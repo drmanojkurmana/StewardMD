@@ -1,76 +1,148 @@
 {
-  "id": "bankart_lesion",
-  "name": "Bankart lesion",
-  "aliases": [
-    "anteroinferior labral tear",
-    "bony Bankart lesion",
-    "anterior glenoid labral avulsion"
+ "id": "bankart_lesion",
+ "name": "Bankart lesion",
+ "aliases": [
+  "anteroinferior labral tear",
+  "bony Bankart lesion",
+  "anterior glenoid labral avulsion"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Sports & Trauma",
+ "specialty": "Orthopaedics / Sports Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Miller's Review of Orthopaedics / Brukner and Khan's Clinical Sports Medicine",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Avulsion of the anteroinferior glenoid labrum (with the inferior glenohumeral ligament) after an anterior shoulder dislocation",
+   "A bony Bankart lesion involves an associated fracture of the anteroinferior glenoid rim and increases recurrence risk",
+   "It is the classic labral lesion of traumatic anterior instability and typically pairs with a Hill-Sachs impaction of the humeral head",
+   "Younger age at first dislocation is the strongest predictor of recurrent instability",
+   "Apprehension and relocation tests are positive; recurrent subluxation may cause activity-limiting apprehension rather than pain",
+   "Significant glenoid bone loss shifts management from soft-tissue repair towards bony augmentation (e.g. Latarjet-type procedures)",
+   "CT quantifies glenoid bone loss and MR arthrography best shows the soft-tissue labroligamentous injury"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Sports & Trauma",
-  "specialty": "Orthopaedics / Sports Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Miller's Review of Orthopaedics / Brukner and Khan's Clinical Sports Medicine",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Avulsion of the anteroinferior glenoid labrum (with the inferior glenohumeral ligament) after an anterior shoulder dislocation",
-      "A bony Bankart lesion involves an associated fracture of the anteroinferior glenoid rim and increases recurrence risk",
-      "It is the classic labral lesion of traumatic anterior instability and typically pairs with a Hill-Sachs impaction of the humeral head",
-      "Younger age at first dislocation is the strongest predictor of recurrent instability",
-      "Apprehension and relocation tests are positive; recurrent subluxation may cause activity-limiting apprehension rather than pain",
-      "Significant glenoid bone loss shifts management from soft-tissue repair towards bony augmentation (e.g. Latarjet-type procedures)",
-      "CT quantifies glenoid bone loss and MR arthrography best shows the soft-tissue labroligamentous injury"
+  "pathophysiology": "During traumatic anterior glenohumeral dislocation the humeral head levers against and strips the anteroinferior labrum and inferior glenohumeral ligament from the glenoid rim, sometimes taking a fragment of bone (bony Bankart). Loss of this labroligamentous bumper and of glenoid concavity reduces the barrier to anterior translation, predisposing to recurrent instability; concurrent posterolateral humeral head impaction (Hill-Sachs) can engage the glenoid rim and perpetuate dislocation.",
+  "additionalDifferentials": [
+   "Hill-Sachs lesion and engaging bipolar bone loss",
+   "SLAP lesion",
+   "Glenoid rim fracture without labral avulsion",
+   "Rotator cuff tear (more common cause of instability in older patients)",
+   "Anterior labroligamentous periosteal sleeve avulsion (ALPSA)",
+   "Multidirectional instability"
+  ],
+  "additionalInvestigations": [
+   "Radiographs including axillary and apical oblique views",
+   "MR arthrography to demonstrate the labroligamentous lesion",
+   "CT with glenoid bone-loss quantification (glenoid track assessment)",
+   "Examination under anaesthesia and diagnostic arthroscopy",
+   "Assessment for generalised ligamentous laxity"
+  ],
+  "redFlags": [
+   "Neurovascular deficit after dislocation (axillary nerve or brachial plexus injury)",
+   "Inability to reduce the joint or locked dislocation",
+   "Large engaging bone loss indicating high re-dislocation risk with soft-tissue-only repair"
+  ],
+  "prognosis": "Recurrence is common in young athletes managed non-operatively; arthroscopic or open stabilisation restores stability in most, with outcomes strongly dependent on the degree of glenoid and humeral bone loss.",
+  "pitfalls": [
+   "Underestimating glenoid bone loss and performing a soft-tissue repair destined to fail",
+   "Overlooking an axillary nerve injury after dislocation",
+   "Missing associated rotator cuff tears in patients over 40 who dislocate",
+   "Ignoring bipolar (glenoid plus Hill-Sachs) bone loss and the glenoid track concept"
+  ],
+  "references": [
+   "Miller's Review of Orthopaedics",
+   "Rockwood and Matsen's The Shoulder"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Reduce the acute dislocation and immobilise briefly, followed by structured physiotherapy to restore rotator-cuff and scapular control",
+   "Offer arthroscopic Bankart repair with labroligamentous reattachment for recurrent instability, particularly in young athletes at high recurrence risk",
+   "Perform a bony augmentation procedure such as the Latarjet coracoid transfer when there is significant glenoid bone loss or an engaging Hill-Sachs lesion",
+   "Quantify glenoid and humeral bone loss with CT and glenoid-track assessment to guide the choice of soft-tissue versus bony reconstruction",
+   "Advise activity modification and avoidance of provocative abduction-external rotation positions while deciding on surgery",
+   "Rehabilitate progressively after stabilisation before graded return to sport",
+   "Refer to a shoulder or sports-orthopaedic surgeon for recurrent or bony instability"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "bankart_lesion-pathway",
+   "title": "Bankart lesion: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Avulsion of the anteroinferior glenoid labrum (with the inferior glenohumeral ligament) after an anterior shoulder dislocation",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Neurovascular deficit after dislocation (axillary nerve or brachial plexus injury)",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Radiographs including axillary and apical oblique views, MR arthrography to demonstrate the labroligamentous lesion, CT with glenoid bone-loss quantification (glenoid track assessment)"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Reduce the acute dislocation and immobilise briefly, followed by structured physiotherapy to restore rotator-cuff and scapular control"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Underestimating glenoid bone loss and performing a soft-tissue repair destined to fail"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of bankart lesion."
+  }
+ ],
+ "tables": [
+  {
+   "id": "bankart_lesion-matrix",
+   "title": "Bankart lesion: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Avulsion of the anteroinferior glenoid labrum (with the inferior glenohumeral ligament) after an anterior shoulder dislocation",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "During traumatic anterior glenohumeral dislocation the humeral head levers against and strips the anteroinferior labrum and inferior glenohumeral ligament from the glenoid rim, sometimes taking a fragment of bone (bony Bankart). Loss of this labroligamentous bumper and of glenoid concavity reduces the barrier to anterior translation, predisposing to recurrent instability; concurrent posterolateral humeral head impaction (Hill-Sachs) can engage the glenoid rim and perpetuate dislocation.",
-    "additionalDifferentials": [
-      "Hill-Sachs lesion and engaging bipolar bone loss",
-      "SLAP lesion",
-      "Glenoid rim fracture without labral avulsion",
-      "Rotator cuff tear (more common cause of instability in older patients)",
-      "Anterior labroligamentous periosteal sleeve avulsion (ALPSA)",
-      "Multidirectional instability"
+    [
+     "Key Investigations",
+     "Radiographs including axillary and apical oblique views, MR arthrography to demonstrate the labroligamentous lesion, CT with",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Radiographs including axillary and apical oblique views",
-      "MR arthrography to demonstrate the labroligamentous lesion",
-      "CT with glenoid bone-loss quantification (glenoid track assessment)",
-      "Examination under anaesthesia and diagnostic arthroscopy",
-      "Assessment for generalised ligamentous laxity"
+    [
+     "Primary Differentials",
+     "Hill-Sachs lesion and engaging bipolar bone loss, SLAP lesion, Glenoid rim fracture without labral avulsion",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Neurovascular deficit after dislocation (axillary nerve or brachial plexus injury)",
-      "Inability to reduce the joint or locked dislocation",
-      "Large engaging bone loss indicating high re-dislocation risk with soft-tissue-only repair"
+    [
+     "Management Strategy",
+     "Reduce the acute dislocation and immobilise briefly, followed by structured physiotherapy to restore rotator-cuff and scapular",
+     "Core treatment modality"
     ],
-    "prognosis": "Recurrence is common in young athletes managed non-operatively; arthroscopic or open stabilisation restores stability in most, with outcomes strongly dependent on the degree of glenoid and humeral bone loss.",
-    "pitfalls": [
-      "Underestimating glenoid bone loss and performing a soft-tissue repair destined to fail",
-      "Overlooking an axillary nerve injury after dislocation",
-      "Missing associated rotator cuff tears in patients over 40 who dislocate",
-      "Ignoring bipolar (glenoid plus Hill-Sachs) bone loss and the glenoid track concept"
-    ],
-    "references": [
-      "Miller's Review of Orthopaedics",
-      "Rockwood and Matsen's The Shoulder"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Reduce the acute dislocation and immobilise briefly, followed by structured physiotherapy to restore rotator-cuff and scapular control",
-      "Offer arthroscopic Bankart repair with labroligamentous reattachment for recurrent instability, particularly in young athletes at high recurrence risk",
-      "Perform a bony augmentation procedure such as the Latarjet coracoid transfer when there is significant glenoid bone loss or an engaging Hill-Sachs lesion",
-      "Quantify glenoid and humeral bone loss with CT and glenoid-track assessment to guide the choice of soft-tissue versus bony reconstruction",
-      "Advise activity modification and avoidance of provocative abduction-external rotation positions while deciding on surgery",
-      "Rehabilitate progressively after stabilisation before graded return to sport",
-      "Refer to a shoulder or sports-orthopaedic surgeon for recurrent or bony instability"
+    [
+     "Clinical Pitfall",
+     "Underestimating glenoid bone loss and performing a soft-tissue repair destined to fail",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for bankart lesion."
+  }
+ ]
 }

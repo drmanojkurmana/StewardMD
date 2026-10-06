@@ -6,7 +6,22 @@
  "basis": "india",
  "counterpart": "snakebite-envenomation-international",
  "setting": "Primary health centre, emergency department, ICU",
- "aliases": ["snake bite", "snakebite", "ASV", "anti snake venom", "antivenom", "20WBCT", "20 minute whole blood clotting test", "cobra bite", "krait bite", "Russell's viper", "saw-scaled viper", "neuroparalytic envenomation", "vasculotoxic envenomation", "NAPSE"],
+ "aliases": [
+  "snake bite",
+  "snakebite",
+  "ASV",
+  "anti snake venom",
+  "antivenom",
+  "20WBCT",
+  "20 minute whole blood clotting test",
+  "cobra bite",
+  "krait bite",
+  "Russell's viper",
+  "saw-scaled viper",
+  "neuroparalytic envenomation",
+  "vasculotoxic envenomation",
+  "NAPSE"
+ ],
  "summary": "Immobilise and transport without tourniquets or incisions. Give polyvalent ASV IV, without a test dose, for systemic envenoming (incoagulable 20WBCT, bleeding, neuroparalysis, rapidly progressive swelling), same dose in children and pregnancy; add atropine-neostigmine and ventilation for neuroparalysis and be ready to treat ASV anaphylaxis.",
  "sections": [
   {
@@ -99,16 +114,125 @@
   }
  ],
  "drugs": [
-  { "name": "Polyvalent antisnake venom (ASV)", "dose": "Neuroparalytic: 10 vials IV over 30 minutes, repeat 10 vials after 1 hour if no improvement (max 20). Vasculotoxic: 10 vials, then 6 vials every 6 hours (high dose) or 2 vials every 6 hours (low dose) until 20WBCT clots", "notes": "IV only, no test dose; same dose in children and pregnancy." },
-  { "name": "Neostigmine", "dose": "1.5 mg IV (or IM), then 0.5 mg every 30 minutes for 5 doses, then taper at 1, 2, 6 and 12 hours (children 0.04 mg/kg, then 0.01 mg/kg)", "notes": "Always with atropine; stop if no response after 3 doses." },
-  { "name": "Atropine", "dose": "0.6 mg IV with each neostigmine dose (children 0.05 mg/kg)", "notes": "Blocks muscarinic effects of neostigmine." },
-  { "name": "Adrenaline (epinephrine) 1:1000", "dose": "0.5 mg IM for ASV anaphylaxis (children 0.01 mg/kg); prophylaxis 0.25 mg SC (children 0.005 mg/kg)", "notes": "Prophylaxis per MoHFW 2016; avoid prophylaxis in hypertension or heart disease." },
-  { "name": "Chlorphenamine", "dose": "10 mg IV (children 0.2 mg/kg) for early reaction; 2 mg every 6 hours for 5 days for serum sickness", "notes": "Adjunct to adrenaline." },
-  { "name": "Fresh frozen plasma", "dose": "10 to 15 mL/kg IV over 30 to 60 minutes", "notes": "Persistent bleeding with coagulopathy despite adequate ASV." }
+  {
+   "name": "Polyvalent antisnake venom (ASV)",
+   "dose": "Neuroparalytic: 10 vials IV over 30 minutes, repeat 10 vials after 1 hour if no improvement (max 20). Vasculotoxic: 10 vials, then 6 vials every 6 hours (high dose) or 2 vials every 6 hours (low dose) until 20WBCT clots",
+   "notes": "IV only, no test dose; same dose in children and pregnancy."
+  },
+  {
+   "name": "Neostigmine",
+   "dose": "1.5 mg IV (or IM), then 0.5 mg every 30 minutes for 5 doses, then taper at 1, 2, 6 and 12 hours (children 0.04 mg/kg, then 0.01 mg/kg)",
+   "notes": "Always with atropine; stop if no response after 3 doses."
+  },
+  {
+   "name": "Atropine",
+   "dose": "0.6 mg IV with each neostigmine dose (children 0.05 mg/kg)",
+   "notes": "Blocks muscarinic effects of neostigmine."
+  },
+  {
+   "name": "Adrenaline (epinephrine) 1:1000",
+   "dose": "0.5 mg IM for ASV anaphylaxis (children 0.01 mg/kg); prophylaxis 0.25 mg SC (children 0.005 mg/kg)",
+   "notes": "Prophylaxis per MoHFW 2016; avoid prophylaxis in hypertension or heart disease."
+  },
+  {
+   "name": "Chlorphenamine",
+   "dose": "10 mg IV (children 0.2 mg/kg) for early reaction; 2 mg every 6 hours for 5 days for serum sickness",
+   "notes": "Adjunct to adrenaline."
+  },
+  {
+   "name": "Fresh frozen plasma",
+   "dose": "10 to 15 mL/kg IV over 30 to 60 minutes",
+   "notes": "Persistent bleeding with coagulopathy despite adequate ASV."
+  }
  ],
  "sources": [
-  { "org": "MoHFW, Government of India", "title": "Standard Treatment Guidelines: Management of Snake Bite (Quick Reference Guide)", "year": 2016, "url": "https://clinicalestablishments.mohfw.gov.in/sites/default/files/standard-treatment-guidelines/5341.pdf" },
-  { "org": "NCDC, MoHFW", "title": "National Action Plan for Prevention and Control of Snakebite Envenoming (NAPSE)", "year": 2024, "url": "https://ncdc.mohfw.gov.in/uploads/pdf/NATIONAL-ACTION-PLAN-FOR-PREVENTION-AND-CONTROL-OF-SNAKEBITE-ENVENOMING-NAPSE.pdf" }
+  {
+   "org": "MoHFW, Government of India",
+   "title": "Standard Treatment Guidelines: Management of Snake Bite (Quick Reference Guide)",
+   "year": 2016,
+   "url": "https://clinicalestablishments.mohfw.gov.in/sites/default/files/standard-treatment-guidelines/5341.pdf"
+  },
+  {
+   "org": "NCDC, MoHFW",
+   "title": "National Action Plan for Prevention and Control of Snakebite Envenoming (NAPSE)",
+   "year": 2024,
+   "url": "https://ncdc.mohfw.gov.in/uploads/pdf/NATIONAL-ACTION-PLAN-FOR-PREVENTION-AND-CONTROL-OF-SNAKEBITE-ENVENOMING-NAPSE.pdf"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "snakebite-envenomation-pathway",
+   "title": "Snakebite envenoming (India) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Neuroparalytic (cobra, krait): ptosis, diplopia, dysphagia, dysarthria, neck and limb weakness, respiratory paralysis.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Reassure (about 70% of bites are non-venomous). Splint and immobilise the whole bitten limb like a fracture, keep the patient still, nil by mouth, and transport quickly (102/108 ambulance). The victim must not walk, run or drive.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "20WBCT: put 2 mL of fresh venous blood in a new, clean, dry glass tube, leave undisturbed for 20 minutes at room temperature, then tilt. Still liquid means incoagulable blood (venom-induced consumption coagulopathy)."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Bulbar or respiratory paralysis: intubate (or laryngeal mask) and ventilate; manual bag ventilation works if no ventilator is available. Deep coma may still recover fully, so do not diagnose brain death."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Strict bed rest, no IM injections, intake-output chart and urine colour; keep urine output about 1 mL/kg/h."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for snakebite envenoming (india)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "snakebite-envenomation-summary-matrix",
+   "title": "Snakebite envenoming (India) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Neuroparalytic (cobra, krait): ptosis, diplopia, dysphagia, dysarthria, neck and limb weakness, respiratory paralysis.",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Reassure (about 70% of bites are non-venomous). Splint and immobilise the whole bitten limb like a fracture, keep the patient still, nil by",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "20WBCT: put 2 mL of fresh venous blood in a new, clean, dry glass tube, leave undisturbed for 20 minutes at room temperature, then tilt.",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Polyvalent antisnake venom (ASV): Neuroparalytic: 10 vials IV over 30 minutes, repeat 10 vials after 1 hour if no improvement (max 20).",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Waiting for a 20WBCT result when there is spontaneous systemic bleeding, or withholding ASV for fear of reactions.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for snakebite envenoming (india)."
+  }
+ ]
 }

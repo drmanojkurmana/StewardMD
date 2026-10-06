@@ -1,80 +1,152 @@
 {
-  "id": "pitt_hopkins_syndrome",
-  "name": "Pitt-Hopkins syndrome",
-  "aliases": [
-    "PTHS",
-    "TCF4",
-    "ITF2",
-    "transcription factor 4 haploinsufficiency"
+ "id": "pitt_hopkins_syndrome",
+ "name": "Pitt-Hopkins syndrome",
+ "aliases": [
+  "PTHS",
+  "TCF4",
+  "ITF2",
+  "transcription factor 4 haploinsufficiency"
+ ],
+ "class": "non_infective",
+ "system": "Genetics / Dysmorphology",
+ "specialty": "Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Episodic hyperventilation alternating with apnoea, typically emerging in childhood and often triggered by excitement or emotion, is a hallmark and important diagnostic clue",
+   "The facial gestalt includes a broad, beaked nose, deep-set eyes, wide mouth with a cupid's-bow upper lip and full lips, and a square jaw, coarsening with age",
+   "Caused by haploinsufficiency of TCF4 due to point variants, deletions or larger rearrangements, following autosomal dominant inheritance and almost always de novo",
+   "Severe intellectual disability with absent or minimal speech and a happy, sociable demeanour is characteristic",
+   "Constipation and Hirschsprung disease are recognised gastrointestinal associations",
+   "Stereotypic hand movements, hypotonia and unsteady, broad-based gait are common",
+   "Myopia and strabismus are frequent ophthalmological findings"
   ],
-  "class": "non_infective",
-  "system": "Genetics / Dysmorphology",
-  "specialty": "Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Episodic hyperventilation alternating with apnoea, typically emerging in childhood and often triggered by excitement or emotion, is a hallmark and important diagnostic clue",
-      "The facial gestalt includes a broad, beaked nose, deep-set eyes, wide mouth with a cupid's-bow upper lip and full lips, and a square jaw, coarsening with age",
-      "Caused by haploinsufficiency of TCF4 due to point variants, deletions or larger rearrangements, following autosomal dominant inheritance and almost always de novo",
-      "Severe intellectual disability with absent or minimal speech and a happy, sociable demeanour is characteristic",
-      "Constipation and Hirschsprung disease are recognised gastrointestinal associations",
-      "Stereotypic hand movements, hypotonia and unsteady, broad-based gait are common",
-      "Myopia and strabismus are frequent ophthalmological findings"
+  "pathophysiology": "Pitt-Hopkins syndrome is caused by haploinsufficiency of TCF4 (transcription factor 4), a basic helix-loop-helix transcription factor essential for neuronal development and differentiation in the central nervous system. Loss-of-function point variants, intragenic deletions and larger chromosomal rearrangements reduce functional TCF4, disrupting the transcriptional programmes that govern brain development and autonomic control. This underlies the severe neurodevelopmental impairment, the distinctive breathing abnormality reflecting brainstem autonomic dysregulation, and the associated craniofacial and gastrointestinal features.",
+  "additionalDifferentials": [
+   "Angelman syndrome",
+   "Mowat-Wilson syndrome",
+   "Rett syndrome",
+   "Christianson syndrome",
+   "Kleefstra syndrome",
+   "Other severe intellectual disability with breathing abnormalities"
+  ],
+  "additionalInvestigations": [
+   "Sequencing and deletion/duplication analysis of TCF4, or chromosomal microarray to detect deletions",
+   "Methylation studies for Angelman syndrome when that diagnosis is in the differential",
+   "Brain MRI for structural anomalies",
+   "Electroencephalography for seizures",
+   "Assessment for Hirschsprung disease when constipation is severe",
+   "Ophthalmology review for myopia and strabismus"
+  ],
+  "redFlags": [
+   "Apnoeic episodes causing cyanosis or requiring intervention",
+   "Prolonged or refractory seizures",
+   "Severe constipation or features suggesting Hirschsprung disease",
+   "Feeding difficulty with aspiration risk"
+  ],
+  "prognosis": "Individuals have severe, lifelong intellectual disability and require continuous support, but the condition is generally compatible with survival into adulthood and is associated with a characteristically cheerful temperament. Breathing episodes, while alarming, are not usually life-limiting on their own.",
+  "pitfalls": [
+   "Mistaking the breathing episodes for primary epilepsy or a psychiatric disorder",
+   "Confusing the phenotype with Angelman syndrome and stopping at negative methylation testing",
+   "Overlooking severe constipation or Hirschsprung disease",
+   "Attributing the sociable demeanour and hand stereotypies solely to autism without genetic testing"
+  ],
+  "references": [
+   "Smith's Recognizable Patterns of Human Malformation",
+   "Nelson Textbook of Pediatrics",
+   "GeneReviews: Pitt-Hopkins syndrome"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Provide supportive developmental care as the mainstay, with early physiotherapy, occupational therapy and speech and language input including augmentative and alternative communication for absent or minimal speech",
+   "Manage the episodic hyperventilation-apnoea breathing episodes with reassurance and trigger avoidance, as they are alarming but not usually life-limiting",
+   "Treat constipation actively and investigate for and surgically manage Hirschsprung disease when bowel obstruction or severe constipation occurs",
+   "Control seizures with antiepileptic drugs guided by electroencephalography",
+   "Refer to ophthalmology for correction of myopia and management of strabismus",
+   "Provide genetic counselling for the TCF4 haploinsufficiency, noting most cases are de novo with low recurrence risk tempered by possible parental mosaicism",
+   "Coordinate lifelong multidisciplinary care with behavioural and family support given the severe intellectual disability"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "pitt_hopkins_syndrome-pathway",
+   "title": "Pitt-Hopkins syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Episodic hyperventilation alternating with apnoea, typically emerging in childhood and often triggered by excitement or emotion, is a hallmark and important diagnostic clue",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Apnoeic episodes causing cyanosis or requiring intervention",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Sequencing and deletion/duplication analysis of TCF4, or chromosomal microarray to detect deletions, Methylation studies for Angelman syndrome when that diagnosis is in the differential, Brain MRI for structural anomalies"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Provide supportive developmental care as the mainstay, with early physiotherapy, occupational therapy and speech and language input including augmentative and alternative communication for absent or minimal speech"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking the breathing episodes for primary epilepsy or a psychiatric disorder"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of pitt-hopkins syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "pitt_hopkins_syndrome-matrix",
+   "title": "Pitt-Hopkins syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Episodic hyperventilation alternating with apnoea, typically emerging in childhood and often triggered by excitement or emotion,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Pitt-Hopkins syndrome is caused by haploinsufficiency of TCF4 (transcription factor 4), a basic helix-loop-helix transcription factor essential for neuronal development and differentiation in the central nervous system. Loss-of-function point variants, intragenic deletions and larger chromosomal rearrangements reduce functional TCF4, disrupting the transcriptional programmes that govern brain development and autonomic control. This underlies the severe neurodevelopmental impairment, the distinctive breathing abnormality reflecting brainstem autonomic dysregulation, and the associated craniofacial and gastrointestinal features.",
-    "additionalDifferentials": [
-      "Angelman syndrome",
-      "Mowat-Wilson syndrome",
-      "Rett syndrome",
-      "Christianson syndrome",
-      "Kleefstra syndrome",
-      "Other severe intellectual disability with breathing abnormalities"
+    [
+     "Key Investigations",
+     "Sequencing and deletion/duplication analysis of TCF4, or chromosomal microarray to detect deletions, Methylation studies for",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Sequencing and deletion/duplication analysis of TCF4, or chromosomal microarray to detect deletions",
-      "Methylation studies for Angelman syndrome when that diagnosis is in the differential",
-      "Brain MRI for structural anomalies",
-      "Electroencephalography for seizures",
-      "Assessment for Hirschsprung disease when constipation is severe",
-      "Ophthalmology review for myopia and strabismus"
+    [
+     "Primary Differentials",
+     "Angelman syndrome, Mowat-Wilson syndrome, Rett syndrome",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Apnoeic episodes causing cyanosis or requiring intervention",
-      "Prolonged or refractory seizures",
-      "Severe constipation or features suggesting Hirschsprung disease",
-      "Feeding difficulty with aspiration risk"
+    [
+     "Management Strategy",
+     "Provide supportive developmental care as the mainstay, with early physiotherapy, occupational therapy and speech and language",
+     "Core treatment modality"
     ],
-    "prognosis": "Individuals have severe, lifelong intellectual disability and require continuous support, but the condition is generally compatible with survival into adulthood and is associated with a characteristically cheerful temperament. Breathing episodes, while alarming, are not usually life-limiting on their own.",
-    "pitfalls": [
-      "Mistaking the breathing episodes for primary epilepsy or a psychiatric disorder",
-      "Confusing the phenotype with Angelman syndrome and stopping at negative methylation testing",
-      "Overlooking severe constipation or Hirschsprung disease",
-      "Attributing the sociable demeanour and hand stereotypies solely to autism without genetic testing"
-    ],
-    "references": [
-      "Smith's Recognizable Patterns of Human Malformation",
-      "Nelson Textbook of Pediatrics",
-      "GeneReviews: Pitt-Hopkins syndrome"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Provide supportive developmental care as the mainstay, with early physiotherapy, occupational therapy and speech and language input including augmentative and alternative communication for absent or minimal speech",
-      "Manage the episodic hyperventilation-apnoea breathing episodes with reassurance and trigger avoidance, as they are alarming but not usually life-limiting",
-      "Treat constipation actively and investigate for and surgically manage Hirschsprung disease when bowel obstruction or severe constipation occurs",
-      "Control seizures with antiepileptic drugs guided by electroencephalography",
-      "Refer to ophthalmology for correction of myopia and management of strabismus",
-      "Provide genetic counselling for the TCF4 haploinsufficiency, noting most cases are de novo with low recurrence risk tempered by possible parental mosaicism",
-      "Coordinate lifelong multidisciplinary care with behavioural and family support given the severe intellectual disability"
+    [
+     "Clinical Pitfall",
+     "Mistaking the breathing episodes for primary epilepsy or a psychiatric disorder",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for pitt-hopkins syndrome."
+  }
+ ]
 }

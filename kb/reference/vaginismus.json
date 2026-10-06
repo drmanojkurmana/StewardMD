@@ -1,77 +1,149 @@
 {
-  "id": "vaginismus",
-  "name": "Vaginismus",
-  "aliases": [
-    "genito-pelvic pain/penetration disorder",
-    "vaginal muscle spasm",
-    "penetration disorder"
+ "id": "vaginismus",
+ "name": "Vaginismus",
+ "aliases": [
+  "genito-pelvic pain/penetration disorder",
+  "vaginal muscle spasm",
+  "penetration disorder"
+ ],
+ "class": "non_infective",
+ "system": "Reproductive medicine",
+ "specialty": "Reproductive Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine / standard sleep & reproductive medicine references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Vaginismus is characterised by involuntary contraction of the pelvic floor and perivaginal muscles that makes vaginal penetration painful, difficult, or impossible",
+   "It is now grouped with dyspareunia under the umbrella of genito-pelvic pain/penetration disorder, reflecting their frequent overlap",
+   "It may be primary, present from the first attempts at penetration, or secondary, developing after a period of pain-free intercourse",
+   "Fear and anticipatory anxiety about pain are central, producing a self-reinforcing cycle of muscle guarding, avoidance, and further distress",
+   "The muscle spasm is involuntary and not under conscious control, a point patients need reassured of to reduce shame and self-blame",
+   "Examination should be gentle and patient-led, and marked distress or guarding on attempted examination itself supports the diagnosis",
+   "Organic causes of pain such as infection, atrophy, or structural abnormality should be excluded, since untreated dyspareunia can trigger secondary vaginismus",
+   "Treatment combines education, pelvic floor physiotherapy, graded desensitisation often using vaginal trainers, and psychological or psychosexual therapy addressing anxiety"
   ],
-  "class": "non_infective",
-  "system": "Reproductive medicine",
-  "specialty": "Reproductive Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine / standard sleep & reproductive medicine references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Vaginismus is characterised by involuntary contraction of the pelvic floor and perivaginal muscles that makes vaginal penetration painful, difficult, or impossible",
-      "It is now grouped with dyspareunia under the umbrella of genito-pelvic pain/penetration disorder, reflecting their frequent overlap",
-      "It may be primary, present from the first attempts at penetration, or secondary, developing after a period of pain-free intercourse",
-      "Fear and anticipatory anxiety about pain are central, producing a self-reinforcing cycle of muscle guarding, avoidance, and further distress",
-      "The muscle spasm is involuntary and not under conscious control, a point patients need reassured of to reduce shame and self-blame",
-      "Examination should be gentle and patient-led, and marked distress or guarding on attempted examination itself supports the diagnosis",
-      "Organic causes of pain such as infection, atrophy, or structural abnormality should be excluded, since untreated dyspareunia can trigger secondary vaginismus",
-      "Treatment combines education, pelvic floor physiotherapy, graded desensitisation often using vaginal trainers, and psychological or psychosexual therapy addressing anxiety"
+  "pathophysiology": "Vaginismus reflects a conditioned, involuntary reflex contraction of the pelvic floor musculature in anticipation of, or response to, attempted vaginal penetration. A trigger, which may be an initial painful experience, infection, trauma, negative sexual conditioning, or fear, leads to protective muscle tightening; the resulting pain reinforces the expectation of pain, so anxiety and guarding become self-perpetuating. Over time the response can be provoked by anticipation alone, independent of any ongoing organic cause. Because the mechanism is largely a learned protective reflex intertwined with anxiety, both the physical muscle response and the psychological component must be addressed for resolution.",
+  "additionalDifferentials": [
+   "Dyspareunia from other causes",
+   "Vulvodynia or provoked vestibulodynia",
+   "Vaginal atrophy from oestrogen deficiency",
+   "Pelvic infection or inflammation",
+   "Congenital anatomical abnormality such as a vaginal septum",
+   "Endometriosis or other pelvic pathology"
+  ],
+  "additionalInvestigations": [
+   "Sensitive sexual and psychological history including any trauma or triggering event",
+   "Gentle, patient-controlled genital and pelvic examination as tolerated",
+   "Exclusion of infection, atrophy, or dermatological vulval conditions",
+   "Assessment of pelvic floor muscle tone, often with physiotherapy input",
+   "Evaluation for structural anomalies when penetration has never been possible"
+  ],
+  "redFlags": [
+   "History of sexual trauma or abuse requiring sensitive, specialised care",
+   "Findings suggesting an organic structural or gynaecological cause of pain",
+   "Signs of infection or inflammation needing directed treatment",
+   "Severe psychological distress or relationship breakdown"
+  ],
+  "prognosis": "Vaginismus generally has a good prognosis, with high success rates when treated by a combined approach of education, pelvic floor physiotherapy, graded desensitisation, and psychological support tailored to the individual.",
+  "pitfalls": [
+   "Attempting a forceful examination, which worsens pain, fear, and guarding",
+   "Treating it as purely psychological and neglecting pelvic floor physiotherapy",
+   "Missing an organic cause of dyspareunia that precipitated secondary vaginismus",
+   "Failing to involve the partner and address relationship and anxiety factors"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Patient education and reassurance that the muscle spasm is involuntary, addressing shame and the pain-anxiety cycle",
+   "Pelvic floor physiotherapy to teach relaxation, awareness and control of the perivaginal muscles",
+   "Graded vaginal desensitisation using progressively sized dilators or trainers at the woman's own pace",
+   "Psychological therapy such as cognitive behavioural therapy and sex therapy to address anticipatory anxiety and any underlying trauma",
+   "Treatment of contributing organic factors such as infection, vulval dermatoses or atrophy",
+   "Involvement of the partner with couple-based therapy where appropriate",
+   "Consideration of adjuncts such as topical local anaesthetic or pelvic floor botulinum toxin in refractory cases"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "vaginismus-pathway",
+   "title": "Vaginismus: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Vaginismus is characterised by involuntary contraction of the pelvic floor and perivaginal muscles that makes vaginal penetration painful, difficult, or impossible",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: History of sexual trauma or abuse requiring sensitive, specialised care",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Sensitive sexual and psychological history including any trauma or triggering event, Gentle, patient-controlled genital and pelvic examination as tolerated, Exclusion of infection, atrophy, or dermatological vulval"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Patient education and reassurance that the muscle spasm is involuntary, addressing shame and the pain-anxiety cycle"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attempting a forceful examination, which worsens pain, fear, and guarding"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of vaginismus."
+  }
+ ],
+ "tables": [
+  {
+   "id": "vaginismus-matrix",
+   "title": "Vaginismus: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Vaginismus is characterised by involuntary contraction of the pelvic floor and perivaginal muscles that makes vaginal penetration",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Vaginismus reflects a conditioned, involuntary reflex contraction of the pelvic floor musculature in anticipation of, or response to, attempted vaginal penetration. A trigger, which may be an initial painful experience, infection, trauma, negative sexual conditioning, or fear, leads to protective muscle tightening; the resulting pain reinforces the expectation of pain, so anxiety and guarding become self-perpetuating. Over time the response can be provoked by anticipation alone, independent of any ongoing organic cause. Because the mechanism is largely a learned protective reflex intertwined with anxiety, both the physical muscle response and the psychological component must be addressed for resolution.",
-    "additionalDifferentials": [
-      "Dyspareunia from other causes",
-      "Vulvodynia or provoked vestibulodynia",
-      "Vaginal atrophy from oestrogen deficiency",
-      "Pelvic infection or inflammation",
-      "Congenital anatomical abnormality such as a vaginal septum",
-      "Endometriosis or other pelvic pathology"
+    [
+     "Key Investigations",
+     "Sensitive sexual and psychological history including any trauma or triggering event, Gentle, patient-controlled genital and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Sensitive sexual and psychological history including any trauma or triggering event",
-      "Gentle, patient-controlled genital and pelvic examination as tolerated",
-      "Exclusion of infection, atrophy, or dermatological vulval conditions",
-      "Assessment of pelvic floor muscle tone, often with physiotherapy input",
-      "Evaluation for structural anomalies when penetration has never been possible"
+    [
+     "Primary Differentials",
+     "Dyspareunia from other causes, Vulvodynia or provoked vestibulodynia, Vaginal atrophy from oestrogen deficiency",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "History of sexual trauma or abuse requiring sensitive, specialised care",
-      "Findings suggesting an organic structural or gynaecological cause of pain",
-      "Signs of infection or inflammation needing directed treatment",
-      "Severe psychological distress or relationship breakdown"
+    [
+     "Management Strategy",
+     "Patient education and reassurance that the muscle spasm is involuntary, addressing shame and the pain-anxiety cycle",
+     "Core treatment modality"
     ],
-    "prognosis": "Vaginismus generally has a good prognosis, with high success rates when treated by a combined approach of education, pelvic floor physiotherapy, graded desensitisation, and psychological support tailored to the individual.",
-    "pitfalls": [
-      "Attempting a forceful examination, which worsens pain, fear, and guarding",
-      "Treating it as purely psychological and neglecting pelvic floor physiotherapy",
-      "Missing an organic cause of dyspareunia that precipitated secondary vaginismus",
-      "Failing to involve the partner and address relationship and anxiety factors"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Patient education and reassurance that the muscle spasm is involuntary, addressing shame and the pain-anxiety cycle",
-      "Pelvic floor physiotherapy to teach relaxation, awareness and control of the perivaginal muscles",
-      "Graded vaginal desensitisation using progressively sized dilators or trainers at the woman's own pace",
-      "Psychological therapy such as cognitive behavioural therapy and sex therapy to address anticipatory anxiety and any underlying trauma",
-      "Treatment of contributing organic factors such as infection, vulval dermatoses or atrophy",
-      "Involvement of the partner with couple-based therapy where appropriate",
-      "Consideration of adjuncts such as topical local anaesthetic or pelvic floor botulinum toxin in refractory cases"
+    [
+     "Clinical Pitfall",
+     "Attempting a forceful examination, which worsens pain, fear, and guarding",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for vaginismus."
+  }
+ ]
 }

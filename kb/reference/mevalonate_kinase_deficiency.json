@@ -1,81 +1,153 @@
 {
-  "id": "mevalonate_kinase_deficiency",
-  "name": "Mevalonate kinase deficiency",
-  "aliases": [
-    "MKD",
-    "hyper-IgD syndrome",
-    "HIDS",
-    "MVK",
-    "mevalonic aciduria"
+ "id": "mevalonate_kinase_deficiency",
+ "name": "Mevalonate kinase deficiency",
+ "aliases": [
+  "MKD",
+  "hyper-IgD syndrome",
+  "HIDS",
+  "MVK",
+  "mevalonic aciduria"
+ ],
+ "class": "non_infective",
+ "system": "Genetics / Immunology",
+ "specialty": "Clinical Genetics / Immunology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "OMIM / GeneReviews (NCBI) and autoinflammatory disease consensus guidance",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Autosomal recessive autoinflammatory disorder caused by biallelic variants in MVK, reducing mevalonate kinase activity in the cholesterol and isoprenoid pathway",
+   "Presents in infancy or early childhood with recurrent febrile episodes lasting several days, often triggered by vaccination, infection or stress",
+   "Attacks feature high fever with cervical lymphadenopathy, abdominal pain, vomiting and diarrhoea, arthralgia and a polymorphous rash",
+   "Aphthous oral ulceration and painful hepatosplenomegaly are common during flares",
+   "Serum IgD is often elevated, giving the historical name hyper-IgD syndrome, though a normal IgD does not exclude the diagnosis",
+   "The severe end of the spectrum, mevalonic aciduria, adds developmental delay, dysmorphism, ataxia, cataract and failure to thrive",
+   "Urinary mevalonic acid is markedly raised during attacks, especially in the severe form",
+   "IL-1 inhibition is the mainstay of treatment for frequent or severe flares, with enzyme activity and genetic testing confirming the diagnosis"
   ],
-  "class": "non_infective",
-  "system": "Genetics / Immunology",
-  "specialty": "Clinical Genetics / Immunology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "OMIM / GeneReviews (NCBI) and autoinflammatory disease consensus guidance",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Autosomal recessive autoinflammatory disorder caused by biallelic variants in MVK, reducing mevalonate kinase activity in the cholesterol and isoprenoid pathway",
-      "Presents in infancy or early childhood with recurrent febrile episodes lasting several days, often triggered by vaccination, infection or stress",
-      "Attacks feature high fever with cervical lymphadenopathy, abdominal pain, vomiting and diarrhoea, arthralgia and a polymorphous rash",
-      "Aphthous oral ulceration and painful hepatosplenomegaly are common during flares",
-      "Serum IgD is often elevated, giving the historical name hyper-IgD syndrome, though a normal IgD does not exclude the diagnosis",
-      "The severe end of the spectrum, mevalonic aciduria, adds developmental delay, dysmorphism, ataxia, cataract and failure to thrive",
-      "Urinary mevalonic acid is markedly raised during attacks, especially in the severe form",
-      "IL-1 inhibition is the mainstay of treatment for frequent or severe flares, with enzyme activity and genetic testing confirming the diagnosis"
+  "pathophysiology": "Mevalonate kinase deficiency results from biallelic variants in MVK that reduce the activity of mevalonate kinase, an enzyme of the isoprenoid biosynthetic pathway downstream of HMG-CoA reductase. Impaired production of non-sterol isoprenoids, particularly geranylgeranyl pyrophosphate, disrupts prenylation of small GTPases and activates the inflammasome, driving excess interleukin-1 beta release. The degree of residual enzyme activity determines whether the phenotype is the milder periodic fever (hyper-IgD) syndrome or severe mevalonic aciduria.",
+  "additionalDifferentials": [
+   "Familial Mediterranean fever",
+   "TNF-receptor-associated periodic syndrome (TRAPS)",
+   "Cryopyrin-associated periodic syndromes",
+   "PFAPA (periodic fever, aphthous stomatitis, pharyngitis, adenitis) syndrome",
+   "Systemic juvenile idiopathic arthritis",
+   "Cyclic neutropenia"
+  ],
+  "additionalInvestigations": [
+   "Urinary organic acids for mevalonic acid, ideally during an attack",
+   "Mevalonate kinase enzyme activity assay",
+   "Molecular genetic testing of MVK",
+   "Serum immunoglobulins including IgD and IgA",
+   "Acute-phase reactants and full blood count during and between flares",
+   "Ophthalmological and developmental assessment in suspected severe disease"
+  ],
+  "redFlags": [
+   "Features of secondary amyloidosis such as proteinuria in long-standing uncontrolled disease",
+   "Severe neurological impairment, ataxia or visual loss suggesting mevalonic aciduria",
+   "Failure to thrive with recurrent crises in infancy",
+   "Signs of macrophage activation syndrome during a severe flare"
+  ],
+  "prognosis": "The milder periodic fever form tends to improve with age but can be complicated by secondary amyloidosis if inflammation is poorly controlled. Mevalonic aciduria carries a poor prognosis with significant neurodevelopmental disability and early mortality; IL-1 blockade can substantially reduce flare frequency.",
+  "pitfalls": [
+   "Excluding the diagnosis because serum IgD is normal",
+   "Missing the raised urinary mevalonic acid by sampling only between attacks",
+   "Overlooking the risk of secondary amyloidosis with chronic inflammation",
+   "Failing to distinguish the severe (mevalonic aciduria) form, which needs broader multisystem care"
+  ],
+  "references": [
+   "GeneReviews (NCBI): Mevalonate kinase deficiency",
+   "OMIM: Hyper-IgD syndrome and mevalonic aciduria"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Control the autoinflammatory febrile attacks with interleukin-1 blockade using anakinra or canakinumab as the mainstay of disease-specific therapy",
+   "Use TNF inhibition or interleukin-6 blockade with tocilizumab in selected cases refractory to interleukin-1 blockade",
+   "Treat acute flares symptomatically with non-steroidal anti-inflammatory drugs or short corticosteroid courses",
+   "Undertake surveillance for secondary AA amyloidosis through proteinuria monitoring, maintaining tight control of inflammation",
+   "Support the severe mevalonic aciduria end of the spectrum with neurodevelopmental, ophthalmological, and physiotherapy care, considering haematopoietic stem cell transplantation in refractory disease",
+   "Manage triggers by treating intercurrent infection and anticipating vaccination-related flares",
+   "Offer genetic counselling for autosomal recessive inheritance of MVK variants and manage through rheumatology and immunology"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "mevalonate_kinase_deficiency-pathway",
+   "title": "Mevalonate kinase deficiency: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Autosomal recessive autoinflammatory disorder caused by biallelic variants in MVK, reducing mevalonate kinase activity in the cholesterol and isoprenoid pathway",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Features of secondary amyloidosis such as proteinuria in long-standing uncontrolled disease",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Urinary organic acids for mevalonic acid, ideally during an attack, Mevalonate kinase enzyme activity assay, Molecular genetic testing of MVK"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Control the autoinflammatory febrile attacks with interleukin-1 blockade using anakinra or canakinumab as the mainstay of disease-specific therapy"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Excluding the diagnosis because serum IgD is normal"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of mevalonate kinase deficiency."
+  }
+ ],
+ "tables": [
+  {
+   "id": "mevalonate_kinase_deficiency-matrix",
+   "title": "Mevalonate kinase deficiency: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Autosomal recessive autoinflammatory disorder caused by biallelic variants in MVK, reducing mevalonate kinase activity in the",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Mevalonate kinase deficiency results from biallelic variants in MVK that reduce the activity of mevalonate kinase, an enzyme of the isoprenoid biosynthetic pathway downstream of HMG-CoA reductase. Impaired production of non-sterol isoprenoids, particularly geranylgeranyl pyrophosphate, disrupts prenylation of small GTPases and activates the inflammasome, driving excess interleukin-1 beta release. The degree of residual enzyme activity determines whether the phenotype is the milder periodic fever (hyper-IgD) syndrome or severe mevalonic aciduria.",
-    "additionalDifferentials": [
-      "Familial Mediterranean fever",
-      "TNF-receptor-associated periodic syndrome (TRAPS)",
-      "Cryopyrin-associated periodic syndromes",
-      "PFAPA (periodic fever, aphthous stomatitis, pharyngitis, adenitis) syndrome",
-      "Systemic juvenile idiopathic arthritis",
-      "Cyclic neutropenia"
+    [
+     "Key Investigations",
+     "Urinary organic acids for mevalonic acid, ideally during an attack, Mevalonate kinase enzyme activity assay, Molecular genetic",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Urinary organic acids for mevalonic acid, ideally during an attack",
-      "Mevalonate kinase enzyme activity assay",
-      "Molecular genetic testing of MVK",
-      "Serum immunoglobulins including IgD and IgA",
-      "Acute-phase reactants and full blood count during and between flares",
-      "Ophthalmological and developmental assessment in suspected severe disease"
+    [
+     "Primary Differentials",
+     "Familial Mediterranean fever, TNF-receptor-associated periodic syndrome (TRAPS), Cryopyrin-associated periodic syndromes",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Features of secondary amyloidosis such as proteinuria in long-standing uncontrolled disease",
-      "Severe neurological impairment, ataxia or visual loss suggesting mevalonic aciduria",
-      "Failure to thrive with recurrent crises in infancy",
-      "Signs of macrophage activation syndrome during a severe flare"
+    [
+     "Management Strategy",
+     "Control the autoinflammatory febrile attacks with interleukin-1 blockade using anakinra or canakinumab as the mainstay of",
+     "Core treatment modality"
     ],
-    "prognosis": "The milder periodic fever form tends to improve with age but can be complicated by secondary amyloidosis if inflammation is poorly controlled. Mevalonic aciduria carries a poor prognosis with significant neurodevelopmental disability and early mortality; IL-1 blockade can substantially reduce flare frequency.",
-    "pitfalls": [
-      "Excluding the diagnosis because serum IgD is normal",
-      "Missing the raised urinary mevalonic acid by sampling only between attacks",
-      "Overlooking the risk of secondary amyloidosis with chronic inflammation",
-      "Failing to distinguish the severe (mevalonic aciduria) form, which needs broader multisystem care"
-    ],
-    "references": [
-      "GeneReviews (NCBI): Mevalonate kinase deficiency",
-      "OMIM: Hyper-IgD syndrome and mevalonic aciduria"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Control the autoinflammatory febrile attacks with interleukin-1 blockade using anakinra or canakinumab as the mainstay of disease-specific therapy",
-      "Use TNF inhibition or interleukin-6 blockade with tocilizumab in selected cases refractory to interleukin-1 blockade",
-      "Treat acute flares symptomatically with non-steroidal anti-inflammatory drugs or short corticosteroid courses",
-      "Undertake surveillance for secondary AA amyloidosis through proteinuria monitoring, maintaining tight control of inflammation",
-      "Support the severe mevalonic aciduria end of the spectrum with neurodevelopmental, ophthalmological, and physiotherapy care, considering haematopoietic stem cell transplantation in refractory disease",
-      "Manage triggers by treating intercurrent infection and anticipating vaccination-related flares",
-      "Offer genetic counselling for autosomal recessive inheritance of MVK variants and manage through rheumatology and immunology"
+    [
+     "Clinical Pitfall",
+     "Excluding the diagnosis because serum IgD is normal",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for mevalonate kinase deficiency."
+  }
+ ]
 }

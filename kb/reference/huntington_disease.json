@@ -1,78 +1,150 @@
 {
-  "id": "huntington_disease",
-  "name": "Huntington disease",
-  "aliases": [
-    "HD",
-    "Huntington's chorea",
-    "chronic progressive hereditary chorea"
+ "id": "huntington_disease",
+ "name": "Huntington disease",
+ "aliases": [
+  "HD",
+  "Huntington's chorea",
+  "chronic progressive hereditary chorea"
+ ],
+ "class": "non_infective",
+ "system": "Neurology",
+ "specialty": "Neurology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An autosomal dominant neurodegenerative disorder classically presenting in mid-adult life with the triad of a movement disorder, cognitive decline, and psychiatric disturbance",
+   "The characteristic movement disorder is chorea, though rigidity and bradykinesia predominate in juvenile and late-stage disease",
+   "Caused by an expanded CAG trinucleotide repeat in the huntingtin (HTT) gene, and genetic testing confirms the diagnosis",
+   "The disease shows anticipation, with larger repeat expansions producing earlier onset, particularly with paternal transmission",
+   "Psychiatric features including depression, irritability, apathy, and a raised suicide risk often precede overt motor signs",
+   "Management is symptomatic and multidisciplinary; agents that deplete or block dopamine can reduce disabling chorea while psychiatric symptoms are treated on their own merits",
+   "Predictive genetic testing requires careful pre- and post-test counselling because of profound psychological and familial implications",
+   "MRI typically shows atrophy of the caudate and putamen with enlargement of the frontal horns of the lateral ventricles"
   ],
-  "class": "non_infective",
-  "system": "Neurology",
-  "specialty": "Neurology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An autosomal dominant neurodegenerative disorder classically presenting in mid-adult life with the triad of a movement disorder, cognitive decline, and psychiatric disturbance",
-      "The characteristic movement disorder is chorea, though rigidity and bradykinesia predominate in juvenile and late-stage disease",
-      "Caused by an expanded CAG trinucleotide repeat in the huntingtin (HTT) gene, and genetic testing confirms the diagnosis",
-      "The disease shows anticipation, with larger repeat expansions producing earlier onset, particularly with paternal transmission",
-      "Psychiatric features including depression, irritability, apathy, and a raised suicide risk often precede overt motor signs",
-      "Management is symptomatic and multidisciplinary; agents that deplete or block dopamine can reduce disabling chorea while psychiatric symptoms are treated on their own merits",
-      "Predictive genetic testing requires careful pre- and post-test counselling because of profound psychological and familial implications",
-      "MRI typically shows atrophy of the caudate and putamen with enlargement of the frontal horns of the lateral ventricles"
+  "pathophysiology": "Huntington disease results from an expanded CAG repeat in the HTT gene encoding a polyglutamine tract in the huntingtin protein. The mutant protein exerts a toxic gain of function, causing progressive neuronal loss most marked in the medium spiny neurons of the striatum (caudate and putamen), with later cortical involvement. Disruption of basal ganglia circuitry underlies the chorea and other movement abnormalities, while cortical and striatal degeneration drives cognitive and psychiatric decline.",
+  "additionalDifferentials": [
+   "Other genetic choreas including Huntington disease-like syndromes and neuroacanthocytosis",
+   "Sydenham chorea and other autoimmune/post-infectious choreas",
+   "Drug-induced chorea or tardive dyskinesia",
+   "Wilson disease",
+   "Systemic causes of chorea such as thyrotoxicosis, polycythaemia, and antiphospholipid syndrome",
+   "Dentatorubral-pallidoluysian atrophy"
+  ],
+  "additionalInvestigations": [
+   "Genetic testing for the CAG repeat expansion in HTT, with appropriate counselling",
+   "MRI of the brain to assess striatal atrophy",
+   "Screening for reversible or secondary causes of chorea when the diagnosis is uncertain (thyroid function, copper studies, autoimmune and antiphospholipid screen, blood film for acanthocytes)",
+   "Psychiatric assessment including screening for depression and suicide risk",
+   "Neuropsychological evaluation to characterise cognitive impairment"
+  ],
+  "redFlags": [
+   "Emergent depression, hopelessness, or expressed suicidal ideation requiring urgent psychiatric intervention",
+   "Rapid functional decline, dysphagia, and aspiration risk in advanced disease",
+   "Juvenile-onset (Westphal) variant presenting with rigidity, seizures, and rapid progression",
+   "Psychosis or severe behavioural disturbance placing the patient or others at risk"
+  ],
+  "prognosis": "Huntington disease is relentlessly progressive over one to two decades from motor onset, leading to severe motor, cognitive, and functional decline. Death commonly results from complications such as aspiration pneumonia; treatment remains symptomatic without proven disease-modifying therapy in routine practice.",
+  "pitfalls": [
+   "Attributing early psychiatric or behavioural changes to a primary psychiatric illness and missing the underlying diagnosis",
+   "Performing predictive genetic testing without adequate counselling and consideration of familial impact",
+   "Failing to recognise and treat depression and suicide risk, which are major sources of morbidity",
+   "Overlooking the rigid, non-choreic presentation of juvenile-onset or advanced disease"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e",
+   "Bradley's Neurology in Clinical Practice"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Reduce disabling chorea with dopamine-depleting VMAT2 inhibitors such as tetrabenazine or deutetrabenazine, or with dopamine-blocking antipsychotics",
+   "Treat psychiatric features on their own merits, using antidepressants for depression and antipsychotics for irritability or psychosis, with active suicide-risk monitoring",
+   "Support cognitive decline and behaviour with structured care, and treat the rigidity and bradykinesia that predominate in juvenile and late-stage disease",
+   "Provide multidisciplinary supportive care with physiotherapy, occupational and speech therapy, and swallowing assessment to reduce aspiration risk",
+   "Optimise nutrition to counter weight loss, with feeding support in advanced disease",
+   "Offer predictive and diagnostic testing for the HTT CAG expansion with specialist counselling, and family and reproductive counselling given autosomal dominant inheritance with anticipation",
+   "Plan advance care and palliative support as the relentlessly progressive disease advances"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "huntington_disease-pathway",
+   "title": "Huntington disease: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An autosomal dominant neurodegenerative disorder classically presenting in mid-adult life with the triad of a movement disorder, cognitive decline, and psychiatric disturbance",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Emergent depression, hopelessness, or expressed suicidal ideation requiring urgent psychiatric intervention",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Genetic testing for the CAG repeat expansion in HTT, with appropriate counselling, MRI of the brain to assess striatal atrophy, Screening for reversible or secondary causes of chorea when the diagnosis is uncertain"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Reduce disabling chorea with dopamine-depleting VMAT2 inhibitors such as tetrabenazine or deutetrabenazine, or with dopamine-blocking antipsychotics"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing early psychiatric or behavioural changes to a primary psychiatric illness and missing the underlying diagnosis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of huntington disease."
+  }
+ ],
+ "tables": [
+  {
+   "id": "huntington_disease-matrix",
+   "title": "Huntington disease: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An autosomal dominant neurodegenerative disorder classically presenting in mid-adult life with the triad of a movement disorder,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Huntington disease results from an expanded CAG repeat in the HTT gene encoding a polyglutamine tract in the huntingtin protein. The mutant protein exerts a toxic gain of function, causing progressive neuronal loss most marked in the medium spiny neurons of the striatum (caudate and putamen), with later cortical involvement. Disruption of basal ganglia circuitry underlies the chorea and other movement abnormalities, while cortical and striatal degeneration drives cognitive and psychiatric decline.",
-    "additionalDifferentials": [
-      "Other genetic choreas including Huntington disease-like syndromes and neuroacanthocytosis",
-      "Sydenham chorea and other autoimmune/post-infectious choreas",
-      "Drug-induced chorea or tardive dyskinesia",
-      "Wilson disease",
-      "Systemic causes of chorea such as thyrotoxicosis, polycythaemia, and antiphospholipid syndrome",
-      "Dentatorubral-pallidoluysian atrophy"
+    [
+     "Key Investigations",
+     "Genetic testing for the CAG repeat expansion in HTT, with appropriate counselling, MRI of the brain to assess striatal atrophy,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Genetic testing for the CAG repeat expansion in HTT, with appropriate counselling",
-      "MRI of the brain to assess striatal atrophy",
-      "Screening for reversible or secondary causes of chorea when the diagnosis is uncertain (thyroid function, copper studies, autoimmune and antiphospholipid screen, blood film for acanthocytes)",
-      "Psychiatric assessment including screening for depression and suicide risk",
-      "Neuropsychological evaluation to characterise cognitive impairment"
+    [
+     "Primary Differentials",
+     "Other genetic choreas including Huntington disease-like syndromes and neuroacanthocytosis, Sydenham chorea and other",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Emergent depression, hopelessness, or expressed suicidal ideation requiring urgent psychiatric intervention",
-      "Rapid functional decline, dysphagia, and aspiration risk in advanced disease",
-      "Juvenile-onset (Westphal) variant presenting with rigidity, seizures, and rapid progression",
-      "Psychosis or severe behavioural disturbance placing the patient or others at risk"
+    [
+     "Management Strategy",
+     "Reduce disabling chorea with dopamine-depleting VMAT2 inhibitors such as tetrabenazine or deutetrabenazine, or with",
+     "Core treatment modality"
     ],
-    "prognosis": "Huntington disease is relentlessly progressive over one to two decades from motor onset, leading to severe motor, cognitive, and functional decline. Death commonly results from complications such as aspiration pneumonia; treatment remains symptomatic without proven disease-modifying therapy in routine practice.",
-    "pitfalls": [
-      "Attributing early psychiatric or behavioural changes to a primary psychiatric illness and missing the underlying diagnosis",
-      "Performing predictive genetic testing without adequate counselling and consideration of familial impact",
-      "Failing to recognise and treat depression and suicide risk, which are major sources of morbidity",
-      "Overlooking the rigid, non-choreic presentation of juvenile-onset or advanced disease"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e",
-      "Bradley's Neurology in Clinical Practice"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Reduce disabling chorea with dopamine-depleting VMAT2 inhibitors such as tetrabenazine or deutetrabenazine, or with dopamine-blocking antipsychotics",
-      "Treat psychiatric features on their own merits, using antidepressants for depression and antipsychotics for irritability or psychosis, with active suicide-risk monitoring",
-      "Support cognitive decline and behaviour with structured care, and treat the rigidity and bradykinesia that predominate in juvenile and late-stage disease",
-      "Provide multidisciplinary supportive care with physiotherapy, occupational and speech therapy, and swallowing assessment to reduce aspiration risk",
-      "Optimise nutrition to counter weight loss, with feeding support in advanced disease",
-      "Offer predictive and diagnostic testing for the HTT CAG expansion with specialist counselling, and family and reproductive counselling given autosomal dominant inheritance with anticipation",
-      "Plan advance care and palliative support as the relentlessly progressive disease advances"
+    [
+     "Clinical Pitfall",
+     "Attributing early psychiatric or behavioural changes to a primary psychiatric illness and missing the underlying diagnosis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for huntington disease."
+  }
+ ]
 }

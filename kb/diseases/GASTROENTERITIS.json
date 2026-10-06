@@ -196,5 +196,77 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h3ebdce47"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "gastroenteritis-dx-algo",
+      "title": "Acute Gastroenteritis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "More than 90% of acute diarrhea episodes are infectious, and most are mild and self-limited; vomiting, fever, and abdominal pain frequently accompany the illness (p.305).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Signs of severe dehydration: lethargy/obtundation, feeble pulse, hypotension, shock",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Fecal leukocyte smear (methylene blue) or, more sensitively, fecal lactoferrin to distinguish inflammatory from noninflammatory disease, Culture-independent multiplex nucleic-acid amplification (PCR) stool panels - now"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Severity is graded clinically by functional impact and dehydration rather than by a single score. Mild: activity unrestricted. Moderate: activities altered. Severe: incapacitated. Dehydration assessment is the key"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Avoid antimotility agents (e.g., loperamide) and bismuth-based slowing in febrile or bloody/dysenteric diarrhea - they may prolong fever and pathogen shedding in Shigella and other invasive infections; in viral"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for acute gastroenteritis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "gastroenteritis-matrix",
+      "title": "Acute Gastroenteritis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "More than 90% of acute diarrhea episodes are infectious, and most are mild and self-limited; vomiting, fever, and abdominal pain",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Fecal leukocyte smear (methylene blue) or, more sensitively, fecal lactoferrin to distinguish inflammatory from noninflammatory",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Enterohemorrhagic E. coli (O157:H7 / Shiga toxin-producing) - watery progressing to bloody, HUS risk, Enteroaggregative E. coli",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Signs of severe dehydration: lethargy/obtundation, feeble pulse, hypotension, shock",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Avoid antimotility agents (e.g., loperamide) and bismuth-based slowing in febrile or bloody/dysenteric diarrhea - they may",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for acute gastroenteritis."
+    }
+  ]
 }

@@ -1,79 +1,151 @@
 {
-  "id": "adhesive_capsulitis",
-  "name": "Adhesive capsulitis (frozen shoulder)",
-  "aliases": [
-    "frozen shoulder",
-    "periarthritis of the shoulder",
-    "shoulder contracture"
+ "id": "adhesive_capsulitis",
+ "name": "Adhesive capsulitis (frozen shoulder)",
+ "aliases": [
+  "frozen shoulder",
+  "periarthritis of the shoulder",
+  "shoulder contracture"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Hand & Peripheral nerve",
+ "specialty": "Orthopaedics / Hand Surgery",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Green's Operative Hand Surgery / Campbell's Operative Orthopaedics",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Presents with painful and progressive global restriction of glenohumeral movement affecting both active and passive range",
+   "Loss of passive external rotation is characteristic and helps distinguish it from rotator cuff and subacromial disorders",
+   "The illness classically evolves through three overlapping phases: a painful freezing phase, a stiff frozen phase and a gradual thawing phase of recovery",
+   "There is a strong association with diabetes mellitus, in whom the disease is often bilateral and more refractory, and with thyroid dysfunction",
+   "It is described as primary (idiopathic) or secondary to trauma, immobilisation or surgery",
+   "It most often affects people between about 40 and 60 years of age with a slight female predominance",
+   "Radiographs are typically normal and mainly serve to exclude osteoarthritis, calcific tendinitis or a locked dislocation, so the diagnosis is largely clinical",
+   "Generic management includes analgesia, physiotherapy and stretching, corticosteroid injection and capsular distension (hydrodilatation), with manipulation under anaesthesia or arthroscopic capsular release for refractory cases"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Hand & Peripheral nerve",
-  "specialty": "Orthopaedics / Hand Surgery",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Green's Operative Hand Surgery / Campbell's Operative Orthopaedics",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Presents with painful and progressive global restriction of glenohumeral movement affecting both active and passive range",
-      "Loss of passive external rotation is characteristic and helps distinguish it from rotator cuff and subacromial disorders",
-      "The illness classically evolves through three overlapping phases: a painful freezing phase, a stiff frozen phase and a gradual thawing phase of recovery",
-      "There is a strong association with diabetes mellitus, in whom the disease is often bilateral and more refractory, and with thyroid dysfunction",
-      "It is described as primary (idiopathic) or secondary to trauma, immobilisation or surgery",
-      "It most often affects people between about 40 and 60 years of age with a slight female predominance",
-      "Radiographs are typically normal and mainly serve to exclude osteoarthritis, calcific tendinitis or a locked dislocation, so the diagnosis is largely clinical",
-      "Generic management includes analgesia, physiotherapy and stretching, corticosteroid injection and capsular distension (hydrodilatation), with manipulation under anaesthesia or arthroscopic capsular release for refractory cases"
+  "pathophysiology": "Adhesive capsulitis involves inflammation followed by fibrosis and contracture of the glenohumeral joint capsule, particularly at the rotator interval and the coracohumeral ligament, with a resulting reduction in joint volume. Fibroblastic proliferation and myofibroblast-driven contracture, mediated by cytokines and growth factors, thicken and tighten the capsule so that movement becomes globally restricted. Diabetes mellitus and thyroid disease predispose to the condition, which is usually self-limiting but resolves only slowly over many months to years.",
+  "additionalDifferentials": [
+   "Rotator cuff tear or tendinopathy",
+   "Subacromial impingement or bursitis",
+   "Glenohumeral osteoarthritis",
+   "Calcific tendinitis",
+   "Locked posterior shoulder dislocation",
+   "Cervical radiculopathy",
+   "Referred pain or malignancy affecting the shoulder girdle"
+  ],
+  "additionalInvestigations": [
+   "Clinical examination demonstrating global loss of active and passive movement, especially external rotation",
+   "Plain radiographs to exclude osteoarthritis, a locked dislocation or calcific tendinitis",
+   "Assessment for diabetes mellitus and thyroid dysfunction",
+   "Ultrasound to exclude coexisting rotator cuff pathology",
+   "MRI or arthrography showing a contracted capsule and reduced joint volume when the diagnosis is uncertain"
+  ],
+  "redFlags": [
+   "A history of trauma with a locked shoulder suggesting a missed posterior dislocation",
+   "Night pain with systemic features or a mass raising concern for malignancy",
+   "A neurological deficit suggesting a cervical or nerve lesion",
+   "Failure to improve or an atypical presentation warranting further imaging"
+  ],
+  "prognosis": "The condition is generally self-limiting but recovery is slow, often taking one to three years; people with diabetes tend to have a more protracted course and some are left with residual stiffness.",
+  "pitfalls": [
+   "Missing a posterior dislocation, which also restricts external rotation, by not obtaining an axillary view",
+   "Labelling any stiff shoulder as frozen without excluding osteoarthritis or cuff pathology",
+   "Overlooking associated diabetes or thyroid disease",
+   "Overly forceful manipulation risking fracture or soft-tissue injury"
+  ],
+  "references": [
+   "Campbell's Operative Orthopaedics",
+   "Green's Operative Hand Surgery"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Provide analgesia and anti-inflammatory measures for pain control, particularly during the painful freezing phase",
+   "Offer intra-articular glenohumeral corticosteroid injection to reduce pain and capsular inflammation early in the disease",
+   "Institute structured physiotherapy with graded stretching and range-of-motion exercises, intensified as pain settles",
+   "Reassure regarding the generally self-limiting but protracted course and advise activity modification",
+   "Optimise glycaemic control in diabetes and treat coexisting thyroid dysfunction, which influence severity and recovery",
+   "Consider capsular hydrodilatation, manipulation under anaesthesia or arthroscopic capsular release for refractory stiffness",
+   "Refer to a shoulder specialist when pain or restriction fails to improve despite conservative measures"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "adhesive_capsulitis-pathway",
+   "title": "Adhesive capsulitis (frozen shoulder): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Presents with painful and progressive global restriction of glenohumeral movement affecting both active and passive range",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: A history of trauma with a locked shoulder suggesting a missed posterior dislocation",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical examination demonstrating global loss of active and passive movement, especially external rotation, Plain radiographs to exclude osteoarthritis, a locked dislocation or calcific tendinitis, Assessment for diabetes"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Provide analgesia and anti-inflammatory measures for pain control, particularly during the painful freezing phase"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Missing a posterior dislocation, which also restricts external rotation, by not obtaining an axillary view"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of adhesive capsulitis (frozen shoulder)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "adhesive_capsulitis-matrix",
+   "title": "Adhesive capsulitis (frozen shoulder): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Presents with painful and progressive global restriction of glenohumeral movement affecting both active and passive range",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Adhesive capsulitis involves inflammation followed by fibrosis and contracture of the glenohumeral joint capsule, particularly at the rotator interval and the coracohumeral ligament, with a resulting reduction in joint volume. Fibroblastic proliferation and myofibroblast-driven contracture, mediated by cytokines and growth factors, thicken and tighten the capsule so that movement becomes globally restricted. Diabetes mellitus and thyroid disease predispose to the condition, which is usually self-limiting but resolves only slowly over many months to years.",
-    "additionalDifferentials": [
-      "Rotator cuff tear or tendinopathy",
-      "Subacromial impingement or bursitis",
-      "Glenohumeral osteoarthritis",
-      "Calcific tendinitis",
-      "Locked posterior shoulder dislocation",
-      "Cervical radiculopathy",
-      "Referred pain or malignancy affecting the shoulder girdle"
+    [
+     "Key Investigations",
+     "Clinical examination demonstrating global loss of active and passive movement, especially external rotation, Plain radiographs to",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical examination demonstrating global loss of active and passive movement, especially external rotation",
-      "Plain radiographs to exclude osteoarthritis, a locked dislocation or calcific tendinitis",
-      "Assessment for diabetes mellitus and thyroid dysfunction",
-      "Ultrasound to exclude coexisting rotator cuff pathology",
-      "MRI or arthrography showing a contracted capsule and reduced joint volume when the diagnosis is uncertain"
+    [
+     "Primary Differentials",
+     "Rotator cuff tear or tendinopathy, Subacromial impingement or bursitis, Glenohumeral osteoarthritis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "A history of trauma with a locked shoulder suggesting a missed posterior dislocation",
-      "Night pain with systemic features or a mass raising concern for malignancy",
-      "A neurological deficit suggesting a cervical or nerve lesion",
-      "Failure to improve or an atypical presentation warranting further imaging"
+    [
+     "Management Strategy",
+     "Provide analgesia and anti-inflammatory measures for pain control, particularly during the painful freezing phase",
+     "Core treatment modality"
     ],
-    "prognosis": "The condition is generally self-limiting but recovery is slow, often taking one to three years; people with diabetes tend to have a more protracted course and some are left with residual stiffness.",
-    "pitfalls": [
-      "Missing a posterior dislocation, which also restricts external rotation, by not obtaining an axillary view",
-      "Labelling any stiff shoulder as frozen without excluding osteoarthritis or cuff pathology",
-      "Overlooking associated diabetes or thyroid disease",
-      "Overly forceful manipulation risking fracture or soft-tissue injury"
-    ],
-    "references": [
-      "Campbell's Operative Orthopaedics",
-      "Green's Operative Hand Surgery"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Provide analgesia and anti-inflammatory measures for pain control, particularly during the painful freezing phase",
-      "Offer intra-articular glenohumeral corticosteroid injection to reduce pain and capsular inflammation early in the disease",
-      "Institute structured physiotherapy with graded stretching and range-of-motion exercises, intensified as pain settles",
-      "Reassure regarding the generally self-limiting but protracted course and advise activity modification",
-      "Optimise glycaemic control in diabetes and treat coexisting thyroid dysfunction, which influence severity and recovery",
-      "Consider capsular hydrodilatation, manipulation under anaesthesia or arthroscopic capsular release for refractory stiffness",
-      "Refer to a shoulder specialist when pain or restriction fails to improve despite conservative measures"
+    [
+     "Clinical Pitfall",
+     "Missing a posterior dislocation, which also restricts external rotation, by not obtaining an axillary view",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for adhesive capsulitis (frozen shoulder)."
+  }
+ ]
 }

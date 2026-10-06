@@ -161,5 +161,77 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h589f19e8"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "acs-dx-algo",
+      "title": "Acute coronary syndrome: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "ACS encompasses unstable angina, NSTEMI, and STEMI, and the term is generally reserved for ischemia precipitated by acute coronary atherothrombosis (Harrison 22e p.145).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: ST-segment elevation on ECG (candidate for immediate reperfusion)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: High-sensitivity cardiac troponin at presentation, repeated at 1-3 h (1-2 h rapid rule-out possible with hs-assays); conventional troponin repeated at 3-6 h, Right-sided ECG leads when ischemia is suspected but standard"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: ACS is categorized along two clinical decision-making lines. (1) Diagnostic/disposition risk in undifferentiated chest pain uses clinical decision pathways such as the HEART score (history, ECG, age, risk factors; low"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Relying on a normal resting ECG or unremarkable physical exam to exclude ACS - both can be normal in unstable ischemic heart disease (Harrison 22e p.149-150)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for acute coronary syndrome."
+    }
+  ],
+  "tables": [
+    {
+      "id": "acs-matrix",
+      "title": "Acute coronary syndrome: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "ACS encompasses unstable angina, NSTEMI, and STEMI, and the term is generally reserved for ischemia precipitated by acute",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "High-sensitivity cardiac troponin at presentation, repeated at 1-3 h (1-2 h rapid rule-out possible with hs-assays); conventional",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Stable angina (chronic, exertional), Esophageal spasm (can closely mimic angina and may respond to nitroglycerin),",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "ST-segment elevation on ECG (candidate for immediate reperfusion)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on a normal resting ECG or unremarkable physical exam to exclude ACS - both can be normal in unstable ischemic heart",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for acute coronary syndrome."
+    }
+  ]
 }

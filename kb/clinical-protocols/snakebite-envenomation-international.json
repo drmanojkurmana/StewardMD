@@ -6,7 +6,22 @@
  "basis": "international",
  "counterpart": "snakebite-envenomation",
  "setting": "Field, emergency department, ward, ICU",
- "aliases": ["snake bite", "snakebite", "envenomation", "antivenom", "ASV", "anti-snake venom", "20WBCT", "neurotoxic envenoming", "haemotoxic envenoming", "cobra", "krait", "Russell's viper", "saw-scaled viper", "pressure pad immobilisation"],
+ "aliases": [
+  "snake bite",
+  "snakebite",
+  "envenomation",
+  "antivenom",
+  "ASV",
+  "anti-snake venom",
+  "20WBCT",
+  "neurotoxic envenoming",
+  "haemotoxic envenoming",
+  "cobra",
+  "krait",
+  "Russell's viper",
+  "saw-scaled viper",
+  "pressure pad immobilisation"
+ ],
  "summary": "Reassure, immobilise and transport without cutting, sucking or tight tourniquets. Give IV antivenom (no skin test) for systemic or severe local envenoming, the same dose for children, repeat by 20WBCT and clinical response, try atropine-neostigmine in neurotoxicity, and treat antivenom anaphylaxis with IM adrenaline.",
  "sections": [
   {
@@ -109,16 +124,124 @@
   }
  ],
  "drugs": [
-  { "name": "Polyvalent antivenom", "dose": "IV slow push (no more than 2 mL/min) or infusion in 5 mL/kg isotonic fluid over 30 to 60 minutes. WHO SEARO initial guide for Indian polyvalent: 100 mL (about 10 vials) for Russell's viper or common krait; 50 mL (about 5 vials) for cobra or saw-scaled viper", "notes": "Same dose for children and in pregnancy. Repeat at 6 hours if blood is still incoagulable, within 1 to 2 hours for continued bleeding, after 1 hour for neurological or cardiovascular deterioration." },
-  { "name": "Adrenaline (epinephrine) 1 mg/mL", "dose": "Prophylaxis 0.25 mg SC before antivenom (children 0.005 mL/kg); anaphylaxis 0.5 mg IM (children 0.01 mg/kg), repeat every 5 to 10 minutes", "notes": "Omit prophylaxis in older patients with suspected cerebrovascular disease. Safe in pregnancy." },
-  { "name": "Chlorphenamine", "dose": "10 mg IV (children 0.2 mg/kg) after adrenaline for anaphylaxis; serum sickness 2 mg orally every 6 hours (children 0.25 mg/kg/day in divided doses) for 5 days", "notes": "Adjunct only; does not prevent reactions." },
-  { "name": "Hydrocortisone", "dose": "100 mg IV (children 2 mg/kg) after adrenaline in anaphylaxis", "notes": "Also for suspected pituitary or adrenal insufficiency after Russell's viper bite. Not for prophylaxis." },
-  { "name": "Prednisolone", "dose": "5 mg orally every 6 hours (children 0.7 mg/kg/day in divided doses) for 5 to 7 days", "notes": "Serum sickness not responding to antihistamine within 24 to 48 hours." },
-  { "name": "Neostigmine", "dose": "Test dose 0.02 mg/kg IM (children 0.04 mg/kg) after atropine; maintenance 0.5 to 2.5 mg every 1 to 3 hours, maximum 10 mg in 24 hours (children 0.01 to 0.04 mg/kg every 2 to 4 hours)", "notes": "Only if the test shows a convincing response; always with atropine." },
-  { "name": "Atropine", "dose": "0.6 mg IV (children 50 mcg/kg) before each neostigmine dose", "notes": "Blocks muscarinic effects of neostigmine." }
+  {
+   "name": "Polyvalent antivenom",
+   "dose": "IV slow push (no more than 2 mL/min) or infusion in 5 mL/kg isotonic fluid over 30 to 60 minutes. WHO SEARO initial guide for Indian polyvalent: 100 mL (about 10 vials) for Russell's viper or common krait; 50 mL (about 5 vials) for cobra or saw-scaled viper",
+   "notes": "Same dose for children and in pregnancy. Repeat at 6 hours if blood is still incoagulable, within 1 to 2 hours for continued bleeding, after 1 hour for neurological or cardiovascular deterioration."
+  },
+  {
+   "name": "Adrenaline (epinephrine) 1 mg/mL",
+   "dose": "Prophylaxis 0.25 mg SC before antivenom (children 0.005 mL/kg); anaphylaxis 0.5 mg IM (children 0.01 mg/kg), repeat every 5 to 10 minutes",
+   "notes": "Omit prophylaxis in older patients with suspected cerebrovascular disease. Safe in pregnancy."
+  },
+  {
+   "name": "Chlorphenamine",
+   "dose": "10 mg IV (children 0.2 mg/kg) after adrenaline for anaphylaxis; serum sickness 2 mg orally every 6 hours (children 0.25 mg/kg/day in divided doses) for 5 days",
+   "notes": "Adjunct only; does not prevent reactions."
+  },
+  {
+   "name": "Hydrocortisone",
+   "dose": "100 mg IV (children 2 mg/kg) after adrenaline in anaphylaxis",
+   "notes": "Also for suspected pituitary or adrenal insufficiency after Russell's viper bite. Not for prophylaxis."
+  },
+  {
+   "name": "Prednisolone",
+   "dose": "5 mg orally every 6 hours (children 0.7 mg/kg/day in divided doses) for 5 to 7 days",
+   "notes": "Serum sickness not responding to antihistamine within 24 to 48 hours."
+  },
+  {
+   "name": "Neostigmine",
+   "dose": "Test dose 0.02 mg/kg IM (children 0.04 mg/kg) after atropine; maintenance 0.5 to 2.5 mg every 1 to 3 hours, maximum 10 mg in 24 hours (children 0.01 to 0.04 mg/kg every 2 to 4 hours)",
+   "notes": "Only if the test shows a convincing response; always with atropine."
+  },
+  {
+   "name": "Atropine",
+   "dose": "0.6 mg IV (children 50 mcg/kg) before each neostigmine dose",
+   "notes": "Blocks muscarinic effects of neostigmine."
+  }
  ],
  "sources": [
-  { "org": "WHO Regional Office for South-East Asia", "title": "Guidelines for the management of snakebites, 2nd edition", "year": 2016, "url": "https://www.who.int/publications/i/item/9789290225300" }
+  {
+   "org": "WHO Regional Office for South-East Asia",
+   "title": "Guidelines for the management of snakebites, 2nd edition",
+   "year": 2016,
+   "url": "https://www.who.int/publications/i/item/9789290225300"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "snakebite-envenomation-international-pathway",
+   "title": "Snakebite envenoming (WHO) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Local envenoming: pain, swelling, blistering, bruising, tender enlarged regional lymph nodes and necrosis (cobras, vipers).",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Reassure the victim (many bites are dry bites and severe envenoming usually evolves slowly). Lay them down, ideally in the recovery position on the left side, and splint or sling the bitten limb; any movement, even walking or undressing,",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "20-minute whole blood clotting test: put 2 mL of fresh venous blood in a new, clean, dry, ordinary glass vessel, leave it undisturbed for 20 minutes at room temperature, then tip once. Blood still liquid means venom-induced consumption"
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Intubate or insert a supraglottic airway and ventilate for respiratory distress, neck weakness with shallow or paradoxical breathing, pooling secretions with loss of gag reflex, SpO2 below 90% despite high-flow oxygen, or rising PaCO2."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Delaying antivenom to wait for a 20WBCT when there is spontaneous systemic bleeding, or withholding it for fear of reactions."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for snakebite envenoming (who)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "snakebite-envenomation-international-summary-matrix",
+   "title": "Snakebite envenoming (WHO) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Local envenoming: pain, swelling, blistering, bruising, tender enlarged regional lymph nodes and necrosis (cobras, vipers).",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Reassure the victim (many bites are dry bites and severe envenoming usually evolves slowly). Lay them down, ideally in the recovery",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "20-minute whole blood clotting test: put 2 mL of fresh venous blood in a new, clean, dry, ordinary glass vessel, leave it undisturbed for",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Polyvalent antivenom: IV slow push (no more than 2 mL/min) or infusion in 5 mL/kg isotonic fluid over 30 to 60 minutes. WHO SEARO initial",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Delaying antivenom to wait for a 20WBCT when there is spontaneous systemic bleeding, or withholding it for fear of reactions.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for snakebite envenoming (who)."
+  }
+ ]
 }

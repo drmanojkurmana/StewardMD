@@ -1,79 +1,151 @@
 {
-  "id": "kcnb1_encephalopathy",
-  "name": "KCNB1 encephalopathy",
-  "aliases": [
-    "KCNB1",
-    "KCNB1-related epilepsy",
-    "Kv2.1 encephalopathy",
-    "EIEE26"
+ "id": "kcnb1_encephalopathy",
+ "name": "KCNB1 encephalopathy",
+ "aliases": [
+  "KCNB1",
+  "KCNB1-related epilepsy",
+  "Kv2.1 encephalopathy",
+  "EIEE26"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Neurogenetics",
+ "specialty": "Neurology / Epileptology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "GeneReviews / ILAE",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Caused by usually de novo variants in KCNB1, which encodes the delayed-rectifier voltage-gated potassium channel Kv2.1 that shapes repolarisation and regulates repetitive neuronal firing",
+   "Presents as a developmental and epileptic encephalopathy, though some individuals have neurodevelopmental impairment with few or no seizures",
+   "Seizure onset is usually in infancy or early childhood, with multiple types including focal, tonic, absence, myoclonic, and epileptic spasms",
+   "The electroencephalogram often shows multifocal or generalised epileptiform discharges and may include hypsarrhythmia",
+   "Intellectual disability, autism spectrum features, behavioural problems, and attention difficulties are prominent parts of the phenotype",
+   "Many pathogenic variants impair the potassium current or confer altered channel properties, disturbing the balance of excitability rather than acting like classic gain-of-function sodium channelopathies",
+   "Broad-spectrum antiseizure agents are generally used, and no single medication is uniformly effective"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Neurogenetics",
-  "specialty": "Neurology / Epileptology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "GeneReviews / ILAE",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Caused by usually de novo variants in KCNB1, which encodes the delayed-rectifier voltage-gated potassium channel Kv2.1 that shapes repolarisation and regulates repetitive neuronal firing",
-      "Presents as a developmental and epileptic encephalopathy, though some individuals have neurodevelopmental impairment with few or no seizures",
-      "Seizure onset is usually in infancy or early childhood, with multiple types including focal, tonic, absence, myoclonic, and epileptic spasms",
-      "The electroencephalogram often shows multifocal or generalised epileptiform discharges and may include hypsarrhythmia",
-      "Intellectual disability, autism spectrum features, behavioural problems, and attention difficulties are prominent parts of the phenotype",
-      "Many pathogenic variants impair the potassium current or confer altered channel properties, disturbing the balance of excitability rather than acting like classic gain-of-function sodium channelopathies",
-      "Broad-spectrum antiseizure agents are generally used, and no single medication is uniformly effective"
+  "pathophysiology": "KCNB1 encodes Kv2.1, a delayed-rectifier voltage-gated potassium channel that carries a major outward potassium current controlling membrane repolarisation, spike-frequency adaptation, and the ability of neurons to fire repetitively. Kv2.1 also has a structural role in organising membrane microdomains. Pathogenic variants disrupt channel gating, selectivity, or expression, and can additionally alter non-conducting functions; the net effect is impaired regulation of neuronal excitability. This dysfunction lowers the seizure threshold and disturbs developmental network activity, producing the combined epileptic and neurodevelopmental phenotype seen clinically.",
+  "additionalDifferentials": [
+   "KCNQ2 and KCNA2 potassium channel encephalopathies",
+   "SCN2A and SCN8A developmental and epileptic encephalopathies",
+   "STXBP1 encephalopathy",
+   "SYNGAP1 encephalopathy",
+   "CDKL5 deficiency disorder",
+   "Other genetic causes of infantile-onset developmental and epileptic encephalopathy"
+  ],
+  "additionalInvestigations": [
+   "Epilepsy gene panel or whole-exome sequencing to identify the KCNB1 variant",
+   "Electroencephalography to characterise multifocal or generalised discharges",
+   "Brain magnetic resonance imaging to exclude structural causes",
+   "Developmental, cognitive, and autism-spectrum assessment",
+   "Behavioural and attention evaluation",
+   "Where available, functional characterisation of the variant"
+  ],
+  "redFlags": [
+   "Evolution to epileptic spasms with hypsarrhythmia",
+   "Drug-resistant mixed seizures with developmental regression",
+   "Status epilepticus",
+   "Severe behavioural deterioration affecting safety"
+  ],
+  "prognosis": "Most affected individuals have intellectual disability with behavioural and autistic features; seizures range from readily controlled to drug-resistant, and cognitive outcome is generally guarded even when seizures improve.",
+  "pitfalls": [
+   "Assuming absent seizures excludes the diagnosis in a child with neurodevelopmental impairment",
+   "Applying sodium-channelopathy treatment logic to a potassium channel disorder",
+   "Underestimating the behavioural and attention comorbidity",
+   "Missing evolving epileptic spasms on the electroencephalogram"
+  ],
+  "references": [
+   "GeneReviews and OMIM resources on KCNB1-related disorders",
+   "ILAE resources on potassium channel developmental and epileptic encephalopathies"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Broad-spectrum antiseizure medications such as valproate, levetiracetam or benzodiazepines titrated to the seizure types, as no targeted therapy exists",
+   "Consideration of the ketogenic diet for drug-resistant seizures",
+   "Multidisciplinary developmental support with speech, occupational and physiotherapy for the intellectual disability and autistic features",
+   "Behavioural, psychological and educational interventions for attention difficulties and behavioural problems",
+   "EEG-guided reassessment of the antiseizure regimen as the multifocal or generalised discharges and seizure types evolve",
+   "Rescue benzodiazepine protocol and a status epilepticus plan for prolonged or clustering seizures",
+   "Clinical genetics counselling; most variants are de novo so recurrence risk is usually low, but parental testing refines advice"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "kcnb1_encephalopathy-pathway",
+   "title": "KCNB1 encephalopathy: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Caused by usually de novo variants in KCNB1, which encodes the delayed-rectifier voltage-gated potassium channel Kv2.1 that shapes repolarisation and regulates repetitive neuronal firing",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Evolution to epileptic spasms with hypsarrhythmia",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Epilepsy gene panel or whole-exome sequencing to identify the KCNB1 variant, Electroencephalography to characterise multifocal or generalised discharges, Brain magnetic resonance imaging to exclude structural causes"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Broad-spectrum antiseizure medications such as valproate, levetiracetam or benzodiazepines titrated to the seizure types, as no targeted therapy exists"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming absent seizures excludes the diagnosis in a child with neurodevelopmental impairment"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of kcnb1 encephalopathy."
+  }
+ ],
+ "tables": [
+  {
+   "id": "kcnb1_encephalopathy-matrix",
+   "title": "KCNB1 encephalopathy: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Caused by usually de novo variants in KCNB1, which encodes the delayed-rectifier voltage-gated potassium channel Kv2.1 that",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "KCNB1 encodes Kv2.1, a delayed-rectifier voltage-gated potassium channel that carries a major outward potassium current controlling membrane repolarisation, spike-frequency adaptation, and the ability of neurons to fire repetitively. Kv2.1 also has a structural role in organising membrane microdomains. Pathogenic variants disrupt channel gating, selectivity, or expression, and can additionally alter non-conducting functions; the net effect is impaired regulation of neuronal excitability. This dysfunction lowers the seizure threshold and disturbs developmental network activity, producing the combined epileptic and neurodevelopmental phenotype seen clinically.",
-    "additionalDifferentials": [
-      "KCNQ2 and KCNA2 potassium channel encephalopathies",
-      "SCN2A and SCN8A developmental and epileptic encephalopathies",
-      "STXBP1 encephalopathy",
-      "SYNGAP1 encephalopathy",
-      "CDKL5 deficiency disorder",
-      "Other genetic causes of infantile-onset developmental and epileptic encephalopathy"
+    [
+     "Key Investigations",
+     "Epilepsy gene panel or whole-exome sequencing to identify the KCNB1 variant, Electroencephalography to characterise multifocal or",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Epilepsy gene panel or whole-exome sequencing to identify the KCNB1 variant",
-      "Electroencephalography to characterise multifocal or generalised discharges",
-      "Brain magnetic resonance imaging to exclude structural causes",
-      "Developmental, cognitive, and autism-spectrum assessment",
-      "Behavioural and attention evaluation",
-      "Where available, functional characterisation of the variant"
+    [
+     "Primary Differentials",
+     "KCNQ2 and KCNA2 potassium channel encephalopathies, SCN2A and SCN8A developmental and epileptic encephalopathies, STXBP1",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Evolution to epileptic spasms with hypsarrhythmia",
-      "Drug-resistant mixed seizures with developmental regression",
-      "Status epilepticus",
-      "Severe behavioural deterioration affecting safety"
+    [
+     "Management Strategy",
+     "Broad-spectrum antiseizure medications such as valproate, levetiracetam or benzodiazepines titrated to the seizure types, as no",
+     "Core treatment modality"
     ],
-    "prognosis": "Most affected individuals have intellectual disability with behavioural and autistic features; seizures range from readily controlled to drug-resistant, and cognitive outcome is generally guarded even when seizures improve.",
-    "pitfalls": [
-      "Assuming absent seizures excludes the diagnosis in a child with neurodevelopmental impairment",
-      "Applying sodium-channelopathy treatment logic to a potassium channel disorder",
-      "Underestimating the behavioural and attention comorbidity",
-      "Missing evolving epileptic spasms on the electroencephalogram"
-    ],
-    "references": [
-      "GeneReviews and OMIM resources on KCNB1-related disorders",
-      "ILAE resources on potassium channel developmental and epileptic encephalopathies"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Broad-spectrum antiseizure medications such as valproate, levetiracetam or benzodiazepines titrated to the seizure types, as no targeted therapy exists",
-      "Consideration of the ketogenic diet for drug-resistant seizures",
-      "Multidisciplinary developmental support with speech, occupational and physiotherapy for the intellectual disability and autistic features",
-      "Behavioural, psychological and educational interventions for attention difficulties and behavioural problems",
-      "EEG-guided reassessment of the antiseizure regimen as the multifocal or generalised discharges and seizure types evolve",
-      "Rescue benzodiazepine protocol and a status epilepticus plan for prolonged or clustering seizures",
-      "Clinical genetics counselling; most variants are de novo so recurrence risk is usually low, but parental testing refines advice"
+    [
+     "Clinical Pitfall",
+     "Assuming absent seizures excludes the diagnosis in a child with neurodevelopmental impairment",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for kcnb1 encephalopathy."
+  }
+ ]
 }

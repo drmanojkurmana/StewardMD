@@ -1,82 +1,154 @@
 {
-  "id": "spinocerebellar_ataxia_type_23",
-  "name": "Spinocerebellar ataxia type 23 (PDYN)",
-  "aliases": [
-    "SCA23",
-    "PDYN-related ataxia",
-    "prodynorphin ataxia",
-    "autosomal dominant cerebellar ataxia type SCA23"
+ "id": "spinocerebellar_ataxia_type_23",
+ "name": "Spinocerebellar ataxia type 23 (PDYN)",
+ "aliases": [
+  "SCA23",
+  "PDYN-related ataxia",
+  "prodynorphin ataxia",
+  "autosomal dominant cerebellar ataxia type SCA23"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Neurogenetics",
+ "specialty": "Neurology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "GeneReviews / Bradley Neurology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A rare autosomal dominant cerebellar ataxia caused by missense variants in PDYN, which encodes prodynorphin, the precursor of the opioid peptide dynorphin",
+   "Presentation is usually in adulthood, often mid-to-late, with slowly progressive gait ataxia and dysarthria",
+   "Alongside cerebellar signs, posterior-column sensory features such as reduced vibration and joint-position sense may be present, together with pyramidal signs like hyperreflexia and extensor plantar responses",
+   "Eye-movement abnormalities including gaze-evoked nystagmus and abnormal saccades are described",
+   "Because it is caused by point mutations, repeat-expansion testing is normal and diagnosis relies on gene sequencing",
+   "Brain MRI shows cerebellar atrophy, sometimes with brainstem involvement",
+   "There is no specific therapy; care is supportive and multidisciplinary"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Neurogenetics",
-  "specialty": "Neurology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "GeneReviews / Bradley Neurology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A rare autosomal dominant cerebellar ataxia caused by missense variants in PDYN, which encodes prodynorphin, the precursor of the opioid peptide dynorphin",
-      "Presentation is usually in adulthood, often mid-to-late, with slowly progressive gait ataxia and dysarthria",
-      "Alongside cerebellar signs, posterior-column sensory features such as reduced vibration and joint-position sense may be present, together with pyramidal signs like hyperreflexia and extensor plantar responses",
-      "Eye-movement abnormalities including gaze-evoked nystagmus and abnormal saccades are described",
-      "Because it is caused by point mutations, repeat-expansion testing is normal and diagnosis relies on gene sequencing",
-      "Brain MRI shows cerebellar atrophy, sometimes with brainstem involvement",
-      "There is no specific therapy; care is supportive and multidisciplinary"
+  "pathophysiology": "SCA23 is caused by dominant missense variants in PDYN, which encodes prodynorphin, a precursor processed into dynorphin peptides that act on kappa-opioid receptors and modulate neurotransmission. Pathogenic variants tend to cluster in the region giving rise to dynorphin A and are thought to yield abnormally stable or neurotoxic peptides that disturb glutamatergic signalling and neuronal calcium handling. The consequent Purkinje cell and related neuronal degeneration produces the cerebellar ataxia, with variable posterior-column and pyramidal involvement reflecting wider effects on neuronal survival.",
+  "additionalDifferentials": [
+   "Other autosomal dominant spinocerebellar ataxias",
+   "Friedreich ataxia and other ataxias with posterior-column involvement",
+   "Vitamin E deficiency ataxia",
+   "Subacute combined degeneration from vitamin B12 deficiency",
+   "Multiple system atrophy, cerebellar type",
+   "Sporadic adult-onset cerebellar ataxia"
+  ],
+  "additionalInvestigations": [
+   "PDYN sequencing within an ataxia gene panel or exome",
+   "Brain MRI to document cerebellar and any brainstem atrophy",
+   "Testing for common repeat-expansion SCAs before proceeding to PDYN analysis",
+   "Nerve conduction studies and vitamin B12 and E levels where posterior-column signs are present",
+   "Detailed family history to establish autosomal dominant transmission",
+   "Screening for acquired ataxia (thyroid function, coeliac serology, alcohol history)"
+  ],
+  "redFlags": [
+   "Rapid progression or an atypical course suggesting an acquired or paraneoplastic cause",
+   "Prominent autonomic failure pointing to multiple system atrophy",
+   "Severe sensory ataxia disproportionate to cerebellar signs, prompting a search for a treatable neuropathy",
+   "Dysphagia with aspiration risk requiring swallow assessment"
+  ],
+  "prognosis": "SCA23 is slowly progressive over years, with gradually increasing gait and speech difficulty; disability varies between families and life expectancy is often relatively preserved, prognosis being influenced by bulbar involvement and falls.",
+  "pitfalls": [
+   "Expecting a repeat expansion and missing the point mutation when common panels are negative",
+   "Attributing posterior-column sensory signs to an acquired neuropathy without pursuing a genetic cause",
+   "Not proceeding to sequencing when the phenotype fits a rare dominant ataxia",
+   "Overlooking multiple system atrophy when autonomic features are present",
+   "Failing to offer genetic counselling regarding dominant inheritance"
+  ],
+  "references": [
+   "GeneReviews, University of Washington, Seattle",
+   "Bradley and Daroff's Neurology in Clinical Practice"
+  ],
+  "crossLinks": [
+   "spinocerebellar_ataxia_type_5"
+  ],
+  "management": [
+   "With no disease-modifying therapy for this PDYN-related ataxia, base care on physiotherapy for gait and balance, occupational therapy, and speech and language therapy for dysarthria",
+   "Manage pyramidal spasticity with physiotherapy, stretching and an antispasticity agent such as baclofen",
+   "Address posterior-column sensory ataxia with proprioceptive rehabilitation, walking aids and falls prevention",
+   "Exclude and treat modifiable causes of posterior-column signs, notably vitamin B12 and vitamin E deficiency",
+   "Monitor for bulbar involvement with periodic swallow assessment, as this influences prognosis",
+   "Provide multidisciplinary ataxia clinic follow-up",
+   "Offer genetic counselling and cascade testing for the autosomal dominant transmission"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "spinocerebellar_ataxia_type_23-pathway",
+   "title": "Spinocerebellar ataxia type 23 (PDYN): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A rare autosomal dominant cerebellar ataxia caused by missense variants in PDYN, which encodes prodynorphin, the precursor of the opioid peptide dynorphin",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapid progression or an atypical course suggesting an acquired or paraneoplastic cause",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: PDYN sequencing within an ataxia gene panel or exome, Brain MRI to document cerebellar and any brainstem atrophy, Testing for common repeat-expansion SCAs before proceeding to PDYN analysis"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: With no disease-modifying therapy for this PDYN-related ataxia, base care on physiotherapy for gait and balance, occupational therapy, and speech and language therapy for dysarthria"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Expecting a repeat expansion and missing the point mutation when common panels are negative"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of spinocerebellar ataxia type 23 (pdyn)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "spinocerebellar_ataxia_type_23-matrix",
+   "title": "Spinocerebellar ataxia type 23 (PDYN): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A rare autosomal dominant cerebellar ataxia caused by missense variants in PDYN, which encodes prodynorphin, the precursor of the",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "SCA23 is caused by dominant missense variants in PDYN, which encodes prodynorphin, a precursor processed into dynorphin peptides that act on kappa-opioid receptors and modulate neurotransmission. Pathogenic variants tend to cluster in the region giving rise to dynorphin A and are thought to yield abnormally stable or neurotoxic peptides that disturb glutamatergic signalling and neuronal calcium handling. The consequent Purkinje cell and related neuronal degeneration produces the cerebellar ataxia, with variable posterior-column and pyramidal involvement reflecting wider effects on neuronal survival.",
-    "additionalDifferentials": [
-      "Other autosomal dominant spinocerebellar ataxias",
-      "Friedreich ataxia and other ataxias with posterior-column involvement",
-      "Vitamin E deficiency ataxia",
-      "Subacute combined degeneration from vitamin B12 deficiency",
-      "Multiple system atrophy, cerebellar type",
-      "Sporadic adult-onset cerebellar ataxia"
+    [
+     "Key Investigations",
+     "PDYN sequencing within an ataxia gene panel or exome, Brain MRI to document cerebellar and any brainstem atrophy, Testing for",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "PDYN sequencing within an ataxia gene panel or exome",
-      "Brain MRI to document cerebellar and any brainstem atrophy",
-      "Testing for common repeat-expansion SCAs before proceeding to PDYN analysis",
-      "Nerve conduction studies and vitamin B12 and E levels where posterior-column signs are present",
-      "Detailed family history to establish autosomal dominant transmission",
-      "Screening for acquired ataxia (thyroid function, coeliac serology, alcohol history)"
+    [
+     "Primary Differentials",
+     "Other autosomal dominant spinocerebellar ataxias, Friedreich ataxia and other ataxias with posterior-column involvement, Vitamin",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapid progression or an atypical course suggesting an acquired or paraneoplastic cause",
-      "Prominent autonomic failure pointing to multiple system atrophy",
-      "Severe sensory ataxia disproportionate to cerebellar signs, prompting a search for a treatable neuropathy",
-      "Dysphagia with aspiration risk requiring swallow assessment"
+    [
+     "Management Strategy",
+     "With no disease-modifying therapy for this PDYN-related ataxia, base care on physiotherapy for gait and balance, occupational",
+     "Core treatment modality"
     ],
-    "prognosis": "SCA23 is slowly progressive over years, with gradually increasing gait and speech difficulty; disability varies between families and life expectancy is often relatively preserved, prognosis being influenced by bulbar involvement and falls.",
-    "pitfalls": [
-      "Expecting a repeat expansion and missing the point mutation when common panels are negative",
-      "Attributing posterior-column sensory signs to an acquired neuropathy without pursuing a genetic cause",
-      "Not proceeding to sequencing when the phenotype fits a rare dominant ataxia",
-      "Overlooking multiple system atrophy when autonomic features are present",
-      "Failing to offer genetic counselling regarding dominant inheritance"
-    ],
-    "references": [
-      "GeneReviews, University of Washington, Seattle",
-      "Bradley and Daroff's Neurology in Clinical Practice"
-    ],
-    "crossLinks": [
-      "spinocerebellar_ataxia_type_5"
-    ],
-    "management": [
-      "With no disease-modifying therapy for this PDYN-related ataxia, base care on physiotherapy for gait and balance, occupational therapy, and speech and language therapy for dysarthria",
-      "Manage pyramidal spasticity with physiotherapy, stretching and an antispasticity agent such as baclofen",
-      "Address posterior-column sensory ataxia with proprioceptive rehabilitation, walking aids and falls prevention",
-      "Exclude and treat modifiable causes of posterior-column signs, notably vitamin B12 and vitamin E deficiency",
-      "Monitor for bulbar involvement with periodic swallow assessment, as this influences prognosis",
-      "Provide multidisciplinary ataxia clinic follow-up",
-      "Offer genetic counselling and cascade testing for the autosomal dominant transmission"
+    [
+     "Clinical Pitfall",
+     "Expecting a repeat expansion and missing the point mutation when common panels are negative",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for spinocerebellar ataxia type 23 (pdyn)."
+  }
+ ]
 }

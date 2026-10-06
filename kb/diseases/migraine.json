@@ -165,5 +165,77 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h97e8cc44"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "migraine-dx-algo",
+      "title": "Migraine: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Migraine is the second most common cause of headache and the leading neurologic cause of disability worldwide; over a 1-year period it affects roughly 15% of women and 6% of men (p.3462).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Sudden-onset (thunderclap) headache or first/worst-ever severe headache (p.114).",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Migraine is a clinical diagnosis in patients with a normal examination and no other reasonable cause for headache (Table 441-3, p.3466)., A headache diary aids diagnosis and quantifies disability and attack frequency"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: ICHD-3 (IHS 2018) classifies migraine into migraine without aura, migraine with aura (typical aura with/without headache, migraine with brainstem aura, hemiplegic migraine including FHM1-3 and sporadic, retinal"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Mistaking migraine-related cranial autonomic symptoms for sinusitis, leading to overdiagnosis and inappropriate sinus treatment (p.114)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for migraine."
+    }
+  ],
+  "tables": [
+    {
+      "id": "migraine-matrix",
+      "title": "Migraine: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Migraine is the second most common cause of headache and the leading neurologic cause of disability worldwide; over a 1-year",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Migraine is a clinical diagnosis in patients with a normal examination and no other reasonable cause for headache (Table 441-3,",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Tension-type headache - the main differential; distinguished by being completely featureless (no nausea/vomiting, photophobia,",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Sudden-onset (thunderclap) headache or first/worst-ever severe headache (p.114).",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking migraine-related cranial autonomic symptoms for sinusitis, leading to overdiagnosis and inappropriate sinus treatment",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for migraine."
+    }
+  ]
 }

@@ -1,83 +1,155 @@
 {
-  "id": "cystic_fibrosis_paed",
-  "name": "Cystic Fibrosis (Paediatric)",
-  "aliases": [
-    "CF",
-    "cystic fibrosis",
-    "mucoviscidosis",
-    "paediatric cystic fibrosis"
+ "id": "cystic_fibrosis_paed",
+ "name": "Cystic Fibrosis (Paediatric)",
+ "aliases": [
+  "CF",
+  "cystic fibrosis",
+  "mucoviscidosis",
+  "paediatric cystic fibrosis"
+ ],
+ "class": "non_infective",
+ "system": "Respiratory",
+ "specialty": "Paediatrics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nelson Textbook of Pediatrics",
+  "sourceEdition": "22e",
+  "pages": null,
+  "clinicalPearls": [
+   "An autosomal recessive multisystem disorder caused by mutations in the CFTR gene, the most common of which is F508del.",
+   "It is a genetic disease, not an infection, though recurrent respiratory infections dominate its course and morbidity.",
+   "Suspect it in a child with chronic productive cough, recurrent chest infections, failure to thrive, and greasy, bulky, foul-smelling stools from fat malabsorption.",
+   "Meconium ileus in a newborn is highly suggestive and is often the earliest presentation.",
+   "Many countries diagnose it through newborn screening, but a positive screen must be confirmed, classically with an elevated sweat chloride test.",
+   "Pancreatic exocrine insufficiency is common and requires enzyme replacement and fat-soluble vitamin supplementation, with attention to overall nutrition.",
+   "Chronic airway infection, notably with Pseudomonas aeruginosa, drives progressive bronchiectasis and lung function decline.",
+   "Care is delivered by a specialist multidisciplinary team, and CFTR modulator therapies have transformed outcomes for eligible genotypes."
   ],
-  "class": "non_infective",
-  "system": "Respiratory",
-  "specialty": "Paediatrics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nelson Textbook of Pediatrics",
-    "sourceEdition": "22e",
-    "pages": null,
-    "clinicalPearls": [
-      "An autosomal recessive multisystem disorder caused by mutations in the CFTR gene, the most common of which is F508del.",
-      "It is a genetic disease, not an infection, though recurrent respiratory infections dominate its course and morbidity.",
-      "Suspect it in a child with chronic productive cough, recurrent chest infections, failure to thrive, and greasy, bulky, foul-smelling stools from fat malabsorption.",
-      "Meconium ileus in a newborn is highly suggestive and is often the earliest presentation.",
-      "Many countries diagnose it through newborn screening, but a positive screen must be confirmed, classically with an elevated sweat chloride test.",
-      "Pancreatic exocrine insufficiency is common and requires enzyme replacement and fat-soluble vitamin supplementation, with attention to overall nutrition.",
-      "Chronic airway infection, notably with Pseudomonas aeruginosa, drives progressive bronchiectasis and lung function decline.",
-      "Care is delivered by a specialist multidisciplinary team, and CFTR modulator therapies have transformed outcomes for eligible genotypes."
+  "pathophysiology": "Mutations in the CFTR gene impair the CFTR chloride and bicarbonate channel at epithelial surfaces. Defective ion transport produces thick, dehydrated secretions across multiple organs. In the airways, viscous mucus impairs mucociliary clearance, promoting chronic infection, neutrophilic inflammation, and progressive bronchiectasis. In the pancreas, ductal obstruction leads to exocrine insufficiency and malabsorption; similar mechanisms affect the intestine, biliary tree, sweat glands (hence high sweat chloride), and reproductive tract.",
+  "additionalDifferentials": [
+   "Primary ciliary dyskinesia",
+   "Immunodeficiency with recurrent infections",
+   "Asthma with recurrent chest infections",
+   "Protracted bacterial bronchitis",
+   "Coeliac disease or other causes of malabsorption and failure to thrive",
+   "Shwachman-Diamond syndrome"
+  ],
+  "additionalInvestigations": [
+   "Newborn screening (immunoreactive trypsinogen) with confirmatory testing",
+   "Sweat chloride testing",
+   "CFTR genetic analysis",
+   "Assessment of pancreatic function (e.g. faecal elastase)",
+   "Respiratory cultures to identify airway pathogens",
+   "Chest imaging and, in older children, lung function testing",
+   "Nutritional assessment and fat-soluble vitamin levels"
+  ],
+  "redFlags": [
+   "Failure to thrive or faltering growth reflecting malabsorption and increased energy demands",
+   "New or persistent Pseudomonas aeruginosa infection requiring eradication",
+   "Acute pulmonary exacerbation with increased cough, sputum, breathlessness, or falling lung function",
+   "Haemoptysis or pneumothorax",
+   "Distal intestinal obstruction syndrome or meconium ileus in the newborn",
+   "Signs of CF-related diabetes or liver disease emerging over time"
+  ],
+  "prognosis": "Survival has improved dramatically with multidisciplinary care, aggressive infection and nutrition management, and CFTR modulator therapy, with many people now living well into adulthood; prognosis is largely determined by the rate of progressive lung disease and nutritional status.",
+  "pitfalls": [
+   "Attributing recurrent chest infections and loose stools to common childhood illness and missing the diagnosis",
+   "Assuming a negative newborn screen fully excludes CF, since screening can miss some cases",
+   "Underestimating nutritional needs and failing to optimise pancreatic enzyme and vitamin replacement",
+   "Delaying treatment of new Pseudomonas infection when early eradication is most effective",
+   "Overlooking emerging complications such as CF-related diabetes and liver disease"
+  ],
+  "references": [
+   "Nelson Textbook of Pediatrics, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Start CFTR modulator therapy in children of eligible genotype to correct the underlying anion-channel defect",
+   "Institute daily airway clearance physiotherapy with mucoactive agents such as dornase alfa and hypertonic saline to clear viscous secretions",
+   "Undertake airway culture surveillance with eradication and treatment of Staphylococcus aureus and Pseudomonas aeruginosa, escalating to intravenous antibiotics for exacerbations",
+   "Treat exocrine pancreatic insufficiency with enzyme replacement and fat-soluble vitamin supplementation, and provide a high-energy diet to promote growth and prevent failure to thrive",
+   "Manage gastrointestinal complications such as meconium ileus and distal intestinal obstruction syndrome, and keep immunisations up to date",
+   "Monitor growth, lung function in older children and screen for cystic-fibrosis-related diabetes",
+   "Deliver care through a specialist paediatric cystic fibrosis multidisciplinary team, and offer genetic counselling with carrier testing for the family"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "cystic_fibrosis_paed-pathway",
+   "title": "Cystic Fibrosis (Paediatric): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An autosomal recessive multisystem disorder caused by mutations in the CFTR gene, the most common of which is F508del.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Failure to thrive or faltering growth reflecting malabsorption and increased energy demands",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Newborn screening (immunoreactive trypsinogen) with confirmatory testing, Sweat chloride testing, CFTR genetic analysis"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Start CFTR modulator therapy in children of eligible genotype to correct the underlying anion-channel defect"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing recurrent chest infections and loose stools to common childhood illness and missing the diagnosis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of cystic fibrosis (paediatric)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "cystic_fibrosis_paed-matrix",
+   "title": "Cystic Fibrosis (Paediatric): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An autosomal recessive multisystem disorder caused by mutations in the CFTR gene, the most common of which is F508del.",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Mutations in the CFTR gene impair the CFTR chloride and bicarbonate channel at epithelial surfaces. Defective ion transport produces thick, dehydrated secretions across multiple organs. In the airways, viscous mucus impairs mucociliary clearance, promoting chronic infection, neutrophilic inflammation, and progressive bronchiectasis. In the pancreas, ductal obstruction leads to exocrine insufficiency and malabsorption; similar mechanisms affect the intestine, biliary tree, sweat glands (hence high sweat chloride), and reproductive tract.",
-    "additionalDifferentials": [
-      "Primary ciliary dyskinesia",
-      "Immunodeficiency with recurrent infections",
-      "Asthma with recurrent chest infections",
-      "Protracted bacterial bronchitis",
-      "Coeliac disease or other causes of malabsorption and failure to thrive",
-      "Shwachman-Diamond syndrome"
+    [
+     "Key Investigations",
+     "Newborn screening (immunoreactive trypsinogen) with confirmatory testing, Sweat chloride testing, CFTR genetic analysis",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Newborn screening (immunoreactive trypsinogen) with confirmatory testing",
-      "Sweat chloride testing",
-      "CFTR genetic analysis",
-      "Assessment of pancreatic function (e.g. faecal elastase)",
-      "Respiratory cultures to identify airway pathogens",
-      "Chest imaging and, in older children, lung function testing",
-      "Nutritional assessment and fat-soluble vitamin levels"
+    [
+     "Primary Differentials",
+     "Primary ciliary dyskinesia, Immunodeficiency with recurrent infections, Asthma with recurrent chest infections",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Failure to thrive or faltering growth reflecting malabsorption and increased energy demands",
-      "New or persistent Pseudomonas aeruginosa infection requiring eradication",
-      "Acute pulmonary exacerbation with increased cough, sputum, breathlessness, or falling lung function",
-      "Haemoptysis or pneumothorax",
-      "Distal intestinal obstruction syndrome or meconium ileus in the newborn",
-      "Signs of CF-related diabetes or liver disease emerging over time"
+    [
+     "Management Strategy",
+     "Start CFTR modulator therapy in children of eligible genotype to correct the underlying anion-channel defect",
+     "Core treatment modality"
     ],
-    "prognosis": "Survival has improved dramatically with multidisciplinary care, aggressive infection and nutrition management, and CFTR modulator therapy, with many people now living well into adulthood; prognosis is largely determined by the rate of progressive lung disease and nutritional status.",
-    "pitfalls": [
-      "Attributing recurrent chest infections and loose stools to common childhood illness and missing the diagnosis",
-      "Assuming a negative newborn screen fully excludes CF, since screening can miss some cases",
-      "Underestimating nutritional needs and failing to optimise pancreatic enzyme and vitamin replacement",
-      "Delaying treatment of new Pseudomonas infection when early eradication is most effective",
-      "Overlooking emerging complications such as CF-related diabetes and liver disease"
-    ],
-    "references": [
-      "Nelson Textbook of Pediatrics, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Start CFTR modulator therapy in children of eligible genotype to correct the underlying anion-channel defect",
-      "Institute daily airway clearance physiotherapy with mucoactive agents such as dornase alfa and hypertonic saline to clear viscous secretions",
-      "Undertake airway culture surveillance with eradication and treatment of Staphylococcus aureus and Pseudomonas aeruginosa, escalating to intravenous antibiotics for exacerbations",
-      "Treat exocrine pancreatic insufficiency with enzyme replacement and fat-soluble vitamin supplementation, and provide a high-energy diet to promote growth and prevent failure to thrive",
-      "Manage gastrointestinal complications such as meconium ileus and distal intestinal obstruction syndrome, and keep immunisations up to date",
-      "Monitor growth, lung function in older children and screen for cystic-fibrosis-related diabetes",
-      "Deliver care through a specialist paediatric cystic fibrosis multidisciplinary team, and offer genetic counselling with carrier testing for the family"
+    [
+     "Clinical Pitfall",
+     "Attributing recurrent chest infections and loose stools to common childhood illness and missing the diagnosis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for cystic fibrosis (paediatric)."
+  }
+ ]
 }

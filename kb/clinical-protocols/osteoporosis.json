@@ -175,5 +175,77 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-25"
- }
+ },
+ "algorithms": [
+  {
+   "id": "osteoporosis-pathway",
+   "title": "Osteoporosis: fracture risk and drug treatment Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Assess postmenopausal women and men aged 50 or over with a clinical risk factor: prior fragility fracture, oral glucocorticoids, parental hip fracture, low BMI, smoking, high alcohol intake, rheumatoid arthritis, diabetes, falls, early",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Fragility fracture: a fracture from a fall from standing height or less. Vertebral fractures are often silent: look for height loss of 4 cm or more, kyphosis or acute back pain.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Routine: full blood count, ESR or CRP, calcium, albumin, phosphate, alkaline phosphatase, creatinine and eGFR, liver enzymes, thyroid function and 25-hydroxyvitamin D (NOGG)."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "High risk: oral alendronate 70 mg once weekly or risedronate 35 mg once weekly, or IV zoledronic acid 5 mg once yearly (first line after hip fracture and when oral drugs are not tolerated or absorbed)."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Oral bisphosphonate: reassess FRAX and BMD after 5 years. Continue to 10 years if aged 70 or over at start, prior hip or vertebral fracture, prednisolone 7.5 mg/day or more, or a fracture on treatment; otherwise consider a treatment break"
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for osteoporosis: fracture risk and drug treatment."
+  }
+ ],
+ "tables": [
+  {
+   "id": "osteoporosis-summary-matrix",
+   "title": "Osteoporosis: fracture risk and drug treatment Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Assess postmenopausal women and men aged 50 or over with a clinical risk factor: prior fragility fracture, oral glucocorticoids, parental",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "High risk: oral alendronate 70 mg once weekly or risedronate 35 mg once weekly, or IV zoledronic acid 5 mg once yearly (first line after",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Routine: full blood count, ESR or CRP, calcium, albumin, phosphate, alkaline phosphatase, creatinine and eGFR, liver enzymes, thyroid",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Alendronic acid: 70 mg orally once weekly",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Stopping denosumab or letting a dose run more than 6 months late: rapid bone loss and multiple vertebral fractures.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for osteoporosis: fracture risk and drug treatment."
+  }
+ ]
 }

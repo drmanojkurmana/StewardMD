@@ -1,73 +1,145 @@
 {
-  "id": "severs_disease",
-  "name": "Sever's disease",
-  "aliases": [
-    "calcaneal apophysitis"
+ "id": "severs_disease",
+ "name": "Sever's disease",
+ "aliases": [
+  "calcaneal apophysitis"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal",
+ "specialty": "Paediatrics / Sports medicine / Orthopaedics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Paediatric sports medicine references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A common cause of heel pain in physically active children and early adolescents, related to traction at the calcaneal growth plate",
+   "Pain is felt at the back and sides of the heel, worse with running and jumping and eased by rest",
+   "It typically occurs during the growth spurt and often around a period of increased sporting activity",
+   "The squeeze test, compressing the sides of the calcaneus, reproduces the pain",
+   "It is a self-limiting condition that resolves once the calcaneal apophysis fuses",
+   "Management is with activity modification, calf stretching, heel cushioning and reassurance"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal",
-  "specialty": "Paediatrics / Sports medicine / Orthopaedics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Paediatric sports medicine references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A common cause of heel pain in physically active children and early adolescents, related to traction at the calcaneal growth plate",
-      "Pain is felt at the back and sides of the heel, worse with running and jumping and eased by rest",
-      "It typically occurs during the growth spurt and often around a period of increased sporting activity",
-      "The squeeze test, compressing the sides of the calcaneus, reproduces the pain",
-      "It is a self-limiting condition that resolves once the calcaneal apophysis fuses",
-      "Management is with activity modification, calf stretching, heel cushioning and reassurance"
+  "pathophysiology": "Sever's disease is a traction apophysitis of the calcaneus, in which repetitive tensile load from the Achilles tendon on the still-open calcaneal growth plate, combined with the impact of running and jumping, produces stress and inflammation at the apophysis. The vulnerability of the growth plate during the adolescent growth spurt, when bone growth may outpace muscle-tendon flexibility, increases traction across the apophysis. It is a benign, self-limiting overuse condition rather than a structural or destructive process.",
+  "additionalDifferentials": [
+   "Achilles tendinopathy or retrocalcaneal bursitis",
+   "Calcaneal stress fracture",
+   "Plantar fasciitis",
+   "Bone cyst or tumour of the calcaneus",
+   "Osteomyelitis (if systemic features)"
+  ],
+  "additionalInvestigations": [
+   "Clinical diagnosis from the age, activity and positive squeeze test",
+   "Radiographs only to exclude other pathology if the picture is atypical",
+   "Assessment of calf flexibility and footwear",
+   "Review of training load",
+   "Further imaging if there are red flags for another diagnosis"
+  ],
+  "redFlags": [
+   "Night pain, rest pain or systemic features suggesting infection or tumour",
+   "Focal bony swelling",
+   "Failure to settle with appropriate measures",
+   "Significant unilateral symptoms without a clear activity link"
+  ],
+  "prognosis": "The condition is benign and resolves spontaneously with skeletal maturity, and symptoms are well controlled in the meantime with conservative measures.",
+  "pitfalls": [
+   "Over-investigating a classic clinical presentation",
+   "Missing a calcaneal stress fracture, infection or tumour when features are atypical",
+   "Failing to address calf tightness and training load",
+   "Advising complete rest rather than activity modification"
+  ],
+  "references": [
+   "Paediatric sports medicine references (standard reference)",
+   "Orthopaedic reference texts (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Reassure the child and family that it is benign and resolves with skeletal maturity once the apophysis fuses",
+   "Relative rest and reduction of training load during painful periods",
+   "Calf-stretching and heel-cord flexibility exercises",
+   "Heel cushions, heel raises, or shock-absorbing insoles to offload the apophysis",
+   "Simple analgesia such as paracetamol or NSAIDs for symptom control during flares",
+   "Footwear review and graded return to sport as pain settles",
+   "Reserve radiographs or further imaging for atypical or persistent presentations to exclude other pathology"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "severs_disease-pathway",
+   "title": "Sever's disease: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A common cause of heel pain in physically active children and early adolescents, related to traction at the calcaneal growth plate",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Night pain, rest pain or systemic features suggesting infection or tumour",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical diagnosis from the age, activity and positive squeeze test, Radiographs only to exclude other pathology if the picture is atypical, Assessment of calf flexibility and footwear"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Reassure the child and family that it is benign and resolves with skeletal maturity once the apophysis fuses"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Over-investigating a classic clinical presentation"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of sever's disease."
+  }
+ ],
+ "tables": [
+  {
+   "id": "severs_disease-matrix",
+   "title": "Sever's disease: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A common cause of heel pain in physically active children and early adolescents, related to traction at the calcaneal growth plate",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Sever's disease is a traction apophysitis of the calcaneus, in which repetitive tensile load from the Achilles tendon on the still-open calcaneal growth plate, combined with the impact of running and jumping, produces stress and inflammation at the apophysis. The vulnerability of the growth plate during the adolescent growth spurt, when bone growth may outpace muscle-tendon flexibility, increases traction across the apophysis. It is a benign, self-limiting overuse condition rather than a structural or destructive process.",
-    "additionalDifferentials": [
-      "Achilles tendinopathy or retrocalcaneal bursitis",
-      "Calcaneal stress fracture",
-      "Plantar fasciitis",
-      "Bone cyst or tumour of the calcaneus",
-      "Osteomyelitis (if systemic features)"
+    [
+     "Key Investigations",
+     "Clinical diagnosis from the age, activity and positive squeeze test, Radiographs only to exclude other pathology if the picture",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical diagnosis from the age, activity and positive squeeze test",
-      "Radiographs only to exclude other pathology if the picture is atypical",
-      "Assessment of calf flexibility and footwear",
-      "Review of training load",
-      "Further imaging if there are red flags for another diagnosis"
+    [
+     "Primary Differentials",
+     "Achilles tendinopathy or retrocalcaneal bursitis, Calcaneal stress fracture, Plantar fasciitis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Night pain, rest pain or systemic features suggesting infection or tumour",
-      "Focal bony swelling",
-      "Failure to settle with appropriate measures",
-      "Significant unilateral symptoms without a clear activity link"
+    [
+     "Management Strategy",
+     "Reassure the child and family that it is benign and resolves with skeletal maturity once the apophysis fuses",
+     "Core treatment modality"
     ],
-    "prognosis": "The condition is benign and resolves spontaneously with skeletal maturity, and symptoms are well controlled in the meantime with conservative measures.",
-    "pitfalls": [
-      "Over-investigating a classic clinical presentation",
-      "Missing a calcaneal stress fracture, infection or tumour when features are atypical",
-      "Failing to address calf tightness and training load",
-      "Advising complete rest rather than activity modification"
-    ],
-    "references": [
-      "Paediatric sports medicine references (standard reference)",
-      "Orthopaedic reference texts (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Reassure the child and family that it is benign and resolves with skeletal maturity once the apophysis fuses",
-      "Relative rest and reduction of training load during painful periods",
-      "Calf-stretching and heel-cord flexibility exercises",
-      "Heel cushions, heel raises, or shock-absorbing insoles to offload the apophysis",
-      "Simple analgesia such as paracetamol or NSAIDs for symptom control during flares",
-      "Footwear review and graded return to sport as pain settles",
-      "Reserve radiographs or further imaging for atypical or persistent presentations to exclude other pathology"
+    [
+     "Clinical Pitfall",
+     "Over-investigating a classic clinical presentation",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for sever's disease."
+  }
+ ]
 }

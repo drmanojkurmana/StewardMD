@@ -197,5 +197,77 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h4af5a7eb"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "bronchiectasis_exacerbation-dx-algo",
+      "title": "Bronchiectasis Exacerbation: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Bronchiectasis is irreversible airway dilation, classically categorised as cylindrical/tubular (most common), varicose, or cystic; it may be focal or diffuse (Harrison 22e p.2242).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Hemoptysis - bronchiectatic airways are dilated, inflamed, and highly vascular (supplied by the high-pressure bronchial circulation), so exacerbations can produce massive, life-threatening hemoptysis (Harrison",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: High-resolution chest CT - imaging modality of choice; more specific than chest radiograph; look for airway dilation as 'tram tracks' or the 'signet-ring sign' (airway diameter at least 1.5x the adjacent vessel), lack of"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Differentiate from top mimics: COPD - airflow obstruction on pulmonary function testing overlaps with bronchiectasis at presentation (Harrison 22e p.2243), Asthma - may coexist; ABPA should be considered in refractory asthma (Harrison 22e"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Expecting classic infection signs: an exacerbation may lack fever or new infiltrates, so reliance on these can miss it - the defining change is sputum volume and purulence (Harrison 22e p.2243)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for bronchiectasis exacerbation."
+    }
+  ],
+  "tables": [
+    {
+      "id": "bronchiectasis_exacerbation-matrix",
+      "title": "Bronchiectasis Exacerbation: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Bronchiectasis is irreversible airway dilation, classically categorised as cylindrical/tubular (most common), varicose, or",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "High-resolution chest CT - imaging modality of choice; more specific than chest radiograph; look for airway dilation as 'tram",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "COPD - airflow obstruction on pulmonary function testing overlaps with bronchiectasis at presentation (Harrison 22e p.2243),",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Hemoptysis - bronchiectatic airways are dilated, inflamed, and highly vascular (supplied by the high-pressure bronchial",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Expecting classic infection signs: an exacerbation may lack fever or new infiltrates, so reliance on these can miss it - the",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for bronchiectasis exacerbation."
+    }
+  ]
 }

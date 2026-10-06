@@ -1,79 +1,151 @@
 {
-  "id": "tetrodotoxin_poisoning",
-  "name": "Tetrodotoxin (pufferfish) poisoning",
-  "aliases": [
-    "pufferfish poisoning",
-    "fugu poisoning",
-    "TTX poisoning",
-    "tetraodon poisoning"
+ "id": "tetrodotoxin_poisoning",
+ "name": "Tetrodotoxin (pufferfish) poisoning",
+ "aliases": [
+  "pufferfish poisoning",
+  "fugu poisoning",
+  "TTX poisoning",
+  "tetraodon poisoning"
+ ],
+ "class": "non_infective",
+ "system": "Toxicology / Envenomation",
+ "specialty": "Clinical Toxicology / Emergency Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Goldfrank's Toxicologic Emergencies / WHO envenoming guidance",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Follows ingestion of pufferfish (fugu) or other tetrodotoxin-containing seafood, especially when improperly prepared",
+   "Symptoms begin within minutes to a few hours with perioral and lingual paraesthesiae, then spread to the face and extremities",
+   "Progresses to nausea, vomiting, ascending flaccid paralysis, bulbar weakness and respiratory failure in severe cases",
+   "Consciousness is usually preserved even in advanced paralysis, as the toxin has limited central effect",
+   "There is no antidote; management is supportive with airway protection and mechanical ventilation until the toxin clears",
+   "Early gastrointestinal decontamination may be considered soon after ingestion, and cardiovascular support given for hypotension and bradyarrhythmia",
+   "Severity grading based on progression of paraesthesiae, weakness and cardiorespiratory signs helps guide monitoring and disposition"
   ],
-  "class": "non_infective",
-  "system": "Toxicology / Envenomation",
-  "specialty": "Clinical Toxicology / Emergency Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Goldfrank's Toxicologic Emergencies / WHO envenoming guidance",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Follows ingestion of pufferfish (fugu) or other tetrodotoxin-containing seafood, especially when improperly prepared",
-      "Symptoms begin within minutes to a few hours with perioral and lingual paraesthesiae, then spread to the face and extremities",
-      "Progresses to nausea, vomiting, ascending flaccid paralysis, bulbar weakness and respiratory failure in severe cases",
-      "Consciousness is usually preserved even in advanced paralysis, as the toxin has limited central effect",
-      "There is no antidote; management is supportive with airway protection and mechanical ventilation until the toxin clears",
-      "Early gastrointestinal decontamination may be considered soon after ingestion, and cardiovascular support given for hypotension and bradyarrhythmia",
-      "Severity grading based on progression of paraesthesiae, weakness and cardiorespiratory signs helps guide monitoring and disposition"
+  "pathophysiology": "Tetrodotoxin is a potent, heat-stable toxin concentrated in the liver, gonads, skin and viscera of pufferfish and produced by symbiotic bacteria. It binds with high affinity to voltage-gated sodium channels on nerve and skeletal muscle membranes, blocking sodium influx and preventing action potential generation and propagation. The result is a rapidly progressive sensory disturbance and flaccid paralysis, including of the respiratory muscles, with respiratory failure the main cause of death. Autonomic effects can cause hypotension and bradycardia, while relative sparing of the central nervous system leaves consciousness intact.",
+  "additionalDifferentials": [
+   "Paralytic shellfish (saxitoxin) poisoning",
+   "Blue-ringed octopus envenomation",
+   "Guillain-Barre syndrome or botulism",
+   "Ciguatera poisoning (overlapping paraesthesiae)",
+   "Myasthenic crisis",
+   "Other cause of acute neuromuscular respiratory failure"
+  ],
+  "additionalInvestigations": [
+   "Clinical diagnosis based on ingestion history and characteristic progression",
+   "Continuous respiratory monitoring and serial forced vital capacity",
+   "Pulse oximetry and arterial blood gases for ventilatory failure",
+   "Electrocardiography and cardiac monitoring for bradyarrhythmia",
+   "Electrolytes and baseline bloods to exclude alternative causes",
+   "Toxin detection in food or biological samples where laboratory capability exists"
+  ],
+  "redFlags": [
+   "Spreading paraesthesiae with progressive limb and bulbar weakness",
+   "Declining respiratory effort or oxygen saturation",
+   "Hypotension or significant bradycardia",
+   "Rapid symptom onset after ingestion (suggesting a large dose)",
+   "Preserved awareness with advancing paralysis heralding respiratory arrest"
+  ],
+  "prognosis": "Outcome depends on timely airway and ventilatory support; patients who survive the first hours with adequate ventilation generally recover fully within days, whereas untreated respiratory failure is rapidly fatal.",
+  "pitfalls": [
+   "Underestimating the speed of progression from paraesthesiae to respiratory failure",
+   "Assuming immobility reflects unconsciousness, when awareness is usually retained",
+   "Waiting for an antidote instead of instituting supportive ventilation",
+   "Failing to recognise the diagnosis in the absence of a clear pufferfish history"
+  ],
+  "references": [
+   "Goldfrank's Toxicologic Emergencies",
+   "WHO/food-safety guidance on marine biotoxins"
+  ],
+  "crossLinks": [],
+  "management": [
+   "There is no antidote; the mainstay is meticulous airway protection with early intubation and mechanical ventilation, as respiratory-muscle paralysis is the main cause of death",
+   "Consider early gastrointestinal decontamination with activated charcoal soon after ingestion",
+   "Treat autonomic instability with intravenous fluids and vasopressors for hypotension and atropine for symptomatic bradycardia",
+   "Continuous respiratory and cardiac monitoring with serial forced vital capacity to detect deteriorating ventilation",
+   "Provide supportive intensive care until the toxin clears, with full recovery expected in survivors who are adequately ventilated",
+   "Manage in a critical care setting with early escalation for ventilatory failure"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "tetrodotoxin_poisoning-pathway",
+   "title": "Tetrodotoxin (pufferfish) poisoning: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Follows ingestion of pufferfish (fugu) or other tetrodotoxin-containing seafood, especially when improperly prepared",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Spreading paraesthesiae with progressive limb and bulbar weakness",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical diagnosis based on ingestion history and characteristic progression, Continuous respiratory monitoring and serial forced vital capacity, Pulse oximetry and arterial blood gases for ventilatory failure"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: There is no antidote; the mainstay is meticulous airway protection with early intubation and mechanical ventilation, as respiratory-muscle paralysis is the main cause of death"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Underestimating the speed of progression from paraesthesiae to respiratory failure"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of tetrodotoxin (pufferfish) poisoning."
+  }
+ ],
+ "tables": [
+  {
+   "id": "tetrodotoxin_poisoning-matrix",
+   "title": "Tetrodotoxin (pufferfish) poisoning: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Follows ingestion of pufferfish (fugu) or other tetrodotoxin-containing seafood, especially when improperly prepared",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Tetrodotoxin is a potent, heat-stable toxin concentrated in the liver, gonads, skin and viscera of pufferfish and produced by symbiotic bacteria. It binds with high affinity to voltage-gated sodium channels on nerve and skeletal muscle membranes, blocking sodium influx and preventing action potential generation and propagation. The result is a rapidly progressive sensory disturbance and flaccid paralysis, including of the respiratory muscles, with respiratory failure the main cause of death. Autonomic effects can cause hypotension and bradycardia, while relative sparing of the central nervous system leaves consciousness intact.",
-    "additionalDifferentials": [
-      "Paralytic shellfish (saxitoxin) poisoning",
-      "Blue-ringed octopus envenomation",
-      "Guillain-Barre syndrome or botulism",
-      "Ciguatera poisoning (overlapping paraesthesiae)",
-      "Myasthenic crisis",
-      "Other cause of acute neuromuscular respiratory failure"
+    [
+     "Key Investigations",
+     "Clinical diagnosis based on ingestion history and characteristic progression, Continuous respiratory monitoring and serial forced",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical diagnosis based on ingestion history and characteristic progression",
-      "Continuous respiratory monitoring and serial forced vital capacity",
-      "Pulse oximetry and arterial blood gases for ventilatory failure",
-      "Electrocardiography and cardiac monitoring for bradyarrhythmia",
-      "Electrolytes and baseline bloods to exclude alternative causes",
-      "Toxin detection in food or biological samples where laboratory capability exists"
+    [
+     "Primary Differentials",
+     "Paralytic shellfish (saxitoxin) poisoning, Blue-ringed octopus envenomation, Guillain-Barre syndrome or botulism",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Spreading paraesthesiae with progressive limb and bulbar weakness",
-      "Declining respiratory effort or oxygen saturation",
-      "Hypotension or significant bradycardia",
-      "Rapid symptom onset after ingestion (suggesting a large dose)",
-      "Preserved awareness with advancing paralysis heralding respiratory arrest"
+    [
+     "Management Strategy",
+     "There is no antidote; the mainstay is meticulous airway protection with early intubation and mechanical ventilation, as",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcome depends on timely airway and ventilatory support; patients who survive the first hours with adequate ventilation generally recover fully within days, whereas untreated respiratory failure is rapidly fatal.",
-    "pitfalls": [
-      "Underestimating the speed of progression from paraesthesiae to respiratory failure",
-      "Assuming immobility reflects unconsciousness, when awareness is usually retained",
-      "Waiting for an antidote instead of instituting supportive ventilation",
-      "Failing to recognise the diagnosis in the absence of a clear pufferfish history"
-    ],
-    "references": [
-      "Goldfrank's Toxicologic Emergencies",
-      "WHO/food-safety guidance on marine biotoxins"
-    ],
-    "crossLinks": [],
-    "management": [
-      "There is no antidote; the mainstay is meticulous airway protection with early intubation and mechanical ventilation, as respiratory-muscle paralysis is the main cause of death",
-      "Consider early gastrointestinal decontamination with activated charcoal soon after ingestion",
-      "Treat autonomic instability with intravenous fluids and vasopressors for hypotension and atropine for symptomatic bradycardia",
-      "Continuous respiratory and cardiac monitoring with serial forced vital capacity to detect deteriorating ventilation",
-      "Provide supportive intensive care until the toxin clears, with full recovery expected in survivors who are adequately ventilated",
-      "Manage in a critical care setting with early escalation for ventilatory failure"
+    [
+     "Clinical Pitfall",
+     "Underestimating the speed of progression from paraesthesiae to respiratory failure",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for tetrodotoxin (pufferfish) poisoning."
+  }
+ ]
 }

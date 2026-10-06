@@ -1,74 +1,146 @@
 {
-  "id": "calcium_channel_blocker_overdose",
-  "name": "Calcium-channel-blocker overdose",
-  "aliases": [
-    "calcium antagonist poisoning",
-    "CCB toxicity"
+ "id": "calcium_channel_blocker_overdose",
+ "name": "Calcium-channel-blocker overdose",
+ "aliases": [
+  "calcium antagonist poisoning",
+  "CCB toxicity"
+ ],
+ "class": "non_infective",
+ "system": "Cardiovascular / Toxicology",
+ "specialty": "Emergency medicine / Toxicology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Standard toxicology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Non-dihydropyridine agents (verapamil, diltiazem) typically cause bradycardia, heart block and hypotension",
+   "Dihydropyridine agents mainly cause vasodilatory hypotension, sometimes with a reflex tachycardia, at least early on",
+   "Hyperglycaemia is characteristic and reflects blockade of insulin release, helping distinguish it from beta-blocker poisoning",
+   "A relatively preserved conscious level despite marked hypotension is a recognised feature",
+   "Management includes calcium, high-dose insulin euglycaemic therapy, vasopressors and supportive care",
+   "Modified-release preparations can cause delayed and prolonged toxicity requiring extended monitoring"
   ],
-  "class": "non_infective",
-  "system": "Cardiovascular / Toxicology",
-  "specialty": "Emergency medicine / Toxicology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Standard toxicology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Non-dihydropyridine agents (verapamil, diltiazem) typically cause bradycardia, heart block and hypotension",
-      "Dihydropyridine agents mainly cause vasodilatory hypotension, sometimes with a reflex tachycardia, at least early on",
-      "Hyperglycaemia is characteristic and reflects blockade of insulin release, helping distinguish it from beta-blocker poisoning",
-      "A relatively preserved conscious level despite marked hypotension is a recognised feature",
-      "Management includes calcium, high-dose insulin euglycaemic therapy, vasopressors and supportive care",
-      "Modified-release preparations can cause delayed and prolonged toxicity requiring extended monitoring"
+  "pathophysiology": "Calcium-channel-blocker overdose blocks L-type calcium channels in cardiac and vascular smooth muscle and in pancreatic islet cells. Reduced calcium entry impairs myocardial contractility and conduction and causes vasodilatation, producing hypotension and, with non-dihydropyridines, bradycardia and block. Blockade of calcium-dependent insulin secretion causes hyperglycaemia and shifts myocardial metabolism away from carbohydrate use, which underlies the benefit of high-dose insulin therapy.",
+  "additionalDifferentials": [
+   "Beta-blocker poisoning",
+   "Digoxin toxicity",
+   "Clonidine or central sympatholytic overdose",
+   "Septic or other distributive shock",
+   "Primary cardiac conduction disease"
+  ],
+  "additionalInvestigations": [
+   "Continuous cardiac monitoring and serial electrocardiograms",
+   "Blood glucose (often high) and electrolytes including calcium",
+   "Identification of the agent and whether it is a modified-release formulation",
+   "Blood gas and lactate for perfusion",
+   "Echocardiography in refractory shock"
+  ],
+  "redFlags": [
+   "Refractory hypotension or high-grade heart block",
+   "Rising lactate indicating poor perfusion",
+   "Ingestion of a modified-release preparation with potential delayed collapse",
+   "Deteriorating conscious level indicating severe shock"
+  ],
+  "prognosis": "Outcomes vary with the agent and dose; with prompt high-dose insulin therapy and vasoactive support many recover, but massive or modified-release ingestions can cause prolonged refractory shock and death.",
+  "pitfalls": [
+   "Confusing it with beta-blocker poisoning (glucose typically high versus low)",
+   "Failing to anticipate delayed toxicity from modified-release formulations",
+   "Underusing high-dose insulin euglycaemic therapy",
+   "Discharging too early after a modified-release ingestion"
+  ],
+  "references": [
+   "Goldfrank's Toxicologic Emergencies",
+   "Tintinalli's Emergency Medicine"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Resuscitate with airway, breathing and circulation support and intravenous fluids for hypotension.",
+   "Consider gastrointestinal decontamination with activated charcoal when presentation is early, and whole-bowel irrigation for modified-release preparations.",
+   "Give intravenous calcium salts to counter channel blockade, repeating as required.",
+   "Start high-dose insulin euglycaemic therapy with glucose supplementation as a key inotropic treatment, monitoring glucose and potassium.",
+   "Add vasopressors and inotropes such as noradrenaline for refractory hypotension, with atropine for symptomatic bradycardia.",
+   "Escalate to intravenous lipid emulsion, cardiac pacing or mechanical circulatory support including extracorporeal membrane oxygenation in refractory shock.",
+   "Provide extended cardiac monitoring after modified-release ingestion given delayed and prolonged toxicity."
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "calcium_channel_blocker_overdose-pathway",
+   "title": "Calcium-channel-blocker overdose: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Non-dihydropyridine agents (verapamil, diltiazem) typically cause bradycardia, heart block and hypotension",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Refractory hypotension or high-grade heart block",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Continuous cardiac monitoring and serial electrocardiograms, Blood glucose (often high) and electrolytes including calcium, Identification of the agent and whether it is a modified-release formulation"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Resuscitate with airway, breathing and circulation support and intravenous fluids for hypotension."
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing it with beta-blocker poisoning (glucose typically high versus low)"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of calcium-channel-blocker overdose."
+  }
+ ],
+ "tables": [
+  {
+   "id": "calcium_channel_blocker_overdose-matrix",
+   "title": "Calcium-channel-blocker overdose: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Non-dihydropyridine agents (verapamil, diltiazem) typically cause bradycardia, heart block and hypotension",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Calcium-channel-blocker overdose blocks L-type calcium channels in cardiac and vascular smooth muscle and in pancreatic islet cells. Reduced calcium entry impairs myocardial contractility and conduction and causes vasodilatation, producing hypotension and, with non-dihydropyridines, bradycardia and block. Blockade of calcium-dependent insulin secretion causes hyperglycaemia and shifts myocardial metabolism away from carbohydrate use, which underlies the benefit of high-dose insulin therapy.",
-    "additionalDifferentials": [
-      "Beta-blocker poisoning",
-      "Digoxin toxicity",
-      "Clonidine or central sympatholytic overdose",
-      "Septic or other distributive shock",
-      "Primary cardiac conduction disease"
+    [
+     "Key Investigations",
+     "Continuous cardiac monitoring and serial electrocardiograms, Blood glucose (often high) and electrolytes including calcium,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Continuous cardiac monitoring and serial electrocardiograms",
-      "Blood glucose (often high) and electrolytes including calcium",
-      "Identification of the agent and whether it is a modified-release formulation",
-      "Blood gas and lactate for perfusion",
-      "Echocardiography in refractory shock"
+    [
+     "Primary Differentials",
+     "Beta-blocker poisoning, Digoxin toxicity, Clonidine or central sympatholytic overdose",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Refractory hypotension or high-grade heart block",
-      "Rising lactate indicating poor perfusion",
-      "Ingestion of a modified-release preparation with potential delayed collapse",
-      "Deteriorating conscious level indicating severe shock"
+    [
+     "Management Strategy",
+     "Resuscitate with airway, breathing and circulation support and intravenous fluids for hypotension.",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcomes vary with the agent and dose; with prompt high-dose insulin therapy and vasoactive support many recover, but massive or modified-release ingestions can cause prolonged refractory shock and death.",
-    "pitfalls": [
-      "Confusing it with beta-blocker poisoning (glucose typically high versus low)",
-      "Failing to anticipate delayed toxicity from modified-release formulations",
-      "Underusing high-dose insulin euglycaemic therapy",
-      "Discharging too early after a modified-release ingestion"
-    ],
-    "references": [
-      "Goldfrank's Toxicologic Emergencies",
-      "Tintinalli's Emergency Medicine"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Resuscitate with airway, breathing and circulation support and intravenous fluids for hypotension.",
-      "Consider gastrointestinal decontamination with activated charcoal when presentation is early, and whole-bowel irrigation for modified-release preparations.",
-      "Give intravenous calcium salts to counter channel blockade, repeating as required.",
-      "Start high-dose insulin euglycaemic therapy with glucose supplementation as a key inotropic treatment, monitoring glucose and potassium.",
-      "Add vasopressors and inotropes such as noradrenaline for refractory hypotension, with atropine for symptomatic bradycardia.",
-      "Escalate to intravenous lipid emulsion, cardiac pacing or mechanical circulatory support including extracorporeal membrane oxygenation in refractory shock.",
-      "Provide extended cardiac monitoring after modified-release ingestion given delayed and prolonged toxicity."
+    [
+     "Clinical Pitfall",
+     "Confusing it with beta-blocker poisoning (glucose typically high versus low)",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for calcium-channel-blocker overdose."
+  }
+ ]
 }

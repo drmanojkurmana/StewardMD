@@ -1,78 +1,150 @@
 {
-  "id": "multiple_evanescent_white_dot_syndrome",
-  "name": "Multiple evanescent white dot syndrome (MEWDS)",
-  "aliases": [
-    "MEWDS",
-    "evanescent white dot syndrome"
+ "id": "multiple_evanescent_white_dot_syndrome",
+ "name": "Multiple evanescent white dot syndrome (MEWDS)",
+ "aliases": [
+  "MEWDS",
+  "evanescent white dot syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Eye / Ophthalmology",
+ "specialty": "Ophthalmology / Retina",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Characteristically affects young women, often after a viral prodrome",
+   "Presents with acute, painless, unilateral visual loss with photopsia and a temporal or paracentral scotoma",
+   "Multiple small grey-white dots appear at the level of the outer retina and retinal pigment epithelium across the posterior pole and mid-periphery",
+   "A characteristic granularity of the fovea is a helpful diagnostic clue",
+   "An enlarged blind spot is frequently found on visual field testing",
+   "Fluorescein angiography shows a wreath-like pattern of hyperfluorescence and indocyanine green angiography shows hypofluorescent spots",
+   "The condition is self-limiting, so management is observation with recovery of vision over weeks"
   ],
-  "class": "non_infective",
-  "system": "Eye / Ophthalmology",
-  "specialty": "Ophthalmology / Retina",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Kanski's Clinical Ophthalmology / Ryan's Retina",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Characteristically affects young women, often after a viral prodrome",
-      "Presents with acute, painless, unilateral visual loss with photopsia and a temporal or paracentral scotoma",
-      "Multiple small grey-white dots appear at the level of the outer retina and retinal pigment epithelium across the posterior pole and mid-periphery",
-      "A characteristic granularity of the fovea is a helpful diagnostic clue",
-      "An enlarged blind spot is frequently found on visual field testing",
-      "Fluorescein angiography shows a wreath-like pattern of hyperfluorescence and indocyanine green angiography shows hypofluorescent spots",
-      "The condition is self-limiting, so management is observation with recovery of vision over weeks"
+  "pathophysiology": "MEWDS is thought to represent a transient inflammatory disturbance of the photoreceptor and outer retinal complex together with the choriocapillaris, frequently following a viral illness. Disruption of the ellipsoid (photoreceptor) zone corresponds to the white dots and to the patient's visual symptoms. The process resolves spontaneously as the photoreceptor layer recovers, and vision returns to normal in most cases.",
+  "additionalDifferentials": [
+   "Acute posterior multifocal placoid pigment epitheliopathy",
+   "Multifocal choroiditis",
+   "Punctate inner choroidopathy",
+   "Acute zonal occult outer retinopathy",
+   "Birdshot chorioretinopathy",
+   "Acute idiopathic blind spot enlargement",
+   "Diffuse unilateral subacute neuroretinitis"
+  ],
+  "additionalInvestigations": [
+   "Dilated fundus examination looking for the white dots and foveal granularity",
+   "Fundus autofluorescence showing hyperautofluorescent dots",
+   "Optical coherence tomography demonstrating ellipsoid zone disruption",
+   "Fluorescein angiography showing wreath-like hyperfluorescence",
+   "Indocyanine green angiography showing hypofluorescent spots",
+   "Visual field testing to document an enlarged blind spot"
+  ],
+  "redFlags": [
+   "Bilateral or recurrent disease, prompting reconsideration of the diagnosis",
+   "Progressive or persistent visual loss suggesting the acute zonal occult outer retinopathy spectrum",
+   "Features suggesting an infective cause such as syphilis",
+   "Profound loss that fails to recover"
+  ],
+  "prognosis": "The prognosis is excellent; almost all patients recover good vision spontaneously over weeks to a few months, although mild residual symptoms occasionally persist.",
+  "pitfalls": [
+   "Over-investigating or treating a self-limiting condition",
+   "Confusing it with other white-dot syndromes",
+   "Missing occasional recurrence or overlap with the acute zonal occult outer retinopathy spectrum",
+   "Failing to exclude syphilis in atypical cases"
+  ],
+  "references": [
+   "Kanski's Clinical Ophthalmology",
+   "Ryan's Retina",
+   "American Academy of Ophthalmology, Basic and Clinical Science Course: Uveitis and Ocular Inflammation"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Reassurance and observation, as the condition is self-limiting and vision recovers spontaneously in most patients over weeks to months",
+   "No specific pharmacological therapy is required, and corticosteroids are not routinely indicated given spontaneous resolution",
+   "Serial optical coherence tomography and fundus autofluorescence to document recovery of the ellipsoid (photoreceptor) zone",
+   "Visual field testing to monitor resolution of the enlarged blind spot and scotoma",
+   "Exclude alternative white-dot syndromes and infective or inflammatory mimics before settling on the diagnosis",
+   "Ophthalmology (retina) follow-up to confirm recovery and identify the rare recurrence or progression"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "multiple_evanescent_white_dot_syndrome-pathway",
+   "title": "Multiple evanescent white dot syndrome (MEWDS): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Characteristically affects young women, often after a viral prodrome",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Bilateral or recurrent disease, prompting reconsideration of the diagnosis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Dilated fundus examination looking for the white dots and foveal granularity, Fundus autofluorescence showing hyperautofluorescent dots, Optical coherence tomography demonstrating ellipsoid zone disruption"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Reassurance and observation, as the condition is self-limiting and vision recovers spontaneously in most patients over weeks to months"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Over-investigating or treating a self-limiting condition"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of multiple evanescent white dot syndrome (mewds)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "multiple_evanescent_white_dot_syndrome-matrix",
+   "title": "Multiple evanescent white dot syndrome (MEWDS): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Characteristically affects young women, often after a viral prodrome",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "MEWDS is thought to represent a transient inflammatory disturbance of the photoreceptor and outer retinal complex together with the choriocapillaris, frequently following a viral illness. Disruption of the ellipsoid (photoreceptor) zone corresponds to the white dots and to the patient's visual symptoms. The process resolves spontaneously as the photoreceptor layer recovers, and vision returns to normal in most cases.",
-    "additionalDifferentials": [
-      "Acute posterior multifocal placoid pigment epitheliopathy",
-      "Multifocal choroiditis",
-      "Punctate inner choroidopathy",
-      "Acute zonal occult outer retinopathy",
-      "Birdshot chorioretinopathy",
-      "Acute idiopathic blind spot enlargement",
-      "Diffuse unilateral subacute neuroretinitis"
+    [
+     "Key Investigations",
+     "Dilated fundus examination looking for the white dots and foveal granularity, Fundus autofluorescence showing",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Dilated fundus examination looking for the white dots and foveal granularity",
-      "Fundus autofluorescence showing hyperautofluorescent dots",
-      "Optical coherence tomography demonstrating ellipsoid zone disruption",
-      "Fluorescein angiography showing wreath-like hyperfluorescence",
-      "Indocyanine green angiography showing hypofluorescent spots",
-      "Visual field testing to document an enlarged blind spot"
+    [
+     "Primary Differentials",
+     "Acute posterior multifocal placoid pigment epitheliopathy, Multifocal choroiditis, Punctate inner choroidopathy",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Bilateral or recurrent disease, prompting reconsideration of the diagnosis",
-      "Progressive or persistent visual loss suggesting the acute zonal occult outer retinopathy spectrum",
-      "Features suggesting an infective cause such as syphilis",
-      "Profound loss that fails to recover"
+    [
+     "Management Strategy",
+     "Reassurance and observation, as the condition is self-limiting and vision recovers spontaneously in most patients over weeks to",
+     "Core treatment modality"
     ],
-    "prognosis": "The prognosis is excellent; almost all patients recover good vision spontaneously over weeks to a few months, although mild residual symptoms occasionally persist.",
-    "pitfalls": [
-      "Over-investigating or treating a self-limiting condition",
-      "Confusing it with other white-dot syndromes",
-      "Missing occasional recurrence or overlap with the acute zonal occult outer retinopathy spectrum",
-      "Failing to exclude syphilis in atypical cases"
-    ],
-    "references": [
-      "Kanski's Clinical Ophthalmology",
-      "Ryan's Retina",
-      "American Academy of Ophthalmology, Basic and Clinical Science Course: Uveitis and Ocular Inflammation"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Reassurance and observation, as the condition is self-limiting and vision recovers spontaneously in most patients over weeks to months",
-      "No specific pharmacological therapy is required, and corticosteroids are not routinely indicated given spontaneous resolution",
-      "Serial optical coherence tomography and fundus autofluorescence to document recovery of the ellipsoid (photoreceptor) zone",
-      "Visual field testing to monitor resolution of the enlarged blind spot and scotoma",
-      "Exclude alternative white-dot syndromes and infective or inflammatory mimics before settling on the diagnosis",
-      "Ophthalmology (retina) follow-up to confirm recovery and identify the rare recurrence or progression"
+    [
+     "Clinical Pitfall",
+     "Over-investigating or treating a self-limiting condition",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for multiple evanescent white dot syndrome (mewds)."
+  }
+ ]
 }

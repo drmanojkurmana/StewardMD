@@ -1,77 +1,149 @@
 {
-  "id": "beriberi",
-  "name": "Beriberi",
-  "aliases": [
-    "thiamine deficiency",
-    "vitamin B1 deficiency",
-    "wet beriberi",
-    "dry beriberi"
+ "id": "beriberi",
+ "name": "Beriberi",
+ "aliases": [
+  "thiamine deficiency",
+  "vitamin B1 deficiency",
+  "wet beriberi",
+  "dry beriberi"
+ ],
+ "class": "non_infective",
+ "system": "Nutrition / Metabolic",
+ "specialty": "Nutrition & Metabolic Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine / WHO nutrition guidance",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Wet beriberi presents with high-output cardiac failure, oedema, and warm extremities, whereas dry beriberi is a symmetrical peripheral polyneuropathy",
+   "Thiamine deficiency also causes Wernicke encephalopathy, with the triad of confusion, ophthalmoplegia, and ataxia, which can progress to irreversible Korsakoff amnesia",
+   "It is associated with diets based on polished (milled) white rice, chronic alcohol use, hyperemesis, bariatric surgery, and prolonged unsupplemented parenteral feeding",
+   "Infantile beriberi can occur in breastfed infants of thiamine-deficient mothers and may be acute and life-threatening",
+   "Thiamine should be given before or with any glucose load in at-risk patients, as glucose can precipitate acute Wernicke encephalopathy",
+   "A rapid improvement in cardiac output after thiamine strongly supports wet beriberi",
+   "Diagnosis is largely clinical, supported by the response to treatment, since laboratory confirmation may be slow"
   ],
-  "class": "non_infective",
-  "system": "Nutrition / Metabolic",
-  "specialty": "Nutrition & Metabolic Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine / WHO nutrition guidance",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Wet beriberi presents with high-output cardiac failure, oedema, and warm extremities, whereas dry beriberi is a symmetrical peripheral polyneuropathy",
-      "Thiamine deficiency also causes Wernicke encephalopathy, with the triad of confusion, ophthalmoplegia, and ataxia, which can progress to irreversible Korsakoff amnesia",
-      "It is associated with diets based on polished (milled) white rice, chronic alcohol use, hyperemesis, bariatric surgery, and prolonged unsupplemented parenteral feeding",
-      "Infantile beriberi can occur in breastfed infants of thiamine-deficient mothers and may be acute and life-threatening",
-      "Thiamine should be given before or with any glucose load in at-risk patients, as glucose can precipitate acute Wernicke encephalopathy",
-      "A rapid improvement in cardiac output after thiamine strongly supports wet beriberi",
-      "Diagnosis is largely clinical, supported by the response to treatment, since laboratory confirmation may be slow"
+  "pathophysiology": "Thiamine, as thiamine pyrophosphate, is a cofactor for key enzymes of carbohydrate metabolism including pyruvate dehydrogenase, alpha-ketoglutarate dehydrogenase, and transketolase. Deficiency impairs oxidative energy production and causes accumulation of pyruvate and lactate, hitting tissues with high energy demand such as heart, peripheral nerves, and brain. Cardiovascular (wet) disease reflects impaired myocardial energetics and peripheral vasodilatation producing high-output failure, while neural (dry) disease and Wernicke-Korsakoff syndrome reflect neuronal energy failure. Carbohydrate loading raises thiamine demand and can unmask or worsen deficiency.",
+  "additionalDifferentials": [
+   "Other causes of high-output or dilated cardiomyopathy",
+   "Other peripheral neuropathies such as diabetic or alcoholic neuropathy",
+   "Guillain-Barre syndrome",
+   "Other causes of delirium and ataxia",
+   "Fluid overload from renal, hepatic, or cardiac disease"
+  ],
+  "additionalInvestigations": [
+   "Clinical assessment with dietary and alcohol history",
+   "Erythrocyte transketolase activity or blood thiamine level where available",
+   "Assessment of cardiac function in suspected wet beriberi",
+   "Neurological and cognitive assessment for Wernicke-Korsakoff features",
+   "Evaluation for coexisting deficiencies in the malnourished or alcohol-dependent"
+  ],
+  "redFlags": [
+   "Acute high-output cardiac failure or cardiovascular collapse (fulminant wet beriberi)",
+   "Wernicke encephalopathy, a medical emergency requiring immediate thiamine",
+   "Rapid deterioration in an infant with suspected infantile beriberi",
+   "Glucose administration in an at-risk patient without prior thiamine"
+  ],
+  "prognosis": "Cardiac and early neurological features often improve rapidly with thiamine, but delayed treatment of Wernicke encephalopathy risks permanent Korsakoff amnesia, and severe peripheral neuropathy may recover only partially.",
+  "pitfalls": [
+   "Giving intravenous glucose before thiamine in an at-risk patient and precipitating Wernicke encephalopathy",
+   "Failing to recognise high-output failure as a treatable nutritional cardiomyopathy",
+   "Waiting for laboratory confirmation before treating in suspected Wernicke encephalopathy",
+   "Overlooking deficiency after bariatric surgery, in hyperemesis, or on prolonged parenteral nutrition"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e",
+   "WHO nutrition guidance"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Give parenteral thiamine replacement promptly as the definitive treatment for wet and dry beriberi and for Wernicke encephalopathy",
+   "Always administer thiamine before or with any glucose load in at-risk patients to avoid precipitating acute Wernicke encephalopathy",
+   "Support the failing circulation in wet beriberi while thiamine reverses the high-output state",
+   "Correct coexisting nutritional deficiencies and address the underlying cause such as alcohol dependence, hyperemesis or unsupplemented parenteral feeding",
+   "Provide dietary counselling and ongoing thiamine supplementation to prevent recurrence",
+   "Monitor cardiac and neurological recovery, recognising that delayed treatment risks irreversible Korsakoff amnesia and incomplete neuropathy recovery",
+   "Involve neurology, cardiology and dietetics and screen at-risk groups including breastfed infants of thiamine-deficient mothers"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "beriberi-pathway",
+   "title": "Beriberi: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Wet beriberi presents with high-output cardiac failure, oedema, and warm extremities, whereas dry beriberi is a symmetrical peripheral polyneuropathy",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Acute high-output cardiac failure or cardiovascular collapse (fulminant wet beriberi)",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical assessment with dietary and alcohol history, Erythrocyte transketolase activity or blood thiamine level where available, Assessment of cardiac function in suspected wet beriberi"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Give parenteral thiamine replacement promptly as the definitive treatment for wet and dry beriberi and for Wernicke encephalopathy"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Giving intravenous glucose before thiamine in an at-risk patient and precipitating Wernicke encephalopathy"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of beriberi."
+  }
+ ],
+ "tables": [
+  {
+   "id": "beriberi-matrix",
+   "title": "Beriberi: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Wet beriberi presents with high-output cardiac failure, oedema, and warm extremities, whereas dry beriberi is a symmetrical",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Thiamine, as thiamine pyrophosphate, is a cofactor for key enzymes of carbohydrate metabolism including pyruvate dehydrogenase, alpha-ketoglutarate dehydrogenase, and transketolase. Deficiency impairs oxidative energy production and causes accumulation of pyruvate and lactate, hitting tissues with high energy demand such as heart, peripheral nerves, and brain. Cardiovascular (wet) disease reflects impaired myocardial energetics and peripheral vasodilatation producing high-output failure, while neural (dry) disease and Wernicke-Korsakoff syndrome reflect neuronal energy failure. Carbohydrate loading raises thiamine demand and can unmask or worsen deficiency.",
-    "additionalDifferentials": [
-      "Other causes of high-output or dilated cardiomyopathy",
-      "Other peripheral neuropathies such as diabetic or alcoholic neuropathy",
-      "Guillain-Barre syndrome",
-      "Other causes of delirium and ataxia",
-      "Fluid overload from renal, hepatic, or cardiac disease"
+    [
+     "Key Investigations",
+     "Clinical assessment with dietary and alcohol history, Erythrocyte transketolase activity or blood thiamine level where available,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical assessment with dietary and alcohol history",
-      "Erythrocyte transketolase activity or blood thiamine level where available",
-      "Assessment of cardiac function in suspected wet beriberi",
-      "Neurological and cognitive assessment for Wernicke-Korsakoff features",
-      "Evaluation for coexisting deficiencies in the malnourished or alcohol-dependent"
+    [
+     "Primary Differentials",
+     "Other causes of high-output or dilated cardiomyopathy, Other peripheral neuropathies such as diabetic or alcoholic neuropathy,",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Acute high-output cardiac failure or cardiovascular collapse (fulminant wet beriberi)",
-      "Wernicke encephalopathy, a medical emergency requiring immediate thiamine",
-      "Rapid deterioration in an infant with suspected infantile beriberi",
-      "Glucose administration in an at-risk patient without prior thiamine"
+    [
+     "Management Strategy",
+     "Give parenteral thiamine replacement promptly as the definitive treatment for wet and dry beriberi and for Wernicke encephalopathy",
+     "Core treatment modality"
     ],
-    "prognosis": "Cardiac and early neurological features often improve rapidly with thiamine, but delayed treatment of Wernicke encephalopathy risks permanent Korsakoff amnesia, and severe peripheral neuropathy may recover only partially.",
-    "pitfalls": [
-      "Giving intravenous glucose before thiamine in an at-risk patient and precipitating Wernicke encephalopathy",
-      "Failing to recognise high-output failure as a treatable nutritional cardiomyopathy",
-      "Waiting for laboratory confirmation before treating in suspected Wernicke encephalopathy",
-      "Overlooking deficiency after bariatric surgery, in hyperemesis, or on prolonged parenteral nutrition"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e",
-      "WHO nutrition guidance"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Give parenteral thiamine replacement promptly as the definitive treatment for wet and dry beriberi and for Wernicke encephalopathy",
-      "Always administer thiamine before or with any glucose load in at-risk patients to avoid precipitating acute Wernicke encephalopathy",
-      "Support the failing circulation in wet beriberi while thiamine reverses the high-output state",
-      "Correct coexisting nutritional deficiencies and address the underlying cause such as alcohol dependence, hyperemesis or unsupplemented parenteral feeding",
-      "Provide dietary counselling and ongoing thiamine supplementation to prevent recurrence",
-      "Monitor cardiac and neurological recovery, recognising that delayed treatment risks irreversible Korsakoff amnesia and incomplete neuropathy recovery",
-      "Involve neurology, cardiology and dietetics and screen at-risk groups including breastfed infants of thiamine-deficient mothers"
+    [
+     "Clinical Pitfall",
+     "Giving intravenous glucose before thiamine in an at-risk patient and precipitating Wernicke encephalopathy",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for beriberi."
+  }
+ ]
 }

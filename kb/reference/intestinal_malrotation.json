@@ -1,76 +1,148 @@
 {
-  "id": "intestinal_malrotation",
-  "name": "Intestinal malrotation",
-  "aliases": [
-    "malrotation",
-    "midgut malrotation",
-    "malrotation with volvulus"
+ "id": "intestinal_malrotation",
+ "name": "Intestinal malrotation",
+ "aliases": [
+  "malrotation",
+  "midgut malrotation",
+  "malrotation with volvulus"
+ ],
+ "class": "non_infective",
+ "system": "Paediatric surgery / Thoracic",
+ "specialty": "Paediatric Surgery",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nelson Textbook of Pediatrics / Bailey & Love (paediatric surgery)",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Arises from incomplete rotation and fixation of the midgut, leaving a narrow mesenteric base that predisposes to twisting (volvulus)",
+   "The classic presentation is a previously well neonate who develops sudden bilious vomiting, which must be treated as a surgical emergency until proven otherwise",
+   "Bilious vomiting in an infant should trigger urgent imaging because midgut volvulus can infarct the entire small bowel within hours",
+   "The upper gastrointestinal contrast study is the key investigation, showing an abnormally positioned duodenojejunal junction and a corkscrew or spiral appearance if volvulus is present",
+   "Ultrasound may reveal an inverted relationship of the superior mesenteric artery and vein or a whirlpool sign of twisted mesentery",
+   "Abnormal peritoneal (Ladd) bands can cross and obstruct the duodenum even without volvulus, producing intermittent obstructive symptoms",
+   "The definitive operation is the Ladd procedure: untwisting the volvulus, dividing Ladd bands, broadening the mesenteric base, and placing the bowel in a non-rotated position, usually with appendicectomy",
+   "Some children present later in life with intermittent, vague abdominal pain or feeding difficulty rather than acute obstruction"
   ],
-  "class": "non_infective",
-  "system": "Paediatric surgery / Thoracic",
-  "specialty": "Paediatric Surgery",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nelson Textbook of Pediatrics / Bailey & Love (paediatric surgery)",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Arises from incomplete rotation and fixation of the midgut, leaving a narrow mesenteric base that predisposes to twisting (volvulus)",
-      "The classic presentation is a previously well neonate who develops sudden bilious vomiting, which must be treated as a surgical emergency until proven otherwise",
-      "Bilious vomiting in an infant should trigger urgent imaging because midgut volvulus can infarct the entire small bowel within hours",
-      "The upper gastrointestinal contrast study is the key investigation, showing an abnormally positioned duodenojejunal junction and a corkscrew or spiral appearance if volvulus is present",
-      "Ultrasound may reveal an inverted relationship of the superior mesenteric artery and vein or a whirlpool sign of twisted mesentery",
-      "Abnormal peritoneal (Ladd) bands can cross and obstruct the duodenum even without volvulus, producing intermittent obstructive symptoms",
-      "The definitive operation is the Ladd procedure: untwisting the volvulus, dividing Ladd bands, broadening the mesenteric base, and placing the bowel in a non-rotated position, usually with appendicectomy",
-      "Some children present later in life with intermittent, vague abdominal pain or feeding difficulty rather than acute obstruction"
+  "pathophysiology": "During normal development the midgut herniates, rotates counterclockwise around the superior mesenteric artery, and returns to the abdomen with broad mesenteric fixation. In malrotation this process is incomplete, so the caecum sits abnormally and the mesenteric root is short and narrow. This narrow pedicle allows the midgut to twist around the superior mesenteric vessels, compromising blood supply and causing ischaemia, while abnormal fibrous bands may simultaneously compress the duodenum and produce obstruction.",
+  "additionalDifferentials": [
+   "Duodenal atresia or stenosis",
+   "Jejunoileal atresia",
+   "Necrotising enterocolitis",
+   "Hypertrophic pyloric stenosis (non-bilious vomiting)",
+   "Incarcerated hernia causing obstruction"
+  ],
+  "additionalInvestigations": [
+   "Upper gastrointestinal contrast series to locate the duodenojejunal junction",
+   "Abdominal ultrasound to assess superior mesenteric vessel orientation and look for a whirlpool sign",
+   "Plain abdominal radiograph, which may show a paucity of distal gas or a double-bubble pattern",
+   "Blood gas and lactate to detect metabolic acidosis suggesting bowel ischaemia",
+   "Baseline bloods and cross-match in preparation for emergency laparotomy"
+  ],
+  "redFlags": [
+   "Bilious vomiting in a neonate or infant, which mandates emergency evaluation for midgut volvulus",
+   "Abdominal distension, tenderness, or rectal bleeding suggesting established bowel ischaemia",
+   "Rapidly worsening metabolic acidosis or haemodynamic instability indicating strangulated midgut requiring immediate laparotomy",
+   "Any delay in diagnosis, as the whole midgut can become necrotic within a few hours of volvulus"
+  ],
+  "prognosis": "When volvulus is corrected before ischaemia sets in, outcomes are excellent with low recurrence after a Ladd procedure. Delayed presentation with extensive bowel infarction can necessitate massive resection, leading to short bowel syndrome and long-term nutritional dependence, and carries significant mortality.",
+  "pitfalls": [
+   "Dismissing bilious vomiting as feed intolerance or reflux and delaying imaging",
+   "Assuming a normal plain radiograph excludes malrotation or volvulus",
+   "Failing to arrange emergency surgery once volvulus is suspected while awaiting further tests",
+   "Overlooking older children with intermittent symptoms in whom malrotation is still possible"
+  ],
+  "references": [
+   "Nelson Textbook of Pediatrics, 22e",
+   "Bailey & Love's Short Practice of Surgery"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Perform emergency laparotomy with the Ladd procedure, comprising derotation of volvulus, division of Ladd bands, appendicectomy and bowel repositioning, for confirmed or suspected midgut volvulus",
+   "Resuscitate immediately with intravenous fluids, nasogastric decompression and correction of metabolic acidosis",
+   "Treat bilious vomiting in a neonate as a surgical emergency with urgent upper gastrointestinal contrast imaging",
+   "Assess bowel viability at operation, resecting infarcted segments and planning a second-look laparotomy where needed",
+   "Provide long-term nutritional support and manage short-bowel syndrome after extensive resection",
+   "Arrange paediatric surgical follow-up, noting the low recurrence risk after a Ladd procedure"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "intestinal_malrotation-pathway",
+   "title": "Intestinal malrotation: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Arises from incomplete rotation and fixation of the midgut, leaving a narrow mesenteric base that predisposes to twisting (volvulus)",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Bilious vomiting in a neonate or infant, which mandates emergency evaluation for midgut volvulus",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Upper gastrointestinal contrast series to locate the duodenojejunal junction, Abdominal ultrasound to assess superior mesenteric vessel orientation and look for a whirlpool sign, Plain abdominal radiograph, which may show"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Perform emergency laparotomy with the Ladd procedure, comprising derotation of volvulus, division of Ladd bands, appendicectomy and bowel repositioning, for confirmed or suspected midgut volvulus"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Dismissing bilious vomiting as feed intolerance or reflux and delaying imaging"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of intestinal malrotation."
+  }
+ ],
+ "tables": [
+  {
+   "id": "intestinal_malrotation-matrix",
+   "title": "Intestinal malrotation: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Arises from incomplete rotation and fixation of the midgut, leaving a narrow mesenteric base that predisposes to twisting",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "During normal development the midgut herniates, rotates counterclockwise around the superior mesenteric artery, and returns to the abdomen with broad mesenteric fixation. In malrotation this process is incomplete, so the caecum sits abnormally and the mesenteric root is short and narrow. This narrow pedicle allows the midgut to twist around the superior mesenteric vessels, compromising blood supply and causing ischaemia, while abnormal fibrous bands may simultaneously compress the duodenum and produce obstruction.",
-    "additionalDifferentials": [
-      "Duodenal atresia or stenosis",
-      "Jejunoileal atresia",
-      "Necrotising enterocolitis",
-      "Hypertrophic pyloric stenosis (non-bilious vomiting)",
-      "Incarcerated hernia causing obstruction"
+    [
+     "Key Investigations",
+     "Upper gastrointestinal contrast series to locate the duodenojejunal junction, Abdominal ultrasound to assess superior mesenteric",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Upper gastrointestinal contrast series to locate the duodenojejunal junction",
-      "Abdominal ultrasound to assess superior mesenteric vessel orientation and look for a whirlpool sign",
-      "Plain abdominal radiograph, which may show a paucity of distal gas or a double-bubble pattern",
-      "Blood gas and lactate to detect metabolic acidosis suggesting bowel ischaemia",
-      "Baseline bloods and cross-match in preparation for emergency laparotomy"
+    [
+     "Primary Differentials",
+     "Duodenal atresia or stenosis, Jejunoileal atresia, Necrotising enterocolitis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Bilious vomiting in a neonate or infant, which mandates emergency evaluation for midgut volvulus",
-      "Abdominal distension, tenderness, or rectal bleeding suggesting established bowel ischaemia",
-      "Rapidly worsening metabolic acidosis or haemodynamic instability indicating strangulated midgut requiring immediate laparotomy",
-      "Any delay in diagnosis, as the whole midgut can become necrotic within a few hours of volvulus"
+    [
+     "Management Strategy",
+     "Perform emergency laparotomy with the Ladd procedure, comprising derotation of volvulus, division of Ladd bands, appendicectomy",
+     "Core treatment modality"
     ],
-    "prognosis": "When volvulus is corrected before ischaemia sets in, outcomes are excellent with low recurrence after a Ladd procedure. Delayed presentation with extensive bowel infarction can necessitate massive resection, leading to short bowel syndrome and long-term nutritional dependence, and carries significant mortality.",
-    "pitfalls": [
-      "Dismissing bilious vomiting as feed intolerance or reflux and delaying imaging",
-      "Assuming a normal plain radiograph excludes malrotation or volvulus",
-      "Failing to arrange emergency surgery once volvulus is suspected while awaiting further tests",
-      "Overlooking older children with intermittent symptoms in whom malrotation is still possible"
-    ],
-    "references": [
-      "Nelson Textbook of Pediatrics, 22e",
-      "Bailey & Love's Short Practice of Surgery"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Perform emergency laparotomy with the Ladd procedure, comprising derotation of volvulus, division of Ladd bands, appendicectomy and bowel repositioning, for confirmed or suspected midgut volvulus",
-      "Resuscitate immediately with intravenous fluids, nasogastric decompression and correction of metabolic acidosis",
-      "Treat bilious vomiting in a neonate as a surgical emergency with urgent upper gastrointestinal contrast imaging",
-      "Assess bowel viability at operation, resecting infarcted segments and planning a second-look laparotomy where needed",
-      "Provide long-term nutritional support and manage short-bowel syndrome after extensive resection",
-      "Arrange paediatric surgical follow-up, noting the low recurrence risk after a Ladd procedure"
+    [
+     "Clinical Pitfall",
+     "Dismissing bilious vomiting as feed intolerance or reflux and delaying imaging",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for intestinal malrotation."
+  }
+ ]
 }

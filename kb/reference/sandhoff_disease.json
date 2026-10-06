@@ -1,77 +1,149 @@
 {
-  "id": "sandhoff_disease",
-  "name": "Sandhoff disease",
-  "aliases": [
-    "GM2 gangliosidosis type 2",
-    "hexosaminidase A and B deficiency",
-    "HEXB deficiency"
+ "id": "sandhoff_disease",
+ "name": "Sandhoff disease",
+ "aliases": [
+  "GM2 gangliosidosis type 2",
+  "hexosaminidase A and B deficiency",
+  "HEXB deficiency"
+ ],
+ "class": "non_infective",
+ "system": "Genetic / Metabolic",
+ "specialty": "Metabolic Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nelson Textbook of Pediatrics / standard metabolic references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An autosomal recessive GM2 gangliosidosis caused by deficiency of both hexosaminidase A and hexosaminidase B, due to pathogenic variants in the HEXB gene encoding the shared beta subunit",
+   "It closely resembles Tay-Sachs disease clinically, with infantile onset of developmental regression, hypotonia, an exaggerated startle response, and a cherry-red macular spot",
+   "Unlike Tay-Sachs disease, visceral involvement such as hepatosplenomegaly and mild skeletal changes can occur, reflecting the additional deficiency of hexosaminidase B",
+   "Progressive macrocephaly, seizures, spasticity, and blindness follow, with death usually in early childhood in the infantile form",
+   "Juvenile and adult-onset forms exist with slower motor, cerebellar, and psychiatric presentations",
+   "The absence of both hexosaminidase isoenzymes on assay distinguishes it biochemically from Tay-Sachs disease, in which hexosaminidase B is preserved",
+   "It is not restricted to any single ethnic group, unlike the increased Tay-Sachs carrier frequency in the Ashkenazi Jewish population",
+   "No disease-modifying therapy is established, so management is supportive with genetic counselling"
   ],
-  "class": "non_infective",
-  "system": "Genetic / Metabolic",
-  "specialty": "Metabolic Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nelson Textbook of Pediatrics / standard metabolic references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An autosomal recessive GM2 gangliosidosis caused by deficiency of both hexosaminidase A and hexosaminidase B, due to pathogenic variants in the HEXB gene encoding the shared beta subunit",
-      "It closely resembles Tay-Sachs disease clinically, with infantile onset of developmental regression, hypotonia, an exaggerated startle response, and a cherry-red macular spot",
-      "Unlike Tay-Sachs disease, visceral involvement such as hepatosplenomegaly and mild skeletal changes can occur, reflecting the additional deficiency of hexosaminidase B",
-      "Progressive macrocephaly, seizures, spasticity, and blindness follow, with death usually in early childhood in the infantile form",
-      "Juvenile and adult-onset forms exist with slower motor, cerebellar, and psychiatric presentations",
-      "The absence of both hexosaminidase isoenzymes on assay distinguishes it biochemically from Tay-Sachs disease, in which hexosaminidase B is preserved",
-      "It is not restricted to any single ethnic group, unlike the increased Tay-Sachs carrier frequency in the Ashkenazi Jewish population",
-      "No disease-modifying therapy is established, so management is supportive with genetic counselling"
+  "pathophysiology": "Sandhoff disease is caused by biallelic pathogenic variants in HEXB, encoding the beta subunit common to both hexosaminidase A (alpha-beta) and hexosaminidase B (beta-beta). Loss of the beta subunit therefore reduces activity of both isoenzymes, impairing degradation of GM2 ganglioside and related glycolipids and glycoproteins. GM2 accumulates within neuronal lysosomes, driving progressive neurodegeneration, while the broader substrate accumulation from combined enzyme loss also affects visceral tissues, producing organomegaly not typically seen in Tay-Sachs disease.",
+  "additionalDifferentials": [
+   "Tay-Sachs disease",
+   "GM1 gangliosidosis",
+   "Niemann-Pick disease and other storage disorders with organomegaly",
+   "Other causes of infantile neurodegeneration with cherry-red spot",
+   "Leukodystrophies with developmental regression"
+  ],
+  "additionalInvestigations": [
+   "Assay of hexosaminidase A and total hexosaminidase activity, showing deficiency of both",
+   "HEXB molecular genetic testing to confirm the diagnosis",
+   "Ophthalmological examination for the macular cherry-red spot",
+   "Neuroimaging to characterise neurodegeneration",
+   "Assessment for visceral involvement and carrier testing of relatives"
+  ],
+  "redFlags": [
+   "Rapid developmental regression with exaggerated startle in an infant",
+   "Emerging seizures or loss of vision",
+   "Progressive swallowing difficulty with aspiration risk",
+   "Organomegaly accompanying neurodegeneration"
+  ],
+  "prognosis": "The infantile form is progressive and fatal, typically within the first few years of life. Juvenile and adult forms progress more slowly with a variable course. Care remains supportive, as no disease-modifying therapy is established.",
+  "pitfalls": [
+   "Assuming Tay-Sachs disease without recognising that combined hexosaminidase A and B deficiency indicates Sandhoff disease",
+   "Overlooking organomegaly as a distinguishing feature from Tay-Sachs disease",
+   "Not offering carrier screening and counselling to at-risk families",
+   "Attributing the exaggerated startle to a benign cause and delaying evaluation"
+  ],
+  "references": [
+   "Nelson Textbook of Pediatrics, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Supportive, symptom-directed care as no disease-modifying therapy is established for this GM2 gangliosidosis",
+   "Antiepileptic drugs for the seizures that emerge with disease progression",
+   "Antispasticity agents and physiotherapy for spasticity and to prevent contractures",
+   "Nutritional and feeding support, including gastrostomy feeding as bulbar function fails",
+   "Respiratory care with management of secretions and aspiration risk",
+   "Physiotherapy, developmental support and early integration of palliative care for the progressive infantile form",
+   "Genetic counselling for this autosomal recessive HEXB disorder, with carrier testing of relatives and reproductive options",
+   "Coordinated multidisciplinary care across metabolic medicine, neurology and community paediatric services"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "sandhoff_disease-pathway",
+   "title": "Sandhoff disease: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An autosomal recessive GM2 gangliosidosis caused by deficiency of both hexosaminidase A and hexosaminidase B, due to pathogenic variants in the HEXB gene encoding the shared beta subunit",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapid developmental regression with exaggerated startle in an infant",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Assay of hexosaminidase A and total hexosaminidase activity, showing deficiency of both, HEXB molecular genetic testing to confirm the diagnosis, Ophthalmological examination for the macular cherry-red spot"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Supportive, symptom-directed care as no disease-modifying therapy is established for this GM2 gangliosidosis"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming Tay-Sachs disease without recognising that combined hexosaminidase A and B deficiency indicates Sandhoff disease"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of sandhoff disease."
+  }
+ ],
+ "tables": [
+  {
+   "id": "sandhoff_disease-matrix",
+   "title": "Sandhoff disease: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An autosomal recessive GM2 gangliosidosis caused by deficiency of both hexosaminidase A and hexosaminidase B, due to pathogenic",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Sandhoff disease is caused by biallelic pathogenic variants in HEXB, encoding the beta subunit common to both hexosaminidase A (alpha-beta) and hexosaminidase B (beta-beta). Loss of the beta subunit therefore reduces activity of both isoenzymes, impairing degradation of GM2 ganglioside and related glycolipids and glycoproteins. GM2 accumulates within neuronal lysosomes, driving progressive neurodegeneration, while the broader substrate accumulation from combined enzyme loss also affects visceral tissues, producing organomegaly not typically seen in Tay-Sachs disease.",
-    "additionalDifferentials": [
-      "Tay-Sachs disease",
-      "GM1 gangliosidosis",
-      "Niemann-Pick disease and other storage disorders with organomegaly",
-      "Other causes of infantile neurodegeneration with cherry-red spot",
-      "Leukodystrophies with developmental regression"
+    [
+     "Key Investigations",
+     "Assay of hexosaminidase A and total hexosaminidase activity, showing deficiency of both, HEXB molecular genetic testing to",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Assay of hexosaminidase A and total hexosaminidase activity, showing deficiency of both",
-      "HEXB molecular genetic testing to confirm the diagnosis",
-      "Ophthalmological examination for the macular cherry-red spot",
-      "Neuroimaging to characterise neurodegeneration",
-      "Assessment for visceral involvement and carrier testing of relatives"
+    [
+     "Primary Differentials",
+     "Tay-Sachs disease, GM1 gangliosidosis, Niemann-Pick disease and other storage disorders with organomegaly",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapid developmental regression with exaggerated startle in an infant",
-      "Emerging seizures or loss of vision",
-      "Progressive swallowing difficulty with aspiration risk",
-      "Organomegaly accompanying neurodegeneration"
+    [
+     "Management Strategy",
+     "Supportive, symptom-directed care as no disease-modifying therapy is established for this GM2 gangliosidosis",
+     "Core treatment modality"
     ],
-    "prognosis": "The infantile form is progressive and fatal, typically within the first few years of life. Juvenile and adult forms progress more slowly with a variable course. Care remains supportive, as no disease-modifying therapy is established.",
-    "pitfalls": [
-      "Assuming Tay-Sachs disease without recognising that combined hexosaminidase A and B deficiency indicates Sandhoff disease",
-      "Overlooking organomegaly as a distinguishing feature from Tay-Sachs disease",
-      "Not offering carrier screening and counselling to at-risk families",
-      "Attributing the exaggerated startle to a benign cause and delaying evaluation"
-    ],
-    "references": [
-      "Nelson Textbook of Pediatrics, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Supportive, symptom-directed care as no disease-modifying therapy is established for this GM2 gangliosidosis",
-      "Antiepileptic drugs for the seizures that emerge with disease progression",
-      "Antispasticity agents and physiotherapy for spasticity and to prevent contractures",
-      "Nutritional and feeding support, including gastrostomy feeding as bulbar function fails",
-      "Respiratory care with management of secretions and aspiration risk",
-      "Physiotherapy, developmental support and early integration of palliative care for the progressive infantile form",
-      "Genetic counselling for this autosomal recessive HEXB disorder, with carrier testing of relatives and reproductive options",
-      "Coordinated multidisciplinary care across metabolic medicine, neurology and community paediatric services"
+    [
+     "Clinical Pitfall",
+     "Assuming Tay-Sachs disease without recognising that combined hexosaminidase A and B deficiency indicates Sandhoff disease",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for sandhoff disease."
+  }
+ ]
 }

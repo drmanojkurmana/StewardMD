@@ -140,5 +140,77 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h3eff7a75"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "pneumothorax-dx-algo",
+      "title": "Pneumothorax: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Pneumothorax is simply gas within the pleural space; classify it as spontaneous (no preceding trauma) versus traumatic, and spontaneous further as primary (no underlying lung disease) versus secondary (underlying lung disease present)",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Tracheal/mediastinal shift to the contralateral side, absent breath sounds over an enlarged hemithorax, hyperresonant percussion, and hypotension - the bedside signs of tension pneumothorax (Harrison 22e p.2314).",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Chest radiograph to confirm or exclude pneumothorax; it is the routine first-line image in acute chest discomfort and is useful for pneumothorax, though for tension it must not delay decompression (Harrison 22e p.105,"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison classifies pneumothorax by mechanism and risk rather than a numeric score: (1) primary spontaneous (no underlying lung disease, often young tall thin smokers, frequently manageable conservatively if"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Waiting for a chest radiograph to confirm a suspected tension pneumothorax instead of decompressing immediately - tension is a clinical diagnosis and delay can be fatal (Harrison 22e p.2314)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for pneumothorax."
+    }
+  ],
+  "tables": [
+    {
+      "id": "pneumothorax-matrix",
+      "title": "Pneumothorax: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Pneumothorax is simply gas within the pleural space; classify it as spontaneous (no preceding trauma) versus traumatic, and",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Chest radiograph to confirm or exclude pneumothorax; it is the routine first-line image in acute chest discomfort and is useful",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Acute coronary syndrome / myocardial infarction (Harrison 22e p.105), Acute aortic syndrome / aortic dissection (Harrison 22e",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Tracheal/mediastinal shift to the contralateral side, absent breath sounds over an enlarged hemithorax, hyperresonant percussion,",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Waiting for a chest radiograph to confirm a suspected tension pneumothorax instead of decompressing immediately - tension is a",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for pneumothorax."
+    }
+  ]
 }

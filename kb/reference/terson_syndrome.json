@@ -1,76 +1,148 @@
 {
-  "id": "terson_syndrome",
-  "name": "Terson syndrome",
-  "aliases": [
-    "Terson's syndrome",
-    "intraocular haemorrhage of subarachnoid haemorrhage"
+ "id": "terson_syndrome",
+ "name": "Terson syndrome",
+ "aliases": [
+  "Terson's syndrome",
+  "intraocular haemorrhage of subarachnoid haemorrhage"
+ ],
+ "class": "non_infective",
+ "system": "Eye / Ophthalmology",
+ "specialty": "Ophthalmology / Retina",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Refers to intraocular haemorrhage, most often vitreous or pre-retinal, occurring in association with subarachnoid or other intracranial haemorrhage or an acute rise in intracranial pressure",
+   "The haemorrhage may be unilateral or bilateral and can involve the vitreous, the sub-hyaloid or sub-internal limiting membrane space, or the retina itself",
+   "It is frequently discovered when a neurologically recovering patient reports blurred vision or floaters",
+   "Its presence is a marker of the severity of the intracranial event and is associated with higher mortality",
+   "Fundus examination and, when the media are opaque, B-scan ultrasound establish the diagnosis",
+   "Management is observation for spontaneous clearance, with vitrectomy considered for non-clearing vitreous haemorrhage",
+   "In young children, early vitrectomy is important to prevent deprivation amblyopia"
   ],
-  "class": "non_infective",
-  "system": "Eye / Ophthalmology",
-  "specialty": "Ophthalmology / Retina",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Kanski's Clinical Ophthalmology / Ryan's Retina",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Refers to intraocular haemorrhage, most often vitreous or pre-retinal, occurring in association with subarachnoid or other intracranial haemorrhage or an acute rise in intracranial pressure",
-      "The haemorrhage may be unilateral or bilateral and can involve the vitreous, the sub-hyaloid or sub-internal limiting membrane space, or the retina itself",
-      "It is frequently discovered when a neurologically recovering patient reports blurred vision or floaters",
-      "Its presence is a marker of the severity of the intracranial event and is associated with higher mortality",
-      "Fundus examination and, when the media are opaque, B-scan ultrasound establish the diagnosis",
-      "Management is observation for spontaneous clearance, with vitrectomy considered for non-clearing vitreous haemorrhage",
-      "In young children, early vitrectomy is important to prevent deprivation amblyopia"
+  "pathophysiology": "An abrupt rise in intracranial pressure, typically from subarachnoid haemorrhage, is transmitted along the optic nerve sheath to compress the central retinal vein and the retinochoroidal venous anastomoses. The resulting acute venous congestion and stasis rupture peripapillary and retinal capillaries, releasing blood into the retina, the pre-retinal spaces and the vitreous. The intraocular blood therefore arises locally rather than tracking directly from the cranial cavity.",
+  "additionalDifferentials": [
+   "Valsalva retinopathy",
+   "Posterior vitreous detachment with haemorrhage",
+   "Proliferative diabetic retinopathy",
+   "Retinal vein occlusion",
+   "Non-accidental injury in an infant",
+   "Ocular trauma"
+  ],
+  "additionalInvestigations": [
+   "Dilated fundus examination to characterise the intraocular haemorrhage",
+   "Neuroimaging with computed tomography or magnetic resonance imaging for the intracranial haemorrhage",
+   "Optical coherence tomography to localise pre-retinal or sub-internal limiting membrane blood",
+   "B-scan ultrasound when the media are too opaque for a fundus view",
+   "Coordination with neurosurgery and neurology for the underlying condition"
+  ],
+  "redFlags": [
+   "Reduced consciousness or neurological deterioration from the underlying intracranial haemorrhage",
+   "Bilateral dense intraocular haemorrhage",
+   "Suspected non-accidental injury in an infant",
+   "Signs of persistently raised intracranial pressure"
+  ],
+  "prognosis": "The visual prognosis is often good once the haemorrhage clears spontaneously or after vitrectomy, but the overall outcome is dominated by the severity of the underlying neurological injury.",
+  "pitfalls": [
+   "Overlooking the ocular findings in an unconscious or sedated patient",
+   "Failing to recognise an underlying intracranial haemorrhage when the eye signs present first",
+   "Delaying vitrectomy in a young child at risk of amblyopia",
+   "Assuming the haemorrhage is due to a simple Valsalva effort"
+  ],
+  "references": [
+   "Kanski's Clinical Ophthalmology",
+   "Ryan's Retina",
+   "American Academy of Ophthalmology, Basic and Clinical Science Course: Retina and Vitreous"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Prioritise treatment of the underlying subarachnoid or intracranial haemorrhage and raised intracranial pressure with neurosurgery and neurology",
+   "Observe most intraocular haemorrhage for spontaneous clearance, which commonly occurs over weeks to months",
+   "Perform pars plana vitrectomy for non-clearing vitreous haemorrhage, dense bilateral involvement, or where earlier visual rehabilitation is needed",
+   "Consider earlier vitrectomy in affected children to prevent deprivation amblyopia",
+   "Monitor for the complications of retinal detachment, epiretinal membrane and raised intraocular pressure during follow-up",
+   "Coordinate ophthalmology follow-up with the neurosurgical and neurological team managing the primary injury"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "terson_syndrome-pathway",
+   "title": "Terson syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Refers to intraocular haemorrhage, most often vitreous or pre-retinal, occurring in association with subarachnoid or other intracranial haemorrhage or an acute rise in intracranial pressure",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Reduced consciousness or neurological deterioration from the underlying intracranial haemorrhage",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Dilated fundus examination to characterise the intraocular haemorrhage, Neuroimaging with computed tomography or magnetic resonance imaging for the intracranial haemorrhage, Optical coherence tomography to localise"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Prioritise treatment of the underlying subarachnoid or intracranial haemorrhage and raised intracranial pressure with neurosurgery and neurology"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Overlooking the ocular findings in an unconscious or sedated patient"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of terson syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "terson_syndrome-matrix",
+   "title": "Terson syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Refers to intraocular haemorrhage, most often vitreous or pre-retinal, occurring in association with subarachnoid or other",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "An abrupt rise in intracranial pressure, typically from subarachnoid haemorrhage, is transmitted along the optic nerve sheath to compress the central retinal vein and the retinochoroidal venous anastomoses. The resulting acute venous congestion and stasis rupture peripapillary and retinal capillaries, releasing blood into the retina, the pre-retinal spaces and the vitreous. The intraocular blood therefore arises locally rather than tracking directly from the cranial cavity.",
-    "additionalDifferentials": [
-      "Valsalva retinopathy",
-      "Posterior vitreous detachment with haemorrhage",
-      "Proliferative diabetic retinopathy",
-      "Retinal vein occlusion",
-      "Non-accidental injury in an infant",
-      "Ocular trauma"
+    [
+     "Key Investigations",
+     "Dilated fundus examination to characterise the intraocular haemorrhage, Neuroimaging with computed tomography or magnetic",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Dilated fundus examination to characterise the intraocular haemorrhage",
-      "Neuroimaging with computed tomography or magnetic resonance imaging for the intracranial haemorrhage",
-      "Optical coherence tomography to localise pre-retinal or sub-internal limiting membrane blood",
-      "B-scan ultrasound when the media are too opaque for a fundus view",
-      "Coordination with neurosurgery and neurology for the underlying condition"
+    [
+     "Primary Differentials",
+     "Valsalva retinopathy, Posterior vitreous detachment with haemorrhage, Proliferative diabetic retinopathy",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Reduced consciousness or neurological deterioration from the underlying intracranial haemorrhage",
-      "Bilateral dense intraocular haemorrhage",
-      "Suspected non-accidental injury in an infant",
-      "Signs of persistently raised intracranial pressure"
+    [
+     "Management Strategy",
+     "Prioritise treatment of the underlying subarachnoid or intracranial haemorrhage and raised intracranial pressure with",
+     "Core treatment modality"
     ],
-    "prognosis": "The visual prognosis is often good once the haemorrhage clears spontaneously or after vitrectomy, but the overall outcome is dominated by the severity of the underlying neurological injury.",
-    "pitfalls": [
-      "Overlooking the ocular findings in an unconscious or sedated patient",
-      "Failing to recognise an underlying intracranial haemorrhage when the eye signs present first",
-      "Delaying vitrectomy in a young child at risk of amblyopia",
-      "Assuming the haemorrhage is due to a simple Valsalva effort"
-    ],
-    "references": [
-      "Kanski's Clinical Ophthalmology",
-      "Ryan's Retina",
-      "American Academy of Ophthalmology, Basic and Clinical Science Course: Retina and Vitreous"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Prioritise treatment of the underlying subarachnoid or intracranial haemorrhage and raised intracranial pressure with neurosurgery and neurology",
-      "Observe most intraocular haemorrhage for spontaneous clearance, which commonly occurs over weeks to months",
-      "Perform pars plana vitrectomy for non-clearing vitreous haemorrhage, dense bilateral involvement, or where earlier visual rehabilitation is needed",
-      "Consider earlier vitrectomy in affected children to prevent deprivation amblyopia",
-      "Monitor for the complications of retinal detachment, epiretinal membrane and raised intraocular pressure during follow-up",
-      "Coordinate ophthalmology follow-up with the neurosurgical and neurological team managing the primary injury"
+    [
+     "Clinical Pitfall",
+     "Overlooking the ocular findings in an unconscious or sedated patient",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for terson syndrome."
+  }
+ ]
 }

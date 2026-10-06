@@ -162,5 +162,77 @@
       "importedAt": "2026-06-29T13:50:09Z",
       "contentHash": "hf20fd710"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "malignancy_b-dx-algo",
+      "title": "Malignancy (B-symptoms): Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "B symptoms are formally defined for lymphoma staging (the Ann Arbor 'B' suffix) as unexplained fever (>38C), drenching night sweats, and/or unexplained weight loss exceeding 10% of body weight over the 6 months before diagnosis (Harrison",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Supraclavicular or scalene adenopathy - always abnormal, biopsy promptly (Harrison 22e p.477-478)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Excisional biopsy of the largest abnormal node is preferred; fine-needle aspiration should NOT be the first procedure as it usually yields insufficient tissue and delays diagnosis (Harrison 22e p.478), Serum protein"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Ann Arbor staging (stages I-IV) with suffix A (no systemic symptoms) or B (presence of B symptoms: fever >38C, drenching night sweats, or weight loss >10% body weight over preceding 6 months); suffix E for localized"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Do NOT give glucocorticoids for undiagnosed lymphadenopathy - their lympholytic effect can obscure lymphoma, leukaemia and Castleman disease and delay/disrupt diagnosis (the rare exception is life-threatening pharyngeal"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for malignancy (b-symptoms)."
+    }
+  ],
+  "tables": [
+    {
+      "id": "malignancy_b-matrix",
+      "title": "Malignancy (B-symptoms): Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "B symptoms are formally defined for lymphoma staging (the Ann Arbor 'B' suffix) as unexplained fever (>38C), drenching night",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Excisional biopsy of the largest abnormal node is preferred; fine-needle aspiration should NOT be the first procedure as it",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Hodgkin lymphoma (classical) - nontender cervical/supraclavicular/axillary nodes, frequent mediastinal involvement (Harrison 22e",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Supraclavicular or scalene adenopathy - always abnormal, biopsy promptly (Harrison 22e p.477-478)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Do NOT give glucocorticoids for undiagnosed lymphadenopathy - their lympholytic effect can obscure lymphoma, leukaemia and",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for malignancy (b-symptoms)."
+    }
+  ]
 }

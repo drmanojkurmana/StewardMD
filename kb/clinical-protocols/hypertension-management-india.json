@@ -6,7 +6,22 @@
  "basis": "india",
  "counterpart": "hypertension-management",
  "setting": "Primary care, outpatient clinic, NCD clinic",
- "aliases": ["hypertension", "HTN", "high blood pressure", "stage 1 hypertension", "stage 2 hypertension", "InSH 2025", "Indian Society of Hypertension", "single pill combination", "SPC", "resistant hypertension", "HBPM", "ABPM", "white coat hypertension", "BP target 130/80"],
+ "aliases": [
+  "hypertension",
+  "HTN",
+  "high blood pressure",
+  "stage 1 hypertension",
+  "stage 2 hypertension",
+  "InSH 2025",
+  "Indian Society of Hypertension",
+  "single pill combination",
+  "SPC",
+  "resistant hypertension",
+  "HBPM",
+  "ABPM",
+  "white coat hypertension",
+  "BP target 130/80"
+ ],
  "summary": "InSH 2025 defines stage 1 hypertension as 130 to 139/80 to 89 and stage 2 as 140/90 or more. Confirm with repeat office and out-of-office readings, start drugs at 140/90 (above 130/80 if high risk), begin with a low-dose two-drug single pill combination (ACEI or ARB with a CCB or thiazide), and treat most adults to below 130/80 mmHg.",
  "sections": [
   {
@@ -99,15 +114,119 @@
   }
  ],
  "drugs": [
-  { "name": "ACEI or ARB plus CCB or thiazide-like diuretic (single pill combination)", "dose": "Low-dose two-drug combination once daily, titrated to maximum tolerated doses", "notes": "Default first step for most adults (InSH 2025). InSH does not specify individual doses for routine use." },
-  { "name": "Spironolactone", "dose": "Add as fourth-line drug if tolerated", "notes": "Resistant hypertension; monitor potassium and creatinine." },
-  { "name": "Amlodipine", "dose": "5 to 10 mg orally", "notes": "Listed by InSH among oral options for severe hypertension without acute organ damage." },
-  { "name": "Labetalol (oral)", "dose": "200 to 400 mg orally", "notes": "Oral option for severe hypertension without acute organ damage." },
-  { "name": "Captopril", "dose": "12.5 to 25 mg orally", "notes": "Oral option for severe hypertension without acute organ damage; avoid in pregnancy." },
-  { "name": "Nifedipine extended release", "dose": "10 to 20 mg orally", "notes": "Never sublingual or immediate-release for rapid lowering." }
+  {
+   "name": "ACEI or ARB plus CCB or thiazide-like diuretic (single pill combination)",
+   "dose": "Low-dose two-drug combination once daily, titrated to maximum tolerated doses",
+   "notes": "Default first step for most adults (InSH 2025). InSH does not specify individual doses for routine use."
+  },
+  {
+   "name": "Spironolactone",
+   "dose": "Add as fourth-line drug if tolerated",
+   "notes": "Resistant hypertension; monitor potassium and creatinine."
+  },
+  {
+   "name": "Amlodipine",
+   "dose": "5 to 10 mg orally",
+   "notes": "Listed by InSH among oral options for severe hypertension without acute organ damage."
+  },
+  {
+   "name": "Labetalol (oral)",
+   "dose": "200 to 400 mg orally",
+   "notes": "Oral option for severe hypertension without acute organ damage."
+  },
+  {
+   "name": "Captopril",
+   "dose": "12.5 to 25 mg orally",
+   "notes": "Oral option for severe hypertension without acute organ damage; avoid in pregnancy."
+  },
+  {
+   "name": "Nifedipine extended release",
+   "dose": "10 to 20 mg orally",
+   "notes": "Never sublingual or immediate-release for rapid lowering."
+  }
  ],
  "sources": [
-  { "org": "Indian Society of Hypertension (InSH)", "title": "Indian Society of Hypertension (InSH) Consensus Guideline for the Management of Hypertension, 2025 (Hypertension Journal 11(4))", "year": 2025, "url": "https://9vom.in/journals/index.php/htnj/article/view/1097" }
+  {
+   "org": "Indian Society of Hypertension (InSH)",
+   "title": "Indian Society of Hypertension (InSH) Consensus Guideline for the Management of Hypertension, 2025 (Hypertension Journal 11(4))",
+   "year": 2025,
+   "url": "https://9vom.in/journals/index.php/htnj/article/view/1097"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "hypertension-management-india-pathway",
+   "title": "Hypertension: diagnosis and outpatient management (India, InSH) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Normal below 120/80. Raised BP: systolic 120 to 129 with diastolic below 80. Stage 1 hypertension: 130 to 139 and/or 80 to 89 mmHg. Stage 2: 140 and/or 90 mmHg or more.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Screen every adult aged 18 and over opportunistically at every point of care; target community screening at the elderly (over 60), obese, smokers, diabetes and those with CVD or a family history.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Essential: CBC, ECG (LVH, arrhythmia), urinalysis and urine albumin to creatinine ratio, creatinine and eGFR, urea and electrolytes, TSH, fasting glucose and HbA1c, lipid profile, and fundus examination."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Resistant: BP above 140/90 despite at least 3 drugs of different classes at maximum tolerated doses, one a diuretic, with adherence confirmed and pseudoresistance (white-coat effect, poor technique) excluded by HBPM or ABPM."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Before starting: eGFR, creatinine, potassium and lying and standing BP. Orthostatic hypotension is a fall of 20 mmHg systolic or 10 mmHg diastolic."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for hypertension: diagnosis and outpatient management (india, insh)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hypertension-management-india-summary-matrix",
+   "title": "Hypertension: diagnosis and outpatient management (India, InSH) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Normal below 120/80. Raised BP: systolic 120 to 129 with diastolic below 80. Stage 1 hypertension: 130 to 139 and/or 80 to 89 mmHg. Stage",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Resistant: BP above 140/90 despite at least 3 drugs of different classes at maximum tolerated doses, one a diuretic, with adherence",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Essential: CBC, ECG (LVH, arrhythmia), urinalysis and urine albumin to creatinine ratio, creatinine and eGFR, urea and electrolytes, TSH,",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "ACEI or ARB plus CCB or thiazide-like diuretic (single pill combination): Low-dose two-drug combination once daily, titrated to maximum",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Diagnosing hypertension from a single office reading.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for hypertension: diagnosis and outpatient management (india, insh)."
+  }
+ ]
 }

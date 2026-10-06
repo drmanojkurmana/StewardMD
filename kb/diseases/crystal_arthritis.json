@@ -141,5 +141,77 @@
       "importedAt": "2026-06-29T13:45:37Z",
       "contentHash": "hd863cdca"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "crystal_arthritis-dx-algo",
+      "title": "Crystal arthritis (gout / pseudogout): Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Initial gout flares are usually monoarticular; the first metatarsophalangeal joint (podagra) is involved in 70-90% of cases, followed by tarsal joints, ankles, and knees. Oligo- and polyarticular flares emerge over time (Harrison 22e",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Crystal-proven arthritis does not exclude concurrent septic arthritis - bacterial infection can coexist with MSU or CPP crystals in synovial fluid; always Gram stain and culture (Harrison 22e p.2958, p.2961)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Polarized light microscopy of synovial fluid - MSU: needle/rod-shaped, strongly negatively birefringent; CPP: rhomboid/rod-shaped, weakly positively or non-birefringent; apatite: non-birefringent (requires alizarin red S"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Differentiate from top mimics: Palindromic rheumatism (Harrison 22e p.2958), Psoriatic arthritis (Harrison 22e p.2958), Osteoarthritis - CPPD pseudo-osteoarthritis variant mimics progressive OA, often in atypical joints (MCP, wrist, elbow,"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Relying on a normal serum urate during an acute flare to exclude gout - urate is often normal or low at flare onset (Harrison 22e p.2959)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for crystal arthritis (gout / pseudogout)."
+    }
+  ],
+  "tables": [
+    {
+      "id": "crystal_arthritis-matrix",
+      "title": "Crystal arthritis (gout / pseudogout): Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Initial gout flares are usually monoarticular; the first metatarsophalangeal joint (podagra) is involved in 70-90% of cases,",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Polarized light microscopy of synovial fluid - MSU: needle/rod-shaped, strongly negatively birefringent; CPP:",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Palindromic rheumatism (Harrison 22e p.2958), Psoriatic arthritis (Harrison 22e p.2958), Osteoarthritis - CPPD",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Crystal-proven arthritis does not exclude concurrent septic arthritis - bacterial infection can coexist with MSU or CPP crystals",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on a normal serum urate during an acute flare to exclude gout - urate is often normal or low at flare onset (Harrison 22e",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for crystal arthritis (gout / pseudogout)."
+    }
+  ]
 }

@@ -1,82 +1,154 @@
 {
-  "id": "pseudoangiomatous_stromal_hyperplasia",
-  "name": "Pseudoangiomatous stromal hyperplasia",
-  "aliases": [
-    "PASH",
-    "Pseudoangiomatous hyperplasia of mammary stroma"
+ "id": "pseudoangiomatous_stromal_hyperplasia",
+ "name": "Pseudoangiomatous stromal hyperplasia",
+ "aliases": [
+  "PASH",
+  "Pseudoangiomatous hyperplasia of mammary stroma"
+ ],
+ "class": "non_infective",
+ "system": "Breast",
+ "specialty": "Breast surgery / Pathology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "WHO Classification of Tumours: Breast Tumours",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A benign myofibroblastic proliferation of breast stroma in which slit-like spaces mimic the vascular channels of a vascular lesion.",
+   "Often an incidental microscopic finding, but can form a discrete palpable or mammographic mass (tumoural PASH).",
+   "Typically affects premenopausal women or those exposed to hormones, reflecting the hormone responsiveness of the myofibroblasts.",
+   "Also recognised as a common stromal component underlying gynaecomastia in men.",
+   "Imaging shows a well-circumscribed, non-calcified oval mass that can resemble a fibroadenoma.",
+   "The pseudovascular slits are lined by CD34-positive, factor VIII-negative myofibroblasts, distinguishing it from a true angiosarcoma.",
+   "Small asymptomatic lesions confirmed on biopsy can be observed; symptomatic or enlarging masses are excised.",
+   "Recurrence after excision can occur, but PASH has no metastatic potential."
   ],
-  "class": "non_infective",
-  "system": "Breast",
-  "specialty": "Breast surgery / Pathology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "WHO Classification of Tumours: Breast Tumours",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A benign myofibroblastic proliferation of breast stroma in which slit-like spaces mimic the vascular channels of a vascular lesion.",
-      "Often an incidental microscopic finding, but can form a discrete palpable or mammographic mass (tumoural PASH).",
-      "Typically affects premenopausal women or those exposed to hormones, reflecting the hormone responsiveness of the myofibroblasts.",
-      "Also recognised as a common stromal component underlying gynaecomastia in men.",
-      "Imaging shows a well-circumscribed, non-calcified oval mass that can resemble a fibroadenoma.",
-      "The pseudovascular slits are lined by CD34-positive, factor VIII-negative myofibroblasts, distinguishing it from a true angiosarcoma.",
-      "Small asymptomatic lesions confirmed on biopsy can be observed; symptomatic or enlarging masses are excised.",
-      "Recurrence after excision can occur, but PASH has no metastatic potential."
+  "pathophysiology": "Pseudoangiomatous stromal hyperplasia results from proliferation of myofibroblasts within the interlobular breast stroma, producing a network of anastomosing, empty, slit-like spaces set in dense collagenous tissue. These spaces superficially resemble vascular channels but contain no red cells and are lined by spindled myofibroblasts rather than endothelium, hence the term pseudoangiomatous. The myofibroblasts express hormone receptors, and the lesion's association with the reproductive years, hormone therapy and gynaecomastia points to hormonal, particularly progestogenic, stimulation as a driver of the proliferation. The process is entirely benign and lacks the cytological atypia, mitoses and true vascular differentiation of angiosarcoma.",
+  "additionalDifferentials": [
+   "Low-grade angiosarcoma",
+   "Fibroadenoma",
+   "Benign phyllodes tumour",
+   "Myofibroblastoma of the breast",
+   "Hamartoma",
+   "Fibromatosis",
+   "Gynaecomastia (in male patients)"
+  ],
+  "additionalInvestigations": [
+   "Breast ultrasound to characterise a circumscribed solid mass",
+   "Mammography as part of triple assessment",
+   "Core needle biopsy for histological diagnosis",
+   "Immunohistochemistry with CD34, factor VIII and hormone receptors",
+   "MRI for large or rapidly enlarging lesions",
+   "Excisional biopsy where imaging and pathology are discordant",
+   "Interval imaging follow-up of conservatively managed lesions"
+  ],
+  "redFlags": [
+   "Rapid enlargement of a stromal breast mass",
+   "Histological atypia, mitoses or true vascular channels suggesting angiosarcoma",
+   "Discordance between benign biopsy and suspicious imaging",
+   "Recurrent or multifocal rapidly growing lesions",
+   "Skin involvement or diffuse breast enlargement"
+  ],
+  "prognosis": "PASH is benign with an excellent prognosis and no malignant or metastatic potential. Local recurrence may follow incomplete excision or reflect ongoing hormonal stimulation, but does not indicate malignant behaviour.",
+  "pitfalls": [
+   "Mistaking the pseudovascular slits for the channels of a low-grade angiosarcoma",
+   "Confusing a tumoural mass with a fibroadenoma and not confirming histologically",
+   "Over-treating small incidental microscopic PASH found on biopsy for another reason",
+   "Failing to correlate benign histology with imaging, missing a discordant lesion",
+   "Overlooking PASH as the stromal basis of male gynaecomastia"
+  ],
+  "references": [
+   "WHO Classification of Tumours: Breast Tumours (current edition)",
+   "Standard textbook of breast pathology on stromal lesions",
+   "National guidance on management of benign breast masses"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Reassurance and conservative management, as the lesion is benign with no malignant or metastatic potential",
+   "Confirm the diagnosis by triple assessment with core needle biopsy and supportive immunohistochemistry (CD34-positive, factor VIII-negative myofibroblasts)",
+   "Clinical and imaging surveillance for asymptomatic incidental or small lesions",
+   "Surgical excision for large, symptomatic, rapidly enlarging or cosmetically troubling masses, or where imaging and pathology are discordant",
+   "Review and, where appropriate, modify exogenous hormone exposure that may drive the proliferation",
+   "Counsel that local recurrence after incomplete excision does not indicate malignant behaviour"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "pseudoangiomatous_stromal_hyperplasia-pathway",
+   "title": "Pseudoangiomatous stromal hyperplasia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A benign myofibroblastic proliferation of breast stroma in which slit-like spaces mimic the vascular channels of a vascular lesion.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapid enlargement of a stromal breast mass",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Breast ultrasound to characterise a circumscribed solid mass, Mammography as part of triple assessment, Core needle biopsy for histological diagnosis"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Reassurance and conservative management, as the lesion is benign with no malignant or metastatic potential"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking the pseudovascular slits for the channels of a low-grade angiosarcoma"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of pseudoangiomatous stromal hyperplasia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "pseudoangiomatous_stromal_hyperplasia-matrix",
+   "title": "Pseudoangiomatous stromal hyperplasia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A benign myofibroblastic proliferation of breast stroma in which slit-like spaces mimic the vascular channels of a vascular",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Pseudoangiomatous stromal hyperplasia results from proliferation of myofibroblasts within the interlobular breast stroma, producing a network of anastomosing, empty, slit-like spaces set in dense collagenous tissue. These spaces superficially resemble vascular channels but contain no red cells and are lined by spindled myofibroblasts rather than endothelium, hence the term pseudoangiomatous. The myofibroblasts express hormone receptors, and the lesion's association with the reproductive years, hormone therapy and gynaecomastia points to hormonal, particularly progestogenic, stimulation as a driver of the proliferation. The process is entirely benign and lacks the cytological atypia, mitoses and true vascular differentiation of angiosarcoma.",
-    "additionalDifferentials": [
-      "Low-grade angiosarcoma",
-      "Fibroadenoma",
-      "Benign phyllodes tumour",
-      "Myofibroblastoma of the breast",
-      "Hamartoma",
-      "Fibromatosis",
-      "Gynaecomastia (in male patients)"
+    [
+     "Key Investigations",
+     "Breast ultrasound to characterise a circumscribed solid mass, Mammography as part of triple assessment, Core needle biopsy for",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Breast ultrasound to characterise a circumscribed solid mass",
-      "Mammography as part of triple assessment",
-      "Core needle biopsy for histological diagnosis",
-      "Immunohistochemistry with CD34, factor VIII and hormone receptors",
-      "MRI for large or rapidly enlarging lesions",
-      "Excisional biopsy where imaging and pathology are discordant",
-      "Interval imaging follow-up of conservatively managed lesions"
+    [
+     "Primary Differentials",
+     "Low-grade angiosarcoma, Fibroadenoma, Benign phyllodes tumour",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapid enlargement of a stromal breast mass",
-      "Histological atypia, mitoses or true vascular channels suggesting angiosarcoma",
-      "Discordance between benign biopsy and suspicious imaging",
-      "Recurrent or multifocal rapidly growing lesions",
-      "Skin involvement or diffuse breast enlargement"
+    [
+     "Management Strategy",
+     "Reassurance and conservative management, as the lesion is benign with no malignant or metastatic potential",
+     "Core treatment modality"
     ],
-    "prognosis": "PASH is benign with an excellent prognosis and no malignant or metastatic potential. Local recurrence may follow incomplete excision or reflect ongoing hormonal stimulation, but does not indicate malignant behaviour.",
-    "pitfalls": [
-      "Mistaking the pseudovascular slits for the channels of a low-grade angiosarcoma",
-      "Confusing a tumoural mass with a fibroadenoma and not confirming histologically",
-      "Over-treating small incidental microscopic PASH found on biopsy for another reason",
-      "Failing to correlate benign histology with imaging, missing a discordant lesion",
-      "Overlooking PASH as the stromal basis of male gynaecomastia"
-    ],
-    "references": [
-      "WHO Classification of Tumours: Breast Tumours (current edition)",
-      "Standard textbook of breast pathology on stromal lesions",
-      "National guidance on management of benign breast masses"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Reassurance and conservative management, as the lesion is benign with no malignant or metastatic potential",
-      "Confirm the diagnosis by triple assessment with core needle biopsy and supportive immunohistochemistry (CD34-positive, factor VIII-negative myofibroblasts)",
-      "Clinical and imaging surveillance for asymptomatic incidental or small lesions",
-      "Surgical excision for large, symptomatic, rapidly enlarging or cosmetically troubling masses, or where imaging and pathology are discordant",
-      "Review and, where appropriate, modify exogenous hormone exposure that may drive the proliferation",
-      "Counsel that local recurrence after incomplete excision does not indicate malignant behaviour"
+    [
+     "Clinical Pitfall",
+     "Mistaking the pseudovascular slits for the channels of a low-grade angiosarcoma",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for pseudoangiomatous stromal hyperplasia."
+  }
+ ]
 }

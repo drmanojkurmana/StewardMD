@@ -145,5 +145,77 @@
       "importedAt": "2026-06-29T13:39:19Z",
       "contentHash": "hb5e2505a"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "hyperthyroidism-dx-algo",
+      "title": "Thyrotoxicosis (uncomplicated): Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Thyrotoxicosis (state of thyroid hormone excess) is NOT synonymous with hyperthyroidism (excessive thyroid gland function); destructive thyroiditis and ingestion of exogenous hormone cause thyrotoxicosis without true hyperthyroidism",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Optic nerve compression at the orbital apex -> papilloedema, peripheral field defects and permanent vision loss; sight-threatening ophthalmopathy is an emergency (p.3034, 3036)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: TRAb (TSH-receptor antibodies) - confirms Graves' when goitre/ophthalmopathy absent; useful for monitoring pregnant Graves' patients (high TSI crosses placenta -> neonatal thyrotoxicosis) (p.3033-3034), Radionuclide"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Subclinical hyperthyroidism = low TSH with normal free T3 and free T4; treatment is increasingly recommended in the elderly to reduce atrial fibrillation and bone-loss risk (p.3034, 3041). Graves' ophthalmopathy severity"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Do NOT assume thyrotoxicosis means hyperthyroidism - low radionuclide uptake indicates destructive thyroiditis, iodine excess or factitia rather than gland overactivity, which changes management (p.3032, 3037)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for thyrotoxicosis (uncomplicated)."
+    }
+  ],
+  "tables": [
+    {
+      "id": "hyperthyroidism-matrix",
+      "title": "Thyrotoxicosis (uncomplicated): Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Thyrotoxicosis (state of thyroid hormone excess) is NOT synonymous with hyperthyroidism (excessive thyroid gland function);",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "TRAb (TSH-receptor antibodies) - confirms Graves' when goitre/ophthalmopathy absent; useful for monitoring pregnant Graves'",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Graves' disease (60-80% of thyrotoxicosis) (p.3032), Toxic multinodular goitre (p.3032), Toxic adenoma / hyperfunctioning",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Optic nerve compression at the orbital apex -> papilloedema, peripheral field defects and permanent vision loss;",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Do NOT assume thyrotoxicosis means hyperthyroidism - low radionuclide uptake indicates destructive thyroiditis, iodine excess or",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for thyrotoxicosis (uncomplicated)."
+    }
+  ]
 }

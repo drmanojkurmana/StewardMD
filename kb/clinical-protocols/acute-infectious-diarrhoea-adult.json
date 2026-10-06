@@ -5,7 +5,18 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Outpatient, emergency department, ward",
- "aliases": ["acute gastroenteritis", "AGE", "acute diarrhoea", "dysentery", "bloody diarrhoea", "cholera", "shigellosis", "travellers diarrhoea", "ORS", "food poisoning"],
+ "aliases": [
+  "acute gastroenteritis",
+  "AGE",
+  "acute diarrhoea",
+  "dysentery",
+  "bloody diarrhoea",
+  "cholera",
+  "shigellosis",
+  "travellers diarrhoea",
+  "ORS",
+  "food poisoning"
+ ],
  "summary": "Rehydrate first (ORS, or Ringer lactate for severe dehydration). Most watery diarrhoea needs no stool test or antibiotic; treat cholera with dehydration, dysentery, severe travellers' diarrhoea and sepsis, preferring azithromycin where fluoroquinolone resistance is common.",
  "sections": [
   {
@@ -92,20 +103,147 @@
   }
  ],
  "drugs": [
-  { "name": "Oral rehydration solution (reduced osmolarity)", "dose": "About 75 mL/kg orally over 4 hours for some dehydration, then replace ongoing losses", "notes": "Sodium 75 mEq/L, glucose 75 mmol/L." },
-  { "name": "Ringer lactate", "dose": "100 mL/kg IV: 30 mL/kg in 30 minutes, then 70 mL/kg over 2.5 hours", "notes": "Severe dehydration or shock; slower in elderly and cardiac or renal failure." },
-  { "name": "Azithromycin", "dose": "500 mg orally once daily for 3 days, or 1 g orally single dose", "notes": "Cholera, dysentery, Campylobacter, travellers' diarrhoea. QT prolongation." },
-  { "name": "Doxycycline", "dose": "300 mg orally, single dose", "notes": "Cholera. Avoid in pregnancy." },
-  { "name": "Ciprofloxacin", "dose": "500 mg orally twice daily for 3 days", "notes": "Shigella (ICMR) only if susceptible or local resistance is low." },
-  { "name": "Ceftriaxone", "dose": "2 g IV once daily", "notes": "Shigella when oral therapy is not possible. ICMR 2022 lists a single dose; continue daily, guided by culture, if bacteraemic or severely ill." },
-  { "name": "Metronidazole", "dose": "500 mg orally three times daily for 5 days (amoebiasis); 250 mg three times daily for 5 days (giardiasis)", "notes": "Follow amoebiasis treatment with a luminal agent. Avoid alcohol." },
-  { "name": "Loperamide", "dose": "4 mg orally, then 2 mg after each loose stool, maximum 16 mg per 24 hours", "notes": "Watery diarrhoea only; not with fever or bloody stools." }
+  {
+   "name": "Oral rehydration solution (reduced osmolarity)",
+   "dose": "About 75 mL/kg orally over 4 hours for some dehydration, then replace ongoing losses",
+   "notes": "Sodium 75 mEq/L, glucose 75 mmol/L."
+  },
+  {
+   "name": "Ringer lactate",
+   "dose": "100 mL/kg IV: 30 mL/kg in 30 minutes, then 70 mL/kg over 2.5 hours",
+   "notes": "Severe dehydration or shock; slower in elderly and cardiac or renal failure."
+  },
+  {
+   "name": "Azithromycin",
+   "dose": "500 mg orally once daily for 3 days, or 1 g orally single dose",
+   "notes": "Cholera, dysentery, Campylobacter, travellers' diarrhoea. QT prolongation."
+  },
+  {
+   "name": "Doxycycline",
+   "dose": "300 mg orally, single dose",
+   "notes": "Cholera. Avoid in pregnancy."
+  },
+  {
+   "name": "Ciprofloxacin",
+   "dose": "500 mg orally twice daily for 3 days",
+   "notes": "Shigella (ICMR) only if susceptible or local resistance is low."
+  },
+  {
+   "name": "Ceftriaxone",
+   "dose": "2 g IV once daily",
+   "notes": "Shigella when oral therapy is not possible. ICMR 2022 lists a single dose; continue daily, guided by culture, if bacteraemic or severely ill."
+  },
+  {
+   "name": "Metronidazole",
+   "dose": "500 mg orally three times daily for 5 days (amoebiasis); 250 mg three times daily for 5 days (giardiasis)",
+   "notes": "Follow amoebiasis treatment with a luminal agent. Avoid alcohol."
+  },
+  {
+   "name": "Loperamide",
+   "dose": "4 mg orally, then 2 mg after each loose stool, maximum 16 mg per 24 hours",
+   "notes": "Watery diarrhoea only; not with fever or bloody stools."
+  }
  ],
  "sources": [
-  { "org": "IDSA", "title": "2017 IDSA clinical practice guidelines for the diagnosis and management of infectious diarrhea", "year": 2017, "url": "https://academic.oup.com/cid/article/65/12/e45/4557073" },
-  { "org": "ICMR", "title": "Treatment Guidelines for Antimicrobial Use in Common Syndromes 2022: acute diarrhoea treatment", "year": 2022, "url": "https://amrtg.icmr.org.in/chapter5-acute-diarrhea-treatment.html" },
-  { "org": "CDC", "title": "CDC Yellow Book 2026: travelers' diarrhea", "year": 2025, "url": "https://www.cdc.gov/yellow-book/hcp/preparing-international-travelers/travelers-diarrhea.html" },
-  { "org": "WHO", "title": "Cholera fact sheet", "year": 2024, "url": "https://www.who.int/news-room/fact-sheets/detail/cholera" }
+  {
+   "org": "IDSA",
+   "title": "2017 IDSA clinical practice guidelines for the diagnosis and management of infectious diarrhea",
+   "year": 2017,
+   "url": "https://academic.oup.com/cid/article/65/12/e45/4557073"
+  },
+  {
+   "org": "ICMR",
+   "title": "Treatment Guidelines for Antimicrobial Use in Common Syndromes 2022: acute diarrhoea treatment",
+   "year": 2022,
+   "url": "https://amrtg.icmr.org.in/chapter5-acute-diarrhea-treatment.html"
+  },
+  {
+   "org": "CDC",
+   "title": "CDC Yellow Book 2026: travelers' diarrhea",
+   "year": 2025,
+   "url": "https://www.cdc.gov/yellow-book/hcp/preparing-international-travelers/travelers-diarrhea.html"
+  },
+  {
+   "org": "WHO",
+   "title": "Cholera fact sheet",
+   "year": 2024,
+   "url": "https://www.who.int/news-room/fact-sheets/detail/cholera"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "acute-infectious-diarrhoea-adult-pathway",
+   "title": "Acute infectious diarrhoea and dysentery (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Acute diarrhoea: 3 or more loose stools in 24 hours for less than 14 days. Separate watery diarrhoea from dysentery (visible blood or mucus, fever, tenesmus).",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Some dehydration: reduced osmolarity ORS (sodium 75 mEq/L, glucose 75 mmol/L), about 75 mL/kg over 4 hours, then replace ongoing losses.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Most acute watery diarrhoea needs no stool test."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Loperamide 4 mg orally, then 2 mg after each loose stool (maximum 16 mg in 24 hours), for watery diarrhoea in immunocompetent adults only. Do not use with fever, bloody stools or suspected C. difficile."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Input and output chart, urine output, pulse and blood pressure; reassess hydration every 1 to 2 hours during IV rehydration."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for acute infectious diarrhoea and dysentery (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "acute-infectious-diarrhoea-adult-summary-matrix",
+   "title": "Acute infectious diarrhoea and dysentery (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Acute diarrhoea: 3 or more loose stools in 24 hours for less than 14 days. Separate watery diarrhoea from dysentery (visible blood or",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Some dehydration: reduced osmolarity ORS (sodium 75 mEq/L, glucose 75 mmol/L), about 75 mL/kg over 4 hours, then replace ongoing losses.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Most acute watery diarrhoea needs no stool test.",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Oral rehydration solution (reduced osmolarity): About 75 mL/kg orally over 4 hours for some dehydration, then replace ongoing losses",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Routine antibiotics, or fixed-dose antibiotic-antiprotozoal combinations such as ofloxacin-ornidazole, for watery diarrhoea.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for acute infectious diarrhoea and dysentery (adult)."
+  }
+ ]
 }

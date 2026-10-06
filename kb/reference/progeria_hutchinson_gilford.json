@@ -1,80 +1,152 @@
 {
-  "id": "progeria_hutchinson_gilford",
-  "name": "Hutchinson-Gilford progeria syndrome",
-  "aliases": [
-    "HGPS",
-    "progeria",
-    "LMNA",
-    "progerin"
+ "id": "progeria_hutchinson_gilford",
+ "name": "Hutchinson-Gilford progeria syndrome",
+ "aliases": [
+  "HGPS",
+  "progeria",
+  "LMNA",
+  "progerin"
+ ],
+ "class": "non_infective",
+ "system": "Genetics / Immunology",
+ "specialty": "Clinical Genetics / Immunology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "OMIM / GeneReviews (NCBI) and standard clinical genetics texts",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Sporadic, almost always de novo dominant disorder caused by a recurrent LMNA variant that generates the toxic truncated lamin A protein progerin",
+   "Infants appear normal at birth but develop failure to thrive and characteristic features within the first one to two years",
+   "Distinctive appearance includes alopecia, prominent scalp veins, micrognathia, a beaked nose, prominent eyes and loss of subcutaneous fat",
+   "Skeletal changes include delayed dentition, coxa valga, a horse-riding stance and progressive joint contractures with distal resorption (acro-osteolysis)",
+   "Intelligence is preserved, distinguishing it from many other progeroid conditions",
+   "Progressive severe atherosclerosis leads to myocardial infarction and stroke, the principal causes of death",
+   "Skin becomes sclerodermatous and mottled with pigmentary change over the trunk",
+   "Diagnosis is clinical and confirmed by molecular testing for the characteristic LMNA variant"
   ],
-  "class": "non_infective",
-  "system": "Genetics / Immunology",
-  "specialty": "Clinical Genetics / Immunology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "OMIM / GeneReviews (NCBI) and standard clinical genetics texts",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Sporadic, almost always de novo dominant disorder caused by a recurrent LMNA variant that generates the toxic truncated lamin A protein progerin",
-      "Infants appear normal at birth but develop failure to thrive and characteristic features within the first one to two years",
-      "Distinctive appearance includes alopecia, prominent scalp veins, micrognathia, a beaked nose, prominent eyes and loss of subcutaneous fat",
-      "Skeletal changes include delayed dentition, coxa valga, a horse-riding stance and progressive joint contractures with distal resorption (acro-osteolysis)",
-      "Intelligence is preserved, distinguishing it from many other progeroid conditions",
-      "Progressive severe atherosclerosis leads to myocardial infarction and stroke, the principal causes of death",
-      "Skin becomes sclerodermatous and mottled with pigmentary change over the trunk",
-      "Diagnosis is clinical and confirmed by molecular testing for the characteristic LMNA variant"
+  "pathophysiology": "Hutchinson-Gilford progeria syndrome is usually caused by a de novo point variant in LMNA that activates a cryptic splice site, producing progerin, a truncated lamin A that cannot be properly processed and remains farnesylated. Accumulation of progerin distorts the nuclear envelope, destabilises the nuclear lamina and disrupts chromatin organisation, DNA repair and mechanotransduction. This drives premature cellular senescence and, in vascular smooth muscle, accelerated atherosclerosis that dominates the clinical course.",
+  "additionalDifferentials": [
+   "Werner syndrome (adult progeria)",
+   "Mandibuloacral dysplasia",
+   "Wiedemann-Rautenstrauch (neonatal progeroid) syndrome",
+   "Restrictive dermopathy and other laminopathies",
+   "Cockayne syndrome",
+   "Severe generalised lipodystrophy"
+  ],
+  "additionalInvestigations": [
+   "Targeted molecular testing for the recurrent LMNA variant",
+   "Echocardiography and vascular imaging for atherosclerotic and cardiac disease",
+   "Lipid profile and cardiovascular risk assessment",
+   "Skeletal survey for acro-osteolysis, coxa valga and joint contractures",
+   "Dental review for delayed and crowded dentition",
+   "Growth and nutritional monitoring"
+  ],
+  "redFlags": [
+   "Chest pain, syncope or other features of myocardial ischaemia",
+   "Focal neurological signs suggesting transient ischaemic attack or stroke",
+   "Rapidly worsening failure to thrive",
+   "Severe joint contractures compromising mobility and function"
+  ],
+  "prognosis": "The condition is progressive and life-limiting, with death typically in the second decade, most often from myocardial infarction or stroke secondary to accelerated atherosclerosis. Multidisciplinary supportive care and cardiovascular risk management are central, and disease-modifying therapy targeting protein farnesylation has been developed.",
+  "pitfalls": [
+   "Confusing preserved intelligence with other progeroid syndromes that feature cognitive impairment",
+   "Underestimating cardiovascular risk in a young child and delaying cardiology involvement",
+   "Attributing early features to a non-syndromic failure to thrive",
+   "Overlooking the sclerodermatous skin as a diagnostic clue"
+  ],
+  "references": [
+   "GeneReviews (NCBI): Hutchinson-Gilford progeria syndrome",
+   "OMIM: Hutchinson-Gilford progeria syndrome"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Disease-modifying therapy with the farnesyltransferase inhibitor lonafarnib, which reduces progerin toxicity and improves survival",
+   "Cardiovascular risk reduction with antiplatelet therapy and a statin, and active management of ischaemic heart disease and cerebrovascular events driven by accelerated atherosclerosis",
+   "Nutritional support for failure to thrive with frequent high-energy feeds and dietetic input",
+   "Physiotherapy and occupational therapy for joint contractures, with orthopaedic and podiatry care for coxa valga and other skeletal problems",
+   "Regular cardiology and vascular surveillance with echocardiography and vascular imaging, plus dental review for delayed and crowded dentition",
+   "Skin care, hydration and avoidance of trauma as part of general multidisciplinary supportive care",
+   "Genetic counselling for the family, noting most cases are sporadic de novo LMNA variants"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "progeria_hutchinson_gilford-pathway",
+   "title": "Hutchinson-Gilford progeria syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Sporadic, almost always de novo dominant disorder caused by a recurrent LMNA variant that generates the toxic truncated lamin A protein progerin",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Chest pain, syncope or other features of myocardial ischaemia",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Targeted molecular testing for the recurrent LMNA variant, Echocardiography and vascular imaging for atherosclerotic and cardiac disease, Lipid profile and cardiovascular risk assessment"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Disease-modifying therapy with the farnesyltransferase inhibitor lonafarnib, which reduces progerin toxicity and improves survival"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing preserved intelligence with other progeroid syndromes that feature cognitive impairment"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of hutchinson-gilford progeria syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "progeria_hutchinson_gilford-matrix",
+   "title": "Hutchinson-Gilford progeria syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Sporadic, almost always de novo dominant disorder caused by a recurrent LMNA variant that generates the toxic truncated lamin A",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Hutchinson-Gilford progeria syndrome is usually caused by a de novo point variant in LMNA that activates a cryptic splice site, producing progerin, a truncated lamin A that cannot be properly processed and remains farnesylated. Accumulation of progerin distorts the nuclear envelope, destabilises the nuclear lamina and disrupts chromatin organisation, DNA repair and mechanotransduction. This drives premature cellular senescence and, in vascular smooth muscle, accelerated atherosclerosis that dominates the clinical course.",
-    "additionalDifferentials": [
-      "Werner syndrome (adult progeria)",
-      "Mandibuloacral dysplasia",
-      "Wiedemann-Rautenstrauch (neonatal progeroid) syndrome",
-      "Restrictive dermopathy and other laminopathies",
-      "Cockayne syndrome",
-      "Severe generalised lipodystrophy"
+    [
+     "Key Investigations",
+     "Targeted molecular testing for the recurrent LMNA variant, Echocardiography and vascular imaging for atherosclerotic and cardiac",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Targeted molecular testing for the recurrent LMNA variant",
-      "Echocardiography and vascular imaging for atherosclerotic and cardiac disease",
-      "Lipid profile and cardiovascular risk assessment",
-      "Skeletal survey for acro-osteolysis, coxa valga and joint contractures",
-      "Dental review for delayed and crowded dentition",
-      "Growth and nutritional monitoring"
+    [
+     "Primary Differentials",
+     "Werner syndrome (adult progeria), Mandibuloacral dysplasia, Wiedemann-Rautenstrauch (neonatal progeroid) syndrome",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Chest pain, syncope or other features of myocardial ischaemia",
-      "Focal neurological signs suggesting transient ischaemic attack or stroke",
-      "Rapidly worsening failure to thrive",
-      "Severe joint contractures compromising mobility and function"
+    [
+     "Management Strategy",
+     "Disease-modifying therapy with the farnesyltransferase inhibitor lonafarnib, which reduces progerin toxicity and improves survival",
+     "Core treatment modality"
     ],
-    "prognosis": "The condition is progressive and life-limiting, with death typically in the second decade, most often from myocardial infarction or stroke secondary to accelerated atherosclerosis. Multidisciplinary supportive care and cardiovascular risk management are central, and disease-modifying therapy targeting protein farnesylation has been developed.",
-    "pitfalls": [
-      "Confusing preserved intelligence with other progeroid syndromes that feature cognitive impairment",
-      "Underestimating cardiovascular risk in a young child and delaying cardiology involvement",
-      "Attributing early features to a non-syndromic failure to thrive",
-      "Overlooking the sclerodermatous skin as a diagnostic clue"
-    ],
-    "references": [
-      "GeneReviews (NCBI): Hutchinson-Gilford progeria syndrome",
-      "OMIM: Hutchinson-Gilford progeria syndrome"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Disease-modifying therapy with the farnesyltransferase inhibitor lonafarnib, which reduces progerin toxicity and improves survival",
-      "Cardiovascular risk reduction with antiplatelet therapy and a statin, and active management of ischaemic heart disease and cerebrovascular events driven by accelerated atherosclerosis",
-      "Nutritional support for failure to thrive with frequent high-energy feeds and dietetic input",
-      "Physiotherapy and occupational therapy for joint contractures, with orthopaedic and podiatry care for coxa valga and other skeletal problems",
-      "Regular cardiology and vascular surveillance with echocardiography and vascular imaging, plus dental review for delayed and crowded dentition",
-      "Skin care, hydration and avoidance of trauma as part of general multidisciplinary supportive care",
-      "Genetic counselling for the family, noting most cases are sporadic de novo LMNA variants"
+    [
+     "Clinical Pitfall",
+     "Confusing preserved intelligence with other progeroid syndromes that feature cognitive impairment",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for hutchinson-gilford progeria syndrome."
+  }
+ ]
 }

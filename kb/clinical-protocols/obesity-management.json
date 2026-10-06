@@ -148,5 +148,77 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-25"
- }
+ },
+ "algorithms": [
+  {
+   "id": "obesity-management-pathway",
+   "title": "Obesity management (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "BMI (NICE): overweight 25 to 29.9, obesity class 1 30 to 34.9, class 2 35 to 39.9, class 3 40 kg/m2 or more. South Asian, Chinese, other Asian, Middle Eastern, Black African or African-Caribbean adults: overweight 23 to 27.4, obesity 27.5",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Measure waist-to-height ratio when BMI is below 35: 0.4 to 0.49 healthy, 0.5 to 0.59 increased and 0.6 or more high central adiposity. Advise keeping the waist below half the height.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Interpret BMI with caution with high muscle mass and over 65. AACE 2025 treats obesity as adiposity-based chronic disease: diagnose by anthropometry plus complications and set treatment goals by complications, not BMI alone."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "NICE: refer for specialist assessment at BMI 40 kg/m2 or more, or 35 to 39.9 with a condition likely to improve (type 2 diabetes, hypertension, cardiovascular disease, MASLD, obstructive sleep apnoea, idiopathic intracranial hypertension),"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Measure weight and waist at least yearly, and every 3 months during active treatment (ADA)."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for obesity management (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "obesity-management-summary-matrix",
+   "title": "Obesity management (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "BMI (NICE): overweight 25 to 29.9, obesity class 1 30 to 34.9, class 2 35 to 39.9, class 3 40 kg/m2 or more. South Asian, Chinese, other",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "NICE: refer for specialist assessment at BMI 40 kg/m2 or more, or 35 to 39.9 with a condition likely to improve (type 2 diabetes,",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Semaglutide (weight management): 0.25 mg SC once weekly for 4 weeks, then 0.5 mg, 1 mg and 1.7 mg each for 4 weeks, then 2.4 mg once weekly",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Using BMI 30 as the obesity cut-off in South Asian patients, whose cardiometabolic risk starts at lower BMI.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for obesity management (adult)."
+  }
+ ]
 }

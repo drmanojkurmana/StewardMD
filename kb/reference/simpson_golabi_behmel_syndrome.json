@@ -1,77 +1,149 @@
 {
-  "id": "simpson_golabi_behmel_syndrome",
-  "name": "Simpson-Golabi-Behmel syndrome",
-  "aliases": [
-    "SGBS",
-    "GPC3-related overgrowth",
-    "Simpson dysmorphia syndrome"
+ "id": "simpson_golabi_behmel_syndrome",
+ "name": "Simpson-Golabi-Behmel syndrome",
+ "aliases": [
+  "SGBS",
+  "GPC3-related overgrowth",
+  "Simpson dysmorphia syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Genetics / Dysmorphology",
+ "specialty": "Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Smith's Recognizable Patterns of Human Malformation",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "X-linked overgrowth syndrome affecting predominantly males, with pre- and postnatal macrosomia and organomegaly",
+   "Coarse facial features include a broad face, hypertelorism, a broad nasal bridge, macrostomia, and a midline groove or furrow of the tongue and lower lip",
+   "Associated malformations include congenital heart disease, diaphragmatic hernia, polydactyly, supernumerary nipples, and genitourinary anomalies",
+   "Caused by loss-of-function variants or deletions in GPC3 (with GPC4 involvement in some) on the X chromosome",
+   "X-linked recessive inheritance, so carrier females are usually mildly affected or unaffected while males are more severely affected",
+   "Carries an increased risk of embryonal tumours, particularly Wilms tumour and hepatoblastoma, warranting tumour surveillance in childhood",
+   "Overlaps clinically with Beckwith-Wiedemann syndrome but is distinguished by X-linked inheritance and the specific facial and skeletal features"
   ],
-  "class": "non_infective",
-  "system": "Genetics / Dysmorphology",
-  "specialty": "Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Smith's Recognizable Patterns of Human Malformation",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "X-linked overgrowth syndrome affecting predominantly males, with pre- and postnatal macrosomia and organomegaly",
-      "Coarse facial features include a broad face, hypertelorism, a broad nasal bridge, macrostomia, and a midline groove or furrow of the tongue and lower lip",
-      "Associated malformations include congenital heart disease, diaphragmatic hernia, polydactyly, supernumerary nipples, and genitourinary anomalies",
-      "Caused by loss-of-function variants or deletions in GPC3 (with GPC4 involvement in some) on the X chromosome",
-      "X-linked recessive inheritance, so carrier females are usually mildly affected or unaffected while males are more severely affected",
-      "Carries an increased risk of embryonal tumours, particularly Wilms tumour and hepatoblastoma, warranting tumour surveillance in childhood",
-      "Overlaps clinically with Beckwith-Wiedemann syndrome but is distinguished by X-linked inheritance and the specific facial and skeletal features"
+  "pathophysiology": "Simpson-Golabi-Behmel syndrome arises from loss of function of GPC3, an X-linked gene encoding glypican-3, a cell-surface heparan sulfate proteoglycan that modulates growth factor signalling and helps restrain cell proliferation during development, in part by regulating hedgehog and IGF-related pathways. Absent or reduced glypican-3 removes this brake on tissue growth, producing generalised overgrowth, organomegaly, and a predisposition to embryonal tumours, while disturbed developmental signalling accounts for the structural malformations and characteristic facies.",
+  "additionalDifferentials": [
+   "Beckwith-Wiedemann syndrome",
+   "Sotos syndrome",
+   "Weaver syndrome",
+   "Perlman syndrome",
+   "PTEN hamartoma tumour syndrome",
+   "Bannayan-Riley-Ruvalcaba syndrome"
+  ],
+  "additionalInvestigations": [
+   "Molecular testing for GPC3 sequence variants and deletions, with GPC4 analysis and overgrowth panel where indicated",
+   "Chromosomal microarray to detect Xq26 deletions",
+   "Abdominal ultrasound as part of embryonal tumour surveillance",
+   "Serum alpha-fetoprotein monitoring for hepatoblastoma surveillance in early childhood",
+   "Echocardiography and renal tract imaging for structural anomalies",
+   "Skeletal survey and evaluation for diaphragmatic hernia and polydactyly"
+  ],
+  "redFlags": [
+   "New abdominal mass, haematuria, or rising alpha-fetoprotein suggesting Wilms tumour or hepatoblastoma",
+   "Respiratory distress from diaphragmatic hernia in the neonatal period",
+   "Cardiac decompensation from structural heart disease",
+   "Neonatal hypoglycaemia or arrhythmia requiring urgent management"
+  ],
+  "prognosis": "Prognosis depends on the severity of malformations and tumour occurrence; severe cases may present with neonatal complications, while milder cases have a favourable outlook with appropriate surveillance. Early detection of embryonal tumours through structured screening improves outcomes.",
+  "pitfalls": [
+   "Confusing the syndrome with Beckwith-Wiedemann and thereby overlooking X-linked inheritance and carrier risk to relatives",
+   "Omitting embryonal tumour surveillance in a child with overgrowth and organomegaly",
+   "Underestimating disease in carrier females who may show subtle features",
+   "Missing a diaphragmatic hernia or cardiac lesion in the newborn assessment"
+  ],
+  "references": [
+   "Smith's Recognizable Patterns of Human Malformation",
+   "GeneReviews: Simpson-Golabi-Behmel Syndrome Type 1"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Structured embryonal tumour surveillance in childhood with regular abdominal ultrasound for Wilms tumour and hepatoblastoma and serial serum alpha-fetoprotein monitoring",
+   "Surgical and medical correction of associated malformations including congenital heart disease, diaphragmatic hernia, polydactyly and genitourinary anomalies",
+   "Neonatal support for macrosomia-related complications, airway and feeding difficulties and hypoglycaemia",
+   "Developmental support and monitoring with appropriate therapies",
+   "Coordinated care through clinical genetics, cardiology, paediatric surgery, nephrology and oncology",
+   "Genetic counselling for X-linked GPC3 disease, with carrier testing of females and family screening"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "simpson_golabi_behmel_syndrome-pathway",
+   "title": "Simpson-Golabi-Behmel syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "X-linked overgrowth syndrome affecting predominantly males, with pre- and postnatal macrosomia and organomegaly",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: New abdominal mass, haematuria, or rising alpha-fetoprotein suggesting Wilms tumour or hepatoblastoma",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Molecular testing for GPC3 sequence variants and deletions, with GPC4 analysis and overgrowth panel where indicated, Chromosomal microarray to detect Xq26 deletions, Abdominal ultrasound as part of embryonal tumour"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Structured embryonal tumour surveillance in childhood with regular abdominal ultrasound for Wilms tumour and hepatoblastoma and serial serum alpha-fetoprotein monitoring"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing the syndrome with Beckwith-Wiedemann and thereby overlooking X-linked inheritance and carrier risk to relatives"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of simpson-golabi-behmel syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "simpson_golabi_behmel_syndrome-matrix",
+   "title": "Simpson-Golabi-Behmel syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "X-linked overgrowth syndrome affecting predominantly males, with pre- and postnatal macrosomia and organomegaly",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Simpson-Golabi-Behmel syndrome arises from loss of function of GPC3, an X-linked gene encoding glypican-3, a cell-surface heparan sulfate proteoglycan that modulates growth factor signalling and helps restrain cell proliferation during development, in part by regulating hedgehog and IGF-related pathways. Absent or reduced glypican-3 removes this brake on tissue growth, producing generalised overgrowth, organomegaly, and a predisposition to embryonal tumours, while disturbed developmental signalling accounts for the structural malformations and characteristic facies.",
-    "additionalDifferentials": [
-      "Beckwith-Wiedemann syndrome",
-      "Sotos syndrome",
-      "Weaver syndrome",
-      "Perlman syndrome",
-      "PTEN hamartoma tumour syndrome",
-      "Bannayan-Riley-Ruvalcaba syndrome"
+    [
+     "Key Investigations",
+     "Molecular testing for GPC3 sequence variants and deletions, with GPC4 analysis and overgrowth panel where indicated, Chromosomal",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Molecular testing for GPC3 sequence variants and deletions, with GPC4 analysis and overgrowth panel where indicated",
-      "Chromosomal microarray to detect Xq26 deletions",
-      "Abdominal ultrasound as part of embryonal tumour surveillance",
-      "Serum alpha-fetoprotein monitoring for hepatoblastoma surveillance in early childhood",
-      "Echocardiography and renal tract imaging for structural anomalies",
-      "Skeletal survey and evaluation for diaphragmatic hernia and polydactyly"
+    [
+     "Primary Differentials",
+     "Beckwith-Wiedemann syndrome, Sotos syndrome, Weaver syndrome",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "New abdominal mass, haematuria, or rising alpha-fetoprotein suggesting Wilms tumour or hepatoblastoma",
-      "Respiratory distress from diaphragmatic hernia in the neonatal period",
-      "Cardiac decompensation from structural heart disease",
-      "Neonatal hypoglycaemia or arrhythmia requiring urgent management"
+    [
+     "Management Strategy",
+     "Structured embryonal tumour surveillance in childhood with regular abdominal ultrasound for Wilms tumour and hepatoblastoma and",
+     "Core treatment modality"
     ],
-    "prognosis": "Prognosis depends on the severity of malformations and tumour occurrence; severe cases may present with neonatal complications, while milder cases have a favourable outlook with appropriate surveillance. Early detection of embryonal tumours through structured screening improves outcomes.",
-    "pitfalls": [
-      "Confusing the syndrome with Beckwith-Wiedemann and thereby overlooking X-linked inheritance and carrier risk to relatives",
-      "Omitting embryonal tumour surveillance in a child with overgrowth and organomegaly",
-      "Underestimating disease in carrier females who may show subtle features",
-      "Missing a diaphragmatic hernia or cardiac lesion in the newborn assessment"
-    ],
-    "references": [
-      "Smith's Recognizable Patterns of Human Malformation",
-      "GeneReviews: Simpson-Golabi-Behmel Syndrome Type 1"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Structured embryonal tumour surveillance in childhood with regular abdominal ultrasound for Wilms tumour and hepatoblastoma and serial serum alpha-fetoprotein monitoring",
-      "Surgical and medical correction of associated malformations including congenital heart disease, diaphragmatic hernia, polydactyly and genitourinary anomalies",
-      "Neonatal support for macrosomia-related complications, airway and feeding difficulties and hypoglycaemia",
-      "Developmental support and monitoring with appropriate therapies",
-      "Coordinated care through clinical genetics, cardiology, paediatric surgery, nephrology and oncology",
-      "Genetic counselling for X-linked GPC3 disease, with carrier testing of females and family screening"
+    [
+     "Clinical Pitfall",
+     "Confusing the syndrome with Beckwith-Wiedemann and thereby overlooking X-linked inheritance and carrier risk to relatives",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for simpson-golabi-behmel syndrome."
+  }
+ ]
 }

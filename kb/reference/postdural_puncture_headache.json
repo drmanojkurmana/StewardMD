@@ -1,78 +1,150 @@
 {
-  "id": "postdural_puncture_headache",
-  "name": "Postdural puncture headache",
-  "aliases": [
-    "PDPH",
-    "post-lumbar puncture headache",
-    "low-pressure headache"
+ "id": "postdural_puncture_headache",
+ "name": "Postdural puncture headache",
+ "aliases": [
+  "PDPH",
+  "post-lumbar puncture headache",
+  "low-pressure headache"
+ ],
+ "class": "non_infective",
+ "system": "Anaesthesia / Perioperative",
+ "specialty": "Anaesthesiology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Miller's Anesthesia / standard perioperative references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A characteristically postural headache that worsens on sitting or standing and improves on lying flat, developing within a few days of dural puncture",
+   "Typically frontal or occipital and may be accompanied by neck stiffness, photophobia, nausea, tinnitus, or hearing changes",
+   "Risk is higher with larger-gauge and cutting (rather than pencil-point) needles, younger age, female sex, and after accidental dural puncture during epidural placement",
+   "Diagnosis is largely clinical, but a headache lacking postural features or with neurological signs should prompt evaluation for other causes",
+   "Initial management is conservative with rest as needed, hydration, simple analgesia, and reassurance, as many cases resolve spontaneously",
+   "An epidural blood patch is the definitive treatment for severe or persistent headache and is generally highly effective",
+   "Caffeine and other pharmacological measures have limited and temporary benefit compared with a blood patch",
+   "Rare but serious complications of intracranial hypotension include subdural haematoma and cerebral venous sinus thrombosis, so atypical or worsening features require imaging"
   ],
-  "class": "non_infective",
-  "system": "Anaesthesia / Perioperative",
-  "specialty": "Anaesthesiology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Miller's Anesthesia / standard perioperative references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A characteristically postural headache that worsens on sitting or standing and improves on lying flat, developing within a few days of dural puncture",
-      "Typically frontal or occipital and may be accompanied by neck stiffness, photophobia, nausea, tinnitus, or hearing changes",
-      "Risk is higher with larger-gauge and cutting (rather than pencil-point) needles, younger age, female sex, and after accidental dural puncture during epidural placement",
-      "Diagnosis is largely clinical, but a headache lacking postural features or with neurological signs should prompt evaluation for other causes",
-      "Initial management is conservative with rest as needed, hydration, simple analgesia, and reassurance, as many cases resolve spontaneously",
-      "An epidural blood patch is the definitive treatment for severe or persistent headache and is generally highly effective",
-      "Caffeine and other pharmacological measures have limited and temporary benefit compared with a blood patch",
-      "Rare but serious complications of intracranial hypotension include subdural haematoma and cerebral venous sinus thrombosis, so atypical or worsening features require imaging"
+  "pathophysiology": "A persistent hole in the dura allows cerebrospinal fluid to leak into the epidural space faster than it is produced, lowering cerebrospinal fluid volume and pressure. In the upright position, reduced buoyant support causes traction on pain-sensitive intracranial structures such as the meninges and bridging veins, and compensatory cerebral vasodilation may contribute, producing the postural headache. Larger dural defects leak more and cause more severe symptoms. An epidural blood patch works by sealing the defect and raising epidural and cerebrospinal fluid pressure.",
+  "additionalDifferentials": [
+   "Migraine or tension-type headache",
+   "Meningitis (infective) or chemical meningism",
+   "Cerebral venous sinus thrombosis",
+   "Subdural haematoma",
+   "Pre-eclampsia or eclampsia in the obstetric patient",
+   "Pneumocephalus or caffeine-withdrawal headache"
+  ],
+  "additionalInvestigations": [
+   "Clinical assessment focusing on the postural nature of the headache",
+   "Neurological examination to exclude focal signs",
+   "Brain imaging (CT or MRI) when features are atypical, worsening, or accompanied by neurological signs",
+   "Investigations for pre-eclampsia in the postpartum patient when relevant",
+   "Assessment for infection if fever or meningism is present"
+  ],
+  "redFlags": [
+   "Loss of the postural component or a headache that becomes constant, suggesting an alternative or serious cause",
+   "Focal neurological deficit, seizure, or reduced consciousness suggesting subdural haematoma or venous thrombosis",
+   "Fever, neck stiffness, or photophobia raising concern for meningitis",
+   "Sudden thunderclap onset or features suggesting subarachnoid haemorrhage"
+  ],
+  "prognosis": "Most postdural puncture headaches resolve within days to weeks with conservative care, and a blood patch relieves the majority of severe cases; rare progression to intracranial haemorrhage or venous thrombosis can cause serious morbidity.",
+  "pitfalls": [
+   "Assuming every post-procedure headache is a postdural puncture headache and missing a dangerous cause",
+   "Delaying an effective blood patch in severe, disabling headache",
+   "Overlooking evolving neurological signs that indicate subdural haematoma or venous sinus thrombosis",
+   "Failing to consider pre-eclampsia in a postpartum woman with headache",
+   "Relying on caffeine or bed rest alone for persistent severe symptoms"
+  ],
+  "references": [
+   "Miller's Anesthesia"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Offer conservative first-line care with rest as needed, oral or intravenous rehydration, and simple analgesia such as paracetamol and non-steroidal anti-inflammatory drugs",
+   "Add symptomatic measures including antiemetics for nausea and caffeine as an adjunct to counter compensatory cerebral vasodilatation",
+   "Reassure the patient that many cases settle spontaneously and adopt a stepwise approach before invasive treatment",
+   "Perform an autologous epidural blood patch as the definitive treatment for severe or persistent headache, sealing the dural defect and restoring cerebrospinal fluid pressure, and repeat if the first fails",
+   "Involve the anaesthetic or pain service early for blood patch and for management of accidental dural puncture",
+   "Monitor for atypical or red-flag features (loss of postural character, focal neurological signs, fever, seizures) that warrant brain imaging to exclude intracranial haemorrhage or cerebral venous thrombosis",
+   "In the postpartum patient, actively exclude pre-eclampsia and cortical vein thrombosis as alternative causes"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "postdural_puncture_headache-pathway",
+   "title": "Postdural puncture headache: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A characteristically postural headache that worsens on sitting or standing and improves on lying flat, developing within a few days of dural puncture",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Loss of the postural component or a headache that becomes constant, suggesting an alternative or serious cause",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical assessment focusing on the postural nature of the headache, Neurological examination to exclude focal signs, Brain imaging (CT or MRI) when features are atypical, worsening, or accompanied by neurological signs"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Offer conservative first-line care with rest as needed, oral or intravenous rehydration, and simple analgesia such as paracetamol and non-steroidal anti-inflammatory drugs"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming every post-procedure headache is a postdural puncture headache and missing a dangerous cause"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of postdural puncture headache."
+  }
+ ],
+ "tables": [
+  {
+   "id": "postdural_puncture_headache-matrix",
+   "title": "Postdural puncture headache: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A characteristically postural headache that worsens on sitting or standing and improves on lying flat, developing within a few",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "A persistent hole in the dura allows cerebrospinal fluid to leak into the epidural space faster than it is produced, lowering cerebrospinal fluid volume and pressure. In the upright position, reduced buoyant support causes traction on pain-sensitive intracranial structures such as the meninges and bridging veins, and compensatory cerebral vasodilation may contribute, producing the postural headache. Larger dural defects leak more and cause more severe symptoms. An epidural blood patch works by sealing the defect and raising epidural and cerebrospinal fluid pressure.",
-    "additionalDifferentials": [
-      "Migraine or tension-type headache",
-      "Meningitis (infective) or chemical meningism",
-      "Cerebral venous sinus thrombosis",
-      "Subdural haematoma",
-      "Pre-eclampsia or eclampsia in the obstetric patient",
-      "Pneumocephalus or caffeine-withdrawal headache"
+    [
+     "Key Investigations",
+     "Clinical assessment focusing on the postural nature of the headache, Neurological examination to exclude focal signs, Brain",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical assessment focusing on the postural nature of the headache",
-      "Neurological examination to exclude focal signs",
-      "Brain imaging (CT or MRI) when features are atypical, worsening, or accompanied by neurological signs",
-      "Investigations for pre-eclampsia in the postpartum patient when relevant",
-      "Assessment for infection if fever or meningism is present"
+    [
+     "Primary Differentials",
+     "Migraine or tension-type headache, Meningitis (infective) or chemical meningism, Cerebral venous sinus thrombosis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Loss of the postural component or a headache that becomes constant, suggesting an alternative or serious cause",
-      "Focal neurological deficit, seizure, or reduced consciousness suggesting subdural haematoma or venous thrombosis",
-      "Fever, neck stiffness, or photophobia raising concern for meningitis",
-      "Sudden thunderclap onset or features suggesting subarachnoid haemorrhage"
+    [
+     "Management Strategy",
+     "Offer conservative first-line care with rest as needed, oral or intravenous rehydration, and simple analgesia such as paracetamol",
+     "Core treatment modality"
     ],
-    "prognosis": "Most postdural puncture headaches resolve within days to weeks with conservative care, and a blood patch relieves the majority of severe cases; rare progression to intracranial haemorrhage or venous thrombosis can cause serious morbidity.",
-    "pitfalls": [
-      "Assuming every post-procedure headache is a postdural puncture headache and missing a dangerous cause",
-      "Delaying an effective blood patch in severe, disabling headache",
-      "Overlooking evolving neurological signs that indicate subdural haematoma or venous sinus thrombosis",
-      "Failing to consider pre-eclampsia in a postpartum woman with headache",
-      "Relying on caffeine or bed rest alone for persistent severe symptoms"
-    ],
-    "references": [
-      "Miller's Anesthesia"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Offer conservative first-line care with rest as needed, oral or intravenous rehydration, and simple analgesia such as paracetamol and non-steroidal anti-inflammatory drugs",
-      "Add symptomatic measures including antiemetics for nausea and caffeine as an adjunct to counter compensatory cerebral vasodilatation",
-      "Reassure the patient that many cases settle spontaneously and adopt a stepwise approach before invasive treatment",
-      "Perform an autologous epidural blood patch as the definitive treatment for severe or persistent headache, sealing the dural defect and restoring cerebrospinal fluid pressure, and repeat if the first fails",
-      "Involve the anaesthetic or pain service early for blood patch and for management of accidental dural puncture",
-      "Monitor for atypical or red-flag features (loss of postural character, focal neurological signs, fever, seizures) that warrant brain imaging to exclude intracranial haemorrhage or cerebral venous thrombosis",
-      "In the postpartum patient, actively exclude pre-eclampsia and cortical vein thrombosis as alternative causes"
+    [
+     "Clinical Pitfall",
+     "Assuming every post-procedure headache is a postdural puncture headache and missing a dangerous cause",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for postdural puncture headache."
+  }
+ ]
 }

@@ -1,77 +1,149 @@
 {
-  "id": "mittelschmerz",
-  "name": "Mittelschmerz",
-  "aliases": [
-    "mid-cycle pain",
-    "ovulation pain",
-    "ovulatory pain",
-    "midcycle ovulatory pain"
+ "id": "mittelschmerz",
+ "name": "Mittelschmerz",
+ "aliases": [
+  "mid-cycle pain",
+  "ovulation pain",
+  "ovulatory pain",
+  "midcycle ovulatory pain"
+ ],
+ "class": "non_infective",
+ "system": "Gynaecology",
+ "specialty": "Gynaecology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Standard gynaecology reference textbook",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Presents as recurrent unilateral lower abdominal or pelvic pain occurring around the middle of the menstrual cycle, roughly coinciding with ovulation",
+   "Pain classically alternates sides between cycles depending on which ovary ovulates, and typically lasts from a few hours up to a couple of days",
+   "The discomfort is usually mild to moderate and self-limiting, sometimes accompanied by light spotting or a small amount of physiological vaginal discharge",
+   "It is fundamentally a clinical diagnosis of exclusion made from a characteristic cyclical history in an otherwise well woman",
+   "Correlating symptoms with a menstrual diary and confirming the timing relative to ovulation supports the diagnosis and reassures the patient",
+   "Management is generally conservative with reassurance and simple analgesia; suppression of ovulation with a combined oral contraceptive abolishes the pain in troublesome cases",
+   "A positive pregnancy test in a woman with mid-cycle-type pain should always prompt exclusion of ectopic pregnancy rather than attribution to mittelschmerz"
   ],
-  "class": "non_infective",
-  "system": "Gynaecology",
-  "specialty": "Gynaecology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Standard gynaecology reference textbook",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Presents as recurrent unilateral lower abdominal or pelvic pain occurring around the middle of the menstrual cycle, roughly coinciding with ovulation",
-      "Pain classically alternates sides between cycles depending on which ovary ovulates, and typically lasts from a few hours up to a couple of days",
-      "The discomfort is usually mild to moderate and self-limiting, sometimes accompanied by light spotting or a small amount of physiological vaginal discharge",
-      "It is fundamentally a clinical diagnosis of exclusion made from a characteristic cyclical history in an otherwise well woman",
-      "Correlating symptoms with a menstrual diary and confirming the timing relative to ovulation supports the diagnosis and reassures the patient",
-      "Management is generally conservative with reassurance and simple analgesia; suppression of ovulation with a combined oral contraceptive abolishes the pain in troublesome cases",
-      "A positive pregnancy test in a woman with mid-cycle-type pain should always prompt exclusion of ectopic pregnancy rather than attribution to mittelschmerz"
+  "pathophysiology": "The pain is attributed to the physiological events of ovulation. Rapid stretching of the ovarian capsule by the enlarging dominant follicle, followed by rupture of the follicle, releases follicular fluid together with a small quantity of blood into the peritoneal cavity. This fluid irritates the adjacent peritoneum and may provoke localised contraction of the fallopian tube and surrounding smooth muscle, producing transient unilateral pain on the side of the ovulating ovary.",
+  "additionalDifferentials": [
+   "Ectopic pregnancy",
+   "Acute appendicitis",
+   "Ovarian torsion",
+   "Ruptured ovarian cyst",
+   "Pelvic inflammatory disease",
+   "Endometriosis"
+  ],
+  "additionalInvestigations": [
+   "Urinary or serum pregnancy test to exclude early or ectopic pregnancy",
+   "Transvaginal ultrasound to assess the ovaries and exclude a cyst, torsion, or free fluid",
+   "Full blood count and inflammatory markers if an infective or inflammatory cause is being considered",
+   "Urinalysis to help exclude urinary tract infection or renal tract pathology",
+   "Menstrual symptom diary correlating pain with the timing of ovulation"
+  ],
+  "redFlags": [
+   "A positive pregnancy test with pain, raising the possibility of ectopic pregnancy",
+   "Signs of peritonitis, haemodynamic instability, or a tender palpable mass",
+   "Fever or systemic upset suggesting infection rather than physiological pain",
+   "Progressive, severe, or atypical pain that does not follow the expected mid-cycle pattern"
+  ],
+  "prognosis": "Mittelschmerz is a benign, self-limiting condition with an excellent outlook; symptoms resolve within a day or two each cycle and are readily controlled by ovulation suppression when they interfere with daily life.",
+  "pitfalls": [
+   "Attributing pain to mittelschmerz and thereby missing an ectopic pregnancy, torsion, or appendicitis",
+   "Failing to confirm the cyclical mid-cycle pattern before making the diagnosis",
+   "Over-investigating a clear, characteristic history in an otherwise well woman",
+   "Overlooking that ovulation pain cannot occur when ovulation is suppressed, prompting a review of alternative causes"
+  ],
+  "references": [
+   "Standard gynaecology reference textbook",
+   "Peer-reviewed gynaecology clinical reviews"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Reassurance and explanation of the benign, self-limiting nature of the mid-cycle ovulatory pain",
+   "Simple analgesia with paracetamol or a non-steroidal anti-inflammatory drug for the transient discomfort",
+   "Suppression of ovulation with the combined oral contraceptive pill to abolish recurrent troublesome pain",
+   "Local heat and a menstrual symptom diary correlating pain with ovulation to confirm the pattern and reassure",
+   "Exclude alternative pathology with a pregnancy test and pelvic ultrasound for cyst, torsion or free fluid when features are atypical",
+   "Refer to gynaecology if pain is severe, persistent or atypical, or if diagnostic doubt remains"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "mittelschmerz-pathway",
+   "title": "Mittelschmerz: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Presents as recurrent unilateral lower abdominal or pelvic pain occurring around the middle of the menstrual cycle, roughly coinciding with ovulation",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: A positive pregnancy test with pain, raising the possibility of ectopic pregnancy",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Urinary or serum pregnancy test to exclude early or ectopic pregnancy, Transvaginal ultrasound to assess the ovaries and exclude a cyst, torsion, or free fluid, Full blood count and inflammatory markers if an infective or"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Reassurance and explanation of the benign, self-limiting nature of the mid-cycle ovulatory pain"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing pain to mittelschmerz and thereby missing an ectopic pregnancy, torsion, or appendicitis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of mittelschmerz."
+  }
+ ],
+ "tables": [
+  {
+   "id": "mittelschmerz-matrix",
+   "title": "Mittelschmerz: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Presents as recurrent unilateral lower abdominal or pelvic pain occurring around the middle of the menstrual cycle, roughly",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The pain is attributed to the physiological events of ovulation. Rapid stretching of the ovarian capsule by the enlarging dominant follicle, followed by rupture of the follicle, releases follicular fluid together with a small quantity of blood into the peritoneal cavity. This fluid irritates the adjacent peritoneum and may provoke localised contraction of the fallopian tube and surrounding smooth muscle, producing transient unilateral pain on the side of the ovulating ovary.",
-    "additionalDifferentials": [
-      "Ectopic pregnancy",
-      "Acute appendicitis",
-      "Ovarian torsion",
-      "Ruptured ovarian cyst",
-      "Pelvic inflammatory disease",
-      "Endometriosis"
+    [
+     "Key Investigations",
+     "Urinary or serum pregnancy test to exclude early or ectopic pregnancy, Transvaginal ultrasound to assess the ovaries and exclude",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Urinary or serum pregnancy test to exclude early or ectopic pregnancy",
-      "Transvaginal ultrasound to assess the ovaries and exclude a cyst, torsion, or free fluid",
-      "Full blood count and inflammatory markers if an infective or inflammatory cause is being considered",
-      "Urinalysis to help exclude urinary tract infection or renal tract pathology",
-      "Menstrual symptom diary correlating pain with the timing of ovulation"
+    [
+     "Primary Differentials",
+     "Ectopic pregnancy, Acute appendicitis, Ovarian torsion",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "A positive pregnancy test with pain, raising the possibility of ectopic pregnancy",
-      "Signs of peritonitis, haemodynamic instability, or a tender palpable mass",
-      "Fever or systemic upset suggesting infection rather than physiological pain",
-      "Progressive, severe, or atypical pain that does not follow the expected mid-cycle pattern"
+    [
+     "Management Strategy",
+     "Reassurance and explanation of the benign, self-limiting nature of the mid-cycle ovulatory pain",
+     "Core treatment modality"
     ],
-    "prognosis": "Mittelschmerz is a benign, self-limiting condition with an excellent outlook; symptoms resolve within a day or two each cycle and are readily controlled by ovulation suppression when they interfere with daily life.",
-    "pitfalls": [
-      "Attributing pain to mittelschmerz and thereby missing an ectopic pregnancy, torsion, or appendicitis",
-      "Failing to confirm the cyclical mid-cycle pattern before making the diagnosis",
-      "Over-investigating a clear, characteristic history in an otherwise well woman",
-      "Overlooking that ovulation pain cannot occur when ovulation is suppressed, prompting a review of alternative causes"
-    ],
-    "references": [
-      "Standard gynaecology reference textbook",
-      "Peer-reviewed gynaecology clinical reviews"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Reassurance and explanation of the benign, self-limiting nature of the mid-cycle ovulatory pain",
-      "Simple analgesia with paracetamol or a non-steroidal anti-inflammatory drug for the transient discomfort",
-      "Suppression of ovulation with the combined oral contraceptive pill to abolish recurrent troublesome pain",
-      "Local heat and a menstrual symptom diary correlating pain with ovulation to confirm the pattern and reassure",
-      "Exclude alternative pathology with a pregnancy test and pelvic ultrasound for cyst, torsion or free fluid when features are atypical",
-      "Refer to gynaecology if pain is severe, persistent or atypical, or if diagnostic doubt remains"
+    [
+     "Clinical Pitfall",
+     "Attributing pain to mittelschmerz and thereby missing an ectopic pregnancy, torsion, or appendicitis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for mittelschmerz."
+  }
+ ]
 }

@@ -1,80 +1,152 @@
 {
-  "id": "sprengel_deformity",
-  "name": "Sprengel deformity",
-  "aliases": [
-    "congenital high scapula",
-    "congenital elevation of the scapula",
-    "Sprengel shoulder",
-    "scapula elevata"
+ "id": "sprengel_deformity",
+ "name": "Sprengel deformity",
+ "aliases": [
+  "congenital high scapula",
+  "congenital elevation of the scapula",
+  "Sprengel shoulder",
+  "scapula elevata"
+ ],
+ "class": "non_infective",
+ "system": "Genetics / Craniofacial",
+ "specialty": "Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Smith's Recognizable Patterns of Human Malformation",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The commonest congenital anomaly of the shoulder girdle, in which one scapula sits abnormally high and is often small and malrotated",
+   "The elevated scapula produces visible asymmetry, a fullness at the base of the neck, and restricted shoulder abduction",
+   "An omovertebral bone or fibrous band connecting the scapula to the cervical spine is present in many cases and further limits movement",
+   "It is frequently associated with Klippel-Feil syndrome, scoliosis, and rib anomalies, so the cervical spine should always be assessed",
+   "The condition is usually unilateral but can be bilateral, and most cases are sporadic",
+   "Limitation of shoulder elevation, rather than pain, is the usual functional complaint",
+   "Cosmetic concern and functional restriction together guide the decision on surgical correction"
   ],
-  "class": "non_infective",
-  "system": "Genetics / Craniofacial",
-  "specialty": "Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Smith's Recognizable Patterns of Human Malformation",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The commonest congenital anomaly of the shoulder girdle, in which one scapula sits abnormally high and is often small and malrotated",
-      "The elevated scapula produces visible asymmetry, a fullness at the base of the neck, and restricted shoulder abduction",
-      "An omovertebral bone or fibrous band connecting the scapula to the cervical spine is present in many cases and further limits movement",
-      "It is frequently associated with Klippel-Feil syndrome, scoliosis, and rib anomalies, so the cervical spine should always be assessed",
-      "The condition is usually unilateral but can be bilateral, and most cases are sporadic",
-      "Limitation of shoulder elevation, rather than pain, is the usual functional complaint",
-      "Cosmetic concern and functional restriction together guide the decision on surgical correction"
+  "pathophysiology": "Sprengel deformity results from failure of the normal caudal descent of the scapula during embryonic development. The scapula forms in the cervical region and normally migrates to its thoracic position by around the third month of gestation; arrested or incomplete descent leaves it elevated, hypoplastic, and often medially rotated. An abnormal osseous, cartilaginous, or fibrous connection (the omovertebral bar) may tether the superomedial scapula to the lower cervical vertebrae, tethering it in position and restricting movement. Because the disturbance occurs during the same period as cervical vertebral segmentation and rib formation, associated anomalies such as Klippel-Feil fusion, scoliosis, and rib defects frequently coexist. Most cases are sporadic.",
+  "additionalDifferentials": [
+   "Klippel-Feil syndrome with scapular involvement",
+   "Congenital muscular torticollis with postural asymmetry",
+   "Acquired winging of the scapula",
+   "Postural scapular asymmetry from scoliosis",
+   "Poland syndrome with shoulder girdle involvement",
+   "Neuromuscular scapular dyskinesis"
+  ],
+  "additionalInvestigations": [
+   "Shoulder and scapular radiographs to assess position, size, and rotation",
+   "Cervical spine imaging to detect Klippel-Feil fusion and an omovertebral bone",
+   "Computed tomography to define the omovertebral connection before surgery",
+   "Assessment for scoliosis and rib anomalies",
+   "Renal ultrasound where associated anomalies suggest a wider spectrum",
+   "Assessment of shoulder range of motion and function"
+  ],
+  "redFlags": [
+   "Coexisting cervical vertebral instability from associated Klippel-Feil syndrome",
+   "Neurological compromise related to cervical or brachial plexus involvement",
+   "Severe functional restriction limiting activities of daily living",
+   "Progressive scoliosis requiring orthopaedic intervention",
+   "Associated undiagnosed renal or cardiac anomalies"
+  ],
+  "prognosis": "The deformity itself is not life-limiting; mild cases need only observation, while surgical repositioning in selected children can improve appearance and shoulder function, with outcome influenced by associated spinal and girdle anomalies.",
+  "pitfalls": [
+   "Failing to image the cervical spine and missing associated Klippel-Feil syndrome",
+   "Overlooking an omovertebral bone that limits movement and complicates surgery",
+   "Attributing the asymmetry to posture or torticollis",
+   "Neglecting associated scoliosis and rib anomalies",
+   "Underestimating the psychosocial effect of visible shoulder asymmetry"
+  ],
+  "references": [
+   "Smith's Recognizable Patterns of Human Malformation",
+   "Tachdjian's Pediatric Orthopaedics"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Observation with physiotherapy for mild deformity, focusing on maintaining and improving shoulder abduction and range of motion",
+   "Surgical repositioning of the scapula (such as a Woodward or Green procedure) in selected children to improve appearance and shoulder function",
+   "Excision of the omovertebral bone or fibrous band to relieve tethering and restricted movement",
+   "Assess and manage associated cervical spine anomalies (Klippel-Feil), scoliosis and rib defects",
+   "Screen for associated renal and other anomalies where a wider malformation spectrum is suspected",
+   "Multidisciplinary input from paediatric orthopaedics, spinal surgery and physiotherapy"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "sprengel_deformity-pathway",
+   "title": "Sprengel deformity: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The commonest congenital anomaly of the shoulder girdle, in which one scapula sits abnormally high and is often small and malrotated",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Coexisting cervical vertebral instability from associated Klippel-Feil syndrome",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Shoulder and scapular radiographs to assess position, size, and rotation, Cervical spine imaging to detect Klippel-Feil fusion and an omovertebral bone, Computed tomography to define the omovertebral connection before"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Observation with physiotherapy for mild deformity, focusing on maintaining and improving shoulder abduction and range of motion"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to image the cervical spine and missing associated Klippel-Feil syndrome"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of sprengel deformity."
+  }
+ ],
+ "tables": [
+  {
+   "id": "sprengel_deformity-matrix",
+   "title": "Sprengel deformity: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The commonest congenital anomaly of the shoulder girdle, in which one scapula sits abnormally high and is often small and",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Sprengel deformity results from failure of the normal caudal descent of the scapula during embryonic development. The scapula forms in the cervical region and normally migrates to its thoracic position by around the third month of gestation; arrested or incomplete descent leaves it elevated, hypoplastic, and often medially rotated. An abnormal osseous, cartilaginous, or fibrous connection (the omovertebral bar) may tether the superomedial scapula to the lower cervical vertebrae, tethering it in position and restricting movement. Because the disturbance occurs during the same period as cervical vertebral segmentation and rib formation, associated anomalies such as Klippel-Feil fusion, scoliosis, and rib defects frequently coexist. Most cases are sporadic.",
-    "additionalDifferentials": [
-      "Klippel-Feil syndrome with scapular involvement",
-      "Congenital muscular torticollis with postural asymmetry",
-      "Acquired winging of the scapula",
-      "Postural scapular asymmetry from scoliosis",
-      "Poland syndrome with shoulder girdle involvement",
-      "Neuromuscular scapular dyskinesis"
+    [
+     "Key Investigations",
+     "Shoulder and scapular radiographs to assess position, size, and rotation, Cervical spine imaging to detect Klippel-Feil fusion",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Shoulder and scapular radiographs to assess position, size, and rotation",
-      "Cervical spine imaging to detect Klippel-Feil fusion and an omovertebral bone",
-      "Computed tomography to define the omovertebral connection before surgery",
-      "Assessment for scoliosis and rib anomalies",
-      "Renal ultrasound where associated anomalies suggest a wider spectrum",
-      "Assessment of shoulder range of motion and function"
+    [
+     "Primary Differentials",
+     "Klippel-Feil syndrome with scapular involvement, Congenital muscular torticollis with postural asymmetry, Acquired winging of the",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Coexisting cervical vertebral instability from associated Klippel-Feil syndrome",
-      "Neurological compromise related to cervical or brachial plexus involvement",
-      "Severe functional restriction limiting activities of daily living",
-      "Progressive scoliosis requiring orthopaedic intervention",
-      "Associated undiagnosed renal or cardiac anomalies"
+    [
+     "Management Strategy",
+     "Observation with physiotherapy for mild deformity, focusing on maintaining and improving shoulder abduction and range of motion",
+     "Core treatment modality"
     ],
-    "prognosis": "The deformity itself is not life-limiting; mild cases need only observation, while surgical repositioning in selected children can improve appearance and shoulder function, with outcome influenced by associated spinal and girdle anomalies.",
-    "pitfalls": [
-      "Failing to image the cervical spine and missing associated Klippel-Feil syndrome",
-      "Overlooking an omovertebral bone that limits movement and complicates surgery",
-      "Attributing the asymmetry to posture or torticollis",
-      "Neglecting associated scoliosis and rib anomalies",
-      "Underestimating the psychosocial effect of visible shoulder asymmetry"
-    ],
-    "references": [
-      "Smith's Recognizable Patterns of Human Malformation",
-      "Tachdjian's Pediatric Orthopaedics"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Observation with physiotherapy for mild deformity, focusing on maintaining and improving shoulder abduction and range of motion",
-      "Surgical repositioning of the scapula (such as a Woodward or Green procedure) in selected children to improve appearance and shoulder function",
-      "Excision of the omovertebral bone or fibrous band to relieve tethering and restricted movement",
-      "Assess and manage associated cervical spine anomalies (Klippel-Feil), scoliosis and rib defects",
-      "Screen for associated renal and other anomalies where a wider malformation spectrum is suspected",
-      "Multidisciplinary input from paediatric orthopaedics, spinal surgery and physiotherapy"
+    [
+     "Clinical Pitfall",
+     "Failing to image the cervical spine and missing associated Klippel-Feil syndrome",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for sprengel deformity."
+  }
+ ]
 }

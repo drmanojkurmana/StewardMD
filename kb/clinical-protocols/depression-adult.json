@@ -160,5 +160,77 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-25"
- }
+ },
+ "algorithms": [
+  {
+   "id": "depression-adult-pathway",
+   "title": "Depression in adults Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Ask: during the last month, have you often been bothered by feeling down, depressed or hopeless, or by having little interest or pleasure in doing things? If yes, assess fully (PHQ-2 then PHQ-9).",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Judge severity by symptoms, duration and functional impairment, not a symptom count alone. NICE NG222: PHQ-9 below 16 is less severe (subthreshold or mild); 16 or more is more severe (moderate or severe).",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Ask about past mood elevation (bipolar disorder), psychotic symptoms, alcohol and drug use, physical illness, previous episodes and treatment response, relationships, debt, work and isolation."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Taper in steps, for example halving the dose each time, with smaller reductions (for example 25%) at low doses, allowing 1 to 2 weeks between steps. Take particular care with paroxetine and venlafaxine."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Explain early side effects (nausea, anxiety, agitation, insomnia), that benefit usually appears within 4 weeks, and that missed doses can cause withdrawal symptoms."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for depression in adults."
+  }
+ ],
+ "tables": [
+  {
+   "id": "depression-adult-summary-matrix",
+   "title": "Depression in adults Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Ask: during the last month, have you often been bothered by feeling down, depressed or hopeless, or by having little interest or pleasure",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Taper in steps, for example halving the dose each time, with smaller reductions (for example 25%) at low doses, allowing 1 to 2 weeks",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Sertraline: 50 mg orally once daily; increase in 50 mg steps at intervals of at least 1 week if needed; max 200 mg daily",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Missing bipolar disorder, psychotic features or alcohol and drug misuse.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for depression in adults."
+  }
+ ]
 }

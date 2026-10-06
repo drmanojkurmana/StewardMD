@@ -1,83 +1,155 @@
 {
-  "id": "hypereosinophilic_cardiomyopathy",
-  "name": "hypereosinophilic cardiomyopathy",
-  "aliases": [
-    "Loeffler endocarditis",
-    "eosinophilic endomyocardial disease"
+ "id": "hypereosinophilic_cardiomyopathy",
+ "name": "hypereosinophilic cardiomyopathy",
+ "aliases": [
+  "Loeffler endocarditis",
+  "eosinophilic endomyocardial disease"
+ ],
+ "class": "non_infective",
+ "system": "cardiovascular",
+ "specialty": "cardiology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Braunwald's Heart Disease",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Cardiac involvement in the hypereosinophilic syndromes (Loeffler endocarditis) results from sustained eosinophilia of any cause—clonal/myeloproliferative, lymphocytic/reactive, or idiopathic—and is a major source of morbidity and mortality.",
+   "Disease evolves through three overlapping stages: an early acute necrotic stage, an intermediate thrombotic stage with mural thrombus, and a late fibrotic stage producing a restrictive cardiomyopathy resembling tropical endomyocardial fibrosis.",
+   "The degree or duration of eosinophilia does not reliably predict cardiac damage, so cardiac surveillance is warranted whenever significant eosinophilia persists.",
+   "Apical obliteration of one or both ventricles by thrombus, with preserved basal function and characteristic tethering of the atrioventricular valves causing regurgitation, is a hallmark on imaging.",
+   "Mural thrombus carries a high embolic risk, and systemic or pulmonary thromboembolism may be the presenting event.",
+   "Cardiac magnetic resonance is valuable for demonstrating endocardial thrombus and subendocardial late gadolinium enhancement, and troponin elevation may flag active myocardial necrosis.",
+   "Testing for the FIP1L1-PDGFRA fusion is essential because such myeloproliferative disease responds dramatically to tyrosine kinase inhibition, whereas reactive and idiopathic forms are treated with corticosteroids and other eosinophil-lowering agents.",
+   "Anticoagulation is generally required once mural thrombus is present, and surgery (thrombectomy, endocardectomy and valve repair or replacement) may be needed in the fibrotic stage."
   ],
-  "class": "non_infective",
-  "system": "cardiovascular",
-  "specialty": "cardiology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Braunwald's Heart Disease",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Cardiac involvement in the hypereosinophilic syndromes (Loeffler endocarditis) results from sustained eosinophilia of any cause—clonal/myeloproliferative, lymphocytic/reactive, or idiopathic—and is a major source of morbidity and mortality.",
-      "Disease evolves through three overlapping stages: an early acute necrotic stage, an intermediate thrombotic stage with mural thrombus, and a late fibrotic stage producing a restrictive cardiomyopathy resembling tropical endomyocardial fibrosis.",
-      "The degree or duration of eosinophilia does not reliably predict cardiac damage, so cardiac surveillance is warranted whenever significant eosinophilia persists.",
-      "Apical obliteration of one or both ventricles by thrombus, with preserved basal function and characteristic tethering of the atrioventricular valves causing regurgitation, is a hallmark on imaging.",
-      "Mural thrombus carries a high embolic risk, and systemic or pulmonary thromboembolism may be the presenting event.",
-      "Cardiac magnetic resonance is valuable for demonstrating endocardial thrombus and subendocardial late gadolinium enhancement, and troponin elevation may flag active myocardial necrosis.",
-      "Testing for the FIP1L1-PDGFRA fusion is essential because such myeloproliferative disease responds dramatically to tyrosine kinase inhibition, whereas reactive and idiopathic forms are treated with corticosteroids and other eosinophil-lowering agents.",
-      "Anticoagulation is generally required once mural thrombus is present, and surgery (thrombectomy, endocardectomy and valve repair or replacement) may be needed in the fibrotic stage."
+  "pathophysiology": "Prolonged elevation of activated eosinophils leads to release of cationic granule proteins—including major basic protein and eosinophil cationic protein—that are directly toxic to the endocardium and myocardium. The initial acute stage is characterised by eosinophilic infiltration and myocardial necrosis with an intense inflammatory response. Endocardial injury then promotes mural thrombus formation, particularly at the ventricular apices and along the inflow tracts, during the thrombotic stage. Organisation of thrombus and progressive endomyocardial fibrosis follow, encasing the subvalvular apparatus and obliterating the ventricular cavities. The stiff, scarred endocardium and reduced cavity volume produce restrictive filling, atrioventricular valve regurgitation from leaflet tethering, and ultimately restrictive cardiomyopathy with congestive failure.",
+  "additionalDifferentials": [
+   "tropical endomyocardial fibrosis",
+   "idiopathic restrictive cardiomyopathy",
+   "cardiac amyloidosis",
+   "cardiac sarcoidosis",
+   "constrictive pericarditis",
+   "apical hypertrophic cardiomyopathy with cavity obliteration",
+   "intracardiac tumour or other cause of ventricular filling defect"
+  ],
+  "additionalInvestigations": [
+   "full blood count with eosinophil quantification and peripheral blood film",
+   "echocardiography for apical thrombus, cavity obliteration and valve tethering",
+   "cardiac magnetic resonance with late gadolinium enhancement and thrombus imaging",
+   "cardiac troponin for active myocardial injury",
+   "FIP1L1-PDGFRA and other clonal molecular/cytogenetic testing, with bone marrow assessment",
+   "evaluation for secondary causes of eosinophilia (parasites, drugs, allergy, malignancy, vasculitis)",
+   "endomyocardial biopsy in selected cases to confirm eosinophilic infiltration"
+  ],
+  "redFlags": [
+   "systemic or pulmonary thromboembolism from intracardiac thrombus",
+   "acute heart failure or troponin rise indicating active myocardial necrosis",
+   "large mobile ventricular thrombus on imaging",
+   "severe atrioventricular valve regurgitation with haemodynamic compromise",
+   "rapidly progressive restrictive physiology and low-output failure"
+  ],
+  "prognosis": "Outcome depends on the underlying cause and the stage at diagnosis; early eosinophil-lowering therapy (and targeted tyrosine kinase inhibition in FIP1L1-PDGFRA disease) can arrest progression, but established fibrotic restrictive disease with valve involvement carries a poor prognosis and may require surgery.",
+  "pitfalls": [
+   "assuming a modest eosinophil count excludes serious cardiac involvement",
+   "failing to test for FIP1L1-PDGFRA and missing a highly treatable form",
+   "overlooking apical thrombus and omitting anticoagulation, risking embolism",
+   "misclassifying the disease as idiopathic restrictive cardiomyopathy or constriction",
+   "attributing the eosinophilia to a benign cause without excluding clonal or secondary drivers"
+  ],
+  "references": [
+   "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
+   "ESC Guidelines on cardiomyopathies",
+   "Consensus criteria and management guidance for hypereosinophilic syndromes"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Lower the eosinophil count promptly with corticosteroids as first-line therapy to halt ongoing myocardial injury",
+   "Give a tyrosine kinase inhibitor such as imatinib where FIP1L1-PDGFRA or related clonal disease is confirmed, and treat any identified secondary cause of eosinophilia",
+   "Anticoagulate to treat and prevent mural thrombus and systemic or pulmonary thromboembolism during the thrombotic stage",
+   "Manage restrictive heart failure and atrioventricular valve regurgitation with standard heart-failure pharmacotherapy and diuretics",
+   "Consider surgery in the fibrotic stage, including endocardial thrombectomy, endocardectomy and valve repair or replacement",
+   "Monitor with serial echocardiography, cardiac magnetic resonance and troponin, and maintain cardiac surveillance whenever significant eosinophilia persists",
+   "Coordinate combined haematology and cardiology care and refer for advanced heart-failure options in end-stage disease"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "hypereosinophilic_cardiomyopathy-pathway",
+   "title": "hypereosinophilic cardiomyopathy: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Cardiac involvement in the hypereosinophilic syndromes (Loeffler endocarditis) results from sustained eosinophilia of any cause - clonal/myeloproliferative, lymphocytic/reactive, or idiopathic - and is a major source of morbidity and",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: systemic or pulmonary thromboembolism from intracardiac thrombus",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: full blood count with eosinophil quantification and peripheral blood film, echocardiography for apical thrombus, cavity obliteration and valve tethering, cardiac magnetic resonance with late gadolinium enhancement and"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Lower the eosinophil count promptly with corticosteroids as first-line therapy to halt ongoing myocardial injury"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: assuming a modest eosinophil count excludes serious cardiac involvement"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of hypereosinophilic cardiomyopathy."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hypereosinophilic_cardiomyopathy-matrix",
+   "title": "hypereosinophilic cardiomyopathy: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Cardiac involvement in the hypereosinophilic syndromes (Loeffler endocarditis) results from sustained eosinophilia of any cause -",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Prolonged elevation of activated eosinophils leads to release of cationic granule proteins—including major basic protein and eosinophil cationic protein—that are directly toxic to the endocardium and myocardium. The initial acute stage is characterised by eosinophilic infiltration and myocardial necrosis with an intense inflammatory response. Endocardial injury then promotes mural thrombus formation, particularly at the ventricular apices and along the inflow tracts, during the thrombotic stage. Organisation of thrombus and progressive endomyocardial fibrosis follow, encasing the subvalvular apparatus and obliterating the ventricular cavities. The stiff, scarred endocardium and reduced cavity volume produce restrictive filling, atrioventricular valve regurgitation from leaflet tethering, and ultimately restrictive cardiomyopathy with congestive failure.",
-    "additionalDifferentials": [
-      "tropical endomyocardial fibrosis",
-      "idiopathic restrictive cardiomyopathy",
-      "cardiac amyloidosis",
-      "cardiac sarcoidosis",
-      "constrictive pericarditis",
-      "apical hypertrophic cardiomyopathy with cavity obliteration",
-      "intracardiac tumour or other cause of ventricular filling defect"
+    [
+     "Key Investigations",
+     "full blood count with eosinophil quantification and peripheral blood film, echocardiography for apical thrombus, cavity",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "full blood count with eosinophil quantification and peripheral blood film",
-      "echocardiography for apical thrombus, cavity obliteration and valve tethering",
-      "cardiac magnetic resonance with late gadolinium enhancement and thrombus imaging",
-      "cardiac troponin for active myocardial injury",
-      "FIP1L1-PDGFRA and other clonal molecular/cytogenetic testing, with bone marrow assessment",
-      "evaluation for secondary causes of eosinophilia (parasites, drugs, allergy, malignancy, vasculitis)",
-      "endomyocardial biopsy in selected cases to confirm eosinophilic infiltration"
+    [
+     "Primary Differentials",
+     "tropical endomyocardial fibrosis, idiopathic restrictive cardiomyopathy, cardiac amyloidosis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "systemic or pulmonary thromboembolism from intracardiac thrombus",
-      "acute heart failure or troponin rise indicating active myocardial necrosis",
-      "large mobile ventricular thrombus on imaging",
-      "severe atrioventricular valve regurgitation with haemodynamic compromise",
-      "rapidly progressive restrictive physiology and low-output failure"
+    [
+     "Management Strategy",
+     "Lower the eosinophil count promptly with corticosteroids as first-line therapy to halt ongoing myocardial injury",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcome depends on the underlying cause and the stage at diagnosis; early eosinophil-lowering therapy (and targeted tyrosine kinase inhibition in FIP1L1-PDGFRA disease) can arrest progression, but established fibrotic restrictive disease with valve involvement carries a poor prognosis and may require surgery.",
-    "pitfalls": [
-      "assuming a modest eosinophil count excludes serious cardiac involvement",
-      "failing to test for FIP1L1-PDGFRA and missing a highly treatable form",
-      "overlooking apical thrombus and omitting anticoagulation, risking embolism",
-      "misclassifying the disease as idiopathic restrictive cardiomyopathy or constriction",
-      "attributing the eosinophilia to a benign cause without excluding clonal or secondary drivers"
-    ],
-    "references": [
-      "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
-      "ESC Guidelines on cardiomyopathies",
-      "Consensus criteria and management guidance for hypereosinophilic syndromes"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Lower the eosinophil count promptly with corticosteroids as first-line therapy to halt ongoing myocardial injury",
-      "Give a tyrosine kinase inhibitor such as imatinib where FIP1L1-PDGFRA or related clonal disease is confirmed, and treat any identified secondary cause of eosinophilia",
-      "Anticoagulate to treat and prevent mural thrombus and systemic or pulmonary thromboembolism during the thrombotic stage",
-      "Manage restrictive heart failure and atrioventricular valve regurgitation with standard heart-failure pharmacotherapy and diuretics",
-      "Consider surgery in the fibrotic stage, including endocardial thrombectomy, endocardectomy and valve repair or replacement",
-      "Monitor with serial echocardiography, cardiac magnetic resonance and troponin, and maintain cardiac surveillance whenever significant eosinophilia persists",
-      "Coordinate combined haematology and cardiology care and refer for advanced heart-failure options in end-stage disease"
+    [
+     "Clinical Pitfall",
+     "assuming a modest eosinophil count excludes serious cardiac involvement",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for hypereosinophilic cardiomyopathy."
+  }
+ ]
 }

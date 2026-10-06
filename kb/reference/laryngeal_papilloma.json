@@ -1,78 +1,150 @@
 {
-  "id": "laryngeal_papilloma",
-  "name": "Laryngeal papilloma",
-  "aliases": [
-    "recurrent respiratory papillomatosis",
-    "RRP",
-    "laryngeal papillomatosis",
-    "juvenile-onset recurrent respiratory papillomatosis"
+ "id": "laryngeal_papilloma",
+ "name": "Laryngeal papilloma",
+ "aliases": [
+  "recurrent respiratory papillomatosis",
+  "RRP",
+  "laryngeal papillomatosis",
+  "juvenile-onset recurrent respiratory papillomatosis"
+ ],
+ "class": "non_infective",
+ "system": "Ear-Nose-Throat / Laryngology",
+ "specialty": "Otolaryngology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Cummings Otolaryngology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Benign exophytic squamous papillomas of the larynx that are the laryngeal manifestation of recurrent respiratory papillomatosis, driven by human papillomavirus, chiefly types 6 and 11",
+   "Juvenile-onset disease presents in childhood with progressive hoarseness, an abnormal cry, and sometimes stridor, and tends to be more aggressive and multifocal",
+   "Adult-onset disease more often causes persistent dysphonia and follows a comparatively less florid course",
+   "Lesions favour anatomical transition zones, especially the true vocal folds and the limen vestibuli",
+   "Progressive stridor and airway obstruction from bulky disease can be life-threatening, particularly in young children",
+   "Treatment is repeated surgical debulking to preserve airway and voice while sparing normal mucosa, as recurrence is expected and cure elusive",
+   "Distal spread to the trachea and lungs and malignant transformation, more likely with type 11 or after prior irradiation, are recognised complications"
   ],
-  "class": "non_infective",
-  "system": "Ear-Nose-Throat / Laryngology",
-  "specialty": "Otolaryngology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Cummings Otolaryngology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Benign exophytic squamous papillomas of the larynx that are the laryngeal manifestation of recurrent respiratory papillomatosis, driven by human papillomavirus, chiefly types 6 and 11",
-      "Juvenile-onset disease presents in childhood with progressive hoarseness, an abnormal cry, and sometimes stridor, and tends to be more aggressive and multifocal",
-      "Adult-onset disease more often causes persistent dysphonia and follows a comparatively less florid course",
-      "Lesions favour anatomical transition zones, especially the true vocal folds and the limen vestibuli",
-      "Progressive stridor and airway obstruction from bulky disease can be life-threatening, particularly in young children",
-      "Treatment is repeated surgical debulking to preserve airway and voice while sparing normal mucosa, as recurrence is expected and cure elusive",
-      "Distal spread to the trachea and lungs and malignant transformation, more likely with type 11 or after prior irradiation, are recognised complications"
+  "pathophysiology": "Laryngeal papillomas are the airway expression of recurrent respiratory papillomatosis, in which human papillomavirus, predominantly the low-risk genotypes 6 and 11, infects the respiratory epithelium and drives proliferation of the basal squamous cells. Juvenile-onset disease is thought to result from vertical transmission during passage through an infected birth canal, whereas adult acquisition is less clearly defined. The virus persists within apparently normal-looking mucosa, which explains the characteristic tendency to recur after removal. Lesions cluster at squamociliary junctions and produce friable, frond-like growths that add mass to the vocal folds and, when bulky, obstruct the airway; rarely the process spreads distally or undergoes malignant change.",
+  "additionalDifferentials": [
+   "Vocal fold polyp",
+   "Vocal fold leukoplakia or dysplasia",
+   "Verrucous or invasive squamous cell carcinoma",
+   "Vocal fold granuloma",
+   "Laryngeal candidiasis with keratosis",
+   "Congenital laryngeal cyst (in the child with stridor)"
+  ],
+  "additionalInvestigations": [
+   "Flexible fibreoptic laryngoscopy to identify and map the papillomatous lesions",
+   "Rigid endoscopy under anaesthesia for assessment, mapping, and biopsy",
+   "Histopathology to confirm papilloma and exclude dysplasia or malignancy",
+   "Human papillomavirus typing of tissue, given prognostic relevance of type 11",
+   "Tracheobronchoscopy or imaging where distal airway or pulmonary spread is suspected"
+  ],
+  "redFlags": [
+   "Progressive stridor or airway obstruction, especially in a young child, which is potentially life-threatening",
+   "Rapid growth, keratinisation, or an ulcerated mass suggesting malignant transformation",
+   "Distal tracheal or pulmonary involvement",
+   "Frequent recurrences requiring escalating numbers of procedures"
+  ],
+  "prognosis": "The course is unpredictable and often chronic with repeated recurrences, and some childhood cases eventually remit spontaneously, but aggressive multifocal or distally spreading disease carries significant morbidity and a small but important risk of malignant transformation.",
+  "pitfalls": [
+   "Aggressive deep resection that damages the vocal ligament and anterior commissure, risking scarring and web formation",
+   "Assuming complete surgical clearance eradicates the virus, when latent virus in normal mucosa drives recurrence",
+   "Overlooking malignant transformation in longstanding or type 11 disease",
+   "Neglecting airway planning in a child with bulky papillomas before anaesthesia"
+  ],
+  "references": [
+   "Cummings Otolaryngology: Head and Neck Surgery",
+   "Scott-Brown's Otorhinolaryngology, Head and Neck Surgery"
+  ],
+  "crossLinks": [],
+  "management": [
+   "The mainstay is repeated conservative surgical debulking with microdebrider or CO2 laser to maintain airway and voice while sparing normal mucosa, as recurrence is expected",
+   "Add adjuvant therapy in aggressive or frequently recurring disease, such as intralesional cidofovir or systemic bevacizumab, with HPV vaccination as an adjunct",
+   "Manage acute airway obstruction promptly, avoiding tracheostomy where possible because it risks distal seeding of papillomas",
+   "Provide voice therapy and support voice outcomes given the cumulative scarring from repeated procedures",
+   "Undertake surveillance endoscopy for recurrence, distal tracheobronchial or pulmonary spread, and malignant transformation, particularly with HPV type 11",
+   "Type HPV on excised tissue for prognostic stratification and confirm histology to exclude dysplasia",
+   "Coordinate ENT and respiratory specialist care with regular structured review"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "laryngeal_papilloma-pathway",
+   "title": "Laryngeal papilloma: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Benign exophytic squamous papillomas of the larynx that are the laryngeal manifestation of recurrent respiratory papillomatosis, driven by human papillomavirus, chiefly types 6 and 11",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive stridor or airway obstruction, especially in a young child, which is potentially life-threatening",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Flexible fibreoptic laryngoscopy to identify and map the papillomatous lesions, Rigid endoscopy under anaesthesia for assessment, mapping, and biopsy, Histopathology to confirm papilloma and exclude dysplasia or malignancy"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: The mainstay is repeated conservative surgical debulking with microdebrider or CO2 laser to maintain airway and voice while sparing normal mucosa, as recurrence is expected"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Aggressive deep resection that damages the vocal ligament and anterior commissure, risking scarring and web formation"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of laryngeal papilloma."
+  }
+ ],
+ "tables": [
+  {
+   "id": "laryngeal_papilloma-matrix",
+   "title": "Laryngeal papilloma: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Benign exophytic squamous papillomas of the larynx that are the laryngeal manifestation of recurrent respiratory papillomatosis,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Laryngeal papillomas are the airway expression of recurrent respiratory papillomatosis, in which human papillomavirus, predominantly the low-risk genotypes 6 and 11, infects the respiratory epithelium and drives proliferation of the basal squamous cells. Juvenile-onset disease is thought to result from vertical transmission during passage through an infected birth canal, whereas adult acquisition is less clearly defined. The virus persists within apparently normal-looking mucosa, which explains the characteristic tendency to recur after removal. Lesions cluster at squamociliary junctions and produce friable, frond-like growths that add mass to the vocal folds and, when bulky, obstruct the airway; rarely the process spreads distally or undergoes malignant change.",
-    "additionalDifferentials": [
-      "Vocal fold polyp",
-      "Vocal fold leukoplakia or dysplasia",
-      "Verrucous or invasive squamous cell carcinoma",
-      "Vocal fold granuloma",
-      "Laryngeal candidiasis with keratosis",
-      "Congenital laryngeal cyst (in the child with stridor)"
+    [
+     "Key Investigations",
+     "Flexible fibreoptic laryngoscopy to identify and map the papillomatous lesions, Rigid endoscopy under anaesthesia for assessment,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Flexible fibreoptic laryngoscopy to identify and map the papillomatous lesions",
-      "Rigid endoscopy under anaesthesia for assessment, mapping, and biopsy",
-      "Histopathology to confirm papilloma and exclude dysplasia or malignancy",
-      "Human papillomavirus typing of tissue, given prognostic relevance of type 11",
-      "Tracheobronchoscopy or imaging where distal airway or pulmonary spread is suspected"
+    [
+     "Primary Differentials",
+     "Vocal fold polyp, Vocal fold leukoplakia or dysplasia, Verrucous or invasive squamous cell carcinoma",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive stridor or airway obstruction, especially in a young child, which is potentially life-threatening",
-      "Rapid growth, keratinisation, or an ulcerated mass suggesting malignant transformation",
-      "Distal tracheal or pulmonary involvement",
-      "Frequent recurrences requiring escalating numbers of procedures"
+    [
+     "Management Strategy",
+     "The mainstay is repeated conservative surgical debulking with microdebrider or CO2 laser to maintain airway and voice while",
+     "Core treatment modality"
     ],
-    "prognosis": "The course is unpredictable and often chronic with repeated recurrences, and some childhood cases eventually remit spontaneously, but aggressive multifocal or distally spreading disease carries significant morbidity and a small but important risk of malignant transformation.",
-    "pitfalls": [
-      "Aggressive deep resection that damages the vocal ligament and anterior commissure, risking scarring and web formation",
-      "Assuming complete surgical clearance eradicates the virus, when latent virus in normal mucosa drives recurrence",
-      "Overlooking malignant transformation in longstanding or type 11 disease",
-      "Neglecting airway planning in a child with bulky papillomas before anaesthesia"
-    ],
-    "references": [
-      "Cummings Otolaryngology: Head and Neck Surgery",
-      "Scott-Brown's Otorhinolaryngology, Head and Neck Surgery"
-    ],
-    "crossLinks": [],
-    "management": [
-      "The mainstay is repeated conservative surgical debulking with microdebrider or CO2 laser to maintain airway and voice while sparing normal mucosa, as recurrence is expected",
-      "Add adjuvant therapy in aggressive or frequently recurring disease, such as intralesional cidofovir or systemic bevacizumab, with HPV vaccination as an adjunct",
-      "Manage acute airway obstruction promptly, avoiding tracheostomy where possible because it risks distal seeding of papillomas",
-      "Provide voice therapy and support voice outcomes given the cumulative scarring from repeated procedures",
-      "Undertake surveillance endoscopy for recurrence, distal tracheobronchial or pulmonary spread, and malignant transformation, particularly with HPV type 11",
-      "Type HPV on excised tissue for prognostic stratification and confirm histology to exclude dysplasia",
-      "Coordinate ENT and respiratory specialist care with regular structured review"
+    [
+     "Clinical Pitfall",
+     "Aggressive deep resection that damages the vocal ligament and anterior commissure, risking scarring and web formation",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for laryngeal papilloma."
+  }
+ ]
 }

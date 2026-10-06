@@ -133,5 +133,77 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "hdac4c315"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "hepatic_enceph-dx-algo",
+      "title": "Hepatic encephalopathy: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Hepatic encephalopathy is far more common in chronic liver disease than in acute liver injury; in severe acute liver injury its presence is itself a defining criterion for acute liver failure (Harrison 22e p.2716).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Encephalopathy appearing during acute hepatitis is the major criterion for acute liver failure and indicates a poor prognosis (Harrison 22e p.2629)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Careful mental status examination is the central assessment (Harrison 22e p.2629), Trail-making (connect-the-dots / number-connection) test: normal 15-30 s, markedly prolonged in early HE (Harrison 22e p.2629), Bedside"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Severity is graded clinically along a continuum from the earliest covert/subtle changes (altered sleep, personality change, irritability, mental dullness - detectable mainly by mental-status testing such as the"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Ammonia levels are typically elevated but correlate poorly with severity of liver disease; most hepatologists do not rely on ammonia to make the diagnosis or to follow clinical progress (Harrison 22e p.2716)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for hepatic encephalopathy."
+    }
+  ],
+  "tables": [
+    {
+      "id": "hepatic_enceph-matrix",
+      "title": "Hepatic encephalopathy: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Hepatic encephalopathy is far more common in chronic liver disease than in acute liver injury; in severe acute liver injury its",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Careful mental status examination is the central assessment (Harrison 22e p.2629), Trail-making (connect-the-dots /",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Other causes of altered mental status must always be considered, since the diagnosis is clinical (Harrison 22e p.2716),",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Encephalopathy appearing during acute hepatitis is the major criterion for acute liver failure and indicates a poor prognosis",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Ammonia levels are typically elevated but correlate poorly with severity of liver disease; most hepatologists do not rely on",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for hepatic encephalopathy."
+    }
+  ]
 }

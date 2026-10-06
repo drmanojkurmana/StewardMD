@@ -5,7 +5,18 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Ward, ICU, cardiac surgery, dialysis unit",
- "aliases": ["HIT", "HITT", "HIT type 2", "4Ts score", "PF4 antibody", "anti-PF4 heparin", "heparin allergy", "argatroban", "bivalirudin", "fondaparinux HIT"],
+ "aliases": [
+  "HIT",
+  "HITT",
+  "HIT type 2",
+  "4Ts score",
+  "PF4 antibody",
+  "anti-PF4 heparin",
+  "heparin allergy",
+  "argatroban",
+  "bivalirudin",
+  "fondaparinux HIT"
+ ],
  "summary": "Calculate the 4Ts score; if intermediate or high, stop all heparin and start a non-heparin anticoagulant (argatroban, bivalirudin, fondaparinux or a DOAC) while testing for PF4/heparin antibodies. Avoid warfarin until platelets recover and avoid routine platelet transfusion.",
  "sections": [
   {
@@ -86,17 +97,130 @@
   }
  ],
  "drugs": [
-  { "name": "Argatroban", "dose": "2 mcg/kg/min IV infusion, no bolus (0.5 to 1.2 mcg/kg/min in hepatic dysfunction, heart failure, anasarca or post cardiac surgery)", "notes": "Target APTT 1.5 to 3.0 times baseline. Hepatic clearance." },
-  { "name": "Bivalirudin", "dose": "0.15 mg/kg/hour IV infusion, no bolus", "notes": "Target APTT 1.5 to 2.5 times baseline. Reduce in renal or hepatic dysfunction." },
-  { "name": "Fondaparinux (treatment dose)", "dose": "SC once daily: below 50 kg 5 mg; 50 to 100 kg 7.5 mg; above 100 kg 10 mg", "notes": "Avoid if CrCl below 30 mL/min." },
-  { "name": "Rivaroxaban", "dose": "HITT: 15 mg orally twice daily for 3 weeks, then 20 mg once daily. Isolated HIT: 15 mg twice daily until platelet recovery", "notes": "For clinically stable patients at average bleeding risk." },
-  { "name": "Apixaban", "dose": "HITT: 10 mg orally twice daily for 7 days, then 5 mg twice daily. Isolated HIT: 5 mg twice daily until platelet recovery", "notes": "For clinically stable patients at average bleeding risk." },
-  { "name": "Dabigatran", "dose": "150 mg orally twice daily", "notes": "HITT: only after at least 5 days of a parenteral non-heparin anticoagulant." },
-  { "name": "Vitamin K (phytomenadione)", "dose": "5 to 10 mg IV", "notes": "If on warfarin when HIT is diagnosed." }
+  {
+   "name": "Argatroban",
+   "dose": "2 mcg/kg/min IV infusion, no bolus (0.5 to 1.2 mcg/kg/min in hepatic dysfunction, heart failure, anasarca or post cardiac surgery)",
+   "notes": "Target APTT 1.5 to 3.0 times baseline. Hepatic clearance."
+  },
+  {
+   "name": "Bivalirudin",
+   "dose": "0.15 mg/kg/hour IV infusion, no bolus",
+   "notes": "Target APTT 1.5 to 2.5 times baseline. Reduce in renal or hepatic dysfunction."
+  },
+  {
+   "name": "Fondaparinux (treatment dose)",
+   "dose": "SC once daily: below 50 kg 5 mg; 50 to 100 kg 7.5 mg; above 100 kg 10 mg",
+   "notes": "Avoid if CrCl below 30 mL/min."
+  },
+  {
+   "name": "Rivaroxaban",
+   "dose": "HITT: 15 mg orally twice daily for 3 weeks, then 20 mg once daily. Isolated HIT: 15 mg twice daily until platelet recovery",
+   "notes": "For clinically stable patients at average bleeding risk."
+  },
+  {
+   "name": "Apixaban",
+   "dose": "HITT: 10 mg orally twice daily for 7 days, then 5 mg twice daily. Isolated HIT: 5 mg twice daily until platelet recovery",
+   "notes": "For clinically stable patients at average bleeding risk."
+  },
+  {
+   "name": "Dabigatran",
+   "dose": "150 mg orally twice daily",
+   "notes": "HITT: only after at least 5 days of a parenteral non-heparin anticoagulant."
+  },
+  {
+   "name": "Vitamin K (phytomenadione)",
+   "dose": "5 to 10 mg IV",
+   "notes": "If on warfarin when HIT is diagnosed."
+  }
  ],
  "sources": [
-  { "org": "American Society of Hematology", "title": "ASH 2018 guidelines for management of venous thromboembolism: heparin-induced thrombocytopenia", "year": 2018, "url": "https://ashpublications.org/bloodadvances/article/2/22/3360/16129/American-Society-of-Hematology-2018-guidelines-for" },
-  { "org": "American Society of Hematology", "title": "2018 ASH clinical practice guidelines on VTE: heparin-induced thrombocytopenia (clinician snapshot)", "year": 2018, "url": "https://www.hematology.org/-/media/hematology/files/clinicians/guidelines/vte/2018ash_clinical_practice_guidelinesvte_heparin-induced-snapshot.pdf" }
+  {
+   "org": "American Society of Hematology",
+   "title": "ASH 2018 guidelines for management of venous thromboembolism: heparin-induced thrombocytopenia",
+   "year": 2018,
+   "url": "https://ashpublications.org/bloodadvances/article/2/22/3360/16129/American-Society-of-Hematology-2018-guidelines-for"
+  },
+  {
+   "org": "American Society of Hematology",
+   "title": "2018 ASH clinical practice guidelines on VTE: heparin-induced thrombocytopenia (clinician snapshot)",
+   "year": 2018,
+   "url": "https://www.hematology.org/-/media/hematology/files/clinicians/guidelines/vte/2018ash_clinical_practice_guidelinesvte_heparin-induced-snapshot.pdf"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "heparin-induced-thrombocytopenia-pathway",
+   "title": "Heparin-induced thrombocytopenia (HIT) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Typical pattern: platelet fall of more than 50% (nadir usually 20 to 100 x 10^9/L) 5 to 10 days after starting heparin; within 24 hours if heparin was given in the previous 30 days.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Stop ALL heparin: UFH, LMWH, heparin flushes, heparin-locked lines and heparin in dialysis circuits. Label the chart clearly.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Low 4Ts (0 to 3): do not send HIT tests and do not treat as HIT; look for other causes (sepsis, DIC, drugs, haemodilution, bypass)."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Argatroban: 2 mcg/kg/min IV, no bolus; 0.5 to 1.2 mcg/kg/min if bilirubin above 1.5 mg/dL, heart failure, anasarca or after cardiac surgery. Titrate to APTT 1.5 to 3.0 times baseline. Suitable in renal failure; avoid or reduce in"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Testing and treating patients with a low 4Ts score: HIT is overdiagnosed."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for heparin-induced thrombocytopenia (hit)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "heparin-induced-thrombocytopenia-summary-matrix",
+   "title": "Heparin-induced thrombocytopenia (HIT) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Typical pattern: platelet fall of more than 50% (nadir usually 20 to 100 x 10^9/L) 5 to 10 days after starting heparin; within 24 hours if",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Stop ALL heparin: UFH, LMWH, heparin flushes, heparin-locked lines and heparin in dialysis circuits. Label the chart clearly.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Low 4Ts (0 to 3): do not send HIT tests and do not treat as HIT; look for other causes (sepsis, DIC, drugs, haemodilution, bypass).",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Argatroban: 2 mcg/kg/min IV infusion, no bolus (0.5 to 1.2 mcg/kg/min in hepatic dysfunction, heart failure, anasarca or post cardiac",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Testing and treating patients with a low 4Ts score: HIT is overdiagnosed.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for heparin-induced thrombocytopenia (hit)."
+  }
+ ]
 }

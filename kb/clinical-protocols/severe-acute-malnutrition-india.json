@@ -6,7 +6,23 @@
  "basis": "india",
  "counterpart": "severe-acute-malnutrition",
  "setting": "Nutrition Rehabilitation Centre (NRC), paediatric ward, district hospital",
- "aliases": ["SAM", "complicated SAM", "severe wasting", "MUAC", "bilateral pitting oedema", "kwashiorkor", "marasmus", "NRC", "F-75", "F-100", "appetite test", "ICMR STW SAM", "IAP STG SAM", "CSAM", "10 steps"],
+ "aliases": [
+  "SAM",
+  "complicated SAM",
+  "severe wasting",
+  "MUAC",
+  "bilateral pitting oedema",
+  "kwashiorkor",
+  "marasmus",
+  "NRC",
+  "F-75",
+  "F-100",
+  "appetite test",
+  "ICMR STW SAM",
+  "IAP STG SAM",
+  "CSAM",
+  "10 steps"
+ ],
  "summary": "Diagnose SAM by MUAC below 11.5 cm, weight for height below -3 SD or bilateral pitting oedema. Admit to an NRC if there are complications or the appetite test fails; treat hypoglycaemia, hypothermia, dehydration, electrolytes and infection, then feed cautiously with F-75 before catch-up F-100.",
  "sections": [
   {
@@ -109,20 +125,145 @@
   }
  ],
  "drugs": [
-  { "name": "10% dextrose", "dose": "5 mL/kg IV if unconscious or convulsing; 50 mL orally or by NG tube if conscious", "notes": "For glucose below 54 mg/dL; recheck at 30 minutes." },
-  { "name": "Amoxicillin (oral)", "dose": "Uncomplicated: 50 mg/kg per dose twice daily for 7 to 10 days (ICMR). Step-down: 40 to 45 mg/kg per dose twice daily to complete 7 days", "notes": "IAP STG lists 15 mg/kg 8-hourly for 5 days for uncomplicated SAM." },
-  { "name": "Ampicillin plus gentamicin", "dose": "Ampicillin 50 mg/kg IV or IM 6-hourly plus gentamicin 7.5 mg/kg IV or IM once daily, 7 to 10 days", "notes": "First line for complicated SAM." },
-  { "name": "Ceftriaxone", "dose": "50 mg/kg IV once daily for 7 to 10 days", "notes": "If no response in 48 hours or critically ill (ICMR)." },
-  { "name": "Potassium", "dose": "3 to 4 mmol/kg/day orally for 2 weeks", "notes": "Empirical; do not add salt to feeds." },
-  { "name": "Magnesium", "dose": "0.4 to 0.6 mmol/kg/day, IM on day 1 then oral for 2 weeks", "notes": "ICMR STW." },
-  { "name": "Vitamin A", "dose": "Over 12 months 200,000 IU; 6 to 12 months 100,000 IU; under 6 months 50,000 IU", "notes": "If food not fortified." },
-  { "name": "Zinc and copper", "dose": "Zinc 2 mg/kg/day and copper 0.3 mg/kg/day for 2 weeks", "notes": "Start on admission." },
-  { "name": "Folic acid", "dose": "5 mg on day 1, then 1 mg daily for 13 days", "notes": "IAP STG." },
-  { "name": "Iron", "dose": "3 mg/kg/day orally for 6 weeks", "notes": "Only once weight gain has started (not in the first 7 days)." }
+  {
+   "name": "10% dextrose",
+   "dose": "5 mL/kg IV if unconscious or convulsing; 50 mL orally or by NG tube if conscious",
+   "notes": "For glucose below 54 mg/dL; recheck at 30 minutes."
+  },
+  {
+   "name": "Amoxicillin (oral)",
+   "dose": "Uncomplicated: 50 mg/kg per dose twice daily for 7 to 10 days (ICMR). Step-down: 40 to 45 mg/kg per dose twice daily to complete 7 days",
+   "notes": "IAP STG lists 15 mg/kg 8-hourly for 5 days for uncomplicated SAM."
+  },
+  {
+   "name": "Ampicillin plus gentamicin",
+   "dose": "Ampicillin 50 mg/kg IV or IM 6-hourly plus gentamicin 7.5 mg/kg IV or IM once daily, 7 to 10 days",
+   "notes": "First line for complicated SAM."
+  },
+  {
+   "name": "Ceftriaxone",
+   "dose": "50 mg/kg IV once daily for 7 to 10 days",
+   "notes": "If no response in 48 hours or critically ill (ICMR)."
+  },
+  {
+   "name": "Potassium",
+   "dose": "3 to 4 mmol/kg/day orally for 2 weeks",
+   "notes": "Empirical; do not add salt to feeds."
+  },
+  {
+   "name": "Magnesium",
+   "dose": "0.4 to 0.6 mmol/kg/day, IM on day 1 then oral for 2 weeks",
+   "notes": "ICMR STW."
+  },
+  {
+   "name": "Vitamin A",
+   "dose": "Over 12 months 200,000 IU; 6 to 12 months 100,000 IU; under 6 months 50,000 IU",
+   "notes": "If food not fortified."
+  },
+  {
+   "name": "Zinc and copper",
+   "dose": "Zinc 2 mg/kg/day and copper 0.3 mg/kg/day for 2 weeks",
+   "notes": "Start on admission."
+  },
+  {
+   "name": "Folic acid",
+   "dose": "5 mg on day 1, then 1 mg daily for 13 days",
+   "notes": "IAP STG."
+  },
+  {
+   "name": "Iron",
+   "dose": "3 mg/kg/day orally for 6 weeks",
+   "notes": "Only once weight gain has started (not in the first 7 days)."
+  }
  ],
  "sources": [
-  { "org": "ICMR / DHR, MoHFW", "title": "Standard Treatment Workflow for the management of severe acute malnutrition with complications", "year": 2019, "url": "https://www.icmr.gov.in/icmrobject/uploads/STWs/1725952337_paediatrics_severe_acute_malnutrition.pdf" },
-  { "org": "Indian Academy of Pediatrics", "title": "IAP Standard Treatment Guidelines 2022: Severe acute malnutrition", "year": 2022, "url": "https://iapindia.org/pdf/Ch-136-Severe-Acute-Malnutrition.pdf" }
+  {
+   "org": "ICMR / DHR, MoHFW",
+   "title": "Standard Treatment Workflow for the management of severe acute malnutrition with complications",
+   "year": 2019,
+   "url": "https://www.icmr.gov.in/icmrobject/uploads/STWs/1725952337_paediatrics_severe_acute_malnutrition.pdf"
+  },
+  {
+   "org": "Indian Academy of Pediatrics",
+   "title": "IAP Standard Treatment Guidelines 2022: Severe acute malnutrition",
+   "year": 2022,
+   "url": "https://iapindia.org/pdf/Ch-136-Severe-Acute-Malnutrition.pdf"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "severe-acute-malnutrition-india-pathway",
+   "title": "Severe acute malnutrition: inpatient care (India, ICMR and IAP) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "6 to 59 months: SAM if MUAC below 11.5 cm, weight for height below -3 SD (WHO standards), or bilateral pitting oedema. Moderate acute malnutrition: MUAC 11.5 to 12.4 cm or weight for height -2 to -3 SD.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Hypoglycaemia is blood glucose below 54 mg/dL (3.0 mmol/L). Conscious: 50 mL of 10% dextrose, or 1 teaspoon of sugar in 3 teaspoons of water, orally or by nasogastric tube.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Essential (ICMR): haemogram, random blood sugar, liver and kidney function, chest X-ray, rapid HIV test, gastric aspirate for CBNAAT and AFB."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Stabilisation: F-75 (about 75 kcal and 0.9 g protein per 100 mL) every 2 to 3 hours, at least 5 feeds a day, increasing over 2 to 3 days towards 150 to 200 kcal/kg/day. Record leftovers."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Record pulse, respiratory rate, temperature, urine frequency, stool and vomit volumes, and feeds taken."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for severe acute malnutrition: inpatient care (india, icmr and iap)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "severe-acute-malnutrition-india-summary-matrix",
+   "title": "Severe acute malnutrition: inpatient care (India, ICMR and IAP) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "6 to 59 months: SAM if MUAC below 11.5 cm, weight for height below -3 SD (WHO standards), or bilateral pitting oedema. Moderate acute",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Hypoglycaemia is blood glucose below 54 mg/dL (3.0 mmol/L). Conscious: 50 mL of 10% dextrose, or 1 teaspoon of sugar in 3 teaspoons of",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Essential (ICMR): haemogram, random blood sugar, liver and kidney function, chest X-ray, rapid HIV test, gastric aspirate for CBNAAT and",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "10% dextrose: 5 mL/kg IV if unconscious or convulsing; 50 mL orally or by NG tube if conscious",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Giving IV fluids or full-strength ORS to a SAM child who is not in shock.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for severe acute malnutrition: inpatient care (india, icmr and iap)."
+  }
+ ]
 }

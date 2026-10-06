@@ -1,79 +1,151 @@
 {
-  "id": "turner_mosaicism",
-  "name": "Turner syndrome mosaicism (45,X/46,XX)",
-  "aliases": [
-    "mosaic Turner syndrome",
-    "45,X/46,XX",
-    "Turner mosaic karyotype",
-    "mosaic monosomy X"
+ "id": "turner_mosaicism",
+ "name": "Turner syndrome mosaicism (45,X/46,XX)",
+ "aliases": [
+  "mosaic Turner syndrome",
+  "45,X/46,XX",
+  "Turner mosaic karyotype",
+  "mosaic monosomy X"
+ ],
+ "class": "non_infective",
+ "system": "Endocrine / Reproductive genetics",
+ "specialty": "Reproductive Endocrinology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A mosaic karyotype combining a 45,X line with a normal 46,XX line, generally producing a milder and more variable phenotype than classic monosomy X",
+   "Short stature and gonadal insufficiency remain the most consistent features, but their severity depends on the proportion of 45,X cells",
+   "Some individuals retain enough ovarian tissue for spontaneous puberty and even fertility, though premature ovarian insufficiency is common",
+   "Classic Turner stigmata such as webbed neck, lymphoedema, cardiac and renal anomalies occur less frequently than in non-mosaic disease",
+   "Because there is no Y-chromosome line, the gonadoblastoma risk that mandates gonadectomy in Y-bearing dysgenesis does not apply",
+   "Cardiac surveillance (particularly for bicuspid aortic valve and aortic dilatation) and renal, thyroid, hearing and metabolic monitoring remain important",
+   "Management includes growth optimisation, timely oestrogen replacement when ovarian function is insufficient, and fertility counselling"
   ],
-  "class": "non_infective",
-  "system": "Endocrine / Reproductive genetics",
-  "specialty": "Reproductive Endocrinology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A mosaic karyotype combining a 45,X line with a normal 46,XX line, generally producing a milder and more variable phenotype than classic monosomy X",
-      "Short stature and gonadal insufficiency remain the most consistent features, but their severity depends on the proportion of 45,X cells",
-      "Some individuals retain enough ovarian tissue for spontaneous puberty and even fertility, though premature ovarian insufficiency is common",
-      "Classic Turner stigmata such as webbed neck, lymphoedema, cardiac and renal anomalies occur less frequently than in non-mosaic disease",
-      "Because there is no Y-chromosome line, the gonadoblastoma risk that mandates gonadectomy in Y-bearing dysgenesis does not apply",
-      "Cardiac surveillance (particularly for bicuspid aortic valve and aortic dilatation) and renal, thyroid, hearing and metabolic monitoring remain important",
-      "Management includes growth optimisation, timely oestrogen replacement when ovarian function is insufficient, and fertility counselling"
+  "pathophysiology": "Turner syndrome mosaicism results from the coexistence of a 45,X cell line, usually arising from postzygotic loss of an X chromosome, alongside a normal 46,XX line. Haploinsufficiency of X-linked genes that escape inactivation, notably SHOX, contributes to short stature and skeletal features, while accelerated loss of oocytes leads to varying degrees of ovarian insufficiency. Because the phenotype reflects the tissue distribution and proportion of the 45,X line, presentations range from near-normal to features resembling classic Turner syndrome. The absence of any Y-bearing cell line means the streak-gonad tumour risk associated with Y material is not a concern in this karyotype.",
+  "additionalDifferentials": [
+   "Non-mosaic Turner syndrome (45,X)",
+   "45,X/46,XY mixed gonadal dysgenesis",
+   "Noonan syndrome (phenotypic overlap with normal karyotype)",
+   "46,XX gonadal dysgenesis and premature ovarian insufficiency of other cause",
+   "Constitutional short stature or growth hormone deficiency",
+   "Other sex-chromosome aneuploidies"
+  ],
+  "additionalInvestigations": [
+   "Karyotype with adequate cell counts (and FISH where needed) to detect and quantify mosaicism",
+   "Serum gonadotropins and oestradiol to assess ovarian function",
+   "Echocardiography and, in adults, aortic imaging for cardiovascular anomalies",
+   "Renal ultrasound for structural anomalies",
+   "Thyroid function, glucose and lipid screening, and audiometry",
+   "Bone mineral density assessment and anti-mullerian hormone for fertility counselling"
+  ],
+  "redFlags": [
+   "Aortic root dilatation or bicuspid aortic valve raising the risk of dissection",
+   "Undiagnosed renal or cardiac structural anomaly",
+   "Untreated oestrogen deficiency leading to osteoporosis",
+   "Signs of autoimmune thyroid disease or impaired glucose tolerance"
+  ],
+  "prognosis": "The prognosis is generally more favourable than in non-mosaic Turner syndrome, with a proportion achieving spontaneous puberty and occasionally fertility, though ovarian insufficiency and short stature are frequent. Long-term outcome depends on cardiovascular surveillance and management of associated endocrine and metabolic conditions.",
+  "pitfalls": [
+   "Assuming a mild phenotype excludes cardiovascular and renal anomalies that still require screening",
+   "Overlooking premature ovarian insufficiency in someone who underwent spontaneous puberty",
+   "Applying the gonadectomy rule inappropriately when there is no Y-chromosome line",
+   "Insufficient karyotype sampling missing a low-level 45,X clone"
+  ],
+  "references": [
+   "Williams Textbook of Endocrinology",
+   "International Turner syndrome clinical practice guidelines"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Recombinant growth hormone to improve height where short stature is present",
+   "Oestrogen replacement to induce and maintain puberty followed by combined oestrogen-progesterone therapy, individualised because some retain ovarian function",
+   "Fertility counselling with consideration of oocyte cryopreservation given the risk of premature ovarian insufficiency, and assisted reproduction where needed",
+   "Cardiac surveillance for bicuspid aortic valve and aortic dilatation with echocardiography and aortic imaging",
+   "Monitoring for renal anomalies, thyroid disease, hearing loss, metabolic disturbance and bone health",
+   "No gonadectomy is required because there is no Y-chromosome line and hence no gonadoblastoma risk",
+   "Genetic counselling and multidisciplinary care coordinated across endocrinology, cardiology and clinical genetics"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "turner_mosaicism-pathway",
+   "title": "Turner syndrome mosaicism (45,X/46,XX): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A mosaic karyotype combining a 45,X line with a normal 46,XX line, generally producing a milder and more variable phenotype than classic monosomy X",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Aortic root dilatation or bicuspid aortic valve raising the risk of dissection",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Karyotype with adequate cell counts (and FISH where needed) to detect and quantify mosaicism, Serum gonadotropins and oestradiol to assess ovarian function, Echocardiography and, in adults, aortic imaging for"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Recombinant growth hormone to improve height where short stature is present"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming a mild phenotype excludes cardiovascular and renal anomalies that still require screening"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of turner syndrome mosaicism (45,x/46,xx)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "turner_mosaicism-matrix",
+   "title": "Turner syndrome mosaicism (45,X/46,XX): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A mosaic karyotype combining a 45,X line with a normal 46,XX line, generally producing a milder and more variable phenotype than",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Turner syndrome mosaicism results from the coexistence of a 45,X cell line, usually arising from postzygotic loss of an X chromosome, alongside a normal 46,XX line. Haploinsufficiency of X-linked genes that escape inactivation, notably SHOX, contributes to short stature and skeletal features, while accelerated loss of oocytes leads to varying degrees of ovarian insufficiency. Because the phenotype reflects the tissue distribution and proportion of the 45,X line, presentations range from near-normal to features resembling classic Turner syndrome. The absence of any Y-bearing cell line means the streak-gonad tumour risk associated with Y material is not a concern in this karyotype.",
-    "additionalDifferentials": [
-      "Non-mosaic Turner syndrome (45,X)",
-      "45,X/46,XY mixed gonadal dysgenesis",
-      "Noonan syndrome (phenotypic overlap with normal karyotype)",
-      "46,XX gonadal dysgenesis and premature ovarian insufficiency of other cause",
-      "Constitutional short stature or growth hormone deficiency",
-      "Other sex-chromosome aneuploidies"
+    [
+     "Key Investigations",
+     "Karyotype with adequate cell counts (and FISH where needed) to detect and quantify mosaicism, Serum gonadotropins and oestradiol",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Karyotype with adequate cell counts (and FISH where needed) to detect and quantify mosaicism",
-      "Serum gonadotropins and oestradiol to assess ovarian function",
-      "Echocardiography and, in adults, aortic imaging for cardiovascular anomalies",
-      "Renal ultrasound for structural anomalies",
-      "Thyroid function, glucose and lipid screening, and audiometry",
-      "Bone mineral density assessment and anti-mullerian hormone for fertility counselling"
+    [
+     "Primary Differentials",
+     "Non-mosaic Turner syndrome (45,X), 45,X/46,XY mixed gonadal dysgenesis, Noonan syndrome (phenotypic overlap with normal karyotype)",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Aortic root dilatation or bicuspid aortic valve raising the risk of dissection",
-      "Undiagnosed renal or cardiac structural anomaly",
-      "Untreated oestrogen deficiency leading to osteoporosis",
-      "Signs of autoimmune thyroid disease or impaired glucose tolerance"
+    [
+     "Management Strategy",
+     "Recombinant growth hormone to improve height where short stature is present",
+     "Core treatment modality"
     ],
-    "prognosis": "The prognosis is generally more favourable than in non-mosaic Turner syndrome, with a proportion achieving spontaneous puberty and occasionally fertility, though ovarian insufficiency and short stature are frequent. Long-term outcome depends on cardiovascular surveillance and management of associated endocrine and metabolic conditions.",
-    "pitfalls": [
-      "Assuming a mild phenotype excludes cardiovascular and renal anomalies that still require screening",
-      "Overlooking premature ovarian insufficiency in someone who underwent spontaneous puberty",
-      "Applying the gonadectomy rule inappropriately when there is no Y-chromosome line",
-      "Insufficient karyotype sampling missing a low-level 45,X clone"
-    ],
-    "references": [
-      "Williams Textbook of Endocrinology",
-      "International Turner syndrome clinical practice guidelines"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Recombinant growth hormone to improve height where short stature is present",
-      "Oestrogen replacement to induce and maintain puberty followed by combined oestrogen-progesterone therapy, individualised because some retain ovarian function",
-      "Fertility counselling with consideration of oocyte cryopreservation given the risk of premature ovarian insufficiency, and assisted reproduction where needed",
-      "Cardiac surveillance for bicuspid aortic valve and aortic dilatation with echocardiography and aortic imaging",
-      "Monitoring for renal anomalies, thyroid disease, hearing loss, metabolic disturbance and bone health",
-      "No gonadectomy is required because there is no Y-chromosome line and hence no gonadoblastoma risk",
-      "Genetic counselling and multidisciplinary care coordinated across endocrinology, cardiology and clinical genetics"
+    [
+     "Clinical Pitfall",
+     "Assuming a mild phenotype excludes cardiovascular and renal anomalies that still require screening",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for turner syndrome mosaicism (45,x/46,xx)."
+  }
+ ]
 }

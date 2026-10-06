@@ -249,5 +249,77 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "hfc358604"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "cap-dx-algo",
+      "title": "Community Acquired Pneumonia (non-severe): Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Typical and atypical pathogens cannot be reliably separated on clinical or radiographic grounds because both can produce overlapping syndromes; atypicals (Mycoplasma, Chlamydia, Legionella) are not seen on Gram stain or grown on standard",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Septic shock requiring vasopressors or respiratory failure requiring invasive mechanical ventilation (major severe-CAP criteria mandating direct ICU admission) (Harrison 22e p.1069)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Sputum Gram stain and culture (recommended chiefly for hospitalized patients, particularly severe cases or those at risk for MRSA or P. aeruginosa; an adequate specimen needs >25 neutrophils and <10 squamous epithelial"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Two validated tools guide the site-of-care decision. The Pneumonia Severity Index (PSI) is a prognostic model using 20 variables (age, comorbidities, abnormal exam and laboratory findings) that stratifies patients into"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Treating a macrolide as adequate empirical monotherapy where high-level pneumococcal macrolide resistance is prevalent risks treatment failure (Harrison 22e p.1069)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for community acquired pneumonia (non-severe)."
+    }
+  ],
+  "tables": [
+    {
+      "id": "cap-matrix",
+      "title": "Community Acquired Pneumonia (non-severe): Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Typical and atypical pathogens cannot be reliably separated on clinical or radiographic grounds because both can produce",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Sputum Gram stain and culture (recommended chiefly for hospitalized patients, particularly severe cases or those at risk for MRSA",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Acute bronchitis (Harrison 22e p.1068), Acute exacerbation of chronic bronchitis/COPD (Harrison 22e p.1068), Tuberculosis",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Septic shock requiring vasopressors or respiratory failure requiring invasive mechanical ventilation (major severe-CAP criteria",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating a macrolide as adequate empirical monotherapy where high-level pneumococcal macrolide resistance is prevalent risks",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for community acquired pneumonia (non-severe)."
+    }
+  ]
 }

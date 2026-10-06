@@ -135,5 +135,77 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-25"
- }
+ },
+ "algorithms": [
+  {
+   "id": "generalised-anxiety-disorder-pathway",
+   "title": "Generalised anxiety disorder (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Excessive, hard-to-control worry about several everyday matters on most days for at least 6 months, with restlessness, fatigue, poor concentration, irritability, muscle tension or poor sleep, causing distress or impairment.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Screen with the GAD-2 (feeling nervous, anxious or on edge; not being able to stop or control worrying); then use the GAD-7 to rate severity and track response (10 or more is a common threshold for probable GAD).",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Consider GAD in frequent attenders who seek reassurance about physical symptoms or a chronic physical illness."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Offer a choice of high-intensity psychological therapy (CBT or applied relaxation, usually 12 to 15 weekly 1-hour sessions) or drug treatment."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Warn about early activation (more anxiety, agitation, poor sleep) and that the full effect develops over 1 week or more; starting at a low dose can help."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for generalised anxiety disorder (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "generalised-anxiety-disorder-summary-matrix",
+   "title": "Generalised anxiety disorder (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Excessive, hard-to-control worry about several everyday matters on most days for at least 6 months, with restlessness, fatigue, poor",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Offer a choice of high-intensity psychological therapy (CBT or applied relaxation, usually 12 to 15 weekly 1-hour sessions) or drug",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Sertraline: 25 to 50 mg orally once daily; increase in 50 mg steps at intervals of at least 1 week; max 200 mg daily",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Long-term benzodiazepines: dependence, falls, cognitive impairment and road accidents; abrupt withdrawal can cause seizures.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for generalised anxiety disorder (adult)."
+  }
+ ]
 }

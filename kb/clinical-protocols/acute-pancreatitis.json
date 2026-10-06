@@ -5,7 +5,18 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, ward, HDU, ICU",
- "aliases": ["AP", "pancreatitis", "gallstone pancreatitis", "biliary pancreatitis", "alcoholic pancreatitis", "necrotising pancreatitis", "revised Atlanta", "WATERFALL", "infected necrosis", "hypertriglyceridaemia pancreatitis"],
+ "aliases": [
+  "AP",
+  "pancreatitis",
+  "gallstone pancreatitis",
+  "biliary pancreatitis",
+  "alcoholic pancreatitis",
+  "necrotising pancreatitis",
+  "revised Atlanta",
+  "WATERFALL",
+  "infected necrosis",
+  "hypertriglyceridaemia pancreatitis"
+ ],
  "summary": "Diagnose with 2 of 3 criteria, grade severity by revised Atlanta (persistent organ failure over 48 hours = severe), give moderate goal-directed Ringer lactate, feed orally early, avoid prophylactic antibiotics, ERCP within 24 hours only for cholangitis, and cholecystectomy before discharge in mild gallstone pancreatitis.",
  "sections": [
   {
@@ -92,13 +103,110 @@
   }
  ],
  "drugs": [
-  { "name": "Ringer lactate", "dose": "1.5 mL/kg/h IV; 10 mL/kg IV bolus first only if hypovolaemic", "notes": "Reassess at 6 hours and over 24 to 48 hours. Reduce in cardiac or renal disease." },
-  { "name": "Indomethacin (rectal)", "dose": "100 mg rectally, single dose before or immediately after ERCP", "notes": "Prevention of post-ERCP pancreatitis in high-risk patients." },
-  { "name": "Meropenem (infected necrosis only)", "dose": "1 g IV every 8 hours", "notes": "Example of a necrosis-penetrating agent; adjust for renal function and local resistance. Not for prophylaxis." }
+  {
+   "name": "Ringer lactate",
+   "dose": "1.5 mL/kg/h IV; 10 mL/kg IV bolus first only if hypovolaemic",
+   "notes": "Reassess at 6 hours and over 24 to 48 hours. Reduce in cardiac or renal disease."
+  },
+  {
+   "name": "Indomethacin (rectal)",
+   "dose": "100 mg rectally, single dose before or immediately after ERCP",
+   "notes": "Prevention of post-ERCP pancreatitis in high-risk patients."
+  },
+  {
+   "name": "Meropenem (infected necrosis only)",
+   "dose": "1 g IV every 8 hours",
+   "notes": "Example of a necrosis-penetrating agent; adjust for renal function and local resistance. Not for prophylaxis."
+  }
  ],
  "sources": [
-  { "org": "American College of Gastroenterology", "title": "American College of Gastroenterology Guidelines: Management of Acute Pancreatitis (Tenner et al., Am J Gastroenterol)", "year": 2024, "url": "https://journals.lww.com/ajg/fulltext/2024/03000/american_college_of_gastroenterology_guidelines_.14.aspx" },
-  { "org": "NEJM (WATERFALL trial)", "title": "Aggressive or Moderate Fluid Resuscitation in Acute Pancreatitis (de-Madaria et al.)", "year": 2022, "url": "https://www.nejm.org/doi/full/10.1056/NEJMoa2202884" }
+  {
+   "org": "American College of Gastroenterology",
+   "title": "American College of Gastroenterology Guidelines: Management of Acute Pancreatitis (Tenner et al., Am J Gastroenterol)",
+   "year": 2024,
+   "url": "https://journals.lww.com/ajg/fulltext/2024/03000/american_college_of_gastroenterology_guidelines_.14.aspx"
+  },
+  {
+   "org": "NEJM (WATERFALL trial)",
+   "title": "Aggressive or Moderate Fluid Resuscitation in Acute Pancreatitis (de-Madaria et al.)",
+   "year": 2022,
+   "url": "https://www.nejm.org/doi/full/10.1056/NEJMoa2202884"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "acute-pancreatitis-pathway",
+   "title": "Acute pancreatitis Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Diagnose with 2 of 3: typical pain (constant epigastric, often radiating to the back), serum lipase or amylase above 3 times the upper limit of normal, or characteristic imaging. Lipase is preferred over amylase.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Use Ringer lactate rather than 0.9% saline.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Revised Atlanta: mild = no organ failure and no local or systemic complications; moderately severe = transient organ failure (resolves within 48 hours), local complications or exacerbation of co-morbid disease; severe = persistent organ"
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Cholangitis: ERCP within 24 hours."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Early CT for severity, which adds little and may miss necrosis that evolves later."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for acute pancreatitis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "acute-pancreatitis-summary-matrix",
+   "title": "Acute pancreatitis Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Diagnose with 2 of 3: typical pain (constant epigastric, often radiating to the back), serum lipase or amylase above 3 times the upper",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Use Ringer lactate rather than 0.9% saline.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Revised Atlanta: mild = no organ failure and no local or systemic complications; moderately severe = transient organ failure (resolves",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Ringer lactate: 1.5 mL/kg/h IV; 10 mL/kg IV bolus first only if hypovolaemic",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Early CT for severity, which adds little and may miss necrosis that evolves later.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for acute pancreatitis."
+  }
+ ]
 }

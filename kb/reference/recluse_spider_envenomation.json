@@ -1,80 +1,152 @@
 {
-  "id": "recluse_spider_envenomation",
-  "name": "Recluse (Loxosceles) spider envenomation",
-  "aliases": [
-    "loxoscelism",
-    "brown recluse bite",
-    "Loxosceles bite",
-    "violin spider bite",
-    "necrotic arachnidism"
+ "id": "recluse_spider_envenomation",
+ "name": "Recluse (Loxosceles) spider envenomation",
+ "aliases": [
+  "loxoscelism",
+  "brown recluse bite",
+  "Loxosceles bite",
+  "violin spider bite",
+  "necrotic arachnidism"
+ ],
+ "class": "non_infective",
+ "system": "Toxicology / Envenomation",
+ "specialty": "Clinical Toxicology / Emergency Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Goldfrank's Toxicologic Emergencies / WHO envenoming guidance",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Loxoscelism ranges from a self-limiting local lesion to a necrotic ulcer, and less commonly a systemic (viscerocutaneous) illness with haemolysis",
+   "The bite is often initially painless; over hours a central blister with surrounding pallor and erythema may evolve into a sinking, dusky lesion and eschar",
+   "A dependent or gravity-influenced spread of discolouration and the classic red-white-blue appearance suggest developing dermonecrosis",
+   "Systemic loxoscelism, more common in children, features fever, malaise and intravascular haemolysis, sometimes with haemoglobinuria and acute kidney injury",
+   "Most necrotic wounds attributed to spiders are actually other conditions; confirmed recluse exposure requires the spider to be endemic and ideally identified",
+   "Management is largely supportive with wound care, analgesia and monitoring for haemolysis; surgical debridement is deferred until the lesion has fully demarcated",
+   "There is no local pain-predominant cramping syndrome as in widow bites, which aids differentiation"
   ],
-  "class": "non_infective",
-  "system": "Toxicology / Envenomation",
-  "specialty": "Clinical Toxicology / Emergency Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Goldfrank's Toxicologic Emergencies / WHO envenoming guidance",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Loxoscelism ranges from a self-limiting local lesion to a necrotic ulcer, and less commonly a systemic (viscerocutaneous) illness with haemolysis",
-      "The bite is often initially painless; over hours a central blister with surrounding pallor and erythema may evolve into a sinking, dusky lesion and eschar",
-      "A dependent or gravity-influenced spread of discolouration and the classic red-white-blue appearance suggest developing dermonecrosis",
-      "Systemic loxoscelism, more common in children, features fever, malaise and intravascular haemolysis, sometimes with haemoglobinuria and acute kidney injury",
-      "Most necrotic wounds attributed to spiders are actually other conditions; confirmed recluse exposure requires the spider to be endemic and ideally identified",
-      "Management is largely supportive with wound care, analgesia and monitoring for haemolysis; surgical debridement is deferred until the lesion has fully demarcated",
-      "There is no local pain-predominant cramping syndrome as in widow bites, which aids differentiation"
+  "pathophysiology": "Recluse venom contains sphingomyelinase D (phospholipase D), which acts on cell membranes and endothelium to trigger complement activation, neutrophil recruitment and intravascular thrombosis. This produces localised vascular occlusion and ischaemic dermonecrosis, with a characteristic gravity-dependent spread of injury. In systemic loxoscelism the enzyme induces complement-mediated haemolysis of red cells, releasing free haemoglobin that can precipitate acute kidney injury; disseminated intravascular coagulation may accompany severe cases. The delayed, evolving nature of the lesion reflects progressive microvascular thrombosis rather than direct cytolysis alone.",
+  "additionalDifferentials": [
+   "Bacterial skin and soft-tissue infection or abscess",
+   "Necrotising fasciitis",
+   "Cutaneous anthrax or other necrotic infection",
+   "Vasculitis or pyoderma gangrenosum",
+   "Other arthropod bite or chemical/thermal injury",
+   "Diabetic or ischaemic ulcer"
+  ],
+  "additionalInvestigations": [
+   "Full blood count and blood film for haemolysis",
+   "Haptoglobin, lactate dehydrogenase, reticulocytes and bilirubin for intravascular haemolysis",
+   "Urinalysis for haemoglobinuria and renal function tests",
+   "Coagulation studies if disseminated intravascular coagulation is suspected",
+   "Wound assessment over serial reviews to track demarcation",
+   "Consideration of infective causes when a necrotic lesion lacks clear envenomation history"
+  ],
+  "redFlags": [
+   "Systemic features of fever, malaise and dark urine suggesting haemolysis",
+   "Falling haemoglobin or evidence of acute kidney injury",
+   "Rapidly spreading necrosis or signs of superadded necrotising infection",
+   "Haemodynamic instability",
+   "Coagulopathy"
+  ],
+  "prognosis": "Most bites heal with conservative wound care, though large necrotic ulcers may take weeks to months and can scar. Systemic loxoscelism with haemolysis is uncommon but potentially life-threatening, particularly in children, and requires close monitoring.",
+  "pitfalls": [
+   "Over-diagnosing recluse bites for necrotic wounds outside the spider's endemic range, missing infection or other pathology",
+   "Performing early aggressive debridement before the lesion has demarcated, worsening the defect",
+   "Failing to screen for and monitor systemic haemolysis, especially in children",
+   "Treating a necrotising soft-tissue infection as a benign spider bite"
+  ],
+  "references": [
+   "Goldfrank's Toxicologic Emergencies",
+   "Clinical toxicology guidance on loxoscelism"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Provide supportive wound care with cleansing, immobilisation, elevation and dressings, together with analgesia and tetanus prophylaxis",
+   "Defer surgical debridement until the necrotic lesion has fully demarcated to avoid enlarging the wound",
+   "Monitor for systemic loxoscelism with serial full blood count, haemolysis markers and urinalysis, particularly in children who are most at risk",
+   "Treat intravascular haemolysis with hydration, transfusion as required and management of haemoglobinuria to protect renal function",
+   "Manage disseminated intravascular coagulation with supportive haematological measures if it develops",
+   "Reserve antibiotics for genuine secondary bacterial infection rather than the necrotic lesion itself, and escalate to critical care for severe systemic envenomation"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "recluse_spider_envenomation-pathway",
+   "title": "Recluse (Loxosceles) spider envenomation: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Loxoscelism ranges from a self-limiting local lesion to a necrotic ulcer, and less commonly a systemic (viscerocutaneous) illness with haemolysis",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Systemic features of fever, malaise and dark urine suggesting haemolysis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Full blood count and blood film for haemolysis, Haptoglobin, lactate dehydrogenase, reticulocytes and bilirubin for intravascular haemolysis, Urinalysis for haemoglobinuria and renal function tests"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Provide supportive wound care with cleansing, immobilisation, elevation and dressings, together with analgesia and tetanus prophylaxis"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Over-diagnosing recluse bites for necrotic wounds outside the spider's endemic range, missing infection or other pathology"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of recluse (loxosceles) spider envenomation."
+  }
+ ],
+ "tables": [
+  {
+   "id": "recluse_spider_envenomation-matrix",
+   "title": "Recluse (Loxosceles) spider envenomation: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Loxoscelism ranges from a self-limiting local lesion to a necrotic ulcer, and less commonly a systemic (viscerocutaneous) illness",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Recluse venom contains sphingomyelinase D (phospholipase D), which acts on cell membranes and endothelium to trigger complement activation, neutrophil recruitment and intravascular thrombosis. This produces localised vascular occlusion and ischaemic dermonecrosis, with a characteristic gravity-dependent spread of injury. In systemic loxoscelism the enzyme induces complement-mediated haemolysis of red cells, releasing free haemoglobin that can precipitate acute kidney injury; disseminated intravascular coagulation may accompany severe cases. The delayed, evolving nature of the lesion reflects progressive microvascular thrombosis rather than direct cytolysis alone.",
-    "additionalDifferentials": [
-      "Bacterial skin and soft-tissue infection or abscess",
-      "Necrotising fasciitis",
-      "Cutaneous anthrax or other necrotic infection",
-      "Vasculitis or pyoderma gangrenosum",
-      "Other arthropod bite or chemical/thermal injury",
-      "Diabetic or ischaemic ulcer"
+    [
+     "Key Investigations",
+     "Full blood count and blood film for haemolysis, Haptoglobin, lactate dehydrogenase, reticulocytes and bilirubin for intravascular",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Full blood count and blood film for haemolysis",
-      "Haptoglobin, lactate dehydrogenase, reticulocytes and bilirubin for intravascular haemolysis",
-      "Urinalysis for haemoglobinuria and renal function tests",
-      "Coagulation studies if disseminated intravascular coagulation is suspected",
-      "Wound assessment over serial reviews to track demarcation",
-      "Consideration of infective causes when a necrotic lesion lacks clear envenomation history"
+    [
+     "Primary Differentials",
+     "Bacterial skin and soft-tissue infection or abscess, Necrotising fasciitis, Cutaneous anthrax or other necrotic infection",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Systemic features of fever, malaise and dark urine suggesting haemolysis",
-      "Falling haemoglobin or evidence of acute kidney injury",
-      "Rapidly spreading necrosis or signs of superadded necrotising infection",
-      "Haemodynamic instability",
-      "Coagulopathy"
+    [
+     "Management Strategy",
+     "Provide supportive wound care with cleansing, immobilisation, elevation and dressings, together with analgesia and tetanus",
+     "Core treatment modality"
     ],
-    "prognosis": "Most bites heal with conservative wound care, though large necrotic ulcers may take weeks to months and can scar. Systemic loxoscelism with haemolysis is uncommon but potentially life-threatening, particularly in children, and requires close monitoring.",
-    "pitfalls": [
-      "Over-diagnosing recluse bites for necrotic wounds outside the spider's endemic range, missing infection or other pathology",
-      "Performing early aggressive debridement before the lesion has demarcated, worsening the defect",
-      "Failing to screen for and monitor systemic haemolysis, especially in children",
-      "Treating a necrotising soft-tissue infection as a benign spider bite"
-    ],
-    "references": [
-      "Goldfrank's Toxicologic Emergencies",
-      "Clinical toxicology guidance on loxoscelism"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Provide supportive wound care with cleansing, immobilisation, elevation and dressings, together with analgesia and tetanus prophylaxis",
-      "Defer surgical debridement until the necrotic lesion has fully demarcated to avoid enlarging the wound",
-      "Monitor for systemic loxoscelism with serial full blood count, haemolysis markers and urinalysis, particularly in children who are most at risk",
-      "Treat intravascular haemolysis with hydration, transfusion as required and management of haemoglobinuria to protect renal function",
-      "Manage disseminated intravascular coagulation with supportive haematological measures if it develops",
-      "Reserve antibiotics for genuine secondary bacterial infection rather than the necrotic lesion itself, and escalate to critical care for severe systemic envenomation"
+    [
+     "Clinical Pitfall",
+     "Over-diagnosing recluse bites for necrotic wounds outside the spider's endemic range, missing infection or other pathology",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for recluse (loxosceles) spider envenomation."
+  }
+ ]
 }

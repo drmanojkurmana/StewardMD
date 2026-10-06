@@ -6,7 +6,19 @@
  "basis": "international",
  "counterpart": "hypertension-management-india",
  "setting": "Primary care, outpatient clinic",
- "aliases": ["hypertension", "HTN", "high blood pressure", "BP", "essential hypertension", "elevated blood pressure", "resistant hypertension", "single pill combination", "SPC", "IHCI", "antihypertensive"],
+ "aliases": [
+  "hypertension",
+  "HTN",
+  "high blood pressure",
+  "BP",
+  "essential hypertension",
+  "elevated blood pressure",
+  "resistant hypertension",
+  "single pill combination",
+  "SPC",
+  "IHCI",
+  "antihypertensive"
+ ],
  "summary": "Confirm raised office BP with home or ambulatory readings, assess cardiovascular risk and organ damage, start lifestyle measures, begin most patients with confirmed hypertension on a two-drug single-pill combination (RAS blocker with a calcium channel blocker or thiazide-like diuretic), and aim for SBP 120 to 129 mmHg if tolerated.",
  "sections": [
   {
@@ -80,19 +92,141 @@
   }
  ],
  "drugs": [
-  { "name": "Amlodipine", "dose": "5 mg orally once daily, increase to 10 mg once daily", "notes": "Ankle oedema is dose-related. First step in the IHCI protocol." },
-  { "name": "Telmisartan", "dose": "40 mg orally once daily, increase to 80 mg once daily", "notes": "Check potassium and creatinine. Contraindicated in pregnancy." },
-  { "name": "Losartan", "dose": "50 mg orally once daily, up to 100 mg daily", "notes": "Alternative ARB." },
-  { "name": "Ramipril or enalapril", "dose": "Ramipril 2.5 mg once daily, up to 10 mg daily; enalapril 5 mg once daily, up to 40 mg daily in 1 or 2 doses", "notes": "Dry cough: switch to an ARB. Angioedema risk. Contraindicated in pregnancy." },
-  { "name": "Chlorthalidone", "dose": "12.5 mg orally once daily, up to 25 mg daily", "notes": "Hypokalaemia, hyponatraemia, hyperuricaemia; check electrolytes." },
-  { "name": "Indapamide", "dose": "1.5 mg modified release (or 2.5 mg) orally once daily", "notes": "Thiazide-like alternative." },
-  { "name": "Spironolactone", "dose": "25 mg orally once daily, up to 50 mg daily", "notes": "Resistant hypertension. Avoid if potassium above 4.5 to 5.0 mmol/L or eGFR below 30 to 45; monitor potassium." },
-  { "name": "Metoprolol succinate or bisoprolol", "dose": "Metoprolol succinate 25 to 100 mg once daily; bisoprolol 2.5 to 10 mg once daily", "notes": "For compelling indications or as a fourth-line agent." }
+  {
+   "name": "Amlodipine",
+   "dose": "5 mg orally once daily, increase to 10 mg once daily",
+   "notes": "Ankle oedema is dose-related. First step in the IHCI protocol."
+  },
+  {
+   "name": "Telmisartan",
+   "dose": "40 mg orally once daily, increase to 80 mg once daily",
+   "notes": "Check potassium and creatinine. Contraindicated in pregnancy."
+  },
+  {
+   "name": "Losartan",
+   "dose": "50 mg orally once daily, up to 100 mg daily",
+   "notes": "Alternative ARB."
+  },
+  {
+   "name": "Ramipril or enalapril",
+   "dose": "Ramipril 2.5 mg once daily, up to 10 mg daily; enalapril 5 mg once daily, up to 40 mg daily in 1 or 2 doses",
+   "notes": "Dry cough: switch to an ARB. Angioedema risk. Contraindicated in pregnancy."
+  },
+  {
+   "name": "Chlorthalidone",
+   "dose": "12.5 mg orally once daily, up to 25 mg daily",
+   "notes": "Hypokalaemia, hyponatraemia, hyperuricaemia; check electrolytes."
+  },
+  {
+   "name": "Indapamide",
+   "dose": "1.5 mg modified release (or 2.5 mg) orally once daily",
+   "notes": "Thiazide-like alternative."
+  },
+  {
+   "name": "Spironolactone",
+   "dose": "25 mg orally once daily, up to 50 mg daily",
+   "notes": "Resistant hypertension. Avoid if potassium above 4.5 to 5.0 mmol/L or eGFR below 30 to 45; monitor potassium."
+  },
+  {
+   "name": "Metoprolol succinate or bisoprolol",
+   "dose": "Metoprolol succinate 25 to 100 mg once daily; bisoprolol 2.5 to 10 mg once daily",
+   "notes": "For compelling indications or as a fourth-line agent."
+  }
  ],
  "sources": [
-  { "org": "ESC", "title": "2024 ESC Guidelines for the management of elevated blood pressure and hypertension", "year": 2024, "url": "https://academic.oup.com/eurheartj/article/45/38/3912/7741010" },
-  { "org": "AHA / ACC", "title": "2025 AHA/ACC Guideline for the Prevention, Detection, Evaluation and Management of High Blood Pressure in Adults", "year": 2025, "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001356" },
-  { "org": "ICMR / MoHFW (IHCI)", "title": "India Hypertension Control Initiative: drug and dose-specific standard treatment protocol at scale in Punjab and Maharashtra", "year": 2024, "url": "https://globalheartjournal.com/articles/10.5334/gh.1305" }
+  {
+   "org": "ESC",
+   "title": "2024 ESC Guidelines for the management of elevated blood pressure and hypertension",
+   "year": 2024,
+   "url": "https://academic.oup.com/eurheartj/article/45/38/3912/7741010"
+  },
+  {
+   "org": "AHA / ACC",
+   "title": "2025 AHA/ACC Guideline for the Prevention, Detection, Evaluation and Management of High Blood Pressure in Adults",
+   "year": 2025,
+   "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001356"
+  },
+  {
+   "org": "ICMR / MoHFW (IHCI)",
+   "title": "India Hypertension Control Initiative: drug and dose-specific standard treatment protocol at scale in Punjab and Maharashtra",
+   "year": 2024,
+   "url": "https://globalheartjournal.com/articles/10.5334/gh.1305"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "hypertension-management-pathway",
+   "title": "Hypertension: diagnosis and outpatient management Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Measure correctly: seated after 5 minutes of rest, back supported, arm at heart level, correct cuff size, validated device; take 2 to 3 readings 1 to 2 minutes apart and average; measure both arms at the first visit and use the higher arm.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "ESC 2024 categories (office): non-elevated below 120/70, elevated 120 to 139/70 to 89, hypertension 140/90 mmHg or more. AHA/ACC 2025 labels 130 to 139/80 to 89 as stage 1 and 140/90 or more as stage 2 hypertension.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Bloods: sodium, potassium, creatinine and eGFR, fasting glucose or HbA1c, lipid profile; urine dipstick and urine albumin-creatinine ratio; 12-lead ECG (LVH, AF). Echocardiography if the ECG is abnormal or symptoms suggest heart disease."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Start drugs promptly for confirmed hypertension (140/90 mmHg or more). Most patients: a two-drug combination, preferably as a single pill: ACE inhibitor or ARB with a dihydropyridine calcium channel blocker or a thiazide-like diuretic."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Review monthly after starting or changing treatment until controlled (aim within 3 months), then every 3 to 12 months. Encourage home BP monitoring."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for hypertension: diagnosis and outpatient management."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hypertension-management-summary-matrix",
+   "title": "Hypertension: diagnosis and outpatient management Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Measure correctly: seated after 5 minutes of rest, back supported, arm at heart level, correct cuff size, validated device; take 2 to 3",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Start drugs promptly for confirmed hypertension (140/90 mmHg or more). Most patients: a two-drug combination, preferably as a single pill:",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Bloods: sodium, potassium, creatinine and eGFR, fasting glucose or HbA1c, lipid profile; urine dipstick and urine albumin-creatinine ratio;",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Amlodipine: 5 mg orally once daily, increase to 10 mg once daily",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Diagnosing hypertension on a single office reading.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for hypertension: diagnosis and outpatient management."
+  }
+ ]
 }

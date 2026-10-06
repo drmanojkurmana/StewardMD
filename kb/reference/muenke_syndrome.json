@@ -1,78 +1,150 @@
 {
-  "id": "muenke_syndrome",
-  "name": "Muenke syndrome",
-  "aliases": [
-    "FGFR3-related coronal synostosis",
-    "FGFR3 P250R craniosynostosis",
-    "Muenke-type craniosynostosis"
+ "id": "muenke_syndrome",
+ "name": "Muenke syndrome",
+ "aliases": [
+  "FGFR3-related coronal synostosis",
+  "FGFR3 P250R craniosynostosis",
+  "Muenke-type craniosynostosis"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Genetics",
+ "specialty": "Clinical Genetics / Skeletal Dysplasia",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Smith's Recognizable Patterns of Human Malformation",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Defined at the molecular level by a single recurrent FGFR3 mutation, the p.Pro250Arg (P250R) substitution, inherited in an autosomal dominant pattern",
+   "Classically causes uni- or bicoronal synostosis, but the phenotype is highly variable and some carriers are essentially unaffected",
+   "Because it is defined by genotype rather than a fixed appearance, molecular testing is essential and clinical overlap with Saethre-Chotzen syndrome is considerable",
+   "Sensorineural hearing loss is an important and frequently under-recognised associated feature that should be actively screened for",
+   "Macrocephaly, mild developmental or learning difficulties and subtle limb radiographic changes (such as carpal or tarsal fusions) may be present",
+   "Females and those with bicoronal involvement tend to be more severely affected than males or those with unilateral synostosis",
+   "The recurrent mutation means testing is straightforward and should be offered when coronal synostosis is found without another cause",
+   "Craniofacial surgical management follows the pattern and severity of suture fusion, with monitoring for raised intracranial pressure"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Genetics",
-  "specialty": "Clinical Genetics / Skeletal Dysplasia",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Smith's Recognizable Patterns of Human Malformation",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Defined at the molecular level by a single recurrent FGFR3 mutation, the p.Pro250Arg (P250R) substitution, inherited in an autosomal dominant pattern",
-      "Classically causes uni- or bicoronal synostosis, but the phenotype is highly variable and some carriers are essentially unaffected",
-      "Because it is defined by genotype rather than a fixed appearance, molecular testing is essential and clinical overlap with Saethre-Chotzen syndrome is considerable",
-      "Sensorineural hearing loss is an important and frequently under-recognised associated feature that should be actively screened for",
-      "Macrocephaly, mild developmental or learning difficulties and subtle limb radiographic changes (such as carpal or tarsal fusions) may be present",
-      "Females and those with bicoronal involvement tend to be more severely affected than males or those with unilateral synostosis",
-      "The recurrent mutation means testing is straightforward and should be offered when coronal synostosis is found without another cause",
-      "Craniofacial surgical management follows the pattern and severity of suture fusion, with monitoring for raised intracranial pressure"
+  "pathophysiology": "Muenke syndrome is caused by a specific gain-of-function change in fibroblast growth factor receptor 3 (the P250R substitution) that increases ligand-independent or ligand-enhanced receptor signalling. The heightened FGFR3 activity in the coronal suture drives premature osteogenic differentiation and suture fusion. The same receptor is expressed in the cochlea, which accounts for the associated sensorineural hearing loss, and its wide expression contributes to the marked variability in expression, including non-penetrant carriers.",
+  "additionalDifferentials": [
+   "Saethre-Chotzen syndrome (TWIST1, overlapping coronal synostosis)",
+   "Crouzon syndrome (FGFR2)",
+   "Pfeiffer syndrome (broad thumbs and toes)",
+   "Non-syndromic uni- or bicoronal craniosynostosis",
+   "Craniofrontonasal syndrome (EFNB1)"
+  ],
+  "additionalInvestigations": [
+   "Targeted molecular testing for the recurrent FGFR3 P250R mutation",
+   "Audiological assessment to detect sensorineural hearing loss",
+   "Three-dimensional cranial CT to define coronal suture involvement",
+   "Developmental and neuropsychological assessment where indicated",
+   "Radiographs of the hands and feet to detect carpal or tarsal fusion",
+   "MRI of the brain if raised intracranial pressure is suspected"
+  ],
+  "redFlags": [
+   "Signs of raised intracranial pressure, more likely with bicoronal fusion",
+   "Undiagnosed sensorineural hearing loss impairing speech and development",
+   "Developmental delay warranting additional evaluation",
+   "Progressive craniofacial deformity requiring surgical revision"
+  ],
+  "prognosis": "Outcome ranges from unaffected carriers to children needing craniofacial surgery; cognition is usually normal or only mildly affected, but unrecognised hearing loss can compromise development, so audiological follow-up is important.",
+  "pitfalls": [
+   "Diagnosing Saethre-Chotzen syndrome clinically without molecular testing, given the overlap",
+   "Failing to screen for and treat sensorineural hearing loss",
+   "Assuming an affected parent excludes the diagnosis, since expression is highly variable",
+   "Neglecting intracranial pressure monitoring in bicoronal cases"
+  ],
+  "references": [
+   "Smith's Recognizable Patterns of Human Malformation",
+   "GeneReviews: FGFR-related craniosynostosis syndromes"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Cranial vault remodelling and suture release by a craniofacial surgical team for coronal synostosis and any raised intracranial pressure",
+   "Audiological management of sensorineural hearing loss, including hearing aids and speech and language support",
+   "Developmental and educational support with early intervention for learning difficulties",
+   "Surveillance for raised intracranial pressure with clinical review, fundoscopy and neuroimaging where indicated",
+   "Coordinated multidisciplinary craniofacial follow-up spanning surgery, ENT and audiology, ophthalmology and neurodevelopment",
+   "Genetic counselling for this autosomal dominant FGFR3 P250R condition, with testing of at-risk relatives given its variable penetrance",
+   "Regular audiological screening, because unrecognised hearing loss can impair development"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "muenke_syndrome-pathway",
+   "title": "Muenke syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Defined at the molecular level by a single recurrent FGFR3 mutation, the p.Pro250Arg (P250R) substitution, inherited in an autosomal dominant pattern",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Signs of raised intracranial pressure, more likely with bicoronal fusion",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Targeted molecular testing for the recurrent FGFR3 P250R mutation, Audiological assessment to detect sensorineural hearing loss, Three-dimensional cranial CT to define coronal suture involvement"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Cranial vault remodelling and suture release by a craniofacial surgical team for coronal synostosis and any raised intracranial pressure"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Diagnosing Saethre-Chotzen syndrome clinically without molecular testing, given the overlap"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of muenke syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "muenke_syndrome-matrix",
+   "title": "Muenke syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Defined at the molecular level by a single recurrent FGFR3 mutation, the p.Pro250Arg (P250R) substitution, inherited in an",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Muenke syndrome is caused by a specific gain-of-function change in fibroblast growth factor receptor 3 (the P250R substitution) that increases ligand-independent or ligand-enhanced receptor signalling. The heightened FGFR3 activity in the coronal suture drives premature osteogenic differentiation and suture fusion. The same receptor is expressed in the cochlea, which accounts for the associated sensorineural hearing loss, and its wide expression contributes to the marked variability in expression, including non-penetrant carriers.",
-    "additionalDifferentials": [
-      "Saethre-Chotzen syndrome (TWIST1, overlapping coronal synostosis)",
-      "Crouzon syndrome (FGFR2)",
-      "Pfeiffer syndrome (broad thumbs and toes)",
-      "Non-syndromic uni- or bicoronal craniosynostosis",
-      "Craniofrontonasal syndrome (EFNB1)"
+    [
+     "Key Investigations",
+     "Targeted molecular testing for the recurrent FGFR3 P250R mutation, Audiological assessment to detect sensorineural hearing loss,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Targeted molecular testing for the recurrent FGFR3 P250R mutation",
-      "Audiological assessment to detect sensorineural hearing loss",
-      "Three-dimensional cranial CT to define coronal suture involvement",
-      "Developmental and neuropsychological assessment where indicated",
-      "Radiographs of the hands and feet to detect carpal or tarsal fusion",
-      "MRI of the brain if raised intracranial pressure is suspected"
+    [
+     "Primary Differentials",
+     "Saethre-Chotzen syndrome (TWIST1, overlapping coronal synostosis), Crouzon syndrome (FGFR2), Pfeiffer syndrome (broad thumbs and",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Signs of raised intracranial pressure, more likely with bicoronal fusion",
-      "Undiagnosed sensorineural hearing loss impairing speech and development",
-      "Developmental delay warranting additional evaluation",
-      "Progressive craniofacial deformity requiring surgical revision"
+    [
+     "Management Strategy",
+     "Cranial vault remodelling and suture release by a craniofacial surgical team for coronal synostosis and any raised intracranial",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcome ranges from unaffected carriers to children needing craniofacial surgery; cognition is usually normal or only mildly affected, but unrecognised hearing loss can compromise development, so audiological follow-up is important.",
-    "pitfalls": [
-      "Diagnosing Saethre-Chotzen syndrome clinically without molecular testing, given the overlap",
-      "Failing to screen for and treat sensorineural hearing loss",
-      "Assuming an affected parent excludes the diagnosis, since expression is highly variable",
-      "Neglecting intracranial pressure monitoring in bicoronal cases"
-    ],
-    "references": [
-      "Smith's Recognizable Patterns of Human Malformation",
-      "GeneReviews: FGFR-related craniosynostosis syndromes"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Cranial vault remodelling and suture release by a craniofacial surgical team for coronal synostosis and any raised intracranial pressure",
-      "Audiological management of sensorineural hearing loss, including hearing aids and speech and language support",
-      "Developmental and educational support with early intervention for learning difficulties",
-      "Surveillance for raised intracranial pressure with clinical review, fundoscopy and neuroimaging where indicated",
-      "Coordinated multidisciplinary craniofacial follow-up spanning surgery, ENT and audiology, ophthalmology and neurodevelopment",
-      "Genetic counselling for this autosomal dominant FGFR3 P250R condition, with testing of at-risk relatives given its variable penetrance",
-      "Regular audiological screening, because unrecognised hearing loss can impair development"
+    [
+     "Clinical Pitfall",
+     "Diagnosing Saethre-Chotzen syndrome clinically without molecular testing, given the overlap",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for muenke syndrome."
+  }
+ ]
 }

@@ -1,81 +1,153 @@
 {
-  "id": "cushing_disease",
-  "name": "Cushing disease",
-  "aliases": [
-    "ACTH-dependent pituitary Cushing",
-    "pituitary-dependent hypercortisolism",
-    "corticotroph adenoma",
-    "Cushing's disease"
+ "id": "cushing_disease",
+ "name": "Cushing disease",
+ "aliases": [
+  "ACTH-dependent pituitary Cushing",
+  "pituitary-dependent hypercortisolism",
+  "corticotroph adenoma",
+  "Cushing's disease"
+ ],
+ "class": "non_infective",
+ "system": "Endocrine / Metabolic",
+ "specialty": "Endocrinology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine / Endocrine Society",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Refers specifically to hypercortisolism caused by an ACTH-secreting pituitary adenoma, the commonest cause of endogenous Cushing syndrome",
+   "Clinical features include central obesity, a rounded plethoric face, dorsocervical and supraclavicular fat pads, wide purple striae, proximal myopathy, easy bruising, and skin thinning",
+   "Metabolic consequences include hypertension, glucose intolerance or diabetes, osteoporosis, and susceptibility to infection",
+   "Diagnosis proceeds in two steps: first confirming cortisol excess, then determining whether it is ACTH-dependent and localising the source",
+   "Confirmatory tests of hypercortisolism include late-night salivary cortisol, 24-hour urinary free cortisol, and failure of cortisol to suppress with low-dose dexamethasone",
+   "In ACTH-dependent disease, distinguishing a pituitary source from ectopic ACTH secretion may require high-dose suppression testing, CRH stimulation, and inferior petrosal sinus sampling",
+   "Because corticotroph adenomas are often small, pituitary MRI can be normal, so biochemical and sampling data guide localisation",
+   "First-line treatment is selective transsphenoidal removal of the adenoma, with radiotherapy, medical therapy, or bilateral adrenalectomy reserved for persistent or recurrent disease"
   ],
-  "class": "non_infective",
-  "system": "Endocrine / Metabolic",
-  "specialty": "Endocrinology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine / Endocrine Society",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Refers specifically to hypercortisolism caused by an ACTH-secreting pituitary adenoma, the commonest cause of endogenous Cushing syndrome",
-      "Clinical features include central obesity, a rounded plethoric face, dorsocervical and supraclavicular fat pads, wide purple striae, proximal myopathy, easy bruising, and skin thinning",
-      "Metabolic consequences include hypertension, glucose intolerance or diabetes, osteoporosis, and susceptibility to infection",
-      "Diagnosis proceeds in two steps: first confirming cortisol excess, then determining whether it is ACTH-dependent and localising the source",
-      "Confirmatory tests of hypercortisolism include late-night salivary cortisol, 24-hour urinary free cortisol, and failure of cortisol to suppress with low-dose dexamethasone",
-      "In ACTH-dependent disease, distinguishing a pituitary source from ectopic ACTH secretion may require high-dose suppression testing, CRH stimulation, and inferior petrosal sinus sampling",
-      "Because corticotroph adenomas are often small, pituitary MRI can be normal, so biochemical and sampling data guide localisation",
-      "First-line treatment is selective transsphenoidal removal of the adenoma, with radiotherapy, medical therapy, or bilateral adrenalectomy reserved for persistent or recurrent disease"
+  "pathophysiology": "Cushing disease is driven by a benign corticotroph adenoma of the anterior pituitary that autonomously secretes ACTH, partially escaping normal cortisol negative feedback. Persistent ACTH stimulation causes bilateral adrenocortical hyperplasia and chronic overproduction of cortisol. Sustained glucocorticoid excess produces the catabolic and metabolic features of Cushing syndrome, including protein breakdown, central fat redistribution, insulin resistance, immune suppression, hypertension, and bone loss. Retained but reset feedback sensitivity underlies the utility of high-dose dexamethasone suppression in distinguishing pituitary from ectopic sources.",
+  "additionalDifferentials": [
+   "Exogenous (iatrogenic) glucocorticoid use",
+   "Ectopic ACTH-secreting tumours",
+   "Adrenal adenoma or carcinoma (ACTH-independent Cushing)",
+   "Pseudo-Cushing states (severe obesity, alcohol excess, depression)",
+   "Metabolic syndrome and poorly controlled diabetes with cushingoid features",
+   "Polycystic ovary syndrome for overlapping features"
+  ],
+  "additionalInvestigations": [
+   "Late-night salivary cortisol and 24-hour urinary free cortisol",
+   "Low-dose dexamethasone suppression test",
+   "Plasma ACTH to establish ACTH dependence",
+   "High-dose dexamethasone suppression and CRH stimulation testing",
+   "Pituitary MRI and, when needed, inferior petrosal sinus sampling",
+   "Assessment for complications: glucose, blood pressure, bone density, electrolytes"
+  ],
+  "redFlags": [
+   "Severe hypercortisolism with marked hypokalaemia, uncontrolled hyperglycaemia, or severe hypertension needing urgent control",
+   "Opportunistic or overwhelming infection due to immunosuppression",
+   "Venous thromboembolism, to which hypercortisolaemic patients are prone",
+   "Psychosis or severe mood disturbance from cortisol excess"
+  ],
+  "prognosis": "Successful transsphenoidal surgery achieves remission in a large proportion of patients, though recurrence can occur and requires long-term surveillance; untreated hypercortisolism carries substantial cardiovascular, metabolic, infective, and thrombotic mortality.",
+  "pitfalls": [
+   "Failing to exclude exogenous glucocorticoid exposure before extensive workup",
+   "Interpreting a normal pituitary MRI as excluding a corticotroph adenoma",
+   "Confusing pseudo-Cushing states with true disease without dynamic testing",
+   "Assuming an ACTH-dependent source is pituitary without confirming against ectopic secretion",
+   "Neglecting perioperative and postoperative glucocorticoid management and thromboprophylaxis"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e",
+   "Endocrine Society guidelines"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Transsphenoidal selective adenomectomy as first-line definitive treatment of the corticotroph adenoma",
+   "Repeat pituitary surgery or pituitary radiotherapy for persistent or recurrent disease",
+   "Medical control of cortisol with steroidogenesis inhibitors such as metyrapone, ketoconazole or osilodrostat, and pituitary-directed pasireotide or cabergoline",
+   "Bilateral adrenalectomy for refractory disease, with lifelong glucocorticoid and mineralocorticoid replacement and monitoring for Nelson syndrome",
+   "Perioperative and postoperative glucocorticoid cover and treatment of the resulting secondary adrenal insufficiency",
+   "Manage complications including hypertension, diabetes and osteoporosis, with venous thromboprophylaxis for the raised thrombotic risk",
+   "Long-term biochemical surveillance for recurrence through a pituitary multidisciplinary team"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "cushing_disease-pathway",
+   "title": "Cushing disease: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Refers specifically to hypercortisolism caused by an ACTH-secreting pituitary adenoma, the commonest cause of endogenous Cushing syndrome",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe hypercortisolism with marked hypokalaemia, uncontrolled hyperglycaemia, or severe hypertension needing urgent control",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Late-night salivary cortisol and 24-hour urinary free cortisol, Low-dose dexamethasone suppression test, Plasma ACTH to establish ACTH dependence"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Transsphenoidal selective adenomectomy as first-line definitive treatment of the corticotroph adenoma"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to exclude exogenous glucocorticoid exposure before extensive workup"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of cushing disease."
+  }
+ ],
+ "tables": [
+  {
+   "id": "cushing_disease-matrix",
+   "title": "Cushing disease: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Refers specifically to hypercortisolism caused by an ACTH-secreting pituitary adenoma, the commonest cause of endogenous Cushing",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Cushing disease is driven by a benign corticotroph adenoma of the anterior pituitary that autonomously secretes ACTH, partially escaping normal cortisol negative feedback. Persistent ACTH stimulation causes bilateral adrenocortical hyperplasia and chronic overproduction of cortisol. Sustained glucocorticoid excess produces the catabolic and metabolic features of Cushing syndrome, including protein breakdown, central fat redistribution, insulin resistance, immune suppression, hypertension, and bone loss. Retained but reset feedback sensitivity underlies the utility of high-dose dexamethasone suppression in distinguishing pituitary from ectopic sources.",
-    "additionalDifferentials": [
-      "Exogenous (iatrogenic) glucocorticoid use",
-      "Ectopic ACTH-secreting tumours",
-      "Adrenal adenoma or carcinoma (ACTH-independent Cushing)",
-      "Pseudo-Cushing states (severe obesity, alcohol excess, depression)",
-      "Metabolic syndrome and poorly controlled diabetes with cushingoid features",
-      "Polycystic ovary syndrome for overlapping features"
+    [
+     "Key Investigations",
+     "Late-night salivary cortisol and 24-hour urinary free cortisol, Low-dose dexamethasone suppression test, Plasma ACTH to establish",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Late-night salivary cortisol and 24-hour urinary free cortisol",
-      "Low-dose dexamethasone suppression test",
-      "Plasma ACTH to establish ACTH dependence",
-      "High-dose dexamethasone suppression and CRH stimulation testing",
-      "Pituitary MRI and, when needed, inferior petrosal sinus sampling",
-      "Assessment for complications: glucose, blood pressure, bone density, electrolytes"
+    [
+     "Primary Differentials",
+     "Exogenous (iatrogenic) glucocorticoid use, Ectopic ACTH-secreting tumours, Adrenal adenoma or carcinoma (ACTH-independent Cushing)",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe hypercortisolism with marked hypokalaemia, uncontrolled hyperglycaemia, or severe hypertension needing urgent control",
-      "Opportunistic or overwhelming infection due to immunosuppression",
-      "Venous thromboembolism, to which hypercortisolaemic patients are prone",
-      "Psychosis or severe mood disturbance from cortisol excess"
+    [
+     "Management Strategy",
+     "Transsphenoidal selective adenomectomy as first-line definitive treatment of the corticotroph adenoma",
+     "Core treatment modality"
     ],
-    "prognosis": "Successful transsphenoidal surgery achieves remission in a large proportion of patients, though recurrence can occur and requires long-term surveillance; untreated hypercortisolism carries substantial cardiovascular, metabolic, infective, and thrombotic mortality.",
-    "pitfalls": [
-      "Failing to exclude exogenous glucocorticoid exposure before extensive workup",
-      "Interpreting a normal pituitary MRI as excluding a corticotroph adenoma",
-      "Confusing pseudo-Cushing states with true disease without dynamic testing",
-      "Assuming an ACTH-dependent source is pituitary without confirming against ectopic secretion",
-      "Neglecting perioperative and postoperative glucocorticoid management and thromboprophylaxis"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e",
-      "Endocrine Society guidelines"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Transsphenoidal selective adenomectomy as first-line definitive treatment of the corticotroph adenoma",
-      "Repeat pituitary surgery or pituitary radiotherapy for persistent or recurrent disease",
-      "Medical control of cortisol with steroidogenesis inhibitors such as metyrapone, ketoconazole or osilodrostat, and pituitary-directed pasireotide or cabergoline",
-      "Bilateral adrenalectomy for refractory disease, with lifelong glucocorticoid and mineralocorticoid replacement and monitoring for Nelson syndrome",
-      "Perioperative and postoperative glucocorticoid cover and treatment of the resulting secondary adrenal insufficiency",
-      "Manage complications including hypertension, diabetes and osteoporosis, with venous thromboprophylaxis for the raised thrombotic risk",
-      "Long-term biochemical surveillance for recurrence through a pituitary multidisciplinary team"
+    [
+     "Clinical Pitfall",
+     "Failing to exclude exogenous glucocorticoid exposure before extensive workup",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for cushing disease."
+  }
+ ]
 }

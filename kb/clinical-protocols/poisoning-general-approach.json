@@ -6,7 +6,19 @@
  "basis": "india",
  "counterpart": "poisoning-general-approach-international",
  "setting": "Emergency department, ICU",
- "aliases": ["poisoning", "overdose", "self-poisoning", "unknown ingestion", "toxidrome", "activated charcoal", "gut decontamination", "gastric lavage", "antidote", "poison information centre", "ISCCM poisoning"],
+ "aliases": [
+  "poisoning",
+  "overdose",
+  "self-poisoning",
+  "unknown ingestion",
+  "toxidrome",
+  "activated charcoal",
+  "gut decontamination",
+  "gastric lavage",
+  "antidote",
+  "poison information centre",
+  "ISCCM poisoning"
+ ],
  "summary": "Resuscitate with an ABCDE approach and a bedside glucose, identify the toxidrome, give activated charcoal 50 g only within 1 hour to a patient with a protected airway after a significant adsorbable ingestion, give specific antidotes early, and consider enhanced elimination for selected poisons.",
  "sections": [
   {
@@ -104,21 +116,150 @@
   }
  ],
  "drugs": [
-  { "name": "Activated charcoal", "dose": "50 g orally or via nasogastric tube once (1 g/kg; range 25 to 100 g), within 1 hour of ingestion", "notes": "Airway must be protected. Not for alcohols, metals, acids, alkalis or hydrocarbons." },
-  { "name": "Dextrose", "dose": "25 g IV (for example 100 mL of 25% or 50 mL of 50%) for glucose below 70 mg/dL (3.9 mmol/L)", "notes": "Recheck glucose; give thiamine with it in at-risk patients." },
-  { "name": "Thiamine", "dose": "100 mg IV", "notes": "Malnourished or alcohol-dependent patients." },
-  { "name": "Lorazepam", "dose": "4 mg IV (0.1 mg/kg, max 4 mg), repeat once after 5 to 10 minutes", "notes": "Toxic seizures; alternative diazepam 10 mg IV. Avoid phenytoin first line." },
-  { "name": "Sodium bicarbonate 8.4%", "dose": "1 to 2 mEq/kg (1 to 2 mL/kg) IV bolus, repeat to effect", "notes": "Sodium channel blocker cardiotoxicity (QRS above 100 ms)." },
-  { "name": "High-dose insulin (euglycaemic)", "dose": "Regular insulin 1 unit/kg IV bolus, then 1 unit/kg/h, titrated up to 10 units/kg/h", "notes": "Give with dextrose and check glucose every 15 to 30 minutes and potassium hourly at first. Calcium channel blocker or beta blocker shock." },
-  { "name": "Calcium", "dose": "Calcium chloride 10% 10 to 20 mL (1 to 2 g) IV via a large or central vein, or calcium gluconate 10% 30 to 60 mL (3 to 6 g) IV; repeat as needed", "notes": "Calcium channel blocker toxicity; monitor ionised calcium." },
-  { "name": "Methylene blue", "dose": "1 to 2 mg/kg IV over 5 minutes, repeat if cyanosis persists", "notes": "Symptomatic methaemoglobinaemia; avoid in G6PD deficiency." },
-  { "name": "Pyridoxine", "dose": "1 g per g of isoniazid ingested; 5 g IV if amount unknown", "notes": "Isoniazid seizures." },
-  { "name": "Hydroxocobalamin", "dose": "5 g IV over 15 minutes; a second 5 g may be given", "notes": "Cyanide poisoning, including smoke inhalation with shock or high lactate." },
-  { "name": "Lipid emulsion 20%", "dose": "1.5 mL/kg IV bolus, then 0.25 mL/kg/min infusion", "notes": "Local anaesthetic toxicity; weak evidence for other lipophilic drugs." }
+  {
+   "name": "Activated charcoal",
+   "dose": "50 g orally or via nasogastric tube once (1 g/kg; range 25 to 100 g), within 1 hour of ingestion",
+   "notes": "Airway must be protected. Not for alcohols, metals, acids, alkalis or hydrocarbons."
+  },
+  {
+   "name": "Dextrose",
+   "dose": "25 g IV (for example 100 mL of 25% or 50 mL of 50%) for glucose below 70 mg/dL (3.9 mmol/L)",
+   "notes": "Recheck glucose; give thiamine with it in at-risk patients."
+  },
+  {
+   "name": "Thiamine",
+   "dose": "100 mg IV",
+   "notes": "Malnourished or alcohol-dependent patients."
+  },
+  {
+   "name": "Lorazepam",
+   "dose": "4 mg IV (0.1 mg/kg, max 4 mg), repeat once after 5 to 10 minutes",
+   "notes": "Toxic seizures; alternative diazepam 10 mg IV. Avoid phenytoin first line."
+  },
+  {
+   "name": "Sodium bicarbonate 8.4%",
+   "dose": "1 to 2 mEq/kg (1 to 2 mL/kg) IV bolus, repeat to effect",
+   "notes": "Sodium channel blocker cardiotoxicity (QRS above 100 ms)."
+  },
+  {
+   "name": "High-dose insulin (euglycaemic)",
+   "dose": "Regular insulin 1 unit/kg IV bolus, then 1 unit/kg/h, titrated up to 10 units/kg/h",
+   "notes": "Give with dextrose and check glucose every 15 to 30 minutes and potassium hourly at first. Calcium channel blocker or beta blocker shock."
+  },
+  {
+   "name": "Calcium",
+   "dose": "Calcium chloride 10% 10 to 20 mL (1 to 2 g) IV via a large or central vein, or calcium gluconate 10% 30 to 60 mL (3 to 6 g) IV; repeat as needed",
+   "notes": "Calcium channel blocker toxicity; monitor ionised calcium."
+  },
+  {
+   "name": "Methylene blue",
+   "dose": "1 to 2 mg/kg IV over 5 minutes, repeat if cyanosis persists",
+   "notes": "Symptomatic methaemoglobinaemia; avoid in G6PD deficiency."
+  },
+  {
+   "name": "Pyridoxine",
+   "dose": "1 g per g of isoniazid ingested; 5 g IV if amount unknown",
+   "notes": "Isoniazid seizures."
+  },
+  {
+   "name": "Hydroxocobalamin",
+   "dose": "5 g IV over 15 minutes; a second 5 g may be given",
+   "notes": "Cyanide poisoning, including smoke inhalation with shock or high lactate."
+  },
+  {
+   "name": "Lipid emulsion 20%",
+   "dose": "1.5 mL/kg IV bolus, then 0.25 mL/kg/min infusion",
+   "notes": "Local anaesthetic toxicity; weak evidence for other lipophilic drugs."
+  }
  ],
  "sources": [
-  { "org": "ISCCM", "title": "Indian Society of Critical Care Medicine Position Statement: Approach to a Patient with Poisoning in the Emergency Room and Intensive Care Unit", "year": 2024, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11369925/" },
-  { "org": "AHA", "title": "2023 American Heart Association Focused Update on the Management of Patients With Cardiac Arrest or Life-Threatening Toxicity Due to Poisoning", "year": 2023, "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001161" }
+  {
+   "org": "ISCCM",
+   "title": "Indian Society of Critical Care Medicine Position Statement: Approach to a Patient with Poisoning in the Emergency Room and Intensive Care Unit",
+   "year": 2024,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11369925/"
+  },
+  {
+   "org": "AHA",
+   "title": "2023 American Heart Association Focused Update on the Management of Patients With Cardiac Arrest or Life-Threatening Toxicity Due to Poisoning",
+   "year": 2023,
+   "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001161"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "poisoning-general-approach-pathway",
+   "title": "Acute poisoning: general approach (adult, India) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Get the history from the patient, relatives and bystanders: agent, amount, time, route, intent, alcohol or other co-ingestants, and any empty strips, bottles or containers. Interpret with caution and assume the worst credible ingestion.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Use an ABCDE approach as for a trauma patient. In cardiac arrest start CPR with compressions first and continue resuscitation longer than usual, as poisoned patients can recover well.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "12-lead ECG: QRS above 100 ms (sodium channel blockade, for example tricyclics), QTc prolongation, heart block, bradycardia or tachyarrhythmia."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Extracorporeal treatment is not routine. Consider for severe poisoning with dialysable toxins (small molecule, volume of distribution below 1 to 2 L/kg, low endogenous clearance): toxic alcohols, lithium, salicylates, metformin-associated"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Gastric lavage or charcoal before resuscitation, airway protection and antidotes."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for acute poisoning: general approach (adult, india)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "poisoning-general-approach-summary-matrix",
+   "title": "Acute poisoning: general approach (adult, India) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Get the history from the patient, relatives and bystanders: agent, amount, time, route, intent, alcohol or other co-ingestants, and any",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Use an ABCDE approach as for a trauma patient. In cardiac arrest start CPR with compressions first and continue resuscitation longer than",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "12-lead ECG: QRS above 100 ms (sodium channel blockade, for example tricyclics), QTc prolongation, heart block, bradycardia or",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Activated charcoal: 50 g orally or via nasogastric tube once (1 g/kg; range 25 to 100 g), within 1 hour of ingestion",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Gastric lavage or charcoal before resuscitation, airway protection and antidotes.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for acute poisoning: general approach (adult, india)."
+  }
+ ]
 }

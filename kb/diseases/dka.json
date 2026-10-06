@@ -126,5 +126,77 @@
       "importedAt": "2026-06-29T13:39:19Z",
       "contentHash": "h4c6e917a"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "dka-dx-algo",
+      "title": "Diabetic ketoacidosis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "An acetone-like fruity odour on the breath is a classic bedside clue to ketoacidosis (p.93).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Mucormycosis risk: DKA patients are at high risk of rhino-orbital-cerebral mucormycosis; acidosis frees iron from carrier proteins and beta-hydroxybutyrate upregulates fungal adherence/penetration receptors -",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Plasma beta-hydroxybutyrate measured directly (more reliable than urine nitroprusside ketones) (p.413)., Anion gap calculation, including assessment for a mixed non-anion-gap / high-anion-gap acidosis when the change in"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Differentiate from top mimics: Alcoholic ketoacidosis - high-anion-gap acidosis (predominantly beta-hydroxybutyrate) without hyperglycaemia, usually with preserved renal function, in chronic alcohol use with vomiting and poor intake"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Relying on urine ketone dipstick, which misses beta-hydroxybutyrate and underestimates ketosis (p.413)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for diabetic ketoacidosis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "dka-matrix",
+      "title": "Diabetic ketoacidosis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An acetone-like fruity odour on the breath is a classic bedside clue to ketoacidosis (p.93).",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Plasma beta-hydroxybutyrate measured directly (more reliable than urine nitroprusside ketones) (p.413)., Anion gap calculation,",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Alcoholic ketoacidosis - high-anion-gap acidosis (predominantly beta-hydroxybutyrate) without hyperglycaemia, usually with",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Mucormycosis risk: DKA patients are at high risk of rhino-orbital-cerebral mucormycosis; acidosis frees iron from carrier",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on urine ketone dipstick, which misses beta-hydroxybutyrate and underestimates ketosis (p.413).",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for diabetic ketoacidosis."
+    }
+  ]
 }

@@ -1,74 +1,146 @@
 {
-  "id": "euthyroid_sick_syndrome",
-  "name": "Euthyroid sick syndrome",
-  "aliases": [
-    "non-thyroidal illness syndrome",
-    "low T3 syndrome",
-    "sick euthyroid syndrome"
+ "id": "euthyroid_sick_syndrome",
+ "name": "Euthyroid sick syndrome",
+ "aliases": [
+  "non-thyroidal illness syndrome",
+  "low T3 syndrome",
+  "sick euthyroid syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Endocrine",
+ "specialty": "Endocrinology / Critical care",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Endocrinology and critical care references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Abnormal thyroid function tests in acutely or chronically unwell patients who do not have intrinsic thyroid disease",
+   "The earliest and most consistent change is a low triiodothyronine (T3), with normal or low thyroid-stimulating hormone",
+   "In severe or prolonged illness thyroxine (T4) also falls, and a very low T4 predicts a poor prognosis",
+   "It reflects an adaptive response to illness rather than true thyroid dysfunction",
+   "Thyroid function testing is best avoided in acutely ill patients unless thyroid disease is genuinely suspected",
+   "Thyroid hormone replacement is generally not indicated and testing should be repeated after recovery"
   ],
-  "class": "non_infective",
-  "system": "Endocrine",
-  "specialty": "Endocrinology / Critical care",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Endocrinology and critical care references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Abnormal thyroid function tests in acutely or chronically unwell patients who do not have intrinsic thyroid disease",
-      "The earliest and most consistent change is a low triiodothyronine (T3), with normal or low thyroid-stimulating hormone",
-      "In severe or prolonged illness thyroxine (T4) also falls, and a very low T4 predicts a poor prognosis",
-      "It reflects an adaptive response to illness rather than true thyroid dysfunction",
-      "Thyroid function testing is best avoided in acutely ill patients unless thyroid disease is genuinely suspected",
-      "Thyroid hormone replacement is generally not indicated and testing should be repeated after recovery"
+  "pathophysiology": "Euthyroid sick syndrome results from illness-induced changes in thyroid hormone metabolism and regulation rather than thyroid gland disease. Reduced peripheral conversion of T4 to active T3 (with shunting toward inactive reverse T3), altered binding proteins, and central downregulation of the hypothalamic-pituitary-thyroid axis by cytokines and other mediators combine to lower measured hormone levels. This is regarded as an adaptive response to conserve energy during illness, and thyroid function typically normalises as the underlying condition resolves.",
+  "additionalDifferentials": [
+   "Central (secondary) hypothyroidism",
+   "Primary hypothyroidism",
+   "Recovery phase of thyroiditis",
+   "Effects of drugs on thyroid tests (for example steroids, dopamine, amiodarone)",
+   "Subclinical thyroid dysfunction"
+  ],
+  "additionalInvestigations": [
+   "Interpretation of thyroid tests in the context of acute illness",
+   "Repeat testing after recovery from the acute illness",
+   "Review of drugs affecting thyroid tests",
+   "Assessment for genuine thyroid disease only where clinically indicated",
+   "Correlation with the clinical picture rather than treating numbers"
+  ],
+  "redFlags": [
+   "A very low thyroxine in critical illness (poor prognostic marker)",
+   "Genuine clinical features of thyroid disease",
+   "Suspected central hypothyroidism with other pituitary deficits",
+   "Diagnostic confusion with amiodarone or other drug effects"
+  ],
+  "prognosis": "The thyroid test abnormalities themselves are benign and resolve with recovery; a markedly low thyroxine reflects severe underlying illness and is associated with worse outcomes.",
+  "pitfalls": [
+   "Testing thyroid function unnecessarily in acutely ill patients and misinterpreting the results",
+   "Treating the abnormal numbers with thyroid hormone",
+   "Confusing it with central hypothyroidism",
+   "Not repeating tests after recovery"
+  ],
+  "references": [
+   "Endocrinology reference texts (standard reference)",
+   "Critical care references (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Direct treatment at the underlying acute illness, as the thyroid test changes are adaptive and resolve with recovery",
+   "Avoid thyroid hormone replacement, which is generally not indicated and may be harmful",
+   "Avoid routine thyroid function testing in acutely ill patients unless intrinsic thyroid disease is genuinely suspected",
+   "Review drugs that alter thyroid tests, such as glucocorticoids, dopamine and amiodarone",
+   "Repeat thyroid function after recovery to confirm normalisation rather than treating numbers",
+   "Recognise a markedly low thyroxine as a marker of illness severity warranting intensive supportive care"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "euthyroid_sick_syndrome-pathway",
+   "title": "Euthyroid sick syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Abnormal thyroid function tests in acutely or chronically unwell patients who do not have intrinsic thyroid disease",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: A very low thyroxine in critical illness (poor prognostic marker)",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Interpretation of thyroid tests in the context of acute illness, Repeat testing after recovery from the acute illness, Review of drugs affecting thyroid tests"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Direct treatment at the underlying acute illness, as the thyroid test changes are adaptive and resolve with recovery"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Testing thyroid function unnecessarily in acutely ill patients and misinterpreting the results"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of euthyroid sick syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "euthyroid_sick_syndrome-matrix",
+   "title": "Euthyroid sick syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Abnormal thyroid function tests in acutely or chronically unwell patients who do not have intrinsic thyroid disease",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Euthyroid sick syndrome results from illness-induced changes in thyroid hormone metabolism and regulation rather than thyroid gland disease. Reduced peripheral conversion of T4 to active T3 (with shunting toward inactive reverse T3), altered binding proteins, and central downregulation of the hypothalamic-pituitary-thyroid axis by cytokines and other mediators combine to lower measured hormone levels. This is regarded as an adaptive response to conserve energy during illness, and thyroid function typically normalises as the underlying condition resolves.",
-    "additionalDifferentials": [
-      "Central (secondary) hypothyroidism",
-      "Primary hypothyroidism",
-      "Recovery phase of thyroiditis",
-      "Effects of drugs on thyroid tests (for example steroids, dopamine, amiodarone)",
-      "Subclinical thyroid dysfunction"
+    [
+     "Key Investigations",
+     "Interpretation of thyroid tests in the context of acute illness, Repeat testing after recovery from the acute illness, Review of",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Interpretation of thyroid tests in the context of acute illness",
-      "Repeat testing after recovery from the acute illness",
-      "Review of drugs affecting thyroid tests",
-      "Assessment for genuine thyroid disease only where clinically indicated",
-      "Correlation with the clinical picture rather than treating numbers"
+    [
+     "Primary Differentials",
+     "Central (secondary) hypothyroidism, Primary hypothyroidism, Recovery phase of thyroiditis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "A very low thyroxine in critical illness (poor prognostic marker)",
-      "Genuine clinical features of thyroid disease",
-      "Suspected central hypothyroidism with other pituitary deficits",
-      "Diagnostic confusion with amiodarone or other drug effects"
+    [
+     "Management Strategy",
+     "Direct treatment at the underlying acute illness, as the thyroid test changes are adaptive and resolve with recovery",
+     "Core treatment modality"
     ],
-    "prognosis": "The thyroid test abnormalities themselves are benign and resolve with recovery; a markedly low thyroxine reflects severe underlying illness and is associated with worse outcomes.",
-    "pitfalls": [
-      "Testing thyroid function unnecessarily in acutely ill patients and misinterpreting the results",
-      "Treating the abnormal numbers with thyroid hormone",
-      "Confusing it with central hypothyroidism",
-      "Not repeating tests after recovery"
-    ],
-    "references": [
-      "Endocrinology reference texts (standard reference)",
-      "Critical care references (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Direct treatment at the underlying acute illness, as the thyroid test changes are adaptive and resolve with recovery",
-      "Avoid thyroid hormone replacement, which is generally not indicated and may be harmful",
-      "Avoid routine thyroid function testing in acutely ill patients unless intrinsic thyroid disease is genuinely suspected",
-      "Review drugs that alter thyroid tests, such as glucocorticoids, dopamine and amiodarone",
-      "Repeat thyroid function after recovery to confirm normalisation rather than treating numbers",
-      "Recognise a markedly low thyroxine as a marker of illness severity warranting intensive supportive care"
+    [
+     "Clinical Pitfall",
+     "Testing thyroid function unnecessarily in acutely ill patients and misinterpreting the results",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for euthyroid sick syndrome."
+  }
+ ]
 }

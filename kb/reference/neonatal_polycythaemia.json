@@ -1,73 +1,145 @@
 {
-  "id": "neonatal_polycythaemia",
-  "name": "Neonatal polycythaemia",
-  "aliases": [
-    "neonatal polycythemia",
-    "hyperviscosity of the newborn"
+ "id": "neonatal_polycythaemia",
+ "name": "Neonatal polycythaemia",
+ "aliases": [
+  "neonatal polycythemia",
+  "hyperviscosity of the newborn"
+ ],
+ "class": "non_infective",
+ "system": "Neonatal / Haematology",
+ "specialty": "Neonatology / Paediatrics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Neonatology reference texts",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An abnormally high haematocrit in the newborn, conventionally a venous value above the mid-sixties percent",
+   "The clinical concern is hyperviscosity, which impairs microcirculatory flow",
+   "Causes include placental transfusion (delayed cord clamping, twin-to-twin transfusion), intrauterine hypoxia and maternal diabetes",
+   "Many infants are asymptomatic; symptoms are non-specific and include plethora, lethargy, poor feeding, jitteriness and hypoglycaemia",
+   "Capillary samples overestimate haematocrit, so a venous sample is needed to confirm",
+   "Partial exchange transfusion is considered for symptomatic infants with significant polycythaemia, alongside hydration and treating hypoglycaemia"
   ],
-  "class": "non_infective",
-  "system": "Neonatal / Haematology",
-  "specialty": "Neonatology / Paediatrics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Neonatology reference texts",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An abnormally high haematocrit in the newborn, conventionally a venous value above the mid-sixties percent",
-      "The clinical concern is hyperviscosity, which impairs microcirculatory flow",
-      "Causes include placental transfusion (delayed cord clamping, twin-to-twin transfusion), intrauterine hypoxia and maternal diabetes",
-      "Many infants are asymptomatic; symptoms are non-specific and include plethora, lethargy, poor feeding, jitteriness and hypoglycaemia",
-      "Capillary samples overestimate haematocrit, so a venous sample is needed to confirm",
-      "Partial exchange transfusion is considered for symptomatic infants with significant polycythaemia, alongside hydration and treating hypoglycaemia"
+  "pathophysiology": "Neonatal polycythaemia results from either increased red cell transfusion to the fetus or newborn (as with delayed cord clamping, cord stripping or twin-to-twin transfusion) or increased fetal red cell production in response to chronic intrauterine hypoxia (as in growth restriction, maternal diabetes or maternal smoking). As the haematocrit rises, blood viscosity increases disproportionately, impairing flow through the microcirculation and reducing oxygen and glucose delivery to tissues. This underlies complications affecting the brain, gut, kidneys and metabolic status, and increases the risk of hypoglycaemia and jaundice.",
+  "additionalDifferentials": [
+   "Dehydration causing haemoconcentration",
+   "Sepsis (as a cause of similar non-specific symptoms)",
+   "Congenital heart disease",
+   "Hypoglycaemia of other cause",
+   "Capillary sampling artefact overestimating haematocrit"
+  ],
+  "additionalInvestigations": [
+   "Confirmatory venous haematocrit",
+   "Blood glucose (hypoglycaemia is common)",
+   "Bilirubin monitoring",
+   "Assessment of hydration and perfusion",
+   "Evaluation for underlying cause and for complications where symptomatic"
+  ],
+  "redFlags": [
+   "Neurological signs such as seizures or marked lethargy",
+   "Features of necrotising enterocolitis or renal compromise",
+   "Respiratory distress suggesting cardiopulmonary involvement",
+   "Severe symptomatic hyperviscosity"
+  ],
+  "prognosis": "Asymptomatic infants generally do well with hydration and monitoring; symptomatic hyperviscosity, particularly with end-organ effects, carries a less certain neurodevelopmental prognosis.",
+  "pitfalls": [
+   "Acting on a capillary rather than venous haematocrit",
+   "Overlooking hypoglycaemia in a polycythaemic infant",
+   "Attributing symptoms to polycythaemia without excluding sepsis",
+   "Treating asymptomatic mild polycythaemia unnecessarily"
+  ],
+  "references": [
+   "Neonatology reference texts (standard reference)",
+   "Paediatric haematology references (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Ensure adequate hydration and fluid intake for asymptomatic infants with a modestly raised haematocrit",
+   "Perform partial exchange transfusion, replacing blood with crystalloid, for symptomatic infants with significant hyperviscosity",
+   "Confirm polycythaemia on a venous haematocrit, as capillary samples overestimate the value",
+   "Treat accompanying hypoglycaemia and monitor bilirubin for hyperbilirubinaemia",
+   "Observe for end-organ effects on the brain, gut and kidneys, including necrotising enterocolitis once enteral feeding begins",
+   "Evaluate and address the underlying cause such as maternal diabetes, intrauterine hypoxia or placental transfusion"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "neonatal_polycythaemia-pathway",
+   "title": "Neonatal polycythaemia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An abnormally high haematocrit in the newborn, conventionally a venous value above the mid-sixties percent",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Neurological signs such as seizures or marked lethargy",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Confirmatory venous haematocrit, Blood glucose (hypoglycaemia is common), Bilirubin monitoring"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Ensure adequate hydration and fluid intake for asymptomatic infants with a modestly raised haematocrit"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Acting on a capillary rather than venous haematocrit"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of neonatal polycythaemia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "neonatal_polycythaemia-matrix",
+   "title": "Neonatal polycythaemia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An abnormally high haematocrit in the newborn, conventionally a venous value above the mid-sixties percent",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Neonatal polycythaemia results from either increased red cell transfusion to the fetus or newborn (as with delayed cord clamping, cord stripping or twin-to-twin transfusion) or increased fetal red cell production in response to chronic intrauterine hypoxia (as in growth restriction, maternal diabetes or maternal smoking). As the haematocrit rises, blood viscosity increases disproportionately, impairing flow through the microcirculation and reducing oxygen and glucose delivery to tissues. This underlies complications affecting the brain, gut, kidneys and metabolic status, and increases the risk of hypoglycaemia and jaundice.",
-    "additionalDifferentials": [
-      "Dehydration causing haemoconcentration",
-      "Sepsis (as a cause of similar non-specific symptoms)",
-      "Congenital heart disease",
-      "Hypoglycaemia of other cause",
-      "Capillary sampling artefact overestimating haematocrit"
+    [
+     "Key Investigations",
+     "Confirmatory venous haematocrit, Blood glucose (hypoglycaemia is common), Bilirubin monitoring",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Confirmatory venous haematocrit",
-      "Blood glucose (hypoglycaemia is common)",
-      "Bilirubin monitoring",
-      "Assessment of hydration and perfusion",
-      "Evaluation for underlying cause and for complications where symptomatic"
+    [
+     "Primary Differentials",
+     "Dehydration causing haemoconcentration, Sepsis (as a cause of similar non-specific symptoms), Congenital heart disease",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Neurological signs such as seizures or marked lethargy",
-      "Features of necrotising enterocolitis or renal compromise",
-      "Respiratory distress suggesting cardiopulmonary involvement",
-      "Severe symptomatic hyperviscosity"
+    [
+     "Management Strategy",
+     "Ensure adequate hydration and fluid intake for asymptomatic infants with a modestly raised haematocrit",
+     "Core treatment modality"
     ],
-    "prognosis": "Asymptomatic infants generally do well with hydration and monitoring; symptomatic hyperviscosity, particularly with end-organ effects, carries a less certain neurodevelopmental prognosis.",
-    "pitfalls": [
-      "Acting on a capillary rather than venous haematocrit",
-      "Overlooking hypoglycaemia in a polycythaemic infant",
-      "Attributing symptoms to polycythaemia without excluding sepsis",
-      "Treating asymptomatic mild polycythaemia unnecessarily"
-    ],
-    "references": [
-      "Neonatology reference texts (standard reference)",
-      "Paediatric haematology references (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Ensure adequate hydration and fluid intake for asymptomatic infants with a modestly raised haematocrit",
-      "Perform partial exchange transfusion, replacing blood with crystalloid, for symptomatic infants with significant hyperviscosity",
-      "Confirm polycythaemia on a venous haematocrit, as capillary samples overestimate the value",
-      "Treat accompanying hypoglycaemia and monitor bilirubin for hyperbilirubinaemia",
-      "Observe for end-organ effects on the brain, gut and kidneys, including necrotising enterocolitis once enteral feeding begins",
-      "Evaluate and address the underlying cause such as maternal diabetes, intrauterine hypoxia or placental transfusion"
+    [
+     "Clinical Pitfall",
+     "Acting on a capillary rather than venous haematocrit",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for neonatal polycythaemia."
+  }
+ ]
 }

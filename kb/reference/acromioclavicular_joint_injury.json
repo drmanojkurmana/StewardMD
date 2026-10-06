@@ -1,75 +1,147 @@
 {
-  "id": "acromioclavicular_joint_injury",
-  "name": "Acromioclavicular joint injury",
-  "aliases": [
-    "AC joint separation",
-    "shoulder separation",
-    "acromioclavicular sprain"
+ "id": "acromioclavicular_joint_injury",
+ "name": "Acromioclavicular joint injury",
+ "aliases": [
+  "AC joint separation",
+  "shoulder separation",
+  "acromioclavicular sprain"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Sports & Trauma",
+ "specialty": "Orthopaedics / Sports Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Miller's Review of Orthopaedics / Brukner and Khan's Clinical Sports Medicine",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Usually caused by a direct fall onto the point of the shoulder with the arm adducted",
+   "Graded by the Rockwood classification (I-VI) according to acromioclavicular and coracoclavicular ligament disruption and clavicle displacement",
+   "Types I and II are sprains without significant displacement; type III shows complete separation with a visible step; types IV-VI are severe displaced patterns",
+   "Tenderness localises to the AC joint, with a palpable step and a positive cross-body adduction test",
+   "Weighted stress radiographs are rarely needed; bilateral views help gauge coracoclavicular distance",
+   "Most types I-III are managed non-operatively, while types IV-VI and some high-demand type III injuries are considered for surgery",
+   "Late AC joint osteoarthritis or distal clavicle osteolysis can follow, particularly in weight-trainers"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Sports & Trauma",
-  "specialty": "Orthopaedics / Sports Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Miller's Review of Orthopaedics / Brukner and Khan's Clinical Sports Medicine",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Usually caused by a direct fall onto the point of the shoulder with the arm adducted",
-      "Graded by the Rockwood classification (I-VI) according to acromioclavicular and coracoclavicular ligament disruption and clavicle displacement",
-      "Types I and II are sprains without significant displacement; type III shows complete separation with a visible step; types IV-VI are severe displaced patterns",
-      "Tenderness localises to the AC joint, with a palpable step and a positive cross-body adduction test",
-      "Weighted stress radiographs are rarely needed; bilateral views help gauge coracoclavicular distance",
-      "Most types I-III are managed non-operatively, while types IV-VI and some high-demand type III injuries are considered for surgery",
-      "Late AC joint osteoarthritis or distal clavicle osteolysis can follow, particularly in weight-trainers"
+  "pathophysiology": "A downward force on the acromion sprains then sequentially disrupts the acromioclavicular and coracoclavicular (conoid and trapezoid) ligaments and the deltotrapezial fascia. Progressive ligament failure allows the clavicle to displace superiorly (or posteriorly/inferiorly in higher grades) relative to the acromion, producing the characteristic deformity and loss of the strut function of the clavicle.",
+  "additionalDifferentials": [
+   "Distal clavicle fracture",
+   "Acromioclavicular joint osteoarthritis",
+   "Distal clavicular osteolysis",
+   "Rotator cuff tear",
+   "Sternoclavicular joint injury",
+   "Coracoid process fracture"
+  ],
+  "additionalInvestigations": [
+   "Bilateral AP radiographs with comparison of coracoclavicular distance",
+   "Axillary lateral view to detect posterior displacement, and a Zanca view to assess the AC joint and coracoclavicular distance",
+   "MRI where associated rotator cuff or labral injury is suspected",
+   "Clinical grading with cross-body adduction testing"
+  ],
+  "redFlags": [
+   "Skin tenting or threatened skin over a severely displaced clavicle",
+   "Posterior displacement with mediastinal or neurovascular compromise",
+   "Associated fracture or scapulothoracic dissociation"
+  ],
+  "prognosis": "Low-grade injuries recover well with rehabilitation, sometimes leaving a painless cosmetic bump; high-grade or operatively treated injuries generally regain good function, though some develop persistent AC joint pain or arthritis.",
+  "pitfalls": [
+   "Misclassifying a type III as lower grade by omitting an axillary view that reveals posterior displacement",
+   "Operating routinely on type III injuries when many do well non-operatively",
+   "Overlooking a concomitant distal clavicle fracture or cuff tear",
+   "Attributing persistent pain solely to the separation when AC arthritis has developed"
+  ],
+  "references": [
+   "Miller's Review of Orthopaedics",
+   "Rockwood and Green's Fractures in Adults"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Non-operative management for Rockwood types I to III: a period of sling immobilisation, analgesia and early mobilisation",
+   "Simple analgesics or non-steroidal anti-inflammatory drugs with ice for acute pain control",
+   "Physiotherapy-led graduated rehabilitation to restore scapular control, range of motion and shoulder-girdle strength",
+   "Surgical stabilisation with coracoclavicular ligament reconstruction for types IV to VI and selected high-demand type III injuries",
+   "Graduated return to sport or heavy activity once pain-free with restored strength and range",
+   "Surveillance for persistent acromioclavicular joint pain or post-traumatic arthritis, managed with corticosteroid injection or later distal clavicle excision",
+   "Orthopaedic or sports-medicine referral for high-grade or refractory injuries"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "acromioclavicular_joint_injury-pathway",
+   "title": "Acromioclavicular joint injury: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Usually caused by a direct fall onto the point of the shoulder with the arm adducted",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Skin tenting or threatened skin over a severely displaced clavicle",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Bilateral AP radiographs with comparison of coracoclavicular distance, Axillary lateral view to detect posterior displacement, and a Zanca view to assess the AC joint and coracoclavicular distance, MRI where associated"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Non-operative management for Rockwood types I to III: a period of sling immobilisation, analgesia and early mobilisation"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misclassifying a type III as lower grade by omitting an axillary view that reveals posterior displacement"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of acromioclavicular joint injury."
+  }
+ ],
+ "tables": [
+  {
+   "id": "acromioclavicular_joint_injury-matrix",
+   "title": "Acromioclavicular joint injury: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Usually caused by a direct fall onto the point of the shoulder with the arm adducted",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "A downward force on the acromion sprains then sequentially disrupts the acromioclavicular and coracoclavicular (conoid and trapezoid) ligaments and the deltotrapezial fascia. Progressive ligament failure allows the clavicle to displace superiorly (or posteriorly/inferiorly in higher grades) relative to the acromion, producing the characteristic deformity and loss of the strut function of the clavicle.",
-    "additionalDifferentials": [
-      "Distal clavicle fracture",
-      "Acromioclavicular joint osteoarthritis",
-      "Distal clavicular osteolysis",
-      "Rotator cuff tear",
-      "Sternoclavicular joint injury",
-      "Coracoid process fracture"
+    [
+     "Key Investigations",
+     "Bilateral AP radiographs with comparison of coracoclavicular distance, Axillary lateral view to detect posterior displacement,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Bilateral AP radiographs with comparison of coracoclavicular distance",
-      "Axillary lateral view to detect posterior displacement, and a Zanca view to assess the AC joint and coracoclavicular distance",
-      "MRI where associated rotator cuff or labral injury is suspected",
-      "Clinical grading with cross-body adduction testing"
+    [
+     "Primary Differentials",
+     "Distal clavicle fracture, Acromioclavicular joint osteoarthritis, Distal clavicular osteolysis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Skin tenting or threatened skin over a severely displaced clavicle",
-      "Posterior displacement with mediastinal or neurovascular compromise",
-      "Associated fracture or scapulothoracic dissociation"
+    [
+     "Management Strategy",
+     "Non-operative management for Rockwood types I to III: a period of sling immobilisation, analgesia and early mobilisation",
+     "Core treatment modality"
     ],
-    "prognosis": "Low-grade injuries recover well with rehabilitation, sometimes leaving a painless cosmetic bump; high-grade or operatively treated injuries generally regain good function, though some develop persistent AC joint pain or arthritis.",
-    "pitfalls": [
-      "Misclassifying a type III as lower grade by omitting an axillary view that reveals posterior displacement",
-      "Operating routinely on type III injuries when many do well non-operatively",
-      "Overlooking a concomitant distal clavicle fracture or cuff tear",
-      "Attributing persistent pain solely to the separation when AC arthritis has developed"
-    ],
-    "references": [
-      "Miller's Review of Orthopaedics",
-      "Rockwood and Green's Fractures in Adults"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Non-operative management for Rockwood types I to III: a period of sling immobilisation, analgesia and early mobilisation",
-      "Simple analgesics or non-steroidal anti-inflammatory drugs with ice for acute pain control",
-      "Physiotherapy-led graduated rehabilitation to restore scapular control, range of motion and shoulder-girdle strength",
-      "Surgical stabilisation with coracoclavicular ligament reconstruction for types IV to VI and selected high-demand type III injuries",
-      "Graduated return to sport or heavy activity once pain-free with restored strength and range",
-      "Surveillance for persistent acromioclavicular joint pain or post-traumatic arthritis, managed with corticosteroid injection or later distal clavicle excision",
-      "Orthopaedic or sports-medicine referral for high-grade or refractory injuries"
+    [
+     "Clinical Pitfall",
+     "Misclassifying a type III as lower grade by omitting an axillary view that reveals posterior displacement",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for acromioclavicular joint injury."
+  }
+ ]
 }

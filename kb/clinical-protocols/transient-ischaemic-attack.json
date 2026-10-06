@@ -5,7 +5,19 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, TIA clinic, outpatient",
- "aliases": ["TIA", "mini stroke", "ministroke", "amaurosis fugax", "ABCD2", "high-risk TIA", "minor stroke", "DAPT", "CHANCE", "POINT", "transient ischemic attack"],
+ "aliases": [
+  "TIA",
+  "mini stroke",
+  "ministroke",
+  "amaurosis fugax",
+  "ABCD2",
+  "high-risk TIA",
+  "minor stroke",
+  "DAPT",
+  "CHANCE",
+  "POINT",
+  "transient ischemic attack"
+ ],
  "summary": "Treat every suspected TIA as a stroke warning: aspirin immediately, same-day brain and vessel imaging and ECG, and aspirin plus clopidogrel for 21 days for high-risk TIA (ABCD2 4 or more) or minor stroke, started within 24 hours.",
  "sections": [
   {
@@ -82,16 +94,127 @@
   }
  ],
  "drugs": [
-  { "name": "Aspirin", "dose": "300 mg orally immediately, then 75 to 100 mg daily with clopidogrel for 21 days", "notes": "Long term 75 to 150 mg daily if chosen as single antiplatelet." },
-  { "name": "Clopidogrel", "dose": "300 to 600 mg orally loading, then 75 mg daily", "notes": "With aspirin for 21 days in high-risk TIA or minor stroke, then continue alone." },
-  { "name": "Ticagrelor", "dose": "180 mg orally loading, then 90 mg twice daily (with aspirin) for 21 to 30 days", "notes": "Alternative to clopidogrel, including CYP2C19 loss-of-function carriers. Higher bleeding risk." },
-  { "name": "Atorvastatin", "dose": "80 mg orally once daily", "notes": "LDL target below 70 mg/dL (1.8 mmol/L)." }
+  {
+   "name": "Aspirin",
+   "dose": "300 mg orally immediately, then 75 to 100 mg daily with clopidogrel for 21 days",
+   "notes": "Long term 75 to 150 mg daily if chosen as single antiplatelet."
+  },
+  {
+   "name": "Clopidogrel",
+   "dose": "300 to 600 mg orally loading, then 75 mg daily",
+   "notes": "With aspirin for 21 days in high-risk TIA or minor stroke, then continue alone."
+  },
+  {
+   "name": "Ticagrelor",
+   "dose": "180 mg orally loading, then 90 mg twice daily (with aspirin) for 21 to 30 days",
+   "notes": "Alternative to clopidogrel, including CYP2C19 loss-of-function carriers. Higher bleeding risk."
+  },
+  {
+   "name": "Atorvastatin",
+   "dose": "80 mg orally once daily",
+   "notes": "LDL target below 70 mg/dL (1.8 mmol/L)."
+  }
  ],
  "sources": [
-  { "org": "AHA/ASA", "title": "2021 Guideline for the Prevention of Stroke in Patients With Stroke and Transient Ischemic Attack", "year": 2021, "url": "https://www.ahajournals.org/doi/10.1161/STR.0000000000000375" },
-  { "org": "AHA", "title": "Diagnosis, Workup, Risk Reduction of Transient Ischemic Attack in the Emergency Department Setting: A Scientific Statement", "year": 2023, "url": "https://pubmed.ncbi.nlm.nih.gov/36655570/" },
-  { "org": "NICE", "title": "Stroke and transient ischaemic attack in over 16s: diagnosis and initial management (NG128, updated 2022)", "year": 2019, "url": "https://www.nice.org.uk/guidance/ng128/chapter/recommendations" },
-  { "org": "AHA/ASA", "title": "2026 Guideline for the Early Management of Patients With Acute Ischemic Stroke (DAPT update)", "year": 2026, "url": "https://www.ahajournals.org/doi/10.1161/STR.0000000000000513" }
+  {
+   "org": "AHA/ASA",
+   "title": "2021 Guideline for the Prevention of Stroke in Patients With Stroke and Transient Ischemic Attack",
+   "year": 2021,
+   "url": "https://www.ahajournals.org/doi/10.1161/STR.0000000000000375"
+  },
+  {
+   "org": "AHA",
+   "title": "Diagnosis, Workup, Risk Reduction of Transient Ischemic Attack in the Emergency Department Setting: A Scientific Statement",
+   "year": 2023,
+   "url": "https://pubmed.ncbi.nlm.nih.gov/36655570/"
+  },
+  {
+   "org": "NICE",
+   "title": "Stroke and transient ischaemic attack in over 16s: diagnosis and initial management (NG128, updated 2022)",
+   "year": 2019,
+   "url": "https://www.nice.org.uk/guidance/ng128/chapter/recommendations"
+  },
+  {
+   "org": "AHA/ASA",
+   "title": "2026 Guideline for the Early Management of Patients With Acute Ischemic Stroke (DAPT update)",
+   "year": 2026,
+   "url": "https://www.ahajournals.org/doi/10.1161/STR.0000000000000513"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "transient-ischaemic-attack-pathway",
+   "title": "Transient ischaemic attack (TIA) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "TIA: transient focal neurological dysfunction caused by ischaemia without acute infarction on imaging. Most episodes last under 1 hour. A persisting deficit is a stroke: activate the stroke pathway.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Give aspirin 300 mg orally immediately unless contraindicated (NICE). If anticoagulated, bleeding risk is high or haemorrhage is suspected, image the brain first.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Brain MRI with diffusion-weighted and blood-sensitive sequences is preferred; use CT if MRI is unavailable, to exclude haemorrhage and mimics."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Atrial fibrillation: oral anticoagulation (DOAC preferred) instead of antiplatelets, started promptly once haemorrhage is excluded; do not add antiplatelets routinely."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Being reassured by a low ABCD2 score in a patient with AF, carotid stenosis or a DWI lesion."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for transient ischaemic attack (tia)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "transient-ischaemic-attack-summary-matrix",
+   "title": "Transient ischaemic attack (TIA) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "TIA: transient focal neurological dysfunction caused by ischaemia without acute infarction on imaging. Most episodes last under 1 hour. A",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Give aspirin 300 mg orally immediately unless contraindicated (NICE). If anticoagulated, bleeding risk is high or haemorrhage is suspected,",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Brain MRI with diffusion-weighted and blood-sensitive sequences is preferred; use CT if MRI is unavailable, to exclude haemorrhage and",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Aspirin: 300 mg orally immediately, then 75 to 100 mg daily with clopidogrel for 21 days",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Being reassured by a low ABCD2 score in a patient with AF, carotid stenosis or a DWI lesion.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for transient ischaemic attack (tia)."
+  }
+ ]
 }

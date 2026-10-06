@@ -1,89 +1,161 @@
 {
-  "id": "autosomal_dominant_hypocalcaemia",
-  "name": "Autosomal Dominant Hypocalcaemia",
-  "aliases": [
-    "ADH",
-    "ADH type 1",
-    "ADH type 1 (activating CASR)",
-    "Autosomal dominant hypocalcaemia",
-    "Autosomal dominant hypocalcaemia with hypercalciuria",
-    "CASR-activating hypocalcaemia",
-    "activating calcium-sensing receptor mutation",
-    "autosomal dominant hypocalcaemia with hypercalciuria",
-    "autosomal dominant hypocalcemia"
+ "id": "autosomal_dominant_hypocalcaemia",
+ "name": "Autosomal Dominant Hypocalcaemia",
+ "aliases": [
+  "ADH",
+  "ADH type 1",
+  "ADH type 1 (activating CASR)",
+  "Autosomal dominant hypocalcaemia",
+  "Autosomal dominant hypocalcaemia with hypercalciuria",
+  "CASR-activating hypocalcaemia",
+  "activating calcium-sensing receptor mutation",
+  "autosomal dominant hypocalcaemia with hypercalciuria",
+  "autosomal dominant hypocalcemia"
+ ],
+ "class": "non_infective",
+ "system": "Endocrine / Renal genetics",
+ "specialty": "Endocrinology / Nephrology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Endocrine and renal genetics references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Autosomal dominant hypocalcaemia is essentially the biochemical mirror image of familial hypocalciuric hypercalcaemia: the same calcium-sensing receptor gene is involved, but with a gain-of-function rather than a loss-of-function change.",
+   "The hallmark is hypocalcaemia accompanied by an inappropriately low or 'normal' parathyroid hormone level, in contrast to most other causes of hypocalcaemia where parathyroid hormone rises appropriately.",
+   "Relative hypercalciuria is the distinguishing renal feature: patients continue to waste calcium in the urine despite being hypocalcaemic, predisposing to nephrocalcinosis and stones.",
+   "Many individuals are asymptomatic and detected only through family screening or incidental biochemistry; symptoms, when present, reflect neuromuscular irritability such as paraesthesiae, carpopedal spasm, tetany and seizures.",
+   "Correcting the serum calcium to fully normal levels with calcium and active vitamin D is hazardous because it amplifies the underlying hypercalciuria and can precipitate nephrocalcinosis and renal impairment; treatment should be guided by symptoms, not by chasing a normal figure.",
+   "Type 2 disease, caused by activation of the Galpha-11 signalling subunit, tends to run a biochemically milder course and has been associated with short stature in some kindreds.",
+   "Long-standing hypocalcaemia may lead to basal ganglia calcification and cataract, so these should be sought in chronically affected patients.",
+   "Calcium-sensing receptor antagonists (calcilytics) represent an emerging targeted therapeutic approach for this condition."
   ],
-  "class": "non_infective",
-  "system": "Endocrine / Renal genetics",
-  "specialty": "Endocrinology / Nephrology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Endocrine and renal genetics references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Autosomal dominant hypocalcaemia is essentially the biochemical mirror image of familial hypocalciuric hypercalcaemia: the same calcium-sensing receptor gene is involved, but with a gain-of-function rather than a loss-of-function change.",
-      "The hallmark is hypocalcaemia accompanied by an inappropriately low or 'normal' parathyroid hormone level, in contrast to most other causes of hypocalcaemia where parathyroid hormone rises appropriately.",
-      "Relative hypercalciuria is the distinguishing renal feature: patients continue to waste calcium in the urine despite being hypocalcaemic, predisposing to nephrocalcinosis and stones.",
-      "Many individuals are asymptomatic and detected only through family screening or incidental biochemistry; symptoms, when present, reflect neuromuscular irritability such as paraesthesiae, carpopedal spasm, tetany and seizures.",
-      "Correcting the serum calcium to fully normal levels with calcium and active vitamin D is hazardous because it amplifies the underlying hypercalciuria and can precipitate nephrocalcinosis and renal impairment; treatment should be guided by symptoms, not by chasing a normal figure.",
-      "Type 2 disease, caused by activation of the Galpha-11 signalling subunit, tends to run a biochemically milder course and has been associated with short stature in some kindreds.",
-      "Long-standing hypocalcaemia may lead to basal ganglia calcification and cataract, so these should be sought in chronically affected patients.",
-      "Calcium-sensing receptor antagonists (calcilytics) represent an emerging targeted therapeutic approach for this condition."
+  "pathophysiology": "Autosomal dominant hypocalcaemia is most often caused by activating (gain-of-function) mutations of the calcium-sensing receptor gene (CASR), giving rise to type 1 disease; a less common type 2 results from activating mutations in GNA11, which encodes the Galpha-11 subunit coupling the receptor to its downstream signalling cascade. The overactive receptor misreads the prevailing extracellular calcium as higher than it truly is, so the parathyroid glands suppress parathyroid hormone secretion at inappropriately low calcium concentrations. In the kidney, receptor activation within the thick ascending limb of the loop of Henle diminishes tubular calcium reabsorption and promotes calciuria. The combined result is hypocalcaemia with inappropriately low or normal parathyroid hormone together with relative hypercalciuria. Because the same receptor modulates renal magnesium handling, hypomagnesaemia may coexist, and the reduced calcium reabsorption underlies the tendency to nephrocalcinosis that is aggravated by over-treatment.",
+  "additionalDifferentials": [
+   "Hypoparathyroidism (autoimmune, post-surgical, or associated with 22q11 deletion / DiGeorge)",
+   "Familial isolated hypoparathyroidism",
+   "Pseudohypoparathyroidism, in which parathyroid hormone is elevated because of end-organ resistance",
+   "Autoimmune polyendocrine syndrome type 1 (APECED)",
+   "Vitamin D deficiency or hereditary vitamin D-resistant states",
+   "Hypomagnesaemia causing functional hypoparathyroidism",
+   "Hypocalcaemia of chronic kidney disease"
+  ],
+  "additionalInvestigations": [
+   "Albumin-corrected serum calcium together with ionised calcium",
+   "Intact parathyroid hormone measured concurrently with the calcium sample",
+   "Timed urinary calcium excretion and the calcium-to-creatinine ratio to demonstrate relative hypercalciuria",
+   "Serum magnesium and phosphate",
+   "Sequencing of CASR and, if negative, GNA11",
+   "Renal ultrasound to detect nephrocalcinosis or calculi",
+   "Electrocardiogram to assess the corrected QT interval"
+  ],
+  "redFlags": [
+   "Seizures or laryngospasm from acute severe hypocalcaemia",
+   "Prolonged QT interval with attendant risk of arrhythmia",
+   "Progressive renal impairment or nephrocalcinosis, often precipitated by over-treatment",
+   "Symptomatic tetany or carpopedal spasm"
+  ],
+  "prognosis": "The outlook is generally good when management is conservative and symptom-guided. The principal long-term threat is renal damage from hypercalciuria, which is worsened rather than prevented by aggressive calcium and active vitamin D replacement.",
+  "pitfalls": [
+   "Mislabelling the condition as idiopathic hypoparathyroidism and treating to a fully normal calcium, thereby precipitating nephrocalcinosis and renal decline.",
+   "Failing to measure parathyroid hormone at the same time as calcium, so the inappropriately low value is missed.",
+   "Overlooking the family history and not offering screening to at-risk relatives.",
+   "Neglecting coexistent hypomagnesaemia, which can perpetuate the hypocalcaemia.",
+   "Confusing the direction of the receptor defect with that of familial hypocalciuric hypercalcaemia."
+  ],
+  "references": [
+   "Endocrinology reference texts",
+   "Clinical genetics references",
+   "Consensus guidance on hypoparathyroidism and disorders of calcium homeostasis"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat only symptomatic hypocalcaemia and aim to abolish neuromuscular symptoms rather than restore a normal serum calcium, since full correction amplifies the underlying hypercalciuria",
+   "Use restrained supplementation with oral calcium and an active vitamin D analogue such as calcitriol or alfacalcidol at the lowest dose that controls symptoms",
+   "Add a thiazide diuretic with dietary sodium restriction to curb urinary calcium loss and protect the kidneys from nephrocalcinosis",
+   "For acute tetany, carpopedal spasm, laryngospasm or seizures, give intravenous calcium gluconate under cardiac monitoring",
+   "Consider recombinant parathyroid hormone, and emerging calcium-sensing receptor antagonists (calcilytics) under specialist care, when conventional therapy fails or aggravates hypercalciuria",
+   "Monitor serum and urinary calcium, magnesium and renal function with periodic renal ultrasound for nephrocalcinosis and stones",
+   "Offer genetic counselling and biochemical CASR/GNA11 screening of relatives, with endocrinology and nephrology co-management"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "autosomal_dominant_hypocalcaemia-pathway",
+   "title": "Autosomal Dominant Hypocalcaemia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Autosomal dominant hypocalcaemia is essentially the biochemical mirror image of familial hypocalciuric hypercalcaemia: the same calcium-sensing receptor gene is involved, but with a gain-of-function rather than a loss-of-function change.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Seizures or laryngospasm from acute severe hypocalcaemia",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Albumin-corrected serum calcium together with ionised calcium, Intact parathyroid hormone measured concurrently with the calcium sample, Timed urinary calcium excretion and the calcium-to-creatinine ratio to demonstrate"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat only symptomatic hypocalcaemia and aim to abolish neuromuscular symptoms rather than restore a normal serum calcium, since full correction amplifies the underlying hypercalciuria"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mislabelling the condition as idiopathic hypoparathyroidism and treating to a fully normal calcium, thereby precipitating nephrocalcinosis and renal decline."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of autosomal dominant hypocalcaemia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "autosomal_dominant_hypocalcaemia-matrix",
+   "title": "Autosomal Dominant Hypocalcaemia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Autosomal dominant hypocalcaemia is essentially the biochemical mirror image of familial hypocalciuric hypercalcaemia: the same",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Autosomal dominant hypocalcaemia is most often caused by activating (gain-of-function) mutations of the calcium-sensing receptor gene (CASR), giving rise to type 1 disease; a less common type 2 results from activating mutations in GNA11, which encodes the Galpha-11 subunit coupling the receptor to its downstream signalling cascade. The overactive receptor misreads the prevailing extracellular calcium as higher than it truly is, so the parathyroid glands suppress parathyroid hormone secretion at inappropriately low calcium concentrations. In the kidney, receptor activation within the thick ascending limb of the loop of Henle diminishes tubular calcium reabsorption and promotes calciuria. The combined result is hypocalcaemia with inappropriately low or normal parathyroid hormone together with relative hypercalciuria. Because the same receptor modulates renal magnesium handling, hypomagnesaemia may coexist, and the reduced calcium reabsorption underlies the tendency to nephrocalcinosis that is aggravated by over-treatment.",
-    "additionalDifferentials": [
-      "Hypoparathyroidism (autoimmune, post-surgical, or associated with 22q11 deletion / DiGeorge)",
-      "Familial isolated hypoparathyroidism",
-      "Pseudohypoparathyroidism, in which parathyroid hormone is elevated because of end-organ resistance",
-      "Autoimmune polyendocrine syndrome type 1 (APECED)",
-      "Vitamin D deficiency or hereditary vitamin D-resistant states",
-      "Hypomagnesaemia causing functional hypoparathyroidism",
-      "Hypocalcaemia of chronic kidney disease"
+    [
+     "Key Investigations",
+     "Albumin-corrected serum calcium together with ionised calcium, Intact parathyroid hormone measured concurrently with the calcium",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Albumin-corrected serum calcium together with ionised calcium",
-      "Intact parathyroid hormone measured concurrently with the calcium sample",
-      "Timed urinary calcium excretion and the calcium-to-creatinine ratio to demonstrate relative hypercalciuria",
-      "Serum magnesium and phosphate",
-      "Sequencing of CASR and, if negative, GNA11",
-      "Renal ultrasound to detect nephrocalcinosis or calculi",
-      "Electrocardiogram to assess the corrected QT interval"
+    [
+     "Primary Differentials",
+     "Hypoparathyroidism (autoimmune, post-surgical, or associated with 22q11 deletion / DiGeorge), Familial isolated",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Seizures or laryngospasm from acute severe hypocalcaemia",
-      "Prolonged QT interval with attendant risk of arrhythmia",
-      "Progressive renal impairment or nephrocalcinosis, often precipitated by over-treatment",
-      "Symptomatic tetany or carpopedal spasm"
+    [
+     "Management Strategy",
+     "Treat only symptomatic hypocalcaemia and aim to abolish neuromuscular symptoms rather than restore a normal serum calcium, since",
+     "Core treatment modality"
     ],
-    "prognosis": "The outlook is generally good when management is conservative and symptom-guided. The principal long-term threat is renal damage from hypercalciuria, which is worsened rather than prevented by aggressive calcium and active vitamin D replacement.",
-    "pitfalls": [
-      "Mislabelling the condition as idiopathic hypoparathyroidism and treating to a fully normal calcium, thereby precipitating nephrocalcinosis and renal decline.",
-      "Failing to measure parathyroid hormone at the same time as calcium, so the inappropriately low value is missed.",
-      "Overlooking the family history and not offering screening to at-risk relatives.",
-      "Neglecting coexistent hypomagnesaemia, which can perpetuate the hypocalcaemia.",
-      "Confusing the direction of the receptor defect with that of familial hypocalciuric hypercalcaemia."
-    ],
-    "references": [
-      "Endocrinology reference texts",
-      "Clinical genetics references",
-      "Consensus guidance on hypoparathyroidism and disorders of calcium homeostasis"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat only symptomatic hypocalcaemia and aim to abolish neuromuscular symptoms rather than restore a normal serum calcium, since full correction amplifies the underlying hypercalciuria",
-      "Use restrained supplementation with oral calcium and an active vitamin D analogue such as calcitriol or alfacalcidol at the lowest dose that controls symptoms",
-      "Add a thiazide diuretic with dietary sodium restriction to curb urinary calcium loss and protect the kidneys from nephrocalcinosis",
-      "For acute tetany, carpopedal spasm, laryngospasm or seizures, give intravenous calcium gluconate under cardiac monitoring",
-      "Consider recombinant parathyroid hormone, and emerging calcium-sensing receptor antagonists (calcilytics) under specialist care, when conventional therapy fails or aggravates hypercalciuria",
-      "Monitor serum and urinary calcium, magnesium and renal function with periodic renal ultrasound for nephrocalcinosis and stones",
-      "Offer genetic counselling and biochemical CASR/GNA11 screening of relatives, with endocrinology and nephrology co-management"
+    [
+     "Clinical Pitfall",
+     "Mislabelling the condition as idiopathic hypoparathyroidism and treating to a fully normal calcium, thereby precipitating",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for autosomal dominant hypocalcaemia."
+  }
+ ]
 }

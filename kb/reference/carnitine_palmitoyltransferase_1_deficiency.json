@@ -1,85 +1,157 @@
 {
-  "id": "carnitine_palmitoyltransferase_1_deficiency",
-  "name": "Carnitine palmitoyltransferase 1 deficiency",
-  "aliases": [
-    "CPT IA deficiency",
-    "CPT1 deficiency",
-    "CPT1A deficiency",
-    "Hepatic carnitine palmitoyltransferase deficiency",
-    "carnitine palmitoyltransferase I deficiency",
-    "cpt1 deficiency",
-    "hepatic CPT deficiency"
+ "id": "carnitine_palmitoyltransferase_1_deficiency",
+ "name": "Carnitine palmitoyltransferase 1 deficiency",
+ "aliases": [
+  "CPT IA deficiency",
+  "CPT1 deficiency",
+  "CPT1A deficiency",
+  "Hepatic carnitine palmitoyltransferase deficiency",
+  "carnitine palmitoyltransferase I deficiency",
+  "cpt1 deficiency",
+  "hepatic CPT deficiency"
+ ],
+ "class": "non_infective",
+ "system": "Metabolic / Fatty acid oxidation",
+ "specialty": "Metabolic medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Metabolic medicine references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Autosomal recessive defect of the liver isoform (CPT1A) of carnitine palmitoyltransferase 1 on the outer mitochondrial membrane, the enzyme that initiates entry of long-chain fatty acids into mitochondria by esterifying them to carnitine.",
+   "Presents with fasting-induced hypoketotic hypoglycaemia, hepatomegaly, raised transaminases and a Reye-like encephalopathy, typically triggered by an intercurrent illness.",
+   "Unlike carnitine palmitoyltransferase 2 or translocase defects, the heart and skeletal muscle are characteristically spared, so cardiomyopathy and rhabdomyolysis are absent because muscle relies on a different isoform.",
+   "The biochemistry is paradoxical among fatty-acid-oxidation disorders: free carnitine is normal or elevated with low long-chain acylcarnitines, giving a raised ratio of free carnitine to combined palmitoyl- and stearoylcarnitine.",
+   "Renal tubular acidosis may accompany metabolic crises.",
+   "A common CPT1A variant (p.Pro479Leu) is highly prevalent in Arctic Indigenous populations and is linked to infant hypoglycaemia and sudden unexpected death.",
+   "Treatment centres on strict fasting avoidance, a high-carbohydrate diet with long-chain-fat restriction and medium-chain triglyceride supplementation, plus a glucose-based emergency regimen during illness."
   ],
-  "class": "non_infective",
-  "system": "Metabolic / Fatty acid oxidation",
-  "specialty": "Metabolic medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Metabolic medicine references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Autosomal recessive defect of the liver isoform (CPT1A) of carnitine palmitoyltransferase 1 on the outer mitochondrial membrane, the enzyme that initiates entry of long-chain fatty acids into mitochondria by esterifying them to carnitine.",
-      "Presents with fasting-induced hypoketotic hypoglycaemia, hepatomegaly, raised transaminases and a Reye-like encephalopathy, typically triggered by an intercurrent illness.",
-      "Unlike carnitine palmitoyltransferase 2 or translocase defects, the heart and skeletal muscle are characteristically spared, so cardiomyopathy and rhabdomyolysis are absent because muscle relies on a different isoform.",
-      "The biochemistry is paradoxical among fatty-acid-oxidation disorders: free carnitine is normal or elevated with low long-chain acylcarnitines, giving a raised ratio of free carnitine to combined palmitoyl- and stearoylcarnitine.",
-      "Renal tubular acidosis may accompany metabolic crises.",
-      "A common CPT1A variant (p.Pro479Leu) is highly prevalent in Arctic Indigenous populations and is linked to infant hypoglycaemia and sudden unexpected death.",
-      "Treatment centres on strict fasting avoidance, a high-carbohydrate diet with long-chain-fat restriction and medium-chain triglyceride supplementation, plus a glucose-based emergency regimen during illness."
+  "pathophysiology": "Carnitine palmitoyltransferase 1A sits on the outer mitochondrial membrane and catalyses the rate-controlling, malonyl-CoA-sensitive step of long-chain fatty-acid import, converting long-chain acyl-CoA plus carnitine into acylcarnitine that the translocase can carry inwards. When CPT1A activity is lost, hepatic long-chain fatty-acid oxidation cannot proceed, so during fasting the liver fails to generate ketones and to sustain gluconeogenesis, producing hypoketotic hypoglycaemia and a Reye-like encephalopathy. Because the enzymatic block is upstream of acylcarnitine formation, long-chain acylcarnitines are conspicuously low while free carnitine accumulates, the mirror image of most fatty-acid-oxidation defects. The muscle and cardiac isoform CPT1B is unaffected, which is why the heart and skeletal muscle are clinically spared, and impaired transporter function in the renal tubule can produce a tubular acidosis.",
+  "additionalDifferentials": [
+   "Medium-chain and very long-chain acyl-CoA dehydrogenase deficiency",
+   "Carnitine palmitoyltransferase 2 and carnitine-acylcarnitine translocase deficiency (with cardiac and muscle features)",
+   "Hepatic glycogen storage disorders",
+   "Congenital hyperinsulinism and other endocrine causes of hypoglycaemia",
+   "Reye syndrome",
+   "Gluconeogenesis defects such as fructose-1,6-bisphosphatase deficiency",
+   "Primary carnitine deficiency"
+  ],
+  "additionalInvestigations": [
+   "Plasma acylcarnitine profile showing low long-chain species with high free carnitine and a raised free-carnitine to long-chain-acylcarnitine ratio",
+   "Plasma total and free carnitine",
+   "Urine organic acids during crisis demonstrating inappropriately low ketones",
+   "Paired blood glucose and ketone monitoring during intercurrent illness",
+   "Molecular testing of CPT1A",
+   "Enzyme activity assay in cultured fibroblasts",
+   "Assessment of renal tubular function and acid-base status"
+  ],
+  "redFlags": [
+   "Fasting hypoketotic hypoglycaemia with encephalopathy",
+   "Acute liver dysfunction and hepatomegaly during illness",
+   "Renal tubular acidosis",
+   "Sudden unexplained infant deterioration, especially in high-prevalence Arctic populations"
+  ],
+  "prognosis": "With early diagnosis, avoidance of fasting and dietary management the prognosis is generally good and cardiac or muscle complications do not develop; the main hazard is an unrecognised hypoglycaemic crisis.",
+  "pitfalls": [
+   "Misreading the low-acylcarnitine, high-free-carnitine profile as normal or as carnitine excess",
+   "Expecting cardiomyopathy or rhabdomyolysis, whose absence does not argue against this long-chain defect",
+   "Overlooking an accompanying renal tubular acidosis",
+   "Under-recognising the founder variant and its sudden-death risk in Arctic Indigenous populations"
+  ],
+  "references": [
+   "Inherited metabolic disease reference texts",
+   "Fatty acid oxidation disorder management consensus guidelines",
+   "Paediatric metabolic medicine references"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Prevent hypoglycaemic crises by avoiding fasting and ensuring frequent carbohydrate intake, with a written emergency regimen during intercurrent illness",
+   "Restrict long-chain fat and supplement with medium-chain triglycerides, which enter mitochondria independently of the carnitine cycle",
+   "Treat acute decompensation with intravenous glucose to restore euglycaemia and reverse the Reye-like state",
+   "Recognise and correct any associated renal tubular acidosis during crises",
+   "Monitor with paired glucose and ketone measurement during illness and periodic acylcarnitine profiling",
+   "Manage within a specialist metabolic team",
+   "Offer CPT1A genetic testing, counselling and family or newborn screening, noting the high-prevalence Arctic variant"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "carnitine_palmitoyltransferase_1_deficiency-pathway",
+   "title": "Carnitine palmitoyltransferase 1 deficiency: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Autosomal recessive defect of the liver isoform (CPT1A) of carnitine palmitoyltransferase 1 on the outer mitochondrial membrane, the enzyme that initiates entry of long-chain fatty acids into mitochondria by esterifying them to carnitine.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Fasting hypoketotic hypoglycaemia with encephalopathy",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Plasma acylcarnitine profile showing low long-chain species with high free carnitine and a raised free-carnitine to long-chain-acylcarnitine ratio, Plasma total and free carnitine, Urine organic acids during crisis"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Prevent hypoglycaemic crises by avoiding fasting and ensuring frequent carbohydrate intake, with a written emergency regimen during intercurrent illness"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misreading the low-acylcarnitine, high-free-carnitine profile as normal or as carnitine excess"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of carnitine palmitoyltransferase 1 deficiency."
+  }
+ ],
+ "tables": [
+  {
+   "id": "carnitine_palmitoyltransferase_1_deficiency-matrix",
+   "title": "Carnitine palmitoyltransferase 1 deficiency: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Autosomal recessive defect of the liver isoform (CPT1A) of carnitine palmitoyltransferase 1 on the outer mitochondrial membrane,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Carnitine palmitoyltransferase 1A sits on the outer mitochondrial membrane and catalyses the rate-controlling, malonyl-CoA-sensitive step of long-chain fatty-acid import, converting long-chain acyl-CoA plus carnitine into acylcarnitine that the translocase can carry inwards. When CPT1A activity is lost, hepatic long-chain fatty-acid oxidation cannot proceed, so during fasting the liver fails to generate ketones and to sustain gluconeogenesis, producing hypoketotic hypoglycaemia and a Reye-like encephalopathy. Because the enzymatic block is upstream of acylcarnitine formation, long-chain acylcarnitines are conspicuously low while free carnitine accumulates, the mirror image of most fatty-acid-oxidation defects. The muscle and cardiac isoform CPT1B is unaffected, which is why the heart and skeletal muscle are clinically spared, and impaired transporter function in the renal tubule can produce a tubular acidosis.",
-    "additionalDifferentials": [
-      "Medium-chain and very long-chain acyl-CoA dehydrogenase deficiency",
-      "Carnitine palmitoyltransferase 2 and carnitine-acylcarnitine translocase deficiency (with cardiac and muscle features)",
-      "Hepatic glycogen storage disorders",
-      "Congenital hyperinsulinism and other endocrine causes of hypoglycaemia",
-      "Reye syndrome",
-      "Gluconeogenesis defects such as fructose-1,6-bisphosphatase deficiency",
-      "Primary carnitine deficiency"
+    [
+     "Key Investigations",
+     "Plasma acylcarnitine profile showing low long-chain species with high free carnitine and a raised free-carnitine to",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Plasma acylcarnitine profile showing low long-chain species with high free carnitine and a raised free-carnitine to long-chain-acylcarnitine ratio",
-      "Plasma total and free carnitine",
-      "Urine organic acids during crisis demonstrating inappropriately low ketones",
-      "Paired blood glucose and ketone monitoring during intercurrent illness",
-      "Molecular testing of CPT1A",
-      "Enzyme activity assay in cultured fibroblasts",
-      "Assessment of renal tubular function and acid-base status"
+    [
+     "Primary Differentials",
+     "Medium-chain and very long-chain acyl-CoA dehydrogenase deficiency, Carnitine palmitoyltransferase 2 and carnitine-acylcarnitine",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Fasting hypoketotic hypoglycaemia with encephalopathy",
-      "Acute liver dysfunction and hepatomegaly during illness",
-      "Renal tubular acidosis",
-      "Sudden unexplained infant deterioration, especially in high-prevalence Arctic populations"
+    [
+     "Management Strategy",
+     "Prevent hypoglycaemic crises by avoiding fasting and ensuring frequent carbohydrate intake, with a written emergency regimen",
+     "Core treatment modality"
     ],
-    "prognosis": "With early diagnosis, avoidance of fasting and dietary management the prognosis is generally good and cardiac or muscle complications do not develop; the main hazard is an unrecognised hypoglycaemic crisis.",
-    "pitfalls": [
-      "Misreading the low-acylcarnitine, high-free-carnitine profile as normal or as carnitine excess",
-      "Expecting cardiomyopathy or rhabdomyolysis, whose absence does not argue against this long-chain defect",
-      "Overlooking an accompanying renal tubular acidosis",
-      "Under-recognising the founder variant and its sudden-death risk in Arctic Indigenous populations"
-    ],
-    "references": [
-      "Inherited metabolic disease reference texts",
-      "Fatty acid oxidation disorder management consensus guidelines",
-      "Paediatric metabolic medicine references"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Prevent hypoglycaemic crises by avoiding fasting and ensuring frequent carbohydrate intake, with a written emergency regimen during intercurrent illness",
-      "Restrict long-chain fat and supplement with medium-chain triglycerides, which enter mitochondria independently of the carnitine cycle",
-      "Treat acute decompensation with intravenous glucose to restore euglycaemia and reverse the Reye-like state",
-      "Recognise and correct any associated renal tubular acidosis during crises",
-      "Monitor with paired glucose and ketone measurement during illness and periodic acylcarnitine profiling",
-      "Manage within a specialist metabolic team",
-      "Offer CPT1A genetic testing, counselling and family or newborn screening, noting the high-prevalence Arctic variant"
+    [
+     "Clinical Pitfall",
+     "Misreading the low-acylcarnitine, high-free-carnitine profile as normal or as carnitine excess",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for carnitine palmitoyltransferase 1 deficiency."
+  }
+ ]
 }

@@ -127,5 +127,77 @@
       "importedAt": "2026-06-29T13:39:19Z",
       "contentHash": "hf3e92ff4"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "myxedema-dx-algo",
+      "title": "Myxoedema coma: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Myxedema coma carries a 20-40% mortality despite intensive care, and outcome does not correlate with the degree of T4 or TSH abnormality (p.3032).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Reduced level of consciousness with seizures in a hypothyroid patient (p.3032).",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Arterial blood gas to detect hypoxia and hypercapnia from hypoventilation (p.3032)., Glucose to detect contributing hypoglycemia (p.3032)., Septic screen / cultures, since infection is a common precipitant and is masked by"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Differentiate from top mimics: Sick euthyroid syndrome confounding thyroid function tests in a critically ill or hypothermic patient (p.3769)., Adrenal insufficiency / hypopituitarism, which independently increase susceptibility to"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Sedatives, anesthetics, and antidepressants can precipitate or worsen myxedema coma, and impaired drug metabolism means standard doses may accumulate (p.3032)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for myxoedema coma."
+    }
+  ],
+  "tables": [
+    {
+      "id": "myxedema-matrix",
+      "title": "Myxoedema coma: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Myxedema coma carries a 20-40% mortality despite intensive care, and outcome does not correlate with the degree of T4 or TSH",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Arterial blood gas to detect hypoxia and hypercapnia from hypoventilation (p.3032)., Glucose to detect contributing hypoglycemia",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Sick euthyroid syndrome confounding thyroid function tests in a critically ill or hypothermic patient (p.3769)., Adrenal",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Reduced level of consciousness with seizures in a hypothyroid patient (p.3032).",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Sedatives, anesthetics, and antidepressants can precipitate or worsen myxedema coma, and impaired drug metabolism means standard",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for myxoedema coma."
+    }
+  ]
 }

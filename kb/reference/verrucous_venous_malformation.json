@@ -1,79 +1,151 @@
 {
-  "id": "verrucous_venous_malformation",
-  "name": "Verrucous venous malformation",
-  "aliases": [
-    "VVM",
-    "verrucous haemangioma",
-    "MAP3K3-associated verrucous venous malformation"
+ "id": "verrucous_venous_malformation",
+ "name": "Verrucous venous malformation",
+ "aliases": [
+  "VVM",
+  "verrucous haemangioma",
+  "MAP3K3-associated verrucous venous malformation"
+ ],
+ "class": "non_infective",
+ "system": "Vascular anomalies / Dermatology",
+ "specialty": "Vascular Anomalies",
+ "referenceOnly": true,
+ "reference": {
+  "source": "ISSVA classification / Mulliken and Young's Vascular Anomalies",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A congenital vascular malformation historically termed verrucous haemangioma, now recognised as a venous malformation with a hyperkeratotic (warty) surface",
+   "Typically presents as a bluish-red plaque or cluster of lesions, most often on a lower limb, that becomes progressively verrucous and hyperkeratotic over time",
+   "Unlike infantile haemangioma it does not involute and it is GLUT1-negative, though older confusing nomenclature persists",
+   "It tends to enlarge with growth of the child and may bleed, become crusted or secondarily infected",
+   "Somatic activating variants in MAP3K3 have been identified, distinguishing it molecularly from common venous malformations",
+   "Histology shows dilated venous channels in the dermis and subcutis with overlying epidermal hyperkeratosis, acanthosis and papillomatosis",
+   "The deep component often extends beyond the visible surface, which explains the tendency to recur after superficial treatment",
+   "Management is guided by symptoms and includes complete surgical excision where feasible, with laser or other modalities for selected lesions"
   ],
-  "class": "non_infective",
-  "system": "Vascular anomalies / Dermatology",
-  "specialty": "Vascular Anomalies",
-  "referenceOnly": true,
-  "reference": {
-    "source": "ISSVA classification / Mulliken and Young's Vascular Anomalies",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A congenital vascular malformation historically termed verrucous haemangioma, now recognised as a venous malformation with a hyperkeratotic (warty) surface",
-      "Typically presents as a bluish-red plaque or cluster of lesions, most often on a lower limb, that becomes progressively verrucous and hyperkeratotic over time",
-      "Unlike infantile haemangioma it does not involute and it is GLUT1-negative, though older confusing nomenclature persists",
-      "It tends to enlarge with growth of the child and may bleed, become crusted or secondarily infected",
-      "Somatic activating variants in MAP3K3 have been identified, distinguishing it molecularly from common venous malformations",
-      "Histology shows dilated venous channels in the dermis and subcutis with overlying epidermal hyperkeratosis, acanthosis and papillomatosis",
-      "The deep component often extends beyond the visible surface, which explains the tendency to recur after superficial treatment",
-      "Management is guided by symptoms and includes complete surgical excision where feasible, with laser or other modalities for selected lesions"
+  "pathophysiology": "Verrucous venous malformation is a congenital slow-flow venous malformation in which dilated, abnormal venous channels occupy the dermis and subcutis while the overlying epidermis develops reactive hyperkeratosis, acanthosis and papillomatosis, giving the characteristic warty surface. Somatic activating variants in MAP3K3 drive the lesion and separate it molecularly from common venous malformations. Because the malformed vessels frequently extend deeper than the visible verrucous surface, superficial or incomplete treatment tends to be followed by recurrence and progressive enlargement.",
+  "additionalDifferentials": [
+   "Common venous malformation",
+   "Angiokeratoma (circumscriptum or other types)",
+   "Lymphatic malformation with verrucous change",
+   "Infantile or congenital haemangioma",
+   "Verrucous epidermal naevus",
+   "Pyogenic granuloma or other bleeding vascular lesion"
+  ],
+  "additionalInvestigations": [
+   "Clinical examination documenting the verrucous, hyperkeratotic surface and distribution",
+   "MRI to assess the depth and full extent of the venous component",
+   "Doppler ultrasound to confirm slow-flow venous characteristics",
+   "Histopathology showing dermal venous channels with epidermal hyperkeratosis",
+   "GLUT1 immunostaining to exclude infantile haemangioma",
+   "Molecular testing for MAP3K3 variants where available"
+  ],
+  "redFlags": [
+   "Recurrent or significant bleeding from the lesion",
+   "Ulceration or secondary infection",
+   "Rapid enlargement or new symptoms",
+   "Functional impairment when overlying joints or weight-bearing areas",
+   "Diagnostic uncertainty raising concern for another lesion"
+  ],
+  "prognosis": "Verrucous venous malformation is benign but persistent and does not involute; it commonly enlarges with the patient and is prone to recurrence after incomplete treatment, so wide complete excision offers the best chance of durable control while symptoms otherwise guide conservative management.",
+  "pitfalls": [
+   "Treating it as an involuting infantile haemangioma and awaiting spontaneous resolution",
+   "Underestimating the deep venous component and performing inadequate superficial excision",
+   "Relying on the outdated term verrucous haemangioma and misclassifying it as a tumour",
+   "Overlooking bleeding and infection risk in hyperkeratotic, friable lesions"
+  ],
+  "references": [
+   "ISSVA Classification of Vascular Anomalies",
+   "Mulliken and Young's Vascular Anomalies: Haemangiomas and Malformations"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Aim for wide, complete surgical excision including the deep venous component, as this offers the best chance of durable control",
+   "Define the full depth and extent with MRI before treatment, since superficial or incomplete excision is followed by recurrence",
+   "Use adjunctive laser therapy for the hyperkeratotic surface and sclerotherapy for the venous channels where appropriate",
+   "Manage bleeding, crusting and secondary infection of the lesion symptomatically",
+   "Adopt conservative, symptom-guided management where complete excision is not feasible",
+   "Manage through a vascular anomalies team or dermatology, with follow-up for recurrence and progressive enlargement"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "verrucous_venous_malformation-pathway",
+   "title": "Verrucous venous malformation: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A congenital vascular malformation historically termed verrucous haemangioma, now recognised as a venous malformation with a hyperkeratotic (warty) surface",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Recurrent or significant bleeding from the lesion",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical examination documenting the verrucous, hyperkeratotic surface and distribution, MRI to assess the depth and full extent of the venous component, Doppler ultrasound to confirm slow-flow venous characteristics"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Aim for wide, complete surgical excision including the deep venous component, as this offers the best chance of durable control"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Treating it as an involuting infantile haemangioma and awaiting spontaneous resolution"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of verrucous venous malformation."
+  }
+ ],
+ "tables": [
+  {
+   "id": "verrucous_venous_malformation-matrix",
+   "title": "Verrucous venous malformation: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A congenital vascular malformation historically termed verrucous haemangioma, now recognised as a venous malformation with a",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Verrucous venous malformation is a congenital slow-flow venous malformation in which dilated, abnormal venous channels occupy the dermis and subcutis while the overlying epidermis develops reactive hyperkeratosis, acanthosis and papillomatosis, giving the characteristic warty surface. Somatic activating variants in MAP3K3 drive the lesion and separate it molecularly from common venous malformations. Because the malformed vessels frequently extend deeper than the visible verrucous surface, superficial or incomplete treatment tends to be followed by recurrence and progressive enlargement.",
-    "additionalDifferentials": [
-      "Common venous malformation",
-      "Angiokeratoma (circumscriptum or other types)",
-      "Lymphatic malformation with verrucous change",
-      "Infantile or congenital haemangioma",
-      "Verrucous epidermal naevus",
-      "Pyogenic granuloma or other bleeding vascular lesion"
+    [
+     "Key Investigations",
+     "Clinical examination documenting the verrucous, hyperkeratotic surface and distribution, MRI to assess the depth and full extent",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical examination documenting the verrucous, hyperkeratotic surface and distribution",
-      "MRI to assess the depth and full extent of the venous component",
-      "Doppler ultrasound to confirm slow-flow venous characteristics",
-      "Histopathology showing dermal venous channels with epidermal hyperkeratosis",
-      "GLUT1 immunostaining to exclude infantile haemangioma",
-      "Molecular testing for MAP3K3 variants where available"
+    [
+     "Primary Differentials",
+     "Common venous malformation, Angiokeratoma (circumscriptum or other types), Lymphatic malformation with verrucous change",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Recurrent or significant bleeding from the lesion",
-      "Ulceration or secondary infection",
-      "Rapid enlargement or new symptoms",
-      "Functional impairment when overlying joints or weight-bearing areas",
-      "Diagnostic uncertainty raising concern for another lesion"
+    [
+     "Management Strategy",
+     "Aim for wide, complete surgical excision including the deep venous component, as this offers the best chance of durable control",
+     "Core treatment modality"
     ],
-    "prognosis": "Verrucous venous malformation is benign but persistent and does not involute; it commonly enlarges with the patient and is prone to recurrence after incomplete treatment, so wide complete excision offers the best chance of durable control while symptoms otherwise guide conservative management.",
-    "pitfalls": [
-      "Treating it as an involuting infantile haemangioma and awaiting spontaneous resolution",
-      "Underestimating the deep venous component and performing inadequate superficial excision",
-      "Relying on the outdated term verrucous haemangioma and misclassifying it as a tumour",
-      "Overlooking bleeding and infection risk in hyperkeratotic, friable lesions"
-    ],
-    "references": [
-      "ISSVA Classification of Vascular Anomalies",
-      "Mulliken and Young's Vascular Anomalies: Haemangiomas and Malformations"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Aim for wide, complete surgical excision including the deep venous component, as this offers the best chance of durable control",
-      "Define the full depth and extent with MRI before treatment, since superficial or incomplete excision is followed by recurrence",
-      "Use adjunctive laser therapy for the hyperkeratotic surface and sclerotherapy for the venous channels where appropriate",
-      "Manage bleeding, crusting and secondary infection of the lesion symptomatically",
-      "Adopt conservative, symptom-guided management where complete excision is not feasible",
-      "Manage through a vascular anomalies team or dermatology, with follow-up for recurrence and progressive enlargement"
+    [
+     "Clinical Pitfall",
+     "Treating it as an involuting infantile haemangioma and awaiting spontaneous resolution",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for verrucous venous malformation."
+  }
+ ]
 }

@@ -1,80 +1,152 @@
 {
-  "id": "hyphema",
-  "name": "Hyphema",
-  "aliases": [
-    "hyphaema",
-    "blood in anterior chamber"
+ "id": "hyphema",
+ "name": "Hyphema",
+ "aliases": [
+  "hyphaema",
+  "blood in anterior chamber"
+ ],
+ "class": "non_infective",
+ "system": "Eye / Ophthalmology",
+ "specialty": "Ophthalmology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Defined as blood in the anterior chamber, usually seen as a layered red fluid level in the inferior chamber when the patient is upright",
+   "Most commonly follows blunt ocular trauma, but spontaneous hyphema should prompt consideration of neovascularisation, tumour, or a bleeding tendency",
+   "Grading is by the height of the layered blood; a total chamber filled with dark clotted blood is termed an eight-ball hyphema",
+   "Raised intraocular pressure is a major early concern, particularly in sickle cell disease where even modest pressures endanger the optic nerve",
+   "Rebleeding, typically within the first several days, tends to be more severe than the original bleed and worsens prognosis",
+   "Management principles include rest with head elevation, limiting activity, shielding the eye, and close monitoring of pressure; avoiding antiplatelet and anticoagulant agents where possible",
+   "Corneal blood staining and glaucoma are the main sight-threatening complications requiring surgical washout if uncontrolled",
+   "All patients of African, Mediterranean, or Middle Eastern descent should be screened for sickle cell status"
   ],
-  "class": "non_infective",
-  "system": "Eye / Ophthalmology",
-  "specialty": "Ophthalmology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Defined as blood in the anterior chamber, usually seen as a layered red fluid level in the inferior chamber when the patient is upright",
-      "Most commonly follows blunt ocular trauma, but spontaneous hyphema should prompt consideration of neovascularisation, tumour, or a bleeding tendency",
-      "Grading is by the height of the layered blood; a total chamber filled with dark clotted blood is termed an eight-ball hyphema",
-      "Raised intraocular pressure is a major early concern, particularly in sickle cell disease where even modest pressures endanger the optic nerve",
-      "Rebleeding, typically within the first several days, tends to be more severe than the original bleed and worsens prognosis",
-      "Management principles include rest with head elevation, limiting activity, shielding the eye, and close monitoring of pressure; avoiding antiplatelet and anticoagulant agents where possible",
-      "Corneal blood staining and glaucoma are the main sight-threatening complications requiring surgical washout if uncontrolled",
-      "All patients of African, Mediterranean, or Middle Eastern descent should be screened for sickle cell status"
+  "pathophysiology": "Hyphema results from disruption of iris or ciliary body vessels, most often by blunt trauma that causes rapid globe compression and a sudden shift of intraocular structures, tearing vessels at the iris root or angle. Red cells settle inferiorly under gravity. Clot formation and subsequent fibrinolysis create a window of rebleeding risk. Blood and inflammatory debris obstruct the trabecular meshwork, raising intraocular pressure; in sickle cell disease, red cells sickle in the low-oxygen, acidotic aqueous, further impairing outflow and increasing susceptibility to optic nerve damage. Prolonged high pressure with an intact endothelial insult leads to corneal blood staining.",
+  "additionalDifferentials": [
+   "Traumatic microhyphema without layering",
+   "Neovascular disease (diabetic retinopathy, retinal vein occlusion, ocular ischaemia)",
+   "Intraocular tumour (e.g. retinoblastoma in children, melanoma)",
+   "Bleeding diathesis or anticoagulation",
+   "Herpetic or other uveitis with bleeding",
+   "Juvenile xanthogranuloma of the iris in children"
+  ],
+  "additionalInvestigations": [
+   "Slit-lamp examination to grade the hyphema and detect associated trauma",
+   "Intraocular pressure measurement and serial monitoring",
+   "Gonioscopy (deferred until rebleeding risk passes) to assess angle recession",
+   "Dilated fundus examination or B-scan ultrasound if the view is obscured, to exclude posterior segment injury",
+   "Sickle cell screening in at-risk patients",
+   "Coagulation studies when a bleeding tendency is suspected"
+  ],
+  "redFlags": [
+   "Uncontrolled raised intraocular pressure threatening the optic nerve, especially in sickle cell disease",
+   "Rebleeding with a larger, darker hyphema",
+   "Early corneal blood staining indicating endothelial compromise",
+   "Signs of globe rupture or associated posterior segment injury",
+   "Spontaneous hyphema in a child raising concern for retinoblastoma"
+  ],
+  "prognosis": "Small hyphemas usually clear without sequelae, but larger bleeds, rebleeding, sickle cell disease, and sustained pressure elevation carry a higher risk of glaucoma, corneal staining, and permanent visual loss.",
+  "pitfalls": [
+   "Failing to screen for sickle cell disease, in which tolerable pressures for others become sight-threatening",
+   "Missing associated injuries such as angle recession, lens dislocation, or globe rupture",
+   "Underestimating rebleeding risk and permitting excessive activity",
+   "Overlooking a spontaneous hyphema as a marker of neovascular disease or tumour"
+  ],
+  "references": [
+   "Parsons' Diseases of the Eye",
+   "Kanski's Clinical Ophthalmology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Institute conservative measures with bed rest, head elevation, a rigid eye shield and restriction of strenuous activity to limit rebleeding",
+   "Prescribe a topical cycloplegic for comfort and ciliary rest and a topical corticosteroid to reduce inflammation and rebleeding risk",
+   "Withhold antiplatelet and anticoagulant agents wherever clinically safe, as they increase the risk of rebleeding",
+   "Control raised intraocular pressure with topical ocular antihypertensives, adding systemic agents if needed, but avoid carbonic anhydrase inhibitors and hyperosmotics in sickle cell disease where they aggravate sickling",
+   "Monitor intraocular pressure serially and watch for corneal blood staining and rebleeding through the high-risk early days",
+   "Screen for sickle cell disease or trait in at-risk patients, since even modest pressure endangers the optic nerve",
+   "Consider antifibrinolytic therapy to reduce rebleeding in selected patients",
+   "Refer for surgical clot evacuation or anterior chamber washout when pressure is uncontrolled, corneal staining develops or a large clot fails to clear"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "hyphema-pathway",
+   "title": "Hyphema: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Defined as blood in the anterior chamber, usually seen as a layered red fluid level in the inferior chamber when the patient is upright",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Uncontrolled raised intraocular pressure threatening the optic nerve, especially in sickle cell disease",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Slit-lamp examination to grade the hyphema and detect associated trauma, Intraocular pressure measurement and serial monitoring, Gonioscopy (deferred until rebleeding risk passes) to assess angle recession"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Institute conservative measures with bed rest, head elevation, a rigid eye shield and restriction of strenuous activity to limit rebleeding"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to screen for sickle cell disease, in which tolerable pressures for others become sight-threatening"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of hyphema."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hyphema-matrix",
+   "title": "Hyphema: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Defined as blood in the anterior chamber, usually seen as a layered red fluid level in the inferior chamber when the patient is",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Hyphema results from disruption of iris or ciliary body vessels, most often by blunt trauma that causes rapid globe compression and a sudden shift of intraocular structures, tearing vessels at the iris root or angle. Red cells settle inferiorly under gravity. Clot formation and subsequent fibrinolysis create a window of rebleeding risk. Blood and inflammatory debris obstruct the trabecular meshwork, raising intraocular pressure; in sickle cell disease, red cells sickle in the low-oxygen, acidotic aqueous, further impairing outflow and increasing susceptibility to optic nerve damage. Prolonged high pressure with an intact endothelial insult leads to corneal blood staining.",
-    "additionalDifferentials": [
-      "Traumatic microhyphema without layering",
-      "Neovascular disease (diabetic retinopathy, retinal vein occlusion, ocular ischaemia)",
-      "Intraocular tumour (e.g. retinoblastoma in children, melanoma)",
-      "Bleeding diathesis or anticoagulation",
-      "Herpetic or other uveitis with bleeding",
-      "Juvenile xanthogranuloma of the iris in children"
+    [
+     "Key Investigations",
+     "Slit-lamp examination to grade the hyphema and detect associated trauma, Intraocular pressure measurement and serial monitoring,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Slit-lamp examination to grade the hyphema and detect associated trauma",
-      "Intraocular pressure measurement and serial monitoring",
-      "Gonioscopy (deferred until rebleeding risk passes) to assess angle recession",
-      "Dilated fundus examination or B-scan ultrasound if the view is obscured, to exclude posterior segment injury",
-      "Sickle cell screening in at-risk patients",
-      "Coagulation studies when a bleeding tendency is suspected"
+    [
+     "Primary Differentials",
+     "Traumatic microhyphema without layering, Neovascular disease (diabetic retinopathy, retinal vein occlusion, ocular ischaemia),",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Uncontrolled raised intraocular pressure threatening the optic nerve, especially in sickle cell disease",
-      "Rebleeding with a larger, darker hyphema",
-      "Early corneal blood staining indicating endothelial compromise",
-      "Signs of globe rupture or associated posterior segment injury",
-      "Spontaneous hyphema in a child raising concern for retinoblastoma"
+    [
+     "Management Strategy",
+     "Institute conservative measures with bed rest, head elevation, a rigid eye shield and restriction of strenuous activity to limit",
+     "Core treatment modality"
     ],
-    "prognosis": "Small hyphemas usually clear without sequelae, but larger bleeds, rebleeding, sickle cell disease, and sustained pressure elevation carry a higher risk of glaucoma, corneal staining, and permanent visual loss.",
-    "pitfalls": [
-      "Failing to screen for sickle cell disease, in which tolerable pressures for others become sight-threatening",
-      "Missing associated injuries such as angle recession, lens dislocation, or globe rupture",
-      "Underestimating rebleeding risk and permitting excessive activity",
-      "Overlooking a spontaneous hyphema as a marker of neovascular disease or tumour"
-    ],
-    "references": [
-      "Parsons' Diseases of the Eye",
-      "Kanski's Clinical Ophthalmology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Institute conservative measures with bed rest, head elevation, a rigid eye shield and restriction of strenuous activity to limit rebleeding",
-      "Prescribe a topical cycloplegic for comfort and ciliary rest and a topical corticosteroid to reduce inflammation and rebleeding risk",
-      "Withhold antiplatelet and anticoagulant agents wherever clinically safe, as they increase the risk of rebleeding",
-      "Control raised intraocular pressure with topical ocular antihypertensives, adding systemic agents if needed, but avoid carbonic anhydrase inhibitors and hyperosmotics in sickle cell disease where they aggravate sickling",
-      "Monitor intraocular pressure serially and watch for corneal blood staining and rebleeding through the high-risk early days",
-      "Screen for sickle cell disease or trait in at-risk patients, since even modest pressure endangers the optic nerve",
-      "Consider antifibrinolytic therapy to reduce rebleeding in selected patients",
-      "Refer for surgical clot evacuation or anterior chamber washout when pressure is uncontrolled, corneal staining develops or a large clot fails to clear"
+    [
+     "Clinical Pitfall",
+     "Failing to screen for sickle cell disease, in which tolerable pressures for others become sight-threatening",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for hyphema."
+  }
+ ]
 }

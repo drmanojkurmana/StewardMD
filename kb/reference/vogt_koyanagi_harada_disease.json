@@ -1,79 +1,151 @@
 {
-  "id": "vogt_koyanagi_harada_disease",
-  "name": "Vogt-Koyanagi-Harada disease",
-  "aliases": [
-    "VKH disease",
-    "VKH syndrome",
-    "uveomeningoencephalitic syndrome"
+ "id": "vogt_koyanagi_harada_disease",
+ "name": "Vogt-Koyanagi-Harada disease",
+ "aliases": [
+  "VKH disease",
+  "VKH syndrome",
+  "uveomeningoencephalitic syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Rheumatology / Immunology",
+ "specialty": "Rheumatology / Clinical Immunology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Firestein & Kelley's Textbook of Rheumatology / Kanski's Clinical Ophthalmology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A bilateral granulomatous panuveitis accompanied by neurological, auditory, and integumentary features, reflecting an autoimmune attack on melanocyte-containing tissues",
+   "More common in pigmented populations, particularly those of Asian, Hispanic, Middle Eastern, and Native American descent",
+   "A prodromal phase with headache, meningism, tinnitus, and dysacusis often precedes the ocular disease",
+   "The acute uveitic phase causes bilateral serous (exudative) retinal detachments, disc oedema, and choroidal thickening",
+   "Later convalescent features include a 'sunset glow fundus' from choroidal depigmentation, poliosis, vitiligo, and alopecia",
+   "Cerebrospinal fluid pleocytosis in the acute phase supports the diagnosis when the picture is incomplete",
+   "Prompt and prolonged systemic corticosteroids, often with steroid-sparing immunosuppression, help prevent chronic recurrent disease and preserve vision"
   ],
-  "class": "non_infective",
-  "system": "Rheumatology / Immunology",
-  "specialty": "Rheumatology / Clinical Immunology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Firestein & Kelley's Textbook of Rheumatology / Kanski's Clinical Ophthalmology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A bilateral granulomatous panuveitis accompanied by neurological, auditory, and integumentary features, reflecting an autoimmune attack on melanocyte-containing tissues",
-      "More common in pigmented populations, particularly those of Asian, Hispanic, Middle Eastern, and Native American descent",
-      "A prodromal phase with headache, meningism, tinnitus, and dysacusis often precedes the ocular disease",
-      "The acute uveitic phase causes bilateral serous (exudative) retinal detachments, disc oedema, and choroidal thickening",
-      "Later convalescent features include a 'sunset glow fundus' from choroidal depigmentation, poliosis, vitiligo, and alopecia",
-      "Cerebrospinal fluid pleocytosis in the acute phase supports the diagnosis when the picture is incomplete",
-      "Prompt and prolonged systemic corticosteroids, often with steroid-sparing immunosuppression, help prevent chronic recurrent disease and preserve vision"
+  "pathophysiology": "Vogt-Koyanagi-Harada disease is a T-cell-mediated autoimmune disorder directed against antigens associated with melanocytes, affecting melanocyte-rich tissues including the uvea, meninges, inner ear, and skin. A genetic predisposition linked to certain HLA types, possibly triggered by a viral or other environmental insult, leads to autoreactive T lymphocytes targeting melanocytic proteins. Granulomatous inflammation of the choroid produces exudative retinal detachments and, in the chronic phase, depigmentation of the choroid and skin, giving rise to the characteristic sunset glow fundus, poliosis, and vitiligo.",
+  "additionalDifferentials": [
+   "Sympathetic ophthalmia",
+   "Sarcoidosis with uveitis",
+   "Posterior scleritis",
+   "Central serous chorioretinopathy",
+   "Acute posterior multifocal placoid pigment epitheliopathy",
+   "Infective causes such as syphilis and tuberculosis"
+  ],
+  "additionalInvestigations": [
+   "Dilated fundus examination and slit-lamp assessment for panuveitis and exudative retinal detachment",
+   "Fluorescein angiography showing multiple pinpoint leaks and pooling of dye in subretinal fluid",
+   "Optical coherence tomography demonstrating serous retinal detachment and choroidal thickening",
+   "Indocyanine green angiography to assess choroidal inflammation",
+   "Lumbar puncture showing cerebrospinal fluid lymphocytic pleocytosis in the acute phase",
+   "Serology to exclude syphilis, tuberculosis, and sarcoidosis"
+  ],
+  "redFlags": [
+   "Bilateral rapid visual loss from exudative retinal detachment",
+   "Meningism and neurological signs in the prodromal phase",
+   "Recurrent or chronic anterior uveitis indicating inadequately treated disease",
+   "Development of complications such as glaucoma, cataract, or choroidal neovascularisation"
+  ],
+  "prognosis": "With early, aggressive, and sustained immunosuppression many patients retain good vision, but delayed or insufficient treatment leads to chronic recurrent granulomatous uveitis with cataract, glaucoma, subretinal fibrosis, and permanent visual impairment.",
+  "pitfalls": [
+   "Tapering corticosteroids too quickly and precipitating chronic recurrent disease",
+   "Confusing exudative retinal detachment with central serous chorioretinopathy and treating inappropriately",
+   "Failing to exclude sympathetic ophthalmia in a patient with prior ocular trauma or surgery",
+   "Not recognising the prodromal meningeal or auditory symptoms as part of the syndrome",
+   "Overlooking infective mimics such as syphilis before starting immunosuppression"
+  ],
+  "references": [
+   "Firestein & Kelley's Textbook of Rheumatology",
+   "Kanski's Clinical Ophthalmology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Early high-dose systemic corticosteroids, often intravenous pulses followed by a slow oral taper, as the mainstay of acute treatment",
+   "Early introduction of steroid-sparing immunomodulators such as mycophenolate, azathioprine, methotrexate or ciclosporin to prevent chronic recurrent disease",
+   "Biologic therapy with anti-TNF agents such as adalimumab or infliximab for refractory or recurrent disease",
+   "Monitor for and manage ocular complications including cataract, glaucoma and choroidal neovascularisation",
+   "Audiological and neurological assessment for auditory and meningeal features in the acute phase",
+   "Prolonged, sustained treatment with long-term ophthalmology follow-up to avoid relapse",
+   "Uveitis specialist and rheumatology multidisciplinary care"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "vogt_koyanagi_harada_disease-pathway",
+   "title": "Vogt-Koyanagi-Harada disease: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A bilateral granulomatous panuveitis accompanied by neurological, auditory, and integumentary features, reflecting an autoimmune attack on melanocyte-containing tissues",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Bilateral rapid visual loss from exudative retinal detachment",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Dilated fundus examination and slit-lamp assessment for panuveitis and exudative retinal detachment, Fluorescein angiography showing multiple pinpoint leaks and pooling of dye in subretinal fluid, Optical coherence"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Early high-dose systemic corticosteroids, often intravenous pulses followed by a slow oral taper, as the mainstay of acute treatment"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Tapering corticosteroids too quickly and precipitating chronic recurrent disease"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of vogt-koyanagi-harada disease."
+  }
+ ],
+ "tables": [
+  {
+   "id": "vogt_koyanagi_harada_disease-matrix",
+   "title": "Vogt-Koyanagi-Harada disease: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A bilateral granulomatous panuveitis accompanied by neurological, auditory, and integumentary features, reflecting an autoimmune",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Vogt-Koyanagi-Harada disease is a T-cell-mediated autoimmune disorder directed against antigens associated with melanocytes, affecting melanocyte-rich tissues including the uvea, meninges, inner ear, and skin. A genetic predisposition linked to certain HLA types, possibly triggered by a viral or other environmental insult, leads to autoreactive T lymphocytes targeting melanocytic proteins. Granulomatous inflammation of the choroid produces exudative retinal detachments and, in the chronic phase, depigmentation of the choroid and skin, giving rise to the characteristic sunset glow fundus, poliosis, and vitiligo.",
-    "additionalDifferentials": [
-      "Sympathetic ophthalmia",
-      "Sarcoidosis with uveitis",
-      "Posterior scleritis",
-      "Central serous chorioretinopathy",
-      "Acute posterior multifocal placoid pigment epitheliopathy",
-      "Infective causes such as syphilis and tuberculosis"
+    [
+     "Key Investigations",
+     "Dilated fundus examination and slit-lamp assessment for panuveitis and exudative retinal detachment, Fluorescein angiography",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Dilated fundus examination and slit-lamp assessment for panuveitis and exudative retinal detachment",
-      "Fluorescein angiography showing multiple pinpoint leaks and pooling of dye in subretinal fluid",
-      "Optical coherence tomography demonstrating serous retinal detachment and choroidal thickening",
-      "Indocyanine green angiography to assess choroidal inflammation",
-      "Lumbar puncture showing cerebrospinal fluid lymphocytic pleocytosis in the acute phase",
-      "Serology to exclude syphilis, tuberculosis, and sarcoidosis"
+    [
+     "Primary Differentials",
+     "Sympathetic ophthalmia, Sarcoidosis with uveitis, Posterior scleritis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Bilateral rapid visual loss from exudative retinal detachment",
-      "Meningism and neurological signs in the prodromal phase",
-      "Recurrent or chronic anterior uveitis indicating inadequately treated disease",
-      "Development of complications such as glaucoma, cataract, or choroidal neovascularisation"
+    [
+     "Management Strategy",
+     "Early high-dose systemic corticosteroids, often intravenous pulses followed by a slow oral taper, as the mainstay of acute",
+     "Core treatment modality"
     ],
-    "prognosis": "With early, aggressive, and sustained immunosuppression many patients retain good vision, but delayed or insufficient treatment leads to chronic recurrent granulomatous uveitis with cataract, glaucoma, subretinal fibrosis, and permanent visual impairment.",
-    "pitfalls": [
-      "Tapering corticosteroids too quickly and precipitating chronic recurrent disease",
-      "Confusing exudative retinal detachment with central serous chorioretinopathy and treating inappropriately",
-      "Failing to exclude sympathetic ophthalmia in a patient with prior ocular trauma or surgery",
-      "Not recognising the prodromal meningeal or auditory symptoms as part of the syndrome",
-      "Overlooking infective mimics such as syphilis before starting immunosuppression"
-    ],
-    "references": [
-      "Firestein & Kelley's Textbook of Rheumatology",
-      "Kanski's Clinical Ophthalmology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Early high-dose systemic corticosteroids, often intravenous pulses followed by a slow oral taper, as the mainstay of acute treatment",
-      "Early introduction of steroid-sparing immunomodulators such as mycophenolate, azathioprine, methotrexate or ciclosporin to prevent chronic recurrent disease",
-      "Biologic therapy with anti-TNF agents such as adalimumab or infliximab for refractory or recurrent disease",
-      "Monitor for and manage ocular complications including cataract, glaucoma and choroidal neovascularisation",
-      "Audiological and neurological assessment for auditory and meningeal features in the acute phase",
-      "Prolonged, sustained treatment with long-term ophthalmology follow-up to avoid relapse",
-      "Uveitis specialist and rheumatology multidisciplinary care"
+    [
+     "Clinical Pitfall",
+     "Tapering corticosteroids too quickly and precipitating chronic recurrent disease",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for vogt-koyanagi-harada disease."
+  }
+ ]
 }

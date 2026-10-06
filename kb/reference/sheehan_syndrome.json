@@ -1,81 +1,153 @@
 {
-  "id": "sheehan_syndrome",
-  "name": "Sheehan syndrome (postpartum pituitary necrosis)",
-  "aliases": [
-    "postpartum pituitary necrosis",
-    "postpartum hypopituitarism",
-    "Sheehan's syndrome"
+ "id": "sheehan_syndrome",
+ "name": "Sheehan syndrome (postpartum pituitary necrosis)",
+ "aliases": [
+  "postpartum pituitary necrosis",
+  "postpartum hypopituitarism",
+  "Sheehan's syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Endocrine",
+ "specialty": "Endocrinology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Williams Textbook of Endocrinology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Results from ischaemic necrosis of the pituitary following severe postpartum haemorrhage and hypotension",
+   "Failure to lactate after delivery is often the earliest clue, reflecting prolactin deficiency",
+   "Failure to resume menstruation and loss of pubic and axillary hair point to gonadotrophin and adrenal androgen loss",
+   "The clinical picture can be insidious, sometimes emerging years after the index pregnancy, and is frequently missed",
+   "The enlarged, vascular pregnant pituitary is especially vulnerable to hypoperfusion, explaining the peripartum timing",
+   "Corticotroph deficiency may present acutely as an adrenal crisis, particularly under physiological stress",
+   "Diabetes insipidus is uncommon because the posterior pituitary is usually relatively spared",
+   "Imaging may later reveal an empty or partially empty sella from pituitary atrophy"
   ],
-  "class": "non_infective",
-  "system": "Endocrine",
-  "specialty": "Endocrinology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Williams Textbook of Endocrinology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Results from ischaemic necrosis of the pituitary following severe postpartum haemorrhage and hypotension",
-      "Failure to lactate after delivery is often the earliest clue, reflecting prolactin deficiency",
-      "Failure to resume menstruation and loss of pubic and axillary hair point to gonadotrophin and adrenal androgen loss",
-      "The clinical picture can be insidious, sometimes emerging years after the index pregnancy, and is frequently missed",
-      "The enlarged, vascular pregnant pituitary is especially vulnerable to hypoperfusion, explaining the peripartum timing",
-      "Corticotroph deficiency may present acutely as an adrenal crisis, particularly under physiological stress",
-      "Diabetes insipidus is uncommon because the posterior pituitary is usually relatively spared",
-      "Imaging may later reveal an empty or partially empty sella from pituitary atrophy"
+  "pathophysiology": "Sheehan syndrome arises when major obstetric haemorrhage and circulatory collapse cause ischaemic infarction of the anterior pituitary. During pregnancy the gland hypertrophies, largely due to lactotroph expansion, increasing its metabolic demand while its low-pressure portal blood supply leaves it prone to infarction if perfusion falls. The resulting loss of anterior pituitary tissue produces variable, often panhypopituitary, hormone deficiencies affecting prolactin, gonadotrophins, growth hormone, thyroid-stimulating hormone and corticotrophin. The posterior lobe is usually preserved, so diabetes insipidus is comparatively rare, and the infarcted gland gradually atrophies, sometimes leaving an empty sella.",
+  "additionalDifferentials": [
+   "Lymphocytic hypophysitis",
+   "Pituitary adenoma or apoplexy",
+   "Empty sella syndrome from other causes",
+   "Primary autoimmune endocrine failure such as thyroid or adrenal disease",
+   "Postpartum thyroiditis",
+   "Depression or other non-endocrine causes of postpartum fatigue"
+  ],
+  "additionalInvestigations": [
+   "Anterior pituitary hormone profile including cortisol, thyroid and gonadal axes",
+   "Prolactin measurement",
+   "Dynamic pituitary testing where basal results are equivocal",
+   "Magnetic resonance imaging of the pituitary, which may show an empty sella",
+   "Serum electrolytes to detect hyponatraemia from cortisol or thyroid deficiency",
+   "Documentation of the obstetric history and any peripartum haemorrhage"
+  ],
+  "redFlags": [
+   "Adrenal crisis with hypotension and hyponatraemia",
+   "Severe hypothyroidism or myxoedema",
+   "Symptomatic hyponatraemia",
+   "Profound fatigue and collapse under physiological stress",
+   "Delayed diagnosis leading to chronic untreated hypopituitarism"
+  ],
+  "prognosis": "With appropriate and lifelong hormone replacement, patients generally do well, but unrecognised disease carries a real risk of life-threatening adrenal crisis; deficits are permanent because infarcted pituitary tissue does not recover.",
+  "pitfalls": [
+   "Attributing failed lactation and fatigue to normal postpartum recovery and missing the diagnosis",
+   "Starting thyroid hormone before glucocorticoid replacement and precipitating adrenal crisis",
+   "Failing to consider the diagnosis years after the causative delivery",
+   "Overlooking hyponatraemia as a manifestation of cortisol or thyroid deficiency",
+   "Assuming posterior pituitary involvement and over-investigating for diabetes insipidus"
+  ],
+  "references": [
+   "Williams Textbook of Endocrinology",
+   "DeGroot's Endocrinology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Lifelong anterior pituitary hormone replacement, replacing glucocorticoid first to avoid precipitating adrenal crisis",
+   "Levothyroxine for secondary hypothyroidism once adequate glucocorticoid cover is established",
+   "Oestrogen with progestogen replacement for gonadotrophin deficiency until the usual age of menopause, and growth hormone replacement in selected adults",
+   "Stress-dose glucocorticoid cover during illness, surgery, or physiological stress, with a steroid emergency card and patient education",
+   "Urgent parenteral hydrocortisone and fluid resuscitation for adrenal crisis",
+   "Monitor clinical and biochemical adequacy of replacement, including electrolytes for hyponatraemia",
+   "Endocrinology-led lifelong follow-up"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "sheehan_syndrome-pathway",
+   "title": "Sheehan syndrome (postpartum pituitary necrosis): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Results from ischaemic necrosis of the pituitary following severe postpartum haemorrhage and hypotension",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Adrenal crisis with hypotension and hyponatraemia",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Anterior pituitary hormone profile including cortisol, thyroid and gonadal axes, Prolactin measurement, Dynamic pituitary testing where basal results are equivocal"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Lifelong anterior pituitary hormone replacement, replacing glucocorticoid first to avoid precipitating adrenal crisis"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing failed lactation and fatigue to normal postpartum recovery and missing the diagnosis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of sheehan syndrome (postpartum pituitary necrosis)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "sheehan_syndrome-matrix",
+   "title": "Sheehan syndrome (postpartum pituitary necrosis): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Results from ischaemic necrosis of the pituitary following severe postpartum haemorrhage and hypotension",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Sheehan syndrome arises when major obstetric haemorrhage and circulatory collapse cause ischaemic infarction of the anterior pituitary. During pregnancy the gland hypertrophies, largely due to lactotroph expansion, increasing its metabolic demand while its low-pressure portal blood supply leaves it prone to infarction if perfusion falls. The resulting loss of anterior pituitary tissue produces variable, often panhypopituitary, hormone deficiencies affecting prolactin, gonadotrophins, growth hormone, thyroid-stimulating hormone and corticotrophin. The posterior lobe is usually preserved, so diabetes insipidus is comparatively rare, and the infarcted gland gradually atrophies, sometimes leaving an empty sella.",
-    "additionalDifferentials": [
-      "Lymphocytic hypophysitis",
-      "Pituitary adenoma or apoplexy",
-      "Empty sella syndrome from other causes",
-      "Primary autoimmune endocrine failure such as thyroid or adrenal disease",
-      "Postpartum thyroiditis",
-      "Depression or other non-endocrine causes of postpartum fatigue"
+    [
+     "Key Investigations",
+     "Anterior pituitary hormone profile including cortisol, thyroid and gonadal axes, Prolactin measurement, Dynamic pituitary testing",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Anterior pituitary hormone profile including cortisol, thyroid and gonadal axes",
-      "Prolactin measurement",
-      "Dynamic pituitary testing where basal results are equivocal",
-      "Magnetic resonance imaging of the pituitary, which may show an empty sella",
-      "Serum electrolytes to detect hyponatraemia from cortisol or thyroid deficiency",
-      "Documentation of the obstetric history and any peripartum haemorrhage"
+    [
+     "Primary Differentials",
+     "Lymphocytic hypophysitis, Pituitary adenoma or apoplexy, Empty sella syndrome from other causes",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Adrenal crisis with hypotension and hyponatraemia",
-      "Severe hypothyroidism or myxoedema",
-      "Symptomatic hyponatraemia",
-      "Profound fatigue and collapse under physiological stress",
-      "Delayed diagnosis leading to chronic untreated hypopituitarism"
+    [
+     "Management Strategy",
+     "Lifelong anterior pituitary hormone replacement, replacing glucocorticoid first to avoid precipitating adrenal crisis",
+     "Core treatment modality"
     ],
-    "prognosis": "With appropriate and lifelong hormone replacement, patients generally do well, but unrecognised disease carries a real risk of life-threatening adrenal crisis; deficits are permanent because infarcted pituitary tissue does not recover.",
-    "pitfalls": [
-      "Attributing failed lactation and fatigue to normal postpartum recovery and missing the diagnosis",
-      "Starting thyroid hormone before glucocorticoid replacement and precipitating adrenal crisis",
-      "Failing to consider the diagnosis years after the causative delivery",
-      "Overlooking hyponatraemia as a manifestation of cortisol or thyroid deficiency",
-      "Assuming posterior pituitary involvement and over-investigating for diabetes insipidus"
-    ],
-    "references": [
-      "Williams Textbook of Endocrinology",
-      "DeGroot's Endocrinology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Lifelong anterior pituitary hormone replacement, replacing glucocorticoid first to avoid precipitating adrenal crisis",
-      "Levothyroxine for secondary hypothyroidism once adequate glucocorticoid cover is established",
-      "Oestrogen with progestogen replacement for gonadotrophin deficiency until the usual age of menopause, and growth hormone replacement in selected adults",
-      "Stress-dose glucocorticoid cover during illness, surgery, or physiological stress, with a steroid emergency card and patient education",
-      "Urgent parenteral hydrocortisone and fluid resuscitation for adrenal crisis",
-      "Monitor clinical and biochemical adequacy of replacement, including electrolytes for hyponatraemia",
-      "Endocrinology-led lifelong follow-up"
+    [
+     "Clinical Pitfall",
+     "Attributing failed lactation and fatigue to normal postpartum recovery and missing the diagnosis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for sheehan syndrome (postpartum pituitary necrosis)."
+  }
+ ]
 }

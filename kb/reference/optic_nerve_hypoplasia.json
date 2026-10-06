@@ -1,80 +1,152 @@
 {
-  "id": "optic_nerve_hypoplasia",
-  "name": "Optic nerve hypoplasia",
-  "aliases": [
-    "ONH",
-    "hypoplastic optic disc",
-    "optic disc hypoplasia"
+ "id": "optic_nerve_hypoplasia",
+ "name": "Optic nerve hypoplasia",
+ "aliases": [
+  "ONH",
+  "hypoplastic optic disc",
+  "optic disc hypoplasia"
+ ],
+ "class": "non_infective",
+ "system": "Eye / Ophthalmology",
+ "specialty": "Ophthalmology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Kanski / Taylor & Hoyt Paediatric Ophthalmology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A leading cause of congenital visual impairment, characterised by an abnormally small optic disc with a reduced complement of retinal ganglion cell axons",
+   "The classic double-ring sign is a pale, small disc surrounded by a ring of pigment marking where the normal disc margin should lie",
+   "May be unilateral or bilateral; vision ranges from near normal to severe impairment, often with nystagmus in bilateral cases",
+   "Frequently associated with midline brain defects and hypopituitarism, forming part of septo-optic dysplasia",
+   "Endocrine assessment is essential because unrecognised cortisol or thyroid deficiency can be life-threatening in infancy",
+   "Neuroimaging with MRI evaluates the optic nerves, chiasm, septum pellucidum and pituitary",
+   "Risk factors include young maternal age and gestational exposures, though most cases are sporadic"
   ],
-  "class": "non_infective",
-  "system": "Eye / Ophthalmology",
-  "specialty": "Ophthalmology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Kanski / Taylor & Hoyt Paediatric Ophthalmology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A leading cause of congenital visual impairment, characterised by an abnormally small optic disc with a reduced complement of retinal ganglion cell axons",
-      "The classic double-ring sign is a pale, small disc surrounded by a ring of pigment marking where the normal disc margin should lie",
-      "May be unilateral or bilateral; vision ranges from near normal to severe impairment, often with nystagmus in bilateral cases",
-      "Frequently associated with midline brain defects and hypopituitarism, forming part of septo-optic dysplasia",
-      "Endocrine assessment is essential because unrecognised cortisol or thyroid deficiency can be life-threatening in infancy",
-      "Neuroimaging with MRI evaluates the optic nerves, chiasm, septum pellucidum and pituitary",
-      "Risk factors include young maternal age and gestational exposures, though most cases are sporadic"
+  "pathophysiology": "Optic nerve hypoplasia results from a deficiency of retinal ganglion cell axons, arising either from failure of adequate axon generation or from excessive regression during development. Because optic nerve development is intimately linked with midline forebrain and hypothalamic-pituitary formation, the same developmental disturbance often produces associated midline brain malformations and pituitary dysfunction. The small disc has fewer nerve fibres, and the surrounding retinal pigment epithelium and lamina cribrosa create the double-ring appearance. Visual deficit reflects the degree of axonal deficiency, while the systemic consequences depend on the extent of hypothalamic-pituitary and midline involvement.",
+  "additionalDifferentials": [
+   "Optic atrophy of other causes",
+   "Optic disc coloboma or morning glory anomaly",
+   "Megalopapilla with pseudo-small disc appearance",
+   "Tilted disc syndrome",
+   "Delayed visual maturation",
+   "Cortical visual impairment",
+   "Leber congenital amaurosis"
+  ],
+  "additionalInvestigations": [
+   "MRI of the brain, orbits and pituitary region",
+   "Full endocrine evaluation including cortisol, thyroid, growth hormone and prolactin axes",
+   "OCT of the retinal nerve fibre layer where cooperation allows",
+   "Visual evoked potentials and electrophysiology",
+   "Cycloplegic refraction and orthoptic assessment",
+   "Developmental and paediatric review"
+  ],
+  "redFlags": [
+   "Neonatal hypoglycaemia or adrenal crisis from unrecognised hypopituitarism",
+   "Prolonged jaundice, micropenis or growth failure suggesting endocrine deficiency",
+   "Diabetes insipidus indicating hypothalamic involvement",
+   "Developmental regression or seizures suggesting broader brain malformation",
+   "Temperature instability pointing to hypothalamic dysfunction"
+  ],
+  "prognosis": "Visual outcome varies widely from good to severely impaired and is generally stable, but overall prognosis and safety hinge on timely recognition and treatment of associated endocrine deficiencies.",
+  "pitfalls": [
+   "Failing to arrange endocrine assessment and missing dangerous hormone deficiencies",
+   "Assuming unilateral disease excludes systemic associations",
+   "Overlooking the double-ring sign and misdiagnosing optic atrophy",
+   "Not imaging the brain to identify midline and pituitary anomalies"
+  ],
+  "references": [
+   "Kanski's Clinical Ophthalmology",
+   "Taylor & Hoyt's Paediatric Ophthalmology and Strabismus"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Undertake urgent endocrine evaluation and institute hormone replacement, including hydrocortisone for cortisol deficiency, levothyroxine for hypothyroidism and growth hormone, as unrecognised deficiency can be life-threatening in infancy",
+   "Image with MRI to define midline brain, chiasm, septum pellucidum and pituitary anomalies within the septo-optic dysplasia spectrum",
+   "Optimise vision with cycloplegic refraction, correction of refractive error and amblyopia management in unilateral cases",
+   "Provide low-vision aids and rehabilitation and manage associated nystagmus",
+   "Arrange developmental assessment and early intervention services",
+   "Coordinate multidisciplinary care across paediatric endocrinology, ophthalmology, neurology and developmental paediatrics",
+   "Offer genetic counselling where an underlying genetic cause is identified"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "optic_nerve_hypoplasia-pathway",
+   "title": "Optic nerve hypoplasia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A leading cause of congenital visual impairment, characterised by an abnormally small optic disc with a reduced complement of retinal ganglion cell axons",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Neonatal hypoglycaemia or adrenal crisis from unrecognised hypopituitarism",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: MRI of the brain, orbits and pituitary region, Full endocrine evaluation including cortisol, thyroid, growth hormone and prolactin axes, OCT of the retinal nerve fibre layer where cooperation allows"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Undertake urgent endocrine evaluation and institute hormone replacement, including hydrocortisone for cortisol deficiency, levothyroxine for hypothyroidism and growth hormone, as unrecognised deficiency can be"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to arrange endocrine assessment and missing dangerous hormone deficiencies"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of optic nerve hypoplasia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "optic_nerve_hypoplasia-matrix",
+   "title": "Optic nerve hypoplasia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A leading cause of congenital visual impairment, characterised by an abnormally small optic disc with a reduced complement of",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Optic nerve hypoplasia results from a deficiency of retinal ganglion cell axons, arising either from failure of adequate axon generation or from excessive regression during development. Because optic nerve development is intimately linked with midline forebrain and hypothalamic-pituitary formation, the same developmental disturbance often produces associated midline brain malformations and pituitary dysfunction. The small disc has fewer nerve fibres, and the surrounding retinal pigment epithelium and lamina cribrosa create the double-ring appearance. Visual deficit reflects the degree of axonal deficiency, while the systemic consequences depend on the extent of hypothalamic-pituitary and midline involvement.",
-    "additionalDifferentials": [
-      "Optic atrophy of other causes",
-      "Optic disc coloboma or morning glory anomaly",
-      "Megalopapilla with pseudo-small disc appearance",
-      "Tilted disc syndrome",
-      "Delayed visual maturation",
-      "Cortical visual impairment",
-      "Leber congenital amaurosis"
+    [
+     "Key Investigations",
+     "MRI of the brain, orbits and pituitary region, Full endocrine evaluation including cortisol, thyroid, growth hormone and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "MRI of the brain, orbits and pituitary region",
-      "Full endocrine evaluation including cortisol, thyroid, growth hormone and prolactin axes",
-      "OCT of the retinal nerve fibre layer where cooperation allows",
-      "Visual evoked potentials and electrophysiology",
-      "Cycloplegic refraction and orthoptic assessment",
-      "Developmental and paediatric review"
+    [
+     "Primary Differentials",
+     "Optic atrophy of other causes, Optic disc coloboma or morning glory anomaly, Megalopapilla with pseudo-small disc appearance",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Neonatal hypoglycaemia or adrenal crisis from unrecognised hypopituitarism",
-      "Prolonged jaundice, micropenis or growth failure suggesting endocrine deficiency",
-      "Diabetes insipidus indicating hypothalamic involvement",
-      "Developmental regression or seizures suggesting broader brain malformation",
-      "Temperature instability pointing to hypothalamic dysfunction"
+    [
+     "Management Strategy",
+     "Undertake urgent endocrine evaluation and institute hormone replacement, including hydrocortisone for cortisol deficiency,",
+     "Core treatment modality"
     ],
-    "prognosis": "Visual outcome varies widely from good to severely impaired and is generally stable, but overall prognosis and safety hinge on timely recognition and treatment of associated endocrine deficiencies.",
-    "pitfalls": [
-      "Failing to arrange endocrine assessment and missing dangerous hormone deficiencies",
-      "Assuming unilateral disease excludes systemic associations",
-      "Overlooking the double-ring sign and misdiagnosing optic atrophy",
-      "Not imaging the brain to identify midline and pituitary anomalies"
-    ],
-    "references": [
-      "Kanski's Clinical Ophthalmology",
-      "Taylor & Hoyt's Paediatric Ophthalmology and Strabismus"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Undertake urgent endocrine evaluation and institute hormone replacement, including hydrocortisone for cortisol deficiency, levothyroxine for hypothyroidism and growth hormone, as unrecognised deficiency can be life-threatening in infancy",
-      "Image with MRI to define midline brain, chiasm, septum pellucidum and pituitary anomalies within the septo-optic dysplasia spectrum",
-      "Optimise vision with cycloplegic refraction, correction of refractive error and amblyopia management in unilateral cases",
-      "Provide low-vision aids and rehabilitation and manage associated nystagmus",
-      "Arrange developmental assessment and early intervention services",
-      "Coordinate multidisciplinary care across paediatric endocrinology, ophthalmology, neurology and developmental paediatrics",
-      "Offer genetic counselling where an underlying genetic cause is identified"
+    [
+     "Clinical Pitfall",
+     "Failing to arrange endocrine assessment and missing dangerous hormone deficiencies",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for optic nerve hypoplasia."
+  }
+ ]
 }

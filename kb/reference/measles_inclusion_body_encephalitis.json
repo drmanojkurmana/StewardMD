@@ -1,79 +1,151 @@
 {
-  "id": "measles_inclusion_body_encephalitis",
-  "name": "Measles inclusion body encephalitis",
-  "aliases": [
-    "MIBE",
-    "measles inclusion-body encephalitis",
-    "subacute measles encephalitis",
-    "immunosuppressive measles encephalitis"
+ "id": "measles_inclusion_body_encephalitis",
+ "name": "Measles inclusion body encephalitis",
+ "aliases": [
+  "MIBE",
+  "measles inclusion-body encephalitis",
+  "subacute measles encephalitis",
+  "immunosuppressive measles encephalitis"
+ ],
+ "class": "infective",
+ "system": "Infectious disease",
+ "specialty": "Infectious Diseases",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Mandell, Douglas and Bennett",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A subacute encephalitis caused by persistent measles virus infection of the brain occurring specifically in immunocompromised patients",
+   "It is seen in children and adults with impaired cell-mediated immunity, such as leukaemia and lymphoma, chemotherapy, HIV, or transplantation",
+   "Unlike SSPE, the latent interval is short, typically weeks to a few months after measles exposure or infection, and the illness may lack a preceding rash",
+   "Presentation is with altered mental status, focal neurological deficits, and, very characteristically, refractory focal seizures including epilepsia partialis continua",
+   "Because antibody responses are blunted by immunosuppression, cerebrospinal fluid measles antibody may be low or absent, unlike the high titres of SSPE",
+   "Diagnosis rests on detecting measles virus RNA or antigen and viral inclusions in brain tissue, supported by imaging, since serology is unreliable in these hosts",
+   "The prognosis is poor; there is no established effective therapy, and prevention through avoiding measles exposure and ensuring immunity in contacts is essential"
   ],
-  "class": "infective",
-  "system": "Infectious disease",
-  "specialty": "Infectious Diseases",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Mandell, Douglas and Bennett",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A subacute encephalitis caused by persistent measles virus infection of the brain occurring specifically in immunocompromised patients",
-      "It is seen in children and adults with impaired cell-mediated immunity, such as leukaemia and lymphoma, chemotherapy, HIV, or transplantation",
-      "Unlike SSPE, the latent interval is short, typically weeks to a few months after measles exposure or infection, and the illness may lack a preceding rash",
-      "Presentation is with altered mental status, focal neurological deficits, and, very characteristically, refractory focal seizures including epilepsia partialis continua",
-      "Because antibody responses are blunted by immunosuppression, cerebrospinal fluid measles antibody may be low or absent, unlike the high titres of SSPE",
-      "Diagnosis rests on detecting measles virus RNA or antigen and viral inclusions in brain tissue, supported by imaging, since serology is unreliable in these hosts",
-      "The prognosis is poor; there is no established effective therapy, and prevention through avoiding measles exposure and ensuring immunity in contacts is essential"
+  "pathophysiology": "Measles inclusion body encephalitis develops when the measles virus persists and replicates within the central nervous system of a host whose cell-mediated immunity is too impaired to clear it. In contrast to subacute sclerosing panencephalitis, where a defective virus smoulders for years and provokes intense antibody production, here the immunosuppressed brain permits relatively active viral replication over a much shorter period with only a weak immune response. Neurones and glia contain intranuclear and intracytoplasmic inclusion bodies packed with viral nucleocapsids, and there is neuronal loss with comparatively little inflammatory infiltrate because the immune response is suppressed. The rapidly progressive cortical involvement produces the characteristic intractable focal seizures and focal deficits, and the blunted humoral response explains why CSF measles antibody is often unhelpful for diagnosis.",
+  "additionalDifferentials": [
+   "Herpes simplex and other viral encephalitides in the immunocompromised",
+   "Progressive multifocal leukoencephalopathy",
+   "Subacute sclerosing panencephalitis",
+   "Cerebral toxoplasmosis or CNS lymphoma",
+   "Metabolic or drug-related encephalopathy",
+   "Autoimmune or paraneoplastic encephalitis"
+  ],
+  "additionalInvestigations": [
+   "Detection of measles virus RNA by PCR or antigen in cerebrospinal fluid or brain tissue",
+   "Brain biopsy showing intranuclear and intracytoplasmic inclusion bodies with immunostaining for measles antigen",
+   "MRI of the brain to identify cortical and subcortical signal change",
+   "Electroencephalography, often showing focal epileptiform activity rather than the periodic complexes of SSPE",
+   "Assessment of immune status including HIV testing, CD4 count, and chemotherapy or transplant history",
+   "Measles exposure and immunisation history of the patient and close contacts"
+  ],
+  "redFlags": [
+   "Refractory focal seizures or epilepsia partialis continua in an immunocompromised patient",
+   "Progressive decline in conscious level or new focal deficits",
+   "Recent measles exposure or infection in a severely immunosuppressed host",
+   "Status epilepticus or rapid neurological deterioration"
+  ],
+  "prognosis": "The outlook is poor, with most patients deteriorating over weeks to months and high mortality; survival and any recovery depend heavily on restoring immune function, and no antiviral regimen is reliably effective.",
+  "pitfalls": [
+   "Excluding measles because CSF antibody is low, when the immunosuppressed host cannot mount a strong response",
+   "Confusing MIBE with SSPE despite their different time course, immune context, and EEG findings",
+   "Failing to obtain brain tissue or molecular testing when serology is unrevealing",
+   "Overlooking measles exposure in an immunocompromised patient with new refractory seizures"
+  ],
+  "references": [
+   "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+   "UpToDate: Measles-associated neurological disease"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Restore cell-mediated immunity where possible by reducing immunosuppression, treating HIV with antiretroviral therapy, or achieving immune reconstitution",
+   "Attempt antiviral therapy with ribavirin (systemic and/or intraventricular), with or without interferon, recognising the limited anecdotal evidence",
+   "Aggressive control of refractory focal seizures and epilepsia partialis continua with combination antiepileptic drugs",
+   "Neurocritical supportive care addressing airway protection, nutrition and raised intracranial pressure",
+   "Multidisciplinary input from neurology, infectious diseases and the primary immunosuppressing service",
+   "Early discussion of the grave prognosis with palliative and family support where deterioration is relentless",
+   "Prevention through measles immunisation of susceptible contacts and immunoglobulin prophylaxis after exposure in immunocompromised patients"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "measles_inclusion_body_encephalitis-pathway",
+   "title": "Measles inclusion body encephalitis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A subacute encephalitis caused by persistent measles virus infection of the brain occurring specifically in immunocompromised patients",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Refractory focal seizures or epilepsia partialis continua in an immunocompromised patient",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Detection of measles virus RNA by PCR or antigen in cerebrospinal fluid or brain tissue, Brain biopsy showing intranuclear and intracytoplasmic inclusion bodies with immunostaining for measles antigen, MRI of the brain to"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Restore cell-mediated immunity where possible by reducing immunosuppression, treating HIV with antiretroviral therapy, or achieving immune reconstitution"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Excluding measles because CSF antibody is low, when the immunosuppressed host cannot mount a strong response"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of measles inclusion body encephalitis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "measles_inclusion_body_encephalitis-matrix",
+   "title": "Measles inclusion body encephalitis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A subacute encephalitis caused by persistent measles virus infection of the brain occurring specifically in immunocompromised",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Measles inclusion body encephalitis develops when the measles virus persists and replicates within the central nervous system of a host whose cell-mediated immunity is too impaired to clear it. In contrast to subacute sclerosing panencephalitis, where a defective virus smoulders for years and provokes intense antibody production, here the immunosuppressed brain permits relatively active viral replication over a much shorter period with only a weak immune response. Neurones and glia contain intranuclear and intracytoplasmic inclusion bodies packed with viral nucleocapsids, and there is neuronal loss with comparatively little inflammatory infiltrate because the immune response is suppressed. The rapidly progressive cortical involvement produces the characteristic intractable focal seizures and focal deficits, and the blunted humoral response explains why CSF measles antibody is often unhelpful for diagnosis.",
-    "additionalDifferentials": [
-      "Herpes simplex and other viral encephalitides in the immunocompromised",
-      "Progressive multifocal leukoencephalopathy",
-      "Subacute sclerosing panencephalitis",
-      "Cerebral toxoplasmosis or CNS lymphoma",
-      "Metabolic or drug-related encephalopathy",
-      "Autoimmune or paraneoplastic encephalitis"
+    [
+     "Key Investigations",
+     "Detection of measles virus RNA by PCR or antigen in cerebrospinal fluid or brain tissue, Brain biopsy showing intranuclear and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Detection of measles virus RNA by PCR or antigen in cerebrospinal fluid or brain tissue",
-      "Brain biopsy showing intranuclear and intracytoplasmic inclusion bodies with immunostaining for measles antigen",
-      "MRI of the brain to identify cortical and subcortical signal change",
-      "Electroencephalography, often showing focal epileptiform activity rather than the periodic complexes of SSPE",
-      "Assessment of immune status including HIV testing, CD4 count, and chemotherapy or transplant history",
-      "Measles exposure and immunisation history of the patient and close contacts"
+    [
+     "Primary Differentials",
+     "Herpes simplex and other viral encephalitides in the immunocompromised, Progressive multifocal leukoencephalopathy, Subacute",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Refractory focal seizures or epilepsia partialis continua in an immunocompromised patient",
-      "Progressive decline in conscious level or new focal deficits",
-      "Recent measles exposure or infection in a severely immunosuppressed host",
-      "Status epilepticus or rapid neurological deterioration"
+    [
+     "Management Strategy",
+     "Restore cell-mediated immunity where possible by reducing immunosuppression, treating HIV with antiretroviral therapy, or",
+     "Core treatment modality"
     ],
-    "prognosis": "The outlook is poor, with most patients deteriorating over weeks to months and high mortality; survival and any recovery depend heavily on restoring immune function, and no antiviral regimen is reliably effective.",
-    "pitfalls": [
-      "Excluding measles because CSF antibody is low, when the immunosuppressed host cannot mount a strong response",
-      "Confusing MIBE with SSPE despite their different time course, immune context, and EEG findings",
-      "Failing to obtain brain tissue or molecular testing when serology is unrevealing",
-      "Overlooking measles exposure in an immunocompromised patient with new refractory seizures"
-    ],
-    "references": [
-      "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
-      "UpToDate: Measles-associated neurological disease"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Restore cell-mediated immunity where possible by reducing immunosuppression, treating HIV with antiretroviral therapy, or achieving immune reconstitution",
-      "Attempt antiviral therapy with ribavirin (systemic and/or intraventricular), with or without interferon, recognising the limited anecdotal evidence",
-      "Aggressive control of refractory focal seizures and epilepsia partialis continua with combination antiepileptic drugs",
-      "Neurocritical supportive care addressing airway protection, nutrition and raised intracranial pressure",
-      "Multidisciplinary input from neurology, infectious diseases and the primary immunosuppressing service",
-      "Early discussion of the grave prognosis with palliative and family support where deterioration is relentless",
-      "Prevention through measles immunisation of susceptible contacts and immunoglobulin prophylaxis after exposure in immunocompromised patients"
+    [
+     "Clinical Pitfall",
+     "Excluding measles because CSF antibody is low, when the immunosuppressed host cannot mount a strong response",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for measles inclusion body encephalitis."
+  }
+ ]
 }

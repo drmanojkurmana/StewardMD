@@ -1,78 +1,150 @@
 {
-  "id": "trigger_finger",
-  "name": "Trigger finger",
-  "aliases": [
-    "stenosing flexor tenosynovitis",
-    "digital tenovaginitis stenosans",
-    "trigger thumb",
-    "snapping finger"
+ "id": "trigger_finger",
+ "name": "Trigger finger",
+ "aliases": [
+  "stenosing flexor tenosynovitis",
+  "digital tenovaginitis stenosans",
+  "trigger thumb",
+  "snapping finger"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal",
+ "specialty": "Sports & Musculoskeletal Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Apley & Solomon / standard sports medicine references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The finger catches, clicks, or locks in flexion and may need to be actively or passively straightened, often with pain at the base of the digit",
+   "The problem lies at the A1 pulley over the metacarpophalangeal joint, where the flexor tendon cannot glide smoothly through a narrowed sheath",
+   "A tender nodule may be palpable over the A1 pulley and can be felt to move with the tendon",
+   "Symptoms are frequently worse in the morning, with the digit locked, and it is most common in the thumb, ring, and middle fingers",
+   "It is associated with diabetes and inflammatory arthritis, and these patients tend to respond less well to conservative treatment",
+   "Severity is graded from painful catching without locking through to a fixed, non-reducible digit",
+   "Initial management includes activity modification and splinting, with corticosteroid injection into the sheath being effective in many cases",
+   "Injection tends to be less successful in people with diabetes and in longstanding or multiple-digit disease",
+   "Surgical or percutaneous release of the A1 pulley is used for cases that fail injection or present with fixed locking"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal",
-  "specialty": "Sports & Musculoskeletal Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Apley & Solomon / standard sports medicine references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The finger catches, clicks, or locks in flexion and may need to be actively or passively straightened, often with pain at the base of the digit",
-      "The problem lies at the A1 pulley over the metacarpophalangeal joint, where the flexor tendon cannot glide smoothly through a narrowed sheath",
-      "A tender nodule may be palpable over the A1 pulley and can be felt to move with the tendon",
-      "Symptoms are frequently worse in the morning, with the digit locked, and it is most common in the thumb, ring, and middle fingers",
-      "It is associated with diabetes and inflammatory arthritis, and these patients tend to respond less well to conservative treatment",
-      "Severity is graded from painful catching without locking through to a fixed, non-reducible digit",
-      "Initial management includes activity modification and splinting, with corticosteroid injection into the sheath being effective in many cases",
-      "Injection tends to be less successful in people with diabetes and in longstanding or multiple-digit disease",
-      "Surgical or percutaneous release of the A1 pulley is used for cases that fail injection or present with fixed locking"
+  "pathophysiology": "Trigger finger is a stenosing tenosynovitis at the first annular (A1) pulley. Thickening and fibrocartilaginous change of the pulley and of the flexor tendon or its sheath create a mismatch in size, so the tendon catches as it passes through. A nodule on the tendon may become trapped proximal to the pulley, producing the characteristic triggering, locking, and pain, with a mechanical block rather than a simple inflammatory process.",
+  "additionalDifferentials": [
+   "Dupuytren disease",
+   "Metacarpophalangeal or interphalangeal joint osteoarthritis",
+   "Flexor tendon or sheath infection",
+   "Ganglion of the tendon sheath",
+   "Focal dystonia or extensor tendon subluxation",
+   "Locked metacarpophalangeal joint from other causes"
+  ],
+  "additionalInvestigations": [
+   "A clinical diagnosis based on the history and demonstrable triggering",
+   "Ultrasound to confirm tendon or pulley thickening and guide injection in uncertain cases",
+   "Screening for diabetes given the association and its effect on outcome",
+   "Plain radiographs only if joint pathology is suspected",
+   "Assessment for inflammatory arthritis when multiple digits are affected"
+  ],
+  "redFlags": [
+   "Signs of flexor sheath infection such as fusiform swelling, severe pain on passive extension, and erythema",
+   "A fixed, non-reducible locked digit requiring timely surgical referral",
+   "Rapidly progressive or multi-digit involvement suggesting inflammatory arthritis",
+   "Neurovascular compromise of the digit"
+  ],
+  "prognosis": "Many cases resolve with splinting or a single corticosteroid injection, though recurrence can occur; response is poorer in diabetic patients and longstanding disease, and surgical release is highly effective when needed.",
+  "pitfalls": [
+   "Mistaking a locked digit for a joint problem rather than tendon triggering",
+   "Missing flexor sheath infection presenting with a swollen painful digit",
+   "Repeated injections in diabetic patients with limited benefit and glycaemic disturbance",
+   "Injuring the neurovascular bundle or digital nerve during release"
+  ],
+  "references": [
+   "Apley & Solomon's System of Orthopaedics and Fractures"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Begin conservative treatment with activity modification and a splint holding the metacarpophalangeal joint in extension, using NSAIDs for pain",
+   "Give a corticosteroid injection into the flexor tendon sheath at the A1 pulley as the mainstay of treatment, which is often curative",
+   "Refer for surgical A1 pulley release, open or percutaneous, for refractory triggering or a fixed, locked digit",
+   "Screen for and optimise diabetes and inflammatory arthritis, which are associated and predict a poorer response to conservative care",
+   "Provide hand therapy with tendon-gliding exercises to restore smooth excursion",
+   "Monitor for recurrence and escalate to surgical release when repeated injections fail"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "trigger_finger-pathway",
+   "title": "Trigger finger: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The finger catches, clicks, or locks in flexion and may need to be actively or passively straightened, often with pain at the base of the digit",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Signs of flexor sheath infection such as fusiform swelling, severe pain on passive extension, and erythema",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: A clinical diagnosis based on the history and demonstrable triggering, Ultrasound to confirm tendon or pulley thickening and guide injection in uncertain cases, Screening for diabetes given the association and its effect"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Begin conservative treatment with activity modification and a splint holding the metacarpophalangeal joint in extension, using NSAIDs for pain"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking a locked digit for a joint problem rather than tendon triggering"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of trigger finger."
+  }
+ ],
+ "tables": [
+  {
+   "id": "trigger_finger-matrix",
+   "title": "Trigger finger: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The finger catches, clicks, or locks in flexion and may need to be actively or passively straightened, often with pain at the",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Trigger finger is a stenosing tenosynovitis at the first annular (A1) pulley. Thickening and fibrocartilaginous change of the pulley and of the flexor tendon or its sheath create a mismatch in size, so the tendon catches as it passes through. A nodule on the tendon may become trapped proximal to the pulley, producing the characteristic triggering, locking, and pain, with a mechanical block rather than a simple inflammatory process.",
-    "additionalDifferentials": [
-      "Dupuytren disease",
-      "Metacarpophalangeal or interphalangeal joint osteoarthritis",
-      "Flexor tendon or sheath infection",
-      "Ganglion of the tendon sheath",
-      "Focal dystonia or extensor tendon subluxation",
-      "Locked metacarpophalangeal joint from other causes"
+    [
+     "Key Investigations",
+     "A clinical diagnosis based on the history and demonstrable triggering, Ultrasound to confirm tendon or pulley thickening and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "A clinical diagnosis based on the history and demonstrable triggering",
-      "Ultrasound to confirm tendon or pulley thickening and guide injection in uncertain cases",
-      "Screening for diabetes given the association and its effect on outcome",
-      "Plain radiographs only if joint pathology is suspected",
-      "Assessment for inflammatory arthritis when multiple digits are affected"
+    [
+     "Primary Differentials",
+     "Dupuytren disease, Metacarpophalangeal or interphalangeal joint osteoarthritis, Flexor tendon or sheath infection",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Signs of flexor sheath infection such as fusiform swelling, severe pain on passive extension, and erythema",
-      "A fixed, non-reducible locked digit requiring timely surgical referral",
-      "Rapidly progressive or multi-digit involvement suggesting inflammatory arthritis",
-      "Neurovascular compromise of the digit"
+    [
+     "Management Strategy",
+     "Begin conservative treatment with activity modification and a splint holding the metacarpophalangeal joint in extension, using",
+     "Core treatment modality"
     ],
-    "prognosis": "Many cases resolve with splinting or a single corticosteroid injection, though recurrence can occur; response is poorer in diabetic patients and longstanding disease, and surgical release is highly effective when needed.",
-    "pitfalls": [
-      "Mistaking a locked digit for a joint problem rather than tendon triggering",
-      "Missing flexor sheath infection presenting with a swollen painful digit",
-      "Repeated injections in diabetic patients with limited benefit and glycaemic disturbance",
-      "Injuring the neurovascular bundle or digital nerve during release"
-    ],
-    "references": [
-      "Apley & Solomon's System of Orthopaedics and Fractures"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Begin conservative treatment with activity modification and a splint holding the metacarpophalangeal joint in extension, using NSAIDs for pain",
-      "Give a corticosteroid injection into the flexor tendon sheath at the A1 pulley as the mainstay of treatment, which is often curative",
-      "Refer for surgical A1 pulley release, open or percutaneous, for refractory triggering or a fixed, locked digit",
-      "Screen for and optimise diabetes and inflammatory arthritis, which are associated and predict a poorer response to conservative care",
-      "Provide hand therapy with tendon-gliding exercises to restore smooth excursion",
-      "Monitor for recurrence and escalate to surgical release when repeated injections fail"
+    [
+     "Clinical Pitfall",
+     "Mistaking a locked digit for a joint problem rather than tendon triggering",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for trigger finger."
+  }
+ ]
 }

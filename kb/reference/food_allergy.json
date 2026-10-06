@@ -1,79 +1,151 @@
 {
-  "id": "food_allergy",
-  "name": "Food allergy",
-  "aliases": [
-    "food hypersensitivity",
-    "IgE-mediated food allergy",
-    "food-induced anaphylaxis"
+ "id": "food_allergy",
+ "name": "Food allergy",
+ "aliases": [
+  "food hypersensitivity",
+  "IgE-mediated food allergy",
+  "food-induced anaphylaxis"
+ ],
+ "class": "non_infective",
+ "system": "Immunology / Allergy",
+ "specialty": "Allergy & Immunology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine / Middleton's Allergy",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Most life-threatening reactions are IgE-mediated and begin within minutes to a couple of hours of ingestion, with skin, respiratory, gastrointestinal, and cardiovascular signs in varying combinations",
+   "A short list of foods accounts for the majority of reactions: cow's milk, egg, peanut, tree nuts, wheat, soy, fish, and shellfish, with peanut and tree nut allergy tending to persist into adult life",
+   "Diagnosis rests on a careful history correlating a specific food with reproducible symptoms, supported by skin prick testing or serum specific IgE, with the oral food challenge remaining the reference standard",
+   "A positive skin or blood test signals sensitisation but does not by itself confirm clinical allergy, so results must be interpreted against the history to avoid needless dietary restriction",
+   "Pollen-food (oral allergy) syndrome causes localised oral itching from raw fruits and vegetables that cross-react with pollens and is usually mild because the allergens are heat-labile",
+   "Cornerstones of management are strict avoidance of the culprit food, patient education on label reading and hidden exposures, and a written emergency action plan with a self-injectable adrenaline device",
+   "Adrenaline given intramuscularly is the first-line treatment for anaphylaxis; antihistamines and corticosteroids are adjuncts only and must never delay adrenaline",
+   "Cofactors such as exercise, alcohol, NSAIDs, and intercurrent infection can lower the reaction threshold, as in food-dependent exercise-induced anaphylaxis",
+   "Early rather than delayed introduction of allergenic foods such as peanut in infancy reduces the risk of developing allergy in high-risk children"
   ],
-  "class": "non_infective",
-  "system": "Immunology / Allergy",
-  "specialty": "Allergy & Immunology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine / Middleton's Allergy",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Most life-threatening reactions are IgE-mediated and begin within minutes to a couple of hours of ingestion, with skin, respiratory, gastrointestinal, and cardiovascular signs in varying combinations",
-      "A short list of foods accounts for the majority of reactions: cow's milk, egg, peanut, tree nuts, wheat, soy, fish, and shellfish, with peanut and tree nut allergy tending to persist into adult life",
-      "Diagnosis rests on a careful history correlating a specific food with reproducible symptoms, supported by skin prick testing or serum specific IgE, with the oral food challenge remaining the reference standard",
-      "A positive skin or blood test signals sensitisation but does not by itself confirm clinical allergy, so results must be interpreted against the history to avoid needless dietary restriction",
-      "Pollen-food (oral allergy) syndrome causes localised oral itching from raw fruits and vegetables that cross-react with pollens and is usually mild because the allergens are heat-labile",
-      "Cornerstones of management are strict avoidance of the culprit food, patient education on label reading and hidden exposures, and a written emergency action plan with a self-injectable adrenaline device",
-      "Adrenaline given intramuscularly is the first-line treatment for anaphylaxis; antihistamines and corticosteroids are adjuncts only and must never delay adrenaline",
-      "Cofactors such as exercise, alcohol, NSAIDs, and intercurrent infection can lower the reaction threshold, as in food-dependent exercise-induced anaphylaxis",
-      "Early rather than delayed introduction of allergenic foods such as peanut in infancy reduces the risk of developing allergy in high-risk children"
+  "pathophysiology": "IgE-mediated food allergy arises when sensitisation to dietary protein leads to allergen-specific IgE bound to mast cells and basophils. On re-exposure the allergen cross-links surface IgE, triggering degranulation with release of histamine, tryptase, leukotrienes, and other mediators that cause vasodilation, increased vascular permeability, smooth-muscle contraction, and mucus secretion. Non-IgE and mixed mechanisms (e.g. eosinophil- and T-cell-driven) underlie disorders such as eosinophilic oesophagitis and food protein-induced enterocolitis, which produce more delayed, predominantly gastrointestinal disease. Loss of oral tolerance, epithelial barrier dysfunction, and cutaneous sensitisation (notably through eczematous skin) are contributing factors.",
+  "additionalDifferentials": [
+   "Food intolerance (e.g. lactase deficiency) without immune mechanism",
+   "Scombroid (histamine) poisoning and other food toxin reactions",
+   "Idiopathic or drug-induced anaphylaxis",
+   "Eosinophilic oesophagitis and other eosinophilic gastrointestinal disorders",
+   "Carbohydrate (alpha-gal) allergy causing delayed reactions to mammalian meat",
+   "Panic or vasovagal episodes mimicking systemic reactions"
+  ],
+  "additionalInvestigations": [
+   "Skin prick testing to suspected foods interpreted alongside the clinical history",
+   "Serum allergen-specific IgE, including component-resolved testing where available",
+   "Supervised oral food challenge as the definitive diagnostic test",
+   "Serum tryptase during and after a suspected anaphylactic event",
+   "Elimination-and-reintroduction dietary trials for suspected non-IgE disease"
+  ],
+  "redFlags": [
+   "Anaphylaxis with airway compromise, stridor, wheeze, hypotension, or collapse requiring immediate intramuscular adrenaline",
+   "Rapidly progressive symptoms after a known trigger, especially in patients with asthma who are at higher risk of fatal reactions",
+   "Biphasic reaction recurring hours after apparent recovery",
+   "Repeated accidental exposures or reactions despite avoidance suggesting inadequate education or hidden allergens"
+  ],
+  "prognosis": "Milk, egg, wheat, and soy allergy commonly resolve during childhood, whereas peanut, tree nut, fish, and shellfish allergy usually persist for life. With reliable avoidance and prompt access to adrenaline, most patients do well, but unrecognised or undertreated anaphylaxis can be fatal.",
+  "pitfalls": [
+   "Diagnosing allergy from a positive test alone without a supporting history, leading to unnecessary and potentially harmful dietary elimination",
+   "Relying on antihistamines or steroids for anaphylaxis instead of giving adrenaline promptly",
+   "Failing to prescribe, or not teaching correct use of, a self-injectable adrenaline device",
+   "Overlooking cofactors and hidden or cross-contaminating allergens in processed foods and restaurant meals"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e",
+   "Middleton's Allergy: Principles and Practice"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Strict avoidance of the culprit food, with structured education on label reading, cross-contamination and hidden exposures",
+   "Provide a written emergency anaphylaxis action plan and prescribe self-injectable adrenaline auto-injectors, with training for the patient and carers",
+   "Treat mild reactions with oral antihistamines, reserving adrenaline as first-line for any features of anaphylaxis",
+   "Consider allergen-specific oral immunotherapy (desensitisation), for example to peanut, within a specialist service",
+   "Optimise coexisting atopic conditions such as eczema and asthma, since poorly controlled asthma worsens anaphylaxis risk",
+   "Involve a dietitian to ensure nutritional adequacy and avoid unnecessary dietary restriction, particularly in children",
+   "Arrange specialist allergy follow-up with periodic reassessment and supervised oral food challenges, since milk, egg, wheat and soy allergy often resolve in childhood"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "food_allergy-pathway",
+   "title": "Food allergy: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Most life-threatening reactions are IgE-mediated and begin within minutes to a couple of hours of ingestion, with skin, respiratory, gastrointestinal, and cardiovascular signs in varying combinations",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Anaphylaxis with airway compromise, stridor, wheeze, hypotension, or collapse requiring immediate intramuscular adrenaline",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Skin prick testing to suspected foods interpreted alongside the clinical history, Serum allergen-specific IgE, including component-resolved testing where available, Supervised oral food challenge as the definitive"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Strict avoidance of the culprit food, with structured education on label reading, cross-contamination and hidden exposures"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Diagnosing allergy from a positive test alone without a supporting history, leading to unnecessary and potentially harmful dietary elimination"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of food allergy."
+  }
+ ],
+ "tables": [
+  {
+   "id": "food_allergy-matrix",
+   "title": "Food allergy: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Most life-threatening reactions are IgE-mediated and begin within minutes to a couple of hours of ingestion, with skin,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "IgE-mediated food allergy arises when sensitisation to dietary protein leads to allergen-specific IgE bound to mast cells and basophils. On re-exposure the allergen cross-links surface IgE, triggering degranulation with release of histamine, tryptase, leukotrienes, and other mediators that cause vasodilation, increased vascular permeability, smooth-muscle contraction, and mucus secretion. Non-IgE and mixed mechanisms (e.g. eosinophil- and T-cell-driven) underlie disorders such as eosinophilic oesophagitis and food protein-induced enterocolitis, which produce more delayed, predominantly gastrointestinal disease. Loss of oral tolerance, epithelial barrier dysfunction, and cutaneous sensitisation (notably through eczematous skin) are contributing factors.",
-    "additionalDifferentials": [
-      "Food intolerance (e.g. lactase deficiency) without immune mechanism",
-      "Scombroid (histamine) poisoning and other food toxin reactions",
-      "Idiopathic or drug-induced anaphylaxis",
-      "Eosinophilic oesophagitis and other eosinophilic gastrointestinal disorders",
-      "Carbohydrate (alpha-gal) allergy causing delayed reactions to mammalian meat",
-      "Panic or vasovagal episodes mimicking systemic reactions"
+    [
+     "Key Investigations",
+     "Skin prick testing to suspected foods interpreted alongside the clinical history, Serum allergen-specific IgE, including",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Skin prick testing to suspected foods interpreted alongside the clinical history",
-      "Serum allergen-specific IgE, including component-resolved testing where available",
-      "Supervised oral food challenge as the definitive diagnostic test",
-      "Serum tryptase during and after a suspected anaphylactic event",
-      "Elimination-and-reintroduction dietary trials for suspected non-IgE disease"
+    [
+     "Primary Differentials",
+     "Food intolerance (e.g. lactase deficiency) without immune mechanism, Scombroid (histamine) poisoning and other food toxin",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Anaphylaxis with airway compromise, stridor, wheeze, hypotension, or collapse requiring immediate intramuscular adrenaline",
-      "Rapidly progressive symptoms after a known trigger, especially in patients with asthma who are at higher risk of fatal reactions",
-      "Biphasic reaction recurring hours after apparent recovery",
-      "Repeated accidental exposures or reactions despite avoidance suggesting inadequate education or hidden allergens"
+    [
+     "Management Strategy",
+     "Strict avoidance of the culprit food, with structured education on label reading, cross-contamination and hidden exposures",
+     "Core treatment modality"
     ],
-    "prognosis": "Milk, egg, wheat, and soy allergy commonly resolve during childhood, whereas peanut, tree nut, fish, and shellfish allergy usually persist for life. With reliable avoidance and prompt access to adrenaline, most patients do well, but unrecognised or undertreated anaphylaxis can be fatal.",
-    "pitfalls": [
-      "Diagnosing allergy from a positive test alone without a supporting history, leading to unnecessary and potentially harmful dietary elimination",
-      "Relying on antihistamines or steroids for anaphylaxis instead of giving adrenaline promptly",
-      "Failing to prescribe, or not teaching correct use of, a self-injectable adrenaline device",
-      "Overlooking cofactors and hidden or cross-contaminating allergens in processed foods and restaurant meals"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e",
-      "Middleton's Allergy: Principles and Practice"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Strict avoidance of the culprit food, with structured education on label reading, cross-contamination and hidden exposures",
-      "Provide a written emergency anaphylaxis action plan and prescribe self-injectable adrenaline auto-injectors, with training for the patient and carers",
-      "Treat mild reactions with oral antihistamines, reserving adrenaline as first-line for any features of anaphylaxis",
-      "Consider allergen-specific oral immunotherapy (desensitisation), for example to peanut, within a specialist service",
-      "Optimise coexisting atopic conditions such as eczema and asthma, since poorly controlled asthma worsens anaphylaxis risk",
-      "Involve a dietitian to ensure nutritional adequacy and avoid unnecessary dietary restriction, particularly in children",
-      "Arrange specialist allergy follow-up with periodic reassessment and supervised oral food challenges, since milk, egg, wheat and soy allergy often resolve in childhood"
+    [
+     "Clinical Pitfall",
+     "Diagnosing allergy from a positive test alone without a supporting history, leading to unnecessary and potentially harmful",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for food allergy."
+  }
+ ]
 }

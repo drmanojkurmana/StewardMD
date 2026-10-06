@@ -1,77 +1,149 @@
 {
-  "id": "weaver_syndrome",
-  "name": "Weaver syndrome",
-  "aliases": [
-    "EZH2-related overgrowth",
-    "Weaver-Smith syndrome"
+ "id": "weaver_syndrome",
+ "name": "Weaver syndrome",
+ "aliases": [
+  "EZH2-related overgrowth",
+  "Weaver-Smith syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Genetics / Dysmorphology",
+ "specialty": "Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Smith's Recognizable Patterns of Human Malformation",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Generalised pre- and postnatal overgrowth with tall stature and markedly advanced bone age, often more accelerated than the child's linear growth",
+   "Characteristic facial gestalt includes a broad forehead, hypertelorism, large low-set ears, a small chin with a horizontal crease, and a round face in infancy",
+   "Limb findings include camptodactyly, prominent finger pads, and broad thumbs, with variable joint contractures and deep-set nails",
+   "Caused by heterozygous loss-of-function variants in EZH2, encoding a histone methyltransferase within the Polycomb repressive complex",
+   "Autosomal dominant inheritance with most cases occurring de novo",
+   "Learning and developmental delay are variable and often milder than in Sotos syndrome, with hypotonia and hoarse low-pitched cry in infancy",
+   "A modestly increased risk of neoplasia, notably haematological malignancy and neuroblastoma, has been reported, so clinical vigilance is prudent"
   ],
-  "class": "non_infective",
-  "system": "Genetics / Dysmorphology",
-  "specialty": "Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Smith's Recognizable Patterns of Human Malformation",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Generalised pre- and postnatal overgrowth with tall stature and markedly advanced bone age, often more accelerated than the child's linear growth",
-      "Characteristic facial gestalt includes a broad forehead, hypertelorism, large low-set ears, a small chin with a horizontal crease, and a round face in infancy",
-      "Limb findings include camptodactyly, prominent finger pads, and broad thumbs, with variable joint contractures and deep-set nails",
-      "Caused by heterozygous loss-of-function variants in EZH2, encoding a histone methyltransferase within the Polycomb repressive complex",
-      "Autosomal dominant inheritance with most cases occurring de novo",
-      "Learning and developmental delay are variable and often milder than in Sotos syndrome, with hypotonia and hoarse low-pitched cry in infancy",
-      "A modestly increased risk of neoplasia, notably haematological malignancy and neuroblastoma, has been reported, so clinical vigilance is prudent"
+  "pathophysiology": "Weaver syndrome is caused by germline variants in EZH2, the catalytic subunit of Polycomb repressive complex 2, which trimethylates histone H3 lysine 27 to silence target genes controlling growth and differentiation. Disruption of EZH2 activity dysregulates these developmental programmes, producing accelerated skeletal maturation, generalised overgrowth, and the characteristic craniofacial and limb features. Because EZH2 and NSD1 act on overlapping chromatin pathways, Weaver and Sotos syndromes share overgrowth but differ in facial gestalt and specific complications.",
+  "additionalDifferentials": [
+   "Sotos syndrome (NSD1-related overgrowth)",
+   "Beckwith-Wiedemann syndrome",
+   "Malan syndrome (NFIX)",
+   "Marshall-Smith syndrome",
+   "Cohen-Gibson syndrome (EED-related overgrowth)",
+   "Simpson-Golabi-Behmel syndrome"
+  ],
+  "additionalInvestigations": [
+   "Molecular testing for EZH2 variants via targeted analysis or an overgrowth gene panel",
+   "Chromosomal microarray to exclude copy-number causes of overgrowth",
+   "Bone age radiograph, which is characteristically markedly advanced",
+   "Developmental assessment to define learning and motor needs",
+   "Clinical examination and directed investigation for neoplasia if suggestive symptoms arise",
+   "Skeletal and joint assessment for contractures and camptodactyly"
+  ],
+  "redFlags": [
+   "Unexplained cytopenias, lymphadenopathy, or an abdominal mass raising concern for malignancy",
+   "Progressive contractures or spinal deformity impairing function",
+   "Airway or feeding compromise in infancy from hypotonia",
+   "Neurological deterioration requiring imaging"
+  ],
+  "prognosis": "Growth acceleration tends to slow after childhood and adult height is often at the upper end of normal, while developmental outcome is variable but frequently better than in Sotos syndrome. The reported tumour risk is modest, and overall life expectancy is generally good.",
+  "pitfalls": [
+   "Mislabelling Weaver as Sotos syndrome given shared overgrowth, delaying correct EZH2 testing",
+   "Assuming a benign course and overlooking the reported association with neoplasia",
+   "Interpreting markedly advanced bone age as a puberty disorder rather than a syndromic feature",
+   "Missing camptodactyly and joint contractures that need orthopaedic and physiotherapy input"
+  ],
+  "references": [
+   "Smith's Recognizable Patterns of Human Malformation",
+   "GeneReviews: EZH2-Related Overgrowth (Weaver Syndrome)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "With no disease-specific therapy available, direct care at the individual's features and coordinate it through clinical genetics",
+   "Provide early developmental intervention, speech and language therapy and educational support for learning delay",
+   "Offer physiotherapy and occupational therapy for hypotonia, camptodactyly and joint contractures, with orthopaedic referral where contractures are functionally limiting",
+   "Monitor growth and the markedly advanced bone age, anticipating that growth acceleration tends to slow after childhood",
+   "Maintain clinical vigilance for neoplasia and investigate suggestive symptoms promptly given the modest tumour risk",
+   "Offer genetic counselling for this autosomal dominant condition, noting most cases arise de novo, with parental testing to inform recurrence risk",
+   "Coordinate care through a multidisciplinary team including genetics, paediatrics and therapy services"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "weaver_syndrome-pathway",
+   "title": "Weaver syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Generalised pre- and postnatal overgrowth with tall stature and markedly advanced bone age, often more accelerated than the child's linear growth",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Unexplained cytopenias, lymphadenopathy, or an abdominal mass raising concern for malignancy",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Molecular testing for EZH2 variants via targeted analysis or an overgrowth gene panel, Chromosomal microarray to exclude copy-number causes of overgrowth, Bone age radiograph, which is characteristically markedly advanced"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: With no disease-specific therapy available, direct care at the individual's features and coordinate it through clinical genetics"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mislabelling Weaver as Sotos syndrome given shared overgrowth, delaying correct EZH2 testing"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of weaver syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "weaver_syndrome-matrix",
+   "title": "Weaver syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Generalised pre- and postnatal overgrowth with tall stature and markedly advanced bone age, often more accelerated than the",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Weaver syndrome is caused by germline variants in EZH2, the catalytic subunit of Polycomb repressive complex 2, which trimethylates histone H3 lysine 27 to silence target genes controlling growth and differentiation. Disruption of EZH2 activity dysregulates these developmental programmes, producing accelerated skeletal maturation, generalised overgrowth, and the characteristic craniofacial and limb features. Because EZH2 and NSD1 act on overlapping chromatin pathways, Weaver and Sotos syndromes share overgrowth but differ in facial gestalt and specific complications.",
-    "additionalDifferentials": [
-      "Sotos syndrome (NSD1-related overgrowth)",
-      "Beckwith-Wiedemann syndrome",
-      "Malan syndrome (NFIX)",
-      "Marshall-Smith syndrome",
-      "Cohen-Gibson syndrome (EED-related overgrowth)",
-      "Simpson-Golabi-Behmel syndrome"
+    [
+     "Key Investigations",
+     "Molecular testing for EZH2 variants via targeted analysis or an overgrowth gene panel, Chromosomal microarray to exclude",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Molecular testing for EZH2 variants via targeted analysis or an overgrowth gene panel",
-      "Chromosomal microarray to exclude copy-number causes of overgrowth",
-      "Bone age radiograph, which is characteristically markedly advanced",
-      "Developmental assessment to define learning and motor needs",
-      "Clinical examination and directed investigation for neoplasia if suggestive symptoms arise",
-      "Skeletal and joint assessment for contractures and camptodactyly"
+    [
+     "Primary Differentials",
+     "Sotos syndrome (NSD1-related overgrowth), Beckwith-Wiedemann syndrome, Malan syndrome (NFIX)",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Unexplained cytopenias, lymphadenopathy, or an abdominal mass raising concern for malignancy",
-      "Progressive contractures or spinal deformity impairing function",
-      "Airway or feeding compromise in infancy from hypotonia",
-      "Neurological deterioration requiring imaging"
+    [
+     "Management Strategy",
+     "With no disease-specific therapy available, direct care at the individual's features and coordinate it through clinical genetics",
+     "Core treatment modality"
     ],
-    "prognosis": "Growth acceleration tends to slow after childhood and adult height is often at the upper end of normal, while developmental outcome is variable but frequently better than in Sotos syndrome. The reported tumour risk is modest, and overall life expectancy is generally good.",
-    "pitfalls": [
-      "Mislabelling Weaver as Sotos syndrome given shared overgrowth, delaying correct EZH2 testing",
-      "Assuming a benign course and overlooking the reported association with neoplasia",
-      "Interpreting markedly advanced bone age as a puberty disorder rather than a syndromic feature",
-      "Missing camptodactyly and joint contractures that need orthopaedic and physiotherapy input"
-    ],
-    "references": [
-      "Smith's Recognizable Patterns of Human Malformation",
-      "GeneReviews: EZH2-Related Overgrowth (Weaver Syndrome)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "With no disease-specific therapy available, direct care at the individual's features and coordinate it through clinical genetics",
-      "Provide early developmental intervention, speech and language therapy and educational support for learning delay",
-      "Offer physiotherapy and occupational therapy for hypotonia, camptodactyly and joint contractures, with orthopaedic referral where contractures are functionally limiting",
-      "Monitor growth and the markedly advanced bone age, anticipating that growth acceleration tends to slow after childhood",
-      "Maintain clinical vigilance for neoplasia and investigate suggestive symptoms promptly given the modest tumour risk",
-      "Offer genetic counselling for this autosomal dominant condition, noting most cases arise de novo, with parental testing to inform recurrence risk",
-      "Coordinate care through a multidisciplinary team including genetics, paediatrics and therapy services"
+    [
+     "Clinical Pitfall",
+     "Mislabelling Weaver as Sotos syndrome given shared overgrowth, delaying correct EZH2 testing",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for weaver syndrome."
+  }
+ ]
 }

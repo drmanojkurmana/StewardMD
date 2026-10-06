@@ -1,81 +1,153 @@
 {
-  "id": "chung_jansen_syndrome",
-  "name": "Chung-Jansen syndrome",
-  "aliases": [
-    "CHUJANS",
-    "PHIP-related syndrome",
-    "PHIP-related developmental disorder",
-    "Chung-Jansen intellectual disability-obesity syndrome"
+ "id": "chung_jansen_syndrome",
+ "name": "Chung-Jansen syndrome",
+ "aliases": [
+  "CHUJANS",
+  "PHIP-related syndrome",
+  "PHIP-related developmental disorder",
+  "Chung-Jansen intellectual disability-obesity syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Genetics",
+ "specialty": "Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "GeneReviews / Nature Reviews chromatinopathy literature",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Caused by haploinsufficiency of PHIP, a protein that acts within a chromatin-modifying complex where its bromodomain and WD40 repeats help read and organise histone modifications, linking the disorder to the epigenetic machinery",
+   "The recognisable combination is intellectual disability or developmental delay with obesity and behavioural difficulties",
+   "Behavioural features often include attention-deficit hyperactivity, anxiety and autistic traits",
+   "A characteristic facial appearance may include a high or broad forehead, downslanting palpebral fissures and a prominent nasal bridge",
+   "Additional findings can include hypotonia, short stature, ophthalmological problems and, in some, structural anomalies",
+   "Because obesity is a core feature, weight, metabolic health and associated complications should be monitored over time",
+   "Diagnosis is confirmed by identifying a loss-of-function PHIP variant or a deletion involving the gene"
   ],
-  "class": "non_infective",
-  "system": "Genetics",
-  "specialty": "Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "GeneReviews / Nature Reviews chromatinopathy literature",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Caused by haploinsufficiency of PHIP, a protein that acts within a chromatin-modifying complex where its bromodomain and WD40 repeats help read and organise histone modifications, linking the disorder to the epigenetic machinery",
-      "The recognisable combination is intellectual disability or developmental delay with obesity and behavioural difficulties",
-      "Behavioural features often include attention-deficit hyperactivity, anxiety and autistic traits",
-      "A characteristic facial appearance may include a high or broad forehead, downslanting palpebral fissures and a prominent nasal bridge",
-      "Additional findings can include hypotonia, short stature, ophthalmological problems and, in some, structural anomalies",
-      "Because obesity is a core feature, weight, metabolic health and associated complications should be monitored over time",
-      "Diagnosis is confirmed by identifying a loss-of-function PHIP variant or a deletion involving the gene"
+  "pathophysiology": "PHIP encodes a component of a chromatin-associated complex that, through its bromodomain and WD40 repeat structures, recognises modified histones and helps regulate access to chromatin and the expression of downstream genes. Loss-of-function variants and deletions reduce the available protein (haploinsufficiency), disturbing this chromatin-reading function and the gene-expression programmes it supports, including those influencing neurodevelopment and the central regulation of appetite and energy balance. The resulting dysregulation manifests as developmental delay and intellectual disability with a characteristic behavioural profile, alongside a predisposition to obesity, positioning the condition within the broader group of Mendelian disorders of the epigenetic machinery.",
+  "additionalDifferentials": [
+   "Prader-Willi syndrome and other genomic imprinting obesity syndromes",
+   "Bardet-Biedl syndrome and related ciliopathies",
+   "MC4R and other monogenic obesity disorders",
+   "Fragile X syndrome",
+   "Other syndromic intellectual disability with obesity",
+   "Chromatinopathies with overlapping neurodevelopmental features",
+   "Non-specific autism spectrum disorder with intellectual disability"
+  ],
+  "additionalInvestigations": [
+   "Exome or genome sequencing to detect PHIP variants",
+   "Chromosomal microarray to identify deletions involving PHIP",
+   "Growth and body mass index monitoring with metabolic screening for obesity-related complications",
+   "Neurodevelopmental and behavioural assessment including attention and autism evaluation",
+   "Ophthalmological review",
+   "Assessment for hypotonia and feeding in infancy",
+   "Brain MRI if structural anomalies or seizures are suspected"
+  ],
+  "redFlags": [
+   "Rapidly progressive obesity with emerging metabolic complications",
+   "Obstructive sleep apnoea related to obesity",
+   "Significant behavioural disturbance affecting safety or function",
+   "New seizures warranting neurological review"
+  ],
+  "prognosis": "Life expectancy is not clearly reduced, but intellectual disability is usually mild to moderate and behavioural difficulties and obesity often persist, so long-term outcome is improved by early developmental support, behavioural intervention and proactive management of weight and its metabolic consequences.",
+  "pitfalls": [
+   "Attributing the obesity and developmental delay to Prader-Willi syndrome without appropriate genetic testing",
+   "Overlooking treatable behavioural comorbidities such as attention-deficit hyperactivity and anxiety",
+   "Failing to monitor and address obesity-related metabolic complications",
+   "Missing small deletions of PHIP when only single-gene sequence analysis is performed"
+  ],
+  "references": [
+   "GeneReviews — PHIP-Related Chung-Jansen Syndrome",
+   "Nature Reviews Genetics — chromatin readers and Mendelian disorders of the epigenetic machinery"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Early developmental intervention with speech and language, occupational and physiotherapy and individualised educational support for intellectual disability",
+   "Behavioural and psychiatric management of attention-deficit hyperactivity, anxiety and autistic traits, including stimulant or other pharmacotherapy where indicated",
+   "Proactive weight and metabolic management with dietetic input, lifestyle measures and monitoring of body mass index and obesity-related complications",
+   "Assessment and treatment of infantile hypotonia and feeding difficulties, with monitoring of growth and short stature",
+   "Ophthalmological review and correction of refractive or other ocular problems",
+   "Coordinated multidisciplinary care through clinical genetics and developmental paediatrics",
+   "Genetic counselling for this autosomal dominant PHIP disorder, with parental testing to distinguish de novo from inherited variants and family screening as indicated"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "chung_jansen_syndrome-pathway",
+   "title": "Chung-Jansen syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Caused by haploinsufficiency of PHIP, a protein that acts within a chromatin-modifying complex where its bromodomain and WD40 repeats help read and organise histone modifications, linking the disorder to the epigenetic machinery",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapidly progressive obesity with emerging metabolic complications",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Exome or genome sequencing to detect PHIP variants, Chromosomal microarray to identify deletions involving PHIP, Growth and body mass index monitoring with metabolic screening for obesity-related complications"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Early developmental intervention with speech and language, occupational and physiotherapy and individualised educational support for intellectual disability"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing the obesity and developmental delay to Prader-Willi syndrome without appropriate genetic testing"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of chung-jansen syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "chung_jansen_syndrome-matrix",
+   "title": "Chung-Jansen syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Caused by haploinsufficiency of PHIP, a protein that acts within a chromatin-modifying complex where its bromodomain and WD40",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "PHIP encodes a component of a chromatin-associated complex that, through its bromodomain and WD40 repeat structures, recognises modified histones and helps regulate access to chromatin and the expression of downstream genes. Loss-of-function variants and deletions reduce the available protein (haploinsufficiency), disturbing this chromatin-reading function and the gene-expression programmes it supports, including those influencing neurodevelopment and the central regulation of appetite and energy balance. The resulting dysregulation manifests as developmental delay and intellectual disability with a characteristic behavioural profile, alongside a predisposition to obesity, positioning the condition within the broader group of Mendelian disorders of the epigenetic machinery.",
-    "additionalDifferentials": [
-      "Prader-Willi syndrome and other genomic imprinting obesity syndromes",
-      "Bardet-Biedl syndrome and related ciliopathies",
-      "MC4R and other monogenic obesity disorders",
-      "Fragile X syndrome",
-      "Other syndromic intellectual disability with obesity",
-      "Chromatinopathies with overlapping neurodevelopmental features",
-      "Non-specific autism spectrum disorder with intellectual disability"
+    [
+     "Key Investigations",
+     "Exome or genome sequencing to detect PHIP variants, Chromosomal microarray to identify deletions involving PHIP, Growth and body",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Exome or genome sequencing to detect PHIP variants",
-      "Chromosomal microarray to identify deletions involving PHIP",
-      "Growth and body mass index monitoring with metabolic screening for obesity-related complications",
-      "Neurodevelopmental and behavioural assessment including attention and autism evaluation",
-      "Ophthalmological review",
-      "Assessment for hypotonia and feeding in infancy",
-      "Brain MRI if structural anomalies or seizures are suspected"
+    [
+     "Primary Differentials",
+     "Prader-Willi syndrome and other genomic imprinting obesity syndromes, Bardet-Biedl syndrome and related ciliopathies, MC4R and",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapidly progressive obesity with emerging metabolic complications",
-      "Obstructive sleep apnoea related to obesity",
-      "Significant behavioural disturbance affecting safety or function",
-      "New seizures warranting neurological review"
+    [
+     "Management Strategy",
+     "Early developmental intervention with speech and language, occupational and physiotherapy and individualised educational support",
+     "Core treatment modality"
     ],
-    "prognosis": "Life expectancy is not clearly reduced, but intellectual disability is usually mild to moderate and behavioural difficulties and obesity often persist, so long-term outcome is improved by early developmental support, behavioural intervention and proactive management of weight and its metabolic consequences.",
-    "pitfalls": [
-      "Attributing the obesity and developmental delay to Prader-Willi syndrome without appropriate genetic testing",
-      "Overlooking treatable behavioural comorbidities such as attention-deficit hyperactivity and anxiety",
-      "Failing to monitor and address obesity-related metabolic complications",
-      "Missing small deletions of PHIP when only single-gene sequence analysis is performed"
-    ],
-    "references": [
-      "GeneReviews — PHIP-Related Chung-Jansen Syndrome",
-      "Nature Reviews Genetics — chromatin readers and Mendelian disorders of the epigenetic machinery"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Early developmental intervention with speech and language, occupational and physiotherapy and individualised educational support for intellectual disability",
-      "Behavioural and psychiatric management of attention-deficit hyperactivity, anxiety and autistic traits, including stimulant or other pharmacotherapy where indicated",
-      "Proactive weight and metabolic management with dietetic input, lifestyle measures and monitoring of body mass index and obesity-related complications",
-      "Assessment and treatment of infantile hypotonia and feeding difficulties, with monitoring of growth and short stature",
-      "Ophthalmological review and correction of refractive or other ocular problems",
-      "Coordinated multidisciplinary care through clinical genetics and developmental paediatrics",
-      "Genetic counselling for this autosomal dominant PHIP disorder, with parental testing to distinguish de novo from inherited variants and family screening as indicated"
+    [
+     "Clinical Pitfall",
+     "Attributing the obesity and developmental delay to Prader-Willi syndrome without appropriate genetic testing",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for chung-jansen syndrome."
+  }
+ ]
 }

@@ -1,76 +1,148 @@
 {
-  "id": "angiokeratoma_circumscriptum",
-  "name": "Angiokeratoma circumscriptum",
-  "aliases": [
-    "Angiokeratoma circumscriptum naeviforme"
+ "id": "angiokeratoma_circumscriptum",
+ "name": "Angiokeratoma circumscriptum",
+ "aliases": [
+  "Angiokeratoma circumscriptum naeviforme"
+ ],
+ "class": "non_infective",
+ "system": "Skin / Vascular",
+ "specialty": "Dermatology / Vascular anomalies / Paediatrics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rook's Textbook of Dermatology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The rarest form of angiokeratoma, usually congenital or appearing in infancy or childhood and most often on a lower limb.",
+   "Presents as a unilateral, well-demarcated cluster or plaque of dark-red to blue-black hyperkeratotic vascular papules and nodules, sometimes in a linear or segmental (blaschkoid) pattern.",
+   "Represents ectatic superficial dermal vessels with overlying epidermal hyperkeratosis and acanthosis.",
+   "May slowly enlarge and can bleed after minor trauma.",
+   "Distinct from the systemic angiokeratomas of Fabry disease (angiokeratoma corporis diffusum), which are widespread and symmetrical.",
+   "Dermoscopy typically shows dark lacunae with an overlying whitish keratotic veil.",
+   "May coexist with an underlying venous or lymphatic malformation in some cases.",
+   "Treatment with laser or excision is undertaken for cosmesis or troublesome bleeding, but recurrence is possible."
   ],
-  "class": "non_infective",
-  "system": "Skin / Vascular",
-  "specialty": "Dermatology / Vascular anomalies / Paediatrics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rook's Textbook of Dermatology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The rarest form of angiokeratoma, usually congenital or appearing in infancy or childhood and most often on a lower limb.",
-      "Presents as a unilateral, well-demarcated cluster or plaque of dark-red to blue-black hyperkeratotic vascular papules and nodules, sometimes in a linear or segmental (blaschkoid) pattern.",
-      "Represents ectatic superficial dermal vessels with overlying epidermal hyperkeratosis and acanthosis.",
-      "May slowly enlarge and can bleed after minor trauma.",
-      "Distinct from the systemic angiokeratomas of Fabry disease (angiokeratoma corporis diffusum), which are widespread and symmetrical.",
-      "Dermoscopy typically shows dark lacunae with an overlying whitish keratotic veil.",
-      "May coexist with an underlying venous or lymphatic malformation in some cases.",
-      "Treatment with laser or excision is undertaken for cosmesis or troublesome bleeding, but recurrence is possible."
+  "pathophysiology": "Angiokeratoma circumscriptum is a localised vascular ectasia in which dilated, thin-walled capillaries and postcapillary venules occupy the superficial papillary dermis, closely apposed to a reactively hyperkeratotic and acanthotic epidermis that may partially enclose the ectatic vessels. Unlike the angiokeratomas of Fabry disease and other lysosomal storage disorders, it is not associated with a systemic enzyme deficiency. It behaves as a localised capillary and venous malformation, sometimes overlying a deeper vascular malformation, with the keratotic surface reflecting secondary epidermal change over long-standing dilated vessels.",
+  "additionalDifferentials": [
+   "Angiokeratoma of Fabry disease (corporis diffusum)",
+   "Other localised angiokeratomas (Mibelli, Fordyce and solitary types)",
+   "Verrucous venous malformation (verrucous haemangioma)",
+   "Malignant melanoma in a pigmented, bleeding lesion",
+   "Lymphangioma circumscriptum",
+   "Pyogenic granuloma"
+  ],
+  "additionalInvestigations": [
+   "Dermoscopy showing dark lacunae with a keratotic veil",
+   "Skin biopsy confirming dilated superficial vessels with overlying hyperkeratosis",
+   "Ultrasound or MRI if a deeper vascular malformation is suspected",
+   "Screening for Fabry disease (alpha-galactosidase A activity) if lesions are widespread or symmetrical",
+   "Assessment of the extent of any associated malformation"
+  ],
+  "redFlags": [
+   "Pigmented or rapidly changing lesion raising suspicion of melanoma",
+   "Recurrent significant bleeding",
+   "Widespread symmetrical angiokeratomas suggesting a systemic storage disorder",
+   "Rapid enlargement suggesting an underlying deeper malformation"
+  ],
+  "prognosis": "Angiokeratoma circumscriptum is benign and persists lifelong, tending to enlarge slowly. Treatment is undertaken for bleeding or cosmetic reasons, with a recognised risk of recurrence after ablative therapy.",
+  "pitfalls": [
+   "Confusing localised angiokeratoma circumscriptum with the systemic angiokeratomas of Fabry disease and missing a treatable metabolic condition.",
+   "Mistaking a bleeding, keratotic and pigmented lesion for melanoma, or the reverse.",
+   "Treating superficially without recognising a deeper underlying malformation.",
+   "Incomplete excision leading to recurrence."
+  ],
+  "references": [
+   "Standard textbook of dermatology",
+   "ISSVA classification of vascular anomalies",
+   "Reviews of cutaneous angiokeratomas and their differential diagnosis"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Surgical excision for localised symptomatic or cosmetically troublesome lesions, with counselling about recurrence after ablative treatment",
+   "Vascular laser therapy such as pulsed-dye or long-pulsed Nd:YAG laser as a less invasive option for suitable lesions",
+   "Local measures to control bleeding from lesions traumatised at the surface",
+   "Imaging with ultrasound or MRI to define any deeper underlying vascular malformation before intervention",
+   "Exclude Fabry disease by measuring alpha-galactosidase A activity if lesions are widespread or symmetrical rather than localised",
+   "Reassurance regarding the benign nature and lifelong persistence, with monitoring for slow enlargement"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "angiokeratoma_circumscriptum-pathway",
+   "title": "Angiokeratoma circumscriptum: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The rarest form of angiokeratoma, usually congenital or appearing in infancy or childhood and most often on a lower limb.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Pigmented or rapidly changing lesion raising suspicion of melanoma",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Dermoscopy showing dark lacunae with a keratotic veil, Skin biopsy confirming dilated superficial vessels with overlying hyperkeratosis, Ultrasound or MRI if a deeper vascular malformation is suspected"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Surgical excision for localised symptomatic or cosmetically troublesome lesions, with counselling about recurrence after ablative treatment"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing localised angiokeratoma circumscriptum with the systemic angiokeratomas of Fabry disease and missing a treatable metabolic condition."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of angiokeratoma circumscriptum."
+  }
+ ],
+ "tables": [
+  {
+   "id": "angiokeratoma_circumscriptum-matrix",
+   "title": "Angiokeratoma circumscriptum: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The rarest form of angiokeratoma, usually congenital or appearing in infancy or childhood and most often on a lower limb.",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Angiokeratoma circumscriptum is a localised vascular ectasia in which dilated, thin-walled capillaries and postcapillary venules occupy the superficial papillary dermis, closely apposed to a reactively hyperkeratotic and acanthotic epidermis that may partially enclose the ectatic vessels. Unlike the angiokeratomas of Fabry disease and other lysosomal storage disorders, it is not associated with a systemic enzyme deficiency. It behaves as a localised capillary and venous malformation, sometimes overlying a deeper vascular malformation, with the keratotic surface reflecting secondary epidermal change over long-standing dilated vessels.",
-    "additionalDifferentials": [
-      "Angiokeratoma of Fabry disease (corporis diffusum)",
-      "Other localised angiokeratomas (Mibelli, Fordyce and solitary types)",
-      "Verrucous venous malformation (verrucous haemangioma)",
-      "Malignant melanoma in a pigmented, bleeding lesion",
-      "Lymphangioma circumscriptum",
-      "Pyogenic granuloma"
+    [
+     "Key Investigations",
+     "Dermoscopy showing dark lacunae with a keratotic veil, Skin biopsy confirming dilated superficial vessels with overlying",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Dermoscopy showing dark lacunae with a keratotic veil",
-      "Skin biopsy confirming dilated superficial vessels with overlying hyperkeratosis",
-      "Ultrasound or MRI if a deeper vascular malformation is suspected",
-      "Screening for Fabry disease (alpha-galactosidase A activity) if lesions are widespread or symmetrical",
-      "Assessment of the extent of any associated malformation"
+    [
+     "Primary Differentials",
+     "Angiokeratoma of Fabry disease (corporis diffusum), Other localised angiokeratomas (Mibelli, Fordyce and solitary types),",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Pigmented or rapidly changing lesion raising suspicion of melanoma",
-      "Recurrent significant bleeding",
-      "Widespread symmetrical angiokeratomas suggesting a systemic storage disorder",
-      "Rapid enlargement suggesting an underlying deeper malformation"
+    [
+     "Management Strategy",
+     "Surgical excision for localised symptomatic or cosmetically troublesome lesions, with counselling about recurrence after ablative",
+     "Core treatment modality"
     ],
-    "prognosis": "Angiokeratoma circumscriptum is benign and persists lifelong, tending to enlarge slowly. Treatment is undertaken for bleeding or cosmetic reasons, with a recognised risk of recurrence after ablative therapy.",
-    "pitfalls": [
-      "Confusing localised angiokeratoma circumscriptum with the systemic angiokeratomas of Fabry disease and missing a treatable metabolic condition.",
-      "Mistaking a bleeding, keratotic and pigmented lesion for melanoma, or the reverse.",
-      "Treating superficially without recognising a deeper underlying malformation.",
-      "Incomplete excision leading to recurrence."
-    ],
-    "references": [
-      "Standard textbook of dermatology",
-      "ISSVA classification of vascular anomalies",
-      "Reviews of cutaneous angiokeratomas and their differential diagnosis"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Surgical excision for localised symptomatic or cosmetically troublesome lesions, with counselling about recurrence after ablative treatment",
-      "Vascular laser therapy such as pulsed-dye or long-pulsed Nd:YAG laser as a less invasive option for suitable lesions",
-      "Local measures to control bleeding from lesions traumatised at the surface",
-      "Imaging with ultrasound or MRI to define any deeper underlying vascular malformation before intervention",
-      "Exclude Fabry disease by measuring alpha-galactosidase A activity if lesions are widespread or symmetrical rather than localised",
-      "Reassurance regarding the benign nature and lifelong persistence, with monitoring for slow enlargement"
+    [
+     "Clinical Pitfall",
+     "Confusing localised angiokeratoma circumscriptum with the systemic angiokeratomas of Fabry disease and missing a treatable",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for angiokeratoma circumscriptum."
+  }
+ ]
 }

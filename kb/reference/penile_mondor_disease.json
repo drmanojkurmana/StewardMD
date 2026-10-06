@@ -1,72 +1,144 @@
 {
-  "id": "penile_mondor_disease",
-  "name": "Penile Mondor disease",
-  "aliases": [
-    "superficial dorsal penile vein thrombophlebitis"
+ "id": "penile_mondor_disease",
+ "name": "Penile Mondor disease",
+ "aliases": [
+  "superficial dorsal penile vein thrombophlebitis"
+ ],
+ "class": "non_infective",
+ "system": "Genitourinary / Vascular",
+ "specialty": "Urology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Urology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Thrombophlebitis of the superficial dorsal vein of the penis, a benign self-limiting condition",
+   "Presents as a palpable, cord-like, sometimes tender indurated structure along the dorsum of the penis",
+   "It often follows vigorous or prolonged sexual activity, and other precipitants include trauma and pelvic procedures",
+   "It is the penile analogue of Mondor disease of the chest/breast wall",
+   "Diagnosis is usually clinical, supported by Doppler ultrasound showing a thrombosed non-compressible dorsal vein",
+   "It resolves spontaneously over weeks with conservative measures such as anti-inflammatory treatment and abstinence"
   ],
-  "class": "non_infective",
-  "system": "Genitourinary / Vascular",
-  "specialty": "Urology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Urology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Thrombophlebitis of the superficial dorsal vein of the penis, a benign self-limiting condition",
-      "Presents as a palpable, cord-like, sometimes tender indurated structure along the dorsum of the penis",
-      "It often follows vigorous or prolonged sexual activity, and other precipitants include trauma and pelvic procedures",
-      "It is the penile analogue of Mondor disease of the chest/breast wall",
-      "Diagnosis is usually clinical, supported by Doppler ultrasound showing a thrombosed non-compressible dorsal vein",
-      "It resolves spontaneously over weeks with conservative measures such as anti-inflammatory treatment and abstinence"
+  "pathophysiology": "Penile Mondor disease is a localised thrombophlebitis of the superficial dorsal vein of the penis. Endothelial injury and venous stasis, often from prolonged sexual activity, trauma or compression, promote thrombosis of the superficial vein, producing a palpable thrombosed cord with surrounding inflammation. It is a benign, self-limiting vascular condition confined to the superficial penile venous system, and recanalisation occurs over time.",
+  "additionalDifferentials": [
+   "Peyronie disease",
+   "Penile lymphangitis (non-venereal sclerosing lymphangitis)",
+   "Penile cellulitis or other infection",
+   "Dorsal nerve or other penile pathology",
+   "Thrombosed penile vascular malformation"
+  ],
+  "additionalInvestigations": [
+   "Clinical diagnosis from the palpable thrombosed dorsal cord",
+   "Doppler ultrasound of the dorsal penile vein",
+   "History of precipitating activity or trauma",
+   "Assessment for a hypercoagulable state if recurrent",
+   "Exclusion of Peyronie disease and infection"
+  ],
+  "redFlags": [
+   "Features suggesting infection (fever, purulence)",
+   "Recurrent episodes suggesting a thrombophilia",
+   "Progressive induration suggesting Peyronie disease",
+   "Persistent symptoms beyond the expected course"
+  ],
+  "prognosis": "The condition is benign and resolves spontaneously over a few weeks with conservative management, with a good prognosis and low recurrence.",
+  "pitfalls": [
+   "Confusing it with Peyronie disease or sclerosing lymphangitis",
+   "Investigating or treating it as an infection",
+   "Overlooking a hypercoagulable tendency in recurrent cases",
+   "Causing undue alarm about a benign self-limiting condition"
+  ],
+  "references": [
+   "Urology reference texts (standard reference)",
+   "Andrology references (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Manage conservatively with non-steroidal anti-inflammatory drugs and reassurance as a benign self-limiting condition",
+   "Advise temporary abstinence from sexual activity and avoidance of penile trauma while the thrombosed vein recanalises",
+   "Provide warm compresses and topical anti-inflammatory measures for symptomatic relief",
+   "Consider a short course of anticoagulation only in extensive or persistent thrombosis",
+   "Investigate for an underlying hypercoagulable state if episodes recur",
+   "Exclude Peyronie disease and infection and reassure regarding spontaneous resolution"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "penile_mondor_disease-pathway",
+   "title": "Penile Mondor disease: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Thrombophlebitis of the superficial dorsal vein of the penis, a benign self-limiting condition",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Features suggesting infection (fever, purulence)",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical diagnosis from the palpable thrombosed dorsal cord, Doppler ultrasound of the dorsal penile vein, History of precipitating activity or trauma"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Manage conservatively with non-steroidal anti-inflammatory drugs and reassurance as a benign self-limiting condition"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing it with Peyronie disease or sclerosing lymphangitis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of penile mondor disease."
+  }
+ ],
+ "tables": [
+  {
+   "id": "penile_mondor_disease-matrix",
+   "title": "Penile Mondor disease: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Thrombophlebitis of the superficial dorsal vein of the penis, a benign self-limiting condition",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Penile Mondor disease is a localised thrombophlebitis of the superficial dorsal vein of the penis. Endothelial injury and venous stasis, often from prolonged sexual activity, trauma or compression, promote thrombosis of the superficial vein, producing a palpable thrombosed cord with surrounding inflammation. It is a benign, self-limiting vascular condition confined to the superficial penile venous system, and recanalisation occurs over time.",
-    "additionalDifferentials": [
-      "Peyronie disease",
-      "Penile lymphangitis (non-venereal sclerosing lymphangitis)",
-      "Penile cellulitis or other infection",
-      "Dorsal nerve or other penile pathology",
-      "Thrombosed penile vascular malformation"
+    [
+     "Key Investigations",
+     "Clinical diagnosis from the palpable thrombosed dorsal cord, Doppler ultrasound of the dorsal penile vein, History of",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical diagnosis from the palpable thrombosed dorsal cord",
-      "Doppler ultrasound of the dorsal penile vein",
-      "History of precipitating activity or trauma",
-      "Assessment for a hypercoagulable state if recurrent",
-      "Exclusion of Peyronie disease and infection"
+    [
+     "Primary Differentials",
+     "Peyronie disease, Penile lymphangitis (non-venereal sclerosing lymphangitis), Penile cellulitis or other infection",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Features suggesting infection (fever, purulence)",
-      "Recurrent episodes suggesting a thrombophilia",
-      "Progressive induration suggesting Peyronie disease",
-      "Persistent symptoms beyond the expected course"
+    [
+     "Management Strategy",
+     "Manage conservatively with non-steroidal anti-inflammatory drugs and reassurance as a benign self-limiting condition",
+     "Core treatment modality"
     ],
-    "prognosis": "The condition is benign and resolves spontaneously over a few weeks with conservative management, with a good prognosis and low recurrence.",
-    "pitfalls": [
-      "Confusing it with Peyronie disease or sclerosing lymphangitis",
-      "Investigating or treating it as an infection",
-      "Overlooking a hypercoagulable tendency in recurrent cases",
-      "Causing undue alarm about a benign self-limiting condition"
-    ],
-    "references": [
-      "Urology reference texts (standard reference)",
-      "Andrology references (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Manage conservatively with non-steroidal anti-inflammatory drugs and reassurance as a benign self-limiting condition",
-      "Advise temporary abstinence from sexual activity and avoidance of penile trauma while the thrombosed vein recanalises",
-      "Provide warm compresses and topical anti-inflammatory measures for symptomatic relief",
-      "Consider a short course of anticoagulation only in extensive or persistent thrombosis",
-      "Investigate for an underlying hypercoagulable state if episodes recur",
-      "Exclude Peyronie disease and infection and reassure regarding spontaneous resolution"
+    [
+     "Clinical Pitfall",
+     "Confusing it with Peyronie disease or sclerosing lymphangitis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for penile mondor disease."
+  }
+ ]
 }

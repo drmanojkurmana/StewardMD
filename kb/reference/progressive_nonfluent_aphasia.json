@@ -1,79 +1,151 @@
 {
-  "id": "progressive_nonfluent_aphasia",
-  "name": "Progressive non-fluent aphasia",
-  "aliases": [
-    "PNFA",
-    "non-fluent/agrammatic variant primary progressive aphasia",
-    "agrammatic variant PPA",
-    "nfvPPA"
+ "id": "progressive_nonfluent_aphasia",
+ "name": "Progressive non-fluent aphasia",
+ "aliases": [
+  "PNFA",
+  "non-fluent/agrammatic variant primary progressive aphasia",
+  "agrammatic variant PPA",
+  "nfvPPA"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Neurology",
+ "specialty": "Neurology / Cognitive & Movement",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Bradley and Daroff Neurology in Clinical Practice",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Characterised by effortful, halting speech with agrammatism and inconsistent speech-sound errors (apraxia of speech), while single-word comprehension is relatively preserved",
+   "It is the non-fluent/agrammatic variant of primary progressive aphasia and usually reflects underlying frontotemporal lobar degeneration with tau pathology",
+   "Comprehension of grammatically complex sentences is impaired, though understanding of individual words and object knowledge remains comparatively intact",
+   "Imaging typically shows atrophy and hypometabolism in the left posterior frontal and insular regions",
+   "Motor features overlapping with corticobasal syndrome or progressive supranuclear palsy may develop as the disease advances",
+   "Speech becomes progressively sparse and telegraphic, and some patients ultimately become mute",
+   "Distinguishing it from the semantic and logopenic variants relies on the pattern of speech production, grammar and repetition"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Neurology",
-  "specialty": "Neurology / Cognitive & Movement",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Bradley and Daroff Neurology in Clinical Practice",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Characterised by effortful, halting speech with agrammatism and inconsistent speech-sound errors (apraxia of speech), while single-word comprehension is relatively preserved",
-      "It is the non-fluent/agrammatic variant of primary progressive aphasia and usually reflects underlying frontotemporal lobar degeneration with tau pathology",
-      "Comprehension of grammatically complex sentences is impaired, though understanding of individual words and object knowledge remains comparatively intact",
-      "Imaging typically shows atrophy and hypometabolism in the left posterior frontal and insular regions",
-      "Motor features overlapping with corticobasal syndrome or progressive supranuclear palsy may develop as the disease advances",
-      "Speech becomes progressively sparse and telegraphic, and some patients ultimately become mute",
-      "Distinguishing it from the semantic and logopenic variants relies on the pattern of speech production, grammar and repetition"
+  "pathophysiology": "Progressive non-fluent aphasia is the non-fluent/agrammatic variant of primary progressive aphasia, caused by neurodegeneration centred on the left inferior frontal, insular and premotor cortex that supports speech planning and grammatical processing. The most frequent underlying pathology is frontotemporal lobar degeneration associated with abnormal tau protein aggregation, and there is clinical and pathological overlap with corticobasal degeneration and progressive supranuclear palsy. Damage to these anterior language and motor-speech networks produces effortful, agrammatic output and apraxia of speech, with relative sparing of the temporal regions that store word meaning.",
+  "additionalDifferentials": [
+   "Semantic variant primary progressive aphasia",
+   "Logopenic variant primary progressive aphasia",
+   "Corticobasal syndrome",
+   "Progressive supranuclear palsy",
+   "Vascular aphasia from stroke",
+   "Behavioural variant frontotemporal dementia",
+   "Primary progressive apraxia of speech"
+  ],
+  "additionalInvestigations": [
+   "Speech and language evaluation focusing on fluency, grammar and motor speech",
+   "MRI of the brain showing left posterior frontal and insular atrophy",
+   "FDG-PET to demonstrate frontal hypometabolism",
+   "Amyloid PET or cerebrospinal fluid biomarkers to exclude underlying Alzheimer pathology",
+   "Neuropsychological testing to document preserved single-word comprehension and object knowledge",
+   "Assessment for parkinsonian and corticobasal features over time"
+  ],
+  "redFlags": [
+   "Emerging parkinsonism, limb apraxia or gaze palsy suggesting corticobasal or supranuclear palsy overlap",
+   "Rapid progression suggesting an alternative aggressive pathology",
+   "Dysphagia and aspiration risk as bulbar and motor features advance",
+   "Progression to mutism with loss of functional communication"
+  ],
+  "prognosis": "The disorder progresses over years, with speech becoming increasingly sparse and eventual mutism in many patients, and frequent evolution of motor features; prognosis depends on the underlying pathology, and management is supportive with speech and language therapy and communication aids.",
+  "pitfalls": [
+   "Confusing agrammatic non-fluent output with the anomia and word-retrieval failure of the logopenic variant",
+   "Overlooking apraxia of speech as a defining feature",
+   "Assuming Alzheimer pathology when frontotemporal lobar degeneration is more likely",
+   "Missing evolving corticobasal or supranuclear palsy features"
+  ],
+  "references": [
+   "Bradley and Daroff Neurology in Clinical Practice",
+   "Adams and Victor's Principles of Neurology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "No disease-modifying drug exists; management centres on speech and language therapy targeting motor speech, grammar and functional communication strategies",
+   "Communication aids and augmentative and alternative communication as speech becomes sparse and in anticipation of eventual mutism",
+   "Treat associated neuropsychiatric symptoms such as depression, apathy and behavioural change with appropriate supportive and pharmacological measures",
+   "Monitor for and manage emerging parkinsonian, corticobasal or supranuclear palsy motor features, with falls prevention, physiotherapy and swallowing assessment",
+   "Dysphagia surveillance and nutritional support as bulbar and motor involvement develops",
+   "Multidisciplinary support across neurology, speech and language therapy, occupational therapy and dietetics, with caregiver education and advance care planning"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "progressive_nonfluent_aphasia-pathway",
+   "title": "Progressive non-fluent aphasia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Characterised by effortful, halting speech with agrammatism and inconsistent speech-sound errors (apraxia of speech), while single-word comprehension is relatively preserved",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Emerging parkinsonism, limb apraxia or gaze palsy suggesting corticobasal or supranuclear palsy overlap",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Speech and language evaluation focusing on fluency, grammar and motor speech, MRI of the brain showing left posterior frontal and insular atrophy, FDG-PET to demonstrate frontal hypometabolism"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: No disease-modifying drug exists; management centres on speech and language therapy targeting motor speech, grammar and functional communication strategies"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing agrammatic non-fluent output with the anomia and word-retrieval failure of the logopenic variant"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of progressive non-fluent aphasia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "progressive_nonfluent_aphasia-matrix",
+   "title": "Progressive non-fluent aphasia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Characterised by effortful, halting speech with agrammatism and inconsistent speech-sound errors (apraxia of speech), while",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Progressive non-fluent aphasia is the non-fluent/agrammatic variant of primary progressive aphasia, caused by neurodegeneration centred on the left inferior frontal, insular and premotor cortex that supports speech planning and grammatical processing. The most frequent underlying pathology is frontotemporal lobar degeneration associated with abnormal tau protein aggregation, and there is clinical and pathological overlap with corticobasal degeneration and progressive supranuclear palsy. Damage to these anterior language and motor-speech networks produces effortful, agrammatic output and apraxia of speech, with relative sparing of the temporal regions that store word meaning.",
-    "additionalDifferentials": [
-      "Semantic variant primary progressive aphasia",
-      "Logopenic variant primary progressive aphasia",
-      "Corticobasal syndrome",
-      "Progressive supranuclear palsy",
-      "Vascular aphasia from stroke",
-      "Behavioural variant frontotemporal dementia",
-      "Primary progressive apraxia of speech"
+    [
+     "Key Investigations",
+     "Speech and language evaluation focusing on fluency, grammar and motor speech, MRI of the brain showing left posterior frontal and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Speech and language evaluation focusing on fluency, grammar and motor speech",
-      "MRI of the brain showing left posterior frontal and insular atrophy",
-      "FDG-PET to demonstrate frontal hypometabolism",
-      "Amyloid PET or cerebrospinal fluid biomarkers to exclude underlying Alzheimer pathology",
-      "Neuropsychological testing to document preserved single-word comprehension and object knowledge",
-      "Assessment for parkinsonian and corticobasal features over time"
+    [
+     "Primary Differentials",
+     "Semantic variant primary progressive aphasia, Logopenic variant primary progressive aphasia, Corticobasal syndrome",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Emerging parkinsonism, limb apraxia or gaze palsy suggesting corticobasal or supranuclear palsy overlap",
-      "Rapid progression suggesting an alternative aggressive pathology",
-      "Dysphagia and aspiration risk as bulbar and motor features advance",
-      "Progression to mutism with loss of functional communication"
+    [
+     "Management Strategy",
+     "No disease-modifying drug exists; management centres on speech and language therapy targeting motor speech, grammar and",
+     "Core treatment modality"
     ],
-    "prognosis": "The disorder progresses over years, with speech becoming increasingly sparse and eventual mutism in many patients, and frequent evolution of motor features; prognosis depends on the underlying pathology, and management is supportive with speech and language therapy and communication aids.",
-    "pitfalls": [
-      "Confusing agrammatic non-fluent output with the anomia and word-retrieval failure of the logopenic variant",
-      "Overlooking apraxia of speech as a defining feature",
-      "Assuming Alzheimer pathology when frontotemporal lobar degeneration is more likely",
-      "Missing evolving corticobasal or supranuclear palsy features"
-    ],
-    "references": [
-      "Bradley and Daroff Neurology in Clinical Practice",
-      "Adams and Victor's Principles of Neurology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "No disease-modifying drug exists; management centres on speech and language therapy targeting motor speech, grammar and functional communication strategies",
-      "Communication aids and augmentative and alternative communication as speech becomes sparse and in anticipation of eventual mutism",
-      "Treat associated neuropsychiatric symptoms such as depression, apathy and behavioural change with appropriate supportive and pharmacological measures",
-      "Monitor for and manage emerging parkinsonian, corticobasal or supranuclear palsy motor features, with falls prevention, physiotherapy and swallowing assessment",
-      "Dysphagia surveillance and nutritional support as bulbar and motor involvement develops",
-      "Multidisciplinary support across neurology, speech and language therapy, occupational therapy and dietetics, with caregiver education and advance care planning"
+    [
+     "Clinical Pitfall",
+     "Confusing agrammatic non-fluent output with the anomia and word-retrieval failure of the logopenic variant",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for progressive non-fluent aphasia."
+  }
+ ]
 }

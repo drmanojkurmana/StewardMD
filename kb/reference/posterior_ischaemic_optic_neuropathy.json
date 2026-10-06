@@ -1,79 +1,151 @@
 {
-  "id": "posterior_ischaemic_optic_neuropathy",
-  "name": "posterior ischaemic optic neuropathy",
-  "aliases": [
-    "PION",
-    "retrobulbar ischaemic optic neuropathy"
+ "id": "posterior_ischaemic_optic_neuropathy",
+ "name": "posterior ischaemic optic neuropathy",
+ "aliases": [
+  "PION",
+  "retrobulbar ischaemic optic neuropathy"
+ ],
+ "class": "non_infective",
+ "system": "Ophthalmic",
+ "specialty": "Neuro-ophthalmology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Infarction affects the retrobulbar optic nerve, so the optic disc appears normal at onset and only becomes pale after several weeks.",
+   "Three recognised categories exist: arteritic (giant cell arteritis), non-arteritic, and perioperative.",
+   "The perioperative form classically follows prolonged spinal or cardiac surgery with prone positioning, hypotension, anaemia, large fluid shifts and significant blood loss.",
+   "Acute visual loss with a normal-looking disc should prompt consideration of a retrobulbar process, of which posterior ischaemic optic neuropathy is one cause.",
+   "A relative afferent pupillary defect is present when involvement is unilateral, but perioperative cases are frequently bilateral.",
+   "It is largely a diagnosis of exclusion, requiring neuroimaging to rule out compressive and inflammatory causes.",
+   "In the perioperative setting visual loss may be profound and bilateral, making preventive haemodynamic management the priority.",
+   "Optic atrophy developing four to eight weeks after acute loss with a previously normal disc supports the diagnosis retrospectively."
   ],
-  "class": "non_infective",
-  "system": "Ophthalmic",
-  "specialty": "Neuro-ophthalmology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Infarction affects the retrobulbar optic nerve, so the optic disc appears normal at onset and only becomes pale after several weeks.",
-      "Three recognised categories exist: arteritic (giant cell arteritis), non-arteritic, and perioperative.",
-      "The perioperative form classically follows prolonged spinal or cardiac surgery with prone positioning, hypotension, anaemia, large fluid shifts and significant blood loss.",
-      "Acute visual loss with a normal-looking disc should prompt consideration of a retrobulbar process, of which posterior ischaemic optic neuropathy is one cause.",
-      "A relative afferent pupillary defect is present when involvement is unilateral, but perioperative cases are frequently bilateral.",
-      "It is largely a diagnosis of exclusion, requiring neuroimaging to rule out compressive and inflammatory causes.",
-      "In the perioperative setting visual loss may be profound and bilateral, making preventive haemodynamic management the priority.",
-      "Optic atrophy developing four to eight weeks after acute loss with a previously normal disc supports the diagnosis retrospectively."
+  "pathophysiology": "The intraorbital posterior optic nerve is supplied by a pial vascular plexus arising from small branches of the ophthalmic artery, and this segment represents a watershed zone particularly vulnerable to systemic hypoperfusion. Non-arteritic and perioperative disease result from a critical fall in perfusion pressure, often compounded by anaemia, oedema and raised orbital or intraocular venous pressure, producing infarction of the retrobulbar nerve. The arteritic form is caused by the granulomatous vasculitis of giant cell arteritis occluding the feeding vessels.",
+  "additionalDifferentials": [
+   "Retrobulbar optic neuritis",
+   "Compressive optic neuropathy",
+   "Anterior ischaemic optic neuropathy",
+   "Chiasmal or retrochiasmal lesion",
+   "Cortical visual loss",
+   "Toxic or nutritional optic neuropathy",
+   "Functional (non-organic) visual loss"
+  ],
+  "additionalInvestigations": [
+   "Erythrocyte sedimentation rate and C-reactive protein to exclude giant cell arteritis",
+   "Magnetic resonance imaging of the brain and orbits with contrast to exclude compression and inflammation",
+   "Automated perimetry to characterise the field loss",
+   "Optical coherence tomography, which later demonstrates nerve fibre layer thinning",
+   "Review of perioperative records for hypotension, blood loss, positioning and fluid balance",
+   "Temporal artery biopsy where an arteritic mechanism is suspected"
+  ],
+  "redFlags": [
+   "Systemic or laboratory features of giant cell arteritis",
+   "Bilateral visual loss on emergence from prolonged surgery",
+   "Progressive visual loss suggesting a compressive lesion",
+   "Pain on eye movement pointing to optic neuritis"
+  ],
+  "prognosis": "Visual recovery is generally poor, particularly in the arteritic and perioperative forms where loss is often severe and permanent. In the perioperative setting prevention through meticulous haemodynamic and positioning management is the most important determinant of outcome.",
+  "pitfalls": [
+   "Expecting disc swelling and discounting the diagnosis when the early disc looks normal",
+   "Overlooking giant cell arteritis as a cause in older patients",
+   "Failing to image and thereby missing a compressive lesion",
+   "Underestimating the risk in prolonged prone or cardiac surgery"
+  ],
+  "references": [
+   "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+   "American Academy of Ophthalmology, Basic and Clinical Science Course, Neuro-Ophthalmology",
+   "American Society of Anesthesiologists practice advisory on perioperative visual loss"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Start immediate high-dose systemic corticosteroids when the arteritic form from giant cell arteritis is suspected, without waiting for temporal artery biopsy, to protect the fellow eye",
+   "Confirm giant cell arteritis with inflammatory markers and temporal artery biopsy and continue a prolonged tapering corticosteroid course, adding a steroid-sparing agent such as tocilizumab or methotrexate",
+   "Correct the precipitating hypoperfusion in non-arteritic and perioperative disease by optimising blood pressure, transfusing for anaemia and reducing orbital and intraocular venous pressure",
+   "Emphasise prevention in high-risk surgery through meticulous haemodynamic management, limiting prone-position duration, staged positioning and avoiding excessive blood loss and fluid overload",
+   "Exclude compressive and inflammatory causes with contrast magnetic resonance imaging of the brain and orbits, as it is largely a diagnosis of exclusion",
+   "Address vascular risk factors and refer to neuro-ophthalmology, with low-vision rehabilitation for permanent visual deficits"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "posterior_ischaemic_optic_neuropathy-pathway",
+   "title": "posterior ischaemic optic neuropathy: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Infarction affects the retrobulbar optic nerve, so the optic disc appears normal at onset and only becomes pale after several weeks.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Systemic or laboratory features of giant cell arteritis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Erythrocyte sedimentation rate and C-reactive protein to exclude giant cell arteritis, Magnetic resonance imaging of the brain and orbits with contrast to exclude compression and inflammation, Automated perimetry to"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Start immediate high-dose systemic corticosteroids when the arteritic form from giant cell arteritis is suspected, without waiting for temporal artery biopsy, to protect the fellow eye"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Expecting disc swelling and discounting the diagnosis when the early disc looks normal"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of posterior ischaemic optic neuropathy."
+  }
+ ],
+ "tables": [
+  {
+   "id": "posterior_ischaemic_optic_neuropathy-matrix",
+   "title": "posterior ischaemic optic neuropathy: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Infarction affects the retrobulbar optic nerve, so the optic disc appears normal at onset and only becomes pale after several",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The intraorbital posterior optic nerve is supplied by a pial vascular plexus arising from small branches of the ophthalmic artery, and this segment represents a watershed zone particularly vulnerable to systemic hypoperfusion. Non-arteritic and perioperative disease result from a critical fall in perfusion pressure, often compounded by anaemia, oedema and raised orbital or intraocular venous pressure, producing infarction of the retrobulbar nerve. The arteritic form is caused by the granulomatous vasculitis of giant cell arteritis occluding the feeding vessels.",
-    "additionalDifferentials": [
-      "Retrobulbar optic neuritis",
-      "Compressive optic neuropathy",
-      "Anterior ischaemic optic neuropathy",
-      "Chiasmal or retrochiasmal lesion",
-      "Cortical visual loss",
-      "Toxic or nutritional optic neuropathy",
-      "Functional (non-organic) visual loss"
+    [
+     "Key Investigations",
+     "Erythrocyte sedimentation rate and C-reactive protein to exclude giant cell arteritis, Magnetic resonance imaging of the brain",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Erythrocyte sedimentation rate and C-reactive protein to exclude giant cell arteritis",
-      "Magnetic resonance imaging of the brain and orbits with contrast to exclude compression and inflammation",
-      "Automated perimetry to characterise the field loss",
-      "Optical coherence tomography, which later demonstrates nerve fibre layer thinning",
-      "Review of perioperative records for hypotension, blood loss, positioning and fluid balance",
-      "Temporal artery biopsy where an arteritic mechanism is suspected"
+    [
+     "Primary Differentials",
+     "Retrobulbar optic neuritis, Compressive optic neuropathy, Anterior ischaemic optic neuropathy",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Systemic or laboratory features of giant cell arteritis",
-      "Bilateral visual loss on emergence from prolonged surgery",
-      "Progressive visual loss suggesting a compressive lesion",
-      "Pain on eye movement pointing to optic neuritis"
+    [
+     "Management Strategy",
+     "Start immediate high-dose systemic corticosteroids when the arteritic form from giant cell arteritis is suspected, without",
+     "Core treatment modality"
     ],
-    "prognosis": "Visual recovery is generally poor, particularly in the arteritic and perioperative forms where loss is often severe and permanent. In the perioperative setting prevention through meticulous haemodynamic and positioning management is the most important determinant of outcome.",
-    "pitfalls": [
-      "Expecting disc swelling and discounting the diagnosis when the early disc looks normal",
-      "Overlooking giant cell arteritis as a cause in older patients",
-      "Failing to image and thereby missing a compressive lesion",
-      "Underestimating the risk in prolonged prone or cardiac surgery"
-    ],
-    "references": [
-      "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
-      "American Academy of Ophthalmology, Basic and Clinical Science Course, Neuro-Ophthalmology",
-      "American Society of Anesthesiologists practice advisory on perioperative visual loss"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Start immediate high-dose systemic corticosteroids when the arteritic form from giant cell arteritis is suspected, without waiting for temporal artery biopsy, to protect the fellow eye",
-      "Confirm giant cell arteritis with inflammatory markers and temporal artery biopsy and continue a prolonged tapering corticosteroid course, adding a steroid-sparing agent such as tocilizumab or methotrexate",
-      "Correct the precipitating hypoperfusion in non-arteritic and perioperative disease by optimising blood pressure, transfusing for anaemia and reducing orbital and intraocular venous pressure",
-      "Emphasise prevention in high-risk surgery through meticulous haemodynamic management, limiting prone-position duration, staged positioning and avoiding excessive blood loss and fluid overload",
-      "Exclude compressive and inflammatory causes with contrast magnetic resonance imaging of the brain and orbits, as it is largely a diagnosis of exclusion",
-      "Address vascular risk factors and refer to neuro-ophthalmology, with low-vision rehabilitation for permanent visual deficits"
+    [
+     "Clinical Pitfall",
+     "Expecting disc swelling and discounting the diagnosis when the early disc looks normal",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for posterior ischaemic optic neuropathy."
+  }
+ ]
 }

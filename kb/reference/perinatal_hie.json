@@ -1,81 +1,153 @@
 {
-  "id": "perinatal_hie",
-  "name": "Perinatal Hypoxic-Ischaemic Encephalopathy",
-  "aliases": [
-    "HIE",
-    "hypoxic-ischemic encephalopathy",
-    "birth asphyxia encephalopathy",
-    "neonatal encephalopathy"
+ "id": "perinatal_hie",
+ "name": "Perinatal Hypoxic-Ischaemic Encephalopathy",
+ "aliases": [
+  "HIE",
+  "hypoxic-ischemic encephalopathy",
+  "birth asphyxia encephalopathy",
+  "neonatal encephalopathy"
+ ],
+ "class": "non_infective",
+ "system": "Neurology",
+ "specialty": "Paediatrics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nelson Textbook of Pediatrics",
+  "sourceEdition": "22e",
+  "pages": null,
+  "clinicalPearls": [
+   "Brain injury in the newborn resulting from a perinatal event that reduces cerebral oxygen delivery and blood flow, producing an evolving encephalopathy.",
+   "It is a leading cause of neonatal mortality and long-term neurodevelopmental disability, including cerebral palsy.",
+   "Severity is graded clinically using the Sarnat stages (mild, moderate, severe) based on level of consciousness, tone, reflexes, autonomic function, and seizures.",
+   "Supportive evidence of a hypoxic-ischaemic insult includes fetal distress, low Apgar scores, the need for resuscitation, and a low umbilical cord arterial pH with metabolic acidosis.",
+   "Therapeutic hypothermia, started within the first hours of life for eligible term and near-term infants with moderate to severe encephalopathy, reduces death and disability.",
+   "Seizures are common and may be subtle; EEG or amplitude-integrated EEG assists detection and monitoring.",
+   "The injury frequently involves other organs, causing renal, cardiac, hepatic, and haematological dysfunction that also require support.",
+   "MRI in the first week helps define the pattern and extent of injury and informs prognosis.",
+   "Important mimics, including infection, metabolic disorders, and stroke, should be considered rather than assuming every encephalopathy is purely hypoxic-ischaemic."
   ],
-  "class": "non_infective",
-  "system": "Neurology",
-  "specialty": "Paediatrics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nelson Textbook of Pediatrics",
-    "sourceEdition": "22e",
-    "pages": null,
-    "clinicalPearls": [
-      "Brain injury in the newborn resulting from a perinatal event that reduces cerebral oxygen delivery and blood flow, producing an evolving encephalopathy.",
-      "It is a leading cause of neonatal mortality and long-term neurodevelopmental disability, including cerebral palsy.",
-      "Severity is graded clinically using the Sarnat stages (mild, moderate, severe) based on level of consciousness, tone, reflexes, autonomic function, and seizures.",
-      "Supportive evidence of a hypoxic-ischaemic insult includes fetal distress, low Apgar scores, the need for resuscitation, and a low umbilical cord arterial pH with metabolic acidosis.",
-      "Therapeutic hypothermia, started within the first hours of life for eligible term and near-term infants with moderate to severe encephalopathy, reduces death and disability.",
-      "Seizures are common and may be subtle; EEG or amplitude-integrated EEG assists detection and monitoring.",
-      "The injury frequently involves other organs, causing renal, cardiac, hepatic, and haematological dysfunction that also require support.",
-      "MRI in the first week helps define the pattern and extent of injury and informs prognosis.",
-      "Important mimics, including infection, metabolic disorders, and stroke, should be considered rather than assuming every encephalopathy is purely hypoxic-ischaemic."
+  "pathophysiology": "A hypoxic-ischaemic insult around the time of birth causes an initial phase of energy failure with cellular depolarisation, excitotoxic glutamate release, and calcium influx. After partial recovery of cerebral metabolism, a delayed (secondary) phase of energy failure ensues over hours to days, driven by mitochondrial dysfunction, oxidative stress, inflammation, and apoptotic and necrotic cell death. This latent window is the rationale for early therapeutic hypothermia, which slows the destructive secondary cascade.",
+  "additionalDifferentials": [
+   "Neonatal sepsis or meningitis",
+   "Inborn errors of metabolism",
+   "Neonatal (arterial or venous) stroke",
+   "Intracranial haemorrhage",
+   "Neonatal seizures from other causes (e.g. electrolyte disturbance)",
+   "Congenital brain malformation or genetic encephalopathy"
+  ],
+  "additionalInvestigations": [
+   "Umbilical cord and early postnatal blood gas for acidosis and base deficit",
+   "EEG or amplitude-integrated EEG for seizure detection and background assessment",
+   "MRI of the brain (usually within the first week) for injury pattern and prognosis",
+   "Assessment of multi-organ function (renal, hepatic, cardiac, coagulation, glucose, electrolytes)",
+   "Evaluation to exclude infection and metabolic causes"
+  ],
+  "redFlags": [
+   "Deep coma, absent brainstem reflexes, or flaccid tone",
+   "Refractory or clinically evident status epilepticus",
+   "Multi-organ failure",
+   "Severely abnormal EEG background or extensive injury on MRI",
+   "Persistent need for cardiorespiratory support"
+  ],
+  "prognosis": "Outcome depends on severity: mild encephalopathy usually recovers well, moderate carries a variable risk of impairment, and severe disease is associated with high mortality and a high rate of cerebral palsy, epilepsy, and cognitive and sensory disability; therapeutic hypothermia improves outcomes in eligible infants.",
+  "pitfalls": [
+   "Assuming all neonatal encephalopathy is hypoxic-ischaemic and missing infection, metabolic disease, or stroke",
+   "Missing subtle seizures without EEG monitoring",
+   "Delaying assessment for and initiation of therapeutic hypothermia within the treatment window",
+   "Allowing hyperthermia, which worsens injury",
+   "Overlooking coexisting multi-organ dysfunction"
+  ],
+  "references": [
+   "Nelson Textbook of Pediatrics, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Initiate therapeutic hypothermia (whole-body or selective head cooling) within the early hours of life for eligible term and near-term infants with moderate-to-severe encephalopathy to slow the secondary energy-failure cascade",
+   "Provide neuroprotective supportive intensive care: maintain normal oxygenation, ventilation, perfusion, glucose and electrolytes and avoid hyperthermia",
+   "Detect and treat seizures with antiseizure medication such as phenobarbital, guided by EEG or amplitude-integrated EEG monitoring",
+   "Monitor and support multi-organ dysfunction (renal, hepatic, cardiac and coagulation) with careful fluid balance",
+   "Obtain brain MRI in the first week to define the injury pattern and inform prognosis, while excluding infective and metabolic mimics",
+   "Rewarm slowly after the cooling period and arrange structured neurodevelopmental follow-up for cerebral palsy, epilepsy and cognitive or sensory impairment",
+   "Involve neonatology, paediatric neurology and allied therapists, and provide family support and counselling"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "perinatal_hie-pathway",
+   "title": "Perinatal Hypoxic-Ischaemic Encephalopathy: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Brain injury in the newborn resulting from a perinatal event that reduces cerebral oxygen delivery and blood flow, producing an evolving encephalopathy.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Deep coma, absent brainstem reflexes, or flaccid tone",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Umbilical cord and early postnatal blood gas for acidosis and base deficit, EEG or amplitude-integrated EEG for seizure detection and background assessment, MRI of the brain (usually within the first week) for injury"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Initiate therapeutic hypothermia (whole-body or selective head cooling) within the early hours of life for eligible term and near-term infants with moderate-to-severe encephalopathy to slow the secondary energy-failure"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming all neonatal encephalopathy is hypoxic-ischaemic and missing infection, metabolic disease, or stroke"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of perinatal hypoxic-ischaemic encephalopathy."
+  }
+ ],
+ "tables": [
+  {
+   "id": "perinatal_hie-matrix",
+   "title": "Perinatal Hypoxic-Ischaemic Encephalopathy: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Brain injury in the newborn resulting from a perinatal event that reduces cerebral oxygen delivery and blood flow, producing an",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "A hypoxic-ischaemic insult around the time of birth causes an initial phase of energy failure with cellular depolarisation, excitotoxic glutamate release, and calcium influx. After partial recovery of cerebral metabolism, a delayed (secondary) phase of energy failure ensues over hours to days, driven by mitochondrial dysfunction, oxidative stress, inflammation, and apoptotic and necrotic cell death. This latent window is the rationale for early therapeutic hypothermia, which slows the destructive secondary cascade.",
-    "additionalDifferentials": [
-      "Neonatal sepsis or meningitis",
-      "Inborn errors of metabolism",
-      "Neonatal (arterial or venous) stroke",
-      "Intracranial haemorrhage",
-      "Neonatal seizures from other causes (e.g. electrolyte disturbance)",
-      "Congenital brain malformation or genetic encephalopathy"
+    [
+     "Key Investigations",
+     "Umbilical cord and early postnatal blood gas for acidosis and base deficit, EEG or amplitude-integrated EEG for seizure detection",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Umbilical cord and early postnatal blood gas for acidosis and base deficit",
-      "EEG or amplitude-integrated EEG for seizure detection and background assessment",
-      "MRI of the brain (usually within the first week) for injury pattern and prognosis",
-      "Assessment of multi-organ function (renal, hepatic, cardiac, coagulation, glucose, electrolytes)",
-      "Evaluation to exclude infection and metabolic causes"
+    [
+     "Primary Differentials",
+     "Neonatal sepsis or meningitis, Inborn errors of metabolism, Neonatal (arterial or venous) stroke",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Deep coma, absent brainstem reflexes, or flaccid tone",
-      "Refractory or clinically evident status epilepticus",
-      "Multi-organ failure",
-      "Severely abnormal EEG background or extensive injury on MRI",
-      "Persistent need for cardiorespiratory support"
+    [
+     "Management Strategy",
+     "Initiate therapeutic hypothermia (whole-body or selective head cooling) within the early hours of life for eligible term and",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcome depends on severity: mild encephalopathy usually recovers well, moderate carries a variable risk of impairment, and severe disease is associated with high mortality and a high rate of cerebral palsy, epilepsy, and cognitive and sensory disability; therapeutic hypothermia improves outcomes in eligible infants.",
-    "pitfalls": [
-      "Assuming all neonatal encephalopathy is hypoxic-ischaemic and missing infection, metabolic disease, or stroke",
-      "Missing subtle seizures without EEG monitoring",
-      "Delaying assessment for and initiation of therapeutic hypothermia within the treatment window",
-      "Allowing hyperthermia, which worsens injury",
-      "Overlooking coexisting multi-organ dysfunction"
-    ],
-    "references": [
-      "Nelson Textbook of Pediatrics, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Initiate therapeutic hypothermia (whole-body or selective head cooling) within the early hours of life for eligible term and near-term infants with moderate-to-severe encephalopathy to slow the secondary energy-failure cascade",
-      "Provide neuroprotective supportive intensive care: maintain normal oxygenation, ventilation, perfusion, glucose and electrolytes and avoid hyperthermia",
-      "Detect and treat seizures with antiseizure medication such as phenobarbital, guided by EEG or amplitude-integrated EEG monitoring",
-      "Monitor and support multi-organ dysfunction (renal, hepatic, cardiac and coagulation) with careful fluid balance",
-      "Obtain brain MRI in the first week to define the injury pattern and inform prognosis, while excluding infective and metabolic mimics",
-      "Rewarm slowly after the cooling period and arrange structured neurodevelopmental follow-up for cerebral palsy, epilepsy and cognitive or sensory impairment",
-      "Involve neonatology, paediatric neurology and allied therapists, and provide family support and counselling"
+    [
+     "Clinical Pitfall",
+     "Assuming all neonatal encephalopathy is hypoxic-ischaemic and missing infection, metabolic disease, or stroke",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for perinatal hypoxic-ischaemic encephalopathy."
+  }
+ ]
 }

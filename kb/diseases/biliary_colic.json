@@ -150,5 +150,77 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "he288b718"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "biliary_colic-dx-algo",
+      "title": "Biliary colic / cholelithiasis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Biliary colic is the most specific symptom of gallstone disease, yet 'colic' is a misnomer: the pain is steady rather than waxing-and-waning, reflecting non-relievable distention of the gallbladder/duct against a stone obstructing the",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Pain persisting beyond ~5 hours - suspect acute cholecystitis (p.2731)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Right-upper-quadrant ultrasound is the procedure of choice: rapid, not limited by jaundice or pregnancy, and >95% accurate for gallstones, identifying calculi as small as ~1.5 mm by their acoustic shadowing and"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison frames the spectrum by clinical course rather than a formal grading scale: uncomplicated biliary colic = transient cystic-duct obstruction giving self-limited pain (30 min-5 h) WITHOUT fever, inflammation, or"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Treating the term 'colic' literally and expecting intermittent crampy pain - biliary colic is steady, and waiting for it to fluctuate can delay recognition (p.2731)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for biliary colic / cholelithiasis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "biliary_colic-matrix",
+      "title": "Biliary colic / cholelithiasis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Biliary colic is the most specific symptom of gallstone disease, yet 'colic' is a misnomer: the pain is steady rather than",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Right-upper-quadrant ultrasound is the procedure of choice: rapid, not limited by jaundice or pregnancy, and >95% accurate for",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Acute cholecystitis (pain >5 h, fever, Murphy's sign) - represents biliary pain that fails to resolve as the cystic duct stays",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Pain persisting beyond ~5 hours - suspect acute cholecystitis (p.2731)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating the term 'colic' literally and expecting intermittent crampy pain - biliary colic is steady, and waiting for it to",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for biliary colic / cholelithiasis."
+    }
+  ]
 }

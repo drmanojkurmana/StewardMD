@@ -1,78 +1,150 @@
 {
-  "id": "williams_campbell_syndrome",
-  "name": "Williams-Campbell syndrome",
-  "aliases": [
-    "bronchial cartilage deficiency",
-    "congenital cystic bronchiectasis",
-    "Williams-Campbell bronchiectasis"
+ "id": "williams_campbell_syndrome",
+ "name": "Williams-Campbell syndrome",
+ "aliases": [
+  "bronchial cartilage deficiency",
+  "congenital cystic bronchiectasis",
+  "Williams-Campbell bronchiectasis"
+ ],
+ "class": "non_infective",
+ "system": "Respiratory",
+ "specialty": "Respiratory Medicine / Occupational Lung Disease",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Respiratory Medicine and Paediatric Pulmonology reference texts",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A rare disorder of deficient or absent cartilage in the fourth to sixth (subsegmental) generation bronchi, with more proximal and distal airways spared",
+   "The cartilage-deficient segments balloon on inspiration and collapse on expiration, producing distal cystic bronchiectasis",
+   "Usually presents in childhood with recurrent respiratory infections, chronic productive cough, wheeze, and breathlessness",
+   "Dynamic imaging or fluoroscopy shows ballooning of the affected bronchi on inspiration and collapse on expiration, a helpful diagnostic sign",
+   "CT reveals cystic bronchiectasis in the mid airways with a characteristic distribution corresponding to the cartilage-deficient generations",
+   "The pattern of bronchiectasis distal to normal proximal airways helps distinguish it from acquired and other congenital causes",
+   "Management is supportive with airway clearance, treatment of infections, and management of bronchiectasis, as there is no specific therapy"
   ],
-  "class": "non_infective",
-  "system": "Respiratory",
-  "specialty": "Respiratory Medicine / Occupational Lung Disease",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Respiratory Medicine and Paediatric Pulmonology reference texts",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A rare disorder of deficient or absent cartilage in the fourth to sixth (subsegmental) generation bronchi, with more proximal and distal airways spared",
-      "The cartilage-deficient segments balloon on inspiration and collapse on expiration, producing distal cystic bronchiectasis",
-      "Usually presents in childhood with recurrent respiratory infections, chronic productive cough, wheeze, and breathlessness",
-      "Dynamic imaging or fluoroscopy shows ballooning of the affected bronchi on inspiration and collapse on expiration, a helpful diagnostic sign",
-      "CT reveals cystic bronchiectasis in the mid airways with a characteristic distribution corresponding to the cartilage-deficient generations",
-      "The pattern of bronchiectasis distal to normal proximal airways helps distinguish it from acquired and other congenital causes",
-      "Management is supportive with airway clearance, treatment of infections, and management of bronchiectasis, as there is no specific therapy"
+  "pathophysiology": "Williams-Campbell syndrome is characterised by a congenital deficiency or absence of the cartilaginous support in the medium-sized subsegmental bronchi, typically the fourth to sixth generations. Lacking rigid cartilage, these airway segments lose their structural integrity and behave abnormally with respiration, distending on inspiration and collapsing on expiration. This dynamic instability impairs airflow and cough-driven clearance, leading to secretion retention, recurrent infection, and the development of characteristic distal cystic bronchiectasis. Because the proximal airways and the more peripheral airways retain normal or adequate structure, the disease has a distinctive intermediate distribution. The condition is generally considered congenital, and its precise molecular cause is not established.",
+  "additionalDifferentials": [
+   "Cystic fibrosis",
+   "Primary ciliary dyskinesia",
+   "Post-infectious bronchiectasis",
+   "Mounier-Kuhn syndrome (tracheobronchomegaly)",
+   "Immunodeficiency-related bronchiectasis",
+   "Allergic bronchopulmonary aspergillosis"
+  ],
+  "additionalInvestigations": [
+   "High-resolution CT demonstrating cystic bronchiectasis in the mid-generation bronchi",
+   "Dynamic expiratory imaging or fluoroscopy showing bronchial ballooning and collapse",
+   "Sweat testing and CFTR analysis to exclude cystic fibrosis",
+   "Assessment of ciliary function and immunoglobulins to exclude other causes",
+   "Sputum microbiology in recurrent infection",
+   "Pulmonary function tests to assess airflow obstruction"
+  ],
+  "redFlags": [
+   "Recurrent severe pneumonia or respiratory failure from extensive bronchiectasis",
+   "Progressive decline in lung function in a young patient",
+   "Haemoptysis complicating cystic bronchiectasis",
+   "Development of cor pulmonale in advanced disease"
+  ],
+  "prognosis": "Prognosis depends on the extent of bronchiectasis and frequency of infection; with diligent airway clearance and infection control some patients do well, while extensive disease can lead to progressive respiratory impairment and, in severe cases, respiratory failure.",
+  "pitfalls": [
+   "Attributing the bronchiectasis to a generic post-infective cause and missing the congenital pattern",
+   "Not recognising the characteristic mid-airway distribution distal to normal proximal bronchi",
+   "Failing to exclude cystic fibrosis, ciliary dyskinesia, and immunodeficiency",
+   "Overlooking the diagnostic value of dynamic imaging showing bronchial ballooning and collapse"
+  ],
+  "references": [
+   "Murray & Nadel's Textbook of Respiratory Medicine",
+   "Kendig's Disorders of the Respiratory Tract in Children"
+  ],
+  "crossLinks": [],
+  "management": [
+   "No therapy corrects the congenital bronchial cartilage deficiency, so care mirrors bronchiectasis management centred on airway clearance and infection control",
+   "Daily airway clearance with chest physiotherapy, postural drainage and mucoactive agents to overcome impaired cough-driven secretion clearance",
+   "Prompt antibiotics for infective exacerbations guided by sputum microbiology, with long-term macrolide considered for frequent exacerbations",
+   "Immunisation against influenza and pneumococcus and prompt treatment of intercurrent respiratory infection",
+   "Regular surveillance of lung function and cross-sectional imaging to detect progression of the distal cystic bronchiectasis",
+   "Pulmonary rehabilitation and, for advancing disease, supplemental oxygen or non-invasive ventilation, with lung transplantation considered in end-stage respiratory failure",
+   "Multidisciplinary respiratory follow-up, with cystic fibrosis, ciliary dysfunction and immunodeficiency excluded as mimics"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "williams_campbell_syndrome-pathway",
+   "title": "Williams-Campbell syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A rare disorder of deficient or absent cartilage in the fourth to sixth (subsegmental) generation bronchi, with more proximal and distal airways spared",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Recurrent severe pneumonia or respiratory failure from extensive bronchiectasis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: High-resolution CT demonstrating cystic bronchiectasis in the mid-generation bronchi, Dynamic expiratory imaging or fluoroscopy showing bronchial ballooning and collapse, Sweat testing and CFTR analysis to exclude cystic"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: No therapy corrects the congenital bronchial cartilage deficiency, so care mirrors bronchiectasis management centred on airway clearance and infection control"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing the bronchiectasis to a generic post-infective cause and missing the congenital pattern"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of williams-campbell syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "williams_campbell_syndrome-matrix",
+   "title": "Williams-Campbell syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A rare disorder of deficient or absent cartilage in the fourth to sixth (subsegmental) generation bronchi, with more proximal and",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Williams-Campbell syndrome is characterised by a congenital deficiency or absence of the cartilaginous support in the medium-sized subsegmental bronchi, typically the fourth to sixth generations. Lacking rigid cartilage, these airway segments lose their structural integrity and behave abnormally with respiration, distending on inspiration and collapsing on expiration. This dynamic instability impairs airflow and cough-driven clearance, leading to secretion retention, recurrent infection, and the development of characteristic distal cystic bronchiectasis. Because the proximal airways and the more peripheral airways retain normal or adequate structure, the disease has a distinctive intermediate distribution. The condition is generally considered congenital, and its precise molecular cause is not established.",
-    "additionalDifferentials": [
-      "Cystic fibrosis",
-      "Primary ciliary dyskinesia",
-      "Post-infectious bronchiectasis",
-      "Mounier-Kuhn syndrome (tracheobronchomegaly)",
-      "Immunodeficiency-related bronchiectasis",
-      "Allergic bronchopulmonary aspergillosis"
+    [
+     "Key Investigations",
+     "High-resolution CT demonstrating cystic bronchiectasis in the mid-generation bronchi, Dynamic expiratory imaging or fluoroscopy",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "High-resolution CT demonstrating cystic bronchiectasis in the mid-generation bronchi",
-      "Dynamic expiratory imaging or fluoroscopy showing bronchial ballooning and collapse",
-      "Sweat testing and CFTR analysis to exclude cystic fibrosis",
-      "Assessment of ciliary function and immunoglobulins to exclude other causes",
-      "Sputum microbiology in recurrent infection",
-      "Pulmonary function tests to assess airflow obstruction"
+    [
+     "Primary Differentials",
+     "Cystic fibrosis, Primary ciliary dyskinesia, Post-infectious bronchiectasis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Recurrent severe pneumonia or respiratory failure from extensive bronchiectasis",
-      "Progressive decline in lung function in a young patient",
-      "Haemoptysis complicating cystic bronchiectasis",
-      "Development of cor pulmonale in advanced disease"
+    [
+     "Management Strategy",
+     "No therapy corrects the congenital bronchial cartilage deficiency, so care mirrors bronchiectasis management centred on airway",
+     "Core treatment modality"
     ],
-    "prognosis": "Prognosis depends on the extent of bronchiectasis and frequency of infection; with diligent airway clearance and infection control some patients do well, while extensive disease can lead to progressive respiratory impairment and, in severe cases, respiratory failure.",
-    "pitfalls": [
-      "Attributing the bronchiectasis to a generic post-infective cause and missing the congenital pattern",
-      "Not recognising the characteristic mid-airway distribution distal to normal proximal bronchi",
-      "Failing to exclude cystic fibrosis, ciliary dyskinesia, and immunodeficiency",
-      "Overlooking the diagnostic value of dynamic imaging showing bronchial ballooning and collapse"
-    ],
-    "references": [
-      "Murray & Nadel's Textbook of Respiratory Medicine",
-      "Kendig's Disorders of the Respiratory Tract in Children"
-    ],
-    "crossLinks": [],
-    "management": [
-      "No therapy corrects the congenital bronchial cartilage deficiency, so care mirrors bronchiectasis management centred on airway clearance and infection control",
-      "Daily airway clearance with chest physiotherapy, postural drainage and mucoactive agents to overcome impaired cough-driven secretion clearance",
-      "Prompt antibiotics for infective exacerbations guided by sputum microbiology, with long-term macrolide considered for frequent exacerbations",
-      "Immunisation against influenza and pneumococcus and prompt treatment of intercurrent respiratory infection",
-      "Regular surveillance of lung function and cross-sectional imaging to detect progression of the distal cystic bronchiectasis",
-      "Pulmonary rehabilitation and, for advancing disease, supplemental oxygen or non-invasive ventilation, with lung transplantation considered in end-stage respiratory failure",
-      "Multidisciplinary respiratory follow-up, with cystic fibrosis, ciliary dysfunction and immunodeficiency excluded as mimics"
+    [
+     "Clinical Pitfall",
+     "Attributing the bronchiectasis to a generic post-infective cause and missing the congenital pattern",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for williams-campbell syndrome."
+  }
+ ]
 }

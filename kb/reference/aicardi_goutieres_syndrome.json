@@ -1,85 +1,157 @@
 {
-  "id": "aicardi_goutieres_syndrome",
-  "name": "Aicardi-Goutieres syndrome",
-  "aliases": [
-    "AGS",
-    "type I interferonopathy",
-    "TREX1",
-    "RNASEH2A",
-    "RNASEH2B",
-    "RNASEH2C",
-    "SAMHD1",
-    "ADAR1",
-    "IFIH1"
+ "id": "aicardi_goutieres_syndrome",
+ "name": "Aicardi-Goutieres syndrome",
+ "aliases": [
+  "AGS",
+  "type I interferonopathy",
+  "TREX1",
+  "RNASEH2A",
+  "RNASEH2B",
+  "RNASEH2C",
+  "SAMHD1",
+  "ADAR1",
+  "IFIH1"
+ ],
+ "class": "non_infective",
+ "system": "Immunology / Genetics",
+ "specialty": "Clinical Immunology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Swaiman's Pediatric Neurology / Stiehm's Immune Deficiencies",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The prototypical monogenic type I interferonopathy, presenting as an inflammatory encephalopathy that mimics congenital (TORCH) infection but without an identifiable pathogen",
+   "Caused by mutations in genes handling nucleic acids, including TREX1, the RNASEH2 subunits, SAMHD1, ADAR1 and IFIH1, with both recessive and dominant forms",
+   "Typical features are early developmental regression, acquired microcephaly, dystonia, irritability and unexplained fevers",
+   "Neuroimaging classically shows intracranial (basal ganglia) calcification, white matter abnormalities and cerebral atrophy",
+   "Cerebrospinal fluid characteristically shows a chronic lymphocytosis and raised interferon-alpha, with a peripheral interferon signature on gene-expression testing",
+   "Chilblain-like acral skin lesions are a recognised extraneurological manifestation",
+   "Management is supportive with emerging use of interferon-pathway-directed therapy such as JAK inhibition to dampen the interferon response"
   ],
-  "class": "non_infective",
-  "system": "Immunology / Genetics",
-  "specialty": "Clinical Immunology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Swaiman's Pediatric Neurology / Stiehm's Immune Deficiencies",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The prototypical monogenic type I interferonopathy, presenting as an inflammatory encephalopathy that mimics congenital (TORCH) infection but without an identifiable pathogen",
-      "Caused by mutations in genes handling nucleic acids, including TREX1, the RNASEH2 subunits, SAMHD1, ADAR1 and IFIH1, with both recessive and dominant forms",
-      "Typical features are early developmental regression, acquired microcephaly, dystonia, irritability and unexplained fevers",
-      "Neuroimaging classically shows intracranial (basal ganglia) calcification, white matter abnormalities and cerebral atrophy",
-      "Cerebrospinal fluid characteristically shows a chronic lymphocytosis and raised interferon-alpha, with a peripheral interferon signature on gene-expression testing",
-      "Chilblain-like acral skin lesions are a recognised extraneurological manifestation",
-      "Management is supportive with emerging use of interferon-pathway-directed therapy such as JAK inhibition to dampen the interferon response"
+  "pathophysiology": "Aicardi-Goutieres syndrome is a genetically determined type I interferonopathy in which defects in intracellular nucleic-acid metabolism cause self-derived DNA and RNA to accumulate or to be misrecognised as foreign. The causative genes encode nucleases and nucleic-acid-editing or sensing proteins (for example the exonuclease TREX1, the ribonuclease H2 complex, the deoxynucleotide-regulating enzyme SAMHD1, the RNA-editing enzyme ADAR1, and the cytosolic RNA sensor encoded by IFIH1). When these fail, endogenous nucleic acids trigger innate immune sensors and drive chronic overproduction of type I interferon. Sustained interferon signalling produces the inflammatory encephalopathy, intracranial calcification, white matter injury and systemic features that characterise the disorder.",
+  "additionalDifferentials": [
+   "Congenital infections (cytomegalovirus, toxoplasmosis, rubella, herpes, Zika)",
+   "Other type I interferonopathies (e.g. STING-associated vasculopathy, proteasome-associated syndromes)",
+   "Mitochondrial and other inborn metabolic encephalopathies",
+   "Leukodystrophies",
+   "Congenital HIV encephalopathy",
+   "Cerebral folate deficiency and other causes of intracranial calcification"
+  ],
+  "additionalInvestigations": [
+   "Peripheral blood interferon signature (interferon-stimulated gene expression)",
+   "Cerebrospinal fluid interferon-alpha and lymphocyte count",
+   "Neuroimaging (CT for calcification, MRI for white matter and atrophy)",
+   "Comprehensive genetic testing of the AGS-associated genes",
+   "Exclusion of congenital infection with appropriate serology and molecular testing",
+   "Skin examination and biopsy of chilblain lesions where present"
+  ],
+  "redFlags": [
+   "Rapid neurological regression and loss of acquired milestones",
+   "Progressive acquired microcephaly and worsening dystonia",
+   "Features initially mistaken for congenital infection but with negative pathogen workup",
+   "Systemic inflammation, cytopenias or evidence of overlapping autoimmunity"
+  ],
+  "prognosis": "The classic early-onset form often causes severe, permanent neurological disability with significant early mortality, though a wide clinical spectrum exists including milder later-onset presentations; interferon-directed therapies offer the prospect of attenuating disease activity, particularly the systemic and skin manifestations.",
+  "pitfalls": [
+   "Persistently pursuing a congenital infection when repeated pathogen testing is negative",
+   "Overlooking the interferon signature and cerebrospinal fluid findings that point to an interferonopathy",
+   "Attributing basal ganglia calcification solely to prior infection or metabolic causes",
+   "Failing to consider genetic counselling given both recessive and dominant inheritance patterns"
+  ],
+  "references": [
+   "Swaiman's Pediatric Neurology",
+   "Stiehm's Immune Deficiencies"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Consider Janus kinase inhibition such as baricitinib to dampen type I interferon signalling and attenuate disease activity",
+   "Treat seizures, dystonia and irritability symptomatically with antiseizure and antispasticity medication",
+   "Provide nutritional support, often by gastrostomy feeding, and manage swallowing and respiratory difficulties",
+   "Manage chilblain-like acral skin lesions with warmth, skin protection and vasodilatory measures",
+   "Deliver developmental therapies, tone management and specialist neurodisability care",
+   "Monitor for complications including glaucoma, hypothyroidism and intracranial vascular disease",
+   "Offer genetic counselling and testing of the causative genes TREX1, RNASEH2, SAMHD1, ADAR1 and IFIH1 for recurrence risk and prenatal options",
+   "Coordinate multidisciplinary care through clinical immunology, neurology and paediatrics"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "aicardi_goutieres_syndrome-pathway",
+   "title": "Aicardi-Goutieres syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The prototypical monogenic type I interferonopathy, presenting as an inflammatory encephalopathy that mimics congenital (TORCH) infection but without an identifiable pathogen",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapid neurological regression and loss of acquired milestones",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Peripheral blood interferon signature (interferon-stimulated gene expression), Cerebrospinal fluid interferon-alpha and lymphocyte count, Neuroimaging (CT for calcification, MRI for white matter and atrophy)"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Consider Janus kinase inhibition such as baricitinib to dampen type I interferon signalling and attenuate disease activity"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Persistently pursuing a congenital infection when repeated pathogen testing is negative"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of aicardi-goutieres syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "aicardi_goutieres_syndrome-matrix",
+   "title": "Aicardi-Goutieres syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The prototypical monogenic type I interferonopathy, presenting as an inflammatory encephalopathy that mimics congenital (TORCH)",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Aicardi-Goutieres syndrome is a genetically determined type I interferonopathy in which defects in intracellular nucleic-acid metabolism cause self-derived DNA and RNA to accumulate or to be misrecognised as foreign. The causative genes encode nucleases and nucleic-acid-editing or sensing proteins (for example the exonuclease TREX1, the ribonuclease H2 complex, the deoxynucleotide-regulating enzyme SAMHD1, the RNA-editing enzyme ADAR1, and the cytosolic RNA sensor encoded by IFIH1). When these fail, endogenous nucleic acids trigger innate immune sensors and drive chronic overproduction of type I interferon. Sustained interferon signalling produces the inflammatory encephalopathy, intracranial calcification, white matter injury and systemic features that characterise the disorder.",
-    "additionalDifferentials": [
-      "Congenital infections (cytomegalovirus, toxoplasmosis, rubella, herpes, Zika)",
-      "Other type I interferonopathies (e.g. STING-associated vasculopathy, proteasome-associated syndromes)",
-      "Mitochondrial and other inborn metabolic encephalopathies",
-      "Leukodystrophies",
-      "Congenital HIV encephalopathy",
-      "Cerebral folate deficiency and other causes of intracranial calcification"
+    [
+     "Key Investigations",
+     "Peripheral blood interferon signature (interferon-stimulated gene expression), Cerebrospinal fluid interferon-alpha and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Peripheral blood interferon signature (interferon-stimulated gene expression)",
-      "Cerebrospinal fluid interferon-alpha and lymphocyte count",
-      "Neuroimaging (CT for calcification, MRI for white matter and atrophy)",
-      "Comprehensive genetic testing of the AGS-associated genes",
-      "Exclusion of congenital infection with appropriate serology and molecular testing",
-      "Skin examination and biopsy of chilblain lesions where present"
+    [
+     "Primary Differentials",
+     "Congenital infections (cytomegalovirus, toxoplasmosis, rubella, herpes, Zika), Other type I interferonopathies (e.g.",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapid neurological regression and loss of acquired milestones",
-      "Progressive acquired microcephaly and worsening dystonia",
-      "Features initially mistaken for congenital infection but with negative pathogen workup",
-      "Systemic inflammation, cytopenias or evidence of overlapping autoimmunity"
+    [
+     "Management Strategy",
+     "Consider Janus kinase inhibition such as baricitinib to dampen type I interferon signalling and attenuate disease activity",
+     "Core treatment modality"
     ],
-    "prognosis": "The classic early-onset form often causes severe, permanent neurological disability with significant early mortality, though a wide clinical spectrum exists including milder later-onset presentations; interferon-directed therapies offer the prospect of attenuating disease activity, particularly the systemic and skin manifestations.",
-    "pitfalls": [
-      "Persistently pursuing a congenital infection when repeated pathogen testing is negative",
-      "Overlooking the interferon signature and cerebrospinal fluid findings that point to an interferonopathy",
-      "Attributing basal ganglia calcification solely to prior infection or metabolic causes",
-      "Failing to consider genetic counselling given both recessive and dominant inheritance patterns"
-    ],
-    "references": [
-      "Swaiman's Pediatric Neurology",
-      "Stiehm's Immune Deficiencies"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Consider Janus kinase inhibition such as baricitinib to dampen type I interferon signalling and attenuate disease activity",
-      "Treat seizures, dystonia and irritability symptomatically with antiseizure and antispasticity medication",
-      "Provide nutritional support, often by gastrostomy feeding, and manage swallowing and respiratory difficulties",
-      "Manage chilblain-like acral skin lesions with warmth, skin protection and vasodilatory measures",
-      "Deliver developmental therapies, tone management and specialist neurodisability care",
-      "Monitor for complications including glaucoma, hypothyroidism and intracranial vascular disease",
-      "Offer genetic counselling and testing of the causative genes TREX1, RNASEH2, SAMHD1, ADAR1 and IFIH1 for recurrence risk and prenatal options",
-      "Coordinate multidisciplinary care through clinical immunology, neurology and paediatrics"
+    [
+     "Clinical Pitfall",
+     "Persistently pursuing a congenital infection when repeated pathogen testing is negative",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for aicardi-goutieres syndrome."
+  }
+ ]
 }

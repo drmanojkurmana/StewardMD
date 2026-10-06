@@ -1,78 +1,150 @@
 {
-  "id": "thyroid_nodule",
-  "name": "Thyroid nodule",
-  "aliases": [
-    "thyroid lump",
-    "solitary thyroid nodule",
-    "thyroid mass",
-    "nodular goitre"
+ "id": "thyroid_nodule",
+ "name": "Thyroid nodule",
+ "aliases": [
+  "thyroid lump",
+  "solitary thyroid nodule",
+  "thyroid mass",
+  "nodular goitre"
+ ],
+ "class": "non_infective",
+ "system": "Endocrine / Metabolic",
+ "specialty": "Endocrinology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine",
+  "sourceEdition": "22e",
+  "pages": null,
+  "clinicalPearls": [
+   "Thyroid nodules are common and usually benign, but the central task is to identify the minority that are malignant",
+   "Initial evaluation begins with a serum TSH; a suppressed value points towards an autonomously functioning (usually benign) nodule and warrants a radionuclide scan",
+   "Ultrasound characterises nodules and stratifies malignancy risk, with features such as marked hypoechogenicity, microcalcifications, irregular margins, and a taller-than-wide shape raising concern",
+   "Fine-needle aspiration is the key diagnostic test, with results reported using standardised cytology categories that guide management",
+   "Hot (functioning) nodules on scanning rarely harbour malignancy, so aspiration is generally directed at non-functioning nodules",
+   "History of childhood neck irradiation, family history of thyroid cancer, rapid growth, hoarseness, or fixed hard nodules increase suspicion of cancer",
+   "Molecular testing of indeterminate cytology samples can refine the risk of malignancy and help avoid unnecessary surgery"
   ],
-  "class": "non_infective",
-  "system": "Endocrine / Metabolic",
-  "specialty": "Endocrinology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine",
-    "sourceEdition": "22e",
-    "pages": null,
-    "clinicalPearls": [
-      "Thyroid nodules are common and usually benign, but the central task is to identify the minority that are malignant",
-      "Initial evaluation begins with a serum TSH; a suppressed value points towards an autonomously functioning (usually benign) nodule and warrants a radionuclide scan",
-      "Ultrasound characterises nodules and stratifies malignancy risk, with features such as marked hypoechogenicity, microcalcifications, irregular margins, and a taller-than-wide shape raising concern",
-      "Fine-needle aspiration is the key diagnostic test, with results reported using standardised cytology categories that guide management",
-      "Hot (functioning) nodules on scanning rarely harbour malignancy, so aspiration is generally directed at non-functioning nodules",
-      "History of childhood neck irradiation, family history of thyroid cancer, rapid growth, hoarseness, or fixed hard nodules increase suspicion of cancer",
-      "Molecular testing of indeterminate cytology samples can refine the risk of malignancy and help avoid unnecessary surgery"
+  "pathophysiology": "Thyroid nodules arise from focal proliferation of follicular cells and may be colloid nodules, adenomas, cysts, areas of thyroiditis, or carcinomas. Autonomously functioning nodules develop constitutive activation of thyroid hormone production, often through activating mutations of the TSH-receptor or G-protein signalling pathway, suppressing TSH and appearing 'hot' on scanning. Malignant nodules result from oncogenic alterations (for example in the MAPK pathway) driving unregulated growth, and their behaviour ranges from indolent differentiated cancers to aggressive anaplastic disease.",
+  "additionalDifferentials": [
+   "Benign colloid or hyperplastic nodule",
+   "Follicular adenoma",
+   "Differentiated thyroid carcinoma (papillary or follicular)",
+   "Medullary or anaplastic thyroid carcinoma",
+   "Thyroid cyst or focal thyroiditis",
+   "Parathyroid or other neck mass mimicking a thyroid nodule"
+  ],
+  "additionalInvestigations": [
+   "Serum TSH as the first-line test",
+   "Thyroid ultrasound to characterise the nodule and assess cervical lymph nodes",
+   "Radionuclide thyroid scan when TSH is suppressed",
+   "Ultrasound-guided fine-needle aspiration cytology",
+   "Molecular marker testing for indeterminate cytology",
+   "Serum calcitonin when medullary carcinoma is suspected"
+  ],
+  "redFlags": [
+   "Rapidly enlarging, hard, or fixed nodule",
+   "New hoarseness or vocal cord palsy suggesting recurrent laryngeal nerve involvement",
+   "Cervical lymphadenopathy",
+   "History of head and neck irradiation or family history of thyroid cancer or MEN syndromes",
+   "Compressive symptoms such as dysphagia or stridor"
+  ],
+  "prognosis": "Most nodules are benign and can be followed conservatively, and even most malignant nodules are differentiated cancers with an excellent prognosis after treatment, though anaplastic and some medullary cancers carry a poor outlook.",
+  "pitfalls": [
+   "Proceeding to biopsy before checking TSH and missing an autonomous nodule that does not need aspiration",
+   "Relying on nodule size alone rather than sonographic risk features to decide on aspiration",
+   "Falsely reassuring the patient after a non-diagnostic aspirate without repeating sampling",
+   "Overlooking calcitonin measurement when clinical features suggest medullary carcinoma"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Stratify malignancy risk with serum thyroid-stimulating hormone, ultrasound characterisation and ultrasound-guided fine-needle aspiration cytology to direct management",
+   "Manage cytologically benign nodules with clinical and ultrasound surveillance rather than intervention",
+   "Refer nodules with malignant or suspicious cytology for surgery (diagnostic lobectomy or thyroidectomy), using molecular testing to guide indeterminate results",
+   "Treat autonomously functioning (hot) nodules causing hyperthyroidism with radioiodine or surgery",
+   "Offer surgery for large or compressive nodules causing local symptoms",
+   "Refer suspected malignancy to a thyroid multidisciplinary team, and measure calcitonin where medullary carcinoma is suspected"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "thyroid_nodule-pathway",
+   "title": "Thyroid nodule: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Thyroid nodules are common and usually benign, but the central task is to identify the minority that are malignant",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapidly enlarging, hard, or fixed nodule",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serum TSH as the first-line test, Thyroid ultrasound to characterise the nodule and assess cervical lymph nodes, Radionuclide thyroid scan when TSH is suppressed"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Stratify malignancy risk with serum thyroid-stimulating hormone, ultrasound characterisation and ultrasound-guided fine-needle aspiration cytology to direct management"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Proceeding to biopsy before checking TSH and missing an autonomous nodule that does not need aspiration"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of thyroid nodule."
+  }
+ ],
+ "tables": [
+  {
+   "id": "thyroid_nodule-matrix",
+   "title": "Thyroid nodule: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Thyroid nodules are common and usually benign, but the central task is to identify the minority that are malignant",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Thyroid nodules arise from focal proliferation of follicular cells and may be colloid nodules, adenomas, cysts, areas of thyroiditis, or carcinomas. Autonomously functioning nodules develop constitutive activation of thyroid hormone production, often through activating mutations of the TSH-receptor or G-protein signalling pathway, suppressing TSH and appearing 'hot' on scanning. Malignant nodules result from oncogenic alterations (for example in the MAPK pathway) driving unregulated growth, and their behaviour ranges from indolent differentiated cancers to aggressive anaplastic disease.",
-    "additionalDifferentials": [
-      "Benign colloid or hyperplastic nodule",
-      "Follicular adenoma",
-      "Differentiated thyroid carcinoma (papillary or follicular)",
-      "Medullary or anaplastic thyroid carcinoma",
-      "Thyroid cyst or focal thyroiditis",
-      "Parathyroid or other neck mass mimicking a thyroid nodule"
+    [
+     "Key Investigations",
+     "Serum TSH as the first-line test, Thyroid ultrasound to characterise the nodule and assess cervical lymph nodes, Radionuclide",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serum TSH as the first-line test",
-      "Thyroid ultrasound to characterise the nodule and assess cervical lymph nodes",
-      "Radionuclide thyroid scan when TSH is suppressed",
-      "Ultrasound-guided fine-needle aspiration cytology",
-      "Molecular marker testing for indeterminate cytology",
-      "Serum calcitonin when medullary carcinoma is suspected"
+    [
+     "Primary Differentials",
+     "Benign colloid or hyperplastic nodule, Follicular adenoma, Differentiated thyroid carcinoma (papillary or follicular)",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapidly enlarging, hard, or fixed nodule",
-      "New hoarseness or vocal cord palsy suggesting recurrent laryngeal nerve involvement",
-      "Cervical lymphadenopathy",
-      "History of head and neck irradiation or family history of thyroid cancer or MEN syndromes",
-      "Compressive symptoms such as dysphagia or stridor"
+    [
+     "Management Strategy",
+     "Stratify malignancy risk with serum thyroid-stimulating hormone, ultrasound characterisation and ultrasound-guided fine-needle",
+     "Core treatment modality"
     ],
-    "prognosis": "Most nodules are benign and can be followed conservatively, and even most malignant nodules are differentiated cancers with an excellent prognosis after treatment, though anaplastic and some medullary cancers carry a poor outlook.",
-    "pitfalls": [
-      "Proceeding to biopsy before checking TSH and missing an autonomous nodule that does not need aspiration",
-      "Relying on nodule size alone rather than sonographic risk features to decide on aspiration",
-      "Falsely reassuring the patient after a non-diagnostic aspirate without repeating sampling",
-      "Overlooking calcitonin measurement when clinical features suggest medullary carcinoma"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Stratify malignancy risk with serum thyroid-stimulating hormone, ultrasound characterisation and ultrasound-guided fine-needle aspiration cytology to direct management",
-      "Manage cytologically benign nodules with clinical and ultrasound surveillance rather than intervention",
-      "Refer nodules with malignant or suspicious cytology for surgery (diagnostic lobectomy or thyroidectomy), using molecular testing to guide indeterminate results",
-      "Treat autonomously functioning (hot) nodules causing hyperthyroidism with radioiodine or surgery",
-      "Offer surgery for large or compressive nodules causing local symptoms",
-      "Refer suspected malignancy to a thyroid multidisciplinary team, and measure calcitonin where medullary carcinoma is suspected"
+    [
+     "Clinical Pitfall",
+     "Proceeding to biopsy before checking TSH and missing an autonomous nodule that does not need aspiration",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for thyroid nodule."
+  }
+ ]
 }

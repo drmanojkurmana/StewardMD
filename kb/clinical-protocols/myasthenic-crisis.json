@@ -136,5 +136,77 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-25"
- }
+ },
+ "algorithms": [
+  {
+   "id": "myasthenic-crisis-pathway",
+   "title": "Myasthenic crisis Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Myasthenic crisis (MGFA class V): worsening weakness needing intubation, or NIV to avoid intubation. Impending crisis: rapid worsening that could lead to crisis within days to weeks.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Admit impending crisis to a monitored bed with ICU access; manifest crisis to ICU.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Triggers: infection (most common), surgery including thymectomy, pregnancy and postpartum, starting high-dose corticosteroids, tapering immunosuppression, drugs that worsen myasthenia, thyroid disease, immune checkpoint inhibitors."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Plasma exchange (PLEX) or IVIg is first-line. Trials show similar efficacy; experts regard PLEX as faster and more effective in crisis, and it may be better in MuSK-positive myasthenia."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Serial FVC, NIF, swallow and neck flexion power; cardiac monitoring; correct potassium, magnesium, phosphate and calcium, as low levels worsen weakness."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for myasthenic crisis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "myasthenic-crisis-summary-matrix",
+   "title": "Myasthenic crisis Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Myasthenic crisis (MGFA class V): worsening weakness needing intubation, or NIV to avoid intubation. Impending crisis: rapid worsening that",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Admit impending crisis to a monitored bed with ICU access; manifest crisis to ICU.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Intravenous immunoglobulin (IVIg): 2 g/kg IV total over 2 to 5 days (0.4 g/kg/day for 5 days or 1 g/kg/day for 2 days)",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Waiting for hypoxaemia or hypercapnia before escalating care.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for myasthenic crisis."
+  }
+ ]
 }

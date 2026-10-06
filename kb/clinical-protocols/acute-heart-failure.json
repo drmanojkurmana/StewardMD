@@ -5,7 +5,18 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, CCU, ICU, ward",
- "aliases": ["AHF", "ADHF", "DHF", "decompensated heart failure", "acute pulmonary oedema", "acute LVF", "flash pulmonary oedema", "cardiogenic shock", "IV furosemide", "diuretic resistance"],
+ "aliases": [
+  "AHF",
+  "ADHF",
+  "DHF",
+  "decompensated heart failure",
+  "acute pulmonary oedema",
+  "acute LVF",
+  "flash pulmonary oedema",
+  "cardiogenic shock",
+  "IV furosemide",
+  "diuretic resistance"
+ ],
  "summary": "Treat the precipitant, give oxygen or NIV for hypoxaemia and respiratory distress, IV loop diuretic at 1 to 2 times the oral dose (20 to 40 mg furosemide if naive) with natriuresis-guided escalation, IV nitrate if SBP is above 110 mmHg, and reserve inotropes for hypotension with hypoperfusion.",
  "sections": [
   {
@@ -103,21 +114,151 @@
   }
  ],
  "drugs": [
-  { "name": "Furosemide", "dose": "Diuretic-naive: 20 to 40 mg IV bolus. On oral loop diuretic: 1 to 2 times the total daily oral dose IV, as 2 to 3 boluses per day or infusion. Double if response inadequate; usual maximum 400 to 600 mg/day", "notes": "Assess spot urine sodium at 2 hours and urine output over 6 hours." },
-  { "name": "Acetazolamide", "dose": "500 mg IV once daily, added to IV loop diuretic", "notes": "For persistent congestion. Monitor bicarbonate and potassium." },
-  { "name": "Hydrochlorothiazide", "dose": "25 to 100 mg orally once daily, added to loop diuretic, dose by eGFR", "notes": "Risk of hypokalaemia, hyponatraemia and renal function decline: daily electrolytes." },
-  { "name": "Glyceryl trinitrate (nitroglycerin) infusion", "dose": "Start 10 to 20 mcg/min IV, increase up to 200 mcg/min", "notes": "Use if SBP above 110 mmHg. Avoid with severe aortic stenosis, RV infarction or PDE5 inhibitor use." },
-  { "name": "Sodium nitroprusside", "dose": "Start 0.3 mcg/kg/min IV, titrate up to 5 mcg/kg/min", "notes": "Severe hypertensive pulmonary oedema or acute mitral regurgitation; arterial line. Cyanide toxicity with prolonged use or renal failure." },
-  { "name": "Dobutamine", "dose": "2 to 20 mcg/kg/min IV infusion, no bolus", "notes": "Hypotension with hypoperfusion. Arrhythmias and ischaemia." },
-  { "name": "Levosimendan", "dose": "0.1 mcg/kg/min IV infusion (range 0.05 to 0.2); optional bolus 12 mcg/kg over 10 minutes only if BP allows", "notes": "Useful in patients on beta-blockers. Avoid bolus with hypotension." },
-  { "name": "Milrinone", "dose": "0.375 to 0.75 mcg/kg/min IV infusion; optional bolus 25 to 75 mcg/kg over 10 to 20 minutes", "notes": "Reduce dose in renal impairment. Hypotension and arrhythmias." },
-  { "name": "Noradrenaline (norepinephrine)", "dose": "IV infusion titrated to perfusion and MAP; ESC range 0.2 to 1 mcg/kg/min", "notes": "Preferred vasopressor in cardiogenic shock. Central or large proximal vein." },
-  { "name": "Enoxaparin (prophylaxis)", "dose": "40 mg SC once daily", "notes": "Reduce the dose if CrCl is below 30 mL/min (20 mg daily in the EU label, 30 mg daily in the US label)." }
+  {
+   "name": "Furosemide",
+   "dose": "Diuretic-naive: 20 to 40 mg IV bolus. On oral loop diuretic: 1 to 2 times the total daily oral dose IV, as 2 to 3 boluses per day or infusion. Double if response inadequate; usual maximum 400 to 600 mg/day",
+   "notes": "Assess spot urine sodium at 2 hours and urine output over 6 hours."
+  },
+  {
+   "name": "Acetazolamide",
+   "dose": "500 mg IV once daily, added to IV loop diuretic",
+   "notes": "For persistent congestion. Monitor bicarbonate and potassium."
+  },
+  {
+   "name": "Hydrochlorothiazide",
+   "dose": "25 to 100 mg orally once daily, added to loop diuretic, dose by eGFR",
+   "notes": "Risk of hypokalaemia, hyponatraemia and renal function decline: daily electrolytes."
+  },
+  {
+   "name": "Glyceryl trinitrate (nitroglycerin) infusion",
+   "dose": "Start 10 to 20 mcg/min IV, increase up to 200 mcg/min",
+   "notes": "Use if SBP above 110 mmHg. Avoid with severe aortic stenosis, RV infarction or PDE5 inhibitor use."
+  },
+  {
+   "name": "Sodium nitroprusside",
+   "dose": "Start 0.3 mcg/kg/min IV, titrate up to 5 mcg/kg/min",
+   "notes": "Severe hypertensive pulmonary oedema or acute mitral regurgitation; arterial line. Cyanide toxicity with prolonged use or renal failure."
+  },
+  {
+   "name": "Dobutamine",
+   "dose": "2 to 20 mcg/kg/min IV infusion, no bolus",
+   "notes": "Hypotension with hypoperfusion. Arrhythmias and ischaemia."
+  },
+  {
+   "name": "Levosimendan",
+   "dose": "0.1 mcg/kg/min IV infusion (range 0.05 to 0.2); optional bolus 12 mcg/kg over 10 minutes only if BP allows",
+   "notes": "Useful in patients on beta-blockers. Avoid bolus with hypotension."
+  },
+  {
+   "name": "Milrinone",
+   "dose": "0.375 to 0.75 mcg/kg/min IV infusion; optional bolus 25 to 75 mcg/kg over 10 to 20 minutes",
+   "notes": "Reduce dose in renal impairment. Hypotension and arrhythmias."
+  },
+  {
+   "name": "Noradrenaline (norepinephrine)",
+   "dose": "IV infusion titrated to perfusion and MAP; ESC range 0.2 to 1 mcg/kg/min",
+   "notes": "Preferred vasopressor in cardiogenic shock. Central or large proximal vein."
+  },
+  {
+   "name": "Enoxaparin (prophylaxis)",
+   "dose": "40 mg SC once daily",
+   "notes": "Reduce the dose if CrCl is below 30 mL/min (20 mg daily in the EU label, 30 mg daily in the US label)."
+  }
  ],
  "sources": [
-  { "org": "ESC", "title": "2026 ESC Guidelines for the management of heart failure", "year": 2026, "url": "https://academic.oup.com/eurheartj/advance-article/doi/10.1093/eurheartj/ehag100/8766302" },
-  { "org": "ESC", "title": "2021 ESC Guidelines for the diagnosis and treatment of acute and chronic heart failure", "year": 2021, "url": "https://academic.oup.com/eurheartj/article/42/36/3599/6358045" },
-  { "org": "ESC", "title": "2023 Focused Update of the 2021 ESC Guidelines for the diagnosis and treatment of acute and chronic heart failure", "year": 2023, "url": "https://academic.oup.com/eurheartj/article/44/37/3627/7246292" }
+  {
+   "org": "ESC",
+   "title": "2026 ESC Guidelines for the management of heart failure",
+   "year": 2026,
+   "url": "https://academic.oup.com/eurheartj/advance-article/doi/10.1093/eurheartj/ehag100/8766302"
+  },
+  {
+   "org": "ESC",
+   "title": "2021 ESC Guidelines for the diagnosis and treatment of acute and chronic heart failure",
+   "year": 2021,
+   "url": "https://academic.oup.com/eurheartj/article/42/36/3599/6358045"
+  },
+  {
+   "org": "ESC",
+   "title": "2023 Focused Update of the 2021 ESC Guidelines for the diagnosis and treatment of acute and chronic heart failure",
+   "year": 2023,
+   "url": "https://academic.oup.com/eurheartj/article/44/37/3627/7246292"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "acute-heart-failure-pathway",
+   "title": "Acute (decompensated) heart failure and pulmonary oedema Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Presentations: decompensated chronic HF (gradual congestion), acute pulmonary oedema (rapid onset, often hypertensive), isolated right ventricular failure, and cardiogenic shock. ESC 2026 calls acute HF decompensated heart failure.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Sit upright. Oxygen if SpO2 is below 90% or PaO2 below 60 mmHg; avoid hyperoxia.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Natriuretic peptide: BNP below 100 pg/mL, NT-proBNP below 300 pg/mL or MR-proANP below 120 pmol/L make acute HF unlikely. Obesity lowers and AF, age and CKD raise values."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Cardiogenic shock: SBP below 90 mmHg (or needing vasopressors) with signs of hypoperfusion. Echo, ECG and lactate at once; immediate angiography and PCI if ACS is the cause."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "SpO2, heart rate and rhythm, BP, respiratory rate continuously at first; urine output hourly initially (catheter only if needed)."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for acute (decompensated) heart failure and pulmonary oedema."
+  }
+ ],
+ "tables": [
+  {
+   "id": "acute-heart-failure-summary-matrix",
+   "title": "Acute (decompensated) heart failure and pulmonary oedema Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Presentations: decompensated chronic HF (gradual congestion), acute pulmonary oedema (rapid onset, often hypertensive), isolated right",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Sit upright. Oxygen if SpO2 is below 90% or PaO2 below 60 mmHg; avoid hyperoxia.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Natriuretic peptide: BNP below 100 pg/mL, NT-proBNP below 300 pg/mL or MR-proANP below 120 pmol/L make acute HF unlikely. Obesity lowers",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Furosemide: Diuretic-naive: 20 to 40 mg IV bolus. On oral loop diuretic: 1 to 2 times the total daily oral dose IV, as 2 to 3 boluses per",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Under-dosing IV diuretic in patients already on oral loop diuretics, or stopping early because of a small creatinine rise.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for acute (decompensated) heart failure and pulmonary oedema."
+  }
+ ]
 }

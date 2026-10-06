@@ -1,80 +1,152 @@
 {
-  "id": "tungiasis",
-  "name": "Tungiasis",
-  "aliases": [
-    "Tunga penetrans",
-    "jigger flea infestation",
-    "sand flea disease",
-    "chigoe flea",
-    "pique"
+ "id": "tungiasis",
+ "name": "Tungiasis",
+ "aliases": [
+  "Tunga penetrans",
+  "jigger flea infestation",
+  "sand flea disease",
+  "chigoe flea",
+  "pique"
+ ],
+ "class": "infective",
+ "system": "Infectious disease",
+ "specialty": "Infectious Diseases / Tropical Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Manson's Tropical Diseases / Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Caused by penetration of the skin by the gravid female sand flea Tunga penetrans, endemic in sub-Saharan Africa, Latin America and the Caribbean",
+   "Affects impoverished communities where people walk barefoot on sandy or dusty soil; lesions concentrate on the feet, especially the toes, periungual folds and soles",
+   "The classic lesion is a white papule with a central black dot (the flea's posterior/exsanguination pore) that enlarges into a painful, itchy nodule as eggs develop",
+   "Lesions can be staged (Fortaleza classification) from penetration through to involution and residual skin changes",
+   "Diagnosis is clinical, based on typical lesions in an epidemiological context; dermoscopy can confirm the embedded flea",
+   "Secondary bacterial infection is common and can lead to abscess, ulceration, lymphangitis, and in neglected cases tetanus or gangrene",
+   "Treatment is careful surgical extraction of the flea under sterile conditions, wound care, and ensuring tetanus immunisation; occlusive topical agents may kill the embedded flea"
   ],
-  "class": "infective",
-  "system": "Infectious disease",
-  "specialty": "Infectious Diseases / Tropical Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Manson's Tropical Diseases / Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Caused by penetration of the skin by the gravid female sand flea Tunga penetrans, endemic in sub-Saharan Africa, Latin America and the Caribbean",
-      "Affects impoverished communities where people walk barefoot on sandy or dusty soil; lesions concentrate on the feet, especially the toes, periungual folds and soles",
-      "The classic lesion is a white papule with a central black dot (the flea's posterior/exsanguination pore) that enlarges into a painful, itchy nodule as eggs develop",
-      "Lesions can be staged (Fortaleza classification) from penetration through to involution and residual skin changes",
-      "Diagnosis is clinical, based on typical lesions in an epidemiological context; dermoscopy can confirm the embedded flea",
-      "Secondary bacterial infection is common and can lead to abscess, ulceration, lymphangitis, and in neglected cases tetanus or gangrene",
-      "Treatment is careful surgical extraction of the flea under sterile conditions, wound care, and ensuring tetanus immunisation; occlusive topical agents may kill the embedded flea"
+  "pathophysiology": "The impregnated female flea burrows head-first into the epidermis, usually of the foot, leaving its posterior end at the skin surface for respiration, defecation and egg expulsion. Over one to two weeks the flea's abdomen swells enormously as eggs mature, producing the characteristic expanding nodule with a central pore. Local inflammation, pain and pruritus result from the parasite and its by-products. Once eggs are shed the flea dies and the lesion involutes, but the breach in the skin and retained flea remnants predispose to secondary bacterial infection.",
+  "additionalDifferentials": [
+   "Plantar wart (verruca)",
+   "Foreign body granuloma or splinter reaction",
+   "Myiasis (furuncular)",
+   "Paronychia or bacterial abscess",
+   "Scabies or other pruritic dermatoses of the feet",
+   "Melanoma or pigmented lesion (when the black dot is prominent)"
+  ],
+  "additionalInvestigations": [
+   "Clinical and epidemiological assessment (travel/residence, barefoot exposure)",
+   "Dermoscopy to visualise the embedded flea and its pore",
+   "Examination for multiple lesions and secondary infection",
+   "Assessment of tetanus immunisation status",
+   "Swab and culture if secondary bacterial infection is suspected"
+  ],
+  "redFlags": [
+   "Spreading cellulitis, lymphangitis or abscess formation",
+   "Signs suggestive of tetanus in an unimmunised patient",
+   "Gangrene or deep tissue destruction from heavy or neglected infestation",
+   "Widespread multiple lesions causing difficulty walking and disability"
+  ],
+  "prognosis": "Isolated lesions resolve well after extraction and wound care, but heavy or repeated infestation in endemic settings causes chronic morbidity, deformity and disability, and secondary infection can be limb- or life-threatening if neglected.",
+  "pitfalls": [
+   "Incomplete extraction leaving flea parts that provoke persistent inflammation and infection",
+   "Performing non-sterile 'home' extraction, introducing secondary infection or tetanus risk",
+   "Overlooking tetanus prophylaxis",
+   "Mistaking a solitary lesion for a wart and applying inappropriate destructive treatment",
+   "Failing to advise on footwear and environmental measures, allowing reinfestation"
+  ],
+  "references": [
+   "Manson's Tropical Diseases",
+   "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Sterile surgical extraction of the embedded flea in its entirety, followed by wound cleaning and dressing",
+   "Topical treatment such as occlusive dimeticone or topical ivermectin for multiple lesions where individual extraction is impractical",
+   "Assessment and updating of tetanus immunisation given the breach in the skin",
+   "Treatment of secondary bacterial infection with appropriate antibiotics and drainage of any abscess",
+   "Examination for and management of multiple or heavily infested lesions",
+   "Prevention through closed footwear, treatment of animal reservoirs and environmental measures in endemic communities",
+   "Follow-up to ensure healing and detect complications such as lymphangitis, ulceration or deformity"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "tungiasis-pathway",
+   "title": "Tungiasis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Caused by penetration of the skin by the gravid female sand flea Tunga penetrans, endemic in sub-Saharan Africa, Latin America and the Caribbean",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Spreading cellulitis, lymphangitis or abscess formation",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical and epidemiological assessment (travel/residence, barefoot exposure), Dermoscopy to visualise the embedded flea and its pore, Examination for multiple lesions and secondary infection"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Sterile surgical extraction of the embedded flea in its entirety, followed by wound cleaning and dressing"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Incomplete extraction leaving flea parts that provoke persistent inflammation and infection"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of tungiasis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "tungiasis-matrix",
+   "title": "Tungiasis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Caused by penetration of the skin by the gravid female sand flea Tunga penetrans, endemic in sub-Saharan Africa, Latin America",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The impregnated female flea burrows head-first into the epidermis, usually of the foot, leaving its posterior end at the skin surface for respiration, defecation and egg expulsion. Over one to two weeks the flea's abdomen swells enormously as eggs mature, producing the characteristic expanding nodule with a central pore. Local inflammation, pain and pruritus result from the parasite and its by-products. Once eggs are shed the flea dies and the lesion involutes, but the breach in the skin and retained flea remnants predispose to secondary bacterial infection.",
-    "additionalDifferentials": [
-      "Plantar wart (verruca)",
-      "Foreign body granuloma or splinter reaction",
-      "Myiasis (furuncular)",
-      "Paronychia or bacterial abscess",
-      "Scabies or other pruritic dermatoses of the feet",
-      "Melanoma or pigmented lesion (when the black dot is prominent)"
+    [
+     "Key Investigations",
+     "Clinical and epidemiological assessment (travel/residence, barefoot exposure), Dermoscopy to visualise the embedded flea and its",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical and epidemiological assessment (travel/residence, barefoot exposure)",
-      "Dermoscopy to visualise the embedded flea and its pore",
-      "Examination for multiple lesions and secondary infection",
-      "Assessment of tetanus immunisation status",
-      "Swab and culture if secondary bacterial infection is suspected"
+    [
+     "Primary Differentials",
+     "Plantar wart (verruca), Foreign body granuloma or splinter reaction, Myiasis (furuncular)",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Spreading cellulitis, lymphangitis or abscess formation",
-      "Signs suggestive of tetanus in an unimmunised patient",
-      "Gangrene or deep tissue destruction from heavy or neglected infestation",
-      "Widespread multiple lesions causing difficulty walking and disability"
+    [
+     "Management Strategy",
+     "Sterile surgical extraction of the embedded flea in its entirety, followed by wound cleaning and dressing",
+     "Core treatment modality"
     ],
-    "prognosis": "Isolated lesions resolve well after extraction and wound care, but heavy or repeated infestation in endemic settings causes chronic morbidity, deformity and disability, and secondary infection can be limb- or life-threatening if neglected.",
-    "pitfalls": [
-      "Incomplete extraction leaving flea parts that provoke persistent inflammation and infection",
-      "Performing non-sterile 'home' extraction, introducing secondary infection or tetanus risk",
-      "Overlooking tetanus prophylaxis",
-      "Mistaking a solitary lesion for a wart and applying inappropriate destructive treatment",
-      "Failing to advise on footwear and environmental measures, allowing reinfestation"
-    ],
-    "references": [
-      "Manson's Tropical Diseases",
-      "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Sterile surgical extraction of the embedded flea in its entirety, followed by wound cleaning and dressing",
-      "Topical treatment such as occlusive dimeticone or topical ivermectin for multiple lesions where individual extraction is impractical",
-      "Assessment and updating of tetanus immunisation given the breach in the skin",
-      "Treatment of secondary bacterial infection with appropriate antibiotics and drainage of any abscess",
-      "Examination for and management of multiple or heavily infested lesions",
-      "Prevention through closed footwear, treatment of animal reservoirs and environmental measures in endemic communities",
-      "Follow-up to ensure healing and detect complications such as lymphangitis, ulceration or deformity"
+    [
+     "Clinical Pitfall",
+     "Incomplete extraction leaving flea parts that provoke persistent inflammation and infection",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for tungiasis."
+  }
+ ]
 }

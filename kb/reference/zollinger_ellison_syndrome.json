@@ -1,84 +1,156 @@
 {
-  "id": "zollinger_ellison_syndrome",
-  "name": "Zollinger-Ellison syndrome",
-  "aliases": [
-    "ZES",
-    "gastrinoma syndrome",
-    "gastric acid hypersecretion syndrome"
+ "id": "zollinger_ellison_syndrome",
+ "name": "Zollinger-Ellison syndrome",
+ "aliases": [
+  "ZES",
+  "gastrinoma syndrome",
+  "gastric acid hypersecretion syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Gastrointestinal / Endocrine",
+ "specialty": "Gastroenterology / Endocrinology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Clinical syndrome of gastric acid hypersecretion, severe or refractory peptic ulcer disease and diarrhoea caused by a gastrin-secreting neuroendocrine tumour (gastrinoma)",
+   "Suspect it with multiple or recurrent ulcers, ulcers in unusual sites (distal duodenum or jejunum), ulcers refractory to therapy or recurring after Helicobacter eradication, and ulcers accompanied by diarrhoea",
+   "Diarrhoea is common and sometimes dominant, and characteristically improves with acid suppression, which helps distinguish it from other secretory diarrhoeas",
+   "Diagnosis requires a raised fasting serum gastrin together with demonstrated gastric acid hypersecretion (low gastric pH); a positive secretin stimulation test supports equivocal cases",
+   "Proton pump inhibition is the cornerstone of symptom control and is often needed at higher-than-standard doses; it must be interrupted carefully before gastrin testing",
+   "Around one-quarter of cases occur within MEN1, so hypercalcaemia and other endocrine features should be actively sought",
+   "Gastro-oesophageal reflux and oesophagitis with their complications are common because of the acid load",
+   "Complications include ulcer haemorrhage, perforation and stricture, and long-standing untreated disease carries substantial morbidity"
   ],
-  "class": "non_infective",
-  "system": "Gastrointestinal / Endocrine",
-  "specialty": "Gastroenterology / Endocrinology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Clinical syndrome of gastric acid hypersecretion, severe or refractory peptic ulcer disease and diarrhoea caused by a gastrin-secreting neuroendocrine tumour (gastrinoma)",
-      "Suspect it with multiple or recurrent ulcers, ulcers in unusual sites (distal duodenum or jejunum), ulcers refractory to therapy or recurring after Helicobacter eradication, and ulcers accompanied by diarrhoea",
-      "Diarrhoea is common and sometimes dominant, and characteristically improves with acid suppression, which helps distinguish it from other secretory diarrhoeas",
-      "Diagnosis requires a raised fasting serum gastrin together with demonstrated gastric acid hypersecretion (low gastric pH); a positive secretin stimulation test supports equivocal cases",
-      "Proton pump inhibition is the cornerstone of symptom control and is often needed at higher-than-standard doses; it must be interrupted carefully before gastrin testing",
-      "Around one-quarter of cases occur within MEN1, so hypercalcaemia and other endocrine features should be actively sought",
-      "Gastro-oesophageal reflux and oesophagitis with their complications are common because of the acid load",
-      "Complications include ulcer haemorrhage, perforation and stricture, and long-standing untreated disease carries substantial morbidity"
+  "pathophysiology": "In Zollinger-Ellison syndrome, autonomous gastrin secretion from a gastrinoma stimulates enterochromaffin-like and parietal cells, producing sustained hyperchlorhydria. The excess acid overwhelms mucosal defences, causing multiple and refractory peptic ulcers throughout the upper gastrointestinal tract, and inactivates pancreatic lipase while injuring the small bowel mucosa, resulting in maldigestion and secretory diarrhoea. Hypergastrinaemia also drives enterochromaffin-like cell hyperplasia, which in MEN1 may progress to type 2 gastric neuroendocrine tumours. The tumour itself may be sporadic or arise within MEN1.",
+  "additionalDifferentials": [
+   "Helicobacter pylori-associated peptic ulcer disease",
+   "NSAID-induced ulceration",
+   "Idiopathic gastro-oesophageal reflux disease",
+   "Other causes of hypergastrinaemia (proton pump inhibitor use, atrophic gastritis, renal failure)",
+   "Other secretory diarrhoeas (VIPoma, carcinoid, coeliac disease)",
+   "Retained gastric antrum or antral G-cell hyperplasia",
+   "Chronic pancreatitis or bile acid diarrhoea"
+  ],
+  "additionalInvestigations": [
+   "Fasting serum gastrin off acid suppression where safe",
+   "Gastric pH or acid output measurement to confirm hypersecretion",
+   "Secretin stimulation test in equivocal cases",
+   "Upper gastrointestinal endoscopy documenting ulcers, prominent gastric folds and reflux disease",
+   "Somatostatin receptor PET/CT and cross-sectional imaging to locate and stage the gastrinoma",
+   "Serum calcium, PTH and prolactin with MEN1 genetic testing",
+   "Chromogranin A for monitoring tumour burden"
+  ],
+  "redFlags": [
+   "Upper gastrointestinal haemorrhage, perforation or obstruction from ulcer disease",
+   "Ulcers refractory despite adequate acid suppression and Helicobacter eradication",
+   "Severe dehydration or electrolyte disturbance from high-volume diarrhoea",
+   "Evidence of metastatic gastrinoma",
+   "Hypercalcaemia or other features indicating MEN1"
+  ],
+  "prognosis": "With effective proton pump inhibition the acid-related morbidity of Zollinger-Ellison syndrome is largely controllable, so long-term prognosis is dictated by the behaviour of the underlying gastrinoma, particularly whether hepatic metastases are present.",
+  "pitfalls": [
+   "Diagnosing on gastrin alone without confirming acid hypersecretion, since proton pump inhibitors raise gastrin physiologically",
+   "Under-dosing acid suppression and accepting persistent symptoms",
+   "Discontinuing acid suppression abruptly for testing without safeguards, risking ulcer complications",
+   "Missing MEN1 and its implications for surgery and family screening",
+   "Overlooking that MEN1-related hypercalcaemia can worsen gastrin secretion and acid output"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine",
+   "ENETS Consensus Guidelines for gastrinoma and Zollinger-Ellison syndrome",
+   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
+  ],
+  "crossLinks": [],
+  "management": [
+   "High-dose proton pump inhibition is the cornerstone, titrated to abolish acid-related symptoms and heal the refractory peptic ulceration driven by hypergastrinaemia",
+   "Surgical exploration and resection of a localised sporadic gastrinoma with curative intent once the tumour has been located and staged",
+   "For unresectable or hepatically metastatic disease, control tumour burden with somatostatin analogues and NET-directed options such as peptide receptor radionuclide therapy, everolimus, sunitinib or cytotoxic chemotherapy",
+   "Supportive care for the maldigestion and secretory diarrhoea, and replacement of deficiencies arising from prolonged acid suppression such as vitamin B12 malabsorption",
+   "Surveillance with serial fasting gastrin, somatostatin-receptor PET/CT and endoscopic monitoring for enterochromaffin-like cell hyperplasia progressing to type 2 gastric neuroendocrine tumours",
+   "Prompt endoscopic or surgical management of acute ulcer complications such as haemorrhage or perforation",
+   "In MEN1-associated disease, screen for and treat primary hyperparathyroidism (parathyroidectomy improves acid control) and pituitary involvement, with genetic counselling and family screening for MEN1"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "zollinger_ellison_syndrome-pathway",
+   "title": "Zollinger-Ellison syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Clinical syndrome of gastric acid hypersecretion, severe or refractory peptic ulcer disease and diarrhoea caused by a gastrin-secreting neuroendocrine tumour (gastrinoma)",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Upper gastrointestinal haemorrhage, perforation or obstruction from ulcer disease",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Fasting serum gastrin off acid suppression where safe, Gastric pH or acid output measurement to confirm hypersecretion, Secretin stimulation test in equivocal cases"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: High-dose proton pump inhibition is the cornerstone, titrated to abolish acid-related symptoms and heal the refractory peptic ulceration driven by hypergastrinaemia"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Diagnosing on gastrin alone without confirming acid hypersecretion, since proton pump inhibitors raise gastrin physiologically"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of zollinger-ellison syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "zollinger_ellison_syndrome-matrix",
+   "title": "Zollinger-Ellison syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Clinical syndrome of gastric acid hypersecretion, severe or refractory peptic ulcer disease and diarrhoea caused by a",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "In Zollinger-Ellison syndrome, autonomous gastrin secretion from a gastrinoma stimulates enterochromaffin-like and parietal cells, producing sustained hyperchlorhydria. The excess acid overwhelms mucosal defences, causing multiple and refractory peptic ulcers throughout the upper gastrointestinal tract, and inactivates pancreatic lipase while injuring the small bowel mucosa, resulting in maldigestion and secretory diarrhoea. Hypergastrinaemia also drives enterochromaffin-like cell hyperplasia, which in MEN1 may progress to type 2 gastric neuroendocrine tumours. The tumour itself may be sporadic or arise within MEN1.",
-    "additionalDifferentials": [
-      "Helicobacter pylori-associated peptic ulcer disease",
-      "NSAID-induced ulceration",
-      "Idiopathic gastro-oesophageal reflux disease",
-      "Other causes of hypergastrinaemia (proton pump inhibitor use, atrophic gastritis, renal failure)",
-      "Other secretory diarrhoeas (VIPoma, carcinoid, coeliac disease)",
-      "Retained gastric antrum or antral G-cell hyperplasia",
-      "Chronic pancreatitis or bile acid diarrhoea"
+    [
+     "Key Investigations",
+     "Fasting serum gastrin off acid suppression where safe, Gastric pH or acid output measurement to confirm hypersecretion, Secretin",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Fasting serum gastrin off acid suppression where safe",
-      "Gastric pH or acid output measurement to confirm hypersecretion",
-      "Secretin stimulation test in equivocal cases",
-      "Upper gastrointestinal endoscopy documenting ulcers, prominent gastric folds and reflux disease",
-      "Somatostatin receptor PET/CT and cross-sectional imaging to locate and stage the gastrinoma",
-      "Serum calcium, PTH and prolactin with MEN1 genetic testing",
-      "Chromogranin A for monitoring tumour burden"
+    [
+     "Primary Differentials",
+     "Helicobacter pylori-associated peptic ulcer disease, NSAID-induced ulceration, Idiopathic gastro-oesophageal reflux disease",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Upper gastrointestinal haemorrhage, perforation or obstruction from ulcer disease",
-      "Ulcers refractory despite adequate acid suppression and Helicobacter eradication",
-      "Severe dehydration or electrolyte disturbance from high-volume diarrhoea",
-      "Evidence of metastatic gastrinoma",
-      "Hypercalcaemia or other features indicating MEN1"
+    [
+     "Management Strategy",
+     "High-dose proton pump inhibition is the cornerstone, titrated to abolish acid-related symptoms and heal the refractory peptic",
+     "Core treatment modality"
     ],
-    "prognosis": "With effective proton pump inhibition the acid-related morbidity of Zollinger-Ellison syndrome is largely controllable, so long-term prognosis is dictated by the behaviour of the underlying gastrinoma, particularly whether hepatic metastases are present.",
-    "pitfalls": [
-      "Diagnosing on gastrin alone without confirming acid hypersecretion, since proton pump inhibitors raise gastrin physiologically",
-      "Under-dosing acid suppression and accepting persistent symptoms",
-      "Discontinuing acid suppression abruptly for testing without safeguards, risking ulcer complications",
-      "Missing MEN1 and its implications for surgery and family screening",
-      "Overlooking that MEN1-related hypercalcaemia can worsen gastrin secretion and acid output"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine",
-      "ENETS Consensus Guidelines for gastrinoma and Zollinger-Ellison syndrome",
-      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
-    ],
-    "crossLinks": [],
-    "management": [
-      "High-dose proton pump inhibition is the cornerstone, titrated to abolish acid-related symptoms and heal the refractory peptic ulceration driven by hypergastrinaemia",
-      "Surgical exploration and resection of a localised sporadic gastrinoma with curative intent once the tumour has been located and staged",
-      "For unresectable or hepatically metastatic disease, control tumour burden with somatostatin analogues and NET-directed options such as peptide receptor radionuclide therapy, everolimus, sunitinib or cytotoxic chemotherapy",
-      "Supportive care for the maldigestion and secretory diarrhoea, and replacement of deficiencies arising from prolonged acid suppression such as vitamin B12 malabsorption",
-      "Surveillance with serial fasting gastrin, somatostatin-receptor PET/CT and endoscopic monitoring for enterochromaffin-like cell hyperplasia progressing to type 2 gastric neuroendocrine tumours",
-      "Prompt endoscopic or surgical management of acute ulcer complications such as haemorrhage or perforation",
-      "In MEN1-associated disease, screen for and treat primary hyperparathyroidism (parathyroidectomy improves acid control) and pituitary involvement, with genetic counselling and family screening for MEN1"
+    [
+     "Clinical Pitfall",
+     "Diagnosing on gastrin alone without confirming acid hypersecretion, since proton pump inhibitors raise gastrin physiologically",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for zollinger-ellison syndrome."
+  }
+ ]
 }

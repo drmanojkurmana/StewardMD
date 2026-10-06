@@ -139,5 +139,77 @@
       "importedAt": "2026-06-29T13:45:37Z",
       "contentHash": "hf0a5d2ae"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "rheumatoid-dx-algo",
+      "title": "Rheumatoid arthritis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Early-morning joint stiffness lasting more than 1 hour that improves with activity is characteristic; the earliest joints involved are typically the small joints of the hands and feet (Harrison 22e p.2839).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Fever above 38.3C (101F) during the course should prompt evaluation for systemic vasculitis or infection rather than being ascribed to RA activity (Harrison 22e p.2840).",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Anti-CCP (ACPA) antibodies - high specificity (~95%) for RA; useful diagnostically and prognostically (Harrison 22e p.2847)., Synovial fluid aspiration with cell count and crystal/microbiology analysis - confirms"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Diagnosis is supported by the 2010 ACR-EULAR classification criteria (for patients with at least one joint of definite clinical synovitis not better explained by another disease), scored 0-10 across four domains - joint"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: The 2010 ACR-EULAR criteria are classification (not diagnostic) criteria intended to identify early patients likely to progress; a positive RF or anti-CCP alone does not establish the diagnosis without supporting"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for rheumatoid arthritis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "rheumatoid-matrix",
+      "title": "Rheumatoid arthritis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Early-morning joint stiffness lasting more than 1 hour that improves with activity is characteristic; the earliest joints",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Anti-CCP (ACPA) antibodies - high specificity (~95%) for RA; useful diagnostically and prognostically (Harrison 22e p.2847).,",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Primary Sjogren's syndrome - polyarthralgia and mild synovitis can mimic RA, and ~50% are RF-positive; distinguished by",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Fever above 38.3C (101F) during the course should prompt evaluation for systemic vasculitis or infection rather than being",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "The 2010 ACR-EULAR criteria are classification (not diagnostic) criteria intended to identify early patients likely to progress;",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for rheumatoid arthritis."
+    }
+  ]
 }

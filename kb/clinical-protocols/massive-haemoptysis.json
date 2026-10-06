@@ -5,7 +5,17 @@
  "population": "Adults",
  "basis": "india",
  "setting": "Emergency department, ICU, interventional radiology",
- "aliases": ["massive hemoptysis", "life-threatening haemoptysis", "haemoptysis", "hemoptysis", "coughing blood", "bronchial artery embolisation", "BAE", "Rasmussen aneurysm", "post-TB haemoptysis"],
+ "aliases": [
+  "massive hemoptysis",
+  "life-threatening haemoptysis",
+  "haemoptysis",
+  "hemoptysis",
+  "coughing blood",
+  "bronchial artery embolisation",
+  "BAE",
+  "Rasmussen aneurysm",
+  "post-TB haemoptysis"
+ ],
  "summary": "The threat is asphyxia, not blood loss: protect the airway, lie the patient bleeding side down, intubate early with a large tube, reverse anticoagulation, give tranexamic acid as a bridge, obtain CT angiography when stable, and arrange bronchial artery embolisation as first-line definitive control.",
  "sections": [
   {
@@ -82,17 +92,132 @@
   }
  ],
  "drugs": [
-  { "name": "Tranexamic acid (IV)", "dose": "1 g IV, then 500 mg to 1 g IV every 6 to 8 hours", "notes": "Bridge only. Reduce dose in renal impairment; caution with previous thromboembolism." },
-  { "name": "Tranexamic acid (nebulised)", "dose": "500 mg in 5 mL 0.9% saline nebulised every 8 hours, for up to 5 days", "notes": "Evidence mainly in non-massive haemoptysis; may cause bronchospasm." },
-  { "name": "Prothrombin complex concentrate", "dose": "25 to 50 units/kg IV", "notes": "Warfarin reversal, with vitamin K." },
-  { "name": "Vitamin K (phytomenadione)", "dose": "10 mg IV", "notes": "Warfarin reversal." },
-  { "name": "Idarucizumab", "dose": "5 g IV", "notes": "Dabigatran reversal." }
+  {
+   "name": "Tranexamic acid (IV)",
+   "dose": "1 g IV, then 500 mg to 1 g IV every 6 to 8 hours",
+   "notes": "Bridge only. Reduce dose in renal impairment; caution with previous thromboembolism."
+  },
+  {
+   "name": "Tranexamic acid (nebulised)",
+   "dose": "500 mg in 5 mL 0.9% saline nebulised every 8 hours, for up to 5 days",
+   "notes": "Evidence mainly in non-massive haemoptysis; may cause bronchospasm."
+  },
+  {
+   "name": "Prothrombin complex concentrate",
+   "dose": "25 to 50 units/kg IV",
+   "notes": "Warfarin reversal, with vitamin K."
+  },
+  {
+   "name": "Vitamin K (phytomenadione)",
+   "dose": "10 mg IV",
+   "notes": "Warfarin reversal."
+  },
+  {
+   "name": "Idarucizumab",
+   "dose": "5 g IV",
+   "notes": "Dabigatran reversal."
+  }
  ],
  "sources": [
-  { "org": "Society of Chest Imaging and Interventions (India)", "title": "Consensus guidelines for the interventional radiology management of hemoptysis (Indian J Radiol Imaging)", "year": 2023, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10289864/" },
-  { "org": "Singapore Medical Journal", "title": "Acute management of massive haemoptysis (Ng J, See KC)", "year": 2026, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12908895/" },
-  { "org": "Lung India", "title": "Advances and challenges in the management of haemoptysis in the emergency department: a narrative review", "year": 2026, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13367543/" },
-  { "org": "Cureus", "title": "Tranexamic acid in the management of hemoptysis: pharmacology, administration routes, clinical evidence, and practical considerations", "year": 2026, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13262689/" }
+  {
+   "org": "Society of Chest Imaging and Interventions (India)",
+   "title": "Consensus guidelines for the interventional radiology management of hemoptysis (Indian J Radiol Imaging)",
+   "year": 2023,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10289864/"
+  },
+  {
+   "org": "Singapore Medical Journal",
+   "title": "Acute management of massive haemoptysis (Ng J, See KC)",
+   "year": 2026,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12908895/"
+  },
+  {
+   "org": "Lung India",
+   "title": "Advances and challenges in the management of haemoptysis in the emergency department: a narrative review",
+   "year": 2026,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13367543/"
+  },
+  {
+   "org": "Cureus",
+   "title": "Tranexamic acid in the management of hemoptysis: pharmacology, administration routes, clinical evidence, and practical considerations",
+   "year": 2026,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13262689/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "massive-haemoptysis-pathway",
+   "title": "Massive (life-threatening) haemoptysis (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Life-threatening haemoptysis: more than 150 mL in 24 hours or 100 mL/hour, or any volume causing airway obstruction, respiratory failure or haemodynamic instability (SCII 2023). About 150 mL of blood can fill the tracheobronchial dead",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Call for help early: airway expert, pulmonologist, interventional radiologist, intensivist, thoracic surgeon. Two working suction units, oxygen, two large-bore IV cannulae, crossmatch.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "CBC, coagulation profile, group and crossmatch, renal function, blood gas; chest X-ray to lateralise."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Bronchial artery embolisation (BAE) is the first-line definitive treatment for life-threatening haemoptysis once stabilised (SCII 2023): technical success 81 to 100%, recurrence 9.8 to 57.5%. Early BAE is also advised for"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Manage in ICU with continuous SpO2 and ECG, measured haemoptysis volumes, serial haemoglobin and coagulation."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for massive (life-threatening) haemoptysis (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "massive-haemoptysis-summary-matrix",
+   "title": "Massive (life-threatening) haemoptysis (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Life-threatening haemoptysis: more than 150 mL in 24 hours or 100 mL/hour, or any volume causing airway obstruction, respiratory failure or",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Call for help early: airway expert, pulmonologist, interventional radiologist, intensivist, thoracic surgeon. Two working suction units,",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "CBC, coagulation profile, group and crossmatch, renal function, blood gas; chest X-ray to lateralise.",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Tranexamic acid (IV): 1 g IV, then 500 mg to 1 g IV every 6 to 8 hours",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Judging severity by volume alone in a patient with poor lung reserve.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for massive (life-threatening) haemoptysis (adult)."
+  }
+ ]
 }

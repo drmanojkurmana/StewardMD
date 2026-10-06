@@ -5,7 +5,19 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, ward, ICU, cardiac surgical centre",
- "aliases": ["IE", "infective endocarditis", "bacterial endocarditis", "SBE", "Duke criteria", "modified Duke", "Duke-ISCVID", "prosthetic valve endocarditis", "PVE", "vegetation", "endocarditis prophylaxis"],
+ "aliases": [
+  "IE",
+  "infective endocarditis",
+  "bacterial endocarditis",
+  "SBE",
+  "Duke criteria",
+  "modified Duke",
+  "Duke-ISCVID",
+  "prosthetic valve endocarditis",
+  "PVE",
+  "vegetation",
+  "endocarditis prophylaxis"
+ ],
  "summary": "Take 3 sets of blood cultures before antibiotics, image with TTE then TOE, apply the 2023 ESC modified Duke criteria, start empirical IV antibiotics by setting (native or late prosthetic versus early prosthetic or healthcare-associated), and involve an Endocarditis Team early for surgery indications: heart failure, uncontrolled infection and embolic risk.",
  "sections": [
   {
@@ -85,19 +97,140 @@
   }
  ],
  "drugs": [
-  { "name": "Ampicillin", "dose": "12 g/day IV in 4 to 6 divided doses", "notes": "Empirical community-acquired native or late prosthetic valve IE; also for enterococci (with ceftriaxone)." },
-  { "name": "Ceftriaxone", "dose": "4 g/day IV or IM in 2 divided doses (with ampicillin); 2 g IV once daily for susceptible streptococci", "notes": "Ampicillin plus ceftriaxone avoids gentamicin nephrotoxicity in E. faecalis IE." },
-  { "name": "Flucloxacillin or cloxacillin", "dose": "12 g/day IV in 4 to 6 divided doses", "notes": "Methicillin-susceptible S. aureus cover." },
-  { "name": "Gentamicin", "dose": "3 mg/kg/day IV or IM once daily", "notes": "Trough below 1 mg/L; adjust for renal function; limit duration (usually 2 weeks)." },
-  { "name": "Vancomycin", "dose": "30 mg/kg/day IV in 2 divided doses (up to 30 to 60 mg/kg/day in 2 to 3 doses for MRSA)", "notes": "Target trough 15 to 20 mg/L or AUC-guided; adjust for renal function." },
-  { "name": "Cefazolin", "dose": "6 g/day IV in 3 divided doses", "notes": "Non-severe penicillin allergy; alternative for MSSA." },
-  { "name": "Daptomycin", "dose": "10 mg/kg IV once daily", "notes": "Alternative to vancomycin for staphylococcal IE; check CK weekly." },
-  { "name": "Rifampicin", "dose": "900 to 1200 mg/day IV or orally in 2 or 3 divided doses", "notes": "Prosthetic valve staphylococcal IE only, added once bacteraemia is controlled. Many drug interactions (including DOACs and warfarin)." },
-  { "name": "Amoxicillin (prophylaxis)", "dose": "2 g orally single dose 30 to 60 minutes before the dental procedure", "notes": "High-risk patients only." }
+  {
+   "name": "Ampicillin",
+   "dose": "12 g/day IV in 4 to 6 divided doses",
+   "notes": "Empirical community-acquired native or late prosthetic valve IE; also for enterococci (with ceftriaxone)."
+  },
+  {
+   "name": "Ceftriaxone",
+   "dose": "4 g/day IV or IM in 2 divided doses (with ampicillin); 2 g IV once daily for susceptible streptococci",
+   "notes": "Ampicillin plus ceftriaxone avoids gentamicin nephrotoxicity in E. faecalis IE."
+  },
+  {
+   "name": "Flucloxacillin or cloxacillin",
+   "dose": "12 g/day IV in 4 to 6 divided doses",
+   "notes": "Methicillin-susceptible S. aureus cover."
+  },
+  {
+   "name": "Gentamicin",
+   "dose": "3 mg/kg/day IV or IM once daily",
+   "notes": "Trough below 1 mg/L; adjust for renal function; limit duration (usually 2 weeks)."
+  },
+  {
+   "name": "Vancomycin",
+   "dose": "30 mg/kg/day IV in 2 divided doses (up to 30 to 60 mg/kg/day in 2 to 3 doses for MRSA)",
+   "notes": "Target trough 15 to 20 mg/L or AUC-guided; adjust for renal function."
+  },
+  {
+   "name": "Cefazolin",
+   "dose": "6 g/day IV in 3 divided doses",
+   "notes": "Non-severe penicillin allergy; alternative for MSSA."
+  },
+  {
+   "name": "Daptomycin",
+   "dose": "10 mg/kg IV once daily",
+   "notes": "Alternative to vancomycin for staphylococcal IE; check CK weekly."
+  },
+  {
+   "name": "Rifampicin",
+   "dose": "900 to 1200 mg/day IV or orally in 2 or 3 divided doses",
+   "notes": "Prosthetic valve staphylococcal IE only, added once bacteraemia is controlled. Many drug interactions (including DOACs and warfarin)."
+  },
+  {
+   "name": "Amoxicillin (prophylaxis)",
+   "dose": "2 g orally single dose 30 to 60 minutes before the dental procedure",
+   "notes": "High-risk patients only."
+  }
  ],
  "sources": [
-  { "org": "ESC", "title": "2023 ESC Guidelines for the management of endocarditis", "year": 2023, "url": "https://academic.oup.com/eurheartj/article-lookup/doi/10.1093/eurheartj/ehad193" },
-  { "org": "ESC", "title": "2023 ESC Guidelines for the management of endocarditis (ESC guideline page)", "year": 2023, "url": "https://www.escardio.org/guidelines/clinical-practice-guidelines/all-esc-practice-guidelines/endocarditis/" }
+  {
+   "org": "ESC",
+   "title": "2023 ESC Guidelines for the management of endocarditis",
+   "year": 2023,
+   "url": "https://academic.oup.com/eurheartj/article-lookup/doi/10.1093/eurheartj/ehad193"
+  },
+  {
+   "org": "ESC",
+   "title": "2023 ESC Guidelines for the management of endocarditis (ESC guideline page)",
+   "year": 2023,
+   "url": "https://www.escardio.org/guidelines/clinical-practice-guidelines/all-esc-practice-guidelines/endocarditis/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "infective-endocarditis-pathway",
+   "title": "Infective endocarditis: diagnosis, empirical therapy and surgery Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Fever with a new or changed murmur, prosthetic valve or cardiac device, previous IE, rheumatic or congenital heart disease, injecting drug use, or recent healthcare exposure (lines, haemodialysis).",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Unexplained embolic events (stroke, limb or splenic infarcts), spondylodiscitis, new heart failure, new AV block, or persistent bacteraemia with S. aureus, streptococci or enterococci.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Blood cultures before antibiotics: 3 sets (aerobic and anaerobic bottles, about 10 mL each) from separate venepunctures, ideally 30 minutes apart; do not wait for fever spikes."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Emergency (within 24 hours): severe acute regurgitation, obstruction or fistula causing refractory pulmonary oedema or cardiogenic shock."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Repeat blood cultures every 24 to 48 hours until negative; daily temperature, CRP trend, and examination for new murmur, heart failure or emboli."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for infective endocarditis: diagnosis, empirical therapy and surgery."
+  }
+ ],
+ "tables": [
+  {
+   "id": "infective-endocarditis-summary-matrix",
+   "title": "Infective endocarditis: diagnosis, empirical therapy and surgery Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Fever with a new or changed murmur, prosthetic valve or cardiac device, previous IE, rheumatic or congenital heart disease, injecting drug",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Emergency (within 24 hours): severe acute regurgitation, obstruction or fistula causing refractory pulmonary oedema or cardiogenic shock.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Blood cultures before antibiotics: 3 sets (aerobic and anaerobic bottles, about 10 mL each) from separate venepunctures, ideally 30 minutes",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Ampicillin: 12 g/day IV in 4 to 6 divided doses",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Starting antibiotics before blood cultures in a stable patient, producing culture-negative IE.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for infective endocarditis: diagnosis, empirical therapy and surgery."
+  }
+ ]
 }

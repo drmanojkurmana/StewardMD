@@ -6,7 +6,24 @@
  "basis": "international",
  "counterpart": "dyslipidaemia-management-india",
  "setting": "Outpatient clinic, primary care, post-ACS discharge",
- "aliases": ["dyslipidaemia", "dyslipidemia", "hyperlipidaemia", "hypercholesterolaemia", "high cholesterol", "LDL", "LDL-C target", "statin", "ezetimibe", "PCSK9 inhibitor", "inclisiran", "bempedoic acid", "familial hypercholesterolaemia", "FH", "Lp(a)", "hypertriglyceridaemia"],
+ "aliases": [
+  "dyslipidaemia",
+  "dyslipidemia",
+  "hyperlipidaemia",
+  "hypercholesterolaemia",
+  "high cholesterol",
+  "LDL",
+  "LDL-C target",
+  "statin",
+  "ezetimibe",
+  "PCSK9 inhibitor",
+  "inclisiran",
+  "bempedoic acid",
+  "familial hypercholesterolaemia",
+  "FH",
+  "Lp(a)",
+  "hypertriglyceridaemia"
+ ],
  "summary": "Classify cardiovascular risk, set a risk-based LDL-C goal (below 55 mg/dL (1.4 mmol/L) with at least 50% reduction for very high risk), start a statin at the right intensity, then add ezetimibe and a PCSK9 inhibitor or inclisiran if not at goal; measure Lp(a) once and check lipids 4 to 12 weeks after each change.",
  "sections": [
   {
@@ -85,20 +102,145 @@
   }
  ],
  "drugs": [
-  { "name": "Atorvastatin", "dose": "10 to 80 mg orally once daily; high intensity 40 to 80 mg", "notes": "No renal dose adjustment." },
-  { "name": "Rosuvastatin", "dose": "5 to 40 mg orally once daily; high intensity 20 to 40 mg", "notes": "CrCl below 30 mL/min: start 5 mg, maximum 10 mg. Higher exposure in Asian patients." },
-  { "name": "Ezetimibe", "dose": "10 mg orally once daily", "notes": "About 20 to 25% additional LDL-C lowering. Fixed-dose combinations with statins are available." },
-  { "name": "Evolocumab", "dose": "140 mg SC every 2 weeks or 420 mg SC once monthly", "notes": "Very high or high risk not at goal on statin plus ezetimibe, or FH." },
-  { "name": "Alirocumab", "dose": "75 or 150 mg SC every 2 weeks, or 300 mg SC every 4 weeks" },
-  { "name": "Inclisiran", "dose": "284 mg SC at 0 and 3 months, then every 6 months", "notes": "Given by a health professional." },
-  { "name": "Bempedoic acid", "dose": "180 mg orally once daily (alone or with ezetimibe 10 mg)", "notes": "Statin intolerance. Raises uric acid; gout risk." },
-  { "name": "Fenofibrate", "dose": "145 to 160 mg orally once daily (dose depends on formulation)", "notes": "Triglycerides 500 mg/dL (5.6 mmol/L) or more. Reduce dose in CKD; avoid in severe renal impairment." },
-  { "name": "Icosapent ethyl", "dose": "2 g orally twice daily with food", "notes": "High-risk patients on a statin with triglycerides 135 to 499 mg/dL. AF and bleeding risk slightly increased." }
+  {
+   "name": "Atorvastatin",
+   "dose": "10 to 80 mg orally once daily; high intensity 40 to 80 mg",
+   "notes": "No renal dose adjustment."
+  },
+  {
+   "name": "Rosuvastatin",
+   "dose": "5 to 40 mg orally once daily; high intensity 20 to 40 mg",
+   "notes": "CrCl below 30 mL/min: start 5 mg, maximum 10 mg. Higher exposure in Asian patients."
+  },
+  {
+   "name": "Ezetimibe",
+   "dose": "10 mg orally once daily",
+   "notes": "About 20 to 25% additional LDL-C lowering. Fixed-dose combinations with statins are available."
+  },
+  {
+   "name": "Evolocumab",
+   "dose": "140 mg SC every 2 weeks or 420 mg SC once monthly",
+   "notes": "Very high or high risk not at goal on statin plus ezetimibe, or FH."
+  },
+  {
+   "name": "Alirocumab",
+   "dose": "75 or 150 mg SC every 2 weeks, or 300 mg SC every 4 weeks"
+  },
+  {
+   "name": "Inclisiran",
+   "dose": "284 mg SC at 0 and 3 months, then every 6 months",
+   "notes": "Given by a health professional."
+  },
+  {
+   "name": "Bempedoic acid",
+   "dose": "180 mg orally once daily (alone or with ezetimibe 10 mg)",
+   "notes": "Statin intolerance. Raises uric acid; gout risk."
+  },
+  {
+   "name": "Fenofibrate",
+   "dose": "145 to 160 mg orally once daily (dose depends on formulation)",
+   "notes": "Triglycerides 500 mg/dL (5.6 mmol/L) or more. Reduce dose in CKD; avoid in severe renal impairment."
+  },
+  {
+   "name": "Icosapent ethyl",
+   "dose": "2 g orally twice daily with food",
+   "notes": "High-risk patients on a statin with triglycerides 135 to 499 mg/dL. AF and bleeding risk slightly increased."
+  }
  ],
  "sources": [
-  { "org": "ESC / EAS", "title": "2025 Focused Update of the 2019 ESC/EAS Guidelines for the management of dyslipidaemias", "year": 2025, "url": "https://academic.oup.com/eurheartj/article-lookup/doi/10.1093/eurheartj/ehaf190" },
-  { "org": "ESC / EAS", "title": "2019 ESC/EAS Guidelines for the management of dyslipidaemias (ESC guideline page)", "year": 2019, "url": "https://www.escardio.org/guidelines/clinical-practice-guidelines/all-esc-practice-guidelines/dyslipidaemias-management/" },
-  { "org": "ACC / AHA and multisociety", "title": "2026 ACC/AHA/Multisociety Guideline on the Management of Dyslipidemia", "year": 2026, "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001423" }
+  {
+   "org": "ESC / EAS",
+   "title": "2025 Focused Update of the 2019 ESC/EAS Guidelines for the management of dyslipidaemias",
+   "year": 2025,
+   "url": "https://academic.oup.com/eurheartj/article-lookup/doi/10.1093/eurheartj/ehaf190"
+  },
+  {
+   "org": "ESC / EAS",
+   "title": "2019 ESC/EAS Guidelines for the management of dyslipidaemias (ESC guideline page)",
+   "year": 2019,
+   "url": "https://www.escardio.org/guidelines/clinical-practice-guidelines/all-esc-practice-guidelines/dyslipidaemias-management/"
+  },
+  {
+   "org": "ACC / AHA and multisociety",
+   "title": "2026 ACC/AHA/Multisociety Guideline on the Management of Dyslipidemia",
+   "year": 2026,
+   "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001423"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "dyslipidaemia-management-pathway",
+   "title": "Dyslipidaemia: risk categories, LDL-C goals and lipid-lowering therapy Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Very high risk: documented ASCVD (clinical or unequivocal on imaging); diabetes with target organ damage, 3 or more major risk factors or type 1 diabetes for over 20 years; eGFR below 30; familial hypercholesterolaemia with ASCVD or",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "High risk: a single markedly raised risk factor (total cholesterol above 310 mg/dL (8 mmol/L), LDL-C above 190 mg/dL (4.9 mmol/L) or BP 180/110 mmHg or more); FH without other risk factors; diabetes for 10 years or more without organ",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Lipid profile (non-fasting is acceptable): total cholesterol, LDL-C, HDL-C, triglycerides, non-HDL-C. If triglycerides are above 400 mg/dL (4.5 mmol/L), use direct LDL-C or apoB rather than the Friedewald formula."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Lifestyle for all: stop tobacco, diet low in saturated and trans fat (limit ghee, vanaspati, fried foods), more fibre, regular exercise, weight loss, limit alcohol."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Lipid profile 4 to 12 weeks after starting or changing therapy, then every 6 to 12 months once at goal."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for dyslipidaemia: risk categories, ldl-c goals and lipid-lowering therapy."
+  }
+ ],
+ "tables": [
+  {
+   "id": "dyslipidaemia-management-summary-matrix",
+   "title": "Dyslipidaemia: risk categories, LDL-C goals and lipid-lowering therapy Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Very high risk: documented ASCVD (clinical or unequivocal on imaging); diabetes with target organ damage, 3 or more major risk factors or",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Lifestyle for all: stop tobacco, diet low in saturated and trans fat (limit ghee, vanaspati, fried foods), more fibre, regular exercise,",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Lipid profile (non-fasting is acceptable): total cholesterol, LDL-C, HDL-C, triglycerides, non-HDL-C. If triglycerides are above 400 mg/dL",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Atorvastatin: 10 to 80 mg orally once daily; high intensity 40 to 80 mg",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Treating to the laboratory reference range instead of a risk-based goal.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for dyslipidaemia: risk categories, ldl-c goals and lipid-lowering therapy."
+  }
+ ]
 }

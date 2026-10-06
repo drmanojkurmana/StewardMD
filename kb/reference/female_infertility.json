@@ -1,77 +1,149 @@
 {
-  "id": "female_infertility",
-  "name": "Female infertility",
-  "aliases": [
-    "female factor infertility",
-    "female subfertility",
-    "impaired female fertility"
+ "id": "female_infertility",
+ "name": "Female infertility",
+ "aliases": [
+  "female factor infertility",
+  "female subfertility",
+  "impaired female fertility"
+ ],
+ "class": "non_infective",
+ "system": "Reproductive medicine",
+ "specialty": "Reproductive Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine / standard sleep & reproductive medicine references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Infertility is conventionally defined as failure to conceive after twelve months of regular unprotected intercourse, with earlier evaluation warranted for women over thirty-five or with known risk factors",
+   "Female causes fall into ovulatory, tubal/pelvic, and uterine/cervical categories, and both partners should always be assessed together",
+   "Ovulatory dysfunction is a leading cause, with polycystic ovary syndrome the commonest example, alongside hypothalamic, pituitary, and premature ovarian insufficiency causes",
+   "Ovarian reserve declines with age, and this age-related fall in oocyte quantity and quality is the single most important prognostic factor",
+   "Confirming ovulation, assessing tubal patency, and evaluating the uterine cavity form the core diagnostic framework",
+   "Tubal damage from prior pelvic infection, endometriosis, or surgery is an important and sometimes silent cause",
+   "Reversible lifestyle contributors such as extremes of body weight, smoking, and excess alcohol should be identified and addressed",
+   "Management ranges from ovulation induction and correction of anatomical problems to assisted reproductive techniques, chosen according to the underlying cause and ovarian reserve"
   ],
-  "class": "non_infective",
-  "system": "Reproductive medicine",
-  "specialty": "Reproductive Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine / standard sleep & reproductive medicine references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Infertility is conventionally defined as failure to conceive after twelve months of regular unprotected intercourse, with earlier evaluation warranted for women over thirty-five or with known risk factors",
-      "Female causes fall into ovulatory, tubal/pelvic, and uterine/cervical categories, and both partners should always be assessed together",
-      "Ovulatory dysfunction is a leading cause, with polycystic ovary syndrome the commonest example, alongside hypothalamic, pituitary, and premature ovarian insufficiency causes",
-      "Ovarian reserve declines with age, and this age-related fall in oocyte quantity and quality is the single most important prognostic factor",
-      "Confirming ovulation, assessing tubal patency, and evaluating the uterine cavity form the core diagnostic framework",
-      "Tubal damage from prior pelvic infection, endometriosis, or surgery is an important and sometimes silent cause",
-      "Reversible lifestyle contributors such as extremes of body weight, smoking, and excess alcohol should be identified and addressed",
-      "Management ranges from ovulation induction and correction of anatomical problems to assisted reproductive techniques, chosen according to the underlying cause and ovarian reserve"
+  "pathophysiology": "Female fertility requires cyclical hypothalamic-pituitary-ovarian function producing a mature oocyte, patent fallopian tubes to allow fertilisation and transport, and a receptive endometrial cavity for implantation. Ovulatory disorders arise from disrupted gonadotrophin secretion: hypothalamic causes (stress, low body weight, excessive exercise, hyperprolactinaemia), polycystic ovary syndrome with anovulation, or premature ovarian insufficiency with follicular depletion. Tubal and peritoneal factors result from scarring and adhesions after pelvic inflammatory disease, endometriosis, or surgery, impairing gamete transport. Uterine factors include fibroids distorting the cavity, intrauterine adhesions, and congenital anomalies that impair implantation. Advancing maternal age reduces both the number and chromosomal quality of remaining oocytes, lowering fecundity and raising miscarriage risk.",
+  "additionalDifferentials": [
+   "Polycystic ovary syndrome with anovulation",
+   "Hypothalamic amenorrhoea from weight, stress, or exercise",
+   "Premature ovarian insufficiency",
+   "Tubal factor from previous pelvic inflammatory disease or surgery",
+   "Endometriosis",
+   "Uterine fibroids, polyps, or intrauterine adhesions"
+  ],
+  "additionalInvestigations": [
+   "Confirmation of ovulation using cycle history and mid-luteal progesterone",
+   "Assessment of ovarian reserve with relevant hormonal markers and antral follicle count",
+   "Tubal patency evaluation by hysterosalpingography or laparoscopy",
+   "Pelvic ultrasound and, where indicated, hysteroscopy to assess the uterine cavity",
+   "Thyroid function and prolactin measurement, plus partner semen analysis"
+  ],
+  "redFlags": [
+   "Amenorrhoea with elevated gonadotrophins in a young woman indicating premature ovarian insufficiency",
+   "Symptoms or signs of a pituitary tumour with hyperprolactinaemia",
+   "Severe pelvic pain or an adnexal mass requiring urgent gynaecological assessment",
+   "Advancing maternal age prompting timely rather than delayed investigation"
+  ],
+  "prognosis": "Prognosis depends heavily on the cause and on ovarian reserve; ovulatory disorders often respond well to induction of ovulation, whereas outcomes decline with maternal age and reduced reserve, and assisted reproduction can help many but not all couples.",
+  "pitfalls": [
+   "Delaying investigation in older women where declining ovarian reserve makes time critical",
+   "Assessing only the female partner and omitting semen analysis",
+   "Overlooking silent tubal disease from past infection or endometriosis",
+   "Failing to address modifiable factors such as weight, smoking, and alcohol before intervention"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Optimise modifiable factors including healthy body weight, smoking cessation, reduced alcohol, folic acid supplementation and correction of hypothalamic causes such as excessive exercise or low body weight",
+   "Induce ovulation in anovulatory disorders such as polycystic ovary syndrome with agents like letrozole or clomifene, adding gonadotrophins where these fail",
+   "Treat identified endocrine causes with dopamine agonists for hyperprolactinaemia and correction of thyroid dysfunction",
+   "Undertake surgical management of tubal, uterine or pelvic factors including tubal surgery, hysteroscopic division of adhesions or removal of submucosal fibroids, and treatment of endometriosis",
+   "Offer assisted reproductive technology, particularly in-vitro fertilisation, for tubal disease, reduced ovarian reserve, advancing maternal age or failure of simpler measures",
+   "Assess and treat the male partner concurrently and counsel on the strong prognostic impact of maternal age and ovarian reserve",
+   "Refer to reproductive medicine specialists and consider donor oocytes or fertility preservation where ovarian reserve is severely reduced"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "female_infertility-pathway",
+   "title": "Female infertility: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Infertility is conventionally defined as failure to conceive after twelve months of regular unprotected intercourse, with earlier evaluation warranted for women over thirty-five or with known risk factors",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Amenorrhoea with elevated gonadotrophins in a young woman indicating premature ovarian insufficiency",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Confirmation of ovulation using cycle history and mid-luteal progesterone, Assessment of ovarian reserve with relevant hormonal markers and antral follicle count, Tubal patency evaluation by hysterosalpingography or"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Optimise modifiable factors including healthy body weight, smoking cessation, reduced alcohol, folic acid supplementation and correction of hypothalamic causes such as excessive exercise or low body weight"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Delaying investigation in older women where declining ovarian reserve makes time critical"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of female infertility."
+  }
+ ],
+ "tables": [
+  {
+   "id": "female_infertility-matrix",
+   "title": "Female infertility: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Infertility is conventionally defined as failure to conceive after twelve months of regular unprotected intercourse, with earlier",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Female fertility requires cyclical hypothalamic-pituitary-ovarian function producing a mature oocyte, patent fallopian tubes to allow fertilisation and transport, and a receptive endometrial cavity for implantation. Ovulatory disorders arise from disrupted gonadotrophin secretion: hypothalamic causes (stress, low body weight, excessive exercise, hyperprolactinaemia), polycystic ovary syndrome with anovulation, or premature ovarian insufficiency with follicular depletion. Tubal and peritoneal factors result from scarring and adhesions after pelvic inflammatory disease, endometriosis, or surgery, impairing gamete transport. Uterine factors include fibroids distorting the cavity, intrauterine adhesions, and congenital anomalies that impair implantation. Advancing maternal age reduces both the number and chromosomal quality of remaining oocytes, lowering fecundity and raising miscarriage risk.",
-    "additionalDifferentials": [
-      "Polycystic ovary syndrome with anovulation",
-      "Hypothalamic amenorrhoea from weight, stress, or exercise",
-      "Premature ovarian insufficiency",
-      "Tubal factor from previous pelvic inflammatory disease or surgery",
-      "Endometriosis",
-      "Uterine fibroids, polyps, or intrauterine adhesions"
+    [
+     "Key Investigations",
+     "Confirmation of ovulation using cycle history and mid-luteal progesterone, Assessment of ovarian reserve with relevant hormonal",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Confirmation of ovulation using cycle history and mid-luteal progesterone",
-      "Assessment of ovarian reserve with relevant hormonal markers and antral follicle count",
-      "Tubal patency evaluation by hysterosalpingography or laparoscopy",
-      "Pelvic ultrasound and, where indicated, hysteroscopy to assess the uterine cavity",
-      "Thyroid function and prolactin measurement, plus partner semen analysis"
+    [
+     "Primary Differentials",
+     "Polycystic ovary syndrome with anovulation, Hypothalamic amenorrhoea from weight, stress, or exercise, Premature ovarian",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Amenorrhoea with elevated gonadotrophins in a young woman indicating premature ovarian insufficiency",
-      "Symptoms or signs of a pituitary tumour with hyperprolactinaemia",
-      "Severe pelvic pain or an adnexal mass requiring urgent gynaecological assessment",
-      "Advancing maternal age prompting timely rather than delayed investigation"
+    [
+     "Management Strategy",
+     "Optimise modifiable factors including healthy body weight, smoking cessation, reduced alcohol, folic acid supplementation and",
+     "Core treatment modality"
     ],
-    "prognosis": "Prognosis depends heavily on the cause and on ovarian reserve; ovulatory disorders often respond well to induction of ovulation, whereas outcomes decline with maternal age and reduced reserve, and assisted reproduction can help many but not all couples.",
-    "pitfalls": [
-      "Delaying investigation in older women where declining ovarian reserve makes time critical",
-      "Assessing only the female partner and omitting semen analysis",
-      "Overlooking silent tubal disease from past infection or endometriosis",
-      "Failing to address modifiable factors such as weight, smoking, and alcohol before intervention"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Optimise modifiable factors including healthy body weight, smoking cessation, reduced alcohol, folic acid supplementation and correction of hypothalamic causes such as excessive exercise or low body weight",
-      "Induce ovulation in anovulatory disorders such as polycystic ovary syndrome with agents like letrozole or clomifene, adding gonadotrophins where these fail",
-      "Treat identified endocrine causes with dopamine agonists for hyperprolactinaemia and correction of thyroid dysfunction",
-      "Undertake surgical management of tubal, uterine or pelvic factors including tubal surgery, hysteroscopic division of adhesions or removal of submucosal fibroids, and treatment of endometriosis",
-      "Offer assisted reproductive technology, particularly in-vitro fertilisation, for tubal disease, reduced ovarian reserve, advancing maternal age or failure of simpler measures",
-      "Assess and treat the male partner concurrently and counsel on the strong prognostic impact of maternal age and ovarian reserve",
-      "Refer to reproductive medicine specialists and consider donor oocytes or fertility preservation where ovarian reserve is severely reduced"
+    [
+     "Clinical Pitfall",
+     "Delaying investigation in older women where declining ovarian reserve makes time critical",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for female infertility."
+  }
+ ]
 }

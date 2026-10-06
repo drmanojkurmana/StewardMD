@@ -1,77 +1,149 @@
 {
-  "id": "intussusception",
-  "name": "Intussusception",
-  "aliases": [
-    "intestinal invagination",
-    "bowel telescoping",
-    "ileocolic intussusception"
+ "id": "intussusception",
+ "name": "Intussusception",
+ "aliases": [
+  "intestinal invagination",
+  "bowel telescoping",
+  "ileocolic intussusception"
+ ],
+ "class": "non_infective",
+ "system": "Gastroenterology",
+ "specialty": "Paediatrics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nelson Textbook of Pediatrics",
+  "sourceEdition": "22e",
+  "pages": null,
+  "clinicalPearls": [
+   "The most common cause of intestinal obstruction in infants and toddlers, typically between 6 months and 3 years, in which one segment of bowel telescopes into the adjacent distal segment.",
+   "The classic triad is intermittent colicky abdominal pain (with drawing up of the legs), vomiting, and red currant jelly stool, but all three are present in only a minority.",
+   "Between painful episodes the infant may appear well or lethargic; lethargy can be a prominent and misleading feature.",
+   "A sausage-shaped mass may be palpable, often in the right upper quadrant, with an empty right lower quadrant.",
+   "Most cases are ileocolic and idiopathic, sometimes following a viral illness with hypertrophied Peyer patches acting as a lead point.",
+   "Ultrasound is the diagnostic investigation of choice, showing a target or doughnut sign on cross-section.",
+   "In a stable child without peritonitis or perforation, non-operative reduction with an air or contrast enema is both diagnostic and therapeutic.",
+   "Surgery is required when enema reduction fails, or when there is perforation, peritonitis, shock, or a pathological lead point."
   ],
-  "class": "non_infective",
-  "system": "Gastroenterology",
-  "specialty": "Paediatrics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nelson Textbook of Pediatrics",
-    "sourceEdition": "22e",
-    "pages": null,
-    "clinicalPearls": [
-      "The most common cause of intestinal obstruction in infants and toddlers, typically between 6 months and 3 years, in which one segment of bowel telescopes into the adjacent distal segment.",
-      "The classic triad is intermittent colicky abdominal pain (with drawing up of the legs), vomiting, and red currant jelly stool, but all three are present in only a minority.",
-      "Between painful episodes the infant may appear well or lethargic; lethargy can be a prominent and misleading feature.",
-      "A sausage-shaped mass may be palpable, often in the right upper quadrant, with an empty right lower quadrant.",
-      "Most cases are ileocolic and idiopathic, sometimes following a viral illness with hypertrophied Peyer patches acting as a lead point.",
-      "Ultrasound is the diagnostic investigation of choice, showing a target or doughnut sign on cross-section.",
-      "In a stable child without peritonitis or perforation, non-operative reduction with an air or contrast enema is both diagnostic and therapeutic.",
-      "Surgery is required when enema reduction fails, or when there is perforation, peritonitis, shock, or a pathological lead point."
+  "pathophysiology": "A proximal segment of bowel (the intussusceptum) invaginates into the lumen of the adjacent distal segment (the intussuscipiens), dragging its mesentery with it. This compromises venous and lymphatic drainage, producing bowel wall oedema and engorgement; the mixture of sloughed mucosa, blood, and mucus produces the characteristic red currant jelly stool. Progressive swelling obstructs the lumen and, if unrelieved, arterial compromise leads to ischaemia, necrosis, and perforation. In infants a lead point is usually hypertrophied lymphoid tissue, whereas older children more often have a pathological lead point such as a Meckel diverticulum or polyp.",
+  "additionalDifferentials": [
+   "Gastroenteritis",
+   "Incarcerated hernia",
+   "Malrotation with volvulus",
+   "Appendicitis",
+   "Henoch-Schonlein purpura with bowel involvement",
+   "Constipation or other causes of colicky pain"
+  ],
+  "additionalInvestigations": [
+   "Abdominal ultrasound (target/doughnut sign) as first-line imaging",
+   "Abdominal radiograph to look for obstruction or free air",
+   "Air or contrast enema (diagnostic and therapeutic in stable children)",
+   "Full blood count and electrolytes to assess dehydration",
+   "Assessment for an underlying lead point in older or atypical cases"
+  ],
+  "redFlags": [
+   "Signs of peritonitis or a rigid, tender abdomen",
+   "Free air on radiograph indicating perforation",
+   "Shock, marked lethargy, or haemodynamic instability",
+   "Bilious vomiting and abdominal distension indicating established obstruction",
+   "Fever with toxic appearance suggesting bowel ischaemia or sepsis"
+  ],
+  "prognosis": "With early diagnosis and reduction the outlook is excellent; delay increases the risk of ischaemia, resection, and complications, and a proportion recur after non-operative reduction.",
+  "pitfalls": [
+   "Waiting for the full classic triad, which is often incomplete, and delaying diagnosis",
+   "Attributing marked lethargy to another cause and missing intussusception",
+   "Attempting enema reduction in a child with peritonitis, perforation, or shock",
+   "Failing to consider a pathological lead point in older children or recurrent cases"
+  ],
+  "references": [
+   "Nelson Textbook of Pediatrics, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Resuscitate with intravenous fluids and correct electrolyte disturbance, and decompress with a nasogastric tube where there is obstruction",
+   "Perform image-guided non-operative reduction with an air (pneumatic) or hydrostatic contrast enema as first-line treatment in the stable child without peritonitis or perforation",
+   "Escalate to operative reduction or bowel resection when enema reduction fails or there is peritonitis, perforation or non-viable bowel",
+   "Cover with broad-spectrum antibiotics and provide analgesia peri-procedurally where ischaemia or perforation is suspected",
+   "Identify and manage a pathological lead point such as a Meckel diverticulum or polyp, particularly in older or recurrent cases",
+   "Observe after successful reduction for early recurrence and re-image if symptoms return"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "intussusception-pathway",
+   "title": "Intussusception: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The most common cause of intestinal obstruction in infants and toddlers, typically between 6 months and 3 years, in which one segment of bowel telescopes into the adjacent distal segment.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Signs of peritonitis or a rigid, tender abdomen",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Abdominal ultrasound (target/doughnut sign) as first-line imaging, Abdominal radiograph to look for obstruction or free air, Air or contrast enema (diagnostic and therapeutic in stable children)"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Resuscitate with intravenous fluids and correct electrolyte disturbance, and decompress with a nasogastric tube where there is obstruction"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Waiting for the full classic triad, which is often incomplete, and delaying diagnosis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of intussusception."
+  }
+ ],
+ "tables": [
+  {
+   "id": "intussusception-matrix",
+   "title": "Intussusception: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The most common cause of intestinal obstruction in infants and toddlers, typically between 6 months and 3 years, in which one",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "A proximal segment of bowel (the intussusceptum) invaginates into the lumen of the adjacent distal segment (the intussuscipiens), dragging its mesentery with it. This compromises venous and lymphatic drainage, producing bowel wall oedema and engorgement; the mixture of sloughed mucosa, blood, and mucus produces the characteristic red currant jelly stool. Progressive swelling obstructs the lumen and, if unrelieved, arterial compromise leads to ischaemia, necrosis, and perforation. In infants a lead point is usually hypertrophied lymphoid tissue, whereas older children more often have a pathological lead point such as a Meckel diverticulum or polyp.",
-    "additionalDifferentials": [
-      "Gastroenteritis",
-      "Incarcerated hernia",
-      "Malrotation with volvulus",
-      "Appendicitis",
-      "Henoch-Schonlein purpura with bowel involvement",
-      "Constipation or other causes of colicky pain"
+    [
+     "Key Investigations",
+     "Abdominal ultrasound (target/doughnut sign) as first-line imaging, Abdominal radiograph to look for obstruction or free air, Air",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Abdominal ultrasound (target/doughnut sign) as first-line imaging",
-      "Abdominal radiograph to look for obstruction or free air",
-      "Air or contrast enema (diagnostic and therapeutic in stable children)",
-      "Full blood count and electrolytes to assess dehydration",
-      "Assessment for an underlying lead point in older or atypical cases"
+    [
+     "Primary Differentials",
+     "Gastroenteritis, Incarcerated hernia, Malrotation with volvulus",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Signs of peritonitis or a rigid, tender abdomen",
-      "Free air on radiograph indicating perforation",
-      "Shock, marked lethargy, or haemodynamic instability",
-      "Bilious vomiting and abdominal distension indicating established obstruction",
-      "Fever with toxic appearance suggesting bowel ischaemia or sepsis"
+    [
+     "Management Strategy",
+     "Resuscitate with intravenous fluids and correct electrolyte disturbance, and decompress with a nasogastric tube where there is",
+     "Core treatment modality"
     ],
-    "prognosis": "With early diagnosis and reduction the outlook is excellent; delay increases the risk of ischaemia, resection, and complications, and a proportion recur after non-operative reduction.",
-    "pitfalls": [
-      "Waiting for the full classic triad, which is often incomplete, and delaying diagnosis",
-      "Attributing marked lethargy to another cause and missing intussusception",
-      "Attempting enema reduction in a child with peritonitis, perforation, or shock",
-      "Failing to consider a pathological lead point in older children or recurrent cases"
-    ],
-    "references": [
-      "Nelson Textbook of Pediatrics, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Resuscitate with intravenous fluids and correct electrolyte disturbance, and decompress with a nasogastric tube where there is obstruction",
-      "Perform image-guided non-operative reduction with an air (pneumatic) or hydrostatic contrast enema as first-line treatment in the stable child without peritonitis or perforation",
-      "Escalate to operative reduction or bowel resection when enema reduction fails or there is peritonitis, perforation or non-viable bowel",
-      "Cover with broad-spectrum antibiotics and provide analgesia peri-procedurally where ischaemia or perforation is suspected",
-      "Identify and manage a pathological lead point such as a Meckel diverticulum or polyp, particularly in older or recurrent cases",
-      "Observe after successful reduction for early recurrence and re-image if symptoms return"
+    [
+     "Clinical Pitfall",
+     "Waiting for the full classic triad, which is often incomplete, and delaying diagnosis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for intussusception."
+  }
+ ]
 }

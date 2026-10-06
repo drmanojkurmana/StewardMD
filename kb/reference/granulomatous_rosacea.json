@@ -1,79 +1,151 @@
 {
-  "id": "granulomatous_rosacea",
-  "name": "Granulomatous rosacea",
-  "aliases": [
-    "granulomatous rosacea",
-    "rosacea granulomatosa",
-    "micropapular tuberculid of Lewandowsky"
+ "id": "granulomatous_rosacea",
+ "name": "Granulomatous rosacea",
+ "aliases": [
+  "granulomatous rosacea",
+  "rosacea granulomatosa",
+  "micropapular tuberculid of Lewandowsky"
+ ],
+ "class": "non_infective",
+ "system": "Dermatology",
+ "specialty": "Dermatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rook's Textbook of Dermatology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A distinctive granulomatous variant of rosacea characterised by firm, monomorphic yellow-brown to red papules and nodules on a relatively normal-appearing background",
+   "Lesions favour the cheeks, perioral and periocular skin and may extend beyond the usual convexities of the central face",
+   "In contrast to classical rosacea, the flushing, background erythema and telangiectasia may be minimal or absent",
+   "Diascopy of the papules can reveal an apple-jelly appearance similar to other granulomatous facial dermatoses",
+   "Histology shows dermal epithelioid granulomata, sometimes with caseation-like necrosis, which can cause confusion with tuberculosis",
+   "The condition overlaps clinically and histologically with lupus miliaris disseminatus faciei, and their relationship remains debated",
+   "It tends to be more persistent and treatment-resistant than ordinary rosacea, and healing may leave scarring",
+   "Management follows rosacea principles with prolonged courses of oral tetracyclines, topical agents and treatment of any demodex contribution, avoiding potent topical corticosteroids which aggravate the disease"
   ],
-  "class": "non_infective",
-  "system": "Dermatology",
-  "specialty": "Dermatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rook's Textbook of Dermatology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A distinctive granulomatous variant of rosacea characterised by firm, monomorphic yellow-brown to red papules and nodules on a relatively normal-appearing background",
-      "Lesions favour the cheeks, perioral and periocular skin and may extend beyond the usual convexities of the central face",
-      "In contrast to classical rosacea, the flushing, background erythema and telangiectasia may be minimal or absent",
-      "Diascopy of the papules can reveal an apple-jelly appearance similar to other granulomatous facial dermatoses",
-      "Histology shows dermal epithelioid granulomata, sometimes with caseation-like necrosis, which can cause confusion with tuberculosis",
-      "The condition overlaps clinically and histologically with lupus miliaris disseminatus faciei, and their relationship remains debated",
-      "It tends to be more persistent and treatment-resistant than ordinary rosacea, and healing may leave scarring",
-      "Management follows rosacea principles with prolonged courses of oral tetracyclines, topical agents and treatment of any demodex contribution, avoiding potent topical corticosteroids which aggravate the disease"
+  "pathophysiology": "Granulomatous rosacea is regarded as a granulomatous tissue reaction pattern occurring within the spectrum of rosacea. As in other rosacea subtypes, dysregulation of the innate immune system, an abnormal cutaneous vascular and neurovascular response, and an inflammatory reaction to Demodex mites and their microbial load are thought to contribute. In this variant the inflammatory response organises into dermal epithelioid granulomata around follicular structures, sometimes with central necrosis, producing the characteristic firm papules. The precise trigger for granuloma formation is unclear, and the histological picture can closely resemble that of lupus miliaris disseminatus faciei and cutaneous tuberculosis.",
+  "additionalDifferentials": [
+   "Lupus miliaris disseminatus faciei",
+   "Cutaneous sarcoidosis of the face",
+   "Cutaneous tuberculosis (lupus vulgaris)",
+   "Perioral (periorificial) dermatitis, including its granulomatous form",
+   "Sarcoidal or demodex-related folliculitis",
+   "Papular acne and acne agminata"
+  ],
+  "additionalInvestigations": [
+   "Skin biopsy to confirm dermal granulomata and characterise any necrosis",
+   "Special stains and culture to exclude mycobacterial and fungal infection",
+   "Skin scrapings or biopsy assessment of Demodex density",
+   "Investigations to exclude sarcoidosis when granulomata are found (e.g. chest imaging)",
+   "Clinical review of prior topical corticosteroid use as an aggravating factor",
+   "Assessment for ocular rosacea when periocular lesions are present"
+  ],
+  "redFlags": [
+   "Granulomatous histology that could represent cutaneous tuberculosis or sarcoidosis requiring systemic evaluation",
+   "Progressive scarring or disfiguring facial involvement",
+   "Coexisting ocular inflammation threatening vision",
+   "Failure to respond to appropriate rosacea therapy, prompting reconsideration of the diagnosis"
+  ],
+  "prognosis": "Granulomatous rosacea often runs a chronic and relatively treatment-resistant course requiring prolonged therapy, and although many patients eventually improve, residual scarring or persistent papules can occur.",
+  "pitfalls": [
+   "Prescribing potent topical corticosteroids, which characteristically worsen the eruption",
+   "Misinterpreting necrotising granulomata as proof of tuberculosis without confirmatory microbiology",
+   "Expecting rapid resolution and stopping treatment prematurely",
+   "Failing to distinguish it from sarcoidosis and missing systemic disease"
+  ],
+  "references": [
+   "Rook's Textbook of Dermatology",
+   "British Association of Dermatologists rosacea guidance"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Use oral tetracyclines such as doxycycline for their anti-inflammatory effect as first-line systemic therapy",
+   "Apply topical agents including metronidazole, azelaic acid or ivermectin, the last also reducing Demodex load",
+   "Reserve oral isotretinoin for disease resistant to antibiotics",
+   "Withdraw any topical corticosteroid, which aggravates the condition",
+   "Advise general rosacea trigger avoidance and photoprotection",
+   "Assess for and treat coexisting ocular rosacea, particularly with periocular lesions",
+   "Refer to dermatology and counsel that the course is often chronic and treatment-resistant with risk of residual scarring"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "granulomatous_rosacea-pathway",
+   "title": "Granulomatous rosacea: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A distinctive granulomatous variant of rosacea characterised by firm, monomorphic yellow-brown to red papules and nodules on a relatively normal-appearing background",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Granulomatous histology that could represent cutaneous tuberculosis or sarcoidosis requiring systemic evaluation",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Skin biopsy to confirm dermal granulomata and characterise any necrosis, Special stains and culture to exclude mycobacterial and fungal infection, Skin scrapings or biopsy assessment of Demodex density"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Use oral tetracyclines such as doxycycline for their anti-inflammatory effect as first-line systemic therapy"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Prescribing potent topical corticosteroids, which characteristically worsen the eruption"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of granulomatous rosacea."
+  }
+ ],
+ "tables": [
+  {
+   "id": "granulomatous_rosacea-matrix",
+   "title": "Granulomatous rosacea: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A distinctive granulomatous variant of rosacea characterised by firm, monomorphic yellow-brown to red papules and nodules on a",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Granulomatous rosacea is regarded as a granulomatous tissue reaction pattern occurring within the spectrum of rosacea. As in other rosacea subtypes, dysregulation of the innate immune system, an abnormal cutaneous vascular and neurovascular response, and an inflammatory reaction to Demodex mites and their microbial load are thought to contribute. In this variant the inflammatory response organises into dermal epithelioid granulomata around follicular structures, sometimes with central necrosis, producing the characteristic firm papules. The precise trigger for granuloma formation is unclear, and the histological picture can closely resemble that of lupus miliaris disseminatus faciei and cutaneous tuberculosis.",
-    "additionalDifferentials": [
-      "Lupus miliaris disseminatus faciei",
-      "Cutaneous sarcoidosis of the face",
-      "Cutaneous tuberculosis (lupus vulgaris)",
-      "Perioral (periorificial) dermatitis, including its granulomatous form",
-      "Sarcoidal or demodex-related folliculitis",
-      "Papular acne and acne agminata"
+    [
+     "Key Investigations",
+     "Skin biopsy to confirm dermal granulomata and characterise any necrosis, Special stains and culture to exclude mycobacterial and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Skin biopsy to confirm dermal granulomata and characterise any necrosis",
-      "Special stains and culture to exclude mycobacterial and fungal infection",
-      "Skin scrapings or biopsy assessment of Demodex density",
-      "Investigations to exclude sarcoidosis when granulomata are found (e.g. chest imaging)",
-      "Clinical review of prior topical corticosteroid use as an aggravating factor",
-      "Assessment for ocular rosacea when periocular lesions are present"
+    [
+     "Primary Differentials",
+     "Lupus miliaris disseminatus faciei, Cutaneous sarcoidosis of the face, Cutaneous tuberculosis (lupus vulgaris)",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Granulomatous histology that could represent cutaneous tuberculosis or sarcoidosis requiring systemic evaluation",
-      "Progressive scarring or disfiguring facial involvement",
-      "Coexisting ocular inflammation threatening vision",
-      "Failure to respond to appropriate rosacea therapy, prompting reconsideration of the diagnosis"
+    [
+     "Management Strategy",
+     "Use oral tetracyclines such as doxycycline for their anti-inflammatory effect as first-line systemic therapy",
+     "Core treatment modality"
     ],
-    "prognosis": "Granulomatous rosacea often runs a chronic and relatively treatment-resistant course requiring prolonged therapy, and although many patients eventually improve, residual scarring or persistent papules can occur.",
-    "pitfalls": [
-      "Prescribing potent topical corticosteroids, which characteristically worsen the eruption",
-      "Misinterpreting necrotising granulomata as proof of tuberculosis without confirmatory microbiology",
-      "Expecting rapid resolution and stopping treatment prematurely",
-      "Failing to distinguish it from sarcoidosis and missing systemic disease"
-    ],
-    "references": [
-      "Rook's Textbook of Dermatology",
-      "British Association of Dermatologists rosacea guidance"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Use oral tetracyclines such as doxycycline for their anti-inflammatory effect as first-line systemic therapy",
-      "Apply topical agents including metronidazole, azelaic acid or ivermectin, the last also reducing Demodex load",
-      "Reserve oral isotretinoin for disease resistant to antibiotics",
-      "Withdraw any topical corticosteroid, which aggravates the condition",
-      "Advise general rosacea trigger avoidance and photoprotection",
-      "Assess for and treat coexisting ocular rosacea, particularly with periocular lesions",
-      "Refer to dermatology and counsel that the course is often chronic and treatment-resistant with risk of residual scarring"
+    [
+     "Clinical Pitfall",
+     "Prescribing potent topical corticosteroids, which characteristically worsen the eruption",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for granulomatous rosacea."
+  }
+ ]
 }

@@ -138,5 +138,77 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "hcad772ea"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "aortic_dissection-dx-algo",
+      "title": "Aortic dissection: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Pain characteristically migrates as the dissection propagates, often shifting to the interscapular region of the back (Harrison 22e p.2169).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Sudden, very severe tearing chest or interscapular back pain with diaphoresis, especially when it migrates (Harrison 22e p.2169)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: CT (with contrast) - most commonly used given proximity of scanners to emergency rooms and rapidity; sensitivity and specificity >90% for the intimal flap and extent (Harrison 22e p.2169), MRI - highly accurate for intimal"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Stanford classification: type A involves the ascending aorta (proximal dissection) regardless of tear site or distal extension; type B is limited to the arch and/or descending aorta (distal dissection). DeBakey"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Aortic dissection is a classic disease that is misdiagnosed as acute myocardial infarction - a dangerous error because anticoagulant/thrombolytic therapy for presumed MI can be catastrophic (Harrison 22e p.102, p.2169)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for aortic dissection."
+    }
+  ],
+  "tables": [
+    {
+      "id": "aortic_dissection-matrix",
+      "title": "Aortic dissection: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Pain characteristically migrates as the dissection propagates, often shifting to the interscapular region of the back (Harrison",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "CT (with contrast) - most commonly used given proximity of scanners to emergency rooms and rapidity; sensitivity and specificity",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Acute myocardial infarction / acute coronary syndrome (chest pain, and dissection can occlude a coronary ostium) (Harrison 22e",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Sudden, very severe tearing chest or interscapular back pain with diaphoresis, especially when it migrates (Harrison 22e p.2169)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Aortic dissection is a classic disease that is misdiagnosed as acute myocardial infarction - a dangerous error because",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for aortic dissection."
+    }
+  ]
 }

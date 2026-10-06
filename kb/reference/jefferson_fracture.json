@@ -1,76 +1,148 @@
 {
-  "id": "jefferson_fracture",
-  "name": "Jefferson fracture (C1 burst)",
-  "aliases": [
-    "C1 burst fracture",
-    "atlas burst fracture",
-    "atlas ring fracture"
+ "id": "jefferson_fracture",
+ "name": "Jefferson fracture (C1 burst)",
+ "aliases": [
+  "C1 burst fracture",
+  "atlas burst fracture",
+  "atlas ring fracture"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Trauma",
+ "specialty": "Orthopaedic Trauma",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rockwood and Green's Fractures in Adults",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A burst fracture of the ring of the atlas (C1), classically a four-part fracture of the anterior and posterior arches produced by axial loading",
+   "Axial compression (a dive or a blow to the vertex) drives the occipital condyles onto the sloped lateral masses, splaying them apart and breaking the ring",
+   "Stability depends chiefly on the integrity of the transverse atlantal ligament",
+   "The rule of Spence uses combined lateral mass overhang on the open-mouth view to infer transverse ligament rupture and instability",
+   "Because the canal is wide at this level, neurological injury is frequently absent",
+   "Stable fractures are treated with a rigid collar or orthosis, while transverse ligament incompetence may require halo immobilisation or surgical fixation and fusion",
+   "The open-mouth (odontoid peg) view and CT are key, alongside assessment of the atlanto-dens interval"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Trauma",
-  "specialty": "Orthopaedic Trauma",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rockwood and Green's Fractures in Adults",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A burst fracture of the ring of the atlas (C1), classically a four-part fracture of the anterior and posterior arches produced by axial loading",
-      "Axial compression (a dive or a blow to the vertex) drives the occipital condyles onto the sloped lateral masses, splaying them apart and breaking the ring",
-      "Stability depends chiefly on the integrity of the transverse atlantal ligament",
-      "The rule of Spence uses combined lateral mass overhang on the open-mouth view to infer transverse ligament rupture and instability",
-      "Because the canal is wide at this level, neurological injury is frequently absent",
-      "Stable fractures are treated with a rigid collar or orthosis, while transverse ligament incompetence may require halo immobilisation or surgical fixation and fusion",
-      "The open-mouth (odontoid peg) view and CT are key, alongside assessment of the atlanto-dens interval"
+  "pathophysiology": "An axial load transmitted through the occipital condyles onto the obliquely oriented lateral masses of the atlas forces them apart, fracturing the ring at its weakest points where the arches join the lateral masses. Lateral displacement of the masses tensions the transverse atlantal ligament, which may rupture or avulse its bony attachment. Because the fracture tends to enlarge rather than narrow the canal, the spinal cord is usually spared, but loss of transverse ligament competence renders the atlantoaxial articulation unstable and threatens later displacement.",
+  "additionalDifferentials": [
+   "Hangman (C2) fracture",
+   "Odontoid (dens) fracture",
+   "Occipital condyle fracture",
+   "Atlanto-occipital dissociation",
+   "Isolated posterior arch fracture of the atlas",
+   "Atlantoaxial instability from other causes"
+  ],
+  "additionalInvestigations": [
+   "Open-mouth (odontoid) and lateral cervical radiographs",
+   "CT of the cervical spine to define the ring fracture and lateral mass displacement",
+   "Application of the rule of Spence to lateral mass overhang",
+   "MRI to assess the integrity of the transverse atlantal ligament",
+   "CT or MR angiography for suspected vertebral artery injury"
+  ],
+  "redFlags": [
+   "Rupture of the transverse atlantal ligament indicating instability",
+   "Lateral mass overhang exceeding the rule-of-Spence threshold",
+   "Associated axis or occipito-cervical injury",
+   "Vertebral artery injury"
+  ],
+  "prognosis": "Isolated stable atlas fractures usually unite with immobilisation and a good outcome; transverse ligament incompetence signifies instability that may require fusion, but neurological injury is uncommon because the canal is capacious.",
+  "pitfalls": [
+   "Failing to assess the competence of the transverse atlantal ligament",
+   "Missing the fracture on plain films by not obtaining CT",
+   "Overlooking associated cervical injuries",
+   "Misjudging stability and under-treating an unstable injury"
+  ],
+  "references": [
+   "Rockwood and Green's Fractures in Adults",
+   "The Spine (Rothman-Simeone)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Determine stability from the integrity of the transverse atlantal ligament, which governs treatment choice",
+   "Rigid cervical collar or orthosis immobilisation for stable fractures with an intact transverse ligament",
+   "Halo vest immobilisation or surgical atlantoaxial fixation and fusion when the transverse ligament is incompetent",
+   "Assess for and manage associated vertebral artery injury with CT or MR angiography and antithrombotic therapy as indicated",
+   "Analgesia and strict spinal precautions during initial stabilisation and imaging",
+   "Spinal surgery referral with follow-up imaging to confirm bony union"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "jefferson_fracture-pathway",
+   "title": "Jefferson fracture (C1 burst): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A burst fracture of the ring of the atlas (C1), classically a four-part fracture of the anterior and posterior arches produced by axial loading",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rupture of the transverse atlantal ligament indicating instability",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Open-mouth (odontoid) and lateral cervical radiographs, CT of the cervical spine to define the ring fracture and lateral mass displacement, Application of the rule of Spence to lateral mass overhang"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Determine stability from the integrity of the transverse atlantal ligament, which governs treatment choice"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to assess the competence of the transverse atlantal ligament"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of jefferson fracture (c1 burst)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "jefferson_fracture-matrix",
+   "title": "Jefferson fracture (C1 burst): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A burst fracture of the ring of the atlas (C1), classically a four-part fracture of the anterior and posterior arches produced by",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "An axial load transmitted through the occipital condyles onto the obliquely oriented lateral masses of the atlas forces them apart, fracturing the ring at its weakest points where the arches join the lateral masses. Lateral displacement of the masses tensions the transverse atlantal ligament, which may rupture or avulse its bony attachment. Because the fracture tends to enlarge rather than narrow the canal, the spinal cord is usually spared, but loss of transverse ligament competence renders the atlantoaxial articulation unstable and threatens later displacement.",
-    "additionalDifferentials": [
-      "Hangman (C2) fracture",
-      "Odontoid (dens) fracture",
-      "Occipital condyle fracture",
-      "Atlanto-occipital dissociation",
-      "Isolated posterior arch fracture of the atlas",
-      "Atlantoaxial instability from other causes"
+    [
+     "Key Investigations",
+     "Open-mouth (odontoid) and lateral cervical radiographs, CT of the cervical spine to define the ring fracture and lateral mass",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Open-mouth (odontoid) and lateral cervical radiographs",
-      "CT of the cervical spine to define the ring fracture and lateral mass displacement",
-      "Application of the rule of Spence to lateral mass overhang",
-      "MRI to assess the integrity of the transverse atlantal ligament",
-      "CT or MR angiography for suspected vertebral artery injury"
+    [
+     "Primary Differentials",
+     "Hangman (C2) fracture, Odontoid (dens) fracture, Occipital condyle fracture",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rupture of the transverse atlantal ligament indicating instability",
-      "Lateral mass overhang exceeding the rule-of-Spence threshold",
-      "Associated axis or occipito-cervical injury",
-      "Vertebral artery injury"
+    [
+     "Management Strategy",
+     "Determine stability from the integrity of the transverse atlantal ligament, which governs treatment choice",
+     "Core treatment modality"
     ],
-    "prognosis": "Isolated stable atlas fractures usually unite with immobilisation and a good outcome; transverse ligament incompetence signifies instability that may require fusion, but neurological injury is uncommon because the canal is capacious.",
-    "pitfalls": [
-      "Failing to assess the competence of the transverse atlantal ligament",
-      "Missing the fracture on plain films by not obtaining CT",
-      "Overlooking associated cervical injuries",
-      "Misjudging stability and under-treating an unstable injury"
-    ],
-    "references": [
-      "Rockwood and Green's Fractures in Adults",
-      "The Spine (Rothman-Simeone)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Determine stability from the integrity of the transverse atlantal ligament, which governs treatment choice",
-      "Rigid cervical collar or orthosis immobilisation for stable fractures with an intact transverse ligament",
-      "Halo vest immobilisation or surgical atlantoaxial fixation and fusion when the transverse ligament is incompetent",
-      "Assess for and manage associated vertebral artery injury with CT or MR angiography and antithrombotic therapy as indicated",
-      "Analgesia and strict spinal precautions during initial stabilisation and imaging",
-      "Spinal surgery referral with follow-up imaging to confirm bony union"
+    [
+     "Clinical Pitfall",
+     "Failing to assess the competence of the transverse atlantal ligament",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for jefferson fracture (c1 burst)."
+  }
+ ]
 }

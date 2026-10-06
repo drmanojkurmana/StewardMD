@@ -1,84 +1,156 @@
 {
-  "id": "hydrofluoric_acid_burn",
-  "name": "Hydrofluoric acid exposure",
-  "aliases": [
-    "HF acid exposure",
-    "HF exposure",
-    "fluoride burn",
-    "hydrofluoric acid burn",
-    "hydrofluoric acid exposure",
-    "hydrofluoric acid poisoning"
+ "id": "hydrofluoric_acid_burn",
+ "name": "Hydrofluoric acid exposure",
+ "aliases": [
+  "HF acid exposure",
+  "HF exposure",
+  "fluoride burn",
+  "hydrofluoric acid burn",
+  "hydrofluoric acid exposure",
+  "hydrofluoric acid poisoning"
+ ],
+ "class": "non_infective",
+ "system": "Toxicology",
+ "specialty": "Clinical Toxicology / Emergency Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Goldfrank's Toxicologic Emergencies",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Pain is characteristically out of proportion to visible skin changes and may be delayed for hours, especially after exposure to dilute solutions",
+   "Unlike other acids, the danger is the fluoride ion rather than the hydrogen ion, so injury and systemic toxicity extend well beyond the surface burn",
+   "Fingertip and nail-bed burns are common and notoriously painful, often with minimal early skin findings",
+   "Systemic fluoride absorption chelates calcium and magnesium, causing hypocalcaemia and hypomagnesaemia that can precipitate life-threatening arrhythmias",
+   "Hyperkalaemia from cellular efflux is an additional driver of cardiotoxicity in significant exposures",
+   "Copious irrigation followed by calcium therapy is the cornerstone of treatment, with topical, local or intra-arterial calcium used depending on site and severity",
+   "Inhalational and large or concentrated dermal exposures warrant cardiac monitoring and aggressive correction of electrolyte disturbance",
+   "Any ingestion or large surface-area or high-concentration exposure should prompt early poisons-centre discussion and monitoring for systemic toxicity"
   ],
-  "class": "non_infective",
-  "system": "Toxicology",
-  "specialty": "Clinical Toxicology / Emergency Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Goldfrank's Toxicologic Emergencies",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Pain is characteristically out of proportion to visible skin changes and may be delayed for hours, especially after exposure to dilute solutions",
-      "Unlike other acids, the danger is the fluoride ion rather than the hydrogen ion, so injury and systemic toxicity extend well beyond the surface burn",
-      "Fingertip and nail-bed burns are common and notoriously painful, often with minimal early skin findings",
-      "Systemic fluoride absorption chelates calcium and magnesium, causing hypocalcaemia and hypomagnesaemia that can precipitate life-threatening arrhythmias",
-      "Hyperkalaemia from cellular efflux is an additional driver of cardiotoxicity in significant exposures",
-      "Copious irrigation followed by calcium therapy is the cornerstone of treatment, with topical, local or intra-arterial calcium used depending on site and severity",
-      "Inhalational and large or concentrated dermal exposures warrant cardiac monitoring and aggressive correction of electrolyte disturbance",
-      "Any ingestion or large surface-area or high-concentration exposure should prompt early poisons-centre discussion and monitoring for systemic toxicity"
+  "pathophysiology": "Hydrofluoric acid is a relatively weak acid, so surface corrosion is often modest, but the fluoride ion penetrates deeply into tissue. There it binds avidly to calcium and magnesium, forming insoluble salts that cause liquefactive necrosis and intense, progressive pain. The resulting fall in ionised calcium and magnesium disrupts cellular function and cardiac conduction, while fluoride also promotes potassium efflux from cells. The combination of hypocalcaemia, hypomagnesaemia and hyperkalaemia predisposes to ventricular arrhythmias, which are the usual cause of death in serious systemic poisoning.",
+  "additionalDifferentials": [
+   "Other acid or alkali chemical burns",
+   "Thermal burn",
+   "Cellulitis or other soft-tissue infection",
+   "Other causes of acute hypocalcaemia",
+   "Contact dermatitis or irritant exposure",
+   "Digital ischaemia from another cause"
+  ],
+  "additionalInvestigations": [
+   "Serum ionised calcium, magnesium and potassium with serial monitoring",
+   "Electrocardiogram and continuous cardiac monitoring for QT prolongation and arrhythmia",
+   "Arterial blood gas and renal function in significant exposures",
+   "Serum fluoride concentration where available",
+   "Chest radiograph after inhalational exposure",
+   "Assessment of burn depth, surface area and involved sites"
+  ],
+  "redFlags": [
+   "Ingestion, inhalation or large or high-concentration dermal exposure",
+   "Severe or worsening pain disproportionate to skin appearance",
+   "Hypocalcaemia, hypomagnesaemia or hyperkalaemia",
+   "QT prolongation or ventricular arrhythmia",
+   "Involvement of the face, airway or extensive body surface area"
+  ],
+  "prognosis": "Small dilute dermal burns treated promptly with irrigation and calcium usually heal well, but concentrated, extensive, inhalational or ingested exposures can cause refractory electrolyte disturbance and fatal arrhythmia despite treatment.",
+  "pitfalls": [
+   "Underestimating severity because the surface burn looks trivial",
+   "Failing to anticipate and correct hypocalcaemia, hypomagnesaemia and hyperkalaemia",
+   "Not instituting cardiac monitoring after significant exposure",
+   "Treating it like an ordinary acid burn and omitting calcium therapy",
+   "Discharging a patient with fingertip burns before ensuring adequate pain control and follow-up"
+  ],
+  "references": [
+   "Goldfrank's Toxicologic Emergencies",
+   "UpToDate: Hydrofluoric acid burns"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Immediate removal of contaminated clothing and copious irrigation of the exposed area",
+   "Topical calcium gluconate gel to the burn, escalating to local subcutaneous infiltration or intra-arterial calcium or a calcium Bier block for refractory pain and deep or digital burns",
+   "Intravenous calcium and magnesium replacement with treatment of hyperkalaemia to counter fluoride-induced electrolyte derangement",
+   "Continuous cardiac monitoring with prompt treatment of arrhythmias and QT prolongation in significant exposures",
+   "Nebulised calcium gluconate and airway assessment after inhalational exposure",
+   "Nail removal to access and treat painful nail-bed burns where needed",
+   "Escalation to intensive care and clinical toxicology input for extensive, concentrated, inhalational, or ingested exposures"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "hydrofluoric_acid_burn-pathway",
+   "title": "Hydrofluoric acid exposure: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Pain is characteristically out of proportion to visible skin changes and may be delayed for hours, especially after exposure to dilute solutions",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Ingestion, inhalation or large or high-concentration dermal exposure",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serum ionised calcium, magnesium and potassium with serial monitoring, Electrocardiogram and continuous cardiac monitoring for QT prolongation and arrhythmia, Arterial blood gas and renal function in significant exposures"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Immediate removal of contaminated clothing and copious irrigation of the exposed area"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Underestimating severity because the surface burn looks trivial"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of hydrofluoric acid exposure."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hydrofluoric_acid_burn-matrix",
+   "title": "Hydrofluoric acid exposure: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Pain is characteristically out of proportion to visible skin changes and may be delayed for hours, especially after exposure to",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Hydrofluoric acid is a relatively weak acid, so surface corrosion is often modest, but the fluoride ion penetrates deeply into tissue. There it binds avidly to calcium and magnesium, forming insoluble salts that cause liquefactive necrosis and intense, progressive pain. The resulting fall in ionised calcium and magnesium disrupts cellular function and cardiac conduction, while fluoride also promotes potassium efflux from cells. The combination of hypocalcaemia, hypomagnesaemia and hyperkalaemia predisposes to ventricular arrhythmias, which are the usual cause of death in serious systemic poisoning.",
-    "additionalDifferentials": [
-      "Other acid or alkali chemical burns",
-      "Thermal burn",
-      "Cellulitis or other soft-tissue infection",
-      "Other causes of acute hypocalcaemia",
-      "Contact dermatitis or irritant exposure",
-      "Digital ischaemia from another cause"
+    [
+     "Key Investigations",
+     "Serum ionised calcium, magnesium and potassium with serial monitoring, Electrocardiogram and continuous cardiac monitoring for QT",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serum ionised calcium, magnesium and potassium with serial monitoring",
-      "Electrocardiogram and continuous cardiac monitoring for QT prolongation and arrhythmia",
-      "Arterial blood gas and renal function in significant exposures",
-      "Serum fluoride concentration where available",
-      "Chest radiograph after inhalational exposure",
-      "Assessment of burn depth, surface area and involved sites"
+    [
+     "Primary Differentials",
+     "Other acid or alkali chemical burns, Thermal burn, Cellulitis or other soft-tissue infection",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Ingestion, inhalation or large or high-concentration dermal exposure",
-      "Severe or worsening pain disproportionate to skin appearance",
-      "Hypocalcaemia, hypomagnesaemia or hyperkalaemia",
-      "QT prolongation or ventricular arrhythmia",
-      "Involvement of the face, airway or extensive body surface area"
+    [
+     "Management Strategy",
+     "Immediate removal of contaminated clothing and copious irrigation of the exposed area",
+     "Core treatment modality"
     ],
-    "prognosis": "Small dilute dermal burns treated promptly with irrigation and calcium usually heal well, but concentrated, extensive, inhalational or ingested exposures can cause refractory electrolyte disturbance and fatal arrhythmia despite treatment.",
-    "pitfalls": [
-      "Underestimating severity because the surface burn looks trivial",
-      "Failing to anticipate and correct hypocalcaemia, hypomagnesaemia and hyperkalaemia",
-      "Not instituting cardiac monitoring after significant exposure",
-      "Treating it like an ordinary acid burn and omitting calcium therapy",
-      "Discharging a patient with fingertip burns before ensuring adequate pain control and follow-up"
-    ],
-    "references": [
-      "Goldfrank's Toxicologic Emergencies",
-      "UpToDate: Hydrofluoric acid burns"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Immediate removal of contaminated clothing and copious irrigation of the exposed area",
-      "Topical calcium gluconate gel to the burn, escalating to local subcutaneous infiltration or intra-arterial calcium or a calcium Bier block for refractory pain and deep or digital burns",
-      "Intravenous calcium and magnesium replacement with treatment of hyperkalaemia to counter fluoride-induced electrolyte derangement",
-      "Continuous cardiac monitoring with prompt treatment of arrhythmias and QT prolongation in significant exposures",
-      "Nebulised calcium gluconate and airway assessment after inhalational exposure",
-      "Nail removal to access and treat painful nail-bed burns where needed",
-      "Escalation to intensive care and clinical toxicology input for extensive, concentrated, inhalational, or ingested exposures"
+    [
+     "Clinical Pitfall",
+     "Underestimating severity because the surface burn looks trivial",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for hydrofluoric acid exposure."
+  }
+ ]
 }

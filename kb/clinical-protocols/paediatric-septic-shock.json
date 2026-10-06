@@ -141,5 +141,77 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-25"
- }
+ },
+ "algorithms": [
+  {
+   "id": "paediatric-septic-shock-pathway",
+   "title": "Septic shock in children Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Phoenix criteria (used by SSC Children 2026): sepsis is suspected infection with a Phoenix Sepsis Score of 2 or more (respiratory, cardiovascular, coagulation and neurological dysfunction).",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Oxygen and airway support, IV or IO access within minutes, check glucose and ionised calcium, and measure blood lactate (strong recommendation).",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Hypoperfusion: tachycardia, prolonged capillary refill or flash refill, weak or bounding pulses, cold mottled or warm flushed peripheries, altered consciousness, reduced urine output. Hypotension is a late sign."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Start adrenaline or noradrenaline for fluid-refractory shock or when fluid overload limits boluses. SSC 2026 found insufficient evidence to prefer either drug or to fix a fluid volume before starting. Start through a peripheral line rather"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Guide resuscitation by heart rate, blood pressure, capillary refill, skin temperature, pulse volume, consciousness and urine output; repeat lactate."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for septic shock in children."
+  }
+ ],
+ "tables": [
+  {
+   "id": "paediatric-septic-shock-summary-matrix",
+   "title": "Septic shock in children Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Phoenix criteria (used by SSC Children 2026): sepsis is suspected infection with a Phoenix Sepsis Score of 2 or more (respiratory,",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Oxygen and airway support, IV or IO access within minutes, check glucose and ionised calcium, and measure blood lactate (strong",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Balanced crystalloid (Ringer lactate): 10 to 20 mL/kg IV per bolus; up to 40 to 60 mL/kg in the first hour where ICU is available, up to 40",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Repeating boluses without reassessment, especially where ICU care is unavailable or in children with malnutrition, anaemia or heart disease.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for septic shock in children."
+  }
+ ]
 }

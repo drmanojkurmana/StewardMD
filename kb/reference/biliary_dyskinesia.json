@@ -1,76 +1,148 @@
 {
-  "id": "biliary_dyskinesia",
-  "name": "Biliary dyskinesia (functional gallbladder disorder)",
-  "aliases": [
-    "functional gallbladder disorder",
-    "acalculous biliary pain",
-    "gallbladder dyskinesia"
+ "id": "biliary_dyskinesia",
+ "name": "Biliary dyskinesia (functional gallbladder disorder)",
+ "aliases": [
+  "functional gallbladder disorder",
+  "acalculous biliary pain",
+  "gallbladder dyskinesia"
+ ],
+ "class": "non_infective",
+ "system": "Gastroenterology / Hepatobiliary",
+ "specialty": "Hepatobiliary / Pancreatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A functional disorder producing typical biliary-type pain in the absence of gallstones or structural gallbladder disease",
+   "Pain is characteristically epigastric or right upper quadrant, builds to a steady plateau, lasts at least half an hour, and is not relieved by posture, antacids, or defaecation",
+   "Ultrasound is normal with no stones, sludge, or wall thickening, prompting further functional assessment",
+   "Cholescintigraphy with a fatty stimulus is used to calculate the gallbladder ejection fraction, and a low value supports the diagnosis",
+   "Diagnosis rests on typical biliary pain plus exclusion of stones and of other upper gastrointestinal causes, in keeping with functional (Rome) criteria",
+   "Cholecystectomy may relieve symptoms in carefully selected patients with a low ejection fraction, but response is less predictable than for stone disease",
+   "Overlap with functional dyspepsia and sphincter of Oddi dysfunction should be considered before surgery"
   ],
-  "class": "non_infective",
-  "system": "Gastroenterology / Hepatobiliary",
-  "specialty": "Hepatobiliary / Pancreatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A functional disorder producing typical biliary-type pain in the absence of gallstones or structural gallbladder disease",
-      "Pain is characteristically epigastric or right upper quadrant, builds to a steady plateau, lasts at least half an hour, and is not relieved by posture, antacids, or defaecation",
-      "Ultrasound is normal with no stones, sludge, or wall thickening, prompting further functional assessment",
-      "Cholescintigraphy with a fatty stimulus is used to calculate the gallbladder ejection fraction, and a low value supports the diagnosis",
-      "Diagnosis rests on typical biliary pain plus exclusion of stones and of other upper gastrointestinal causes, in keeping with functional (Rome) criteria",
-      "Cholecystectomy may relieve symptoms in carefully selected patients with a low ejection fraction, but response is less predictable than for stone disease",
-      "Overlap with functional dyspepsia and sphincter of Oddi dysfunction should be considered before surgery"
+  "pathophysiology": "Functional gallbladder disorder is thought to arise from abnormal gallbladder motility and impaired emptying, sometimes accompanied by visceral hypersensitivity and altered neurohormonal signalling of the biliary tract. Ineffective contraction in response to cholecystokinin, whether from a primary motility defect or from a functional narrowing at the cystic duct or sphincter, is proposed to generate biliary-type pain despite the absence of stones. A reduced gallbladder ejection fraction on cholescintigraphy is the objective correlate of this impaired emptying, although the correlation between measured ejection fraction and symptom relief after surgery is imperfect.",
+  "additionalDifferentials": [
+   "Symptomatic gallstones or microlithiasis",
+   "Functional dyspepsia",
+   "Sphincter of Oddi dysfunction",
+   "Peptic ulcer disease or gastro-oesophageal reflux",
+   "Chronic pancreatitis",
+   "Irritable bowel syndrome with upper abdominal pain"
+  ],
+  "additionalInvestigations": [
+   "Abdominal ultrasound to exclude stones, sludge, and structural disease",
+   "Cholescintigraphy with a fatty or cholecystokinin stimulus to measure gallbladder ejection fraction",
+   "Liver function tests and pancreatic enzymes to exclude obstruction and pancreatitis",
+   "Upper gastrointestinal endoscopy to exclude peptic disease",
+   "Magnetic resonance cholangiopancreatography where biliary or pancreatic duct pathology is suspected"
+  ],
+  "redFlags": [
+   "Jaundice, fever, or deranged liver function suggesting obstruction or cholangitis",
+   "Weight loss or a palpable mass raising concern for malignancy",
+   "Persistent vomiting or features of gastric outlet obstruction",
+   "Raised pancreatic enzymes indicating pancreatitis"
+  ],
+  "prognosis": "The condition is benign but can be chronic and relapsing; selected patients with a low ejection fraction and classic pain often improve after cholecystectomy, though a proportion have persistent symptoms, underscoring the need for careful selection.",
+  "pitfalls": [
+   "Proceeding to cholecystectomy for atypical or non-biliary pain and leaving the patient with persistent symptoms",
+   "Relying on a low ejection fraction alone without confirming that the pain is genuinely biliary",
+   "Overlooking functional dyspepsia or sphincter of Oddi dysfunction that would not respond to surgery",
+   "Failing to exclude structural disease and malignancy before labelling the disorder functional"
+  ],
+  "references": [
+   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+   "Yamada's Textbook of Gastroenterology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Reassurance and conservative management of this benign functional disorder, with dietary modification and simple analgesia",
+   "A trial of neuromodulatory or antispasmodic therapy, such as a low-dose tricyclic antidepressant, for functional biliary-type pain",
+   "Exclude and treat other upper gastrointestinal causes such as peptic disease and reflux before attributing symptoms to the gallbladder",
+   "Laparoscopic cholecystectomy for carefully selected patients with classic biliary pain and a low gallbladder ejection fraction",
+   "Counsel that symptom relief after surgery is less predictable than for stone disease",
+   "Gastroenterology or hepatobiliary referral for functional (Rome-criteria) assessment and to guide surgical selection"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "biliary_dyskinesia-pathway",
+   "title": "Biliary dyskinesia (functional gallbladder disorder): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A functional disorder producing typical biliary-type pain in the absence of gallstones or structural gallbladder disease",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Jaundice, fever, or deranged liver function suggesting obstruction or cholangitis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Abdominal ultrasound to exclude stones, sludge, and structural disease, Cholescintigraphy with a fatty or cholecystokinin stimulus to measure gallbladder ejection fraction, Liver function tests and pancreatic enzymes to"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Reassurance and conservative management of this benign functional disorder, with dietary modification and simple analgesia"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Proceeding to cholecystectomy for atypical or non-biliary pain and leaving the patient with persistent symptoms"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of biliary dyskinesia (functional gallbladder disorder)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "biliary_dyskinesia-matrix",
+   "title": "Biliary dyskinesia (functional gallbladder disorder): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A functional disorder producing typical biliary-type pain in the absence of gallstones or structural gallbladder disease",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Functional gallbladder disorder is thought to arise from abnormal gallbladder motility and impaired emptying, sometimes accompanied by visceral hypersensitivity and altered neurohormonal signalling of the biliary tract. Ineffective contraction in response to cholecystokinin, whether from a primary motility defect or from a functional narrowing at the cystic duct or sphincter, is proposed to generate biliary-type pain despite the absence of stones. A reduced gallbladder ejection fraction on cholescintigraphy is the objective correlate of this impaired emptying, although the correlation between measured ejection fraction and symptom relief after surgery is imperfect.",
-    "additionalDifferentials": [
-      "Symptomatic gallstones or microlithiasis",
-      "Functional dyspepsia",
-      "Sphincter of Oddi dysfunction",
-      "Peptic ulcer disease or gastro-oesophageal reflux",
-      "Chronic pancreatitis",
-      "Irritable bowel syndrome with upper abdominal pain"
+    [
+     "Key Investigations",
+     "Abdominal ultrasound to exclude stones, sludge, and structural disease, Cholescintigraphy with a fatty or cholecystokinin",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Abdominal ultrasound to exclude stones, sludge, and structural disease",
-      "Cholescintigraphy with a fatty or cholecystokinin stimulus to measure gallbladder ejection fraction",
-      "Liver function tests and pancreatic enzymes to exclude obstruction and pancreatitis",
-      "Upper gastrointestinal endoscopy to exclude peptic disease",
-      "Magnetic resonance cholangiopancreatography where biliary or pancreatic duct pathology is suspected"
+    [
+     "Primary Differentials",
+     "Symptomatic gallstones or microlithiasis, Functional dyspepsia, Sphincter of Oddi dysfunction",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Jaundice, fever, or deranged liver function suggesting obstruction or cholangitis",
-      "Weight loss or a palpable mass raising concern for malignancy",
-      "Persistent vomiting or features of gastric outlet obstruction",
-      "Raised pancreatic enzymes indicating pancreatitis"
+    [
+     "Management Strategy",
+     "Reassurance and conservative management of this benign functional disorder, with dietary modification and simple analgesia",
+     "Core treatment modality"
     ],
-    "prognosis": "The condition is benign but can be chronic and relapsing; selected patients with a low ejection fraction and classic pain often improve after cholecystectomy, though a proportion have persistent symptoms, underscoring the need for careful selection.",
-    "pitfalls": [
-      "Proceeding to cholecystectomy for atypical or non-biliary pain and leaving the patient with persistent symptoms",
-      "Relying on a low ejection fraction alone without confirming that the pain is genuinely biliary",
-      "Overlooking functional dyspepsia or sphincter of Oddi dysfunction that would not respond to surgery",
-      "Failing to exclude structural disease and malignancy before labelling the disorder functional"
-    ],
-    "references": [
-      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-      "Yamada's Textbook of Gastroenterology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Reassurance and conservative management of this benign functional disorder, with dietary modification and simple analgesia",
-      "A trial of neuromodulatory or antispasmodic therapy, such as a low-dose tricyclic antidepressant, for functional biliary-type pain",
-      "Exclude and treat other upper gastrointestinal causes such as peptic disease and reflux before attributing symptoms to the gallbladder",
-      "Laparoscopic cholecystectomy for carefully selected patients with classic biliary pain and a low gallbladder ejection fraction",
-      "Counsel that symptom relief after surgery is less predictable than for stone disease",
-      "Gastroenterology or hepatobiliary referral for functional (Rome-criteria) assessment and to guide surgical selection"
+    [
+     "Clinical Pitfall",
+     "Proceeding to cholecystectomy for atypical or non-biliary pain and leaving the patient with persistent symptoms",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for biliary dyskinesia (functional gallbladder disorder)."
+  }
+ ]
 }

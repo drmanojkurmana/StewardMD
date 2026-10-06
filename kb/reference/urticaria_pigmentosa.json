@@ -1,72 +1,144 @@
 {
-  "id": "urticaria_pigmentosa",
-  "name": "Urticaria pigmentosa",
-  "aliases": [
-    "maculopapular cutaneous mastocytosis"
+ "id": "urticaria_pigmentosa",
+ "name": "Urticaria pigmentosa",
+ "aliases": [
+  "maculopapular cutaneous mastocytosis"
+ ],
+ "class": "non_infective",
+ "system": "Skin",
+ "specialty": "Dermatology / Paediatrics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Dermatology references / mastocytosis literature",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The commonest form of cutaneous mastocytosis, presenting as multiple red-brown macules and papules",
+   "Lesions urticate on rubbing (Darier sign) and may blister in young children",
+   "It can begin in infancy or in adulthood, with different implications for each",
+   "Childhood-onset disease often regresses spontaneously, while adult-onset disease is frequently associated with systemic mastocytosis",
+   "Mediator release can cause flushing, itch and, uncommonly, systemic reactions",
+   "Baseline serum tryptase and clinical assessment guide the need for systemic evaluation"
   ],
-  "class": "non_infective",
-  "system": "Skin",
-  "specialty": "Dermatology / Paediatrics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Dermatology references / mastocytosis literature",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The commonest form of cutaneous mastocytosis, presenting as multiple red-brown macules and papules",
-      "Lesions urticate on rubbing (Darier sign) and may blister in young children",
-      "It can begin in infancy or in adulthood, with different implications for each",
-      "Childhood-onset disease often regresses spontaneously, while adult-onset disease is frequently associated with systemic mastocytosis",
-      "Mediator release can cause flushing, itch and, uncommonly, systemic reactions",
-      "Baseline serum tryptase and clinical assessment guide the need for systemic evaluation"
+  "pathophysiology": "Urticaria pigmentosa is a maculopapular pattern of cutaneous mastocytosis in which increased numbers of clonal mast cells accumulate in the dermis, commonly linked to KIT mutations. Mechanical or chemical stimulation degranulates these mast cells, releasing histamine and other mediators to produce the localised weal-and-flare of the Darier sign and the pigmented appearance from associated increased melanin. As with other cutaneous mastocytosis, childhood disease tends to involute, whereas adult disease often reflects an underlying systemic process.",
+  "additionalDifferentials": [
+   "Other forms of cutaneous or systemic mastocytosis",
+   "Chronic urticaria",
+   "Secondary syphilis or other papular eruptions",
+   "Histiocytoses",
+   "Post-inflammatory hyperpigmentation"
+  ],
+  "additionalInvestigations": [
+   "Clinical diagnosis with Darier sign",
+   "Skin biopsy showing increased dermal mast cells if needed",
+   "Serum baseline tryptase",
+   "Assessment for systemic symptoms and, in adults, systemic mastocytosis",
+   "Trigger history for mediator symptoms"
+  ],
+  "redFlags": [
+   "Adult onset suggesting systemic mastocytosis",
+   "Systemic mediator symptoms or anaphylaxis",
+   "Extensive disease with blistering in infants",
+   "A high baseline tryptase"
+  ],
+  "prognosis": "Childhood urticaria pigmentosa commonly improves or clears by adolescence, whereas adult disease tends to persist and may be a marker of systemic mastocytosis.",
+  "pitfalls": [
+   "Failing to evaluate adults for systemic mastocytosis",
+   "Overlooking the Darier sign",
+   "Provoking mediator release by vigorously rubbing lesions",
+   "Confusing it with chronic urticaria"
+  ],
+  "references": [
+   "Dermatology reference texts (standard reference)",
+   "Mastocytosis clinical guidelines (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Advise avoidance of mast-cell degranulation triggers including friction, temperature extremes, and provoking drugs such as opioids, NSAIDs, radiographic contrast and certain anaesthetic agents",
+   "Control pruritus and flushing with H1 antihistamines, adding H2 antihistamines and oral sodium cromoglicate for gastrointestinal mediator symptoms",
+   "Treat symptomatic skin lesions with potent topical corticosteroids or phototherapy",
+   "Provide an adrenaline auto-injector and emergency plan for those at risk of systemic mediator-release reactions",
+   "Measure baseline serum tryptase and evaluate adults for underlying systemic mastocytosis, referring to haematology where indicated",
+   "Reassure that childhood-onset disease commonly involutes by adolescence, and offer specialist review for persistent adult disease"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "urticaria_pigmentosa-pathway",
+   "title": "Urticaria pigmentosa: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The commonest form of cutaneous mastocytosis, presenting as multiple red-brown macules and papules",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Adult onset suggesting systemic mastocytosis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical diagnosis with Darier sign, Skin biopsy showing increased dermal mast cells if needed, Serum baseline tryptase"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Advise avoidance of mast-cell degranulation triggers including friction, temperature extremes, and provoking drugs such as opioids, NSAIDs, radiographic contrast and certain anaesthetic agents"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to evaluate adults for systemic mastocytosis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of urticaria pigmentosa."
+  }
+ ],
+ "tables": [
+  {
+   "id": "urticaria_pigmentosa-matrix",
+   "title": "Urticaria pigmentosa: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The commonest form of cutaneous mastocytosis, presenting as multiple red-brown macules and papules",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Urticaria pigmentosa is a maculopapular pattern of cutaneous mastocytosis in which increased numbers of clonal mast cells accumulate in the dermis, commonly linked to KIT mutations. Mechanical or chemical stimulation degranulates these mast cells, releasing histamine and other mediators to produce the localised weal-and-flare of the Darier sign and the pigmented appearance from associated increased melanin. As with other cutaneous mastocytosis, childhood disease tends to involute, whereas adult disease often reflects an underlying systemic process.",
-    "additionalDifferentials": [
-      "Other forms of cutaneous or systemic mastocytosis",
-      "Chronic urticaria",
-      "Secondary syphilis or other papular eruptions",
-      "Histiocytoses",
-      "Post-inflammatory hyperpigmentation"
+    [
+     "Key Investigations",
+     "Clinical diagnosis with Darier sign, Skin biopsy showing increased dermal mast cells if needed, Serum baseline tryptase",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical diagnosis with Darier sign",
-      "Skin biopsy showing increased dermal mast cells if needed",
-      "Serum baseline tryptase",
-      "Assessment for systemic symptoms and, in adults, systemic mastocytosis",
-      "Trigger history for mediator symptoms"
+    [
+     "Primary Differentials",
+     "Other forms of cutaneous or systemic mastocytosis, Chronic urticaria, Secondary syphilis or other papular eruptions",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Adult onset suggesting systemic mastocytosis",
-      "Systemic mediator symptoms or anaphylaxis",
-      "Extensive disease with blistering in infants",
-      "A high baseline tryptase"
+    [
+     "Management Strategy",
+     "Advise avoidance of mast-cell degranulation triggers including friction, temperature extremes, and provoking drugs such as",
+     "Core treatment modality"
     ],
-    "prognosis": "Childhood urticaria pigmentosa commonly improves or clears by adolescence, whereas adult disease tends to persist and may be a marker of systemic mastocytosis.",
-    "pitfalls": [
-      "Failing to evaluate adults for systemic mastocytosis",
-      "Overlooking the Darier sign",
-      "Provoking mediator release by vigorously rubbing lesions",
-      "Confusing it with chronic urticaria"
-    ],
-    "references": [
-      "Dermatology reference texts (standard reference)",
-      "Mastocytosis clinical guidelines (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Advise avoidance of mast-cell degranulation triggers including friction, temperature extremes, and provoking drugs such as opioids, NSAIDs, radiographic contrast and certain anaesthetic agents",
-      "Control pruritus and flushing with H1 antihistamines, adding H2 antihistamines and oral sodium cromoglicate for gastrointestinal mediator symptoms",
-      "Treat symptomatic skin lesions with potent topical corticosteroids or phototherapy",
-      "Provide an adrenaline auto-injector and emergency plan for those at risk of systemic mediator-release reactions",
-      "Measure baseline serum tryptase and evaluate adults for underlying systemic mastocytosis, referring to haematology where indicated",
-      "Reassure that childhood-onset disease commonly involutes by adolescence, and offer specialist review for persistent adult disease"
+    [
+     "Clinical Pitfall",
+     "Failing to evaluate adults for systemic mastocytosis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for urticaria pigmentosa."
+  }
+ ]
 }

@@ -5,7 +5,16 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, ward, ICU, perioperative",
- "aliases": ["Addisonian crisis", "acute adrenal insufficiency", "adrenal insufficiency", "steroid withdrawal", "glucocorticoid-induced adrenal insufficiency", "sick day rules", "stress dose steroids", "steroid emergency card"],
+ "aliases": [
+  "Addisonian crisis",
+  "acute adrenal insufficiency",
+  "adrenal insufficiency",
+  "steroid withdrawal",
+  "glucocorticoid-induced adrenal insufficiency",
+  "sick day rules",
+  "stress dose steroids",
+  "steroid emergency card"
+ ],
  "summary": "Suspect in anyone with adrenal insufficiency or current or recent glucocorticoid use who has unexplained shock, vomiting or collapse; give hydrocortisone 100 mg IV or IM at once, 1 L saline in the first hour, then 200 mg/24 hours, and prevent recurrence with sick-day rules and an emergency card.",
  "sections": [
   {
@@ -77,16 +86,125 @@
   }
  ],
  "drugs": [
-  { "name": "Hydrocortisone (crisis)", "dose": "100 mg IV or IM immediately, then 200 mg/24 hours by continuous IV infusion or 50 mg IV or IM every 6 hours", "notes": "Children: 50 mg/m2 then 50 to 100 mg/m2 per 24 hours. Taper once recovering." },
-  { "name": "0.9% sodium chloride", "dose": "1 L IV within the first hour, then continuous infusion guided by haemodynamics", "notes": "Smaller boluses in heart failure and older adults." },
-  { "name": "Hydrocortisone (oral stress dose)", "dose": "40 mg/day in three doses (20 mg on rising, 10 mg midday, 10 mg 5 pm) for 2 to 5 days of minor illness", "notes": "Prednisolone users: increase to 10 mg/day." },
-  { "name": "Hydrocortisone (emergency IM, self or carer)", "dose": "100 mg IM, repeat after 6 hours if needed", "notes": "For vomiting, diarrhoea or inability to take tablets; then seek hospital care." },
-  { "name": "Hydrocortisone (maintenance)", "dose": "15 to 25 mg/day orally in 2 or 3 divided doses", "notes": "Prednisolone 4 to 6 mg/day is the physiological equivalent." },
-  { "name": "Fludrocortisone", "dose": "50 to 100 mcg orally once daily (starting dose)", "notes": "Primary adrenal insufficiency only; not needed during high-dose hydrocortisone." }
+  {
+   "name": "Hydrocortisone (crisis)",
+   "dose": "100 mg IV or IM immediately, then 200 mg/24 hours by continuous IV infusion or 50 mg IV or IM every 6 hours",
+   "notes": "Children: 50 mg/m2 then 50 to 100 mg/m2 per 24 hours. Taper once recovering."
+  },
+  {
+   "name": "0.9% sodium chloride",
+   "dose": "1 L IV within the first hour, then continuous infusion guided by haemodynamics",
+   "notes": "Smaller boluses in heart failure and older adults."
+  },
+  {
+   "name": "Hydrocortisone (oral stress dose)",
+   "dose": "40 mg/day in three doses (20 mg on rising, 10 mg midday, 10 mg 5 pm) for 2 to 5 days of minor illness",
+   "notes": "Prednisolone users: increase to 10 mg/day."
+  },
+  {
+   "name": "Hydrocortisone (emergency IM, self or carer)",
+   "dose": "100 mg IM, repeat after 6 hours if needed",
+   "notes": "For vomiting, diarrhoea or inability to take tablets; then seek hospital care."
+  },
+  {
+   "name": "Hydrocortisone (maintenance)",
+   "dose": "15 to 25 mg/day orally in 2 or 3 divided doses",
+   "notes": "Prednisolone 4 to 6 mg/day is the physiological equivalent."
+  },
+  {
+   "name": "Fludrocortisone",
+   "dose": "50 to 100 mcg orally once daily (starting dose)",
+   "notes": "Primary adrenal insufficiency only; not needed during high-dose hydrocortisone."
+  }
  ],
  "sources": [
-  { "org": "Endocrine Society", "title": "Diagnosis and treatment of primary adrenal insufficiency: an Endocrine Society clinical practice guideline", "year": 2016, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4880116/" },
-  { "org": "ESE / Endocrine Society", "title": "Joint clinical guideline: diagnosis and therapy of glucocorticoid-induced adrenal insufficiency", "year": 2024, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11180513/" }
+  {
+   "org": "Endocrine Society",
+   "title": "Diagnosis and treatment of primary adrenal insufficiency: an Endocrine Society clinical practice guideline",
+   "year": 2016,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4880116/"
+  },
+  {
+   "org": "ESE / Endocrine Society",
+   "title": "Joint clinical guideline: diagnosis and therapy of glucocorticoid-induced adrenal insufficiency",
+   "year": 2024,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11180513/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "adrenal-crisis-pathway",
+   "title": "Adrenal crisis Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Hypotension or hypovolaemic shock (often out of proportion to the trigger and resistant to fluids and vasopressors) plus one or more of: nausea or vomiting, severe fatigue, fever, abdominal pain, impaired consciousness (confusion,",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Do not delay treatment for tests. If it causes no delay, draw blood for cortisol and ACTH (plus renin and aldosterone if possible) before the first dose.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Supportive labs (not needed for diagnosis): hyponatraemia, hyperkalaemia (primary adrenal insufficiency), raised urea and creatinine, hypoglycaemia, eosinophilia, lymphocytosis."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Hydrocortisone 100 mg IV (or IM if no access) immediately."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Monitor BP, heart rate, urine output, sodium, potassium and glucose closely; correct hyponatraemia at a controlled rate and watch for fluid overload."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for adrenal crisis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "adrenal-crisis-summary-matrix",
+   "title": "Adrenal crisis Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Hypotension or hypovolaemic shock (often out of proportion to the trigger and resistant to fluids and vasopressors) plus one or more of:",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Do not delay treatment for tests. If it causes no delay, draw blood for cortisol and ACTH (plus renin and aldosterone if possible) before",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Hydrocortisone (crisis): 100 mg IV or IM immediately, then 200 mg/24 hours by continuous IV infusion or 50 mg IV or IM every 6 hours",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Waiting for cortisol results or a Synacthen test before giving hydrocortisone.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for adrenal crisis."
+  }
+ ]
 }

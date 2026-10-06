@@ -1,79 +1,151 @@
 {
-  "id": "erythrokeratodermia_progressiva",
-  "name": "Progressive symmetric erythrokeratodermia",
-  "aliases": [
-    "PSEK",
-    "Gottron syndrome",
-    "erythrokeratodermia progressiva symmetrica",
-    "KRT83/LOR/GJB variants"
+ "id": "erythrokeratodermia_progressiva",
+ "name": "Progressive symmetric erythrokeratodermia",
+ "aliases": [
+  "PSEK",
+  "Gottron syndrome",
+  "erythrokeratodermia progressiva symmetrica",
+  "KRT83/LOR/GJB variants"
+ ],
+ "class": "non_infective",
+ "system": "Dermatology / Genetics",
+ "specialty": "Dermatology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rook's Textbook of Dermatology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Characterised by fixed, symmetrical, well-demarcated erythematous hyperkeratotic plaques, typically over the extensor limbs, buttocks and face",
+   "Lesions are relatively stable in position (unlike the migratory figures of erythrokeratodermia variabilis) but slowly progress, often during childhood",
+   "A palmoplantar keratoderma is present in many affected individuals",
+   "Inheritance is usually autosomal dominant, and it shows genetic overlap with erythrokeratodermia variabilis, with variants reported in connexin and other keratinisation genes such as KRT83 and LOR",
+   "There is considerable clinical and genetic overlap with erythrokeratodermia variabilis et progressiva, and the two are often considered a spectrum",
+   "Diagnosis is clinical, supported by biopsy showing hyperkeratosis, acanthosis and papillomatosis; molecular testing may identify a causative variant",
+   "Management is supportive with emollients and keratolytics, and oral retinoids can substantially improve the hyperkeratosis in severe disease"
   ],
-  "class": "non_infective",
-  "system": "Dermatology / Genetics",
-  "specialty": "Dermatology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rook's Textbook of Dermatology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Characterised by fixed, symmetrical, well-demarcated erythematous hyperkeratotic plaques, typically over the extensor limbs, buttocks and face",
-      "Lesions are relatively stable in position (unlike the migratory figures of erythrokeratodermia variabilis) but slowly progress, often during childhood",
-      "A palmoplantar keratoderma is present in many affected individuals",
-      "Inheritance is usually autosomal dominant, and it shows genetic overlap with erythrokeratodermia variabilis, with variants reported in connexin and other keratinisation genes such as KRT83 and LOR",
-      "There is considerable clinical and genetic overlap with erythrokeratodermia variabilis et progressiva, and the two are often considered a spectrum",
-      "Diagnosis is clinical, supported by biopsy showing hyperkeratosis, acanthosis and papillomatosis; molecular testing may identify a causative variant",
-      "Management is supportive with emollients and keratolytics, and oral retinoids can substantially improve the hyperkeratosis in severe disease"
+  "pathophysiology": "Progressive symmetric erythrokeratodermia is a genetically heterogeneous disorder of keratinisation. Reported causes include variants affecting gap-junction connexins, loricrin and hair-keratin genes such as KRT83, which disturb keratinocyte communication, cornified-envelope formation and terminal differentiation. The result is a chronic disturbance of epidermal proliferation and differentiation, generating persistent symmetric erythematous hyperkeratotic plaques with a background of increased epidermal turnover, and a frequently associated palmoplantar keratoderma. Its overlap with erythrokeratodermia variabilis reflects shared molecular pathways.",
+  "additionalDifferentials": [
+   "Erythrokeratodermia variabilis et progressiva",
+   "Pityriasis rubra pilaris",
+   "Psoriasis",
+   "Ichthyosis (lamellar or ichthyosiform erythroderma)",
+   "Netherton syndrome",
+   "KID (keratitis-ichthyosis-deafness) syndrome"
+  ],
+  "additionalInvestigations": [
+   "Skin biopsy showing hyperkeratosis, acanthosis and papillomatosis",
+   "Molecular genetic testing of connexin, LOR and keratin genes as indicated",
+   "Family history and pedigree analysis",
+   "Assessment for palmoplantar keratoderma",
+   "Clinical photography to document progression and symmetry",
+   "Exclusion of psoriasis and pityriasis rubra pilaris where clinically uncertain"
+  ],
+  "redFlags": [
+   "Rapid extension or erythroderma with barrier compromise",
+   "Deep painful fissuring of associated palmoplantar keratoderma",
+   "Secondary infection of hyperkeratotic plaques",
+   "Atypical features prompting reconsideration of an inflammatory or syndromic diagnosis"
+  ],
+  "prognosis": "The condition is chronic and tends to progress through childhood before stabilising; it is not life-threatening, and many patients respond well to oral retinoids, though relapse on withdrawal is common.",
+  "pitfalls": [
+   "Misdiagnosing the fixed plaques as psoriasis or pityriasis rubra pilaris",
+   "Failing to recognise the overlap with erythrokeratodermia variabilis",
+   "Overlooking an associated palmoplantar keratoderma",
+   "Stopping effective retinoid therapy abruptly with subsequent relapse"
+  ],
+  "references": [
+   "Rook's Textbook of Dermatology",
+   "Harper's Textbook of Paediatric Dermatology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Oral retinoids such as acitretin as the mainstay for extensive hyperkeratotic disease, normalising the disturbed keratinisation",
+   "Topical keratolytics including urea, salicylic acid and lactic acid, combined with regular emollients to reduce scale",
+   "Topical retinoids or vitamin D analogues for localised plaques",
+   "Dedicated care of associated palmoplantar keratoderma to preserve hand and foot function",
+   "Genetic counselling and family screening given the usually autosomal dominant inheritance and reported connexin, loricrin and keratin gene variants",
+   "Monitoring for relapse on retinoid withdrawal and surveillance for retinoid-related adverse effects",
+   "Coordinated dermatology and clinical genetics follow-up to document progression and guide therapy"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "erythrokeratodermia_progressiva-pathway",
+   "title": "Progressive symmetric erythrokeratodermia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Characterised by fixed, symmetrical, well-demarcated erythematous hyperkeratotic plaques, typically over the extensor limbs, buttocks and face",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapid extension or erythroderma with barrier compromise",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Skin biopsy showing hyperkeratosis, acanthosis and papillomatosis, Molecular genetic testing of connexin, LOR and keratin genes as indicated, Family history and pedigree analysis"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Oral retinoids such as acitretin as the mainstay for extensive hyperkeratotic disease, normalising the disturbed keratinisation"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misdiagnosing the fixed plaques as psoriasis or pityriasis rubra pilaris"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of progressive symmetric erythrokeratodermia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "erythrokeratodermia_progressiva-matrix",
+   "title": "Progressive symmetric erythrokeratodermia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Characterised by fixed, symmetrical, well-demarcated erythematous hyperkeratotic plaques, typically over the extensor limbs,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Progressive symmetric erythrokeratodermia is a genetically heterogeneous disorder of keratinisation. Reported causes include variants affecting gap-junction connexins, loricrin and hair-keratin genes such as KRT83, which disturb keratinocyte communication, cornified-envelope formation and terminal differentiation. The result is a chronic disturbance of epidermal proliferation and differentiation, generating persistent symmetric erythematous hyperkeratotic plaques with a background of increased epidermal turnover, and a frequently associated palmoplantar keratoderma. Its overlap with erythrokeratodermia variabilis reflects shared molecular pathways.",
-    "additionalDifferentials": [
-      "Erythrokeratodermia variabilis et progressiva",
-      "Pityriasis rubra pilaris",
-      "Psoriasis",
-      "Ichthyosis (lamellar or ichthyosiform erythroderma)",
-      "Netherton syndrome",
-      "KID (keratitis-ichthyosis-deafness) syndrome"
+    [
+     "Key Investigations",
+     "Skin biopsy showing hyperkeratosis, acanthosis and papillomatosis, Molecular genetic testing of connexin, LOR and keratin genes",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Skin biopsy showing hyperkeratosis, acanthosis and papillomatosis",
-      "Molecular genetic testing of connexin, LOR and keratin genes as indicated",
-      "Family history and pedigree analysis",
-      "Assessment for palmoplantar keratoderma",
-      "Clinical photography to document progression and symmetry",
-      "Exclusion of psoriasis and pityriasis rubra pilaris where clinically uncertain"
+    [
+     "Primary Differentials",
+     "Erythrokeratodermia variabilis et progressiva, Pityriasis rubra pilaris, Psoriasis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapid extension or erythroderma with barrier compromise",
-      "Deep painful fissuring of associated palmoplantar keratoderma",
-      "Secondary infection of hyperkeratotic plaques",
-      "Atypical features prompting reconsideration of an inflammatory or syndromic diagnosis"
+    [
+     "Management Strategy",
+     "Oral retinoids such as acitretin as the mainstay for extensive hyperkeratotic disease, normalising the disturbed keratinisation",
+     "Core treatment modality"
     ],
-    "prognosis": "The condition is chronic and tends to progress through childhood before stabilising; it is not life-threatening, and many patients respond well to oral retinoids, though relapse on withdrawal is common.",
-    "pitfalls": [
-      "Misdiagnosing the fixed plaques as psoriasis or pityriasis rubra pilaris",
-      "Failing to recognise the overlap with erythrokeratodermia variabilis",
-      "Overlooking an associated palmoplantar keratoderma",
-      "Stopping effective retinoid therapy abruptly with subsequent relapse"
-    ],
-    "references": [
-      "Rook's Textbook of Dermatology",
-      "Harper's Textbook of Paediatric Dermatology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Oral retinoids such as acitretin as the mainstay for extensive hyperkeratotic disease, normalising the disturbed keratinisation",
-      "Topical keratolytics including urea, salicylic acid and lactic acid, combined with regular emollients to reduce scale",
-      "Topical retinoids or vitamin D analogues for localised plaques",
-      "Dedicated care of associated palmoplantar keratoderma to preserve hand and foot function",
-      "Genetic counselling and family screening given the usually autosomal dominant inheritance and reported connexin, loricrin and keratin gene variants",
-      "Monitoring for relapse on retinoid withdrawal and surveillance for retinoid-related adverse effects",
-      "Coordinated dermatology and clinical genetics follow-up to document progression and guide therapy"
+    [
+     "Clinical Pitfall",
+     "Misdiagnosing the fixed plaques as psoriasis or pityriasis rubra pilaris",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for progressive symmetric erythrokeratodermia."
+  }
+ ]
 }

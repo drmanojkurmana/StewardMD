@@ -175,5 +175,77 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-25"
- }
+ },
+ "algorithms": [
+  {
+   "id": "migraine-prevention-pathway",
+   "title": "Migraine prevention (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Offer prevention (AAN/AHS 2026) for 4 or more migraine days a month, 4 or more moderate to severe headache days a month, or migraine that substantially affects work or daily life.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Also consider prevention when acute treatments are contraindicated, ineffective or being overused.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Chronic migraine: headache on 15 or more days a month for more than 3 months, with migraine features on at least 8 of those days."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "CGRP monoclonal antibodies (erenumab, fremanezumab, galcanezumab, eptinezumab) and gepants (atogepant, rimegepant) are first-line options in the AHS 2024 position and AAN/AHS 2026 guideline; NICE funds them only after at least 3"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Start low and increase slowly; judge effect after 8 to 12 weeks at the target or maximum tolerated dose (24 weeks for onabotulinumtoxinA)."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for migraine prevention (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "migraine-prevention-summary-matrix",
+   "title": "Migraine prevention (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Offer prevention (AAN/AHS 2026) for 4 or more migraine days a month, 4 or more moderate to severe headache days a month, or migraine that",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "CGRP monoclonal antibodies (erenumab, fremanezumab, galcanezumab, eptinezumab) and gepants (atogepant, rimegepant) are first-line options",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Propranolol: 40 mg orally two or three times daily; maintenance 80 to 160 mg daily (divided, or modified-release once daily)",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Stopping a preventive after 2 to 3 weeks at a low dose, before it could work.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for migraine prevention (adult)."
+  }
+ ]
 }

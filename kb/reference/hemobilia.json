@@ -1,76 +1,148 @@
 {
-  "id": "hemobilia",
-  "name": "Haemobilia",
-  "aliases": [
-    "hemobilia",
-    "biliary tract haemorrhage"
+ "id": "hemobilia",
+ "name": "Haemobilia",
+ "aliases": [
+  "hemobilia",
+  "biliary tract haemorrhage"
+ ],
+ "class": "non_infective",
+ "system": "Gastroenterology",
+ "specialty": "Gastroenterology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Haemobilia is bleeding into the biliary tree, most often from an abnormal communication between a vessel and a bile duct",
+   "The classic Quincke triad is right upper quadrant pain, jaundice, and gastrointestinal bleeding, although all three features are present in only a minority",
+   "Iatrogenic and traumatic causes now predominate, including liver biopsy, percutaneous biliary drainage, cholecystectomy, and blunt hepatic trauma",
+   "Other causes include hepatic artery aneurysm or pseudoaneurysm, tumours, gallstones, and vascular malformations",
+   "Bleeding may be delayed by days to weeks after the inciting procedure, so a high index of suspicion is needed",
+   "Blood clots passing through the ampulla can produce biliary colic and transient obstructive jaundice",
+   "Angiographic transcatheter embolisation is the first-line treatment for significant arterial haemobilia, with surgery reserved for embolisation failure and endoscopic therapy used to relieve biliary obstruction"
   ],
-  "class": "non_infective",
-  "system": "Gastroenterology",
-  "specialty": "Gastroenterology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Haemobilia is bleeding into the biliary tree, most often from an abnormal communication between a vessel and a bile duct",
-      "The classic Quincke triad is right upper quadrant pain, jaundice, and gastrointestinal bleeding, although all three features are present in only a minority",
-      "Iatrogenic and traumatic causes now predominate, including liver biopsy, percutaneous biliary drainage, cholecystectomy, and blunt hepatic trauma",
-      "Other causes include hepatic artery aneurysm or pseudoaneurysm, tumours, gallstones, and vascular malformations",
-      "Bleeding may be delayed by days to weeks after the inciting procedure, so a high index of suspicion is needed",
-      "Blood clots passing through the ampulla can produce biliary colic and transient obstructive jaundice",
-      "Angiographic transcatheter embolisation is the first-line treatment for significant arterial haemobilia, with surgery reserved for embolisation failure and endoscopic therapy used to relieve biliary obstruction"
+  "pathophysiology": "Haemobilia arises when a communication forms between the hepatic or cystic arterial circulation (less often the portal or venous system) and the biliary tree, allowing blood to enter the ducts and drain into the duodenum. The commonest triggers are hepatobiliary trauma and instrumentation, which can create a pseudoaneurysm or arteriobiliary fistula that ruptures into a duct. Blood in the biliary tract may clot and intermittently obstruct bile flow, producing colicky pain and jaundice, and then decompress into the gut as melaena or haematemesis, giving the characteristic waxing-and-waning presentation.",
+  "additionalDifferentials": [
+   "Upper gastrointestinal bleeding from peptic ulcer or varices",
+   "Haemosuccus pancreaticus (bleeding via the pancreatic duct)",
+   "Bleeding duodenal or ampullary tumour",
+   "Choledocholithiasis causing obstructive jaundice",
+   "Aortoenteric fistula",
+   "Ruptured hepatic tumour into the biliary tree"
+  ],
+  "additionalInvestigations": [
+   "Cross-sectional contrast-enhanced computed tomography, ideally with arterial-phase angiography, to identify a bleeding source or pseudoaneurysm",
+   "Catheter hepatic angiography, which is both diagnostic and therapeutic through embolisation",
+   "Upper gastrointestinal endoscopy or side-viewing endoscopy to observe blood issuing from the ampulla of Vater",
+   "Liver function tests to characterise the obstructive pattern",
+   "Full blood count, coagulation studies, and crossmatch",
+   "Abdominal ultrasound to detect ductal clot, dilatation, or an underlying lesion"
+  ],
+  "redFlags": [
+   "Haemodynamic instability from major arterial bleeding",
+   "Delayed severe bleeding after recent hepatobiliary intervention or trauma",
+   "Cholangitis or biliary sepsis complicating obstructing clot",
+   "Recurrent bleeding after initial control"
+  ],
+  "prognosis": "With modern angiographic embolisation most cases of arterial haemobilia are controlled successfully and the outlook is favourable, although the prognosis worsens with major trauma, underlying malignancy, or delayed recognition.",
+  "pitfalls": [
+   "Not considering haemobilia in obscure gastrointestinal bleeding after a recent hepatobiliary procedure",
+   "Attributing biliary colic and jaundice to stones and missing intraductal clot",
+   "Overlooking the potentially long delay between the inciting event and the bleed",
+   "Proceeding to surgery when transcatheter embolisation would suffice"
+  ],
+  "references": [
+   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+   "Yamada's Textbook of Gastroenterology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Control active arterial bleeding with catheter hepatic angiography and transarterial embolisation, the first-line definitive treatment for most cases",
+   "Resuscitate with fluids and blood transfusion and correct any coagulopathy",
+   "Relieve biliary obstruction from clot with ERCP, including clot extraction and stenting where jaundice or cholangitis develops",
+   "Reserve surgery, such as vessel ligation or hepatic resection, for failure of embolisation or when a surgically correctable lesion or major trauma is present",
+   "Investigate and treat the underlying cause, such as a hepatic artery pseudoaneurysm, tumour or gallstone, maintaining a high index of suspicion given delayed presentation after biliary procedures",
+   "Monitor for recurrent bleeding, biliary sepsis and haemodynamic deterioration, escalating to interventional radiology or surgery as needed"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "hemobilia-pathway",
+   "title": "Haemobilia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Haemobilia is bleeding into the biliary tree, most often from an abnormal communication between a vessel and a bile duct",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Haemodynamic instability from major arterial bleeding",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Cross-sectional contrast-enhanced computed tomography, ideally with arterial-phase angiography, to identify a bleeding source or pseudoaneurysm, Catheter hepatic angiography, which is both diagnostic and therapeutic"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Control active arterial bleeding with catheter hepatic angiography and transarterial embolisation, the first-line definitive treatment for most cases"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Not considering haemobilia in obscure gastrointestinal bleeding after a recent hepatobiliary procedure"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of haemobilia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hemobilia-matrix",
+   "title": "Haemobilia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Haemobilia is bleeding into the biliary tree, most often from an abnormal communication between a vessel and a bile duct",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Haemobilia arises when a communication forms between the hepatic or cystic arterial circulation (less often the portal or venous system) and the biliary tree, allowing blood to enter the ducts and drain into the duodenum. The commonest triggers are hepatobiliary trauma and instrumentation, which can create a pseudoaneurysm or arteriobiliary fistula that ruptures into a duct. Blood in the biliary tract may clot and intermittently obstruct bile flow, producing colicky pain and jaundice, and then decompress into the gut as melaena or haematemesis, giving the characteristic waxing-and-waning presentation.",
-    "additionalDifferentials": [
-      "Upper gastrointestinal bleeding from peptic ulcer or varices",
-      "Haemosuccus pancreaticus (bleeding via the pancreatic duct)",
-      "Bleeding duodenal or ampullary tumour",
-      "Choledocholithiasis causing obstructive jaundice",
-      "Aortoenteric fistula",
-      "Ruptured hepatic tumour into the biliary tree"
+    [
+     "Key Investigations",
+     "Cross-sectional contrast-enhanced computed tomography, ideally with arterial-phase angiography, to identify a bleeding source or",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Cross-sectional contrast-enhanced computed tomography, ideally with arterial-phase angiography, to identify a bleeding source or pseudoaneurysm",
-      "Catheter hepatic angiography, which is both diagnostic and therapeutic through embolisation",
-      "Upper gastrointestinal endoscopy or side-viewing endoscopy to observe blood issuing from the ampulla of Vater",
-      "Liver function tests to characterise the obstructive pattern",
-      "Full blood count, coagulation studies, and crossmatch",
-      "Abdominal ultrasound to detect ductal clot, dilatation, or an underlying lesion"
+    [
+     "Primary Differentials",
+     "Upper gastrointestinal bleeding from peptic ulcer or varices, Haemosuccus pancreaticus (bleeding via the pancreatic duct),",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Haemodynamic instability from major arterial bleeding",
-      "Delayed severe bleeding after recent hepatobiliary intervention or trauma",
-      "Cholangitis or biliary sepsis complicating obstructing clot",
-      "Recurrent bleeding after initial control"
+    [
+     "Management Strategy",
+     "Control active arterial bleeding with catheter hepatic angiography and transarterial embolisation, the first-line definitive",
+     "Core treatment modality"
     ],
-    "prognosis": "With modern angiographic embolisation most cases of arterial haemobilia are controlled successfully and the outlook is favourable, although the prognosis worsens with major trauma, underlying malignancy, or delayed recognition.",
-    "pitfalls": [
-      "Not considering haemobilia in obscure gastrointestinal bleeding after a recent hepatobiliary procedure",
-      "Attributing biliary colic and jaundice to stones and missing intraductal clot",
-      "Overlooking the potentially long delay between the inciting event and the bleed",
-      "Proceeding to surgery when transcatheter embolisation would suffice"
-    ],
-    "references": [
-      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-      "Yamada's Textbook of Gastroenterology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Control active arterial bleeding with catheter hepatic angiography and transarterial embolisation, the first-line definitive treatment for most cases",
-      "Resuscitate with fluids and blood transfusion and correct any coagulopathy",
-      "Relieve biliary obstruction from clot with ERCP, including clot extraction and stenting where jaundice or cholangitis develops",
-      "Reserve surgery, such as vessel ligation or hepatic resection, for failure of embolisation or when a surgically correctable lesion or major trauma is present",
-      "Investigate and treat the underlying cause, such as a hepatic artery pseudoaneurysm, tumour or gallstone, maintaining a high index of suspicion given delayed presentation after biliary procedures",
-      "Monitor for recurrent bleeding, biliary sepsis and haemodynamic deterioration, escalating to interventional radiology or surgery as needed"
+    [
+     "Clinical Pitfall",
+     "Not considering haemobilia in obscure gastrointestinal bleeding after a recent hepatobiliary procedure",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for haemobilia."
+  }
+ ]
 }

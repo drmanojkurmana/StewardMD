@@ -1,79 +1,151 @@
 {
-  "id": "wagner_syndrome",
-  "name": "Wagner syndrome",
-  "aliases": [
-    "Wagner vitreoretinal degeneration",
-    "erosive vitreoretinopathy",
-    "VCAN",
-    "CSPG2"
+ "id": "wagner_syndrome",
+ "name": "Wagner syndrome",
+ "aliases": [
+  "Wagner vitreoretinal degeneration",
+  "erosive vitreoretinopathy",
+  "VCAN",
+  "CSPG2"
+ ],
+ "class": "non_infective",
+ "system": "Eye / Ophthalmology",
+ "specialty": "Ophthalmology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Ryan's Retina / Kanski's Clinical Ophthalmology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Autosomal dominant vitreoretinopathy caused by mutations in VCAN (versican), a component of the vitreous extracellular matrix, and unlike Stickler syndrome it lacks systemic skeletal and orofacial features",
+   "The defining sign is an optically empty vitreous cavity with avascular condensed membranes or veils, reflecting abnormal vitreous architecture",
+   "Chorioretinal atrophy, perivascular pigmentary change and progressive retinal pigment epithelium and choroidal thinning develop over time (the erosive vitreoretinopathy phenotype)",
+   "Patients may have myopia, early cataract, ectopic or dragged fovea and reduced night vision",
+   "Risk of retinal detachment is increased, though generally lower than in Stickler syndrome",
+   "Electroretinography may show progressive reduction in rod and cone responses as chorioretinal degeneration advances",
+   "Management is refractive correction, cataract surgery when indicated, lifelong monitoring for retinal detachment, and genetic counselling"
   ],
-  "class": "non_infective",
-  "system": "Eye / Ophthalmology",
-  "specialty": "Ophthalmology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Ryan's Retina / Kanski's Clinical Ophthalmology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Autosomal dominant vitreoretinopathy caused by mutations in VCAN (versican), a component of the vitreous extracellular matrix, and unlike Stickler syndrome it lacks systemic skeletal and orofacial features",
-      "The defining sign is an optically empty vitreous cavity with avascular condensed membranes or veils, reflecting abnormal vitreous architecture",
-      "Chorioretinal atrophy, perivascular pigmentary change and progressive retinal pigment epithelium and choroidal thinning develop over time (the erosive vitreoretinopathy phenotype)",
-      "Patients may have myopia, early cataract, ectopic or dragged fovea and reduced night vision",
-      "Risk of retinal detachment is increased, though generally lower than in Stickler syndrome",
-      "Electroretinography may show progressive reduction in rod and cone responses as chorioretinal degeneration advances",
-      "Management is refractive correction, cataract surgery when indicated, lifelong monitoring for retinal detachment, and genetic counselling"
+  "pathophysiology": "Wagner syndrome is caused by dominant mutations in VCAN, which encodes versican, a large proteoglycan of the vitreous extracellular matrix. Abnormal splicing and altered versican disrupt the normal collagen-hyaluronan gel structure of the vitreous, producing liquefaction and the characteristic optically empty cavity with residual avascular membranes. Over time there is progressive chorioretinal and retinal pigment epithelial atrophy, giving the erosive vitreoretinopathy picture, together with an increased predisposition to retinal detachment.",
+  "additionalDifferentials": [
+   "Stickler syndrome (with systemic features)",
+   "High myopia with vitreoretinal degeneration",
+   "Erosive vitreoretinopathy as a phenotypic variant",
+   "Familial exudative vitreoretinopathy",
+   "Goldmann-Favre / enhanced S-cone syndrome",
+   "Marshall syndrome"
+  ],
+  "additionalInvestigations": [
+   "Detailed slit-lamp and dilated examination documenting the optically empty vitreous and avascular veils",
+   "Optical coherence tomography for foveal ectopia and chorioretinal atrophy",
+   "Full-field electroretinography to monitor progressive photoreceptor dysfunction",
+   "Fundus autofluorescence for retinal pigment epithelium atrophy",
+   "Molecular genetic testing for VCAN mutations",
+   "Refraction and axial length assessment"
+  ],
+  "redFlags": [
+   "New floaters, flashes or field loss suggesting retinal detachment and needing urgent review",
+   "Progressive night blindness and field constriction from advancing chorioretinal atrophy",
+   "Early or rapidly progressive cataract affecting vision",
+   "Affected relatives requiring examination given dominant inheritance"
+  ],
+  "prognosis": "Vision is often reasonable in early life but can decline with progressive chorioretinal atrophy, cataract and the risk of retinal detachment; long-term outcome varies and lifelong surveillance is warranted.",
+  "pitfalls": [
+   "Failing to distinguish Wagner syndrome from Stickler syndrome, which has systemic features and a higher detachment risk",
+   "Overlooking the increased retinal detachment risk during routine follow-up",
+   "Attributing the vitreous changes to simple myopic degeneration",
+   "Not offering genetic counselling for a dominantly inherited condition"
+  ],
+  "references": [
+   "Ryan's Retina",
+   "Kanski's Clinical Ophthalmology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Maintain lifelong vitreoretinal surveillance with regular dilated fundus examination given the raised risk of retinal detachment",
+   "Treat retinal breaks and tears prophylactically with laser photocoagulation or cryotherapy, and repair established detachment with vitreoretinal surgery",
+   "Correct the associated myopia with refraction and provide low-vision aids as chorioretinal atrophy advances",
+   "Undertake cataract surgery when visually significant, with careful planning because of the abnormal vitreous and detachment risk",
+   "Educate patients on the warning symptoms of retinal detachment and the need for urgent ophthalmic review",
+   "Offer genetic counselling for autosomal dominant VCAN-related disease with family screening",
+   "Manage under a vitreoretinal specialist within a coordinated ophthalmic and genetics team"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "wagner_syndrome-pathway",
+   "title": "Wagner syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Autosomal dominant vitreoretinopathy caused by mutations in VCAN (versican), a component of the vitreous extracellular matrix, and unlike Stickler syndrome it lacks systemic skeletal and orofacial features",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: New floaters, flashes or field loss suggesting retinal detachment and needing urgent review",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Detailed slit-lamp and dilated examination documenting the optically empty vitreous and avascular veils, Optical coherence tomography for foveal ectopia and chorioretinal atrophy, Full-field electroretinography to monitor"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Maintain lifelong vitreoretinal surveillance with regular dilated fundus examination given the raised risk of retinal detachment"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to distinguish Wagner syndrome from Stickler syndrome, which has systemic features and a higher detachment risk"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of wagner syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "wagner_syndrome-matrix",
+   "title": "Wagner syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Autosomal dominant vitreoretinopathy caused by mutations in VCAN (versican), a component of the vitreous extracellular matrix,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Wagner syndrome is caused by dominant mutations in VCAN, which encodes versican, a large proteoglycan of the vitreous extracellular matrix. Abnormal splicing and altered versican disrupt the normal collagen-hyaluronan gel structure of the vitreous, producing liquefaction and the characteristic optically empty cavity with residual avascular membranes. Over time there is progressive chorioretinal and retinal pigment epithelial atrophy, giving the erosive vitreoretinopathy picture, together with an increased predisposition to retinal detachment.",
-    "additionalDifferentials": [
-      "Stickler syndrome (with systemic features)",
-      "High myopia with vitreoretinal degeneration",
-      "Erosive vitreoretinopathy as a phenotypic variant",
-      "Familial exudative vitreoretinopathy",
-      "Goldmann-Favre / enhanced S-cone syndrome",
-      "Marshall syndrome"
+    [
+     "Key Investigations",
+     "Detailed slit-lamp and dilated examination documenting the optically empty vitreous and avascular veils, Optical coherence",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Detailed slit-lamp and dilated examination documenting the optically empty vitreous and avascular veils",
-      "Optical coherence tomography for foveal ectopia and chorioretinal atrophy",
-      "Full-field electroretinography to monitor progressive photoreceptor dysfunction",
-      "Fundus autofluorescence for retinal pigment epithelium atrophy",
-      "Molecular genetic testing for VCAN mutations",
-      "Refraction and axial length assessment"
+    [
+     "Primary Differentials",
+     "Stickler syndrome (with systemic features), High myopia with vitreoretinal degeneration, Erosive vitreoretinopathy as a",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "New floaters, flashes or field loss suggesting retinal detachment and needing urgent review",
-      "Progressive night blindness and field constriction from advancing chorioretinal atrophy",
-      "Early or rapidly progressive cataract affecting vision",
-      "Affected relatives requiring examination given dominant inheritance"
+    [
+     "Management Strategy",
+     "Maintain lifelong vitreoretinal surveillance with regular dilated fundus examination given the raised risk of retinal detachment",
+     "Core treatment modality"
     ],
-    "prognosis": "Vision is often reasonable in early life but can decline with progressive chorioretinal atrophy, cataract and the risk of retinal detachment; long-term outcome varies and lifelong surveillance is warranted.",
-    "pitfalls": [
-      "Failing to distinguish Wagner syndrome from Stickler syndrome, which has systemic features and a higher detachment risk",
-      "Overlooking the increased retinal detachment risk during routine follow-up",
-      "Attributing the vitreous changes to simple myopic degeneration",
-      "Not offering genetic counselling for a dominantly inherited condition"
-    ],
-    "references": [
-      "Ryan's Retina",
-      "Kanski's Clinical Ophthalmology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Maintain lifelong vitreoretinal surveillance with regular dilated fundus examination given the raised risk of retinal detachment",
-      "Treat retinal breaks and tears prophylactically with laser photocoagulation or cryotherapy, and repair established detachment with vitreoretinal surgery",
-      "Correct the associated myopia with refraction and provide low-vision aids as chorioretinal atrophy advances",
-      "Undertake cataract surgery when visually significant, with careful planning because of the abnormal vitreous and detachment risk",
-      "Educate patients on the warning symptoms of retinal detachment and the need for urgent ophthalmic review",
-      "Offer genetic counselling for autosomal dominant VCAN-related disease with family screening",
-      "Manage under a vitreoretinal specialist within a coordinated ophthalmic and genetics team"
+    [
+     "Clinical Pitfall",
+     "Failing to distinguish Wagner syndrome from Stickler syndrome, which has systemic features and a higher detachment risk",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for wagner syndrome."
+  }
+ ]
 }

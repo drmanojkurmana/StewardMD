@@ -5,7 +5,18 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, ward, ICU",
- "aliases": ["acute severe asthma", "asthma attack", "life-threatening asthma", "near-fatal asthma", "status asthmaticus", "asthma exacerbation", "bronchial asthma", "wheeze", "GINA 2026", "SIGN 158"],
+ "aliases": [
+  "acute severe asthma",
+  "asthma attack",
+  "life-threatening asthma",
+  "near-fatal asthma",
+  "status asthmaticus",
+  "asthma exacerbation",
+  "bronchial asthma",
+  "wheeze",
+  "GINA 2026",
+  "SIGN 158"
+ ],
  "summary": "Grade severity by speech, respiratory rate, SpO2 and PEF; give inhaled salbutamol (with ipratropium if moderate or severe), oxygen only if SpO2 is below 92% (target 92 to 95%), prednisolone 40 to 50 mg within 1 hour, IV magnesium for poor responders, and discharge on ICS-containing treatment with review in 2 to 7 days.",
  "sections": [
   {
@@ -103,17 +114,130 @@
   }
  ],
  "drugs": [
-  { "name": "Salbutamol", "dose": "pMDI 100 mcg/puff with spacer: 4 puffs (mild), 4 to 6 puffs (moderate), 6 to 10 puffs (severe), up to 3 times 20 to 30 minutes apart in the first hour; or nebulised 2.5 mg (moderate) to 5 mg (severe)", "notes": "Continuous nebulisation 5 to 10 mg/hour for poor responders (SIGN 158). Monitor potassium, heart rate and lactate." },
-  { "name": "Ipratropium bromide", "dose": "4 puffs (20 mcg/puff) by pMDI and spacer, or 0.25 mg nebulised with each salbutamol dose in the first hour; 0.5 mg nebulised every 4 to 6 hours in severe attacks (SIGN 158)", "notes": "Moderate, severe or life-threatening attacks; little benefit after the first 1 to 2 hours in most patients." },
-  { "name": "Budesonide-formoterol 160/4.5 mcg", "dose": "2 inhalations for a mild attack; at discharge 2 inhalations twice daily plus 1 as needed (MART Step 4)", "notes": "Seek care if more than 12 inhalations are needed in 24 hours." },
-  { "name": "Prednisolone", "dose": "40 to 50 mg orally once daily for 5 to 7 days", "notes": "Give within 1 hour of arrival; no taper needed if on ICS." },
-  { "name": "Hydrocortisone", "dose": "100 mg IV every 6 hours", "notes": "Only if oral route not possible (vomiting, too breathless, ventilated). GINA uses 200 mg/day in divided doses." },
-  { "name": "Magnesium sulfate", "dose": "2 g IV over 20 minutes, single dose (SIGN 158: 1.2 to 2 g)", "notes": "Severe attack not responding to initial treatment. Repeat doses not assessed; risk of hypermagnesaemia." },
-  { "name": "Aminophylline", "dose": "5 mg/kg IV over 20 minutes, then 0.5 to 0.7 mg/kg/hour", "notes": "Not routine. Senior decision only; omit loading dose if on oral theophylline; check levels daily." }
+  {
+   "name": "Salbutamol",
+   "dose": "pMDI 100 mcg/puff with spacer: 4 puffs (mild), 4 to 6 puffs (moderate), 6 to 10 puffs (severe), up to 3 times 20 to 30 minutes apart in the first hour; or nebulised 2.5 mg (moderate) to 5 mg (severe)",
+   "notes": "Continuous nebulisation 5 to 10 mg/hour for poor responders (SIGN 158). Monitor potassium, heart rate and lactate."
+  },
+  {
+   "name": "Ipratropium bromide",
+   "dose": "4 puffs (20 mcg/puff) by pMDI and spacer, or 0.25 mg nebulised with each salbutamol dose in the first hour; 0.5 mg nebulised every 4 to 6 hours in severe attacks (SIGN 158)",
+   "notes": "Moderate, severe or life-threatening attacks; little benefit after the first 1 to 2 hours in most patients."
+  },
+  {
+   "name": "Budesonide-formoterol 160/4.5 mcg",
+   "dose": "2 inhalations for a mild attack; at discharge 2 inhalations twice daily plus 1 as needed (MART Step 4)",
+   "notes": "Seek care if more than 12 inhalations are needed in 24 hours."
+  },
+  {
+   "name": "Prednisolone",
+   "dose": "40 to 50 mg orally once daily for 5 to 7 days",
+   "notes": "Give within 1 hour of arrival; no taper needed if on ICS."
+  },
+  {
+   "name": "Hydrocortisone",
+   "dose": "100 mg IV every 6 hours",
+   "notes": "Only if oral route not possible (vomiting, too breathless, ventilated). GINA uses 200 mg/day in divided doses."
+  },
+  {
+   "name": "Magnesium sulfate",
+   "dose": "2 g IV over 20 minutes, single dose (SIGN 158: 1.2 to 2 g)",
+   "notes": "Severe attack not responding to initial treatment. Repeat doses not assessed; risk of hypermagnesaemia."
+  },
+  {
+   "name": "Aminophylline",
+   "dose": "5 mg/kg IV over 20 minutes, then 0.5 to 0.7 mg/kg/hour",
+   "notes": "Not routine. Senior decision only; omit loading dose if on oral theophylline; check levels daily."
+  }
  ],
  "sources": [
-  { "org": "GINA", "title": "Global Strategy for Asthma Management and Prevention, 2026 update (Box 9-6, acute care facility flowchart)", "year": 2026, "url": "https://ginasthma.org/wp-content/uploads/2026/05/GINA-2026-Strategy-Report-WMS.pdf" },
-  { "org": "SIGN / BTS", "title": "SIGN 158: British guideline on the management of asthma (acute asthma sections, 2024 revision, May 2025 corrections)", "year": 2024, "url": "https://www.sign.ac.uk/guidelines/british-guideline-on-the-management-of-asthma/" }
+  {
+   "org": "GINA",
+   "title": "Global Strategy for Asthma Management and Prevention, 2026 update (Box 9-6, acute care facility flowchart)",
+   "year": 2026,
+   "url": "https://ginasthma.org/wp-content/uploads/2026/05/GINA-2026-Strategy-Report-WMS.pdf"
+  },
+  {
+   "org": "SIGN / BTS",
+   "title": "SIGN 158: British guideline on the management of asthma (acute asthma sections, 2024 revision, May 2025 corrections)",
+   "year": 2024,
+   "url": "https://www.sign.ac.uk/guidelines/british-guideline-on-the-management-of-asthma/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "acute-asthma-adult-pathway",
+   "title": "Acute asthma exacerbation (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Mild: talks in sentences, can lie down, no or mild accessory muscle use, SpO2 on air 94% or more, PEF or FEV1 above 70% of best or predicted.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Oxygen only if SpO2 is below 92%, titrated to 92 to 95% and no higher than 96% (GINA 2026). SIGN 158 targets 94 to 98%. Never withhold oxygen because an oximeter is unavailable.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "PEF or FEV1 before treatment if it does not delay care (not in life-threatening attacks), at 1 hour, and before discharge."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "IV magnesium sulfate 2 g over 20 minutes, single dose, for a severe attack not responding to initial bronchodilators (persistent hypoxaemia or PEF below 50%). SIGN 158 gives 1.2 to 2 g with senior review. Nebulised magnesium is not"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Reassess symptoms, respiratory rate, SpO2, air entry and PEF after the first bronchodilator dose, at 1 hour, then at least hourly."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for acute asthma exacerbation (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "acute-asthma-adult-summary-matrix",
+   "title": "Acute asthma exacerbation (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Mild: talks in sentences, can lie down, no or mild accessory muscle use, SpO2 on air 94% or more, PEF or FEV1 above 70% of best or",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Oxygen only if SpO2 is below 92%, titrated to 92 to 95% and no higher than 96% (GINA 2026). SIGN 158 targets 94 to 98%. Never withhold",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "PEF or FEV1 before treatment if it does not delay care (not in life-threatening attacks), at 1 hour, and before discharge.",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Salbutamol: pMDI 100 mcg/puff with spacer: 4 puffs (mild), 4 to 6 puffs (moderate), 6 to 10 puffs (severe), up to 3 times 20 to 30 minutes",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "A 'normal' PaCO2 in a breathless asthmatic is a life-threatening sign, not reassurance.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for acute asthma exacerbation (adult)."
+  }
+ ]
 }

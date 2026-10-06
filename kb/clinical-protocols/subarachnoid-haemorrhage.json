@@ -5,7 +5,19 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, neurosurgery, neuro ICU",
- "aliases": ["SAH", "aSAH", "subarachnoid hemorrhage", "thunderclap headache", "worst headache of life", "ruptured aneurysm", "berry aneurysm", "nimodipine", "vasospasm", "DCI", "delayed cerebral ischaemia"],
+ "aliases": [
+  "SAH",
+  "aSAH",
+  "subarachnoid hemorrhage",
+  "thunderclap headache",
+  "worst headache of life",
+  "ruptured aneurysm",
+  "berry aneurysm",
+  "nimodipine",
+  "vasospasm",
+  "DCI",
+  "delayed cerebral ischaemia"
+ ],
  "summary": "Thunderclap headache needs CT, with LP if CT beyond 6 hours is negative; secure the aneurysm within 24 hours, avoid severe hypertension, hypotension and BP swings before securing, give oral nimodipine 60 mg every 4 hours for 21 days, keep euvolaemia and watch for delayed cerebral ischaemia on days 4 to 14.",
  "sections": [
   {
@@ -84,15 +96,120 @@
   }
  ],
  "drugs": [
-  { "name": "Nimodipine", "dose": "60 mg orally or by NG tube every 4 hours for 21 days", "notes": "If hypotension: 30 mg every 2 hours. Enteral route is the recommended route." },
-  { "name": "Labetalol", "dose": "10 to 20 mg IV over 1 to 2 minutes, may repeat; or infusion 2 to 8 mg/min", "notes": "Short-acting control of severe hypertension before securing; avoid hypotension." },
-  { "name": "Nicardipine", "dose": "5 mg/h IV infusion, increase by 2.5 mg/h every 5 to 15 minutes, max 15 mg/h", "notes": "Titratable alternative where available." },
-  { "name": "Paracetamol", "dose": "1 g orally or IV every 6 hours (max 4 g/day)", "notes": "Analgesia and fever; reduce max dose in low weight or liver disease." },
-  { "name": "Levetiracetam", "dose": "500 to 1000 mg orally or IV twice daily for 7 days", "notes": "For new seizures after SAH; reduce in renal impairment. Avoid phenytoin." }
+  {
+   "name": "Nimodipine",
+   "dose": "60 mg orally or by NG tube every 4 hours for 21 days",
+   "notes": "If hypotension: 30 mg every 2 hours. Enteral route is the recommended route."
+  },
+  {
+   "name": "Labetalol",
+   "dose": "10 to 20 mg IV over 1 to 2 minutes, may repeat; or infusion 2 to 8 mg/min",
+   "notes": "Short-acting control of severe hypertension before securing; avoid hypotension."
+  },
+  {
+   "name": "Nicardipine",
+   "dose": "5 mg/h IV infusion, increase by 2.5 mg/h every 5 to 15 minutes, max 15 mg/h",
+   "notes": "Titratable alternative where available."
+  },
+  {
+   "name": "Paracetamol",
+   "dose": "1 g orally or IV every 6 hours (max 4 g/day)",
+   "notes": "Analgesia and fever; reduce max dose in low weight or liver disease."
+  },
+  {
+   "name": "Levetiracetam",
+   "dose": "500 to 1000 mg orally or IV twice daily for 7 days",
+   "notes": "For new seizures after SAH; reduce in renal impairment. Avoid phenytoin."
+  }
  ],
  "sources": [
-  { "org": "AHA/ASA", "title": "2023 Guideline for the Management of Patients With Aneurysmal Subarachnoid Hemorrhage", "year": 2023, "url": "https://www.ahajournals.org/doi/10.1161/STR.0000000000000436" },
-  { "org": "AHA", "title": "2023 Guideline for the Management of Patients With Aneurysmal Subarachnoid Hemorrhage (Professional Heart Daily summary)", "year": 2023, "url": "https://professional.heart.org/en/science-news/2023-guideline-for-the-management-of-patients-with-aneurysmal-subarachnoid-hemorrhage" }
+  {
+   "org": "AHA/ASA",
+   "title": "2023 Guideline for the Management of Patients With Aneurysmal Subarachnoid Hemorrhage",
+   "year": 2023,
+   "url": "https://www.ahajournals.org/doi/10.1161/STR.0000000000000436"
+  },
+  {
+   "org": "AHA",
+   "title": "2023 Guideline for the Management of Patients With Aneurysmal Subarachnoid Hemorrhage (Professional Heart Daily summary)",
+   "year": 2023,
+   "url": "https://professional.heart.org/en/science-news/2023-guideline-for-the-management-of-patients-with-aneurysmal-subarachnoid-hemorrhage"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "subarachnoid-haemorrhage-pathway",
+   "title": "Aneurysmal subarachnoid haemorrhage (SAH) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Sudden severe headache reaching maximum within seconds to 1 hour, with or without vomiting, neck stiffness, collapse, seizure or focal deficit. A warning (sentinel) headache precedes 10 to 43% of cases.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Transfer early to a high-volume centre with neurosurgery, neurointervention and neurocritical care.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Non-contrast CT immediately. Within 6 hours of onset in a patient without a new deficit, a normal CT on a high-quality scanner read by an experienced neuroradiologist reasonably excludes SAH."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Secure the ruptured aneurysm by coiling or clipping (neurovascular team decision) as early as feasible, preferably within 24 hours of onset, aiming for complete obliteration."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "DCI affects about 30%, mostly on days 4 to 14: a new focal deficit or a fall of 2 or more GCS points lasting at least 1 hour, not explained by another cause."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for aneurysmal subarachnoid haemorrhage (sah)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "subarachnoid-haemorrhage-summary-matrix",
+   "title": "Aneurysmal subarachnoid haemorrhage (SAH) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Sudden severe headache reaching maximum within seconds to 1 hour, with or without vomiting, neck stiffness, collapse, seizure or focal",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Transfer early to a high-volume centre with neurosurgery, neurointervention and neurocritical care.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Non-contrast CT immediately. Within 6 hours of onset in a patient without a new deficit, a normal CT on a high-quality scanner read by an",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Nimodipine: 60 mg orally or by NG tube every 4 hours for 21 days",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Discharging a thunderclap headache after a normal CT done beyond 6 hours without LP or angiography.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for aneurysmal subarachnoid haemorrhage (sah)."
+  }
+ ]
 }

@@ -1,77 +1,149 @@
 {
-  "id": "mycobacterium_immunogenum_infection",
-  "name": "Mycobacterium immunogenum infection",
-  "aliases": [
-    "M. immunogenum infection",
-    "Mycobacterium immunogenum hypersensitivity pneumonitis"
+ "id": "mycobacterium_immunogenum_infection",
+ "name": "Mycobacterium immunogenum infection",
+ "aliases": [
+  "M. immunogenum infection",
+  "Mycobacterium immunogenum hypersensitivity pneumonitis"
+ ],
+ "class": "infective",
+ "system": "Infectious disease",
+ "specialty": "Infectious Diseases",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Mandell, Douglas and Bennett / ATS-IDSA NTM guidance",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A rapidly growing mycobacterium closely related to the M. abscessus and M. chelonae group, from which it was formerly indistinguishable without molecular methods",
+   "Its best-known niche is metalworking fluid, where contamination has caused outbreaks of hypersensitivity pneumonitis among machine-shop workers",
+   "Also found in water systems and contaminated solutions, and a cause of catheter-related and other health-care-associated infection",
+   "The occupational lung disease is an immune (hypersensitivity) reaction to aerosolised organisms rather than invasive infection",
+   "True infection includes bloodstream infection related to intravascular catheters and skin or soft-tissue infection after procedures",
+   "Reliable identification requires molecular methods such as rpoB or hsp65 sequencing to separate it from other rapid growers",
+   "Like related rapid growers it is often multidrug-resistant with inducible macrolide resistance, so treatment is susceptibility-guided and combined with source removal"
   ],
-  "class": "infective",
-  "system": "Infectious disease",
-  "specialty": "Infectious Diseases",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Mandell, Douglas and Bennett / ATS-IDSA NTM guidance",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A rapidly growing mycobacterium closely related to the M. abscessus and M. chelonae group, from which it was formerly indistinguishable without molecular methods",
-      "Its best-known niche is metalworking fluid, where contamination has caused outbreaks of hypersensitivity pneumonitis among machine-shop workers",
-      "Also found in water systems and contaminated solutions, and a cause of catheter-related and other health-care-associated infection",
-      "The occupational lung disease is an immune (hypersensitivity) reaction to aerosolised organisms rather than invasive infection",
-      "True infection includes bloodstream infection related to intravascular catheters and skin or soft-tissue infection after procedures",
-      "Reliable identification requires molecular methods such as rpoB or hsp65 sequencing to separate it from other rapid growers",
-      "Like related rapid growers it is often multidrug-resistant with inducible macrolide resistance, so treatment is susceptibility-guided and combined with source removal"
+  "pathophysiology": "Mycobacterium immunogenum is an environmental rapidly growing mycobacterium closely allied to the M. abscessus and M. chelonae group. Its characteristic reservoir is metalworking fluid, and inhalation of contaminated aerosols provokes hypersensitivity pneumonitis, an immune-mediated reaction to the organism rather than tissue invasion. Where it causes genuine infection, this usually follows inoculation or intravascular-device contamination, giving catheter-related bloodstream infection or post-procedural skin and soft-tissue disease, with biofilm on devices promoting persistence. Its resistance profile resembles that of related rapid growers, including inducible macrolide resistance, so cure depends on susceptibility-guided therapy and removal of the source or device.",
+  "additionalDifferentials": [
+   "Other rapidly growing mycobacteria (M. abscessus, M. chelonae)",
+   "Hypersensitivity pneumonitis from other causes",
+   "Catheter-related bloodstream infection from conventional organisms",
+   "Bacterial or fungal post-procedural soft-tissue infection",
+   "Occupational asthma or organic dust toxic syndrome",
+   "Other nontuberculous mycobacterial disease"
+  ],
+  "additionalInvestigations": [
+   "Mycobacterial culture demonstrating rapid growth",
+   "Molecular identification (rpoB or hsp65 sequencing) to distinguish it from related rapid growers",
+   "Drug-susceptibility testing including detection of inducible macrolide resistance",
+   "Occupational and exposure history with sampling of metalworking fluid in suspected outbreaks",
+   "Chest CT and lung assessment for hypersensitivity pneumonitis",
+   "Blood and device cultures in suspected catheter-related infection"
+  ],
+  "redFlags": [
+   "Clustered respiratory illness in machine-shop workers suggesting a contaminated metalworking-fluid source",
+   "Catheter-related bloodstream infection requiring line removal",
+   "Health-care-associated clusters pointing to a contaminated solution or device",
+   "Progressive infection despite therapy, reflecting drug resistance"
+  ],
+  "prognosis": "Occupational hypersensitivity pneumonitis usually improves with removal from the offending exposure. Genuine infection carries the guarded outlook of the related rapid growers, being difficult to eradicate with antimicrobials alone; adequate source control, including device removal, is central to a good outcome.",
+  "pitfalls": [
+   "Misidentifying it as M. abscessus or M. chelonae without molecular testing",
+   "Treating hypersensitivity pneumonitis as invasive infection instead of removing the exposure",
+   "Relying on a macrolide without testing for inducible resistance",
+   "Failing to remove an infected catheter or identify a contaminated solution"
+  ],
+  "references": [
+   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
+   "ATS/IDSA guideline on nontuberculous mycobacterial diseases"
+  ],
+  "crossLinks": [],
+  "management": [
+   "For occupational hypersensitivity pneumonitis, remove the worker from the contaminated metalworking-fluid exposure as the primary treatment, using corticosteroids for symptomatic inflammation and remediating the fluid system",
+   "For genuine infection, treat with susceptibility-guided multidrug therapy as for related rapid growers, such as amikacin with a macrolide where susceptible, testing for inducible macrolide resistance",
+   "Achieve source control by removing infected intravascular catheters or other devices where biofilm sustains infection",
+   "Confirm the species by molecular methods such as rpoB or hsp65 sequencing to separate it from other rapid growers and guide expectations",
+   "Investigate the occupational or procedural source, sampling metalworking fluid and water systems in suspected outbreaks",
+   "Monitor treatment response and drug toxicity across the prolonged antimycobacterial course",
+   "Manage with infectious diseases and, for the lung disease, occupational medicine and respiratory input"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "mycobacterium_immunogenum_infection-pathway",
+   "title": "Mycobacterium immunogenum infection: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A rapidly growing mycobacterium closely related to the M. abscessus and M. chelonae group, from which it was formerly indistinguishable without molecular methods",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Clustered respiratory illness in machine-shop workers suggesting a contaminated metalworking-fluid source",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Mycobacterial culture demonstrating rapid growth, Molecular identification (rpoB or hsp65 sequencing) to distinguish it from related rapid growers, Drug-susceptibility testing including detection of inducible macrolide"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: For occupational hypersensitivity pneumonitis, remove the worker from the contaminated metalworking-fluid exposure as the primary treatment, using corticosteroids for symptomatic inflammation and remediating the fluid"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misidentifying it as M. abscessus or M. chelonae without molecular testing"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of mycobacterium immunogenum infection."
+  }
+ ],
+ "tables": [
+  {
+   "id": "mycobacterium_immunogenum_infection-matrix",
+   "title": "Mycobacterium immunogenum infection: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A rapidly growing mycobacterium closely related to the M. abscessus and M. chelonae group, from which it was formerly",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Mycobacterium immunogenum is an environmental rapidly growing mycobacterium closely allied to the M. abscessus and M. chelonae group. Its characteristic reservoir is metalworking fluid, and inhalation of contaminated aerosols provokes hypersensitivity pneumonitis, an immune-mediated reaction to the organism rather than tissue invasion. Where it causes genuine infection, this usually follows inoculation or intravascular-device contamination, giving catheter-related bloodstream infection or post-procedural skin and soft-tissue disease, with biofilm on devices promoting persistence. Its resistance profile resembles that of related rapid growers, including inducible macrolide resistance, so cure depends on susceptibility-guided therapy and removal of the source or device.",
-    "additionalDifferentials": [
-      "Other rapidly growing mycobacteria (M. abscessus, M. chelonae)",
-      "Hypersensitivity pneumonitis from other causes",
-      "Catheter-related bloodstream infection from conventional organisms",
-      "Bacterial or fungal post-procedural soft-tissue infection",
-      "Occupational asthma or organic dust toxic syndrome",
-      "Other nontuberculous mycobacterial disease"
+    [
+     "Key Investigations",
+     "Mycobacterial culture demonstrating rapid growth, Molecular identification (rpoB or hsp65 sequencing) to distinguish it from",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Mycobacterial culture demonstrating rapid growth",
-      "Molecular identification (rpoB or hsp65 sequencing) to distinguish it from related rapid growers",
-      "Drug-susceptibility testing including detection of inducible macrolide resistance",
-      "Occupational and exposure history with sampling of metalworking fluid in suspected outbreaks",
-      "Chest CT and lung assessment for hypersensitivity pneumonitis",
-      "Blood and device cultures in suspected catheter-related infection"
+    [
+     "Primary Differentials",
+     "Other rapidly growing mycobacteria (M. abscessus, M. chelonae), Hypersensitivity pneumonitis from other causes, Catheter-related",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Clustered respiratory illness in machine-shop workers suggesting a contaminated metalworking-fluid source",
-      "Catheter-related bloodstream infection requiring line removal",
-      "Health-care-associated clusters pointing to a contaminated solution or device",
-      "Progressive infection despite therapy, reflecting drug resistance"
+    [
+     "Management Strategy",
+     "For occupational hypersensitivity pneumonitis, remove the worker from the contaminated metalworking-fluid exposure as the primary",
+     "Core treatment modality"
     ],
-    "prognosis": "Occupational hypersensitivity pneumonitis usually improves with removal from the offending exposure. Genuine infection carries the guarded outlook of the related rapid growers, being difficult to eradicate with antimicrobials alone; adequate source control, including device removal, is central to a good outcome.",
-    "pitfalls": [
-      "Misidentifying it as M. abscessus or M. chelonae without molecular testing",
-      "Treating hypersensitivity pneumonitis as invasive infection instead of removing the exposure",
-      "Relying on a macrolide without testing for inducible resistance",
-      "Failing to remove an infected catheter or identify a contaminated solution"
-    ],
-    "references": [
-      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
-      "ATS/IDSA guideline on nontuberculous mycobacterial diseases"
-    ],
-    "crossLinks": [],
-    "management": [
-      "For occupational hypersensitivity pneumonitis, remove the worker from the contaminated metalworking-fluid exposure as the primary treatment, using corticosteroids for symptomatic inflammation and remediating the fluid system",
-      "For genuine infection, treat with susceptibility-guided multidrug therapy as for related rapid growers, such as amikacin with a macrolide where susceptible, testing for inducible macrolide resistance",
-      "Achieve source control by removing infected intravascular catheters or other devices where biofilm sustains infection",
-      "Confirm the species by molecular methods such as rpoB or hsp65 sequencing to separate it from other rapid growers and guide expectations",
-      "Investigate the occupational or procedural source, sampling metalworking fluid and water systems in suspected outbreaks",
-      "Monitor treatment response and drug toxicity across the prolonged antimycobacterial course",
-      "Manage with infectious diseases and, for the lung disease, occupational medicine and respiratory input"
+    [
+     "Clinical Pitfall",
+     "Misidentifying it as M. abscessus or M. chelonae without molecular testing",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for mycobacterium immunogenum infection."
+  }
+ ]
 }

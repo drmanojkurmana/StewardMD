@@ -1,78 +1,150 @@
 {
-  "id": "microsporidiosis",
-  "name": "Microsporidiosis",
-  "aliases": [
-    "Enterocytozoon bieneusi infection",
-    "Encephalitozoon intestinalis infection",
-    "microsporidia infection",
-    "microsporidian enteritis"
+ "id": "microsporidiosis",
+ "name": "Microsporidiosis",
+ "aliases": [
+  "Enterocytozoon bieneusi infection",
+  "Encephalitozoon intestinalis infection",
+  "microsporidia infection",
+  "microsporidian enteritis"
+ ],
+ "class": "infective",
+ "system": "Infectious disease",
+ "specialty": "Infectious Diseases / Tropical Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Mandell/Manson's Tropical Diseases",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Microsporidia are spore-forming, obligate intracellular organisms now classified with the fungi, transmitted by ingesting or inhaling environmentally resistant spores",
+   "Enterocytozoon bieneusi and Encephalitozoon intestinalis are the commonest species causing chronic, watery, non-bloody diarrhoea and wasting in people with advanced HIV",
+   "The infection came to prominence as an AIDS-defining cause of intractable diarrhoea before widespread antiretroviral therapy",
+   "Encephalitozoon species can disseminate beyond the gut to cause keratoconjunctivitis, sinusitis, hepatitis, nephritis and encephalitis, unlike the largely enteric E. bieneusi",
+   "Diagnosis relies on detecting the small spores in stool or biopsy using chromotrope-based (modified trichrome) stains that colour the spores pinkish-red against a pale background, or with calcofluor and immunofluorescence",
+   "Albendazole is effective against Encephalitozoon species, whereas E. bieneusi responds poorly and is better managed with fumagillin where available",
+   "Immune reconstitution with antiretroviral therapy is the most important measure for durable resolution in HIV-associated disease"
   ],
-  "class": "infective",
-  "system": "Infectious disease",
-  "specialty": "Infectious Diseases / Tropical Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Mandell/Manson's Tropical Diseases",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Microsporidia are spore-forming, obligate intracellular organisms now classified with the fungi, transmitted by ingesting or inhaling environmentally resistant spores",
-      "Enterocytozoon bieneusi and Encephalitozoon intestinalis are the commonest species causing chronic, watery, non-bloody diarrhoea and wasting in people with advanced HIV",
-      "The infection came to prominence as an AIDS-defining cause of intractable diarrhoea before widespread antiretroviral therapy",
-      "Encephalitozoon species can disseminate beyond the gut to cause keratoconjunctivitis, sinusitis, hepatitis, nephritis and encephalitis, unlike the largely enteric E. bieneusi",
-      "Diagnosis relies on detecting the small spores in stool or biopsy using chromotrope-based (modified trichrome) stains that colour the spores pinkish-red against a pale background, or with calcofluor and immunofluorescence",
-      "Albendazole is effective against Encephalitozoon species, whereas E. bieneusi responds poorly and is better managed with fumagillin where available",
-      "Immune reconstitution with antiretroviral therapy is the most important measure for durable resolution in HIV-associated disease"
+  "pathophysiology": "Microsporidia are unicellular, obligate intracellular organisms that infect host cells by explosively everting a coiled polar tubule, through which the sporoplasm is injected into the cytoplasm. Intracellular multiplication culminates in the release of resistant spores that are shed in stool, urine or respiratory secretions and transmit infection. In the gut, infection of enterocytes causes villous atrophy, epithelial disarray and malabsorption with a secretory diarrhoea. Effective control depends on cell-mediated immunity, so heavy chronic infection and dissemination to eye, sinuses, liver, kidney and central nervous system occur predominantly in profound immunosuppression such as advanced HIV.",
+  "additionalDifferentials": [
+   "Cryptosporidiosis",
+   "Cystoisosporiasis",
+   "Cyclosporiasis",
+   "Giardiasis",
+   "HIV enteropathy",
+   "Cytomegalovirus enterocolitis"
+  ],
+  "additionalInvestigations": [
+   "Stool microscopy with chromotrope (modified trichrome) staining for spores",
+   "Calcofluor white or immunofluorescent staining of faecal smears",
+   "Molecular PCR with species identification",
+   "Small-bowel biopsy with electron microscopy when stool testing is inconclusive",
+   "HIV testing and CD4 count",
+   "Urine, corneal scrapings or other specimens when dissemination is suspected"
+  ],
+  "redFlags": [
+   "Chronic dehydrating diarrhoea with severe wasting in advanced HIV",
+   "Visual symptoms suggesting microsporidial keratoconjunctivitis",
+   "Features of disseminated disease such as renal, hepatic or neurological involvement",
+   "Failure of enteric symptoms to settle despite species-directed therapy"
+  ],
+  "prognosis": "In immunocompetent hosts infection is usually mild and self-limiting; in advanced HIV it can be chronic and disabling, though outcomes improved markedly with immune reconstitution and species-directed therapy.",
+  "pitfalls": [
+   "Missing the tiny spores because routine stool microscopy lacks a chromotrope or fluorescent stain",
+   "Treating all species with albendazole and expecting response, when Enterocytozoon bieneusi responds poorly",
+   "Overlooking extraintestinal sites such as the eye in disseminated Encephalitozoon infection",
+   "Neglecting antiretroviral therapy, without which relapse is likely"
+  ],
+  "references": [
+   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
+   "Manson's Tropical Diseases"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat Encephalitozoon species with albendazole, and Enterocytozoon bieneusi with fumagillin where available",
+   "Restore cell-mediated immunity with antiretroviral therapy in HIV, which is central to clearing and preventing relapse of infection",
+   "Provide supportive care with rehydration, electrolyte correction, nutritional support and antidiarrhoeal agents for the secretory diarrhoea",
+   "Treat microsporidial keratoconjunctivitis with topical fumagillin alongside systemic therapy",
+   "Monitor the CD4 count and clinical response, remaining alert to dissemination to eye, sinuses, liver, kidney and central nervous system",
+   "Advise on prevention through safe water and hand hygiene, particularly in the immunocompromised"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "microsporidiosis-pathway",
+   "title": "Microsporidiosis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Microsporidia are spore-forming, obligate intracellular organisms now classified with the fungi, transmitted by ingesting or inhaling environmentally resistant spores",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Chronic dehydrating diarrhoea with severe wasting in advanced HIV",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Stool microscopy with chromotrope (modified trichrome) staining for spores, Calcofluor white or immunofluorescent staining of faecal smears, Molecular PCR with species identification"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat Encephalitozoon species with albendazole, and Enterocytozoon bieneusi with fumagillin where available"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Missing the tiny spores because routine stool microscopy lacks a chromotrope or fluorescent stain"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of microsporidiosis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "microsporidiosis-matrix",
+   "title": "Microsporidiosis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Microsporidia are spore-forming, obligate intracellular organisms now classified with the fungi, transmitted by ingesting or",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Microsporidia are unicellular, obligate intracellular organisms that infect host cells by explosively everting a coiled polar tubule, through which the sporoplasm is injected into the cytoplasm. Intracellular multiplication culminates in the release of resistant spores that are shed in stool, urine or respiratory secretions and transmit infection. In the gut, infection of enterocytes causes villous atrophy, epithelial disarray and malabsorption with a secretory diarrhoea. Effective control depends on cell-mediated immunity, so heavy chronic infection and dissemination to eye, sinuses, liver, kidney and central nervous system occur predominantly in profound immunosuppression such as advanced HIV.",
-    "additionalDifferentials": [
-      "Cryptosporidiosis",
-      "Cystoisosporiasis",
-      "Cyclosporiasis",
-      "Giardiasis",
-      "HIV enteropathy",
-      "Cytomegalovirus enterocolitis"
+    [
+     "Key Investigations",
+     "Stool microscopy with chromotrope (modified trichrome) staining for spores, Calcofluor white or immunofluorescent staining of",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Stool microscopy with chromotrope (modified trichrome) staining for spores",
-      "Calcofluor white or immunofluorescent staining of faecal smears",
-      "Molecular PCR with species identification",
-      "Small-bowel biopsy with electron microscopy when stool testing is inconclusive",
-      "HIV testing and CD4 count",
-      "Urine, corneal scrapings or other specimens when dissemination is suspected"
+    [
+     "Primary Differentials",
+     "Cryptosporidiosis, Cystoisosporiasis, Cyclosporiasis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Chronic dehydrating diarrhoea with severe wasting in advanced HIV",
-      "Visual symptoms suggesting microsporidial keratoconjunctivitis",
-      "Features of disseminated disease such as renal, hepatic or neurological involvement",
-      "Failure of enteric symptoms to settle despite species-directed therapy"
+    [
+     "Management Strategy",
+     "Treat Encephalitozoon species with albendazole, and Enterocytozoon bieneusi with fumagillin where available",
+     "Core treatment modality"
     ],
-    "prognosis": "In immunocompetent hosts infection is usually mild and self-limiting; in advanced HIV it can be chronic and disabling, though outcomes improved markedly with immune reconstitution and species-directed therapy.",
-    "pitfalls": [
-      "Missing the tiny spores because routine stool microscopy lacks a chromotrope or fluorescent stain",
-      "Treating all species with albendazole and expecting response, when Enterocytozoon bieneusi responds poorly",
-      "Overlooking extraintestinal sites such as the eye in disseminated Encephalitozoon infection",
-      "Neglecting antiretroviral therapy, without which relapse is likely"
-    ],
-    "references": [
-      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
-      "Manson's Tropical Diseases"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat Encephalitozoon species with albendazole, and Enterocytozoon bieneusi with fumagillin where available",
-      "Restore cell-mediated immunity with antiretroviral therapy in HIV, which is central to clearing and preventing relapse of infection",
-      "Provide supportive care with rehydration, electrolyte correction, nutritional support and antidiarrhoeal agents for the secretory diarrhoea",
-      "Treat microsporidial keratoconjunctivitis with topical fumagillin alongside systemic therapy",
-      "Monitor the CD4 count and clinical response, remaining alert to dissemination to eye, sinuses, liver, kidney and central nervous system",
-      "Advise on prevention through safe water and hand hygiene, particularly in the immunocompromised"
+    [
+     "Clinical Pitfall",
+     "Missing the tiny spores because routine stool microscopy lacks a chromotrope or fluorescent stain",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for microsporidiosis."
+  }
+ ]
 }

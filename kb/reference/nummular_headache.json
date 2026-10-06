@@ -1,74 +1,146 @@
 {
-  "id": "nummular_headache",
-  "name": "Nummular headache",
-  "aliases": [
-    "coin-shaped headache",
-    "coin-shaped cephalgia"
+ "id": "nummular_headache",
+ "name": "Nummular headache",
+ "aliases": [
+  "coin-shaped headache",
+  "coin-shaped cephalgia"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Headache",
+ "specialty": "Neurology / Headache",
+ "referenceOnly": true,
+ "reference": {
+  "source": "ICHD-3 / International Classification of Sleep Disorders",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Pain is confined to a small, sharply demarcated rounded or elliptical area of the scalp, typically a few centimetres across",
+   "The painful patch stays fixed in shape, size and location over time",
+   "The parietal region is the most common site, though any part of the scalp may be affected",
+   "Local sensory changes such as tenderness, tingling, numbness or allodynia are often present within the zone",
+   "Pain may be continuous or intermittent and ranges from mild to moderate",
+   "It is thought to arise from terminal branches of the scalp sensory nerves rather than from an intracranial source",
+   "Examination and, when indicated, imaging should exclude a local structural or dermatological lesion"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Headache",
-  "specialty": "Neurology / Headache",
-  "referenceOnly": true,
-  "reference": {
-    "source": "ICHD-3 / International Classification of Sleep Disorders",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Pain is confined to a small, sharply demarcated rounded or elliptical area of the scalp, typically a few centimetres across",
-      "The painful patch stays fixed in shape, size and location over time",
-      "The parietal region is the most common site, though any part of the scalp may be affected",
-      "Local sensory changes such as tenderness, tingling, numbness or allodynia are often present within the zone",
-      "Pain may be continuous or intermittent and ranges from mild to moderate",
-      "It is thought to arise from terminal branches of the scalp sensory nerves rather than from an intracranial source",
-      "Examination and, when indicated, imaging should exclude a local structural or dermatological lesion"
+  "pathophysiology": "Nummular headache is thought to be a disorder of the terminal twigs of the scalp sensory nerves, producing pain and sensory disturbance restricted to a small, well-defined territory of the epicranial tissues. The sharply localised, fixed area of tenderness and dysaesthesia points to a peripheral, extracranial focus rather than referred or intracranial pain, although central sensitisation may contribute to its persistence.",
+  "additionalDifferentials": [
+   "Primary stabbing headache",
+   "Occipital or other scalp neuralgia",
+   "Local scalp or skull pathology such as a cyst or osteoma",
+   "Herpes zoster or post-herpetic neuralgia of the scalp",
+   "Giant cell arteritis when the temporal region of an older patient is involved",
+   "Referred pain from cervical or dental structures"
+  ],
+  "additionalInvestigations": [
+   "Careful mapping of the painful area and its associated sensory changes",
+   "Palpation for local masses and scalp or skull abnormalities",
+   "Skin examination to exclude a dermatological or zoster lesion",
+   "Neuroimaging or skull imaging when a structural cause is suspected",
+   "Inflammatory markers if giant cell arteritis is a consideration in an older patient"
+  ],
+  "redFlags": [
+   "A palpable mass, skin change or bony abnormality beneath the painful area",
+   "Progressive enlargement of the affected zone",
+   "Features of giant cell arteritis in an older patient with temporal involvement",
+   "Systemic symptoms or a rapid change in the pain pattern"
+  ],
+  "prognosis": "The condition is usually benign; many patients have a chronic but stable course, and symptoms often respond to simple analgesia, gabapentinoids or local injection therapy when troublesome.",
+  "pitfalls": [
+   "Assuming all fixed scalp pain is primary and missing an underlying local lesion",
+   "Overlooking giant cell arteritis when the patch overlies the temporal artery in an older patient",
+   "Not examining the skin and skull beneath the painful zone",
+   "Escalating systemic analgesics without considering targeted local treatment"
+  ],
+  "references": [
+   "International Classification of Headache Disorders, 3rd edition (ICHD-3)",
+   "The Headaches (Olesen et al.)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Reassurance and simple analgesia for mild, intermittent symptoms",
+   "Neuropathic agents such as gabapentinoids or tricyclic antidepressants for troublesome or persistent pain",
+   "Local infiltration with anaesthetic and corticosteroid, or botulinum toxin, into the affected scalp zone in refractory cases",
+   "Topical agents such as capsaicin or local anaesthetic as an adjunct over the fixed painful patch",
+   "Exclusion of a structural scalp or skull lesion, and of giant cell arteritis in older patients, before attributing symptoms to the primary disorder"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "nummular_headache-pathway",
+   "title": "Nummular headache: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Pain is confined to a small, sharply demarcated rounded or elliptical area of the scalp, typically a few centimetres across",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: A palpable mass, skin change or bony abnormality beneath the painful area",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Careful mapping of the painful area and its associated sensory changes, Palpation for local masses and scalp or skull abnormalities, Skin examination to exclude a dermatological or zoster lesion"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Reassurance and simple analgesia for mild, intermittent symptoms"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming all fixed scalp pain is primary and missing an underlying local lesion"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of nummular headache."
+  }
+ ],
+ "tables": [
+  {
+   "id": "nummular_headache-matrix",
+   "title": "Nummular headache: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Pain is confined to a small, sharply demarcated rounded or elliptical area of the scalp, typically a few centimetres across",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Nummular headache is thought to be a disorder of the terminal twigs of the scalp sensory nerves, producing pain and sensory disturbance restricted to a small, well-defined territory of the epicranial tissues. The sharply localised, fixed area of tenderness and dysaesthesia points to a peripheral, extracranial focus rather than referred or intracranial pain, although central sensitisation may contribute to its persistence.",
-    "additionalDifferentials": [
-      "Primary stabbing headache",
-      "Occipital or other scalp neuralgia",
-      "Local scalp or skull pathology such as a cyst or osteoma",
-      "Herpes zoster or post-herpetic neuralgia of the scalp",
-      "Giant cell arteritis when the temporal region of an older patient is involved",
-      "Referred pain from cervical or dental structures"
+    [
+     "Key Investigations",
+     "Careful mapping of the painful area and its associated sensory changes, Palpation for local masses and scalp or skull",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Careful mapping of the painful area and its associated sensory changes",
-      "Palpation for local masses and scalp or skull abnormalities",
-      "Skin examination to exclude a dermatological or zoster lesion",
-      "Neuroimaging or skull imaging when a structural cause is suspected",
-      "Inflammatory markers if giant cell arteritis is a consideration in an older patient"
+    [
+     "Primary Differentials",
+     "Primary stabbing headache, Occipital or other scalp neuralgia, Local scalp or skull pathology such as a cyst or osteoma",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "A palpable mass, skin change or bony abnormality beneath the painful area",
-      "Progressive enlargement of the affected zone",
-      "Features of giant cell arteritis in an older patient with temporal involvement",
-      "Systemic symptoms or a rapid change in the pain pattern"
+    [
+     "Management Strategy",
+     "Reassurance and simple analgesia for mild, intermittent symptoms",
+     "Core treatment modality"
     ],
-    "prognosis": "The condition is usually benign; many patients have a chronic but stable course, and symptoms often respond to simple analgesia, gabapentinoids or local injection therapy when troublesome.",
-    "pitfalls": [
-      "Assuming all fixed scalp pain is primary and missing an underlying local lesion",
-      "Overlooking giant cell arteritis when the patch overlies the temporal artery in an older patient",
-      "Not examining the skin and skull beneath the painful zone",
-      "Escalating systemic analgesics without considering targeted local treatment"
-    ],
-    "references": [
-      "International Classification of Headache Disorders, 3rd edition (ICHD-3)",
-      "The Headaches (Olesen et al.)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Reassurance and simple analgesia for mild, intermittent symptoms",
-      "Neuropathic agents such as gabapentinoids or tricyclic antidepressants for troublesome or persistent pain",
-      "Local infiltration with anaesthetic and corticosteroid, or botulinum toxin, into the affected scalp zone in refractory cases",
-      "Topical agents such as capsaicin or local anaesthetic as an adjunct over the fixed painful patch",
-      "Exclusion of a structural scalp or skull lesion, and of giant cell arteritis in older patients, before attributing symptoms to the primary disorder"
+    [
+     "Clinical Pitfall",
+     "Assuming all fixed scalp pain is primary and missing an underlying local lesion",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for nummular headache."
+  }
+ ]
 }

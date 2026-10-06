@@ -1,78 +1,150 @@
 {
-  "id": "fibrous_tumor_pleura",
-  "name": "Solitary fibrous tumour of the pleura",
-  "aliases": [
-    "SFTP",
-    "benign fibrous mesothelioma",
-    "localised fibrous tumour of pleura",
-    "pleural fibroma"
+ "id": "fibrous_tumor_pleura",
+ "name": "Solitary fibrous tumour of the pleura",
+ "aliases": [
+  "SFTP",
+  "benign fibrous mesothelioma",
+  "localised fibrous tumour of pleura",
+  "pleural fibroma"
+ ],
+ "class": "non_infective",
+ "system": "Respiratory / Thoracic",
+ "specialty": "Respiratory / Thoracic Surgery",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Shields' General Thoracic Surgery",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A mesenchymal tumour usually arising from the visceral pleura, most often benign but with a minority behaving in a malignant fashion",
+   "Distinct from diffuse malignant mesothelioma and not related to asbestos exposure",
+   "Frequently asymptomatic and found incidentally as a well-defined, sometimes pedunculated pleural-based mass",
+   "Large tumours may cause cough, chest discomfort, or breathlessness through local mass effect",
+   "Associated paraneoplastic syndromes include hypertrophic osteoarthropathy and, classically, hypoglycaemia from tumour secretion of insulin-like growth factor (Doege-Potter syndrome)",
+   "Characterised molecularly by the NAB2-STAT6 gene fusion, with nuclear STAT6 expression on immunohistochemistry",
+   "Complete surgical resection is the treatment of choice and is usually curative for benign lesions",
+   "Because late or malignant recurrence can occur, prolonged imaging follow-up after resection is advised"
   ],
-  "class": "non_infective",
-  "system": "Respiratory / Thoracic",
-  "specialty": "Respiratory / Thoracic Surgery",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Shields' General Thoracic Surgery",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A mesenchymal tumour usually arising from the visceral pleura, most often benign but with a minority behaving in a malignant fashion",
-      "Distinct from diffuse malignant mesothelioma and not related to asbestos exposure",
-      "Frequently asymptomatic and found incidentally as a well-defined, sometimes pedunculated pleural-based mass",
-      "Large tumours may cause cough, chest discomfort, or breathlessness through local mass effect",
-      "Associated paraneoplastic syndromes include hypertrophic osteoarthropathy and, classically, hypoglycaemia from tumour secretion of insulin-like growth factor (Doege-Potter syndrome)",
-      "Characterised molecularly by the NAB2-STAT6 gene fusion, with nuclear STAT6 expression on immunohistochemistry",
-      "Complete surgical resection is the treatment of choice and is usually curative for benign lesions",
-      "Because late or malignant recurrence can occur, prolonged imaging follow-up after resection is advised"
+  "pathophysiology": "The tumour arises from CD34-positive fibroblast-like mesenchymal cells of the submesothelial pleura rather than from mesothelial cells themselves. A recurrent intrachromosomal NAB2-STAT6 gene fusion is the defining molecular event, driving cell proliferation and producing the nuclear STAT6 immunopositivity used diagnostically. Most tumours grow slowly as a circumscribed, often pedunculated mass and remain benign, but a subset show high mitotic activity, necrosis, and infiltrative growth that predict malignant behaviour. Some tumours secrete an incompletely processed insulin-like growth factor that produces refractory hypoglycaemia, the basis of Doege-Potter syndrome.",
+  "additionalDifferentials": [
+   "Malignant pleural mesothelioma",
+   "Peripheral bronchial carcinoma abutting the pleura",
+   "Pleural metastasis",
+   "Neurogenic tumour of the chest wall or mediastinum",
+   "Localised organising pleural effusion or fibrous plaque",
+   "Other pleural sarcomas"
+  ],
+  "additionalInvestigations": [
+   "Contrast-enhanced CT of the thorax to characterise the mass and its pleural origin",
+   "MRI to assess a pedunculated stalk and relationship to adjacent structures",
+   "Image-guided or surgical biopsy with immunohistochemistry, including STAT6 and CD34",
+   "PET-CT where malignant behaviour or metastasis is suspected",
+   "Blood glucose monitoring and relevant hormonal studies if paraneoplastic hypoglycaemia is suspected"
+  ],
+  "redFlags": [
+   "Rapid enlargement or a large tumour with invasive features on imaging",
+   "Recurrent symptomatic hypoglycaemia indicating a paraneoplastic effect",
+   "Recurrence after previous resection",
+   "Histological features of high mitotic count, necrosis, or infiltration"
+  ],
+  "prognosis": "Benign, completely resected tumours have an excellent outlook, whereas malignant or incompletely excised lesions may recur locally or metastasise, so long-term surveillance is recommended.",
+  "pitfalls": [
+   "Confusing a solitary fibrous tumour with diffuse malignant mesothelioma and mislabelling the prognosis",
+   "Assuming all such tumours are benign and omitting long-term follow-up",
+   "Overlooking paraneoplastic hypoglycaemia as the cause of unexplained low glucose",
+   "Incomplete resection leaving a stalk or margin that predisposes to recurrence"
+  ],
+  "references": [
+   "Shields' General Thoracic Surgery",
+   "Murray & Nadel's Textbook of Respiratory Medicine"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Complete surgical resection with clear margins is the mainstay and is curative for benign, well-circumscribed tumours",
+   "Correction of paraneoplastic hypoglycaemia (Doege-Potter syndrome) with glucose support, definitive control coming from tumour removal",
+   "Histological and molecular confirmation with STAT6 and CD34 immunohistochemistry to guide risk stratification",
+   "Radiotherapy or systemic therapy considered for malignant, unresectable or incompletely excised tumours",
+   "Long-term imaging surveillance for local recurrence or metastasis, particularly with high-mitotic-index or malignant lesions",
+   "Thoracic surgical and oncology multidisciplinary management"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "fibrous_tumor_pleura-pathway",
+   "title": "Solitary fibrous tumour of the pleura: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A mesenchymal tumour usually arising from the visceral pleura, most often benign but with a minority behaving in a malignant fashion",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapid enlargement or a large tumour with invasive features on imaging",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Contrast-enhanced CT of the thorax to characterise the mass and its pleural origin, MRI to assess a pedunculated stalk and relationship to adjacent structures, Image-guided or surgical biopsy with immunohistochemistry,"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Complete surgical resection with clear margins is the mainstay and is curative for benign, well-circumscribed tumours"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing a solitary fibrous tumour with diffuse malignant mesothelioma and mislabelling the prognosis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of solitary fibrous tumour of the pleura."
+  }
+ ],
+ "tables": [
+  {
+   "id": "fibrous_tumor_pleura-matrix",
+   "title": "Solitary fibrous tumour of the pleura: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A mesenchymal tumour usually arising from the visceral pleura, most often benign but with a minority behaving in a malignant",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The tumour arises from CD34-positive fibroblast-like mesenchymal cells of the submesothelial pleura rather than from mesothelial cells themselves. A recurrent intrachromosomal NAB2-STAT6 gene fusion is the defining molecular event, driving cell proliferation and producing the nuclear STAT6 immunopositivity used diagnostically. Most tumours grow slowly as a circumscribed, often pedunculated mass and remain benign, but a subset show high mitotic activity, necrosis, and infiltrative growth that predict malignant behaviour. Some tumours secrete an incompletely processed insulin-like growth factor that produces refractory hypoglycaemia, the basis of Doege-Potter syndrome.",
-    "additionalDifferentials": [
-      "Malignant pleural mesothelioma",
-      "Peripheral bronchial carcinoma abutting the pleura",
-      "Pleural metastasis",
-      "Neurogenic tumour of the chest wall or mediastinum",
-      "Localised organising pleural effusion or fibrous plaque",
-      "Other pleural sarcomas"
+    [
+     "Key Investigations",
+     "Contrast-enhanced CT of the thorax to characterise the mass and its pleural origin, MRI to assess a pedunculated stalk and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Contrast-enhanced CT of the thorax to characterise the mass and its pleural origin",
-      "MRI to assess a pedunculated stalk and relationship to adjacent structures",
-      "Image-guided or surgical biopsy with immunohistochemistry, including STAT6 and CD34",
-      "PET-CT where malignant behaviour or metastasis is suspected",
-      "Blood glucose monitoring and relevant hormonal studies if paraneoplastic hypoglycaemia is suspected"
+    [
+     "Primary Differentials",
+     "Malignant pleural mesothelioma, Peripheral bronchial carcinoma abutting the pleura, Pleural metastasis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapid enlargement or a large tumour with invasive features on imaging",
-      "Recurrent symptomatic hypoglycaemia indicating a paraneoplastic effect",
-      "Recurrence after previous resection",
-      "Histological features of high mitotic count, necrosis, or infiltration"
+    [
+     "Management Strategy",
+     "Complete surgical resection with clear margins is the mainstay and is curative for benign, well-circumscribed tumours",
+     "Core treatment modality"
     ],
-    "prognosis": "Benign, completely resected tumours have an excellent outlook, whereas malignant or incompletely excised lesions may recur locally or metastasise, so long-term surveillance is recommended.",
-    "pitfalls": [
-      "Confusing a solitary fibrous tumour with diffuse malignant mesothelioma and mislabelling the prognosis",
-      "Assuming all such tumours are benign and omitting long-term follow-up",
-      "Overlooking paraneoplastic hypoglycaemia as the cause of unexplained low glucose",
-      "Incomplete resection leaving a stalk or margin that predisposes to recurrence"
-    ],
-    "references": [
-      "Shields' General Thoracic Surgery",
-      "Murray & Nadel's Textbook of Respiratory Medicine"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Complete surgical resection with clear margins is the mainstay and is curative for benign, well-circumscribed tumours",
-      "Correction of paraneoplastic hypoglycaemia (Doege-Potter syndrome) with glucose support, definitive control coming from tumour removal",
-      "Histological and molecular confirmation with STAT6 and CD34 immunohistochemistry to guide risk stratification",
-      "Radiotherapy or systemic therapy considered for malignant, unresectable or incompletely excised tumours",
-      "Long-term imaging surveillance for local recurrence or metastasis, particularly with high-mitotic-index or malignant lesions",
-      "Thoracic surgical and oncology multidisciplinary management"
+    [
+     "Clinical Pitfall",
+     "Confusing a solitary fibrous tumour with diffuse malignant mesothelioma and mislabelling the prognosis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for solitary fibrous tumour of the pleura."
+  }
+ ]
 }

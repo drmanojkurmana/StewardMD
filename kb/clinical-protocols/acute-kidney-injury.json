@@ -5,7 +5,19 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, ward, ICU",
- "aliases": ["AKI", "acute renal failure", "ARF", "KDIGO staging", "rising creatinine", "oliguria", "AKD", "acute kidney disease", "prerenal AKI", "ATN", "AEIOU dialysis"],
+ "aliases": [
+  "AKI",
+  "acute renal failure",
+  "ARF",
+  "KDIGO staging",
+  "rising creatinine",
+  "oliguria",
+  "AKD",
+  "acute kidney disease",
+  "prerenal AKI",
+  "ATN",
+  "AEIOU dialysis"
+ ],
  "summary": "Diagnose and stage AKI with KDIGO creatinine and urine output criteria, find the prerenal, renal or postrenal cause, give buffered crystalloid only if hypovolaemic (never hydroxyethyl starch), stop nephrotoxins, and start dialysis for life-threatening complications refractory to medical therapy.",
  "sections": [
   {
@@ -98,15 +110,121 @@
   }
  ],
  "drugs": [
-  { "name": "Buffered crystalloid (Ringer lactate, Plasma-Lyte)", "dose": "IV boluses of 250 to 500 mL with reassessment after each, for hypovolaemia", "notes": "Preferred over 0.9% saline for volume expansion (KDIGO 2026 draft); stop when no longer fluid responsive." },
-  { "name": "Furosemide", "dose": "20 to 40 mg IV bolus initially, repeated or increased according to response", "notes": "Only for volume overload. Higher doses are often needed when GFR is low." },
-  { "name": "Noradrenaline (norepinephrine)", "dose": "Start 0.05 to 0.1 mcg/kg/min IV, titrate to MAP above 65 mmHg", "notes": "Hypotension despite adequate fluid." },
-  { "name": "Calcium gluconate 10%", "dose": "30 mL IV over 10 minutes", "notes": "For hyperkalaemia with ECG changes; see Hyperkalaemia protocol." }
+  {
+   "name": "Buffered crystalloid (Ringer lactate, Plasma-Lyte)",
+   "dose": "IV boluses of 250 to 500 mL with reassessment after each, for hypovolaemia",
+   "notes": "Preferred over 0.9% saline for volume expansion (KDIGO 2026 draft); stop when no longer fluid responsive."
+  },
+  {
+   "name": "Furosemide",
+   "dose": "20 to 40 mg IV bolus initially, repeated or increased according to response",
+   "notes": "Only for volume overload. Higher doses are often needed when GFR is low."
+  },
+  {
+   "name": "Noradrenaline (norepinephrine)",
+   "dose": "Start 0.05 to 0.1 mcg/kg/min IV, titrate to MAP above 65 mmHg",
+   "notes": "Hypotension despite adequate fluid."
+  },
+  {
+   "name": "Calcium gluconate 10%",
+   "dose": "30 mL IV over 10 minutes",
+   "notes": "For hyperkalaemia with ECG changes; see Hyperkalaemia protocol."
+  }
  ],
  "sources": [
-  { "org": "KDIGO", "title": "KDIGO Clinical Practice Guideline for Acute Kidney Injury", "year": 2012, "url": "https://kdigo.org/wp-content/uploads/2016/10/KDIGO-2012-AKI-Guideline-English.pdf" },
-  { "org": "KDIGO", "title": "KDIGO 2026 Clinical Practice Guideline for AKI and AKD (public review draft)", "year": 2026, "url": "https://kdigo.org/wp-content/uploads/2026/03/KDIGO-2026-AKI-AKD-Guideline-Public-Review-Draft-March-2026.pdf" },
-  { "org": "KDIGO", "title": "Acute Kidney Injury (AKI) and Acute Kidney Disease (AKD) guideline page", "year": 2026, "url": "https://kdigo.org/guidelines/acute-kidney-injury/" }
+  {
+   "org": "KDIGO",
+   "title": "KDIGO Clinical Practice Guideline for Acute Kidney Injury",
+   "year": 2012,
+   "url": "https://kdigo.org/wp-content/uploads/2016/10/KDIGO-2012-AKI-Guideline-English.pdf"
+  },
+  {
+   "org": "KDIGO",
+   "title": "KDIGO 2026 Clinical Practice Guideline for AKI and AKD (public review draft)",
+   "year": 2026,
+   "url": "https://kdigo.org/wp-content/uploads/2026/03/KDIGO-2026-AKI-AKD-Guideline-Public-Review-Draft-March-2026.pdf"
+  },
+  {
+   "org": "KDIGO",
+   "title": "Acute Kidney Injury (AKI) and Acute Kidney Disease (AKD) guideline page",
+   "year": 2026,
+   "url": "https://kdigo.org/guidelines/acute-kidney-injury/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "acute-kidney-injury-pathway",
+   "title": "Acute kidney injury (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "AKI: serum creatinine rise of 0.3 mg/dL (26.5 micromol/L) or more within 48 hours, OR rise to 1.5 times baseline or more known or presumed within the prior 7 days, OR urine output below 0.5 mL/kg/h for 6 hours or more.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Check potassium, bicarbonate (venous gas) and a 12-lead ECG at once; treat hyperkalaemia first (see Hyperkalaemia protocol) and look for pulmonary oedema.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Creatinine and urea trend, sodium, potassium, bicarbonate or blood gas, calcium, phosphate, CBC with peripheral smear, LFTs, CK and glucose."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Use loop diuretics only for clinically significant volume overload, as intermittent IV boluses; do not use diuretics or low-dose dopamine to prevent or treat AKI itself."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Hourly urine output in the critically ill (catheter only if needed for accurate measurement), daily weight and fluid balance."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for acute kidney injury (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "acute-kidney-injury-summary-matrix",
+   "title": "Acute kidney injury (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "AKI: serum creatinine rise of 0.3 mg/dL (26.5 micromol/L) or more within 48 hours, OR rise to 1.5 times baseline or more known or presumed",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Check potassium, bicarbonate (venous gas) and a 12-lead ECG at once; treat hyperkalaemia first (see Hyperkalaemia protocol) and look for",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Creatinine and urea trend, sodium, potassium, bicarbonate or blood gas, calcium, phosphate, CBC with peripheral smear, LFTs, CK and glucose.",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Buffered crystalloid (Ringer lactate, Plasma-Lyte): IV boluses of 250 to 500 mL with reassessment after each, for hypovolaemia",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Assuming a normal first creatinine excludes AKI: creatinine lags behind the injury.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for acute kidney injury (adult)."
+  }
+ ]
 }

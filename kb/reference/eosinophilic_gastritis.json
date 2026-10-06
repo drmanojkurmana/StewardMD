@@ -1,81 +1,153 @@
 {
-  "id": "eosinophilic_gastritis",
-  "name": "Eosinophilic gastritis",
-  "aliases": [
-    "EG",
-    "Eosinophilic gastroenteropathy"
+ "id": "eosinophilic_gastritis",
+ "name": "Eosinophilic gastritis",
+ "aliases": [
+  "EG",
+  "Eosinophilic gastroenteropathy"
+ ],
+ "class": "non_infective",
+ "system": "Gastrointestinal",
+ "specialty": "Gastroenterology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "One of the eosinophilic gastrointestinal disorders, defined by gastric-predominant eosinophilic infiltration without a secondary cause.",
+   "The Klein classification describes disease by depth: mucosal (commonest, causing pain, nausea, bleeding and protein loss), muscular (obstruction and gastric outlet narrowing) and serosal (eosinophilic ascites).",
+   "Peripheral eosinophilia is common but not universal, and most patients have an atopic background.",
+   "Diagnosis requires gastric biopsies showing excess eosinophils together with exclusion of parasites, drugs, malignancy, hypereosinophilic syndrome and connective tissue disease.",
+   "Normal-appearing mucosa does not exclude the diagnosis, so take multiple biopsies.",
+   "Serosal disease may present with eosinophil-rich ascites.",
+   "Corticosteroids are the mainstay of treatment, with dietary elimination in selected and paediatric cases.",
+   "Exclude Strongyloides infection before starting immunosuppression to avoid hyperinfection."
   ],
-  "class": "non_infective",
-  "system": "Gastrointestinal",
-  "specialty": "Gastroenterology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "One of the eosinophilic gastrointestinal disorders, defined by gastric-predominant eosinophilic infiltration without a secondary cause.",
-      "The Klein classification describes disease by depth: mucosal (commonest, causing pain, nausea, bleeding and protein loss), muscular (obstruction and gastric outlet narrowing) and serosal (eosinophilic ascites).",
-      "Peripheral eosinophilia is common but not universal, and most patients have an atopic background.",
-      "Diagnosis requires gastric biopsies showing excess eosinophils together with exclusion of parasites, drugs, malignancy, hypereosinophilic syndrome and connective tissue disease.",
-      "Normal-appearing mucosa does not exclude the diagnosis, so take multiple biopsies.",
-      "Serosal disease may present with eosinophil-rich ascites.",
-      "Corticosteroids are the mainstay of treatment, with dietary elimination in selected and paediatric cases.",
-      "Exclude Strongyloides infection before starting immunosuppression to avoid hyperinfection."
+  "pathophysiology": "Eosinophilic gastritis is a Th2-mediated eosinophilic infiltration of the gastric wall driven by interleukin-5, interleukin-13 and eotaxin, frequently in atopic individuals reacting to food antigens. Eosinophil degranulation releases major basic protein and other cytotoxic granule proteins that damage tissue, and the depth of infiltration determines the phenotype: mucosal disease causes malabsorption and protein loss, muscular disease causes obstruction, and serosal disease produces eosinophilic ascites.",
+  "additionalDifferentials": [
+   "Secondary gastric eosinophilia from parasitic infection (Strongyloides, Anisakis)",
+   "Drug-induced eosinophilia",
+   "Hypereosinophilic syndrome with gastric involvement",
+   "Helicobacter pylori gastritis",
+   "Gastric carcinoma or lymphoma",
+   "Eosinophilic granulomatosis with polyangiitis",
+   "Crohn's disease with gastric involvement"
+  ],
+  "additionalInvestigations": [
+   "Upper gastrointestinal endoscopy with multiple gastric biopsies and eosinophil quantification",
+   "Full blood count with eosinophil count",
+   "Stool microscopy and Strongyloides serology",
+   "Serum IgE and allergy testing",
+   "Cross-sectional imaging for wall thickening or ascites",
+   "Ascitic fluid analysis for eosinophils in serosal disease",
+   "Screen for hypereosinophilic syndrome and ANCA-associated vasculitis where indicated"
+  ],
+  "redFlags": [
+   "Gastric outlet obstruction or intractable vomiting",
+   "Significant gastrointestinal haemorrhage",
+   "Marked hypoalbuminaemia from protein-losing enteropathy",
+   "Features suggesting malignancy or systemic vasculitis"
+  ],
+  "prognosis": "Prognosis is generally good given corticosteroid responsiveness, but many patients relapse and require maintenance therapy, and a subset follows a chronic remitting-relapsing course.",
+  "pitfalls": [
+   "Starting corticosteroids before excluding Strongyloides, risking hyperinfection",
+   "Relying on peripheral eosinophilia, which may be absent",
+   "Taking too few biopsies from normal-looking mucosa",
+   "Overlooking serosal disease presenting as unexplained eosinophilic ascites"
+  ],
+  "references": [
+   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+   "Oxford Textbook of Medicine",
+   "International consensus nomenclature for eosinophilic gastrointestinal diseases"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Dietary elimination therapy, empirical multi-food or allergy-guided and amino-acid based in severe disease, as a steroid-sparing mainstay",
+   "Corticosteroids, including swallowed topical or targeted budesonide, with systemic corticosteroids for extensive disease, to induce remission",
+   "Proton pump inhibitors for acid-related symptoms and mucosal healing",
+   "Exclude and treat secondary causes such as parasites, drugs and malignancy before diagnosis",
+   "Steroid-sparing agents or anti-IL-5 and anti-IL-5-receptor biologics for relapsing or steroid-dependent disease",
+   "Manage complications including gastric outlet obstruction from muscular disease, protein loss and eosinophilic ascites",
+   "Monitor symptoms and gastric histology with gastroenterology follow-up"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "eosinophilic_gastritis-pathway",
+   "title": "Eosinophilic gastritis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "One of the eosinophilic gastrointestinal disorders, defined by gastric-predominant eosinophilic infiltration without a secondary cause.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Gastric outlet obstruction or intractable vomiting",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Upper gastrointestinal endoscopy with multiple gastric biopsies and eosinophil quantification, Full blood count with eosinophil count, Stool microscopy and Strongyloides serology"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Dietary elimination therapy, empirical multi-food or allergy-guided and amino-acid based in severe disease, as a steroid-sparing mainstay"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Starting corticosteroids before excluding Strongyloides, risking hyperinfection"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of eosinophilic gastritis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "eosinophilic_gastritis-matrix",
+   "title": "Eosinophilic gastritis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "One of the eosinophilic gastrointestinal disorders, defined by gastric-predominant eosinophilic infiltration without a secondary",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Eosinophilic gastritis is a Th2-mediated eosinophilic infiltration of the gastric wall driven by interleukin-5, interleukin-13 and eotaxin, frequently in atopic individuals reacting to food antigens. Eosinophil degranulation releases major basic protein and other cytotoxic granule proteins that damage tissue, and the depth of infiltration determines the phenotype: mucosal disease causes malabsorption and protein loss, muscular disease causes obstruction, and serosal disease produces eosinophilic ascites.",
-    "additionalDifferentials": [
-      "Secondary gastric eosinophilia from parasitic infection (Strongyloides, Anisakis)",
-      "Drug-induced eosinophilia",
-      "Hypereosinophilic syndrome with gastric involvement",
-      "Helicobacter pylori gastritis",
-      "Gastric carcinoma or lymphoma",
-      "Eosinophilic granulomatosis with polyangiitis",
-      "Crohn's disease with gastric involvement"
+    [
+     "Key Investigations",
+     "Upper gastrointestinal endoscopy with multiple gastric biopsies and eosinophil quantification, Full blood count with eosinophil",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Upper gastrointestinal endoscopy with multiple gastric biopsies and eosinophil quantification",
-      "Full blood count with eosinophil count",
-      "Stool microscopy and Strongyloides serology",
-      "Serum IgE and allergy testing",
-      "Cross-sectional imaging for wall thickening or ascites",
-      "Ascitic fluid analysis for eosinophils in serosal disease",
-      "Screen for hypereosinophilic syndrome and ANCA-associated vasculitis where indicated"
+    [
+     "Primary Differentials",
+     "Secondary gastric eosinophilia from parasitic infection (Strongyloides, Anisakis), Drug-induced eosinophilia, Hypereosinophilic",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Gastric outlet obstruction or intractable vomiting",
-      "Significant gastrointestinal haemorrhage",
-      "Marked hypoalbuminaemia from protein-losing enteropathy",
-      "Features suggesting malignancy or systemic vasculitis"
+    [
+     "Management Strategy",
+     "Dietary elimination therapy, empirical multi-food or allergy-guided and amino-acid based in severe disease, as a steroid-sparing",
+     "Core treatment modality"
     ],
-    "prognosis": "Prognosis is generally good given corticosteroid responsiveness, but many patients relapse and require maintenance therapy, and a subset follows a chronic remitting-relapsing course.",
-    "pitfalls": [
-      "Starting corticosteroids before excluding Strongyloides, risking hyperinfection",
-      "Relying on peripheral eosinophilia, which may be absent",
-      "Taking too few biopsies from normal-looking mucosa",
-      "Overlooking serosal disease presenting as unexplained eosinophilic ascites"
-    ],
-    "references": [
-      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-      "Oxford Textbook of Medicine",
-      "International consensus nomenclature for eosinophilic gastrointestinal diseases"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Dietary elimination therapy, empirical multi-food or allergy-guided and amino-acid based in severe disease, as a steroid-sparing mainstay",
-      "Corticosteroids, including swallowed topical or targeted budesonide, with systemic corticosteroids for extensive disease, to induce remission",
-      "Proton pump inhibitors for acid-related symptoms and mucosal healing",
-      "Exclude and treat secondary causes such as parasites, drugs and malignancy before diagnosis",
-      "Steroid-sparing agents or anti-IL-5 and anti-IL-5-receptor biologics for relapsing or steroid-dependent disease",
-      "Manage complications including gastric outlet obstruction from muscular disease, protein loss and eosinophilic ascites",
-      "Monitor symptoms and gastric histology with gastroenterology follow-up"
+    [
+     "Clinical Pitfall",
+     "Starting corticosteroids before excluding Strongyloides, risking hyperinfection",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for eosinophilic gastritis."
+  }
+ ]
 }

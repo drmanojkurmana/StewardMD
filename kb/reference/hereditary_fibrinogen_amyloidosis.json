@@ -1,79 +1,151 @@
 {
-  "id": "hereditary_fibrinogen_amyloidosis",
-  "name": "Hereditary Fibrinogen A Alpha-Chain Amyloidosis (AFib)",
-  "aliases": [
-    "Fibrinogen A alpha-chain amyloidosis",
-    "AFib amyloidosis",
-    "Hereditary renal amyloidosis, fibrinogen type"
+ "id": "hereditary_fibrinogen_amyloidosis",
+ "name": "Hereditary Fibrinogen A Alpha-Chain Amyloidosis (AFib)",
+ "aliases": [
+  "Fibrinogen A alpha-chain amyloidosis",
+  "AFib amyloidosis",
+  "Hereditary renal amyloidosis, fibrinogen type"
+ ],
+ "class": "non_infective",
+ "system": "Multisystem / Haematology",
+ "specialty": "Haematology / Amyloidosis",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Comprehensive Clinical Nephrology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "AFib is caused by autosomal dominant mutations in the fibrinogen A alpha-chain gene (FGA), producing a variant circulating fibrinogen that is amyloidogenic.",
+   "It is among the commonest forms of hereditary systemic amyloidosis in several Western populations and a leading hereditary cause of renal amyloid.",
+   "The phenotype is overwhelmingly renal, with hypertension, heavy proteinuria and nephrotic syndrome and relatively rapid progression to end-stage kidney disease.",
+   "Glomeruli are characteristically almost completely replaced by amyloid, often with sparing of vessels and interstitium, which is a helpful histological clue.",
+   "Penetrance is variable and a family history may be absent, so genetic testing is warranted even in apparently sporadic renal amyloid.",
+   "The variant fibrinogen is synthesised by the liver, so combined liver and kidney transplantation can be curative by removing the protein source and replacing the failed organ.",
+   "Amyloid may recur in a kidney-only allograft because the amyloidogenic protein continues to be produced."
   ],
-  "class": "non_infective",
-  "system": "Multisystem / Haematology",
-  "specialty": "Haematology / Amyloidosis",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Comprehensive Clinical Nephrology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "AFib is caused by autosomal dominant mutations in the fibrinogen A alpha-chain gene (FGA), producing a variant circulating fibrinogen that is amyloidogenic.",
-      "It is among the commonest forms of hereditary systemic amyloidosis in several Western populations and a leading hereditary cause of renal amyloid.",
-      "The phenotype is overwhelmingly renal, with hypertension, heavy proteinuria and nephrotic syndrome and relatively rapid progression to end-stage kidney disease.",
-      "Glomeruli are characteristically almost completely replaced by amyloid, often with sparing of vessels and interstitium, which is a helpful histological clue.",
-      "Penetrance is variable and a family history may be absent, so genetic testing is warranted even in apparently sporadic renal amyloid.",
-      "The variant fibrinogen is synthesised by the liver, so combined liver and kidney transplantation can be curative by removing the protein source and replacing the failed organ.",
-      "Amyloid may recur in a kidney-only allograft because the amyloidogenic protein continues to be produced."
+  "pathophysiology": "Point mutations or frameshift changes in the C-terminal region of the fibrinogen A alpha-chain produce a variant protein that circulates alongside normal fibrinogen. The variant is prone to misfold and deposit as amyloid fibrils, with a striking predilection for the renal glomerulus, where progressive accumulation obliterates the glomerular tuft and drives proteinuria and renal failure. Because the abnormal chain is synthesised by the liver, the amyloid load is sustained by ongoing hepatic production, and extrarenal deposition is usually mild, distinguishing AFib from other hereditary amyloidoses. The rate of progression varies between kindreds and with the specific mutation.",
+  "additionalDifferentials": [
+   "AL (immunoglobulin light-chain) amyloidosis",
+   "AA amyloidosis",
+   "Other hereditary amyloidoses (lysozyme, apolipoprotein A-I, LECT2)",
+   "Diabetic nephropathy",
+   "Other causes of nephrotic syndrome",
+   "Hypertensive nephrosclerosis"
+  ],
+  "additionalInvestigations": [
+   "Renal biopsy with Congo red staining showing glomerular-predominant amyloid",
+   "Amyloid typing by mass spectrometry and immunohistochemistry",
+   "FGA gene sequencing",
+   "Serum free light chains and immunofixation to exclude AL amyloidosis",
+   "Quantified proteinuria and renal function",
+   "SAP scintigraphy to assess organ burden",
+   "Family screening and genetic counselling"
+  ],
+  "redFlags": [
+   "Nephrotic syndrome with rapidly declining renal function",
+   "Family history of renal failure or amyloidosis",
+   "Hypertension refractory to treatment",
+   "Recurrent proteinuria after kidney transplantation"
+  ],
+  "prognosis": "Renal survival is limited once nephrotic syndrome develops, but the systemic course is often more indolent than AL amyloidosis. Combined liver and kidney transplantation can be curative, whereas isolated renal transplantation risks graft amyloid recurrence.",
+  "pitfalls": [
+   "Labelling glomerular-predominant amyloid as AL without formal typing",
+   "Assuming that a negative family history excludes a hereditary cause",
+   "Overlooking the option of combined liver and kidney transplantation",
+   "Missing the diagnosis in older sporadic presentations"
+  ],
+  "references": [
+   "Comprehensive Clinical Nephrology, chapter on renal amyloidosis",
+   "Oxford Textbook of Medicine, chapter on hereditary amyloidosis",
+   "International Society of Amyloidosis nomenclature guidelines"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Combined liver and kidney transplantation is potentially curative by removing the hepatic source of variant fibrinogen while replacing the failed kidney",
+   "For renal-limited disease, isolated kidney transplantation improves function but carries a risk of amyloid recurrence in the graft, which must be counselled",
+   "Supportive nephrological care of nephrotic syndrome with renin-angiotensin blockade for proteinuria and blood pressure, oedema management and treatment of dyslipidaemia",
+   "Renal replacement therapy by dialysis when end-stage kidney disease supervenes",
+   "Monitor proteinuria, renal function and blood pressure, using SAP scintigraphy to track organ amyloid burden",
+   "Genetic counselling and family screening for FGA variants given autosomal dominant inheritance with variable penetrance"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "hereditary_fibrinogen_amyloidosis-pathway",
+   "title": "Hereditary Fibrinogen A Alpha-Chain Amyloidosis (AFib): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "AFib is caused by autosomal dominant mutations in the fibrinogen A alpha-chain gene (FGA), producing a variant circulating fibrinogen that is amyloidogenic.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Nephrotic syndrome with rapidly declining renal function",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Renal biopsy with Congo red staining showing glomerular-predominant amyloid, Amyloid typing by mass spectrometry and immunohistochemistry, FGA gene sequencing"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Combined liver and kidney transplantation is potentially curative by removing the hepatic source of variant fibrinogen while replacing the failed kidney"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Labelling glomerular-predominant amyloid as AL without formal typing"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of hereditary fibrinogen a alpha-chain amyloidosis (afib)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hereditary_fibrinogen_amyloidosis-matrix",
+   "title": "Hereditary Fibrinogen A Alpha-Chain Amyloidosis (AFib): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "AFib is caused by autosomal dominant mutations in the fibrinogen A alpha-chain gene (FGA), producing a variant circulating",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Point mutations or frameshift changes in the C-terminal region of the fibrinogen A alpha-chain produce a variant protein that circulates alongside normal fibrinogen. The variant is prone to misfold and deposit as amyloid fibrils, with a striking predilection for the renal glomerulus, where progressive accumulation obliterates the glomerular tuft and drives proteinuria and renal failure. Because the abnormal chain is synthesised by the liver, the amyloid load is sustained by ongoing hepatic production, and extrarenal deposition is usually mild, distinguishing AFib from other hereditary amyloidoses. The rate of progression varies between kindreds and with the specific mutation.",
-    "additionalDifferentials": [
-      "AL (immunoglobulin light-chain) amyloidosis",
-      "AA amyloidosis",
-      "Other hereditary amyloidoses (lysozyme, apolipoprotein A-I, LECT2)",
-      "Diabetic nephropathy",
-      "Other causes of nephrotic syndrome",
-      "Hypertensive nephrosclerosis"
+    [
+     "Key Investigations",
+     "Renal biopsy with Congo red staining showing glomerular-predominant amyloid, Amyloid typing by mass spectrometry and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Renal biopsy with Congo red staining showing glomerular-predominant amyloid",
-      "Amyloid typing by mass spectrometry and immunohistochemistry",
-      "FGA gene sequencing",
-      "Serum free light chains and immunofixation to exclude AL amyloidosis",
-      "Quantified proteinuria and renal function",
-      "SAP scintigraphy to assess organ burden",
-      "Family screening and genetic counselling"
+    [
+     "Primary Differentials",
+     "AL (immunoglobulin light-chain) amyloidosis, AA amyloidosis, Other hereditary amyloidoses (lysozyme, apolipoprotein A-I, LECT2)",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Nephrotic syndrome with rapidly declining renal function",
-      "Family history of renal failure or amyloidosis",
-      "Hypertension refractory to treatment",
-      "Recurrent proteinuria after kidney transplantation"
+    [
+     "Management Strategy",
+     "Combined liver and kidney transplantation is potentially curative by removing the hepatic source of variant fibrinogen while",
+     "Core treatment modality"
     ],
-    "prognosis": "Renal survival is limited once nephrotic syndrome develops, but the systemic course is often more indolent than AL amyloidosis. Combined liver and kidney transplantation can be curative, whereas isolated renal transplantation risks graft amyloid recurrence.",
-    "pitfalls": [
-      "Labelling glomerular-predominant amyloid as AL without formal typing",
-      "Assuming that a negative family history excludes a hereditary cause",
-      "Overlooking the option of combined liver and kidney transplantation",
-      "Missing the diagnosis in older sporadic presentations"
-    ],
-    "references": [
-      "Comprehensive Clinical Nephrology, chapter on renal amyloidosis",
-      "Oxford Textbook of Medicine, chapter on hereditary amyloidosis",
-      "International Society of Amyloidosis nomenclature guidelines"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Combined liver and kidney transplantation is potentially curative by removing the hepatic source of variant fibrinogen while replacing the failed kidney",
-      "For renal-limited disease, isolated kidney transplantation improves function but carries a risk of amyloid recurrence in the graft, which must be counselled",
-      "Supportive nephrological care of nephrotic syndrome with renin-angiotensin blockade for proteinuria and blood pressure, oedema management and treatment of dyslipidaemia",
-      "Renal replacement therapy by dialysis when end-stage kidney disease supervenes",
-      "Monitor proteinuria, renal function and blood pressure, using SAP scintigraphy to track organ amyloid burden",
-      "Genetic counselling and family screening for FGA variants given autosomal dominant inheritance with variable penetrance"
+    [
+     "Clinical Pitfall",
+     "Labelling glomerular-predominant amyloid as AL without formal typing",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for hereditary fibrinogen a alpha-chain amyloidosis (afib)."
+  }
+ ]
 }

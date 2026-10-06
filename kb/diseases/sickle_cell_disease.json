@@ -32,9 +32,15 @@
     "Fever in a functionally asplenic patient — high risk of overwhelming encapsulated-organism sepsis"
   ],
   "investigations": [
-    { "test": "FBC with reticulocyte count (baseline vs current Hb)" },
-    { "test": "Assess hydration, oxygenation (SpO2/ABG) and screen for a precipitant (infection, hypoxia)" },
-    { "test": "CXR if chest pain / hypoxia / fever — exclude acute chest syndrome" }
+    {
+      "test": "FBC with reticulocyte count (baseline vs current Hb)"
+    },
+    {
+      "test": "Assess hydration, oxygenation (SpO2/ABG) and screen for a precipitant (infection, hypoxia)"
+    },
+    {
+      "test": "CXR if chest pain / hypoxia / fever — exclude acute chest syndrome"
+    }
   ],
   "treatmentRef": null,
   "policyRef": null,
@@ -43,7 +49,9 @@
   "drugRefs": [],
   "provenance": {
     "primaryRef": "Harrison 22e",
-    "editions": ["Harrison 22e (2025)"]
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
   },
   "review": {
     "status": "approved",
@@ -52,6 +60,80 @@
   },
   "version": 1,
   "contentHash": null,
-  "references": ["Harrison 22e p.769-776"],
-  "provenanceNote": "Recall Tier-4 promotion from kb/reference/sickle_cell_disease.json (reference-only) to a diagnosable entity. AI-drafted matching signature; PENDING clinician sign-off before it should be treated as clinically validated."
+  "references": [
+    "Harrison 22e p.769-776"
+  ],
+  "provenanceNote": "Recall Tier-4 promotion from kb/reference/sickle_cell_disease.json (reference-only) to a diagnosable entity. AI-drafted matching signature; PENDING clinician sign-off before it should be treated as clinically validated.",
+  "algorithms": [
+    {
+      "id": "sickle_cell_disease-dx-algo",
+      "title": "Sickle Cell Vaso-occlusive Crisis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Evaluate acute presentation and core clinical features of Sickle Cell Vaso-occlusive Crisis.",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Acute chest syndrome - chest pain, cough, fever, hypoxia and a new pulmonary infiltrate; can progress rapidly to ARDS and multiorgan failure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: FBC with reticulocyte count (baseline vs current Hb), Assess hydration, oxygenation (SpO2/ABG) and screen for a precipitant (infection, hypoxia), CXR if chest pain / hypoxia / fever - exclude acute chest syndrome"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Apply evidence-based criteria to classify disease severity and organ dysfunction."
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Initiate guideline-directed medical therapy and monitor clinical progress."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for sickle cell vaso-occlusive crisis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "sickle_cell_disease-matrix",
+      "title": "Sickle Cell Vaso-occlusive Crisis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Cardinal presentation of Sickle Cell Vaso-occlusive Crisis",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "FBC with reticulocyte count (baseline vs current Hb), Assess hydration, oxygenation (SpO2/ABG) and screen for a precipitant",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Alternative etiologies in this class",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Acute chest syndrome - chest pain, cough, fever, hypoxia and a new pulmonary infiltrate; can progress rapidly to ARDS and",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Delayed recognition of atypical presentations",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for sickle cell vaso-occlusive crisis."
+    }
+  ]
 }

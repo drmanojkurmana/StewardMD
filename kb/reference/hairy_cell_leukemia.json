@@ -1,79 +1,151 @@
 {
-  "id": "hairy_cell_leukemia",
-  "name": "Hairy cell leukaemia",
-  "aliases": [
-    "BRAF V600E-mutated hairy cell leukaemia",
-    "HCL",
-    "hairy cell leukaemia",
-    "leukaemic reticuloendotheliosis"
+ "id": "hairy_cell_leukemia",
+ "name": "Hairy cell leukaemia",
+ "aliases": [
+  "BRAF V600E-mutated hairy cell leukaemia",
+  "HCL",
+  "hairy cell leukaemia",
+  "leukaemic reticuloendotheliosis"
+ ],
+ "class": "non_infective",
+ "system": "Haematology",
+ "specialty": "Haematology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Williams Hematology / WHO classification of haematolymphoid tumours",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An indolent mature B-cell malignancy classically presenting with pancytopenia, monocytopenia and marked splenomegaly, often without lymphadenopathy",
+   "The blood film shows characteristic lymphoid cells with fine cytoplasmic hairy projections",
+   "Monocytopenia is a useful and fairly specific clue that helps distinguish it from other lymphoproliferative disorders",
+   "The immunophenotype is a clonal B cell expressing CD11c, CD25, CD103 and CD123, and annexin-A1 positivity is highly characteristic",
+   "The BRAF V600E mutation is present in nearly all classic cases and is the defining molecular lesion",
+   "Marrow aspiration is frequently a dry tap because of reticulin fibrosis, so a trephine biopsy showing a fried-egg appearance is important",
+   "Tartrate-resistant acid phosphatase (TRAP) positivity is a traditional cytochemical hallmark, and treatment centres on purine analogues, with BRAF inhibition for relapsed or refractory disease"
   ],
-  "class": "non_infective",
-  "system": "Haematology",
-  "specialty": "Haematology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Williams Hematology / WHO classification of haematolymphoid tumours",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An indolent mature B-cell malignancy classically presenting with pancytopenia, monocytopenia and marked splenomegaly, often without lymphadenopathy",
-      "The blood film shows characteristic lymphoid cells with fine cytoplasmic hairy projections",
-      "Monocytopenia is a useful and fairly specific clue that helps distinguish it from other lymphoproliferative disorders",
-      "The immunophenotype is a clonal B cell expressing CD11c, CD25, CD103 and CD123, and annexin-A1 positivity is highly characteristic",
-      "The BRAF V600E mutation is present in nearly all classic cases and is the defining molecular lesion",
-      "Marrow aspiration is frequently a dry tap because of reticulin fibrosis, so a trephine biopsy showing a fried-egg appearance is important",
-      "Tartrate-resistant acid phosphatase (TRAP) positivity is a traditional cytochemical hallmark, and treatment centres on purine analogues, with BRAF inhibition for relapsed or refractory disease"
+  "pathophysiology": "Hairy cell leukaemia is a clonal proliferation of mature B lymphocytes with distinctive cytoplasmic projections. The near-universal driver is the activating BRAF V600E mutation, which switches on the RAF-MEK-ERK signalling pathway and promotes survival and characteristic morphology and adhesion properties. The malignant cells infiltrate the bone marrow, inducing reticulin fibrosis that explains the frequent dry tap, and populate the splenic red pulp producing splenomegaly. Marrow infiltration and hypersplenism together drive the pancytopenia and the characteristic monocytopenia that increases infection risk.",
+  "additionalDifferentials": [
+   "Splenic marginal zone lymphoma",
+   "Hairy cell leukaemia variant (now a distinct entity)",
+   "Chronic lymphocytic leukaemia",
+   "Systemic mastocytosis with splenomegaly",
+   "Aplastic anaemia (given pancytopenia)",
+   "Myelofibrosis"
+  ],
+  "additionalInvestigations": [
+   "Peripheral blood film to identify hairy cells and monocytopenia",
+   "Flow cytometry (CD11c, CD25, CD103, CD123) and annexin-A1 staining",
+   "Bone marrow trephine biopsy with reticulin stain",
+   "Molecular testing for BRAF V600E mutation",
+   "TRAP cytochemistry where available",
+   "Imaging to assess splenomegaly"
+  ],
+  "redFlags": [
+   "Severe neutropenia or monocytopenia with serious or opportunistic infection",
+   "Symptomatic massive splenomegaly or splenic rupture",
+   "Failure to respond to purine analogue therapy suggesting the variant form",
+   "Progressive marrow failure with bleeding or transfusion dependence"
+  ],
+  "prognosis": "Classic hairy cell leukaemia responds well to purine analogue therapy with durable remissions and near-normal life expectancy for many patients; relapses can occur but often respond to further treatment or BRAF-targeted therapy.",
+  "pitfalls": [
+   "Interpreting a dry marrow tap as inadequate rather than a diagnostic clue for fibrosis",
+   "Confusing it with splenic marginal zone lymphoma or the hairy cell variant, which behave differently",
+   "Overlooking monocytopenia as a diagnostic pointer",
+   "Missing BRAF V600E testing that confirms classic disease and guides targeted therapy"
+  ],
+  "references": [
+   "Williams Hematology",
+   "WHO Classification of Haematolymphoid Tumours"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Purine nucleoside analogue therapy with cladribine or pentostatin as the first-line mainstay, achieving durable remissions",
+   "Rituximab combined with, or following, a purine analogue to deepen response and eradicate minimal residual disease",
+   "BRAF inhibitor therapy such as vemurafenib for relapsed or refractory disease harbouring the BRAF V600E mutation",
+   "Defer treatment until cytopenias or symptomatic splenomegaly develop, observing asymptomatic patients",
+   "Antimicrobial prophylaxis and vigilance for opportunistic infection because of the characteristic monocytopenia, with red cell and platelet transfusion support",
+   "Consider splenectomy for massive or refractory symptomatic splenomegaly in selected patients",
+   "Regular full blood count and clinical surveillance to detect and re-treat relapse"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "hairy_cell_leukemia-pathway",
+   "title": "Hairy cell leukaemia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An indolent mature B-cell malignancy classically presenting with pancytopenia, monocytopenia and marked splenomegaly, often without lymphadenopathy",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe neutropenia or monocytopenia with serious or opportunistic infection",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Peripheral blood film to identify hairy cells and monocytopenia, Flow cytometry (CD11c, CD25, CD103, CD123) and annexin-A1 staining, Bone marrow trephine biopsy with reticulin stain"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Purine nucleoside analogue therapy with cladribine or pentostatin as the first-line mainstay, achieving durable remissions"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Interpreting a dry marrow tap as inadequate rather than a diagnostic clue for fibrosis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of hairy cell leukaemia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hairy_cell_leukemia-matrix",
+   "title": "Hairy cell leukaemia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An indolent mature B-cell malignancy classically presenting with pancytopenia, monocytopenia and marked splenomegaly, often",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Hairy cell leukaemia is a clonal proliferation of mature B lymphocytes with distinctive cytoplasmic projections. The near-universal driver is the activating BRAF V600E mutation, which switches on the RAF-MEK-ERK signalling pathway and promotes survival and characteristic morphology and adhesion properties. The malignant cells infiltrate the bone marrow, inducing reticulin fibrosis that explains the frequent dry tap, and populate the splenic red pulp producing splenomegaly. Marrow infiltration and hypersplenism together drive the pancytopenia and the characteristic monocytopenia that increases infection risk.",
-    "additionalDifferentials": [
-      "Splenic marginal zone lymphoma",
-      "Hairy cell leukaemia variant (now a distinct entity)",
-      "Chronic lymphocytic leukaemia",
-      "Systemic mastocytosis with splenomegaly",
-      "Aplastic anaemia (given pancytopenia)",
-      "Myelofibrosis"
+    [
+     "Key Investigations",
+     "Peripheral blood film to identify hairy cells and monocytopenia, Flow cytometry (CD11c, CD25, CD103, CD123) and annexin-A1",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Peripheral blood film to identify hairy cells and monocytopenia",
-      "Flow cytometry (CD11c, CD25, CD103, CD123) and annexin-A1 staining",
-      "Bone marrow trephine biopsy with reticulin stain",
-      "Molecular testing for BRAF V600E mutation",
-      "TRAP cytochemistry where available",
-      "Imaging to assess splenomegaly"
+    [
+     "Primary Differentials",
+     "Splenic marginal zone lymphoma, Hairy cell leukaemia variant (now a distinct entity), Chronic lymphocytic leukaemia",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe neutropenia or monocytopenia with serious or opportunistic infection",
-      "Symptomatic massive splenomegaly or splenic rupture",
-      "Failure to respond to purine analogue therapy suggesting the variant form",
-      "Progressive marrow failure with bleeding or transfusion dependence"
+    [
+     "Management Strategy",
+     "Purine nucleoside analogue therapy with cladribine or pentostatin as the first-line mainstay, achieving durable remissions",
+     "Core treatment modality"
     ],
-    "prognosis": "Classic hairy cell leukaemia responds well to purine analogue therapy with durable remissions and near-normal life expectancy for many patients; relapses can occur but often respond to further treatment or BRAF-targeted therapy.",
-    "pitfalls": [
-      "Interpreting a dry marrow tap as inadequate rather than a diagnostic clue for fibrosis",
-      "Confusing it with splenic marginal zone lymphoma or the hairy cell variant, which behave differently",
-      "Overlooking monocytopenia as a diagnostic pointer",
-      "Missing BRAF V600E testing that confirms classic disease and guides targeted therapy"
-    ],
-    "references": [
-      "Williams Hematology",
-      "WHO Classification of Haematolymphoid Tumours"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Purine nucleoside analogue therapy with cladribine or pentostatin as the first-line mainstay, achieving durable remissions",
-      "Rituximab combined with, or following, a purine analogue to deepen response and eradicate minimal residual disease",
-      "BRAF inhibitor therapy such as vemurafenib for relapsed or refractory disease harbouring the BRAF V600E mutation",
-      "Defer treatment until cytopenias or symptomatic splenomegaly develop, observing asymptomatic patients",
-      "Antimicrobial prophylaxis and vigilance for opportunistic infection because of the characteristic monocytopenia, with red cell and platelet transfusion support",
-      "Consider splenectomy for massive or refractory symptomatic splenomegaly in selected patients",
-      "Regular full blood count and clinical surveillance to detect and re-treat relapse"
+    [
+     "Clinical Pitfall",
+     "Interpreting a dry marrow tap as inadequate rather than a diagnostic clue for fibrosis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for hairy cell leukaemia."
+  }
+ ]
 }

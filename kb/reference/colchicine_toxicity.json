@@ -1,83 +1,155 @@
 {
-  "id": "colchicine_toxicity",
-  "name": "Colchicine toxicity",
-  "aliases": [
-    "colchicine poisoning",
-    "colchicine overdose",
-    "autumn crocus poisoning",
-    "Colchicum autumnale poisoning"
+ "id": "colchicine_toxicity",
+ "name": "Colchicine toxicity",
+ "aliases": [
+  "colchicine poisoning",
+  "colchicine overdose",
+  "autumn crocus poisoning",
+  "Colchicum autumnale poisoning"
+ ],
+ "class": "non_infective",
+ "system": "Toxicology",
+ "specialty": "Clinical Toxicology / Emergency Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Goldfrank's Toxicologic Emergencies",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Colchicine has a narrow therapeutic index and serious overdose can occur at doses only modestly above therapeutic, so risk assessment should be cautious",
+   "Toxicity classically evolves in three phases: an early gastrointestinal phase, a phase of multi-organ failure, and, in survivors, a recovery phase",
+   "The initial phase brings nausea, vomiting, diarrhoea and abdominal pain with fluid losses within hours of ingestion",
+   "The second phase, over subsequent days, features bone-marrow suppression, cardiovascular collapse, acute kidney injury, hepatic dysfunction and metabolic derangement",
+   "A relatively well-appearing patient after the gastrointestinal phase can be deceptive, as multi-organ failure may follow",
+   "Plant sources such as autumn crocus and glory lily can cause identical toxicity and may be mistaken for edible plants",
+   "There is no widely available antidote in routine practice, so meticulous supportive and intensive care is the mainstay, with early poisons-centre involvement",
+   "Late alopecia and a rebound leucocytosis are recognised features during recovery"
   ],
-  "class": "non_infective",
-  "system": "Toxicology",
-  "specialty": "Clinical Toxicology / Emergency Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Goldfrank's Toxicologic Emergencies",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Colchicine has a narrow therapeutic index and serious overdose can occur at doses only modestly above therapeutic, so risk assessment should be cautious",
-      "Toxicity classically evolves in three phases: an early gastrointestinal phase, a phase of multi-organ failure, and, in survivors, a recovery phase",
-      "The initial phase brings nausea, vomiting, diarrhoea and abdominal pain with fluid losses within hours of ingestion",
-      "The second phase, over subsequent days, features bone-marrow suppression, cardiovascular collapse, acute kidney injury, hepatic dysfunction and metabolic derangement",
-      "A relatively well-appearing patient after the gastrointestinal phase can be deceptive, as multi-organ failure may follow",
-      "Plant sources such as autumn crocus and glory lily can cause identical toxicity and may be mistaken for edible plants",
-      "There is no widely available antidote in routine practice, so meticulous supportive and intensive care is the mainstay, with early poisons-centre involvement",
-      "Late alopecia and a rebound leucocytosis are recognised features during recovery"
+  "pathophysiology": "Colchicine binds tubulin and prevents microtubule polymerisation, arresting mitosis and disrupting intracellular transport, cell division and structural integrity. Tissues with high turnover, including gastrointestinal epithelium and bone marrow, are affected early, producing profuse gastrointestinal losses and later pancytopenia. Impaired cellular function and mitochondrial dysfunction contribute to multi-organ failure with cardiovascular collapse, acute kidney injury, hepatic dysfunction, lactic acidosis and rhabdomyolysis. The delayed, evolving course reflects the time required for microtubule-dependent processes and rapidly dividing cell populations to fail.",
+  "additionalDifferentials": [
+   "Infective gastroenteritis or sepsis",
+   "Other cytotoxic or antimetabolite drug poisoning",
+   "Iron or other multi-organ toxin ingestion",
+   "Ricin or other plant-toxin poisoning",
+   "Primary haematological failure or aplastic crisis",
+   "Distributive or cardiogenic shock from another cause"
+  ],
+  "additionalInvestigations": [
+   "Serial full blood count to detect evolving bone-marrow suppression",
+   "Renal and liver function, electrolytes, calcium, phosphate and glucose",
+   "Arterial blood gas and lactate for metabolic acidosis",
+   "Creatine kinase for rhabdomyolysis",
+   "Coagulation profile and troponin with electrocardiogram for cardiac involvement",
+   "Careful history of tablet ingestion or plant exposure"
+  ],
+  "redFlags": [
+   "Large reported ingestion or ingestion of concentrated plant material",
+   "Progressive cytopenias, particularly worsening neutropenia",
+   "Hypotension, arrhythmia or evidence of cardiogenic shock",
+   "Acute kidney injury, hepatic dysfunction or lactic acidosis",
+   "Deterioration after an apparently settling gastrointestinal phase"
+  ],
+  "prognosis": "Mild ingestions may cause only self-limiting gastrointestinal upset, but significant overdose carries a high mortality driven by cardiovascular collapse and multi-organ failure; those who survive the second phase generally recover marrow and organ function.",
+  "pitfalls": [
+   "Being reassured by a well patient after the gastrointestinal phase and discharging prematurely",
+   "Underestimating toxicity because the ingested dose seems only slightly supratherapeutic",
+   "Failing to monitor serial blood counts for delayed marrow suppression",
+   "Not recognising plant sources such as autumn crocus and glory lily",
+   "Overlooking drug interactions that raise colchicine concentrations in therapeutic users"
+  ],
+  "references": [
+   "Goldfrank's Toxicologic Emergencies",
+   "UpToDate: Colchicine poisoning"
+  ],
+  "crossLinks": [],
+  "management": [
+   "There is no widely available antidote, as colchicine-specific Fab remains investigational, so management is early decontamination and aggressive supportive care",
+   "Activated charcoal for patients presenting early after significant ingestion, with airway protection as required",
+   "Aggressive intravenous fluid resuscitation to replace profuse gastrointestinal losses, with vasopressors and inotropes for cardiovascular collapse in intensive care",
+   "Granulocyte colony-stimulating factor to support bone-marrow recovery during the pancytopenic phase, with transfusion and neutropenic-sepsis precautions",
+   "Correct electrolyte, calcium, phosphate and glucose derangements and metabolic acidosis; renal replacement is largely ineffective at removing colchicine because of its large volume of distribution but supports acute kidney injury",
+   "Serial monitoring of full blood count, renal and liver function, creatine kinase, lactate, troponin and ECG through the evolving multi-organ phase",
+   "Do not be reassured by apparent recovery after the gastrointestinal phase, as multi-organ failure may follow; admit and observe",
+   "Escalate early to critical care and clinical toxicology for significant ingestions"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "colchicine_toxicity-pathway",
+   "title": "Colchicine toxicity: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Colchicine has a narrow therapeutic index and serious overdose can occur at doses only modestly above therapeutic, so risk assessment should be cautious",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Large reported ingestion or ingestion of concentrated plant material",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serial full blood count to detect evolving bone-marrow suppression, Renal and liver function, electrolytes, calcium, phosphate and glucose, Arterial blood gas and lactate for metabolic acidosis"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: There is no widely available antidote, as colchicine-specific Fab remains investigational, so management is early decontamination and aggressive supportive care"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Being reassured by a well patient after the gastrointestinal phase and discharging prematurely"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of colchicine toxicity."
+  }
+ ],
+ "tables": [
+  {
+   "id": "colchicine_toxicity-matrix",
+   "title": "Colchicine toxicity: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Colchicine has a narrow therapeutic index and serious overdose can occur at doses only modestly above therapeutic, so risk",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Colchicine binds tubulin and prevents microtubule polymerisation, arresting mitosis and disrupting intracellular transport, cell division and structural integrity. Tissues with high turnover, including gastrointestinal epithelium and bone marrow, are affected early, producing profuse gastrointestinal losses and later pancytopenia. Impaired cellular function and mitochondrial dysfunction contribute to multi-organ failure with cardiovascular collapse, acute kidney injury, hepatic dysfunction, lactic acidosis and rhabdomyolysis. The delayed, evolving course reflects the time required for microtubule-dependent processes and rapidly dividing cell populations to fail.",
-    "additionalDifferentials": [
-      "Infective gastroenteritis or sepsis",
-      "Other cytotoxic or antimetabolite drug poisoning",
-      "Iron or other multi-organ toxin ingestion",
-      "Ricin or other plant-toxin poisoning",
-      "Primary haematological failure or aplastic crisis",
-      "Distributive or cardiogenic shock from another cause"
+    [
+     "Key Investigations",
+     "Serial full blood count to detect evolving bone-marrow suppression, Renal and liver function, electrolytes, calcium, phosphate",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serial full blood count to detect evolving bone-marrow suppression",
-      "Renal and liver function, electrolytes, calcium, phosphate and glucose",
-      "Arterial blood gas and lactate for metabolic acidosis",
-      "Creatine kinase for rhabdomyolysis",
-      "Coagulation profile and troponin with electrocardiogram for cardiac involvement",
-      "Careful history of tablet ingestion or plant exposure"
+    [
+     "Primary Differentials",
+     "Infective gastroenteritis or sepsis, Other cytotoxic or antimetabolite drug poisoning, Iron or other multi-organ toxin ingestion",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Large reported ingestion or ingestion of concentrated plant material",
-      "Progressive cytopenias, particularly worsening neutropenia",
-      "Hypotension, arrhythmia or evidence of cardiogenic shock",
-      "Acute kidney injury, hepatic dysfunction or lactic acidosis",
-      "Deterioration after an apparently settling gastrointestinal phase"
+    [
+     "Management Strategy",
+     "There is no widely available antidote, as colchicine-specific Fab remains investigational, so management is early decontamination",
+     "Core treatment modality"
     ],
-    "prognosis": "Mild ingestions may cause only self-limiting gastrointestinal upset, but significant overdose carries a high mortality driven by cardiovascular collapse and multi-organ failure; those who survive the second phase generally recover marrow and organ function.",
-    "pitfalls": [
-      "Being reassured by a well patient after the gastrointestinal phase and discharging prematurely",
-      "Underestimating toxicity because the ingested dose seems only slightly supratherapeutic",
-      "Failing to monitor serial blood counts for delayed marrow suppression",
-      "Not recognising plant sources such as autumn crocus and glory lily",
-      "Overlooking drug interactions that raise colchicine concentrations in therapeutic users"
-    ],
-    "references": [
-      "Goldfrank's Toxicologic Emergencies",
-      "UpToDate: Colchicine poisoning"
-    ],
-    "crossLinks": [],
-    "management": [
-      "There is no widely available antidote, as colchicine-specific Fab remains investigational, so management is early decontamination and aggressive supportive care",
-      "Activated charcoal for patients presenting early after significant ingestion, with airway protection as required",
-      "Aggressive intravenous fluid resuscitation to replace profuse gastrointestinal losses, with vasopressors and inotropes for cardiovascular collapse in intensive care",
-      "Granulocyte colony-stimulating factor to support bone-marrow recovery during the pancytopenic phase, with transfusion and neutropenic-sepsis precautions",
-      "Correct electrolyte, calcium, phosphate and glucose derangements and metabolic acidosis; renal replacement is largely ineffective at removing colchicine because of its large volume of distribution but supports acute kidney injury",
-      "Serial monitoring of full blood count, renal and liver function, creatine kinase, lactate, troponin and ECG through the evolving multi-organ phase",
-      "Do not be reassured by apparent recovery after the gastrointestinal phase, as multi-organ failure may follow; admit and observe",
-      "Escalate early to critical care and clinical toxicology for significant ingestions"
+    [
+     "Clinical Pitfall",
+     "Being reassured by a well patient after the gastrointestinal phase and discharging prematurely",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for colchicine toxicity."
+  }
+ ]
 }

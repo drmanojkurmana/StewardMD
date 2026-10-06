@@ -1,72 +1,144 @@
 {
-  "id": "retractile_testis",
-  "name": "Retractile testis",
-  "aliases": [
-    "retractile testicle"
+ "id": "retractile_testis",
+ "name": "Retractile testis",
+ "aliases": [
+  "retractile testicle"
+ ],
+ "class": "non_infective",
+ "system": "Genitourinary",
+ "specialty": "Paediatric surgery / Urology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Paediatric urology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A testis that intermittently withdraws from the scrotum into the groin due to an overactive cremasteric reflex, but can be brought down and stays in the scrotum",
+   "It is a normal variant in prepubertal boys and must be distinguished from a truly undescended (cryptorchid) testis",
+   "The key clinical feature is that the testis, once manipulated into the scrotum, remains there without tension until the reflex is re-triggered",
+   "The cremasteric reflex is most active in mid-childhood, when retractile testes are commonest",
+   "A minority become ascending (acquired undescended) testes over time, so periodic review is advised",
+   "No surgery is needed for a genuinely retractile testis, but an ascending testis requires orchidopexy"
   ],
-  "class": "non_infective",
-  "system": "Genitourinary",
-  "specialty": "Paediatric surgery / Urology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Paediatric urology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A testis that intermittently withdraws from the scrotum into the groin due to an overactive cremasteric reflex, but can be brought down and stays in the scrotum",
-      "It is a normal variant in prepubertal boys and must be distinguished from a truly undescended (cryptorchid) testis",
-      "The key clinical feature is that the testis, once manipulated into the scrotum, remains there without tension until the reflex is re-triggered",
-      "The cremasteric reflex is most active in mid-childhood, when retractile testes are commonest",
-      "A minority become ascending (acquired undescended) testes over time, so periodic review is advised",
-      "No surgery is needed for a genuinely retractile testis, but an ascending testis requires orchidopexy"
+  "pathophysiology": "A retractile testis results from a brisk cremasteric reflex that pulls a normally descended testis up toward the external ring, particularly with cold or handling. Because the spermatic cord is of adequate length, the testis can be drawn back into and remain in the scrotum, distinguishing it from cryptorchidism. In some boys relative shortening of the cord with growth converts a retractile testis into an ascending (acquired undescended) testis, which no longer stays down.",
+  "additionalDifferentials": [
+   "Undescended (cryptorchid) testis",
+   "Ascending (acquired undescended) testis",
+   "Ectopic testis",
+   "Absent (vanishing) testis",
+   "Gliding testis"
+  ],
+  "additionalInvestigations": [
+   "Careful examination in a warm, relaxed setting to overcome the cremasteric reflex",
+   "Confirmation that the testis stays in the scrotum after manipulation",
+   "Serial follow-up to detect an ascending testis",
+   "No routine imaging required",
+   "Referral if the testis cannot be kept in the scrotum"
+  ],
+  "redFlags": [
+   "A testis that will not stay in the scrotum (undescended/ascending)",
+   "Testicular asymmetry or atrophy",
+   "Associated hypospadias or ambiguous genitalia",
+   "Loss of a previously scrotal testis on follow-up"
+  ],
+  "prognosis": "A truly retractile testis is benign and typically resolves at puberty, but the small risk of progression to an ascending testis warrants monitoring.",
+  "pitfalls": [
+   "Labelling an undescended or ascending testis as merely retractile",
+   "Examining in a cold or anxious setting and misjudging position",
+   "Failing to arrange follow-up for possible ascent",
+   "Reassuring without confirming the testis stays down"
+  ],
+  "references": [
+   "Paediatric urology references (standard reference)",
+   "Paediatric surgery reference texts (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Reassure that a genuinely retractile testis is a normal variant needing no surgery",
+   "Confirm the diagnosis by examining in a warm, relaxed setting and demonstrating that the testis stays in the scrotum after manipulation",
+   "Arrange periodic clinical review through childhood to detect conversion to an ascending (acquired undescended) testis",
+   "Refer for orchidopexy if the testis can no longer be maintained in the scrotum",
+   "Avoid routine imaging, which does not aid management",
+   "Reassess around puberty, when the cremasteric reflex wanes and retraction typically resolves"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "retractile_testis-pathway",
+   "title": "Retractile testis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A testis that intermittently withdraws from the scrotum into the groin due to an overactive cremasteric reflex, but can be brought down and stays in the scrotum",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: A testis that will not stay in the scrotum (undescended/ascending)",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Careful examination in a warm, relaxed setting to overcome the cremasteric reflex, Confirmation that the testis stays in the scrotum after manipulation, Serial follow-up to detect an ascending testis"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Reassure that a genuinely retractile testis is a normal variant needing no surgery"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Labelling an undescended or ascending testis as merely retractile"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of retractile testis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "retractile_testis-matrix",
+   "title": "Retractile testis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A testis that intermittently withdraws from the scrotum into the groin due to an overactive cremasteric reflex, but can be",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "A retractile testis results from a brisk cremasteric reflex that pulls a normally descended testis up toward the external ring, particularly with cold or handling. Because the spermatic cord is of adequate length, the testis can be drawn back into and remain in the scrotum, distinguishing it from cryptorchidism. In some boys relative shortening of the cord with growth converts a retractile testis into an ascending (acquired undescended) testis, which no longer stays down.",
-    "additionalDifferentials": [
-      "Undescended (cryptorchid) testis",
-      "Ascending (acquired undescended) testis",
-      "Ectopic testis",
-      "Absent (vanishing) testis",
-      "Gliding testis"
+    [
+     "Key Investigations",
+     "Careful examination in a warm, relaxed setting to overcome the cremasteric reflex, Confirmation that the testis stays in the",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Careful examination in a warm, relaxed setting to overcome the cremasteric reflex",
-      "Confirmation that the testis stays in the scrotum after manipulation",
-      "Serial follow-up to detect an ascending testis",
-      "No routine imaging required",
-      "Referral if the testis cannot be kept in the scrotum"
+    [
+     "Primary Differentials",
+     "Undescended (cryptorchid) testis, Ascending (acquired undescended) testis, Ectopic testis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "A testis that will not stay in the scrotum (undescended/ascending)",
-      "Testicular asymmetry or atrophy",
-      "Associated hypospadias or ambiguous genitalia",
-      "Loss of a previously scrotal testis on follow-up"
+    [
+     "Management Strategy",
+     "Reassure that a genuinely retractile testis is a normal variant needing no surgery",
+     "Core treatment modality"
     ],
-    "prognosis": "A truly retractile testis is benign and typically resolves at puberty, but the small risk of progression to an ascending testis warrants monitoring.",
-    "pitfalls": [
-      "Labelling an undescended or ascending testis as merely retractile",
-      "Examining in a cold or anxious setting and misjudging position",
-      "Failing to arrange follow-up for possible ascent",
-      "Reassuring without confirming the testis stays down"
-    ],
-    "references": [
-      "Paediatric urology references (standard reference)",
-      "Paediatric surgery reference texts (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Reassure that a genuinely retractile testis is a normal variant needing no surgery",
-      "Confirm the diagnosis by examining in a warm, relaxed setting and demonstrating that the testis stays in the scrotum after manipulation",
-      "Arrange periodic clinical review through childhood to detect conversion to an ascending (acquired undescended) testis",
-      "Refer for orchidopexy if the testis can no longer be maintained in the scrotum",
-      "Avoid routine imaging, which does not aid management",
-      "Reassess around puberty, when the cremasteric reflex wanes and retraction typically resolves"
+    [
+     "Clinical Pitfall",
+     "Labelling an undescended or ascending testis as merely retractile",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for retractile testis."
+  }
+ ]
 }

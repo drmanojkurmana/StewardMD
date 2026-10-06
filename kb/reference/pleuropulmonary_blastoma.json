@@ -1,88 +1,160 @@
 {
-  "id": "pleuropulmonary_blastoma",
-  "name": "pleuropulmonary blastoma",
-  "aliases": [
-    "PPB",
-    "pleuropulmonary blastoma of childhood"
+ "id": "pleuropulmonary_blastoma",
+ "name": "pleuropulmonary blastoma",
+ "aliases": [
+  "PPB",
+  "pleuropulmonary blastoma of childhood"
+ ],
+ "class": "non_infective",
+ "system": "respiratory",
+ "specialty": "paediatric oncology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "WHO Classification of Tumours: Thoracic Tumours",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The commonest primary lung malignancy of early childhood, a dysembryonic mesenchymal tumour of lung and pleura, distinct from the epithelial pulmonary blastoma of adults.",
+   "Classified into three progressive types: Type I is purely cystic, Type II is mixed cystic and solid, and Type III is purely solid, with prognosis worsening across the sequence.",
+   "Type I may regress or, if untreated, progress to the aggressive Type II and III forms, so complete resection of Type I lesions is advocated.",
+   "Around two-thirds of cases arise in DICER1 syndrome; identifying a germline DICER1 pathogenic variant unlocks family surveillance.",
+   "It is frequently and dangerously mistaken for a benign congenital pulmonary airway malformation (CPAM) on imaging.",
+   "Presentations include respiratory distress, persistent cough, chest pain, and spontaneous pneumothorax.",
+   "The solid types metastasise with a particular predilection for the brain and bone.",
+   "DICER1 syndrome also predisposes to cystic nephroma, Sertoli-Leydig cell tumour, multinodular goitre, ciliary body medulloepithelioma, and nasal chondromesenchymal hamartoma."
   ],
-  "class": "non_infective",
-  "system": "respiratory",
-  "specialty": "paediatric oncology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "WHO Classification of Tumours: Thoracic Tumours",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The commonest primary lung malignancy of early childhood, a dysembryonic mesenchymal tumour of lung and pleura, distinct from the epithelial pulmonary blastoma of adults.",
-      "Classified into three progressive types: Type I is purely cystic, Type II is mixed cystic and solid, and Type III is purely solid, with prognosis worsening across the sequence.",
-      "Type I may regress or, if untreated, progress to the aggressive Type II and III forms, so complete resection of Type I lesions is advocated.",
-      "Around two-thirds of cases arise in DICER1 syndrome; identifying a germline DICER1 pathogenic variant unlocks family surveillance.",
-      "It is frequently and dangerously mistaken for a benign congenital pulmonary airway malformation (CPAM) on imaging.",
-      "Presentations include respiratory distress, persistent cough, chest pain, and spontaneous pneumothorax.",
-      "The solid types metastasise with a particular predilection for the brain and bone.",
-      "DICER1 syndrome also predisposes to cystic nephroma, Sertoli-Leydig cell tumour, multinodular goitre, ciliary body medulloepithelioma, and nasal chondromesenchymal hamartoma."
+  "pathophysiology": "Pleuropulmonary blastoma is a dysontogenetic tumour arising from the primitive mesenchyme of the developing lung and pleura. Most cases are associated with germline loss-of-function mutation in DICER1, an endoribonuclease essential for microRNA maturation; a characteristic somatic hotspot missense mutation in the RNase IIIb domain of the remaining allele deregulates microRNA processing and drives tumour formation. Disease begins as an epithelium-lined cystic lesion (Type I) harbouring a subtle malignant mesenchymal (cambium) layer beneath a benign-appearing epithelium; over time the mesenchyme overgrows to produce mixed (Type II) and then wholly solid, high-grade sarcomatous (Type III) tumours, which may display blastematous, rhabdomyosarcomatous, chondroid, and anaplastic elements.",
+  "additionalDifferentials": [
+   "Congenital pulmonary airway malformation (CPAM)",
+   "Congenital lobar emphysema",
+   "Bronchogenic or other foregut duplication cyst",
+   "Pulmonary sequestration",
+   "Bronchopulmonary infection with cavitation or empyema",
+   "Metastatic sarcoma or Wilms tumour to the lung",
+   "Mediastinal germ cell tumour"
+  ],
+  "additionalInvestigations": [
+   "Contrast-enhanced CT of the chest to characterise cystic versus solid components",
+   "Histopathology of the resected lesion with attention to the malignant cambium layer",
+   "Germline and tumour DICER1 mutation testing",
+   "Brain MRI to screen for cerebral metastases in solid types",
+   "Bone imaging for skeletal metastases",
+   "Echocardiography if there is mediastinal or cardiac displacement",
+   "Thyroid ultrasound and abdominal/pelvic imaging for DICER1-associated tumours"
+  ],
+  "redFlags": [
+   "Spontaneous pneumothorax in a young child, which may herald an underlying cystic pleuropulmonary blastoma",
+   "A presumed CPAM with solid components, septal thickening, or rapid enlargement",
+   "Neurological signs suggesting cerebral metastasis",
+   "A family history of DICER1-associated tumours"
+  ],
+  "prognosis": "Type I disease that is completely resected has a favourable outcome, whereas Type II and especially Type III tumours carry a substantially worse prognosis with significant risk of recurrence and metastatic spread; cerebral metastases are a particularly poor prognostic feature.",
+  "pitfalls": [
+   "Diagnosing a cystic lung lesion as benign CPAM without histological review, missing an early Type I pleuropulmonary blastoma.",
+   "Adopting watchful waiting for complex cystic lung lesions in a child with a DICER1 background rather than resecting.",
+   "Not sending DICER1 testing, missing the syndrome and surveillance opportunities for the child and relatives.",
+   "Omitting brain imaging in solid-type disease and thereby missing metastases."
+  ],
+  "references": [
+   "WHO Classification of Tumours: Thoracic Tumours",
+   "International Pleuropulmonary Blastoma / DICER1 Registry guidance",
+   "Nelson Textbook of Pediatrics"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Classify by pathological type (I, Ir, II, III) since this drives treatment intensity rather than a formal TNM stage",
+   "Type I (purely cystic): complete surgical resection as primary and often sole treatment, even when imaging looks benign, since an occult malignant cambium layer can be present and untreated disease can progress to Type II or III",
+   "Type Ir (regressed cystic): surveillance imaging rather than further resection once the diagnosis is secure",
+   "Type II and III (mixed or purely solid, high-grade): manage as a high-grade pediatric sarcoma with surgery plus systemic chemotherapy, and radiotherapy in selected cases",
+   "Surgery is the cornerstone at every stage, pursuing complete resection of the primary tumour whenever feasible, including re-resection of residual or recurrent disease and resection of accessible metastases",
+   "Systemic therapy for Type II/III follows a pediatric soft-tissue sarcoma type chemotherapy backbone combining an alkylating agent, an anthracycline-based agent, and a vinca alkaloid or actinomycin based agent, given adjuvant or neoadjuvant per a structured protocol",
+   "Reserve radiotherapy for unresectable primary disease, gross residual disease after surgery, or symptomatic metastatic sites, weighed against long-term radiation risk in a young child",
+   "Manage recurrent or refractory disease case by case with further surgery, alternative or salvage chemotherapy, and consideration of clinical trial enrolment given the rarity of the disease",
+   "Offer germline DICER1 testing to all patients with PPB, with genetic counselling and cascade testing for first-degree relatives when a pathogenic variant is confirmed",
+   "Enrol patients and DICER1 carrier relatives in surveillance for other DICER1-associated tumours, including cystic nephroma, Sertoli-Leydig cell tumour, multinodular goitre and thyroid carcinoma, ciliary body medulloepithelioma, and nasal chondromesenchymal hamartoma",
+   "Use surveillance chest imaging to detect local recurrence, individualised to tumour type and resection margins, plus periodic brain MRI and skeletal imaging for solid-type (Type II/III) disease given its preference for brain and bone metastasis",
+   "Track survivors long term for other DICER1-related tumours and for late effects of chemotherapy and radiotherapy",
+   "Refer any child with a complex or enlarging cystic lung lesion, or one with solid components, promptly for pediatric surgical and oncology assessment rather than managing it as a presumed benign congenital pulmonary airway malformation",
+   "Refer confirmed or suspected PPB to a specialist pediatric oncology multidisciplinary team with DICER1/PPB registry access, and treat family history of DICER1 tumours or neurological signs of cerebral metastasis as an urgent referral"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "pleuropulmonary_blastoma-pathway",
+   "title": "pleuropulmonary blastoma: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The commonest primary lung malignancy of early childhood, a dysembryonic mesenchymal tumour of lung and pleura, distinct from the epithelial pulmonary blastoma of adults.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Spontaneous pneumothorax in a young child, which may herald an underlying cystic pleuropulmonary blastoma",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Contrast-enhanced CT of the chest to characterise cystic versus solid components, Histopathology of the resected lesion with attention to the malignant cambium layer, Germline and tumour DICER1 mutation testing"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Classify by pathological type (I, Ir, II, III) since this drives treatment intensity rather than a formal TNM stage"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Diagnosing a cystic lung lesion as benign CPAM without histological review, missing an early Type I pleuropulmonary blastoma."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of pleuropulmonary blastoma."
+  }
+ ],
+ "tables": [
+  {
+   "id": "pleuropulmonary_blastoma-matrix",
+   "title": "pleuropulmonary blastoma: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The commonest primary lung malignancy of early childhood, a dysembryonic mesenchymal tumour of lung and pleura, distinct from the",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Pleuropulmonary blastoma is a dysontogenetic tumour arising from the primitive mesenchyme of the developing lung and pleura. Most cases are associated with germline loss-of-function mutation in DICER1, an endoribonuclease essential for microRNA maturation; a characteristic somatic hotspot missense mutation in the RNase IIIb domain of the remaining allele deregulates microRNA processing and drives tumour formation. Disease begins as an epithelium-lined cystic lesion (Type I) harbouring a subtle malignant mesenchymal (cambium) layer beneath a benign-appearing epithelium; over time the mesenchyme overgrows to produce mixed (Type II) and then wholly solid, high-grade sarcomatous (Type III) tumours, which may display blastematous, rhabdomyosarcomatous, chondroid, and anaplastic elements.",
-    "additionalDifferentials": [
-      "Congenital pulmonary airway malformation (CPAM)",
-      "Congenital lobar emphysema",
-      "Bronchogenic or other foregut duplication cyst",
-      "Pulmonary sequestration",
-      "Bronchopulmonary infection with cavitation or empyema",
-      "Metastatic sarcoma or Wilms tumour to the lung",
-      "Mediastinal germ cell tumour"
+    [
+     "Key Investigations",
+     "Contrast-enhanced CT of the chest to characterise cystic versus solid components, Histopathology of the resected lesion with",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Contrast-enhanced CT of the chest to characterise cystic versus solid components",
-      "Histopathology of the resected lesion with attention to the malignant cambium layer",
-      "Germline and tumour DICER1 mutation testing",
-      "Brain MRI to screen for cerebral metastases in solid types",
-      "Bone imaging for skeletal metastases",
-      "Echocardiography if there is mediastinal or cardiac displacement",
-      "Thyroid ultrasound and abdominal/pelvic imaging for DICER1-associated tumours"
+    [
+     "Primary Differentials",
+     "Congenital pulmonary airway malformation (CPAM), Congenital lobar emphysema, Bronchogenic or other foregut duplication cyst",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Spontaneous pneumothorax in a young child, which may herald an underlying cystic pleuropulmonary blastoma",
-      "A presumed CPAM with solid components, septal thickening, or rapid enlargement",
-      "Neurological signs suggesting cerebral metastasis",
-      "A family history of DICER1-associated tumours"
+    [
+     "Management Strategy",
+     "Classify by pathological type (I, Ir, II, III) since this drives treatment intensity rather than a formal TNM stage",
+     "Core treatment modality"
     ],
-    "prognosis": "Type I disease that is completely resected has a favourable outcome, whereas Type II and especially Type III tumours carry a substantially worse prognosis with significant risk of recurrence and metastatic spread; cerebral metastases are a particularly poor prognostic feature.",
-    "pitfalls": [
-      "Diagnosing a cystic lung lesion as benign CPAM without histological review, missing an early Type I pleuropulmonary blastoma.",
-      "Adopting watchful waiting for complex cystic lung lesions in a child with a DICER1 background rather than resecting.",
-      "Not sending DICER1 testing, missing the syndrome and surveillance opportunities for the child and relatives.",
-      "Omitting brain imaging in solid-type disease and thereby missing metastases."
-    ],
-    "references": [
-      "WHO Classification of Tumours: Thoracic Tumours",
-      "International Pleuropulmonary Blastoma / DICER1 Registry guidance",
-      "Nelson Textbook of Pediatrics"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Classify by pathological type (I, Ir, II, III) since this drives treatment intensity rather than a formal TNM stage",
-      "Type I (purely cystic): complete surgical resection as primary and often sole treatment, even when imaging looks benign, since an occult malignant cambium layer can be present and untreated disease can progress to Type II or III",
-      "Type Ir (regressed cystic): surveillance imaging rather than further resection once the diagnosis is secure",
-      "Type II and III (mixed or purely solid, high-grade): manage as a high-grade pediatric sarcoma with surgery plus systemic chemotherapy, and radiotherapy in selected cases",
-      "Surgery is the cornerstone at every stage, pursuing complete resection of the primary tumour whenever feasible, including re-resection of residual or recurrent disease and resection of accessible metastases",
-      "Systemic therapy for Type II/III follows a pediatric soft-tissue sarcoma type chemotherapy backbone combining an alkylating agent, an anthracycline-based agent, and a vinca alkaloid or actinomycin based agent, given adjuvant or neoadjuvant per a structured protocol",
-      "Reserve radiotherapy for unresectable primary disease, gross residual disease after surgery, or symptomatic metastatic sites, weighed against long-term radiation risk in a young child",
-      "Manage recurrent or refractory disease case by case with further surgery, alternative or salvage chemotherapy, and consideration of clinical trial enrolment given the rarity of the disease",
-      "Offer germline DICER1 testing to all patients with PPB, with genetic counselling and cascade testing for first-degree relatives when a pathogenic variant is confirmed",
-      "Enrol patients and DICER1 carrier relatives in surveillance for other DICER1-associated tumours, including cystic nephroma, Sertoli-Leydig cell tumour, multinodular goitre and thyroid carcinoma, ciliary body medulloepithelioma, and nasal chondromesenchymal hamartoma",
-      "Use surveillance chest imaging to detect local recurrence, individualised to tumour type and resection margins, plus periodic brain MRI and skeletal imaging for solid-type (Type II/III) disease given its preference for brain and bone metastasis",
-      "Track survivors long term for other DICER1-related tumours and for late effects of chemotherapy and radiotherapy",
-      "Refer any child with a complex or enlarging cystic lung lesion, or one with solid components, promptly for pediatric surgical and oncology assessment rather than managing it as a presumed benign congenital pulmonary airway malformation",
-      "Refer confirmed or suspected PPB to a specialist pediatric oncology multidisciplinary team with DICER1/PPB registry access, and treat family history of DICER1 tumours or neurological signs of cerebral metastasis as an urgent referral"
+    [
+     "Clinical Pitfall",
+     "Diagnosing a cystic lung lesion as benign CPAM without histological review, missing an early Type I pleuropulmonary blastoma.",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for pleuropulmonary blastoma."
+  }
+ ]
 }

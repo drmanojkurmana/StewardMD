@@ -1,80 +1,152 @@
 {
-  "id": "sialuria",
-  "name": "Sialuria",
-  "aliases": [
-    "French type sialuria",
-    "sialuria, infantile type (historical distinction)",
-    "free sialic acid overproduction",
-    "GNE"
+ "id": "sialuria",
+ "name": "Sialuria",
+ "aliases": [
+  "French type sialuria",
+  "sialuria, infantile type (historical distinction)",
+  "free sialic acid overproduction",
+  "GNE"
+ ],
+ "class": "non_infective",
+ "system": "Metabolic / Genetics",
+ "specialty": "Metabolic Medicine / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / Journal of Inherited Metabolic Disease",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A dominantly inherited disorder of sialic acid overproduction caused by activating (dominant-negative) variants in the allosteric site of GNE",
+   "Characterised by massive urinary excretion of free (unconjugated) N-acetylneuraminic acid, the sialic acid intermediate",
+   "It differs fundamentally from the sialic acid storage disorders, where the problem is lysosomal accumulation rather than cytoplasmic overproduction",
+   "Clinical features are variable and often relatively mild: coarse facies, hepatomegaly, recurrent infections, and variable developmental delay",
+   "Diagnosis rests on demonstrating grossly elevated free sialic acid in urine, distinguishing it from bound sialic acid disorders",
+   "The same GNE gene, when affected by different loss-of-function variants, causes GNE myopathy, illustrating gene-specific allelic diversity",
+   "There is no specific therapy; management is supportive with monitoring of growth and development",
+   "Prognosis is generally more favourable than for the severe sialic acid storage diseases"
   ],
-  "class": "non_infective",
-  "system": "Metabolic / Genetics",
-  "specialty": "Metabolic Medicine / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / Journal of Inherited Metabolic Disease",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A dominantly inherited disorder of sialic acid overproduction caused by activating (dominant-negative) variants in the allosteric site of GNE",
-      "Characterised by massive urinary excretion of free (unconjugated) N-acetylneuraminic acid, the sialic acid intermediate",
-      "It differs fundamentally from the sialic acid storage disorders, where the problem is lysosomal accumulation rather than cytoplasmic overproduction",
-      "Clinical features are variable and often relatively mild: coarse facies, hepatomegaly, recurrent infections, and variable developmental delay",
-      "Diagnosis rests on demonstrating grossly elevated free sialic acid in urine, distinguishing it from bound sialic acid disorders",
-      "The same GNE gene, when affected by different loss-of-function variants, causes GNE myopathy, illustrating gene-specific allelic diversity",
-      "There is no specific therapy; management is supportive with monitoring of growth and development",
-      "Prognosis is generally more favourable than for the severe sialic acid storage diseases"
+  "pathophysiology": "Sialuria is caused by variants that disrupt the allosteric feedback site of GNE, the bifunctional enzyme UDP-N-acetylglucosamine 2-epimerase/N-acetylmannosamine kinase that catalyses the rate-limiting steps of sialic acid biosynthesis. Normally the end-product, CMP-sialic acid, feeds back to inhibit this enzyme. When the regulatory site is disrupted, feedback inhibition is lost and the cytoplasm overproduces free N-acetylneuraminic acid, which is then excreted in large amounts in the urine and accumulates in tissues. This is distinct from the sialic acid storage disorders, in which a lysosomal transporter defect traps sialic acid within lysosomes. The overproduction phenotype tends to be milder, with variable somatic and developmental features.",
+  "additionalDifferentials": [
+   "Sialic acid storage disorders (Salla disease, infantile free sialic acid storage disease)",
+   "Other lysosomal storage disorders with coarse facies and hepatomegaly",
+   "Mucopolysaccharidoses",
+   "Congenital disorders of glycosylation",
+   "GNE myopathy (allelic but distinct phenotype)",
+   "Other causes of hepatomegaly with developmental delay"
+  ],
+  "additionalInvestigations": [
+   "Quantitative urinary free sialic acid (markedly elevated)",
+   "Measurement of bound versus free sialic acid to distinguish storage disorders",
+   "GNE molecular genetic testing",
+   "Liver function tests and abdominal imaging for hepatomegaly",
+   "Developmental assessment",
+   "Metabolic screening to exclude alternative storage disorders"
+  ],
+  "redFlags": [
+   "Significant developmental regression prompting reassessment for an alternative diagnosis",
+   "Recurrent serious infections",
+   "Progressive hepatomegaly with functional impairment",
+   "Failure to thrive"
+  ],
+  "prognosis": "Generally more benign than the sialic acid storage disorders, with variable outcome; many affected individuals have relatively mild disease, though developmental delay may occur.",
+  "pitfalls": [
+   "Confusing sialuria (overproduction, free sialic acid excreted) with sialic acid storage disease (lysosomal accumulation)",
+   "Failing to distinguish free from bound sialic acid on testing",
+   "Assuming a severe storage-disease prognosis and counselling incorrectly",
+   "Overlooking the shared GNE gene basis with the distinct GNE myopathy"
+  ],
+  "references": [
+   "Emery and Rimoin's Principles and Practice of Medical Genetics",
+   "Journal of Inherited Metabolic Disease"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Supportive, manifestation-directed care as no disease-specific therapy exists for the GNE overproduction defect",
+   "Early developmental intervention and educational support for variable developmental delay",
+   "Monitoring for and prompt treatment of recurrent infections",
+   "Monitoring of hepatomegaly with liver function tests and abdominal imaging",
+   "Nutritional and growth surveillance",
+   "Coordinated multidisciplinary metabolic and developmental follow-up",
+   "Genetic counselling given autosomal dominant inheritance, noting that variants often arise de novo"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "sialuria-pathway",
+   "title": "Sialuria: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A dominantly inherited disorder of sialic acid overproduction caused by activating (dominant-negative) variants in the allosteric site of GNE",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Significant developmental regression prompting reassessment for an alternative diagnosis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Quantitative urinary free sialic acid (markedly elevated), Measurement of bound versus free sialic acid to distinguish storage disorders, GNE molecular genetic testing"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Supportive, manifestation-directed care as no disease-specific therapy exists for the GNE overproduction defect"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing sialuria (overproduction, free sialic acid excreted) with sialic acid storage disease (lysosomal accumulation)"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of sialuria."
+  }
+ ],
+ "tables": [
+  {
+   "id": "sialuria-matrix",
+   "title": "Sialuria: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A dominantly inherited disorder of sialic acid overproduction caused by activating (dominant-negative) variants in the allosteric",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Sialuria is caused by variants that disrupt the allosteric feedback site of GNE, the bifunctional enzyme UDP-N-acetylglucosamine 2-epimerase/N-acetylmannosamine kinase that catalyses the rate-limiting steps of sialic acid biosynthesis. Normally the end-product, CMP-sialic acid, feeds back to inhibit this enzyme. When the regulatory site is disrupted, feedback inhibition is lost and the cytoplasm overproduces free N-acetylneuraminic acid, which is then excreted in large amounts in the urine and accumulates in tissues. This is distinct from the sialic acid storage disorders, in which a lysosomal transporter defect traps sialic acid within lysosomes. The overproduction phenotype tends to be milder, with variable somatic and developmental features.",
-    "additionalDifferentials": [
-      "Sialic acid storage disorders (Salla disease, infantile free sialic acid storage disease)",
-      "Other lysosomal storage disorders with coarse facies and hepatomegaly",
-      "Mucopolysaccharidoses",
-      "Congenital disorders of glycosylation",
-      "GNE myopathy (allelic but distinct phenotype)",
-      "Other causes of hepatomegaly with developmental delay"
+    [
+     "Key Investigations",
+     "Quantitative urinary free sialic acid (markedly elevated), Measurement of bound versus free sialic acid to distinguish storage",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Quantitative urinary free sialic acid (markedly elevated)",
-      "Measurement of bound versus free sialic acid to distinguish storage disorders",
-      "GNE molecular genetic testing",
-      "Liver function tests and abdominal imaging for hepatomegaly",
-      "Developmental assessment",
-      "Metabolic screening to exclude alternative storage disorders"
+    [
+     "Primary Differentials",
+     "Sialic acid storage disorders (Salla disease, infantile free sialic acid storage disease), Other lysosomal storage disorders with",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Significant developmental regression prompting reassessment for an alternative diagnosis",
-      "Recurrent serious infections",
-      "Progressive hepatomegaly with functional impairment",
-      "Failure to thrive"
+    [
+     "Management Strategy",
+     "Supportive, manifestation-directed care as no disease-specific therapy exists for the GNE overproduction defect",
+     "Core treatment modality"
     ],
-    "prognosis": "Generally more benign than the sialic acid storage disorders, with variable outcome; many affected individuals have relatively mild disease, though developmental delay may occur.",
-    "pitfalls": [
-      "Confusing sialuria (overproduction, free sialic acid excreted) with sialic acid storage disease (lysosomal accumulation)",
-      "Failing to distinguish free from bound sialic acid on testing",
-      "Assuming a severe storage-disease prognosis and counselling incorrectly",
-      "Overlooking the shared GNE gene basis with the distinct GNE myopathy"
-    ],
-    "references": [
-      "Emery and Rimoin's Principles and Practice of Medical Genetics",
-      "Journal of Inherited Metabolic Disease"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Supportive, manifestation-directed care as no disease-specific therapy exists for the GNE overproduction defect",
-      "Early developmental intervention and educational support for variable developmental delay",
-      "Monitoring for and prompt treatment of recurrent infections",
-      "Monitoring of hepatomegaly with liver function tests and abdominal imaging",
-      "Nutritional and growth surveillance",
-      "Coordinated multidisciplinary metabolic and developmental follow-up",
-      "Genetic counselling given autosomal dominant inheritance, noting that variants often arise de novo"
+    [
+     "Clinical Pitfall",
+     "Confusing sialuria (overproduction, free sialic acid excreted) with sialic acid storage disease (lysosomal accumulation)",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for sialuria."
+  }
+ ]
 }

@@ -1,81 +1,153 @@
 {
-  "id": "weber_syndrome",
-  "name": "Weber syndrome (midbrain)",
-  "aliases": [
-    "superior alternating hemiplegia",
-    "ventral midbrain syndrome",
-    "Weber's syndrome"
+ "id": "weber_syndrome",
+ "name": "Weber syndrome (midbrain)",
+ "aliases": [
+  "superior alternating hemiplegia",
+  "ventral midbrain syndrome",
+  "Weber's syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Cerebrovascular",
+ "specialty": "Neurology / Stroke",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Bradley and Daroff Neurology in Clinical Practice",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Results from infarction of the ventral midbrain (cerebral peduncle) in the territory of paramedian branches of the posterior cerebral and basilar arteries",
+   "Defined by the combination of an ipsilateral oculomotor (third nerve) palsy with contralateral hemiparesis",
+   "The third nerve palsy produces a down-and-out eye, ptosis, and a dilated, poorly reactive pupil on the side of the lesion",
+   "Contralateral weakness affects the face, arm, and leg because the corticospinal and corticobulbar fibres in the crus cerebri are damaged",
+   "It is the prototypical superior alternating hemiplegia and a form of crossed brainstem syndrome",
+   "The fascicle of the third nerve passes through the cerebral peduncle, explaining why a single lesion links the eye and limb signs",
+   "A pupil-involving third nerve palsy always demands exclusion of a compressive aneurysm before attributing it to brainstem ischaemia"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Cerebrovascular",
-  "specialty": "Neurology / Stroke",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Bradley and Daroff Neurology in Clinical Practice",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Results from infarction of the ventral midbrain (cerebral peduncle) in the territory of paramedian branches of the posterior cerebral and basilar arteries",
-      "Defined by the combination of an ipsilateral oculomotor (third nerve) palsy with contralateral hemiparesis",
-      "The third nerve palsy produces a down-and-out eye, ptosis, and a dilated, poorly reactive pupil on the side of the lesion",
-      "Contralateral weakness affects the face, arm, and leg because the corticospinal and corticobulbar fibres in the crus cerebri are damaged",
-      "It is the prototypical superior alternating hemiplegia and a form of crossed brainstem syndrome",
-      "The fascicle of the third nerve passes through the cerebral peduncle, explaining why a single lesion links the eye and limb signs",
-      "A pupil-involving third nerve palsy always demands exclusion of a compressive aneurysm before attributing it to brainstem ischaemia"
+  "pathophysiology": "Weber syndrome arises from ischaemia of the ventral (basal) midbrain, supplied by paramedian perforating branches of the posterior cerebral and top-of-basilar arteries. The lesion involves two adjacent structures: the emerging fascicles of the oculomotor nerve, giving an ipsilateral third nerve palsy with pupillary dilatation and ptosis, and the corticospinal and corticobulbar fibres within the crus cerebri, giving contralateral weakness of the face and limbs. Because the descending motor fibres decussate more caudally, weakness is contralateral while the cranial nerve deficit is ipsilateral, producing the crossed pattern typical of alternating hemiplegias.",
+  "additionalDifferentials": [
+   "Benedikt syndrome (tegmental midbrain involvement)",
+   "Claude syndrome",
+   "Posterior communicating artery aneurysm compressing the third nerve",
+   "Uncal herniation with third nerve compression",
+   "Midbrain demyelination or tumour",
+   "Diabetic third nerve palsy (usually pupil-sparing and without hemiparesis)"
+  ],
+  "additionalInvestigations": [
+   "Diffusion-weighted MRI of the midbrain to confirm a paramedian peduncular infarct",
+   "MR or CT angiography of the posterior circulation and circle of Willis to exclude aneurysm",
+   "Formal assessment of pupillary size and reactivity to characterise the third nerve palsy",
+   "Cardiovascular and stroke risk workup including ECG and metabolic profiling",
+   "Vessel wall imaging where basilar atherosclerosis or dissection is considered",
+   "Blood glucose and inflammatory markers to weigh microvascular and inflammatory causes"
+  ],
+  "redFlags": [
+   "Pupil-involving third nerve palsy raising concern for a compressive posterior communicating artery aneurysm",
+   "Declining consciousness suggesting extension into the reticular activating system or top-of-basilar involvement",
+   "Bilateral signs indicating a larger paramedian midbrain or thalamic infarct",
+   "Rapid clinical deterioration implying evolving basilar occlusion"
+  ],
+  "prognosis": "The oculomotor palsy and hemiparesis may partially improve with rehabilitation, but persistent diplopia, ptosis, and residual limb weakness are common, and outcome depends heavily on the underlying vascular cause.",
+  "pitfalls": [
+   "Attributing a pupil-involving third nerve palsy to microvascular ischaemia without excluding an aneurysm",
+   "Missing the contralateral hemiparesis and treating the eye signs in isolation",
+   "Confusing Weber with tegmental midbrain syndromes that add tremor or ataxia",
+   "Overlooking evolving basilar territory ischaemia in a patient with only midbrain signs"
+  ],
+  "references": [
+   "Bradley and Daroff Neurology in Clinical Practice",
+   "Adams and Victor's Principles of Neurology"
+  ],
+  "crossLinks": [
+   "benedikt_syndrome",
+   "claude_syndrome",
+   "top_of_the_basilar_syndrome"
+  ],
+  "management": [
+   "Treat as an acute posterior-circulation ischaemic stroke on the hyperacute pathway, offering intravenous thrombolysis and considering mechanical thrombectomy for eligible patients within the therapeutic window",
+   "Start secondary prevention with antiplatelet therapy, or anticoagulation if a cardioembolic source is confirmed",
+   "Reduce vascular risk with a statin, blood-pressure control, glycaemic management and smoking cessation",
+   "Refer for multidisciplinary neurorehabilitation with physiotherapy and occupational therapy for the contralateral hemiparesis",
+   "Manage the oculomotor palsy and diplopia with temporary occlusion or prisms, reserving strabismus surgery for stable residual deviation",
+   "Exclude an aneurysm or basilar dissection as the cause, and escalate urgently for fluctuating brainstem signs suggesting evolving basilar occlusion"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "weber_syndrome-pathway",
+   "title": "Weber syndrome (midbrain): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Results from infarction of the ventral midbrain (cerebral peduncle) in the territory of paramedian branches of the posterior cerebral and basilar arteries",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Pupil-involving third nerve palsy raising concern for a compressive posterior communicating artery aneurysm",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Diffusion-weighted MRI of the midbrain to confirm a paramedian peduncular infarct, MR or CT angiography of the posterior circulation and circle of Willis to exclude aneurysm, Formal assessment of pupillary size and"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat as an acute posterior-circulation ischaemic stroke on the hyperacute pathway, offering intravenous thrombolysis and considering mechanical thrombectomy for eligible patients within the therapeutic window"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing a pupil-involving third nerve palsy to microvascular ischaemia without excluding an aneurysm"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of weber syndrome (midbrain)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "weber_syndrome-matrix",
+   "title": "Weber syndrome (midbrain): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Results from infarction of the ventral midbrain (cerebral peduncle) in the territory of paramedian branches of the posterior",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Weber syndrome arises from ischaemia of the ventral (basal) midbrain, supplied by paramedian perforating branches of the posterior cerebral and top-of-basilar arteries. The lesion involves two adjacent structures: the emerging fascicles of the oculomotor nerve, giving an ipsilateral third nerve palsy with pupillary dilatation and ptosis, and the corticospinal and corticobulbar fibres within the crus cerebri, giving contralateral weakness of the face and limbs. Because the descending motor fibres decussate more caudally, weakness is contralateral while the cranial nerve deficit is ipsilateral, producing the crossed pattern typical of alternating hemiplegias.",
-    "additionalDifferentials": [
-      "Benedikt syndrome (tegmental midbrain involvement)",
-      "Claude syndrome",
-      "Posterior communicating artery aneurysm compressing the third nerve",
-      "Uncal herniation with third nerve compression",
-      "Midbrain demyelination or tumour",
-      "Diabetic third nerve palsy (usually pupil-sparing and without hemiparesis)"
+    [
+     "Key Investigations",
+     "Diffusion-weighted MRI of the midbrain to confirm a paramedian peduncular infarct, MR or CT angiography of the posterior",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Diffusion-weighted MRI of the midbrain to confirm a paramedian peduncular infarct",
-      "MR or CT angiography of the posterior circulation and circle of Willis to exclude aneurysm",
-      "Formal assessment of pupillary size and reactivity to characterise the third nerve palsy",
-      "Cardiovascular and stroke risk workup including ECG and metabolic profiling",
-      "Vessel wall imaging where basilar atherosclerosis or dissection is considered",
-      "Blood glucose and inflammatory markers to weigh microvascular and inflammatory causes"
+    [
+     "Primary Differentials",
+     "Benedikt syndrome (tegmental midbrain involvement), Claude syndrome, Posterior communicating artery aneurysm compressing the",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Pupil-involving third nerve palsy raising concern for a compressive posterior communicating artery aneurysm",
-      "Declining consciousness suggesting extension into the reticular activating system or top-of-basilar involvement",
-      "Bilateral signs indicating a larger paramedian midbrain or thalamic infarct",
-      "Rapid clinical deterioration implying evolving basilar occlusion"
+    [
+     "Management Strategy",
+     "Treat as an acute posterior-circulation ischaemic stroke on the hyperacute pathway, offering intravenous thrombolysis and",
+     "Core treatment modality"
     ],
-    "prognosis": "The oculomotor palsy and hemiparesis may partially improve with rehabilitation, but persistent diplopia, ptosis, and residual limb weakness are common, and outcome depends heavily on the underlying vascular cause.",
-    "pitfalls": [
-      "Attributing a pupil-involving third nerve palsy to microvascular ischaemia without excluding an aneurysm",
-      "Missing the contralateral hemiparesis and treating the eye signs in isolation",
-      "Confusing Weber with tegmental midbrain syndromes that add tremor or ataxia",
-      "Overlooking evolving basilar territory ischaemia in a patient with only midbrain signs"
-    ],
-    "references": [
-      "Bradley and Daroff Neurology in Clinical Practice",
-      "Adams and Victor's Principles of Neurology"
-    ],
-    "crossLinks": [
-      "benedikt_syndrome",
-      "claude_syndrome",
-      "top_of_the_basilar_syndrome"
-    ],
-    "management": [
-      "Treat as an acute posterior-circulation ischaemic stroke on the hyperacute pathway, offering intravenous thrombolysis and considering mechanical thrombectomy for eligible patients within the therapeutic window",
-      "Start secondary prevention with antiplatelet therapy, or anticoagulation if a cardioembolic source is confirmed",
-      "Reduce vascular risk with a statin, blood-pressure control, glycaemic management and smoking cessation",
-      "Refer for multidisciplinary neurorehabilitation with physiotherapy and occupational therapy for the contralateral hemiparesis",
-      "Manage the oculomotor palsy and diplopia with temporary occlusion or prisms, reserving strabismus surgery for stable residual deviation",
-      "Exclude an aneurysm or basilar dissection as the cause, and escalate urgently for fluctuating brainstem signs suggesting evolving basilar occlusion"
+    [
+     "Clinical Pitfall",
+     "Attributing a pupil-involving third nerve palsy to microvascular ischaemia without excluding an aneurysm",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for weber syndrome (midbrain)."
+  }
+ ]
 }

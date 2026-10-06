@@ -1,73 +1,145 @@
 {
-  "id": "high_altitude_retinopathy",
-  "name": "High-altitude retinopathy",
-  "aliases": [
-    "altitude retinal haemorrhage"
+ "id": "high_altitude_retinopathy",
+ "name": "High-altitude retinopathy",
+ "aliases": [
+  "altitude retinal haemorrhage"
+ ],
+ "class": "non_infective",
+ "system": "Eye",
+ "specialty": "High-altitude medicine / Ophthalmology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "High-altitude medicine and ophthalmology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Retinal changes occurring at high altitude, including dilated tortuous vessels, retinal haemorrhages and disc hyperaemia",
+   "Most retinal haemorrhages are peripheral and asymptomatic, discovered only on fundoscopy",
+   "Visual symptoms occur mainly when a haemorrhage involves the macula",
+   "It is part of the spectrum of high-altitude illness and is more likely with higher altitude, rapid ascent and strenuous exertion",
+   "Its presence may accompany other altitude illness such as high-altitude cerebral oedema",
+   "Descent generally leads to resolution of the haemorrhages over weeks"
   ],
-  "class": "non_infective",
-  "system": "Eye",
-  "specialty": "High-altitude medicine / Ophthalmology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "High-altitude medicine and ophthalmology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Retinal changes occurring at high altitude, including dilated tortuous vessels, retinal haemorrhages and disc hyperaemia",
-      "Most retinal haemorrhages are peripheral and asymptomatic, discovered only on fundoscopy",
-      "Visual symptoms occur mainly when a haemorrhage involves the macula",
-      "It is part of the spectrum of high-altitude illness and is more likely with higher altitude, rapid ascent and strenuous exertion",
-      "Its presence may accompany other altitude illness such as high-altitude cerebral oedema",
-      "Descent generally leads to resolution of the haemorrhages over weeks"
+  "pathophysiology": "High-altitude retinopathy arises from the retinal vascular response to hypobaric hypoxia. Hypoxia causes retinal vasodilatation and increased retinal blood flow, and raised intracranial and venous pressure together with impaired autoregulation predispose the fragile retinal vessels to leak, producing haemorrhages. The same hypoxic and haemodynamic stresses that drive cerebral involvement in severe altitude illness contribute to the retinal findings, so extensive retinopathy can be a marker of significant altitude stress.",
+  "additionalDifferentials": [
+   "Retinal haemorrhage from hypertension or diabetes",
+   "Valsalva retinopathy",
+   "Anaemia or blood dyscrasia causing retinal haemorrhage",
+   "Central retinal vein occlusion",
+   "Optic disc oedema from other causes"
+  ],
+  "additionalInvestigations": [
+   "Dilated fundus examination documenting haemorrhages and vascular changes",
+   "Assessment for other features of altitude illness",
+   "Visual acuity testing, particularly for macular involvement",
+   "Optical coherence tomography where macular involvement is suspected",
+   "Exclusion of systemic causes of retinal haemorrhage"
+  ],
+  "redFlags": [
+   "Macular haemorrhage with visual loss",
+   "Coexisting signs of high-altitude cerebral oedema",
+   "Extensive bilateral haemorrhage",
+   "Failure of resolution after descent"
+  ],
+  "prognosis": "Peripheral haemorrhages usually resolve completely after descent with no lasting visual effect, though macular involvement can leave persistent visual deficit.",
+  "pitfalls": [
+   "Dismissing extensive retinopathy that may signal serious altitude illness",
+   "Attributing haemorrhages to altitude without excluding systemic causes",
+   "Overlooking macular involvement in a symptomatic climber",
+   "Allowing continued ascent despite significant retinopathy"
+  ],
+  "references": [
+   "High-altitude medicine references (standard reference)",
+   "Ophthalmology reference texts (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Descent to lower altitude, which allows spontaneous resolution of retinal haemorrhages",
+   "Observation of peripheral asymptomatic haemorrhages, which need no specific intervention",
+   "Supplemental oxygen as part of treating coexisting altitude illness",
+   "Ophthalmology referral and closer monitoring where a haemorrhage involves the macula and threatens vision",
+   "Assessment for concurrent high-altitude cerebral or pulmonary oedema",
+   "Preventive gradual ascent and avoidance of strenuous exertion in susceptible individuals",
+   "Follow-up fundoscopy and visual acuity testing until haemorrhages resolve"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "high_altitude_retinopathy-pathway",
+   "title": "High-altitude retinopathy: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Retinal changes occurring at high altitude, including dilated tortuous vessels, retinal haemorrhages and disc hyperaemia",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Macular haemorrhage with visual loss",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Dilated fundus examination documenting haemorrhages and vascular changes, Assessment for other features of altitude illness, Visual acuity testing, particularly for macular involvement"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Descent to lower altitude, which allows spontaneous resolution of retinal haemorrhages"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Dismissing extensive retinopathy that may signal serious altitude illness"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of high-altitude retinopathy."
+  }
+ ],
+ "tables": [
+  {
+   "id": "high_altitude_retinopathy-matrix",
+   "title": "High-altitude retinopathy: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Retinal changes occurring at high altitude, including dilated tortuous vessels, retinal haemorrhages and disc hyperaemia",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "High-altitude retinopathy arises from the retinal vascular response to hypobaric hypoxia. Hypoxia causes retinal vasodilatation and increased retinal blood flow, and raised intracranial and venous pressure together with impaired autoregulation predispose the fragile retinal vessels to leak, producing haemorrhages. The same hypoxic and haemodynamic stresses that drive cerebral involvement in severe altitude illness contribute to the retinal findings, so extensive retinopathy can be a marker of significant altitude stress.",
-    "additionalDifferentials": [
-      "Retinal haemorrhage from hypertension or diabetes",
-      "Valsalva retinopathy",
-      "Anaemia or blood dyscrasia causing retinal haemorrhage",
-      "Central retinal vein occlusion",
-      "Optic disc oedema from other causes"
+    [
+     "Key Investigations",
+     "Dilated fundus examination documenting haemorrhages and vascular changes, Assessment for other features of altitude illness,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Dilated fundus examination documenting haemorrhages and vascular changes",
-      "Assessment for other features of altitude illness",
-      "Visual acuity testing, particularly for macular involvement",
-      "Optical coherence tomography where macular involvement is suspected",
-      "Exclusion of systemic causes of retinal haemorrhage"
+    [
+     "Primary Differentials",
+     "Retinal haemorrhage from hypertension or diabetes, Valsalva retinopathy, Anaemia or blood dyscrasia causing retinal haemorrhage",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Macular haemorrhage with visual loss",
-      "Coexisting signs of high-altitude cerebral oedema",
-      "Extensive bilateral haemorrhage",
-      "Failure of resolution after descent"
+    [
+     "Management Strategy",
+     "Descent to lower altitude, which allows spontaneous resolution of retinal haemorrhages",
+     "Core treatment modality"
     ],
-    "prognosis": "Peripheral haemorrhages usually resolve completely after descent with no lasting visual effect, though macular involvement can leave persistent visual deficit.",
-    "pitfalls": [
-      "Dismissing extensive retinopathy that may signal serious altitude illness",
-      "Attributing haemorrhages to altitude without excluding systemic causes",
-      "Overlooking macular involvement in a symptomatic climber",
-      "Allowing continued ascent despite significant retinopathy"
-    ],
-    "references": [
-      "High-altitude medicine references (standard reference)",
-      "Ophthalmology reference texts (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Descent to lower altitude, which allows spontaneous resolution of retinal haemorrhages",
-      "Observation of peripheral asymptomatic haemorrhages, which need no specific intervention",
-      "Supplemental oxygen as part of treating coexisting altitude illness",
-      "Ophthalmology referral and closer monitoring where a haemorrhage involves the macula and threatens vision",
-      "Assessment for concurrent high-altitude cerebral or pulmonary oedema",
-      "Preventive gradual ascent and avoidance of strenuous exertion in susceptible individuals",
-      "Follow-up fundoscopy and visual acuity testing until haemorrhages resolve"
+    [
+     "Clinical Pitfall",
+     "Dismissing extensive retinopathy that may signal serious altitude illness",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for high-altitude retinopathy."
+  }
+ ]
 }

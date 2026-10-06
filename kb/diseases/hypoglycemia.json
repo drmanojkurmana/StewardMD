@@ -128,5 +128,77 @@
       "importedAt": "2026-06-29T13:39:19Z",
       "contentHash": "hb4cbe4a2"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "hypoglycemia-dx-algo",
+      "title": "Hypoglycemia: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Symptoms fall into two groups: autonomic/adrenergic features (tremor, palpitations, anxiety, sweating, hunger, paresthesias) driven by counterregulatory activation, and neuroglycopenic features (fatigue, weakness, dizziness, confusion,",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Hypoglycemia complicating severe malaria carries a poor prognosis, especially in children and pregnant women, and the usual warning signs may be absent (p.1807)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Fasting insulin level (p.721), Proinsulin level (p.721), C-peptide level - helps separate endogenous from exogenous insulin (p.721), Serum/plasma sulfonylurea assay when surreptitious agent use suspected (p.721)"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Differentiate from top mimics: Insulinoma (endogenous hyperinsulinism) - fasting hypoglycemia with elevated insulin, proinsulin, C-peptide (p.721), Surreptitious/factitious insulin or sulfonylurea use (suppressed C-peptide with exogenous"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Repeated hypoglycemia produces hypoglycemia unawareness by impairing the counterregulatory response, so the absence of adrenergic warning symptoms does not exclude dangerous hypoglycemia (p.204)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for hypoglycemia."
+    }
+  ],
+  "tables": [
+    {
+      "id": "hypoglycemia-matrix",
+      "title": "Hypoglycemia: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Symptoms fall into two groups: autonomic/adrenergic features (tremor, palpitations, anxiety, sweating, hunger, paresthesias)",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Fasting insulin level (p.721), Proinsulin level (p.721), C-peptide level - helps separate endogenous from exogenous insulin",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Insulinoma (endogenous hyperinsulinism) - fasting hypoglycemia with elevated insulin, proinsulin, C-peptide (p.721),",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Hypoglycemia complicating severe malaria carries a poor prognosis, especially in children and pregnant women, and the usual",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Repeated hypoglycemia produces hypoglycemia unawareness by impairing the counterregulatory response, so the absence of adrenergic",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for hypoglycemia."
+    }
+  ]
 }

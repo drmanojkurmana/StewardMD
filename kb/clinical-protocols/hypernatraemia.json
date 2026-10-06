@@ -5,7 +5,15 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, ward, ICU",
- "aliases": ["hypernatremia", "high sodium", "free water deficit", "water deficit", "dehydration", "diabetes insipidus", "Adrogue-Madias formula"],
+ "aliases": [
+  "hypernatremia",
+  "high sodium",
+  "free water deficit",
+  "water deficit",
+  "dehydration",
+  "diabetes insipidus",
+  "Adrogue-Madias formula"
+ ],
  "summary": "Restore circulation first if shocked, then replace the free water deficit with enteral water or hypotonic IV fluid, lowering sodium by about 10 mmol/L per day in chronic cases and faster in acute salt loading, while treating the cause and ongoing losses.",
  "sections": [
   {
@@ -83,15 +91,121 @@
   }
  ],
  "drugs": [
-  { "name": "Enteral water (oral or nasogastric)", "dose": "Volume from the free water deficit plus ongoing losses, spread to lower sodium about 10 mmol/L per day", "notes": "Preferred route when the gut works." },
-  { "name": "Glucose 5% IV", "dose": "Rate set by the Adrogue-Madias formula to lower sodium about 10 mmol/L per day (chronic) or 1 mmol/L/h (acute)", "notes": "Pure water loss. Monitor glucose." },
-  { "name": "Sodium chloride 0.45% IV", "dose": "Rate set by the Adrogue-Madias formula", "notes": "When sodium has also been lost; a larger volume is needed than with 5% dextrose." },
-  { "name": "Isotonic crystalloid", "dose": "Limited IV boluses until perfusion is restored", "notes": "Shock only; then change to hypotonic fluid." }
+  {
+   "name": "Enteral water (oral or nasogastric)",
+   "dose": "Volume from the free water deficit plus ongoing losses, spread to lower sodium about 10 mmol/L per day",
+   "notes": "Preferred route when the gut works."
+  },
+  {
+   "name": "Glucose 5% IV",
+   "dose": "Rate set by the Adrogue-Madias formula to lower sodium about 10 mmol/L per day (chronic) or 1 mmol/L/h (acute)",
+   "notes": "Pure water loss. Monitor glucose."
+  },
+  {
+   "name": "Sodium chloride 0.45% IV",
+   "dose": "Rate set by the Adrogue-Madias formula",
+   "notes": "When sodium has also been lost; a larger volume is needed than with 5% dextrose."
+  },
+  {
+   "name": "Isotonic crystalloid",
+   "dose": "Limited IV boluses until perfusion is restored",
+   "notes": "Shock only; then change to hypotonic fluid."
+  }
  ],
  "sources": [
-  { "org": "N Engl J Med (Adrogue and Madias)", "title": "Hypernatremia", "year": 2000, "url": "https://pubmed.ncbi.nlm.nih.gov/10816188/" },
-  { "org": "JAMA Network Open (Feigin et al)", "title": "Rate of Correction and All-Cause Mortality in Patients With Severe Hypernatremia", "year": 2023, "url": "https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2809955" },
-  { "org": "Cureus (systematic review)", "title": "Hypernatremia and Its Rate of Correction: The Evidence So Far", "year": 2024, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10961935/" }
+  {
+   "org": "N Engl J Med (Adrogue and Madias)",
+   "title": "Hypernatremia",
+   "year": 2000,
+   "url": "https://pubmed.ncbi.nlm.nih.gov/10816188/"
+  },
+  {
+   "org": "JAMA Network Open (Feigin et al)",
+   "title": "Rate of Correction and All-Cause Mortality in Patients With Severe Hypernatremia",
+   "year": 2023,
+   "url": "https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2809955"
+  },
+  {
+   "org": "Cureus (systematic review)",
+   "title": "Hypernatremia and Its Rate of Correction: The Evidence So Far",
+   "year": 2024,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10961935/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "hypernatraemia-pathway",
+   "title": "Hypernatraemia (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Hypernatraemia: serum sodium above 145 mmol/L; cohort studies define severe as 155 mmol/L or more.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Shock or poor perfusion: first restore circulation with a limited volume of isotonic crystalloid, then switch to hypotonic fluid once haemodynamically stable.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Causes: pure water loss (diabetes insipidus, fever, heat, tachypnoea), hypotonic fluid loss (diarrhoea, vomiting, osmotic diuresis from hyperglycaemia or mannitol, loop diuretics, lactulose, post-obstructive diuresis) or sodium gain"
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Stop gastrointestinal losses, control fever and hyperglycaemia, and withhold lactulose and diuretics where possible."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Recheck sodium frequently (for example every 4 hours) during active IV correction and reassess the prescription each time."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for hypernatraemia (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hypernatraemia-summary-matrix",
+   "title": "Hypernatraemia (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Hypernatraemia: serum sodium above 145 mmol/L; cohort studies define severe as 155 mmol/L or more.",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Shock or poor perfusion: first restore circulation with a limited volume of isotonic crystalloid, then switch to hypotonic fluid once",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Enteral water (oral or nasogastric): Volume from the free water deficit plus ongoing losses, spread to lower sodium about 10 mmol/L per day",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Correcting with 0.9% saline in a stable patient, which worsens or fails to correct sodium.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for hypernatraemia (adult)."
+  }
+ ]
 }

@@ -5,7 +5,21 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, HDU, ICU, endoscopy unit",
- "aliases": ["AVB", "AVH", "variceal haemorrhage", "variceal hemorrhage", "oesophageal varices", "esophageal varices", "gastric varices", "portal hypertensive bleeding", "EVL", "band ligation", "pre-emptive TIPS", "terlipressin", "Baveno VII"],
+ "aliases": [
+  "AVB",
+  "AVH",
+  "variceal haemorrhage",
+  "variceal hemorrhage",
+  "oesophageal varices",
+  "esophageal varices",
+  "gastric varices",
+  "portal hypertensive bleeding",
+  "EVL",
+  "band ligation",
+  "pre-emptive TIPS",
+  "terlipressin",
+  "Baveno VII"
+ ],
  "summary": "Suspected variceal bleeding: start a vasoactive drug (terlipressin, octreotide or somatostatin) and IV ceftriaxone immediately, transfuse restrictively (Hb 7 to 8 g/dL), band ligation within 12 hours, pre-emptive TIPS for high-risk patients, then beta-blocker plus EVL.",
  "sections": [
   {
@@ -85,19 +99,141 @@
   }
  ],
  "drugs": [
-  { "name": "Terlipressin", "dose": "2 mg IV every 4 hours until bleeding is controlled (first 24 to 48 hours), then 1 mg IV every 4 hours; total 2 to 5 days", "notes": "AASLD 2024 table allows every 4 to 6 hours. Baseline ECG; caution in ischaemic heart or peripheral vascular disease; monitor sodium." },
-  { "name": "Octreotide", "dose": "50 mcg IV bolus (repeat in the first hour if bleeding continues), then 50 mcg/h IV infusion for 2 to 5 days", "notes": "Use one vasoactive drug only." },
-  { "name": "Somatostatin", "dose": "250 mcg IV bolus (may repeat in the first hour), then 250 to 500 mcg/h IV infusion for 2 to 5 days", "notes": "Alternative to terlipressin or octreotide." },
-  { "name": "Ceftriaxone", "dose": "1 g IV every 24 hours", "notes": "Prophylaxis from admission; up to 5 days (AASLD 2024) or maximum 7 days (AASLD 2016). Choose per local resistance." },
-  { "name": "Erythromycin (IV)", "dose": "250 mg IV single dose, 30 to 120 minutes before endoscopy", "notes": "Avoid with QT prolongation." },
-  { "name": "Lactulose", "dose": "15 to 30 mL (10 to 20 g) orally or by NG tube, titrated to 2 to 3 soft stools a day; or enema if unable to swallow", "notes": "Clears blood from the gut to prevent hepatic encephalopathy." },
-  { "name": "Carvedilol (secondary prophylaxis)", "dose": "6.25 mg orally once daily, increase to 6.25 mg twice daily after 3 days; maximum 12.5 mg/day", "notes": "Keep systolic BP 90 mmHg or above. Combine with EVL." },
-  { "name": "Propranolol (secondary prophylaxis)", "dose": "20 to 40 mg orally twice daily, titrate every 2 to 3 days to heart rate 55 to 60/min", "notes": "Maximum 320 mg/day without ascites, 160 mg/day with ascites. Nadolol 20 to 40 mg once daily is an alternative." }
+  {
+   "name": "Terlipressin",
+   "dose": "2 mg IV every 4 hours until bleeding is controlled (first 24 to 48 hours), then 1 mg IV every 4 hours; total 2 to 5 days",
+   "notes": "AASLD 2024 table allows every 4 to 6 hours. Baseline ECG; caution in ischaemic heart or peripheral vascular disease; monitor sodium."
+  },
+  {
+   "name": "Octreotide",
+   "dose": "50 mcg IV bolus (repeat in the first hour if bleeding continues), then 50 mcg/h IV infusion for 2 to 5 days",
+   "notes": "Use one vasoactive drug only."
+  },
+  {
+   "name": "Somatostatin",
+   "dose": "250 mcg IV bolus (may repeat in the first hour), then 250 to 500 mcg/h IV infusion for 2 to 5 days",
+   "notes": "Alternative to terlipressin or octreotide."
+  },
+  {
+   "name": "Ceftriaxone",
+   "dose": "1 g IV every 24 hours",
+   "notes": "Prophylaxis from admission; up to 5 days (AASLD 2024) or maximum 7 days (AASLD 2016). Choose per local resistance."
+  },
+  {
+   "name": "Erythromycin (IV)",
+   "dose": "250 mg IV single dose, 30 to 120 minutes before endoscopy",
+   "notes": "Avoid with QT prolongation."
+  },
+  {
+   "name": "Lactulose",
+   "dose": "15 to 30 mL (10 to 20 g) orally or by NG tube, titrated to 2 to 3 soft stools a day; or enema if unable to swallow",
+   "notes": "Clears blood from the gut to prevent hepatic encephalopathy."
+  },
+  {
+   "name": "Carvedilol (secondary prophylaxis)",
+   "dose": "6.25 mg orally once daily, increase to 6.25 mg twice daily after 3 days; maximum 12.5 mg/day",
+   "notes": "Keep systolic BP 90 mmHg or above. Combine with EVL."
+  },
+  {
+   "name": "Propranolol (secondary prophylaxis)",
+   "dose": "20 to 40 mg orally twice daily, titrate every 2 to 3 days to heart rate 55 to 60/min",
+   "notes": "Maximum 320 mg/day without ascites, 160 mg/day with ascites. Nadolol 20 to 40 mg once daily is an alternative."
+  }
  ],
  "sources": [
-  { "org": "Baveno VII Faculty", "title": "Baveno VII: Renewing consensus in portal hypertension (J Hepatol)", "year": 2022, "url": "https://pubmed.ncbi.nlm.nih.gov/35120736/" },
-  { "org": "AASLD", "title": "AASLD Practice Guidance on risk stratification and management of portal hypertension and varices in cirrhosis (Hepatology)", "year": 2024, "url": "https://journals.lww.com/hep/fulltext/10.1097/hep.0000000000000647~aasld-practice-guidance-on-risk-stratification-and" },
-  { "org": "AASLD", "title": "Portal hypertensive bleeding in cirrhosis: risk stratification, diagnosis, and management: 2016 practice guidance (Hepatology)", "year": 2017, "url": "https://journals.lww.com/hep/fulltext/10.1002/hep.28906~portal-hypertensive-bleeding-in-cirrhosis-risk" }
+  {
+   "org": "Baveno VII Faculty",
+   "title": "Baveno VII: Renewing consensus in portal hypertension (J Hepatol)",
+   "year": 2022,
+   "url": "https://pubmed.ncbi.nlm.nih.gov/35120736/"
+  },
+  {
+   "org": "AASLD",
+   "title": "AASLD Practice Guidance on risk stratification and management of portal hypertension and varices in cirrhosis (Hepatology)",
+   "year": 2024,
+   "url": "https://journals.lww.com/hep/fulltext/10.1097/hep.0000000000000647~aasld-practice-guidance-on-risk-stratification-and"
+  },
+  {
+   "org": "AASLD",
+   "title": "Portal hypertensive bleeding in cirrhosis: risk stratification, diagnosis, and management: 2016 practice guidance (Hepatology)",
+   "year": 2017,
+   "url": "https://journals.lww.com/hep/fulltext/10.1002/hep.28906~portal-hypertensive-bleeding-in-cirrhosis-risk"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "acute-variceal-bleeding-pathway",
+   "title": "Acute variceal bleeding in cirrhosis Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Upper GI bleeding in a patient with known or suspected cirrhosis or portal hypertension is variceal until proven otherwise: start vasoactive drug and antibiotics before endoscopy.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Restore and maintain haemodynamic stability with cautious volume replacement; avoid over-expansion, which raises portal pressure.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Score Child-Pugh and MELD at admission: Child-Pugh C, a high MELD and failure to achieve primary haemostasis predict 6-week mortality (Baveno VII)."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Upper endoscopy within 12 hours of presentation after resuscitation; if unstable, as soon as it is safe (Baveno VII, AASLD 2024)."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Treatment failure: failure to control bleeding or rebleeding within the first 5 days."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for acute variceal bleeding in cirrhosis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "acute-variceal-bleeding-summary-matrix",
+   "title": "Acute variceal bleeding in cirrhosis Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Upper GI bleeding in a patient with known or suspected cirrhosis or portal hypertension is variceal until proven otherwise: start",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Restore and maintain haemodynamic stability with cautious volume replacement; avoid over-expansion, which raises portal pressure.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Terlipressin: 2 mg IV every 4 hours until bleeding is controlled (first 24 to 48 hours), then 1 mg IV every 4 hours; total 2 to 5 days",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Waiting for endoscopy before starting the vasoactive drug and antibiotics.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for acute variceal bleeding in cirrhosis."
+  }
+ ]
 }

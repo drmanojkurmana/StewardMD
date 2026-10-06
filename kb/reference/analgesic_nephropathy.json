@@ -1,79 +1,151 @@
 {
-  "id": "analgesic_nephropathy",
-  "name": "Analgesic nephropathy",
-  "aliases": [
-    "phenacetin nephropathy",
-    "analgesic abuse nephropathy",
-    "analgesic-induced chronic interstitial nephritis",
-    "analgesic kidney"
+ "id": "analgesic_nephropathy",
+ "name": "Analgesic nephropathy",
+ "aliases": [
+  "phenacetin nephropathy",
+  "analgesic abuse nephropathy",
+  "analgesic-induced chronic interstitial nephritis",
+  "analgesic kidney"
+ ],
+ "class": "non_infective",
+ "system": "Renal / Nephrology",
+ "specialty": "Nephrology / Urology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Comprehensive Clinical Nephrology / Campbell-Walsh-Wein Urology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A chronic tubulointerstitial nephritis with papillary necrosis caused by prolonged heavy analgesic use, historically phenacetin-containing combinations",
+   "Cumulative dose over many years is the key exposure, and combination analgesics are more nephrotoxic than single agents",
+   "Classically described in middle-aged women with chronic pain, headaches or psychiatric comorbidity and a habit of daily analgesic use",
+   "It presents insidiously with impaired urinary concentration, sterile pyuria, modest proteinuria, hypertension and slowly progressive renal impairment",
+   "Papillary necrosis may cause haematuria or colic when a papilla sloughs",
+   "CT typically shows small, scarred kidneys with bumpy contours and papillary calcification",
+   "There is an increased long-term risk of urothelial (transitional cell) carcinoma, so urine cytology surveillance is warranted",
+   "The essential treatment is to stop all offending analgesics, after which renal decline may stabilise"
   ],
-  "class": "non_infective",
-  "system": "Renal / Nephrology",
-  "specialty": "Nephrology / Urology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Comprehensive Clinical Nephrology / Campbell-Walsh-Wein Urology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A chronic tubulointerstitial nephritis with papillary necrosis caused by prolonged heavy analgesic use, historically phenacetin-containing combinations",
-      "Cumulative dose over many years is the key exposure, and combination analgesics are more nephrotoxic than single agents",
-      "Classically described in middle-aged women with chronic pain, headaches or psychiatric comorbidity and a habit of daily analgesic use",
-      "It presents insidiously with impaired urinary concentration, sterile pyuria, modest proteinuria, hypertension and slowly progressive renal impairment",
-      "Papillary necrosis may cause haematuria or colic when a papilla sloughs",
-      "CT typically shows small, scarred kidneys with bumpy contours and papillary calcification",
-      "There is an increased long-term risk of urothelial (transitional cell) carcinoma, so urine cytology surveillance is warranted",
-      "The essential treatment is to stop all offending analgesics, after which renal decline may stabilise"
+  "pathophysiology": "Long-term ingestion of analgesic mixtures damages the renal medulla by two complementary mechanisms. Phenacetin and its metabolite paracetamol accumulate and generate oxidative injury in the papillary tissue, while aspirin depletes protective prostaglandins, reducing medullary blood flow, and depletes glutathione, potentiating the toxicity. The medulla, already functioning at low oxygen tension, sustains combined ischaemic and oxidative damage leading to papillary necrosis and a surrounding chronic tubulointerstitial nephritis with fibrosis and tubular atrophy. Over years this produces shrunken, scarred kidneys, and chronic urothelial injury predisposes to transitional cell carcinoma.",
+  "additionalDifferentials": [
+   "Other causes of chronic tubulointerstitial nephritis such as lithium, lead or aristolochic acid (Chinese-herb) nephropathy",
+   "Reflux nephropathy",
+   "Chronic pyelonephritis",
+   "Obstructive uropathy",
+   "Ischaemic nephropathy",
+   "Papillary necrosis from other causes"
+  ],
+  "additionalInvestigations": [
+   "A careful analgesic and drug history quantifying cumulative use",
+   "CT showing small kidneys with an irregular outline and papillary calcification",
+   "Urinalysis for sterile pyuria and low-grade proteinuria",
+   "Renal function and assessment of urinary concentrating ability",
+   "Urine cytology to screen for urothelial malignancy",
+   "Cross-sectional imaging or cystoscopy if malignancy is suspected"
+  ],
+  "redFlags": [
+   "New or persistent haematuria raising concern for urothelial carcinoma",
+   "Progressive renal impairment despite stopping analgesics",
+   "Acute obstruction with infection from a sloughed papilla",
+   "Uncontrolled hypertension"
+  ],
+  "prognosis": "If analgesic use stops early, renal function often stabilises; continued use leads to progressive chronic kidney disease and end-stage renal failure, and a lifelong risk of urothelial cancer persists even after cessation.",
+  "pitfalls": [
+   "Not taking a detailed over-the-counter analgesic history, so the cause is missed",
+   "Allowing the patient to continue nephrotoxic analgesics for chronic pain",
+   "Overlooking urothelial malignancy when haematuria develops",
+   "Attributing the picture to hypertension alone rather than to analgesic injury"
+  ],
+  "references": [
+   "Comprehensive Clinical Nephrology (Feehally et al.)",
+   "Campbell-Walsh-Wein Urology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Cease all analgesic use permanently, particularly combination analgesics and non-steroidal anti-inflammatory drugs, as the key disease-modifying step",
+   "Provide alternative pain strategies and address the underlying chronic pain, headache and psychiatric comorbidity that drive analgesic use",
+   "Manage the chronic kidney disease with blood pressure control and general nephroprotective measures",
+   "Monitor renal function and urinary concentrating ability over time",
+   "Undertake lifelong surveillance for urothelial malignancy with urine cytology, and imaging or cystoscopy where suspected",
+   "Refer to nephrology and urology, and provide renal replacement therapy if end-stage failure develops"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "analgesic_nephropathy-pathway",
+   "title": "Analgesic nephropathy: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A chronic tubulointerstitial nephritis with papillary necrosis caused by prolonged heavy analgesic use, historically phenacetin-containing combinations",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: New or persistent haematuria raising concern for urothelial carcinoma",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: A careful analgesic and drug history quantifying cumulative use, CT showing small kidneys with an irregular outline and papillary calcification, Urinalysis for sterile pyuria and low-grade proteinuria"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Cease all analgesic use permanently, particularly combination analgesics and non-steroidal anti-inflammatory drugs, as the key disease-modifying step"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Not taking a detailed over-the-counter analgesic history, so the cause is missed"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of analgesic nephropathy."
+  }
+ ],
+ "tables": [
+  {
+   "id": "analgesic_nephropathy-matrix",
+   "title": "Analgesic nephropathy: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A chronic tubulointerstitial nephritis with papillary necrosis caused by prolonged heavy analgesic use, historically",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Long-term ingestion of analgesic mixtures damages the renal medulla by two complementary mechanisms. Phenacetin and its metabolite paracetamol accumulate and generate oxidative injury in the papillary tissue, while aspirin depletes protective prostaglandins, reducing medullary blood flow, and depletes glutathione, potentiating the toxicity. The medulla, already functioning at low oxygen tension, sustains combined ischaemic and oxidative damage leading to papillary necrosis and a surrounding chronic tubulointerstitial nephritis with fibrosis and tubular atrophy. Over years this produces shrunken, scarred kidneys, and chronic urothelial injury predisposes to transitional cell carcinoma.",
-    "additionalDifferentials": [
-      "Other causes of chronic tubulointerstitial nephritis such as lithium, lead or aristolochic acid (Chinese-herb) nephropathy",
-      "Reflux nephropathy",
-      "Chronic pyelonephritis",
-      "Obstructive uropathy",
-      "Ischaemic nephropathy",
-      "Papillary necrosis from other causes"
+    [
+     "Key Investigations",
+     "A careful analgesic and drug history quantifying cumulative use, CT showing small kidneys with an irregular outline and papillary",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "A careful analgesic and drug history quantifying cumulative use",
-      "CT showing small kidneys with an irregular outline and papillary calcification",
-      "Urinalysis for sterile pyuria and low-grade proteinuria",
-      "Renal function and assessment of urinary concentrating ability",
-      "Urine cytology to screen for urothelial malignancy",
-      "Cross-sectional imaging or cystoscopy if malignancy is suspected"
+    [
+     "Primary Differentials",
+     "Other causes of chronic tubulointerstitial nephritis such as lithium, lead or aristolochic acid (Chinese-herb) nephropathy,",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "New or persistent haematuria raising concern for urothelial carcinoma",
-      "Progressive renal impairment despite stopping analgesics",
-      "Acute obstruction with infection from a sloughed papilla",
-      "Uncontrolled hypertension"
+    [
+     "Management Strategy",
+     "Cease all analgesic use permanently, particularly combination analgesics and non-steroidal anti-inflammatory drugs, as the key",
+     "Core treatment modality"
     ],
-    "prognosis": "If analgesic use stops early, renal function often stabilises; continued use leads to progressive chronic kidney disease and end-stage renal failure, and a lifelong risk of urothelial cancer persists even after cessation.",
-    "pitfalls": [
-      "Not taking a detailed over-the-counter analgesic history, so the cause is missed",
-      "Allowing the patient to continue nephrotoxic analgesics for chronic pain",
-      "Overlooking urothelial malignancy when haematuria develops",
-      "Attributing the picture to hypertension alone rather than to analgesic injury"
-    ],
-    "references": [
-      "Comprehensive Clinical Nephrology (Feehally et al.)",
-      "Campbell-Walsh-Wein Urology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Cease all analgesic use permanently, particularly combination analgesics and non-steroidal anti-inflammatory drugs, as the key disease-modifying step",
-      "Provide alternative pain strategies and address the underlying chronic pain, headache and psychiatric comorbidity that drive analgesic use",
-      "Manage the chronic kidney disease with blood pressure control and general nephroprotective measures",
-      "Monitor renal function and urinary concentrating ability over time",
-      "Undertake lifelong surveillance for urothelial malignancy with urine cytology, and imaging or cystoscopy where suspected",
-      "Refer to nephrology and urology, and provide renal replacement therapy if end-stage failure develops"
+    [
+     "Clinical Pitfall",
+     "Not taking a detailed over-the-counter analgesic history, so the cause is missed",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for analgesic nephropathy."
+  }
+ ]
 }

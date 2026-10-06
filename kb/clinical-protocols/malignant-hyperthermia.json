@@ -5,7 +5,17 @@
  "population": "Adults and children",
  "basis": "international",
  "setting": "Operating theatre, recovery, ICU",
- "aliases": ["MH", "MH crisis", "malignant hyperpyrexia", "dantrolene", "hypermetabolic crisis", "masseter spasm", "volatile anaesthetic reaction", "suxamethonium reaction", "RYR1"],
+ "aliases": [
+  "MH",
+  "MH crisis",
+  "malignant hyperpyrexia",
+  "dantrolene",
+  "hypermetabolic crisis",
+  "masseter spasm",
+  "volatile anaesthetic reaction",
+  "suxamethonium reaction",
+  "RYR1"
+ ],
  "summary": "Suspect MH with unexplained rising end-tidal CO2, tachycardia and rigidity after a volatile agent or suxamethonium. Stop triggers, hyperventilate with 100% O2, give dantrolene 2.5 mg/kg IV as a rapid bolus and repeat until controlled, cool, treat hyperkalaemia and acidosis, and monitor in critical care for at least 24 hours.",
  "sections": [
   {
@@ -86,19 +96,143 @@
   }
  ],
  "drugs": [
-  { "name": "Dantrolene sodium", "dose": "2.5 mg/kg IV rapid bolus (actual body weight; EMHG 2 to 2.5 mg/kg, max 300 mg per dose), then 1 mg/kg every 5 minutes (or the full dose every 10 minutes, EMHG) until controlled", "notes": "Reappraise the diagnosis at 10 mg/kg; it may need to be exceeded (up to about 1200 mg in adults). 20 mg vial plus 60 mL sterile water; Ryanodex 250 mg plus 5 mL sterile water. Same mg/kg in children." },
-  { "name": "Dantrolene (post-crisis)", "dose": "1 mg/kg IV every 4 to 6 hours for at least 24 hours", "notes": "MHAUS regimen; watch the IV site for thrombophlebitis and extravasation." },
-  { "name": "Calcium chloride 10%", "dose": "10 mg/kg IV (max 2 g) for hyperkalaemia with ECG changes", "notes": "Calcium gluconate if calcium chloride is unavailable." },
-  { "name": "Insulin with glucose", "dose": "Adult: 10 units regular insulin IV with 50 mL of 50% glucose. Child: 0.1 units/kg with 2 mL/kg of 25% glucose", "notes": "Check glucose hourly." },
-  { "name": "Sodium bicarbonate", "dose": "1 to 2 mmol/kg IV if pH below 7.2 or marked base deficit", "notes": "Ventilation to normocapnia first." },
-  { "name": "Chilled crystalloid", "dose": "2000 to 3000 mL IV at 4 to 8 C in adults", "notes": "Stop cooling below 38.5 C." }
+  {
+   "name": "Dantrolene sodium",
+   "dose": "2.5 mg/kg IV rapid bolus (actual body weight; EMHG 2 to 2.5 mg/kg, max 300 mg per dose), then 1 mg/kg every 5 minutes (or the full dose every 10 minutes, EMHG) until controlled",
+   "notes": "Reappraise the diagnosis at 10 mg/kg; it may need to be exceeded (up to about 1200 mg in adults). 20 mg vial plus 60 mL sterile water; Ryanodex 250 mg plus 5 mL sterile water. Same mg/kg in children."
+  },
+  {
+   "name": "Dantrolene (post-crisis)",
+   "dose": "1 mg/kg IV every 4 to 6 hours for at least 24 hours",
+   "notes": "MHAUS regimen; watch the IV site for thrombophlebitis and extravasation."
+  },
+  {
+   "name": "Calcium chloride 10%",
+   "dose": "10 mg/kg IV (max 2 g) for hyperkalaemia with ECG changes",
+   "notes": "Calcium gluconate if calcium chloride is unavailable."
+  },
+  {
+   "name": "Insulin with glucose",
+   "dose": "Adult: 10 units regular insulin IV with 50 mL of 50% glucose. Child: 0.1 units/kg with 2 mL/kg of 25% glucose",
+   "notes": "Check glucose hourly."
+  },
+  {
+   "name": "Sodium bicarbonate",
+   "dose": "1 to 2 mmol/kg IV if pH below 7.2 or marked base deficit",
+   "notes": "Ventilation to normocapnia first."
+  },
+  {
+   "name": "Chilled crystalloid",
+   "dose": "2000 to 3000 mL IV at 4 to 8 C in adults",
+   "notes": "Stop cooling below 38.5 C."
+  }
  ],
  "sources": [
-  { "org": "European Malignant Hyperthermia Group", "title": "Recognising and managing a malignant hyperthermia crisis (v2024); Br J Anaesth 2025;134:221-3", "year": 2024, "url": "https://www.emhg.org/recommendations-1/2024/11/4/recognising-and-managing-a-malignant-hyperthermia-crisis-v2024" },
-  { "org": "Association of Anaesthetists", "title": "Malignant hyperthermia 2020: guideline from the Association of Anaesthetists (Anaesthesia 2021;76:655-64)", "year": 2020, "url": "https://anaesthetists.org/Guidelines-and-publications/Guidelines/Malignant-hyperthermia-2020" },
-  { "org": "MHAUS", "title": "Managing a crisis: emergency treatment for an acute MH event", "year": 2026, "url": "https://www.mhaus.org/healthcare-professionals/managing-a-crisis/" },
-  { "org": "MHAUS", "title": "Post acute phase management in PACU or ICU", "year": 2026, "url": "https://www.mhaus.org/healthcare-professionals/after-a-crisis/post-acute-phase/" },
-  { "org": "European Malignant Hyperthermia Group", "title": "EMHG recommendations (dantrolene availability 2020; perioperative management of MH-susceptible patients 2021)", "year": 2020, "url": "https://www.emhg.org/recommendations-1" }
+  {
+   "org": "European Malignant Hyperthermia Group",
+   "title": "Recognising and managing a malignant hyperthermia crisis (v2024); Br J Anaesth 2025;134:221-3",
+   "year": 2024,
+   "url": "https://www.emhg.org/recommendations-1/2024/11/4/recognising-and-managing-a-malignant-hyperthermia-crisis-v2024"
+  },
+  {
+   "org": "Association of Anaesthetists",
+   "title": "Malignant hyperthermia 2020: guideline from the Association of Anaesthetists (Anaesthesia 2021;76:655-64)",
+   "year": 2020,
+   "url": "https://anaesthetists.org/Guidelines-and-publications/Guidelines/Malignant-hyperthermia-2020"
+  },
+  {
+   "org": "MHAUS",
+   "title": "Managing a crisis: emergency treatment for an acute MH event",
+   "year": 2026,
+   "url": "https://www.mhaus.org/healthcare-professionals/managing-a-crisis/"
+  },
+  {
+   "org": "MHAUS",
+   "title": "Post acute phase management in PACU or ICU",
+   "year": 2026,
+   "url": "https://www.mhaus.org/healthcare-professionals/after-a-crisis/post-acute-phase/"
+  },
+  {
+   "org": "European Malignant Hyperthermia Group",
+   "title": "EMHG recommendations (dantrolene availability 2020; perioperative management of MH-susceptible patients 2021)",
+   "year": 2020,
+   "url": "https://www.emhg.org/recommendations-1"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "malignant-hyperthermia-pathway",
+   "title": "Malignant hyperthermia crisis Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Triggers: all volatile anaesthetics (sevoflurane, isoflurane, desflurane, halothane, methoxyflurane) and suxamethonium. It can occur even after previous uneventful anaesthetics.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Declare an emergency, call for help and get dantrolene and the MH kit. Ask the surgeon to finish or abandon surgery as fast as possible.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Cardiovascular: inappropriate tachycardia, ventricular ectopics or bigeminy, unstable blood pressure."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Dantrolene 20 mg vials: reconstitute each with 60 mL sterile water for injection (not saline or glucose); a 70 kg adult needs 7 to 9 vials per dose. Ryanodex 250 mg vials: 5 mL sterile water each. Assign two or more people to mix."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Core temperature, ECG, invasive arterial pressure, urinary catheter; consider central venous access."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for malignant hyperthermia crisis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "malignant-hyperthermia-summary-matrix",
+   "title": "Malignant hyperthermia crisis Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Triggers: all volatile anaesthetics (sevoflurane, isoflurane, desflurane, halothane, methoxyflurane) and suxamethonium. It can occur even",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Declare an emergency, call for help and get dantrolene and the MH kit. Ask the surgeon to finish or abandon surgery as fast as possible.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Dantrolene sodium: 2.5 mg/kg IV rapid bolus (actual body weight; EMHG 2 to 2.5 mg/kg, max 300 mg per dose), then 1 mg/kg every 5 minutes",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Waiting for hyperthermia before diagnosing MH: rising end-tidal CO2 and tachycardia come first.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for malignant hyperthermia crisis."
+  }
+ ]
 }

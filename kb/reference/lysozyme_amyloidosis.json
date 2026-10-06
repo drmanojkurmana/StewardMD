@@ -1,79 +1,151 @@
 {
-  "id": "lysozyme_amyloidosis",
-  "name": "Lysozyme Amyloidosis (ALys)",
-  "aliases": [
-    "ALys amyloidosis",
-    "Hereditary lysozyme amyloidosis"
+ "id": "lysozyme_amyloidosis",
+ "name": "Lysozyme Amyloidosis (ALys)",
+ "aliases": [
+  "ALys amyloidosis",
+  "Hereditary lysozyme amyloidosis"
+ ],
+ "class": "non_infective",
+ "system": "Multisystem / Haematology",
+ "specialty": "Haematology / Amyloidosis",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Oxford Textbook of Medicine",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "ALys is a rare autosomal dominant amyloidosis caused by mutations in the lysozyme gene (LYZ).",
+   "It is characteristically multi-visceral, with prominent involvement of the kidney, liver, spleen and gastrointestinal tract.",
+   "Spontaneous and potentially life-threatening haemorrhage is a hallmark, with reports of hepatic and splenic rupture and gastrointestinal bleeding.",
+   "Sicca symptoms of dry eyes and mouth and cutaneous petechiae are recognised features.",
+   "Renal involvement is common but often slowly progressive, with nephrotic syndrome developing over years.",
+   "Cardiac and neurological involvement are typically mild or absent, which helps distinguish ALys from ATTR.",
+   "Diagnosis rests on tissue typing and LYZ sequencing; there is no specific antifibril therapy, so management is supportive and directed at complications."
   ],
-  "class": "non_infective",
-  "system": "Multisystem / Haematology",
-  "specialty": "Haematology / Amyloidosis",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Oxford Textbook of Medicine",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "ALys is a rare autosomal dominant amyloidosis caused by mutations in the lysozyme gene (LYZ).",
-      "It is characteristically multi-visceral, with prominent involvement of the kidney, liver, spleen and gastrointestinal tract.",
-      "Spontaneous and potentially life-threatening haemorrhage is a hallmark, with reports of hepatic and splenic rupture and gastrointestinal bleeding.",
-      "Sicca symptoms of dry eyes and mouth and cutaneous petechiae are recognised features.",
-      "Renal involvement is common but often slowly progressive, with nephrotic syndrome developing over years.",
-      "Cardiac and neurological involvement are typically mild or absent, which helps distinguish ALys from ATTR.",
-      "Diagnosis rests on tissue typing and LYZ sequencing; there is no specific antifibril therapy, so management is supportive and directed at complications."
+  "pathophysiology": "Lysozyme is a bacteriolytic enzyme secreted by macrophages, Paneth cells and various epithelia. Amyloidogenic variants destabilise the folded protein, promoting partial unfolding, aggregation and deposition of lysozyme-derived amyloid fibrils in the extracellular matrix of viscera. Deposition is widespread but shows particular avidity for the gastrointestinal tract, liver, spleen and kidney, where infiltration weakens tissue integrity and predisposes to haemorrhage and organ dysfunction. Because lysozyme is produced by many cell types, the amyloid source cannot be removed by transplantation of a single organ, and deposition continues over decades in a slowly progressive fashion.",
+  "additionalDifferentials": [
+   "AL (immunoglobulin light-chain) amyloidosis",
+   "Other hereditary amyloidoses (fibrinogen, apolipoprotein A-I, transthyretin)",
+   "AA amyloidosis",
+   "Other causes of gastrointestinal bleeding or hepatosplenomegaly",
+   "Sjögren syndrome for the sicca features",
+   "Other causes of nephrotic syndrome"
+  ],
+  "additionalInvestigations": [
+   "Biopsy of affected tissue (gut, liver or kidney) with Congo red staining",
+   "Amyloid typing by mass spectrometry or immunohistochemistry",
+   "LYZ gene sequencing",
+   "Cross-sectional imaging of the liver and spleen to assess size and rupture risk",
+   "Renal function and quantified proteinuria",
+   "Full blood count and clotting studies given the bleeding risk",
+   "Serum free light chains and immunofixation to exclude AL amyloidosis"
+  ],
+  "redFlags": [
+   "Acute abdominal pain with haemodynamic compromise suggesting hepatic or splenic rupture",
+   "Gastrointestinal haemorrhage",
+   "Rapidly enlarging liver or spleen",
+   "Progressive proteinuria and renal decline"
+  ],
+  "prognosis": "The disorder is generally slowly progressive, with survival often measured in decades, but life-threatening visceral haemorrhage from organ rupture is the principal cause of acute mortality.",
+  "pitfalls": [
+   "Mistyping as AL amyloidosis and exposing patients to chemotherapy",
+   "Underestimating the risk of spontaneous organ rupture",
+   "Attributing sicca symptoms to Sjögren syndrome without considering amyloid",
+   "Relying on single-organ transplantation to remove the amyloid source"
+  ],
+  "references": [
+   "Oxford Textbook of Medicine, chapter on hereditary amyloidosis",
+   "Williams Hematology, chapter on amyloidosis",
+   "International Society of Amyloidosis nomenclature guidelines"
+  ],
+  "crossLinks": [],
+  "management": [
+   "No single-organ transplant removes the amyloid source, as lysozyme is produced by many cell types, so management is largely supportive and surveillance-based",
+   "Vigilant management of spontaneous visceral haemorrhage from hepatic or splenic rupture and gastrointestinal bleeding, with resuscitation, correction of coagulopathy, and interventional radiological embolisation or surgery",
+   "Manage renal involvement with renin-angiotensin blockade for proteinuria and nephrotic syndrome, progressing to renal replacement therapy as disease advances",
+   "Surveillance cross-sectional imaging of liver and spleen for organomegaly and rupture risk, with advice to avoid contact sports and abdominal trauma",
+   "Symptomatic treatment of sicca symptoms with ocular lubricants and saliva substitutes",
+   "Multidisciplinary care through a specialist amyloidosis centre spanning haematology, nephrology and gastroenterology",
+   "Genetic counselling and family screening given autosomal dominant LYZ inheritance"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "lysozyme_amyloidosis-pathway",
+   "title": "Lysozyme Amyloidosis (ALys): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "ALys is a rare autosomal dominant amyloidosis caused by mutations in the lysozyme gene (LYZ).",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Acute abdominal pain with haemodynamic compromise suggesting hepatic or splenic rupture",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Biopsy of affected tissue (gut, liver or kidney) with Congo red staining, Amyloid typing by mass spectrometry or immunohistochemistry, LYZ gene sequencing"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: No single-organ transplant removes the amyloid source, as lysozyme is produced by many cell types, so management is largely supportive and surveillance-based"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistyping as AL amyloidosis and exposing patients to chemotherapy"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of lysozyme amyloidosis (alys)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "lysozyme_amyloidosis-matrix",
+   "title": "Lysozyme Amyloidosis (ALys): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "ALys is a rare autosomal dominant amyloidosis caused by mutations in the lysozyme gene (LYZ).",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Lysozyme is a bacteriolytic enzyme secreted by macrophages, Paneth cells and various epithelia. Amyloidogenic variants destabilise the folded protein, promoting partial unfolding, aggregation and deposition of lysozyme-derived amyloid fibrils in the extracellular matrix of viscera. Deposition is widespread but shows particular avidity for the gastrointestinal tract, liver, spleen and kidney, where infiltration weakens tissue integrity and predisposes to haemorrhage and organ dysfunction. Because lysozyme is produced by many cell types, the amyloid source cannot be removed by transplantation of a single organ, and deposition continues over decades in a slowly progressive fashion.",
-    "additionalDifferentials": [
-      "AL (immunoglobulin light-chain) amyloidosis",
-      "Other hereditary amyloidoses (fibrinogen, apolipoprotein A-I, transthyretin)",
-      "AA amyloidosis",
-      "Other causes of gastrointestinal bleeding or hepatosplenomegaly",
-      "Sjögren syndrome for the sicca features",
-      "Other causes of nephrotic syndrome"
+    [
+     "Key Investigations",
+     "Biopsy of affected tissue (gut, liver or kidney) with Congo red staining, Amyloid typing by mass spectrometry or",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Biopsy of affected tissue (gut, liver or kidney) with Congo red staining",
-      "Amyloid typing by mass spectrometry or immunohistochemistry",
-      "LYZ gene sequencing",
-      "Cross-sectional imaging of the liver and spleen to assess size and rupture risk",
-      "Renal function and quantified proteinuria",
-      "Full blood count and clotting studies given the bleeding risk",
-      "Serum free light chains and immunofixation to exclude AL amyloidosis"
+    [
+     "Primary Differentials",
+     "AL (immunoglobulin light-chain) amyloidosis, Other hereditary amyloidoses (fibrinogen, apolipoprotein A-I, transthyretin), AA",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Acute abdominal pain with haemodynamic compromise suggesting hepatic or splenic rupture",
-      "Gastrointestinal haemorrhage",
-      "Rapidly enlarging liver or spleen",
-      "Progressive proteinuria and renal decline"
+    [
+     "Management Strategy",
+     "No single-organ transplant removes the amyloid source, as lysozyme is produced by many cell types, so management is largely",
+     "Core treatment modality"
     ],
-    "prognosis": "The disorder is generally slowly progressive, with survival often measured in decades, but life-threatening visceral haemorrhage from organ rupture is the principal cause of acute mortality.",
-    "pitfalls": [
-      "Mistyping as AL amyloidosis and exposing patients to chemotherapy",
-      "Underestimating the risk of spontaneous organ rupture",
-      "Attributing sicca symptoms to Sjögren syndrome without considering amyloid",
-      "Relying on single-organ transplantation to remove the amyloid source"
-    ],
-    "references": [
-      "Oxford Textbook of Medicine, chapter on hereditary amyloidosis",
-      "Williams Hematology, chapter on amyloidosis",
-      "International Society of Amyloidosis nomenclature guidelines"
-    ],
-    "crossLinks": [],
-    "management": [
-      "No single-organ transplant removes the amyloid source, as lysozyme is produced by many cell types, so management is largely supportive and surveillance-based",
-      "Vigilant management of spontaneous visceral haemorrhage from hepatic or splenic rupture and gastrointestinal bleeding, with resuscitation, correction of coagulopathy, and interventional radiological embolisation or surgery",
-      "Manage renal involvement with renin-angiotensin blockade for proteinuria and nephrotic syndrome, progressing to renal replacement therapy as disease advances",
-      "Surveillance cross-sectional imaging of liver and spleen for organomegaly and rupture risk, with advice to avoid contact sports and abdominal trauma",
-      "Symptomatic treatment of sicca symptoms with ocular lubricants and saliva substitutes",
-      "Multidisciplinary care through a specialist amyloidosis centre spanning haematology, nephrology and gastroenterology",
-      "Genetic counselling and family screening given autosomal dominant LYZ inheritance"
+    [
+     "Clinical Pitfall",
+     "Mistyping as AL amyloidosis and exposing patients to chemotherapy",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for lysozyme amyloidosis (alys)."
+  }
+ ]
 }

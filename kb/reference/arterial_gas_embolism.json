@@ -1,75 +1,147 @@
 {
-  "id": "arterial_gas_embolism",
-  "name": "Arterial gas embolism",
-  "aliases": [
-    "AGE",
-    "cerebral arterial gas embolism"
+ "id": "arterial_gas_embolism",
+ "name": "Arterial gas embolism",
+ "aliases": [
+  "AGE",
+  "cerebral arterial gas embolism"
+ ],
+ "class": "non_infective",
+ "system": "Multisystem / Cardiovascular / Nervous system",
+ "specialty": "Diving and hyperbaric medicine / Emergency medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Diving and hyperbaric medicine references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Gas bubbles entering the arterial circulation obstruct end-arteries, most dangerously in the brain and heart",
+   "In divers it classically follows pulmonary barotrauma during ascent, especially breath-holding on a rapid ascent",
+   "Symptoms are typically dramatic and immediate on or within minutes of surfacing, including loss of consciousness, seizures, focal deficits or cardiac arrest",
+   "It can also be iatrogenic, from vascular access, cardiac or pulmonary procedures and mechanical ventilation",
+   "High-flow oxygen and urgent recompression with hyperbaric oxygen are the definitive treatments",
+   "Any diver with neurological symptoms immediately after surfacing has gas embolism until proven otherwise"
   ],
-  "class": "non_infective",
-  "system": "Multisystem / Cardiovascular / Nervous system",
-  "specialty": "Diving and hyperbaric medicine / Emergency medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Diving and hyperbaric medicine references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Gas bubbles entering the arterial circulation obstruct end-arteries, most dangerously in the brain and heart",
-      "In divers it classically follows pulmonary barotrauma during ascent, especially breath-holding on a rapid ascent",
-      "Symptoms are typically dramatic and immediate on or within minutes of surfacing, including loss of consciousness, seizures, focal deficits or cardiac arrest",
-      "It can also be iatrogenic, from vascular access, cardiac or pulmonary procedures and mechanical ventilation",
-      "High-flow oxygen and urgent recompression with hyperbaric oxygen are the definitive treatments",
-      "Any diver with neurological symptoms immediately after surfacing has gas embolism until proven otherwise"
+  "pathophysiology": "Arterial gas embolism occurs when gas enters the systemic arterial circulation and lodges in small arteries, causing mechanical obstruction, endothelial injury and secondary inflammation and thrombosis. In diving, alveolar rupture from lung overexpansion allows gas to enter the pulmonary veins and reach the systemic arteries, while iatrogenic cases arise from air introduced during procedures. Distribution of bubbles to the cerebral or coronary circulation produces the acute neurological and cardiac manifestations, and reduced perfusion beyond the obstruction drives ischaemic injury.",
+  "additionalDifferentials": [
+   "Decompression sickness",
+   "Cardiac arrhythmia or myocardial infarction",
+   "Stroke of another cause",
+   "Seizure disorder",
+   "Immersion syncope or near-drowning"
+  ],
+  "additionalInvestigations": [
+   "Immediate clinical recognition based on timing after surfacing or a procedure",
+   "High-flow oxygen and preparation for recompression without delay",
+   "Assessment for pulmonary barotrauma including pneumothorax",
+   "Imaging as feasible, not allowing it to delay recompression",
+   "Cardiac and neurological monitoring"
+  ],
+  "redFlags": [
+   "Loss of consciousness or cardiac arrest on surfacing",
+   "Focal neurological deficit or seizure",
+   "Coexisting tension pneumothorax",
+   "Rapid deterioration"
+  ],
+  "prognosis": "Outcome depends on the bubble burden and speed of recompression; with prompt hyperbaric treatment many recover substantially, but delay or massive embolism can be fatal or leave permanent deficits.",
+  "pitfalls": [
+   "Delaying recompression to complete imaging",
+   "Confusing it with decompression sickness and mismanaging the urgency",
+   "Missing a coexisting pneumothorax before recompression",
+   "Failing to give high-flow oxygen immediately"
+  ],
+  "references": [
+   "Diving and hyperbaric medicine references (standard reference)",
+   "Tintinalli's Emergency Medicine"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Immediate administration of high-concentration oxygen to accelerate bubble resolution and treat ischaemia",
+   "Urgent hyperbaric oxygen recompression is the definitive treatment and should not be delayed",
+   "Supine positioning, airway protection and haemodynamic support, with advanced life support if cardiac arrest occurs",
+   "Intravenous fluids to maintain perfusion and counter endothelial injury",
+   "Identify and treat associated pulmonary barotrauma, including decompression of a pneumothorax",
+   "Arrange immediate transfer to a hyperbaric facility rather than allowing imaging to delay recompression",
+   "Continuous cardiac and neurological monitoring throughout treatment",
+   "Prevent recurrence through diving safety education and elimination of iatrogenic air sources during vascular access and procedures"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "arterial_gas_embolism-pathway",
+   "title": "Arterial gas embolism: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Gas bubbles entering the arterial circulation obstruct end-arteries, most dangerously in the brain and heart",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Loss of consciousness or cardiac arrest on surfacing",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Immediate clinical recognition based on timing after surfacing or a procedure, High-flow oxygen and preparation for recompression without delay, Assessment for pulmonary barotrauma including pneumothorax"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Immediate administration of high-concentration oxygen to accelerate bubble resolution and treat ischaemia"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Delaying recompression to complete imaging"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of arterial gas embolism."
+  }
+ ],
+ "tables": [
+  {
+   "id": "arterial_gas_embolism-matrix",
+   "title": "Arterial gas embolism: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Gas bubbles entering the arterial circulation obstruct end-arteries, most dangerously in the brain and heart",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Arterial gas embolism occurs when gas enters the systemic arterial circulation and lodges in small arteries, causing mechanical obstruction, endothelial injury and secondary inflammation and thrombosis. In diving, alveolar rupture from lung overexpansion allows gas to enter the pulmonary veins and reach the systemic arteries, while iatrogenic cases arise from air introduced during procedures. Distribution of bubbles to the cerebral or coronary circulation produces the acute neurological and cardiac manifestations, and reduced perfusion beyond the obstruction drives ischaemic injury.",
-    "additionalDifferentials": [
-      "Decompression sickness",
-      "Cardiac arrhythmia or myocardial infarction",
-      "Stroke of another cause",
-      "Seizure disorder",
-      "Immersion syncope or near-drowning"
+    [
+     "Key Investigations",
+     "Immediate clinical recognition based on timing after surfacing or a procedure, High-flow oxygen and preparation for recompression",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Immediate clinical recognition based on timing after surfacing or a procedure",
-      "High-flow oxygen and preparation for recompression without delay",
-      "Assessment for pulmonary barotrauma including pneumothorax",
-      "Imaging as feasible, not allowing it to delay recompression",
-      "Cardiac and neurological monitoring"
+    [
+     "Primary Differentials",
+     "Decompression sickness, Cardiac arrhythmia or myocardial infarction, Stroke of another cause",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Loss of consciousness or cardiac arrest on surfacing",
-      "Focal neurological deficit or seizure",
-      "Coexisting tension pneumothorax",
-      "Rapid deterioration"
+    [
+     "Management Strategy",
+     "Immediate administration of high-concentration oxygen to accelerate bubble resolution and treat ischaemia",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcome depends on the bubble burden and speed of recompression; with prompt hyperbaric treatment many recover substantially, but delay or massive embolism can be fatal or leave permanent deficits.",
-    "pitfalls": [
-      "Delaying recompression to complete imaging",
-      "Confusing it with decompression sickness and mismanaging the urgency",
-      "Missing a coexisting pneumothorax before recompression",
-      "Failing to give high-flow oxygen immediately"
-    ],
-    "references": [
-      "Diving and hyperbaric medicine references (standard reference)",
-      "Tintinalli's Emergency Medicine"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Immediate administration of high-concentration oxygen to accelerate bubble resolution and treat ischaemia",
-      "Urgent hyperbaric oxygen recompression is the definitive treatment and should not be delayed",
-      "Supine positioning, airway protection and haemodynamic support, with advanced life support if cardiac arrest occurs",
-      "Intravenous fluids to maintain perfusion and counter endothelial injury",
-      "Identify and treat associated pulmonary barotrauma, including decompression of a pneumothorax",
-      "Arrange immediate transfer to a hyperbaric facility rather than allowing imaging to delay recompression",
-      "Continuous cardiac and neurological monitoring throughout treatment",
-      "Prevent recurrence through diving safety education and elimination of iatrogenic air sources during vascular access and procedures"
+    [
+     "Clinical Pitfall",
+     "Delaying recompression to complete imaging",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for arterial gas embolism."
+  }
+ ]
 }

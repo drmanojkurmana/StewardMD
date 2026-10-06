@@ -1,76 +1,148 @@
 {
-  "id": "ovarian_dermoid_cyst",
-  "name": "Ovarian dermoid cyst (mature cystic teratoma)",
-  "aliases": [
-    "mature cystic teratoma",
-    "dermoid cyst",
-    "benign cystic teratoma"
+ "id": "ovarian_dermoid_cyst",
+ "name": "Ovarian dermoid cyst (mature cystic teratoma)",
+ "aliases": [
+  "mature cystic teratoma",
+  "dermoid cyst",
+  "benign cystic teratoma"
+ ],
+ "class": "non_infective",
+ "system": "Gynaecology",
+ "specialty": "Gynaecology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Standard gynaecology reference textbook",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The commonest benign ovarian germ cell tumour of the reproductive years, containing mature tissues such as sebaceous material, hair, and sometimes teeth",
+   "A localised solid prominence in the wall, the Rokitansky protuberance or dermoid plug, is a characteristic feature and often the site of hair and teeth",
+   "Ultrasound features are distinctive, including a densely echogenic focus with acoustic shadowing, the tip-of-the-iceberg sign, and echogenic linear dermoid mesh",
+   "Torsion is an important complication, particularly with larger cysts, and can present as acute severe pelvic pain",
+   "Rupture releases sebaceous contents that can provoke a chemical peritonitis, so care is taken to avoid intra-operative spillage",
+   "Around a tenth are bilateral, so the contralateral ovary should be assessed at imaging and surgery",
+   "Fertility-sparing cystectomy is usually preferred in younger women, with rare malignant transformation, most often to squamous cell carcinoma, in a small minority"
   ],
-  "class": "non_infective",
-  "system": "Gynaecology",
-  "specialty": "Gynaecology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Standard gynaecology reference textbook",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The commonest benign ovarian germ cell tumour of the reproductive years, containing mature tissues such as sebaceous material, hair, and sometimes teeth",
-      "A localised solid prominence in the wall, the Rokitansky protuberance or dermoid plug, is a characteristic feature and often the site of hair and teeth",
-      "Ultrasound features are distinctive, including a densely echogenic focus with acoustic shadowing, the tip-of-the-iceberg sign, and echogenic linear dermoid mesh",
-      "Torsion is an important complication, particularly with larger cysts, and can present as acute severe pelvic pain",
-      "Rupture releases sebaceous contents that can provoke a chemical peritonitis, so care is taken to avoid intra-operative spillage",
-      "Around a tenth are bilateral, so the contralateral ovary should be assessed at imaging and surgery",
-      "Fertility-sparing cystectomy is usually preferred in younger women, with rare malignant transformation, most often to squamous cell carcinoma, in a small minority"
+  "pathophysiology": "A mature cystic teratoma arises from a germ cell that undergoes parthenogenetic development and differentiates into mature tissues derived from all three germ layers, with ectodermal elements predominating. The cyst therefore comes to contain skin appendages, sebaceous secretions, hair, and occasionally teeth or cartilage. Growth is slow, and the tumour is benign in the great majority of cases; rare malignant change occurs when one of its differentiated tissues, most often squamous epithelium, transforms.",
+  "additionalDifferentials": [
+   "Haemorrhagic ovarian cyst",
+   "Endometrioma",
+   "Other ovarian germ cell tumours, including immature teratoma",
+   "Epithelial ovarian neoplasm",
+   "Appendiceal or bowel pathology",
+   "Ovarian torsion of another cause"
+  ],
+  "additionalInvestigations": [
+   "Transvaginal ultrasound identifying characteristic echogenic and shadowing features",
+   "Magnetic resonance imaging with fat-suppression sequences to confirm macroscopic fat",
+   "Computed tomography, which readily demonstrates fat, calcification, or teeth",
+   "Tumour markers where the appearance is atypical or malignancy is suspected",
+   "Assessment of the contralateral ovary given the possibility of bilateral disease"
+  ],
+  "redFlags": [
+   "Ovarian torsion causing acute severe pain",
+   "Rupture with chemical peritonitis",
+   "Features suggesting malignant transformation, such as solid vascular areas or rapid growth",
+   "New symptoms or markers in an older woman raising concern for malignancy"
+  ],
+  "prognosis": "The prognosis is excellent, as these are benign tumours with a low recurrence rate after complete excision; the small risk of malignant transformation rises with age and larger size.",
+  "pitfalls": [
+   "Intra-operative spillage of cyst contents provoking chemical peritonitis",
+   "Overlooking a contralateral dermoid because bilateral disease is not uncommon",
+   "Delaying diagnosis of torsion in a woman with a known dermoid",
+   "Missing the uncommon malignant transformation, particularly in older women"
+  ],
+  "references": [
+   "Standard gynaecology reference textbook",
+   "Gynaecological oncology reference text"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Ovarian-sparing cystectomy as the preferred treatment, preserving fertility where possible",
+   "Careful, usually laparoscopic, surgery retrieving the cyst in a bag to avoid intra-operative spillage of sebaceous contents that can cause chemical peritonitis",
+   "Emergency surgical detorsion or cystectomy for ovarian torsion presenting as acute severe pelvic pain",
+   "Inspect and, if involved, treat the contralateral ovary given that around a tenth are bilateral",
+   "Consider expectant surveillance with ultrasound for small, asymptomatic incidental cysts",
+   "Histological assessment of the excised cyst to exclude the rare malignant transformation, particularly in older women with larger cysts"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "ovarian_dermoid_cyst-pathway",
+   "title": "Ovarian dermoid cyst (mature cystic teratoma): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The commonest benign ovarian germ cell tumour of the reproductive years, containing mature tissues such as sebaceous material, hair, and sometimes teeth",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Ovarian torsion causing acute severe pain",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Transvaginal ultrasound identifying characteristic echogenic and shadowing features, Magnetic resonance imaging with fat-suppression sequences to confirm macroscopic fat, Computed tomography, which readily demonstrates"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Ovarian-sparing cystectomy as the preferred treatment, preserving fertility where possible"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Intra-operative spillage of cyst contents provoking chemical peritonitis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of ovarian dermoid cyst (mature cystic teratoma)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "ovarian_dermoid_cyst-matrix",
+   "title": "Ovarian dermoid cyst (mature cystic teratoma): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The commonest benign ovarian germ cell tumour of the reproductive years, containing mature tissues such as sebaceous material,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "A mature cystic teratoma arises from a germ cell that undergoes parthenogenetic development and differentiates into mature tissues derived from all three germ layers, with ectodermal elements predominating. The cyst therefore comes to contain skin appendages, sebaceous secretions, hair, and occasionally teeth or cartilage. Growth is slow, and the tumour is benign in the great majority of cases; rare malignant change occurs when one of its differentiated tissues, most often squamous epithelium, transforms.",
-    "additionalDifferentials": [
-      "Haemorrhagic ovarian cyst",
-      "Endometrioma",
-      "Other ovarian germ cell tumours, including immature teratoma",
-      "Epithelial ovarian neoplasm",
-      "Appendiceal or bowel pathology",
-      "Ovarian torsion of another cause"
+    [
+     "Key Investigations",
+     "Transvaginal ultrasound identifying characteristic echogenic and shadowing features, Magnetic resonance imaging with",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Transvaginal ultrasound identifying characteristic echogenic and shadowing features",
-      "Magnetic resonance imaging with fat-suppression sequences to confirm macroscopic fat",
-      "Computed tomography, which readily demonstrates fat, calcification, or teeth",
-      "Tumour markers where the appearance is atypical or malignancy is suspected",
-      "Assessment of the contralateral ovary given the possibility of bilateral disease"
+    [
+     "Primary Differentials",
+     "Haemorrhagic ovarian cyst, Endometrioma, Other ovarian germ cell tumours, including immature teratoma",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Ovarian torsion causing acute severe pain",
-      "Rupture with chemical peritonitis",
-      "Features suggesting malignant transformation, such as solid vascular areas or rapid growth",
-      "New symptoms or markers in an older woman raising concern for malignancy"
+    [
+     "Management Strategy",
+     "Ovarian-sparing cystectomy as the preferred treatment, preserving fertility where possible",
+     "Core treatment modality"
     ],
-    "prognosis": "The prognosis is excellent, as these are benign tumours with a low recurrence rate after complete excision; the small risk of malignant transformation rises with age and larger size.",
-    "pitfalls": [
-      "Intra-operative spillage of cyst contents provoking chemical peritonitis",
-      "Overlooking a contralateral dermoid because bilateral disease is not uncommon",
-      "Delaying diagnosis of torsion in a woman with a known dermoid",
-      "Missing the uncommon malignant transformation, particularly in older women"
-    ],
-    "references": [
-      "Standard gynaecology reference textbook",
-      "Gynaecological oncology reference text"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Ovarian-sparing cystectomy as the preferred treatment, preserving fertility where possible",
-      "Careful, usually laparoscopic, surgery retrieving the cyst in a bag to avoid intra-operative spillage of sebaceous contents that can cause chemical peritonitis",
-      "Emergency surgical detorsion or cystectomy for ovarian torsion presenting as acute severe pelvic pain",
-      "Inspect and, if involved, treat the contralateral ovary given that around a tenth are bilateral",
-      "Consider expectant surveillance with ultrasound for small, asymptomatic incidental cysts",
-      "Histological assessment of the excised cyst to exclude the rare malignant transformation, particularly in older women with larger cysts"
+    [
+     "Clinical Pitfall",
+     "Intra-operative spillage of cyst contents provoking chemical peritonitis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for ovarian dermoid cyst (mature cystic teratoma)."
+  }
+ ]
 }

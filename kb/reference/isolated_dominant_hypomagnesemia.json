@@ -1,78 +1,150 @@
 {
-  "id": "isolated_dominant_hypomagnesemia",
-  "name": "Isolated dominant hypomagnesaemia (FXYD2)",
-  "aliases": [
-    "isolated dominant hypomagnesaemia",
-    "IDH",
-    "FXYD2",
-    "gamma-subunit of Na-K-ATPase deficiency",
-    "hypomagnesaemia with hypocalciuria"
+ "id": "isolated_dominant_hypomagnesemia",
+ "name": "Isolated dominant hypomagnesaemia (FXYD2)",
+ "aliases": [
+  "isolated dominant hypomagnesaemia",
+  "IDH",
+  "FXYD2",
+  "gamma-subunit of Na-K-ATPase deficiency",
+  "hypomagnesaemia with hypocalciuria"
+ ],
+ "class": "non_infective",
+ "system": "Renal / Genetics",
+ "specialty": "Nephrology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Comprehensive Clinical Nephrology / OMIM",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Autosomal dominant renal magnesium-wasting disorder caused by variants in FXYD2, encoding the gamma-subunit of the sodium-potassium ATPase",
+   "The biochemical signature is hypomagnesaemia accompanied by hypocalciuria, mirroring the pattern seen in Gitelman syndrome",
+   "Presentation is often mild, with fatigue, muscle cramps, or an incidental low magnesium, though childhood convulsions have been described",
+   "Unlike FHHNC, there is no nephrocalcinosis, hypercalciuria, or progressive renal impairment",
+   "A recurrent dominant-negative variant affecting the gamma-subunit accounts for many reported families",
+   "Management is long-term oral magnesium supplementation, titrated to relieve symptoms rather than to fully normalise serum levels",
+   "Consider the diagnosis in autosomal dominant hypomagnesaemia with hypocalciuria and confirm with FXYD2 testing"
   ],
-  "class": "non_infective",
-  "system": "Renal / Genetics",
-  "specialty": "Nephrology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Comprehensive Clinical Nephrology / OMIM",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Autosomal dominant renal magnesium-wasting disorder caused by variants in FXYD2, encoding the gamma-subunit of the sodium-potassium ATPase",
-      "The biochemical signature is hypomagnesaemia accompanied by hypocalciuria, mirroring the pattern seen in Gitelman syndrome",
-      "Presentation is often mild, with fatigue, muscle cramps, or an incidental low magnesium, though childhood convulsions have been described",
-      "Unlike FHHNC, there is no nephrocalcinosis, hypercalciuria, or progressive renal impairment",
-      "A recurrent dominant-negative variant affecting the gamma-subunit accounts for many reported families",
-      "Management is long-term oral magnesium supplementation, titrated to relieve symptoms rather than to fully normalise serum levels",
-      "Consider the diagnosis in autosomal dominant hypomagnesaemia with hypocalciuria and confirm with FXYD2 testing"
+  "pathophysiology": "The gamma-subunit encoded by FXYD2 modulates the activity of the basolateral sodium-potassium ATPase in the distal convoluted tubule, the main site of active transcellular magnesium reabsorption. A dominant-negative variant impairs correct routing or function of the ATPase, reducing the electrochemical gradient that drives apical magnesium entry through TRPM6. The result is defective distal magnesium reabsorption and renal magnesium wasting. As in Gitelman syndrome, reduced distal tubular sodium chloride handling promotes compensatory proximal sodium and calcium reabsorption, producing the associated hypocalciuria. Because the defect is confined to distal magnesium handling, calcium deposition and progressive nephron loss do not occur.",
+  "additionalDifferentials": [
+   "Gitelman syndrome",
+   "FHHNC (CLDN16/CLDN19)",
+   "Hypomagnesaemia with secondary hypocalcaemia (TRPM6)",
+   "Drug-induced hypomagnesaemia (e.g. proton-pump inhibitors, diuretics)",
+   "Gastrointestinal magnesium loss",
+   "EAST/SeSAME syndrome"
+  ],
+  "additionalInvestigations": [
+   "Serum magnesium with fractional excretion of magnesium confirming renal loss",
+   "Spot urinary calcium-to-creatinine ratio demonstrating hypocalciuria",
+   "Serum potassium and venous blood gas to distinguish from Gitelman syndrome",
+   "Renal ultrasound to exclude nephrocalcinosis",
+   "Family biochemical screening consistent with dominant inheritance",
+   "FXYD2 gene sequencing"
+  ],
+  "redFlags": [
+   "Symptomatic hypomagnesaemia causing seizures or tetany",
+   "Profound hypomagnesaemia with secondary hypocalcaemia and cardiac irritability",
+   "Refractory symptoms despite adequate supplementation"
+  ],
+  "prognosis": "The condition is generally benign with a normal life expectancy and preserved renal function; symptoms are controlled with lifelong magnesium supplementation, though complete biochemical correction is often not achievable.",
+  "pitfalls": [
+   "Assuming a Gitelman-like biochemical picture excludes an FXYD2 cause",
+   "Attempting to fully normalise serum magnesium and provoking diarrhoea with high oral doses",
+   "Overlooking a dominant family history that points to the diagnosis",
+   "Attributing symptoms solely to concurrent medication such as proton-pump inhibitors"
+  ],
+  "references": [
+   "Comprehensive Clinical Nephrology",
+   "OMIM entry for isolated dominant hypomagnesaemia"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Lifelong oral magnesium supplementation, titrated to relieve symptoms rather than to fully normalise serum magnesium",
+   "Use of better-tolerated organic magnesium salts in divided intake to limit diarrhoea and improve absorption",
+   "Correction of symptomatic hypomagnesaemia during acute decompensation, with parenteral magnesium if severe or accompanied by tetany or seizures",
+   "Periodic monitoring of serum magnesium and symptom control, with renal ultrasound reassurance that nephrocalcinosis does not develop",
+   "Genetic counselling for autosomal dominant inheritance and biochemical screening of at-risk family members",
+   "Nephrology or clinical genetics referral to confirm the FXYD2 diagnosis and guide long-term care"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "isolated_dominant_hypomagnesemia-pathway",
+   "title": "Isolated dominant hypomagnesaemia (FXYD2): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Autosomal dominant renal magnesium-wasting disorder caused by variants in FXYD2, encoding the gamma-subunit of the sodium-potassium ATPase",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Symptomatic hypomagnesaemia causing seizures or tetany",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serum magnesium with fractional excretion of magnesium confirming renal loss, Spot urinary calcium-to-creatinine ratio demonstrating hypocalciuria, Serum potassium and venous blood gas to distinguish from Gitelman syndrome"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Lifelong oral magnesium supplementation, titrated to relieve symptoms rather than to fully normalise serum magnesium"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming a Gitelman-like biochemical picture excludes an FXYD2 cause"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of isolated dominant hypomagnesaemia (fxyd2)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "isolated_dominant_hypomagnesemia-matrix",
+   "title": "Isolated dominant hypomagnesaemia (FXYD2): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Autosomal dominant renal magnesium-wasting disorder caused by variants in FXYD2, encoding the gamma-subunit of the",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The gamma-subunit encoded by FXYD2 modulates the activity of the basolateral sodium-potassium ATPase in the distal convoluted tubule, the main site of active transcellular magnesium reabsorption. A dominant-negative variant impairs correct routing or function of the ATPase, reducing the electrochemical gradient that drives apical magnesium entry through TRPM6. The result is defective distal magnesium reabsorption and renal magnesium wasting. As in Gitelman syndrome, reduced distal tubular sodium chloride handling promotes compensatory proximal sodium and calcium reabsorption, producing the associated hypocalciuria. Because the defect is confined to distal magnesium handling, calcium deposition and progressive nephron loss do not occur.",
-    "additionalDifferentials": [
-      "Gitelman syndrome",
-      "FHHNC (CLDN16/CLDN19)",
-      "Hypomagnesaemia with secondary hypocalcaemia (TRPM6)",
-      "Drug-induced hypomagnesaemia (e.g. proton-pump inhibitors, diuretics)",
-      "Gastrointestinal magnesium loss",
-      "EAST/SeSAME syndrome"
+    [
+     "Key Investigations",
+     "Serum magnesium with fractional excretion of magnesium confirming renal loss, Spot urinary calcium-to-creatinine ratio",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serum magnesium with fractional excretion of magnesium confirming renal loss",
-      "Spot urinary calcium-to-creatinine ratio demonstrating hypocalciuria",
-      "Serum potassium and venous blood gas to distinguish from Gitelman syndrome",
-      "Renal ultrasound to exclude nephrocalcinosis",
-      "Family biochemical screening consistent with dominant inheritance",
-      "FXYD2 gene sequencing"
+    [
+     "Primary Differentials",
+     "Gitelman syndrome, FHHNC (CLDN16/CLDN19), Hypomagnesaemia with secondary hypocalcaemia (TRPM6)",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Symptomatic hypomagnesaemia causing seizures or tetany",
-      "Profound hypomagnesaemia with secondary hypocalcaemia and cardiac irritability",
-      "Refractory symptoms despite adequate supplementation"
+    [
+     "Management Strategy",
+     "Lifelong oral magnesium supplementation, titrated to relieve symptoms rather than to fully normalise serum magnesium",
+     "Core treatment modality"
     ],
-    "prognosis": "The condition is generally benign with a normal life expectancy and preserved renal function; symptoms are controlled with lifelong magnesium supplementation, though complete biochemical correction is often not achievable.",
-    "pitfalls": [
-      "Assuming a Gitelman-like biochemical picture excludes an FXYD2 cause",
-      "Attempting to fully normalise serum magnesium and provoking diarrhoea with high oral doses",
-      "Overlooking a dominant family history that points to the diagnosis",
-      "Attributing symptoms solely to concurrent medication such as proton-pump inhibitors"
-    ],
-    "references": [
-      "Comprehensive Clinical Nephrology",
-      "OMIM entry for isolated dominant hypomagnesaemia"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Lifelong oral magnesium supplementation, titrated to relieve symptoms rather than to fully normalise serum magnesium",
-      "Use of better-tolerated organic magnesium salts in divided intake to limit diarrhoea and improve absorption",
-      "Correction of symptomatic hypomagnesaemia during acute decompensation, with parenteral magnesium if severe or accompanied by tetany or seizures",
-      "Periodic monitoring of serum magnesium and symptom control, with renal ultrasound reassurance that nephrocalcinosis does not develop",
-      "Genetic counselling for autosomal dominant inheritance and biochemical screening of at-risk family members",
-      "Nephrology or clinical genetics referral to confirm the FXYD2 diagnosis and guide long-term care"
+    [
+     "Clinical Pitfall",
+     "Assuming a Gitelman-like biochemical picture excludes an FXYD2 cause",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for isolated dominant hypomagnesaemia (fxyd2)."
+  }
+ ]
 }

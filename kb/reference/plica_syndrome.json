@@ -1,78 +1,150 @@
 {
-  "id": "plica_syndrome",
-  "name": "Medial plica syndrome of the knee",
-  "aliases": [
-    "synovial plica syndrome",
-    "medial patellar plica syndrome",
-    "mediopatellar plica syndrome"
+ "id": "plica_syndrome",
+ "name": "Medial plica syndrome of the knee",
+ "aliases": [
+  "synovial plica syndrome",
+  "medial patellar plica syndrome",
+  "mediopatellar plica syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Hand & Peripheral nerve",
+ "specialty": "Orthopaedics / Hand Surgery",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Green's Operative Hand Surgery / Campbell's Operative Orthopaedics",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Plicae are embryological remnants of synovial folds, and the medial patellar plica is the one that most often becomes symptomatic",
+   "Patients report anteromedial knee pain with clicking or snapping and a sense of catching or pseudo-locking, worse with flexion activities such as stairs or after prolonged sitting",
+   "A tender palpable band can often be felt along the medial border of the patella, sometimes rolling under the examining fingers",
+   "The plica becomes symptomatic when it thickens, loses elasticity and becomes fibrotic or inflamed through overuse or trauma, impinging on the medial femoral condyle",
+   "A chronically inflamed plica can abrade the cartilage of the medial condyle or patella",
+   "The diagnosis is largely clinical and one of exclusion, with MRI or dynamic ultrasound able to show a thickened plica",
+   "Arthroscopy is the definitive means of confirming a truly pathological plica",
+   "Generic management includes activity modification, physiotherapy targeting the quadriceps and stretching, corticosteroid injection and arthroscopic resection for refractory cases"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Hand & Peripheral nerve",
-  "specialty": "Orthopaedics / Hand Surgery",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Green's Operative Hand Surgery / Campbell's Operative Orthopaedics",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Plicae are embryological remnants of synovial folds, and the medial patellar plica is the one that most often becomes symptomatic",
-      "Patients report anteromedial knee pain with clicking or snapping and a sense of catching or pseudo-locking, worse with flexion activities such as stairs or after prolonged sitting",
-      "A tender palpable band can often be felt along the medial border of the patella, sometimes rolling under the examining fingers",
-      "The plica becomes symptomatic when it thickens, loses elasticity and becomes fibrotic or inflamed through overuse or trauma, impinging on the medial femoral condyle",
-      "A chronically inflamed plica can abrade the cartilage of the medial condyle or patella",
-      "The diagnosis is largely clinical and one of exclusion, with MRI or dynamic ultrasound able to show a thickened plica",
-      "Arthroscopy is the definitive means of confirming a truly pathological plica",
-      "Generic management includes activity modification, physiotherapy targeting the quadriceps and stretching, corticosteroid injection and arthroscopic resection for refractory cases"
+  "pathophysiology": "A synovial plica is a remnant of the embryonic septa that once divided the knee into compartments, and the medial patellar plica is the fold that most commonly becomes symptomatic. Repetitive overuse or direct trauma causes the plica to thicken, lose its elasticity and become fibrotic and inflamed, so that it impinges against the medial femoral condyle during flexion and extension. This produces pain, snapping and sometimes chondral damage. Asymptomatic plicae are common incidental findings and do not require treatment.",
+  "additionalDifferentials": [
+   "Patellofemoral pain syndrome",
+   "Medial meniscal tear",
+   "Chondromalacia patellae or a chondral lesion",
+   "Medial collateral ligament injury",
+   "Osteochondritis dissecans",
+   "Intra-articular loose body",
+   "Pes anserine bursitis"
+  ],
+  "additionalInvestigations": [
+   "Clinical examination for a tender palpable medial band and reproduction of the snap",
+   "MRI to show a thickened plica and any associated chondral change",
+   "Dynamic ultrasound to visualise the plica during movement",
+   "Plain radiographs to exclude other pathology",
+   "Diagnostic arthroscopy as the definitive investigation"
+  ],
+  "redFlags": [
+   "True locking or an effusion suggesting a meniscal tear or loose body",
+   "Significant chondral damage",
+   "Features suggesting an inflammatory or septic arthritis",
+   "Progressive mechanical symptoms"
+  ],
+  "prognosis": "Many patients settle with conservative treatment, and arthroscopic excision of a genuinely symptomatic plica gives good results.",
+  "pitfalls": [
+   "Overdiagnosis, since asymptomatic plicae are common incidental findings",
+   "Missing a meniscal or chondral lesion, as the diagnosis is one of exclusion",
+   "Resecting an incidental plica that is not the source of symptoms",
+   "Ignoring underlying patellofemoral dysfunction"
+  ],
+  "references": [
+   "Campbell's Operative Orthopaedics",
+   "Green's Operative Hand Surgery"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Begin with conservative care, including activity modification and structured physiotherapy targeting quadriceps and vastus medialis strengthening with hamstring and iliotibial band stretching",
+   "Use simple analgesics or NSAIDs to settle the inflamed, fibrotic plica",
+   "Consider an intra-articular or local corticosteroid injection for symptoms that persist despite rehabilitation",
+   "Address contributing biomechanical factors such as patellar maltracking and training load",
+   "Proceed to arthroscopic resection of the symptomatic plica when adequate conservative treatment fails, treating any associated chondral damage at the same time",
+   "Refer to orthopaedics for dynamic imaging or arthroscopy where the diagnosis is uncertain or symptoms are refractory"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "plica_syndrome-pathway",
+   "title": "Medial plica syndrome of the knee: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Plicae are embryological remnants of synovial folds, and the medial patellar plica is the one that most often becomes symptomatic",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: True locking or an effusion suggesting a meniscal tear or loose body",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical examination for a tender palpable medial band and reproduction of the snap, MRI to show a thickened plica and any associated chondral change, Dynamic ultrasound to visualise the plica during movement"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Begin with conservative care, including activity modification and structured physiotherapy targeting quadriceps and vastus medialis strengthening with hamstring and iliotibial band stretching"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Overdiagnosis, since asymptomatic plicae are common incidental findings"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of medial plica syndrome of the knee."
+  }
+ ],
+ "tables": [
+  {
+   "id": "plica_syndrome-matrix",
+   "title": "Medial plica syndrome of the knee: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Plicae are embryological remnants of synovial folds, and the medial patellar plica is the one that most often becomes symptomatic",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "A synovial plica is a remnant of the embryonic septa that once divided the knee into compartments, and the medial patellar plica is the fold that most commonly becomes symptomatic. Repetitive overuse or direct trauma causes the plica to thicken, lose its elasticity and become fibrotic and inflamed, so that it impinges against the medial femoral condyle during flexion and extension. This produces pain, snapping and sometimes chondral damage. Asymptomatic plicae are common incidental findings and do not require treatment.",
-    "additionalDifferentials": [
-      "Patellofemoral pain syndrome",
-      "Medial meniscal tear",
-      "Chondromalacia patellae or a chondral lesion",
-      "Medial collateral ligament injury",
-      "Osteochondritis dissecans",
-      "Intra-articular loose body",
-      "Pes anserine bursitis"
+    [
+     "Key Investigations",
+     "Clinical examination for a tender palpable medial band and reproduction of the snap, MRI to show a thickened plica and any",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical examination for a tender palpable medial band and reproduction of the snap",
-      "MRI to show a thickened plica and any associated chondral change",
-      "Dynamic ultrasound to visualise the plica during movement",
-      "Plain radiographs to exclude other pathology",
-      "Diagnostic arthroscopy as the definitive investigation"
+    [
+     "Primary Differentials",
+     "Patellofemoral pain syndrome, Medial meniscal tear, Chondromalacia patellae or a chondral lesion",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "True locking or an effusion suggesting a meniscal tear or loose body",
-      "Significant chondral damage",
-      "Features suggesting an inflammatory or septic arthritis",
-      "Progressive mechanical symptoms"
+    [
+     "Management Strategy",
+     "Begin with conservative care, including activity modification and structured physiotherapy targeting quadriceps and vastus",
+     "Core treatment modality"
     ],
-    "prognosis": "Many patients settle with conservative treatment, and arthroscopic excision of a genuinely symptomatic plica gives good results.",
-    "pitfalls": [
-      "Overdiagnosis, since asymptomatic plicae are common incidental findings",
-      "Missing a meniscal or chondral lesion, as the diagnosis is one of exclusion",
-      "Resecting an incidental plica that is not the source of symptoms",
-      "Ignoring underlying patellofemoral dysfunction"
-    ],
-    "references": [
-      "Campbell's Operative Orthopaedics",
-      "Green's Operative Hand Surgery"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Begin with conservative care, including activity modification and structured physiotherapy targeting quadriceps and vastus medialis strengthening with hamstring and iliotibial band stretching",
-      "Use simple analgesics or NSAIDs to settle the inflamed, fibrotic plica",
-      "Consider an intra-articular or local corticosteroid injection for symptoms that persist despite rehabilitation",
-      "Address contributing biomechanical factors such as patellar maltracking and training load",
-      "Proceed to arthroscopic resection of the symptomatic plica when adequate conservative treatment fails, treating any associated chondral damage at the same time",
-      "Refer to orthopaedics for dynamic imaging or arthroscopy where the diagnosis is uncertain or symptoms are refractory"
+    [
+     "Clinical Pitfall",
+     "Overdiagnosis, since asymptomatic plicae are common incidental findings",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for medial plica syndrome of the knee."
+  }
+ ]
 }

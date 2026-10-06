@@ -1,77 +1,149 @@
 {
-  "id": "galeazzi_fracture",
-  "name": "Galeazzi fracture-dislocation",
-  "aliases": [
-    "distal radial shaft fracture with distal radioulnar joint disruption",
-    "fracture of necessity",
-    "Galeazzi lesion"
+ "id": "galeazzi_fracture",
+ "name": "Galeazzi fracture-dislocation",
+ "aliases": [
+  "distal radial shaft fracture with distal radioulnar joint disruption",
+  "fracture of necessity",
+  "Galeazzi lesion"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Trauma",
+ "specialty": "Orthopaedic Trauma",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rockwood and Green's Fractures in Adults",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A fracture of the distal third of the radial shaft combined with disruption of the distal radioulnar joint (DRUJ)",
+   "Termed a fracture of necessity in adults because stable union and forearm function reliably require operative fixation",
+   "DRUJ instability may be subtle; clues include an associated ulnar styloid base fracture, DRUJ widening and altered ulnar variance",
+   "The counterpart injury is the Monteggia fracture-dislocation (proximal ulna fracture with radial head dislocation)",
+   "The usual mechanism is a fall on the outstretched hand with forearm rotation, or a direct blow",
+   "Treatment is anatomical plate fixation of the radius, after which the DRUJ is assessed and, if reduced and stable, immobilised in supination, or stabilised operatively if unstable",
+   "Radiographs must include the wrist and elbow to evaluate the whole forearm ring"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Trauma",
-  "specialty": "Orthopaedic Trauma",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rockwood and Green's Fractures in Adults",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A fracture of the distal third of the radial shaft combined with disruption of the distal radioulnar joint (DRUJ)",
-      "Termed a fracture of necessity in adults because stable union and forearm function reliably require operative fixation",
-      "DRUJ instability may be subtle; clues include an associated ulnar styloid base fracture, DRUJ widening and altered ulnar variance",
-      "The counterpart injury is the Monteggia fracture-dislocation (proximal ulna fracture with radial head dislocation)",
-      "The usual mechanism is a fall on the outstretched hand with forearm rotation, or a direct blow",
-      "Treatment is anatomical plate fixation of the radius, after which the DRUJ is assessed and, if reduced and stable, immobilised in supination, or stabilised operatively if unstable",
-      "Radiographs must include the wrist and elbow to evaluate the whole forearm ring"
+  "pathophysiology": "The radius and ulna form a functional ring joined by the interosseous membrane and the proximal and distal radioulnar joints, so a shaft fracture rarely occurs in isolation. In the Galeazzi injury a force applied to the distal forearm fractures the distal radial shaft; the resulting radial shortening and angulation disrupt the distal radioulnar joint, tearing its stabilising ligaments or avulsing the ulnar styloid. If the radius is fixed without recognising and addressing the DRUJ, residual instability causes pain, weakness of grip and loss of forearm rotation.",
+  "additionalDifferentials": [
+   "Isolated distal radial shaft fracture",
+   "Both-bone forearm fracture",
+   "Distal radius metaphyseal fracture",
+   "Monteggia fracture-dislocation",
+   "Essex-Lopresti injury involving the interosseous membrane and proximal radioulnar joint",
+   "Isolated distal radioulnar joint dislocation"
+  ],
+  "additionalInvestigations": [
+   "Anteroposterior and lateral radiographs of the forearm including the wrist and elbow",
+   "Assessment of DRUJ congruity, ulnar variance and the ulnar styloid",
+   "CT of the DRUJ with contralateral comparison when reduction is uncertain",
+   "Intra-operative stress testing of the DRUJ after radial fixation",
+   "MRI for triangular fibrocartilage complex injury in chronic or occult instability"
+  ],
+  "redFlags": [
+   "Unrecognised DRUJ instability leading to failure of treatment",
+   "Neurovascular compromise of the forearm or hand",
+   "Compartment syndrome after high-energy injury",
+   "Open fracture requiring urgent management"
+  ],
+  "prognosis": "With anatomical radial fixation and appropriate DRUJ stabilisation the outcome is generally good; a missed or untreated distal radioulnar joint injury causes chronic pain, weakness and restricted forearm rotation.",
+  "pitfalls": [
+   "Fixing the radial fracture while overlooking distal radioulnar joint instability",
+   "Immobilising the forearm in the wrong rotation after reduction",
+   "Missing an associated ulnar styloid base fracture signalling DRUJ injury",
+   "Failing to image the whole forearm including the wrist"
+  ],
+  "references": [
+   "Rockwood and Green's Fractures in Adults",
+   "AO Principles of Fracture Management"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Anatomical open reduction and internal plate fixation of the distal radial shaft, a fracture of necessity that requires operative fixation in adults",
+   "Intra-operative assessment and reduction of the distal radioulnar joint after radial fixation, immobilising in supination when it is reduced and stable",
+   "Operative stabilisation of the distal radioulnar joint by ligament repair or pinning if it remains unstable after radial fixation",
+   "Analgesia, initial immobilisation and careful neurovascular assessment of the limb",
+   "Structured hand therapy and graded rehabilitation to restore forearm rotation and grip strength after immobilisation",
+   "Radiographic follow-up to confirm union and detect recurrent distal radioulnar joint instability",
+   "Referral to orthopaedic or hand surgery for definitive operative management"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "galeazzi_fracture-pathway",
+   "title": "Galeazzi fracture-dislocation: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A fracture of the distal third of the radial shaft combined with disruption of the distal radioulnar joint (DRUJ)",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Unrecognised DRUJ instability leading to failure of treatment",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Anteroposterior and lateral radiographs of the forearm including the wrist and elbow, Assessment of DRUJ congruity, ulnar variance and the ulnar styloid, CT of the DRUJ with contralateral comparison when reduction is"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Anatomical open reduction and internal plate fixation of the distal radial shaft, a fracture of necessity that requires operative fixation in adults"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Fixing the radial fracture while overlooking distal radioulnar joint instability"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of galeazzi fracture-dislocation."
+  }
+ ],
+ "tables": [
+  {
+   "id": "galeazzi_fracture-matrix",
+   "title": "Galeazzi fracture-dislocation: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A fracture of the distal third of the radial shaft combined with disruption of the distal radioulnar joint (DRUJ)",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The radius and ulna form a functional ring joined by the interosseous membrane and the proximal and distal radioulnar joints, so a shaft fracture rarely occurs in isolation. In the Galeazzi injury a force applied to the distal forearm fractures the distal radial shaft; the resulting radial shortening and angulation disrupt the distal radioulnar joint, tearing its stabilising ligaments or avulsing the ulnar styloid. If the radius is fixed without recognising and addressing the DRUJ, residual instability causes pain, weakness of grip and loss of forearm rotation.",
-    "additionalDifferentials": [
-      "Isolated distal radial shaft fracture",
-      "Both-bone forearm fracture",
-      "Distal radius metaphyseal fracture",
-      "Monteggia fracture-dislocation",
-      "Essex-Lopresti injury involving the interosseous membrane and proximal radioulnar joint",
-      "Isolated distal radioulnar joint dislocation"
+    [
+     "Key Investigations",
+     "Anteroposterior and lateral radiographs of the forearm including the wrist and elbow, Assessment of DRUJ congruity, ulnar",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Anteroposterior and lateral radiographs of the forearm including the wrist and elbow",
-      "Assessment of DRUJ congruity, ulnar variance and the ulnar styloid",
-      "CT of the DRUJ with contralateral comparison when reduction is uncertain",
-      "Intra-operative stress testing of the DRUJ after radial fixation",
-      "MRI for triangular fibrocartilage complex injury in chronic or occult instability"
+    [
+     "Primary Differentials",
+     "Isolated distal radial shaft fracture, Both-bone forearm fracture, Distal radius metaphyseal fracture",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Unrecognised DRUJ instability leading to failure of treatment",
-      "Neurovascular compromise of the forearm or hand",
-      "Compartment syndrome after high-energy injury",
-      "Open fracture requiring urgent management"
+    [
+     "Management Strategy",
+     "Anatomical open reduction and internal plate fixation of the distal radial shaft, a fracture of necessity that requires operative",
+     "Core treatment modality"
     ],
-    "prognosis": "With anatomical radial fixation and appropriate DRUJ stabilisation the outcome is generally good; a missed or untreated distal radioulnar joint injury causes chronic pain, weakness and restricted forearm rotation.",
-    "pitfalls": [
-      "Fixing the radial fracture while overlooking distal radioulnar joint instability",
-      "Immobilising the forearm in the wrong rotation after reduction",
-      "Missing an associated ulnar styloid base fracture signalling DRUJ injury",
-      "Failing to image the whole forearm including the wrist"
-    ],
-    "references": [
-      "Rockwood and Green's Fractures in Adults",
-      "AO Principles of Fracture Management"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Anatomical open reduction and internal plate fixation of the distal radial shaft, a fracture of necessity that requires operative fixation in adults",
-      "Intra-operative assessment and reduction of the distal radioulnar joint after radial fixation, immobilising in supination when it is reduced and stable",
-      "Operative stabilisation of the distal radioulnar joint by ligament repair or pinning if it remains unstable after radial fixation",
-      "Analgesia, initial immobilisation and careful neurovascular assessment of the limb",
-      "Structured hand therapy and graded rehabilitation to restore forearm rotation and grip strength after immobilisation",
-      "Radiographic follow-up to confirm union and detect recurrent distal radioulnar joint instability",
-      "Referral to orthopaedic or hand surgery for definitive operative management"
+    [
+     "Clinical Pitfall",
+     "Fixing the radial fracture while overlooking distal radioulnar joint instability",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for galeazzi fracture-dislocation."
+  }
+ ]
 }

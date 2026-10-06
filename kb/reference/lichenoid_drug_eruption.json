@@ -1,79 +1,151 @@
 {
-  "id": "lichenoid_drug_eruption",
-  "name": "Lichenoid drug eruption",
-  "aliases": [
-    "drug-induced lichen planus",
-    "lichenoid drug reaction",
-    "lichenoid drug eruption",
-    "drug-induced lichenoid dermatitis"
+ "id": "lichenoid_drug_eruption",
+ "name": "Lichenoid drug eruption",
+ "aliases": [
+  "drug-induced lichen planus",
+  "lichenoid drug reaction",
+  "lichenoid drug eruption",
+  "drug-induced lichenoid dermatitis"
+ ],
+ "class": "non_infective",
+ "system": "Dermatology",
+ "specialty": "Dermatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rook's Textbook of Dermatology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A drug-induced eruption that clinically and histologically mimics idiopathic lichen planus, with violaceous flat-topped papules and plaques",
+   "Compared with classic lichen planus it tends to be more widespread and symmetrical, may favour sun-exposed sites, and Wickham striae and mucosal involvement are often less prominent",
+   "There is characteristically a latent period of weeks to months between starting the drug and the onset of the eruption, which can hamper recognition",
+   "Frequently implicated drugs include certain antihypertensives, antimalarials, diuretics, gold, and increasingly immune checkpoint inhibitors and other biologic agents",
+   "Healing often leaves marked post-inflammatory hyperpigmentation, particularly in more pigmented skin",
+   "Histology resembles lichen planus but may show more eosinophils, parakeratosis and a deeper, more perivascular infiltrate as clues to a drug cause",
+   "The eruption typically improves after the culprit drug is withdrawn, though resolution can be slow over weeks to months",
+   "Management is identification and withdrawal of the responsible drug together with topical or, if extensive, systemic corticosteroids and symptomatic measures"
   ],
-  "class": "non_infective",
-  "system": "Dermatology",
-  "specialty": "Dermatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rook's Textbook of Dermatology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A drug-induced eruption that clinically and histologically mimics idiopathic lichen planus, with violaceous flat-topped papules and plaques",
-      "Compared with classic lichen planus it tends to be more widespread and symmetrical, may favour sun-exposed sites, and Wickham striae and mucosal involvement are often less prominent",
-      "There is characteristically a latent period of weeks to months between starting the drug and the onset of the eruption, which can hamper recognition",
-      "Frequently implicated drugs include certain antihypertensives, antimalarials, diuretics, gold, and increasingly immune checkpoint inhibitors and other biologic agents",
-      "Healing often leaves marked post-inflammatory hyperpigmentation, particularly in more pigmented skin",
-      "Histology resembles lichen planus but may show more eosinophils, parakeratosis and a deeper, more perivascular infiltrate as clues to a drug cause",
-      "The eruption typically improves after the culprit drug is withdrawn, though resolution can be slow over weeks to months",
-      "Management is identification and withdrawal of the responsible drug together with topical or, if extensive, systemic corticosteroids and symptomatic measures"
+  "pathophysiology": "Lichenoid drug eruption is a T-cell-mediated interface reaction in which a drug or its metabolite triggers a cytotoxic lymphocytic attack on basal keratinocytes. The resulting band-like (lichenoid) infiltrate at the dermoepidermal junction, with basal cell degeneration and apoptotic keratinocytes (Civatte bodies), reproduces the histological pattern of lichen planus. The drug is thought to act as a hapten or to alter self-antigens so that basal keratinocytes are recognised as foreign, and the relatively long latent period reflects the time required for sensitisation. Damage to basal cells releases melanin that is taken up by dermal macrophages, accounting for the prominent residual pigmentation.",
+  "additionalDifferentials": [
+   "Idiopathic lichen planus",
+   "Lichenoid variant of graft-versus-host disease",
+   "Lichenoid keratosis and hypertrophic lichenoid dermatoses",
+   "Subacute cutaneous lupus erythematosus",
+   "Pityriasis rosea and other papulosquamous eruptions",
+   "Photodistributed drug eruption when photoexposed sites are involved"
+  ],
+  "additionalInvestigations": [
+   "Detailed drug history noting agents started weeks to months before onset",
+   "Skin biopsy demonstrating a lichenoid interface dermatitis, with features suggesting a drug cause",
+   "Review of temporal relationship between drug introduction, withdrawal and improvement",
+   "Autoimmune serology to help exclude lupus in photodistributed cases",
+   "Assessment of mucosae and nails to compare with idiopathic lichen planus",
+   "Patch testing in selected cases to support identification of the culprit"
+  ],
+  "redFlags": [
+   "Extensive or erythrodermic involvement requiring urgent assessment",
+   "Painful or erosive mucosal disease impairing function",
+   "Eruption associated with immune checkpoint inhibitor therapy needing oncology liaison",
+   "Failure to improve after drug withdrawal, prompting reconsideration of the diagnosis"
+  ],
+  "prognosis": "The eruption usually resolves after the responsible drug is stopped, although clearance may take several weeks to months and often leaves lasting hyperpigmentation; recurrence follows re-exposure to the culprit drug.",
+  "pitfalls": [
+   "Failing to recognise the long latent period and therefore not linking the eruption to a drug",
+   "Mistaking it for idiopathic lichen planus and missing the treatable drug cause",
+   "Expecting rapid clearance and stopping investigation prematurely",
+   "Overlooking newer agents such as checkpoint inhibitors as triggers"
+  ],
+  "references": [
+   "Rook's Textbook of Dermatology",
+   "British Association of Dermatologists guidance on cutaneous drug reactions"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Identify and withdraw the culprit drug (antihypertensives, antimalarials, diuretics, gold, immune checkpoint inhibitors or other biologics) as the definitive step",
+   "Prescribe potent topical corticosteroids for localised disease, with a short course of systemic corticosteroids for widespread eruption",
+   "Offer oral antihistamines for pruritus",
+   "Consider phototherapy in selected persistent cases",
+   "Advise photoprotection and reassurance for post-inflammatory hyperpigmentation, which fades slowly",
+   "Document the culprit agent to avoid re-exposure, which provokes recurrence, and liaise with the prescriber to find an alternative for the original indication"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "lichenoid_drug_eruption-pathway",
+   "title": "Lichenoid drug eruption: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A drug-induced eruption that clinically and histologically mimics idiopathic lichen planus, with violaceous flat-topped papules and plaques",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Extensive or erythrodermic involvement requiring urgent assessment",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Detailed drug history noting agents started weeks to months before onset, Skin biopsy demonstrating a lichenoid interface dermatitis, with features suggesting a drug cause, Review of temporal relationship between drug"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Identify and withdraw the culprit drug (antihypertensives, antimalarials, diuretics, gold, immune checkpoint inhibitors or other biologics) as the definitive step"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to recognise the long latent period and therefore not linking the eruption to a drug"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of lichenoid drug eruption."
+  }
+ ],
+ "tables": [
+  {
+   "id": "lichenoid_drug_eruption-matrix",
+   "title": "Lichenoid drug eruption: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A drug-induced eruption that clinically and histologically mimics idiopathic lichen planus, with violaceous flat-topped papules",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Lichenoid drug eruption is a T-cell-mediated interface reaction in which a drug or its metabolite triggers a cytotoxic lymphocytic attack on basal keratinocytes. The resulting band-like (lichenoid) infiltrate at the dermoepidermal junction, with basal cell degeneration and apoptotic keratinocytes (Civatte bodies), reproduces the histological pattern of lichen planus. The drug is thought to act as a hapten or to alter self-antigens so that basal keratinocytes are recognised as foreign, and the relatively long latent period reflects the time required for sensitisation. Damage to basal cells releases melanin that is taken up by dermal macrophages, accounting for the prominent residual pigmentation.",
-    "additionalDifferentials": [
-      "Idiopathic lichen planus",
-      "Lichenoid variant of graft-versus-host disease",
-      "Lichenoid keratosis and hypertrophic lichenoid dermatoses",
-      "Subacute cutaneous lupus erythematosus",
-      "Pityriasis rosea and other papulosquamous eruptions",
-      "Photodistributed drug eruption when photoexposed sites are involved"
+    [
+     "Key Investigations",
+     "Detailed drug history noting agents started weeks to months before onset, Skin biopsy demonstrating a lichenoid interface",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Detailed drug history noting agents started weeks to months before onset",
-      "Skin biopsy demonstrating a lichenoid interface dermatitis, with features suggesting a drug cause",
-      "Review of temporal relationship between drug introduction, withdrawal and improvement",
-      "Autoimmune serology to help exclude lupus in photodistributed cases",
-      "Assessment of mucosae and nails to compare with idiopathic lichen planus",
-      "Patch testing in selected cases to support identification of the culprit"
+    [
+     "Primary Differentials",
+     "Idiopathic lichen planus, Lichenoid variant of graft-versus-host disease, Lichenoid keratosis and hypertrophic lichenoid",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Extensive or erythrodermic involvement requiring urgent assessment",
-      "Painful or erosive mucosal disease impairing function",
-      "Eruption associated with immune checkpoint inhibitor therapy needing oncology liaison",
-      "Failure to improve after drug withdrawal, prompting reconsideration of the diagnosis"
+    [
+     "Management Strategy",
+     "Identify and withdraw the culprit drug (antihypertensives, antimalarials, diuretics, gold, immune checkpoint inhibitors or other",
+     "Core treatment modality"
     ],
-    "prognosis": "The eruption usually resolves after the responsible drug is stopped, although clearance may take several weeks to months and often leaves lasting hyperpigmentation; recurrence follows re-exposure to the culprit drug.",
-    "pitfalls": [
-      "Failing to recognise the long latent period and therefore not linking the eruption to a drug",
-      "Mistaking it for idiopathic lichen planus and missing the treatable drug cause",
-      "Expecting rapid clearance and stopping investigation prematurely",
-      "Overlooking newer agents such as checkpoint inhibitors as triggers"
-    ],
-    "references": [
-      "Rook's Textbook of Dermatology",
-      "British Association of Dermatologists guidance on cutaneous drug reactions"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Identify and withdraw the culprit drug (antihypertensives, antimalarials, diuretics, gold, immune checkpoint inhibitors or other biologics) as the definitive step",
-      "Prescribe potent topical corticosteroids for localised disease, with a short course of systemic corticosteroids for widespread eruption",
-      "Offer oral antihistamines for pruritus",
-      "Consider phototherapy in selected persistent cases",
-      "Advise photoprotection and reassurance for post-inflammatory hyperpigmentation, which fades slowly",
-      "Document the culprit agent to avoid re-exposure, which provokes recurrence, and liaise with the prescriber to find an alternative for the original indication"
+    [
+     "Clinical Pitfall",
+     "Failing to recognise the long latent period and therefore not linking the eruption to a drug",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for lichenoid drug eruption."
+  }
+ ]
 }

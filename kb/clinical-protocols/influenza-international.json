@@ -6,7 +6,22 @@
  "basis": "international",
  "counterpart": "influenza",
  "setting": "Outpatient, emergency department, ward, ICU",
- "aliases": ["flu", "influenza A", "influenza B", "H1N1", "H3N2", "oseltamivir", "Tamiflu", "baloxavir", "Xofluza", "zanamivir", "peramivir", "ILI", "SARI", "influenza prophylaxis"],
+ "aliases": [
+  "flu",
+  "influenza A",
+  "influenza B",
+  "H1N1",
+  "H3N2",
+  "oseltamivir",
+  "Tamiflu",
+  "baloxavir",
+  "Xofluza",
+  "zanamivir",
+  "peramivir",
+  "ILI",
+  "SARI",
+  "influenza prophylaxis"
+ ],
  "summary": "Treat severe or hospitalised influenza with oseltamivir as early as possible whatever the illness duration. For non-severe illness, WHO 2024 suggests single-dose baloxavir only for high-risk patients and no antiviral for others, whereas CDC and IDSA recommend oseltamivir for all higher-risk outpatients.",
  "sections": [
   {
@@ -86,17 +101,131 @@
   }
  ],
  "drugs": [
-  { "name": "Oseltamivir (treatment)", "dose": "75 mg orally twice daily for 5 days (longer in severe illness or immunocompromise)", "notes": "Creatinine clearance above 30 to 60 mL/min 30 mg twice daily; above 10 to 30, 30 mg once daily; haemodialysis 30 mg after each session. Nausea common; take with food." },
-  { "name": "Oseltamivir (post-exposure prophylaxis)", "dose": "75 mg orally once daily for 10 days (WHO) or for 7 days after the last exposure (CDC)", "notes": "Start within 48 hours of exposure. Reduce in renal impairment." },
-  { "name": "Baloxavir marboxil", "dose": "Single oral dose: 40 mg if 20 to 79 kg; 80 mg if 80 kg or more", "notes": "Within 2 days of onset (treatment) or exposure (prophylaxis). Not in pregnancy or breastfeeding; caution in immunocompromise." },
-  { "name": "Zanamivir (inhaled)", "dose": "10 mg (two 5 mg inhalations) twice daily for 5 days", "notes": "Avoid in asthma or COPD. WHO recommends against it for severe influenza." },
-  { "name": "Peramivir", "dose": "600 mg IV as a single dose; creatinine clearance 30 to 49 mL/min 200 mg; 10 to 29 mL/min 100 mg", "notes": "Only when oral oseltamivir cannot be taken or absorbed (WHO)." },
-  { "name": "Paracetamol", "dose": "500 mg to 1 g orally every 4 to 6 hours as needed, maximum 4 g/day", "notes": "Lower maximum in liver disease, low body weight or alcohol dependence." }
+  {
+   "name": "Oseltamivir (treatment)",
+   "dose": "75 mg orally twice daily for 5 days (longer in severe illness or immunocompromise)",
+   "notes": "Creatinine clearance above 30 to 60 mL/min 30 mg twice daily; above 10 to 30, 30 mg once daily; haemodialysis 30 mg after each session. Nausea common; take with food."
+  },
+  {
+   "name": "Oseltamivir (post-exposure prophylaxis)",
+   "dose": "75 mg orally once daily for 10 days (WHO) or for 7 days after the last exposure (CDC)",
+   "notes": "Start within 48 hours of exposure. Reduce in renal impairment."
+  },
+  {
+   "name": "Baloxavir marboxil",
+   "dose": "Single oral dose: 40 mg if 20 to 79 kg; 80 mg if 80 kg or more",
+   "notes": "Within 2 days of onset (treatment) or exposure (prophylaxis). Not in pregnancy or breastfeeding; caution in immunocompromise."
+  },
+  {
+   "name": "Zanamivir (inhaled)",
+   "dose": "10 mg (two 5 mg inhalations) twice daily for 5 days",
+   "notes": "Avoid in asthma or COPD. WHO recommends against it for severe influenza."
+  },
+  {
+   "name": "Peramivir",
+   "dose": "600 mg IV as a single dose; creatinine clearance 30 to 49 mL/min 200 mg; 10 to 29 mL/min 100 mg",
+   "notes": "Only when oral oseltamivir cannot be taken or absorbed (WHO)."
+  },
+  {
+   "name": "Paracetamol",
+   "dose": "500 mg to 1 g orally every 4 to 6 hours as needed, maximum 4 g/day",
+   "notes": "Lower maximum in liver disease, low body weight or alcohol dependence."
+  }
  ],
  "sources": [
-  { "org": "WHO", "title": "Clinical practice guidelines for influenza", "year": 2024, "url": "https://www.who.int/publications/i/item/9789240097759" },
-  { "org": "IDSA", "title": "Clinical practice guidelines by IDSA: 2018 update on diagnosis, treatment, chemoprophylaxis and institutional outbreak management of seasonal influenza", "year": 2018, "url": "https://www.idsociety.org/practice-guideline/influenza/" },
-  { "org": "CDC", "title": "Influenza antiviral medications: summary for clinicians", "year": 2026, "url": "https://www.cdc.gov/flu/hcp/antivirals/summary-clinicians.html" }
+  {
+   "org": "WHO",
+   "title": "Clinical practice guidelines for influenza",
+   "year": 2024,
+   "url": "https://www.who.int/publications/i/item/9789240097759"
+  },
+  {
+   "org": "IDSA",
+   "title": "Clinical practice guidelines by IDSA: 2018 update on diagnosis, treatment, chemoprophylaxis and institutional outbreak management of seasonal influenza",
+   "year": 2018,
+   "url": "https://www.idsociety.org/practice-guideline/influenza/"
+  },
+  {
+   "org": "CDC",
+   "title": "Influenza antiviral medications: summary for clinicians",
+   "year": 2026,
+   "url": "https://www.cdc.gov/flu/hcp/antivirals/summary-clinicians.html"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "influenza-international-pathway",
+   "title": "Seasonal influenza (WHO, IDSA and CDC) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Non-severe influenza: sudden cough, fever, headache, myalgia, sore throat and malaise without features of severe disease; most people recover within a week.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Severe influenza (WHO): sepsis, septic shock, severe pneumonia, ARDS, multi-organ failure or exacerbation of a chronic illness, usually needing admission, oxygen, ventilation or vasopressors. Treat novel or zoonotic influenza A (for",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Suspected severe influenza: nucleic acid amplification test (RT-PCR) on a nasopharyngeal swab (WHO). In ventilated patients also test lower respiratory tract samples, as upper-airway tests can be negative (IDSA)."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "WHO 2024: high-risk patients, suggest baloxavir as a single oral dose within 2 days of onset; low-risk patients, no antiviral. WHO makes a strong recommendation against oseltamivir for non-severe influenza, having found no important effect"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Withholding oseltamivir from hospitalised or severely ill patients because more than 48 hours have passed."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for seasonal influenza (who, idsa and cdc)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "influenza-international-summary-matrix",
+   "title": "Seasonal influenza (WHO, IDSA and CDC) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Non-severe influenza: sudden cough, fever, headache, myalgia, sore throat and malaise without features of severe disease; most people",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "WHO 2024: high-risk patients, suggest baloxavir as a single oral dose within 2 days of onset; low-risk patients, no antiviral. WHO makes a",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Suspected severe influenza: nucleic acid amplification test (RT-PCR) on a nasopharyngeal swab (WHO). In ventilated patients also test lower",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Oseltamivir (treatment): 75 mg orally twice daily for 5 days (longer in severe illness or immunocompromise)",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Withholding oseltamivir from hospitalised or severely ill patients because more than 48 hours have passed.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for seasonal influenza (who, idsa and cdc)."
+  }
+ ]
 }

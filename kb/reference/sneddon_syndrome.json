@@ -1,77 +1,149 @@
 {
-  "id": "sneddon_syndrome",
-  "name": "Sneddon syndrome",
-  "aliases": [
-    "Sneddon's syndrome",
-    "livedo racemosa with cerebrovascular disease",
-    "idiopathic livedo reticularis with cerebrovascular accidents"
+ "id": "sneddon_syndrome",
+ "name": "Sneddon syndrome",
+ "aliases": [
+  "Sneddon's syndrome",
+  "livedo racemosa with cerebrovascular disease",
+  "idiopathic livedo reticularis with cerebrovascular accidents"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Cerebrovascular",
+ "specialty": "Neurology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Adams and Victor's Principles of Neurology / cerebrovascular and rheumatology literature",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Defined by the combination of widespread livedo racemosa and recurrent ischaemic cerebrovascular events",
+   "Livedo is a persistent, broken, irregular net-like violaceous pattern that often precedes strokes by years",
+   "Affects predominantly young to middle-aged women and presents with strokes, transient ischaemic attacks, and progressive cognitive decline",
+   "A substantial subset have antiphospholipid antibodies, linking it to the antiphospholipid syndrome spectrum",
+   "Hypertension, headache, and vascular dementia are frequent accompaniments",
+   "Skin biopsy from the border of livedo may show a non-inflammatory occlusive vasculopathy of small dermal arteries",
+   "Management centres on antithrombotic therapy and control of vascular risk factors rather than a specific cure"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Cerebrovascular",
-  "specialty": "Neurology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Adams and Victor's Principles of Neurology / cerebrovascular and rheumatology literature",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Defined by the combination of widespread livedo racemosa and recurrent ischaemic cerebrovascular events",
-      "Livedo is a persistent, broken, irregular net-like violaceous pattern that often precedes strokes by years",
-      "Affects predominantly young to middle-aged women and presents with strokes, transient ischaemic attacks, and progressive cognitive decline",
-      "A substantial subset have antiphospholipid antibodies, linking it to the antiphospholipid syndrome spectrum",
-      "Hypertension, headache, and vascular dementia are frequent accompaniments",
-      "Skin biopsy from the border of livedo may show a non-inflammatory occlusive vasculopathy of small dermal arteries",
-      "Management centres on antithrombotic therapy and control of vascular risk factors rather than a specific cure"
+  "pathophysiology": "Sneddon syndrome is a non-inflammatory occlusive arteriopathy affecting small and medium arteries of the skin and brain. Progressive endothelial injury and subintimal proliferation lead to partial then complete occlusion of dermal and cerebral vessels, producing the characteristic livedo racemosa and recurrent cerebral ischaemia. In antiphospholipid-antibody-positive cases a prothrombotic autoimmune mechanism contributes, whereas seronegative cases appear to reflect a primary vasculopathy; both converge on chronic small-vessel occlusion and cumulative brain injury.",
+  "additionalDifferentials": [
+   "Antiphospholipid syndrome without the full livedo picture",
+   "Systemic lupus erythematosus and other connective tissue disease",
+   "Systemic vasculitis such as polyarteritis nodosa",
+   "Cholesterol embolisation syndrome",
+   "Thrombotic thrombocytopenic purpura and other thrombotic microangiopathies",
+   "Cryoglobulinaemia"
+  ],
+  "additionalInvestigations": [
+   "Antiphospholipid antibody panel including lupus anticoagulant, anticardiolipin, and anti-beta-2-glycoprotein I",
+   "Brain MRI and MR angiography to document infarcts and small-vessel disease",
+   "Skin biopsy taken from the white centre of the livedo net to capture occluded arterioles",
+   "Connective tissue and vasculitis serology to exclude alternative causes",
+   "Echocardiography and thrombophilia screening to assess embolic and prothrombotic sources"
+  ],
+  "redFlags": [
+   "Recurrent strokes in a young patient with persistent livedo",
+   "Rapidly progressive cognitive decline",
+   "Catastrophic thrombotic events suggesting antiphospholipid syndrome",
+   "New focal neurological deficits despite antithrombotic therapy"
+  ],
+  "prognosis": "The condition tends to be progressive, with recurrent strokes and stepwise cognitive decline leading to vascular dementia in many patients; antithrombotic therapy and risk-factor control may slow but rarely halt the course.",
+  "pitfalls": [
+   "Dismissing livedo racemosa as benign livedo reticularis and missing the underlying vasculopathy",
+   "Failing to test for antiphospholipid antibodies, which alters anticoagulation decisions",
+   "Taking skin biopsy from the wrong site so the occlusive lesion is missed",
+   "Attributing young-onset stroke to a single episode rather than a systemic vasculopathy"
+  ],
+  "references": [
+   "Adams and Victor's Principles of Neurology",
+   "Bradley's Neurology in Clinical Practice"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Antithrombotic therapy as the mainstay, using antiplatelet agents or anticoagulation with a vitamin K antagonist, particularly in antiphospholipid-antibody-positive patients.",
+   "Aggressive vascular risk-factor control including treatment of hypertension, statin therapy and smoking cessation.",
+   "Manage co-existing antiphospholipid syndrome according to its thrombotic risk where antibodies are confirmed.",
+   "Cognitive assessment and support given the tendency to stepwise vascular cognitive decline.",
+   "Surveillance with serial brain imaging, blood pressure monitoring and reassessment after recurrent ischaemic events.",
+   "Coordinate care across neurology, dermatology and rheumatology.",
+   "Reassess and intensify the antithrombotic strategy after recurrent strokes occurring despite treatment."
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "sneddon_syndrome-pathway",
+   "title": "Sneddon syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Defined by the combination of widespread livedo racemosa and recurrent ischaemic cerebrovascular events",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Recurrent strokes in a young patient with persistent livedo",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Antiphospholipid antibody panel including lupus anticoagulant, anticardiolipin, and anti-beta-2-glycoprotein I, Brain MRI and MR angiography to document infarcts and small-vessel disease, Skin biopsy taken from the white"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Antithrombotic therapy as the mainstay, using antiplatelet agents or anticoagulation with a vitamin K antagonist, particularly in antiphospholipid-antibody-positive patients."
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Dismissing livedo racemosa as benign livedo reticularis and missing the underlying vasculopathy"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of sneddon syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "sneddon_syndrome-matrix",
+   "title": "Sneddon syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Defined by the combination of widespread livedo racemosa and recurrent ischaemic cerebrovascular events",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Sneddon syndrome is a non-inflammatory occlusive arteriopathy affecting small and medium arteries of the skin and brain. Progressive endothelial injury and subintimal proliferation lead to partial then complete occlusion of dermal and cerebral vessels, producing the characteristic livedo racemosa and recurrent cerebral ischaemia. In antiphospholipid-antibody-positive cases a prothrombotic autoimmune mechanism contributes, whereas seronegative cases appear to reflect a primary vasculopathy; both converge on chronic small-vessel occlusion and cumulative brain injury.",
-    "additionalDifferentials": [
-      "Antiphospholipid syndrome without the full livedo picture",
-      "Systemic lupus erythematosus and other connective tissue disease",
-      "Systemic vasculitis such as polyarteritis nodosa",
-      "Cholesterol embolisation syndrome",
-      "Thrombotic thrombocytopenic purpura and other thrombotic microangiopathies",
-      "Cryoglobulinaemia"
+    [
+     "Key Investigations",
+     "Antiphospholipid antibody panel including lupus anticoagulant, anticardiolipin, and anti-beta-2-glycoprotein I, Brain MRI and MR",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Antiphospholipid antibody panel including lupus anticoagulant, anticardiolipin, and anti-beta-2-glycoprotein I",
-      "Brain MRI and MR angiography to document infarcts and small-vessel disease",
-      "Skin biopsy taken from the white centre of the livedo net to capture occluded arterioles",
-      "Connective tissue and vasculitis serology to exclude alternative causes",
-      "Echocardiography and thrombophilia screening to assess embolic and prothrombotic sources"
+    [
+     "Primary Differentials",
+     "Antiphospholipid syndrome without the full livedo picture, Systemic lupus erythematosus and other connective tissue disease,",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Recurrent strokes in a young patient with persistent livedo",
-      "Rapidly progressive cognitive decline",
-      "Catastrophic thrombotic events suggesting antiphospholipid syndrome",
-      "New focal neurological deficits despite antithrombotic therapy"
+    [
+     "Management Strategy",
+     "Antithrombotic therapy as the mainstay, using antiplatelet agents or anticoagulation with a vitamin K antagonist, particularly in",
+     "Core treatment modality"
     ],
-    "prognosis": "The condition tends to be progressive, with recurrent strokes and stepwise cognitive decline leading to vascular dementia in many patients; antithrombotic therapy and risk-factor control may slow but rarely halt the course.",
-    "pitfalls": [
-      "Dismissing livedo racemosa as benign livedo reticularis and missing the underlying vasculopathy",
-      "Failing to test for antiphospholipid antibodies, which alters anticoagulation decisions",
-      "Taking skin biopsy from the wrong site so the occlusive lesion is missed",
-      "Attributing young-onset stroke to a single episode rather than a systemic vasculopathy"
-    ],
-    "references": [
-      "Adams and Victor's Principles of Neurology",
-      "Bradley's Neurology in Clinical Practice"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Antithrombotic therapy as the mainstay, using antiplatelet agents or anticoagulation with a vitamin K antagonist, particularly in antiphospholipid-antibody-positive patients.",
-      "Aggressive vascular risk-factor control including treatment of hypertension, statin therapy and smoking cessation.",
-      "Manage co-existing antiphospholipid syndrome according to its thrombotic risk where antibodies are confirmed.",
-      "Cognitive assessment and support given the tendency to stepwise vascular cognitive decline.",
-      "Surveillance with serial brain imaging, blood pressure monitoring and reassessment after recurrent ischaemic events.",
-      "Coordinate care across neurology, dermatology and rheumatology.",
-      "Reassess and intensify the antithrombotic strategy after recurrent strokes occurring despite treatment."
+    [
+     "Clinical Pitfall",
+     "Dismissing livedo racemosa as benign livedo reticularis and missing the underlying vasculopathy",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for sneddon syndrome."
+  }
+ ]
 }

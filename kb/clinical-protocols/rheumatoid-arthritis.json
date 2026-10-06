@@ -5,7 +5,26 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Primary care, outpatient rheumatology clinic",
- "aliases": ["RA", "rheumatoid", "inflammatory arthritis", "early arthritis", "DMARD", "csDMARD", "bDMARD", "methotrexate", "MTX", "treat to target", "T2T", "anti-CCP", "ACPA", "rheumatoid factor", "biologic", "JAK inhibitor", "tofacitinib", "adalimumab"],
+ "aliases": [
+  "RA",
+  "rheumatoid",
+  "inflammatory arthritis",
+  "early arthritis",
+  "DMARD",
+  "csDMARD",
+  "bDMARD",
+  "methotrexate",
+  "MTX",
+  "treat to target",
+  "T2T",
+  "anti-CCP",
+  "ACPA",
+  "rheumatoid factor",
+  "biologic",
+  "JAK inhibitor",
+  "tofacitinib",
+  "adalimumab"
+ ],
  "summary": "Start a DMARD as soon as RA is diagnosed: methotrexate titrated to at least 15 mg once weekly (usual maximum 25 mg) with folic acid, an optional short glucocorticoid bridge tapered off within about 3 months, and treat to remission or low disease activity; add a biologic (or a JAK inhibitor after risk assessment) if the target is missed by 6 months.",
  "sections": [
   {
@@ -87,18 +106,136 @@
   }
  ],
  "drugs": [
-  { "name": "Methotrexate", "dose": "Start 10 to 15 mg orally once weekly (7.5 mg if elderly or CKD); increase by 5 mg every 2 to 4 weeks to at least 15 mg weekly within 4 to 6 weeks; usual maximum 25 mg once weekly, oral or subcutaneous", "notes": "Weekly only. With folic acid. Reduce if eGFR 30 to 60; avoid below 30, in pregnancy and significant liver disease." },
-  { "name": "Folic acid", "dose": "5 mg orally once weekly, on a different day from methotrexate", "notes": "Reduces GI, mucosal and liver toxicity; can be increased if side effects." },
-  { "name": "Hydroxychloroquine", "dose": "200 to 400 mg orally daily, not exceeding 5 mg/kg actual body weight per day", "notes": "Retinal screening. Reduce dose in CKD." },
-  { "name": "Sulfasalazine (enteric-coated)", "dose": "500 mg orally daily, increased by 500 mg each week to 2 to 3 g daily in 2 to 3 divided doses", "notes": "CBC and liver monitoring; compatible with pregnancy; reversible oligospermia." },
-  { "name": "Leflunomide", "dose": "10 to 20 mg orally once daily", "notes": "Teratogenic: before conception give colestyramine 8 g three times daily for 11 days. Monitor BP, liver enzymes, CBC." },
-  { "name": "Adalimumab (example TNF inhibitor)", "dose": "40 mg subcutaneously every 2 weeks", "notes": "With methotrexate. Screen TB and hepatitis B and C first. Avoid in NYHA III or IV heart failure." },
-  { "name": "Tofacitinib (JAK inhibitor)", "dose": "5 mg orally twice daily", "notes": "Only after assessing cardiovascular, malignancy and VTE risk. Monitor CBC and lipids; recombinant zoster vaccine beforehand." }
+  {
+   "name": "Methotrexate",
+   "dose": "Start 10 to 15 mg orally once weekly (7.5 mg if elderly or CKD); increase by 5 mg every 2 to 4 weeks to at least 15 mg weekly within 4 to 6 weeks; usual maximum 25 mg once weekly, oral or subcutaneous",
+   "notes": "Weekly only. With folic acid. Reduce if eGFR 30 to 60; avoid below 30, in pregnancy and significant liver disease."
+  },
+  {
+   "name": "Folic acid",
+   "dose": "5 mg orally once weekly, on a different day from methotrexate",
+   "notes": "Reduces GI, mucosal and liver toxicity; can be increased if side effects."
+  },
+  {
+   "name": "Hydroxychloroquine",
+   "dose": "200 to 400 mg orally daily, not exceeding 5 mg/kg actual body weight per day",
+   "notes": "Retinal screening. Reduce dose in CKD."
+  },
+  {
+   "name": "Sulfasalazine (enteric-coated)",
+   "dose": "500 mg orally daily, increased by 500 mg each week to 2 to 3 g daily in 2 to 3 divided doses",
+   "notes": "CBC and liver monitoring; compatible with pregnancy; reversible oligospermia."
+  },
+  {
+   "name": "Leflunomide",
+   "dose": "10 to 20 mg orally once daily",
+   "notes": "Teratogenic: before conception give colestyramine 8 g three times daily for 11 days. Monitor BP, liver enzymes, CBC."
+  },
+  {
+   "name": "Adalimumab (example TNF inhibitor)",
+   "dose": "40 mg subcutaneously every 2 weeks",
+   "notes": "With methotrexate. Screen TB and hepatitis B and C first. Avoid in NYHA III or IV heart failure."
+  },
+  {
+   "name": "Tofacitinib (JAK inhibitor)",
+   "dose": "5 mg orally twice daily",
+   "notes": "Only after assessing cardiovascular, malignancy and VTE risk. Monitor CBC and lipids; recombinant zoster vaccine beforehand."
+  }
  ],
  "sources": [
-  { "org": "EULAR", "title": "EULAR recommendations for the management of rheumatoid arthritis with synthetic and biologic disease-modifying antirheumatic drugs: 2025 update", "year": 2026, "url": "https://ard.eular.org/article/S0003-4967(26)00075-0/fulltext" },
-  { "org": "American College of Rheumatology", "title": "2021 American College of Rheumatology guideline for the treatment of rheumatoid arthritis", "year": 2021, "url": "https://acrjournals.onlinelibrary.wiley.com/doi/10.1002/acr.24596" },
-  { "org": "EULAR", "title": "EULAR recommendations for the management of rheumatoid arthritis with synthetic and biological disease-modifying antirheumatic drugs: 2022 update", "year": 2022, "url": "https://ard.eular.org/article/S0003-4967(24)08619-9/fulltext" }
+  {
+   "org": "EULAR",
+   "title": "EULAR recommendations for the management of rheumatoid arthritis with synthetic and biologic disease-modifying antirheumatic drugs: 2025 update",
+   "year": 2026,
+   "url": "https://ard.eular.org/article/S0003-4967(26)00075-0/fulltext"
+  },
+  {
+   "org": "American College of Rheumatology",
+   "title": "2021 American College of Rheumatology guideline for the treatment of rheumatoid arthritis",
+   "year": 2021,
+   "url": "https://acrjournals.onlinelibrary.wiley.com/doi/10.1002/acr.24596"
+  },
+  {
+   "org": "EULAR",
+   "title": "EULAR recommendations for the management of rheumatoid arthritis with synthetic and biological disease-modifying antirheumatic drugs: 2022 update",
+   "year": 2022,
+   "url": "https://ard.eular.org/article/S0003-4967(24)08619-9/fulltext"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "rheumatoid-arthritis-pathway",
+   "title": "Rheumatoid arthritis: early DMARDs and treat-to-target Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Persistent synovitis (soft joint swelling) of more than one joint, typically symmetrical small joints of the hands and feet (MCP, PIP, MTP), with morning stiffness over 30 minutes, fatigue and a positive MCP or MTP squeeze test.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Refer suspected persistent synovitis urgently to rheumatology (EULAR: assessment within 6 weeks of symptom onset), even when ESR, CRP and rheumatoid factor are normal. Avoid starting glucocorticoid before assessment where possible, as it",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "RF and anti-CCP (ACPA), ESR and CRP, CBC, creatinine and eGFR, liver enzymes, urinalysis; ANA if features suggest connective tissue disease."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Target sustained remission, or low disease activity if remission is unrealistic. Review every 1 to 3 months while active; change therapy if there is no improvement by 3 months or the target is not reached by 6 months."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Methotrexate, leflunomide and sulfasalazine: CBC, liver enzymes and creatinine every 2 to 4 weeks for the first 3 months and after dose increases, then every 8 to 12 weeks when stable."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for rheumatoid arthritis: early dmards and treat-to-target."
+  }
+ ],
+ "tables": [
+  {
+   "id": "rheumatoid-arthritis-summary-matrix",
+   "title": "Rheumatoid arthritis: early DMARDs and treat-to-target Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Persistent synovitis (soft joint swelling) of more than one joint, typically symmetrical small joints of the hands and feet (MCP, PIP,",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Target sustained remission, or low disease activity if remission is unrealistic. Review every 1 to 3 months while active; change therapy if",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "RF and anti-CCP (ACPA), ESR and CRP, CBC, creatinine and eGFR, liver enzymes, urinalysis; ANA if features suggest connective tissue disease.",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Methotrexate: Start 10 to 15 mg orally once weekly (7.5 mg if elderly or CKD); increase by 5 mg every 2 to 4 weeks to at least 15 mg weekly",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Methotrexate taken daily instead of weekly: potentially fatal. Write the day of the week on the prescription and counsel the patient.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for rheumatoid arthritis: early dmards and treat-to-target."
+  }
+ ]
 }

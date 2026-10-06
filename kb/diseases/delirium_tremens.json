@@ -34,9 +34,15 @@
     "Withdrawal seizures may herald DT"
   ],
   "investigations": [
-    { "test": "Bedside glucose + IV thiamine before glucose (Wernicke prophylaxis)" },
-    { "test": "Exclude CNS infection / structural cause (LP, imaging) when febrile, focal or atypical" },
-    { "test": "Electrolytes incl. Mg/PO4, LFTs; assess CIWA-Ar" }
+    {
+      "test": "Bedside glucose + IV thiamine before glucose (Wernicke prophylaxis)"
+    },
+    {
+      "test": "Exclude CNS infection / structural cause (LP, imaging) when febrile, focal or atypical"
+    },
+    {
+      "test": "Electrolytes incl. Mg/PO4, LFTs; assess CIWA-Ar"
+    }
   ],
   "treatmentRef": null,
   "policyRef": null,
@@ -45,7 +51,9 @@
   "drugRefs": [],
   "provenance": {
     "primaryRef": "Harrison 22e",
-    "editions": ["Harrison 22e (2025)"]
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
   },
   "review": {
     "status": "approved",
@@ -54,6 +62,80 @@
   },
   "version": 1,
   "contentHash": null,
-  "references": ["Harrison 22e — Alcohol and Alcohol Use Disorders"],
-  "provenanceNote": "Recall Tier-4 new diagnosable entity (alcohol withdrawal). AI-drafted matching signature; PENDING clinician sign-off. Intentionally does NOT dominate CNS-infection candidates in a febrile/altered patient — designed to enter the top-3 as a co-consideration."
+  "references": [
+    "Harrison 22e — Alcohol and Alcohol Use Disorders"
+  ],
+  "provenanceNote": "Recall Tier-4 new diagnosable entity (alcohol withdrawal). AI-drafted matching signature; PENDING clinician sign-off. Intentionally does NOT dominate CNS-infection candidates in a febrile/altered patient — designed to enter the top-3 as a co-consideration.",
+  "algorithms": [
+    {
+      "id": "delirium_tremens-dx-algo",
+      "title": "Delirium Tremens (Alcohol Withdrawal): Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Evaluate acute presentation and core clinical features of Delirium Tremens (Alcohol Withdrawal).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Do NOT anchor on withdrawal in a febrile/altered patient - exclude meningitis/encephalitis (LP) and give thiamine before glucose (Wernicke)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Bedside glucose + IV thiamine before glucose (Wernicke prophylaxis), Exclude CNS infection / structural cause (LP, imaging) when febrile, focal or atypical, Electrolytes incl. Mg/PO4, LFTs; assess CIWA-Ar"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Apply evidence-based criteria to classify disease severity and organ dysfunction."
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Initiate guideline-directed medical therapy and monitor clinical progress."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for delirium tremens (alcohol withdrawal)."
+    }
+  ],
+  "tables": [
+    {
+      "id": "delirium_tremens-matrix",
+      "title": "Delirium Tremens (Alcohol Withdrawal): Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Cardinal presentation of Delirium Tremens (Alcohol Withdrawal)",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Bedside glucose + IV thiamine before glucose (Wernicke prophylaxis), Exclude CNS infection / structural cause (LP, imaging) when",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Alternative etiologies in this class",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Do NOT anchor on withdrawal in a febrile/altered patient - exclude meningitis/encephalitis (LP) and give thiamine before glucose",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Delayed recognition of atypical presentations",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for delirium tremens (alcohol withdrawal)."
+    }
+  ]
 }

@@ -1,77 +1,149 @@
 {
-  "id": "glomus_tympanicum",
-  "name": "Glomus tympanicum",
-  "aliases": [
-    "tympanic paraganglioma",
-    "glomus tympanicum tumour",
-    "middle ear paraganglioma"
+ "id": "glomus_tympanicum",
+ "name": "Glomus tympanicum",
+ "aliases": [
+  "tympanic paraganglioma",
+  "glomus tympanicum tumour",
+  "middle ear paraganglioma"
+ ],
+ "class": "non_infective",
+ "system": "ENT / Otorhinolaryngology",
+ "specialty": "ENT",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Dhingra, Diseases of Ear, Nose and Throat",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A benign, slow-growing, vascular tumour (paraganglioma) arising from paraganglionic tissue on the promontory of the middle ear",
+   "The classic presentation is pulsatile tinnitus synchronous with the heartbeat, together with conductive hearing loss",
+   "Otoscopy shows a reddish mass behind the tympanic membrane, often described as a rising-sun appearance, that may blanch on positive pneumatic pressure (Brown sign)",
+   "It should be distinguished from glomus jugulare, which arises around the jugular bulb and tends to involve the skull base and lower cranial nerves",
+   "Imaging is essential to define the tumour and separate a confined tympanic lesion from more extensive jugulare or vagale disease",
+   "Biopsy through the eardrum is avoided because these lesions are vascular and bleed readily",
+   "Treatment of a confined glomus tympanicum is usually surgical excision, which is generally curative for small lesions",
+   "A small proportion of paragangliomas are catecholamine-secreting or part of a familial syndrome, so relevant clinical features should prompt further evaluation"
   ],
-  "class": "non_infective",
-  "system": "ENT / Otorhinolaryngology",
-  "specialty": "ENT",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Dhingra, Diseases of Ear, Nose and Throat",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A benign, slow-growing, vascular tumour (paraganglioma) arising from paraganglionic tissue on the promontory of the middle ear",
-      "The classic presentation is pulsatile tinnitus synchronous with the heartbeat, together with conductive hearing loss",
-      "Otoscopy shows a reddish mass behind the tympanic membrane, often described as a rising-sun appearance, that may blanch on positive pneumatic pressure (Brown sign)",
-      "It should be distinguished from glomus jugulare, which arises around the jugular bulb and tends to involve the skull base and lower cranial nerves",
-      "Imaging is essential to define the tumour and separate a confined tympanic lesion from more extensive jugulare or vagale disease",
-      "Biopsy through the eardrum is avoided because these lesions are vascular and bleed readily",
-      "Treatment of a confined glomus tympanicum is usually surgical excision, which is generally curative for small lesions",
-      "A small proportion of paragangliomas are catecholamine-secreting or part of a familial syndrome, so relevant clinical features should prompt further evaluation"
+  "pathophysiology": "Glomus tympanicum is a paraganglioma derived from paraganglion cells associated with the tympanic branches of the glossopharyngeal and vagus nerves along the cochlear promontory. These tumours are highly vascular, composed of nests of chief cells in a rich capillary network, and grow slowly to fill the middle-ear cleft, impairing ossicular movement and producing conductive hearing loss and pulsatile tinnitus. Although almost always benign and non-secretory, a minority of paragangliomas produce catecholamines or occur within hereditary syndromes such as those linked to succinate dehydrogenase gene mutations, and multicentric tumours can occur.",
+  "additionalDifferentials": [
+   "Glomus jugulare tumour",
+   "Aberrant internal carotid artery in the middle ear",
+   "High or dehiscent jugular bulb",
+   "Middle-ear cholesteatoma or granulation tissue",
+   "Haemangioma of the middle ear",
+   "Facial nerve schwannoma"
+  ],
+  "additionalInvestigations": [
+   "Otoscopy and microscopy to identify the retrotympanic vascular mass",
+   "High-resolution computed tomography of the temporal bone to define the tumour and assess the jugular bulb and bony margins",
+   "Magnetic resonance imaging with contrast to characterise soft-tissue extent and distinguish from a glomus jugulare",
+   "Angiography and preoperative embolisation for larger or vascular lesions",
+   "Screening for catecholamine secretion and family history where a functional or hereditary paraganglioma is suspected"
+  ],
+  "redFlags": [
+   "A pulsatile retrotympanic mass that should never be biopsied blindly through the eardrum because of brisk bleeding",
+   "Extension to the skull base or lower cranial nerve palsies suggesting glomus jugulare rather than a confined tympanicum",
+   "Symptoms of catecholamine excess indicating a functional (secreting) paraganglioma",
+   "Multicentric tumours or a strong family history suggesting a hereditary paraganglioma syndrome"
+  ],
+  "prognosis": "As a benign, slow-growing tumour, a glomus tympanicum confined to the middle ear has an excellent outlook with complete surgical excision, which is usually curative; larger or jugulare lesions are more challenging and carry greater risk to hearing and cranial nerves.",
+  "pitfalls": [
+   "Biopsying a vascular middle-ear mass through the tympanic membrane and causing significant haemorrhage",
+   "Mistaking an aberrant carotid artery or high jugular bulb for a tumour",
+   "Failing to image adequately and underestimating a glomus jugulare with skull-base extension",
+   "Overlooking a secreting or hereditary paraganglioma"
+  ],
+  "references": [
+   "Dhingra, Diseases of Ear, Nose and Throat"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Complete surgical excision, most often transcanal or via tympanotomy, is curative for disease confined to the middle ear",
+   "Radiotherapy or stereotactic radiosurgery as an alternative for tumour control in poor surgical candidates",
+   "Observation with serial imaging for small, minimally symptomatic tumours in older patients",
+   "Avoid transtympanic biopsy because these lesions are vascular and bleed readily, and consider preoperative embolisation for larger tumours",
+   "Screen for catecholamine secretion where a functional or hereditary paraganglioma is suspected",
+   "Offer genetic evaluation for succinate dehydrogenase mutations and screen for multicentric disease",
+   "Manage through an ENT and skull base team, with imaging to distinguish a confined tympanicum from jugulare or vagale disease"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "glomus_tympanicum-pathway",
+   "title": "Glomus tympanicum: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A benign, slow-growing, vascular tumour (paraganglioma) arising from paraganglionic tissue on the promontory of the middle ear",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: A pulsatile retrotympanic mass that should never be biopsied blindly through the eardrum because of brisk bleeding",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Otoscopy and microscopy to identify the retrotympanic vascular mass, High-resolution computed tomography of the temporal bone to define the tumour and assess the jugular bulb and bony margins, Magnetic resonance imaging"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Complete surgical excision, most often transcanal or via tympanotomy, is curative for disease confined to the middle ear"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Biopsying a vascular middle-ear mass through the tympanic membrane and causing significant haemorrhage"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of glomus tympanicum."
+  }
+ ],
+ "tables": [
+  {
+   "id": "glomus_tympanicum-matrix",
+   "title": "Glomus tympanicum: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A benign, slow-growing, vascular tumour (paraganglioma) arising from paraganglionic tissue on the promontory of the middle ear",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Glomus tympanicum is a paraganglioma derived from paraganglion cells associated with the tympanic branches of the glossopharyngeal and vagus nerves along the cochlear promontory. These tumours are highly vascular, composed of nests of chief cells in a rich capillary network, and grow slowly to fill the middle-ear cleft, impairing ossicular movement and producing conductive hearing loss and pulsatile tinnitus. Although almost always benign and non-secretory, a minority of paragangliomas produce catecholamines or occur within hereditary syndromes such as those linked to succinate dehydrogenase gene mutations, and multicentric tumours can occur.",
-    "additionalDifferentials": [
-      "Glomus jugulare tumour",
-      "Aberrant internal carotid artery in the middle ear",
-      "High or dehiscent jugular bulb",
-      "Middle-ear cholesteatoma or granulation tissue",
-      "Haemangioma of the middle ear",
-      "Facial nerve schwannoma"
+    [
+     "Key Investigations",
+     "Otoscopy and microscopy to identify the retrotympanic vascular mass, High-resolution computed tomography of the temporal bone to",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Otoscopy and microscopy to identify the retrotympanic vascular mass",
-      "High-resolution computed tomography of the temporal bone to define the tumour and assess the jugular bulb and bony margins",
-      "Magnetic resonance imaging with contrast to characterise soft-tissue extent and distinguish from a glomus jugulare",
-      "Angiography and preoperative embolisation for larger or vascular lesions",
-      "Screening for catecholamine secretion and family history where a functional or hereditary paraganglioma is suspected"
+    [
+     "Primary Differentials",
+     "Glomus jugulare tumour, Aberrant internal carotid artery in the middle ear, High or dehiscent jugular bulb",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "A pulsatile retrotympanic mass that should never be biopsied blindly through the eardrum because of brisk bleeding",
-      "Extension to the skull base or lower cranial nerve palsies suggesting glomus jugulare rather than a confined tympanicum",
-      "Symptoms of catecholamine excess indicating a functional (secreting) paraganglioma",
-      "Multicentric tumours or a strong family history suggesting a hereditary paraganglioma syndrome"
+    [
+     "Management Strategy",
+     "Complete surgical excision, most often transcanal or via tympanotomy, is curative for disease confined to the middle ear",
+     "Core treatment modality"
     ],
-    "prognosis": "As a benign, slow-growing tumour, a glomus tympanicum confined to the middle ear has an excellent outlook with complete surgical excision, which is usually curative; larger or jugulare lesions are more challenging and carry greater risk to hearing and cranial nerves.",
-    "pitfalls": [
-      "Biopsying a vascular middle-ear mass through the tympanic membrane and causing significant haemorrhage",
-      "Mistaking an aberrant carotid artery or high jugular bulb for a tumour",
-      "Failing to image adequately and underestimating a glomus jugulare with skull-base extension",
-      "Overlooking a secreting or hereditary paraganglioma"
-    ],
-    "references": [
-      "Dhingra, Diseases of Ear, Nose and Throat"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Complete surgical excision, most often transcanal or via tympanotomy, is curative for disease confined to the middle ear",
-      "Radiotherapy or stereotactic radiosurgery as an alternative for tumour control in poor surgical candidates",
-      "Observation with serial imaging for small, minimally symptomatic tumours in older patients",
-      "Avoid transtympanic biopsy because these lesions are vascular and bleed readily, and consider preoperative embolisation for larger tumours",
-      "Screen for catecholamine secretion where a functional or hereditary paraganglioma is suspected",
-      "Offer genetic evaluation for succinate dehydrogenase mutations and screen for multicentric disease",
-      "Manage through an ENT and skull base team, with imaging to distinguish a confined tympanicum from jugulare or vagale disease"
+    [
+     "Clinical Pitfall",
+     "Biopsying a vascular middle-ear mass through the tympanic membrane and causing significant haemorrhage",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for glomus tympanicum."
+  }
+ ]
 }

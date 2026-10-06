@@ -170,5 +170,77 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-25"
- }
+ },
+ "algorithms": [
+  {
+   "id": "type-1-diabetes-management-pathway",
+   "title": "Type 1 diabetes: outpatient management (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Features favouring type 1 in adults: age under 35, BMI below 25 kg/m2, unintentional weight loss, ketoacidosis, and glucose above 360 mg/dL (20 mmol/L) at presentation. Adult onset is common and is often mislabelled as type 2.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Measure islet autoantibodies at diagnosis: GAD first, then IA-2 and/or ZnT8 if negative. About 5 to 10% of people with type 1 diabetes are antibody-negative.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "If the type is uncertain after 3 years, measure random C-peptide (with paired glucose, within 5 hours of eating), and always before stopping insulin: 600 pmol/L or more suggests type 2 or monogenic diabetes; low or absent confirms severe"
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Level 1: glucose below 70 mg/dL (3.9 mmol/L) but 54 mg/dL or above. Level 2: below 54 mg/dL (3.0 mmol/L). Level 3: altered mental or physical state needing help from another person."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Every visit: weight, blood pressure, injection or infusion sites for lipohypertrophy, hypoglycaemia history and glucose data."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for type 1 diabetes: outpatient management (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "type-1-diabetes-management-summary-matrix",
+   "title": "Type 1 diabetes: outpatient management (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Features favouring type 1 in adults: age under 35, BMI below 25 kg/m2, unintentional weight loss, ketoacidosis, and glucose above 360 mg/dL",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Level 1: glucose below 70 mg/dL (3.9 mmol/L) but 54 mg/dL or above. Level 2: below 54 mg/dL (3.0 mmol/L). Level 3: altered mental or",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Basal insulin analogue (glargine U100, degludec): About 50% of the total daily dose SC once daily (TDD typically 0.5 units/kg/day at start)",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Labelling a lean young adult, or an older adult with rapid weight loss, as type 2 and starting oral agents: check antibodies.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for type 1 diabetes: outpatient management (adult)."
+  }
+ ]
 }

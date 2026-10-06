@@ -5,7 +5,20 @@
  "population": "Adults and children",
  "basis": "international",
  "setting": "Primary care, emergency department, eye clinic",
- "aliases": ["conjunctivitis", "pink eye", "red eye", "viral conjunctivitis", "adenoviral conjunctivitis", "EKC", "bacterial conjunctivitis", "allergic conjunctivitis", "gonococcal conjunctivitis", "chlamydial conjunctivitis", "ophthalmia neonatorum", "Madras eye"],
+ "aliases": [
+  "conjunctivitis",
+  "pink eye",
+  "red eye",
+  "viral conjunctivitis",
+  "adenoviral conjunctivitis",
+  "EKC",
+  "bacterial conjunctivitis",
+  "allergic conjunctivitis",
+  "gonococcal conjunctivitis",
+  "chlamydial conjunctivitis",
+  "ophthalmia neonatorum",
+  "Madras eye"
+ ],
  "summary": "Most acute conjunctivitis in adults is viral and self-limiting: no antibiotics. Treat bacterial conjunctivitis with a 5 to 7 day topical antibiotic, allergic with antihistamine or mast-cell stabiliser drops, and gonococcal or chlamydial infection systemically. Visual loss, pain, corneal involvement, contact lens wear or a neonate need same-day ophthalmology.",
  "sections": [
   {
@@ -91,20 +104,146 @@
   }
  ],
  "drugs": [
-  { "name": "Chloramphenicol 0.5% eye drops", "dose": "1 drop every 2 hours for the first 48 hours, then every 4 hours while awake, for 5 to 7 days in total", "notes": "Bacterial conjunctivitis in adults and children." },
-  { "name": "Moxifloxacin 0.5% eye drops", "dose": "1 drop three times daily for 7 days", "notes": "Contact lens wearers (Pseudomonas cover) or when a fluoroquinolone is preferred." },
-  { "name": "Olopatadine 0.1% eye drops", "dose": "1 drop twice daily", "notes": "Allergic conjunctivitis (antihistamine with mast-cell stabilising action)." },
-  { "name": "Ceftriaxone", "dose": "Adults and adolescents: 1 g IM single dose. Children up to 45 kg: 25 to 50 mg/kg IV or IM single dose (max 250 mg IM). Neonates: 25 to 50 mg/kg IV or IM single dose (max 250 mg)", "notes": "Gonococcal conjunctivitis; plus saline lavage. Use cefotaxime 100 mg/kg single dose in neonates receiving IV calcium." },
-  { "name": "Doxycycline", "dose": "100 mg orally twice daily for 7 days", "notes": "Chlamydial conjunctivitis in adults. Not in pregnancy or children under 8 years." },
-  { "name": "Azithromycin", "dose": "Adults: 1 g orally single dose. Neonates: 20 mg/kg orally once daily for 3 days", "notes": "Chlamydia alternative; preferred option in pregnancy." },
-  { "name": "Erythromycin (oral)", "dose": "50 mg/kg/day orally in 4 divided doses for 14 days", "notes": "Neonatal chlamydial conjunctivitis; monitor for infantile hypertrophic pyloric stenosis." },
-  { "name": "Aciclovir (oral)", "dose": "200 to 400 mg orally five times daily until resolved, with review within 1 week", "notes": "HSV conjunctivitis; or valaciclovir 500 mg two or three times daily. Adjust for renal impairment." },
-  { "name": "Ganciclovir 0.15% eye gel", "dose": "1 drop 3 to 5 times daily", "notes": "HSV conjunctivitis or epithelial keratitis; less toxic to the ocular surface than trifluridine." }
+  {
+   "name": "Chloramphenicol 0.5% eye drops",
+   "dose": "1 drop every 2 hours for the first 48 hours, then every 4 hours while awake, for 5 to 7 days in total",
+   "notes": "Bacterial conjunctivitis in adults and children."
+  },
+  {
+   "name": "Moxifloxacin 0.5% eye drops",
+   "dose": "1 drop three times daily for 7 days",
+   "notes": "Contact lens wearers (Pseudomonas cover) or when a fluoroquinolone is preferred."
+  },
+  {
+   "name": "Olopatadine 0.1% eye drops",
+   "dose": "1 drop twice daily",
+   "notes": "Allergic conjunctivitis (antihistamine with mast-cell stabilising action)."
+  },
+  {
+   "name": "Ceftriaxone",
+   "dose": "Adults and adolescents: 1 g IM single dose. Children up to 45 kg: 25 to 50 mg/kg IV or IM single dose (max 250 mg IM). Neonates: 25 to 50 mg/kg IV or IM single dose (max 250 mg)",
+   "notes": "Gonococcal conjunctivitis; plus saline lavage. Use cefotaxime 100 mg/kg single dose in neonates receiving IV calcium."
+  },
+  {
+   "name": "Doxycycline",
+   "dose": "100 mg orally twice daily for 7 days",
+   "notes": "Chlamydial conjunctivitis in adults. Not in pregnancy or children under 8 years."
+  },
+  {
+   "name": "Azithromycin",
+   "dose": "Adults: 1 g orally single dose. Neonates: 20 mg/kg orally once daily for 3 days",
+   "notes": "Chlamydia alternative; preferred option in pregnancy."
+  },
+  {
+   "name": "Erythromycin (oral)",
+   "dose": "50 mg/kg/day orally in 4 divided doses for 14 days",
+   "notes": "Neonatal chlamydial conjunctivitis; monitor for infantile hypertrophic pyloric stenosis."
+  },
+  {
+   "name": "Aciclovir (oral)",
+   "dose": "200 to 400 mg orally five times daily until resolved, with review within 1 week",
+   "notes": "HSV conjunctivitis; or valaciclovir 500 mg two or three times daily. Adjust for renal impairment."
+  },
+  {
+   "name": "Ganciclovir 0.15% eye gel",
+   "dose": "1 drop 3 to 5 times daily",
+   "notes": "HSV conjunctivitis or epithelial keratitis; less toxic to the ocular surface than trifluridine."
+  }
  ],
  "sources": [
-  { "org": "American Academy of Ophthalmology", "title": "Conjunctivitis Preferred Practice Pattern", "year": 2023, "url": "https://www.aao.org/Assets/76c4baa7-869e-42ad-9ffc-215781185a7b/638434228319430000/conjunctivitis-ppp-pdf" },
-  { "org": "American Academy of Ophthalmology", "title": "Cornea/External Disease Summary Benchmarks", "year": 2025, "url": "https://www.aao.org/education/summary-benchmark-detail/cornea-external-disease-summary-benchmarks-2020" },
-  { "org": "CDC", "title": "Sexually transmitted infections treatment guidelines, 2021", "year": 2021, "url": "https://doi.org/10.15585/mmwr.rr7004a1" }
+  {
+   "org": "American Academy of Ophthalmology",
+   "title": "Conjunctivitis Preferred Practice Pattern",
+   "year": 2023,
+   "url": "https://www.aao.org/Assets/76c4baa7-869e-42ad-9ffc-215781185a7b/638434228319430000/conjunctivitis-ppp-pdf"
+  },
+  {
+   "org": "American Academy of Ophthalmology",
+   "title": "Cornea/External Disease Summary Benchmarks",
+   "year": 2025,
+   "url": "https://www.aao.org/education/summary-benchmark-detail/cornea-external-disease-summary-benchmarks-2020"
+  },
+  {
+   "org": "CDC",
+   "title": "Sexually transmitted infections treatment guidelines, 2021",
+   "year": 2021,
+   "url": "https://doi.org/10.15585/mmwr.rr7004a1"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "acute-conjunctivitis-pathway",
+   "title": "Acute conjunctivitis Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Viral (usually adenovirus): watery discharge, follicles, tender preauricular node, often one eye then the other, recent cold or contact; highly contagious for 10 to 14 days.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Bacterial: mucopurulent discharge with lids stuck together on waking; usually self-limiting in adults. In children examine the ears, as conjunctivitis with otitis suggests Haemophilus influenzae.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Check visual acuity and stain the cornea with fluorescein in every red eye."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Gonococcal, adults and adolescents: ceftriaxone 1 g IM single dose (CDC 2021; the AAO table quotes 500 mg) plus one saline lavage of the eye; review daily until resolved; add keratitis treatment if the cornea is involved. Treat for"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Antibiotic drops for viral conjunctivitis."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for acute conjunctivitis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "acute-conjunctivitis-summary-matrix",
+   "title": "Acute conjunctivitis Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Viral (usually adenovirus): watery discharge, follicles, tender preauricular node, often one eye then the other, recent cold or contact;",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Gonococcal, adults and adolescents: ceftriaxone 1 g IM single dose (CDC 2021; the AAO table quotes 500 mg) plus one saline lavage of the",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Check visual acuity and stain the cornea with fluorescein in every red eye.",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Chloramphenicol 0.5% eye drops: 1 drop every 2 hours for the first 48 hours, then every 4 hours while awake, for 5 to 7 days in total",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Antibiotic drops for viral conjunctivitis.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for acute conjunctivitis."
+  }
+ ]
 }

@@ -5,7 +5,23 @@
  "population": "Adults and children",
  "basis": "international",
  "setting": "Primary care, dermatology clinic",
- "aliases": ["acne", "pimples", "comedones", "adapalene", "benzoyl peroxide", "BPO", "clindamycin gel", "doxycycline", "lymecycline", "isotretinoin", "acne fulminans", "nodulocystic acne", "acne conglobata", "hormonal acne", "spironolactone"],
+ "aliases": [
+  "acne",
+  "pimples",
+  "comedones",
+  "adapalene",
+  "benzoyl peroxide",
+  "BPO",
+  "clindamycin gel",
+  "doxycycline",
+  "lymecycline",
+  "isotretinoin",
+  "acne fulminans",
+  "nodulocystic acne",
+  "acne conglobata",
+  "hormonal acne",
+  "spironolactone"
+ ],
  "summary": "Offer a 12-week course of a fixed topical combination (retinoid or clindamycin with benzoyl peroxide); add oral doxycycline or lymecycline for moderate to severe acne, never as monotherapy and rarely beyond 6 months; use isotretinoin for severe, scarring or refractory acne with strict pregnancy prevention and mood monitoring.",
  "sections": [
   {
@@ -66,18 +82,135 @@
   }
  ],
  "drugs": [
-  { "name": "Adapalene 0.1% with benzoyl peroxide 2.5% gel", "dose": "Apply thinly once daily in the evening to affected areas", "notes": "Any severity and maintenance. Not in pregnancy. Irritation, photosensitivity, bleaches fabric." },
-  { "name": "Clindamycin 1% with benzoyl peroxide gel", "dose": "Apply once daily in the evening", "notes": "Mild to moderate acne; can be used with caution in pregnancy." },
-  { "name": "Tretinoin 0.025% with clindamycin 1% gel", "dose": "Apply once daily in the evening", "notes": "Any severity. Not in pregnancy or breastfeeding." },
-  { "name": "Azelaic acid 20% cream", "dose": "Apply twice daily", "notes": "With an oral antibiotic for moderate to severe acne, or alone for maintenance; helps post-inflammatory pigmentation." },
-  { "name": "Doxycycline", "dose": "100 mg orally once daily with food and a full glass of water, taken upright", "notes": "Always with topical therapy; review at 12 weeks; usually no more than 6 months. Photosensitivity. Not in pregnancy or young children." },
-  { "name": "Lymecycline", "dose": "408 mg orally once daily", "notes": "Alternative to doxycycline; same restrictions." },
-  { "name": "Isotretinoin", "dose": "0.5 to 1 mg/kg/day orally with food, to a cumulative 120 to 150 mg/kg", "notes": "Specialist initiation. Pregnancy prevention programme, liver enzymes and lipids, mood and sexual function monitoring." },
-  { "name": "Spironolactone", "dose": "50 to 100 mg orally once daily", "notes": "Females with hormonal acne (off-label); avoid in pregnancy; potassium checks only if risk factors (older age, CKD, interacting drugs)." }
+  {
+   "name": "Adapalene 0.1% with benzoyl peroxide 2.5% gel",
+   "dose": "Apply thinly once daily in the evening to affected areas",
+   "notes": "Any severity and maintenance. Not in pregnancy. Irritation, photosensitivity, bleaches fabric."
+  },
+  {
+   "name": "Clindamycin 1% with benzoyl peroxide gel",
+   "dose": "Apply once daily in the evening",
+   "notes": "Mild to moderate acne; can be used with caution in pregnancy."
+  },
+  {
+   "name": "Tretinoin 0.025% with clindamycin 1% gel",
+   "dose": "Apply once daily in the evening",
+   "notes": "Any severity. Not in pregnancy or breastfeeding."
+  },
+  {
+   "name": "Azelaic acid 20% cream",
+   "dose": "Apply twice daily",
+   "notes": "With an oral antibiotic for moderate to severe acne, or alone for maintenance; helps post-inflammatory pigmentation."
+  },
+  {
+   "name": "Doxycycline",
+   "dose": "100 mg orally once daily with food and a full glass of water, taken upright",
+   "notes": "Always with topical therapy; review at 12 weeks; usually no more than 6 months. Photosensitivity. Not in pregnancy or young children."
+  },
+  {
+   "name": "Lymecycline",
+   "dose": "408 mg orally once daily",
+   "notes": "Alternative to doxycycline; same restrictions."
+  },
+  {
+   "name": "Isotretinoin",
+   "dose": "0.5 to 1 mg/kg/day orally with food, to a cumulative 120 to 150 mg/kg",
+   "notes": "Specialist initiation. Pregnancy prevention programme, liver enzymes and lipids, mood and sexual function monitoring."
+  },
+  {
+   "name": "Spironolactone",
+   "dose": "50 to 100 mg orally once daily",
+   "notes": "Females with hormonal acne (off-label); avoid in pregnancy; potassium checks only if risk factors (older age, CKD, interacting drugs)."
+  }
  ],
  "sources": [
-  { "org": "American Academy of Dermatology", "title": "Guidelines of care for the management of acne vulgaris", "year": 2024, "url": "https://www.jaad.org/article/S0190-9622(23)03389-3/fulltext" },
-  { "org": "NICE", "title": "Acne vulgaris: management (NG198, updated 2026)", "year": 2021, "url": "https://www.nice.org.uk/guidance/ng198" }
+  {
+   "org": "American Academy of Dermatology",
+   "title": "Guidelines of care for the management of acne vulgaris",
+   "year": 2024,
+   "url": "https://www.jaad.org/article/S0190-9622(23)03389-3/fulltext"
+  },
+  {
+   "org": "NICE",
+   "title": "Acne vulgaris: management (NG198, updated 2026)",
+   "year": 2021,
+   "url": "https://www.nice.org.uk/guidance/ng198"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "acne-vulgaris-pathway",
+   "title": "Acne vulgaris Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Open and closed comedones with inflammatory papules, pustules, nodules or cysts on the face, chest and back. Grade as mild to moderate (comedones, few papules or pustules) or moderate to severe (many inflammatory lesions, nodules, cysts,",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Acne fulminans (sudden severe ulcerating acne with fever, arthralgia and raised inflammatory markers): same-day referral to on-call dermatology (NICE).",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Look for hyperandrogenism (hirsutism, irregular periods: polycystic ovary syndrome, now termed polyendocrine metabolic ovarian syndrome by NICE), drug causes (anabolic steroids, systemic corticosteroids, lithium) and mimics (rosacea,"
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Review at 12 weeks. If an oral antibiotic has cleared the acne, stop it and continue the topical; if improved but not clear, continue it for up to 12 more weeks. Continue antibiotics beyond 6 months only exceptionally, reviewing every 3"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Antibiotic monotherapy, or long courses without benzoyl peroxide, driving resistance."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for acne vulgaris."
+  }
+ ],
+ "tables": [
+  {
+   "id": "acne-vulgaris-summary-matrix",
+   "title": "Acne vulgaris Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Open and closed comedones with inflammatory papules, pustules, nodules or cysts on the face, chest and back. Grade as mild to moderate",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Review at 12 weeks. If an oral antibiotic has cleared the acne, stop it and continue the topical; if improved but not clear, continue it",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Adapalene 0.1% with benzoyl peroxide 2.5% gel: Apply thinly once daily in the evening to affected areas",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Antibiotic monotherapy, or long courses without benzoyl peroxide, driving resistance.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for acne vulgaris."
+  }
+ ]
 }

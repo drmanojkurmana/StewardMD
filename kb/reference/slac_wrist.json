@@ -1,77 +1,149 @@
 {
-  "id": "slac_wrist",
-  "name": "slac wrist",
-  "aliases": [
-    "scapholunate advanced collapse",
-    "SLAC arthritis"
+ "id": "slac_wrist",
+ "name": "slac wrist",
+ "aliases": [
+  "scapholunate advanced collapse",
+  "SLAC arthritis"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal",
+ "specialty": "Hand and wrist surgery",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Green's Operative Hand Surgery",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "SLAC is the most common pattern of degenerative wrist arthritis and usually arises from untreated scapholunate dissociation.",
+   "Degeneration follows a predictable sequence: the radial styloid-scaphoid articulation first, then the whole radioscaphoid joint, then the capitolunate and midcarpal joint.",
+   "The radiolunate joint is characteristically spared, which underpins motion-preserving salvage procedures.",
+   "Scaphoid nonunion advanced collapse (SNAC) follows an analogous but distinct degenerative pattern originating from scaphoid nonunion.",
+   "Stage guides surgery: radial styloidectomy with scapholunate treatment early, proximal row carpectomy or scaphoid excision with four-corner fusion later, and total wrist fusion for pancarpal disease.",
+   "Proximal row carpectomy depends on preserved cartilage on the capitate head and in the lunate fossa.",
+   "Wrist denervation via anterior and posterior interosseous neurectomy can relieve pain while preserving motion in selected patients."
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal",
-  "specialty": "Hand and wrist surgery",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Green's Operative Hand Surgery",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "SLAC is the most common pattern of degenerative wrist arthritis and usually arises from untreated scapholunate dissociation.",
-      "Degeneration follows a predictable sequence: the radial styloid-scaphoid articulation first, then the whole radioscaphoid joint, then the capitolunate and midcarpal joint.",
-      "The radiolunate joint is characteristically spared, which underpins motion-preserving salvage procedures.",
-      "Scaphoid nonunion advanced collapse (SNAC) follows an analogous but distinct degenerative pattern originating from scaphoid nonunion.",
-      "Stage guides surgery: radial styloidectomy with scapholunate treatment early, proximal row carpectomy or scaphoid excision with four-corner fusion later, and total wrist fusion for pancarpal disease.",
-      "Proximal row carpectomy depends on preserved cartilage on the capitate head and in the lunate fossa.",
-      "Wrist denervation via anterior and posterior interosseous neurectomy can relieve pain while preserving motion in selected patients."
+  "pathophysiology": "Chronic scapholunate dissociation allows the scaphoid to assume a fixed flexed and rotated position, shifting radiocarpal contact to a small area at the radial styloid. Abnormal, concentrated loading erodes articular cartilage first at the radioscaphoid articulation and then across the midcarpal joint as the capitate migrates proximally into the gap between scaphoid and lunate. Because the lunate remains congruent within the lunate fossa, the radiolunate joint is preserved, which allows salvage operations that offload the diseased articulations while retaining some wrist motion.",
+  "additionalDifferentials": [
+   "SNAC wrist (scaphoid nonunion advanced collapse)",
+   "Rheumatoid or other inflammatory arthritis",
+   "Calcium pyrophosphate deposition (pseudogout) arthropathy",
+   "Kienböck disease with secondary arthritis",
+   "Post-traumatic radiocarpal arthritis from an intra-articular distal radius fracture",
+   "Primary radiocarpal osteoarthritis",
+   "Gout"
+  ],
+  "additionalInvestigations": [
+   "PA and lateral radiographs to stage the degenerative pattern",
+   "Clenched-fist and contralateral comparison views",
+   "CT for detailed articular assessment and surgical planning",
+   "MRI to evaluate cartilage and the capitate head before proximal row carpectomy",
+   "Diagnostic wrist arthroscopy to grade chondral surfaces",
+   "Inflammatory and crystal screen if an inflammatory arthropathy is suspected"
+  ],
+  "redFlags": [
+   "Rapidly progressive pain and deformity suggesting advanced collapse",
+   "Features of inflammatory or crystal arthropathy requiring systemic work-up",
+   "Capitate head chondral loss that would contraindicate proximal row carpectomy"
+  ],
+  "prognosis": "SLAC is progressive and non-reversible, but stage-appropriate salvage surgery reliably relieves pain, albeit at the cost of some grip strength and wrist motion.",
+  "pitfalls": [
+   "Choosing proximal row carpectomy when the capitate head cartilage is already compromised.",
+   "Failing to distinguish SLAC from SNAC, which changes the pattern of joint involvement.",
+   "Mistaking crystal or inflammatory arthropathy for degenerative SLAC.",
+   "Underestimating radial styloid involvement in early disease."
+  ],
+  "references": [
+   "Green's Operative Hand Surgery",
+   "Rockwood and Green's Fractures in Adults",
+   "Wheeless' Textbook of Orthopaedics"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Begin with non-operative pain control using activity modification, wrist splinting, analgesia and a corticosteroid injection",
+   "Offer stage-directed motion-preserving salvage surgery, starting with radial styloidectomy and scapholunate treatment in early disease",
+   "Perform proximal row carpectomy or scaphoid excision with four-corner fusion in mid-stage disease, exploiting the characteristically spared radiolunate joint",
+   "Reserve total wrist arthrodesis for advanced pancarpal degeneration",
+   "Confirm preserved cartilage on the capitate head and in the lunate fossa before proceeding to proximal row carpectomy",
+   "Provide postoperative hand therapy and rehabilitation, counselling the patient on the trade-off between pain relief and loss of grip strength and wrist motion"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "slac_wrist-pathway",
+   "title": "slac wrist: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "SLAC is the most common pattern of degenerative wrist arthritis and usually arises from untreated scapholunate dissociation.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapidly progressive pain and deformity suggesting advanced collapse",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: PA and lateral radiographs to stage the degenerative pattern, Clenched-fist and contralateral comparison views, CT for detailed articular assessment and surgical planning"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Begin with non-operative pain control using activity modification, wrist splinting, analgesia and a corticosteroid injection"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Choosing proximal row carpectomy when the capitate head cartilage is already compromised."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of slac wrist."
+  }
+ ],
+ "tables": [
+  {
+   "id": "slac_wrist-matrix",
+   "title": "slac wrist: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "SLAC is the most common pattern of degenerative wrist arthritis and usually arises from untreated scapholunate dissociation.",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Chronic scapholunate dissociation allows the scaphoid to assume a fixed flexed and rotated position, shifting radiocarpal contact to a small area at the radial styloid. Abnormal, concentrated loading erodes articular cartilage first at the radioscaphoid articulation and then across the midcarpal joint as the capitate migrates proximally into the gap between scaphoid and lunate. Because the lunate remains congruent within the lunate fossa, the radiolunate joint is preserved, which allows salvage operations that offload the diseased articulations while retaining some wrist motion.",
-    "additionalDifferentials": [
-      "SNAC wrist (scaphoid nonunion advanced collapse)",
-      "Rheumatoid or other inflammatory arthritis",
-      "Calcium pyrophosphate deposition (pseudogout) arthropathy",
-      "Kienböck disease with secondary arthritis",
-      "Post-traumatic radiocarpal arthritis from an intra-articular distal radius fracture",
-      "Primary radiocarpal osteoarthritis",
-      "Gout"
+    [
+     "Key Investigations",
+     "PA and lateral radiographs to stage the degenerative pattern, Clenched-fist and contralateral comparison views, CT for detailed",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "PA and lateral radiographs to stage the degenerative pattern",
-      "Clenched-fist and contralateral comparison views",
-      "CT for detailed articular assessment and surgical planning",
-      "MRI to evaluate cartilage and the capitate head before proximal row carpectomy",
-      "Diagnostic wrist arthroscopy to grade chondral surfaces",
-      "Inflammatory and crystal screen if an inflammatory arthropathy is suspected"
+    [
+     "Primary Differentials",
+     "SNAC wrist (scaphoid nonunion advanced collapse), Rheumatoid or other inflammatory arthritis, Calcium pyrophosphate deposition",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapidly progressive pain and deformity suggesting advanced collapse",
-      "Features of inflammatory or crystal arthropathy requiring systemic work-up",
-      "Capitate head chondral loss that would contraindicate proximal row carpectomy"
+    [
+     "Management Strategy",
+     "Begin with non-operative pain control using activity modification, wrist splinting, analgesia and a corticosteroid injection",
+     "Core treatment modality"
     ],
-    "prognosis": "SLAC is progressive and non-reversible, but stage-appropriate salvage surgery reliably relieves pain, albeit at the cost of some grip strength and wrist motion.",
-    "pitfalls": [
-      "Choosing proximal row carpectomy when the capitate head cartilage is already compromised.",
-      "Failing to distinguish SLAC from SNAC, which changes the pattern of joint involvement.",
-      "Mistaking crystal or inflammatory arthropathy for degenerative SLAC.",
-      "Underestimating radial styloid involvement in early disease."
-    ],
-    "references": [
-      "Green's Operative Hand Surgery",
-      "Rockwood and Green's Fractures in Adults",
-      "Wheeless' Textbook of Orthopaedics"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Begin with non-operative pain control using activity modification, wrist splinting, analgesia and a corticosteroid injection",
-      "Offer stage-directed motion-preserving salvage surgery, starting with radial styloidectomy and scapholunate treatment in early disease",
-      "Perform proximal row carpectomy or scaphoid excision with four-corner fusion in mid-stage disease, exploiting the characteristically spared radiolunate joint",
-      "Reserve total wrist arthrodesis for advanced pancarpal degeneration",
-      "Confirm preserved cartilage on the capitate head and in the lunate fossa before proceeding to proximal row carpectomy",
-      "Provide postoperative hand therapy and rehabilitation, counselling the patient on the trade-off between pain relief and loss of grip strength and wrist motion"
+    [
+     "Clinical Pitfall",
+     "Choosing proximal row carpectomy when the capitate head cartilage is already compromised.",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for slac wrist."
+  }
+ ]
 }

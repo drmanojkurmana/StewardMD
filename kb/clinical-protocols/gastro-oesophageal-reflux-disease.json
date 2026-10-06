@@ -5,7 +5,19 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Outpatient, primary care",
- "aliases": ["GERD", "GORD", "reflux", "acid reflux", "heartburn", "regurgitation", "erosive oesophagitis", "NERD", "PPI trial", "PPI deprescribing", "LA grade"],
+ "aliases": [
+  "GERD",
+  "GORD",
+  "reflux",
+  "acid reflux",
+  "heartburn",
+  "regurgitation",
+  "erosive oesophagitis",
+  "NERD",
+  "PPI trial",
+  "PPI deprescribing",
+  "LA grade"
+ ],
  "summary": "Classic heartburn or regurgitation without alarm features: 8-week once-daily PPI trial taken 30 to 60 minutes before a meal, then try to stop. Alarm features, non-response or multiple Barrett risk factors need endoscopy (ideally 2 to 4 weeks off PPI). Keep long-term PPI at the lowest effective dose and only with a clear indication.",
  "sections": [
   {
@@ -83,17 +95,131 @@
   }
  ],
  "drugs": [
-  { "name": "Omeprazole", "dose": "20 mg orally once daily, 30 to 60 minutes before breakfast, for 8 weeks", "notes": "May increase to twice daily for partial response." },
-  { "name": "Pantoprazole", "dose": "40 mg orally once daily before breakfast for 8 weeks", "notes": "Equivalent standard-dose alternative." },
-  { "name": "Esomeprazole", "dose": "20 to 40 mg orally once daily before breakfast", "notes": "40 mg is commonly used for healing erosive oesophagitis." },
-  { "name": "Rabeprazole", "dose": "20 mg orally once daily before breakfast", "notes": "Standard-dose alternative; lansoprazole 30 mg once daily is another." },
-  { "name": "Vonoprazan", "dose": "20 mg orally once daily for 8 weeks to heal erosive oesophagitis, then 10 mg once daily for maintenance", "notes": "Consider for LA grade C or D disease; not first line for milder disease." },
-  { "name": "Famotidine", "dose": "20 mg orally at bedtime", "notes": "Add-on for night-time symptoms; tachyphylaxis with continuous use. Reduce dose in renal impairment." }
+  {
+   "name": "Omeprazole",
+   "dose": "20 mg orally once daily, 30 to 60 minutes before breakfast, for 8 weeks",
+   "notes": "May increase to twice daily for partial response."
+  },
+  {
+   "name": "Pantoprazole",
+   "dose": "40 mg orally once daily before breakfast for 8 weeks",
+   "notes": "Equivalent standard-dose alternative."
+  },
+  {
+   "name": "Esomeprazole",
+   "dose": "20 to 40 mg orally once daily before breakfast",
+   "notes": "40 mg is commonly used for healing erosive oesophagitis."
+  },
+  {
+   "name": "Rabeprazole",
+   "dose": "20 mg orally once daily before breakfast",
+   "notes": "Standard-dose alternative; lansoprazole 30 mg once daily is another."
+  },
+  {
+   "name": "Vonoprazan",
+   "dose": "20 mg orally once daily for 8 weeks to heal erosive oesophagitis, then 10 mg once daily for maintenance",
+   "notes": "Consider for LA grade C or D disease; not first line for milder disease."
+  },
+  {
+   "name": "Famotidine",
+   "dose": "20 mg orally at bedtime",
+   "notes": "Add-on for night-time symptoms; tachyphylaxis with continuous use. Reduce dose in renal impairment."
+  }
  ],
  "sources": [
-  { "org": "American College of Gastroenterology", "title": "ACG Clinical Guideline for the Diagnosis and Management of Gastroesophageal Reflux Disease (Am J Gastroenterol 2022;117:27-56)", "year": 2022, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8754510/" },
-  { "org": "American Gastroenterological Association", "title": "AGA Clinical Practice Update on De-Prescribing of Proton Pump Inhibitors: Expert Review", "year": 2022, "url": "https://gastro.org/clinical-guidance/de-prescribing-proton-pump-inhibitors-ppis/" },
-  { "org": "American Gastroenterological Association", "title": "AGA Clinical Practice Update on Integrating Potassium-Competitive Acid Blockers Into Clinical Practice: Expert Review", "year": 2024, "url": "https://pubmed.ncbi.nlm.nih.gov/39269391/" }
+  {
+   "org": "American College of Gastroenterology",
+   "title": "ACG Clinical Guideline for the Diagnosis and Management of Gastroesophageal Reflux Disease (Am J Gastroenterol 2022;117:27-56)",
+   "year": 2022,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8754510/"
+  },
+  {
+   "org": "American Gastroenterological Association",
+   "title": "AGA Clinical Practice Update on De-Prescribing of Proton Pump Inhibitors: Expert Review",
+   "year": 2022,
+   "url": "https://gastro.org/clinical-guidance/de-prescribing-proton-pump-inhibitors-ppis/"
+  },
+  {
+   "org": "American Gastroenterological Association",
+   "title": "AGA Clinical Practice Update on Integrating Potassium-Competitive Acid Blockers Into Clinical Practice: Expert Review",
+   "year": 2024,
+   "url": "https://pubmed.ncbi.nlm.nih.gov/39269391/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "gastro-oesophageal-reflux-disease-pathway",
+   "title": "Gastro-oesophageal reflux disease (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Classic symptoms: heartburn and regurgitation. Heartburn responds to PPIs more reliably than regurgitation or extra-oesophageal symptoms.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Alarm features needing endoscopy first: dysphagia, weight loss, GI bleeding or anaemia, and persistent vomiting.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Endoscopy first for dysphagia or other alarm features, and for chronic GERD with multiple Barrett risk factors."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "LA grade C or D oesophagitis, peptic stricture and Barrett's oesophagus: maintenance PPI indefinitely (or anti-reflux surgery)."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Review every long-term PPI regularly and document the indication."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for gastro-oesophageal reflux disease (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "gastro-oesophageal-reflux-disease-summary-matrix",
+   "title": "Gastro-oesophageal reflux disease (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Classic symptoms: heartburn and regurgitation. Heartburn responds to PPIs more reliably than regurgitation or extra-oesophageal symptoms.",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "LA grade C or D oesophagitis, peptic stricture and Barrett's oesophagus: maintenance PPI indefinitely (or anti-reflux surgery).",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Endoscopy first for dysphagia or other alarm features, and for chronic GERD with multiple Barrett risk factors.",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Omeprazole: 20 mg orally once daily, 30 to 60 minutes before breakfast, for 8 weeks",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Taking the PPI at bedtime or after food instead of 30 to 60 minutes before a meal.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for gastro-oesophageal reflux disease (adult)."
+  }
+ ]
 }

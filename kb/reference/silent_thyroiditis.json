@@ -1,73 +1,145 @@
 {
-  "id": "silent_thyroiditis",
-  "name": "Silent thyroiditis",
-  "aliases": [
-    "painless thyroiditis",
-    "subacute lymphocytic thyroiditis"
+ "id": "silent_thyroiditis",
+ "name": "Silent thyroiditis",
+ "aliases": [
+  "painless thyroiditis",
+  "subacute lymphocytic thyroiditis"
+ ],
+ "class": "non_infective",
+ "system": "Endocrine",
+ "specialty": "Endocrinology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Endocrinology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A painless autoimmune destructive thyroiditis causing transient thyrotoxicosis followed by hypothyroidism and usually recovery",
+   "Unlike subacute (de Quervain) thyroiditis it is painless, and unlike Graves disease there is no ophthalmopathy",
+   "Radioactive iodine uptake is low during the thyrotoxic phase, distinguishing it from Graves disease",
+   "It is considered part of the autoimmune thyroid disease spectrum and is related to postpartum thyroiditis",
+   "The thyrotoxic phase is managed symptomatically with beta-blockade rather than antithyroid drugs",
+   "A minority develop permanent hypothyroidism, so follow-up thyroid function testing is needed"
   ],
-  "class": "non_infective",
-  "system": "Endocrine",
-  "specialty": "Endocrinology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Endocrinology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A painless autoimmune destructive thyroiditis causing transient thyrotoxicosis followed by hypothyroidism and usually recovery",
-      "Unlike subacute (de Quervain) thyroiditis it is painless, and unlike Graves disease there is no ophthalmopathy",
-      "Radioactive iodine uptake is low during the thyrotoxic phase, distinguishing it from Graves disease",
-      "It is considered part of the autoimmune thyroid disease spectrum and is related to postpartum thyroiditis",
-      "The thyrotoxic phase is managed symptomatically with beta-blockade rather than antithyroid drugs",
-      "A minority develop permanent hypothyroidism, so follow-up thyroid function testing is needed"
+  "pathophysiology": "Silent thyroiditis is an autoimmune lymphocytic inflammation of the thyroid that transiently destroys follicular cells, releasing preformed thyroid hormone and causing a self-limited thyrotoxic phase. As stored hormone is depleted and the gland recovers, a hypothyroid phase often follows before euthyroidism is usually restored. Because the process is destructive rather than hyperfunctioning, radioactive iodine uptake is low, and antithyroid drugs are ineffective. It shares its autoimmune basis and biphasic course with postpartum thyroiditis.",
+  "additionalDifferentials": [
+   "Graves disease",
+   "Subacute (de Quervain) granulomatous thyroiditis",
+   "Postpartum thyroiditis",
+   "Amiodarone-induced thyroiditis",
+   "Factitious thyrotoxicosis"
+  ],
+  "additionalInvestigations": [
+   "Thyroid function tests through the phases",
+   "Thyroid radioactive iodine uptake (low in the thyrotoxic phase)",
+   "Thyroid autoantibodies",
+   "Inflammatory markers (usually normal, unlike subacute thyroiditis)",
+   "Follow-up thyroid function to detect permanent hypothyroidism"
+  ],
+  "redFlags": [
+   "Features suggesting Graves disease (ophthalmopathy) needing different management",
+   "Severe thyrotoxic symptoms",
+   "Persistent hypothyroidism",
+   "Diagnostic uncertainty with amiodarone exposure"
+  ],
+  "prognosis": "Most patients recover normal thyroid function within months, though some develop permanent hypothyroidism and recurrence can occur.",
+  "pitfalls": [
+   "Treating the thyrotoxic phase with antithyroid drugs, which do not work in destructive thyroiditis",
+   "Misdiagnosing it as Graves disease and giving radioactive iodine",
+   "Failing to monitor for permanent hypothyroidism",
+   "Overlooking the link with the postpartum period"
+  ],
+  "references": [
+   "Endocrinology reference texts (standard reference)",
+   "Thyroid disease guidelines (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Symptomatic beta-blockade (such as propranolol) for adrenergic features of the thyrotoxic phase, since the process is destructive and antithyroid drugs are ineffective",
+   "Levothyroxine replacement during a symptomatic or prolonged hypothyroid phase, with a planned attempt at withdrawal once recovery is likely",
+   "Avoidance of radioiodine and thyroidectomy, given the self-limiting course and low radioiodine uptake",
+   "Serial thyroid function testing through the thyrotoxic, hypothyroid and recovery phases to track evolution and detect permanent hypothyroidism",
+   "Surveillance for recurrence, particularly in the postpartum setting given the shared autoimmune basis",
+   "Reassurance regarding the usually self-limiting nature of the illness"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "silent_thyroiditis-pathway",
+   "title": "Silent thyroiditis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A painless autoimmune destructive thyroiditis causing transient thyrotoxicosis followed by hypothyroidism and usually recovery",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Features suggesting Graves disease (ophthalmopathy) needing different management",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Thyroid function tests through the phases, Thyroid radioactive iodine uptake (low in the thyrotoxic phase), Thyroid autoantibodies"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Symptomatic beta-blockade (such as propranolol) for adrenergic features of the thyrotoxic phase, since the process is destructive and antithyroid drugs are ineffective"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Treating the thyrotoxic phase with antithyroid drugs, which do not work in destructive thyroiditis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of silent thyroiditis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "silent_thyroiditis-matrix",
+   "title": "Silent thyroiditis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A painless autoimmune destructive thyroiditis causing transient thyrotoxicosis followed by hypothyroidism and usually recovery",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Silent thyroiditis is an autoimmune lymphocytic inflammation of the thyroid that transiently destroys follicular cells, releasing preformed thyroid hormone and causing a self-limited thyrotoxic phase. As stored hormone is depleted and the gland recovers, a hypothyroid phase often follows before euthyroidism is usually restored. Because the process is destructive rather than hyperfunctioning, radioactive iodine uptake is low, and antithyroid drugs are ineffective. It shares its autoimmune basis and biphasic course with postpartum thyroiditis.",
-    "additionalDifferentials": [
-      "Graves disease",
-      "Subacute (de Quervain) granulomatous thyroiditis",
-      "Postpartum thyroiditis",
-      "Amiodarone-induced thyroiditis",
-      "Factitious thyrotoxicosis"
+    [
+     "Key Investigations",
+     "Thyroid function tests through the phases, Thyroid radioactive iodine uptake (low in the thyrotoxic phase), Thyroid autoantibodies",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Thyroid function tests through the phases",
-      "Thyroid radioactive iodine uptake (low in the thyrotoxic phase)",
-      "Thyroid autoantibodies",
-      "Inflammatory markers (usually normal, unlike subacute thyroiditis)",
-      "Follow-up thyroid function to detect permanent hypothyroidism"
+    [
+     "Primary Differentials",
+     "Graves disease, Subacute (de Quervain) granulomatous thyroiditis, Postpartum thyroiditis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Features suggesting Graves disease (ophthalmopathy) needing different management",
-      "Severe thyrotoxic symptoms",
-      "Persistent hypothyroidism",
-      "Diagnostic uncertainty with amiodarone exposure"
+    [
+     "Management Strategy",
+     "Symptomatic beta-blockade (such as propranolol) for adrenergic features of the thyrotoxic phase, since the process is destructive",
+     "Core treatment modality"
     ],
-    "prognosis": "Most patients recover normal thyroid function within months, though some develop permanent hypothyroidism and recurrence can occur.",
-    "pitfalls": [
-      "Treating the thyrotoxic phase with antithyroid drugs, which do not work in destructive thyroiditis",
-      "Misdiagnosing it as Graves disease and giving radioactive iodine",
-      "Failing to monitor for permanent hypothyroidism",
-      "Overlooking the link with the postpartum period"
-    ],
-    "references": [
-      "Endocrinology reference texts (standard reference)",
-      "Thyroid disease guidelines (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Symptomatic beta-blockade (such as propranolol) for adrenergic features of the thyrotoxic phase, since the process is destructive and antithyroid drugs are ineffective",
-      "Levothyroxine replacement during a symptomatic or prolonged hypothyroid phase, with a planned attempt at withdrawal once recovery is likely",
-      "Avoidance of radioiodine and thyroidectomy, given the self-limiting course and low radioiodine uptake",
-      "Serial thyroid function testing through the thyrotoxic, hypothyroid and recovery phases to track evolution and detect permanent hypothyroidism",
-      "Surveillance for recurrence, particularly in the postpartum setting given the shared autoimmune basis",
-      "Reassurance regarding the usually self-limiting nature of the illness"
+    [
+     "Clinical Pitfall",
+     "Treating the thyrotoxic phase with antithyroid drugs, which do not work in destructive thyroiditis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for silent thyroiditis."
+  }
+ ]
 }

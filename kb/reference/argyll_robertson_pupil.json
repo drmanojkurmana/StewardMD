@@ -1,78 +1,150 @@
 {
-  "id": "argyll_robertson_pupil",
-  "name": "Argyll Robertson pupil",
-  "aliases": [
-    "AR pupil",
-    "prostitute's pupil",
-    "reflex iridoplegia"
+ "id": "argyll_robertson_pupil",
+ "name": "Argyll Robertson pupil",
+ "aliases": [
+  "AR pupil",
+  "prostitute's pupil",
+  "reflex iridoplegia"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Neuro-ophthalmology",
+ "specialty": "Neurology / Ophthalmology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Walsh and Hoyt Clinical Neuro-Ophthalmology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The pupils are small, usually bilateral and often irregular, and show light-near dissociation: they fail to constrict to light but constrict briskly to a near target",
+   "Pupils dilate poorly in the dark and respond poorly to mydriatic drops",
+   "Classically associated with tertiary neurosyphilis, historically the reason for prompting syphilis serology in any patient with these findings",
+   "The near response is preserved and brisk, in contrast to the slow tonic near response of the Adie pupil",
+   "The presumed lesion lies in the pretectal midbrain, sparing the near-reflex fibres while damaging the light-reflex pathway",
+   "Diabetes and other causes can produce a similar pupillary picture, so it is not entirely specific for syphilis",
+   "The finding should trigger a broader assessment for other features of neurosyphilis such as tabes dorsalis"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Neuro-ophthalmology",
-  "specialty": "Neurology / Ophthalmology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Walsh and Hoyt Clinical Neuro-Ophthalmology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The pupils are small, usually bilateral and often irregular, and show light-near dissociation: they fail to constrict to light but constrict briskly to a near target",
-      "Pupils dilate poorly in the dark and respond poorly to mydriatic drops",
-      "Classically associated with tertiary neurosyphilis, historically the reason for prompting syphilis serology in any patient with these findings",
-      "The near response is preserved and brisk, in contrast to the slow tonic near response of the Adie pupil",
-      "The presumed lesion lies in the pretectal midbrain, sparing the near-reflex fibres while damaging the light-reflex pathway",
-      "Diabetes and other causes can produce a similar pupillary picture, so it is not entirely specific for syphilis",
-      "The finding should trigger a broader assessment for other features of neurosyphilis such as tabes dorsalis"
+  "pathophysiology": "The Argyll Robertson pupil is thought to arise from a lesion in the periaqueductal pretectal region of the rostral midbrain that interrupts the fibres mediating the pupillary light reflex while sparing the more ventrally located fibres subserving the near response. This anatomical separation produces the characteristic light-near dissociation, with small pupils reflecting associated damage to sympathetic supranuclear inhibitory pathways. The classic association is tertiary neurosyphilis, though similar findings occur with diabetes mellitus and other conditions affecting the same region.",
+  "additionalDifferentials": [
+   "Adie tonic pupil with light-near dissociation",
+   "Diabetic autonomic pupillary changes",
+   "Parinaud dorsal midbrain syndrome",
+   "Bilateral small pupils from opioid or other drug effect",
+   "Chronic anterior uveitis with posterior synechiae",
+   "Age-related senile miosis"
+  ],
+  "additionalInvestigations": [
+   "Serological testing for syphilis (treponemal and non-treponemal assays)",
+   "Cerebrospinal fluid examination for neurosyphilis where indicated",
+   "Pupillary testing documenting light-near dissociation",
+   "Slit-lamp examination to exclude synechiae or iris pathology",
+   "Assessment for other neurosyphilitic signs such as posterior column loss",
+   "Screening for diabetes mellitus"
+  ],
+  "redFlags": [
+   "Confirmed syphilis serology requiring evaluation and treatment for neurosyphilis",
+   "Associated dorsal column signs or lightning pains suggesting tabes dorsalis",
+   "Cognitive decline suggesting general paresis of neurosyphilis",
+   "New pupillary abnormality with other midbrain signs"
+  ],
+  "prognosis": "The pupillary abnormality itself is fixed and does not recover, but recognising it allows diagnosis and treatment of neurosyphilis or another underlying condition, which alters the systemic prognosis.",
+  "pitfalls": [
+   "Confusing it with the Adie pupil, which has a slow tonic rather than brisk near response and cholinergic supersensitivity",
+   "Failing to test the pupils at near and so missing the dissociation",
+   "Not ordering syphilis serology when the finding is identified",
+   "Overlooking anterior segment causes of pupillary irregularity such as synechiae"
+  ],
+  "references": [
+   "Walsh and Hoyt Clinical Neuro-Ophthalmology",
+   "Adams and Victor's Principles of Neurology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat the underlying neurosyphilis with parenteral benzylpenicillin as first-line therapy, using penicillin desensitisation where allergy exists",
+   "Confirm the diagnosis with treponemal and non-treponemal serology and cerebrospinal fluid examination to direct treatment",
+   "Screen for and manage other causes such as diabetes mellitus with glycaemic control where syphilis is excluded",
+   "Assess for and treat other manifestations of neurosyphilis such as tabes dorsalis and general paresis",
+   "Monitor treatment response with serial non-treponemal titres and clinical review, recognising the pupillary sign itself is fixed and will not reverse",
+   "Offer partner notification and screening for other sexually transmitted infections including HIV",
+   "Involve neurology, ophthalmology and genitourinary medicine as appropriate"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "argyll_robertson_pupil-pathway",
+   "title": "Argyll Robertson pupil: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The pupils are small, usually bilateral and often irregular, and show light-near dissociation: they fail to constrict to light but constrict briskly to a near target",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Confirmed syphilis serology requiring evaluation and treatment for neurosyphilis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serological testing for syphilis (treponemal and non-treponemal assays), Cerebrospinal fluid examination for neurosyphilis where indicated, Pupillary testing documenting light-near dissociation"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat the underlying neurosyphilis with parenteral benzylpenicillin as first-line therapy, using penicillin desensitisation where allergy exists"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing it with the Adie pupil, which has a slow tonic rather than brisk near response and cholinergic supersensitivity"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of argyll robertson pupil."
+  }
+ ],
+ "tables": [
+  {
+   "id": "argyll_robertson_pupil-matrix",
+   "title": "Argyll Robertson pupil: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The pupils are small, usually bilateral and often irregular, and show light-near dissociation: they fail to constrict to light",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The Argyll Robertson pupil is thought to arise from a lesion in the periaqueductal pretectal region of the rostral midbrain that interrupts the fibres mediating the pupillary light reflex while sparing the more ventrally located fibres subserving the near response. This anatomical separation produces the characteristic light-near dissociation, with small pupils reflecting associated damage to sympathetic supranuclear inhibitory pathways. The classic association is tertiary neurosyphilis, though similar findings occur with diabetes mellitus and other conditions affecting the same region.",
-    "additionalDifferentials": [
-      "Adie tonic pupil with light-near dissociation",
-      "Diabetic autonomic pupillary changes",
-      "Parinaud dorsal midbrain syndrome",
-      "Bilateral small pupils from opioid or other drug effect",
-      "Chronic anterior uveitis with posterior synechiae",
-      "Age-related senile miosis"
+    [
+     "Key Investigations",
+     "Serological testing for syphilis (treponemal and non-treponemal assays), Cerebrospinal fluid examination for neurosyphilis where",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serological testing for syphilis (treponemal and non-treponemal assays)",
-      "Cerebrospinal fluid examination for neurosyphilis where indicated",
-      "Pupillary testing documenting light-near dissociation",
-      "Slit-lamp examination to exclude synechiae or iris pathology",
-      "Assessment for other neurosyphilitic signs such as posterior column loss",
-      "Screening for diabetes mellitus"
+    [
+     "Primary Differentials",
+     "Adie tonic pupil with light-near dissociation, Diabetic autonomic pupillary changes, Parinaud dorsal midbrain syndrome",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Confirmed syphilis serology requiring evaluation and treatment for neurosyphilis",
-      "Associated dorsal column signs or lightning pains suggesting tabes dorsalis",
-      "Cognitive decline suggesting general paresis of neurosyphilis",
-      "New pupillary abnormality with other midbrain signs"
+    [
+     "Management Strategy",
+     "Treat the underlying neurosyphilis with parenteral benzylpenicillin as first-line therapy, using penicillin desensitisation where",
+     "Core treatment modality"
     ],
-    "prognosis": "The pupillary abnormality itself is fixed and does not recover, but recognising it allows diagnosis and treatment of neurosyphilis or another underlying condition, which alters the systemic prognosis.",
-    "pitfalls": [
-      "Confusing it with the Adie pupil, which has a slow tonic rather than brisk near response and cholinergic supersensitivity",
-      "Failing to test the pupils at near and so missing the dissociation",
-      "Not ordering syphilis serology when the finding is identified",
-      "Overlooking anterior segment causes of pupillary irregularity such as synechiae"
-    ],
-    "references": [
-      "Walsh and Hoyt Clinical Neuro-Ophthalmology",
-      "Adams and Victor's Principles of Neurology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat the underlying neurosyphilis with parenteral benzylpenicillin as first-line therapy, using penicillin desensitisation where allergy exists",
-      "Confirm the diagnosis with treponemal and non-treponemal serology and cerebrospinal fluid examination to direct treatment",
-      "Screen for and manage other causes such as diabetes mellitus with glycaemic control where syphilis is excluded",
-      "Assess for and treat other manifestations of neurosyphilis such as tabes dorsalis and general paresis",
-      "Monitor treatment response with serial non-treponemal titres and clinical review, recognising the pupillary sign itself is fixed and will not reverse",
-      "Offer partner notification and screening for other sexually transmitted infections including HIV",
-      "Involve neurology, ophthalmology and genitourinary medicine as appropriate"
+    [
+     "Clinical Pitfall",
+     "Confusing it with the Adie pupil, which has a slow tonic rather than brisk near response and cholinergic supersensitivity",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for argyll robertson pupil."
+  }
+ ]
 }

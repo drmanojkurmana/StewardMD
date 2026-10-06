@@ -203,5 +203,77 @@
       "importedAt": "2026-06-29T13:45:37Z",
       "contentHash": "h8043a9fc"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "vasculitis-dx-algo",
+      "title": "Systemic vasculitis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Suspect vasculitis in any patient with an unexplained multisystem illness; specific clues include palpable purpura, pulmonary infiltrates with microscopic hematuria, chronic sinusitis, mononeuritis multiplex, unexplained ischemic events,",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Active glomerulonephritis is always classed as severe disease even with normal renal function (Harrison 22e p.2941)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: ANCA with antigen specificity - anti-proteinase-3 (cANCA) and anti-myeloperoxidase (pANCA) testing, interpreting in light of pretest probability (Harrison 22e p.2937, p.2941), Tissue biopsy of a clinically involved organ"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Vasculitides are classified by predominant vessel size per the Chapel Hill Consensus nomenclature (Harrison 22e p.2936, p.2942): LARGE-VESSEL (giant cell/temporal arteritis, Takayasu arteritis); MEDIUM-VESSEL"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Treating a rise in ANCA titre as a relapse - only ~43% relapse within 1 year of an ANCA increase, so a rising ANCA alone should not prompt reinstitution or escalation of immunosuppression (Harrison 22e p.2941)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for systemic vasculitis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "vasculitis-matrix",
+      "title": "Systemic vasculitis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Suspect vasculitis in any patient with an unexplained multisystem illness; specific clues include palpable purpura, pulmonary",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "ANCA with antigen specificity - anti-proteinase-3 (cANCA) and anti-myeloperoxidase (pANCA) testing, interpreting in light of",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Granulomatosis with polyangiitis (GPA) - upper + lower respiratory tract granulomatous vasculitis plus pauci-immune",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Active glomerulonephritis is always classed as severe disease even with normal renal function (Harrison 22e p.2941)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating a rise in ANCA titre as a relapse - only ~43% relapse within 1 year of an ANCA increase, so a rising ANCA alone should",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for systemic vasculitis."
+    }
+  ]
 }

@@ -1,77 +1,149 @@
 {
-  "id": "respiratory_bronchiolitis_interstitial_lung_disease",
-  "name": "Respiratory bronchiolitis interstitial lung disease",
-  "aliases": [
-    "RB-ILD",
-    "Smoking-related interstitial lung disease"
+ "id": "respiratory_bronchiolitis_interstitial_lung_disease",
+ "name": "Respiratory bronchiolitis interstitial lung disease",
+ "aliases": [
+  "RB-ILD",
+  "Smoking-related interstitial lung disease"
+ ],
+ "class": "non_infective",
+ "system": "Respiratory",
+ "specialty": "Respiratory medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Murray & Nadel's Textbook of Respiratory Medicine",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A smoking-related interstitial lung disease occurring almost exclusively in current or heavy former smokers.",
+   "Forms part of a spectrum with desquamative interstitial pneumonia; asymptomatic respiratory bronchiolitis is a common incidental finding in smokers, whereas RB-ILD is the symptomatic form.",
+   "Presents with mild breathlessness and cough; crackles may be present but finger clubbing is uncommon.",
+   "HRCT shows centrilobular nodules, patchy ground-glass opacity and bronchial wall thickening, often upper-zone predominant, together with centrilobular emphysema.",
+   "Histology demonstrates pigmented 'smoker's' macrophages accumulating within respiratory bronchioles and surrounding alveoli with mild peribronchiolar fibrosis.",
+   "Bronchoalveolar lavage shows characteristic golden-brown pigmented macrophages.",
+   "Smoking cessation is the cornerstone of management and may lead to stabilisation or improvement.",
+   "Corticosteroids are reserved for progressive disease, where the supporting evidence is limited."
   ],
-  "class": "non_infective",
-  "system": "Respiratory",
-  "specialty": "Respiratory medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Murray & Nadel's Textbook of Respiratory Medicine",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A smoking-related interstitial lung disease occurring almost exclusively in current or heavy former smokers.",
-      "Forms part of a spectrum with desquamative interstitial pneumonia; asymptomatic respiratory bronchiolitis is a common incidental finding in smokers, whereas RB-ILD is the symptomatic form.",
-      "Presents with mild breathlessness and cough; crackles may be present but finger clubbing is uncommon.",
-      "HRCT shows centrilobular nodules, patchy ground-glass opacity and bronchial wall thickening, often upper-zone predominant, together with centrilobular emphysema.",
-      "Histology demonstrates pigmented 'smoker's' macrophages accumulating within respiratory bronchioles and surrounding alveoli with mild peribronchiolar fibrosis.",
-      "Bronchoalveolar lavage shows characteristic golden-brown pigmented macrophages.",
-      "Smoking cessation is the cornerstone of management and may lead to stabilisation or improvement.",
-      "Corticosteroids are reserved for progressive disease, where the supporting evidence is limited."
+  "pathophysiology": "Chronic inhalation of cigarette smoke provokes accumulation of pigment-laden macrophages within respiratory bronchioles and adjacent alveolar spaces, accompanied by mild bronchiolocentric inflammation and fibrosis. This bronchiolocentric distribution and the strong causal link to tobacco distinguish RB-ILD from the more diffuse alveolar macrophage filling of desquamative interstitial pneumonia, with which it overlaps.",
+  "additionalDifferentials": [
+   "Desquamative interstitial pneumonia",
+   "Subacute hypersensitivity pneumonitis",
+   "Nonspecific interstitial pneumonia",
+   "Pulmonary Langerhans cell histiocytosis",
+   "Chronic obstructive pulmonary disease with emphysema",
+   "Early or subclinical idiopathic pulmonary fibrosis"
+  ],
+  "additionalInvestigations": [
+   "Detailed smoking history and HRCT thorax",
+   "Pulmonary function tests, which may show a mixed obstructive-restrictive pattern with reduced transfer factor",
+   "Bronchoalveolar lavage demonstrating pigmented macrophages",
+   "Exclusion of hypersensitivity pneumonitis with precipitins and exposure history",
+   "Surgical lung biopsy only if the diagnosis remains unclear after multidisciplinary review",
+   "Six-minute walk test with oximetry"
+  ],
+  "redFlags": [
+   "Progressive decline despite smoking cessation, prompting reconsideration of the diagnosis",
+   "Development of honeycombing suggesting an alternative fibrotic interstitial lung disease",
+   "Significant resting or exertional hypoxaemia",
+   "Radiological features raising concern for Langerhans cell histiocytosis or malignancy"
+  ],
+  "prognosis": "The outlook is generally favourable, particularly with smoking cessation; most patients stabilise, although some have persistent symptoms and a minority progress.",
+  "pitfalls": [
+   "Diagnosing RB-ILD in a lifelong non-smoker without reconsidering the diagnosis",
+   "Not prioritising smoking cessation as the primary therapy",
+   "Confusing incidental respiratory bronchiolitis with symptomatic RB-ILD",
+   "Overtreating with immunosuppression when smoking cessation would suffice"
+  ],
+  "references": [
+   "Murray & Nadel's Textbook of Respiratory Medicine",
+   "ATS/ERS international multidisciplinary classification of the idiopathic interstitial pneumonias"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Prioritise complete smoking cessation with nicotine replacement or pharmacotherapy, as it is the primary and most effective intervention",
+   "Reserve a trial of corticosteroids for symptomatic or progressive disease persisting after stopping smoking",
+   "Add pulmonary rehabilitation, ambulatory oxygen for exertional hypoxaemia, and routine vaccination",
+   "Monitor with serial pulmonary function tests including transfer factor and interval HRCT to detect progression",
+   "Manage coexisting centrilobular emphysema and other smoking-related disease concurrently",
+   "Review within an interstitial lung disease multidisciplinary team, escalating to lung biopsy only if the diagnosis becomes unclear"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "respiratory_bronchiolitis_interstitial_lung_disease-pathway",
+   "title": "Respiratory bronchiolitis interstitial lung disease: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A smoking-related interstitial lung disease occurring almost exclusively in current or heavy former smokers.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive decline despite smoking cessation, prompting reconsideration of the diagnosis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Detailed smoking history and HRCT thorax, Pulmonary function tests, which may show a mixed obstructive-restrictive pattern with reduced transfer factor, Bronchoalveolar lavage demonstrating pigmented macrophages"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Prioritise complete smoking cessation with nicotine replacement or pharmacotherapy, as it is the primary and most effective intervention"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Diagnosing RB-ILD in a lifelong non-smoker without reconsidering the diagnosis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of respiratory bronchiolitis interstitial lung disease."
+  }
+ ],
+ "tables": [
+  {
+   "id": "respiratory_bronchiolitis_interstitial_lung_disease-matrix",
+   "title": "Respiratory bronchiolitis interstitial lung disease: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A smoking-related interstitial lung disease occurring almost exclusively in current or heavy former smokers.",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Chronic inhalation of cigarette smoke provokes accumulation of pigment-laden macrophages within respiratory bronchioles and adjacent alveolar spaces, accompanied by mild bronchiolocentric inflammation and fibrosis. This bronchiolocentric distribution and the strong causal link to tobacco distinguish RB-ILD from the more diffuse alveolar macrophage filling of desquamative interstitial pneumonia, with which it overlaps.",
-    "additionalDifferentials": [
-      "Desquamative interstitial pneumonia",
-      "Subacute hypersensitivity pneumonitis",
-      "Nonspecific interstitial pneumonia",
-      "Pulmonary Langerhans cell histiocytosis",
-      "Chronic obstructive pulmonary disease with emphysema",
-      "Early or subclinical idiopathic pulmonary fibrosis"
+    [
+     "Key Investigations",
+     "Detailed smoking history and HRCT thorax, Pulmonary function tests, which may show a mixed obstructive-restrictive pattern with",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Detailed smoking history and HRCT thorax",
-      "Pulmonary function tests, which may show a mixed obstructive-restrictive pattern with reduced transfer factor",
-      "Bronchoalveolar lavage demonstrating pigmented macrophages",
-      "Exclusion of hypersensitivity pneumonitis with precipitins and exposure history",
-      "Surgical lung biopsy only if the diagnosis remains unclear after multidisciplinary review",
-      "Six-minute walk test with oximetry"
+    [
+     "Primary Differentials",
+     "Desquamative interstitial pneumonia, Subacute hypersensitivity pneumonitis, Nonspecific interstitial pneumonia",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive decline despite smoking cessation, prompting reconsideration of the diagnosis",
-      "Development of honeycombing suggesting an alternative fibrotic interstitial lung disease",
-      "Significant resting or exertional hypoxaemia",
-      "Radiological features raising concern for Langerhans cell histiocytosis or malignancy"
+    [
+     "Management Strategy",
+     "Prioritise complete smoking cessation with nicotine replacement or pharmacotherapy, as it is the primary and most effective",
+     "Core treatment modality"
     ],
-    "prognosis": "The outlook is generally favourable, particularly with smoking cessation; most patients stabilise, although some have persistent symptoms and a minority progress.",
-    "pitfalls": [
-      "Diagnosing RB-ILD in a lifelong non-smoker without reconsidering the diagnosis",
-      "Not prioritising smoking cessation as the primary therapy",
-      "Confusing incidental respiratory bronchiolitis with symptomatic RB-ILD",
-      "Overtreating with immunosuppression when smoking cessation would suffice"
-    ],
-    "references": [
-      "Murray & Nadel's Textbook of Respiratory Medicine",
-      "ATS/ERS international multidisciplinary classification of the idiopathic interstitial pneumonias"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Prioritise complete smoking cessation with nicotine replacement or pharmacotherapy, as it is the primary and most effective intervention",
-      "Reserve a trial of corticosteroids for symptomatic or progressive disease persisting after stopping smoking",
-      "Add pulmonary rehabilitation, ambulatory oxygen for exertional hypoxaemia, and routine vaccination",
-      "Monitor with serial pulmonary function tests including transfer factor and interval HRCT to detect progression",
-      "Manage coexisting centrilobular emphysema and other smoking-related disease concurrently",
-      "Review within an interstitial lung disease multidisciplinary team, escalating to lung biopsy only if the diagnosis becomes unclear"
+    [
+     "Clinical Pitfall",
+     "Diagnosing RB-ILD in a lifelong non-smoker without reconsidering the diagnosis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for respiratory bronchiolitis interstitial lung disease."
+  }
+ ]
 }

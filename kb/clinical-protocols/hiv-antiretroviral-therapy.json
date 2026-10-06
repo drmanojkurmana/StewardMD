@@ -5,7 +5,23 @@
  "population": "Adults",
  "basis": "international",
  "setting": "ART clinic, outpatient, ward",
- "aliases": ["ART", "HAART", "antiretroviral therapy", "PLHIV", "TLD", "dolutegravir", "HIV treatment", "advanced HIV disease", "AHD", "viral load", "treatment failure", "IRIS", "co-trimoxazole prophylaxis", "CPT", "rapid ART"],
+ "aliases": [
+  "ART",
+  "HAART",
+  "antiretroviral therapy",
+  "PLHIV",
+  "TLD",
+  "dolutegravir",
+  "HIV treatment",
+  "advanced HIV disease",
+  "AHD",
+  "viral load",
+  "treatment failure",
+  "IRIS",
+  "co-trimoxazole prophylaxis",
+  "CPT",
+  "rapid ART"
+ ],
  "summary": "Offer ART to everyone with confirmed HIV within 7 days of diagnosis (same day if ready) using TLD (tenofovir DF, lamivudine, dolutegravir) once daily, screen for TB and cryptococcal antigen when CD4 is low, give co-trimoxazole prophylaxis, and monitor viral load, switching only after confirmed failure.",
  "sections": [
   {
@@ -100,19 +116,141 @@
   }
  ],
  "drugs": [
-  { "name": "TLD (tenofovir DF + lamivudine + dolutegravir)", "dose": "300 mg + 300 mg + 50 mg, one tablet orally once daily", "notes": "Preferred first-line (WHO, NACO). Avoid TDF if eGFR below 50 mL/min." },
-  { "name": "Dolutegravir (additional dose)", "dose": "50 mg orally, taken 12 hours after TLD, while on rifampicin", "notes": "Gives dolutegravir 50 mg twice daily with rifampicin." },
-  { "name": "Bictegravir/TAF/emtricitabine", "dose": "50/25/200 mg, one tablet orally once daily", "notes": "DHHS recommended initial regimen." },
-  { "name": "Darunavir/ritonavir", "dose": "800/100 mg orally once daily with food; 600/100 mg twice daily after protease inhibitor failure", "notes": "Preferred boosted PI (WHO 2025); many drug interactions." },
-  { "name": "Efavirenz", "dose": "400 mg orally once daily with TDF + lamivudine", "notes": "WHO alternative first line; avoid with high NNRTI pretreatment resistance." },
-  { "name": "Co-trimoxazole", "dose": "960 mg (160/800 mg) orally once daily", "notes": "Prophylaxis per WHO or US criteria above." },
-  { "name": "Fluconazole (pre-emptive)", "dose": "800 to 1200 mg daily for 2 weeks, then 800 mg daily for 8 weeks, then 200 mg daily", "notes": "CrAg positive without meningitis." },
-  { "name": "Isoniazid + rifapentine (3HP)", "dose": "Isoniazid 900 mg + rifapentine 900 mg orally once weekly for 12 weeks", "notes": "Preferred TB preventive treatment in HIV (WHO 2025); give pyridoxine." }
+  {
+   "name": "TLD (tenofovir DF + lamivudine + dolutegravir)",
+   "dose": "300 mg + 300 mg + 50 mg, one tablet orally once daily",
+   "notes": "Preferred first-line (WHO, NACO). Avoid TDF if eGFR below 50 mL/min."
+  },
+  {
+   "name": "Dolutegravir (additional dose)",
+   "dose": "50 mg orally, taken 12 hours after TLD, while on rifampicin",
+   "notes": "Gives dolutegravir 50 mg twice daily with rifampicin."
+  },
+  {
+   "name": "Bictegravir/TAF/emtricitabine",
+   "dose": "50/25/200 mg, one tablet orally once daily",
+   "notes": "DHHS recommended initial regimen."
+  },
+  {
+   "name": "Darunavir/ritonavir",
+   "dose": "800/100 mg orally once daily with food; 600/100 mg twice daily after protease inhibitor failure",
+   "notes": "Preferred boosted PI (WHO 2025); many drug interactions."
+  },
+  {
+   "name": "Efavirenz",
+   "dose": "400 mg orally once daily with TDF + lamivudine",
+   "notes": "WHO alternative first line; avoid with high NNRTI pretreatment resistance."
+  },
+  {
+   "name": "Co-trimoxazole",
+   "dose": "960 mg (160/800 mg) orally once daily",
+   "notes": "Prophylaxis per WHO or US criteria above."
+  },
+  {
+   "name": "Fluconazole (pre-emptive)",
+   "dose": "800 to 1200 mg daily for 2 weeks, then 800 mg daily for 8 weeks, then 200 mg daily",
+   "notes": "CrAg positive without meningitis."
+  },
+  {
+   "name": "Isoniazid + rifapentine (3HP)",
+   "dose": "Isoniazid 900 mg + rifapentine 900 mg orally once weekly for 12 weeks",
+   "notes": "Preferred TB preventive treatment in HIV (WHO 2025); give pyridoxine."
+  }
  ],
  "sources": [
-  { "org": "WHO", "title": "Consolidated guidelines on HIV prevention, testing, treatment, service delivery and monitoring: recommendations for a public health approach", "year": 2021, "url": "https://www.who.int/publications/i/item/9789240031593" },
-  { "org": "WHO", "title": "WHO updated recommendations on HIV clinical management: recommendations for a public health approach", "year": 2025, "url": "https://www.who.int/publications/i/item/9789240119468" },
-  { "org": "US DHHS Panel on Antiretroviral Guidelines for Adults and Adolescents", "title": "Guidelines for the Use of Antiretroviral Agents in Adults and Adolescents With HIV", "year": 2024, "url": "https://www.ncbi.nlm.nih.gov/books/NBK586306/" }
+  {
+   "org": "WHO",
+   "title": "Consolidated guidelines on HIV prevention, testing, treatment, service delivery and monitoring: recommendations for a public health approach",
+   "year": 2021,
+   "url": "https://www.who.int/publications/i/item/9789240031593"
+  },
+  {
+   "org": "WHO",
+   "title": "WHO updated recommendations on HIV clinical management: recommendations for a public health approach",
+   "year": 2025,
+   "url": "https://www.who.int/publications/i/item/9789240119468"
+  },
+  {
+   "org": "US DHHS Panel on Antiretroviral Guidelines for Adults and Adolescents",
+   "title": "Guidelines for the Use of Antiretroviral Agents in Adults and Adolescents With HIV",
+   "year": 2024,
+   "url": "https://www.ncbi.nlm.nih.gov/books/NBK586306/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "hiv-antiretroviral-therapy-pathway",
+   "title": "HIV: starting and monitoring antiretroviral therapy (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Suspect HIV: starting and monitoring antiretroviral therapy (adult) based on characteristic presentation and clinical risk factors.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Offer ART to every adult with confirmed HIV, whatever the CD4 count. WHO: start within 7 days of diagnosis and offer same-day start to people who are ready; give priority to people with advanced HIV disease.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "CD4 count (defines advanced HIV disease and prophylaxis needs), HIV viral load, CBC, creatinine with eGFR, ALT, glucose, lipids and urinalysis."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Give the WHO package: rapid ART, TB screening with LF-LAM and molecular testing, CrAg screening, co-trimoxazole prophylaxis, TB preventive treatment once active TB is excluded, and pre-emptive fluconazole for CrAg-positive people."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "WHO: viral load by 6 months, at 12 months, then every 12 months once established on ART. DHHS: first viral load 4 to 8 weeks after starting, then every 4 to 8 weeks until below 50 copies/mL, then every 3 to 6 months."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for hiv: starting and monitoring antiretroviral therapy (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hiv-antiretroviral-therapy-summary-matrix",
+   "title": "HIV: starting and monitoring antiretroviral therapy (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Key signs and symptoms of HIV: starting and monitoring antiretroviral therapy (adult)",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Offer ART to every adult with confirmed HIV, whatever the CD4 count. WHO: start within 7 days of diagnosis and offer same-day start to",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "CD4 count (defines advanced HIV disease and prophylaxis needs), HIV viral load, CBC, creatinine with eGFR, ALT, glucose, lipids and",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "TLD (tenofovir DF + lamivudine + dolutegravir): 300 mg + 300 mg + 50 mg, one tablet orally once daily",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Delaying ART for CD4 results or repeated readiness visits when the person is well and willing to start.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for hiv: starting and monitoring antiretroviral therapy (adult)."
+  }
+ ]
 }

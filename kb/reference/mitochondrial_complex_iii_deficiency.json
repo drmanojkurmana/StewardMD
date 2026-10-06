@@ -1,85 +1,157 @@
 {
-  "id": "mitochondrial_complex_iii_deficiency",
-  "name": "Mitochondrial Complex III Deficiency (Ubiquinol-Cytochrome c Oxidoreductase Deficiency)",
-  "aliases": [
-    "Cytochrome bc1 complex deficiency",
-    "BCS1L deficiency",
-    "MT-CYB deficiency",
-    "GRACILE syndrome"
+ "id": "mitochondrial_complex_iii_deficiency",
+ "name": "Mitochondrial Complex III Deficiency (Ubiquinol-Cytochrome c Oxidoreductase Deficiency)",
+ "aliases": [
+  "Cytochrome bc1 complex deficiency",
+  "BCS1L deficiency",
+  "MT-CYB deficiency",
+  "GRACILE syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Metabolic / Mitochondrial",
+ "specialty": "Metabolic medicine / Neurology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Neurogenetics references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Complex III (the cytochrome bc1 complex) transfers electrons from reduced ubiquinone to cytochrome c through the proton-translocating Q cycle; isolated deficiency is the rarest of the isolated respiratory chain defects.",
+   "Cytochrome b, encoded by the mitochondrial MT-CYB gene, is the only mtDNA-encoded subunit; sporadic somatic or maternally transmitted MT-CYB variants classically cause exercise intolerance and myopathy, sometimes with lactic acidosis or myoglobinuria.",
+   "BCS1L is the commonest nuclear cause: it is an assembly factor that inserts the Rieske iron-sulphur protein, and its variants produce a spectrum from the severe GRACILE syndrome to Björnstad syndrome.",
+   "GRACILE syndrome (Growth Retardation, Aminoaciduria, Cholestasis, Iron overload, Lactic acidosis and Early death) is a distinctive BCS1L phenotype with neonatal iron overload and hepatic involvement, prevalent in Finnish families.",
+   "Björnstad syndrome couples sensorineural hearing loss with pili torti (twisted, brittle hair), and is also caused by BCS1L variants at the milder end of the spectrum.",
+   "TTC19 deficiency is a recognised nuclear Complex III cause producing a later-onset, slowly progressive neurological picture with a Leigh-like or spinocerebellar phenotype and psychiatric features.",
+   "Other nuclear subunit and assembly genes include UQCRB, UQCRQ, CYC1, UQCRC2 and UQCC2/UQCC3, giving hypoglycaemia, ketoacidosis or encephalomyopathy.",
+   "Respiratory chain enzymology showing isolated reduction of Complex III activity (rotenone-sensitive or antimycin-sensitive assays), with preserved Complexes I, IV and V, focuses the genetic workup."
   ],
-  "class": "non_infective",
-  "system": "Metabolic / Mitochondrial",
-  "specialty": "Metabolic medicine / Neurology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Neurogenetics references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Complex III (the cytochrome bc1 complex) transfers electrons from reduced ubiquinone to cytochrome c through the proton-translocating Q cycle; isolated deficiency is the rarest of the isolated respiratory chain defects.",
-      "Cytochrome b, encoded by the mitochondrial MT-CYB gene, is the only mtDNA-encoded subunit; sporadic somatic or maternally transmitted MT-CYB variants classically cause exercise intolerance and myopathy, sometimes with lactic acidosis or myoglobinuria.",
-      "BCS1L is the commonest nuclear cause: it is an assembly factor that inserts the Rieske iron-sulphur protein, and its variants produce a spectrum from the severe GRACILE syndrome to Björnstad syndrome.",
-      "GRACILE syndrome (Growth Retardation, Aminoaciduria, Cholestasis, Iron overload, Lactic acidosis and Early death) is a distinctive BCS1L phenotype with neonatal iron overload and hepatic involvement, prevalent in Finnish families.",
-      "Björnstad syndrome couples sensorineural hearing loss with pili torti (twisted, brittle hair), and is also caused by BCS1L variants at the milder end of the spectrum.",
-      "TTC19 deficiency is a recognised nuclear Complex III cause producing a later-onset, slowly progressive neurological picture with a Leigh-like or spinocerebellar phenotype and psychiatric features.",
-      "Other nuclear subunit and assembly genes include UQCRB, UQCRQ, CYC1, UQCRC2 and UQCC2/UQCC3, giving hypoglycaemia, ketoacidosis or encephalomyopathy.",
-      "Respiratory chain enzymology showing isolated reduction of Complex III activity (rotenone-sensitive or antimycin-sensitive assays), with preserved Complexes I, IV and V, focuses the genetic workup."
+  "pathophysiology": "Complex III (ubiquinol-cytochrome c oxidoreductase, the cytochrome bc1 complex) sits at the centre of the electron transport chain, accepting electrons from ubiquinol and passing them to cytochrome c through the bifurcated Q cycle, which couples electron transfer to proton pumping across the inner mitochondrial membrane. The functional dimeric enzyme contains three redox-active catalytic subunits: cytochrome b (encoded by mitochondrial MT-CYB), cytochrome c1 (CYC1) and the Rieske iron-sulphur protein (UQCRFS1), together with supernumerary nuclear subunits and dedicated assembly factors. Disease arises from maternally inherited or somatic MT-CYB variants, or from autosomal recessive variants in nuclear structural subunits (CYC1, UQCRB, UQCRQ, UQCRC2) and assembly factors, most importantly BCS1L, which chaperones incorporation of the Rieske protein, and TTC19, which is required for clearance of assembly intermediates. Impaired bc1 function blocks electron flow between the ubiquinone pool and cytochrome c, collapses proton-motive force, diverts pyruvate to lactate, and, in the BCS1L GRACILE phenotype, additionally deranges iron handling to cause hepatic iron overload; energy failure again targets liver, brain, muscle, kidney tubule and cochlea.",
+  "additionalDifferentials": [
+   "Mitochondrial Complex I deficiency (NADH:ubiquinone oxidoreductase defect)",
+   "Mitochondrial Complex IV deficiency (cytochrome c oxidase / COX defect)",
+   "Mitochondrial Complex V deficiency (ATP synthase defect)",
+   "Coenzyme Q10 (ubiquinone) biosynthesis deficiency, which impairs electron delivery to Complex III and is treatable",
+   "Neonatal haemochromatosis and other causes of neonatal iron overload and cholestasis (for the GRACILE presentation)",
+   "Other syndromic sensorineural hearing loss with hair-shaft abnormality (for the Björnstad presentation)",
+   "Combined oxidative phosphorylation and mitochondrial translation defects"
+  ],
+  "additionalInvestigations": [
+   "Blood and cerebrospinal fluid lactate and pyruvate with lactate-to-pyruvate ratio",
+   "Urine organic acids and generalised aminoaciduria screen (renal Fanconi-type involvement)",
+   "Iron studies, ferritin and liver function tests, with liver imaging where GRACILE is suspected",
+   "Spectrophotometric respiratory chain enzymology demonstrating isolated Complex III deficiency",
+   "Molecular testing of MT-CYB and nuclear genes (BCS1L, TTC19, CYC1, UQCRB, UQCRQ, UQCRC2, UQCC2/UQCC3)",
+   "Coenzyme Q10 measurement in muscle or fibroblasts to exclude a treatable ubiquinone biosynthesis defect",
+   "Audiometry and hair-shaft microscopy for pili torti when Björnstad syndrome is considered"
+  ],
+  "redFlags": [
+   "Neonatal lactic acidosis with cholestasis and iron overload suggesting GRACILE syndrome",
+   "Fulminant hepatic dysfunction or intractable metabolic acidosis in a neonate",
+   "Recurrent rhabdomyolysis or myoglobinuria with exercise in MT-CYB-related myopathy",
+   "Rapid neurological regression or brainstem dysfunction in a Leigh-like TTC19 presentation",
+   "Progressive hearing loss with metabolic decompensation during intercurrent illness"
+  ],
+  "prognosis": "Outcome ranges from lethal in early infancy (GRACILE and severe neonatal encephalohepatopathic forms) to slowly progressive in later-onset TTC19 neurological disease and relatively benign in some isolated MT-CYB myopathies. A treatable coenzyme Q10 biosynthesis defect must be excluded because it materially changes prognosis.",
+  "pitfalls": [
+   "Misdiagnosing GRACILE-related neonatal iron overload as primary neonatal haemochromatosis and missing the BCS1L cause.",
+   "Overlooking a treatable coenzyme Q10 biosynthesis defect, which can mimic Complex III deficiency biochemically.",
+   "Assaying Complex III without appropriate specific inhibitors, giving spuriously normal or misleading activity.",
+   "Attributing isolated exercise intolerance or recurrent myoglobinuria to a muscle glycogenosis and missing an MT-CYB variant.",
+   "Failing to examine the hair shaft and hearing in a child with unexplained respiratory chain disease, missing Björnstad syndrome."
+  ],
+  "references": [
+   "Textbook of inherited metabolic disease (mitochondrial disorders chapter)",
+   "Neurology reference on mitochondrial and respiratory chain disease",
+   "International consensus guidance on diagnosis and management of mitochondrial disease"
+  ],
+  "crossLinks": [],
+  "management": [
+   "No cure; management is supportive, but a treatable coenzyme Q10 biosynthesis defect must be excluded because ubiquinone (coenzyme Q10) supplementation can benefit that subgroup",
+   "Supportive mitochondrial cofactor supplementation with avoidance of prolonged fasting and catabolic stress to limit metabolic decompensation",
+   "Prompt correction of lactic acidosis and hypoglycaemia during metabolic crises with intravenous dextrose and fluids",
+   "In GRACILE and hepatopathic forms, manage cholestasis, iron overload and liver failure with nutritional and hepatology support",
+   "Manage the sensorineural hearing loss of Bjornstad syndrome with amplification, and treat the neurological and psychiatric features of TTC19 disease symptomatically",
+   "Avoid mitochondrial toxins, and manage exercise intolerance and myopathy in MT-CYB disease with activity pacing",
+   "Multidisciplinary follow-up and genetic counselling for autosomal recessive nuclear disease or maternally inherited MT-CYB variants"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "mitochondrial_complex_iii_deficiency-pathway",
+   "title": "Mitochondrial Complex III Deficiency (Ubiquinol-Cytochrome c Oxidoreductase Deficiency): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Complex III (the cytochrome bc1 complex) transfers electrons from reduced ubiquinone to cytochrome c through the proton-translocating Q cycle; isolated deficiency is the rarest of the isolated respiratory chain defects.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Neonatal lactic acidosis with cholestasis and iron overload suggesting GRACILE syndrome",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Blood and cerebrospinal fluid lactate and pyruvate with lactate-to-pyruvate ratio, Urine organic acids and generalised aminoaciduria screen (renal Fanconi-type involvement), Iron studies, ferritin and liver function tests,"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: No cure; management is supportive, but a treatable coenzyme Q10 biosynthesis defect must be excluded because ubiquinone (coenzyme Q10) supplementation can benefit that subgroup"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misdiagnosing GRACILE-related neonatal iron overload as primary neonatal haemochromatosis and missing the BCS1L cause."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of mitochondrial complex iii deficiency (ubiquinol-cytochrome c oxidoreductase deficiency)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "mitochondrial_complex_iii_deficiency-matrix",
+   "title": "Mitochondrial Complex III Deficiency (Ubiquinol-Cytochrome c Oxidoreductase Deficiency): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Complex III (the cytochrome bc1 complex) transfers electrons from reduced ubiquinone to cytochrome c through the",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Complex III (ubiquinol-cytochrome c oxidoreductase, the cytochrome bc1 complex) sits at the centre of the electron transport chain, accepting electrons from ubiquinol and passing them to cytochrome c through the bifurcated Q cycle, which couples electron transfer to proton pumping across the inner mitochondrial membrane. The functional dimeric enzyme contains three redox-active catalytic subunits: cytochrome b (encoded by mitochondrial MT-CYB), cytochrome c1 (CYC1) and the Rieske iron-sulphur protein (UQCRFS1), together with supernumerary nuclear subunits and dedicated assembly factors. Disease arises from maternally inherited or somatic MT-CYB variants, or from autosomal recessive variants in nuclear structural subunits (CYC1, UQCRB, UQCRQ, UQCRC2) and assembly factors, most importantly BCS1L, which chaperones incorporation of the Rieske protein, and TTC19, which is required for clearance of assembly intermediates. Impaired bc1 function blocks electron flow between the ubiquinone pool and cytochrome c, collapses proton-motive force, diverts pyruvate to lactate, and, in the BCS1L GRACILE phenotype, additionally deranges iron handling to cause hepatic iron overload; energy failure again targets liver, brain, muscle, kidney tubule and cochlea.",
-    "additionalDifferentials": [
-      "Mitochondrial Complex I deficiency (NADH:ubiquinone oxidoreductase defect)",
-      "Mitochondrial Complex IV deficiency (cytochrome c oxidase / COX defect)",
-      "Mitochondrial Complex V deficiency (ATP synthase defect)",
-      "Coenzyme Q10 (ubiquinone) biosynthesis deficiency, which impairs electron delivery to Complex III and is treatable",
-      "Neonatal haemochromatosis and other causes of neonatal iron overload and cholestasis (for the GRACILE presentation)",
-      "Other syndromic sensorineural hearing loss with hair-shaft abnormality (for the Björnstad presentation)",
-      "Combined oxidative phosphorylation and mitochondrial translation defects"
+    [
+     "Key Investigations",
+     "Blood and cerebrospinal fluid lactate and pyruvate with lactate-to-pyruvate ratio, Urine organic acids and generalised",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Blood and cerebrospinal fluid lactate and pyruvate with lactate-to-pyruvate ratio",
-      "Urine organic acids and generalised aminoaciduria screen (renal Fanconi-type involvement)",
-      "Iron studies, ferritin and liver function tests, with liver imaging where GRACILE is suspected",
-      "Spectrophotometric respiratory chain enzymology demonstrating isolated Complex III deficiency",
-      "Molecular testing of MT-CYB and nuclear genes (BCS1L, TTC19, CYC1, UQCRB, UQCRQ, UQCRC2, UQCC2/UQCC3)",
-      "Coenzyme Q10 measurement in muscle or fibroblasts to exclude a treatable ubiquinone biosynthesis defect",
-      "Audiometry and hair-shaft microscopy for pili torti when Björnstad syndrome is considered"
+    [
+     "Primary Differentials",
+     "Mitochondrial Complex I deficiency (NADH:ubiquinone oxidoreductase defect), Mitochondrial Complex IV deficiency (cytochrome c",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Neonatal lactic acidosis with cholestasis and iron overload suggesting GRACILE syndrome",
-      "Fulminant hepatic dysfunction or intractable metabolic acidosis in a neonate",
-      "Recurrent rhabdomyolysis or myoglobinuria with exercise in MT-CYB-related myopathy",
-      "Rapid neurological regression or brainstem dysfunction in a Leigh-like TTC19 presentation",
-      "Progressive hearing loss with metabolic decompensation during intercurrent illness"
+    [
+     "Management Strategy",
+     "No cure; management is supportive, but a treatable coenzyme Q10 biosynthesis defect must be excluded because ubiquinone (coenzyme",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcome ranges from lethal in early infancy (GRACILE and severe neonatal encephalohepatopathic forms) to slowly progressive in later-onset TTC19 neurological disease and relatively benign in some isolated MT-CYB myopathies. A treatable coenzyme Q10 biosynthesis defect must be excluded because it materially changes prognosis.",
-    "pitfalls": [
-      "Misdiagnosing GRACILE-related neonatal iron overload as primary neonatal haemochromatosis and missing the BCS1L cause.",
-      "Overlooking a treatable coenzyme Q10 biosynthesis defect, which can mimic Complex III deficiency biochemically.",
-      "Assaying Complex III without appropriate specific inhibitors, giving spuriously normal or misleading activity.",
-      "Attributing isolated exercise intolerance or recurrent myoglobinuria to a muscle glycogenosis and missing an MT-CYB variant.",
-      "Failing to examine the hair shaft and hearing in a child with unexplained respiratory chain disease, missing Björnstad syndrome."
-    ],
-    "references": [
-      "Textbook of inherited metabolic disease (mitochondrial disorders chapter)",
-      "Neurology reference on mitochondrial and respiratory chain disease",
-      "International consensus guidance on diagnosis and management of mitochondrial disease"
-    ],
-    "crossLinks": [],
-    "management": [
-      "No cure; management is supportive, but a treatable coenzyme Q10 biosynthesis defect must be excluded because ubiquinone (coenzyme Q10) supplementation can benefit that subgroup",
-      "Supportive mitochondrial cofactor supplementation with avoidance of prolonged fasting and catabolic stress to limit metabolic decompensation",
-      "Prompt correction of lactic acidosis and hypoglycaemia during metabolic crises with intravenous dextrose and fluids",
-      "In GRACILE and hepatopathic forms, manage cholestasis, iron overload and liver failure with nutritional and hepatology support",
-      "Manage the sensorineural hearing loss of Bjornstad syndrome with amplification, and treat the neurological and psychiatric features of TTC19 disease symptomatically",
-      "Avoid mitochondrial toxins, and manage exercise intolerance and myopathy in MT-CYB disease with activity pacing",
-      "Multidisciplinary follow-up and genetic counselling for autosomal recessive nuclear disease or maternally inherited MT-CYB variants"
+    [
+     "Clinical Pitfall",
+     "Misdiagnosing GRACILE-related neonatal iron overload as primary neonatal haemochromatosis and missing the BCS1L cause.",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for mitochondrial complex iii deficiency (ubiquinol-cytochrome c oxidoreductase deficiency)."
+  }
+ ]
 }

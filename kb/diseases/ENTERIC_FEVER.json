@@ -201,5 +201,77 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "hc0edfcc"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "enteric_fever-dx-algo",
+      "title": "Enteric Fever (Typhoid): Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Both 'enteric fever' and 'typhoid fever' refer to the same systemic illness caused by dissemination of S. Typhi or S. Paratyphi; the names are used interchangeably (p.1358).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Gastrointestinal hemorrhage (~6%) - most often in the third and fourth weeks; life-threatening, needs fluid resuscitation and possible surgery (p.1360).",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Buffy-coat (centrifuged blood) culture - speeds isolation because most S. Typhi reside in the mononuclear-cell/platelet fraction, though it does not raise overall sensitivity (p.1360)., Bone marrow culture - about 80%"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison does not give a formal grading scale; it distinguishes uncomplicated enteric fever (manageable at home with oral therapy) from disease warranting hospitalization (persistent vomiting, diarrhea, or abdominal"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: No single laboratory test other than a positive culture is diagnostic; the presentation is nonspecific, so a high index of suspicion is needed in any febrile returning traveler from an endemic region (notably the Indian"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for enteric fever (typhoid)."
+    }
+  ],
+  "tables": [
+    {
+      "id": "enteric_fever-matrix",
+      "title": "Enteric Fever (Typhoid): Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Both 'enteric fever' and 'typhoid fever' refer to the same systemic illness caused by dissemination of S. Typhi or S. Paratyphi;",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Buffy-coat (centrifuged blood) culture - speeds isolation because most S. Typhi reside in the mononuclear-cell/platelet fraction,",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Malaria, Viral hepatitis, Bacterial enteritis",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Gastrointestinal hemorrhage (~6%) - most often in the third and fourth weeks; life-threatening, needs fluid resuscitation and",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "No single laboratory test other than a positive culture is diagnostic; the presentation is nonspecific, so a high index of",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for enteric fever (typhoid)."
+    }
+  ]
 }

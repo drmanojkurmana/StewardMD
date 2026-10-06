@@ -6,7 +6,20 @@
  "basis": "international",
  "counterpart": "dengue",
  "setting": "Outpatient, emergency department, ward, ICU",
- "aliases": ["dengue fever", "severe dengue", "dengue shock syndrome", "DSS", "DHF", "dengue warning signs", "NS1", "WHO arboviral guideline 2025", "arbovirus", "capillary refill time", "platelet transfusion dengue", "Group A B C dengue"],
+ "aliases": [
+  "dengue fever",
+  "severe dengue",
+  "dengue shock syndrome",
+  "DSS",
+  "DHF",
+  "dengue warning signs",
+  "NS1",
+  "WHO arboviral guideline 2025",
+  "arbovirus",
+  "capillary refill time",
+  "platelet transfusion dengue",
+  "Group A B C dengue"
+ ],
  "summary": "Recognise warning signs and admit. Protocolised oral fluids and paracetamol (or metamizole) for non-severe disease, never NSAIDs or steroids. Severe disease: isotonic crystalloid rather than colloid, titrated by capillary refill time, lactate and haematocrit, tapered and stopped within 48 hours; no prophylactic platelets.",
  "sections": [
   {
@@ -108,16 +121,126 @@
   }
  ],
  "drugs": [
-  { "name": "Paracetamol", "dose": "Adults over 50 kg 500 mg to 1 g every 4 to 6 hours, maximum 4 g/day; children 10 to 15 mg/kg every 4 to 6 hours, maximum 60 mg/kg/day", "notes": "Not more often than 4-hourly; count all paracetamol sources. Caution with liver involvement." },
-  { "name": "Metamizole (dipyrone)", "dose": "Adults 500 mg to 1 g per dose (maximum 4 g/day); children 10 mg/kg per dose up to 4 times daily", "notes": "Alternative to paracetamol where licensed. Agranulocytosis risk; avoid in third trimester and breastfeeding." },
-  { "name": "Isotonic crystalloid (0.9% saline, Ringer lactate, Hartmann)", "dose": "Warning signs: 5 to 7 mL/kg/h, tapering. Compensated shock: 5 to 10 mL/kg/h in adults, 10 to 20 mL/kg/h in children, over 1 hour. Hypotensive shock: 20 mL/kg over 15 to 30 minutes", "notes": "Taper stepwise by response; stop within 24 to 48 hours. Ideal body weight in obesity." },
-  { "name": "Packed red cells or whole blood", "dose": "Fresh packed red cells 5 to 10 mL/kg or fresh whole blood 10 to 20 mL/kg per aliquot", "notes": "Suspected or overt severe bleeding, or shock with falling haematocrit." },
-  { "name": "Furosemide", "dose": "0.1 to 0.5 mg/kg per dose IV 2 to 3 times daily, or 0.1 mg/kg/h infusion", "notes": "Fluid overload once out of the critical phase and haemodynamically stable. Monitor potassium." }
+  {
+   "name": "Paracetamol",
+   "dose": "Adults over 50 kg 500 mg to 1 g every 4 to 6 hours, maximum 4 g/day; children 10 to 15 mg/kg every 4 to 6 hours, maximum 60 mg/kg/day",
+   "notes": "Not more often than 4-hourly; count all paracetamol sources. Caution with liver involvement."
+  },
+  {
+   "name": "Metamizole (dipyrone)",
+   "dose": "Adults 500 mg to 1 g per dose (maximum 4 g/day); children 10 mg/kg per dose up to 4 times daily",
+   "notes": "Alternative to paracetamol where licensed. Agranulocytosis risk; avoid in third trimester and breastfeeding."
+  },
+  {
+   "name": "Isotonic crystalloid (0.9% saline, Ringer lactate, Hartmann)",
+   "dose": "Warning signs: 5 to 7 mL/kg/h, tapering. Compensated shock: 5 to 10 mL/kg/h in adults, 10 to 20 mL/kg/h in children, over 1 hour. Hypotensive shock: 20 mL/kg over 15 to 30 minutes",
+   "notes": "Taper stepwise by response; stop within 24 to 48 hours. Ideal body weight in obesity."
+  },
+  {
+   "name": "Packed red cells or whole blood",
+   "dose": "Fresh packed red cells 5 to 10 mL/kg or fresh whole blood 10 to 20 mL/kg per aliquot",
+   "notes": "Suspected or overt severe bleeding, or shock with falling haematocrit."
+  },
+  {
+   "name": "Furosemide",
+   "dose": "0.1 to 0.5 mg/kg per dose IV 2 to 3 times daily, or 0.1 mg/kg/h infusion",
+   "notes": "Fluid overload once out of the critical phase and haemodynamically stable. Monitor potassium."
+  }
  ],
  "sources": [
-  { "org": "WHO", "title": "WHO guidelines for clinical management of arboviral diseases: dengue, chikungunya, Zika and yellow fever", "year": 2025, "url": "https://iris.who.int/handle/10665/381804" },
-  { "org": "WHO", "title": "Handbook for clinical management of dengue", "year": 2012, "url": "https://apps.who.int/iris/handle/10665/76887" },
-  { "org": "WHO / TDR", "title": "Dengue guidelines for diagnosis, treatment, prevention and control: new edition", "year": 2009, "url": "https://www.who.int/publications-detail-redirect/9789241547871" }
+  {
+   "org": "WHO",
+   "title": "WHO guidelines for clinical management of arboviral diseases: dengue, chikungunya, Zika and yellow fever",
+   "year": 2025,
+   "url": "https://iris.who.int/handle/10665/381804"
+  },
+  {
+   "org": "WHO",
+   "title": "Handbook for clinical management of dengue",
+   "year": 2012,
+   "url": "https://apps.who.int/iris/handle/10665/76887"
+  },
+  {
+   "org": "WHO / TDR",
+   "title": "Dengue guidelines for diagnosis, treatment, prevention and control: new edition",
+   "year": 2009,
+   "url": "https://www.who.int/publications-detail-redirect/9789241547871"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "dengue-international-pathway",
+   "title": "Dengue: assessment and fluid management (WHO) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Febrile phase 2 to 7 days. The critical phase of plasma leakage starts around defervescence (day 4 to 6) and usually settles within 48 to 72 hours, followed by reabsorption of fluid in the recovery phase.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Use isotonic crystalloid rather than colloid (WHO 2025). Obtain a reference haematocrit, group and cross-match, and guide every step by capillary refill time and lactate as well as pulse, BP, pulse pressure, urine output and haematocrit.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Severe dengue (WHO 2009): plasma leakage causing shock or fluid accumulation with respiratory distress; severe bleeding; or severe organ involvement (AST or ALT 1000 U/L or more, impaired consciousness, heart or other organs)."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Do not give prophylactic platelets for counts below 50,000/microlitre without active bleeding (WHO 2025). Platelets may be considered before surgery or invasive procedures, or with pre-existing anticoagulation."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Warning signs: vital signs and perfusion 1 to 4-hourly until out of the critical phase, urine output 4 to 6-hourly, haematocrit before and after fluid changes then 6 to 12-hourly, plus glucose, renal, liver and coagulation tests as"
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for dengue: assessment and fluid management (who)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "dengue-international-summary-matrix",
+   "title": "Dengue: assessment and fluid management (WHO) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Febrile phase 2 to 7 days. The critical phase of plasma leakage starts around defervescence (day 4 to 6) and usually settles within 48 to",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Use isotonic crystalloid rather than colloid (WHO 2025). Obtain a reference haematocrit, group and cross-match, and guide every step by",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Paracetamol: Adults over 50 kg 500 mg to 1 g every 4 to 6 hours, maximum 4 g/day; children 10 to 15 mg/kg every 4 to 6 hours, maximum 60",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Discharging at defervescence, when the critical phase begins.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for dengue: assessment and fluid management (who)."
+  }
+ ]
 }

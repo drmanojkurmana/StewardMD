@@ -5,7 +5,20 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Outpatient, primary care, respiratory clinic",
- "aliases": ["chronic asthma", "GINA steps", "GINA Track 1", "GINA Track 2", "MART", "SMART", "AIR", "anti-inflammatory reliever", "ICS-formoterol", "budesonide-formoterol", "asthma step down", "NG245"],
+ "aliases": [
+  "chronic asthma",
+  "GINA steps",
+  "GINA Track 1",
+  "GINA Track 2",
+  "MART",
+  "SMART",
+  "AIR",
+  "anti-inflammatory reliever",
+  "ICS-formoterol",
+  "budesonide-formoterol",
+  "asthma step down",
+  "NG245"
+ ],
  "summary": "Every adult or adolescent with asthma needs ICS-containing treatment. GINA 2026 prefers Track 1: as-needed low-dose ICS-formoterol (Steps 1 to 2), then ICS-formoterol maintenance and reliever therapy (Steps 3 to 5); step up only after checking technique and adherence, and step down after 3 months of good control.",
  "sections": [
   {
@@ -93,18 +106,135 @@
   }
  ],
  "drugs": [
-  { "name": "Budesonide-formoterol 160/4.5 mcg delivered (200/6 mcg metered)", "dose": "AIR-only: 1 inhalation as needed. MART Step 3: 1 inhalation twice (or once) daily plus 1 as needed. MART Steps 4 to 5: 2 inhalations twice daily plus 1 as needed", "notes": "Seek care if more than 12 total inhalations in 24 hours. Not the 400/12 mcg strength as reliever." },
-  { "name": "Beclometasone-formoterol 100/6 mcg", "dose": "MART: 1 inhalation twice daily (Step 3) or 2 inhalations twice daily (Steps 4 to 5), plus 1 inhalation as needed", "notes": "Maximum 12 inhalations in 24 hours; 200/6 mcg strength must not be used as reliever." },
-  { "name": "Budesonide-salbutamol 80/90 mcg delivered", "dose": "2 inhalations as needed", "notes": "Track 2 reliever; seek same-day care if more than 12 inhalations (6 doses) in 24 hours. Not for MART." },
-  { "name": "Budesonide (ICS)", "dose": "Low 200 to 400 mcg/day; medium above 400 to 800 mcg/day; high above 800 mcg/day", "notes": "Adults and adolescents 12 years and older (GINA Box 4-2)." },
-  { "name": "Fluticasone propionate (ICS)", "dose": "Low 100 to 250 mcg/day; medium above 250 to 500 mcg/day; high above 500 mcg/day", "notes": "Dose bands are not potency equivalents." },
-  { "name": "Beclometasone dipropionate, standard particle (ICS)", "dose": "Low 200 to 500 mcg/day; medium above 500 to 1000 mcg/day; high above 1000 mcg/day", "notes": "Extrafine particle: low 100 to 200 mcg/day." },
-  { "name": "Tiotropium (soft mist inhaler)", "dose": "5 mcg (2 puffs of 2.5 mcg) once daily", "notes": "Step 5 add-on to medium or high-dose ICS-LABA." },
-  { "name": "Salbutamol", "dose": "100 to 200 mcg (1 to 2 puffs) by pMDI as needed", "notes": "Track 2 reliever only when ICS-SABA unavailable; always with maintenance ICS." }
+  {
+   "name": "Budesonide-formoterol 160/4.5 mcg delivered (200/6 mcg metered)",
+   "dose": "AIR-only: 1 inhalation as needed. MART Step 3: 1 inhalation twice (or once) daily plus 1 as needed. MART Steps 4 to 5: 2 inhalations twice daily plus 1 as needed",
+   "notes": "Seek care if more than 12 total inhalations in 24 hours. Not the 400/12 mcg strength as reliever."
+  },
+  {
+   "name": "Beclometasone-formoterol 100/6 mcg",
+   "dose": "MART: 1 inhalation twice daily (Step 3) or 2 inhalations twice daily (Steps 4 to 5), plus 1 inhalation as needed",
+   "notes": "Maximum 12 inhalations in 24 hours; 200/6 mcg strength must not be used as reliever."
+  },
+  {
+   "name": "Budesonide-salbutamol 80/90 mcg delivered",
+   "dose": "2 inhalations as needed",
+   "notes": "Track 2 reliever; seek same-day care if more than 12 inhalations (6 doses) in 24 hours. Not for MART."
+  },
+  {
+   "name": "Budesonide (ICS)",
+   "dose": "Low 200 to 400 mcg/day; medium above 400 to 800 mcg/day; high above 800 mcg/day",
+   "notes": "Adults and adolescents 12 years and older (GINA Box 4-2)."
+  },
+  {
+   "name": "Fluticasone propionate (ICS)",
+   "dose": "Low 100 to 250 mcg/day; medium above 250 to 500 mcg/day; high above 500 mcg/day",
+   "notes": "Dose bands are not potency equivalents."
+  },
+  {
+   "name": "Beclometasone dipropionate, standard particle (ICS)",
+   "dose": "Low 200 to 500 mcg/day; medium above 500 to 1000 mcg/day; high above 1000 mcg/day",
+   "notes": "Extrafine particle: low 100 to 200 mcg/day."
+  },
+  {
+   "name": "Tiotropium (soft mist inhaler)",
+   "dose": "5 mcg (2 puffs of 2.5 mcg) once daily",
+   "notes": "Step 5 add-on to medium or high-dose ICS-LABA."
+  },
+  {
+   "name": "Salbutamol",
+   "dose": "100 to 200 mcg (1 to 2 puffs) by pMDI as needed",
+   "notes": "Track 2 reliever only when ICS-SABA unavailable; always with maintenance ICS."
+  }
  ],
  "sources": [
-  { "org": "GINA", "title": "Global Strategy for Asthma Management and Prevention, 2026 update", "year": 2026, "url": "https://ginasthma.org/wp-content/uploads/2026/05/GINA-2026-Strategy-Report-WMS.pdf" },
-  { "org": "BTS / NICE / SIGN", "title": "Asthma: diagnosis, monitoring and chronic asthma management (NG245)", "year": 2024, "url": "https://www.nice.org.uk/guidance/ng245" }
+  {
+   "org": "GINA",
+   "title": "Global Strategy for Asthma Management and Prevention, 2026 update",
+   "year": 2026,
+   "url": "https://ginasthma.org/wp-content/uploads/2026/05/GINA-2026-Strategy-Report-WMS.pdf"
+  },
+  {
+   "org": "BTS / NICE / SIGN",
+   "title": "Asthma: diagnosis, monitoring and chronic asthma management (NG245)",
+   "year": 2024,
+   "url": "https://www.nice.org.uk/guidance/ng245"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "asthma-long-term-management-pathway",
+   "title": "Asthma long-term management (adults and adolescents) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Document variable expiratory airflow limitation: bronchodilator responsiveness (FEV1 or FVC rise of 12% or more and 200 mL or more), excessive PEF variability or a positive challenge test. BTS/NICE/SIGN 2024: FeNO 50 ppb or more, or a",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Symptom control over the past 4 weeks: daytime symptoms more than twice a week, any night waking, SABA reliever more than twice a week, any activity limitation. None = well controlled, 1 to 2 = partly controlled, 3 to 4 = uncontrolled.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Exacerbation risk factors even with few symptoms: SABA overuse (3 or more 200-dose canisters a year; 1 or more a month is very high risk), no ICS or poor technique, FEV1 below 60% predicted, smoking, obesity, rhinosinusitis, GERD, food"
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Use when Track 1 is not possible, or when asthma is stable on current therapy with good adherence and no exacerbations. Before relying on a SABA reliever, check the patient will take maintenance ICS daily."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Review 1 to 3 months after starting or changing treatment, then every 3 to 12 months, and within 1 week of an exacerbation. Check symptoms, exacerbations, inhaler technique, adherence, side-effects and comorbidities every time."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for asthma long-term management (adults and adolescents)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "asthma-long-term-management-summary-matrix",
+   "title": "Asthma long-term management (adults and adolescents) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Document variable expiratory airflow limitation: bronchodilator responsiveness (FEV1 or FVC rise of 12% or more and 200 mL or more),",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Use when Track 1 is not possible, or when asthma is stable on current therapy with good adherence and no exacerbations. Before relying on a",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Budesonide-formoterol 160/4.5 mcg delivered (200/6 mcg metered): AIR-only: 1 inhalation as needed. MART Step 3: 1 inhalation twice (or",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "SABA-only treatment, or a separate SABA prescribed alongside MART.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for asthma long-term management (adults and adolescents)."
+  }
+ ]
 }

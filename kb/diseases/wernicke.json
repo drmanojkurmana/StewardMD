@@ -134,5 +134,77 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h3be4effd"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "wernicke-dx-algo",
+      "title": "Wernicke encephalopathy: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "The classic triad (ophthalmoplegia, ataxia, global confusion) is present in only about one-third of acute cases, so a complete triad should not be required to make the diagnosis.",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Untreated disease can progress to stupor, coma, and death",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: MRI may show changes including abnormal enhancement of the mammillary bodies (coronal T1 postcontrast), typical of acute Wernicke, Erythrocyte transketolase activity assay measured before and after adding thiamine"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Differentiate from top mimics: Supranuclear gaze disorder mimicking combined abducens and oculomotor nerve palsy (Wernicke can itself cause this pattern), Other metabolic encephalopathies (hepatic, hypercarbic, hyper-/hyponatremic,"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Waiting for the full classic triad before treating, when only about one-third of patients show all three features."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for wernicke encephalopathy."
+    }
+  ],
+  "tables": [
+    {
+      "id": "wernicke-matrix",
+      "title": "Wernicke encephalopathy: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The classic triad (ophthalmoplegia, ataxia, global confusion) is present in only about one-third of acute cases, so a complete",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "MRI may show changes including abnormal enhancement of the mammillary bodies (coronal T1 postcontrast), typical of acute",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Supranuclear gaze disorder mimicking combined abducens and oculomotor nerve palsy (Wernicke can itself cause this pattern), Other",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Untreated disease can progress to stupor, coma, and death",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Waiting for the full classic triad before treating, when only about one-third of patients show all three features.",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for wernicke encephalopathy."
+    }
+  ]
 }

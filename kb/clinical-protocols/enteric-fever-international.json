@@ -6,7 +6,20 @@
  "basis": "international",
  "counterpart": "enteric-fever",
  "setting": "Outpatient, emergency department, ward",
- "aliases": ["typhoid", "paratyphoid", "enteric fever", "Salmonella Typhi", "Salmonella Paratyphi A", "XDR typhoid", "MDR typhoid", "returning traveller fever", "typhoid perforation", "TCV", "Typhim Vi", "Ty21a"],
+ "aliases": [
+  "typhoid",
+  "paratyphoid",
+  "enteric fever",
+  "Salmonella Typhi",
+  "Salmonella Paratyphi A",
+  "XDR typhoid",
+  "MDR typhoid",
+  "returning traveller fever",
+  "typhoid perforation",
+  "TCV",
+  "Typhim Vi",
+  "Ty21a"
+ ],
  "summary": "Take blood cultures before antibiotics and a detailed travel history. Avoid empirical fluoroquinolones. Uncomplicated: oral azithromycin. Complicated: IV ceftriaxone, or a carbapenem if acquired in Pakistan or Iraq (XDR risk). Tailor to susceptibility, give dexamethasone for severe typhoid with encephalopathy or shock, and follow public health clearance rules.",
  "sections": [
   {
@@ -92,17 +105,132 @@
   }
  ],
  "drugs": [
-  { "name": "Azithromycin", "dose": "Adults 1 g orally once daily; children 20 mg/kg once daily (maximum 1 g); 7 days", "notes": "First-line oral agent, including XDR infection. QTc caution with interacting drugs." },
-  { "name": "Ceftriaxone", "dose": "Adults 2 g IV once daily; children 50 to 80 mg/kg IV once daily (maximum 2 g)", "notes": "Complicated disease without XDR risk; total course usually 10 to 14 days including oral step-down." },
-  { "name": "Meropenem", "dose": "Adults 1 g IV every 8 hours; children 20 mg/kg every 8 hours (maximum 1 g per dose)", "notes": "Complicated disease acquired in Pakistan or Iraq (XDR risk). Reduce dose in renal impairment." },
-  { "name": "Dexamethasone", "dose": "3 mg/kg IV over 30 minutes, then 1 mg/kg IV every 6 hours for 8 doses", "notes": "Severe typhoid with encephalopathy (delirium, obtundation, coma) or shock." },
-  { "name": "Metronidazole", "dose": "500 mg IV every 8 hours", "notes": "Added for intestinal perforation when not on a carbapenem." }
+  {
+   "name": "Azithromycin",
+   "dose": "Adults 1 g orally once daily; children 20 mg/kg once daily (maximum 1 g); 7 days",
+   "notes": "First-line oral agent, including XDR infection. QTc caution with interacting drugs."
+  },
+  {
+   "name": "Ceftriaxone",
+   "dose": "Adults 2 g IV once daily; children 50 to 80 mg/kg IV once daily (maximum 2 g)",
+   "notes": "Complicated disease without XDR risk; total course usually 10 to 14 days including oral step-down."
+  },
+  {
+   "name": "Meropenem",
+   "dose": "Adults 1 g IV every 8 hours; children 20 mg/kg every 8 hours (maximum 1 g per dose)",
+   "notes": "Complicated disease acquired in Pakistan or Iraq (XDR risk). Reduce dose in renal impairment."
+  },
+  {
+   "name": "Dexamethasone",
+   "dose": "3 mg/kg IV over 30 minutes, then 1 mg/kg IV every 6 hours for 8 doses",
+   "notes": "Severe typhoid with encephalopathy (delirium, obtundation, coma) or shock."
+  },
+  {
+   "name": "Metronidazole",
+   "dose": "500 mg IV every 8 hours",
+   "notes": "Added for intestinal perforation when not on a carbapenem."
+  }
  ],
  "sources": [
-  { "org": "CDC", "title": "Typhoid and Paratyphoid Fever, CDC Yellow Book 2026", "year": 2025, "url": "https://www.cdc.gov/yellow-book/hcp/travel-associated-infections-diseases/typhoid-and-paratyphoid-fever.html" },
-  { "org": "CDC", "title": "Clinical Guidance for Typhoid Fever and Paratyphoid Fever", "year": 2024, "url": "https://www.cdc.gov/typhoid-fever/hcp/clinical-guidance/index.html" },
-  { "org": "UKHSA", "title": "Public health operational guidelines for typhoid and paratyphoid (enteric fever)", "year": 2024, "url": "https://www.gov.uk/government/publications/typhoid-and-paratyphoid-public-health-operational-guidelines/public-health-operational-guidelines-for-typhoid-and-paratyphoid-enteric-fever" },
-  { "org": "WHO", "title": "Typhoid fact sheet", "year": 2023, "url": "https://www.who.int/news-room/fact-sheets/detail/typhoid" }
+  {
+   "org": "CDC",
+   "title": "Typhoid and Paratyphoid Fever, CDC Yellow Book 2026",
+   "year": 2025,
+   "url": "https://www.cdc.gov/yellow-book/hcp/travel-associated-infections-diseases/typhoid-and-paratyphoid-fever.html"
+  },
+  {
+   "org": "CDC",
+   "title": "Clinical Guidance for Typhoid Fever and Paratyphoid Fever",
+   "year": 2024,
+   "url": "https://www.cdc.gov/typhoid-fever/hcp/clinical-guidance/index.html"
+  },
+  {
+   "org": "UKHSA",
+   "title": "Public health operational guidelines for typhoid and paratyphoid (enteric fever)",
+   "year": 2024,
+   "url": "https://www.gov.uk/government/publications/typhoid-and-paratyphoid-public-health-operational-guidelines/public-health-operational-guidelines-for-typhoid-and-paratyphoid-enteric-fever"
+  },
+  {
+   "org": "WHO",
+   "title": "Typhoid fact sheet",
+   "year": 2023,
+   "url": "https://www.who.int/news-room/fact-sheets/detail/typhoid"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "enteric-fever-international-pathway",
+   "title": "Enteric fever: typhoid and paratyphoid (international guidance) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Incubation 6 to 30 days for typhoid and 1 to 10 days for paratyphoid. Insidious fatigue and fever rising to 39 to 40°C by day 3 or 4, with headache, anorexia, abdominal pain, and constipation or diarrhoea.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Complications affect 10 to 15% of hospitalised patients, usually after 2 to 3 weeks of illness: gastrointestinal bleeding, intestinal perforation and encephalopathy. Mortality is under 1% with prompt treatment and above 10% untreated.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Blood cultures before antibiotics: a single culture is positive in only about 50%, so take more than one. Bone marrow culture is about 80% sensitive and stays positive after antibiotics. Send stool culture too."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "No XDR risk: ceftriaxone 2 g IV once daily in adults (children 50 to 80 mg/kg once daily, maximum 2 g). Travel to Pakistan or Iraq (XDR risk): a carbapenem such as meropenem 1 g IV 8-hourly (children 20 mg/kg 8-hourly, maximum 1 g) until"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Relapse occurs in up to 10% of patients 1 to 3 weeks after clinical recovery; re-culture and retreat according to susceptibility."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for enteric fever: typhoid and paratyphoid (international guidance)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "enteric-fever-international-summary-matrix",
+   "title": "Enteric fever: typhoid and paratyphoid (international guidance) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Incubation 6 to 30 days for typhoid and 1 to 10 days for paratyphoid. Insidious fatigue and fever rising to 39 to 40°C by day 3 or 4, with",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "No XDR risk: ceftriaxone 2 g IV once daily in adults (children 50 to 80 mg/kg once daily, maximum 2 g). Travel to Pakistan or Iraq (XDR",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Blood cultures before antibiotics: a single culture is positive in only about 50%, so take more than one. Bone marrow culture is about 80%",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Azithromycin: Adults 1 g orally once daily; children 20 mg/kg once daily (maximum 1 g); 7 days",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Starting antibiotics before blood cultures are taken.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for enteric fever: typhoid and paratyphoid (international guidance)."
+  }
+ ]
 }

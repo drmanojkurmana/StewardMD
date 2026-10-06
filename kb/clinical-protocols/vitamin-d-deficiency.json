@@ -129,5 +129,77 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-25"
- }
+ },
+ "algorithms": [
+  {
+   "id": "vitamin-d-deficiency-pathway",
+   "title": "Vitamin D deficiency (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Do not routinely test 25(OH)D in healthy adults, including those with obesity or darker skin and in pregnancy: levels that give outcome-specific benefit are not established (Endocrine Society 2024).",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Test when the result changes management: suspected osteomalacia (bone pain, proximal weakness, raised alkaline phosphatase, low phosphate), bone disease before treatment such as IV zoledronic acid or denosumab, hypocalcaemia, or",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "With a low 25(OH)D check albumin-adjusted calcium, phosphate, alkaline phosphatase, creatinine and eGFR; add PTH if calcium is high or high-normal or osteomalacia is suspected."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Use oral colecalciferol (vitamin D3)."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Check albumin-adjusted calcium 1 month after completing a loading regimen or after starting supplements, to detect primary hyperparathyroidism unmasked by treatment (NOS)."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for vitamin d deficiency (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "vitamin-d-deficiency-summary-matrix",
+   "title": "Vitamin D deficiency (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Do not routinely test 25(OH)D in healthy adults, including those with obesity or darker skin and in pregnancy: levels that give",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Use oral colecalciferol (vitamin D3).",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "With a low 25(OH)D check albumin-adjusted calcium, phosphate, alkaline phosphatase, creatinine and eGFR; add PTH if calcium is high or",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Colecalciferol (loading): About 300,000 IU orally over 6 to 10 weeks, for example 50,000 IU once weekly for 6 weeks or 4,000 IU daily for",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Screening asymptomatic healthy adults and treating a number rather than a patient.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for vitamin d deficiency (adult)."
+  }
+ ]
 }

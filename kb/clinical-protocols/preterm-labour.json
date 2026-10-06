@@ -5,7 +5,22 @@
  "population": "Pregnancy",
  "basis": "international",
  "setting": "Labour room, antenatal ward, referral unit",
- "aliases": ["preterm labor", "threatened preterm labour", "PTL", "PPROM", "preterm prelabour rupture of membranes", "antenatal corticosteroids", "ACS", "antenatal steroids", "dexamethasone", "tocolysis", "nifedipine tocolysis", "magnesium sulphate neuroprotection", "GBS prophylaxis", "group B streptococcus"],
+ "aliases": [
+  "preterm labor",
+  "threatened preterm labour",
+  "PTL",
+  "PPROM",
+  "preterm prelabour rupture of membranes",
+  "antenatal corticosteroids",
+  "ACS",
+  "antenatal steroids",
+  "dexamethasone",
+  "tocolysis",
+  "nifedipine tocolysis",
+  "magnesium sulphate neuroprotection",
+  "GBS prophylaxis",
+  "group B streptococcus"
+ ],
  "summary": "If birth is likely within 7 days at 24 to 34 weeks and dating is reliable, give dexamethasone 6 mg IM 12-hourly x4. Use nifedipine tocolysis (24 to 33+6 weeks) only to complete steroids or allow transfer, magnesium sulphate before 32 weeks, erythromycin for PPROM and intrapartum GBS prophylaxis.",
  "sections": [
   {
@@ -93,20 +108,147 @@
   }
  ],
  "drugs": [
-  { "name": "Dexamethasone", "dose": "6 mg IM every 12 hours for 4 doses (total 24 mg)", "notes": "24+0 to 34+0 weeks when WHO conditions are met. One repeat course only after at least 7 days." },
-  { "name": "Betamethasone", "dose": "12 mg IM every 24 hours for 2 doses", "notes": "Alternative to dexamethasone." },
-  { "name": "Nifedipine immediate-release (tocolysis)", "dose": "20 mg orally, then 10 mg every 6 hours for 3 to 7 days or until transfer", "notes": "24+0 to 33+6 weeks. Monitor BP; avoid with hypotension or cardiac disease." },
-  { "name": "Magnesium sulphate (neuroprotection)", "dose": "4 g IV over 20 minutes, then 1 g/h until birth or for 24 hours", "notes": "Before 32+0 weeks when birth is expected within 24 hours." },
-  { "name": "Erythromycin", "dose": "250 mg orally every 6 hours for 10 days or until birth", "notes": "PPROM. Avoid co-amoxiclav." },
-  { "name": "Benzylpenicillin (penicillin G)", "dose": "5 million units (3 g) IV, then 2.5 to 3 million units (1.5 g) IV every 4 hours until birth", "notes": "Intrapartum GBS prophylaxis." },
-  { "name": "Ampicillin", "dose": "2 g IV, then 1 g IV every 4 hours until birth", "notes": "Alternative GBS prophylaxis." },
-  { "name": "Cefazolin", "dose": "2 g IV, then 1 g IV every 8 hours until birth", "notes": "GBS prophylaxis with penicillin allergy at low anaphylaxis risk." }
+  {
+   "name": "Dexamethasone",
+   "dose": "6 mg IM every 12 hours for 4 doses (total 24 mg)",
+   "notes": "24+0 to 34+0 weeks when WHO conditions are met. One repeat course only after at least 7 days."
+  },
+  {
+   "name": "Betamethasone",
+   "dose": "12 mg IM every 24 hours for 2 doses",
+   "notes": "Alternative to dexamethasone."
+  },
+  {
+   "name": "Nifedipine immediate-release (tocolysis)",
+   "dose": "20 mg orally, then 10 mg every 6 hours for 3 to 7 days or until transfer",
+   "notes": "24+0 to 33+6 weeks. Monitor BP; avoid with hypotension or cardiac disease."
+  },
+  {
+   "name": "Magnesium sulphate (neuroprotection)",
+   "dose": "4 g IV over 20 minutes, then 1 g/h until birth or for 24 hours",
+   "notes": "Before 32+0 weeks when birth is expected within 24 hours."
+  },
+  {
+   "name": "Erythromycin",
+   "dose": "250 mg orally every 6 hours for 10 days or until birth",
+   "notes": "PPROM. Avoid co-amoxiclav."
+  },
+  {
+   "name": "Benzylpenicillin (penicillin G)",
+   "dose": "5 million units (3 g) IV, then 2.5 to 3 million units (1.5 g) IV every 4 hours until birth",
+   "notes": "Intrapartum GBS prophylaxis."
+  },
+  {
+   "name": "Ampicillin",
+   "dose": "2 g IV, then 1 g IV every 4 hours until birth",
+   "notes": "Alternative GBS prophylaxis."
+  },
+  {
+   "name": "Cefazolin",
+   "dose": "2 g IV, then 1 g IV every 8 hours until birth",
+   "notes": "GBS prophylaxis with penicillin allergy at low anaphylaxis risk."
+  }
  ],
  "sources": [
-  { "org": "WHO", "title": "WHO recommendations on antenatal corticosteroids for improving preterm birth outcomes", "year": 2022, "url": "https://www.who.int/publications/i/item/9789240057296" },
-  { "org": "WHO", "title": "WHO recommendation on tocolytic therapy for improving preterm birth outcomes", "year": 2022, "url": "https://www.who.int/publications/i/item/9789240057227" },
-  { "org": "WHO", "title": "WHO recommendations on interventions to improve preterm birth outcomes (magnesium sulphate, antibiotics, mode of birth)", "year": 2015, "url": "https://www.who.int/publications/i/item/9789241508988" },
-  { "org": "ACOG", "title": "Prevention of group B streptococcal early-onset disease in newborns: Committee Opinion No. 797", "year": 2020, "url": "https://doi.org/10.1097/AOG.0000000000003668" }
+  {
+   "org": "WHO",
+   "title": "WHO recommendations on antenatal corticosteroids for improving preterm birth outcomes",
+   "year": 2022,
+   "url": "https://www.who.int/publications/i/item/9789240057296"
+  },
+  {
+   "org": "WHO",
+   "title": "WHO recommendation on tocolytic therapy for improving preterm birth outcomes",
+   "year": 2022,
+   "url": "https://www.who.int/publications/i/item/9789240057227"
+  },
+  {
+   "org": "WHO",
+   "title": "WHO recommendations on interventions to improve preterm birth outcomes (magnesium sulphate, antibiotics, mode of birth)",
+   "year": 2015,
+   "url": "https://www.who.int/publications/i/item/9789241508988"
+  },
+  {
+   "org": "ACOG",
+   "title": "Prevention of group B streptococcal early-onset disease in newborns: Committee Opinion No. 797",
+   "year": 2020,
+   "url": "https://doi.org/10.1097/AOG.0000000000003668"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "preterm-labour-pathway",
+   "title": "Preterm labour and PPROM: corticosteroids, tocolysis and neuroprotection Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Preterm labour: regular contractions (at least 6 per hour) with cervical change (dilated 3 cm or more, or 75% or more effaced) before 37+0 weeks. WHO uses this, PPROM, or a planned preterm birth to define a high likelihood of birth within",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Establish gestational age as accurately as possible (first-trimester ultrasound is best). Steroid benefit depends on reliable dating.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "CBC, urine microscopy and culture, low vaginal and rectal swab for group B streptococcus where available; blood cultures if febrile."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "PPROM: erythromycin 250 mg orally 6-hourly for 10 days or until birth (WHO 2015, ORACLE I regimen). If unavailable, use a penicillin such as amoxicillin. Do not use co-amoxiclav (necrotising enterocolitis in the newborn)."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Giving corticosteroids when dating is uncertain, when birth is not likely within 7 days, or routinely after 34 weeks; in low-resource settings this has caused harm (ACT trial)."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for preterm labour and pprom: corticosteroids, tocolysis and neuroprotection."
+  }
+ ],
+ "tables": [
+  {
+   "id": "preterm-labour-summary-matrix",
+   "title": "Preterm labour and PPROM: corticosteroids, tocolysis and neuroprotection Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Preterm labour: regular contractions (at least 6 per hour) with cervical change (dilated 3 cm or more, or 75% or more effaced) before 37+0",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "PPROM: erythromycin 250 mg orally 6-hourly for 10 days or until birth (WHO 2015, ORACLE I regimen). If unavailable, use a penicillin such",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "CBC, urine microscopy and culture, low vaginal and rectal swab for group B streptococcus where available; blood cultures if febrile.",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Dexamethasone: 6 mg IM every 12 hours for 4 doses (total 24 mg)",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Giving corticosteroids when dating is uncertain, when birth is not likely within 7 days, or routinely after 34 weeks; in low-resource",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for preterm labour and pprom: corticosteroids, tocolysis and neuroprotection."
+  }
+ ]
 }

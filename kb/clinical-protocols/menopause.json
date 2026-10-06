@@ -5,7 +5,25 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Primary care, gynaecology outpatient",
- "aliases": ["perimenopause", "HRT", "MHT", "menopausal hormone therapy", "hormone replacement therapy", "hot flushes", "night sweats", "vasomotor symptoms", "GSM", "genitourinary syndrome of menopause", "vaginal atrophy", "vaginal oestrogen", "premature ovarian insufficiency", "POI", "early menopause", "fezolinetant", "NG23"],
+ "aliases": [
+  "perimenopause",
+  "HRT",
+  "MHT",
+  "menopausal hormone therapy",
+  "hormone replacement therapy",
+  "hot flushes",
+  "night sweats",
+  "vasomotor symptoms",
+  "GSM",
+  "genitourinary syndrome of menopause",
+  "vaginal atrophy",
+  "vaginal oestrogen",
+  "premature ovarian insufficiency",
+  "POI",
+  "early menopause",
+  "fezolinetant",
+  "NG23"
+ ],
  "summary": "Diagnose perimenopause and menopause clinically at 45 or over without FSH testing. Offer HRT for vasomotor symptoms (combined oestrogen and progestogen if a uterus is present, transdermal oestrogen if VTE risk is raised), vaginal oestrogen for genitourinary symptoms, and review at 3 months then yearly.",
  "sections": [
   {
@@ -87,17 +105,131 @@
   }
  ],
  "drugs": [
-  { "name": "Oestradiol (oral)", "dose": "1 to 2 mg orally once daily", "notes": "Oral route raises VTE and stroke risk; prefer transdermal if risk factors. Add a progestogen if a uterus is present." },
-  { "name": "Oestradiol (transdermal patch)", "dose": "25 to 100 micrograms/24 hours, patch changed once or twice weekly by brand (50 micrograms/24 hours is a standard dose)", "notes": "Preferred with VTE risk, BMI above 30 kg/m2, migraine or malabsorption." },
-  { "name": "Micronised progesterone", "dose": "Sequential: 200 mg orally at bedtime for 12 days of each 28-day cycle. Continuous: 100 mg orally at bedtime daily", "notes": "Endometrial protection with oestrogen in women with a uterus." },
-  { "name": "Levonorgestrel intrauterine system", "dose": "52 mg intrauterine system", "notes": "Endometrial protection for the licensed duration and also contraception." },
-  { "name": "Vaginal oestradiol", "dose": "10 microgram vaginal tablet daily for 2 weeks, then twice weekly", "notes": "Genitourinary symptoms; no progestogen needed. Can be used with systemic HRT." },
-  { "name": "Fezolinetant", "dose": "45 mg orally once daily", "notes": "Non-hormonal option when HRT is unsuitable. Liver tests before starting, monthly for 3 months, then periodically; stop if liver injury." }
+  {
+   "name": "Oestradiol (oral)",
+   "dose": "1 to 2 mg orally once daily",
+   "notes": "Oral route raises VTE and stroke risk; prefer transdermal if risk factors. Add a progestogen if a uterus is present."
+  },
+  {
+   "name": "Oestradiol (transdermal patch)",
+   "dose": "25 to 100 micrograms/24 hours, patch changed once or twice weekly by brand (50 micrograms/24 hours is a standard dose)",
+   "notes": "Preferred with VTE risk, BMI above 30 kg/m2, migraine or malabsorption."
+  },
+  {
+   "name": "Micronised progesterone",
+   "dose": "Sequential: 200 mg orally at bedtime for 12 days of each 28-day cycle. Continuous: 100 mg orally at bedtime daily",
+   "notes": "Endometrial protection with oestrogen in women with a uterus."
+  },
+  {
+   "name": "Levonorgestrel intrauterine system",
+   "dose": "52 mg intrauterine system",
+   "notes": "Endometrial protection for the licensed duration and also contraception."
+  },
+  {
+   "name": "Vaginal oestradiol",
+   "dose": "10 microgram vaginal tablet daily for 2 weeks, then twice weekly",
+   "notes": "Genitourinary symptoms; no progestogen needed. Can be used with systemic HRT."
+  },
+  {
+   "name": "Fezolinetant",
+   "dose": "45 mg orally once daily",
+   "notes": "Non-hormonal option when HRT is unsuitable. Liver tests before starting, monthly for 3 months, then periodically; stop if liver injury."
+  }
  ],
  "sources": [
-  { "org": "NICE", "title": "Menopause: identification and management (NG23), updated 2024", "year": 2024, "url": "https://www.nice.org.uk/guidance/ng23" },
-  { "org": "The North American Menopause Society (The Menopause Society)", "title": "The 2022 hormone therapy position statement of The North American Menopause Society", "year": 2022, "url": "https://journals.lww.com/menopausejournal/fulltext/2022/07000/the_2022_hormone_therapy_position_statement_of_the.4.aspx" },
-  { "org": "NICE", "title": "Fezolinetant for treating moderate to severe vasomotor symptoms associated with menopause (TA1143)", "year": 2026, "url": "https://www.nice.org.uk/guidance/ta1143/chapter/1-Recommendations" }
+  {
+   "org": "NICE",
+   "title": "Menopause: identification and management (NG23), updated 2024",
+   "year": 2024,
+   "url": "https://www.nice.org.uk/guidance/ng23"
+  },
+  {
+   "org": "The North American Menopause Society (The Menopause Society)",
+   "title": "The 2022 hormone therapy position statement of The North American Menopause Society",
+   "year": 2022,
+   "url": "https://journals.lww.com/menopausejournal/fulltext/2022/07000/the_2022_hormone_therapy_position_statement_of_the.4.aspx"
+  },
+  {
+   "org": "NICE",
+   "title": "Fezolinetant for treating moderate to severe vasomotor symptoms associated with menopause (TA1143)",
+   "year": 2026,
+   "url": "https://www.nice.org.uk/guidance/ta1143/chapter/1-Recommendations"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "menopause-pathway",
+   "title": "Menopause: diagnosis and hormone replacement therapy Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Age 45 or over with symptoms, no tests needed: perimenopause if vasomotor symptoms have recently started with any change in the menstrual cycle; menopause if no period for at least 12 months (not on hormonal contraception), or by symptoms",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "At 45 or over do not use AMH, inhibin, oestradiol, antral follicle count or ovarian volume. Do not use FSH in women taking combined hormonal contraception or high-dose progestogen.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Ask about VTE (personal and family), breast, endometrial or ovarian cancer, coronary disease, stroke, liver disease, migraine and unexplained vaginal bleeding; measure BP and BMI."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Offer vaginal oestrogen (cream, gel, tablet, pessary or ring) for genitourinary symptoms, including in women already on systemic HRT. Absorption is minimal, serious harms are very rare, and no progestogen is needed."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Review each treatment at 3 months for effect and tolerability, then yearly; refer to a menopause specialist if symptoms persist or side effects continue."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for menopause: diagnosis and hormone replacement therapy."
+  }
+ ],
+ "tables": [
+  {
+   "id": "menopause-summary-matrix",
+   "title": "Menopause: diagnosis and hormone replacement therapy Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Age 45 or over with symptoms, no tests needed: perimenopause if vasomotor symptoms have recently started with any change in the menstrual",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Offer vaginal oestrogen (cream, gel, tablet, pessary or ring) for genitourinary symptoms, including in women already on systemic HRT.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Ask about VTE (personal and family), breast, endometrial or ovarian cancer, coronary disease, stroke, liver disease, migraine and",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Oestradiol (oral): 1 to 2 mg orally once daily",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Ordering FSH in women over 45 with typical symptoms, or in women on combined contraception.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for menopause: diagnosis and hormone replacement therapy."
+  }
+ ]
 }

@@ -199,5 +199,77 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "he5c9c48e"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "amoebic_liver_abscess-dx-algo",
+      "title": "Amoebic Liver Abscess: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Most patients are febrile with right-upper-quadrant pain that may be dull or pleuritic and may radiate to the shoulder; point tenderness over the liver and a right-sided pleural effusion are common, whereas jaundice is rare (p.1799).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Pleuropulmonary involvement (reported in 20-30%, the most frequent complication): contiguous spread or frank rupture into the pleural space, the latter requiring drainage (p.1799).",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Serum alkaline phosphatase and aminotransferases (enzymes often normal/minimally elevated; raised aminotransferases suggest acute disease or complication) (p.1800), Full blood count for leukocytosis >10,000/uL, present in"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Differentiate from top mimics: Pyogenic liver abscess (the most important imaging-based distinction once a hepatic abscess is identified) (p.1801), Malaria (p.1801), Typhoid/enteric fever (p.1801)"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Expecting concurrent dysentery: fewer than one-third of patients have active diarrhea, so a negative stool examination or absent diarrhea does not exclude the diagnosis (p.1799)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for amoebic liver abscess."
+    }
+  ],
+  "tables": [
+    {
+      "id": "amoebic_liver_abscess-matrix",
+      "title": "Amoebic Liver Abscess: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Most patients are febrile with right-upper-quadrant pain that may be dull or pleuritic and may radiate to the shoulder; point",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Serum alkaline phosphatase and aminotransferases (enzymes often normal/minimally elevated; raised aminotransferases suggest acute",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Pyogenic liver abscess (the most important imaging-based distinction once a hepatic abscess is identified) (p.1801), Malaria",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Pleuropulmonary involvement (reported in 20-30%, the most frequent complication): contiguous spread or frank rupture into the",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Expecting concurrent dysentery: fewer than one-third of patients have active diarrhea, so a negative stool examination or absent",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for amoebic liver abscess."
+    }
+  ]
 }

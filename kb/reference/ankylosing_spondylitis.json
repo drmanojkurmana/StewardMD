@@ -1,80 +1,152 @@
 {
-  "id": "ankylosing_spondylitis",
-  "name": "Ankylosing spondylitis",
-  "aliases": [
-    "AS",
-    "radiographic axial spondyloarthritis",
-    "Bechterew disease"
+ "id": "ankylosing_spondylitis",
+ "name": "Ankylosing spondylitis",
+ "aliases": [
+  "AS",
+  "radiographic axial spondyloarthritis",
+  "Bechterew disease"
+ ],
+ "class": "non_infective",
+ "system": "Rheumatology / MSK",
+ "specialty": "Rheumatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine / ACR-EULAR",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Typically presents in young adults, more often men, with insidious chronic low back pain and stiffness that improves with activity and worsens with rest, especially in the second half of the night",
+   "Morning stiffness lasting more than 30 minutes and buttock pain from sacroiliitis are characteristic inflammatory back pain features",
+   "Progressive loss of spinal mobility can be assessed with the modified Schober test and chest expansion measurement",
+   "Enthesitis (notably at the Achilles tendon and plantar fascia) and asymmetric large-joint peripheral arthritis are common",
+   "Extra-articular manifestations include acute anterior uveitis, inflammatory bowel disease, and psoriasis",
+   "Strongly associated with HLA-B27, though a positive test alone is neither diagnostic nor required",
+   "Early sacroiliitis is often better seen on MRI (bone marrow oedema) before radiographic changes such as sclerosis, erosions, and eventual ankylosis appear",
+   "Management combines a regular exercise and physiotherapy programme with NSAIDs first-line, escalating to biologic therapy (TNF or IL-17 inhibitors) for inadequate control"
   ],
-  "class": "non_infective",
-  "system": "Rheumatology / MSK",
-  "specialty": "Rheumatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine / ACR-EULAR",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Typically presents in young adults, more often men, with insidious chronic low back pain and stiffness that improves with activity and worsens with rest, especially in the second half of the night",
-      "Morning stiffness lasting more than 30 minutes and buttock pain from sacroiliitis are characteristic inflammatory back pain features",
-      "Progressive loss of spinal mobility can be assessed with the modified Schober test and chest expansion measurement",
-      "Enthesitis (notably at the Achilles tendon and plantar fascia) and asymmetric large-joint peripheral arthritis are common",
-      "Extra-articular manifestations include acute anterior uveitis, inflammatory bowel disease, and psoriasis",
-      "Strongly associated with HLA-B27, though a positive test alone is neither diagnostic nor required",
-      "Early sacroiliitis is often better seen on MRI (bone marrow oedema) before radiographic changes such as sclerosis, erosions, and eventual ankylosis appear",
-      "Management combines a regular exercise and physiotherapy programme with NSAIDs first-line, escalating to biologic therapy (TNF or IL-17 inhibitors) for inadequate control"
+  "pathophysiology": "Ankylosing spondylitis is a chronic immune-mediated inflammatory disease of the axial skeleton and the prototype of the seronegative spondyloarthritides. Inflammation centres on the entheses (sites where ligaments and tendons attach to bone) and the sacroiliac joints. A strong genetic association with HLA-B27 implicates aberrant antigen presentation and dysregulated IL-23/IL-17 pathway signalling. Chronic enthesitis and osteitis drive a cycle of erosion followed by reactive new bone formation, leading to syndesmophyte development, bony bridging across vertebrae, and ultimately spinal fusion (the 'bamboo spine').",
+  "additionalDifferentials": [
+   "Mechanical or degenerative low back pain",
+   "Psoriatic arthritis with axial involvement",
+   "Reactive arthritis",
+   "Arthritis associated with inflammatory bowel disease",
+   "Diffuse idiopathic skeletal hyperostosis (DISH)",
+   "Infective sacroiliitis or vertebral osteomyelitis"
+  ],
+  "additionalInvestigations": [
+   "MRI of the sacroiliac joints to detect early active inflammation before radiographic change",
+   "Plain radiographs of the pelvis and spine for sacroiliitis, syndesmophytes, and ankylosis",
+   "HLA-B27 typing to support the diagnosis in the right clinical context",
+   "Inflammatory markers (CRP and ESR), which may be normal despite active disease",
+   "Assessment of extra-articular features including ophthalmology review for uveitis"
+  ],
+  "redFlags": [
+   "Acute painful red eye suggesting anterior uveitis requiring urgent ophthalmology assessment",
+   "New or worsening neurological deficit, or acute severe pain after minor trauma, raising concern for spinal fracture through a rigid fused spine",
+   "Cauda equina syndrome from arachnoiditis",
+   "Symptoms of cardiac conduction block or aortic regurgitation from cardiac involvement",
+   "Restrictive lung disease or apical pulmonary fibrosis"
+  ],
+  "prognosis": "Disease course is variable; many patients maintain good function with exercise and modern therapy, but persistent inflammation can lead to progressive spinal ankylosis, fixed kyphotic deformity, and increased fracture risk. Early diagnosis and biologic therapy have improved symptom control and quality of life.",
+  "pitfalls": [
+   "Attributing chronic back pain in a young adult to mechanical causes and delaying diagnosis for years",
+   "Relying on HLA-B27 as a diagnostic test rather than a supportive finding",
+   "Assuming normal inflammatory markers exclude active disease",
+   "Overlooking the high fracture risk of a rigid, osteoporotic spine after minor trauma",
+   "Neglecting extra-articular manifestations such as uveitis, bowel disease, and cardiac involvement"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e",
+   "ACR/EULAR guidelines"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Prescribe regular exercise and structured physiotherapy to maintain spinal mobility, posture, and function as the foundation of care",
+   "Use non-steroidal anti-inflammatory drugs as first-line pharmacological therapy for pain and stiffness",
+   "Escalate to biologic or targeted therapy with tumour necrosis factor inhibitors or interleukin-17 inhibitors when response to NSAIDs is inadequate",
+   "Treat peripheral arthritis and enthesitis with local corticosteroid injections and consider sulfasalazine for peripheral (not axial) involvement",
+   "Identify and co-manage extra-articular disease including acute anterior uveitis with ophthalmology, inflammatory bowel disease, and psoriasis",
+   "Monitor for and manage osteoporosis, spinal fracture risk, and cardiovascular risk, and advise smoking cessation",
+   "Refer to a rheumatology-led multidisciplinary team and consider spinal surgery for severe fixed deformity"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "ankylosing_spondylitis-pathway",
+   "title": "Ankylosing spondylitis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Typically presents in young adults, more often men, with insidious chronic low back pain and stiffness that improves with activity and worsens with rest, especially in the second half of the night",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Acute painful red eye suggesting anterior uveitis requiring urgent ophthalmology assessment",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: MRI of the sacroiliac joints to detect early active inflammation before radiographic change, Plain radiographs of the pelvis and spine for sacroiliitis, syndesmophytes, and ankylosis, HLA-B27 typing to support the"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Prescribe regular exercise and structured physiotherapy to maintain spinal mobility, posture, and function as the foundation of care"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing chronic back pain in a young adult to mechanical causes and delaying diagnosis for years"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of ankylosing spondylitis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "ankylosing_spondylitis-matrix",
+   "title": "Ankylosing spondylitis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Typically presents in young adults, more often men, with insidious chronic low back pain and stiffness that improves with",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Ankylosing spondylitis is a chronic immune-mediated inflammatory disease of the axial skeleton and the prototype of the seronegative spondyloarthritides. Inflammation centres on the entheses (sites where ligaments and tendons attach to bone) and the sacroiliac joints. A strong genetic association with HLA-B27 implicates aberrant antigen presentation and dysregulated IL-23/IL-17 pathway signalling. Chronic enthesitis and osteitis drive a cycle of erosion followed by reactive new bone formation, leading to syndesmophyte development, bony bridging across vertebrae, and ultimately spinal fusion (the 'bamboo spine').",
-    "additionalDifferentials": [
-      "Mechanical or degenerative low back pain",
-      "Psoriatic arthritis with axial involvement",
-      "Reactive arthritis",
-      "Arthritis associated with inflammatory bowel disease",
-      "Diffuse idiopathic skeletal hyperostosis (DISH)",
-      "Infective sacroiliitis or vertebral osteomyelitis"
+    [
+     "Key Investigations",
+     "MRI of the sacroiliac joints to detect early active inflammation before radiographic change, Plain radiographs of the pelvis and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "MRI of the sacroiliac joints to detect early active inflammation before radiographic change",
-      "Plain radiographs of the pelvis and spine for sacroiliitis, syndesmophytes, and ankylosis",
-      "HLA-B27 typing to support the diagnosis in the right clinical context",
-      "Inflammatory markers (CRP and ESR), which may be normal despite active disease",
-      "Assessment of extra-articular features including ophthalmology review for uveitis"
+    [
+     "Primary Differentials",
+     "Mechanical or degenerative low back pain, Psoriatic arthritis with axial involvement, Reactive arthritis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Acute painful red eye suggesting anterior uveitis requiring urgent ophthalmology assessment",
-      "New or worsening neurological deficit, or acute severe pain after minor trauma, raising concern for spinal fracture through a rigid fused spine",
-      "Cauda equina syndrome from arachnoiditis",
-      "Symptoms of cardiac conduction block or aortic regurgitation from cardiac involvement",
-      "Restrictive lung disease or apical pulmonary fibrosis"
+    [
+     "Management Strategy",
+     "Prescribe regular exercise and structured physiotherapy to maintain spinal mobility, posture, and function as the foundation of",
+     "Core treatment modality"
     ],
-    "prognosis": "Disease course is variable; many patients maintain good function with exercise and modern therapy, but persistent inflammation can lead to progressive spinal ankylosis, fixed kyphotic deformity, and increased fracture risk. Early diagnosis and biologic therapy have improved symptom control and quality of life.",
-    "pitfalls": [
-      "Attributing chronic back pain in a young adult to mechanical causes and delaying diagnosis for years",
-      "Relying on HLA-B27 as a diagnostic test rather than a supportive finding",
-      "Assuming normal inflammatory markers exclude active disease",
-      "Overlooking the high fracture risk of a rigid, osteoporotic spine after minor trauma",
-      "Neglecting extra-articular manifestations such as uveitis, bowel disease, and cardiac involvement"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e",
-      "ACR/EULAR guidelines"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Prescribe regular exercise and structured physiotherapy to maintain spinal mobility, posture, and function as the foundation of care",
-      "Use non-steroidal anti-inflammatory drugs as first-line pharmacological therapy for pain and stiffness",
-      "Escalate to biologic or targeted therapy with tumour necrosis factor inhibitors or interleukin-17 inhibitors when response to NSAIDs is inadequate",
-      "Treat peripheral arthritis and enthesitis with local corticosteroid injections and consider sulfasalazine for peripheral (not axial) involvement",
-      "Identify and co-manage extra-articular disease including acute anterior uveitis with ophthalmology, inflammatory bowel disease, and psoriasis",
-      "Monitor for and manage osteoporosis, spinal fracture risk, and cardiovascular risk, and advise smoking cessation",
-      "Refer to a rheumatology-led multidisciplinary team and consider spinal surgery for severe fixed deformity"
+    [
+     "Clinical Pitfall",
+     "Attributing chronic back pain in a young adult to mechanical causes and delaying diagnosis for years",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for ankylosing spondylitis."
+  }
+ ]
 }

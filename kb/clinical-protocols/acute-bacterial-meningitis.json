@@ -5,7 +5,17 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, ward, ICU",
- "aliases": ["ABM", "bacterial meningitis", "pyogenic meningitis", "meningococcal meningitis", "pneumococcal meningitis", "Listeria meningitis", "CT before LP", "meningitis dexamethasone", "meningococcal prophylaxis"],
+ "aliases": [
+  "ABM",
+  "bacterial meningitis",
+  "pyogenic meningitis",
+  "meningococcal meningitis",
+  "pneumococcal meningitis",
+  "Listeria meningitis",
+  "CT before LP",
+  "meningitis dexamethasone",
+  "meningococcal prophylaxis"
+ ],
  "summary": "Blood cultures, then IV ceftriaxone plus vancomycin with dexamethasone within 1 hour of arrival; add amoxicillin when Listeria is possible (age over 50, pregnancy, immunocompromise). Do the LP at once unless CT criteria are met, and never let imaging delay antibiotics.",
  "sections": [
   {
@@ -93,20 +103,147 @@
   }
  ],
  "drugs": [
-  { "name": "Ceftriaxone", "dose": "2 g IV every 12 hours", "notes": "Empirical backbone. Does not cover Listeria. Do not co-infuse with calcium-containing solutions." },
-  { "name": "Vancomycin", "dose": "15 to 20 mg/kg IV every 8 to 12 hours (individual doses usually capped at 2 g), target trough 15 to 20 mg/L", "notes": "For possibly resistant pneumococci; stop if the isolate is cephalosporin-susceptible. Adjust to renal function and levels." },
-  { "name": "Amoxicillin or ampicillin", "dose": "2 g IV every 4 hours", "notes": "Listeria cover; at least 21 days if Listeria is confirmed." },
-  { "name": "Dexamethasone", "dose": "10 mg IV every 6 hours for 4 days (0.15 mg/kg)", "notes": "First dose before or with the first antibiotic dose." },
-  { "name": "Meropenem", "dose": "2 g IV every 8 hours", "notes": "Alternative (with vancomycin) for non-anaphylactic beta-lactam allergy or resistant gram-negative infection." },
-  { "name": "Ciprofloxacin (contact prophylaxis)", "dose": "500 mg orally, single dose", "notes": "Meningococcal close contacts." },
-  { "name": "Rifampicin (contact prophylaxis)", "dose": "600 mg orally every 12 hours for 2 days", "notes": "Colours urine and secretions; reduces efficacy of hormonal contraception." },
-  { "name": "Ceftriaxone (contact prophylaxis)", "dose": "250 mg IM, single dose", "notes": "Preferred in pregnancy." }
+  {
+   "name": "Ceftriaxone",
+   "dose": "2 g IV every 12 hours",
+   "notes": "Empirical backbone. Does not cover Listeria. Do not co-infuse with calcium-containing solutions."
+  },
+  {
+   "name": "Vancomycin",
+   "dose": "15 to 20 mg/kg IV every 8 to 12 hours (individual doses usually capped at 2 g), target trough 15 to 20 mg/L",
+   "notes": "For possibly resistant pneumococci; stop if the isolate is cephalosporin-susceptible. Adjust to renal function and levels."
+  },
+  {
+   "name": "Amoxicillin or ampicillin",
+   "dose": "2 g IV every 4 hours",
+   "notes": "Listeria cover; at least 21 days if Listeria is confirmed."
+  },
+  {
+   "name": "Dexamethasone",
+   "dose": "10 mg IV every 6 hours for 4 days (0.15 mg/kg)",
+   "notes": "First dose before or with the first antibiotic dose."
+  },
+  {
+   "name": "Meropenem",
+   "dose": "2 g IV every 8 hours",
+   "notes": "Alternative (with vancomycin) for non-anaphylactic beta-lactam allergy or resistant gram-negative infection."
+  },
+  {
+   "name": "Ciprofloxacin (contact prophylaxis)",
+   "dose": "500 mg orally, single dose",
+   "notes": "Meningococcal close contacts."
+  },
+  {
+   "name": "Rifampicin (contact prophylaxis)",
+   "dose": "600 mg orally every 12 hours for 2 days",
+   "notes": "Colours urine and secretions; reduces efficacy of hormonal contraception."
+  },
+  {
+   "name": "Ceftriaxone (contact prophylaxis)",
+   "dose": "250 mg IM, single dose",
+   "notes": "Preferred in pregnancy."
+  }
  ],
  "sources": [
-  { "org": "ESCMID", "title": "ESCMID guideline: diagnosis and treatment of acute bacterial meningitis", "year": 2016, "url": "https://pubmed.ncbi.nlm.nih.gov/27062097/" },
-  { "org": "NICE", "title": "Meningitis (bacterial) and meningococcal disease: recognition, diagnosis and management (NG240)", "year": 2024, "url": "https://www.nice.org.uk/guidance/ng240/chapter/Recommendations" },
-  { "org": "ICMR", "title": "Treatment Guidelines for Antimicrobial Use in Common Syndromes 2022: acute bacterial meningitis", "year": 2022, "url": "https://amrtg.icmr.org.in/chapter8-abm-investigations.html" },
-  { "org": "IDSA", "title": "Practice guidelines for the management of bacterial meningitis", "year": 2004, "url": "https://academic.oup.com/cid/article/39/9/1267/402080" }
+  {
+   "org": "ESCMID",
+   "title": "ESCMID guideline: diagnosis and treatment of acute bacterial meningitis",
+   "year": 2016,
+   "url": "https://pubmed.ncbi.nlm.nih.gov/27062097/"
+  },
+  {
+   "org": "NICE",
+   "title": "Meningitis (bacterial) and meningococcal disease: recognition, diagnosis and management (NG240)",
+   "year": 2024,
+   "url": "https://www.nice.org.uk/guidance/ng240/chapter/Recommendations"
+  },
+  {
+   "org": "ICMR",
+   "title": "Treatment Guidelines for Antimicrobial Use in Common Syndromes 2022: acute bacterial meningitis",
+   "year": 2022,
+   "url": "https://amrtg.icmr.org.in/chapter8-abm-investigations.html"
+  },
+  {
+   "org": "IDSA",
+   "title": "Practice guidelines for the management of bacterial meningitis",
+   "year": 2004,
+   "url": "https://academic.oup.com/cid/article/39/9/1267/402080"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "acute-bacterial-meningitis-pathway",
+   "title": "Acute bacterial meningitis (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "The classic triad (fever, neck stiffness, altered mental status) is present in under half of adults, but almost all have at least two of headache, fever, neck stiffness and altered consciousness.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Take 2 sets of blood cultures, then give IV antibiotics and dexamethasone within 1 hour of arrival. Do the LP first only if it can be done immediately; never delay the first dose for LP or imaging.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "CSF: opening pressure, cell count and differential, protein, glucose with paired plasma glucose, Gram stain, culture, and PCR or a multiplex panel where available. Save an extra tube for TB, cryptococcal antigen or viral PCR."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Dexamethasone 10 mg IV every 6 hours for 4 days (0.15 mg/kg), first dose just before or with the first antibiotic dose."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Neurological observations (GCS, pupils) hourly at first; watch for seizures, hyponatraemia, hydrocephalus, cerebral oedema, venous sinus thrombosis and subdural empyema."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for acute bacterial meningitis (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "acute-bacterial-meningitis-summary-matrix",
+   "title": "Acute bacterial meningitis (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The classic triad (fever, neck stiffness, altered mental status) is present in under half of adults, but almost all have at least two of",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Take 2 sets of blood cultures, then give IV antibiotics and dexamethasone within 1 hour of arrival. Do the LP first only if it can be done",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "CSF: opening pressure, cell count and differential, protein, glucose with paired plasma glucose, Gram stain, culture, and PCR or a",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Ceftriaxone: 2 g IV every 12 hours",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Delaying antibiotics for CT or LP: outcome worsens with each hour of delay.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for acute bacterial meningitis (adult)."
+  }
+ ]
 }

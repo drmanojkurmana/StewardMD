@@ -1,82 +1,154 @@
 {
-  "id": "cervical_polyp",
-  "name": "Cervical polyp",
-  "aliases": [
-    "Endocervical polyp",
-    "Cervical mucous polyp"
+ "id": "cervical_polyp",
+ "name": "Cervical polyp",
+ "aliases": [
+  "Endocervical polyp",
+  "Cervical mucous polyp"
+ ],
+ "class": "non_infective",
+ "system": "Reproductive / Gynaecology",
+ "specialty": "Gynaecology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Berek & Novak's Gynecology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Cervical polyps are common benign outgrowths of endocervical, and occasionally ectocervical, tissue, most frequent in multiparous women in the fourth to sixth decades.",
+   "They are often asymptomatic and found incidentally at speculum examination, but when symptomatic they cause intermenstrual, postcoital or postmenopausal bleeding, or a mucoid discharge.",
+   "The typical appearance is a smooth, reddish, pedunculated lesion protruding through the external os.",
+   "Malignant change is very rare, affecting well under one per cent, yet every removed polyp should be sent for histological examination.",
+   "Small symptomatic polyps can frequently be removed in clinic by grasping and twisting the base, whereas a broad-based lesion may require hysteroscopic resection.",
+   "Coexisting endometrial polyps are common, particularly when there is abnormal bleeding, so the endometrial cavity should be assessed.",
+   "Visible bleeding still warrants exclusion of cervical and endometrial malignancy, even when a polyp is present.",
+   "An endometrial polyp can prolapse through the cervix and mimic a cervical polyp, and recurrence after removal is possible."
   ],
-  "class": "non_infective",
-  "system": "Reproductive / Gynaecology",
-  "specialty": "Gynaecology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Berek & Novak's Gynecology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Cervical polyps are common benign outgrowths of endocervical, and occasionally ectocervical, tissue, most frequent in multiparous women in the fourth to sixth decades.",
-      "They are often asymptomatic and found incidentally at speculum examination, but when symptomatic they cause intermenstrual, postcoital or postmenopausal bleeding, or a mucoid discharge.",
-      "The typical appearance is a smooth, reddish, pedunculated lesion protruding through the external os.",
-      "Malignant change is very rare, affecting well under one per cent, yet every removed polyp should be sent for histological examination.",
-      "Small symptomatic polyps can frequently be removed in clinic by grasping and twisting the base, whereas a broad-based lesion may require hysteroscopic resection.",
-      "Coexisting endometrial polyps are common, particularly when there is abnormal bleeding, so the endometrial cavity should be assessed.",
-      "Visible bleeding still warrants exclusion of cervical and endometrial malignancy, even when a polyp is present.",
-      "An endometrial polyp can prolapse through the cervix and mimic a cervical polyp, and recurrence after removal is possible."
+  "pathophysiology": "A cervical polyp is a focal benign proliferation of endocervical columnar epithelium and its supporting stroma, generally attributed to chronic inflammation, local vascular congestion or oestrogenic stimulation. It consists of a vascular connective-tissue core covered by epithelium, and the fragile surface vessels bleed readily on contact, producing the characteristic postcoital or intermenstrual spotting. The covering epithelium may undergo squamous metaplasia, and less commonly microglandular hyperplasia develops in association with progestogen exposure or pregnancy.",
+  "additionalDifferentials": [
+   "Endometrial polyp prolapsing through the os",
+   "Prolapsed submucosal fibroid",
+   "Cervical ectropion",
+   "Cervical carcinoma",
+   "Retained products of conception or decidual reaction in pregnancy",
+   "Nabothian cyst",
+   "Cervical condyloma or papilloma"
+  ],
+  "additionalInvestigations": [
+   "Speculum examination to establish the diagnosis",
+   "Histopathological examination of the excised polyp",
+   "Cervical cytology in accordance with the screening programme",
+   "Transvaginal ultrasound or saline sonohysterography to assess the endometrium",
+   "Hysteroscopy when endometrial pathology is suspected or the polyp is broad-based",
+   "Endometrial biopsy when abnormal uterine bleeding is accompanied by risk factors",
+   "High vaginal and endocervical swabs where there is associated discharge"
+  ],
+  "redFlags": [
+   "Postmenopausal bleeding, which mandates endometrial investigation regardless of a visible polyp",
+   "A friable, irregular or necrotic-looking lesion suspicious for malignancy",
+   "Persistent abnormal bleeding after polyp removal",
+   "Rapid growth of the lesion",
+   "Abnormal cervical cytology"
+  ],
+  "prognosis": "The prognosis is excellent, as cervical polyps are benign with very low malignant potential and simple removal is usually curative, although recurrence can occur.",
+  "pitfalls": [
+   "Assuming all bleeding arises from the polyp and failing to investigate the cervix and endometrium for malignancy.",
+   "Not submitting the removed specimen for histology.",
+   "Mistaking a prolapsed endometrial polyp or submucosal fibroid for a cervical polyp.",
+   "Removing a polyp during pregnancy without accounting for the increased risk of bleeding.",
+   "Overlooking an associated endometrial polyp in women with abnormal uterine bleeding."
+  ],
+  "references": [
+   "Berek & Novak's Gynecology",
+   "Rosai and Ackerman's Surgical Pathology",
+   "NICE Clinical Knowledge Summaries: Cervical polyps"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Remove small symptomatic polyps in clinic by grasping and twisting the base to avulse the lesion",
+   "Undertake hysteroscopic resection for broad-based or larger polyps",
+   "Send every removed polyp for histological examination to exclude the rare malignancy",
+   "Assess the endometrial cavity with transvaginal ultrasound or saline sonohysterography, as coexisting endometrial polyps are common",
+   "Ensure cervical screening is up to date and perform endometrial biopsy where abnormal uterine bleeding coexists with risk factors",
+   "Reassure and observe asymptomatic incidental polyps, counselling on the possibility of recurrence"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "cervical_polyp-pathway",
+   "title": "Cervical polyp: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Cervical polyps are common benign outgrowths of endocervical, and occasionally ectocervical, tissue, most frequent in multiparous women in the fourth to sixth decades.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Postmenopausal bleeding, which mandates endometrial investigation regardless of a visible polyp",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Speculum examination to establish the diagnosis, Histopathological examination of the excised polyp, Cervical cytology in accordance with the screening programme"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Remove small symptomatic polyps in clinic by grasping and twisting the base to avulse the lesion"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming all bleeding arises from the polyp and failing to investigate the cervix and endometrium for malignancy."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of cervical polyp."
+  }
+ ],
+ "tables": [
+  {
+   "id": "cervical_polyp-matrix",
+   "title": "Cervical polyp: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Cervical polyps are common benign outgrowths of endocervical, and occasionally ectocervical, tissue, most frequent in multiparous",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "A cervical polyp is a focal benign proliferation of endocervical columnar epithelium and its supporting stroma, generally attributed to chronic inflammation, local vascular congestion or oestrogenic stimulation. It consists of a vascular connective-tissue core covered by epithelium, and the fragile surface vessels bleed readily on contact, producing the characteristic postcoital or intermenstrual spotting. The covering epithelium may undergo squamous metaplasia, and less commonly microglandular hyperplasia develops in association with progestogen exposure or pregnancy.",
-    "additionalDifferentials": [
-      "Endometrial polyp prolapsing through the os",
-      "Prolapsed submucosal fibroid",
-      "Cervical ectropion",
-      "Cervical carcinoma",
-      "Retained products of conception or decidual reaction in pregnancy",
-      "Nabothian cyst",
-      "Cervical condyloma or papilloma"
+    [
+     "Key Investigations",
+     "Speculum examination to establish the diagnosis, Histopathological examination of the excised polyp, Cervical cytology in",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Speculum examination to establish the diagnosis",
-      "Histopathological examination of the excised polyp",
-      "Cervical cytology in accordance with the screening programme",
-      "Transvaginal ultrasound or saline sonohysterography to assess the endometrium",
-      "Hysteroscopy when endometrial pathology is suspected or the polyp is broad-based",
-      "Endometrial biopsy when abnormal uterine bleeding is accompanied by risk factors",
-      "High vaginal and endocervical swabs where there is associated discharge"
+    [
+     "Primary Differentials",
+     "Endometrial polyp prolapsing through the os, Prolapsed submucosal fibroid, Cervical ectropion",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Postmenopausal bleeding, which mandates endometrial investigation regardless of a visible polyp",
-      "A friable, irregular or necrotic-looking lesion suspicious for malignancy",
-      "Persistent abnormal bleeding after polyp removal",
-      "Rapid growth of the lesion",
-      "Abnormal cervical cytology"
+    [
+     "Management Strategy",
+     "Remove small symptomatic polyps in clinic by grasping and twisting the base to avulse the lesion",
+     "Core treatment modality"
     ],
-    "prognosis": "The prognosis is excellent, as cervical polyps are benign with very low malignant potential and simple removal is usually curative, although recurrence can occur.",
-    "pitfalls": [
-      "Assuming all bleeding arises from the polyp and failing to investigate the cervix and endometrium for malignancy.",
-      "Not submitting the removed specimen for histology.",
-      "Mistaking a prolapsed endometrial polyp or submucosal fibroid for a cervical polyp.",
-      "Removing a polyp during pregnancy without accounting for the increased risk of bleeding.",
-      "Overlooking an associated endometrial polyp in women with abnormal uterine bleeding."
-    ],
-    "references": [
-      "Berek & Novak's Gynecology",
-      "Rosai and Ackerman's Surgical Pathology",
-      "NICE Clinical Knowledge Summaries: Cervical polyps"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Remove small symptomatic polyps in clinic by grasping and twisting the base to avulse the lesion",
-      "Undertake hysteroscopic resection for broad-based or larger polyps",
-      "Send every removed polyp for histological examination to exclude the rare malignancy",
-      "Assess the endometrial cavity with transvaginal ultrasound or saline sonohysterography, as coexisting endometrial polyps are common",
-      "Ensure cervical screening is up to date and perform endometrial biopsy where abnormal uterine bleeding coexists with risk factors",
-      "Reassure and observe asymptomatic incidental polyps, counselling on the possibility of recurrence"
+    [
+     "Clinical Pitfall",
+     "Assuming all bleeding arises from the polyp and failing to investigate the cervix and endometrium for malignancy.",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for cervical polyp."
+  }
+ ]
 }

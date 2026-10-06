@@ -1,82 +1,154 @@
 {
-  "id": "neonatal_abstinence_syndrome",
-  "name": "Neonatal Abstinence Syndrome",
-  "aliases": [
-    "NAS",
-    "neonatal opioid withdrawal syndrome",
-    "NOWS"
+ "id": "neonatal_abstinence_syndrome",
+ "name": "Neonatal Abstinence Syndrome",
+ "aliases": [
+  "NAS",
+  "neonatal opioid withdrawal syndrome",
+  "NOWS"
+ ],
+ "class": "non_infective",
+ "system": "Neonatal / Neurological",
+ "specialty": "Paediatrics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nelson Textbook of Pediatrics",
+  "sourceEdition": "22e",
+  "pages": null,
+  "clinicalPearls": [
+   "A constellation of withdrawal signs in a newborn following intrauterine exposure to substances, most commonly opioids, that the infant is no longer receiving after birth.",
+   "Signs typically involve central nervous system irritability, autonomic disturbance, and gastrointestinal dysfunction.",
+   "Common features include tremors, high-pitched crying, poor sleep, irritability, hypertonia, sweating, sneezing, nasal stuffiness, feeding difficulty, vomiting, and loose stools.",
+   "The timing of onset depends on the substance and its half-life; short-acting opioids produce earlier withdrawal, while longer-acting agents may delay onset for days.",
+   "Standardised scoring tools are used to assess severity and guide whether pharmacological treatment is needed.",
+   "First-line care emphasises supportive, non-pharmacological measures such as a low-stimulation environment, swaddling, gentle handling, and rooming-in with the mother.",
+   "The Eat, Sleep, Console approach focuses on the infant's function rather than symptom counts alone.",
+   "When supportive care is insufficient, opioid-based pharmacological treatment is used with gradual weaning; polysubstance exposure and breastfeeding considerations should also be addressed."
   ],
-  "class": "non_infective",
-  "system": "Neonatal / Neurological",
-  "specialty": "Paediatrics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nelson Textbook of Pediatrics",
-    "sourceEdition": "22e",
-    "pages": null,
-    "clinicalPearls": [
-      "A constellation of withdrawal signs in a newborn following intrauterine exposure to substances, most commonly opioids, that the infant is no longer receiving after birth.",
-      "Signs typically involve central nervous system irritability, autonomic disturbance, and gastrointestinal dysfunction.",
-      "Common features include tremors, high-pitched crying, poor sleep, irritability, hypertonia, sweating, sneezing, nasal stuffiness, feeding difficulty, vomiting, and loose stools.",
-      "The timing of onset depends on the substance and its half-life; short-acting opioids produce earlier withdrawal, while longer-acting agents may delay onset for days.",
-      "Standardised scoring tools are used to assess severity and guide whether pharmacological treatment is needed.",
-      "First-line care emphasises supportive, non-pharmacological measures such as a low-stimulation environment, swaddling, gentle handling, and rooming-in with the mother.",
-      "The Eat, Sleep, Console approach focuses on the infant's function rather than symptom counts alone.",
-      "When supportive care is insufficient, opioid-based pharmacological treatment is used with gradual weaning; polysubstance exposure and breastfeeding considerations should also be addressed."
+  "pathophysiology": "During pregnancy, drugs that cross the placenta reach the fetus and lead to physiological dependence, particularly with opioids acting on central opioid receptors. After delivery the sudden loss of transplacental drug supply removes this stimulation, producing a hyperexcitable state affecting the central and autonomic nervous systems and the gastrointestinal tract. The resulting neurotransmitter imbalance manifests as the characteristic irritability, autonomic instability, and feeding disturbance; the pattern and timing vary with the specific agent, dose, and its pharmacokinetics.",
+  "additionalDifferentials": [
+   "Neonatal sepsis or infection",
+   "Hypoglycaemia",
+   "Hypocalcaemia or other electrolyte disturbance",
+   "Hyperthyroidism (neonatal thyrotoxicosis)",
+   "Hypoxic-ischaemic encephalopathy",
+   "Central nervous system haemorrhage or injury"
+  ],
+  "additionalInvestigations": [
+   "Serial standardised withdrawal scoring (e.g. modified Finnegan) or function-based assessment",
+   "Maternal history of substance use and prescribed medications",
+   "Toxicology testing of infant urine, meconium, or other matrices where appropriate",
+   "Blood glucose monitoring",
+   "Electrolytes and calcium if clinically indicated",
+   "Sepsis screen when infection cannot be excluded"
+  ],
+  "redFlags": [
+   "Seizures attributable to withdrawal",
+   "Severe feeding intolerance with dehydration or poor weight gain",
+   "Excessive weight loss or failure to thrive",
+   "Marked autonomic instability or persistent high scores despite supportive care",
+   "Signs suggesting an alternative serious diagnosis such as sepsis or hypoglycaemia",
+   "Difficulty consoling with escalating pharmacological requirements"
+  ],
+  "prognosis": "Acute withdrawal is usually self-limited and manageable, and most infants recover well with appropriate supportive and, when needed, pharmacological care; longer-term neurodevelopmental outcomes are influenced more by the broader social and environmental context, so coordinated family support and follow-up are important.",
+  "pitfalls": [
+   "Relying on medication before optimising non-pharmacological, function-focused care",
+   "Excessive handling and stimulation that worsen the infant's symptoms",
+   "Overlooking polysubstance exposure, which alters the withdrawal course",
+   "Missing concurrent problems such as sepsis or hypoglycaemia",
+   "Inconsistent scoring between assessors leading to inappropriate treatment decisions",
+   "Neglecting maternal support, breastfeeding counselling, and social care coordination"
+  ],
+  "references": [
+   "Nelson Textbook of Pediatrics, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "First-line non-pharmacological care with a low-stimulation environment, swaddling, gentle handling, rooming-in with the mother and frequent small feeds",
+   "Standardised withdrawal scoring to assess severity and decide when pharmacological treatment is needed",
+   "Pharmacological treatment of opioid withdrawal with an opioid such as oral morphine or methadone when supportive measures are insufficient",
+   "Adjunctive phenobarbital or clonidine for severe, refractory or polysubstance-related withdrawal",
+   "Support of breastfeeding where maternal circumstances allow, with monitoring of weight, hydration and blood glucose",
+   "Engagement of maternal addiction services, social support and safeguarding assessment",
+   "Coordinated follow-up for feeding, growth and neurodevelopmental outcome"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "neonatal_abstinence_syndrome-pathway",
+   "title": "Neonatal Abstinence Syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A constellation of withdrawal signs in a newborn following intrauterine exposure to substances, most commonly opioids, that the infant is no longer receiving after birth.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Seizures attributable to withdrawal",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serial standardised withdrawal scoring (e.g. modified Finnegan) or function-based assessment, Maternal history of substance use and prescribed medications, Toxicology testing of infant urine, meconium, or other matrices"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: First-line non-pharmacological care with a low-stimulation environment, swaddling, gentle handling, rooming-in with the mother and frequent small feeds"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Relying on medication before optimising non-pharmacological, function-focused care"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of neonatal abstinence syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "neonatal_abstinence_syndrome-matrix",
+   "title": "Neonatal Abstinence Syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A constellation of withdrawal signs in a newborn following intrauterine exposure to substances, most commonly opioids, that the",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "During pregnancy, drugs that cross the placenta reach the fetus and lead to physiological dependence, particularly with opioids acting on central opioid receptors. After delivery the sudden loss of transplacental drug supply removes this stimulation, producing a hyperexcitable state affecting the central and autonomic nervous systems and the gastrointestinal tract. The resulting neurotransmitter imbalance manifests as the characteristic irritability, autonomic instability, and feeding disturbance; the pattern and timing vary with the specific agent, dose, and its pharmacokinetics.",
-    "additionalDifferentials": [
-      "Neonatal sepsis or infection",
-      "Hypoglycaemia",
-      "Hypocalcaemia or other electrolyte disturbance",
-      "Hyperthyroidism (neonatal thyrotoxicosis)",
-      "Hypoxic-ischaemic encephalopathy",
-      "Central nervous system haemorrhage or injury"
+    [
+     "Key Investigations",
+     "Serial standardised withdrawal scoring (e.g. modified Finnegan) or function-based assessment, Maternal history of substance use",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serial standardised withdrawal scoring (e.g. modified Finnegan) or function-based assessment",
-      "Maternal history of substance use and prescribed medications",
-      "Toxicology testing of infant urine, meconium, or other matrices where appropriate",
-      "Blood glucose monitoring",
-      "Electrolytes and calcium if clinically indicated",
-      "Sepsis screen when infection cannot be excluded"
+    [
+     "Primary Differentials",
+     "Neonatal sepsis or infection, Hypoglycaemia, Hypocalcaemia or other electrolyte disturbance",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Seizures attributable to withdrawal",
-      "Severe feeding intolerance with dehydration or poor weight gain",
-      "Excessive weight loss or failure to thrive",
-      "Marked autonomic instability or persistent high scores despite supportive care",
-      "Signs suggesting an alternative serious diagnosis such as sepsis or hypoglycaemia",
-      "Difficulty consoling with escalating pharmacological requirements"
+    [
+     "Management Strategy",
+     "First-line non-pharmacological care with a low-stimulation environment, swaddling, gentle handling, rooming-in with the mother",
+     "Core treatment modality"
     ],
-    "prognosis": "Acute withdrawal is usually self-limited and manageable, and most infants recover well with appropriate supportive and, when needed, pharmacological care; longer-term neurodevelopmental outcomes are influenced more by the broader social and environmental context, so coordinated family support and follow-up are important.",
-    "pitfalls": [
-      "Relying on medication before optimising non-pharmacological, function-focused care",
-      "Excessive handling and stimulation that worsen the infant's symptoms",
-      "Overlooking polysubstance exposure, which alters the withdrawal course",
-      "Missing concurrent problems such as sepsis or hypoglycaemia",
-      "Inconsistent scoring between assessors leading to inappropriate treatment decisions",
-      "Neglecting maternal support, breastfeeding counselling, and social care coordination"
-    ],
-    "references": [
-      "Nelson Textbook of Pediatrics, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "First-line non-pharmacological care with a low-stimulation environment, swaddling, gentle handling, rooming-in with the mother and frequent small feeds",
-      "Standardised withdrawal scoring to assess severity and decide when pharmacological treatment is needed",
-      "Pharmacological treatment of opioid withdrawal with an opioid such as oral morphine or methadone when supportive measures are insufficient",
-      "Adjunctive phenobarbital or clonidine for severe, refractory or polysubstance-related withdrawal",
-      "Support of breastfeeding where maternal circumstances allow, with monitoring of weight, hydration and blood glucose",
-      "Engagement of maternal addiction services, social support and safeguarding assessment",
-      "Coordinated follow-up for feeding, growth and neurodevelopmental outcome"
+    [
+     "Clinical Pitfall",
+     "Relying on medication before optimising non-pharmacological, function-focused care",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for neonatal abstinence syndrome."
+  }
+ ]
 }

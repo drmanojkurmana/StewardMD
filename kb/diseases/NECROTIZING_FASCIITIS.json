@@ -227,5 +227,77 @@
       "importedAt": "2026-06-29T13:34:16Z",
       "contentHash": "h7128ecbe"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "necrotizing_fasciitis-dx-algo",
+      "title": "Necrotizing Fasciitis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Pain out of proportion to physical findings is the classic early clue: physical signs may be minimal (only soft-tissue edema and mild erythema) while pain and fever are severe; this disparity helps distinguish NF from superficial",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Pain out of proportion to examination findings",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Soft-tissue plain radiography, CT, and MRI to assess depth of infection and detect tissue gas or a localized abscess - most useful when lesions progress rapidly or SIRS is present; note imaging may show only soft-tissue"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Microbiologic/clinical typing: Type I = mixed aerobic-anaerobic, begins at a mucosal-barrier breach (GI/GU), common in diabetes, peripheral vascular disease, malignancy, surgery, or abdominal penetrating injury; Fournier"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Early physical findings are minimal relative to pain/fever, leading to underestimation of severity and misdiagnosis as thrombophlebitis or simple cellulitis."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for necrotizing fasciitis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "necrotizing_fasciitis-matrix",
+      "title": "Necrotizing Fasciitis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Pain out of proportion to physical findings is the classic early clue: physical signs may be minimal (only soft-tissue edema and",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Soft-tissue plain radiography, CT, and MRI to assess depth of infection and detect tissue gas or a localized abscess - most",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Clostridial myonecrosis / gas gangrene (distinguished from clostridial NF by muscle biopsy), Streptococcal necrotizing myositis",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Pain out of proportion to examination findings",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Early physical findings are minimal relative to pain/fever, leading to underestimation of severity and misdiagnosis as",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for necrotizing fasciitis."
+    }
+  ]
 }

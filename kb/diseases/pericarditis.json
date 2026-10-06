@@ -143,5 +143,77 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "he82277f6"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "pericarditis-dx-algo",
+      "title": "Acute pericarditis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Diagnosis rests on the combination of characteristic chest pain, a pericardial friction rub, and characteristic ECG changes; echocardiography can be normal in roughly a third to half of cases, so a normal echo does not exclude pericarditis",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Hypotension with significant tachycardia, suggesting tamponade and haemodynamic compromise (pericarditis with tamponade is a high-risk, potentially life-threatening cause of chest pain) (p.147, p.150)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: 12-lead ECG looking for diffuse ST-segment elevation with PR-segment depression (p.149), Chest radiograph (pericardial calcification suggests chronic pericarditis; usually unremarkable in acute disease) (p.150),"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Differentiate from top mimics: Acute myocardial ischaemia / STEMI, Acute aortic syndrome (dissection), Pulmonary embolism"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Diffuse (multi-lead) ST-segment elevation not confined to a single coronary territory, together with PR-segment depression, helps distinguish pericarditis from acute MI; ascribing these ECG changes to ischaemia is a key"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for acute pericarditis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "pericarditis-matrix",
+      "title": "Acute pericarditis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Diagnosis rests on the combination of characteristic chest pain, a pericardial friction rub, and characteristic ECG changes;",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "12-lead ECG looking for diffuse ST-segment elevation with PR-segment depression (p.149), Chest radiograph (pericardial",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Acute myocardial ischaemia / STEMI, Acute aortic syndrome (dissection), Pulmonary embolism",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Hypotension with significant tachycardia, suggesting tamponade and haemodynamic compromise (pericarditis with tamponade is a",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diffuse (multi-lead) ST-segment elevation not confined to a single coronary territory, together with PR-segment depression, helps",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for acute pericarditis."
+    }
+  ]
 }

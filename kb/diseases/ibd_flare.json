@@ -174,5 +174,77 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h668f935a"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "ibd_flare-dx-algo",
+      "title": "Inflammatory bowel disease flare: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "UC inflammation is continuous from the rectum proximally without skip areas, whereas Crohn's is segmental with skip lesions and frequently spares the rectum; this distribution difference is a key way to separate the two (p.2555-2556).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Toxic megacolon - transverse or right colon dilated >6 cm with loss of haustration during a severe attack; surgical emergency, can be precipitated by electrolyte abnormalities and narcotics (p.2557)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Acute-phase reactants - CRP, platelet count and ESR rise; haemoglobin falls in active disease (p.2556-2557), Serum albumin (falls quickly in severe illness) (p.2557), Faecal lactoferrin (sensitive/specific marker of"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Montreal classification of UC severity (Harrison Table 337-4, p.2557): S0 clinical remission (no symptoms); S1 mild = up to 4 stools/day +/- blood, no systemic illness, normal ESR; S2 moderate = 4 or more stools/day with"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Before escalating immunosuppression in a presumed flare, exclude superimposed infection - C. difficile and CMV colitis can mimic or complicate IBD; diagnosis requires negative stool studies (culture, C. difficile toxin,"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for inflammatory bowel disease flare."
+    }
+  ],
+  "tables": [
+    {
+      "id": "ibd_flare-matrix",
+      "title": "Inflammatory bowel disease flare: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "UC inflammation is continuous from the rectum proximally without skip areas, whereas Crohn's is segmental with skip lesions and",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Acute-phase reactants - CRP, platelet count and ESR rise; haemoglobin falls in active disease (p.2556-2557), Serum albumin (falls",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Indeterminate colitis (UC vs Crohn's cannot be distinguished early in up to 15% of cases) (p.2559), Diverticulitis /",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Toxic megacolon - transverse or right colon dilated >6 cm with loss of haustration during a severe attack; surgical emergency,",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Before escalating immunosuppression in a presumed flare, exclude superimposed infection - C. difficile and CMV colitis can mimic",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for inflammatory bowel disease flare."
+    }
+  ]
 }

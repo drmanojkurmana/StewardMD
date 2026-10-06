@@ -1,81 +1,153 @@
 {
-  "id": "eastern_equine_encephalitis",
-  "name": "Eastern equine encephalitis",
-  "aliases": [
-    "EEE",
-    "eastern equine encephalitis virus infection",
-    "EEEV infection",
-    "sleeping sickness (equine)"
+ "id": "eastern_equine_encephalitis",
+ "name": "Eastern equine encephalitis",
+ "aliases": [
+  "EEE",
+  "eastern equine encephalitis virus infection",
+  "EEEV infection",
+  "sleeping sickness (equine)"
+ ],
+ "class": "infective",
+ "system": "Infectious disease",
+ "specialty": "Infectious Diseases",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / CDC guidance",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A mosquito-borne alphavirus of eastern North America maintained in a bird reservoir with Culiseta mosquitoes, spilling over to humans and horses via bridge-vector mosquitoes near freshwater swamps",
+   "Most infections are asymptomatic or febrile, but eastern equine encephalitis produces the most severe of the arboviral encephalitides in North America with very high mortality among those with neuroinvasive disease",
+   "Neuroinvasive illness presents with high fever, headache, vomiting, seizures, and rapidly progressive obtundation, often after a brief prodrome",
+   "Young children and older adults are at greatest risk of severe disease and neurological sequelae",
+   "Magnetic resonance imaging characteristically shows lesions in the basal ganglia and thalami, which can help differentiate it from other encephalitides",
+   "There is no specific antiviral or licensed human vaccine; management is intensive supportive and neuroprotective care with seizure and intracranial pressure control",
+   "Diagnosis rests on cerebrospinal fluid and serum serology (IgM) and, where available, molecular testing, alongside a summer mosquito-exposure history"
   ],
-  "class": "infective",
-  "system": "Infectious disease",
-  "specialty": "Infectious Diseases",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / CDC guidance",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A mosquito-borne alphavirus of eastern North America maintained in a bird reservoir with Culiseta mosquitoes, spilling over to humans and horses via bridge-vector mosquitoes near freshwater swamps",
-      "Most infections are asymptomatic or febrile, but eastern equine encephalitis produces the most severe of the arboviral encephalitides in North America with very high mortality among those with neuroinvasive disease",
-      "Neuroinvasive illness presents with high fever, headache, vomiting, seizures, and rapidly progressive obtundation, often after a brief prodrome",
-      "Young children and older adults are at greatest risk of severe disease and neurological sequelae",
-      "Magnetic resonance imaging characteristically shows lesions in the basal ganglia and thalami, which can help differentiate it from other encephalitides",
-      "There is no specific antiviral or licensed human vaccine; management is intensive supportive and neuroprotective care with seizure and intracranial pressure control",
-      "Diagnosis rests on cerebrospinal fluid and serum serology (IgM) and, where available, molecular testing, alongside a summer mosquito-exposure history"
+  "pathophysiology": "Eastern equine encephalitis virus cycles between passerine birds and ornithophilic mosquitoes in freshwater swamp habitats, with bridge-vector mosquitoes transmitting to incidental hosts such as humans and horses that do not sustain transmission. After a bite, viral replication and viraemia can be followed by neuroinvasion across the blood-brain barrier. In the central nervous system the virus causes widespread neuronal infection, intense inflammation, and vasculitis, with a predilection for deep grey-matter structures, producing severe oedema and neuronal destruction that underlie the high fatality and neurological sequelae.",
+  "additionalDifferentials": [
+   "Herpes simplex virus encephalitis",
+   "West Nile virus neuroinvasive disease",
+   "Other arboviral encephalitides such as St Louis or La Crosse encephalitis",
+   "Bacterial meningoencephalitis",
+   "Autoimmune or paraneoplastic encephalitis",
+   "Acute disseminated encephalomyelitis"
+  ],
+  "additionalInvestigations": [
+   "Serum and cerebrospinal fluid IgM serology for eastern equine encephalitis virus",
+   "Cerebrospinal fluid analysis typically showing pleocytosis and raised protein",
+   "Magnetic resonance imaging of the brain looking for basal ganglia and thalamic involvement",
+   "Molecular testing (RT-PCR) on cerebrospinal fluid where available, recognising limited sensitivity late in disease",
+   "Electroencephalography to characterise seizure activity and encephalopathy",
+   "Testing to exclude treatable causes, particularly herpes simplex virus"
+  ],
+  "redFlags": [
+   "Rapidly declining consciousness or coma",
+   "Status epilepticus or recurrent seizures",
+   "Signs of raised intracranial pressure",
+   "Focal neurological deficits with basal ganglia or thalamic lesions on imaging",
+   "Extremes of age with neuroinvasive disease"
+  ],
+  "prognosis": "Neuroinvasive eastern equine encephalitis carries one of the highest case-fatality rates of the arboviral encephalitides, and many survivors are left with significant long-term neurological disability.",
+  "pitfalls": [
+   "Delaying empirical aciclovir for possible herpes simplex encephalitis while awaiting arboviral results",
+   "Relying on molecular testing alone, since RT-PCR sensitivity in cerebrospinal fluid is limited and serology is often required",
+   "Underestimating rapid deterioration and delaying intensive care admission",
+   "Overlooking the summer mosquito-exposure history in swampy endemic regions",
+   "Failing to recognise characteristic deep grey-matter imaging findings"
+  ],
+  "references": [
+   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
+   "CDC guidance on eastern equine encephalitis"
+  ],
+  "crossLinks": [],
+  "management": [
+   "No specific antiviral or licensed vaccine exists; the mainstay is intensive supportive neurocritical care with airway protection and mechanical ventilation for the obtunded patient",
+   "Control seizures with benzodiazepines acutely and loading with an antiseizure agent, treating status epilepticus aggressively",
+   "Manage raised intracranial pressure and cerebral oedema with head elevation, osmotic therapy (hypertonic saline or mannitol) and neuroprotective measures",
+   "Give empirical aciclovir until herpes simplex encephalitis is excluded, given the overlapping presentation",
+   "Maintain fluid and electrolyte balance, prevent aspiration, and treat secondary infection and other intensive care complications",
+   "Manage jointly with neurology and infectious diseases in an intensive care setting, and arrange neurorehabilitation for survivors with disability",
+   "Counsel on mosquito-bite avoidance and vector control for prevention, and notify public health authorities"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "eastern_equine_encephalitis-pathway",
+   "title": "Eastern equine encephalitis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A mosquito-borne alphavirus of eastern North America maintained in a bird reservoir with Culiseta mosquitoes, spilling over to humans and horses via bridge-vector mosquitoes near freshwater swamps",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapidly declining consciousness or coma",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serum and cerebrospinal fluid IgM serology for eastern equine encephalitis virus, Cerebrospinal fluid analysis typically showing pleocytosis and raised protein, Magnetic resonance imaging of the brain looking for basal"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: No specific antiviral or licensed vaccine exists; the mainstay is intensive supportive neurocritical care with airway protection and mechanical ventilation for the obtunded patient"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Delaying empirical aciclovir for possible herpes simplex encephalitis while awaiting arboviral results"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of eastern equine encephalitis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "eastern_equine_encephalitis-matrix",
+   "title": "Eastern equine encephalitis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A mosquito-borne alphavirus of eastern North America maintained in a bird reservoir with Culiseta mosquitoes, spilling over to",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Eastern equine encephalitis virus cycles between passerine birds and ornithophilic mosquitoes in freshwater swamp habitats, with bridge-vector mosquitoes transmitting to incidental hosts such as humans and horses that do not sustain transmission. After a bite, viral replication and viraemia can be followed by neuroinvasion across the blood-brain barrier. In the central nervous system the virus causes widespread neuronal infection, intense inflammation, and vasculitis, with a predilection for deep grey-matter structures, producing severe oedema and neuronal destruction that underlie the high fatality and neurological sequelae.",
-    "additionalDifferentials": [
-      "Herpes simplex virus encephalitis",
-      "West Nile virus neuroinvasive disease",
-      "Other arboviral encephalitides such as St Louis or La Crosse encephalitis",
-      "Bacterial meningoencephalitis",
-      "Autoimmune or paraneoplastic encephalitis",
-      "Acute disseminated encephalomyelitis"
+    [
+     "Key Investigations",
+     "Serum and cerebrospinal fluid IgM serology for eastern equine encephalitis virus, Cerebrospinal fluid analysis typically showing",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serum and cerebrospinal fluid IgM serology for eastern equine encephalitis virus",
-      "Cerebrospinal fluid analysis typically showing pleocytosis and raised protein",
-      "Magnetic resonance imaging of the brain looking for basal ganglia and thalamic involvement",
-      "Molecular testing (RT-PCR) on cerebrospinal fluid where available, recognising limited sensitivity late in disease",
-      "Electroencephalography to characterise seizure activity and encephalopathy",
-      "Testing to exclude treatable causes, particularly herpes simplex virus"
+    [
+     "Primary Differentials",
+     "Herpes simplex virus encephalitis, West Nile virus neuroinvasive disease, Other arboviral encephalitides such as St Louis or La",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapidly declining consciousness or coma",
-      "Status epilepticus or recurrent seizures",
-      "Signs of raised intracranial pressure",
-      "Focal neurological deficits with basal ganglia or thalamic lesions on imaging",
-      "Extremes of age with neuroinvasive disease"
+    [
+     "Management Strategy",
+     "No specific antiviral or licensed vaccine exists; the mainstay is intensive supportive neurocritical care with airway protection",
+     "Core treatment modality"
     ],
-    "prognosis": "Neuroinvasive eastern equine encephalitis carries one of the highest case-fatality rates of the arboviral encephalitides, and many survivors are left with significant long-term neurological disability.",
-    "pitfalls": [
-      "Delaying empirical aciclovir for possible herpes simplex encephalitis while awaiting arboviral results",
-      "Relying on molecular testing alone, since RT-PCR sensitivity in cerebrospinal fluid is limited and serology is often required",
-      "Underestimating rapid deterioration and delaying intensive care admission",
-      "Overlooking the summer mosquito-exposure history in swampy endemic regions",
-      "Failing to recognise characteristic deep grey-matter imaging findings"
-    ],
-    "references": [
-      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
-      "CDC guidance on eastern equine encephalitis"
-    ],
-    "crossLinks": [],
-    "management": [
-      "No specific antiviral or licensed vaccine exists; the mainstay is intensive supportive neurocritical care with airway protection and mechanical ventilation for the obtunded patient",
-      "Control seizures with benzodiazepines acutely and loading with an antiseizure agent, treating status epilepticus aggressively",
-      "Manage raised intracranial pressure and cerebral oedema with head elevation, osmotic therapy (hypertonic saline or mannitol) and neuroprotective measures",
-      "Give empirical aciclovir until herpes simplex encephalitis is excluded, given the overlapping presentation",
-      "Maintain fluid and electrolyte balance, prevent aspiration, and treat secondary infection and other intensive care complications",
-      "Manage jointly with neurology and infectious diseases in an intensive care setting, and arrange neurorehabilitation for survivors with disability",
-      "Counsel on mosquito-bite avoidance and vector control for prevention, and notify public health authorities"
+    [
+     "Clinical Pitfall",
+     "Delaying empirical aciclovir for possible herpes simplex encephalitis while awaiting arboviral results",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for eastern equine encephalitis."
+  }
+ ]
 }

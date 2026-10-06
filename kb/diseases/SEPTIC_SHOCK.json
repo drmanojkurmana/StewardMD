@@ -195,5 +195,77 @@
       "importedAt": "2026-06-29T13:56:25Z",
       "contentHash": "haa7f116e"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "septic_shock-dx-algo",
+      "title": "Septic Shock: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Septic shock under Sepsis-3 is a subset of sepsis with profound circulatory, cellular, and metabolic derangements that carry a higher mortality than sepsis alone; sepsis itself is life-threatening organ dysfunction from a dysregulated host",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Persistent hypotension requiring vasopressors to keep MAP >65 mmHg plus lactate >2 mmol/L despite adequate fluid resuscitation defines septic shock and marks the highest-mortality end of the spectrum (p.2320,",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Complete blood count with differential, basic metabolic panel, and liver function tests to assess end-organ dysfunction (p.2320), Coagulation panel (PT/PTT/INR, platelets) to detect sepsis-induced coagulopathy/DIC (p.2320,"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Sepsis-3 spectrum: (1) Sepsis = life-threatening organ dysfunction from a dysregulated host response to infection, operationalized as an acute increase of >=2 points in the SOFA score in a patient with"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Relying on SIRS criteria to define or exclude sepsis: SIRS lacks specificity, which is why Sepsis-3 replaced it (p.2316)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for septic shock."
+    }
+  ],
+  "tables": [
+    {
+      "id": "septic_shock-matrix",
+      "title": "Septic Shock: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Septic shock under Sepsis-3 is a subset of sepsis with profound circulatory, cellular, and metabolic derangements that carry a",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Complete blood count with differential, basic metabolic panel, and liver function tests to assess end-organ dysfunction (p.2320),",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Other causes of distributive shock: pancreatitis, severe burns, liver failure, anaphylaxis, neurogenic shock from brain/spinal",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Persistent hypotension requiring vasopressors to keep MAP >65 mmHg plus lactate >2 mmol/L despite adequate fluid resuscitation",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on SIRS criteria to define or exclude sepsis: SIRS lacks specificity, which is why Sepsis-3 replaced it (p.2316).",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for septic shock."
+    }
+  ]
 }

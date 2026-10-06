@@ -1,85 +1,157 @@
 {
-  "id": "coffin_siris_syndrome",
-  "name": "Coffin-Siris syndrome",
-  "aliases": [
-    "CSS",
-    "fifth digit syndrome",
-    "ARID1B",
-    "ARID1A",
-    "SMARCB1",
-    "SMARCA4",
-    "SMARCE1",
-    "BAF complex disorder",
-    "BAFopathy"
+ "id": "coffin_siris_syndrome",
+ "name": "Coffin-Siris syndrome",
+ "aliases": [
+  "CSS",
+  "fifth digit syndrome",
+  "ARID1B",
+  "ARID1A",
+  "SMARCB1",
+  "SMARCA4",
+  "SMARCE1",
+  "BAF complex disorder",
+  "BAFopathy"
+ ],
+ "class": "non_infective",
+ "system": "Genetics / Dysmorphology",
+ "specialty": "Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Hypoplasia or absence of the fifth finger or toe nail and distal phalanx is the classical, though not universal, hand and foot finding",
+   "The facial gestalt is coarse with a wide mouth, thick lips, broad nasal tip, long philtrum and thick eyebrows, often with generalised hirsutism but sparse scalp hair",
+   "Caused by variants in genes encoding subunits of the BAF (SWI/SNF) chromatin-remodelling complex, most commonly ARID1B",
+   "Developmental delay and intellectual disability, usually with speech more affected than motor skills, are consistent features",
+   "Feeding difficulty, hypotonia and frequent infections are common in early childhood",
+   "Corpus callosum abnormalities and other structural brain findings may be seen on neuroimaging",
+   "Inheritance is autosomal dominant, and nearly all cases result from de novo variants"
   ],
-  "class": "non_infective",
-  "system": "Genetics / Dysmorphology",
-  "specialty": "Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Hypoplasia or absence of the fifth finger or toe nail and distal phalanx is the classical, though not universal, hand and foot finding",
-      "The facial gestalt is coarse with a wide mouth, thick lips, broad nasal tip, long philtrum and thick eyebrows, often with generalised hirsutism but sparse scalp hair",
-      "Caused by variants in genes encoding subunits of the BAF (SWI/SNF) chromatin-remodelling complex, most commonly ARID1B",
-      "Developmental delay and intellectual disability, usually with speech more affected than motor skills, are consistent features",
-      "Feeding difficulty, hypotonia and frequent infections are common in early childhood",
-      "Corpus callosum abnormalities and other structural brain findings may be seen on neuroimaging",
-      "Inheritance is autosomal dominant, and nearly all cases result from de novo variants"
+  "pathophysiology": "Coffin-Siris syndrome is a BAFopathy caused by pathogenic variants in genes encoding components of the BAF (SWI/SNF) ATP-dependent chromatin-remodelling complex, including ARID1B, ARID1A, SMARCB1, SMARCA4 and SMARCE1. This complex repositions nucleosomes to make DNA accessible for transcription, and is essential for regulating gene-expression programmes during development. Disruption of its subunits alters chromatin accessibility and downstream developmental gene networks, impairing neuronal, craniofacial and limb development and producing the characteristic dysmorphism, digital anomalies and cognitive impairment.",
+  "additionalDifferentials": [
+   "Nicolaides-Baraitser syndrome",
+   "Cornelia de Lange syndrome",
+   "DOORS syndrome",
+   "Mabry syndrome and other coarse-facies intellectual disability disorders",
+   "Fetal hydantoin/anticonvulsant embryopathy",
+   "Other BAF-complex-related intellectual disability syndromes"
+  ],
+  "additionalInvestigations": [
+   "Gene-panel or exome sequencing covering ARID1B, ARID1A, SMARCB1, SMARCA4, SMARCE1 and related BAF genes",
+   "Chromosomal microarray to detect deletions involving ARID1B",
+   "Brain MRI to assess the corpus callosum and other structural anomalies",
+   "Echocardiography for congenital heart disease",
+   "Renal tract ultrasound for structural anomalies",
+   "Ophthalmology and audiology assessment"
+  ],
+  "redFlags": [
+   "Failure to thrive from severe feeding difficulty requiring nutritional support",
+   "Recurrent severe infections suggesting immune vulnerability",
+   "Seizures needing investigation and treatment",
+   "Undiagnosed congenital heart disease causing cardiorespiratory compromise"
+  ],
+  "prognosis": "Most individuals have mild to moderate intellectual disability and survive into adulthood; outlook depends on the severity of associated malformations and the specific gene involved, with some subunit variants carrying more severe phenotypes. Speech and communication support can substantially improve function.",
+  "pitfalls": [
+   "Excluding the diagnosis when the fifth-nail finding is absent, as it is not universal",
+   "Confusing it with Nicolaides-Baraitser syndrome, which shares BAF-complex biology but has distinct features",
+   "Overlooking a corpus callosum anomaly that informs prognosis and counselling",
+   "Assuming a single gene test suffices rather than covering the full BAF panel"
+  ],
+  "references": [
+   "Smith's Recognizable Patterns of Human Malformation",
+   "Nelson Textbook of Pediatrics",
+   "GeneReviews: Coffin-Siris syndrome"
+  ],
+  "crossLinks": [],
+  "management": [
+   "No disease-specific therapy; management is supportive and multidisciplinary, prioritising early developmental intervention with speech and language therapy, physiotherapy and occupational therapy",
+   "Feeding support and management of hypotonia in infancy, with nutritional input and gastrostomy where feeding difficulty is severe",
+   "Screen for and manage structural anomalies: echocardiography for congenital heart disease and renal-tract ultrasound for renal malformations",
+   "Ophthalmology and audiology assessment with treatment of visual and hearing deficits",
+   "Vigilance for and prompt treatment of recurrent childhood infections",
+   "Neurodevelopmental and behavioural support, with neuroimaging where corpus callosum or other structural brain anomalies are suspected",
+   "Genetic counselling for this predominantly de novo autosomal dominant BAFopathy (most commonly ARID1B), with recurrence-risk discussion and family testing"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "coffin_siris_syndrome-pathway",
+   "title": "Coffin-Siris syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Hypoplasia or absence of the fifth finger or toe nail and distal phalanx is the classical, though not universal, hand and foot finding",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Failure to thrive from severe feeding difficulty requiring nutritional support",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Gene-panel or exome sequencing covering ARID1B, ARID1A, SMARCB1, SMARCA4, SMARCE1 and related BAF genes, Chromosomal microarray to detect deletions involving ARID1B, Brain MRI to assess the corpus callosum and other"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: No disease-specific therapy; management is supportive and multidisciplinary, prioritising early developmental intervention with speech and language therapy, physiotherapy and occupational therapy"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Excluding the diagnosis when the fifth-nail finding is absent, as it is not universal"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of coffin-siris syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "coffin_siris_syndrome-matrix",
+   "title": "Coffin-Siris syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Hypoplasia or absence of the fifth finger or toe nail and distal phalanx is the classical, though not universal, hand and foot",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Coffin-Siris syndrome is a BAFopathy caused by pathogenic variants in genes encoding components of the BAF (SWI/SNF) ATP-dependent chromatin-remodelling complex, including ARID1B, ARID1A, SMARCB1, SMARCA4 and SMARCE1. This complex repositions nucleosomes to make DNA accessible for transcription, and is essential for regulating gene-expression programmes during development. Disruption of its subunits alters chromatin accessibility and downstream developmental gene networks, impairing neuronal, craniofacial and limb development and producing the characteristic dysmorphism, digital anomalies and cognitive impairment.",
-    "additionalDifferentials": [
-      "Nicolaides-Baraitser syndrome",
-      "Cornelia de Lange syndrome",
-      "DOORS syndrome",
-      "Mabry syndrome and other coarse-facies intellectual disability disorders",
-      "Fetal hydantoin/anticonvulsant embryopathy",
-      "Other BAF-complex-related intellectual disability syndromes"
+    [
+     "Key Investigations",
+     "Gene-panel or exome sequencing covering ARID1B, ARID1A, SMARCB1, SMARCA4, SMARCE1 and related BAF genes, Chromosomal microarray",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Gene-panel or exome sequencing covering ARID1B, ARID1A, SMARCB1, SMARCA4, SMARCE1 and related BAF genes",
-      "Chromosomal microarray to detect deletions involving ARID1B",
-      "Brain MRI to assess the corpus callosum and other structural anomalies",
-      "Echocardiography for congenital heart disease",
-      "Renal tract ultrasound for structural anomalies",
-      "Ophthalmology and audiology assessment"
+    [
+     "Primary Differentials",
+     "Nicolaides-Baraitser syndrome, Cornelia de Lange syndrome, DOORS syndrome",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Failure to thrive from severe feeding difficulty requiring nutritional support",
-      "Recurrent severe infections suggesting immune vulnerability",
-      "Seizures needing investigation and treatment",
-      "Undiagnosed congenital heart disease causing cardiorespiratory compromise"
+    [
+     "Management Strategy",
+     "No disease-specific therapy; management is supportive and multidisciplinary, prioritising early developmental intervention with",
+     "Core treatment modality"
     ],
-    "prognosis": "Most individuals have mild to moderate intellectual disability and survive into adulthood; outlook depends on the severity of associated malformations and the specific gene involved, with some subunit variants carrying more severe phenotypes. Speech and communication support can substantially improve function.",
-    "pitfalls": [
-      "Excluding the diagnosis when the fifth-nail finding is absent, as it is not universal",
-      "Confusing it with Nicolaides-Baraitser syndrome, which shares BAF-complex biology but has distinct features",
-      "Overlooking a corpus callosum anomaly that informs prognosis and counselling",
-      "Assuming a single gene test suffices rather than covering the full BAF panel"
-    ],
-    "references": [
-      "Smith's Recognizable Patterns of Human Malformation",
-      "Nelson Textbook of Pediatrics",
-      "GeneReviews: Coffin-Siris syndrome"
-    ],
-    "crossLinks": [],
-    "management": [
-      "No disease-specific therapy; management is supportive and multidisciplinary, prioritising early developmental intervention with speech and language therapy, physiotherapy and occupational therapy",
-      "Feeding support and management of hypotonia in infancy, with nutritional input and gastrostomy where feeding difficulty is severe",
-      "Screen for and manage structural anomalies: echocardiography for congenital heart disease and renal-tract ultrasound for renal malformations",
-      "Ophthalmology and audiology assessment with treatment of visual and hearing deficits",
-      "Vigilance for and prompt treatment of recurrent childhood infections",
-      "Neurodevelopmental and behavioural support, with neuroimaging where corpus callosum or other structural brain anomalies are suspected",
-      "Genetic counselling for this predominantly de novo autosomal dominant BAFopathy (most commonly ARID1B), with recurrence-risk discussion and family testing"
+    [
+     "Clinical Pitfall",
+     "Excluding the diagnosis when the fifth-nail finding is absent, as it is not universal",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for coffin-siris syndrome."
+  }
+ ]
 }

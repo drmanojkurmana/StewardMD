@@ -1,78 +1,150 @@
 {
-  "id": "aldolase_a_deficiency",
-  "name": "Aldolase A deficiency",
-  "aliases": [
-    "fructose-bisphosphate aldolase A deficiency",
-    "red-cell aldolase deficiency",
-    "ALDOA gene"
+ "id": "aldolase_a_deficiency",
+ "name": "Aldolase A deficiency",
+ "aliases": [
+  "fructose-bisphosphate aldolase A deficiency",
+  "red-cell aldolase deficiency",
+  "ALDOA gene"
+ ],
+ "class": "non_infective",
+ "system": "Haematology / Genetics",
+ "specialty": "Haematology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Williams Hematology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A rare autosomal recessive glycolytic enzymopathy producing chronic non-spherocytic haemolytic anaemia, often with associated myopathy",
+   "The A isoform predominates in red cells and muscle, so deficiency frequently combines haemolysis with exertional muscle symptoms and raised creatine kinase",
+   "Rhabdomyolysis may be provoked by febrile illness or vigorous exercise, sometimes as a presenting event",
+   "Some patients show growth retardation and dysmorphic features, reflecting the enzyme's wide tissue expression",
+   "Anaemia is Coombs-negative and the film lacks the spherocytes of membrane disease",
+   "Diagnosis depends on reduced red-cell aldolase activity and identification of an ALDOA mutation",
+   "Management is supportive with transfusion and folate, avoidance of exertional and febrile triggers of muscle breakdown, and splenectomy considered in severe transfusion-dependent haemolysis"
   ],
-  "class": "non_infective",
-  "system": "Haematology / Genetics",
-  "specialty": "Haematology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Williams Hematology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A rare autosomal recessive glycolytic enzymopathy producing chronic non-spherocytic haemolytic anaemia, often with associated myopathy",
-      "The A isoform predominates in red cells and muscle, so deficiency frequently combines haemolysis with exertional muscle symptoms and raised creatine kinase",
-      "Rhabdomyolysis may be provoked by febrile illness or vigorous exercise, sometimes as a presenting event",
-      "Some patients show growth retardation and dysmorphic features, reflecting the enzyme's wide tissue expression",
-      "Anaemia is Coombs-negative and the film lacks the spherocytes of membrane disease",
-      "Diagnosis depends on reduced red-cell aldolase activity and identification of an ALDOA mutation",
-      "Management is supportive with transfusion and folate, avoidance of exertional and febrile triggers of muscle breakdown, and splenectomy considered in severe transfusion-dependent haemolysis"
+  "pathophysiology": "Aldolase A catalyses the cleavage of fructose-1,6-bisphosphate into the two triose phosphates that continue through glycolysis, the sole ATP source for the mature red cell. Reduced activity impairs glycolytic flux and energy generation, shortening red-cell survival and causing a chronic non-spherocytic haemolytic anaemia. Because the A isoenzyme is also highly expressed in skeletal muscle, deficiency additionally compromises muscle energy metabolism, predisposing to myopathy and exercise- or fever-induced rhabdomyolysis.",
+  "additionalDifferentials": [
+   "Pyruvate kinase deficiency",
+   "Phosphofructokinase deficiency (Tarui disease)",
+   "Glucose phosphate isomerase deficiency",
+   "Other glycogen storage and metabolic myopathies",
+   "Autoimmune haemolytic anaemia",
+   "Phosphoglycerate mutase deficiency"
+  ],
+  "additionalInvestigations": [
+   "Red-cell aldolase enzyme activity assay",
+   "Creatine kinase and myoglobin, especially during muscle symptoms",
+   "Full blood count, reticulocytes and blood film",
+   "Haemolysis screen with bilirubin, lactate dehydrogenase and haptoglobin",
+   "Direct antiglobulin test to exclude immune haemolysis",
+   "Molecular testing of the ALDOA gene"
+  ],
+  "redFlags": [
+   "Acute rhabdomyolysis with risk of acute kidney injury",
+   "Severe neonatal or childhood jaundice requiring exchange transfusion",
+   "Aplastic crisis after parvovirus B19 infection",
+   "Progressive myopathy or failure to thrive"
+  ],
+  "prognosis": "Outlook depends on the severity of both the haemolytic anaemia and the muscle involvement; well-compensated cases fare well, whereas recurrent rhabdomyolysis and severe transfusion-dependent anaemia carry greater morbidity.",
+  "pitfalls": [
+   "Missing the muscle component and attributing symptoms to a purely haematological disorder",
+   "Failing to check creatine kinase during febrile illness or after exercise",
+   "Not counselling patients to avoid exertional and febrile triggers of rhabdomyolysis",
+   "Overlooking transfusional iron overload during long-term follow-up"
+  ],
+  "references": [
+   "Williams Hematology",
+   "Wintrobe's Clinical Hematology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Supportive management of the chronic non-spherocytic haemolytic anaemia with folic acid supplementation and transfusion for symptomatic anaemia or aplastic crises",
+   "Prompt recognition and treatment of rhabdomyolysis with aggressive intravenous fluids to protect renal function",
+   "Avoidance of rhabdomyolysis triggers, with early antipyresis and management of febrile illness and limitation of strenuous exercise",
+   "Monitor for transfusional iron overload with iron chelation as required",
+   "Ensure vaccination and monitor for pigment gallstones given chronic haemolysis",
+   "Multidisciplinary follow-up with haematology and neuromuscular input where myopathy is prominent",
+   "Genetic counselling and family testing for this autosomal recessive ALDOA disorder"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "aldolase_a_deficiency-pathway",
+   "title": "Aldolase A deficiency: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A rare autosomal recessive glycolytic enzymopathy producing chronic non-spherocytic haemolytic anaemia, often with associated myopathy",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Acute rhabdomyolysis with risk of acute kidney injury",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Red-cell aldolase enzyme activity assay, Creatine kinase and myoglobin, especially during muscle symptoms, Full blood count, reticulocytes and blood film"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Supportive management of the chronic non-spherocytic haemolytic anaemia with folic acid supplementation and transfusion for symptomatic anaemia or aplastic crises"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Missing the muscle component and attributing symptoms to a purely haematological disorder"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of aldolase a deficiency."
+  }
+ ],
+ "tables": [
+  {
+   "id": "aldolase_a_deficiency-matrix",
+   "title": "Aldolase A deficiency: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A rare autosomal recessive glycolytic enzymopathy producing chronic non-spherocytic haemolytic anaemia, often with associated",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Aldolase A catalyses the cleavage of fructose-1,6-bisphosphate into the two triose phosphates that continue through glycolysis, the sole ATP source for the mature red cell. Reduced activity impairs glycolytic flux and energy generation, shortening red-cell survival and causing a chronic non-spherocytic haemolytic anaemia. Because the A isoenzyme is also highly expressed in skeletal muscle, deficiency additionally compromises muscle energy metabolism, predisposing to myopathy and exercise- or fever-induced rhabdomyolysis.",
-    "additionalDifferentials": [
-      "Pyruvate kinase deficiency",
-      "Phosphofructokinase deficiency (Tarui disease)",
-      "Glucose phosphate isomerase deficiency",
-      "Other glycogen storage and metabolic myopathies",
-      "Autoimmune haemolytic anaemia",
-      "Phosphoglycerate mutase deficiency"
+    [
+     "Key Investigations",
+     "Red-cell aldolase enzyme activity assay, Creatine kinase and myoglobin, especially during muscle symptoms, Full blood count,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Red-cell aldolase enzyme activity assay",
-      "Creatine kinase and myoglobin, especially during muscle symptoms",
-      "Full blood count, reticulocytes and blood film",
-      "Haemolysis screen with bilirubin, lactate dehydrogenase and haptoglobin",
-      "Direct antiglobulin test to exclude immune haemolysis",
-      "Molecular testing of the ALDOA gene"
+    [
+     "Primary Differentials",
+     "Pyruvate kinase deficiency, Phosphofructokinase deficiency (Tarui disease), Glucose phosphate isomerase deficiency",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Acute rhabdomyolysis with risk of acute kidney injury",
-      "Severe neonatal or childhood jaundice requiring exchange transfusion",
-      "Aplastic crisis after parvovirus B19 infection",
-      "Progressive myopathy or failure to thrive"
+    [
+     "Management Strategy",
+     "Supportive management of the chronic non-spherocytic haemolytic anaemia with folic acid supplementation and transfusion for",
+     "Core treatment modality"
     ],
-    "prognosis": "Outlook depends on the severity of both the haemolytic anaemia and the muscle involvement; well-compensated cases fare well, whereas recurrent rhabdomyolysis and severe transfusion-dependent anaemia carry greater morbidity.",
-    "pitfalls": [
-      "Missing the muscle component and attributing symptoms to a purely haematological disorder",
-      "Failing to check creatine kinase during febrile illness or after exercise",
-      "Not counselling patients to avoid exertional and febrile triggers of rhabdomyolysis",
-      "Overlooking transfusional iron overload during long-term follow-up"
-    ],
-    "references": [
-      "Williams Hematology",
-      "Wintrobe's Clinical Hematology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Supportive management of the chronic non-spherocytic haemolytic anaemia with folic acid supplementation and transfusion for symptomatic anaemia or aplastic crises",
-      "Prompt recognition and treatment of rhabdomyolysis with aggressive intravenous fluids to protect renal function",
-      "Avoidance of rhabdomyolysis triggers, with early antipyresis and management of febrile illness and limitation of strenuous exercise",
-      "Monitor for transfusional iron overload with iron chelation as required",
-      "Ensure vaccination and monitor for pigment gallstones given chronic haemolysis",
-      "Multidisciplinary follow-up with haematology and neuromuscular input where myopathy is prominent",
-      "Genetic counselling and family testing for this autosomal recessive ALDOA disorder"
+    [
+     "Clinical Pitfall",
+     "Missing the muscle component and attributing symptoms to a purely haematological disorder",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for aldolase a deficiency."
+  }
+ ]
 }

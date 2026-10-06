@@ -1,81 +1,153 @@
 {
-  "id": "oromandibular_dystonia",
-  "name": "Oromandibular dystonia",
-  "aliases": [
-    "OMD",
-    "cranial dystonia",
-    "jaw dystonia",
-    "Meige syndrome (when with blepharospasm)"
+ "id": "oromandibular_dystonia",
+ "name": "Oromandibular dystonia",
+ "aliases": [
+  "OMD",
+  "cranial dystonia",
+  "jaw dystonia",
+  "Meige syndrome (when with blepharospasm)"
+ ],
+ "class": "non_infective",
+ "system": "Ear-Nose-Throat / Neurology",
+ "specialty": "Otolaryngology / Neurology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Cummings Otolaryngology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A focal dystonia producing involuntary, sustained or repetitive contractions of the masticatory, facial, and tongue muscles",
+   "Recognised patterns include jaw-closing, jaw-opening, jaw-deviating, and lingual dystonia, often triggered or worsened by speaking or chewing",
+   "Jaw-closing dystonia can cause bruxism, dental damage, and difficulty with mouth opening, while jaw-opening dystonia interferes with eating and speech",
+   "Many patients discover a sensory trick (geste antagoniste), such as touching the lips or chin, that transiently relieves the spasms",
+   "When combined with blepharospasm it constitutes Meige syndrome (cranial dystonia)",
+   "Secondary causes include dopamine-blocking drugs (tardive dystonia), neurodegenerative disease, and structural brain lesions, which should be excluded",
+   "Botulinum toxin injection into the overactive muscles is the principal treatment, supported by oral medication and dental appliances"
   ],
-  "class": "non_infective",
-  "system": "Ear-Nose-Throat / Neurology",
-  "specialty": "Otolaryngology / Neurology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Cummings Otolaryngology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A focal dystonia producing involuntary, sustained or repetitive contractions of the masticatory, facial, and tongue muscles",
-      "Recognised patterns include jaw-closing, jaw-opening, jaw-deviating, and lingual dystonia, often triggered or worsened by speaking or chewing",
-      "Jaw-closing dystonia can cause bruxism, dental damage, and difficulty with mouth opening, while jaw-opening dystonia interferes with eating and speech",
-      "Many patients discover a sensory trick (geste antagoniste), such as touching the lips or chin, that transiently relieves the spasms",
-      "When combined with blepharospasm it constitutes Meige syndrome (cranial dystonia)",
-      "Secondary causes include dopamine-blocking drugs (tardive dystonia), neurodegenerative disease, and structural brain lesions, which should be excluded",
-      "Botulinum toxin injection into the overactive muscles is the principal treatment, supported by oral medication and dental appliances"
+  "pathophysiology": "Oromandibular dystonia is a focal dystonia affecting the jaw, mouth, and tongue muscles, arising from disordered motor control within the basal ganglia circuits and their connections, with abnormal inhibition and excessive co-contraction of agonist and antagonist muscles. This produces involuntary, patterned, often task-related movements of the masticatory and lower facial musculature. It may be idiopathic (primary) or secondary to dopamine-receptor-blocking drugs, neurodegenerative disorders, or structural lesions. The characteristic sensory trick, which temporarily reduces the dystonia through sensorimotor modulation, is a hallmark of dystonic disorders.",
+  "additionalDifferentials": [
+   "Temporomandibular joint dysfunction",
+   "Tardive dyskinesia or drug-induced dystonia",
+   "Hemifacial spasm",
+   "Bruxism unrelated to dystonia",
+   "Trismus from local or infective causes",
+   "Functional (psychogenic) movement disorder",
+   "Neurodegenerative disease with orofacial involvement"
+  ],
+  "additionalInvestigations": [
+   "Detailed neurological examination for other dystonias and a sensory trick",
+   "Medication history to identify dopamine-blocking or other causative drugs",
+   "MRI of the brain to exclude a structural or degenerative cause in atypical or secondary cases",
+   "Dental and temporomandibular joint assessment",
+   "Surface or needle electromyography of the masticatory muscles in selected cases",
+   "Investigations for Wilson disease and other secondary causes in young patients"
+  ],
+  "redFlags": [
+   "Onset in a young patient suggesting Wilson disease or an inherited dystonia",
+   "Recent exposure to dopamine-blocking drugs indicating tardive dystonia",
+   "Additional neurological signs suggesting a neurodegenerative disorder",
+   "Acute severe jaw-closing spasm threatening the airway or causing tongue injury"
+  ],
+  "prognosis": "Oromandibular dystonia is usually chronic; primary forms rarely remit but respond to repeated botulinum toxin injections combined with oral agents and appliances, allowing reasonable function. Secondary and drug-induced forms may improve if the underlying cause is addressed.",
+  "pitfalls": [
+   "Mistaking it for temporomandibular joint dysfunction or simple bruxism",
+   "Overlooking a drug-induced (tardive) cause",
+   "Failing to exclude Wilson disease in a young patient",
+   "Missing coexisting blepharospasm (Meige syndrome)",
+   "Not recognising the sensory trick as a diagnostic clue"
+  ],
+  "references": [
+   "Cummings Otolaryngology: Head and Neck Surgery",
+   "Adams and Victor's Principles of Neurology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Repeated botulinum toxin injections into the overactive jaw-closing, jaw-opening or lingual muscles, ideally guided by electromyography, as the mainstay of symptom control",
+   "Adjunctive oral agents such as anticholinergics, benzodiazepines, baclofen or a dopamine-depleting agent like tetrabenazine for incomplete responders",
+   "Withdrawal or substitution of any causative dopamine-receptor-blocking drug in tardive or drug-induced dystonia, with treatment of an identified secondary cause",
+   "Custom dental splints or bite appliances and training in the patient's sensory trick to reduce spasms and protect the dentition",
+   "Supportive speech and language therapy, dietary modification for chewing and swallowing difficulty, and dental care for bruxism-related damage",
+   "Multidisciplinary input from neurology, otolaryngology and dentistry, with screening for Wilson disease and structural lesions in younger or atypical patients",
+   "Referral for pallidal deep brain stimulation in severe, disabling disease refractory to toxin and oral therapy"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "oromandibular_dystonia-pathway",
+   "title": "Oromandibular dystonia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A focal dystonia producing involuntary, sustained or repetitive contractions of the masticatory, facial, and tongue muscles",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Onset in a young patient suggesting Wilson disease or an inherited dystonia",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Detailed neurological examination for other dystonias and a sensory trick, Medication history to identify dopamine-blocking or other causative drugs, MRI of the brain to exclude a structural or degenerative cause in"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Repeated botulinum toxin injections into the overactive jaw-closing, jaw-opening or lingual muscles, ideally guided by electromyography, as the mainstay of symptom control"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking it for temporomandibular joint dysfunction or simple bruxism"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of oromandibular dystonia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "oromandibular_dystonia-matrix",
+   "title": "Oromandibular dystonia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A focal dystonia producing involuntary, sustained or repetitive contractions of the masticatory, facial, and tongue muscles",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Oromandibular dystonia is a focal dystonia affecting the jaw, mouth, and tongue muscles, arising from disordered motor control within the basal ganglia circuits and their connections, with abnormal inhibition and excessive co-contraction of agonist and antagonist muscles. This produces involuntary, patterned, often task-related movements of the masticatory and lower facial musculature. It may be idiopathic (primary) or secondary to dopamine-receptor-blocking drugs, neurodegenerative disorders, or structural lesions. The characteristic sensory trick, which temporarily reduces the dystonia through sensorimotor modulation, is a hallmark of dystonic disorders.",
-    "additionalDifferentials": [
-      "Temporomandibular joint dysfunction",
-      "Tardive dyskinesia or drug-induced dystonia",
-      "Hemifacial spasm",
-      "Bruxism unrelated to dystonia",
-      "Trismus from local or infective causes",
-      "Functional (psychogenic) movement disorder",
-      "Neurodegenerative disease with orofacial involvement"
+    [
+     "Key Investigations",
+     "Detailed neurological examination for other dystonias and a sensory trick, Medication history to identify dopamine-blocking or",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Detailed neurological examination for other dystonias and a sensory trick",
-      "Medication history to identify dopamine-blocking or other causative drugs",
-      "MRI of the brain to exclude a structural or degenerative cause in atypical or secondary cases",
-      "Dental and temporomandibular joint assessment",
-      "Surface or needle electromyography of the masticatory muscles in selected cases",
-      "Investigations for Wilson disease and other secondary causes in young patients"
+    [
+     "Primary Differentials",
+     "Temporomandibular joint dysfunction, Tardive dyskinesia or drug-induced dystonia, Hemifacial spasm",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Onset in a young patient suggesting Wilson disease or an inherited dystonia",
-      "Recent exposure to dopamine-blocking drugs indicating tardive dystonia",
-      "Additional neurological signs suggesting a neurodegenerative disorder",
-      "Acute severe jaw-closing spasm threatening the airway or causing tongue injury"
+    [
+     "Management Strategy",
+     "Repeated botulinum toxin injections into the overactive jaw-closing, jaw-opening or lingual muscles, ideally guided by",
+     "Core treatment modality"
     ],
-    "prognosis": "Oromandibular dystonia is usually chronic; primary forms rarely remit but respond to repeated botulinum toxin injections combined with oral agents and appliances, allowing reasonable function. Secondary and drug-induced forms may improve if the underlying cause is addressed.",
-    "pitfalls": [
-      "Mistaking it for temporomandibular joint dysfunction or simple bruxism",
-      "Overlooking a drug-induced (tardive) cause",
-      "Failing to exclude Wilson disease in a young patient",
-      "Missing coexisting blepharospasm (Meige syndrome)",
-      "Not recognising the sensory trick as a diagnostic clue"
-    ],
-    "references": [
-      "Cummings Otolaryngology: Head and Neck Surgery",
-      "Adams and Victor's Principles of Neurology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Repeated botulinum toxin injections into the overactive jaw-closing, jaw-opening or lingual muscles, ideally guided by electromyography, as the mainstay of symptom control",
-      "Adjunctive oral agents such as anticholinergics, benzodiazepines, baclofen or a dopamine-depleting agent like tetrabenazine for incomplete responders",
-      "Withdrawal or substitution of any causative dopamine-receptor-blocking drug in tardive or drug-induced dystonia, with treatment of an identified secondary cause",
-      "Custom dental splints or bite appliances and training in the patient's sensory trick to reduce spasms and protect the dentition",
-      "Supportive speech and language therapy, dietary modification for chewing and swallowing difficulty, and dental care for bruxism-related damage",
-      "Multidisciplinary input from neurology, otolaryngology and dentistry, with screening for Wilson disease and structural lesions in younger or atypical patients",
-      "Referral for pallidal deep brain stimulation in severe, disabling disease refractory to toxin and oral therapy"
+    [
+     "Clinical Pitfall",
+     "Mistaking it for temporomandibular joint dysfunction or simple bruxism",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for oromandibular dystonia."
+  }
+ ]
 }

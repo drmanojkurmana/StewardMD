@@ -1,78 +1,150 @@
 {
-  "id": "foreign_body_aspiration",
-  "name": "Foreign Body Aspiration",
-  "aliases": [
-    "airway foreign body",
-    "aspirated foreign body",
-    "inhaled foreign body"
+ "id": "foreign_body_aspiration",
+ "name": "Foreign Body Aspiration",
+ "aliases": [
+  "airway foreign body",
+  "aspirated foreign body",
+  "inhaled foreign body"
+ ],
+ "class": "non_infective",
+ "system": "Respiratory",
+ "specialty": "Paediatrics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nelson Textbook of Pediatrics",
+  "sourceEdition": "22e",
+  "pages": null,
+  "clinicalPearls": [
+   "Aspiration of a foreign body is most common in toddlers, who explore with their mouths and have immature airway protective reflexes; food items such as nuts and seeds are frequent culprits.",
+   "The classic history is a sudden episode of choking, coughing, or gagging in a previously well young child, often while eating or playing with small objects.",
+   "Clinical presentation varies with the site and degree of obstruction; a lodged object may produce unilateral wheeze, reduced air entry, or persistent cough.",
+   "A witnessed choking event is a strong clue, but the initial episode can be unwitnessed or followed by a symptom-free interval that leads to delayed diagnosis.",
+   "Chest radiographs may be normal because most aspirated objects are radiolucent; indirect signs include localised air trapping or hyperinflation, atelectasis, or a persistent infiltrate.",
+   "Rigid bronchoscopy is the definitive procedure for both confirming and removing an airway foreign body.",
+   "Complete upper airway obstruction is a life-threatening emergency requiring immediate basic choking manoeuvres appropriate to the child's age.",
+   "Delayed or missed diagnosis can lead to recurrent or persistent pneumonia, bronchiectasis, or chronic lung damage, so a high index of suspicion is important."
   ],
-  "class": "non_infective",
-  "system": "Respiratory",
-  "specialty": "Paediatrics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nelson Textbook of Pediatrics",
-    "sourceEdition": "22e",
-    "pages": null,
-    "clinicalPearls": [
-      "Aspiration of a foreign body is most common in toddlers, who explore with their mouths and have immature airway protective reflexes; food items such as nuts and seeds are frequent culprits.",
-      "The classic history is a sudden episode of choking, coughing, or gagging in a previously well young child, often while eating or playing with small objects.",
-      "Clinical presentation varies with the site and degree of obstruction; a lodged object may produce unilateral wheeze, reduced air entry, or persistent cough.",
-      "A witnessed choking event is a strong clue, but the initial episode can be unwitnessed or followed by a symptom-free interval that leads to delayed diagnosis.",
-      "Chest radiographs may be normal because most aspirated objects are radiolucent; indirect signs include localised air trapping or hyperinflation, atelectasis, or a persistent infiltrate.",
-      "Rigid bronchoscopy is the definitive procedure for both confirming and removing an airway foreign body.",
-      "Complete upper airway obstruction is a life-threatening emergency requiring immediate basic choking manoeuvres appropriate to the child's age.",
-      "Delayed or missed diagnosis can lead to recurrent or persistent pneumonia, bronchiectasis, or chronic lung damage, so a high index of suspicion is important."
+  "pathophysiology": "When a small object is inhaled it may lodge anywhere from the larynx to the distal bronchi, with the site determining the clinical picture. A large object at the larynx or trachea can cause complete or near-complete obstruction and rapid asphyxia. More commonly the object passes into a bronchus, producing partial obstruction: air may move past on inspiration but be trapped on expiration, causing distal hyperinflation, or the airway may become fully blocked, leading to distal atelectasis. Retained material provokes inflammation and, over time, granulation tissue, mucus retention, and secondary infection, which underlie the chronic complications seen with delayed removal.",
+  "additionalDifferentials": [
+   "Croup or other infectious airway obstruction",
+   "Asthma or viral wheeze",
+   "Pneumonia",
+   "Anaphylaxis with airway compromise",
+   "Retropharyngeal or peritonsillar abscess",
+   "Structural airway lesion"
+  ],
+  "additionalInvestigations": [
+   "Chest radiograph including inspiratory and expiratory (or lateral decubitus) views",
+   "Assessment for asymmetric air entry or localised findings on examination",
+   "Rigid bronchoscopy for diagnosis and removal",
+   "Neck radiographs if a laryngotracheal object is suspected",
+   "Further imaging when diagnosis remains uncertain despite strong suspicion"
+  ],
+  "redFlags": [
+   "Complete airway obstruction with inability to cough, speak, or breathe",
+   "Cyanosis or rapidly progressive respiratory distress",
+   "Stridor with severe distress suggesting a laryngotracheal foreign body",
+   "Persistent or recurrent focal pneumonia",
+   "Altered consciousness from hypoxia"
+  ],
+  "prognosis": "With timely recognition and bronchoscopic removal the outlook is generally excellent, whereas complete obstruction can be rapidly fatal and delayed diagnosis may result in chronic pulmonary complications such as bronchiectasis.",
+  "pitfalls": [
+   "Excluding aspiration because the chest radiograph is normal",
+   "Being falsely reassured by a symptom-free interval after the initial choking event",
+   "Attributing persistent focal respiratory symptoms to recurrent infection or asthma rather than a retained foreign body",
+   "Performing blind finger sweeps or inappropriate manoeuvres that may push an object further"
+  ],
+  "references": [
+   "Nelson Textbook of Pediatrics, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "For acute complete obstruction, initiate the choking algorithm immediately — back blows and abdominal thrusts (chest thrusts in infants), progressing to CPR if the child becomes unresponsive",
+   "Secure the airway and give supplemental oxygen while arranging urgent definitive removal",
+   "Perform rigid bronchoscopy as the definitive procedure to confirm and extract the airway foreign body",
+   "Treat secondary infection or post-obstructive pneumonia with antibiotics and provide chest physiotherapy after removal",
+   "Monitor for and manage complications such as persistent atelectasis, retained fragments and bronchiectasis",
+   "Provide preventive education, advising against giving nuts and seeds to young children and keeping small objects out of reach",
+   "Refer to paediatric ENT or respiratory services for the procedure and follow-up"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "foreign_body_aspiration-pathway",
+   "title": "Foreign Body Aspiration: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Aspiration of a foreign body is most common in toddlers, who explore with their mouths and have immature airway protective reflexes; food items such as nuts and seeds are frequent culprits.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Complete airway obstruction with inability to cough, speak, or breathe",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Chest radiograph including inspiratory and expiratory (or lateral decubitus) views, Assessment for asymmetric air entry or localised findings on examination, Rigid bronchoscopy for diagnosis and removal"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: For acute complete obstruction, initiate the choking algorithm immediately - back blows and abdominal thrusts (chest thrusts in infants), progressing to CPR if the child becomes unresponsive"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Excluding aspiration because the chest radiograph is normal"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of foreign body aspiration."
+  }
+ ],
+ "tables": [
+  {
+   "id": "foreign_body_aspiration-matrix",
+   "title": "Foreign Body Aspiration: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Aspiration of a foreign body is most common in toddlers, who explore with their mouths and have immature airway protective",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "When a small object is inhaled it may lodge anywhere from the larynx to the distal bronchi, with the site determining the clinical picture. A large object at the larynx or trachea can cause complete or near-complete obstruction and rapid asphyxia. More commonly the object passes into a bronchus, producing partial obstruction: air may move past on inspiration but be trapped on expiration, causing distal hyperinflation, or the airway may become fully blocked, leading to distal atelectasis. Retained material provokes inflammation and, over time, granulation tissue, mucus retention, and secondary infection, which underlie the chronic complications seen with delayed removal.",
-    "additionalDifferentials": [
-      "Croup or other infectious airway obstruction",
-      "Asthma or viral wheeze",
-      "Pneumonia",
-      "Anaphylaxis with airway compromise",
-      "Retropharyngeal or peritonsillar abscess",
-      "Structural airway lesion"
+    [
+     "Key Investigations",
+     "Chest radiograph including inspiratory and expiratory (or lateral decubitus) views, Assessment for asymmetric air entry or",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Chest radiograph including inspiratory and expiratory (or lateral decubitus) views",
-      "Assessment for asymmetric air entry or localised findings on examination",
-      "Rigid bronchoscopy for diagnosis and removal",
-      "Neck radiographs if a laryngotracheal object is suspected",
-      "Further imaging when diagnosis remains uncertain despite strong suspicion"
+    [
+     "Primary Differentials",
+     "Croup or other infectious airway obstruction, Asthma or viral wheeze, Pneumonia",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Complete airway obstruction with inability to cough, speak, or breathe",
-      "Cyanosis or rapidly progressive respiratory distress",
-      "Stridor with severe distress suggesting a laryngotracheal foreign body",
-      "Persistent or recurrent focal pneumonia",
-      "Altered consciousness from hypoxia"
+    [
+     "Management Strategy",
+     "For acute complete obstruction, initiate the choking algorithm immediately - back blows and abdominal thrusts (chest thrusts in",
+     "Core treatment modality"
     ],
-    "prognosis": "With timely recognition and bronchoscopic removal the outlook is generally excellent, whereas complete obstruction can be rapidly fatal and delayed diagnosis may result in chronic pulmonary complications such as bronchiectasis.",
-    "pitfalls": [
-      "Excluding aspiration because the chest radiograph is normal",
-      "Being falsely reassured by a symptom-free interval after the initial choking event",
-      "Attributing persistent focal respiratory symptoms to recurrent infection or asthma rather than a retained foreign body",
-      "Performing blind finger sweeps or inappropriate manoeuvres that may push an object further"
-    ],
-    "references": [
-      "Nelson Textbook of Pediatrics, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "For acute complete obstruction, initiate the choking algorithm immediately — back blows and abdominal thrusts (chest thrusts in infants), progressing to CPR if the child becomes unresponsive",
-      "Secure the airway and give supplemental oxygen while arranging urgent definitive removal",
-      "Perform rigid bronchoscopy as the definitive procedure to confirm and extract the airway foreign body",
-      "Treat secondary infection or post-obstructive pneumonia with antibiotics and provide chest physiotherapy after removal",
-      "Monitor for and manage complications such as persistent atelectasis, retained fragments and bronchiectasis",
-      "Provide preventive education, advising against giving nuts and seeds to young children and keeping small objects out of reach",
-      "Refer to paediatric ENT or respiratory services for the procedure and follow-up"
+    [
+     "Clinical Pitfall",
+     "Excluding aspiration because the chest radiograph is normal",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for foreign body aspiration."
+  }
+ ]
 }

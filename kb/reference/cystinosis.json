@@ -1,76 +1,148 @@
 {
-  "id": "cystinosis",
-  "name": "Cystinosis",
-  "aliases": [
-    "cystinosin deficiency",
-    "CTNS-related cystinosis",
-    "nephropathic cystinosis"
+ "id": "cystinosis",
+ "name": "Cystinosis",
+ "aliases": [
+  "cystinosin deficiency",
+  "CTNS-related cystinosis",
+  "nephropathic cystinosis"
+ ],
+ "class": "non_infective",
+ "system": "Genetic / Metabolic",
+ "specialty": "Metabolic Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nelson Textbook of Pediatrics / standard metabolic references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An autosomal recessive lysosomal storage disorder caused by defective function of cystinosin, the lysosomal membrane transporter that exports cystine, encoded by the CTNS gene",
+   "Rather than an enzyme deficiency, it is a transporter defect, so cystine accumulates and crystallises within lysosomes throughout the body",
+   "The classic infantile nephropathic form presents in the first year with renal Fanconi syndrome, causing polyuria, dehydration, electrolyte loss, rickets, and failure to thrive",
+   "Corneal cystine crystals are a characteristic finding on slit-lamp examination and cause photophobia over time",
+   "Without treatment, progressive kidney disease advances to end-stage renal failure in childhood",
+   "Later extrarenal complications include hypothyroidism, growth failure, myopathy, diabetes, and central nervous system involvement",
+   "Intermediate (juvenile) and non-nephropathic (ocular) forms have milder or predominantly ophthalmological features",
+   "Cystine-depleting therapy with cysteamine slows systemic damage, and topical cysteamine addresses corneal crystals, alongside supportive management of Fanconi losses"
   ],
-  "class": "non_infective",
-  "system": "Genetic / Metabolic",
-  "specialty": "Metabolic Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nelson Textbook of Pediatrics / standard metabolic references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An autosomal recessive lysosomal storage disorder caused by defective function of cystinosin, the lysosomal membrane transporter that exports cystine, encoded by the CTNS gene",
-      "Rather than an enzyme deficiency, it is a transporter defect, so cystine accumulates and crystallises within lysosomes throughout the body",
-      "The classic infantile nephropathic form presents in the first year with renal Fanconi syndrome, causing polyuria, dehydration, electrolyte loss, rickets, and failure to thrive",
-      "Corneal cystine crystals are a characteristic finding on slit-lamp examination and cause photophobia over time",
-      "Without treatment, progressive kidney disease advances to end-stage renal failure in childhood",
-      "Later extrarenal complications include hypothyroidism, growth failure, myopathy, diabetes, and central nervous system involvement",
-      "Intermediate (juvenile) and non-nephropathic (ocular) forms have milder or predominantly ophthalmological features",
-      "Cystine-depleting therapy with cysteamine slows systemic damage, and topical cysteamine addresses corneal crystals, alongside supportive management of Fanconi losses"
+  "pathophysiology": "Cystinosis is caused by biallelic pathogenic variants in CTNS, which encodes cystinosin, the transporter that moves cystine out of the lysosome. Impaired transport leads to intralysosomal cystine accumulation and crystal formation in cells across many tissues, including the kidney, cornea, thyroid, muscle, pancreas, and brain. In the kidney, damage to the proximal tubule produces a generalised reabsorptive defect (Fanconi syndrome) and, over time, progressive glomerular and interstitial injury leading to renal failure. Continued crystal accumulation elsewhere accounts for the later multisystem complications.",
+  "additionalDifferentials": [
+   "Other causes of renal Fanconi syndrome such as Lowe syndrome or mitochondrial disease",
+   "Other inherited tubulopathies",
+   "Rickets from other metabolic causes",
+   "Other lysosomal storage disorders",
+   "Dent disease and other proximal tubular disorders"
+  ],
+  "additionalInvestigations": [
+   "Measurement of leukocyte cystine content, the key diagnostic and monitoring test",
+   "CTNS molecular genetic testing",
+   "Slit-lamp examination for corneal cystine crystals",
+   "Renal function, electrolytes, and urinalysis to characterise Fanconi syndrome",
+   "Assessment of growth, thyroid function, and other endocrine and organ involvement"
+  ],
+  "redFlags": [
+   "Progressive decline in renal function toward end-stage disease",
+   "Severe electrolyte disturbance or dehydration from tubular losses",
+   "Growth failure and rickets",
+   "Emerging endocrine, muscular, or neurological complications"
+  ],
+  "prognosis": "Untreated nephropathic cystinosis progresses to end-stage renal failure in childhood with multisystem complications. Early and sustained cystine-depleting therapy with supportive care substantially delays renal deterioration and reduces extrarenal complications, improving long-term survival, though adherence is critical and complications may still accrue over time.",
+  "pitfalls": [
+   "Overlooking cystinosis as a cause of Fanconi syndrome and rickets in a young child",
+   "Failing to examine for corneal crystals that support the diagnosis",
+   "Underestimating the importance of adherence to cystine-depleting therapy and electrolyte replacement",
+   "Assuming renal transplantation cures the disorder, when extrarenal cystine accumulation continues"
+  ],
+  "references": [
+   "Nelson Textbook of Pediatrics, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Begin lifelong cystine-depleting therapy with oral cysteamine as early as possible to lower intralysosomal cystine, delaying renal decline and extrarenal complications",
+   "Prescribe topical cysteamine eye drops for corneal cystine crystals and associated photophobia",
+   "Replace the losses of renal Fanconi syndrome with generous fluids, bicarbonate, phosphate, potassium and vitamin D or phosphate supplementation for rickets",
+   "Manage progression to end-stage renal failure with dialysis and kidney transplantation, noting the disorder does not recur in the graft",
+   "Treat accruing extrarenal complications with levothyroxine for hypothyroidism, insulin for diabetes and growth hormone for growth failure",
+   "Titrate cysteamine dosing against serial leukocyte cystine concentration, the key monitoring test",
+   "Provide genetic counselling for this autosomal recessive CTNS disorder with family screening, and coordinate metabolic medicine and nephrology"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "cystinosis-pathway",
+   "title": "Cystinosis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An autosomal recessive lysosomal storage disorder caused by defective function of cystinosin, the lysosomal membrane transporter that exports cystine, encoded by the CTNS gene",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive decline in renal function toward end-stage disease",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Measurement of leukocyte cystine content, the key diagnostic and monitoring test, CTNS molecular genetic testing, Slit-lamp examination for corneal cystine crystals"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Begin lifelong cystine-depleting therapy with oral cysteamine as early as possible to lower intralysosomal cystine, delaying renal decline and extrarenal complications"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Overlooking cystinosis as a cause of Fanconi syndrome and rickets in a young child"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of cystinosis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "cystinosis-matrix",
+   "title": "Cystinosis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An autosomal recessive lysosomal storage disorder caused by defective function of cystinosin, the lysosomal membrane transporter",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Cystinosis is caused by biallelic pathogenic variants in CTNS, which encodes cystinosin, the transporter that moves cystine out of the lysosome. Impaired transport leads to intralysosomal cystine accumulation and crystal formation in cells across many tissues, including the kidney, cornea, thyroid, muscle, pancreas, and brain. In the kidney, damage to the proximal tubule produces a generalised reabsorptive defect (Fanconi syndrome) and, over time, progressive glomerular and interstitial injury leading to renal failure. Continued crystal accumulation elsewhere accounts for the later multisystem complications.",
-    "additionalDifferentials": [
-      "Other causes of renal Fanconi syndrome such as Lowe syndrome or mitochondrial disease",
-      "Other inherited tubulopathies",
-      "Rickets from other metabolic causes",
-      "Other lysosomal storage disorders",
-      "Dent disease and other proximal tubular disorders"
+    [
+     "Key Investigations",
+     "Measurement of leukocyte cystine content, the key diagnostic and monitoring test, CTNS molecular genetic testing, Slit-lamp",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Measurement of leukocyte cystine content, the key diagnostic and monitoring test",
-      "CTNS molecular genetic testing",
-      "Slit-lamp examination for corneal cystine crystals",
-      "Renal function, electrolytes, and urinalysis to characterise Fanconi syndrome",
-      "Assessment of growth, thyroid function, and other endocrine and organ involvement"
+    [
+     "Primary Differentials",
+     "Other causes of renal Fanconi syndrome such as Lowe syndrome or mitochondrial disease, Other inherited tubulopathies, Rickets",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive decline in renal function toward end-stage disease",
-      "Severe electrolyte disturbance or dehydration from tubular losses",
-      "Growth failure and rickets",
-      "Emerging endocrine, muscular, or neurological complications"
+    [
+     "Management Strategy",
+     "Begin lifelong cystine-depleting therapy with oral cysteamine as early as possible to lower intralysosomal cystine, delaying",
+     "Core treatment modality"
     ],
-    "prognosis": "Untreated nephropathic cystinosis progresses to end-stage renal failure in childhood with multisystem complications. Early and sustained cystine-depleting therapy with supportive care substantially delays renal deterioration and reduces extrarenal complications, improving long-term survival, though adherence is critical and complications may still accrue over time.",
-    "pitfalls": [
-      "Overlooking cystinosis as a cause of Fanconi syndrome and rickets in a young child",
-      "Failing to examine for corneal crystals that support the diagnosis",
-      "Underestimating the importance of adherence to cystine-depleting therapy and electrolyte replacement",
-      "Assuming renal transplantation cures the disorder, when extrarenal cystine accumulation continues"
-    ],
-    "references": [
-      "Nelson Textbook of Pediatrics, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Begin lifelong cystine-depleting therapy with oral cysteamine as early as possible to lower intralysosomal cystine, delaying renal decline and extrarenal complications",
-      "Prescribe topical cysteamine eye drops for corneal cystine crystals and associated photophobia",
-      "Replace the losses of renal Fanconi syndrome with generous fluids, bicarbonate, phosphate, potassium and vitamin D or phosphate supplementation for rickets",
-      "Manage progression to end-stage renal failure with dialysis and kidney transplantation, noting the disorder does not recur in the graft",
-      "Treat accruing extrarenal complications with levothyroxine for hypothyroidism, insulin for diabetes and growth hormone for growth failure",
-      "Titrate cysteamine dosing against serial leukocyte cystine concentration, the key monitoring test",
-      "Provide genetic counselling for this autosomal recessive CTNS disorder with family screening, and coordinate metabolic medicine and nephrology"
+    [
+     "Clinical Pitfall",
+     "Overlooking cystinosis as a cause of Fanconi syndrome and rickets in a young child",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for cystinosis."
+  }
+ ]
 }

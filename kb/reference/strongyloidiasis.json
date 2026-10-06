@@ -1,83 +1,155 @@
 {
-  "id": "strongyloidiasis",
-  "name": "Strongyloidiasis",
-  "aliases": [
-    "Strongyloides stercoralis infection",
-    "threadworm infection",
-    "strongyloides hyperinfection syndrome"
+ "id": "strongyloidiasis",
+ "name": "Strongyloidiasis",
+ "aliases": [
+  "Strongyloides stercoralis infection",
+  "threadworm infection",
+  "strongyloides hyperinfection syndrome"
+ ],
+ "class": "infective",
+ "system": "Infectious / Tropical",
+ "specialty": "Infectious Diseases",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine / WHO / India national programmes",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A soil-transmitted intestinal nematode acquired when larvae in contaminated soil penetrate skin, endemic in warm, humid parts of India",
+   "Uniquely among common helminths it can complete its life cycle within the host (autoinfection), so infection may persist silently for decades",
+   "Chronic infection is often mild, with intermittent abdominal symptoms, urticaria, and a characteristic migratory serpiginous rash (larva currens); eosinophilia is a common clue",
+   "The feared complication is hyperinfection/disseminated disease, precipitated by immunosuppression, especially corticosteroids and HTLV-1 co-infection",
+   "Screening and treating latent infection before starting immunosuppression is a key preventive principle",
+   "Disseminated strongyloidiasis often carries Gram-negative bacteraemia or meningitis as larvae transport gut bacteria",
+   "A single stool examination is insensitive; serology and repeated or concentrated stool studies improve detection",
+   "Antiparasitic therapy with ivermectin is the treatment principle, with prolonged/repeated courses needed in disseminated disease"
   ],
-  "class": "infective",
-  "system": "Infectious / Tropical",
-  "specialty": "Infectious Diseases",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine / WHO / India national programmes",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A soil-transmitted intestinal nematode acquired when larvae in contaminated soil penetrate skin, endemic in warm, humid parts of India",
-      "Uniquely among common helminths it can complete its life cycle within the host (autoinfection), so infection may persist silently for decades",
-      "Chronic infection is often mild, with intermittent abdominal symptoms, urticaria, and a characteristic migratory serpiginous rash (larva currens); eosinophilia is a common clue",
-      "The feared complication is hyperinfection/disseminated disease, precipitated by immunosuppression, especially corticosteroids and HTLV-1 co-infection",
-      "Screening and treating latent infection before starting immunosuppression is a key preventive principle",
-      "Disseminated strongyloidiasis often carries Gram-negative bacteraemia or meningitis as larvae transport gut bacteria",
-      "A single stool examination is insensitive; serology and repeated or concentrated stool studies improve detection",
-      "Antiparasitic therapy with ivermectin is the treatment principle, with prolonged/repeated courses needed in disseminated disease"
+  "pathophysiology": "Filariform larvae penetrate the skin, migrate through the circulation to the lungs, ascend the airways and are swallowed, maturing into adult worms in the small intestine. Females produce eggs that hatch into rhabditiform larvae; some transform into infective filariform larvae within the gut or perianal skin and reinvade the host, sustaining autoinfection. When host cellular immunity is impaired, this autoinfective cycle accelerates uncontrollably, causing massive larval migration through multiple organs (hyperinfection and dissemination) and carrying enteric bacteria that seed the bloodstream, meninges and other sites.",
+  "additionalDifferentials": [
+   "Other soil-transmitted helminth infections (hookworm, ascariasis)",
+   "Peptic ulcer disease or functional dyspepsia",
+   "Inflammatory bowel disease",
+   "Chronic urticaria of other cause",
+   "Hypereosinophilic syndromes"
+  ],
+  "infectionMimics": [
+   "Drug-induced eosinophilia",
+   "Allergic/atopic disease with urticaria",
+   "Other causes of Gram-negative sepsis in the immunosuppressed",
+   "Eosinophilic gastroenteritis"
+  ],
+  "additionalInvestigations": [
+   "Serology for Strongyloides antibodies, which is more sensitive than single stool testing",
+   "Repeated stool microscopy with concentration or agar-plate culture to detect larvae",
+   "Full blood count looking for eosinophilia (which may be absent in dissemination)",
+   "Examination of sputum, duodenal aspirate or other fluids for larvae in suspected hyperinfection",
+   "Screening for HTLV-1 and assessment of immune status in severe disease"
+  ],
+  "redFlags": [
+   "Hyperinfection or dissemination in an immunosuppressed patient, a life-threatening emergency",
+   "Gram-negative bacteraemia or meningitis complicating heavy larval migration",
+   "Planned corticosteroid or other immunosuppression in someone from an endemic area without prior screening",
+   "Rapid respiratory or gastrointestinal deterioration with detectable larvae"
+  ],
+  "prognosis": "Chronic uncomplicated infection responds well to antiparasitic therapy and has an excellent outlook, though eradication should be confirmed given the autoinfection risk. Hyperinfection and disseminated disease, by contrast, carry very high mortality despite treatment, particularly when diagnosis is delayed.",
+  "pitfalls": [
+   "Starting corticosteroids or immunosuppression without screening at-risk patients, precipitating fatal hyperinfection",
+   "Relying on a single negative stool sample to exclude infection",
+   "Assuming eosinophilia will always be present, as it is often absent in dissemination",
+   "Failing to give a sufficiently prolonged antiparasitic course in disseminated disease"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e",
+   "WHO guidelines"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Definitive anthelmintic therapy with ivermectin as first line for chronic infection, with albendazole as an alternative or adjunct",
+   "Screen for and treat latent infection before starting immunosuppression, particularly corticosteroids, and in HTLV-1 co-infection",
+   "Confirm cure with follow-up serology and stool examination given the risk of persistent autoinfection, repeating or extending treatment as required",
+   "Hyperinfection or disseminated disease: prolonged ivermectin continued until larvae are cleared, reduction or withdrawal of immunosuppression, and parenteral or veterinary-formulation ivermectin where enteral absorption is impaired",
+   "Treat accompanying Gram-negative bacteraemia or meningitis with broad-spectrum antibiotics alongside organ support in intensive care",
+   "Preventive advice on footwear and sanitation in endemic areas and screening of at-risk migrants and transplant or immunosuppression candidates",
+   "Involve infectious diseases specialists for severe or disseminated disease"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "strongyloidiasis-pathway",
+   "title": "Strongyloidiasis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A soil-transmitted intestinal nematode acquired when larvae in contaminated soil penetrate skin, endemic in warm, humid parts of India",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Hyperinfection or dissemination in an immunosuppressed patient, a life-threatening emergency",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serology for Strongyloides antibodies, which is more sensitive than single stool testing, Repeated stool microscopy with concentration or agar-plate culture to detect larvae, Full blood count looking for eosinophilia"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Definitive anthelmintic therapy with ivermectin as first line for chronic infection, with albendazole as an alternative or adjunct"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Starting corticosteroids or immunosuppression without screening at-risk patients, precipitating fatal hyperinfection"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of strongyloidiasis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "strongyloidiasis-matrix",
+   "title": "Strongyloidiasis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A soil-transmitted intestinal nematode acquired when larvae in contaminated soil penetrate skin, endemic in warm, humid parts of",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Filariform larvae penetrate the skin, migrate through the circulation to the lungs, ascend the airways and are swallowed, maturing into adult worms in the small intestine. Females produce eggs that hatch into rhabditiform larvae; some transform into infective filariform larvae within the gut or perianal skin and reinvade the host, sustaining autoinfection. When host cellular immunity is impaired, this autoinfective cycle accelerates uncontrollably, causing massive larval migration through multiple organs (hyperinfection and dissemination) and carrying enteric bacteria that seed the bloodstream, meninges and other sites.",
-    "additionalDifferentials": [
-      "Other soil-transmitted helminth infections (hookworm, ascariasis)",
-      "Peptic ulcer disease or functional dyspepsia",
-      "Inflammatory bowel disease",
-      "Chronic urticaria of other cause",
-      "Hypereosinophilic syndromes"
+    [
+     "Key Investigations",
+     "Serology for Strongyloides antibodies, which is more sensitive than single stool testing, Repeated stool microscopy with",
+     "Confirmatory diagnostic workup"
     ],
-    "infectionMimics": [
-      "Drug-induced eosinophilia",
-      "Allergic/atopic disease with urticaria",
-      "Other causes of Gram-negative sepsis in the immunosuppressed",
-      "Eosinophilic gastroenteritis"
+    [
+     "Primary Differentials",
+     "Other soil-transmitted helminth infections (hookworm, ascariasis), Peptic ulcer disease or functional dyspepsia, Inflammatory",
+     "Rule out key mimics"
     ],
-    "additionalInvestigations": [
-      "Serology for Strongyloides antibodies, which is more sensitive than single stool testing",
-      "Repeated stool microscopy with concentration or agar-plate culture to detect larvae",
-      "Full blood count looking for eosinophilia (which may be absent in dissemination)",
-      "Examination of sputum, duodenal aspirate or other fluids for larvae in suspected hyperinfection",
-      "Screening for HTLV-1 and assessment of immune status in severe disease"
+    [
+     "Management Strategy",
+     "Definitive anthelmintic therapy with ivermectin as first line for chronic infection, with albendazole as an alternative or adjunct",
+     "Core treatment modality"
     ],
-    "redFlags": [
-      "Hyperinfection or dissemination in an immunosuppressed patient, a life-threatening emergency",
-      "Gram-negative bacteraemia or meningitis complicating heavy larval migration",
-      "Planned corticosteroid or other immunosuppression in someone from an endemic area without prior screening",
-      "Rapid respiratory or gastrointestinal deterioration with detectable larvae"
-    ],
-    "prognosis": "Chronic uncomplicated infection responds well to antiparasitic therapy and has an excellent outlook, though eradication should be confirmed given the autoinfection risk. Hyperinfection and disseminated disease, by contrast, carry very high mortality despite treatment, particularly when diagnosis is delayed.",
-    "pitfalls": [
-      "Starting corticosteroids or immunosuppression without screening at-risk patients, precipitating fatal hyperinfection",
-      "Relying on a single negative stool sample to exclude infection",
-      "Assuming eosinophilia will always be present, as it is often absent in dissemination",
-      "Failing to give a sufficiently prolonged antiparasitic course in disseminated disease"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e",
-      "WHO guidelines"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Definitive anthelmintic therapy with ivermectin as first line for chronic infection, with albendazole as an alternative or adjunct",
-      "Screen for and treat latent infection before starting immunosuppression, particularly corticosteroids, and in HTLV-1 co-infection",
-      "Confirm cure with follow-up serology and stool examination given the risk of persistent autoinfection, repeating or extending treatment as required",
-      "Hyperinfection or disseminated disease: prolonged ivermectin continued until larvae are cleared, reduction or withdrawal of immunosuppression, and parenteral or veterinary-formulation ivermectin where enteral absorption is impaired",
-      "Treat accompanying Gram-negative bacteraemia or meningitis with broad-spectrum antibiotics alongside organ support in intensive care",
-      "Preventive advice on footwear and sanitation in endemic areas and screening of at-risk migrants and transplant or immunosuppression candidates",
-      "Involve infectious diseases specialists for severe or disseminated disease"
+    [
+     "Clinical Pitfall",
+     "Starting corticosteroids or immunosuppression without screening at-risk patients, precipitating fatal hyperinfection",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for strongyloidiasis."
+  }
+ ]
 }

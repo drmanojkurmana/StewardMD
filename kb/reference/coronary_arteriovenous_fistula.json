@@ -1,74 +1,146 @@
 {
-  "id": "coronary_arteriovenous_fistula",
-  "name": "Coronary arteriovenous fistula",
-  "aliases": [
-    "coronary cameral fistula",
-    "coronary artery fistula"
+ "id": "coronary_arteriovenous_fistula",
+ "name": "Coronary arteriovenous fistula",
+ "aliases": [
+  "coronary cameral fistula",
+  "coronary artery fistula"
+ ],
+ "class": "non_infective",
+ "system": "Cardiovascular",
+ "specialty": "Cardiology / Congenital heart disease",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Congenital heart disease references / cardiology literature",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An abnormal communication between a coronary artery and a cardiac chamber or great vessel, bypassing the myocardial capillary bed",
+   "Most are congenital, though some follow cardiac procedures or trauma",
+   "Many are small and asymptomatic, found incidentally on echocardiography or angiography as a continuous murmur",
+   "Large fistulae can cause a left-to-right shunt, coronary steal with ischaemia, heart failure or aneurysm formation",
+   "A continuous murmur, often atypical in location, is a clue",
+   "Small asymptomatic fistulae are observed; large or symptomatic ones are closed by catheter or surgery"
   ],
-  "class": "non_infective",
-  "system": "Cardiovascular",
-  "specialty": "Cardiology / Congenital heart disease",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Congenital heart disease references / cardiology literature",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An abnormal communication between a coronary artery and a cardiac chamber or great vessel, bypassing the myocardial capillary bed",
-      "Most are congenital, though some follow cardiac procedures or trauma",
-      "Many are small and asymptomatic, found incidentally on echocardiography or angiography as a continuous murmur",
-      "Large fistulae can cause a left-to-right shunt, coronary steal with ischaemia, heart failure or aneurysm formation",
-      "A continuous murmur, often atypical in location, is a clue",
-      "Small asymptomatic fistulae are observed; large or symptomatic ones are closed by catheter or surgery"
+  "pathophysiology": "A coronary arteriovenous fistula is a direct connection that shunts blood from a coronary artery into a low-pressure cardiac chamber or vein, diverting it from the myocardial capillary network. The shunt volume and drainage site determine the effects: diversion of coronary flow can cause a steal phenomenon with distal myocardial ischaemia, while a large left-to-right shunt increases volume load and can cause chamber dilatation and heart failure. Chronic high flow may lead to aneurysmal dilatation of the feeding coronary artery and predisposes to thrombosis.",
+  "additionalDifferentials": [
+   "Patent ductus arteriosus (continuous murmur)",
+   "Ruptured sinus of Valsalva aneurysm",
+   "Aortopulmonary window",
+   "Pulmonary arteriovenous malformation",
+   "Anomalous origin of a coronary artery"
+  ],
+  "additionalInvestigations": [
+   "Echocardiography with colour Doppler",
+   "Coronary CT angiography or invasive coronary angiography to define the fistula",
+   "Assessment for ischaemia where coronary steal is suspected",
+   "Quantification of shunt where large",
+   "Cardiac MRI in selected cases"
+  ],
+  "redFlags": [
+   "Angina or ischaemia from coronary steal",
+   "Heart failure from a large shunt",
+   "Coronary aneurysm or thrombosis",
+   "Endocarditis risk at the fistula site"
+  ],
+  "prognosis": "Small fistulae often remain asymptomatic with a benign course, whereas large or symptomatic ones can cause ischaemia or heart failure and generally do well after catheter or surgical closure.",
+  "pitfalls": [
+   "Attributing a continuous murmur solely to a patent ductus",
+   "Overlooking coronary steal as a cause of ischaemia",
+   "Closing small asymptomatic fistulae unnecessarily",
+   "Missing associated coronary aneurysm"
+  ],
+  "references": [
+   "Congenital heart disease references (standard reference)",
+   "Braunwald's Heart Disease"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Manage small asymptomatic fistulae conservatively with periodic imaging surveillance",
+   "Close large or symptomatic fistulae definitively by transcatheter device occlusion or surgical ligation",
+   "Consider antiplatelet or anticoagulant therapy where there is aneurysmal dilatation of the feeding artery or a high thrombotic risk, and after closure",
+   "Treat associated heart failure with diuretics and address myocardial ischaemia from coronary steal",
+   "Undertake surveillance echocardiography and cross-sectional imaging to monitor shunt size, aneurysm formation and residual flow after closure",
+   "Refer to a cardiology or congenital heart disease service for assessment and intervention planning",
+   "Escalate promptly if ischaemia, heart failure or aneurysmal complications develop"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "coronary_arteriovenous_fistula-pathway",
+   "title": "Coronary arteriovenous fistula: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An abnormal communication between a coronary artery and a cardiac chamber or great vessel, bypassing the myocardial capillary bed",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Angina or ischaemia from coronary steal",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Echocardiography with colour Doppler, Coronary CT angiography or invasive coronary angiography to define the fistula, Assessment for ischaemia where coronary steal is suspected"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Manage small asymptomatic fistulae conservatively with periodic imaging surveillance"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing a continuous murmur solely to a patent ductus"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of coronary arteriovenous fistula."
+  }
+ ],
+ "tables": [
+  {
+   "id": "coronary_arteriovenous_fistula-matrix",
+   "title": "Coronary arteriovenous fistula: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An abnormal communication between a coronary artery and a cardiac chamber or great vessel, bypassing the myocardial capillary bed",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "A coronary arteriovenous fistula is a direct connection that shunts blood from a coronary artery into a low-pressure cardiac chamber or vein, diverting it from the myocardial capillary network. The shunt volume and drainage site determine the effects: diversion of coronary flow can cause a steal phenomenon with distal myocardial ischaemia, while a large left-to-right shunt increases volume load and can cause chamber dilatation and heart failure. Chronic high flow may lead to aneurysmal dilatation of the feeding coronary artery and predisposes to thrombosis.",
-    "additionalDifferentials": [
-      "Patent ductus arteriosus (continuous murmur)",
-      "Ruptured sinus of Valsalva aneurysm",
-      "Aortopulmonary window",
-      "Pulmonary arteriovenous malformation",
-      "Anomalous origin of a coronary artery"
+    [
+     "Key Investigations",
+     "Echocardiography with colour Doppler, Coronary CT angiography or invasive coronary angiography to define the fistula, Assessment",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Echocardiography with colour Doppler",
-      "Coronary CT angiography or invasive coronary angiography to define the fistula",
-      "Assessment for ischaemia where coronary steal is suspected",
-      "Quantification of shunt where large",
-      "Cardiac MRI in selected cases"
+    [
+     "Primary Differentials",
+     "Patent ductus arteriosus (continuous murmur), Ruptured sinus of Valsalva aneurysm, Aortopulmonary window",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Angina or ischaemia from coronary steal",
-      "Heart failure from a large shunt",
-      "Coronary aneurysm or thrombosis",
-      "Endocarditis risk at the fistula site"
+    [
+     "Management Strategy",
+     "Manage small asymptomatic fistulae conservatively with periodic imaging surveillance",
+     "Core treatment modality"
     ],
-    "prognosis": "Small fistulae often remain asymptomatic with a benign course, whereas large or symptomatic ones can cause ischaemia or heart failure and generally do well after catheter or surgical closure.",
-    "pitfalls": [
-      "Attributing a continuous murmur solely to a patent ductus",
-      "Overlooking coronary steal as a cause of ischaemia",
-      "Closing small asymptomatic fistulae unnecessarily",
-      "Missing associated coronary aneurysm"
-    ],
-    "references": [
-      "Congenital heart disease references (standard reference)",
-      "Braunwald's Heart Disease"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Manage small asymptomatic fistulae conservatively with periodic imaging surveillance",
-      "Close large or symptomatic fistulae definitively by transcatheter device occlusion or surgical ligation",
-      "Consider antiplatelet or anticoagulant therapy where there is aneurysmal dilatation of the feeding artery or a high thrombotic risk, and after closure",
-      "Treat associated heart failure with diuretics and address myocardial ischaemia from coronary steal",
-      "Undertake surveillance echocardiography and cross-sectional imaging to monitor shunt size, aneurysm formation and residual flow after closure",
-      "Refer to a cardiology or congenital heart disease service for assessment and intervention planning",
-      "Escalate promptly if ischaemia, heart failure or aneurysmal complications develop"
+    [
+     "Clinical Pitfall",
+     "Attributing a continuous murmur solely to a patent ductus",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for coronary arteriovenous fistula."
+  }
+ ]
 }

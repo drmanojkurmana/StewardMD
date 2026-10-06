@@ -123,5 +123,77 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-25"
- }
+ },
+ "algorithms": [
+  {
+   "id": "lower-gi-bleeding-pathway",
+   "title": "Acute lower GI bleeding Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Fresh or maroon blood per rectum. Common causes: diverticular bleeding, angioectasia, ischaemic, infective or inflammatory colitis, post-polypectomy bleeding, haemorrhoids, neoplasia. In India also consider intestinal tuberculosis, amoebic",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Two large-bore cannulae, crystalloid resuscitation, group and crossmatch.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Bloods: CBC, urea, creatinine, electrolytes, LFT, coagulation profile, group and crossmatch."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Bowel preparation for urgent colonoscopy: polyethylene glycol electrolyte solution 4 to 6 L over 3 to 4 hours, via nasogastric tube if needed. Distal known source (for example post-polypectomy): enema and washing may suffice."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Missing an upper GI source in the shocked patient with haematochezia."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for acute lower gi bleeding."
+  }
+ ],
+ "tables": [
+  {
+   "id": "lower-gi-bleeding-summary-matrix",
+   "title": "Acute lower GI bleeding Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Fresh or maroon blood per rectum. Common causes: diverticular bleeding, angioectasia, ischaemic, infective or inflammatory colitis,",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Two large-bore cannulae, crystalloid resuscitation, group and crossmatch.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Bloods: CBC, urea, creatinine, electrolytes, LFT, coagulation profile, group and crossmatch.",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Packed red cells: Transfuse at Hb below 7 g/dL (below 8 g/dL with cardiovascular disease)",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Missing an upper GI source in the shocked patient with haematochezia.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for acute lower gi bleeding."
+  }
+ ]
 }

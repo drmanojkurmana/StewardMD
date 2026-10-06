@@ -1,74 +1,146 @@
 {
-  "id": "oral_lichen_planus",
-  "name": "Oral lichen planus",
-  "aliases": [
-    "OLP"
+ "id": "oral_lichen_planus",
+ "name": "Oral lichen planus",
+ "aliases": [
+  "OLP"
+ ],
+ "class": "non_infective",
+ "system": "Oral cavity",
+ "specialty": "Oral medicine / Dermatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Oral medicine and dermatology reference texts",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A chronic immune-mediated mucosal disorder presenting with bilateral, often symmetrical, white striae, plaques, atrophic or erosive lesions",
+   "The reticular form with lacy white Wickham striae is frequently asymptomatic, whereas erosive and atrophic forms cause pain and burning",
+   "The buccal mucosa, tongue and gingivae are commonly involved, and desquamative gingivitis may be the presenting feature",
+   "A lichenoid reaction that is clinically similar can be caused by drugs, dental materials or graft-versus-host disease",
+   "There is a small but recognised risk of malignant transformation, so long-term monitoring is advised",
+   "Topical corticosteroids are the mainstay for symptomatic disease, with other immunomodulators for refractory cases"
   ],
-  "class": "non_infective",
-  "system": "Oral cavity",
-  "specialty": "Oral medicine / Dermatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Oral medicine and dermatology reference texts",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A chronic immune-mediated mucosal disorder presenting with bilateral, often symmetrical, white striae, plaques, atrophic or erosive lesions",
-      "The reticular form with lacy white Wickham striae is frequently asymptomatic, whereas erosive and atrophic forms cause pain and burning",
-      "The buccal mucosa, tongue and gingivae are commonly involved, and desquamative gingivitis may be the presenting feature",
-      "A lichenoid reaction that is clinically similar can be caused by drugs, dental materials or graft-versus-host disease",
-      "There is a small but recognised risk of malignant transformation, so long-term monitoring is advised",
-      "Topical corticosteroids are the mainstay for symptomatic disease, with other immunomodulators for refractory cases"
+  "pathophysiology": "Oral lichen planus is a T-cell-mediated chronic inflammatory condition in which cytotoxic T lymphocytes target basal keratinocytes of the mucosal epithelium, producing basal cell damage and a band-like subepithelial lymphocytic infiltrate. The resulting epithelial changes create the characteristic striae, atrophy and erosions. Similar lichenoid reactions can be triggered by drugs, contact with dental restorative materials or systemic graft-versus-host disease, reflecting a shared final immunological pathway.",
+  "additionalDifferentials": [
+   "Oral lichenoid drug or contact reaction",
+   "Chronic graft-versus-host disease",
+   "Mucous membrane pemphigoid",
+   "Pemphigus vulgaris",
+   "Lupus erythematosus of the mucosa",
+   "Oral leukoplakia or dysplasia"
+  ],
+  "additionalInvestigations": [
+   "Clinical assessment of distribution and morphology",
+   "Biopsy with histopathology, and direct immunofluorescence to exclude immunobullous disease",
+   "Review of medications and dental materials for lichenoid triggers",
+   "Long-term surveillance for malignant change, especially in erosive disease",
+   "Assessment for cutaneous or other mucosal lichen planus"
+  ],
+  "redFlags": [
+   "Non-homogeneous, indurated or non-healing areas suggesting dysplasia or carcinoma",
+   "Rapidly changing or ulcerated lesions",
+   "Widespread erosive disease impairing nutrition",
+   "Features suggesting immunobullous disease requiring different management"
+  ],
+  "prognosis": "The condition is chronic with relapses and remissions; symptoms are usually controllable, but erosive forms carry a small long-term risk of malignant transformation requiring surveillance.",
+  "pitfalls": [
+   "Not distinguishing lichen planus from a lichenoid drug or contact reaction",
+   "Missing an immunobullous disorder presenting as desquamative gingivitis",
+   "Failing to monitor for malignant transformation",
+   "Overlooking coexisting skin or genital lichen planus"
+  ],
+  "references": [
+   "Oral medicine reference texts (standard reference)",
+   "Dermatology reference texts (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Use topical corticosteroids as first-line therapy for symptomatic erosive or atrophic disease",
+   "Add topical calcineurin inhibitors (tacrolimus) for lesions refractory to topical steroids",
+   "Reserve systemic corticosteroids or steroid-sparing immunomodulators for severe or widespread refractory disease",
+   "Provide symptomatic measures: analgesic or anaesthetic mouthwashes, meticulous oral hygiene, avoidance of spicy and acidic foods, and treatment of superimposed candidiasis",
+   "Identify and remove lichenoid triggers such as culprit drugs and adjacent dental restorative materials",
+   "Maintain long-term surveillance for malignant transformation, particularly in erosive disease",
+   "Refer to oral medicine or dermatology and assess for cutaneous and other mucosal lichen planus"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "oral_lichen_planus-pathway",
+   "title": "Oral lichen planus: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A chronic immune-mediated mucosal disorder presenting with bilateral, often symmetrical, white striae, plaques, atrophic or erosive lesions",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Non-homogeneous, indurated or non-healing areas suggesting dysplasia or carcinoma",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical assessment of distribution and morphology, Biopsy with histopathology, and direct immunofluorescence to exclude immunobullous disease, Review of medications and dental materials for lichenoid triggers"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Use topical corticosteroids as first-line therapy for symptomatic erosive or atrophic disease"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Not distinguishing lichen planus from a lichenoid drug or contact reaction"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of oral lichen planus."
+  }
+ ],
+ "tables": [
+  {
+   "id": "oral_lichen_planus-matrix",
+   "title": "Oral lichen planus: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A chronic immune-mediated mucosal disorder presenting with bilateral, often symmetrical, white striae, plaques, atrophic or",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Oral lichen planus is a T-cell-mediated chronic inflammatory condition in which cytotoxic T lymphocytes target basal keratinocytes of the mucosal epithelium, producing basal cell damage and a band-like subepithelial lymphocytic infiltrate. The resulting epithelial changes create the characteristic striae, atrophy and erosions. Similar lichenoid reactions can be triggered by drugs, contact with dental restorative materials or systemic graft-versus-host disease, reflecting a shared final immunological pathway.",
-    "additionalDifferentials": [
-      "Oral lichenoid drug or contact reaction",
-      "Chronic graft-versus-host disease",
-      "Mucous membrane pemphigoid",
-      "Pemphigus vulgaris",
-      "Lupus erythematosus of the mucosa",
-      "Oral leukoplakia or dysplasia"
+    [
+     "Key Investigations",
+     "Clinical assessment of distribution and morphology, Biopsy with histopathology, and direct immunofluorescence to exclude",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical assessment of distribution and morphology",
-      "Biopsy with histopathology, and direct immunofluorescence to exclude immunobullous disease",
-      "Review of medications and dental materials for lichenoid triggers",
-      "Long-term surveillance for malignant change, especially in erosive disease",
-      "Assessment for cutaneous or other mucosal lichen planus"
+    [
+     "Primary Differentials",
+     "Oral lichenoid drug or contact reaction, Chronic graft-versus-host disease, Mucous membrane pemphigoid",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Non-homogeneous, indurated or non-healing areas suggesting dysplasia or carcinoma",
-      "Rapidly changing or ulcerated lesions",
-      "Widespread erosive disease impairing nutrition",
-      "Features suggesting immunobullous disease requiring different management"
+    [
+     "Management Strategy",
+     "Use topical corticosteroids as first-line therapy for symptomatic erosive or atrophic disease",
+     "Core treatment modality"
     ],
-    "prognosis": "The condition is chronic with relapses and remissions; symptoms are usually controllable, but erosive forms carry a small long-term risk of malignant transformation requiring surveillance.",
-    "pitfalls": [
-      "Not distinguishing lichen planus from a lichenoid drug or contact reaction",
-      "Missing an immunobullous disorder presenting as desquamative gingivitis",
-      "Failing to monitor for malignant transformation",
-      "Overlooking coexisting skin or genital lichen planus"
-    ],
-    "references": [
-      "Oral medicine reference texts (standard reference)",
-      "Dermatology reference texts (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Use topical corticosteroids as first-line therapy for symptomatic erosive or atrophic disease",
-      "Add topical calcineurin inhibitors (tacrolimus) for lesions refractory to topical steroids",
-      "Reserve systemic corticosteroids or steroid-sparing immunomodulators for severe or widespread refractory disease",
-      "Provide symptomatic measures: analgesic or anaesthetic mouthwashes, meticulous oral hygiene, avoidance of spicy and acidic foods, and treatment of superimposed candidiasis",
-      "Identify and remove lichenoid triggers such as culprit drugs and adjacent dental restorative materials",
-      "Maintain long-term surveillance for malignant transformation, particularly in erosive disease",
-      "Refer to oral medicine or dermatology and assess for cutaneous and other mucosal lichen planus"
+    [
+     "Clinical Pitfall",
+     "Not distinguishing lichen planus from a lichenoid drug or contact reaction",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for oral lichen planus."
+  }
+ ]
 }

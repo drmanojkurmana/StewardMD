@@ -1,76 +1,148 @@
 {
-  "id": "mycobacterium_malmoense_infection",
-  "name": "Mycobacterium malmoense infection",
-  "aliases": [
-    "M. malmoense infection",
-    "Mycobacterium malmoense lung disease"
+ "id": "mycobacterium_malmoense_infection",
+ "name": "Mycobacterium malmoense infection",
+ "aliases": [
+  "M. malmoense infection",
+  "Mycobacterium malmoense lung disease"
+ ],
+ "class": "infective",
+ "system": "Infectious disease",
+ "specialty": "Infectious Diseases",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Mandell, Douglas and Bennett / ATS-IDSA NTM guidance",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A slow-growing non-chromogenic mycobacterium that can take several weeks to grow, so prolonged incubation is important",
+   "Shows striking geographical clustering, being reported particularly from northern Europe, including Scandinavia and the United Kingdom",
+   "Acquired from the environment (soil and water), it most often causes chronic pulmonary disease resembling that due to Mycobacterium avium complex or M. kansasii",
+   "Typically affects middle-aged and older adults with chronic obstructive pulmonary disease, pneumoconiosis, or a smoking history, producing cavitary or fibronodular changes",
+   "In young children it is a recognised cause of cervical lymphadenitis",
+   "Its slow growth means cultures may be reported as negative if not held long enough",
+   "Treatment is with rifampicin and ethambutol, often with a macrolide or a quinolone, while childhood lymphadenitis is managed by surgical excision"
   ],
-  "class": "infective",
-  "system": "Infectious disease",
-  "specialty": "Infectious Diseases",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Mandell, Douglas and Bennett / ATS-IDSA NTM guidance",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A slow-growing non-chromogenic mycobacterium that can take several weeks to grow, so prolonged incubation is important",
-      "Shows striking geographical clustering, being reported particularly from northern Europe, including Scandinavia and the United Kingdom",
-      "Acquired from the environment (soil and water), it most often causes chronic pulmonary disease resembling that due to Mycobacterium avium complex or M. kansasii",
-      "Typically affects middle-aged and older adults with chronic obstructive pulmonary disease, pneumoconiosis, or a smoking history, producing cavitary or fibronodular changes",
-      "In young children it is a recognised cause of cervical lymphadenitis",
-      "Its slow growth means cultures may be reported as negative if not held long enough",
-      "Treatment is with rifampicin and ethambutol, often with a macrolide or a quinolone, while childhood lymphadenitis is managed by surgical excision"
+  "pathophysiology": "Mycobacterium malmoense is a slow-growing, non-pigmented environmental mycobacterium found in soil and water, with a distinct geographical distribution favouring northern Europe. Inhalation causes pulmonary infection chiefly in adults with pre-existing lung damage, producing a granulomatous, often cavitating process similar to that of M. avium complex and M. kansasii. In immunocompetent children the organism localises to cervical lymph nodes, as with other nontuberculous mycobacteria. Its very slow growth in culture can delay or prevent diagnosis unless incubation is sufficiently prolonged.",
+  "additionalDifferentials": [
+   "Pulmonary tuberculosis",
+   "Mycobacterium avium complex or M. kansasii lung disease",
+   "Other cavitary NTM lung disease (M. xenopi)",
+   "Chronic pulmonary aspergillosis",
+   "Lung malignancy",
+   "Nontuberculous mycobacterial or tuberculous lymphadenitis in children"
+  ],
+  "additionalInvestigations": [
+   "Mycobacterial culture with prolonged incubation given slow growth",
+   "Molecular identification to species level",
+   "Chest radiograph and CT for cavitary or fibronodular disease",
+   "Repeated respiratory cultures to satisfy diagnostic criteria",
+   "Excisional biopsy and culture for suspected childhood lymphadenitis",
+   "Assessment of underlying lung disease and immune status"
+  ],
+  "redFlags": [
+   "Progressive cavitary disease with constitutional symptoms or haemoptysis",
+   "Facial-nerve proximity when excising cervical nodes in children",
+   "Disseminated disease suggesting immunosuppression",
+   "Prolonged culture-negative results despite strong clinical suspicion"
+  ],
+  "prognosis": "Pulmonary disease responds reasonably to prolonged rifampicin- and ethambutol-based combination therapy, though relapse can occur and outcomes are influenced by underlying lung disease. Childhood cervical lymphadenitis does well after complete surgical excision.",
+  "pitfalls": [
+   "Discarding cultures before slow growth can be detected",
+   "Failing to meet diagnostic criteria before treating respiratory isolates",
+   "Performing incision and drainage of a child's node, promoting a chronic sinus",
+   "Assuming the same regimen and response as for M. tuberculosis"
+  ],
+  "references": [
+   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
+   "ATS/IDSA guideline on nontuberculous mycobacterial diseases"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat pulmonary disease with prolonged rifampicin- and ethambutol-based combination therapy, commonly with the addition of a macrolide such as clarithromycin",
+   "Ensure sufficiently prolonged culture incubation to confirm the diagnosis, since this very slow grower may otherwise be reported as negative",
+   "Manage the underlying lung disease, such as chronic obstructive pulmonary disease, and support smoking cessation",
+   "Monitor treatment response with repeated respiratory cultures and watch for drug toxicity, including ethambutol-related visual changes",
+   "Treat childhood cervical lymphadenitis with complete surgical excision",
+   "Refer to infectious diseases or respiratory medicine, recognising that relapse can occur and outcomes are shaped by underlying lung disease"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "mycobacterium_malmoense_infection-pathway",
+   "title": "Mycobacterium malmoense infection: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A slow-growing non-chromogenic mycobacterium that can take several weeks to grow, so prolonged incubation is important",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive cavitary disease with constitutional symptoms or haemoptysis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Mycobacterial culture with prolonged incubation given slow growth, Molecular identification to species level, Chest radiograph and CT for cavitary or fibronodular disease"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat pulmonary disease with prolonged rifampicin- and ethambutol-based combination therapy, commonly with the addition of a macrolide such as clarithromycin"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Discarding cultures before slow growth can be detected"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of mycobacterium malmoense infection."
+  }
+ ],
+ "tables": [
+  {
+   "id": "mycobacterium_malmoense_infection-matrix",
+   "title": "Mycobacterium malmoense infection: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A slow-growing non-chromogenic mycobacterium that can take several weeks to grow, so prolonged incubation is important",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Mycobacterium malmoense is a slow-growing, non-pigmented environmental mycobacterium found in soil and water, with a distinct geographical distribution favouring northern Europe. Inhalation causes pulmonary infection chiefly in adults with pre-existing lung damage, producing a granulomatous, often cavitating process similar to that of M. avium complex and M. kansasii. In immunocompetent children the organism localises to cervical lymph nodes, as with other nontuberculous mycobacteria. Its very slow growth in culture can delay or prevent diagnosis unless incubation is sufficiently prolonged.",
-    "additionalDifferentials": [
-      "Pulmonary tuberculosis",
-      "Mycobacterium avium complex or M. kansasii lung disease",
-      "Other cavitary NTM lung disease (M. xenopi)",
-      "Chronic pulmonary aspergillosis",
-      "Lung malignancy",
-      "Nontuberculous mycobacterial or tuberculous lymphadenitis in children"
+    [
+     "Key Investigations",
+     "Mycobacterial culture with prolonged incubation given slow growth, Molecular identification to species level, Chest radiograph",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Mycobacterial culture with prolonged incubation given slow growth",
-      "Molecular identification to species level",
-      "Chest radiograph and CT for cavitary or fibronodular disease",
-      "Repeated respiratory cultures to satisfy diagnostic criteria",
-      "Excisional biopsy and culture for suspected childhood lymphadenitis",
-      "Assessment of underlying lung disease and immune status"
+    [
+     "Primary Differentials",
+     "Pulmonary tuberculosis, Mycobacterium avium complex or M. kansasii lung disease, Other cavitary NTM lung disease (M. xenopi)",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive cavitary disease with constitutional symptoms or haemoptysis",
-      "Facial-nerve proximity when excising cervical nodes in children",
-      "Disseminated disease suggesting immunosuppression",
-      "Prolonged culture-negative results despite strong clinical suspicion"
+    [
+     "Management Strategy",
+     "Treat pulmonary disease with prolonged rifampicin- and ethambutol-based combination therapy, commonly with the addition of a",
+     "Core treatment modality"
     ],
-    "prognosis": "Pulmonary disease responds reasonably to prolonged rifampicin- and ethambutol-based combination therapy, though relapse can occur and outcomes are influenced by underlying lung disease. Childhood cervical lymphadenitis does well after complete surgical excision.",
-    "pitfalls": [
-      "Discarding cultures before slow growth can be detected",
-      "Failing to meet diagnostic criteria before treating respiratory isolates",
-      "Performing incision and drainage of a child's node, promoting a chronic sinus",
-      "Assuming the same regimen and response as for M. tuberculosis"
-    ],
-    "references": [
-      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
-      "ATS/IDSA guideline on nontuberculous mycobacterial diseases"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat pulmonary disease with prolonged rifampicin- and ethambutol-based combination therapy, commonly with the addition of a macrolide such as clarithromycin",
-      "Ensure sufficiently prolonged culture incubation to confirm the diagnosis, since this very slow grower may otherwise be reported as negative",
-      "Manage the underlying lung disease, such as chronic obstructive pulmonary disease, and support smoking cessation",
-      "Monitor treatment response with repeated respiratory cultures and watch for drug toxicity, including ethambutol-related visual changes",
-      "Treat childhood cervical lymphadenitis with complete surgical excision",
-      "Refer to infectious diseases or respiratory medicine, recognising that relapse can occur and outcomes are shaped by underlying lung disease"
+    [
+     "Clinical Pitfall",
+     "Discarding cultures before slow growth can be detected",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for mycobacterium malmoense infection."
+  }
+ ]
 }

@@ -1,80 +1,152 @@
 {
-  "id": "juvenile_myelomonocytic_leukaemia",
-  "name": "Juvenile myelomonocytic leukaemia",
-  "aliases": [
-    "JMML"
+ "id": "juvenile_myelomonocytic_leukaemia",
+ "name": "Juvenile myelomonocytic leukaemia",
+ "aliases": [
+  "JMML"
+ ],
+ "class": "non_infective",
+ "system": "Haematology",
+ "specialty": "Paediatric haematology / oncology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "WHO haematolymphoid classification / paediatric haematology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An aggressive clonal myelodysplastic/myeloproliferative neoplasm of early childhood",
+   "Presents with hepatosplenomegaly, monocytosis, leucocytosis, cytopenias and often a rash",
+   "It is driven by dysregulation of the RAS pathway, with mutations in PTPN11, NRAS, KRAS, NF1 or CBL",
+   "There are associations with neurofibromatosis type 1 and Noonan syndrome (the latter can cause a self-limiting JMML-like disorder)",
+   "Hypersensitivity of myeloid progenitors to granulocyte-macrophage colony-stimulating factor is characteristic",
+   "Allogeneic haematopoietic stem cell transplantation is the main curative treatment for most cases"
   ],
-  "class": "non_infective",
-  "system": "Haematology",
-  "specialty": "Paediatric haematology / oncology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "WHO haematolymphoid classification / paediatric haematology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An aggressive clonal myelodysplastic/myeloproliferative neoplasm of early childhood",
-      "Presents with hepatosplenomegaly, monocytosis, leucocytosis, cytopenias and often a rash",
-      "It is driven by dysregulation of the RAS pathway, with mutations in PTPN11, NRAS, KRAS, NF1 or CBL",
-      "There are associations with neurofibromatosis type 1 and Noonan syndrome (the latter can cause a self-limiting JMML-like disorder)",
-      "Hypersensitivity of myeloid progenitors to granulocyte-macrophage colony-stimulating factor is characteristic",
-      "Allogeneic haematopoietic stem cell transplantation is the main curative treatment for most cases"
+  "pathophysiology": "Juvenile myelomonocytic leukaemia arises from constitutive activation of the RAS signal transduction pathway in a haematopoietic stem cell, through mutations in genes such as PTPN11, NRAS, KRAS, NF1 or CBL. This hyperactive signalling makes myeloid progenitors hypersensitive to granulocyte-macrophage colony-stimulating factor, driving excessive proliferation of monocytes and granulocytes that infiltrate the spleen, liver, skin and lungs. The clonal proliferation with dysplasia produces the mixed myelodysplastic and myeloproliferative picture and, untreated, is rapidly progressive.",
+  "additionalDifferentials": [
+   "Infection causing reactive monocytosis/hepatosplenomegaly (for example viral)",
+   "Other myeloproliferative or myelodysplastic disorders",
+   "Noonan-syndrome-associated myeloproliferative disorder (often transient)",
+   "Infantile leukaemoid reactions",
+   "Langerhans cell histiocytosis"
+  ],
+  "additionalInvestigations": [
+   "Full blood count and film showing monocytosis and immature cells",
+   "Bone marrow examination with cytogenetics (including monosomy 7 assessment)",
+   "RAS-pathway mutation analysis (PTPN11, NRAS, KRAS, NF1, CBL)",
+   "Assessment for neurofibromatosis type 1 and Noonan syndrome",
+   "Exclusion of infective mimics"
+  ],
+  "redFlags": [
+   "Rapidly rising white cell count and organomegaly",
+   "Progressive cytopenias with bleeding or infection",
+   "Respiratory compromise from leukaemic infiltration",
+   "Transformation to acute myeloid leukaemia"
+  ],
+  "prognosis": "Untreated JMML is rapidly fatal in most children; allogeneic stem cell transplantation cures many, though relapse occurs, and certain CBL- and Noonan-associated forms may follow a milder or self-resolving course.",
+  "pitfalls": [
+   "Mistaking a viral illness with hepatosplenomegaly for JMML and vice versa",
+   "Overlooking an underlying RASopathy (NF1, Noonan)",
+   "Delaying referral for transplantation",
+   "Assuming all RAS-mutant infantile disease is aggressive"
+  ],
+  "references": [
+   "WHO classification of haematolymphoid tumours",
+   "Paediatric haematology reference texts (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "JMML is an aggressive RAS-pathway-driven clonal disorder of early childhood, so treatment intent is curative and centred on transplant rather than chemotherapy alone",
+   "Allogeneic haematopoietic stem cell transplantation is the principal curative treatment for most children with typical, progressive RAS-driven JMML",
+   "In CBL-mutated and Noonan-syndrome-associated JMML, a subset behaves indolently or self-resolves, so watchful waiting can be appropriate once the genotype is confirmed, rather than immediate transplant",
+   "NF1-associated JMML still requires transplant as the mainstay, alongside management of the underlying neurofibromatosis type 1",
+   "A hypomethylating agent or low-intensity chemotherapy is used for pre-transplant cytoreduction to control organomegaly and cytopenias, not as definitive therapy",
+   "Allogeneic stem cell transplantation is the definitive, potentially curative step for most children with progressive disease",
+   "Relapse after transplant is managed with donor lymphocyte infusion or a second transplant rather than treated as automatically terminal",
+   "Splenectomy has a selected adjunctive role for symptomatic splenomegaly or to facilitate engraftment, not a primary curative role",
+   "Radiotherapy has no established primary role in JMML management outside of transplant conditioning protocols",
+   "Supportive systemic care including blood product transfusion and prompt treatment of infection is needed throughout the disease course",
+   "Close monitoring for relapse after transplant is required given the availability of salvage options such as donor lymphocyte infusion or second transplant",
+   "Ongoing surveillance of blood counts, organomegaly and infection risk is needed during cytoreduction and the peri-transplant period",
+   "Children managed with watchful waiting for CBL-mutated or Noonan-associated disease need monitoring to detect transition to a more progressive course",
+   "Any child with suspected JMML should be referred promptly to a paediatric haematology/oncology and transplant centre, and genetic counselling offered when an underlying predisposition syndrome is identified"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "juvenile_myelomonocytic_leukaemia-pathway",
+   "title": "Juvenile myelomonocytic leukaemia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An aggressive clonal myelodysplastic/myeloproliferative neoplasm of early childhood",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapidly rising white cell count and organomegaly",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Full blood count and film showing monocytosis and immature cells, Bone marrow examination with cytogenetics (including monosomy 7 assessment), RAS-pathway mutation analysis (PTPN11, NRAS, KRAS, NF1, CBL)"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: JMML is an aggressive RAS-pathway-driven clonal disorder of early childhood, so treatment intent is curative and centred on transplant rather than chemotherapy alone"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking a viral illness with hepatosplenomegaly for JMML and vice versa"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of juvenile myelomonocytic leukaemia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "juvenile_myelomonocytic_leukaemia-matrix",
+   "title": "Juvenile myelomonocytic leukaemia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An aggressive clonal myelodysplastic/myeloproliferative neoplasm of early childhood",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Juvenile myelomonocytic leukaemia arises from constitutive activation of the RAS signal transduction pathway in a haematopoietic stem cell, through mutations in genes such as PTPN11, NRAS, KRAS, NF1 or CBL. This hyperactive signalling makes myeloid progenitors hypersensitive to granulocyte-macrophage colony-stimulating factor, driving excessive proliferation of monocytes and granulocytes that infiltrate the spleen, liver, skin and lungs. The clonal proliferation with dysplasia produces the mixed myelodysplastic and myeloproliferative picture and, untreated, is rapidly progressive.",
-    "additionalDifferentials": [
-      "Infection causing reactive monocytosis/hepatosplenomegaly (for example viral)",
-      "Other myeloproliferative or myelodysplastic disorders",
-      "Noonan-syndrome-associated myeloproliferative disorder (often transient)",
-      "Infantile leukaemoid reactions",
-      "Langerhans cell histiocytosis"
+    [
+     "Key Investigations",
+     "Full blood count and film showing monocytosis and immature cells, Bone marrow examination with cytogenetics (including monosomy 7",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Full blood count and film showing monocytosis and immature cells",
-      "Bone marrow examination with cytogenetics (including monosomy 7 assessment)",
-      "RAS-pathway mutation analysis (PTPN11, NRAS, KRAS, NF1, CBL)",
-      "Assessment for neurofibromatosis type 1 and Noonan syndrome",
-      "Exclusion of infective mimics"
+    [
+     "Primary Differentials",
+     "Infection causing reactive monocytosis/hepatosplenomegaly (for example viral), Other myeloproliferative or myelodysplastic",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapidly rising white cell count and organomegaly",
-      "Progressive cytopenias with bleeding or infection",
-      "Respiratory compromise from leukaemic infiltration",
-      "Transformation to acute myeloid leukaemia"
+    [
+     "Management Strategy",
+     "JMML is an aggressive RAS-pathway-driven clonal disorder of early childhood, so treatment intent is curative and centred on",
+     "Core treatment modality"
     ],
-    "prognosis": "Untreated JMML is rapidly fatal in most children; allogeneic stem cell transplantation cures many, though relapse occurs, and certain CBL- and Noonan-associated forms may follow a milder or self-resolving course.",
-    "pitfalls": [
-      "Mistaking a viral illness with hepatosplenomegaly for JMML and vice versa",
-      "Overlooking an underlying RASopathy (NF1, Noonan)",
-      "Delaying referral for transplantation",
-      "Assuming all RAS-mutant infantile disease is aggressive"
-    ],
-    "references": [
-      "WHO classification of haematolymphoid tumours",
-      "Paediatric haematology reference texts (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "JMML is an aggressive RAS-pathway-driven clonal disorder of early childhood, so treatment intent is curative and centred on transplant rather than chemotherapy alone",
-      "Allogeneic haematopoietic stem cell transplantation is the principal curative treatment for most children with typical, progressive RAS-driven JMML",
-      "In CBL-mutated and Noonan-syndrome-associated JMML, a subset behaves indolently or self-resolves, so watchful waiting can be appropriate once the genotype is confirmed, rather than immediate transplant",
-      "NF1-associated JMML still requires transplant as the mainstay, alongside management of the underlying neurofibromatosis type 1",
-      "A hypomethylating agent or low-intensity chemotherapy is used for pre-transplant cytoreduction to control organomegaly and cytopenias, not as definitive therapy",
-      "Allogeneic stem cell transplantation is the definitive, potentially curative step for most children with progressive disease",
-      "Relapse after transplant is managed with donor lymphocyte infusion or a second transplant rather than treated as automatically terminal",
-      "Splenectomy has a selected adjunctive role for symptomatic splenomegaly or to facilitate engraftment, not a primary curative role",
-      "Radiotherapy has no established primary role in JMML management outside of transplant conditioning protocols",
-      "Supportive systemic care including blood product transfusion and prompt treatment of infection is needed throughout the disease course",
-      "Close monitoring for relapse after transplant is required given the availability of salvage options such as donor lymphocyte infusion or second transplant",
-      "Ongoing surveillance of blood counts, organomegaly and infection risk is needed during cytoreduction and the peri-transplant period",
-      "Children managed with watchful waiting for CBL-mutated or Noonan-associated disease need monitoring to detect transition to a more progressive course",
-      "Any child with suspected JMML should be referred promptly to a paediatric haematology/oncology and transplant centre, and genetic counselling offered when an underlying predisposition syndrome is identified"
+    [
+     "Clinical Pitfall",
+     "Mistaking a viral illness with hepatosplenomegaly for JMML and vice versa",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for juvenile myelomonocytic leukaemia."
+  }
+ ]
 }

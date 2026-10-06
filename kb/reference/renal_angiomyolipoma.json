@@ -1,76 +1,148 @@
 {
-  "id": "renal_angiomyolipoma",
-  "name": "Renal angiomyolipoma",
-  "aliases": [
-    "AML",
-    "renal AML"
+ "id": "renal_angiomyolipoma",
+ "name": "Renal angiomyolipoma",
+ "aliases": [
+  "AML",
+  "renal AML"
+ ],
+ "class": "non_infective",
+ "system": "Genitourinary / Kidney",
+ "specialty": "Urology / Radiology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Uro-radiology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A benign renal tumour composed of blood vessels, smooth muscle and mature fat, part of the PEComa family",
+   "Most are sporadic, solitary and found incidentally; multiple bilateral lesions suggest tuberous sclerosis complex",
+   "The presence of macroscopic fat on CT or MRI is characteristic and usually allows a confident diagnosis",
+   "Fat-poor variants can mimic renal cell carcinoma and may require biopsy or excision to clarify",
+   "Larger lesions carry a risk of spontaneous, potentially life-threatening retroperitoneal haemorrhage (Wunderlich syndrome)",
+   "Aneurysms within the feeding vessels increase the bleeding risk and can be targeted by embolisation",
+   "Epithelioid angiomyolipoma is an uncommon variant with malignant potential"
   ],
-  "class": "non_infective",
-  "system": "Genitourinary / Kidney",
-  "specialty": "Urology / Radiology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Uro-radiology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A benign renal tumour composed of blood vessels, smooth muscle and mature fat, part of the PEComa family",
-      "Most are sporadic, solitary and found incidentally; multiple bilateral lesions suggest tuberous sclerosis complex",
-      "The presence of macroscopic fat on CT or MRI is characteristic and usually allows a confident diagnosis",
-      "Fat-poor variants can mimic renal cell carcinoma and may require biopsy or excision to clarify",
-      "Larger lesions carry a risk of spontaneous, potentially life-threatening retroperitoneal haemorrhage (Wunderlich syndrome)",
-      "Aneurysms within the feeding vessels increase the bleeding risk and can be targeted by embolisation",
-      "Epithelioid angiomyolipoma is an uncommon variant with malignant potential"
+  "pathophysiology": "Angiomyolipomas are benign mesenchymal neoplasms arising from perivascular epithelioid cells and containing a variable mixture of dysmorphic thick-walled vessels, smooth muscle and adipose tissue. In tuberous sclerosis, biallelic inactivation of the TSC1 or TSC2 genes leads to constitutive activation of the mTOR pathway, driving multiple and often larger tumours. The abnormal, aneurysm-prone vasculature accounts for the tendency of larger lesions to bleed. The epithelioid variant shows atypical cells and can behave in a malignant fashion.",
+  "additionalDifferentials": [
+   "Fat-poor angiomyolipoma versus renal cell carcinoma",
+   "Clear cell or papillary renal cell carcinoma",
+   "Retroperitoneal liposarcoma involving the kidney",
+   "Oncocytoma",
+   "Renal lipoma or other fatty lesion",
+   "Wilms tumour in children"
+  ],
+  "additionalInvestigations": [
+   "CT or MRI to demonstrate macroscopic fat and characterise the lesion",
+   "Assessment of lesion size and intratumoural aneurysms to gauge bleeding risk",
+   "Screening for tuberous sclerosis features when lesions are multiple or bilateral",
+   "Renal mass biopsy when imaging is indeterminate and malignancy cannot be excluded",
+   "Baseline renal function, particularly before intervention"
+  ],
+  "redFlags": [
+   "Acute flank pain with hypotension suggesting spontaneous haemorrhage",
+   "Rapidly enlarging lesion or a large lesion with prominent aneurysms",
+   "Features suggesting the epithelioid variant or malignancy",
+   "New multiple bilateral lesions raising concern for a syndrome with other organ involvement"
+  ],
+  "prognosis": "Most angiomyolipomas are benign with an excellent prognosis; the main risks are haemorrhage from larger lesions and, rarely, malignant behaviour of the epithelioid variant, both of which can be mitigated by surveillance and timely intervention.",
+  "pitfalls": [
+   "Assuming all angiomyolipomas are benign and overlooking the epithelioid variant",
+   "Misdiagnosing a fat-poor lesion as, or overlooking, renal cell carcinoma",
+   "Failing to evaluate for tuberous sclerosis when lesions are multiple",
+   "Underestimating haemorrhage risk in large or aneurysmal lesions"
+  ],
+  "references": [
+   "Campbell-Walsh-Wein Urology (standard reference)",
+   "WHO Classification of Urinary and Male Genital Tumours"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Manage small asymptomatic lesions with active imaging surveillance to track growth and bleeding risk",
+   "Offer an mTOR inhibitor such as everolimus or sirolimus to shrink tumours, particularly in tuberous-sclerosis-associated multiple or larger angiomyolipomas driven by mTOR activation",
+   "Perform selective arterial embolisation to reduce the bleeding risk of larger lesions and those containing intratumoural aneurysms, and as first-line control of acute haemorrhage",
+   "Reserve nephron-sparing surgery for large, symptomatic or diagnostically uncertain lesions and for fat-poor tumours that cannot be distinguished from renal cell carcinoma",
+   "Treat spontaneous retroperitoneal haemorrhage (Wunderlich syndrome) as an emergency with resuscitation and urgent embolisation or surgery",
+   "Screen for tuberous sclerosis complex when lesions are multiple or bilateral, and refer for genetic counselling and family assessment when the complex is confirmed",
+   "Monitor baseline renal function, especially before embolisation or surgery, to preserve nephron mass"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "renal_angiomyolipoma-pathway",
+   "title": "Renal angiomyolipoma: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A benign renal tumour composed of blood vessels, smooth muscle and mature fat, part of the PEComa family",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Acute flank pain with hypotension suggesting spontaneous haemorrhage",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: CT or MRI to demonstrate macroscopic fat and characterise the lesion, Assessment of lesion size and intratumoural aneurysms to gauge bleeding risk, Screening for tuberous sclerosis features when lesions are multiple or"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Manage small asymptomatic lesions with active imaging surveillance to track growth and bleeding risk"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming all angiomyolipomas are benign and overlooking the epithelioid variant"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of renal angiomyolipoma."
+  }
+ ],
+ "tables": [
+  {
+   "id": "renal_angiomyolipoma-matrix",
+   "title": "Renal angiomyolipoma: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A benign renal tumour composed of blood vessels, smooth muscle and mature fat, part of the PEComa family",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Angiomyolipomas are benign mesenchymal neoplasms arising from perivascular epithelioid cells and containing a variable mixture of dysmorphic thick-walled vessels, smooth muscle and adipose tissue. In tuberous sclerosis, biallelic inactivation of the TSC1 or TSC2 genes leads to constitutive activation of the mTOR pathway, driving multiple and often larger tumours. The abnormal, aneurysm-prone vasculature accounts for the tendency of larger lesions to bleed. The epithelioid variant shows atypical cells and can behave in a malignant fashion.",
-    "additionalDifferentials": [
-      "Fat-poor angiomyolipoma versus renal cell carcinoma",
-      "Clear cell or papillary renal cell carcinoma",
-      "Retroperitoneal liposarcoma involving the kidney",
-      "Oncocytoma",
-      "Renal lipoma or other fatty lesion",
-      "Wilms tumour in children"
+    [
+     "Key Investigations",
+     "CT or MRI to demonstrate macroscopic fat and characterise the lesion, Assessment of lesion size and intratumoural aneurysms to",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "CT or MRI to demonstrate macroscopic fat and characterise the lesion",
-      "Assessment of lesion size and intratumoural aneurysms to gauge bleeding risk",
-      "Screening for tuberous sclerosis features when lesions are multiple or bilateral",
-      "Renal mass biopsy when imaging is indeterminate and malignancy cannot be excluded",
-      "Baseline renal function, particularly before intervention"
+    [
+     "Primary Differentials",
+     "Fat-poor angiomyolipoma versus renal cell carcinoma, Clear cell or papillary renal cell carcinoma, Retroperitoneal liposarcoma",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Acute flank pain with hypotension suggesting spontaneous haemorrhage",
-      "Rapidly enlarging lesion or a large lesion with prominent aneurysms",
-      "Features suggesting the epithelioid variant or malignancy",
-      "New multiple bilateral lesions raising concern for a syndrome with other organ involvement"
+    [
+     "Management Strategy",
+     "Manage small asymptomatic lesions with active imaging surveillance to track growth and bleeding risk",
+     "Core treatment modality"
     ],
-    "prognosis": "Most angiomyolipomas are benign with an excellent prognosis; the main risks are haemorrhage from larger lesions and, rarely, malignant behaviour of the epithelioid variant, both of which can be mitigated by surveillance and timely intervention.",
-    "pitfalls": [
-      "Assuming all angiomyolipomas are benign and overlooking the epithelioid variant",
-      "Misdiagnosing a fat-poor lesion as, or overlooking, renal cell carcinoma",
-      "Failing to evaluate for tuberous sclerosis when lesions are multiple",
-      "Underestimating haemorrhage risk in large or aneurysmal lesions"
-    ],
-    "references": [
-      "Campbell-Walsh-Wein Urology (standard reference)",
-      "WHO Classification of Urinary and Male Genital Tumours"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Manage small asymptomatic lesions with active imaging surveillance to track growth and bleeding risk",
-      "Offer an mTOR inhibitor such as everolimus or sirolimus to shrink tumours, particularly in tuberous-sclerosis-associated multiple or larger angiomyolipomas driven by mTOR activation",
-      "Perform selective arterial embolisation to reduce the bleeding risk of larger lesions and those containing intratumoural aneurysms, and as first-line control of acute haemorrhage",
-      "Reserve nephron-sparing surgery for large, symptomatic or diagnostically uncertain lesions and for fat-poor tumours that cannot be distinguished from renal cell carcinoma",
-      "Treat spontaneous retroperitoneal haemorrhage (Wunderlich syndrome) as an emergency with resuscitation and urgent embolisation or surgery",
-      "Screen for tuberous sclerosis complex when lesions are multiple or bilateral, and refer for genetic counselling and family assessment when the complex is confirmed",
-      "Monitor baseline renal function, especially before embolisation or surgery, to preserve nephron mass"
+    [
+     "Clinical Pitfall",
+     "Assuming all angiomyolipomas are benign and overlooking the epithelioid variant",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for renal angiomyolipoma."
+  }
+ ]
 }

@@ -1,80 +1,152 @@
 {
-  "id": "systemic_sclerosis_sine_scleroderma",
-  "name": "Systemic sclerosis sine scleroderma",
-  "aliases": [
-    "ssSSc",
-    "scleroderma sine scleroderma",
-    "systemic sclerosis without skin thickening",
-    "anticentromere antibody",
-    "anti-Scl-70"
+ "id": "systemic_sclerosis_sine_scleroderma",
+ "name": "Systemic sclerosis sine scleroderma",
+ "aliases": [
+  "ssSSc",
+  "scleroderma sine scleroderma",
+  "systemic sclerosis without skin thickening",
+  "anticentromere antibody",
+  "anti-Scl-70"
+ ],
+ "class": "non_infective",
+ "system": "Rheumatology / Vascular",
+ "specialty": "Rheumatology / Vascular Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Kelley & Firestein's Textbook of Rheumatology / EULAR systemic sclerosis guidance",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Patients have the internal organ and vascular features of systemic sclerosis without clinically detectable skin thickening",
+   "Raynaud phenomenon, a scleroderma-pattern nailfold capillary picture, and systemic sclerosis-specific autoantibodies support the diagnosis",
+   "Interstitial lung disease, pulmonary arterial hypertension, oesophageal dysmotility, or renal crisis may still occur",
+   "The absence of skin change frequently delays recognition until an internal organ complication declares itself",
+   "Autoantibody profiles resemble those of cutaneous systemic sclerosis, including anticentromere and anti-topoisomerase I patterns",
+   "Organ-based surveillance mirrors that used in cutaneous systemic sclerosis despite normal skin",
+   "It should be considered in unexplained pulmonary hypertension or interstitial lung disease with Raynaud"
   ],
-  "class": "non_infective",
-  "system": "Rheumatology / Vascular",
-  "specialty": "Rheumatology / Vascular Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Kelley & Firestein's Textbook of Rheumatology / EULAR systemic sclerosis guidance",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Patients have the internal organ and vascular features of systemic sclerosis without clinically detectable skin thickening",
-      "Raynaud phenomenon, a scleroderma-pattern nailfold capillary picture, and systemic sclerosis-specific autoantibodies support the diagnosis",
-      "Interstitial lung disease, pulmonary arterial hypertension, oesophageal dysmotility, or renal crisis may still occur",
-      "The absence of skin change frequently delays recognition until an internal organ complication declares itself",
-      "Autoantibody profiles resemble those of cutaneous systemic sclerosis, including anticentromere and anti-topoisomerase I patterns",
-      "Organ-based surveillance mirrors that used in cutaneous systemic sclerosis despite normal skin",
-      "It should be considered in unexplained pulmonary hypertension or interstitial lung disease with Raynaud"
+  "pathophysiology": "Systemic sclerosis sine scleroderma shares the immune activation, small-vessel vasculopathy, and internal fibrosis of cutaneous systemic sclerosis but without the dermal fibrosis that produces visible skin thickening. Endothelial injury, autoantibody production, and profibrotic signalling target the lungs, gastrointestinal tract, heart, and kidneys while sparing the skin clinically. The same pathogenic mechanisms therefore generate pulmonary vascular disease, interstitial fibrosis, and dysmotility, meaning the visceral risk profile parallels that of overt scleroderma.",
+  "additionalDifferentials": [
+   "Limited cutaneous systemic sclerosis",
+   "Idiopathic pulmonary arterial hypertension",
+   "Idiopathic interstitial pneumonia",
+   "Mixed connective tissue disease",
+   "Undifferentiated connective tissue disease",
+   "Primary Raynaud phenomenon"
+  ],
+  "additionalInvestigations": [
+   "Antinuclear antibody with systemic sclerosis-specific antibody profiling",
+   "Nailfold capillaroscopy for scleroderma-pattern change",
+   "High-resolution CT and pulmonary function tests for interstitial lung disease",
+   "Transthoracic echocardiography screening for pulmonary hypertension",
+   "Oesophageal function studies when dysmotility is suspected",
+   "Renal function and blood pressure monitoring"
+  ],
+  "redFlags": [
+   "Unexplained progressive breathlessness from pulmonary vascular or interstitial disease",
+   "Hypertensive crisis with rising creatinine suggesting renal crisis",
+   "Recurrent aspiration from oesophageal dysmotility",
+   "Critical digital ischaemia"
+  ],
+  "prognosis": "Outcome depends on the specific internal organ involvement; the visceral complications carry the same risks as in cutaneous disease, and pulmonary vascular or interstitial disease dominates prognosis. Early recognition despite normal skin allows timely organ-directed treatment.",
+  "pitfalls": [
+   "Excluding systemic sclerosis simply because the skin is normal",
+   "Labelling pulmonary hypertension as idiopathic without checking autoantibodies and capillaroscopy",
+   "Delaying surveillance for internal organ disease",
+   "Overlooking the risk of renal crisis in the absence of skin change"
+  ],
+  "references": [
+   "Kelley & Firestein's Textbook of Rheumatology",
+   "EULAR recommendations for the treatment of systemic sclerosis"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Vasodilator therapy for Raynaud phenomenon and digital ischaemia with calcium channel blockers and phosphodiesterase-5 inhibitors",
+   "Immunosuppression and antifibrotic therapy (mycophenolate, cyclophosphamide, rituximab, nintedanib) for interstitial lung disease",
+   "Targeted pulmonary vasodilators for pulmonary arterial hypertension confirmed on right heart catheterisation",
+   "Proton pump inhibitors and prokinetics for oesophageal and gastrointestinal dysmotility",
+   "ACE-inhibitor therapy for scleroderma renal crisis, with avoidance of high-dose corticosteroids",
+   "Organ-based surveillance mirroring cutaneous disease, with pulmonary function tests, echocardiography, and blood pressure and renal monitoring despite normal skin",
+   "Multidisciplinary specialist follow-up to enable early detection of visceral complications"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "systemic_sclerosis_sine_scleroderma-pathway",
+   "title": "Systemic sclerosis sine scleroderma: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Patients have the internal organ and vascular features of systemic sclerosis without clinically detectable skin thickening",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Unexplained progressive breathlessness from pulmonary vascular or interstitial disease",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Antinuclear antibody with systemic sclerosis-specific antibody profiling, Nailfold capillaroscopy for scleroderma-pattern change, High-resolution CT and pulmonary function tests for interstitial lung disease"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Vasodilator therapy for Raynaud phenomenon and digital ischaemia with calcium channel blockers and phosphodiesterase-5 inhibitors"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Excluding systemic sclerosis simply because the skin is normal"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of systemic sclerosis sine scleroderma."
+  }
+ ],
+ "tables": [
+  {
+   "id": "systemic_sclerosis_sine_scleroderma-matrix",
+   "title": "Systemic sclerosis sine scleroderma: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Patients have the internal organ and vascular features of systemic sclerosis without clinically detectable skin thickening",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Systemic sclerosis sine scleroderma shares the immune activation, small-vessel vasculopathy, and internal fibrosis of cutaneous systemic sclerosis but without the dermal fibrosis that produces visible skin thickening. Endothelial injury, autoantibody production, and profibrotic signalling target the lungs, gastrointestinal tract, heart, and kidneys while sparing the skin clinically. The same pathogenic mechanisms therefore generate pulmonary vascular disease, interstitial fibrosis, and dysmotility, meaning the visceral risk profile parallels that of overt scleroderma.",
-    "additionalDifferentials": [
-      "Limited cutaneous systemic sclerosis",
-      "Idiopathic pulmonary arterial hypertension",
-      "Idiopathic interstitial pneumonia",
-      "Mixed connective tissue disease",
-      "Undifferentiated connective tissue disease",
-      "Primary Raynaud phenomenon"
+    [
+     "Key Investigations",
+     "Antinuclear antibody with systemic sclerosis-specific antibody profiling, Nailfold capillaroscopy for scleroderma-pattern change,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Antinuclear antibody with systemic sclerosis-specific antibody profiling",
-      "Nailfold capillaroscopy for scleroderma-pattern change",
-      "High-resolution CT and pulmonary function tests for interstitial lung disease",
-      "Transthoracic echocardiography screening for pulmonary hypertension",
-      "Oesophageal function studies when dysmotility is suspected",
-      "Renal function and blood pressure monitoring"
+    [
+     "Primary Differentials",
+     "Limited cutaneous systemic sclerosis, Idiopathic pulmonary arterial hypertension, Idiopathic interstitial pneumonia",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Unexplained progressive breathlessness from pulmonary vascular or interstitial disease",
-      "Hypertensive crisis with rising creatinine suggesting renal crisis",
-      "Recurrent aspiration from oesophageal dysmotility",
-      "Critical digital ischaemia"
+    [
+     "Management Strategy",
+     "Vasodilator therapy for Raynaud phenomenon and digital ischaemia with calcium channel blockers and phosphodiesterase-5 inhibitors",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcome depends on the specific internal organ involvement; the visceral complications carry the same risks as in cutaneous disease, and pulmonary vascular or interstitial disease dominates prognosis. Early recognition despite normal skin allows timely organ-directed treatment.",
-    "pitfalls": [
-      "Excluding systemic sclerosis simply because the skin is normal",
-      "Labelling pulmonary hypertension as idiopathic without checking autoantibodies and capillaroscopy",
-      "Delaying surveillance for internal organ disease",
-      "Overlooking the risk of renal crisis in the absence of skin change"
-    ],
-    "references": [
-      "Kelley & Firestein's Textbook of Rheumatology",
-      "EULAR recommendations for the treatment of systemic sclerosis"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Vasodilator therapy for Raynaud phenomenon and digital ischaemia with calcium channel blockers and phosphodiesterase-5 inhibitors",
-      "Immunosuppression and antifibrotic therapy (mycophenolate, cyclophosphamide, rituximab, nintedanib) for interstitial lung disease",
-      "Targeted pulmonary vasodilators for pulmonary arterial hypertension confirmed on right heart catheterisation",
-      "Proton pump inhibitors and prokinetics for oesophageal and gastrointestinal dysmotility",
-      "ACE-inhibitor therapy for scleroderma renal crisis, with avoidance of high-dose corticosteroids",
-      "Organ-based surveillance mirroring cutaneous disease, with pulmonary function tests, echocardiography, and blood pressure and renal monitoring despite normal skin",
-      "Multidisciplinary specialist follow-up to enable early detection of visceral complications"
+    [
+     "Clinical Pitfall",
+     "Excluding systemic sclerosis simply because the skin is normal",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for systemic sclerosis sine scleroderma."
+  }
+ ]
 }

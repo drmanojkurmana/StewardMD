@@ -1,80 +1,152 @@
 {
-  "id": "von_willebrand_disease",
-  "name": "Von Willebrand disease",
-  "aliases": [
-    "VWD",
-    "von Willebrand disease",
-    "vWD",
-    "von Willebrand factor deficiency"
+ "id": "von_willebrand_disease",
+ "name": "Von Willebrand disease",
+ "aliases": [
+  "VWD",
+  "von Willebrand disease",
+  "vWD",
+  "von Willebrand factor deficiency"
+ ],
+ "class": "non_infective",
+ "system": "Haematology",
+ "specialty": "Haematology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine",
+  "sourceEdition": "22e",
+  "pages": null,
+  "clinicalPearls": [
+   "The most common inherited bleeding disorder, caused by a quantitative or qualitative defect in von Willebrand factor, which mediates platelet adhesion and carries and stabilises factor VIII",
+   "The bleeding pattern is that of primary haemostatic failure: mucocutaneous bleeding with easy bruising, epistaxis, menorrhagia, and prolonged bleeding after dental or surgical procedures",
+   "Type 1 is a partial quantitative deficiency (most common and usually mild), type 2 comprises qualitative variants, and type 3 is a severe near-complete deficiency with the heaviest bleeding",
+   "Because von Willebrand factor protects factor VIII, low levels can produce a modestly prolonged activated partial thromboplastin time alongside normal platelet count",
+   "Diagnosis relies on measuring von Willebrand factor antigen, its functional (ristocetin cofactor or equivalent) activity, and factor VIII, with multimer analysis to subtype",
+   "Factor levels fluctuate with stress, pregnancy, oestrogens, and inflammation, so borderline results may need repeat testing",
+   "Desmopressin releases stored von Willebrand factor and is useful in type 1 and many type 2 cases but is ineffective or inappropriate in type 3 and certain subtypes",
+   "When desmopressin is unsuitable, von Willebrand factor-containing concentrates and antifibrinolytic agents are the mainstays for bleeding or procedures; an acquired form can occur with other disorders"
   ],
-  "class": "non_infective",
-  "system": "Haematology",
-  "specialty": "Haematology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine",
-    "sourceEdition": "22e",
-    "pages": null,
-    "clinicalPearls": [
-      "The most common inherited bleeding disorder, caused by a quantitative or qualitative defect in von Willebrand factor, which mediates platelet adhesion and carries and stabilises factor VIII",
-      "The bleeding pattern is that of primary haemostatic failure: mucocutaneous bleeding with easy bruising, epistaxis, menorrhagia, and prolonged bleeding after dental or surgical procedures",
-      "Type 1 is a partial quantitative deficiency (most common and usually mild), type 2 comprises qualitative variants, and type 3 is a severe near-complete deficiency with the heaviest bleeding",
-      "Because von Willebrand factor protects factor VIII, low levels can produce a modestly prolonged activated partial thromboplastin time alongside normal platelet count",
-      "Diagnosis relies on measuring von Willebrand factor antigen, its functional (ristocetin cofactor or equivalent) activity, and factor VIII, with multimer analysis to subtype",
-      "Factor levels fluctuate with stress, pregnancy, oestrogens, and inflammation, so borderline results may need repeat testing",
-      "Desmopressin releases stored von Willebrand factor and is useful in type 1 and many type 2 cases but is ineffective or inappropriate in type 3 and certain subtypes",
-      "When desmopressin is unsuitable, von Willebrand factor-containing concentrates and antifibrinolytic agents are the mainstays for bleeding or procedures; an acquired form can occur with other disorders"
+  "pathophysiology": "Von Willebrand factor is a large multimeric glycoprotein synthesised by endothelial cells and megakaryocytes. It bridges platelets to exposed subendothelial collagen at sites of vascular injury (particularly under high shear) and serves as the carrier that protects circulating factor VIII from degradation. In VWD, reduced quantity (types 1 and 3) or impaired function (type 2 variants) of this factor impairs platelet adhesion and aggregation, and the loss of factor VIII protection lowers its level, adding a secondary coagulation defect. The result is defective primary haemostasis with a mucocutaneous bleeding phenotype. Acquired von Willebrand syndrome can arise from adsorption onto abnormal cells, high shear (e.g. aortic stenosis), or autoantibodies.",
+  "additionalDifferentials": [
+   "Haemophilia A (factor VIII deficiency)",
+   "Platelet function disorders (e.g. Glanzmann thrombasthenia, storage pool disease)",
+   "Immune thrombocytopenia and other causes of thrombocytopenia",
+   "Acquired von Willebrand syndrome",
+   "Vascular/connective tissue causes of mucocutaneous bleeding",
+   "Vitamin K deficiency or liver disease affecting coagulation"
+  ],
+  "additionalInvestigations": [
+   "Full blood count and blood film to assess platelet number and morphology",
+   "Coagulation screen including activated partial thromboplastin time",
+   "Von Willebrand factor antigen level and functional (ristocetin cofactor/collagen-binding) activity",
+   "Factor VIII coagulant activity",
+   "Von Willebrand factor multimer analysis and ristocetin-induced platelet aggregation to define subtype",
+   "Repeat testing when results are borderline, accounting for stress, pregnancy, and hormonal influences"
+  ],
+  "redFlags": [
+   "Severe or life-threatening haemorrhage, including gastrointestinal or intracranial bleeding, particularly in type 3 disease",
+   "Uncontrolled menorrhagia causing haemodynamic compromise or severe anaemia",
+   "Major unplanned surgery or trauma in a patient with a significant factor deficiency",
+   "New or worsening bleeding suggesting acquired von Willebrand syndrome linked to another disease"
+  ],
+  "prognosis": "Most patients, especially those with type 1 disease, have a mild course and a normal life expectancy with appropriate peri-procedural planning; type 3 and severe type 2 disease carry a higher lifelong bleeding burden but are manageable with modern replacement and adjunctive therapy.",
+  "pitfalls": [
+   "Excluding VWD on the basis of a normal activated partial thromboplastin time or normal platelet count",
+   "Missing the diagnosis because factor levels are transiently normalised by stress, pregnancy, or oestrogen use",
+   "Giving desmopressin in type 2B (which can worsen thrombocytopenia) or in type 3 (where it is ineffective)",
+   "Overlooking acquired von Willebrand syndrome in older patients or those with lymphoproliferative, myeloproliferative, or cardiac conditions",
+   "Failing to plan replacement or antifibrinolytic cover before invasive procedures"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Use desmopressin to release endogenous von Willebrand factor for bleeding or minor procedures in type 1 and responsive type 2 disease, after confirming response with a therapeutic trial",
+   "Give von Willebrand factor-containing concentrate for type 3, severe type 2, major bleeding or major surgery where desmopressin is ineffective or unsuitable",
+   "Add the antifibrinolytic tranexamic acid for mucosal bleeding, epistaxis, dental extraction and menorrhagia",
+   "Control menorrhagia with hormonal measures such as the combined oral contraceptive or a levonorgestrel-releasing intrauterine system alongside haemostatic therapy",
+   "Avoid antiplatelet agents and NSAIDs, and plan peri-procedural haemostatic cover in advance",
+   "Provide genetic counselling for autosomal recessive type 3 and family testing, with patient education and a medical-alert record",
+   "Manage through a specialist haemophilia or haematology centre with an individualised bleeding-management plan"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "von_willebrand_disease-pathway",
+   "title": "Von Willebrand disease: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The most common inherited bleeding disorder, caused by a quantitative or qualitative defect in von Willebrand factor, which mediates platelet adhesion and carries and stabilises factor VIII",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe or life-threatening haemorrhage, including gastrointestinal or intracranial bleeding, particularly in type 3 disease",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Full blood count and blood film to assess platelet number and morphology, Coagulation screen including activated partial thromboplastin time, Von Willebrand factor antigen level and functional (ristocetin"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Use desmopressin to release endogenous von Willebrand factor for bleeding or minor procedures in type 1 and responsive type 2 disease, after confirming response with a therapeutic trial"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Excluding VWD on the basis of a normal activated partial thromboplastin time or normal platelet count"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of von willebrand disease."
+  }
+ ],
+ "tables": [
+  {
+   "id": "von_willebrand_disease-matrix",
+   "title": "Von Willebrand disease: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The most common inherited bleeding disorder, caused by a quantitative or qualitative defect in von Willebrand factor, which",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Von Willebrand factor is a large multimeric glycoprotein synthesised by endothelial cells and megakaryocytes. It bridges platelets to exposed subendothelial collagen at sites of vascular injury (particularly under high shear) and serves as the carrier that protects circulating factor VIII from degradation. In VWD, reduced quantity (types 1 and 3) or impaired function (type 2 variants) of this factor impairs platelet adhesion and aggregation, and the loss of factor VIII protection lowers its level, adding a secondary coagulation defect. The result is defective primary haemostasis with a mucocutaneous bleeding phenotype. Acquired von Willebrand syndrome can arise from adsorption onto abnormal cells, high shear (e.g. aortic stenosis), or autoantibodies.",
-    "additionalDifferentials": [
-      "Haemophilia A (factor VIII deficiency)",
-      "Platelet function disorders (e.g. Glanzmann thrombasthenia, storage pool disease)",
-      "Immune thrombocytopenia and other causes of thrombocytopenia",
-      "Acquired von Willebrand syndrome",
-      "Vascular/connective tissue causes of mucocutaneous bleeding",
-      "Vitamin K deficiency or liver disease affecting coagulation"
+    [
+     "Key Investigations",
+     "Full blood count and blood film to assess platelet number and morphology, Coagulation screen including activated partial",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Full blood count and blood film to assess platelet number and morphology",
-      "Coagulation screen including activated partial thromboplastin time",
-      "Von Willebrand factor antigen level and functional (ristocetin cofactor/collagen-binding) activity",
-      "Factor VIII coagulant activity",
-      "Von Willebrand factor multimer analysis and ristocetin-induced platelet aggregation to define subtype",
-      "Repeat testing when results are borderline, accounting for stress, pregnancy, and hormonal influences"
+    [
+     "Primary Differentials",
+     "Haemophilia A (factor VIII deficiency), Platelet function disorders (e.g. Glanzmann thrombasthenia, storage pool disease), Immune",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe or life-threatening haemorrhage, including gastrointestinal or intracranial bleeding, particularly in type 3 disease",
-      "Uncontrolled menorrhagia causing haemodynamic compromise or severe anaemia",
-      "Major unplanned surgery or trauma in a patient with a significant factor deficiency",
-      "New or worsening bleeding suggesting acquired von Willebrand syndrome linked to another disease"
+    [
+     "Management Strategy",
+     "Use desmopressin to release endogenous von Willebrand factor for bleeding or minor procedures in type 1 and responsive type 2",
+     "Core treatment modality"
     ],
-    "prognosis": "Most patients, especially those with type 1 disease, have a mild course and a normal life expectancy with appropriate peri-procedural planning; type 3 and severe type 2 disease carry a higher lifelong bleeding burden but are manageable with modern replacement and adjunctive therapy.",
-    "pitfalls": [
-      "Excluding VWD on the basis of a normal activated partial thromboplastin time or normal platelet count",
-      "Missing the diagnosis because factor levels are transiently normalised by stress, pregnancy, or oestrogen use",
-      "Giving desmopressin in type 2B (which can worsen thrombocytopenia) or in type 3 (where it is ineffective)",
-      "Overlooking acquired von Willebrand syndrome in older patients or those with lymphoproliferative, myeloproliferative, or cardiac conditions",
-      "Failing to plan replacement or antifibrinolytic cover before invasive procedures"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Use desmopressin to release endogenous von Willebrand factor for bleeding or minor procedures in type 1 and responsive type 2 disease, after confirming response with a therapeutic trial",
-      "Give von Willebrand factor-containing concentrate for type 3, severe type 2, major bleeding or major surgery where desmopressin is ineffective or unsuitable",
-      "Add the antifibrinolytic tranexamic acid for mucosal bleeding, epistaxis, dental extraction and menorrhagia",
-      "Control menorrhagia with hormonal measures such as the combined oral contraceptive or a levonorgestrel-releasing intrauterine system alongside haemostatic therapy",
-      "Avoid antiplatelet agents and NSAIDs, and plan peri-procedural haemostatic cover in advance",
-      "Provide genetic counselling for autosomal recessive type 3 and family testing, with patient education and a medical-alert record",
-      "Manage through a specialist haemophilia or haematology centre with an individualised bleeding-management plan"
+    [
+     "Clinical Pitfall",
+     "Excluding VWD on the basis of a normal activated partial thromboplastin time or normal platelet count",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for von willebrand disease."
+  }
+ ]
 }

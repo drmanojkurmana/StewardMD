@@ -1,84 +1,156 @@
 {
-  "id": "serous_cystadenoma_ovary",
-  "name": "Ovarian serous cystadenoma",
-  "aliases": [
-    "benign serous ovarian tumour",
-    "serous cystadenoma"
+ "id": "serous_cystadenoma_ovary",
+ "name": "Ovarian serous cystadenoma",
+ "aliases": [
+  "benign serous ovarian tumour",
+  "serous cystadenoma"
+ ],
+ "class": "non_infective",
+ "system": "Gynaecology / Oncology",
+ "specialty": "Gynaecological Oncology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "WHO Classification of Female Genital Tumours",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A common benign epithelial ovarian tumour lined by tubal-type serous epithelium and filled with thin, watery fluid",
+   "Usually presents in reproductive-age and perimenopausal women as an asymptomatic cyst or with vague pelvic pressure",
+   "Typically a thin-walled, unilocular cyst with clear fluid and few or no septations on ultrasound, and is bilateral in a proportion of cases",
+   "Psammoma bodies (concentric calcifications) may be present histologically",
+   "Distinguished from borderline and malignant serous tumours by the absence of epithelial proliferation, atypia, and stromal invasion",
+   "Complications are mechanical, chiefly torsion or rupture, rather than invasive spread",
+   "Managed by observation for small simple cysts or by cystectomy or oophorectomy when large, symptomatic, or diagnostically uncertain"
   ],
-  "class": "non_infective",
-  "system": "Gynaecology / Oncology",
-  "specialty": "Gynaecological Oncology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "WHO Classification of Female Genital Tumours",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A common benign epithelial ovarian tumour lined by tubal-type serous epithelium and filled with thin, watery fluid",
-      "Usually presents in reproductive-age and perimenopausal women as an asymptomatic cyst or with vague pelvic pressure",
-      "Typically a thin-walled, unilocular cyst with clear fluid and few or no septations on ultrasound, and is bilateral in a proportion of cases",
-      "Psammoma bodies (concentric calcifications) may be present histologically",
-      "Distinguished from borderline and malignant serous tumours by the absence of epithelial proliferation, atypia, and stromal invasion",
-      "Complications are mechanical, chiefly torsion or rupture, rather than invasive spread",
-      "Managed by observation for small simple cysts or by cystectomy or oophorectomy when large, symptomatic, or diagnostically uncertain"
+  "pathophysiology": "Serous cystadenomas are benign surface-epithelial tumours whose lining recapitulates the ciliated, tubal-type epithelium of the fallopian tube, reflecting the current understanding that many serous ovarian tumours derive from tubal or Mullerian epithelium. The epithelium is a single, orderly layer without the stratification, tufting, or cytological atypia seen in borderline and malignant counterparts, and there is no stromal invasion. Secretion of serous fluid by this epithelium produces a thin-walled cyst, and concentric calcified psammoma bodies may form. Because growth is non-invasive, clinical problems arise from the size of the cyst and mechanical events such as torsion or rupture rather than from local or distant spread.",
+  "additionalDifferentials": [
+   "Serous borderline tumour or low-grade serous carcinoma",
+   "Mucinous cystadenoma",
+   "Functional or simple ovarian cyst",
+   "Paratubal or paraovarian cyst",
+   "Endometrioma",
+   "Hydrosalpinx"
+  ],
+  "additionalInvestigations": [
+   "Transvaginal ultrasound to characterise a thin-walled unilocular cyst",
+   "Pelvic MRI when the lesion is large or indeterminate",
+   "CA125 and risk-of-malignancy assessment to help stratify the lesion",
+   "Serial ultrasound follow-up for small simple cysts",
+   "Histology to confirm a benign lining and exclude a borderline or malignant component",
+   "Doppler assessment if torsion is suspected"
+  ],
+  "redFlags": [
+   "Solid or papillary components, thick septations, or ascites suggesting a borderline or malignant tumour",
+   "Acute pain indicating torsion or rupture",
+   "Rapid enlargement of a previously stable cyst",
+   "A markedly raised CA125 in a complex adnexal mass"
+  ],
+  "prognosis": "Excellent, as serous cystadenomas are benign and cured by complete excision, with no tendency to invasive spread; recurrence is uncommon and usually represents a new lesion.",
+  "pitfalls": [
+   "Assuming any serous cystic lesion is benign and missing a borderline or malignant tumour",
+   "Rupturing or incompletely excising a cyst and prompting recurrence",
+   "Over-relying on a normal CA125, which is frequently normal even in benign disease and can be raised for non-neoplastic reasons",
+   "Overlooking torsion as a cause of acute presentation"
+  ],
+  "references": [
+   "WHO Classification of Female Genital Tumours",
+   "Blaustein's Pathology of the Female Genital Tract"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Confirm this is a benign lesion and actively exclude a borderline or malignant look alike before committing to conservative management",
+   "Use transvaginal ultrasound as the primary tool to characterize the mass as simple versus complex, since septations, solid areas, or mural nodules raise concern for malignancy",
+   "Order CA125 as part of risk assessment, recognizing it is not diagnostic alone since it is elevated in only about 75 percent of epithelial ovarian cancers and can rise with benign conditions",
+   "Apply ACOG and SGO referral criteria, including a CA125 above 200 U per mL in a premenopausal woman or any CA125 elevation in a postmenopausal woman, ascites, nodularity or fixed mobility, metastasis, or a first degree relative with breast or ovarian cancer, to trigger referral to a gynecologic oncologist",
+   "Consider adjunct multivariate serum tests such as OVA1 or ROMA combining CA125 and HE4 to help decide whether surgical referral is warranted",
+   "Manage an asymptomatic, sonographically simple, unilocular thin walled cyst with normal markers and no referral criteria conservatively with interval ultrasound surveillance rather than immediate surgery",
+   "Refer to a gynecologic oncologist before proceeding whenever a mass meets any ACOG or SGO referral criterion or looks complex on imaging, so a borderline or malignant lesion is not mismanaged as simple cystadenoma",
+   "Proceed to surgical removal, cystectomy or oophorectomy, generally by a minimally invasive approach when feasible, for a large, symptomatic, or diagnostically indeterminate cyst without high risk features, both to relieve symptoms and to obtain definitive histology",
+   "Evaluate urgently for torsion or rupture in acute severe pain presentations, since these are surgical emergencies",
+   "Recognize that surgery is the only definitive treatment when removal is indicated and also confirms the diagnosis histologically while excluding a borderline or malignant counterpart",
+   "Do not use radiotherapy or systemic cytotoxic therapy, since neither has any role in benign serous cystadenoma",
+   "For non-operative management, follow serial ultrasound watching specifically for new complex features such as solid components, thickening septations, or growth",
+   "After surgical removal, confirm histology shows a benign serous lining without atypia or invasion as the management endpoint, and do not pursue cancer type tumor marker or imaging surveillance afterward since this entity does not recur or spread like a carcinoma",
+   "In women with a strong family history of breast or ovarian cancer or a known BRCA1, BRCA2, or Lynch syndrome mutation, involve genetics and gynecologic oncology for any adnexal finding given the elevated rate of occult serous carcinoma found at prophylactic risk reducing surgery in mutation carriers"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "serous_cystadenoma_ovary-pathway",
+   "title": "Ovarian serous cystadenoma: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A common benign epithelial ovarian tumour lined by tubal-type serous epithelium and filled with thin, watery fluid",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Solid or papillary components, thick septations, or ascites suggesting a borderline or malignant tumour",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Transvaginal ultrasound to characterise a thin-walled unilocular cyst, Pelvic MRI when the lesion is large or indeterminate, CA125 and risk-of-malignancy assessment to help stratify the lesion"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Confirm this is a benign lesion and actively exclude a borderline or malignant look alike before committing to conservative management"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming any serous cystic lesion is benign and missing a borderline or malignant tumour"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of ovarian serous cystadenoma."
+  }
+ ],
+ "tables": [
+  {
+   "id": "serous_cystadenoma_ovary-matrix",
+   "title": "Ovarian serous cystadenoma: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A common benign epithelial ovarian tumour lined by tubal-type serous epithelium and filled with thin, watery fluid",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Serous cystadenomas are benign surface-epithelial tumours whose lining recapitulates the ciliated, tubal-type epithelium of the fallopian tube, reflecting the current understanding that many serous ovarian tumours derive from tubal or Mullerian epithelium. The epithelium is a single, orderly layer without the stratification, tufting, or cytological atypia seen in borderline and malignant counterparts, and there is no stromal invasion. Secretion of serous fluid by this epithelium produces a thin-walled cyst, and concentric calcified psammoma bodies may form. Because growth is non-invasive, clinical problems arise from the size of the cyst and mechanical events such as torsion or rupture rather than from local or distant spread.",
-    "additionalDifferentials": [
-      "Serous borderline tumour or low-grade serous carcinoma",
-      "Mucinous cystadenoma",
-      "Functional or simple ovarian cyst",
-      "Paratubal or paraovarian cyst",
-      "Endometrioma",
-      "Hydrosalpinx"
+    [
+     "Key Investigations",
+     "Transvaginal ultrasound to characterise a thin-walled unilocular cyst, Pelvic MRI when the lesion is large or indeterminate,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Transvaginal ultrasound to characterise a thin-walled unilocular cyst",
-      "Pelvic MRI when the lesion is large or indeterminate",
-      "CA125 and risk-of-malignancy assessment to help stratify the lesion",
-      "Serial ultrasound follow-up for small simple cysts",
-      "Histology to confirm a benign lining and exclude a borderline or malignant component",
-      "Doppler assessment if torsion is suspected"
+    [
+     "Primary Differentials",
+     "Serous borderline tumour or low-grade serous carcinoma, Mucinous cystadenoma, Functional or simple ovarian cyst",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Solid or papillary components, thick septations, or ascites suggesting a borderline or malignant tumour",
-      "Acute pain indicating torsion or rupture",
-      "Rapid enlargement of a previously stable cyst",
-      "A markedly raised CA125 in a complex adnexal mass"
+    [
+     "Management Strategy",
+     "Confirm this is a benign lesion and actively exclude a borderline or malignant look alike before committing to conservative",
+     "Core treatment modality"
     ],
-    "prognosis": "Excellent, as serous cystadenomas are benign and cured by complete excision, with no tendency to invasive spread; recurrence is uncommon and usually represents a new lesion.",
-    "pitfalls": [
-      "Assuming any serous cystic lesion is benign and missing a borderline or malignant tumour",
-      "Rupturing or incompletely excising a cyst and prompting recurrence",
-      "Over-relying on a normal CA125, which is frequently normal even in benign disease and can be raised for non-neoplastic reasons",
-      "Overlooking torsion as a cause of acute presentation"
-    ],
-    "references": [
-      "WHO Classification of Female Genital Tumours",
-      "Blaustein's Pathology of the Female Genital Tract"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Confirm this is a benign lesion and actively exclude a borderline or malignant look alike before committing to conservative management",
-      "Use transvaginal ultrasound as the primary tool to characterize the mass as simple versus complex, since septations, solid areas, or mural nodules raise concern for malignancy",
-      "Order CA125 as part of risk assessment, recognizing it is not diagnostic alone since it is elevated in only about 75 percent of epithelial ovarian cancers and can rise with benign conditions",
-      "Apply ACOG and SGO referral criteria, including a CA125 above 200 U per mL in a premenopausal woman or any CA125 elevation in a postmenopausal woman, ascites, nodularity or fixed mobility, metastasis, or a first degree relative with breast or ovarian cancer, to trigger referral to a gynecologic oncologist",
-      "Consider adjunct multivariate serum tests such as OVA1 or ROMA combining CA125 and HE4 to help decide whether surgical referral is warranted",
-      "Manage an asymptomatic, sonographically simple, unilocular thin walled cyst with normal markers and no referral criteria conservatively with interval ultrasound surveillance rather than immediate surgery",
-      "Refer to a gynecologic oncologist before proceeding whenever a mass meets any ACOG or SGO referral criterion or looks complex on imaging, so a borderline or malignant lesion is not mismanaged as simple cystadenoma",
-      "Proceed to surgical removal, cystectomy or oophorectomy, generally by a minimally invasive approach when feasible, for a large, symptomatic, or diagnostically indeterminate cyst without high risk features, both to relieve symptoms and to obtain definitive histology",
-      "Evaluate urgently for torsion or rupture in acute severe pain presentations, since these are surgical emergencies",
-      "Recognize that surgery is the only definitive treatment when removal is indicated and also confirms the diagnosis histologically while excluding a borderline or malignant counterpart",
-      "Do not use radiotherapy or systemic cytotoxic therapy, since neither has any role in benign serous cystadenoma",
-      "For non-operative management, follow serial ultrasound watching specifically for new complex features such as solid components, thickening septations, or growth",
-      "After surgical removal, confirm histology shows a benign serous lining without atypia or invasion as the management endpoint, and do not pursue cancer type tumor marker or imaging surveillance afterward since this entity does not recur or spread like a carcinoma",
-      "In women with a strong family history of breast or ovarian cancer or a known BRCA1, BRCA2, or Lynch syndrome mutation, involve genetics and gynecologic oncology for any adnexal finding given the elevated rate of occult serous carcinoma found at prophylactic risk reducing surgery in mutation carriers"
+    [
+     "Clinical Pitfall",
+     "Assuming any serous cystic lesion is benign and missing a borderline or malignant tumour",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for ovarian serous cystadenoma."
+  }
+ ]
 }

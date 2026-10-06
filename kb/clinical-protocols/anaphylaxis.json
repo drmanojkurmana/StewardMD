@@ -5,7 +5,16 @@
  "population": "Adults and children",
  "basis": "international",
  "setting": "Emergency department, ward, OPD, operating theatre, prehospital",
- "aliases": ["anaphylactic shock", "anaphylactic reaction", "severe allergic reaction", "IM adrenaline", "epinephrine", "refractory anaphylaxis", "antivenom reaction", "drug allergy"],
+ "aliases": [
+  "anaphylactic shock",
+  "anaphylactic reaction",
+  "severe allergic reaction",
+  "IM adrenaline",
+  "epinephrine",
+  "refractory anaphylaxis",
+  "antivenom reaction",
+  "drug allergy"
+ ],
  "summary": "Give IM adrenaline into the anterolateral thigh at once (0.01 mg/kg, maximum 0.5 mg; adults 500 micrograms), repeat after 5 minutes if needed, lie the patient flat, give oxygen and IV fluid for shock, and start a low-dose adrenaline infusion if two doses fail. Antihistamines and steroids are not first-line.",
  "sections": [
   {
@@ -87,18 +96,136 @@
   }
  ],
  "drugs": [
-  { "name": "Adrenaline (epinephrine) 1 mg/mL IM", "dose": "0.01 mg/kg IM (maximum 0.5 mg): adult and over 12 years 500 micrograms; 6 to 12 years 300 micrograms; 6 months to 6 years 150 micrograms; under 6 months 100 to 150 micrograms. Repeat after 5 minutes if needed", "notes": "Anterolateral mid-thigh." },
-  { "name": "Adrenaline IV infusion (refractory)", "dose": "1 mg in 100 mL 0.9% saline; start 0.5 mL/kg/h (about 0.1 microgram/kg/min), 1 mL/kg/h if severe; titrate", "notes": "Adults and children. Wean to 50% as symptoms improve; taper over 30 minutes starting 1 hour after resolution." },
-  { "name": "Crystalloid (0.9% saline, Ringer lactate, Plasma-Lyte)", "dose": "Adult 500 to 1000 mL IV bolus; child 10 mL/kg IV bolus; repeat as needed", "notes": "Use non-glucose crystalloid; avoid colloids." },
-  { "name": "Glucagon", "dose": "Adult 1 mg IV, repeat or infuse 1 to 2 mg/h; child 20 to 30 micrograms/kg IV (maximum 1 mg), repeat every 5 minutes", "notes": "Refractory anaphylaxis in patients on beta blockers. Causes vomiting and hyperglycaemia." },
-  { "name": "Hydrocortisone", "dose": "Adult 200 mg IV; child 4 mg/kg IV (maximum 200 mg)", "notes": "Refractory reactions or ongoing asthma/shock only, after initial resuscitation. Not routine." },
-  { "name": "Salbutamol (nebulised)", "dose": "Adult 5 mg; child under 5 years 2.5 mg, 5 years and over 5 mg; repeat as needed", "notes": "Persistent bronchospasm after adrenaline." },
-  { "name": "Cetirizine (oral)", "dose": "Adult and 12 years or over 10 to 20 mg; 6 to 11 years 5 to 10 mg; 2 to 6 years 2.5 to 5 mg; under 2 years 250 micrograms/kg", "notes": "Skin symptoms only, after stabilisation; preferred over sedating chlorphenamine." }
+  {
+   "name": "Adrenaline (epinephrine) 1 mg/mL IM",
+   "dose": "0.01 mg/kg IM (maximum 0.5 mg): adult and over 12 years 500 micrograms; 6 to 12 years 300 micrograms; 6 months to 6 years 150 micrograms; under 6 months 100 to 150 micrograms. Repeat after 5 minutes if needed",
+   "notes": "Anterolateral mid-thigh."
+  },
+  {
+   "name": "Adrenaline IV infusion (refractory)",
+   "dose": "1 mg in 100 mL 0.9% saline; start 0.5 mL/kg/h (about 0.1 microgram/kg/min), 1 mL/kg/h if severe; titrate",
+   "notes": "Adults and children. Wean to 50% as symptoms improve; taper over 30 minutes starting 1 hour after resolution."
+  },
+  {
+   "name": "Crystalloid (0.9% saline, Ringer lactate, Plasma-Lyte)",
+   "dose": "Adult 500 to 1000 mL IV bolus; child 10 mL/kg IV bolus; repeat as needed",
+   "notes": "Use non-glucose crystalloid; avoid colloids."
+  },
+  {
+   "name": "Glucagon",
+   "dose": "Adult 1 mg IV, repeat or infuse 1 to 2 mg/h; child 20 to 30 micrograms/kg IV (maximum 1 mg), repeat every 5 minutes",
+   "notes": "Refractory anaphylaxis in patients on beta blockers. Causes vomiting and hyperglycaemia."
+  },
+  {
+   "name": "Hydrocortisone",
+   "dose": "Adult 200 mg IV; child 4 mg/kg IV (maximum 200 mg)",
+   "notes": "Refractory reactions or ongoing asthma/shock only, after initial resuscitation. Not routine."
+  },
+  {
+   "name": "Salbutamol (nebulised)",
+   "dose": "Adult 5 mg; child under 5 years 2.5 mg, 5 years and over 5 mg; repeat as needed",
+   "notes": "Persistent bronchospasm after adrenaline."
+  },
+  {
+   "name": "Cetirizine (oral)",
+   "dose": "Adult and 12 years or over 10 to 20 mg; 6 to 11 years 5 to 10 mg; 2 to 6 years 2.5 to 5 mg; under 2 years 250 micrograms/kg",
+   "notes": "Skin symptoms only, after stabilisation; preferred over sedating chlorphenamine."
+  }
  ],
  "sources": [
-  { "org": "Resuscitation Council UK", "title": "Emergency treatment of anaphylaxis: guidelines for healthcare providers", "year": 2021, "url": "https://www.resus.org.uk/sites/default/files/2021-05/Emergency%20Treatment%20of%20Anaphylaxis%20May%202021_0.pdf" },
-  { "org": "World Allergy Organization", "title": "World Allergy Organization Anaphylaxis Guidance 2020", "year": 2020, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7607509/" },
-  { "org": "Resuscitation Council UK", "title": "2025 Special circumstances guidelines (anaphylaxis and cardiac arrest)", "year": 2025, "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/special-circumstances-guidelines" }
+  {
+   "org": "Resuscitation Council UK",
+   "title": "Emergency treatment of anaphylaxis: guidelines for healthcare providers",
+   "year": 2021,
+   "url": "https://www.resus.org.uk/sites/default/files/2021-05/Emergency%20Treatment%20of%20Anaphylaxis%20May%202021_0.pdf"
+  },
+  {
+   "org": "World Allergy Organization",
+   "title": "World Allergy Organization Anaphylaxis Guidance 2020",
+   "year": 2020,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7607509/"
+  },
+  {
+   "org": "Resuscitation Council UK",
+   "title": "2025 Special circumstances guidelines (anaphylaxis and cardiac arrest)",
+   "year": 2025,
+   "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/special-circumstances-guidelines"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "anaphylaxis-pathway",
+   "title": "Anaphylaxis (adults and children) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Sudden airway (swelling, stridor, hoarseness), breathing (wheeze, hypoxia) or circulation (hypotension, collapse) problems after a trigger, usually with skin or mucosal changes; skin signs can be absent.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Call for help, stop or remove the trigger (drug infusion, antivenom, blood product) and assess ABCDE.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Mast cell tryptase: first sample as soon as feasible without delaying treatment, second at 1 to 2 hours (no later than 4 hours) after onset, third at least 24 hours after resolution for a baseline. Record the sample times."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Refractory: respiratory or cardiovascular features persist despite 2 appropriate doses of adrenaline. Get critical care help; keep giving IM adrenaline every 5 minutes until an infusion is running."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Giving an antihistamine or steroid instead of, or before, adrenaline. Antihistamines do not treat airway, breathing or circulation problems."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for anaphylaxis (adults and children)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "anaphylaxis-summary-matrix",
+   "title": "Anaphylaxis (adults and children) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Sudden airway (swelling, stridor, hoarseness), breathing (wheeze, hypoxia) or circulation (hypotension, collapse) problems after a trigger,",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Call for help, stop or remove the trigger (drug infusion, antivenom, blood product) and assess ABCDE.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Mast cell tryptase: first sample as soon as feasible without delaying treatment, second at 1 to 2 hours (no later than 4 hours) after",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Adrenaline (epinephrine) 1 mg/mL IM: 0.01 mg/kg IM (maximum 0.5 mg): adult and over 12 years 500 micrograms; 6 to 12 years 300 micrograms;",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Giving an antihistamine or steroid instead of, or before, adrenaline. Antihistamines do not treat airway, breathing or circulation problems.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for anaphylaxis (adults and children)."
+  }
+ ]
 }

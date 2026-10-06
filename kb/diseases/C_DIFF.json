@@ -188,5 +188,77 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "hcdbde9c7"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "c_diff-dx-algo",
+      "title": "Clostridioides difficile Infection: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "CDI is the most commonly diagnosed hospital-acquired diarrhoeal illness and the leading health care-associated infection; it follows ingestion of spores that germinate and produce toxins once the normal colonic microbiota has been",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Unexplained leukocytosis with WBC >=15,000/uL, especially when stool passage has ceased due to adynamic ileus (ileus seen on x-ray in ~20%) - a clue to unsuspected CDI and a marker of high risk for toxic",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Only diarrhoeal (unformed) stool should be tested; testing of asymptomatic patients is not recommended except for epidemiologic study (Harrison 22e p.1084)., NAAT/PCR for the toxin gene is rapid and sensitive but may"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison applies the IDSA/SHEA-aligned severity tiers as treatment-decision markers: SEVERE disease is indicated by leukocytosis >=15,000 WBCs/uL and/or a serum creatinine >=1.5 mg/dL; FULMINANT (severe complicated)"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Do not perform a 'test of cure' after treatment: >50% of patients keep harbouring the organism and its toxin after diarrhoea resolves, and results do not predict recurrence; such results must not be used to restrict"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for clostridioides difficile infection."
+    }
+  ],
+  "tables": [
+    {
+      "id": "c_diff-matrix",
+      "title": "Clostridioides difficile Infection: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "CDI is the most commonly diagnosed hospital-acquired diarrhoeal illness and the leading health care-associated infection; it",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Only diarrhoeal (unformed) stool should be tested; testing of asymptomatic patients is not recommended except for epidemiologic",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Alternative etiologies in this class",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Unexplained leukocytosis with WBC >=15,000/uL, especially when stool passage has ceased due to adynamic ileus (ileus seen on",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Do not perform a 'test of cure' after treatment: >50% of patients keep harbouring the organism and its toxin after diarrhoea",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for clostridioides difficile infection."
+    }
+  ]
 }

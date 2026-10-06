@@ -1,79 +1,151 @@
 {
-  "id": "gamma_glutamylcysteine_synthetase_deficiency",
-  "name": "Gamma-glutamylcysteine synthetase deficiency",
-  "aliases": [
-    "glutamate-cysteine ligase deficiency",
-    "GCL deficiency",
-    "gamma-GCS deficiency",
-    "GCLC gene"
+ "id": "gamma_glutamylcysteine_synthetase_deficiency",
+ "name": "Gamma-glutamylcysteine synthetase deficiency",
+ "aliases": [
+  "glutamate-cysteine ligase deficiency",
+  "GCL deficiency",
+  "gamma-GCS deficiency",
+  "GCLC gene"
+ ],
+ "class": "non_infective",
+ "system": "Haematology / Genetics",
+ "specialty": "Haematology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Williams Hematology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A rare recessive defect of glutathione synthesis producing an oxidant-sensitive chronic non-spherocytic haemolytic anaemia",
+   "The enzyme catalyses the first, rate-limiting step of glutathione production, so deficiency depletes red-cell glutathione",
+   "Low glutathione leaves the red cell poorly protected against oxidant stress, and haemolysis may worsen with oxidant drugs or infection",
+   "Some patients have neurological features such as spinocerebellar degeneration and peripheral neuropathy, reflecting glutathione depletion in other tissues",
+   "The anaemia is Coombs-negative and the film may show non-specific oxidative changes",
+   "Diagnosis rests on demonstrating low red-cell glutathione, reduced enzyme activity and a GCLC mutation",
+   "Management is supportive with folate and transfusion when needed, and above all avoidance of oxidant drugs and foods known to precipitate haemolysis"
   ],
-  "class": "non_infective",
-  "system": "Haematology / Genetics",
-  "specialty": "Haematology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Williams Hematology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A rare recessive defect of glutathione synthesis producing an oxidant-sensitive chronic non-spherocytic haemolytic anaemia",
-      "The enzyme catalyses the first, rate-limiting step of glutathione production, so deficiency depletes red-cell glutathione",
-      "Low glutathione leaves the red cell poorly protected against oxidant stress, and haemolysis may worsen with oxidant drugs or infection",
-      "Some patients have neurological features such as spinocerebellar degeneration and peripheral neuropathy, reflecting glutathione depletion in other tissues",
-      "The anaemia is Coombs-negative and the film may show non-specific oxidative changes",
-      "Diagnosis rests on demonstrating low red-cell glutathione, reduced enzyme activity and a GCLC mutation",
-      "Management is supportive with folate and transfusion when needed, and above all avoidance of oxidant drugs and foods known to precipitate haemolysis"
+  "pathophysiology": "Gamma-glutamylcysteine synthetase, also called glutamate-cysteine ligase, catalyses the first and rate-limiting step in the synthesis of glutathione, the tripeptide that defends the red cell against oxidative injury. Deficiency lowers red-cell glutathione, leaving haemoglobin and membrane proteins vulnerable to oxidant damage; the resulting chronic non-spherocytic haemolytic anaemia is characteristically exacerbated by oxidant stress from certain drugs or infections. Because glutathione is important throughout the body, severe deficiency can also cause neurological dysfunction.",
+  "additionalDifferentials": [
+   "Glutathione synthetase deficiency",
+   "Glucose-6-phosphate dehydrogenase deficiency",
+   "Glutathione reductase deficiency",
+   "Autoimmune haemolytic anaemia",
+   "Unstable haemoglobin variants",
+   "Other oxidant-induced haemolytic states"
+  ],
+  "additionalInvestigations": [
+   "Red-cell glutathione concentration measurement",
+   "Gamma-glutamylcysteine synthetase enzyme activity assay",
+   "Full blood count, reticulocyte count and blood film for oxidative changes",
+   "Haemolysis screen with bilirubin, lactate dehydrogenase and haptoglobin",
+   "Neurological assessment where indicated",
+   "Molecular testing of the GCLC gene"
+  ],
+  "redFlags": [
+   "Acute haemolytic crisis triggered by oxidant drug exposure or infection",
+   "Progressive neurological deterioration in severe deficiency",
+   "Severe symptomatic anaemia requiring transfusion",
+   "Aplastic crisis following parvovirus B19 infection"
+  ],
+  "prognosis": "The haemolytic anaemia is usually chronic and manageable if oxidant triggers are avoided; prognosis is worse when significant neurological involvement is present.",
+  "pitfalls": [
+   "Failing to advise strict avoidance of oxidant drugs and foods",
+   "Confusing the disorder with glucose-6-phosphate dehydrogenase deficiency without measuring glutathione",
+   "Overlooking neurological signs that indicate systemic glutathione depletion",
+   "Neglecting iron-overload monitoring in transfused patients"
+  ],
+  "references": [
+   "Williams Hematology",
+   "Wintrobe's Clinical Hematology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Avoidance of oxidant triggers, including oxidant drugs and where relevant foods, with prompt treatment of infections that precipitate haemolysis",
+   "Supportive care of the chronic non-spherocytic haemolytic anaemia with folic acid supplementation and red-cell transfusion during severe crises",
+   "Consideration of antioxidant supplementation such as vitamin E as an adjunct",
+   "Monitoring of haemolysis with blood count, reticulocytes, bilirubin and lactate dehydrogenase, and of iron status in transfused patients",
+   "Neurological assessment and supportive management where spinocerebellar degeneration or peripheral neuropathy is present",
+   "Genetic counselling for this recessive disorder with GCLC molecular confirmation and family testing",
+   "Multidisciplinary input from haematology and clinical genetics"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "gamma_glutamylcysteine_synthetase_deficiency-pathway",
+   "title": "Gamma-glutamylcysteine synthetase deficiency: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A rare recessive defect of glutathione synthesis producing an oxidant-sensitive chronic non-spherocytic haemolytic anaemia",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Acute haemolytic crisis triggered by oxidant drug exposure or infection",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Red-cell glutathione concentration measurement, Gamma-glutamylcysteine synthetase enzyme activity assay, Full blood count, reticulocyte count and blood film for oxidative changes"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Avoidance of oxidant triggers, including oxidant drugs and where relevant foods, with prompt treatment of infections that precipitate haemolysis"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to advise strict avoidance of oxidant drugs and foods"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of gamma-glutamylcysteine synthetase deficiency."
+  }
+ ],
+ "tables": [
+  {
+   "id": "gamma_glutamylcysteine_synthetase_deficiency-matrix",
+   "title": "Gamma-glutamylcysteine synthetase deficiency: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A rare recessive defect of glutathione synthesis producing an oxidant-sensitive chronic non-spherocytic haemolytic anaemia",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Gamma-glutamylcysteine synthetase, also called glutamate-cysteine ligase, catalyses the first and rate-limiting step in the synthesis of glutathione, the tripeptide that defends the red cell against oxidative injury. Deficiency lowers red-cell glutathione, leaving haemoglobin and membrane proteins vulnerable to oxidant damage; the resulting chronic non-spherocytic haemolytic anaemia is characteristically exacerbated by oxidant stress from certain drugs or infections. Because glutathione is important throughout the body, severe deficiency can also cause neurological dysfunction.",
-    "additionalDifferentials": [
-      "Glutathione synthetase deficiency",
-      "Glucose-6-phosphate dehydrogenase deficiency",
-      "Glutathione reductase deficiency",
-      "Autoimmune haemolytic anaemia",
-      "Unstable haemoglobin variants",
-      "Other oxidant-induced haemolytic states"
+    [
+     "Key Investigations",
+     "Red-cell glutathione concentration measurement, Gamma-glutamylcysteine synthetase enzyme activity assay, Full blood count,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Red-cell glutathione concentration measurement",
-      "Gamma-glutamylcysteine synthetase enzyme activity assay",
-      "Full blood count, reticulocyte count and blood film for oxidative changes",
-      "Haemolysis screen with bilirubin, lactate dehydrogenase and haptoglobin",
-      "Neurological assessment where indicated",
-      "Molecular testing of the GCLC gene"
+    [
+     "Primary Differentials",
+     "Glutathione synthetase deficiency, Glucose-6-phosphate dehydrogenase deficiency, Glutathione reductase deficiency",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Acute haemolytic crisis triggered by oxidant drug exposure or infection",
-      "Progressive neurological deterioration in severe deficiency",
-      "Severe symptomatic anaemia requiring transfusion",
-      "Aplastic crisis following parvovirus B19 infection"
+    [
+     "Management Strategy",
+     "Avoidance of oxidant triggers, including oxidant drugs and where relevant foods, with prompt treatment of infections that",
+     "Core treatment modality"
     ],
-    "prognosis": "The haemolytic anaemia is usually chronic and manageable if oxidant triggers are avoided; prognosis is worse when significant neurological involvement is present.",
-    "pitfalls": [
-      "Failing to advise strict avoidance of oxidant drugs and foods",
-      "Confusing the disorder with glucose-6-phosphate dehydrogenase deficiency without measuring glutathione",
-      "Overlooking neurological signs that indicate systemic glutathione depletion",
-      "Neglecting iron-overload monitoring in transfused patients"
-    ],
-    "references": [
-      "Williams Hematology",
-      "Wintrobe's Clinical Hematology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Avoidance of oxidant triggers, including oxidant drugs and where relevant foods, with prompt treatment of infections that precipitate haemolysis",
-      "Supportive care of the chronic non-spherocytic haemolytic anaemia with folic acid supplementation and red-cell transfusion during severe crises",
-      "Consideration of antioxidant supplementation such as vitamin E as an adjunct",
-      "Monitoring of haemolysis with blood count, reticulocytes, bilirubin and lactate dehydrogenase, and of iron status in transfused patients",
-      "Neurological assessment and supportive management where spinocerebellar degeneration or peripheral neuropathy is present",
-      "Genetic counselling for this recessive disorder with GCLC molecular confirmation and family testing",
-      "Multidisciplinary input from haematology and clinical genetics"
+    [
+     "Clinical Pitfall",
+     "Failing to advise strict avoidance of oxidant drugs and foods",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for gamma-glutamylcysteine synthetase deficiency."
+  }
+ ]
 }

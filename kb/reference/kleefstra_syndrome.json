@@ -1,79 +1,151 @@
 {
-  "id": "kleefstra_syndrome",
-  "name": "Kleefstra syndrome",
-  "aliases": [
-    "9q34.3 deletion syndrome",
-    "EHMT1-related disorder",
-    "9q subtelomeric deletion syndrome"
+ "id": "kleefstra_syndrome",
+ "name": "Kleefstra syndrome",
+ "aliases": [
+  "9q34.3 deletion syndrome",
+  "EHMT1-related disorder",
+  "9q subtelomeric deletion syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Genetics / Dysmorphology",
+ "specialty": "Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Smith's Recognizable Patterns of Human Malformation",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A neurodevelopmental syndrome with intellectual disability, childhood hypotonia, and severely delayed or absent speech",
+   "A recognisable facial gestalt includes brachycephaly, a flat face with hypertelorism, synophrys, anteverted nares, a protruding tongue, and a prognathic jaw that becomes more evident with age",
+   "Autistic and other behavioural features are common, and some individuals show a regression or apathetic, catatonia-like state in adolescence or adulthood",
+   "Congenital heart defects, genitourinary anomalies, recurrent infections, and later obesity are associated systemic features",
+   "Caused by haploinsufficiency of EHMT1 at chromosome 9q34.3, from either a subtelomeric microdeletion or an intragenic EHMT1 variant",
+   "EHMT1 encodes a histone methyltransferase, placing Kleefstra syndrome among the chromatin-modification (epigenetic machinery) disorders",
+   "Diagnosis uses chromosomal microarray to detect the 9q34.3 deletion, with EHMT1 sequencing when the array is normal"
   ],
-  "class": "non_infective",
-  "system": "Genetics / Dysmorphology",
-  "specialty": "Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Smith's Recognizable Patterns of Human Malformation",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A neurodevelopmental syndrome with intellectual disability, childhood hypotonia, and severely delayed or absent speech",
-      "A recognisable facial gestalt includes brachycephaly, a flat face with hypertelorism, synophrys, anteverted nares, a protruding tongue, and a prognathic jaw that becomes more evident with age",
-      "Autistic and other behavioural features are common, and some individuals show a regression or apathetic, catatonia-like state in adolescence or adulthood",
-      "Congenital heart defects, genitourinary anomalies, recurrent infections, and later obesity are associated systemic features",
-      "Caused by haploinsufficiency of EHMT1 at chromosome 9q34.3, from either a subtelomeric microdeletion or an intragenic EHMT1 variant",
-      "EHMT1 encodes a histone methyltransferase, placing Kleefstra syndrome among the chromatin-modification (epigenetic machinery) disorders",
-      "Diagnosis uses chromosomal microarray to detect the 9q34.3 deletion, with EHMT1 sequencing when the array is normal"
+  "pathophysiology": "Kleefstra syndrome is caused by haploinsufficiency of EHMT1, which encodes euchromatic histone methyltransferase 1, an enzyme that dimethylates histone H3 lysine 9 to establish repressive chromatin marks and silence target genes. Reduced EHMT1 activity, whether from a 9q34.3 deletion or an intragenic variant, dysregulates transcriptional programmes controlling neuronal development and function, producing intellectual disability, hypotonia, speech impairment, and behavioural features. Contiguous deletions removing neighbouring genes can add to the systemic and dysmorphic phenotype.",
+  "additionalDifferentials": [
+   "Down syndrome (given overlapping facial and hypotonia features)",
+   "Smith-Magenis syndrome",
+   "Pitt-Hopkins syndrome",
+   "Phelan-McDermid syndrome",
+   "Rubinstein-Taybi and other chromatin-modification disorders",
+   "Angelman syndrome"
+  ],
+  "additionalInvestigations": [
+   "Chromosomal microarray to detect and size the 9q34.3 deletion",
+   "EHMT1 sequencing when microarray is normal but the phenotype is suggestive",
+   "Echocardiography for congenital heart disease",
+   "Renal tract ultrasound for genitourinary anomalies",
+   "Developmental, speech, and behavioural or autism assessment",
+   "Neurological and, where regression occurs, psychiatric review"
+  ],
+  "redFlags": [
+   "Behavioural or developmental regression or catatonia-like state in adolescence or adulthood",
+   "New seizures requiring evaluation",
+   "Significant congenital heart disease needing cardiology management",
+   "Recurrent or severe infection prompting immune assessment"
+  ],
+  "prognosis": "Intellectual disability and speech impairment are lifelong and most individuals require ongoing support, with the additional long-term concern of possible regression or psychiatric deterioration in later life. Systemic complications are managed as they arise, and multidisciplinary care optimises function and wellbeing.",
+  "pitfalls": [
+   "Mistaking the facial features and hypotonia for Down syndrome and not pursuing microarray",
+   "Assuming a normal microarray excludes the diagnosis when an intragenic EHMT1 variant may be responsible",
+   "Failing to anticipate and monitor for adolescent or adult regression and psychiatric change",
+   "Overlooking associated cardiac or renal anomalies that need screening"
+  ],
+  "references": [
+   "Smith's Recognizable Patterns of Human Malformation",
+   "GeneReviews: Kleefstra Syndrome"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Early developmental intervention with speech and language therapy, occupational therapy and physiotherapy for the hypotonia and delay, as there is no disease-specific therapy",
+   "Individualised educational support and structured behavioural or autism-focused interventions",
+   "Echocardiographic evaluation and cardiology management of congenital heart defects",
+   "Renal tract imaging and urological management of genitourinary anomalies",
+   "Surveillance for and treatment of recurrent infections, with weight management for later obesity",
+   "Psychiatric review and monitoring for adolescent or adult regression or a catatonia-like state",
+   "Genetic counselling and family testing, reflecting EHMT1 haploinsufficiency at 9q34.3",
+   "Coordinated multidisciplinary neurodevelopmental follow-up"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "kleefstra_syndrome-pathway",
+   "title": "Kleefstra syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A neurodevelopmental syndrome with intellectual disability, childhood hypotonia, and severely delayed or absent speech",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Behavioural or developmental regression or catatonia-like state in adolescence or adulthood",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Chromosomal microarray to detect and size the 9q34.3 deletion, EHMT1 sequencing when microarray is normal but the phenotype is suggestive, Echocardiography for congenital heart disease"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Early developmental intervention with speech and language therapy, occupational therapy and physiotherapy for the hypotonia and delay, as there is no disease-specific therapy"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking the facial features and hypotonia for Down syndrome and not pursuing microarray"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of kleefstra syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "kleefstra_syndrome-matrix",
+   "title": "Kleefstra syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A neurodevelopmental syndrome with intellectual disability, childhood hypotonia, and severely delayed or absent speech",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Kleefstra syndrome is caused by haploinsufficiency of EHMT1, which encodes euchromatic histone methyltransferase 1, an enzyme that dimethylates histone H3 lysine 9 to establish repressive chromatin marks and silence target genes. Reduced EHMT1 activity, whether from a 9q34.3 deletion or an intragenic variant, dysregulates transcriptional programmes controlling neuronal development and function, producing intellectual disability, hypotonia, speech impairment, and behavioural features. Contiguous deletions removing neighbouring genes can add to the systemic and dysmorphic phenotype.",
-    "additionalDifferentials": [
-      "Down syndrome (given overlapping facial and hypotonia features)",
-      "Smith-Magenis syndrome",
-      "Pitt-Hopkins syndrome",
-      "Phelan-McDermid syndrome",
-      "Rubinstein-Taybi and other chromatin-modification disorders",
-      "Angelman syndrome"
+    [
+     "Key Investigations",
+     "Chromosomal microarray to detect and size the 9q34.3 deletion, EHMT1 sequencing when microarray is normal but the phenotype is",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Chromosomal microarray to detect and size the 9q34.3 deletion",
-      "EHMT1 sequencing when microarray is normal but the phenotype is suggestive",
-      "Echocardiography for congenital heart disease",
-      "Renal tract ultrasound for genitourinary anomalies",
-      "Developmental, speech, and behavioural or autism assessment",
-      "Neurological and, where regression occurs, psychiatric review"
+    [
+     "Primary Differentials",
+     "Down syndrome (given overlapping facial and hypotonia features), Smith-Magenis syndrome, Pitt-Hopkins syndrome",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Behavioural or developmental regression or catatonia-like state in adolescence or adulthood",
-      "New seizures requiring evaluation",
-      "Significant congenital heart disease needing cardiology management",
-      "Recurrent or severe infection prompting immune assessment"
+    [
+     "Management Strategy",
+     "Early developmental intervention with speech and language therapy, occupational therapy and physiotherapy for the hypotonia and",
+     "Core treatment modality"
     ],
-    "prognosis": "Intellectual disability and speech impairment are lifelong and most individuals require ongoing support, with the additional long-term concern of possible regression or psychiatric deterioration in later life. Systemic complications are managed as they arise, and multidisciplinary care optimises function and wellbeing.",
-    "pitfalls": [
-      "Mistaking the facial features and hypotonia for Down syndrome and not pursuing microarray",
-      "Assuming a normal microarray excludes the diagnosis when an intragenic EHMT1 variant may be responsible",
-      "Failing to anticipate and monitor for adolescent or adult regression and psychiatric change",
-      "Overlooking associated cardiac or renal anomalies that need screening"
-    ],
-    "references": [
-      "Smith's Recognizable Patterns of Human Malformation",
-      "GeneReviews: Kleefstra Syndrome"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Early developmental intervention with speech and language therapy, occupational therapy and physiotherapy for the hypotonia and delay, as there is no disease-specific therapy",
-      "Individualised educational support and structured behavioural or autism-focused interventions",
-      "Echocardiographic evaluation and cardiology management of congenital heart defects",
-      "Renal tract imaging and urological management of genitourinary anomalies",
-      "Surveillance for and treatment of recurrent infections, with weight management for later obesity",
-      "Psychiatric review and monitoring for adolescent or adult regression or a catatonia-like state",
-      "Genetic counselling and family testing, reflecting EHMT1 haploinsufficiency at 9q34.3",
-      "Coordinated multidisciplinary neurodevelopmental follow-up"
+    [
+     "Clinical Pitfall",
+     "Mistaking the facial features and hypotonia for Down syndrome and not pursuing microarray",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for kleefstra syndrome."
+  }
+ ]
 }

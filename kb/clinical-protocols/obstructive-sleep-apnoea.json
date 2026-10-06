@@ -5,7 +5,21 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Outpatient clinic, preoperative assessment, ward",
- "aliases": ["OSA", "OSAHS", "sleep apnea", "obstructive sleep apnea", "snoring", "CPAP", "APAP", "PAP therapy", "STOP-Bang", "AHI", "polysomnography", "home sleep apnoea test", "HSAT"],
+ "aliases": [
+  "OSA",
+  "OSAHS",
+  "sleep apnea",
+  "obstructive sleep apnea",
+  "snoring",
+  "CPAP",
+  "APAP",
+  "PAP therapy",
+  "STOP-Bang",
+  "AHI",
+  "polysomnography",
+  "home sleep apnoea test",
+  "HSAT"
+ ],
  "summary": "Use STOP-Bang to triage but confirm OSA with polysomnography or a home sleep apnoea test; treat OSA with sleepiness, impaired quality of life or hypertension with CPAP or APAP plus education and early adherence support, advise against drowsy driving, and flag suspected OSA before surgery (AASM).",
  "sections": [
   {
@@ -94,13 +108,110 @@
   }
  ],
  "drugs": [
-  { "name": "CPAP or auto-titrating PAP (APAP)", "dose": "Nightly for the whole sleep period; fixed CPAP at the titrated pressure, or APAP with prescribed pressure limits", "notes": "Adherence benchmark: at least 4 hours a night on 70% of nights." },
-  { "name": "Tirzepatide", "dose": "2.5 mg SC once weekly for 4 weeks, then increase by 2.5 mg every 4 weeks to a maintenance dose of 10 mg or 15 mg once weekly", "notes": "Moderate to severe OSA with obesity (US approval 2024). GI side effects; avoid with personal or family history of medullary thyroid cancer or MEN2 and in pregnancy." },
-  { "name": "Fluticasone propionate nasal spray", "dose": "100 mcg (2 sprays) into each nostril once daily", "notes": "Rhinitis or nasal congestion limiting CPAP use." }
+  {
+   "name": "CPAP or auto-titrating PAP (APAP)",
+   "dose": "Nightly for the whole sleep period; fixed CPAP at the titrated pressure, or APAP with prescribed pressure limits",
+   "notes": "Adherence benchmark: at least 4 hours a night on 70% of nights."
+  },
+  {
+   "name": "Tirzepatide",
+   "dose": "2.5 mg SC once weekly for 4 weeks, then increase by 2.5 mg every 4 weeks to a maintenance dose of 10 mg or 15 mg once weekly",
+   "notes": "Moderate to severe OSA with obesity (US approval 2024). GI side effects; avoid with personal or family history of medullary thyroid cancer or MEN2 and in pregnancy."
+  },
+  {
+   "name": "Fluticasone propionate nasal spray",
+   "dose": "100 mcg (2 sprays) into each nostril once daily",
+   "notes": "Rhinitis or nasal congestion limiting CPAP use."
+  }
  ],
  "sources": [
-  { "org": "American Academy of Sleep Medicine", "title": "Clinical practice guideline for diagnostic testing for adult obstructive sleep apnea", "year": 2017, "url": "https://jcsm.aasm.org/doi/10.5664/jcsm.6506" },
-  { "org": "American Academy of Sleep Medicine", "title": "Treatment of adult obstructive sleep apnea with positive airway pressure: an AASM clinical practice guideline", "year": 2019, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6374094/" }
+  {
+   "org": "American Academy of Sleep Medicine",
+   "title": "Clinical practice guideline for diagnostic testing for adult obstructive sleep apnea",
+   "year": 2017,
+   "url": "https://jcsm.aasm.org/doi/10.5664/jcsm.6506"
+  },
+  {
+   "org": "American Academy of Sleep Medicine",
+   "title": "Treatment of adult obstructive sleep apnea with positive airway pressure: an AASM clinical practice guideline",
+   "year": 2019,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6374094/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "obstructive-sleep-apnoea-pathway",
+   "title": "Obstructive sleep apnoea (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Symptoms: loud habitual snoring, witnessed apnoeas, nocturnal gasping or choking, unrefreshing sleep, excessive daytime sleepiness, morning headache, nocturia and poor concentration.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Risk factors: obesity, large neck, male sex, older age, retrognathia, enlarged tonsils, hypothyroidism, acromegaly, and evening alcohol or sedatives.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Uncomplicated adults at increased risk of moderate to severe OSA (excessive sleepiness plus two of: loud snoring, witnessed apnoea or gasping, diagnosed hypertension): in-laboratory polysomnography or a technically adequate home sleep"
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Weight loss for all overweight or obese patients. Tirzepatide is approved in the US (2024) for moderate to severe OSA with obesity and reduces AHI."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Review sleepiness (Epworth), BP, weight and PAP download data early after starting and then at least yearly."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for obstructive sleep apnoea (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "obstructive-sleep-apnoea-summary-matrix",
+   "title": "Obstructive sleep apnoea (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Symptoms: loud habitual snoring, witnessed apnoeas, nocturnal gasping or choking, unrefreshing sleep, excessive daytime sleepiness, morning",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Weight loss for all overweight or obese patients. Tirzepatide is approved in the US (2024) for moderate to severe OSA with obesity and",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Uncomplicated adults at increased risk of moderate to severe OSA (excessive sleepiness plus two of: loud snoring, witnessed apnoea or",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "CPAP or auto-titrating PAP (APAP): Nightly for the whole sleep period; fixed CPAP at the titrated pressure, or APAP with prescribed",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Ruling out OSA from a low questionnaire score or a single negative HSAT in a high-risk patient.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for obstructive sleep apnoea (adult)."
+  }
+ ]
 }

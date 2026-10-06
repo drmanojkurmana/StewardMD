@@ -132,5 +132,77 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h43a8190c"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "bowel_obstruction-dx-algo",
+      "title": "Bowel obstruction: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Small-bowel obstruction characteristically produces poorly localized, intermittent peri-/supra-umbilical colicky pain; as the bowel progressively dilates and loses muscular tone the colicky quality of the pain may actually diminish, which",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Continuous diffuse pain with absent tenderness/rigidity ('pain out of proportion to findings') in a patient at vascular risk - suspect superior mesenteric artery occlusion / intestinal ischaemia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Low-dose CT is preferred over plain abdominal radiography when the indication for surgical/medical intervention is unclear in nontraumatic acute abdominal pain, Plain upright/lateral-decubitus abdominal radiographs can"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Differentiate from top mimics: Adynamic / paralytic ileus (loss of peristalsis with absent bowel sounds) rather than mechanical obstruction, Colonic pseudo-obstruction (Ogilvie's syndrome) - colonic dilatation without a mechanical lesion,"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Relying on auscultation or bowel-sound quality: strangulating obstruction can occur with normal peristaltic sounds, and distended/edematous proximal bowel may be quiet even without peritonitis (p.113)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for bowel obstruction."
+    }
+  ],
+  "tables": [
+    {
+      "id": "bowel_obstruction-matrix",
+      "title": "Bowel obstruction: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Small-bowel obstruction characteristically produces poorly localized, intermittent peri-/supra-umbilical colicky pain; as the",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Low-dose CT is preferred over plain abdominal radiography when the indication for surgical/medical intervention is unclear in",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Adynamic / paralytic ileus (loss of peristalsis with absent bowel sounds) rather than mechanical obstruction, Colonic",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Continuous diffuse pain with absent tenderness/rigidity ('pain out of proportion to findings') in a patient at vascular risk -",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on auscultation or bowel-sound quality: strangulating obstruction can occur with normal peristaltic sounds, and",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for bowel obstruction."
+    }
+  ]
 }

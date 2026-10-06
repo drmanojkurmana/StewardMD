@@ -1,86 +1,158 @@
 {
-  "id": "wolff_parkinson_white_syndrome",
-  "name": "wolff parkinson white syndrome",
-  "aliases": [
-    "WPW",
-    "WPW syndrome",
-    "Wolff-Parkinson-White syndrome",
-    "accessory pathway syndrome",
-    "ventricular pre-excitation",
-    "ventricular pre-excitation syndrome",
-    "wolff parkinson white"
+ "id": "wolff_parkinson_white_syndrome",
+ "name": "wolff parkinson white syndrome",
+ "aliases": [
+  "WPW",
+  "WPW syndrome",
+  "Wolff-Parkinson-White syndrome",
+  "accessory pathway syndrome",
+  "ventricular pre-excitation",
+  "ventricular pre-excitation syndrome",
+  "wolff parkinson white"
+ ],
+ "class": "non_infective",
+ "system": "cardiovascular",
+ "specialty": "cardiology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Braunwald's Heart Disease",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "WPW syndrome is the combination of ventricular pre-excitation on the resting ECG and symptomatic tachyarrhythmia; pre-excitation without symptoms is termed a WPW pattern.",
+   "The classic triad is a short PR interval, a slurred delta wave and a widened QRS, reflecting fusion of accessory-pathway and nodal ventricular activation.",
+   "The delta-wave vector and precordial transition allow bedside prediction of pathway location, guiding ablation.",
+   "Orthodromic AVRT is the commonest tachycardia, but pre-excited atrial fibrillation is the most dangerous because it can conduct rapidly and degenerate to ventricular fibrillation.",
+   "An irregular, broad, rapid tachycardia with varying QRS morphology should raise immediate suspicion of pre-excited atrial fibrillation.",
+   "AV-nodal blocking drugs including adenosine, verapamil, diltiazem and digoxin are contraindicated in pre-excited atrial fibrillation as they can accelerate pathway conduction.",
+   "Abrupt, complete loss of pre-excitation during exercise or with procainamide suggests a pathway with a long refractory period and lower risk.",
+   "Ebstein anomaly is associated with WPW and frequently with multiple right-sided accessory pathways."
   ],
-  "class": "non_infective",
-  "system": "cardiovascular",
-  "specialty": "cardiology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Braunwald's Heart Disease",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "WPW syndrome is the combination of ventricular pre-excitation on the resting ECG and symptomatic tachyarrhythmia; pre-excitation without symptoms is termed a WPW pattern.",
-      "The classic triad is a short PR interval, a slurred delta wave and a widened QRS, reflecting fusion of accessory-pathway and nodal ventricular activation.",
-      "The delta-wave vector and precordial transition allow bedside prediction of pathway location, guiding ablation.",
-      "Orthodromic AVRT is the commonest tachycardia, but pre-excited atrial fibrillation is the most dangerous because it can conduct rapidly and degenerate to ventricular fibrillation.",
-      "An irregular, broad, rapid tachycardia with varying QRS morphology should raise immediate suspicion of pre-excited atrial fibrillation.",
-      "AV-nodal blocking drugs including adenosine, verapamil, diltiazem and digoxin are contraindicated in pre-excited atrial fibrillation as they can accelerate pathway conduction.",
-      "Abrupt, complete loss of pre-excitation during exercise or with procainamide suggests a pathway with a long refractory period and lower risk.",
-      "Ebstein anomaly is associated with WPW and frequently with multiple right-sided accessory pathways."
+  "pathophysiology": "The syndrome results from a congenital accessory atrioventricular pathway that bypasses the physiological delay of the atrioventricular node, allowing early activation of ventricular myocardium (pre-excitation). Because the pathway conducts faster than the node, part of the ventricle depolarises early, shortening the PR interval and inscribing a delta wave, while the remainder is activated normally, producing a fusion QRS. The same pathway provides a limb for macroreentrant tachycardia. When atrial fibrillation develops, an accessory pathway with a short antegrade refractory period can transmit disorganised atrial impulses to the ventricle at extremely high rates, and this rapid irregular ventricular response may deteriorate into ventricular fibrillation and sudden death.",
+  "additionalDifferentials": [
+   "atrioventricular nodal reentrant tachycardia",
+   "concealed accessory pathway atrioventricular reentrant tachycardia",
+   "bundle branch block mimicking a wide QRS",
+   "ventricular tachycardia",
+   "atrial fibrillation without pre-excitation",
+   "fasciculoventricular and other variant pathways"
+  ],
+  "additionalInvestigations": [
+   "twelve-lead ECG to characterise the delta wave and localise the pathway",
+   "exercise stress testing to assess abrupt loss of pre-excitation",
+   "ambulatory monitoring to document tachyarrhythmias",
+   "transthoracic echocardiography to exclude Ebstein anomaly and cardiomyopathy",
+   "electrophysiological study with measurement of the shortest pre-excited RR interval in atrial fibrillation",
+   "procainamide or other pharmacological challenge to gauge pathway refractoriness"
+  ],
+  "redFlags": [
+   "pre-excited atrial fibrillation with a very short shortest pre-excited RR interval",
+   "syncope, particularly during exertion or palpitations",
+   "resuscitated cardiac arrest or documented ventricular fibrillation",
+   "family history of sudden death with pre-excitation",
+   "haemodynamic instability during any wide-complex tachycardia"
+  ],
+  "prognosis": "Most patients have an excellent prognosis and catheter ablation is curative with a high success rate, but a small subset with rapidly conducting pathways are at risk of sudden cardiac death, which may occasionally be the first manifestation. Risk stratification of asymptomatic pre-excitation is therefore central to management.",
+  "pitfalls": [
+   "Treating pre-excited atrial fibrillation with AV-nodal blockers and precipitating ventricular fibrillation.",
+   "Dismissing asymptomatic pre-excitation without considering risk stratification in higher-risk occupations or athletes.",
+   "Confusing a fusion or pre-excited complex with myocardial infarction because of pseudo-Q waves and repolarisation change.",
+   "Assuming a single pathway when multiple pathways, especially in Ebstein anomaly, are present.",
+   "Interpreting intermittent pre-excitation as invariably low-risk without confirming it is abrupt and rate-related."
+  ],
+  "references": [
+   "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
+   "ESC Guidelines for the management of patients with supraventricular tachycardia",
+   "Zipes Cardiac Electrophysiology: From Cell to Bedside"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Radiofrequency catheter ablation of the accessory pathway is the curative mainstay for symptomatic pre-excitation and recurrent tachyarrhythmia",
+   "Acute orthodromic AVRT managed with vagal manoeuvres then adenosine or another short-acting AV-nodal blocker",
+   "Pre-excited atrial fibrillation treated with procainamide, flecainide or synchronised cardioversion while strictly avoiding adenosine, verapamil, diltiazem and digoxin, which can accelerate pathway conduction",
+   "Urgent synchronised electrical cardioversion for the haemodynamically unstable pre-excited patient",
+   "Risk stratification of asymptomatic pre-excitation by exercise testing and, in higher-risk occupations or findings, an electrophysiology study measuring the shortest pre-excited RR interval",
+   "Long-term suppressive antiarrhythmic therapy such as flecainide or propafenone where ablation is not undertaken",
+   "Cardiology and electrophysiology referral with transthoracic echocardiography to exclude Ebstein anomaly and cardiomyopathy"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "wolff_parkinson_white_syndrome-pathway",
+   "title": "wolff parkinson white syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "WPW syndrome is the combination of ventricular pre-excitation on the resting ECG and symptomatic tachyarrhythmia; pre-excitation without symptoms is termed a WPW pattern.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: pre-excited atrial fibrillation with a very short shortest pre-excited RR interval",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: twelve-lead ECG to characterise the delta wave and localise the pathway, exercise stress testing to assess abrupt loss of pre-excitation, ambulatory monitoring to document tachyarrhythmias"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Radiofrequency catheter ablation of the accessory pathway is the curative mainstay for symptomatic pre-excitation and recurrent tachyarrhythmia"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Treating pre-excited atrial fibrillation with AV-nodal blockers and precipitating ventricular fibrillation."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of wolff parkinson white syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "wolff_parkinson_white_syndrome-matrix",
+   "title": "wolff parkinson white syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "WPW syndrome is the combination of ventricular pre-excitation on the resting ECG and symptomatic tachyarrhythmia; pre-excitation",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The syndrome results from a congenital accessory atrioventricular pathway that bypasses the physiological delay of the atrioventricular node, allowing early activation of ventricular myocardium (pre-excitation). Because the pathway conducts faster than the node, part of the ventricle depolarises early, shortening the PR interval and inscribing a delta wave, while the remainder is activated normally, producing a fusion QRS. The same pathway provides a limb for macroreentrant tachycardia. When atrial fibrillation develops, an accessory pathway with a short antegrade refractory period can transmit disorganised atrial impulses to the ventricle at extremely high rates, and this rapid irregular ventricular response may deteriorate into ventricular fibrillation and sudden death.",
-    "additionalDifferentials": [
-      "atrioventricular nodal reentrant tachycardia",
-      "concealed accessory pathway atrioventricular reentrant tachycardia",
-      "bundle branch block mimicking a wide QRS",
-      "ventricular tachycardia",
-      "atrial fibrillation without pre-excitation",
-      "fasciculoventricular and other variant pathways"
+    [
+     "Key Investigations",
+     "twelve-lead ECG to characterise the delta wave and localise the pathway, exercise stress testing to assess abrupt loss of",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "twelve-lead ECG to characterise the delta wave and localise the pathway",
-      "exercise stress testing to assess abrupt loss of pre-excitation",
-      "ambulatory monitoring to document tachyarrhythmias",
-      "transthoracic echocardiography to exclude Ebstein anomaly and cardiomyopathy",
-      "electrophysiological study with measurement of the shortest pre-excited RR interval in atrial fibrillation",
-      "procainamide or other pharmacological challenge to gauge pathway refractoriness"
+    [
+     "Primary Differentials",
+     "atrioventricular nodal reentrant tachycardia, concealed accessory pathway atrioventricular reentrant tachycardia, bundle branch",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "pre-excited atrial fibrillation with a very short shortest pre-excited RR interval",
-      "syncope, particularly during exertion or palpitations",
-      "resuscitated cardiac arrest or documented ventricular fibrillation",
-      "family history of sudden death with pre-excitation",
-      "haemodynamic instability during any wide-complex tachycardia"
+    [
+     "Management Strategy",
+     "Radiofrequency catheter ablation of the accessory pathway is the curative mainstay for symptomatic pre-excitation and recurrent",
+     "Core treatment modality"
     ],
-    "prognosis": "Most patients have an excellent prognosis and catheter ablation is curative with a high success rate, but a small subset with rapidly conducting pathways are at risk of sudden cardiac death, which may occasionally be the first manifestation. Risk stratification of asymptomatic pre-excitation is therefore central to management.",
-    "pitfalls": [
-      "Treating pre-excited atrial fibrillation with AV-nodal blockers and precipitating ventricular fibrillation.",
-      "Dismissing asymptomatic pre-excitation without considering risk stratification in higher-risk occupations or athletes.",
-      "Confusing a fusion or pre-excited complex with myocardial infarction because of pseudo-Q waves and repolarisation change.",
-      "Assuming a single pathway when multiple pathways, especially in Ebstein anomaly, are present.",
-      "Interpreting intermittent pre-excitation as invariably low-risk without confirming it is abrupt and rate-related."
-    ],
-    "references": [
-      "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
-      "ESC Guidelines for the management of patients with supraventricular tachycardia",
-      "Zipes Cardiac Electrophysiology: From Cell to Bedside"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Radiofrequency catheter ablation of the accessory pathway is the curative mainstay for symptomatic pre-excitation and recurrent tachyarrhythmia",
-      "Acute orthodromic AVRT managed with vagal manoeuvres then adenosine or another short-acting AV-nodal blocker",
-      "Pre-excited atrial fibrillation treated with procainamide, flecainide or synchronised cardioversion while strictly avoiding adenosine, verapamil, diltiazem and digoxin, which can accelerate pathway conduction",
-      "Urgent synchronised electrical cardioversion for the haemodynamically unstable pre-excited patient",
-      "Risk stratification of asymptomatic pre-excitation by exercise testing and, in higher-risk occupations or findings, an electrophysiology study measuring the shortest pre-excited RR interval",
-      "Long-term suppressive antiarrhythmic therapy such as flecainide or propafenone where ablation is not undertaken",
-      "Cardiology and electrophysiology referral with transthoracic echocardiography to exclude Ebstein anomaly and cardiomyopathy"
+    [
+     "Clinical Pitfall",
+     "Treating pre-excited atrial fibrillation with AV-nodal blockers and precipitating ventricular fibrillation.",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for wolff parkinson white syndrome."
+  }
+ ]
 }

@@ -1,90 +1,162 @@
 {
-  "id": "clear_cell_sarcoma_soft_tissue",
-  "name": "Clear cell sarcoma of soft tissue",
-  "aliases": [
-    "Malignant melanoma of soft parts",
-    "CCS"
+ "id": "clear_cell_sarcoma_soft_tissue",
+ "name": "Clear cell sarcoma of soft tissue",
+ "aliases": [
+  "Malignant melanoma of soft parts",
+  "CCS"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Soft tissue",
+ "specialty": "Oncology / Haematology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Oncology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Rare deep soft-tissue sarcoma of young adults, typically arising in tendons and aponeuroses of the distal extremities, most often around the foot and ankle.",
+   "Historically called malignant melanoma of soft parts because of melanocytic differentiation, but it is genetically distinct from cutaneous melanoma.",
+   "Defined by a recurrent EWSR1-ATF1 fusion (t(12;22)), with a minority harbouring EWSR1-CREB1; this distinguishes it from melanoma, which lacks these fusions.",
+   "Tumour cells express melanocytic markers (S100, HMB-45, Melan-A, SOX10) and contain melanin, so immunohistochemistry alone cannot separate it from metastatic melanoma.",
+   "Presents as a slowly enlarging, often painless deep mass attached to tendon or fascia; a long indolent history before diagnosis is characteristic.",
+   "Molecular confirmation of the EWSR1 rearrangement (FISH or RT-PCR) is the key diagnostic step when melanoma is in the differential.",
+   "Prone to late local recurrence and to lymph-node as well as haematogenous metastasis, with lung the most common distant site.",
+   "Wide surgical excision is the mainstay; it responds poorly to conventional cytotoxic chemotherapy and to melanoma immunotherapy regimens."
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Soft tissue",
-  "specialty": "Oncology / Haematology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Oncology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Rare deep soft-tissue sarcoma of young adults, typically arising in tendons and aponeuroses of the distal extremities, most often around the foot and ankle.",
-      "Historically called malignant melanoma of soft parts because of melanocytic differentiation, but it is genetically distinct from cutaneous melanoma.",
-      "Defined by a recurrent EWSR1-ATF1 fusion (t(12;22)), with a minority harbouring EWSR1-CREB1; this distinguishes it from melanoma, which lacks these fusions.",
-      "Tumour cells express melanocytic markers (S100, HMB-45, Melan-A, SOX10) and contain melanin, so immunohistochemistry alone cannot separate it from metastatic melanoma.",
-      "Presents as a slowly enlarging, often painless deep mass attached to tendon or fascia; a long indolent history before diagnosis is characteristic.",
-      "Molecular confirmation of the EWSR1 rearrangement (FISH or RT-PCR) is the key diagnostic step when melanoma is in the differential.",
-      "Prone to late local recurrence and to lymph-node as well as haematogenous metastasis, with lung the most common distant site.",
-      "Wide surgical excision is the mainstay; it responds poorly to conventional cytotoxic chemotherapy and to melanoma immunotherapy regimens."
+  "pathophysiology": "Clear cell sarcoma arises from a primitive mesenchymal cell that acquires a balanced chromosomal translocation, most commonly t(12;22)(q13;q12) generating an EWSR1-ATF1 chimeric transcription factor, with a smaller subset carrying EWSR1-CREB1. The fusion protein constitutively activates the microphthalmia-associated transcription factor (MITF) pathway, driving a melanocytic differentiation programme so that the tumour cells synthesise melanin and express melanocyte markers despite a soft-tissue rather than epidermal origin. Aberrant MITF signalling also promotes proliferation and survival. Because the oncogenic driver is a fusion rather than the BRAF/NRAS mutations and high mutational burden seen in cutaneous melanoma, the biology, therapeutic vulnerabilities and immune landscape differ substantially: the tumour has a low mutational load and typically lacks the targetable kinase mutations exploited in melanoma. The cells grow along tendons and aponeuroses in nested and fascicular patterns separated by fibrous septa, correlating with the deep, fascia-anchored masses seen clinically.",
+  "additionalDifferentials": [
+   "Metastatic or primary malignant melanoma",
+   "Synovial sarcoma",
+   "Epithelioid sarcoma",
+   "Malignant peripheral nerve sheath tumour with melanocytic features",
+   "Cellular blue naevus and other melanocytic proliferations",
+   "PEComa",
+   "Alveolar soft part sarcoma"
+  ],
+  "additionalInvestigations": [
+   "MRI of the primary site to define soft-tissue extent and relationship to tendon and neurovascular structures",
+   "Core needle or open biopsy with expert soft-tissue pathology review",
+   "FISH or RT-PCR for EWSR1 rearrangement (EWSR1-ATF1 / EWSR1-CREB1)",
+   "Immunohistochemistry panel including S100, HMB-45, Melan-A and SOX10",
+   "Contrast CT of the chest to assess for pulmonary metastases",
+   "Regional nodal imaging and consideration of sentinel node evaluation given nodal spread",
+   "Dermatological and mucosal examination to exclude an occult primary melanoma"
+  ],
+  "redFlags": [
+   "Rapid enlargement, new pain or skin ulceration over a previously indolent deep mass",
+   "Palpable regional lymphadenopathy suggesting nodal metastasis",
+   "New respiratory symptoms or pulmonary nodules indicating distant spread",
+   "Recurrence at the prior surgical bed after apparently complete excision",
+   "Neurological deficit from local invasion of adjacent nerves"
+  ],
+  "prognosis": "Prognosis is guarded and strongly linked to tumour size, depth and the presence of nodal or distant metastasis, with large or metastatic tumours carrying poor long-term survival. Late recurrences and metastases occurring many years after treatment are characteristic, so prolonged follow-up is required.",
+  "pitfalls": [
+   "Mislabelling the tumour as metastatic melanoma because of shared melanocytic markers, leading to inappropriate melanoma-directed therapy.",
+   "Omitting molecular testing for EWSR1 rearrangement, which is the decisive distinguishing feature.",
+   "Underestimating the risk of lymph-node metastasis, which is higher than for most other soft-tissue sarcomas.",
+   "Assuming an indolent clinical course means benign disease and delaying definitive wide excision.",
+   "Discharging patients from surveillance too early given the propensity for very late relapse."
+  ],
+  "references": [
+   "WHO Classification of Soft Tissue and Bone Tumours",
+   "Major soft-tissue sarcoma clinical practice guidelines",
+   "Standard surgical oncology and musculoskeletal oncology references"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Wide, margin-negative surgical resection is the foundation of curative treatment and should be planned at a center with sarcoma or musculoskeletal oncology expertise.",
+   "Margin planning must account for tumor spread along tendons and fascial planes rather than treating the lesion as a simple superficial mass.",
+   "Because of a distinct propensity for regional nodal metastasis, gross nodal disease found on staging should be resected together with the primary tumor.",
+   "Sentinel node biopsy can be considered for staging, though its effect on outcome is not established and its use remains debated.",
+   "Adjuvant radiotherapy to the tumor bed can be considered to improve local control, particularly with large tumors or close or marginal resection margins.",
+   "Multidisciplinary planning involving surgical, radiation, and medical oncology plus a sarcoma-experienced pathologist is appropriate before finalizing local treatment.",
+   "Cytotoxic chemotherapy has only limited activity overall; platinum-containing regimens have been reported as the most potentially beneficial conventional option, though responses are inconsistent.",
+   "Antiangiogenic multitargeted tyrosine kinase inhibitors are a reasonable systemic option to discuss for advanced disease, recognizing the supporting evidence comes only from small series.",
+   "Given limited and unproven efficacy of standard sarcoma and melanoma regimens, clinical trial enrollment should be discussed whenever an appropriate trial is available.",
+   "Palliative systemic therapy and symptom-directed supportive care are appropriate once disease-directed treatment is unlikely to change the trajectory.",
+   "Extended surveillance with cross-sectional imaging of the primary site and chest CT is reasonable since recurrence can present a long time after apparently successful initial treatment.",
+   "Long-term follow-up should continue beyond the timelines used for more indolent soft-tissue tumors given the risk of late recurrence.",
+   "Refer to a specialist sarcoma or musculoskeletal oncology center before definitive surgery given the technical demands of wide excision and risk of mismanagement.",
+   "Refer for molecular confirmation with EWSR1 rearrangement testing whenever melanoma is in the differential, since immunohistochemistry alone cannot reliably distinguish the two entities."
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "clear_cell_sarcoma_soft_tissue-pathway",
+   "title": "Clear cell sarcoma of soft tissue: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Rare deep soft-tissue sarcoma of young adults, typically arising in tendons and aponeuroses of the distal extremities, most often around the foot and ankle.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapid enlargement, new pain or skin ulceration over a previously indolent deep mass",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: MRI of the primary site to define soft-tissue extent and relationship to tendon and neurovascular structures, Core needle or open biopsy with expert soft-tissue pathology review, FISH or RT-PCR for EWSR1 rearrangement"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Wide, margin-negative surgical resection is the foundation of curative treatment and should be planned at a center with sarcoma or musculoskeletal oncology expertise."
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mislabelling the tumour as metastatic melanoma because of shared melanocytic markers, leading to inappropriate melanoma-directed therapy."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of clear cell sarcoma of soft tissue."
+  }
+ ],
+ "tables": [
+  {
+   "id": "clear_cell_sarcoma_soft_tissue-matrix",
+   "title": "Clear cell sarcoma of soft tissue: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Rare deep soft-tissue sarcoma of young adults, typically arising in tendons and aponeuroses of the distal extremities, most often",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Clear cell sarcoma arises from a primitive mesenchymal cell that acquires a balanced chromosomal translocation, most commonly t(12;22)(q13;q12) generating an EWSR1-ATF1 chimeric transcription factor, with a smaller subset carrying EWSR1-CREB1. The fusion protein constitutively activates the microphthalmia-associated transcription factor (MITF) pathway, driving a melanocytic differentiation programme so that the tumour cells synthesise melanin and express melanocyte markers despite a soft-tissue rather than epidermal origin. Aberrant MITF signalling also promotes proliferation and survival. Because the oncogenic driver is a fusion rather than the BRAF/NRAS mutations and high mutational burden seen in cutaneous melanoma, the biology, therapeutic vulnerabilities and immune landscape differ substantially: the tumour has a low mutational load and typically lacks the targetable kinase mutations exploited in melanoma. The cells grow along tendons and aponeuroses in nested and fascicular patterns separated by fibrous septa, correlating with the deep, fascia-anchored masses seen clinically.",
-    "additionalDifferentials": [
-      "Metastatic or primary malignant melanoma",
-      "Synovial sarcoma",
-      "Epithelioid sarcoma",
-      "Malignant peripheral nerve sheath tumour with melanocytic features",
-      "Cellular blue naevus and other melanocytic proliferations",
-      "PEComa",
-      "Alveolar soft part sarcoma"
+    [
+     "Key Investigations",
+     "MRI of the primary site to define soft-tissue extent and relationship to tendon and neurovascular structures, Core needle or open",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "MRI of the primary site to define soft-tissue extent and relationship to tendon and neurovascular structures",
-      "Core needle or open biopsy with expert soft-tissue pathology review",
-      "FISH or RT-PCR for EWSR1 rearrangement (EWSR1-ATF1 / EWSR1-CREB1)",
-      "Immunohistochemistry panel including S100, HMB-45, Melan-A and SOX10",
-      "Contrast CT of the chest to assess for pulmonary metastases",
-      "Regional nodal imaging and consideration of sentinel node evaluation given nodal spread",
-      "Dermatological and mucosal examination to exclude an occult primary melanoma"
+    [
+     "Primary Differentials",
+     "Metastatic or primary malignant melanoma, Synovial sarcoma, Epithelioid sarcoma",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapid enlargement, new pain or skin ulceration over a previously indolent deep mass",
-      "Palpable regional lymphadenopathy suggesting nodal metastasis",
-      "New respiratory symptoms or pulmonary nodules indicating distant spread",
-      "Recurrence at the prior surgical bed after apparently complete excision",
-      "Neurological deficit from local invasion of adjacent nerves"
+    [
+     "Management Strategy",
+     "Wide, margin-negative surgical resection is the foundation of curative treatment and should be planned at a center with sarcoma",
+     "Core treatment modality"
     ],
-    "prognosis": "Prognosis is guarded and strongly linked to tumour size, depth and the presence of nodal or distant metastasis, with large or metastatic tumours carrying poor long-term survival. Late recurrences and metastases occurring many years after treatment are characteristic, so prolonged follow-up is required.",
-    "pitfalls": [
-      "Mislabelling the tumour as metastatic melanoma because of shared melanocytic markers, leading to inappropriate melanoma-directed therapy.",
-      "Omitting molecular testing for EWSR1 rearrangement, which is the decisive distinguishing feature.",
-      "Underestimating the risk of lymph-node metastasis, which is higher than for most other soft-tissue sarcomas.",
-      "Assuming an indolent clinical course means benign disease and delaying definitive wide excision.",
-      "Discharging patients from surveillance too early given the propensity for very late relapse."
-    ],
-    "references": [
-      "WHO Classification of Soft Tissue and Bone Tumours",
-      "Major soft-tissue sarcoma clinical practice guidelines",
-      "Standard surgical oncology and musculoskeletal oncology references"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Wide, margin-negative surgical resection is the foundation of curative treatment and should be planned at a center with sarcoma or musculoskeletal oncology expertise.",
-      "Margin planning must account for tumor spread along tendons and fascial planes rather than treating the lesion as a simple superficial mass.",
-      "Because of a distinct propensity for regional nodal metastasis, gross nodal disease found on staging should be resected together with the primary tumor.",
-      "Sentinel node biopsy can be considered for staging, though its effect on outcome is not established and its use remains debated.",
-      "Adjuvant radiotherapy to the tumor bed can be considered to improve local control, particularly with large tumors or close or marginal resection margins.",
-      "Multidisciplinary planning involving surgical, radiation, and medical oncology plus a sarcoma-experienced pathologist is appropriate before finalizing local treatment.",
-      "Cytotoxic chemotherapy has only limited activity overall; platinum-containing regimens have been reported as the most potentially beneficial conventional option, though responses are inconsistent.",
-      "Antiangiogenic multitargeted tyrosine kinase inhibitors are a reasonable systemic option to discuss for advanced disease, recognizing the supporting evidence comes only from small series.",
-      "Given limited and unproven efficacy of standard sarcoma and melanoma regimens, clinical trial enrollment should be discussed whenever an appropriate trial is available.",
-      "Palliative systemic therapy and symptom-directed supportive care are appropriate once disease-directed treatment is unlikely to change the trajectory.",
-      "Extended surveillance with cross-sectional imaging of the primary site and chest CT is reasonable since recurrence can present a long time after apparently successful initial treatment.",
-      "Long-term follow-up should continue beyond the timelines used for more indolent soft-tissue tumors given the risk of late recurrence.",
-      "Refer to a specialist sarcoma or musculoskeletal oncology center before definitive surgery given the technical demands of wide excision and risk of mismanagement.",
-      "Refer for molecular confirmation with EWSR1 rearrangement testing whenever melanoma is in the differential, since immunohistochemistry alone cannot reliably distinguish the two entities."
+    [
+     "Clinical Pitfall",
+     "Mislabelling the tumour as metastatic melanoma because of shared melanocytic markers, leading to inappropriate melanoma-directed",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for clear cell sarcoma of soft tissue."
+  }
+ ]
 }

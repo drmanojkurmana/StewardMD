@@ -5,7 +5,20 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, operating theatre, ICU",
- "aliases": ["MTP", "massive transfusion protocol", "MHP", "major haemorrhage protocol", "haemorrhagic shock", "damage control resuscitation", "trauma-induced coagulopathy", "TXA", "1:1:1", "ROTEM", "TEG", "cryoprecipitate"],
+ "aliases": [
+  "MTP",
+  "massive transfusion protocol",
+  "MHP",
+  "major haemorrhage protocol",
+  "haemorrhagic shock",
+  "damage control resuscitation",
+  "trauma-induced coagulopathy",
+  "TXA",
+  "1:1:1",
+  "ROTEM",
+  "TEG",
+  "cryoprecipitate"
+ ],
  "summary": "Damage control resuscitation: stop the bleeding fast, activate the major haemorrhage protocol, replace crystalloid with blood products in a high plasma ratio, give tranexamic acid within 3 hours, accept permissive hypotension, and correct fibrinogen, platelets, calcium and temperature guided by lab or viscoelastic tests.",
  "sections": [
   {
@@ -86,17 +99,130 @@
   }
  ],
  "drugs": [
-  { "name": "Tranexamic acid", "dose": "1 g IV over 10 minutes, then 1 g IV infusion over 8 hours", "notes": "Within 3 hours of injury, as early as possible. Do not start after 3 hours." },
-  { "name": "Fibrinogen concentrate", "dose": "3 to 4 g IV initial dose", "notes": "If Clauss fibrinogen is 1.5 g/L or less or viscoelastic evidence of deficit; repeat guided by levels." },
-  { "name": "Cryoprecipitate", "dose": "15 to 20 single-donor units IV (about 3 to 4 g fibrinogen)", "notes": "Alternative to fibrinogen concentrate." },
-  { "name": "Calcium chloride 10%", "dose": "10 mL IV (6.8 mmol, 270 mg elemental calcium) slowly via a large or central vein, repeat guided by ionised calcium", "notes": "Calcium gluconate 10% 30 mL IV is an equivalent alternative." },
-  { "name": "Prothrombin complex concentrate (4-factor)", "dose": "25 to 50 units/kg IV", "notes": "Vitamin K antagonist reversal (with vitamin K 5 to 10 mg IV), or factor Xa inhibitor bleeding when andexanet is unavailable." },
-  { "name": "Idarucizumab", "dose": "5 g IV", "notes": "Dabigatran reversal." },
-  { "name": "Noradrenaline (norepinephrine)", "dose": "Start 0.05 to 0.1 mcg/kg/min IV, titrate to the target pressure", "notes": "Only when restricted volume replacement fails to reach target blood pressure." }
+  {
+   "name": "Tranexamic acid",
+   "dose": "1 g IV over 10 minutes, then 1 g IV infusion over 8 hours",
+   "notes": "Within 3 hours of injury, as early as possible. Do not start after 3 hours."
+  },
+  {
+   "name": "Fibrinogen concentrate",
+   "dose": "3 to 4 g IV initial dose",
+   "notes": "If Clauss fibrinogen is 1.5 g/L or less or viscoelastic evidence of deficit; repeat guided by levels."
+  },
+  {
+   "name": "Cryoprecipitate",
+   "dose": "15 to 20 single-donor units IV (about 3 to 4 g fibrinogen)",
+   "notes": "Alternative to fibrinogen concentrate."
+  },
+  {
+   "name": "Calcium chloride 10%",
+   "dose": "10 mL IV (6.8 mmol, 270 mg elemental calcium) slowly via a large or central vein, repeat guided by ionised calcium",
+   "notes": "Calcium gluconate 10% 30 mL IV is an equivalent alternative."
+  },
+  {
+   "name": "Prothrombin complex concentrate (4-factor)",
+   "dose": "25 to 50 units/kg IV",
+   "notes": "Vitamin K antagonist reversal (with vitamin K 5 to 10 mg IV), or factor Xa inhibitor bleeding when andexanet is unavailable."
+  },
+  {
+   "name": "Idarucizumab",
+   "dose": "5 g IV",
+   "notes": "Dabigatran reversal."
+  },
+  {
+   "name": "Noradrenaline (norepinephrine)",
+   "dose": "Start 0.05 to 0.1 mcg/kg/min IV, titrate to the target pressure",
+   "notes": "Only when restricted volume replacement fails to reach target blood pressure."
+  }
  ],
  "sources": [
-  { "org": "European Task Force for Advanced Bleeding Care in Trauma", "title": "The European guideline on management of major bleeding and coagulopathy following trauma: sixth edition", "year": 2023, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9977110/" },
-  { "org": "NICE", "title": "Major trauma: assessment and initial management (NG39)", "year": 2016, "url": "https://www.nice.org.uk/guidance/ng39/chapter/recommendations" }
+  {
+   "org": "European Task Force for Advanced Bleeding Care in Trauma",
+   "title": "The European guideline on management of major bleeding and coagulopathy following trauma: sixth edition",
+   "year": 2023,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9977110/"
+  },
+  {
+   "org": "NICE",
+   "title": "Major trauma: assessment and initial management (NG39)",
+   "year": 2016,
+   "url": "https://www.nice.org.uk/guidance/ng39/chapter/recommendations"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "major-haemorrhage-trauma-pathway",
+   "title": "Major haemorrhage in trauma (massive transfusion) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Activate the major haemorrhage protocol on physiology and the response to initial resuscitation, not on a single-time-point score (NICE NG39).",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "External bleeding: direct pressure, tourniquet for life-threatening limb bleeding, haemostatic packing of junctional wounds; pelvic binder for suspected pelvic fracture; splint long-bone fractures.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "ABC score of 2 or more (penetrating mechanism, SBP 90 mmHg or less, heart rate 120 or more, positive FAST) predicts the need for massive transfusion."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Move from fixed ratios to therapy guided by PT/INR, APTT, Clauss fibrinogen, platelet count and viscoelastic tests (ROTEM or TEG) as soon as results are available."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Repeat blood gas (pH, lactate, base deficit, ionised calcium, potassium, haemoglobin) and coagulation tests frequently during active transfusion, for example every 30 to 60 minutes."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for major haemorrhage in trauma (massive transfusion)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "major-haemorrhage-trauma-summary-matrix",
+   "title": "Major haemorrhage in trauma (massive transfusion) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Activate the major haemorrhage protocol on physiology and the response to initial resuscitation, not on a single-time-point score (NICE",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "External bleeding: direct pressure, tourniquet for life-threatening limb bleeding, haemostatic packing of junctional wounds; pelvic binder",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Tranexamic acid: 1 g IV over 10 minutes, then 1 g IV infusion over 8 hours",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Waiting for the haemoglobin to fall before transfusing, or using crystalloid as the main resuscitation fluid.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for major haemorrhage in trauma (massive transfusion)."
+  }
+ ]
 }

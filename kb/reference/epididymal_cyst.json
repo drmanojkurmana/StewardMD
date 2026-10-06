@@ -1,77 +1,149 @@
 {
-  "id": "epididymal_cyst",
-  "name": "Epididymal cyst",
-  "aliases": [
-    "epididymal cystic swelling",
-    "simple epididymal cyst",
-    "epididymal cyste"
+ "id": "epididymal_cyst",
+ "name": "Epididymal cyst",
+ "aliases": [
+  "epididymal cystic swelling",
+  "simple epididymal cyst",
+  "epididymal cyste"
+ ],
+ "class": "non_infective",
+ "system": "Urology / Andrology",
+ "specialty": "Urology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Campbell-Walsh-Wein Urology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A benign, fluid-filled cyst of the epididymis, usually arising from the head and containing clear serous fluid, in contrast to the sperm-laden fluid of a spermatocele",
+   "Presents as a painless, smooth, mobile swelling felt separate from and usually above and behind the testis",
+   "Transilluminates brightly, reflecting its clear fluid content",
+   "Often multiple and bilateral, and very common as an incidental finding",
+   "Scrotal ultrasound confirms a thin-walled anechoic cyst separate from the testis and is the key investigation",
+   "The distinction from a spermatocele is largely academic, resting on content rather than behaviour, as both are benign and managed the same way",
+   "Most need only reassurance; excision is reserved for large, painful, or bothersome cysts, with counselling about the small risk to fertility from epididymal surgery"
   ],
-  "class": "non_infective",
-  "system": "Urology / Andrology",
-  "specialty": "Urology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Campbell-Walsh-Wein Urology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A benign, fluid-filled cyst of the epididymis, usually arising from the head and containing clear serous fluid, in contrast to the sperm-laden fluid of a spermatocele",
-      "Presents as a painless, smooth, mobile swelling felt separate from and usually above and behind the testis",
-      "Transilluminates brightly, reflecting its clear fluid content",
-      "Often multiple and bilateral, and very common as an incidental finding",
-      "Scrotal ultrasound confirms a thin-walled anechoic cyst separate from the testis and is the key investigation",
-      "The distinction from a spermatocele is largely academic, resting on content rather than behaviour, as both are benign and managed the same way",
-      "Most need only reassurance; excision is reserved for large, painful, or bothersome cysts, with counselling about the small risk to fertility from epididymal surgery"
+  "pathophysiology": "An epididymal cyst arises from cystic dilatation of the epididymal tubules or efferent ductules, probably from obstruction or from embryological ductal remnants, producing a thin-walled sac of clear serous fluid. Unlike a spermatocele, this fluid does not contain spermatozoa. The cysts are lined by flattened epithelium, grow slowly, and are entirely benign with no malignant potential; they become clinically important only when large enough to cause discomfort or anxiety.",
+  "additionalDifferentials": [
+   "Spermatocele",
+   "Hydrocele",
+   "Varicocele",
+   "Epididymitis",
+   "Testicular or epididymal tumour",
+   "Inguinoscrotal hernia",
+   "Cyst of the appendix testis or appendix epididymis"
+  ],
+  "additionalInvestigations": [
+   "Scrotal ultrasound with Doppler",
+   "Transillumination test at the bedside",
+   "Clinical examination confirming the lump is separate from the testis",
+   "Testicular tumour markers if any solid component is seen",
+   "Interval review where there is diagnostic uncertainty"
+  ],
+  "redFlags": [
+   "A solid or vascular component on ultrasound",
+   "An associated painful, hard testicular mass",
+   "Rapid enlargement of the swelling",
+   "Systemic or infective features",
+   "An irregular or fixed swelling"
+  ],
+  "prognosis": "Excellent, as epididymal cysts are benign and often remain stable or fluctuate in size; even when excised the outlook is good, with only a small risk to ipsilateral epididymal function.",
+  "pitfalls": [
+   "Excising asymptomatic cysts and risking epididymal obstruction and fertility impairment",
+   "Failing to obtain ultrasound to exclude a solid testicular lesion behind a scrotal lump",
+   "Confusing an epididymal cyst with a hydrocele or with a spermatocele",
+   "Under-counselling younger men about the fertility implications of surgery"
+  ],
+  "references": [
+   "Campbell-Walsh-Wein Urology",
+   "Smith & Tanagho's General Urology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Reassure and manage conservatively, as epididymal cysts are benign with no malignant potential and often remain stable",
+   "Confirm the diagnosis with scrotal ultrasound showing a thin-walled anechoic cyst separate from the testis, with interval review where there is uncertainty",
+   "Offer simple analgesia and scrotal support for discomfort",
+   "Reserve surgical excision for large or persistently symptomatic cysts, counselling the patient about the small risk to ipsilateral epididymal function and fertility",
+   "Investigate any solid component with testicular tumour markers and prompt referral to exclude malignancy"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "epididymal_cyst-pathway",
+   "title": "Epididymal cyst: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A benign, fluid-filled cyst of the epididymis, usually arising from the head and containing clear serous fluid, in contrast to the sperm-laden fluid of a spermatocele",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: A solid or vascular component on ultrasound",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Scrotal ultrasound with Doppler, Transillumination test at the bedside, Clinical examination confirming the lump is separate from the testis"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Reassure and manage conservatively, as epididymal cysts are benign with no malignant potential and often remain stable"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Excising asymptomatic cysts and risking epididymal obstruction and fertility impairment"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of epididymal cyst."
+  }
+ ],
+ "tables": [
+  {
+   "id": "epididymal_cyst-matrix",
+   "title": "Epididymal cyst: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A benign, fluid-filled cyst of the epididymis, usually arising from the head and containing clear serous fluid, in contrast to",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "An epididymal cyst arises from cystic dilatation of the epididymal tubules or efferent ductules, probably from obstruction or from embryological ductal remnants, producing a thin-walled sac of clear serous fluid. Unlike a spermatocele, this fluid does not contain spermatozoa. The cysts are lined by flattened epithelium, grow slowly, and are entirely benign with no malignant potential; they become clinically important only when large enough to cause discomfort or anxiety.",
-    "additionalDifferentials": [
-      "Spermatocele",
-      "Hydrocele",
-      "Varicocele",
-      "Epididymitis",
-      "Testicular or epididymal tumour",
-      "Inguinoscrotal hernia",
-      "Cyst of the appendix testis or appendix epididymis"
+    [
+     "Key Investigations",
+     "Scrotal ultrasound with Doppler, Transillumination test at the bedside, Clinical examination confirming the lump is separate from",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Scrotal ultrasound with Doppler",
-      "Transillumination test at the bedside",
-      "Clinical examination confirming the lump is separate from the testis",
-      "Testicular tumour markers if any solid component is seen",
-      "Interval review where there is diagnostic uncertainty"
+    [
+     "Primary Differentials",
+     "Spermatocele, Hydrocele, Varicocele",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "A solid or vascular component on ultrasound",
-      "An associated painful, hard testicular mass",
-      "Rapid enlargement of the swelling",
-      "Systemic or infective features",
-      "An irregular or fixed swelling"
+    [
+     "Management Strategy",
+     "Reassure and manage conservatively, as epididymal cysts are benign with no malignant potential and often remain stable",
+     "Core treatment modality"
     ],
-    "prognosis": "Excellent, as epididymal cysts are benign and often remain stable or fluctuate in size; even when excised the outlook is good, with only a small risk to ipsilateral epididymal function.",
-    "pitfalls": [
-      "Excising asymptomatic cysts and risking epididymal obstruction and fertility impairment",
-      "Failing to obtain ultrasound to exclude a solid testicular lesion behind a scrotal lump",
-      "Confusing an epididymal cyst with a hydrocele or with a spermatocele",
-      "Under-counselling younger men about the fertility implications of surgery"
-    ],
-    "references": [
-      "Campbell-Walsh-Wein Urology",
-      "Smith & Tanagho's General Urology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Reassure and manage conservatively, as epididymal cysts are benign with no malignant potential and often remain stable",
-      "Confirm the diagnosis with scrotal ultrasound showing a thin-walled anechoic cyst separate from the testis, with interval review where there is uncertainty",
-      "Offer simple analgesia and scrotal support for discomfort",
-      "Reserve surgical excision for large or persistently symptomatic cysts, counselling the patient about the small risk to ipsilateral epididymal function and fertility",
-      "Investigate any solid component with testicular tumour markers and prompt referral to exclude malignancy"
+    [
+     "Clinical Pitfall",
+     "Excising asymptomatic cysts and risking epididymal obstruction and fertility impairment",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for epididymal cyst."
+  }
+ ]
 }

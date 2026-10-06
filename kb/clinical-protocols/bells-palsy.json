@@ -136,5 +136,77 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-25"
- }
+ },
+ "algorithms": [
+  {
+   "id": "bells-palsy-pathway",
+   "title": "Bell's palsy (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Sudden unilateral facial weakness developing over hours to a peak within about 72 hours, involving the forehead (cannot raise the eyebrow or fully close the eye), often with ear or postauricular pain, altered taste or hyperacusis.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "About 70% of facial nerve palsies are Bell's palsy, so examine all cranial nerves, limbs, ears, parotid glands and the skin of the head and face to exclude another cause.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Grade severity (House-Brackmann I to VI) and note whether paralysis is complete; complete paralysis recovers less well."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Incomplete eye closure: lubricating eye drops through the day and eye ointment at night; glasses or goggles outdoors."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Missing a stroke because forehead movement was not tested."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for bell's palsy (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "bells-palsy-summary-matrix",
+   "title": "Bell's palsy (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Sudden unilateral facial weakness developing over hours to a peak within about 72 hours, involving the forehead (cannot raise the eyebrow",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Incomplete eye closure: lubricating eye drops through the day and eye ointment at night; glasses or goggles outdoors.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Prednisolone: 50 mg orally once daily for 10 days; or 60 mg once daily for 5 days, then reduce by 10 mg daily over 5 days",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Missing a stroke because forehead movement was not tested.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for bell's palsy (adult)."
+  }
+ ]
 }

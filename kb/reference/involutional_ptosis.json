@@ -1,74 +1,146 @@
 {
-  "id": "involutional_ptosis",
-  "name": "Involutional ptosis",
-  "aliases": [
-    "aponeurotic ptosis",
-    "age-related ptosis"
+ "id": "involutional_ptosis",
+ "name": "Involutional ptosis",
+ "aliases": [
+  "aponeurotic ptosis",
+  "age-related ptosis"
+ ],
+ "class": "non_infective",
+ "system": "Eye / Orbit and adnexa",
+ "specialty": "Ophthalmology / Oculoplastics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Oculoplastic surgery references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The commonest form of acquired ptosis, caused by age-related weakening or dehiscence of the levator aponeurosis",
+   "Features are a low upper lid margin with good levator function and a high or indistinct upper lid skin crease",
+   "In severe cases the lid can obstruct the superior visual field",
+   "It is typically bilateral but often asymmetric and gradually progressive",
+   "A key task is to distinguish it from neurogenic (third nerve, Horner) and myogenic (myasthenia, myopathy) ptosis",
+   "Levator advancement or reinsertion surgery is highly effective given the preserved muscle function"
   ],
-  "class": "non_infective",
-  "system": "Eye / Orbit and adnexa",
-  "specialty": "Ophthalmology / Oculoplastics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Oculoplastic surgery references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The commonest form of acquired ptosis, caused by age-related weakening or dehiscence of the levator aponeurosis",
-      "Features are a low upper lid margin with good levator function and a high or indistinct upper lid skin crease",
-      "In severe cases the lid can obstruct the superior visual field",
-      "It is typically bilateral but often asymmetric and gradually progressive",
-      "A key task is to distinguish it from neurogenic (third nerve, Horner) and myogenic (myasthenia, myopathy) ptosis",
-      "Levator advancement or reinsertion surgery is highly effective given the preserved muscle function"
+  "pathophysiology": "Involutional ptosis results from stretching, thinning or disinsertion of the levator palpebrae superioris aponeurosis from the tarsal plate, an age-related degenerative change also promoted by chronic eyelid rubbing, prior surgery and contact lens use. Because the levator muscle itself remains strong, levator function is preserved, but the weakened aponeurotic attachment fails to hold the lid elevated, producing a low lid margin and elevation of the skin crease as the crease is pulled upward.",
+  "additionalDifferentials": [
+   "Neurogenic ptosis (third nerve palsy, Horner syndrome)",
+   "Myogenic ptosis (myasthenia gravis, chronic progressive external ophthalmoplegia, myotonic dystrophy)",
+   "Mechanical ptosis (lid mass, dermatochalasis, oedema)",
+   "Congenital ptosis",
+   "Pseudoptosis (enophthalmos, contralateral lid retraction)"
+  ],
+  "additionalInvestigations": [
+   "Measurement of margin-reflex distance, levator function and lid crease position",
+   "Assessment for fatigability and other features of myasthenia",
+   "Pupil and ocular motility examination to exclude neurogenic causes",
+   "Superior visual field testing for functional impairment",
+   "Further investigation (for example acetylcholine-receptor antibodies, imaging) if a neurogenic or myogenic cause is suspected"
+  ],
+  "redFlags": [
+   "Ptosis with anisocoria or motility deficit suggesting third nerve palsy or Horner syndrome",
+   "Variable or fatigable ptosis suggesting myasthenia gravis",
+   "Sudden onset with pain or other neurological signs",
+   "Associated systemic or neurological symptoms"
+  ],
+  "prognosis": "The condition is benign and progressive, and surgical repair of the aponeurosis is very effective and durable because levator function is retained.",
+  "pitfalls": [
+   "Missing myasthenia gravis or a third nerve palsy masquerading as simple age-related ptosis",
+   "Overlooking coexisting dermatochalasis or brow ptosis",
+   "Attributing pseudoptosis from enophthalmos to true ptosis",
+   "Failing to document levator function before surgery"
+  ],
+  "references": [
+   "Oculoplastic surgery references (standard reference)",
+   "Kanski's Clinical Ophthalmology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Confirm the diagnosis and exclude neurogenic (third nerve palsy, Horner syndrome) and myogenic (myasthenia, myopathy) causes before intervention, as their management differs",
+   "Offer levator aponeurosis advancement or reinsertion surgery as the definitive and highly effective treatment given preserved levator function",
+   "Consider a posterior Muller-muscle-conjunctival resection approach in selected patients",
+   "Manage conservatively with observation or a ptosis prop mounted on spectacles where surgery is declined or the patient is unfit",
+   "Document superior visual field impairment to establish the functional indication for repair",
+   "Address contributing factors such as chronic eyelid rubbing and contact lens wear",
+   "Monitor postoperatively for over- or under-correction, lagophthalmos and exposure keratopathy"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "involutional_ptosis-pathway",
+   "title": "Involutional ptosis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The commonest form of acquired ptosis, caused by age-related weakening or dehiscence of the levator aponeurosis",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Ptosis with anisocoria or motility deficit suggesting third nerve palsy or Horner syndrome",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Measurement of margin-reflex distance, levator function and lid crease position, Assessment for fatigability and other features of myasthenia, Pupil and ocular motility examination to exclude neurogenic causes"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Confirm the diagnosis and exclude neurogenic (third nerve palsy, Horner syndrome) and myogenic (myasthenia, myopathy) causes before intervention, as their management differs"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Missing myasthenia gravis or a third nerve palsy masquerading as simple age-related ptosis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of involutional ptosis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "involutional_ptosis-matrix",
+   "title": "Involutional ptosis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The commonest form of acquired ptosis, caused by age-related weakening or dehiscence of the levator aponeurosis",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Involutional ptosis results from stretching, thinning or disinsertion of the levator palpebrae superioris aponeurosis from the tarsal plate, an age-related degenerative change also promoted by chronic eyelid rubbing, prior surgery and contact lens use. Because the levator muscle itself remains strong, levator function is preserved, but the weakened aponeurotic attachment fails to hold the lid elevated, producing a low lid margin and elevation of the skin crease as the crease is pulled upward.",
-    "additionalDifferentials": [
-      "Neurogenic ptosis (third nerve palsy, Horner syndrome)",
-      "Myogenic ptosis (myasthenia gravis, chronic progressive external ophthalmoplegia, myotonic dystrophy)",
-      "Mechanical ptosis (lid mass, dermatochalasis, oedema)",
-      "Congenital ptosis",
-      "Pseudoptosis (enophthalmos, contralateral lid retraction)"
+    [
+     "Key Investigations",
+     "Measurement of margin-reflex distance, levator function and lid crease position, Assessment for fatigability and other features",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Measurement of margin-reflex distance, levator function and lid crease position",
-      "Assessment for fatigability and other features of myasthenia",
-      "Pupil and ocular motility examination to exclude neurogenic causes",
-      "Superior visual field testing for functional impairment",
-      "Further investigation (for example acetylcholine-receptor antibodies, imaging) if a neurogenic or myogenic cause is suspected"
+    [
+     "Primary Differentials",
+     "Neurogenic ptosis (third nerve palsy, Horner syndrome), Myogenic ptosis (myasthenia gravis, chronic progressive external",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Ptosis with anisocoria or motility deficit suggesting third nerve palsy or Horner syndrome",
-      "Variable or fatigable ptosis suggesting myasthenia gravis",
-      "Sudden onset with pain or other neurological signs",
-      "Associated systemic or neurological symptoms"
+    [
+     "Management Strategy",
+     "Confirm the diagnosis and exclude neurogenic (third nerve palsy, Horner syndrome) and myogenic (myasthenia, myopathy) causes",
+     "Core treatment modality"
     ],
-    "prognosis": "The condition is benign and progressive, and surgical repair of the aponeurosis is very effective and durable because levator function is retained.",
-    "pitfalls": [
-      "Missing myasthenia gravis or a third nerve palsy masquerading as simple age-related ptosis",
-      "Overlooking coexisting dermatochalasis or brow ptosis",
-      "Attributing pseudoptosis from enophthalmos to true ptosis",
-      "Failing to document levator function before surgery"
-    ],
-    "references": [
-      "Oculoplastic surgery references (standard reference)",
-      "Kanski's Clinical Ophthalmology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Confirm the diagnosis and exclude neurogenic (third nerve palsy, Horner syndrome) and myogenic (myasthenia, myopathy) causes before intervention, as their management differs",
-      "Offer levator aponeurosis advancement or reinsertion surgery as the definitive and highly effective treatment given preserved levator function",
-      "Consider a posterior Muller-muscle-conjunctival resection approach in selected patients",
-      "Manage conservatively with observation or a ptosis prop mounted on spectacles where surgery is declined or the patient is unfit",
-      "Document superior visual field impairment to establish the functional indication for repair",
-      "Address contributing factors such as chronic eyelid rubbing and contact lens wear",
-      "Monitor postoperatively for over- or under-correction, lagophthalmos and exposure keratopathy"
+    [
+     "Clinical Pitfall",
+     "Missing myasthenia gravis or a third nerve palsy masquerading as simple age-related ptosis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for involutional ptosis."
+  }
+ ]
 }

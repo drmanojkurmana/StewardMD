@@ -1,76 +1,148 @@
 {
-  "id": "androgenetic_alopecia",
-  "name": "Androgenetic alopecia",
-  "aliases": [
-    "AGA",
-    "male pattern baldness",
-    "female pattern hair loss",
-    "pattern hair loss"
+ "id": "androgenetic_alopecia",
+ "name": "Androgenetic alopecia",
+ "aliases": [
+  "AGA",
+  "male pattern baldness",
+  "female pattern hair loss",
+  "pattern hair loss"
+ ],
+ "class": "non_infective",
+ "system": "Dermatology / Trichology",
+ "specialty": "Dermatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rook's Textbook of Dermatology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The commonest cause of progressive, patterned, non-scarring hair loss, driven by a genetically determined sensitivity of follicles to androgens",
+   "In men, bitemporal recession and vertex thinning progress along the Hamilton-Norwood pattern, while in women diffuse central thinning with preservation of the frontal hairline follows the Ludwig pattern",
+   "The central feature is follicular miniaturisation, the progressive conversion of thick terminal hairs into fine vellus-like hairs, with preserved follicular ostia",
+   "Trichoscopy shows hair-diameter diversity (anisotrichosis), a predominance of single-hair follicular units and peripilar signs",
+   "Female pattern hair loss with clinical signs of hyperandrogenism warrants evaluation for an endocrine cause such as polycystic ovary syndrome",
+   "A superimposed telogen effluvium can unmask or accelerate the appearance of androgenetic thinning",
+   "Management includes topical or oral minoxidil to prolong anagen and 5-alpha-reductase inhibition to reduce dihydrotestosterone, with antiandrogen approaches in women and procedural options such as transplantation"
   ],
-  "class": "non_infective",
-  "system": "Dermatology / Trichology",
-  "specialty": "Dermatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rook's Textbook of Dermatology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The commonest cause of progressive, patterned, non-scarring hair loss, driven by a genetically determined sensitivity of follicles to androgens",
-      "In men, bitemporal recession and vertex thinning progress along the Hamilton-Norwood pattern, while in women diffuse central thinning with preservation of the frontal hairline follows the Ludwig pattern",
-      "The central feature is follicular miniaturisation, the progressive conversion of thick terminal hairs into fine vellus-like hairs, with preserved follicular ostia",
-      "Trichoscopy shows hair-diameter diversity (anisotrichosis), a predominance of single-hair follicular units and peripilar signs",
-      "Female pattern hair loss with clinical signs of hyperandrogenism warrants evaluation for an endocrine cause such as polycystic ovary syndrome",
-      "A superimposed telogen effluvium can unmask or accelerate the appearance of androgenetic thinning",
-      "Management includes topical or oral minoxidil to prolong anagen and 5-alpha-reductase inhibition to reduce dihydrotestosterone, with antiandrogen approaches in women and procedural options such as transplantation"
+  "pathophysiology": "Androgenetic alopecia arises from a genetically determined sensitivity of scalp follicles to androgens, principally dihydrotestosterone generated from testosterone by 5-alpha-reductase. In susceptible follicles androgens progressively shorten the anagen phase and drive miniaturisation, so successive cycles produce finer, shorter and less pigmented hairs until only vellus hairs remain. The pattern reflects regional differences in follicular androgen sensitivity, and because follicles are miniaturised rather than destroyed the ostia are preserved and the process is non-scarring.",
+  "additionalDifferentials": [
+   "Telogen effluvium, which causes diffuse shedding and may coexist",
+   "Diffuse alopecia areata (incognita)",
+   "Frontal fibrosing alopecia, a scarring cause of hairline recession in women",
+   "Thyroid or nutritional diffuse hair loss",
+   "Early central scarring alopecia such as central centrifugal cicatricial alopecia in a patterned distribution"
+  ],
+  "additionalInvestigations": [
+   "Trichoscopy demonstrating hair-diameter diversity and miniaturisation",
+   "Clinical grading with the Hamilton-Norwood or Ludwig scales",
+   "Ferritin and thyroid function to exclude contributory factors",
+   "Androgen profile in women with features of hyperandrogenism to assess for polycystic ovary syndrome",
+   "Scalp biopsy with a terminal-to-vellus ratio in atypical or diagnostically uncertain cases"
+  ],
+  "redFlags": [
+   "Signs of virilisation or rapid hair loss in women suggesting an androgen-secreting tumour",
+   "Loss of follicular ostia or scarring indicating a cicatricial process instead of, or alongside, androgenetic alopecia",
+   "Sudden marked shedding suggesting a coexisting effluvium or systemic illness"
+  ],
+  "prognosis": "Androgenetic alopecia is progressive without treatment but non-scarring; medical therapy can stabilise loss and produce partial regrowth in many patients, with benefit maintained only while treatment continues.",
+  "pitfalls": [
+   "Overlooking a coexisting telogen effluvium that has unmasked the pattern",
+   "Missing signs of hyperandrogenism in women with pattern loss",
+   "Failing to recognise an early scarring alopecia mimicking central thinning",
+   "Expecting regrowth to persist after treatment is stopped"
+  ],
+  "references": [
+   "Rook's Textbook of Dermatology",
+   "Bolognia Dermatology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Topical minoxidil to prolong the anagen phase and promote regrowth, applied continuously as benefit is lost on stopping",
+   "Oral 5-alpha-reductase inhibitor such as finasteride in men to reduce dihydrotestosterone-driven follicular miniaturisation",
+   "Antiandrogen therapy such as spironolactone for female pattern loss, with reliable contraception advised in women of childbearing potential",
+   "Correct contributory factors by treating iron deficiency and thyroid dysfunction that can worsen shedding",
+   "Investigate and manage underlying hyperandrogenism such as polycystic ovary syndrome in affected women",
+   "Cosmetic options including camouflage, low-level laser devices and hair transplantation for those seeking restored density",
+   "Counsel that treatment stabilises loss and gives only partial regrowth while maintained, so long-term adherence is required"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "androgenetic_alopecia-pathway",
+   "title": "Androgenetic alopecia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The commonest cause of progressive, patterned, non-scarring hair loss, driven by a genetically determined sensitivity of follicles to androgens",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Signs of virilisation or rapid hair loss in women suggesting an androgen-secreting tumour",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Trichoscopy demonstrating hair-diameter diversity and miniaturisation, Clinical grading with the Hamilton-Norwood or Ludwig scales, Ferritin and thyroid function to exclude contributory factors"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Topical minoxidil to prolong the anagen phase and promote regrowth, applied continuously as benefit is lost on stopping"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Overlooking a coexisting telogen effluvium that has unmasked the pattern"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of androgenetic alopecia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "androgenetic_alopecia-matrix",
+   "title": "Androgenetic alopecia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The commonest cause of progressive, patterned, non-scarring hair loss, driven by a genetically determined sensitivity of",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Androgenetic alopecia arises from a genetically determined sensitivity of scalp follicles to androgens, principally dihydrotestosterone generated from testosterone by 5-alpha-reductase. In susceptible follicles androgens progressively shorten the anagen phase and drive miniaturisation, so successive cycles produce finer, shorter and less pigmented hairs until only vellus hairs remain. The pattern reflects regional differences in follicular androgen sensitivity, and because follicles are miniaturised rather than destroyed the ostia are preserved and the process is non-scarring.",
-    "additionalDifferentials": [
-      "Telogen effluvium, which causes diffuse shedding and may coexist",
-      "Diffuse alopecia areata (incognita)",
-      "Frontal fibrosing alopecia, a scarring cause of hairline recession in women",
-      "Thyroid or nutritional diffuse hair loss",
-      "Early central scarring alopecia such as central centrifugal cicatricial alopecia in a patterned distribution"
+    [
+     "Key Investigations",
+     "Trichoscopy demonstrating hair-diameter diversity and miniaturisation, Clinical grading with the Hamilton-Norwood or Ludwig",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Trichoscopy demonstrating hair-diameter diversity and miniaturisation",
-      "Clinical grading with the Hamilton-Norwood or Ludwig scales",
-      "Ferritin and thyroid function to exclude contributory factors",
-      "Androgen profile in women with features of hyperandrogenism to assess for polycystic ovary syndrome",
-      "Scalp biopsy with a terminal-to-vellus ratio in atypical or diagnostically uncertain cases"
+    [
+     "Primary Differentials",
+     "Telogen effluvium, which causes diffuse shedding and may coexist, Diffuse alopecia areata (incognita), Frontal fibrosing",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Signs of virilisation or rapid hair loss in women suggesting an androgen-secreting tumour",
-      "Loss of follicular ostia or scarring indicating a cicatricial process instead of, or alongside, androgenetic alopecia",
-      "Sudden marked shedding suggesting a coexisting effluvium or systemic illness"
+    [
+     "Management Strategy",
+     "Topical minoxidil to prolong the anagen phase and promote regrowth, applied continuously as benefit is lost on stopping",
+     "Core treatment modality"
     ],
-    "prognosis": "Androgenetic alopecia is progressive without treatment but non-scarring; medical therapy can stabilise loss and produce partial regrowth in many patients, with benefit maintained only while treatment continues.",
-    "pitfalls": [
-      "Overlooking a coexisting telogen effluvium that has unmasked the pattern",
-      "Missing signs of hyperandrogenism in women with pattern loss",
-      "Failing to recognise an early scarring alopecia mimicking central thinning",
-      "Expecting regrowth to persist after treatment is stopped"
-    ],
-    "references": [
-      "Rook's Textbook of Dermatology",
-      "Bolognia Dermatology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Topical minoxidil to prolong the anagen phase and promote regrowth, applied continuously as benefit is lost on stopping",
-      "Oral 5-alpha-reductase inhibitor such as finasteride in men to reduce dihydrotestosterone-driven follicular miniaturisation",
-      "Antiandrogen therapy such as spironolactone for female pattern loss, with reliable contraception advised in women of childbearing potential",
-      "Correct contributory factors by treating iron deficiency and thyroid dysfunction that can worsen shedding",
-      "Investigate and manage underlying hyperandrogenism such as polycystic ovary syndrome in affected women",
-      "Cosmetic options including camouflage, low-level laser devices and hair transplantation for those seeking restored density",
-      "Counsel that treatment stabilises loss and gives only partial regrowth while maintained, so long-term adherence is required"
+    [
+     "Clinical Pitfall",
+     "Overlooking a coexisting telogen effluvium that has unmasked the pattern",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for androgenetic alopecia."
+  }
+ ]
 }

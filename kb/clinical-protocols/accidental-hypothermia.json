@@ -5,7 +5,17 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Prehospital, emergency department, ICU",
- "aliases": ["hypothermia", "cold exposure", "hypothermic cardiac arrest", "Swiss staging", "rewarming", "ECLS rewarming", "HOPE score", "cold wave", "afterdrop"],
+ "aliases": [
+  "hypothermia",
+  "cold exposure",
+  "hypothermic cardiac arrest",
+  "Swiss staging",
+  "rewarming",
+  "ECLS rewarming",
+  "HOPE score",
+  "cold wave",
+  "afterdrop"
+ ],
  "summary": "Core temperature below 35 degrees C. Handle gently, prevent further heat loss, stage by core temperature or the Swiss system, rewarm actively in moderate to severe cases, and send patients in or at risk of cardiac arrest to an ECPR centre. Below 30 degrees C, limit shocks to 3 and withhold adrenaline.",
  "sections": [
   {
@@ -84,15 +94,121 @@
   }
  ],
  "drugs": [
-  { "name": "Adrenaline (epinephrine) in hypothermic arrest", "dose": "Withhold below 30 degrees C; 1 mg IV once at 30 degrees C; every 6 to 10 minutes at 30 to 35 degrees C; standard 1 mg every 3 to 5 minutes from 35 degrees C", "notes": "Omit if ECPR is imminent (ERC 2025)." },
-  { "name": "Amiodarone in hypothermic arrest", "dose": "300 mg IV once for a shockable rhythm; further doses only above 30 degrees C", "notes": "ERC 2025." },
-  { "name": "Warmed crystalloid (0.9% saline or balanced)", "dose": "Boluses of 250 to 500 mL warmed to about 40 degrees C, titrated to BP and perfusion", "notes": "Avoid overload; central venous pressure monitoring helps in severe cases." },
-  { "name": "Dextrose", "dose": "25 g IV (100 mL of 25% or 50 mL of 50% dextrose) if glucose below 70 mg/dL (3.9 mmol/L)", "notes": "Hypoglycaemia is common in alcohol-related and malnourished patients." }
+  {
+   "name": "Adrenaline (epinephrine) in hypothermic arrest",
+   "dose": "Withhold below 30 degrees C; 1 mg IV once at 30 degrees C; every 6 to 10 minutes at 30 to 35 degrees C; standard 1 mg every 3 to 5 minutes from 35 degrees C",
+   "notes": "Omit if ECPR is imminent (ERC 2025)."
+  },
+  {
+   "name": "Amiodarone in hypothermic arrest",
+   "dose": "300 mg IV once for a shockable rhythm; further doses only above 30 degrees C",
+   "notes": "ERC 2025."
+  },
+  {
+   "name": "Warmed crystalloid (0.9% saline or balanced)",
+   "dose": "Boluses of 250 to 500 mL warmed to about 40 degrees C, titrated to BP and perfusion",
+   "notes": "Avoid overload; central venous pressure monitoring helps in severe cases."
+  },
+  {
+   "name": "Dextrose",
+   "dose": "25 g IV (100 mL of 25% or 50 mL of 50% dextrose) if glucose below 70 mg/dL (3.9 mmol/L)",
+   "notes": "Hypoglycaemia is common in alcohol-related and malnourished patients."
+  }
  ],
  "sources": [
-  { "org": "European Resuscitation Council", "title": "European Resuscitation Council Guidelines 2025 Special Circumstances in Resuscitation", "year": 2025, "url": "https://doi.org/10.1016/j.resuscitation.2025.110753" },
-  { "org": "Resuscitation Council UK", "title": "2025 Special circumstances guidelines (accidental hypothermia)", "year": 2025, "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/special-circumstances-guidelines" },
-  { "org": "Paal P, et al. Int J Environ Res Public Health", "title": "Accidental Hypothermia: 2021 Update", "year": 2022, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8744717/" }
+  {
+   "org": "European Resuscitation Council",
+   "title": "European Resuscitation Council Guidelines 2025 Special Circumstances in Resuscitation",
+   "year": 2025,
+   "url": "https://doi.org/10.1016/j.resuscitation.2025.110753"
+  },
+  {
+   "org": "Resuscitation Council UK",
+   "title": "2025 Special circumstances guidelines (accidental hypothermia)",
+   "year": 2025,
+   "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/special-circumstances-guidelines"
+  },
+  {
+   "org": "Paal P, et al. Int J Environ Res Public Health",
+   "title": "Accidental Hypothermia: 2021 Update",
+   "year": 2022,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8744717/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "accidental-hypothermia-pathway",
+   "title": "Accidental hypothermia (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Accidental hypothermia: unintentional fall in core temperature below 35 degrees C. Primary: cold exposure. Secondary: sepsis, hypoglycaemia, hypothyroidism, adrenal insufficiency, alcohol or sedative intoxication, stroke, trauma, immobile",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Check breathing and pulse for up to 1 minute in an unconscious hypothermic patient (bradycardia and slow shallow breathing are expected); use ECG, capnography or ultrasound if available.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Measure core temperature with a low-reading thermometer: oesophageal (lower third) if intubated, epitympanic thermistor otherwise; rectal and bladder probes lag during rewarming. Infrared ear, oral and axillary readings are unreliable."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Standard CPR at normal rate and ratio. Asystole, fixed dilated pupils, rigidity, unwitnessed arrest and low ETCO2 are NOT reasons to stop. Do not start or stop only for lethal injury, a frozen body, valid DNACPR, rescuer danger, or"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Continuous ECG, core temperature, BP (arterial line if unstable), SpO2 (often unreliable with vasoconstriction), urine output."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for accidental hypothermia (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "accidental-hypothermia-summary-matrix",
+   "title": "Accidental hypothermia (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Accidental hypothermia: unintentional fall in core temperature below 35 degrees C. Primary: cold exposure. Secondary: sepsis,",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Check breathing and pulse for up to 1 minute in an unconscious hypothermic patient (bradycardia and slow shallow breathing are expected);",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Adrenaline (epinephrine) in hypothermic arrest: Withhold below 30 degrees C; 1 mg IV once at 30 degrees C; every 6 to 10 minutes at 30 to",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Using a standard thermometer that does not read below 34 to 35 degrees C.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for accidental hypothermia (adult)."
+  }
+ ]
 }

@@ -1,73 +1,145 @@
 {
-  "id": "latent_nystagmus",
-  "name": "Latent nystagmus",
-  "aliases": [
-    "fusion maldevelopment nystagmus syndrome",
-    "manifest latent nystagmus"
+ "id": "latent_nystagmus",
+ "name": "Latent nystagmus",
+ "aliases": [
+  "fusion maldevelopment nystagmus syndrome",
+  "manifest latent nystagmus"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Neuro-ophthalmology",
+ "specialty": "Ophthalmology / Neurology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A conjugate horizontal jerk nystagmus that appears or intensifies when one eye is occluded, now termed fusion maldevelopment nystagmus syndrome",
+   "The fast phase beats toward the viewing (uncovered) eye, reversing direction depending on which eye fixates",
+   "It is strongly associated with early disruption of binocular vision, such as infantile esotropia and dissociated vertical deviation",
+   "When some nystagmus is present even with both eyes open it is called manifest latent nystagmus",
+   "Covering one eye to measure visual acuity can worsen the nystagmus and falsely reduce the measured acuity",
+   "Recognition matters mainly to avoid misinterpreting it as a sign of intracranial disease"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Neuro-ophthalmology",
-  "specialty": "Ophthalmology / Neurology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A conjugate horizontal jerk nystagmus that appears or intensifies when one eye is occluded, now termed fusion maldevelopment nystagmus syndrome",
-      "The fast phase beats toward the viewing (uncovered) eye, reversing direction depending on which eye fixates",
-      "It is strongly associated with early disruption of binocular vision, such as infantile esotropia and dissociated vertical deviation",
-      "When some nystagmus is present even with both eyes open it is called manifest latent nystagmus",
-      "Covering one eye to measure visual acuity can worsen the nystagmus and falsely reduce the measured acuity",
-      "Recognition matters mainly to avoid misinterpreting it as a sign of intracranial disease"
+  "pathophysiology": "Latent nystagmus arises from maldevelopment of binocular fusion during early infancy, typically in the context of infantile strabismus, which disturbs the normal cortical monocular motion processing that underlies gaze holding. Monocular occlusion unbalances this system and elicits a jerk nystagmus whose fast phase beats toward the fixating eye. The condition reflects a developmental abnormality of the visual motion pathways rather than an acquired brainstem or cerebellar lesion.",
+  "additionalDifferentials": [
+   "Congenital (infantile) nystagmus syndrome",
+   "Acquired gaze-evoked nystagmus",
+   "Spasmus nutans",
+   "Peripheral or central vestibular nystagmus",
+   "Periodic alternating nystagmus"
+  ],
+  "additionalInvestigations": [
+   "Orthoptic assessment of ocular alignment and fusion",
+   "Careful acuity testing that avoids full occlusion (using a fogging lens)",
+   "Documentation of the nystagmus with each eye fixating",
+   "Assessment for associated infantile esotropia and dissociated vertical deviation",
+   "Eye-movement recording where diagnostic doubt persists"
+  ],
+  "redFlags": [
+   "Vertical or purely torsional nystagmus suggesting central disease",
+   "Associated neurological signs",
+   "New onset in an older child or adult",
+   "Optic atrophy or other afferent pathway signs"
+  ],
+  "prognosis": "The condition itself is benign and stable; visual outcome depends on the associated strabismus and amblyopia, which should be managed on their own merits.",
+  "pitfalls": [
+   "Underestimating acuity by fully occluding one eye during testing",
+   "Mistaking it for acquired nystagmus and ordering unnecessary imaging",
+   "Missing the associated infantile strabismus and amblyopia",
+   "Confusing manifest latent nystagmus with congenital nystagmus syndrome"
+  ],
+  "references": [
+   "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+   "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus"
+  ],
+  "crossLinks": [],
+  "management": [
+   "There is no drug therapy; management targets the underlying infantile strabismus and any amblyopia on their own merits",
+   "Treat amblyopia with occlusion or atropine penalisation, but avoid abrupt full occlusion which intensifies the nystagmus, favouring fogging or partial penalisation",
+   "Correct significant refractive error with spectacles to optimise vision",
+   "Offer strabismus surgery for the associated infantile esotropia or dissociated vertical deviation as indicated",
+   "Test acuity monocularly using a fogging lens rather than a full occluder to avoid falsely reducing measured vision",
+   "Recognise the benign developmental nature to avoid unnecessary neuroimaging, and follow up with orthoptic assessment"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "latent_nystagmus-pathway",
+   "title": "Latent nystagmus: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A conjugate horizontal jerk nystagmus that appears or intensifies when one eye is occluded, now termed fusion maldevelopment nystagmus syndrome",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Vertical or purely torsional nystagmus suggesting central disease",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Orthoptic assessment of ocular alignment and fusion, Careful acuity testing that avoids full occlusion (using a fogging lens), Documentation of the nystagmus with each eye fixating"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: There is no drug therapy; management targets the underlying infantile strabismus and any amblyopia on their own merits"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Underestimating acuity by fully occluding one eye during testing"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of latent nystagmus."
+  }
+ ],
+ "tables": [
+  {
+   "id": "latent_nystagmus-matrix",
+   "title": "Latent nystagmus: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A conjugate horizontal jerk nystagmus that appears or intensifies when one eye is occluded, now termed fusion maldevelopment",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Latent nystagmus arises from maldevelopment of binocular fusion during early infancy, typically in the context of infantile strabismus, which disturbs the normal cortical monocular motion processing that underlies gaze holding. Monocular occlusion unbalances this system and elicits a jerk nystagmus whose fast phase beats toward the fixating eye. The condition reflects a developmental abnormality of the visual motion pathways rather than an acquired brainstem or cerebellar lesion.",
-    "additionalDifferentials": [
-      "Congenital (infantile) nystagmus syndrome",
-      "Acquired gaze-evoked nystagmus",
-      "Spasmus nutans",
-      "Peripheral or central vestibular nystagmus",
-      "Periodic alternating nystagmus"
+    [
+     "Key Investigations",
+     "Orthoptic assessment of ocular alignment and fusion, Careful acuity testing that avoids full occlusion (using a fogging lens),",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Orthoptic assessment of ocular alignment and fusion",
-      "Careful acuity testing that avoids full occlusion (using a fogging lens)",
-      "Documentation of the nystagmus with each eye fixating",
-      "Assessment for associated infantile esotropia and dissociated vertical deviation",
-      "Eye-movement recording where diagnostic doubt persists"
+    [
+     "Primary Differentials",
+     "Congenital (infantile) nystagmus syndrome, Acquired gaze-evoked nystagmus, Spasmus nutans",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Vertical or purely torsional nystagmus suggesting central disease",
-      "Associated neurological signs",
-      "New onset in an older child or adult",
-      "Optic atrophy or other afferent pathway signs"
+    [
+     "Management Strategy",
+     "There is no drug therapy; management targets the underlying infantile strabismus and any amblyopia on their own merits",
+     "Core treatment modality"
     ],
-    "prognosis": "The condition itself is benign and stable; visual outcome depends on the associated strabismus and amblyopia, which should be managed on their own merits.",
-    "pitfalls": [
-      "Underestimating acuity by fully occluding one eye during testing",
-      "Mistaking it for acquired nystagmus and ordering unnecessary imaging",
-      "Missing the associated infantile strabismus and amblyopia",
-      "Confusing manifest latent nystagmus with congenital nystagmus syndrome"
-    ],
-    "references": [
-      "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
-      "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus"
-    ],
-    "crossLinks": [],
-    "management": [
-      "There is no drug therapy; management targets the underlying infantile strabismus and any amblyopia on their own merits",
-      "Treat amblyopia with occlusion or atropine penalisation, but avoid abrupt full occlusion which intensifies the nystagmus, favouring fogging or partial penalisation",
-      "Correct significant refractive error with spectacles to optimise vision",
-      "Offer strabismus surgery for the associated infantile esotropia or dissociated vertical deviation as indicated",
-      "Test acuity monocularly using a fogging lens rather than a full occluder to avoid falsely reducing measured vision",
-      "Recognise the benign developmental nature to avoid unnecessary neuroimaging, and follow up with orthoptic assessment"
+    [
+     "Clinical Pitfall",
+     "Underestimating acuity by fully occluding one eye during testing",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for latent nystagmus."
+  }
+ ]
 }

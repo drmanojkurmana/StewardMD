@@ -180,5 +180,77 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h7f421e88"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "acute_bronchitis-dx-algo",
+      "title": "Acute Bronchitis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Defined as a dry or productive cough lasting <3 weeks, occurring without clinical or radiographic signs of pneumonia; it is most common during winter (p.1537).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Dyspnea, especially exertional dyspnea or chest heaviness/pain, which should trigger consideration of cardiac or thromboembolic disease rather than acute bronchitis (p.21).",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Chest radiography should be obtained whenever pneumonia is suspected, to confirm the absence of an infiltrate that defines acute bronchitis (p.1537)., Specific viral diagnosis is generally unnecessary but, when needed,"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Differentiate from top mimics: Community-acquired pneumonia (distinguished by a new infiltrate on chest radiography and focal exam findings) (p.1024)., Acute exacerbation of chronic bronchitis / COPD (p.1024)., Heart failure (p.1024)."
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Prescribing antibiotics for acute bronchitis is inappropriate stewardship; roughly half of ambulatory antibiotic prescriptions for acute respiratory infections are unnecessary, and antibiotics cause adverse effects, C."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for acute bronchitis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "acute_bronchitis-matrix",
+      "title": "Acute Bronchitis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined as a dry or productive cough lasting <3 weeks, occurring without clinical or radiographic signs of pneumonia; it is most",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Chest radiography should be obtained whenever pneumonia is suspected, to confirm the absence of an infiltrate that defines acute",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Community-acquired pneumonia (distinguished by a new infiltrate on chest radiography and focal exam findings) (p.1024)., Acute",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Dyspnea, especially exertional dyspnea or chest heaviness/pain, which should trigger consideration of cardiac or thromboembolic",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Prescribing antibiotics for acute bronchitis is inappropriate stewardship; roughly half of ambulatory antibiotic prescriptions",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for acute bronchitis."
+    }
+  ]
 }

@@ -1,93 +1,165 @@
 {
-  "id": "GOODPASTURE",
-  "name": "Anti-GBM disease (Goodpasture)",
-  "system": "Nephrology",
-  "class": "non_infective",
-  "chapter": null,
-  "page": null,
-  "aliases": [
-    "Goodpasture disease",
-    "Goodpasture syndrome",
-    "anti gbm disease",
-    "anti glomerular basement",
-    "anti-GBM antibody disease",
-    "anti-gbm",
-    "anti-glomerular basement membrane disease",
-    "goodpasture disease",
-    "goodpasture syndrome",
-    "pulmonary-renal syndrome"
+ "id": "GOODPASTURE",
+ "name": "Anti-GBM disease (Goodpasture)",
+ "system": "Nephrology",
+ "class": "non_infective",
+ "chapter": null,
+ "page": null,
+ "aliases": [
+  "Goodpasture disease",
+  "Goodpasture syndrome",
+  "anti gbm disease",
+  "anti glomerular basement",
+  "anti-GBM antibody disease",
+  "anti-gbm",
+  "anti-glomerular basement membrane disease",
+  "goodpasture disease",
+  "goodpasture syndrome",
+  "pulmonary-renal syndrome"
+ ],
+ "referenceOnly": true,
+ "review": {
+  "status": "ai_drafted"
+ },
+ "harrison": {
+  "clinicalPearls": [
+   "Classic triad is rapidly progressive glomerulonephritis plus alveolar hemorrhage, though renal-limited disease occurs without lung involvement",
+   "Caused by circulating autoantibodies against the alpha-3 chain of type IV collagen in glomerular and alveolar basement membranes",
+   "Bimodal age distribution — young men (often smokers, with lung hemorrhage) and older adults of both sexes (often renal-limited)",
+   "Smoking, hydrocarbon exposure, viral respiratory infection, and cocaine use are recognized triggers of alveolar hemorrhage in susceptible patients",
+   "Roughly a third of patients have concurrent ANCA positivity (usually MPO-ANCA), which affects prognosis and relapse risk",
+   "Renal biopsy showing linear IgG deposition along the glomerular basement membrane on immunofluorescence is the diagnostic hallmark",
+   "Prompt recognition and treatment before oliguria and severe renal failure develop is the strongest determinant of kidney survival",
+   "Once ESRD is established, native kidney recovery is unlikely and prophylactic bilateral nephrectomy is not standard practice"
   ],
-  "referenceOnly": true,
-  "review": {
-    "status": "ai_drafted"
-  },
-  "harrison": {
-    "clinicalPearls": [
-      "Classic triad is rapidly progressive glomerulonephritis plus alveolar hemorrhage, though renal-limited disease occurs without lung involvement",
-      "Caused by circulating autoantibodies against the alpha-3 chain of type IV collagen in glomerular and alveolar basement membranes",
-      "Bimodal age distribution — young men (often smokers, with lung hemorrhage) and older adults of both sexes (often renal-limited)",
-      "Smoking, hydrocarbon exposure, viral respiratory infection, and cocaine use are recognized triggers of alveolar hemorrhage in susceptible patients",
-      "Roughly a third of patients have concurrent ANCA positivity (usually MPO-ANCA), which affects prognosis and relapse risk",
-      "Renal biopsy showing linear IgG deposition along the glomerular basement membrane on immunofluorescence is the diagnostic hallmark",
-      "Prompt recognition and treatment before oliguria and severe renal failure develop is the strongest determinant of kidney survival",
-      "Once ESRD is established, native kidney recovery is unlikely and prophylactic bilateral nephrectomy is not standard practice"
-    ],
-    "pathophysiology": "Anti-GBM disease results from autoantibody binding to a conformational epitope on the alpha-3 chain of type IV collagen, an antigen shared by the glomerular and alveolar basement membranes. Antibody deposition activates complement and recruits neutrophils and macrophages, producing crescentic glomerulonephritis and, when pulmonary capillaries are involved, diffuse alveolar hemorrhage. Loss of pulmonary capillary integrity (from smoking, infection, or inhalational injury) is thought to expose the alveolar antigen and precipitate lung bleeding in genetically susceptible individuals (HLA-DR15 association).",
-    "additionalDifferentials": [
-      "ANCA-associated vasculitis (granulomatosis with polyangiitis, microscopic polyangiitis)",
-      "Lupus nephritis with diffuse alveolar hemorrhage",
-      "IgA nephropathy / IgA vasculitis with pulmonary involvement",
-      "Post-infectious or other immune-complex crescentic glomerulonephritis",
-      "Cryoglobulinemic vasculitis with pulmonary-renal syndrome",
-      "Thrombotic microangiopathy causing combined renal and pulmonary injury"
-    ],
-    "infectionMimics": [
-      "Severe pneumonia with concurrent acute kidney injury mimicking a pulmonary-renal syndrome",
-      "Leptospirosis with pulmonary hemorrhage and renal failure"
-    ],
-    "nonInfectiousMimics": [
-      "ANCA-associated vasculitis",
-      "Systemic lupus erythematosus",
-      "Diffuse alveolar hemorrhage from anticoagulation or coagulopathy",
-      "Cardiogenic pulmonary edema with coincident renal failure",
-      "Cocaine/levamisole-induced vasculitis"
-    ],
-    "additionalInvestigations": [
-      "Serum anti-GBM antibody titer (ELISA) — confirms circulating autoantibody, main serologic diagnostic test",
-      "ANCA serology (MPO/PR3) — detects dual-positive cases which alter relapse risk and monitoring",
-      "Renal biopsy with immunofluorescence — linear IgG (and often C3) along GBM confirms diagnosis and grades crescent burden for prognosis",
-      "Urinalysis with microscopy — dysmorphic red cells and red cell casts confirm glomerular bleeding",
-      "Chest imaging (chest x-ray or CT) — detects alveolar infiltrates from pulmonary hemorrhage",
-      "Diffusing capacity for carbon monoxide (DLCO) — an elevated DLCO supports active alveolar hemorrhage",
-      "Complete blood count — unexplained drop in hemoglobin can be an early clue to occult pulmonary hemorrhage",
-      "Serum creatinine and renal function trend — guides urgency of treatment and predicts recovery potential"
-    ],
-    "redFlags": [
-      "Hemoptysis or unexplained falling hemoglobin in a patient with acute glomerulonephritis",
-      "Oliguria or rapidly rising creatinine suggesting need for urgent biopsy and immunosuppression before irreversible fibrosis",
-      "Respiratory distress or hypoxemia from active alveolar hemorrhage requiring ICU-level support",
-      "Dialysis-dependent renal failure at presentation, a marker of poor renal recovery",
-      "Concurrent ANCA positivity, which is associated with a distinct relapse pattern requiring longer surveillance"
-    ],
-    "pitfalls": [
-      "Attributing hemoptysis and anemia to an unrelated pulmonary process, delaying recognition of the pulmonary-renal syndrome",
-      "Waiting for antibody results before starting empiric treatment when clinical suspicion is high and biopsy is pending",
-      "Missing renal-limited anti-GBM disease because the classic pulmonary component is absent",
-      "Failing to test for concomitant ANCA, which can alter both prognosis and the duration of immunosuppressive follow-up"
-    ],
-    "prognosis": "Outcomes depend heavily on renal function and the extent of crescent formation at diagnosis — patients presenting with dialysis-dependent renal failure or near-total crescents rarely recover independent kidney function, whereas earlier treatment before advanced renal failure preserves function in many cases. Pulmonary hemorrhage, when treated promptly, generally resolves without long-term sequelae, but disease recurrence and progression to end-stage renal disease remain the major long-term concerns.",
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e — Glomerular Diseases / Anti-GBM (Goodpasture) Disease chapter"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Start urgent plasma exchange to remove circulating anti-GBM antibodies, combined with corticosteroids and cyclophosphamide",
-      "Consider rituximab as an alternative or adjunct to cyclophosphamide, particularly where the latter is contraindicated",
-      "Support life-threatening alveolar haemorrhage with oxygen, transfusion, and ventilatory support, and provide dialysis for advanced renal failure",
-      "Eliminate precipitants of pulmonary haemorrhage — enforce smoking cessation and avoid hydrocarbon and inhalational exposures",
-      "Monitor serial anti-GBM antibody titres to guide treatment duration and check ANCA status, which alters relapse risk in dual-positive patients",
-      "Escalate to intensive care for massive pulmonary haemorrhage or respiratory failure",
-      "Defer kidney transplantation until antibodies are persistently undetectable, recognising that dialysis-dependent presentation with extensive crescents rarely recovers renal function"
-    ]
+  "pathophysiology": "Anti-GBM disease results from autoantibody binding to a conformational epitope on the alpha-3 chain of type IV collagen, an antigen shared by the glomerular and alveolar basement membranes. Antibody deposition activates complement and recruits neutrophils and macrophages, producing crescentic glomerulonephritis and, when pulmonary capillaries are involved, diffuse alveolar hemorrhage. Loss of pulmonary capillary integrity (from smoking, infection, or inhalational injury) is thought to expose the alveolar antigen and precipitate lung bleeding in genetically susceptible individuals (HLA-DR15 association).",
+  "additionalDifferentials": [
+   "ANCA-associated vasculitis (granulomatosis with polyangiitis, microscopic polyangiitis)",
+   "Lupus nephritis with diffuse alveolar hemorrhage",
+   "IgA nephropathy / IgA vasculitis with pulmonary involvement",
+   "Post-infectious or other immune-complex crescentic glomerulonephritis",
+   "Cryoglobulinemic vasculitis with pulmonary-renal syndrome",
+   "Thrombotic microangiopathy causing combined renal and pulmonary injury"
+  ],
+  "infectionMimics": [
+   "Severe pneumonia with concurrent acute kidney injury mimicking a pulmonary-renal syndrome",
+   "Leptospirosis with pulmonary hemorrhage and renal failure"
+  ],
+  "nonInfectiousMimics": [
+   "ANCA-associated vasculitis",
+   "Systemic lupus erythematosus",
+   "Diffuse alveolar hemorrhage from anticoagulation or coagulopathy",
+   "Cardiogenic pulmonary edema with coincident renal failure",
+   "Cocaine/levamisole-induced vasculitis"
+  ],
+  "additionalInvestigations": [
+   "Serum anti-GBM antibody titer (ELISA) — confirms circulating autoantibody, main serologic diagnostic test",
+   "ANCA serology (MPO/PR3) — detects dual-positive cases which alter relapse risk and monitoring",
+   "Renal biopsy with immunofluorescence — linear IgG (and often C3) along GBM confirms diagnosis and grades crescent burden for prognosis",
+   "Urinalysis with microscopy — dysmorphic red cells and red cell casts confirm glomerular bleeding",
+   "Chest imaging (chest x-ray or CT) — detects alveolar infiltrates from pulmonary hemorrhage",
+   "Diffusing capacity for carbon monoxide (DLCO) — an elevated DLCO supports active alveolar hemorrhage",
+   "Complete blood count — unexplained drop in hemoglobin can be an early clue to occult pulmonary hemorrhage",
+   "Serum creatinine and renal function trend — guides urgency of treatment and predicts recovery potential"
+  ],
+  "redFlags": [
+   "Hemoptysis or unexplained falling hemoglobin in a patient with acute glomerulonephritis",
+   "Oliguria or rapidly rising creatinine suggesting need for urgent biopsy and immunosuppression before irreversible fibrosis",
+   "Respiratory distress or hypoxemia from active alveolar hemorrhage requiring ICU-level support",
+   "Dialysis-dependent renal failure at presentation, a marker of poor renal recovery",
+   "Concurrent ANCA positivity, which is associated with a distinct relapse pattern requiring longer surveillance"
+  ],
+  "pitfalls": [
+   "Attributing hemoptysis and anemia to an unrelated pulmonary process, delaying recognition of the pulmonary-renal syndrome",
+   "Waiting for antibody results before starting empiric treatment when clinical suspicion is high and biopsy is pending",
+   "Missing renal-limited anti-GBM disease because the classic pulmonary component is absent",
+   "Failing to test for concomitant ANCA, which can alter both prognosis and the duration of immunosuppressive follow-up"
+  ],
+  "prognosis": "Outcomes depend heavily on renal function and the extent of crescent formation at diagnosis — patients presenting with dialysis-dependent renal failure or near-total crescents rarely recover independent kidney function, whereas earlier treatment before advanced renal failure preserves function in many cases. Pulmonary hemorrhage, when treated promptly, generally resolves without long-term sequelae, but disease recurrence and progression to end-stage renal disease remain the major long-term concerns.",
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e — Glomerular Diseases / Anti-GBM (Goodpasture) Disease chapter"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Start urgent plasma exchange to remove circulating anti-GBM antibodies, combined with corticosteroids and cyclophosphamide",
+   "Consider rituximab as an alternative or adjunct to cyclophosphamide, particularly where the latter is contraindicated",
+   "Support life-threatening alveolar haemorrhage with oxygen, transfusion, and ventilatory support, and provide dialysis for advanced renal failure",
+   "Eliminate precipitants of pulmonary haemorrhage — enforce smoking cessation and avoid hydrocarbon and inhalational exposures",
+   "Monitor serial anti-GBM antibody titres to guide treatment duration and check ANCA status, which alters relapse risk in dual-positive patients",
+   "Escalate to intensive care for massive pulmonary haemorrhage or respiratory failure",
+   "Defer kidney transplantation until antibodies are persistently undetectable, recognising that dialysis-dependent presentation with extensive crescents rarely recovers renal function"
+  ]
+ },
+ "algorithms": [
+  {
+   "id": "goodpasture-pathway",
+   "title": "Anti-GBM disease (Goodpasture): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Classic triad is rapidly progressive glomerulonephritis plus alveolar hemorrhage, though renal-limited disease occurs without lung involvement",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Hemoptysis or unexplained falling hemoglobin in a patient with acute glomerulonephritis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serum anti-GBM antibody titer (ELISA) - confirms circulating autoantibody, main serologic diagnostic test, ANCA serology (MPO/PR3) - detects dual-positive cases which alter relapse risk and monitoring, Renal biopsy with"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Start urgent plasma exchange to remove circulating anti-GBM antibodies, combined with corticosteroids and cyclophosphamide"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing hemoptysis and anemia to an unrelated pulmonary process, delaying recognition of the pulmonary-renal syndrome"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of anti-gbm disease (goodpasture)."
   }
+ ],
+ "tables": [
+  {
+   "id": "goodpasture-matrix",
+   "title": "Anti-GBM disease (Goodpasture): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Classic triad is rapidly progressive glomerulonephritis plus alveolar hemorrhage, though renal-limited disease occurs without",
+     "Cardinal clinical findings"
+    ],
+    [
+     "Key Investigations",
+     "Serum anti-GBM antibody titer (ELISA) - confirms circulating autoantibody, main serologic diagnostic test, ANCA serology",
+     "Confirmatory diagnostic workup"
+    ],
+    [
+     "Primary Differentials",
+     "ANCA-associated vasculitis (granulomatosis with polyangiitis, microscopic polyangiitis), Lupus nephritis with diffuse alveolar",
+     "Rule out key mimics"
+    ],
+    [
+     "Management Strategy",
+     "Start urgent plasma exchange to remove circulating anti-GBM antibodies, combined with corticosteroids and cyclophosphamide",
+     "Core treatment modality"
+    ],
+    [
+     "Clinical Pitfall",
+     "Attributing hemoptysis and anemia to an unrelated pulmonary process, delaying recognition of the pulmonary-renal syndrome",
+     "Prevent diagnostic or management error"
+    ]
+   ],
+   "caption": "Overview comparison matrix for anti-gbm disease (goodpasture)."
+  }
+ ]
 }

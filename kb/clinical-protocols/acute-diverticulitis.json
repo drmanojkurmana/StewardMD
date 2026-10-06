@@ -5,7 +5,16 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, outpatient, surgical ward",
- "aliases": ["diverticulitis", "sigmoid diverticulitis", "diverticular abscess", "complicated diverticulitis", "uncomplicated diverticulitis", "Hinchey", "left iliac fossa pain", "LIF pain"],
+ "aliases": [
+  "diverticulitis",
+  "sigmoid diverticulitis",
+  "diverticular abscess",
+  "complicated diverticulitis",
+  "uncomplicated diverticulitis",
+  "Hinchey",
+  "left iliac fossa pain",
+  "LIF pain"
+ ],
  "summary": "Confirm with CT when the diagnosis or severity is uncertain. Low-risk immunocompetent patients with uncomplicated disease can be managed as outpatients without routine antibiotics; give antibiotics to high-risk or complicated cases, drain abscesses larger than 3 cm, operate for peritonitis, and arrange colonoscopy after recovery when indicated.",
  "sections": [
   {
@@ -78,16 +87,126 @@
   }
  ],
  "drugs": [
-  { "name": "Amoxicillin-clavulanate", "dose": "875/125 mg orally twice daily (or 500/125 mg three times daily) for 4 to 7 days", "notes": "Outpatient option when antibiotics are indicated." },
-  { "name": "Ciprofloxacin + metronidazole", "dose": "Ciprofloxacin 500 mg orally twice daily + metronidazole 500 mg orally three times daily for 4 to 7 days", "notes": "Penicillin allergy. Adjust ciprofloxacin in renal impairment." },
-  { "name": "Ceftriaxone + metronidazole", "dose": "Ceftriaxone 2 g IV once daily + metronidazole 500 mg IV every 8 hours", "notes": "Inpatient or complicated disease; switch to oral when improving." },
-  { "name": "Piperacillin-tazobactam", "dose": "4.5 g IV every 6 to 8 hours", "notes": "Severe or healthcare-associated infection; adjust for renal function." },
-  { "name": "Paracetamol", "dose": "1 g orally or IV every 6 hours, maximum 4 g per day", "notes": "Maximum 3 g per day if under 50 kg, malnourished or with liver disease." }
+  {
+   "name": "Amoxicillin-clavulanate",
+   "dose": "875/125 mg orally twice daily (or 500/125 mg three times daily) for 4 to 7 days",
+   "notes": "Outpatient option when antibiotics are indicated."
+  },
+  {
+   "name": "Ciprofloxacin + metronidazole",
+   "dose": "Ciprofloxacin 500 mg orally twice daily + metronidazole 500 mg orally three times daily for 4 to 7 days",
+   "notes": "Penicillin allergy. Adjust ciprofloxacin in renal impairment."
+  },
+  {
+   "name": "Ceftriaxone + metronidazole",
+   "dose": "Ceftriaxone 2 g IV once daily + metronidazole 500 mg IV every 8 hours",
+   "notes": "Inpatient or complicated disease; switch to oral when improving."
+  },
+  {
+   "name": "Piperacillin-tazobactam",
+   "dose": "4.5 g IV every 6 to 8 hours",
+   "notes": "Severe or healthcare-associated infection; adjust for renal function."
+  },
+  {
+   "name": "Paracetamol",
+   "dose": "1 g orally or IV every 6 hours, maximum 4 g per day",
+   "notes": "Maximum 3 g per day if under 50 kg, malnourished or with liver disease."
+  }
  ],
  "sources": [
-  { "org": "American Gastroenterological Association", "title": "AGA Clinical Practice Update on Medical Management of Colonic Diverticulitis: Expert Review (Gastroenterology 2021)", "year": 2021, "url": "https://www.gastrojournal.org/article/S0016-5085(20)35512-8/fulltext" },
-  { "org": "American Society of Colon and Rectal Surgeons", "title": "The ASCRS Clinical Practice Guidelines for the Treatment of Left-Sided Colonic Diverticulitis (Dis Colon Rectum 2020)", "year": 2020, "url": "https://journals.lww.com/dcrjournal/fulltext/10.1097/dcr.0000000000001679~the-american-society-of-colon-and-rectal-surgeons-clinical" },
-  { "org": "American College of Gastroenterology", "title": "ACG Clinical Guideline: Colonic Diverticulitis (Am J Gastroenterol 2026)", "year": 2026, "url": "https://journals.lww.com/ajg/fulltext/2026/07000/acg_clinical_guideline__colonic_diverticulitis.13.aspx" }
+  {
+   "org": "American Gastroenterological Association",
+   "title": "AGA Clinical Practice Update on Medical Management of Colonic Diverticulitis: Expert Review (Gastroenterology 2021)",
+   "year": 2021,
+   "url": "https://www.gastrojournal.org/article/S0016-5085(20)35512-8/fulltext"
+  },
+  {
+   "org": "American Society of Colon and Rectal Surgeons",
+   "title": "The ASCRS Clinical Practice Guidelines for the Treatment of Left-Sided Colonic Diverticulitis (Dis Colon Rectum 2020)",
+   "year": 2020,
+   "url": "https://journals.lww.com/dcrjournal/fulltext/10.1097/dcr.0000000000001679~the-american-society-of-colon-and-rectal-surgeons-clinical"
+  },
+  {
+   "org": "American College of Gastroenterology",
+   "title": "ACG Clinical Guideline: Colonic Diverticulitis (Am J Gastroenterol 2026)",
+   "year": 2026,
+   "url": "https://journals.lww.com/ajg/fulltext/2026/07000/acg_clinical_guideline__colonic_diverticulitis.13.aspx"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "acute-diverticulitis-pathway",
+   "title": "Acute colonic diverticulitis (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Typical: left lower quadrant pain and tenderness, fever, leucocytosis and raised CRP. Right-sided diverticulitis is more common in Asian populations and can mimic appendicitis.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Uncomplicated: localised colonic inflammation. Complicated: abscess, perforation with purulent or faecal peritonitis, fistula (e.g. colovesical, with pneumaturia or faecaluria), obstruction or stricture.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Full blood count, CRP, creatinine and electrolytes, lactate if septic, urinalysis, and pregnancy test where relevant."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Admit, IV fluids, bowel rest as needed, and IV antibiotics covering gram-negative and anaerobic organisms (e.g. ceftriaxone plus metronidazole, or piperacillin-tazobactam)."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Missing a colorectal cancer that mimics diverticulitis: arrange colonoscopy after complicated disease."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for acute colonic diverticulitis (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "acute-diverticulitis-summary-matrix",
+   "title": "Acute colonic diverticulitis (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Typical: left lower quadrant pain and tenderness, fever, leucocytosis and raised CRP. Right-sided diverticulitis is more common in Asian",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Admit, IV fluids, bowel rest as needed, and IV antibiotics covering gram-negative and anaerobic organisms (e.g. ceftriaxone plus",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Full blood count, CRP, creatinine and electrolytes, lactate if septic, urinalysis, and pregnancy test where relevant.",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Amoxicillin-clavulanate: 875/125 mg orally twice daily (or 500/125 mg three times daily) for 4 to 7 days",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Missing a colorectal cancer that mimics diverticulitis: arrange colonoscopy after complicated disease.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for acute colonic diverticulitis (adult)."
+  }
+ ]
 }

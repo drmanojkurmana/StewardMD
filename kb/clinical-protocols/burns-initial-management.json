@@ -5,7 +5,21 @@
  "population": "Adults and children",
  "basis": "international",
  "setting": "Pre-hospital, emergency department, burns unit",
- "aliases": ["burns", "burn injury", "thermal burn", "scald", "Parkland formula", "modified Brooke", "TBSA", "rule of nines", "Lund and Browder", "inhalation injury", "escharotomy", "electrical burn", "chemical burn"],
+ "aliases": [
+  "burns",
+  "burn injury",
+  "thermal burn",
+  "scald",
+  "Parkland formula",
+  "modified Brooke",
+  "TBSA",
+  "rule of nines",
+  "Lund and Browder",
+  "inhalation injury",
+  "escharotomy",
+  "electrical burn",
+  "chemical burn"
+ ],
  "summary": "Stop the burning and cool with running water, secure the airway early if inhalation injury is suspected, estimate TBSA (rule of nines, Lund and Browder in children), start formal fluid resuscitation at 2 to 4 mL/kg/%TBSA titrated hourly to urine output, and refer early to a burns unit.",
  "sections": [
   {
@@ -96,16 +110,126 @@
   }
  ],
  "drugs": [
-  { "name": "Ringer lactate (adults)", "dose": "Start 2 mL/kg/%TBSA over 24 hours (Parkland: 4 mL/kg/%TBSA); half in first 8 hours from burn, half over next 16 hours", "notes": "Titrate hourly to urine output 0.5 mL/kg/h (30 to 50 mL/h)." },
-  { "name": "Ringer lactate (children)", "dose": "3 mL/kg/%TBSA over 24 hours, same 8 and 16 hour split, plus dextrose-containing maintenance fluid if under 30 kg", "notes": "Target urine output 1 mL/kg/h in children under 30 kg." },
-  { "name": "Ringer lactate (high-voltage electrical injury)", "dose": "Start 4 mL/kg/%TBSA over 24 hours", "notes": "Target urine output 75 to 100 mL/h until pigmented urine clears." },
-  { "name": "Oxygen", "dose": "15 L/min via non-rebreather mask", "notes": "Continue until carbon monoxide poisoning is excluded or treated." },
-  { "name": "Hydroxocobalamin", "dose": "Adults 5 g IV over 15 minutes; children 70 mg/kg IV (maximum 5 g)", "notes": "Suspected cyanide poisoning after enclosed-space fire." }
+  {
+   "name": "Ringer lactate (adults)",
+   "dose": "Start 2 mL/kg/%TBSA over 24 hours (Parkland: 4 mL/kg/%TBSA); half in first 8 hours from burn, half over next 16 hours",
+   "notes": "Titrate hourly to urine output 0.5 mL/kg/h (30 to 50 mL/h)."
+  },
+  {
+   "name": "Ringer lactate (children)",
+   "dose": "3 mL/kg/%TBSA over 24 hours, same 8 and 16 hour split, plus dextrose-containing maintenance fluid if under 30 kg",
+   "notes": "Target urine output 1 mL/kg/h in children under 30 kg."
+  },
+  {
+   "name": "Ringer lactate (high-voltage electrical injury)",
+   "dose": "Start 4 mL/kg/%TBSA over 24 hours",
+   "notes": "Target urine output 75 to 100 mL/h until pigmented urine clears."
+  },
+  {
+   "name": "Oxygen",
+   "dose": "15 L/min via non-rebreather mask",
+   "notes": "Continue until carbon monoxide poisoning is excluded or treated."
+  },
+  {
+   "name": "Hydroxocobalamin",
+   "dose": "Adults 5 g IV over 15 minutes; children 70 mg/kg IV (maximum 5 g)",
+   "notes": "Suspected cyanide poisoning after enclosed-space fire."
+  }
  ],
  "sources": [
-  { "org": "American Burn Association", "title": "American Burn Association Clinical Practice Guidelines on Burn Shock Resuscitation", "year": 2024, "url": "https://academic.oup.com/jbcr/article/45/3/565/7458089" },
-  { "org": "American Burn Association", "title": "Guidelines for Burn Patient Referral", "year": 2022, "url": "https://ameriburn.org/resources/burnreferral/" },
-  { "org": "WHO", "title": "Burns fact sheet", "year": 2023, "url": "https://www.who.int/news-room/fact-sheets/detail/burns" }
+  {
+   "org": "American Burn Association",
+   "title": "American Burn Association Clinical Practice Guidelines on Burn Shock Resuscitation",
+   "year": 2024,
+   "url": "https://academic.oup.com/jbcr/article/45/3/565/7458089"
+  },
+  {
+   "org": "American Burn Association",
+   "title": "Guidelines for Burn Patient Referral",
+   "year": 2022,
+   "url": "https://ameriburn.org/resources/burnreferral/"
+  },
+  {
+   "org": "WHO",
+   "title": "Burns fact sheet",
+   "year": 2023,
+   "url": "https://www.who.int/news-room/fact-sheets/detail/burns"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "burns-initial-management-pathway",
+   "title": "Burns: initial assessment and fluid resuscitation Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Assess as a trauma patient (ABCDE): look for associated injuries from blasts, falls or road traffic crashes, and for carbon monoxide or cyanide poisoning.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Give high-flow oxygen by non-rebreather mask to all significant burns and smoke exposures; SpO2 is falsely normal in carbon monoxide poisoning, so measure carboxyhaemoglobin on a blood gas.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Depth: superficial (red, painful, no blisters) is not counted in TBSA; superficial partial thickness (blisters, moist, blanching, painful); deep partial thickness (blotchy, sluggish capillary refill, reduced pain); full thickness (white,"
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Escharotomy for circumferential deep burns of a limb with vascular compromise or of the torso with restricted ventilation; do not wait for pulses to disappear. Elevate burnt limbs."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Hourly urine output, heart rate, blood pressure, temperature and fluid balance; lactate and base deficit on blood gas."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for burns: initial assessment and fluid resuscitation."
+  }
+ ],
+ "tables": [
+  {
+   "id": "burns-initial-management-summary-matrix",
+   "title": "Burns: initial assessment and fluid resuscitation Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Assess as a trauma patient (ABCDE): look for associated injuries from blasts, falls or road traffic crashes, and for carbon monoxide or",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Give high-flow oxygen by non-rebreather mask to all significant burns and smoke exposures; SpO2 is falsely normal in carbon monoxide",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Ringer lactate (adults): Start 2 mL/kg/%TBSA over 24 hours (Parkland: 4 mL/kg/%TBSA); half in first 8 hours from burn, half over next 16",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Overestimating TBSA by including simple erythema, or underestimating it in children by using the adult rule of nines.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for burns: initial assessment and fluid resuscitation."
+  }
+ ]
 }

@@ -5,7 +5,17 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, HDU, ICU",
- "aliases": ["hypertensive crisis", "hypertensive urgency", "malignant hypertension", "accelerated hypertension", "hypertensive encephalopathy", "severe hypertension", "IV labetalol", "nicardipine", "nitroprusside"],
+ "aliases": [
+  "hypertensive crisis",
+  "hypertensive urgency",
+  "malignant hypertension",
+  "accelerated hypertension",
+  "hypertensive encephalopathy",
+  "severe hypertension",
+  "IV labetalol",
+  "nicardipine",
+  "nitroprusside"
+ ],
  "summary": "Hypertensive emergency is severe hypertension with acute organ damage: admit, use titratable IV drugs and lower BP to condition-specific targets (usually MAP down 20 to 25% over hours; immediately in aortic dissection, pulmonary oedema and ACS). Severe hypertension without organ damage is treated orally and gradually.",
  "sections": [
   {
@@ -82,17 +92,130 @@
   }
  ],
  "drugs": [
-  { "name": "Labetalol", "dose": "0.25 to 0.5 mg/kg IV bolus (or 20 mg IV over 2 minutes, then 40 to 80 mg every 10 minutes); infusion 2 to 4 mg/min until target, then 5 to 20 mg/h; maximum cumulative 300 mg", "notes": "Avoid in acute HF, asthma, bradycardia, second or third degree AV block." },
-  { "name": "Nicardipine", "dose": "5 mg/h IV infusion, increase by 2.5 mg/h every 15 to 30 minutes to a maximum of 15 mg/h; reduce to about 3 mg/h once at target", "notes": "Avoid in liver failure and severe aortic stenosis. Reflex tachycardia." },
-  { "name": "Glyceryl trinitrate (nitroglycerin)", "dose": "5 to 200 mcg/min IV infusion, increasing by 5 mcg/min every 5 minutes", "notes": "First choice in ACS and pulmonary oedema. Headache; tolerance. Avoid with PDE5 inhibitors." },
-  { "name": "Sodium nitroprusside", "dose": "0.3 to 10 mcg/kg/min IV infusion, increasing by 0.5 mcg/kg/min every 5 minutes; protect from light", "notes": "Arterial line. Cyanide or thiocyanate toxicity with high doses, long infusions, renal or hepatic failure." },
-  { "name": "Esmolol", "dose": "0.5 to 1 mg/kg IV bolus over 1 minute, then 50 to 300 mcg/kg/min infusion", "notes": "Aortic dissection, peri-operative hypertension. Avoid in acute HF and heart block." },
-  { "name": "Urapidil", "dose": "12.5 to 25 mg IV bolus, then 5 to 40 mg/h infusion", "notes": "Alternative where available." },
-  { "name": "Phentolamine", "dose": "5 mg IV bolus, repeated every 10 minutes as needed to reach the target", "notes": "Catecholamine excess (phaeochromocytoma, sympathomimetic toxicity). Tachycardia, angina." }
+  {
+   "name": "Labetalol",
+   "dose": "0.25 to 0.5 mg/kg IV bolus (or 20 mg IV over 2 minutes, then 40 to 80 mg every 10 minutes); infusion 2 to 4 mg/min until target, then 5 to 20 mg/h; maximum cumulative 300 mg",
+   "notes": "Avoid in acute HF, asthma, bradycardia, second or third degree AV block."
+  },
+  {
+   "name": "Nicardipine",
+   "dose": "5 mg/h IV infusion, increase by 2.5 mg/h every 15 to 30 minutes to a maximum of 15 mg/h; reduce to about 3 mg/h once at target",
+   "notes": "Avoid in liver failure and severe aortic stenosis. Reflex tachycardia."
+  },
+  {
+   "name": "Glyceryl trinitrate (nitroglycerin)",
+   "dose": "5 to 200 mcg/min IV infusion, increasing by 5 mcg/min every 5 minutes",
+   "notes": "First choice in ACS and pulmonary oedema. Headache; tolerance. Avoid with PDE5 inhibitors."
+  },
+  {
+   "name": "Sodium nitroprusside",
+   "dose": "0.3 to 10 mcg/kg/min IV infusion, increasing by 0.5 mcg/kg/min every 5 minutes; protect from light",
+   "notes": "Arterial line. Cyanide or thiocyanate toxicity with high doses, long infusions, renal or hepatic failure."
+  },
+  {
+   "name": "Esmolol",
+   "dose": "0.5 to 1 mg/kg IV bolus over 1 minute, then 50 to 300 mcg/kg/min infusion",
+   "notes": "Aortic dissection, peri-operative hypertension. Avoid in acute HF and heart block."
+  },
+  {
+   "name": "Urapidil",
+   "dose": "12.5 to 25 mg IV bolus, then 5 to 40 mg/h infusion",
+   "notes": "Alternative where available."
+  },
+  {
+   "name": "Phentolamine",
+   "dose": "5 mg IV bolus, repeated every 10 minutes as needed to reach the target",
+   "notes": "Catecholamine excess (phaeochromocytoma, sympathomimetic toxicity). Tachycardia, angina."
+  }
  ],
  "sources": [
-  { "org": "ESC", "title": "2024 ESC Guidelines for the management of elevated blood pressure and hypertension", "year": 2024, "url": "https://academic.oup.com/eurheartj/article/45/38/3912/7741010" },
-  { "org": "AHA / ACC", "title": "2025 AHA/ACC Guideline for the Prevention, Detection, Evaluation and Management of High Blood Pressure in Adults", "year": 2025, "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001356" }
+  {
+   "org": "ESC",
+   "title": "2024 ESC Guidelines for the management of elevated blood pressure and hypertension",
+   "year": 2024,
+   "url": "https://academic.oup.com/eurheartj/article/45/38/3912/7741010"
+  },
+  {
+   "org": "AHA / ACC",
+   "title": "2025 AHA/ACC Guideline for the Prevention, Detection, Evaluation and Management of High Blood Pressure in Adults",
+   "year": 2025,
+   "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001356"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "hypertensive-emergency-pathway",
+   "title": "Hypertensive emergency and severe asymptomatic hypertension Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Hypertensive emergency: severe BP elevation (often 180/110 mmHg or more) with acute hypertension-mediated organ damage. The absolute BP is less important than the rate of rise and the organ damage.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Admit to HDU or ICU with continuous BP monitoring (arterial line where possible) and use short-acting titratable IV drugs.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Fundoscopy, ECG, troponin, creatinine, electrolytes, urine dipstick (protein, blood) and microscopy."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Rest in a quiet room, treat pain and anxiety, and recheck BP after 30 minutes; many settle without drugs."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "BP every 5 to 15 minutes during titration (continuous arterial line in ICU), neurological status, ECG, urine output."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for hypertensive emergency and severe asymptomatic hypertension."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hypertensive-emergency-summary-matrix",
+   "title": "Hypertensive emergency and severe asymptomatic hypertension Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Hypertensive emergency: severe BP elevation (often 180/110 mmHg or more) with acute hypertension-mediated organ damage. The absolute BP is",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Admit to HDU or ICU with continuous BP monitoring (arterial line where possible) and use short-acting titratable IV drugs.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Fundoscopy, ECG, troponin, creatinine, electrolytes, urine dipstick (protein, blood) and microscopy.",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Labetalol: 0.25 to 0.5 mg/kg IV bolus (or 20 mg IV over 2 minutes, then 40 to 80 mg every 10 minutes); infusion 2 to 4 mg/min until target,",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Treating the number rather than the patient: IV drugs for asymptomatic severe hypertension cause harm.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for hypertensive emergency and severe asymptomatic hypertension."
+  }
+ ]
 }

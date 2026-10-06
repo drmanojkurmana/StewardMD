@@ -1,80 +1,152 @@
 {
-  "id": "spinocerebellar_ataxia_type_17",
-  "name": "Spinocerebellar ataxia type 17 (TBP)",
-  "aliases": [
-    "SCA17",
-    "TBP CAG/CAA repeat expansion",
-    "Huntington disease-like 4",
-    "HDL4"
+ "id": "spinocerebellar_ataxia_type_17",
+ "name": "Spinocerebellar ataxia type 17 (TBP)",
+ "aliases": [
+  "SCA17",
+  "TBP CAG/CAA repeat expansion",
+  "Huntington disease-like 4",
+  "HDL4"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Neurogenetics",
+ "specialty": "Neurology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Bradley and Daroff Neurology / GeneReviews",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Autosomal dominant disorder combining cerebellar ataxia with prominent cognitive decline, psychiatric disturbance and movement disorders, so it is also termed Huntington disease-like 4",
+   "Caused by a CAG/CAA repeat expansion in TBP encoding the TATA-box-binding protein, a general transcription factor",
+   "The phenotype is broad and can include chorea, dystonia, parkinsonism, spasticity and seizures in addition to ataxia",
+   "Progressive dementia and behavioural or psychiatric change are frequently early and disabling",
+   "Reduced penetrance occurs in the intermediate repeat range, complicating interpretation and counselling",
+   "MRI shows cerebellar atrophy and, in many patients, cerebral and caudate atrophy resembling Huntington disease",
+   "Because CAA interruptions accompany the CAG repeat, the expansion is comparatively stable and anticipation is less pronounced than in some SCAs",
+   "Management is supportive and symptomatic, targeting the movement disorder, mood and cognition"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Neurogenetics",
-  "specialty": "Neurology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Bradley and Daroff Neurology / GeneReviews",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Autosomal dominant disorder combining cerebellar ataxia with prominent cognitive decline, psychiatric disturbance and movement disorders, so it is also termed Huntington disease-like 4",
-      "Caused by a CAG/CAA repeat expansion in TBP encoding the TATA-box-binding protein, a general transcription factor",
-      "The phenotype is broad and can include chorea, dystonia, parkinsonism, spasticity and seizures in addition to ataxia",
-      "Progressive dementia and behavioural or psychiatric change are frequently early and disabling",
-      "Reduced penetrance occurs in the intermediate repeat range, complicating interpretation and counselling",
-      "MRI shows cerebellar atrophy and, in many patients, cerebral and caudate atrophy resembling Huntington disease",
-      "Because CAA interruptions accompany the CAG repeat, the expansion is comparatively stable and anticipation is less pronounced than in some SCAs",
-      "Management is supportive and symptomatic, targeting the movement disorder, mood and cognition"
+  "pathophysiology": "SCA17 is caused by an expanded CAG/CAA repeat in TBP, which encodes the TATA-box-binding protein, a central component of the transcription initiation machinery used by all three RNA polymerases. The resulting elongated polyglutamine tract causes the protein to misfold and aggregate into nuclear inclusions, disrupting global transcriptional regulation through a toxic gain-of-function together with impaired normal TBP activity. Widespread neuronal degeneration affects the cerebellum, cerebral cortex and striatum, explaining the overlap with Huntington disease. The mixed CAG/CAA repeat structure confers relative meiotic stability, so anticipation is modest.",
+  "additionalDifferentials": [
+   "Huntington disease and other Huntington disease-like syndromes",
+   "Dentatorubral-pallidoluysian atrophy",
+   "Other autosomal dominant spinocerebellar ataxias (SCA1, SCA2, SCA3)",
+   "Wilson disease and other treatable movement disorders with cognitive change",
+   "Frontotemporal dementia with movement features",
+   "Prion disease presenting with ataxia and dementia"
+  ],
+  "additionalInvestigations": [
+   "Targeted TBP CAG/CAA repeat-expansion analysis",
+   "Huntington disease (HTT) testing when the clinical picture is Huntington-like and TBP is negative",
+   "MRI brain assessing cerebellar, cortical and caudate atrophy",
+   "Neuropsychological assessment to characterise cognitive and behavioural decline",
+   "Copper studies and other screens to exclude treatable mimics such as Wilson disease",
+   "EEG when seizures are present"
+  ],
+  "redFlags": [
+   "Rapidly progressive dementia raising the possibility of prion disease",
+   "Severe psychiatric disturbance with risk to self or others requiring urgent care",
+   "Marked dysphagia and aspiration risk in advanced disease",
+   "An intermediate-range TBP result of uncertain significance that risks misclassification"
+  ],
+  "prognosis": "SCA17 is a progressive neurodegenerative disorder that typically advances over one to two decades, with combined motor, cognitive and psychiatric decline leading to substantial dependency; larger expansions tend to cause earlier onset and more severe disease.",
+  "pitfalls": [
+   "Testing only for Huntington disease and missing the phenotypically similar SCA17",
+   "Interpreting intermediate TBP alleles as definitively pathogenic given reduced penetrance",
+   "Overlooking treatable causes of ataxia with dementia such as Wilson disease before genetic testing",
+   "Focusing on ataxia while neglecting the often more disabling cognitive and psychiatric features"
+  ],
+  "references": [
+   "GeneReviews: Spinocerebellar Ataxia Type 17",
+   "Bradley and Daroff's Neurology in Clinical Practice"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Provide symptomatic and multidisciplinary care, as there is no disease-modifying therapy for the TBP repeat expansion",
+   "Treat the movement disorder symptomatically, using dopamine-depleting or antidopaminergic agents for chorea and managing dystonia, parkinsonism and spasticity as appropriate",
+   "Manage prominent psychiatric and behavioural disturbance with psychotropic medication and psychiatric support",
+   "Support progressive cognitive decline with neuropsychological input, cognitive and social care, and carer support",
+   "Control seizures with antiepileptic therapy where present, and manage swallowing safety with speech and language therapy and gastrostomy when aspiration risk is high",
+   "Monitor progression and provide anticipatory care planning for the substantial dependency that develops",
+   "Offer genetic counselling addressing autosomal dominant inheritance and reduced penetrance in the intermediate repeat range, with careful predictive-testing counselling"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "spinocerebellar_ataxia_type_17-pathway",
+   "title": "Spinocerebellar ataxia type 17 (TBP): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Autosomal dominant disorder combining cerebellar ataxia with prominent cognitive decline, psychiatric disturbance and movement disorders, so it is also termed Huntington disease-like 4",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapidly progressive dementia raising the possibility of prion disease",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Targeted TBP CAG/CAA repeat-expansion analysis, Huntington disease (HTT) testing when the clinical picture is Huntington-like and TBP is negative, MRI brain assessing cerebellar, cortical and caudate atrophy"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Provide symptomatic and multidisciplinary care, as there is no disease-modifying therapy for the TBP repeat expansion"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Testing only for Huntington disease and missing the phenotypically similar SCA17"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of spinocerebellar ataxia type 17 (tbp)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "spinocerebellar_ataxia_type_17-matrix",
+   "title": "Spinocerebellar ataxia type 17 (TBP): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Autosomal dominant disorder combining cerebellar ataxia with prominent cognitive decline, psychiatric disturbance and movement",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "SCA17 is caused by an expanded CAG/CAA repeat in TBP, which encodes the TATA-box-binding protein, a central component of the transcription initiation machinery used by all three RNA polymerases. The resulting elongated polyglutamine tract causes the protein to misfold and aggregate into nuclear inclusions, disrupting global transcriptional regulation through a toxic gain-of-function together with impaired normal TBP activity. Widespread neuronal degeneration affects the cerebellum, cerebral cortex and striatum, explaining the overlap with Huntington disease. The mixed CAG/CAA repeat structure confers relative meiotic stability, so anticipation is modest.",
-    "additionalDifferentials": [
-      "Huntington disease and other Huntington disease-like syndromes",
-      "Dentatorubral-pallidoluysian atrophy",
-      "Other autosomal dominant spinocerebellar ataxias (SCA1, SCA2, SCA3)",
-      "Wilson disease and other treatable movement disorders with cognitive change",
-      "Frontotemporal dementia with movement features",
-      "Prion disease presenting with ataxia and dementia"
+    [
+     "Key Investigations",
+     "Targeted TBP CAG/CAA repeat-expansion analysis, Huntington disease (HTT) testing when the clinical picture is Huntington-like and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Targeted TBP CAG/CAA repeat-expansion analysis",
-      "Huntington disease (HTT) testing when the clinical picture is Huntington-like and TBP is negative",
-      "MRI brain assessing cerebellar, cortical and caudate atrophy",
-      "Neuropsychological assessment to characterise cognitive and behavioural decline",
-      "Copper studies and other screens to exclude treatable mimics such as Wilson disease",
-      "EEG when seizures are present"
+    [
+     "Primary Differentials",
+     "Huntington disease and other Huntington disease-like syndromes, Dentatorubral-pallidoluysian atrophy, Other autosomal dominant",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapidly progressive dementia raising the possibility of prion disease",
-      "Severe psychiatric disturbance with risk to self or others requiring urgent care",
-      "Marked dysphagia and aspiration risk in advanced disease",
-      "An intermediate-range TBP result of uncertain significance that risks misclassification"
+    [
+     "Management Strategy",
+     "Provide symptomatic and multidisciplinary care, as there is no disease-modifying therapy for the TBP repeat expansion",
+     "Core treatment modality"
     ],
-    "prognosis": "SCA17 is a progressive neurodegenerative disorder that typically advances over one to two decades, with combined motor, cognitive and psychiatric decline leading to substantial dependency; larger expansions tend to cause earlier onset and more severe disease.",
-    "pitfalls": [
-      "Testing only for Huntington disease and missing the phenotypically similar SCA17",
-      "Interpreting intermediate TBP alleles as definitively pathogenic given reduced penetrance",
-      "Overlooking treatable causes of ataxia with dementia such as Wilson disease before genetic testing",
-      "Focusing on ataxia while neglecting the often more disabling cognitive and psychiatric features"
-    ],
-    "references": [
-      "GeneReviews: Spinocerebellar Ataxia Type 17",
-      "Bradley and Daroff's Neurology in Clinical Practice"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Provide symptomatic and multidisciplinary care, as there is no disease-modifying therapy for the TBP repeat expansion",
-      "Treat the movement disorder symptomatically, using dopamine-depleting or antidopaminergic agents for chorea and managing dystonia, parkinsonism and spasticity as appropriate",
-      "Manage prominent psychiatric and behavioural disturbance with psychotropic medication and psychiatric support",
-      "Support progressive cognitive decline with neuropsychological input, cognitive and social care, and carer support",
-      "Control seizures with antiepileptic therapy where present, and manage swallowing safety with speech and language therapy and gastrostomy when aspiration risk is high",
-      "Monitor progression and provide anticipatory care planning for the substantial dependency that develops",
-      "Offer genetic counselling addressing autosomal dominant inheritance and reduced penetrance in the intermediate repeat range, with careful predictive-testing counselling"
+    [
+     "Clinical Pitfall",
+     "Testing only for Huntington disease and missing the phenotypically similar SCA17",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for spinocerebellar ataxia type 17 (tbp)."
+  }
+ ]
 }

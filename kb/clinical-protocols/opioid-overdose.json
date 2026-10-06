@@ -5,7 +5,19 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Prehospital, emergency department, ward",
- "aliases": ["opioid toxicity", "opiate overdose", "heroin overdose", "fentanyl overdose", "tramadol overdose", "methadone overdose", "naloxone", "Narcan", "respiratory depression", "opioid reversal", "naloxone infusion"],
+ "aliases": [
+  "opioid toxicity",
+  "opiate overdose",
+  "heroin overdose",
+  "fentanyl overdose",
+  "tramadol overdose",
+  "methadone overdose",
+  "naloxone",
+  "Narcan",
+  "respiratory depression",
+  "opioid reversal",
+  "naloxone infusion"
+ ],
  "summary": "Support ventilation first, then give naloxone titrated to adequate breathing rather than full wakefulness (0.04 to 0.4 mg IV increments in hospital, or 0.4 to 2 mg IM, IV, SC or intranasal). Start an infusion at two-thirds of the effective reversal dose per hour if toxicity recurs, and observe until fully recovered.",
  "sections": [
   {
@@ -81,15 +93,121 @@
   }
  ],
  "drugs": [
-  { "name": "Naloxone (IV titration)", "dose": "0.04 to 0.4 mg IV every 2 to 3 minutes, doubling if no response", "notes": "Titrate to breathing; reassess the diagnosis after 10 mg cumulative." },
-  { "name": "Naloxone (IM or SC)", "dose": "0.4 to 2 mg, repeat every 2 to 3 minutes", "notes": "0.4 to 0.8 mg is usually effective (WHO)." },
-  { "name": "Naloxone (intranasal)", "dose": "1 mg in each nostril (1 mg/mL with atomiser) or 3 to 4 mg spray in one nostril; repeat every 2 to 3 minutes", "notes": "Community and prehospital use." },
-  { "name": "Naloxone (infusion)", "dose": "Two-thirds of the effective cumulative bolus dose per hour IV, titrated", "notes": "Recurrent toxicity, long-acting or extended-release opioids, buprenorphine." }
+  {
+   "name": "Naloxone (IV titration)",
+   "dose": "0.04 to 0.4 mg IV every 2 to 3 minutes, doubling if no response",
+   "notes": "Titrate to breathing; reassess the diagnosis after 10 mg cumulative."
+  },
+  {
+   "name": "Naloxone (IM or SC)",
+   "dose": "0.4 to 2 mg, repeat every 2 to 3 minutes",
+   "notes": "0.4 to 0.8 mg is usually effective (WHO)."
+  },
+  {
+   "name": "Naloxone (intranasal)",
+   "dose": "1 mg in each nostril (1 mg/mL with atomiser) or 3 to 4 mg spray in one nostril; repeat every 2 to 3 minutes",
+   "notes": "Community and prehospital use."
+  },
+  {
+   "name": "Naloxone (infusion)",
+   "dose": "Two-thirds of the effective cumulative bolus dose per hour IV, titrated",
+   "notes": "Recurrent toxicity, long-acting or extended-release opioids, buprenorphine."
+  }
  ],
  "sources": [
-  { "org": "WHO", "title": "Community management of opioid overdose", "year": 2014, "url": "https://www.who.int/publications/i/item/9789241548816" },
-  { "org": "Utah Poison Control Center", "title": "Naloxone Dosing Strategies", "year": 2026, "url": "https://poisoncontrol.utah.edu/news/2026/02/naloxone-dosing-strategies" },
-  { "org": "AHA", "title": "2023 American Heart Association Focused Update on the Management of Patients With Cardiac Arrest or Life-Threatening Toxicity Due to Poisoning", "year": 2023, "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001161" }
+  {
+   "org": "WHO",
+   "title": "Community management of opioid overdose",
+   "year": 2014,
+   "url": "https://www.who.int/publications/i/item/9789241548816"
+  },
+  {
+   "org": "Utah Poison Control Center",
+   "title": "Naloxone Dosing Strategies",
+   "year": 2026,
+   "url": "https://poisoncontrol.utah.edu/news/2026/02/naloxone-dosing-strategies"
+  },
+  {
+   "org": "AHA",
+   "title": "2023 American Heart Association Focused Update on the Management of Patients With Cardiac Arrest or Life-Threatening Toxicity Due to Poisoning",
+   "year": 2023,
+   "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001161"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "opioid-overdose-pathway",
+   "title": "Opioid overdose (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Reduced consciousness, slow shallow breathing or apnoea with hypoxia, and pinpoint pupils.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Stimulate, open the airway, clear vomit (recovery position if breathing), and give bag-valve-mask ventilation with oxygen if breathing is inadequate; then give naloxone.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Mixed overdoses (benzodiazepines, alcohol, gabapentinoids, sedating drugs) deepen respiratory depression and may respond only partly to naloxone."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Goal: adequate spontaneous breathing and airway protection, not full arousal. Large doses in opioid-dependent patients cause abrupt withdrawal, vomiting and agitation."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Naloxone acts for about 90 to 180 minutes (half-life 30 to 45 minutes), shorter than many opioids, so re-sedation is common."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for opioid overdose (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "opioid-overdose-summary-matrix",
+   "title": "Opioid overdose (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Reduced consciousness, slow shallow breathing or apnoea with hypoxia, and pinpoint pupils.",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Stimulate, open the airway, clear vomit (recovery position if breathing), and give bag-valve-mask ventilation with oxygen if breathing is",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Naloxone (IV titration): 0.04 to 0.4 mg IV every 2 to 3 minutes, doubling if no response",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Giving naloxone before ventilating a hypoxic apnoeic patient.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for opioid overdose (adult)."
+  }
+ ]
 }

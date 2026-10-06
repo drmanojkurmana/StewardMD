@@ -1,75 +1,147 @@
 {
-  "id": "keratoconus",
-  "name": "Keratoconus",
-  "aliases": [
-    "conical cornea",
-    "KC"
+ "id": "keratoconus",
+ "name": "Keratoconus",
+ "aliases": [
+  "conical cornea",
+  "KC"
+ ],
+ "class": "non_infective",
+ "system": "Eye / Ophthalmology",
+ "specialty": "Ophthalmology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Typically presents in adolescence or early adulthood with progressive blurring and distortion of vision from irregular astigmatism",
+   "Frequent changes of spectacle prescription that fail to give satisfactory vision should raise suspicion of a developing ectasia",
+   "Often bilateral but asymmetric, and associated with eye rubbing, atopy, and connective tissue disorders such as Down syndrome",
+   "Clinical signs include a cone-shaped protrusion of the cornea, thinning at the apex, Vogt striae, Fleischer ring, and a scissoring reflex on retinoscopy",
+   "Munson sign is an angular bulging of the lower lid margin seen on downgaze in advanced disease",
+   "Corneal topography and tomography are key to early diagnosis and to monitoring progression",
+   "Management is staged: spectacles or soft lenses early, rigid gas-permeable or specialty contact lenses for irregular astigmatism, corneal collagen cross-linking to arrest progression, and keratoplasty for advanced scarring or intolerance to lenses",
+   "Acute corneal hydrops causes sudden pain, redness, and reduced vision from a break in Descemet membrane allowing aqueous into the stroma"
   ],
-  "class": "non_infective",
-  "system": "Eye / Ophthalmology",
-  "specialty": "Ophthalmology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Typically presents in adolescence or early adulthood with progressive blurring and distortion of vision from irregular astigmatism",
-      "Frequent changes of spectacle prescription that fail to give satisfactory vision should raise suspicion of a developing ectasia",
-      "Often bilateral but asymmetric, and associated with eye rubbing, atopy, and connective tissue disorders such as Down syndrome",
-      "Clinical signs include a cone-shaped protrusion of the cornea, thinning at the apex, Vogt striae, Fleischer ring, and a scissoring reflex on retinoscopy",
-      "Munson sign is an angular bulging of the lower lid margin seen on downgaze in advanced disease",
-      "Corneal topography and tomography are key to early diagnosis and to monitoring progression",
-      "Management is staged: spectacles or soft lenses early, rigid gas-permeable or specialty contact lenses for irregular astigmatism, corneal collagen cross-linking to arrest progression, and keratoplasty for advanced scarring or intolerance to lenses",
-      "Acute corneal hydrops causes sudden pain, redness, and reduced vision from a break in Descemet membrane allowing aqueous into the stroma"
+  "pathophysiology": "Keratoconus is a progressive, non-inflammatory ectasia in which the cornea thins and steepens into a conical shape, producing irregular astigmatism and myopia. The stromal thinning reflects disorganisation of collagen lamellae and altered enzyme activity with increased degradation of the corneal matrix. Mechanical stress from chronic eye rubbing and an association with atopy and certain systemic syndromes are recognised contributors. As the cone advances, the apex scars and Descemet membrane may rupture, precipitating acute hydrops with corneal oedema.",
+  "additionalDifferentials": [
+   "Pellucid marginal degeneration",
+   "Keratoglobus",
+   "Post-refractive surgery ectasia",
+   "Irregular astigmatism from corneal scarring",
+   "Contact lens-induced corneal warpage"
+  ],
+  "additionalInvestigations": [
+   "Corneal topography and tomography to map curvature and detect early ectasia",
+   "Pachymetry to quantify corneal thinning",
+   "Retinoscopy to detect the scissoring reflex",
+   "Serial imaging to assess progression and guide cross-linking decisions",
+   "Assessment for associated atopy or connective tissue disorders when indicated"
+  ],
+  "redFlags": [
+   "Sudden pain, marked visual loss, and corneal oedema suggesting acute hydrops",
+   "Rapidly progressive steepening in young patients requiring urgent cross-linking assessment",
+   "Corneal scarring or lens intolerance indicating need for keratoplasty referral"
+  ],
+  "prognosis": "Progression is most rapid in younger patients and often stabilises with age; timely cross-linking can halt deterioration, and most patients achieve good functional vision with lenses, though a minority need corneal transplantation.",
+  "pitfalls": [
+   "Repeatedly changing spectacle prescriptions instead of recognising an underlying ectasia",
+   "Overlooking eye rubbing as a modifiable driver of progression",
+   "Delaying cross-linking in demonstrable progression, allowing avoidable visual loss",
+   "Mistaking acute hydrops for infective keratitis"
+  ],
+  "references": [
+   "Parsons' Diseases of the Eye",
+   "Kanski's Clinical Ophthalmology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Corneal collagen cross-linking to halt progression in documented or early progressive ectasia",
+   "Rigid gas-permeable or scleral contact lenses, with spectacles in mild cases, to correct irregular astigmatism and optimise vision",
+   "Counselling to stop eye rubbing and treatment of associated atopy and ocular allergy to slow progression",
+   "Intrastromal corneal ring segments to flatten the cone and improve lens tolerance in selected eyes",
+   "Management of acute hydrops with topical hypertonic agents and supportive measures while the corneal oedema resolves",
+   "Corneal transplantation by deep anterior lamellar or penetrating keratoplasty for advanced scarring or contact-lens intolerance",
+   "Serial corneal topography and tomography to monitor progression and guide the timing of cross-linking"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "keratoconus-pathway",
+   "title": "Keratoconus: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Typically presents in adolescence or early adulthood with progressive blurring and distortion of vision from irregular astigmatism",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Sudden pain, marked visual loss, and corneal oedema suggesting acute hydrops",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Corneal topography and tomography to map curvature and detect early ectasia, Pachymetry to quantify corneal thinning, Retinoscopy to detect the scissoring reflex"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Corneal collagen cross-linking to halt progression in documented or early progressive ectasia"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Repeatedly changing spectacle prescriptions instead of recognising an underlying ectasia"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of keratoconus."
+  }
+ ],
+ "tables": [
+  {
+   "id": "keratoconus-matrix",
+   "title": "Keratoconus: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Typically presents in adolescence or early adulthood with progressive blurring and distortion of vision from irregular astigmatism",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Keratoconus is a progressive, non-inflammatory ectasia in which the cornea thins and steepens into a conical shape, producing irregular astigmatism and myopia. The stromal thinning reflects disorganisation of collagen lamellae and altered enzyme activity with increased degradation of the corneal matrix. Mechanical stress from chronic eye rubbing and an association with atopy and certain systemic syndromes are recognised contributors. As the cone advances, the apex scars and Descemet membrane may rupture, precipitating acute hydrops with corneal oedema.",
-    "additionalDifferentials": [
-      "Pellucid marginal degeneration",
-      "Keratoglobus",
-      "Post-refractive surgery ectasia",
-      "Irregular astigmatism from corneal scarring",
-      "Contact lens-induced corneal warpage"
+    [
+     "Key Investigations",
+     "Corneal topography and tomography to map curvature and detect early ectasia, Pachymetry to quantify corneal thinning, Retinoscopy",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Corneal topography and tomography to map curvature and detect early ectasia",
-      "Pachymetry to quantify corneal thinning",
-      "Retinoscopy to detect the scissoring reflex",
-      "Serial imaging to assess progression and guide cross-linking decisions",
-      "Assessment for associated atopy or connective tissue disorders when indicated"
+    [
+     "Primary Differentials",
+     "Pellucid marginal degeneration, Keratoglobus, Post-refractive surgery ectasia",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Sudden pain, marked visual loss, and corneal oedema suggesting acute hydrops",
-      "Rapidly progressive steepening in young patients requiring urgent cross-linking assessment",
-      "Corneal scarring or lens intolerance indicating need for keratoplasty referral"
+    [
+     "Management Strategy",
+     "Corneal collagen cross-linking to halt progression in documented or early progressive ectasia",
+     "Core treatment modality"
     ],
-    "prognosis": "Progression is most rapid in younger patients and often stabilises with age; timely cross-linking can halt deterioration, and most patients achieve good functional vision with lenses, though a minority need corneal transplantation.",
-    "pitfalls": [
-      "Repeatedly changing spectacle prescriptions instead of recognising an underlying ectasia",
-      "Overlooking eye rubbing as a modifiable driver of progression",
-      "Delaying cross-linking in demonstrable progression, allowing avoidable visual loss",
-      "Mistaking acute hydrops for infective keratitis"
-    ],
-    "references": [
-      "Parsons' Diseases of the Eye",
-      "Kanski's Clinical Ophthalmology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Corneal collagen cross-linking to halt progression in documented or early progressive ectasia",
-      "Rigid gas-permeable or scleral contact lenses, with spectacles in mild cases, to correct irregular astigmatism and optimise vision",
-      "Counselling to stop eye rubbing and treatment of associated atopy and ocular allergy to slow progression",
-      "Intrastromal corneal ring segments to flatten the cone and improve lens tolerance in selected eyes",
-      "Management of acute hydrops with topical hypertonic agents and supportive measures while the corneal oedema resolves",
-      "Corneal transplantation by deep anterior lamellar or penetrating keratoplasty for advanced scarring or contact-lens intolerance",
-      "Serial corneal topography and tomography to monitor progression and guide the timing of cross-linking"
+    [
+     "Clinical Pitfall",
+     "Repeatedly changing spectacle prescriptions instead of recognising an underlying ectasia",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for keratoconus."
+  }
+ ]
 }

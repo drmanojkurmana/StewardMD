@@ -188,5 +188,77 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "had05ae4f"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "ca_uti-dx-algo",
+      "title": "Catheter-Associated Urinary Tract Infection: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "CAUTI is diagnosed only when localizing urinary and/or systemic symptoms (e.g., fever) are present together with pyuria and bacteriuria; bacteriuria and pyuria alone do not establish the diagnosis (Harrison 22e p.1090).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Fever, rigors, nausea/vomiting, or flank/costovertebral angle pain suggesting infection has extended beyond the bladder (pyelonephritis or bloodstream)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Urine culture collected from a freshly placed catheter (after exchanging/removing the indwelling catheter) to reflect bladder rather than biofilm microbiology, with susceptibilities to guide therapy, Urine dipstick"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: CAUTI falls within the complicated UTI category, defined by infection in the setting of intermittent or indwelling urinary catheterization. Severity ranges from localized symptomatic infection to infection extending"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Treating catheter-associated asymptomatic bacteriuria: apart from pregnancy (and pre-urologic-procedure screening), urine culture and treatment are not indicated for asymptomatic catheterized patients, and treating it"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for catheter-associated urinary tract infection."
+    }
+  ],
+  "tables": [
+    {
+      "id": "ca_uti-matrix",
+      "title": "Catheter-Associated Urinary Tract Infection: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "CAUTI is diagnosed only when localizing urinary and/or systemic symptoms (e.g., fever) are present together with pyuria and",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Urine culture collected from a freshly placed catheter (after exchanging/removing the indwelling catheter) to reflect bladder",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Asymptomatic bacteriuria / catheter-associated asymptomatic bacteriuria (positive culture without localizing or systemic symptoms",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Fever, rigors, nausea/vomiting, or flank/costovertebral angle pain suggesting infection has extended beyond the bladder",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating catheter-associated asymptomatic bacteriuria: apart from pregnancy (and pre-urologic-procedure screening), urine culture",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for catheter-associated urinary tract infection."
+    }
+  ]
 }

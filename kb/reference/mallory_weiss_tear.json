@@ -1,77 +1,149 @@
 {
-  "id": "mallory_weiss_tear",
-  "name": "Mallory-Weiss tear",
-  "aliases": [
-    "Mallory-Weiss syndrome",
-    "gastro-oesophageal mucosal tear",
-    "Mallory-Weiss laceration"
+ "id": "mallory_weiss_tear",
+ "name": "Mallory-Weiss tear",
+ "aliases": [
+  "Mallory-Weiss syndrome",
+  "gastro-oesophageal mucosal tear",
+  "Mallory-Weiss laceration"
+ ],
+ "class": "non_infective",
+ "system": "Gastroenterology",
+ "specialty": "Gastroenterology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A longitudinal mucosal tear near the gastro-oesophageal junction, classically provoked by forceful retching or vomiting",
+   "Typically presents as haematemesis following an episode of non-bloody vomiting, retching, coughing, or straining",
+   "Alcohol excess, hiatus hernia, and any cause of repeated vomiting (including pregnancy and bulimia) are common predisposing factors",
+   "Most tears are single and lie on the gastric side of the junction along the lesser curve",
+   "Bleeding stops spontaneously in the majority of patients and the tear heals within days",
+   "Endoscopy is diagnostic and allows haemostasis (injection, thermal therapy, clips, or band ligation) when active or high-risk bleeding is present",
+   "Must be distinguished from a full-thickness Boerhaave perforation, which is a surgical emergency"
   ],
-  "class": "non_infective",
-  "system": "Gastroenterology",
-  "specialty": "Gastroenterology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A longitudinal mucosal tear near the gastro-oesophageal junction, classically provoked by forceful retching or vomiting",
-      "Typically presents as haematemesis following an episode of non-bloody vomiting, retching, coughing, or straining",
-      "Alcohol excess, hiatus hernia, and any cause of repeated vomiting (including pregnancy and bulimia) are common predisposing factors",
-      "Most tears are single and lie on the gastric side of the junction along the lesser curve",
-      "Bleeding stops spontaneously in the majority of patients and the tear heals within days",
-      "Endoscopy is diagnostic and allows haemostasis (injection, thermal therapy, clips, or band ligation) when active or high-risk bleeding is present",
-      "Must be distinguished from a full-thickness Boerhaave perforation, which is a surgical emergency"
+  "pathophysiology": "A Mallory-Weiss tear is a mucosal and submucosal laceration at or just below the gastro-oesophageal junction produced by a sudden rise in intra-abdominal and intragastric pressure, most often during forceful retching or vomiting. The abrupt pressure gradient across the junction stretches and splits the mucosa longitudinally, disrupting submucosal vessels and causing bleeding. A hiatus hernia is thought to predispose by accentuating the pressure differential across the herniated segment, and the tear characteristically remains confined to the mucosa, distinguishing it from the transmural rupture of Boerhaave syndrome.",
+  "additionalDifferentials": [
+   "Bleeding peptic ulcer",
+   "Oesophageal or gastric varices",
+   "Erosive oesophagitis or gastritis",
+   "Boerhaave syndrome (transmural oesophageal rupture)",
+   "Dieulafoy lesion",
+   "Upper gastrointestinal malignancy"
+  ],
+  "additionalInvestigations": [
+   "Upper gastrointestinal endoscopy to visualise the linear tear and assess for active or recent bleeding",
+   "Full blood count to gauge blood loss, with coagulation studies and group-and-save or crossmatch",
+   "Assessment for underlying causes such as alcohol use, hiatus hernia, or an eating disorder",
+   "Erect chest and abdominal imaging if perforation is suspected clinically",
+   "Risk stratification using an accepted upper gastrointestinal bleeding score",
+   "Repeat endoscopy if rebleeding occurs"
+  ],
+  "redFlags": [
+   "Severe or ongoing haematemesis with haemodynamic instability",
+   "Features suggesting Boerhaave perforation such as severe chest pain, subcutaneous emphysema, or sepsis",
+   "Rebleeding after initial haemostasis",
+   "Bleeding in a patient with coagulopathy or portal hypertension"
+  ],
+  "prognosis": "The outlook is excellent for most patients, as bleeding is self-limiting and the mucosal tear heals rapidly; rebleeding is uncommon and is more likely with coagulopathy or portal hypertension, where the prognosis is correspondingly poorer.",
+  "pitfalls": [
+   "Confusing a Mallory-Weiss tear with the far more dangerous Boerhaave perforation",
+   "Failing to identify and address an underlying cause of recurrent vomiting",
+   "Overlooking coexisting varices or portal hypertension that raise the bleeding risk",
+   "Assuming all tears are benign and not applying endoscopic haemostasis to actively bleeding lesions"
+  ],
+  "references": [
+   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+   "Yamada's Textbook of Gastroenterology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Resuscitate with intravenous access and fluids, transfuse as required and correct any coagulopathy",
+   "Manage conservatively in most patients with antiemetics and acid suppression using a proton pump inhibitor, since bleeding usually stops spontaneously",
+   "Upper gastrointestinal endoscopy to confirm the tear and achieve haemostasis by adrenaline injection, thermal therapy, clips or band ligation when bleeding is active or high-risk",
+   "Risk-stratify with a validated upper gastrointestinal bleeding score to guide admission and timing of endoscopy",
+   "Treat the underlying precipitant, addressing alcohol excess, an eating disorder or persistent vomiting",
+   "For refractory or recurrent bleeding, repeat endoscopic therapy and escalate to angiographic embolisation or, rarely, surgery"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "mallory_weiss_tear-pathway",
+   "title": "Mallory-Weiss tear: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A longitudinal mucosal tear near the gastro-oesophageal junction, classically provoked by forceful retching or vomiting",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe or ongoing haematemesis with haemodynamic instability",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Upper gastrointestinal endoscopy to visualise the linear tear and assess for active or recent bleeding, Full blood count to gauge blood loss, with coagulation studies and group-and-save or crossmatch, Assessment for"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Resuscitate with intravenous access and fluids, transfuse as required and correct any coagulopathy"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing a Mallory-Weiss tear with the far more dangerous Boerhaave perforation"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of mallory-weiss tear."
+  }
+ ],
+ "tables": [
+  {
+   "id": "mallory_weiss_tear-matrix",
+   "title": "Mallory-Weiss tear: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A longitudinal mucosal tear near the gastro-oesophageal junction, classically provoked by forceful retching or vomiting",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "A Mallory-Weiss tear is a mucosal and submucosal laceration at or just below the gastro-oesophageal junction produced by a sudden rise in intra-abdominal and intragastric pressure, most often during forceful retching or vomiting. The abrupt pressure gradient across the junction stretches and splits the mucosa longitudinally, disrupting submucosal vessels and causing bleeding. A hiatus hernia is thought to predispose by accentuating the pressure differential across the herniated segment, and the tear characteristically remains confined to the mucosa, distinguishing it from the transmural rupture of Boerhaave syndrome.",
-    "additionalDifferentials": [
-      "Bleeding peptic ulcer",
-      "Oesophageal or gastric varices",
-      "Erosive oesophagitis or gastritis",
-      "Boerhaave syndrome (transmural oesophageal rupture)",
-      "Dieulafoy lesion",
-      "Upper gastrointestinal malignancy"
+    [
+     "Key Investigations",
+     "Upper gastrointestinal endoscopy to visualise the linear tear and assess for active or recent bleeding, Full blood count to gauge",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Upper gastrointestinal endoscopy to visualise the linear tear and assess for active or recent bleeding",
-      "Full blood count to gauge blood loss, with coagulation studies and group-and-save or crossmatch",
-      "Assessment for underlying causes such as alcohol use, hiatus hernia, or an eating disorder",
-      "Erect chest and abdominal imaging if perforation is suspected clinically",
-      "Risk stratification using an accepted upper gastrointestinal bleeding score",
-      "Repeat endoscopy if rebleeding occurs"
+    [
+     "Primary Differentials",
+     "Bleeding peptic ulcer, Oesophageal or gastric varices, Erosive oesophagitis or gastritis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe or ongoing haematemesis with haemodynamic instability",
-      "Features suggesting Boerhaave perforation such as severe chest pain, subcutaneous emphysema, or sepsis",
-      "Rebleeding after initial haemostasis",
-      "Bleeding in a patient with coagulopathy or portal hypertension"
+    [
+     "Management Strategy",
+     "Resuscitate with intravenous access and fluids, transfuse as required and correct any coagulopathy",
+     "Core treatment modality"
     ],
-    "prognosis": "The outlook is excellent for most patients, as bleeding is self-limiting and the mucosal tear heals rapidly; rebleeding is uncommon and is more likely with coagulopathy or portal hypertension, where the prognosis is correspondingly poorer.",
-    "pitfalls": [
-      "Confusing a Mallory-Weiss tear with the far more dangerous Boerhaave perforation",
-      "Failing to identify and address an underlying cause of recurrent vomiting",
-      "Overlooking coexisting varices or portal hypertension that raise the bleeding risk",
-      "Assuming all tears are benign and not applying endoscopic haemostasis to actively bleeding lesions"
-    ],
-    "references": [
-      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-      "Yamada's Textbook of Gastroenterology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Resuscitate with intravenous access and fluids, transfuse as required and correct any coagulopathy",
-      "Manage conservatively in most patients with antiemetics and acid suppression using a proton pump inhibitor, since bleeding usually stops spontaneously",
-      "Upper gastrointestinal endoscopy to confirm the tear and achieve haemostasis by adrenaline injection, thermal therapy, clips or band ligation when bleeding is active or high-risk",
-      "Risk-stratify with a validated upper gastrointestinal bleeding score to guide admission and timing of endoscopy",
-      "Treat the underlying precipitant, addressing alcohol excess, an eating disorder or persistent vomiting",
-      "For refractory or recurrent bleeding, repeat endoscopic therapy and escalate to angiographic embolisation or, rarely, surgery"
+    [
+     "Clinical Pitfall",
+     "Confusing a Mallory-Weiss tear with the far more dangerous Boerhaave perforation",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for mallory-weiss tear."
+  }
+ ]
 }

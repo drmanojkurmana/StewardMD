@@ -1,74 +1,146 @@
 {
-  "id": "beta_blocker_overdose",
-  "name": "Beta-blocker overdose",
-  "aliases": [
-    "beta-adrenergic antagonist poisoning",
-    "beta blocker toxicity"
+ "id": "beta_blocker_overdose",
+ "name": "Beta-blocker overdose",
+ "aliases": [
+  "beta-adrenergic antagonist poisoning",
+  "beta blocker toxicity"
+ ],
+ "class": "non_infective",
+ "system": "Cardiovascular / Toxicology",
+ "specialty": "Emergency medicine / Toxicology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Standard toxicology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The core features are bradycardia and hypotension from reduced cardiac chronotropy and inotropy",
+   "Hypoglycaemia can occur, especially in children, in contrast to the hyperglycaemia typical of calcium-channel-blocker poisoning",
+   "Lipophilic agents such as propranolol can cause seizures, coma and sodium-channel blockade with QRS widening",
+   "Agents with membrane-stabilising activity or mixed effects produce more severe cardiotoxicity",
+   "Treatment escalates from fluids and atropine to glucagon, high-dose insulin euglycaemic therapy and vasopressors",
+   "Refractory shock may prompt consideration of lipid emulsion or mechanical circulatory support"
   ],
-  "class": "non_infective",
-  "system": "Cardiovascular / Toxicology",
-  "specialty": "Emergency medicine / Toxicology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Standard toxicology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The core features are bradycardia and hypotension from reduced cardiac chronotropy and inotropy",
-      "Hypoglycaemia can occur, especially in children, in contrast to the hyperglycaemia typical of calcium-channel-blocker poisoning",
-      "Lipophilic agents such as propranolol can cause seizures, coma and sodium-channel blockade with QRS widening",
-      "Agents with membrane-stabilising activity or mixed effects produce more severe cardiotoxicity",
-      "Treatment escalates from fluids and atropine to glucagon, high-dose insulin euglycaemic therapy and vasopressors",
-      "Refractory shock may prompt consideration of lipid emulsion or mechanical circulatory support"
+  "pathophysiology": "Beta-blocker overdose produces excessive antagonism of beta-adrenergic receptors, reducing heart rate and myocardial contractility and blunting the compensatory sympathetic response to hypotension. Impaired cyclic AMP generation reduces intracellular calcium available for contraction. Lipophilic and membrane-stabilising agents add central nervous system toxicity and sodium-channel blockade, worsening conduction and precipitating seizures. The net effect is cardiogenic shock with, in some cases, metabolic and neurological complications.",
+  "additionalDifferentials": [
+   "Calcium-channel-blocker poisoning",
+   "Digoxin toxicity",
+   "Clonidine or other central sympatholytic overdose",
+   "Cholinergic (organophosphate) poisoning",
+   "Primary cardiac conduction disease or myocardial infarction"
+  ],
+  "additionalInvestigations": [
+   "Continuous cardiac monitoring and serial electrocardiograms",
+   "Blood glucose (may be low) and electrolytes",
+   "Assessment of the specific agent, formulation and co-ingestants",
+   "Blood gas and lactate to gauge perfusion",
+   "Echocardiography in refractory shock to guide support"
+  ],
+  "redFlags": [
+   "Profound bradycardia or high-grade heart block",
+   "Hypotension refractory to initial measures",
+   "Wide QRS or seizures suggesting membrane-stabilising toxicity",
+   "Ingestion of a modified-release preparation with delayed deterioration"
+  ],
+  "prognosis": "Many patients recover with aggressive supportive care, but massive ingestions, membrane-stabilising agents and delayed presentation can cause fatal refractory shock.",
+  "pitfalls": [
+   "Confusing it with calcium-channel-blocker poisoning (glucose typically low versus high)",
+   "Underdosing high-dose insulin euglycaemic therapy in refractory shock",
+   "Missing delayed toxicity from modified-release formulations",
+   "Overlooking co-ingestants that compound cardiotoxicity"
+  ],
+  "references": [
+   "Goldfrank's Toxicologic Emergencies",
+   "Tintinalli's Emergency Medicine"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Begin with intravenous fluids and atropine for symptomatic bradycardia and hypotension",
+   "Give glucagon to bypass beta-receptor blockade and improve chronotropy and inotropy",
+   "Escalate to high-dose insulin euglycaemic therapy with glucose, adding vasopressors for refractory cardiogenic shock",
+   "Treat sodium-channel blockade and QRS widening from lipophilic agents such as propranolol with sodium bicarbonate, and manage seizures",
+   "Correct hypoglycaemia, particularly in children, with continuous cardiac monitoring and serial ECGs",
+   "Consider intravenous lipid emulsion and mechanical circulatory support for shock unresponsive to pharmacological measures",
+   "Consider activated charcoal for recent ingestion and whole-bowel irrigation for modified-release preparations, with psychiatric follow-up after intentional overdose"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "beta_blocker_overdose-pathway",
+   "title": "Beta-blocker overdose: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The core features are bradycardia and hypotension from reduced cardiac chronotropy and inotropy",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Profound bradycardia or high-grade heart block",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Continuous cardiac monitoring and serial electrocardiograms, Blood glucose (may be low) and electrolytes, Assessment of the specific agent, formulation and co-ingestants"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Begin with intravenous fluids and atropine for symptomatic bradycardia and hypotension"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing it with calcium-channel-blocker poisoning (glucose typically low versus high)"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of beta-blocker overdose."
+  }
+ ],
+ "tables": [
+  {
+   "id": "beta_blocker_overdose-matrix",
+   "title": "Beta-blocker overdose: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The core features are bradycardia and hypotension from reduced cardiac chronotropy and inotropy",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Beta-blocker overdose produces excessive antagonism of beta-adrenergic receptors, reducing heart rate and myocardial contractility and blunting the compensatory sympathetic response to hypotension. Impaired cyclic AMP generation reduces intracellular calcium available for contraction. Lipophilic and membrane-stabilising agents add central nervous system toxicity and sodium-channel blockade, worsening conduction and precipitating seizures. The net effect is cardiogenic shock with, in some cases, metabolic and neurological complications.",
-    "additionalDifferentials": [
-      "Calcium-channel-blocker poisoning",
-      "Digoxin toxicity",
-      "Clonidine or other central sympatholytic overdose",
-      "Cholinergic (organophosphate) poisoning",
-      "Primary cardiac conduction disease or myocardial infarction"
+    [
+     "Key Investigations",
+     "Continuous cardiac monitoring and serial electrocardiograms, Blood glucose (may be low) and electrolytes, Assessment of the",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Continuous cardiac monitoring and serial electrocardiograms",
-      "Blood glucose (may be low) and electrolytes",
-      "Assessment of the specific agent, formulation and co-ingestants",
-      "Blood gas and lactate to gauge perfusion",
-      "Echocardiography in refractory shock to guide support"
+    [
+     "Primary Differentials",
+     "Calcium-channel-blocker poisoning, Digoxin toxicity, Clonidine or other central sympatholytic overdose",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Profound bradycardia or high-grade heart block",
-      "Hypotension refractory to initial measures",
-      "Wide QRS or seizures suggesting membrane-stabilising toxicity",
-      "Ingestion of a modified-release preparation with delayed deterioration"
+    [
+     "Management Strategy",
+     "Begin with intravenous fluids and atropine for symptomatic bradycardia and hypotension",
+     "Core treatment modality"
     ],
-    "prognosis": "Many patients recover with aggressive supportive care, but massive ingestions, membrane-stabilising agents and delayed presentation can cause fatal refractory shock.",
-    "pitfalls": [
-      "Confusing it with calcium-channel-blocker poisoning (glucose typically low versus high)",
-      "Underdosing high-dose insulin euglycaemic therapy in refractory shock",
-      "Missing delayed toxicity from modified-release formulations",
-      "Overlooking co-ingestants that compound cardiotoxicity"
-    ],
-    "references": [
-      "Goldfrank's Toxicologic Emergencies",
-      "Tintinalli's Emergency Medicine"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Begin with intravenous fluids and atropine for symptomatic bradycardia and hypotension",
-      "Give glucagon to bypass beta-receptor blockade and improve chronotropy and inotropy",
-      "Escalate to high-dose insulin euglycaemic therapy with glucose, adding vasopressors for refractory cardiogenic shock",
-      "Treat sodium-channel blockade and QRS widening from lipophilic agents such as propranolol with sodium bicarbonate, and manage seizures",
-      "Correct hypoglycaemia, particularly in children, with continuous cardiac monitoring and serial ECGs",
-      "Consider intravenous lipid emulsion and mechanical circulatory support for shock unresponsive to pharmacological measures",
-      "Consider activated charcoal for recent ingestion and whole-bowel irrigation for modified-release preparations, with psychiatric follow-up after intentional overdose"
+    [
+     "Clinical Pitfall",
+     "Confusing it with calcium-channel-blocker poisoning (glucose typically low versus high)",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for beta-blocker overdose."
+  }
+ ]
 }

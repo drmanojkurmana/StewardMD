@@ -145,5 +145,77 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-25"
- }
+ },
+ "algorithms": [
+  {
+   "id": "upper-gi-bleeding-nonvariceal-pathway",
+   "title": "Acute upper GI bleeding (non-variceal) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Haematemesis, coffee-ground vomitus or melaena. Brisk haematochezia with shock may also come from an upper GI source.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Assess airway, breathing and circulation; two large-bore IV cannulae; group and crossmatch; give IV crystalloid promptly if haemodynamically unstable.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "GBS 0 to 1: very low risk of intervention or death. Discharge with early outpatient endoscopy if there is no other reason to admit (ACG 2021, ESGE 2021)."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Treat active spurting or oozing (Forrest Ia, Ib) and non-bleeding visible vessel (IIa) endoscopically. Adrenaline injection must be combined with a second modality (thermal contact, clips); consider clot removal for adherent clot (IIb)."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Close monitoring of pulse, BP, urine output and mental state in a monitored bed for high-risk patients; repeat Hb after resuscitation and whenever rebleeding is suspected."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for acute upper gi bleeding (non-variceal)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "upper-gi-bleeding-nonvariceal-summary-matrix",
+   "title": "Acute upper GI bleeding (non-variceal) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Haematemesis, coffee-ground vomitus or melaena. Brisk haematochezia with shock may also come from an upper GI source.",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Assess airway, breathing and circulation; two large-bore IV cannulae; group and crossmatch; give IV crystalloid promptly if",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Pantoprazole or esomeprazole (IV): 80 mg IV bolus, then 8 mg/h continuous infusion for 72 hours after endoscopic haemostasis",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Missing variceal bleeding in undiagnosed cirrhosis: give vasoactive drug and antibiotics empirically when portal hypertension is suspected.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for acute upper gi bleeding (non-variceal)."
+  }
+ ]
 }

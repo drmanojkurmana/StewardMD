@@ -5,7 +5,18 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, ward, day-care unit",
- "aliases": ["VOC", "sickle cell crisis", "painful crisis", "SCD pain", "sickle cell anaemia", "HbSS", "acute chest syndrome", "ACS sickle", "hydroxyurea", "NSCAEM"],
+ "aliases": [
+  "VOC",
+  "sickle cell crisis",
+  "painful crisis",
+  "SCD pain",
+  "sickle cell anaemia",
+  "HbSS",
+  "acute chest syndrome",
+  "ACS sickle",
+  "hydroxyurea",
+  "NSCAEM"
+ ],
  "summary": "Assess and give analgesia within 60 minutes of arrival, tailor opioids to the patient's previous needs and reassess every 30 to 60 minutes, give oxygen only if hypoxic, avoid overhydration, watch closely for acute chest syndrome, and start or optimise hydroxyurea.",
  "sections": [
   {
@@ -94,18 +105,136 @@
   }
  ],
  "drugs": [
-  { "name": "Morphine", "dose": "0.1 mg/kg IV or SC, repeat every 30 to 60 minutes titrated to pain and sedation", "notes": "Use the individual care plan dose if available. Reduce in elderly and renal impairment. Monitor sedation and respiratory rate." },
-  { "name": "Paracetamol", "dose": "1 g orally or IV every 6 hours, maximum 4 g/day", "notes": "Regular, with opioids." },
-  { "name": "Ibuprofen", "dose": "400 mg orally three times daily for 5 to 7 days", "notes": "Avoid in renal impairment, peptic ulcer, anticoagulation or pregnancy." },
-  { "name": "Ketamine (subanaesthetic)", "dose": "0.1 to 0.3 mg/kg/hour IV infusion, maximum 1 mg/kg/hour", "notes": "Refractory pain in hospitalised patients, monitored setting." },
-  { "name": "Ceftriaxone plus azithromycin", "dose": "Ceftriaxone 1 to 2 g IV once daily plus azithromycin 500 mg orally once daily", "notes": "Acute chest syndrome." },
-  { "name": "Hydroxyurea", "dose": "Start 10 to 15 mg/kg/day orally once daily, increase every 6 to 8 weeks to a maximum of 35 mg/kg/day", "notes": "Monitor CBC; lower dose in CKD; stop 3 months before conception." },
-  { "name": "Folic acid", "dose": "5 mg orally once daily", "notes": "All patients with SCD." }
+  {
+   "name": "Morphine",
+   "dose": "0.1 mg/kg IV or SC, repeat every 30 to 60 minutes titrated to pain and sedation",
+   "notes": "Use the individual care plan dose if available. Reduce in elderly and renal impairment. Monitor sedation and respiratory rate."
+  },
+  {
+   "name": "Paracetamol",
+   "dose": "1 g orally or IV every 6 hours, maximum 4 g/day",
+   "notes": "Regular, with opioids."
+  },
+  {
+   "name": "Ibuprofen",
+   "dose": "400 mg orally three times daily for 5 to 7 days",
+   "notes": "Avoid in renal impairment, peptic ulcer, anticoagulation or pregnancy."
+  },
+  {
+   "name": "Ketamine (subanaesthetic)",
+   "dose": "0.1 to 0.3 mg/kg/hour IV infusion, maximum 1 mg/kg/hour",
+   "notes": "Refractory pain in hospitalised patients, monitored setting."
+  },
+  {
+   "name": "Ceftriaxone plus azithromycin",
+   "dose": "Ceftriaxone 1 to 2 g IV once daily plus azithromycin 500 mg orally once daily",
+   "notes": "Acute chest syndrome."
+  },
+  {
+   "name": "Hydroxyurea",
+   "dose": "Start 10 to 15 mg/kg/day orally once daily, increase every 6 to 8 weeks to a maximum of 35 mg/kg/day",
+   "notes": "Monitor CBC; lower dose in CKD; stop 3 months before conception."
+  },
+  {
+   "name": "Folic acid",
+   "dose": "5 mg orally once daily",
+   "notes": "All patients with SCD."
+  }
  ],
  "sources": [
-  { "org": "American Society of Hematology", "title": "ASH 2020 guidelines for sickle cell disease: management of acute and chronic pain", "year": 2020, "url": "https://ashpublications.org/bloodadvances/article/4/12/2656/460974/American-Society-of-Hematology-2020-guidelines-for" },
-  { "org": "MoHFW / NHM, Government of India", "title": "Operational guidelines for National Programme for Prevention and Management of Sickle Cell Disease (National Sickle Cell Anaemia Elimination Mission)", "year": 2023, "url": "https://nhsrcindia.org/sites/default/files/2023-07/Operational%20Guidelines%20for%20National%20Programme%20for%20Prevention%20and%20Management%20of%20Sickle%20Cell%20Disease.pdf.pdf" },
-  { "org": "NHM, Government of India", "title": "National Sickle Cell Anaemia Elimination Mission portal", "year": 2023, "url": "https://sickle.nhm.gov.in/home/about" }
+  {
+   "org": "American Society of Hematology",
+   "title": "ASH 2020 guidelines for sickle cell disease: management of acute and chronic pain",
+   "year": 2020,
+   "url": "https://ashpublications.org/bloodadvances/article/4/12/2656/460974/American-Society-of-Hematology-2020-guidelines-for"
+  },
+  {
+   "org": "MoHFW / NHM, Government of India",
+   "title": "Operational guidelines for National Programme for Prevention and Management of Sickle Cell Disease (National Sickle Cell Anaemia Elimination Mission)",
+   "year": 2023,
+   "url": "https://nhsrcindia.org/sites/default/files/2023-07/Operational%20Guidelines%20for%20National%20Programme%20for%20Prevention%20and%20Management%20of%20Sickle%20Cell%20Disease.pdf.pdf"
+  },
+  {
+   "org": "NHM, Government of India",
+   "title": "National Sickle Cell Anaemia Elimination Mission portal",
+   "year": 2023,
+   "url": "https://sickle.nhm.gov.in/home/about"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "sickle-cell-vaso-occlusive-crisis-pathway",
+   "title": "Sickle cell disease: vaso-occlusive crisis (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Acute pain in the back, chest, limbs or abdomen in a person with sickle cell disease (HbSS, HbS-beta thalassaemia, HbSC). Triggers: infection, dehydration, cold, exertion, alcohol, pregnancy.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Triage as urgent. Assess pain and give the first analgesic dose within 60 minutes of arrival (ASH 2020); use SC or intranasal routes if IV access is delayed.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "FBC and reticulocyte count compared with steady-state values (low reticulocytes suggest aplastic crisis, often parvovirus B19), renal and liver function, LDH."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Acute chest syndrome: new pulmonary infiltrate with fever, chest pain, cough, tachypnoea or hypoxia; often develops 24 to 72 hours into a painful crisis. It is an emergency needing HDU or ICU care."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Delaying analgesia or labelling patients as drug-seeking."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for sickle cell disease: vaso-occlusive crisis (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "sickle-cell-vaso-occlusive-crisis-summary-matrix",
+   "title": "Sickle cell disease: vaso-occlusive crisis (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Acute pain in the back, chest, limbs or abdomen in a person with sickle cell disease (HbSS, HbS-beta thalassaemia, HbSC). Triggers:",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Triage as urgent. Assess pain and give the first analgesic dose within 60 minutes of arrival (ASH 2020); use SC or intranasal routes if IV",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "FBC and reticulocyte count compared with steady-state values (low reticulocytes suggest aplastic crisis, often parvovirus B19), renal and",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Morphine: 0.1 mg/kg IV or SC, repeat every 30 to 60 minutes titrated to pain and sedation",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Delaying analgesia or labelling patients as drug-seeking.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for sickle cell disease: vaso-occlusive crisis (adult)."
+  }
+ ]
 }

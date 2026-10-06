@@ -1,79 +1,151 @@
 {
-  "id": "candle_syndrome",
-  "name": "CANDLE syndrome",
-  "aliases": [
-    "chronic atypical neutrophilic dermatosis with lipodystrophy and elevated temperature",
-    "proteasome-associated autoinflammatory syndrome",
-    "PRAAS",
-    "PSMB8"
+ "id": "candle_syndrome",
+ "name": "CANDLE syndrome",
+ "aliases": [
+  "chronic atypical neutrophilic dermatosis with lipodystrophy and elevated temperature",
+  "proteasome-associated autoinflammatory syndrome",
+  "PRAAS",
+  "PSMB8"
+ ],
+ "class": "non_infective",
+ "system": "Immunology / Autoinflammatory",
+ "specialty": "Clinical Immunology / Rheumatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Textbook of Autoinflammation / Nelson Textbook of Paediatrics",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A type I interferonopathy caused by mutations affecting the proteasome, classically PSMB8, impairing protein degradation",
+   "Presents in infancy or early childhood with recurrent fevers, violaceous annular skin plaques, and progressive lipodystrophy",
+   "Facial and limb fat loss produces a characteristic pinched appearance, while periorbital oedema and swelling are common",
+   "Additional features include arthralgia, hepatosplenomegaly, growth impairment, and delayed physical development",
+   "A raised interferon signature in blood is a key laboratory clue supporting an interferonopathy",
+   "Skin biopsy shows an atypical mononuclear and neutrophilic dermal infiltrate rather than a simple neutrophilic dermatosis",
+   "Janus kinase (JAK) inhibition targets the interferon pathway and can improve systemic and cutaneous features, though damage may be only partly reversible"
   ],
-  "class": "non_infective",
-  "system": "Immunology / Autoinflammatory",
-  "specialty": "Clinical Immunology / Rheumatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Textbook of Autoinflammation / Nelson Textbook of Paediatrics",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A type I interferonopathy caused by mutations affecting the proteasome, classically PSMB8, impairing protein degradation",
-      "Presents in infancy or early childhood with recurrent fevers, violaceous annular skin plaques, and progressive lipodystrophy",
-      "Facial and limb fat loss produces a characteristic pinched appearance, while periorbital oedema and swelling are common",
-      "Additional features include arthralgia, hepatosplenomegaly, growth impairment, and delayed physical development",
-      "A raised interferon signature in blood is a key laboratory clue supporting an interferonopathy",
-      "Skin biopsy shows an atypical mononuclear and neutrophilic dermal infiltrate rather than a simple neutrophilic dermatosis",
-      "Janus kinase (JAK) inhibition targets the interferon pathway and can improve systemic and cutaneous features, though damage may be only partly reversible"
+  "pathophysiology": "CANDLE syndrome is a proteasome-associated autoinflammatory disease, most often from mutations in PSMB8 and related proteasome or immunoproteasome subunit genes. Defective proteasome function impairs clearance of ubiquitinated and oxidised proteins, causing cellular stress that triggers excessive type I interferon production. This interferon-dominated inflammation drives recurrent fevers, an atypical neutrophilic dermatosis, panniculitis with resulting lipodystrophy, and multi-organ involvement. The prominent interferon signature explains both the clinical phenotype and the rationale for JAK inhibition, which dampens interferon signalling.",
+  "additionalDifferentials": [
+   "SAVI and other type I interferonopathies",
+   "Systemic juvenile idiopathic arthritis",
+   "Dermatomyositis (juvenile)",
+   "Lipodystrophy syndromes of other cause",
+   "Sweet syndrome and other neutrophilic dermatoses",
+   "Systemic lupus erythematosus"
+  ],
+  "additionalInvestigations": [
+   "Genetic testing for PSMB8 and other proteasome subunit gene mutations",
+   "Interferon signature (interferon-stimulated gene expression) in blood",
+   "Skin biopsy demonstrating atypical mixed dermal infiltrate and panniculitis",
+   "Acute-phase reactants and full blood count",
+   "Assessment of metabolic and lipid profile given lipodystrophy",
+   "Imaging and growth monitoring for organomegaly and developmental delay"
+  ],
+  "redFlags": [
+   "Progressive organ dysfunction from sustained interferon-driven inflammation",
+   "Severe growth failure and developmental delay",
+   "Intracranial calcification or neurological involvement",
+   "Refractory systemic inflammation despite conventional immunosuppression"
+  ],
+  "prognosis": "CANDLE is a chronic progressive disease; JAK inhibition can substantially reduce inflammation and improve quality of life, but established lipodystrophy and organ damage may persist.",
+  "pitfalls": [
+   "Attributing early features to juvenile dermatomyositis or systemic juvenile idiopathic arthritis and missing the interferonopathy",
+   "Failing to request an interferon signature when standard autoimmune workup is inconclusive",
+   "Expecting full reversal of lipodystrophy with treatment",
+   "Relying on conventional immunosuppression that inadequately targets interferon signalling"
+  ],
+  "references": [
+   "Textbook of Autoinflammation",
+   "Nelson Textbook of Paediatrics"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Use a JAK inhibitor such as baricitinib or ruxolitinib as the mainstay to suppress the type I interferon-driven inflammation",
+   "Add corticosteroids for partial control, recognising that conventional immunosuppressants are often ineffective",
+   "Monitor for infection during JAK inhibition, together with growth, blood counts and lipid and metabolic parameters",
+   "Manage established lipodystrophy and its metabolic consequences with dietetic and endocrine input",
+   "Track disease activity using the blood interferon signature and acute-phase reactants",
+   "Offer genetic testing and counselling for the underlying PSMB8 and related proteasome-gene mutations",
+   "Coordinate care across clinical immunology, rheumatology and dermatology"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "candle_syndrome-pathway",
+   "title": "CANDLE syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A type I interferonopathy caused by mutations affecting the proteasome, classically PSMB8, impairing protein degradation",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive organ dysfunction from sustained interferon-driven inflammation",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Genetic testing for PSMB8 and other proteasome subunit gene mutations, Interferon signature (interferon-stimulated gene expression) in blood, Skin biopsy demonstrating atypical mixed dermal infiltrate and panniculitis"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Use a JAK inhibitor such as baricitinib or ruxolitinib as the mainstay to suppress the type I interferon-driven inflammation"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing early features to juvenile dermatomyositis or systemic juvenile idiopathic arthritis and missing the interferonopathy"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of candle syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "candle_syndrome-matrix",
+   "title": "CANDLE syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A type I interferonopathy caused by mutations affecting the proteasome, classically PSMB8, impairing protein degradation",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "CANDLE syndrome is a proteasome-associated autoinflammatory disease, most often from mutations in PSMB8 and related proteasome or immunoproteasome subunit genes. Defective proteasome function impairs clearance of ubiquitinated and oxidised proteins, causing cellular stress that triggers excessive type I interferon production. This interferon-dominated inflammation drives recurrent fevers, an atypical neutrophilic dermatosis, panniculitis with resulting lipodystrophy, and multi-organ involvement. The prominent interferon signature explains both the clinical phenotype and the rationale for JAK inhibition, which dampens interferon signalling.",
-    "additionalDifferentials": [
-      "SAVI and other type I interferonopathies",
-      "Systemic juvenile idiopathic arthritis",
-      "Dermatomyositis (juvenile)",
-      "Lipodystrophy syndromes of other cause",
-      "Sweet syndrome and other neutrophilic dermatoses",
-      "Systemic lupus erythematosus"
+    [
+     "Key Investigations",
+     "Genetic testing for PSMB8 and other proteasome subunit gene mutations, Interferon signature (interferon-stimulated gene",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Genetic testing for PSMB8 and other proteasome subunit gene mutations",
-      "Interferon signature (interferon-stimulated gene expression) in blood",
-      "Skin biopsy demonstrating atypical mixed dermal infiltrate and panniculitis",
-      "Acute-phase reactants and full blood count",
-      "Assessment of metabolic and lipid profile given lipodystrophy",
-      "Imaging and growth monitoring for organomegaly and developmental delay"
+    [
+     "Primary Differentials",
+     "SAVI and other type I interferonopathies, Systemic juvenile idiopathic arthritis, Dermatomyositis (juvenile)",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive organ dysfunction from sustained interferon-driven inflammation",
-      "Severe growth failure and developmental delay",
-      "Intracranial calcification or neurological involvement",
-      "Refractory systemic inflammation despite conventional immunosuppression"
+    [
+     "Management Strategy",
+     "Use a JAK inhibitor such as baricitinib or ruxolitinib as the mainstay to suppress the type I interferon-driven inflammation",
+     "Core treatment modality"
     ],
-    "prognosis": "CANDLE is a chronic progressive disease; JAK inhibition can substantially reduce inflammation and improve quality of life, but established lipodystrophy and organ damage may persist.",
-    "pitfalls": [
-      "Attributing early features to juvenile dermatomyositis or systemic juvenile idiopathic arthritis and missing the interferonopathy",
-      "Failing to request an interferon signature when standard autoimmune workup is inconclusive",
-      "Expecting full reversal of lipodystrophy with treatment",
-      "Relying on conventional immunosuppression that inadequately targets interferon signalling"
-    ],
-    "references": [
-      "Textbook of Autoinflammation",
-      "Nelson Textbook of Paediatrics"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Use a JAK inhibitor such as baricitinib or ruxolitinib as the mainstay to suppress the type I interferon-driven inflammation",
-      "Add corticosteroids for partial control, recognising that conventional immunosuppressants are often ineffective",
-      "Monitor for infection during JAK inhibition, together with growth, blood counts and lipid and metabolic parameters",
-      "Manage established lipodystrophy and its metabolic consequences with dietetic and endocrine input",
-      "Track disease activity using the blood interferon signature and acute-phase reactants",
-      "Offer genetic testing and counselling for the underlying PSMB8 and related proteasome-gene mutations",
-      "Coordinate care across clinical immunology, rheumatology and dermatology"
+    [
+     "Clinical Pitfall",
+     "Attributing early features to juvenile dermatomyositis or systemic juvenile idiopathic arthritis and missing the interferonopathy",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for candle syndrome."
+  }
+ ]
 }

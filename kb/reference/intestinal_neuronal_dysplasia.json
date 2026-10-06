@@ -1,77 +1,149 @@
 {
-  "id": "intestinal_neuronal_dysplasia",
-  "name": "Intestinal neuronal dysplasia",
-  "aliases": [
-    "IND",
-    "intestinal neuronal dysplasia type B",
-    "colonic dysganglionosis",
-    "neuronal intestinal dysplasia"
+ "id": "intestinal_neuronal_dysplasia",
+ "name": "Intestinal neuronal dysplasia",
+ "aliases": [
+  "IND",
+  "intestinal neuronal dysplasia type B",
+  "colonic dysganglionosis",
+  "neuronal intestinal dysplasia"
+ ],
+ "class": "non_infective",
+ "system": "Gastroenterology",
+ "specialty": "Gastroenterology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An enteric neuromuscular disorder in which the myenteric and submucosal plexuses are dysplastic rather than absent, mimicking Hirschsprung disease",
+   "Presents in infancy or childhood with chronic constipation, abdominal distension, and features of functional obstruction",
+   "The commoner form (type B) is characterised by hyperplasia of the submucosal plexus with giant ganglia and ectopic ganglion cells",
+   "It can occur in isolation or alongside true aganglionosis, sometimes proximal to a Hirschsprung segment",
+   "Diagnosis requires full-thickness or deep rectal biopsy with specialised histochemistry and immunohistochemistry, and is subject to interobserver variability",
+   "Management is largely conservative with bowel-management measures, reserving surgery for refractory or clearly localised disease",
+   "The diagnosis remains debated, with evolving histological criteria and uncertain reproducibility"
   ],
-  "class": "non_infective",
-  "system": "Gastroenterology",
-  "specialty": "Gastroenterology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An enteric neuromuscular disorder in which the myenteric and submucosal plexuses are dysplastic rather than absent, mimicking Hirschsprung disease",
-      "Presents in infancy or childhood with chronic constipation, abdominal distension, and features of functional obstruction",
-      "The commoner form (type B) is characterised by hyperplasia of the submucosal plexus with giant ganglia and ectopic ganglion cells",
-      "It can occur in isolation or alongside true aganglionosis, sometimes proximal to a Hirschsprung segment",
-      "Diagnosis requires full-thickness or deep rectal biopsy with specialised histochemistry and immunohistochemistry, and is subject to interobserver variability",
-      "Management is largely conservative with bowel-management measures, reserving surgery for refractory or clearly localised disease",
-      "The diagnosis remains debated, with evolving histological criteria and uncertain reproducibility"
+  "pathophysiology": "Intestinal neuronal dysplasia is a form of enteric dysganglionosis in which ganglion cells are present but abnormally organised. In the classic type B pattern there is hyperplasia of the submucosal (and myenteric) plexus with giant ganglia, increased ganglion cell numbers, and ectopic neurons within the lamina propria and around submucosal vessels, together with abnormal acetylcholinesterase activity. This disordered innervation impairs coordinated peristalsis, producing a functional obstruction that clinically resembles Hirschsprung disease despite the presence of ganglion cells.",
+  "additionalDifferentials": [
+   "Hirschsprung disease (aganglionosis)",
+   "Chronic intestinal pseudo-obstruction of other cause",
+   "Hypoganglionosis",
+   "Functional constipation",
+   "Anorectal malformation or mechanical obstruction",
+   "Hollow visceral myopathy"
+  ],
+  "additionalInvestigations": [
+   "Full-thickness or deep suction rectal biopsy with acetylcholinesterase histochemistry and immunohistochemistry",
+   "Contrast enema to assess calibre change and transition zone",
+   "Anorectal manometry to assess the rectoanal inhibitory reflex",
+   "Abdominal radiography to evaluate distension and obstruction",
+   "Assessment for associated aganglionosis or systemic neuromuscular disease"
+  ],
+  "redFlags": [
+   "Features of complete or worsening intestinal obstruction",
+   "Enterocolitis with sepsis, particularly where Hirschsprung disease coexists",
+   "Failure to thrive or severe malnutrition",
+   "Bowel ischaemia or perforation from chronic distension"
+  ],
+  "prognosis": "Many children improve over time with conservative bowel management, and outcome depends on the extent of disease and whether aganglionosis coexists; the uncertain diagnostic criteria complicate prognostication.",
+  "pitfalls": [
+   "Confidently diagnosing or excluding the condition despite substantial interobserver variability in histology",
+   "Missing coexisting Hirschsprung aganglionosis in the distal segment",
+   "Proceeding to resection when conservative management would suffice",
+   "Interpreting inadequate or superficial biopsies as definitive"
+  ],
+  "references": [
+   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+   "Walker's Pediatric Gastrointestinal Disease"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Establish a conservative bowel-management programme with laxatives, enemas and dietary fibre as the mainstay",
+   "Use regular rectal washouts for refractory constipation and functional obstruction",
+   "Provide nutritional support and management of abdominal distension",
+   "Reserve surgery such as myectomy or resection for clearly localised or refractory disease",
+   "Exclude and manage coexisting Hirschsprung aganglionosis, which alters the surgical approach",
+   "Follow up through paediatric gastroenterology and surgery with periodic reassessment, as many children improve over time"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "intestinal_neuronal_dysplasia-pathway",
+   "title": "Intestinal neuronal dysplasia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An enteric neuromuscular disorder in which the myenteric and submucosal plexuses are dysplastic rather than absent, mimicking Hirschsprung disease",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Features of complete or worsening intestinal obstruction",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Full-thickness or deep suction rectal biopsy with acetylcholinesterase histochemistry and immunohistochemistry, Contrast enema to assess calibre change and transition zone, Anorectal manometry to assess the rectoanal"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Establish a conservative bowel-management programme with laxatives, enemas and dietary fibre as the mainstay"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confidently diagnosing or excluding the condition despite substantial interobserver variability in histology"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of intestinal neuronal dysplasia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "intestinal_neuronal_dysplasia-matrix",
+   "title": "Intestinal neuronal dysplasia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An enteric neuromuscular disorder in which the myenteric and submucosal plexuses are dysplastic rather than absent, mimicking",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Intestinal neuronal dysplasia is a form of enteric dysganglionosis in which ganglion cells are present but abnormally organised. In the classic type B pattern there is hyperplasia of the submucosal (and myenteric) plexus with giant ganglia, increased ganglion cell numbers, and ectopic neurons within the lamina propria and around submucosal vessels, together with abnormal acetylcholinesterase activity. This disordered innervation impairs coordinated peristalsis, producing a functional obstruction that clinically resembles Hirschsprung disease despite the presence of ganglion cells.",
-    "additionalDifferentials": [
-      "Hirschsprung disease (aganglionosis)",
-      "Chronic intestinal pseudo-obstruction of other cause",
-      "Hypoganglionosis",
-      "Functional constipation",
-      "Anorectal malformation or mechanical obstruction",
-      "Hollow visceral myopathy"
+    [
+     "Key Investigations",
+     "Full-thickness or deep suction rectal biopsy with acetylcholinesterase histochemistry and immunohistochemistry, Contrast enema to",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Full-thickness or deep suction rectal biopsy with acetylcholinesterase histochemistry and immunohistochemistry",
-      "Contrast enema to assess calibre change and transition zone",
-      "Anorectal manometry to assess the rectoanal inhibitory reflex",
-      "Abdominal radiography to evaluate distension and obstruction",
-      "Assessment for associated aganglionosis or systemic neuromuscular disease"
+    [
+     "Primary Differentials",
+     "Hirschsprung disease (aganglionosis), Chronic intestinal pseudo-obstruction of other cause, Hypoganglionosis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Features of complete or worsening intestinal obstruction",
-      "Enterocolitis with sepsis, particularly where Hirschsprung disease coexists",
-      "Failure to thrive or severe malnutrition",
-      "Bowel ischaemia or perforation from chronic distension"
+    [
+     "Management Strategy",
+     "Establish a conservative bowel-management programme with laxatives, enemas and dietary fibre as the mainstay",
+     "Core treatment modality"
     ],
-    "prognosis": "Many children improve over time with conservative bowel management, and outcome depends on the extent of disease and whether aganglionosis coexists; the uncertain diagnostic criteria complicate prognostication.",
-    "pitfalls": [
-      "Confidently diagnosing or excluding the condition despite substantial interobserver variability in histology",
-      "Missing coexisting Hirschsprung aganglionosis in the distal segment",
-      "Proceeding to resection when conservative management would suffice",
-      "Interpreting inadequate or superficial biopsies as definitive"
-    ],
-    "references": [
-      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-      "Walker's Pediatric Gastrointestinal Disease"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Establish a conservative bowel-management programme with laxatives, enemas and dietary fibre as the mainstay",
-      "Use regular rectal washouts for refractory constipation and functional obstruction",
-      "Provide nutritional support and management of abdominal distension",
-      "Reserve surgery such as myectomy or resection for clearly localised or refractory disease",
-      "Exclude and manage coexisting Hirschsprung aganglionosis, which alters the surgical approach",
-      "Follow up through paediatric gastroenterology and surgery with periodic reassessment, as many children improve over time"
+    [
+     "Clinical Pitfall",
+     "Confidently diagnosing or excluding the condition despite substantial interobserver variability in histology",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for intestinal neuronal dysplasia."
+  }
+ ]
 }

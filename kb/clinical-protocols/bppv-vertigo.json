@@ -5,7 +5,18 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, primary care, ENT clinic",
- "aliases": ["BPPV", "positional vertigo", "vertigo", "dizziness", "Dix-Hallpike", "Epley manoeuvre", "Epley maneuver", "canalith repositioning", "supine roll test", "HINTS"],
+ "aliases": [
+  "BPPV",
+  "positional vertigo",
+  "vertigo",
+  "dizziness",
+  "Dix-Hallpike",
+  "Epley manoeuvre",
+  "Epley maneuver",
+  "canalith repositioning",
+  "supine roll test",
+  "HINTS"
+ ],
  "summary": "Diagnose posterior canal BPPV when the Dix-Hallpike test provokes vertigo with torsional upbeating nystagmus, and treat with the Epley manoeuvre rather than vestibular suppressants or imaging. Continuous vertigo, atypical nystagmus or any neurological sign points to a central cause: HINTS by a trained clinician and MRI, not CT.",
  "sections": [
   {
@@ -89,13 +100,111 @@
   }
  ],
  "drugs": [
-  { "name": "Prochlorperazine", "dose": "12.5 mg by deep IM injection once, or 5 to 10 mg orally up to three times daily for 1 to 2 days only", "notes": "Severe nausea only; not a treatment for BPPV. Sedation, extrapyramidal effects and falls in older adults." },
-  { "name": "Ondansetron", "dose": "4 mg IV or orally, single dose", "notes": "Alternative antiemetic around manoeuvres; caution with QT prolongation." }
+  {
+   "name": "Prochlorperazine",
+   "dose": "12.5 mg by deep IM injection once, or 5 to 10 mg orally up to three times daily for 1 to 2 days only",
+   "notes": "Severe nausea only; not a treatment for BPPV. Sedation, extrapyramidal effects and falls in older adults."
+  },
+  {
+   "name": "Ondansetron",
+   "dose": "4 mg IV or orally, single dose",
+   "notes": "Alternative antiemetic around manoeuvres; caution with QT prolongation."
+  }
  ],
  "sources": [
-  { "org": "AAO-HNSF", "title": "Clinical practice guideline: benign paroxysmal positional vertigo (update)", "year": 2017, "url": "https://doi.org/10.1177/0194599816689667" },
-  { "org": "AAO-HNSF", "title": "Clinical practice guideline: benign paroxysmal positional vertigo (update) executive summary", "year": 2017, "url": "https://doi.org/10.1177/0194599816689660" },
-  { "org": "SAEM", "title": "Guidelines for reasonable and appropriate care in the emergency department 3 (GRACE-3): acute dizziness and vertigo in the emergency department", "year": 2023, "url": "https://doi.org/10.1111/acem.14728" }
+  {
+   "org": "AAO-HNSF",
+   "title": "Clinical practice guideline: benign paroxysmal positional vertigo (update)",
+   "year": 2017,
+   "url": "https://doi.org/10.1177/0194599816689667"
+  },
+  {
+   "org": "AAO-HNSF",
+   "title": "Clinical practice guideline: benign paroxysmal positional vertigo (update) executive summary",
+   "year": 2017,
+   "url": "https://doi.org/10.1177/0194599816689660"
+  },
+  {
+   "org": "SAEM",
+   "title": "Guidelines for reasonable and appropriate care in the emergency department 3 (GRACE-3): acute dizziness and vertigo in the emergency department",
+   "year": 2023,
+   "url": "https://doi.org/10.1111/acem.14728"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "bppv-vertigo-pathway",
+   "title": "Benign paroxysmal positional vertigo (BPPV) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Brief spinning vertigo, lasting seconds and usually under a minute, triggered by head movement: rolling over in bed, lying down, looking up or bending forward. No hearing loss or neurological symptoms; mild imbalance or nausea between",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Posterior canal BPPV is the commonest form, lateral (horizontal) canal BPPV the next; anterior canal BPPV is rare.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Dix-Hallpike: from sitting, turn the head 45 degrees to one side, then lie the patient back quickly with the neck extended about 20 degrees and that ear down. Watch the eyes for up to a minute, sit up, then test the other side."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Do not routinely treat BPPV with vestibular suppressants such as antihistamines (meclizine, cinnarizine, promethazine, dimenhydrinate) or benzodiazepines: they do not resolve BPPV, can impair central compensation and increase falls."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Labelling dizziness as BPPV without a positive positional test."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for benign paroxysmal positional vertigo (bppv)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "bppv-vertigo-summary-matrix",
+   "title": "Benign paroxysmal positional vertigo (BPPV) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Brief spinning vertigo, lasting seconds and usually under a minute, triggered by head movement: rolling over in bed, lying down, looking up",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Do not routinely treat BPPV with vestibular suppressants such as antihistamines (meclizine, cinnarizine, promethazine, dimenhydrinate) or",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Dix-Hallpike: from sitting, turn the head 45 degrees to one side, then lie the patient back quickly with the neck extended about 20 degrees",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Prochlorperazine: 12.5 mg by deep IM injection once, or 5 to 10 mg orally up to three times daily for 1 to 2 days only",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Labelling dizziness as BPPV without a positive positional test.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for benign paroxysmal positional vertigo (bppv)."
+  }
+ ]
 }

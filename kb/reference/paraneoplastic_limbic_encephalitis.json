@@ -1,81 +1,153 @@
 {
-  "id": "paraneoplastic_limbic_encephalitis",
-  "name": "paraneoplastic limbic encephalitis",
-  "aliases": [
-    "limbic encephalitis",
-    "paraneoplastic limbic encephalopathy"
+ "id": "paraneoplastic_limbic_encephalitis",
+ "name": "paraneoplastic limbic encephalitis",
+ "aliases": [
+  "limbic encephalitis",
+  "paraneoplastic limbic encephalopathy"
+ ],
+ "class": "non_infective",
+ "system": "nervous system",
+ "specialty": "neurology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Bradley and Daroff's Neurology in Clinical Practice",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Subacute onset (days to weeks) of short-term memory impairment, temporal lobe seizures, confusion and neuropsychiatric change (anxiety, depression, hallucinations, personality change) is the core syndrome.",
+   "Anterograde amnesia with relative preservation of remote memory reflects selective hippocampal and medial temporal involvement.",
+   "Small-cell lung carcinoma with anti-Hu (ANNA-1) is the commonest association; anti-Ma2 disease characteristically affects young men with testicular germ-cell tumours.",
+   "Cell-surface antibody syndromes (anti-NMDAR, anti-LGI1, anti-GABA-B, anti-AMPAR, anti-CASPR2) are considerably more responsive to immunotherapy than intracellular onconeural antibody syndromes.",
+   "Anti-LGI1 disease produces faciobrachial dystonic seizures and hyponatraemia and is often non-paraneoplastic, though thymoma may occur.",
+   "Anti-GABA-B encephalitis presents with prominent early seizures and is strongly linked to small-cell lung carcinoma.",
+   "MRI typically shows unilateral or bilateral medial temporal T2/FLAIR hyperintensity, and CSF shows lymphocytic pleocytosis, raised protein and oligoclonal bands.",
+   "The syndrome frequently antedates the tumour diagnosis by months, so a negative initial cancer screen warrants periodic re-screening."
   ],
-  "class": "non_infective",
-  "system": "nervous system",
-  "specialty": "neurology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Bradley and Daroff's Neurology in Clinical Practice",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Subacute onset (days to weeks) of short-term memory impairment, temporal lobe seizures, confusion and neuropsychiatric change (anxiety, depression, hallucinations, personality change) is the core syndrome.",
-      "Anterograde amnesia with relative preservation of remote memory reflects selective hippocampal and medial temporal involvement.",
-      "Small-cell lung carcinoma with anti-Hu (ANNA-1) is the commonest association; anti-Ma2 disease characteristically affects young men with testicular germ-cell tumours.",
-      "Cell-surface antibody syndromes (anti-NMDAR, anti-LGI1, anti-GABA-B, anti-AMPAR, anti-CASPR2) are considerably more responsive to immunotherapy than intracellular onconeural antibody syndromes.",
-      "Anti-LGI1 disease produces faciobrachial dystonic seizures and hyponatraemia and is often non-paraneoplastic, though thymoma may occur.",
-      "Anti-GABA-B encephalitis presents with prominent early seizures and is strongly linked to small-cell lung carcinoma.",
-      "MRI typically shows unilateral or bilateral medial temporal T2/FLAIR hyperintensity, and CSF shows lymphocytic pleocytosis, raised protein and oligoclonal bands.",
-      "The syndrome frequently antedates the tumour diagnosis by months, so a negative initial cancer screen warrants periodic re-screening."
+  "pathophysiology": "An immune response directed against a tumour that ectopically expresses neuronal antigens cross-reacts with limbic structures (hippocampi, amygdala, cingulate and insular cortex), producing inflammation and neuronal loss. Two mechanistic groups exist: antibodies against intracellular onconeural antigens (Hu/ANNA-1, Ma2, CV2/CRMP5, amphiphysin) are markers of a predominantly cytotoxic T-cell mediated process that is poorly reversible, whereas antibodies against neuronal cell-surface or synaptic proteins (NMDAR, LGI1, GABA-B, AMPAR, CASPR2) are directly pathogenic, disrupt receptor function or clustering, and are potentially reversible with immunotherapy.",
+  "additionalDifferentials": [
+   "herpes simplex and other viral encephalitides",
+   "non-convulsive status epilepticus",
+   "Wernicke encephalopathy",
+   "primary CNS lymphoma or gliomatosis cerebri",
+   "Hashimoto (steroid-responsive) encephalopathy",
+   "Creutzfeldt-Jakob disease",
+   "mesial temporal sclerosis"
+  ],
+  "additionalInvestigations": [
+   "paired serum and CSF autoimmune and paraneoplastic antibody panel",
+   "MRI brain with contrast (medial temporal FLAIR sequences)",
+   "CSF analysis with oligoclonal bands and cytology",
+   "EEG (temporal epileptiform or slow-wave activity)",
+   "whole-body FDG-PET/CT to detect occult malignancy",
+   "testicular ultrasound in young men (anti-Ma2)",
+   "CT chest for small-cell lung carcinoma or thymoma"
+  ],
+  "redFlags": [
+   "refractory or non-convulsive status epilepticus",
+   "rapidly progressive decline in consciousness or coma",
+   "autonomic instability (especially with NMDAR antibodies)",
+   "severe symptomatic hyponatraemia",
+   "identification of an underlying malignancy requiring urgent staging"
+  ],
+  "prognosis": "Cell-surface antibody syndromes often improve substantially with tumour treatment and immunotherapy, whereas intracellular onconeural antibody-associated disease tends to leave persistent cognitive deficits. Overall outcome is governed by the antibody type and the stage and treatability of the underlying tumour.",
+  "pitfalls": [
+   "Misdiagnosing as herpes simplex encephalitis and missing the paraneoplastic search.",
+   "Assuming a negative antibody panel excludes the diagnosis, since seronegative cases are recognised.",
+   "Abandoning the tumour hunt after one negative screen rather than repeating surveillance.",
+   "Overlooking an occult testicular germ-cell tumour in a young man with anti-Ma2 antibodies."
+  ],
+  "references": [
+   "Graus F, et al. A clinical approach to diagnosis of autoimmune encephalitis. Lancet Neurology.",
+   "Dalmau J, Rosenfeld MR. Paraneoplastic and autoimmune encephalitis.",
+   "Bradley and Daroff's Neurology in Clinical Practice, current edition."
+  ],
+  "crossLinks": [],
+  "management": [
+   "Identification and treatment of the underlying tumour where present, alongside immunotherapy",
+   "First-line immunotherapy with corticosteroids, intravenous immunoglobulin or plasma exchange, escalating to rituximab or cyclophosphamide, with better response in cell-surface antibody syndromes than onconeural ones",
+   "Seizure control with anticonvulsants, including targeting faciobrachial dystonic seizures in anti-LGI1 disease",
+   "Correction of hyponatraemia and neuropsychiatric supportive care",
+   "Systematic malignancy search, including testicular ultrasound in young men with anti-Ma2, and repeated surveillance if initially negative",
+   "Coordinated neurology and oncology multidisciplinary management with cognitive rehabilitation"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "paraneoplastic_limbic_encephalitis-pathway",
+   "title": "paraneoplastic limbic encephalitis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Subacute onset (days to weeks) of short-term memory impairment, temporal lobe seizures, confusion and neuropsychiatric change (anxiety, depression, hallucinations, personality change) is the core syndrome.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: refractory or non-convulsive status epilepticus",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: paired serum and CSF autoimmune and paraneoplastic antibody panel, MRI brain with contrast (medial temporal FLAIR sequences), CSF analysis with oligoclonal bands and cytology"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Identification and treatment of the underlying tumour where present, alongside immunotherapy"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misdiagnosing as herpes simplex encephalitis and missing the paraneoplastic search."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of paraneoplastic limbic encephalitis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "paraneoplastic_limbic_encephalitis-matrix",
+   "title": "paraneoplastic limbic encephalitis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Subacute onset (days to weeks) of short-term memory impairment, temporal lobe seizures, confusion and neuropsychiatric change",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "An immune response directed against a tumour that ectopically expresses neuronal antigens cross-reacts with limbic structures (hippocampi, amygdala, cingulate and insular cortex), producing inflammation and neuronal loss. Two mechanistic groups exist: antibodies against intracellular onconeural antigens (Hu/ANNA-1, Ma2, CV2/CRMP5, amphiphysin) are markers of a predominantly cytotoxic T-cell mediated process that is poorly reversible, whereas antibodies against neuronal cell-surface or synaptic proteins (NMDAR, LGI1, GABA-B, AMPAR, CASPR2) are directly pathogenic, disrupt receptor function or clustering, and are potentially reversible with immunotherapy.",
-    "additionalDifferentials": [
-      "herpes simplex and other viral encephalitides",
-      "non-convulsive status epilepticus",
-      "Wernicke encephalopathy",
-      "primary CNS lymphoma or gliomatosis cerebri",
-      "Hashimoto (steroid-responsive) encephalopathy",
-      "Creutzfeldt-Jakob disease",
-      "mesial temporal sclerosis"
+    [
+     "Key Investigations",
+     "paired serum and CSF autoimmune and paraneoplastic antibody panel, MRI brain with contrast (medial temporal FLAIR sequences), CSF",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "paired serum and CSF autoimmune and paraneoplastic antibody panel",
-      "MRI brain with contrast (medial temporal FLAIR sequences)",
-      "CSF analysis with oligoclonal bands and cytology",
-      "EEG (temporal epileptiform or slow-wave activity)",
-      "whole-body FDG-PET/CT to detect occult malignancy",
-      "testicular ultrasound in young men (anti-Ma2)",
-      "CT chest for small-cell lung carcinoma or thymoma"
+    [
+     "Primary Differentials",
+     "herpes simplex and other viral encephalitides, non-convulsive status epilepticus, Wernicke encephalopathy",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "refractory or non-convulsive status epilepticus",
-      "rapidly progressive decline in consciousness or coma",
-      "autonomic instability (especially with NMDAR antibodies)",
-      "severe symptomatic hyponatraemia",
-      "identification of an underlying malignancy requiring urgent staging"
+    [
+     "Management Strategy",
+     "Identification and treatment of the underlying tumour where present, alongside immunotherapy",
+     "Core treatment modality"
     ],
-    "prognosis": "Cell-surface antibody syndromes often improve substantially with tumour treatment and immunotherapy, whereas intracellular onconeural antibody-associated disease tends to leave persistent cognitive deficits. Overall outcome is governed by the antibody type and the stage and treatability of the underlying tumour.",
-    "pitfalls": [
-      "Misdiagnosing as herpes simplex encephalitis and missing the paraneoplastic search.",
-      "Assuming a negative antibody panel excludes the diagnosis, since seronegative cases are recognised.",
-      "Abandoning the tumour hunt after one negative screen rather than repeating surveillance.",
-      "Overlooking an occult testicular germ-cell tumour in a young man with anti-Ma2 antibodies."
-    ],
-    "references": [
-      "Graus F, et al. A clinical approach to diagnosis of autoimmune encephalitis. Lancet Neurology.",
-      "Dalmau J, Rosenfeld MR. Paraneoplastic and autoimmune encephalitis.",
-      "Bradley and Daroff's Neurology in Clinical Practice, current edition."
-    ],
-    "crossLinks": [],
-    "management": [
-      "Identification and treatment of the underlying tumour where present, alongside immunotherapy",
-      "First-line immunotherapy with corticosteroids, intravenous immunoglobulin or plasma exchange, escalating to rituximab or cyclophosphamide, with better response in cell-surface antibody syndromes than onconeural ones",
-      "Seizure control with anticonvulsants, including targeting faciobrachial dystonic seizures in anti-LGI1 disease",
-      "Correction of hyponatraemia and neuropsychiatric supportive care",
-      "Systematic malignancy search, including testicular ultrasound in young men with anti-Ma2, and repeated surveillance if initially negative",
-      "Coordinated neurology and oncology multidisciplinary management with cognitive rehabilitation"
+    [
+     "Clinical Pitfall",
+     "Misdiagnosing as herpes simplex encephalitis and missing the paraneoplastic search.",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for paraneoplastic limbic encephalitis."
+  }
+ ]
 }

@@ -1,73 +1,145 @@
 {
-  "id": "neonatal_hypocalcaemia",
-  "name": "Neonatal hypocalcaemia",
-  "aliases": [
-    "low calcium in the newborn"
+ "id": "neonatal_hypocalcaemia",
+ "name": "Neonatal hypocalcaemia",
+ "aliases": [
+  "low calcium in the newborn"
+ ],
+ "class": "non_infective",
+ "system": "Neonatal / Metabolic",
+ "specialty": "Neonatology / Paediatrics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Neonatology reference texts",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A low serum calcium in the newborn, conventionally divided into early (first days) and late (end of the first week or later) onset",
+   "Early hypocalcaemia is associated with prematurity, maternal diabetes, growth restriction and perinatal asphyxia",
+   "Late hypocalcaemia is linked to high phosphate intake, hypomagnesaemia, vitamin D deficiency and hypoparathyroidism",
+   "It is often asymptomatic but can cause jitteriness, irritability, feeding difficulty, apnoea and seizures",
+   "Persistent or refractory hypocalcaemia should prompt consideration of hypomagnesaemia, DiGeorge syndrome and vitamin D disorders",
+   "Management corrects calcium (and any magnesium deficiency) and addresses the underlying cause"
   ],
-  "class": "non_infective",
-  "system": "Neonatal / Metabolic",
-  "specialty": "Neonatology / Paediatrics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Neonatology reference texts",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A low serum calcium in the newborn, conventionally divided into early (first days) and late (end of the first week or later) onset",
-      "Early hypocalcaemia is associated with prematurity, maternal diabetes, growth restriction and perinatal asphyxia",
-      "Late hypocalcaemia is linked to high phosphate intake, hypomagnesaemia, vitamin D deficiency and hypoparathyroidism",
-      "It is often asymptomatic but can cause jitteriness, irritability, feeding difficulty, apnoea and seizures",
-      "Persistent or refractory hypocalcaemia should prompt consideration of hypomagnesaemia, DiGeorge syndrome and vitamin D disorders",
-      "Management corrects calcium (and any magnesium deficiency) and addresses the underlying cause"
+  "pathophysiology": "At birth the continuous placental calcium supply ceases, and the newborn depends on parathyroid hormone, vitamin D and calcium intake to maintain calcium. Early hypocalcaemia reflects an exaggerated postnatal fall with immature or suppressed parathyroid responses, more marked in preterm, growth-restricted and asphyxiated infants and those of diabetic mothers. Late hypocalcaemia results from factors that impair calcium handling, such as a high phosphate load, magnesium deficiency (which impairs parathyroid hormone secretion and action), vitamin D deficiency, or congenital hypoparathyroidism as in DiGeorge syndrome. Low ionised calcium increases neuromuscular excitability, causing the clinical features.",
+  "additionalDifferentials": [
+   "Hypomagnesaemia",
+   "Vitamin D deficiency or disorders of vitamin D metabolism",
+   "Hypoparathyroidism (for example DiGeorge syndrome)",
+   "Hypoglycaemia (as another cause of jitteriness and seizures)",
+   "Sepsis",
+   "Alkalosis reducing ionised calcium"
+  ],
+  "additionalInvestigations": [
+   "Serum total and ionised calcium",
+   "Magnesium, phosphate and alkaline phosphatase",
+   "Parathyroid hormone and vitamin D where persistent",
+   "Assessment for DiGeorge syndrome if features suggest it",
+   "Glucose and sepsis evaluation for symptomatic infants"
+  ],
+  "redFlags": [
+   "Seizures or significant neuromuscular irritability",
+   "Refractory hypocalcaemia suggesting hypomagnesaemia or hypoparathyroidism",
+   "Features suggesting DiGeorge syndrome (cardiac, dysmorphic, immune)",
+   "Cardiac arrhythmia or prolonged QT interval"
+  ],
+  "prognosis": "Early hypocalcaemia usually resolves within days with correction and treatment of contributing factors; prognosis of late or persistent hypocalcaemia depends on the underlying cause.",
+  "pitfalls": [
+   "Failing to correct coexisting hypomagnesaemia, without which calcium is hard to normalise",
+   "Overlooking DiGeorge syndrome in persistent hypocalcaemia",
+   "Confusing the cause of seizures with hypoglycaemia",
+   "Giving a high-phosphate feed that perpetuates late hypocalcaemia"
+  ],
+  "references": [
+   "Neonatology reference texts (standard reference)",
+   "Paediatric endocrinology references (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Give intravenous calcium (calcium gluconate) for symptomatic or severe hypocalcaemia and oral calcium supplementation for milder cases",
+   "Correct coexisting hypomagnesaemia with magnesium, as it impairs parathyroid hormone secretion and perpetuates refractory hypocalcaemia",
+   "Treat the underlying cause: reduce a high phosphate load, replace vitamin D in deficiency, and manage hypoparathyroidism",
+   "Deliver intravenous calcium under cardiac monitoring for seizures or apnoea, watching for bradycardia and extravasation injury",
+   "Monitor total and ionised calcium, phosphate and magnesium during correction",
+   "Investigate DiGeorge syndrome and vitamin D disorders in persistent or late hypocalcaemia, with genetics referral where a 22q11 deletion is suspected"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "neonatal_hypocalcaemia-pathway",
+   "title": "Neonatal hypocalcaemia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A low serum calcium in the newborn, conventionally divided into early (first days) and late (end of the first week or later) onset",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Seizures or significant neuromuscular irritability",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serum total and ionised calcium, Magnesium, phosphate and alkaline phosphatase, Parathyroid hormone and vitamin D where persistent"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Give intravenous calcium (calcium gluconate) for symptomatic or severe hypocalcaemia and oral calcium supplementation for milder cases"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to correct coexisting hypomagnesaemia, without which calcium is hard to normalise"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of neonatal hypocalcaemia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "neonatal_hypocalcaemia-matrix",
+   "title": "Neonatal hypocalcaemia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A low serum calcium in the newborn, conventionally divided into early (first days) and late (end of the first week or later) onset",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "At birth the continuous placental calcium supply ceases, and the newborn depends on parathyroid hormone, vitamin D and calcium intake to maintain calcium. Early hypocalcaemia reflects an exaggerated postnatal fall with immature or suppressed parathyroid responses, more marked in preterm, growth-restricted and asphyxiated infants and those of diabetic mothers. Late hypocalcaemia results from factors that impair calcium handling, such as a high phosphate load, magnesium deficiency (which impairs parathyroid hormone secretion and action), vitamin D deficiency, or congenital hypoparathyroidism as in DiGeorge syndrome. Low ionised calcium increases neuromuscular excitability, causing the clinical features.",
-    "additionalDifferentials": [
-      "Hypomagnesaemia",
-      "Vitamin D deficiency or disorders of vitamin D metabolism",
-      "Hypoparathyroidism (for example DiGeorge syndrome)",
-      "Hypoglycaemia (as another cause of jitteriness and seizures)",
-      "Sepsis",
-      "Alkalosis reducing ionised calcium"
+    [
+     "Key Investigations",
+     "Serum total and ionised calcium, Magnesium, phosphate and alkaline phosphatase, Parathyroid hormone and vitamin D where persistent",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serum total and ionised calcium",
-      "Magnesium, phosphate and alkaline phosphatase",
-      "Parathyroid hormone and vitamin D where persistent",
-      "Assessment for DiGeorge syndrome if features suggest it",
-      "Glucose and sepsis evaluation for symptomatic infants"
+    [
+     "Primary Differentials",
+     "Hypomagnesaemia, Vitamin D deficiency or disorders of vitamin D metabolism, Hypoparathyroidism (for example DiGeorge syndrome)",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Seizures or significant neuromuscular irritability",
-      "Refractory hypocalcaemia suggesting hypomagnesaemia or hypoparathyroidism",
-      "Features suggesting DiGeorge syndrome (cardiac, dysmorphic, immune)",
-      "Cardiac arrhythmia or prolonged QT interval"
+    [
+     "Management Strategy",
+     "Give intravenous calcium (calcium gluconate) for symptomatic or severe hypocalcaemia and oral calcium supplementation for milder",
+     "Core treatment modality"
     ],
-    "prognosis": "Early hypocalcaemia usually resolves within days with correction and treatment of contributing factors; prognosis of late or persistent hypocalcaemia depends on the underlying cause.",
-    "pitfalls": [
-      "Failing to correct coexisting hypomagnesaemia, without which calcium is hard to normalise",
-      "Overlooking DiGeorge syndrome in persistent hypocalcaemia",
-      "Confusing the cause of seizures with hypoglycaemia",
-      "Giving a high-phosphate feed that perpetuates late hypocalcaemia"
-    ],
-    "references": [
-      "Neonatology reference texts (standard reference)",
-      "Paediatric endocrinology references (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Give intravenous calcium (calcium gluconate) for symptomatic or severe hypocalcaemia and oral calcium supplementation for milder cases",
-      "Correct coexisting hypomagnesaemia with magnesium, as it impairs parathyroid hormone secretion and perpetuates refractory hypocalcaemia",
-      "Treat the underlying cause: reduce a high phosphate load, replace vitamin D in deficiency, and manage hypoparathyroidism",
-      "Deliver intravenous calcium under cardiac monitoring for seizures or apnoea, watching for bradycardia and extravasation injury",
-      "Monitor total and ionised calcium, phosphate and magnesium during correction",
-      "Investigate DiGeorge syndrome and vitamin D disorders in persistent or late hypocalcaemia, with genetics referral where a 22q11 deletion is suspected"
+    [
+     "Clinical Pitfall",
+     "Failing to correct coexisting hypomagnesaemia, without which calcium is hard to normalise",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for neonatal hypocalcaemia."
+  }
+ ]
 }

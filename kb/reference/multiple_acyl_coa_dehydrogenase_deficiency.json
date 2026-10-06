@@ -1,86 +1,158 @@
 {
-  "id": "multiple_acyl_coa_dehydrogenase_deficiency",
-  "name": "Multiple acyl-CoA dehydrogenase deficiency (glutaric aciduria type II)",
-  "aliases": [
-    "MADD",
-    "glutaric aciduria type II",
-    "GA2",
-    "ETFA/ETFB/ETFDH deficiency",
-    "electron transfer flavoprotein deficiency"
+ "id": "multiple_acyl_coa_dehydrogenase_deficiency",
+ "name": "Multiple acyl-CoA dehydrogenase deficiency (glutaric aciduria type II)",
+ "aliases": [
+  "MADD",
+  "glutaric aciduria type II",
+  "GA2",
+  "ETFA/ETFB/ETFDH deficiency",
+  "electron transfer flavoprotein deficiency"
+ ],
+ "class": "non_infective",
+ "system": "Metabolic / Genetics",
+ "specialty": "Metabolic Medicine / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Caused by defects in electron transfer flavoprotein or its dehydrogenase (ETFA, ETFB, ETFDH), impairing many flavin-dependent dehydrogenases at once",
+   "Presents as a spectrum: severe neonatal forms with or without congenital anomalies, and milder late-onset (riboflavin-responsive) disease",
+   "Severe neonatal disease features hypoketotic hypoglycaemia, metabolic acidosis, hyperammonaemia and a distinctive 'sweaty feet' odour",
+   "Congenital anomalies in the severe form include large cystic (dysplastic) kidneys, facial dysmorphism and hypospadias",
+   "Late-onset MADD often manifests as a lipid-storage myopathy with exercise intolerance, muscle weakness and recurrent rhabdomyolysis",
+   "Urine organic acids show glutaric acid plus a broad range of dicarboxylic and other acids reflecting the multiple enzyme block",
+   "Acylcarnitine profile shows elevation of short-, medium- and long-chain species together, a clue to a global fatty acid oxidation defect",
+   "Many late-onset (and some ETFDH) cases respond well to riboflavin; treatment also includes fasting avoidance, glucose during crises and carnitine"
   ],
-  "class": "non_infective",
-  "system": "Metabolic / Genetics",
-  "specialty": "Metabolic Medicine / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Caused by defects in electron transfer flavoprotein or its dehydrogenase (ETFA, ETFB, ETFDH), impairing many flavin-dependent dehydrogenases at once",
-      "Presents as a spectrum: severe neonatal forms with or without congenital anomalies, and milder late-onset (riboflavin-responsive) disease",
-      "Severe neonatal disease features hypoketotic hypoglycaemia, metabolic acidosis, hyperammonaemia and a distinctive 'sweaty feet' odour",
-      "Congenital anomalies in the severe form include large cystic (dysplastic) kidneys, facial dysmorphism and hypospadias",
-      "Late-onset MADD often manifests as a lipid-storage myopathy with exercise intolerance, muscle weakness and recurrent rhabdomyolysis",
-      "Urine organic acids show glutaric acid plus a broad range of dicarboxylic and other acids reflecting the multiple enzyme block",
-      "Acylcarnitine profile shows elevation of short-, medium- and long-chain species together, a clue to a global fatty acid oxidation defect",
-      "Many late-onset (and some ETFDH) cases respond well to riboflavin; treatment also includes fasting avoidance, glucose during crises and carnitine"
+  "pathophysiology": "MADD results from deficiency of electron transfer flavoprotein (ETF) or ETF-ubiquinone oxidoreductase (ETF dehydrogenase), which shuttle electrons from numerous mitochondrial flavin-adenine-dinucleotide-dependent dehydrogenases into the respiratory chain. Because these carriers serve the acyl-CoA dehydrogenases of fatty acid beta-oxidation as well as several dehydrogenases of amino acid catabolism, a single defect simultaneously impairs oxidation of fatty acids of all chain lengths, and of glutaryl-, isovaleryl- and sarcosine-related substrates. The consequence during fasting or catabolic stress is failure of fatty acid oxidation and ketogenesis, producing hypoketotic hypoglycaemia and energy deficiency, with accumulation of glutaric and dicarboxylic acids and secondary hyperammonaemia. ETFDH variants that destabilise the flavoprotein can be stabilised by riboflavin (the FAD precursor), which underlies the riboflavin-responsive phenotype. Inheritance is autosomal recessive.",
+  "additionalDifferentials": [
+   "Isolated fatty acid oxidation disorders (MCAD, VLCAD, LCHAD)",
+   "Isolated glutaric aciduria type I (glutaryl-CoA dehydrogenase deficiency)",
+   "Primary carnitine deficiency and CPT disorders",
+   "Mitochondrial respiratory chain disorders",
+   "Congenital lactic acidoses",
+   "Polycystic/dysplastic kidney disease of other cause (in the neonatal form)",
+   "Inflammatory or metabolic myopathies (in late-onset disease)"
+  ],
+  "additionalInvestigations": [
+   "Plasma acylcarnitine profile showing multiple chain-length elevations",
+   "Urine organic acids with glutaric and dicarboxylic aciduria",
+   "Blood gas, glucose, ketones and ammonia during crises",
+   "Creatine kinase in suspected lipid-storage myopathy/rhabdomyolysis",
+   "ETFA, ETFB and ETFDH gene sequencing",
+   "Renal ultrasound in neonates for cystic dysplastic kidneys",
+   "Trial of riboflavin with clinical/biochemical response assessment"
+  ],
+  "redFlags": [
+   "Neonatal hypoketotic hypoglycaemia with severe acidosis and cardiomyopathy",
+   "Hyperammonaemic encephalopathy during an acute crisis",
+   "Rhabdomyolysis with myoglobinuria and risk of renal failure",
+   "Cardiac arrhythmia or heart failure from lipid accumulation",
+   "Rapid decompensation with fasting or intercurrent illness"
+  ],
+  "prognosis": "The severe neonatal form, especially with congenital anomalies, carries a poor prognosis with high early mortality; late-onset disease is often milder and many riboflavin-responsive patients improve markedly, though relapses can occur with catabolic stress.",
+  "pitfalls": [
+   "Mistaking the multiple acylcarnitine elevations for an isolated fatty acid oxidation defect",
+   "Not trialling riboflavin in a myopathic or ETFDH-related case",
+   "Allowing fasting for procedures or illness without a glucose-based emergency plan",
+   "Overlooking cardiomyopathy and arrhythmia in the acute setting",
+   "Failing to monitor for rhabdomyolysis and renal compromise in late-onset disease"
+  ],
+  "references": [
+   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID)",
+   "Nelson Textbook of Paediatrics",
+   "Saudubray, Inborn Metabolic Diseases: Diagnosis and Treatment"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Trial of riboflavin, to which many late-onset patients respond markedly, with coenzyme Q10 and L-carnitine supplementation",
+   "Dietary management avoiding fasting, with a low-fat, low-protein, high-carbohydrate diet and frequent feeds",
+   "Emergency regimen during intercurrent illness or catabolic stress using intravenous glucose to suppress catabolism and prevent decompensation",
+   "Acute management of metabolic crises by correcting hypoketotic hypoglycaemia, acidosis and hyperammonaemia",
+   "Monitoring of acylcarnitine and organic acid profiles, growth, and creatine kinase where there is myopathy or rhabdomyolysis",
+   "Multidisciplinary metabolic care with a specialist dietitian",
+   "Genetic counselling for this autosomal recessive ETFA/ETFB/ETFDH disorder, with family screening and antenatal or newborn testing"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "multiple_acyl_coa_dehydrogenase_deficiency-pathway",
+   "title": "Multiple acyl-CoA dehydrogenase deficiency (glutaric aciduria type II): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Caused by defects in electron transfer flavoprotein or its dehydrogenase (ETFA, ETFB, ETFDH), impairing many flavin-dependent dehydrogenases at once",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Neonatal hypoketotic hypoglycaemia with severe acidosis and cardiomyopathy",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Plasma acylcarnitine profile showing multiple chain-length elevations, Urine organic acids with glutaric and dicarboxylic aciduria, Blood gas, glucose, ketones and ammonia during crises"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Trial of riboflavin, to which many late-onset patients respond markedly, with coenzyme Q10 and L-carnitine supplementation"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking the multiple acylcarnitine elevations for an isolated fatty acid oxidation defect"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of multiple acyl-coa dehydrogenase deficiency (glutaric aciduria type ii)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "multiple_acyl_coa_dehydrogenase_deficiency-matrix",
+   "title": "Multiple acyl-CoA dehydrogenase deficiency (glutaric aciduria type II): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Caused by defects in electron transfer flavoprotein or its dehydrogenase (ETFA, ETFB, ETFDH), impairing many flavin-dependent",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "MADD results from deficiency of electron transfer flavoprotein (ETF) or ETF-ubiquinone oxidoreductase (ETF dehydrogenase), which shuttle electrons from numerous mitochondrial flavin-adenine-dinucleotide-dependent dehydrogenases into the respiratory chain. Because these carriers serve the acyl-CoA dehydrogenases of fatty acid beta-oxidation as well as several dehydrogenases of amino acid catabolism, a single defect simultaneously impairs oxidation of fatty acids of all chain lengths, and of glutaryl-, isovaleryl- and sarcosine-related substrates. The consequence during fasting or catabolic stress is failure of fatty acid oxidation and ketogenesis, producing hypoketotic hypoglycaemia and energy deficiency, with accumulation of glutaric and dicarboxylic acids and secondary hyperammonaemia. ETFDH variants that destabilise the flavoprotein can be stabilised by riboflavin (the FAD precursor), which underlies the riboflavin-responsive phenotype. Inheritance is autosomal recessive.",
-    "additionalDifferentials": [
-      "Isolated fatty acid oxidation disorders (MCAD, VLCAD, LCHAD)",
-      "Isolated glutaric aciduria type I (glutaryl-CoA dehydrogenase deficiency)",
-      "Primary carnitine deficiency and CPT disorders",
-      "Mitochondrial respiratory chain disorders",
-      "Congenital lactic acidoses",
-      "Polycystic/dysplastic kidney disease of other cause (in the neonatal form)",
-      "Inflammatory or metabolic myopathies (in late-onset disease)"
+    [
+     "Key Investigations",
+     "Plasma acylcarnitine profile showing multiple chain-length elevations, Urine organic acids with glutaric and dicarboxylic",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Plasma acylcarnitine profile showing multiple chain-length elevations",
-      "Urine organic acids with glutaric and dicarboxylic aciduria",
-      "Blood gas, glucose, ketones and ammonia during crises",
-      "Creatine kinase in suspected lipid-storage myopathy/rhabdomyolysis",
-      "ETFA, ETFB and ETFDH gene sequencing",
-      "Renal ultrasound in neonates for cystic dysplastic kidneys",
-      "Trial of riboflavin with clinical/biochemical response assessment"
+    [
+     "Primary Differentials",
+     "Isolated fatty acid oxidation disorders (MCAD, VLCAD, LCHAD), Isolated glutaric aciduria type I (glutaryl-CoA dehydrogenase",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Neonatal hypoketotic hypoglycaemia with severe acidosis and cardiomyopathy",
-      "Hyperammonaemic encephalopathy during an acute crisis",
-      "Rhabdomyolysis with myoglobinuria and risk of renal failure",
-      "Cardiac arrhythmia or heart failure from lipid accumulation",
-      "Rapid decompensation with fasting or intercurrent illness"
+    [
+     "Management Strategy",
+     "Trial of riboflavin, to which many late-onset patients respond markedly, with coenzyme Q10 and L-carnitine supplementation",
+     "Core treatment modality"
     ],
-    "prognosis": "The severe neonatal form, especially with congenital anomalies, carries a poor prognosis with high early mortality; late-onset disease is often milder and many riboflavin-responsive patients improve markedly, though relapses can occur with catabolic stress.",
-    "pitfalls": [
-      "Mistaking the multiple acylcarnitine elevations for an isolated fatty acid oxidation defect",
-      "Not trialling riboflavin in a myopathic or ETFDH-related case",
-      "Allowing fasting for procedures or illness without a glucose-based emergency plan",
-      "Overlooking cardiomyopathy and arrhythmia in the acute setting",
-      "Failing to monitor for rhabdomyolysis and renal compromise in late-onset disease"
-    ],
-    "references": [
-      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID)",
-      "Nelson Textbook of Paediatrics",
-      "Saudubray, Inborn Metabolic Diseases: Diagnosis and Treatment"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Trial of riboflavin, to which many late-onset patients respond markedly, with coenzyme Q10 and L-carnitine supplementation",
-      "Dietary management avoiding fasting, with a low-fat, low-protein, high-carbohydrate diet and frequent feeds",
-      "Emergency regimen during intercurrent illness or catabolic stress using intravenous glucose to suppress catabolism and prevent decompensation",
-      "Acute management of metabolic crises by correcting hypoketotic hypoglycaemia, acidosis and hyperammonaemia",
-      "Monitoring of acylcarnitine and organic acid profiles, growth, and creatine kinase where there is myopathy or rhabdomyolysis",
-      "Multidisciplinary metabolic care with a specialist dietitian",
-      "Genetic counselling for this autosomal recessive ETFA/ETFB/ETFDH disorder, with family screening and antenatal or newborn testing"
+    [
+     "Clinical Pitfall",
+     "Mistaking the multiple acylcarnitine elevations for an isolated fatty acid oxidation defect",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for multiple acyl-coa dehydrogenase deficiency (glutaric aciduria type ii)."
+  }
+ ]
 }

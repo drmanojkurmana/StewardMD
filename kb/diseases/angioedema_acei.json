@@ -127,5 +127,77 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "hadb3c28c"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "angioedema_acei-dx-algo",
+      "title": "ACE-inhibitor / hereditary angioedema: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "ACE-inhibitor angioedema occurs in roughly 0.2-0.7% of exposed patients and is driven by impaired (delayed) degradation of bradykinin rather than by an IgE/mast-cell allergic mechanism (p. 2807).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Upper-respiratory-tract / laryngeal angioedema can cause transient airway obstruction and is potentially life-threatening (p. 2808).",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Diagnosis of bradykinin-mediated angioedema is largely clinical; the lack of pruritus/urticaria and failure to respond to H1 antihistamines point away from histaminergic causes (p. 2808)., For isolated angioedema without"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison classifies urticaria/angioedema by duration as acute (6 weeks) rather than by a graded severity scale; this distinction helps identify precipitating factors (pp. 2807, 2809). No formal angioedema"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Because the swelling is bradykinin- and not histamine-mediated, it responds poorly to the standard allergic-angioedema/anaphylaxis measures (adrenaline, antihistamines, glucocorticoids); relying on these can give false"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for ace-inhibitor / hereditary angioedema."
+    }
+  ],
+  "tables": [
+    {
+      "id": "angioedema_acei-matrix",
+      "title": "ACE-inhibitor / hereditary angioedema: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "ACE-inhibitor angioedema occurs in roughly 0.2-0.7% of exposed patients and is driven by impaired (delayed) degradation of",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Diagnosis of bradykinin-mediated angioedema is largely clinical; the lack of pruritus/urticaria and failure to respond to H1",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Allergic (histaminergic, IgE/mast-cell-mediated) angioedema, typically with concurrent urticaria/pruritus and a more rapid onset",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Upper-respiratory-tract / laryngeal angioedema can cause transient airway obstruction and is potentially life-threatening (p.",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Because the swelling is bradykinin- and not histamine-mediated, it responds poorly to the standard",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for ace-inhibitor / hereditary angioedema."
+    }
+  ]
 }

@@ -1,78 +1,150 @@
 {
-  "id": "periosteal_chondroma",
-  "name": "Periosteal chondroma",
-  "aliases": [
-    "Juxtacortical chondroma",
-    "Periosteal chondroma of bone"
+ "id": "periosteal_chondroma",
+ "name": "Periosteal chondroma",
+ "aliases": [
+  "Juxtacortical chondroma",
+  "Periosteal chondroma of bone"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal",
+ "specialty": "Orthopaedics / Musculoskeletal radiology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "WHO Classification of Tumours: Soft Tissue and Bone",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A benign surface (juxtacortical) hyaline cartilage tumour arising beneath the periosteum, favouring the proximal humerus, the small tubular bones of the hand and long-bone metaphyses in adolescents and young adults.",
+   "The lesion erodes and saucerises the underlying cortex, producing a well-defined defect with a sclerotic margin and characteristic overhanging periosteal buttresses at its edges.",
+   "It is typically small, usually under about 3 to 4 cm; larger surface cartilage lesions should raise suspicion for periosteal chondrosarcoma.",
+   "Chondroid matrix mineralisation in a ring-and-arc pattern may be visible within the lesion.",
+   "MRI shows lobulated tissue of high T2 signal with peripheral and septal enhancement and, importantly, no invasion of the medullary cavity.",
+   "It must be distinguished from periosteal chondrosarcoma and periosteal osteosarcoma, which are larger and show cortical destruction, marrow invasion or a soft-tissue mass.",
+   "Marginal en bloc excision is curative and local recurrence is uncommon when excision is complete."
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal",
-  "specialty": "Orthopaedics / Musculoskeletal radiology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "WHO Classification of Tumours: Soft Tissue and Bone",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A benign surface (juxtacortical) hyaline cartilage tumour arising beneath the periosteum, favouring the proximal humerus, the small tubular bones of the hand and long-bone metaphyses in adolescents and young adults.",
-      "The lesion erodes and saucerises the underlying cortex, producing a well-defined defect with a sclerotic margin and characteristic overhanging periosteal buttresses at its edges.",
-      "It is typically small, usually under about 3 to 4 cm; larger surface cartilage lesions should raise suspicion for periosteal chondrosarcoma.",
-      "Chondroid matrix mineralisation in a ring-and-arc pattern may be visible within the lesion.",
-      "MRI shows lobulated tissue of high T2 signal with peripheral and septal enhancement and, importantly, no invasion of the medullary cavity.",
-      "It must be distinguished from periosteal chondrosarcoma and periosteal osteosarcoma, which are larger and show cortical destruction, marrow invasion or a soft-tissue mass.",
-      "Marginal en bloc excision is curative and local recurrence is uncommon when excision is complete."
+  "pathophysiology": "Periosteal chondroma is a benign neoplasm of mature hyaline cartilage that develops on the surface of a bone, deep to the periosteum and superficial to the cortex. As the cartilaginous lobules enlarge they exert pressure on the underlying cortex, producing the characteristic scalloped cortical erosion (saucerisation) with a reactive sclerotic base and buttressing periosteal new bone at the margins, while by definition the process remains confined to the surface and does not invade the medullary cavity. Histologically it comprises lobules of hypercellular hyaline cartilage that may show mild atypia and binucleate cells, features acceptable in a surface lesion but which contribute to difficulty distinguishing it from low-grade surface chondrosarcoma; IDH mutations may be present as in other cartilage tumours.",
+  "additionalDifferentials": [
+   "Periosteal (juxtacortical) chondrosarcoma",
+   "Periosteal osteosarcoma",
+   "Osteochondroma",
+   "Bizarre parosteal osteochondromatous proliferation (Nora lesion)",
+   "Periosteal (cortical) desmoid",
+   "Surface aneurysmal bone cyst"
+  ],
+  "additionalInvestigations": [
+   "Plain radiographs to demonstrate cortical saucerisation with sclerotic margins and periosteal buttressing",
+   "MRI to characterise the cartilage and confirm absence of marrow invasion",
+   "CT to define cortical scalloping and matrix mineralisation",
+   "Assessment of lesion size as a discriminator from surface chondrosarcoma",
+   "Biopsy for large or atypical lesions, interpreted with awareness of overlap with low-grade malignancy",
+   "Comparison with prior imaging to assess for growth in the skeletally mature"
+  ],
+  "redFlags": [
+   "Lesion size greater than about 5 cm",
+   "Cortical destruction rather than smooth saucerisation",
+   "Invasion of the medullary cavity",
+   "An associated soft-tissue mass",
+   "Documented growth in a skeletally mature adult"
+  ],
+  "prognosis": "The prognosis is excellent, with a low rate of local recurrence following adequate marginal excision and negligible malignant potential.",
+  "pitfalls": [
+   "Misdiagnosis as periosteal chondrosarcoma, leading to overtreatment, or the reverse leading to inadequate surgery",
+   "Confusing it with osteochondroma, which shows corticomedullary continuity",
+   "Incomplete excision predisposing to local recurrence",
+   "Overlooking marrow invasion on MRI, which would indicate malignancy"
+  ],
+  "references": [
+   "WHO Classification of Tumours of Soft Tissue and Bone (current edition)",
+   "Resnick, Diagnosis of Bone and Joint Disorders",
+   "Greenspan, Orthopedic Imaging: A Practical Approach"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Manage asymptomatic, radiologically classic small lesions with observation and serial imaging",
+   "Undertake marginal en bloc surgical excision for symptomatic, enlarging or diagnostically uncertain lesions, which is generally curative",
+   "Ensure complete removal of the cartilage lobules to minimise local recurrence when curettage-based resection is used",
+   "Confirm absence of medullary invasion on MRI and use lesion size to help distinguish it from periosteal chondrosarcoma before planning surgery",
+   "Reserve biopsy for large or atypical lesions, interpreting histology with awareness of overlap with low-grade surface chondrosarcoma",
+   "Follow up with imaging for local recurrence after excision and manage within a musculoskeletal oncology and radiology multidisciplinary team"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "periosteal_chondroma-pathway",
+   "title": "Periosteal chondroma: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A benign surface (juxtacortical) hyaline cartilage tumour arising beneath the periosteum, favouring the proximal humerus, the small tubular bones of the hand and long-bone metaphyses in adolescents and young adults.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Lesion size greater than about 5 cm",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Plain radiographs to demonstrate cortical saucerisation with sclerotic margins and periosteal buttressing, MRI to characterise the cartilage and confirm absence of marrow invasion, CT to define cortical scalloping and"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Manage asymptomatic, radiologically classic small lesions with observation and serial imaging"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misdiagnosis as periosteal chondrosarcoma, leading to overtreatment, or the reverse leading to inadequate surgery"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of periosteal chondroma."
+  }
+ ],
+ "tables": [
+  {
+   "id": "periosteal_chondroma-matrix",
+   "title": "Periosteal chondroma: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A benign surface (juxtacortical) hyaline cartilage tumour arising beneath the periosteum, favouring the proximal humerus, the",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Periosteal chondroma is a benign neoplasm of mature hyaline cartilage that develops on the surface of a bone, deep to the periosteum and superficial to the cortex. As the cartilaginous lobules enlarge they exert pressure on the underlying cortex, producing the characteristic scalloped cortical erosion (saucerisation) with a reactive sclerotic base and buttressing periosteal new bone at the margins, while by definition the process remains confined to the surface and does not invade the medullary cavity. Histologically it comprises lobules of hypercellular hyaline cartilage that may show mild atypia and binucleate cells, features acceptable in a surface lesion but which contribute to difficulty distinguishing it from low-grade surface chondrosarcoma; IDH mutations may be present as in other cartilage tumours.",
-    "additionalDifferentials": [
-      "Periosteal (juxtacortical) chondrosarcoma",
-      "Periosteal osteosarcoma",
-      "Osteochondroma",
-      "Bizarre parosteal osteochondromatous proliferation (Nora lesion)",
-      "Periosteal (cortical) desmoid",
-      "Surface aneurysmal bone cyst"
+    [
+     "Key Investigations",
+     "Plain radiographs to demonstrate cortical saucerisation with sclerotic margins and periosteal buttressing, MRI to characterise",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Plain radiographs to demonstrate cortical saucerisation with sclerotic margins and periosteal buttressing",
-      "MRI to characterise the cartilage and confirm absence of marrow invasion",
-      "CT to define cortical scalloping and matrix mineralisation",
-      "Assessment of lesion size as a discriminator from surface chondrosarcoma",
-      "Biopsy for large or atypical lesions, interpreted with awareness of overlap with low-grade malignancy",
-      "Comparison with prior imaging to assess for growth in the skeletally mature"
+    [
+     "Primary Differentials",
+     "Periosteal (juxtacortical) chondrosarcoma, Periosteal osteosarcoma, Osteochondroma",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Lesion size greater than about 5 cm",
-      "Cortical destruction rather than smooth saucerisation",
-      "Invasion of the medullary cavity",
-      "An associated soft-tissue mass",
-      "Documented growth in a skeletally mature adult"
+    [
+     "Management Strategy",
+     "Manage asymptomatic, radiologically classic small lesions with observation and serial imaging",
+     "Core treatment modality"
     ],
-    "prognosis": "The prognosis is excellent, with a low rate of local recurrence following adequate marginal excision and negligible malignant potential.",
-    "pitfalls": [
-      "Misdiagnosis as periosteal chondrosarcoma, leading to overtreatment, or the reverse leading to inadequate surgery",
-      "Confusing it with osteochondroma, which shows corticomedullary continuity",
-      "Incomplete excision predisposing to local recurrence",
-      "Overlooking marrow invasion on MRI, which would indicate malignancy"
-    ],
-    "references": [
-      "WHO Classification of Tumours of Soft Tissue and Bone (current edition)",
-      "Resnick, Diagnosis of Bone and Joint Disorders",
-      "Greenspan, Orthopedic Imaging: A Practical Approach"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Manage asymptomatic, radiologically classic small lesions with observation and serial imaging",
-      "Undertake marginal en bloc surgical excision for symptomatic, enlarging or diagnostically uncertain lesions, which is generally curative",
-      "Ensure complete removal of the cartilage lobules to minimise local recurrence when curettage-based resection is used",
-      "Confirm absence of medullary invasion on MRI and use lesion size to help distinguish it from periosteal chondrosarcoma before planning surgery",
-      "Reserve biopsy for large or atypical lesions, interpreting histology with awareness of overlap with low-grade surface chondrosarcoma",
-      "Follow up with imaging for local recurrence after excision and manage within a musculoskeletal oncology and radiology multidisciplinary team"
+    [
+     "Clinical Pitfall",
+     "Misdiagnosis as periosteal chondrosarcoma, leading to overtreatment, or the reverse leading to inadequate surgery",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for periosteal chondroma."
+  }
+ ]
 }

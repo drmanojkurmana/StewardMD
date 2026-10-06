@@ -1,78 +1,150 @@
 {
-  "id": "osteomesopyknosis",
-  "name": "Osteomesopyknosis",
-  "aliases": [
-    "axial osteosclerosis",
-    "benign axial osteosclerosis",
-    "OSMPK"
+ "id": "osteomesopyknosis",
+ "name": "Osteomesopyknosis",
+ "aliases": [
+  "axial osteosclerosis",
+  "benign axial osteosclerosis",
+  "OSMPK"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Genetics",
+ "specialty": "Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / textbooks of skeletal dysplasia radiology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A rare, benign sclerosing bone dysplasia in which osteosclerosis is confined to the axial skeleton",
+   "Characteristically the sclerosis affects the spine (vertebral endplates), pelvis, and proximal femora while sparing the skull and distal limbs",
+   "It is usually inherited in an autosomal dominant pattern and often comes to light incidentally on radiographs",
+   "The commonest symptom is chronic low back pain, which is generally mild and non-progressive",
+   "Unlike osteopetrosis, there is no marrow failure, cranial nerve compression, or increased fracture tendency",
+   "Bone turnover markers and calcium metabolism are typically normal, helping to distinguish it from metabolic causes of sclerosis",
+   "The main clinical importance is recognising it as benign to avoid unnecessary investigation for malignancy or metabolic bone disease",
+   "No specific treatment is required beyond reassurance and simple management of back pain"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Genetics",
-  "specialty": "Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / textbooks of skeletal dysplasia radiology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A rare, benign sclerosing bone dysplasia in which osteosclerosis is confined to the axial skeleton",
-      "Characteristically the sclerosis affects the spine (vertebral endplates), pelvis, and proximal femora while sparing the skull and distal limbs",
-      "It is usually inherited in an autosomal dominant pattern and often comes to light incidentally on radiographs",
-      "The commonest symptom is chronic low back pain, which is generally mild and non-progressive",
-      "Unlike osteopetrosis, there is no marrow failure, cranial nerve compression, or increased fracture tendency",
-      "Bone turnover markers and calcium metabolism are typically normal, helping to distinguish it from metabolic causes of sclerosis",
-      "The main clinical importance is recognising it as benign to avoid unnecessary investigation for malignancy or metabolic bone disease",
-      "No specific treatment is required beyond reassurance and simple management of back pain"
+  "pathophysiology": "Osteomesopyknosis is a benign heritable sclerosing bone dysplasia characterised by increased bone density restricted to the axial skeleton, particularly the vertebrae, pelvis, and proximal femora. The precise molecular basis is not firmly established, but the pattern reflects a localised disturbance of the balance between bone formation and resorption favouring accrual of dense trabecular bone in axial sites, with sparing of the appendicular skeleton and skull. Because bone modelling and marrow function are otherwise preserved, there is no medullary compromise, and calcium homeostasis and bone-turnover biochemistry remain normal. The condition therefore behaves as a radiologically striking but clinically indolent finding, in contrast to the diffuse and complication-prone sclerosis of osteopetrosis.",
+  "additionalDifferentials": [
+   "Osteopetrosis and other diffuse sclerosing dysplasias",
+   "Osteoblastic metastases (e.g. from prostate or breast)",
+   "Paget disease of bone",
+   "Renal osteodystrophy with rugger-jersey spine",
+   "Fluorosis and other causes of increased bone density",
+   "Pyknodysostosis"
+  ],
+  "additionalInvestigations": [
+   "Plain radiographs of the spine and pelvis demonstrating the axial sclerosis pattern",
+   "Serum calcium, phosphate, and alkaline phosphatase (typically normal)",
+   "Bone turnover markers to exclude metabolic bone disease",
+   "Prostate-specific antigen or other tumour markers where metastasis is a concern",
+   "Family history and, where appropriate, radiographs of relatives",
+   "Cross-sectional imaging only if malignancy cannot be excluded clinically"
+  ],
+  "redFlags": [
+   "Atypical or progressive bone pain raising concern for metastatic disease",
+   "Constitutional symptoms suggesting malignancy rather than a benign dysplasia",
+   "Rising tumour markers or abnormal bone biochemistry indicating an alternative diagnosis",
+   "Pathological fracture, which would be unexpected and warrant reassessment"
+  ],
+  "prognosis": "Excellent; it is a benign, non-progressive condition with a normal life expectancy and no risk of marrow failure or nerve compression, with symptoms limited to mild back pain.",
+  "pitfalls": [
+   "Mistaking the axial sclerosis for osteoblastic metastases and subjecting patients to unnecessary cancer investigation",
+   "Confusing it with osteopetrosis and expecting marrow failure or fracture risk",
+   "Overlooking the normal bone biochemistry that supports a benign diagnosis",
+   "Failing to recognise the autosomal dominant pattern within a family"
+  ],
+  "references": [
+   "Emery and Rimoin's Principles and Practice of Medical Genetics",
+   "Textbooks of skeletal dysplasia radiology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Reassurance, since this is a benign, non-progressive dysplasia requiring no disease-modifying treatment",
+   "Conservative management of chronic low back pain with simple analgesia, physiotherapy and activity advice",
+   "Confirmation of the benign nature through normal calcium metabolism and bone turnover markers, so unnecessary intervention is avoided",
+   "Exclusion of osteoblastic metastasis where clinically warranted, for example with prostate-specific antigen, to avert misdiagnosis",
+   "Minimal radiographic follow-up given the indolent course and absence of marrow failure, fracture tendency or nerve compression",
+   "Genetic counselling and reassurance of relatives regarding the autosomal dominant inheritance"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "osteomesopyknosis-pathway",
+   "title": "Osteomesopyknosis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A rare, benign sclerosing bone dysplasia in which osteosclerosis is confined to the axial skeleton",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Atypical or progressive bone pain raising concern for metastatic disease",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Plain radiographs of the spine and pelvis demonstrating the axial sclerosis pattern, Serum calcium, phosphate, and alkaline phosphatase (typically normal), Bone turnover markers to exclude metabolic bone disease"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Reassurance, since this is a benign, non-progressive dysplasia requiring no disease-modifying treatment"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking the axial sclerosis for osteoblastic metastases and subjecting patients to unnecessary cancer investigation"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of osteomesopyknosis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "osteomesopyknosis-matrix",
+   "title": "Osteomesopyknosis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A rare, benign sclerosing bone dysplasia in which osteosclerosis is confined to the axial skeleton",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Osteomesopyknosis is a benign heritable sclerosing bone dysplasia characterised by increased bone density restricted to the axial skeleton, particularly the vertebrae, pelvis, and proximal femora. The precise molecular basis is not firmly established, but the pattern reflects a localised disturbance of the balance between bone formation and resorption favouring accrual of dense trabecular bone in axial sites, with sparing of the appendicular skeleton and skull. Because bone modelling and marrow function are otherwise preserved, there is no medullary compromise, and calcium homeostasis and bone-turnover biochemistry remain normal. The condition therefore behaves as a radiologically striking but clinically indolent finding, in contrast to the diffuse and complication-prone sclerosis of osteopetrosis.",
-    "additionalDifferentials": [
-      "Osteopetrosis and other diffuse sclerosing dysplasias",
-      "Osteoblastic metastases (e.g. from prostate or breast)",
-      "Paget disease of bone",
-      "Renal osteodystrophy with rugger-jersey spine",
-      "Fluorosis and other causes of increased bone density",
-      "Pyknodysostosis"
+    [
+     "Key Investigations",
+     "Plain radiographs of the spine and pelvis demonstrating the axial sclerosis pattern, Serum calcium, phosphate, and alkaline",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Plain radiographs of the spine and pelvis demonstrating the axial sclerosis pattern",
-      "Serum calcium, phosphate, and alkaline phosphatase (typically normal)",
-      "Bone turnover markers to exclude metabolic bone disease",
-      "Prostate-specific antigen or other tumour markers where metastasis is a concern",
-      "Family history and, where appropriate, radiographs of relatives",
-      "Cross-sectional imaging only if malignancy cannot be excluded clinically"
+    [
+     "Primary Differentials",
+     "Osteopetrosis and other diffuse sclerosing dysplasias, Osteoblastic metastases (e.g. from prostate or breast), Paget disease of",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Atypical or progressive bone pain raising concern for metastatic disease",
-      "Constitutional symptoms suggesting malignancy rather than a benign dysplasia",
-      "Rising tumour markers or abnormal bone biochemistry indicating an alternative diagnosis",
-      "Pathological fracture, which would be unexpected and warrant reassessment"
+    [
+     "Management Strategy",
+     "Reassurance, since this is a benign, non-progressive dysplasia requiring no disease-modifying treatment",
+     "Core treatment modality"
     ],
-    "prognosis": "Excellent; it is a benign, non-progressive condition with a normal life expectancy and no risk of marrow failure or nerve compression, with symptoms limited to mild back pain.",
-    "pitfalls": [
-      "Mistaking the axial sclerosis for osteoblastic metastases and subjecting patients to unnecessary cancer investigation",
-      "Confusing it with osteopetrosis and expecting marrow failure or fracture risk",
-      "Overlooking the normal bone biochemistry that supports a benign diagnosis",
-      "Failing to recognise the autosomal dominant pattern within a family"
-    ],
-    "references": [
-      "Emery and Rimoin's Principles and Practice of Medical Genetics",
-      "Textbooks of skeletal dysplasia radiology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Reassurance, since this is a benign, non-progressive dysplasia requiring no disease-modifying treatment",
-      "Conservative management of chronic low back pain with simple analgesia, physiotherapy and activity advice",
-      "Confirmation of the benign nature through normal calcium metabolism and bone turnover markers, so unnecessary intervention is avoided",
-      "Exclusion of osteoblastic metastasis where clinically warranted, for example with prostate-specific antigen, to avert misdiagnosis",
-      "Minimal radiographic follow-up given the indolent course and absence of marrow failure, fracture tendency or nerve compression",
-      "Genetic counselling and reassurance of relatives regarding the autosomal dominant inheritance"
+    [
+     "Clinical Pitfall",
+     "Mistaking the axial sclerosis for osteoblastic metastases and subjecting patients to unnecessary cancer investigation",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for osteomesopyknosis."
+  }
+ ]
 }

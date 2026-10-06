@@ -1,73 +1,145 @@
 {
-  "id": "biotin_deficiency",
-  "name": "Biotin deficiency",
-  "aliases": [
-    "vitamin B7 deficiency",
-    "vitamin H deficiency"
+ "id": "biotin_deficiency",
+ "name": "Biotin deficiency",
+ "aliases": [
+  "vitamin B7 deficiency",
+  "vitamin H deficiency"
+ ],
+ "class": "non_infective",
+ "system": "Nutritional / Skin / Nervous system",
+ "specialty": "Dermatology / Nutrition",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nutrition and dermatology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Deficiency of biotin (a B-group vitamin and enzyme cofactor) causes a characteristic dermatitis, alopecia and neurological features",
+   "The classic cutaneous sign is a periorificial scaly erythematous dermatitis with hair loss",
+   "Neurological features include lethargy, hypotonia, paraesthesiae and, in infants, developmental effects",
+   "Acquired causes include prolonged consumption of raw egg white (avidin binds biotin), long-term parenteral nutrition without biotin, and some anticonvulsants",
+   "Inherited biotinidase deficiency and holocarboxylase synthetase deficiency are important congenital causes detected on newborn screening",
+   "It responds rapidly to biotin replacement"
   ],
-  "class": "non_infective",
-  "system": "Nutritional / Skin / Nervous system",
-  "specialty": "Dermatology / Nutrition",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nutrition and dermatology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Deficiency of biotin (a B-group vitamin and enzyme cofactor) causes a characteristic dermatitis, alopecia and neurological features",
-      "The classic cutaneous sign is a periorificial scaly erythematous dermatitis with hair loss",
-      "Neurological features include lethargy, hypotonia, paraesthesiae and, in infants, developmental effects",
-      "Acquired causes include prolonged consumption of raw egg white (avidin binds biotin), long-term parenteral nutrition without biotin, and some anticonvulsants",
-      "Inherited biotinidase deficiency and holocarboxylase synthetase deficiency are important congenital causes detected on newborn screening",
-      "It responds rapidly to biotin replacement"
+  "pathophysiology": "Biotin is a cofactor for carboxylase enzymes central to gluconeogenesis, fatty acid synthesis and amino acid metabolism. Deficiency impairs these carboxylases, disturbing energy and lipid metabolism in the skin, hair follicles and nervous system and producing the dermatitis, alopecia and neurological features. Acquired deficiency follows reduced intake or absorption or increased binding (avidin in raw egg white), while inherited biotinidase or holocarboxylase synthetase deficiency prevents recycling or utilisation of biotin, causing an organic aciduria if untreated.",
+  "additionalDifferentials": [
+   "Acrodermatitis enteropathica (zinc deficiency)",
+   "Other nutritional dermatitides (essential fatty acid, niacin)",
+   "Seborrhoeic dermatitis",
+   "Inherited organic acidaemias",
+   "Alopecia of other cause"
+  ],
+  "additionalInvestigations": [
+   "Clinical recognition of the dermatitis-alopecia-neurological pattern",
+   "Biotinidase activity and, in infants, newborn screening results",
+   "Assessment of diet, parenteral nutrition and medications",
+   "Urinary organic acids where an inherited disorder is suspected",
+   "Response to biotin supplementation"
+  ],
+  "redFlags": [
+   "Infant with dermatitis, seizures and metabolic acidosis (possible biotinidase deficiency)",
+   "Developmental regression",
+   "Severe or refractory dermatitis",
+   "Coma or metabolic decompensation"
+  ],
+  "prognosis": "Acquired deficiency and inherited biotinidase deficiency respond well and often completely to biotin, particularly when inherited disease is treated early after newborn screening.",
+  "pitfalls": [
+   "Missing biotinidase deficiency, which is treatable and screened for in newborns",
+   "Overlooking dietary raw egg white or biotin-free parenteral nutrition",
+   "Confusing it with zinc deficiency dermatitis",
+   "Delaying treatment in an unwell infant"
+  ],
+  "references": [
+   "Nutrition reference texts (standard reference)",
+   "Metabolic medicine references (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Oral biotin supplementation as the mainstay, correcting the deficiency and reversing the dermatitis, alopecia and neurological features",
+   "Remove the precipitating cause — discontinue raw egg white ingestion, add biotin to long-term parenteral nutrition and review offending anticonvulsants",
+   "Supportive skin care for the periorificial dermatitis while replacement takes effect",
+   "Monitor clinical response, expecting rapid improvement in rash, hair regrowth and neurological symptoms",
+   "In suspected inherited disease, confirm biotinidase activity and commit to lifelong biotin replacement",
+   "Refer inherited cases to metabolic medicine with newborn-screening follow-up and family screening"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "biotin_deficiency-pathway",
+   "title": "Biotin deficiency: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Deficiency of biotin (a B-group vitamin and enzyme cofactor) causes a characteristic dermatitis, alopecia and neurological features",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Infant with dermatitis, seizures and metabolic acidosis (possible biotinidase deficiency)",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical recognition of the dermatitis-alopecia-neurological pattern, Biotinidase activity and, in infants, newborn screening results, Assessment of diet, parenteral nutrition and medications"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Oral biotin supplementation as the mainstay, correcting the deficiency and reversing the dermatitis, alopecia and neurological features"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Missing biotinidase deficiency, which is treatable and screened for in newborns"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of biotin deficiency."
+  }
+ ],
+ "tables": [
+  {
+   "id": "biotin_deficiency-matrix",
+   "title": "Biotin deficiency: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Deficiency of biotin (a B-group vitamin and enzyme cofactor) causes a characteristic dermatitis, alopecia and neurological",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Biotin is a cofactor for carboxylase enzymes central to gluconeogenesis, fatty acid synthesis and amino acid metabolism. Deficiency impairs these carboxylases, disturbing energy and lipid metabolism in the skin, hair follicles and nervous system and producing the dermatitis, alopecia and neurological features. Acquired deficiency follows reduced intake or absorption or increased binding (avidin in raw egg white), while inherited biotinidase or holocarboxylase synthetase deficiency prevents recycling or utilisation of biotin, causing an organic aciduria if untreated.",
-    "additionalDifferentials": [
-      "Acrodermatitis enteropathica (zinc deficiency)",
-      "Other nutritional dermatitides (essential fatty acid, niacin)",
-      "Seborrhoeic dermatitis",
-      "Inherited organic acidaemias",
-      "Alopecia of other cause"
+    [
+     "Key Investigations",
+     "Clinical recognition of the dermatitis-alopecia-neurological pattern, Biotinidase activity and, in infants, newborn screening",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical recognition of the dermatitis-alopecia-neurological pattern",
-      "Biotinidase activity and, in infants, newborn screening results",
-      "Assessment of diet, parenteral nutrition and medications",
-      "Urinary organic acids where an inherited disorder is suspected",
-      "Response to biotin supplementation"
+    [
+     "Primary Differentials",
+     "Acrodermatitis enteropathica (zinc deficiency), Other nutritional dermatitides (essential fatty acid, niacin), Seborrhoeic",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Infant with dermatitis, seizures and metabolic acidosis (possible biotinidase deficiency)",
-      "Developmental regression",
-      "Severe or refractory dermatitis",
-      "Coma or metabolic decompensation"
+    [
+     "Management Strategy",
+     "Oral biotin supplementation as the mainstay, correcting the deficiency and reversing the dermatitis, alopecia and neurological",
+     "Core treatment modality"
     ],
-    "prognosis": "Acquired deficiency and inherited biotinidase deficiency respond well and often completely to biotin, particularly when inherited disease is treated early after newborn screening.",
-    "pitfalls": [
-      "Missing biotinidase deficiency, which is treatable and screened for in newborns",
-      "Overlooking dietary raw egg white or biotin-free parenteral nutrition",
-      "Confusing it with zinc deficiency dermatitis",
-      "Delaying treatment in an unwell infant"
-    ],
-    "references": [
-      "Nutrition reference texts (standard reference)",
-      "Metabolic medicine references (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Oral biotin supplementation as the mainstay, correcting the deficiency and reversing the dermatitis, alopecia and neurological features",
-      "Remove the precipitating cause — discontinue raw egg white ingestion, add biotin to long-term parenteral nutrition and review offending anticonvulsants",
-      "Supportive skin care for the periorificial dermatitis while replacement takes effect",
-      "Monitor clinical response, expecting rapid improvement in rash, hair regrowth and neurological symptoms",
-      "In suspected inherited disease, confirm biotinidase activity and commit to lifelong biotin replacement",
-      "Refer inherited cases to metabolic medicine with newborn-screening follow-up and family screening"
+    [
+     "Clinical Pitfall",
+     "Missing biotinidase deficiency, which is treatable and screened for in newborns",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for biotin deficiency."
+  }
+ ]
 }

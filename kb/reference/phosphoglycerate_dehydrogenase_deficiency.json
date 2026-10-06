@@ -1,77 +1,149 @@
 {
-  "id": "phosphoglycerate_dehydrogenase_deficiency",
-  "name": "Phosphoglycerate dehydrogenase deficiency",
-  "aliases": [
-    "PHGDH deficiency",
-    "serine deficiency syndrome",
-    "3-phosphoglycerate dehydrogenase deficiency"
+ "id": "phosphoglycerate_dehydrogenase_deficiency",
+ "name": "Phosphoglycerate dehydrogenase deficiency",
+ "aliases": [
+  "PHGDH deficiency",
+  "serine deficiency syndrome",
+  "3-phosphoglycerate dehydrogenase deficiency"
+ ],
+ "class": "non_infective",
+ "system": "Metabolic / Amino acid biosynthesis",
+ "specialty": "Metabolic medicine / Neurology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Metabolic medicine references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An autosomal recessive disorder of L-serine biosynthesis caused by deficiency of phosphoglycerate dehydrogenase",
+   "The classic infantile form presents with congenital microcephaly, intractable seizures and severe psychomotor retardation",
+   "Milder juvenile forms with absence seizures and developmental delay are recognised",
+   "The most severe end of the spectrum overlaps with Neu-Laxova syndrome",
+   "Cerebrospinal fluid and, to a lesser extent, plasma show low serine (and often low glycine)",
+   "It is one of the treatable inborn errors — oral serine (with glycine) supplementation can improve seizures and, if started early, outcomes",
+   "Serine is essential for neuronal membrane, neurotransmitter and one-carbon metabolism, explaining the neurological phenotype"
   ],
-  "class": "non_infective",
-  "system": "Metabolic / Amino acid biosynthesis",
-  "specialty": "Metabolic medicine / Neurology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Metabolic medicine references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An autosomal recessive disorder of L-serine biosynthesis caused by deficiency of phosphoglycerate dehydrogenase",
-      "The classic infantile form presents with congenital microcephaly, intractable seizures and severe psychomotor retardation",
-      "Milder juvenile forms with absence seizures and developmental delay are recognised",
-      "The most severe end of the spectrum overlaps with Neu-Laxova syndrome",
-      "Cerebrospinal fluid and, to a lesser extent, plasma show low serine (and often low glycine)",
-      "It is one of the treatable inborn errors — oral serine (with glycine) supplementation can improve seizures and, if started early, outcomes",
-      "Serine is essential for neuronal membrane, neurotransmitter and one-carbon metabolism, explaining the neurological phenotype"
+  "pathophysiology": "Phosphoglycerate dehydrogenase catalyses the first committed step of de novo L-serine synthesis from a glycolytic intermediate. Deficiency limits endogenous serine production, which is critical in the brain because serine crosses the blood-brain barrier poorly and neural tissue depends heavily on local synthesis. Serine is a precursor for glycine, phospholipids, nucleotides and D-serine (an NMDA-receptor co-agonist), so its deficiency impairs myelination, neuronal proliferation and neurotransmission, producing microcephaly, seizures and developmental impairment. Providing exogenous serine bypasses the enzymatic block.",
+  "additionalDifferentials": [
+   "Other serine biosynthesis defects (phosphoserine aminotransferase or phosphatase deficiency)",
+   "Congenital microcephaly of other genetic cause",
+   "Early infantile epileptic encephalopathies",
+   "Congenital infections causing microcephaly",
+   "Neu-Laxova syndrome (severe end of the spectrum)",
+   "Other treatable neurometabolic epilepsies"
+  ],
+  "additionalInvestigations": [
+   "Plasma and cerebrospinal fluid amino acids showing low serine",
+   "Genetic testing of PHGDH",
+   "Brain MRI (may show hypomyelination and cortical atrophy)",
+   "EEG for seizure characterisation",
+   "Assessment of the other serine-pathway enzymes if PHGDH is normal"
+  ],
+  "redFlags": [
+   "Congenital microcephaly with intractable neonatal seizures",
+   "Progressive developmental regression",
+   "Feeding difficulties and failure to thrive",
+   "Severe presentation overlapping with Neu-Laxova syndrome"
+  ],
+  "prognosis": "Untreated classic disease carries a poor neurological prognosis; early serine (and glycine) supplementation can markedly reduce seizures and, when started antenatally or in early infancy, may substantially improve outcome.",
+  "pitfalls": [
+   "Measuring only plasma amino acids, as cerebrospinal fluid serine is more sensitive",
+   "Overlooking a treatable cause of a neonatal epileptic encephalopathy",
+   "Delaying a trial of serine supplementation while awaiting genetics",
+   "Confusing it with non-treatable causes of congenital microcephaly"
+  ],
+  "references": [
+   "Textbook of Inborn Metabolic Diseases (standard reference)",
+   "GeneReviews (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Provide lifelong oral L-serine supplementation, usually with added glycine, to bypass the enzymatic block and replenish central serine",
+   "Start supplementation as early as possible, including antenatally in affected pregnancies, to maximise neurological outcome",
+   "Control seizures with appropriate anticonvulsant therapy alongside serine replacement",
+   "Support development with physiotherapy, occupational therapy and speech and language input",
+   "Monitor cerebrospinal fluid and plasma serine and glycine and titrate supplementation against clinical and biochemical response",
+   "Offer genetic counselling with PHGDH cascade testing of the family and prenatal diagnosis for future pregnancies",
+   "Coordinate care through metabolic medicine and paediatric neurology"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "phosphoglycerate_dehydrogenase_deficiency-pathway",
+   "title": "Phosphoglycerate dehydrogenase deficiency: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An autosomal recessive disorder of L-serine biosynthesis caused by deficiency of phosphoglycerate dehydrogenase",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Congenital microcephaly with intractable neonatal seizures",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Plasma and cerebrospinal fluid amino acids showing low serine, Genetic testing of PHGDH, Brain MRI (may show hypomyelination and cortical atrophy)"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Provide lifelong oral L-serine supplementation, usually with added glycine, to bypass the enzymatic block and replenish central serine"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Measuring only plasma amino acids, as cerebrospinal fluid serine is more sensitive"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of phosphoglycerate dehydrogenase deficiency."
+  }
+ ],
+ "tables": [
+  {
+   "id": "phosphoglycerate_dehydrogenase_deficiency-matrix",
+   "title": "Phosphoglycerate dehydrogenase deficiency: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An autosomal recessive disorder of L-serine biosynthesis caused by deficiency of phosphoglycerate dehydrogenase",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Phosphoglycerate dehydrogenase catalyses the first committed step of de novo L-serine synthesis from a glycolytic intermediate. Deficiency limits endogenous serine production, which is critical in the brain because serine crosses the blood-brain barrier poorly and neural tissue depends heavily on local synthesis. Serine is a precursor for glycine, phospholipids, nucleotides and D-serine (an NMDA-receptor co-agonist), so its deficiency impairs myelination, neuronal proliferation and neurotransmission, producing microcephaly, seizures and developmental impairment. Providing exogenous serine bypasses the enzymatic block.",
-    "additionalDifferentials": [
-      "Other serine biosynthesis defects (phosphoserine aminotransferase or phosphatase deficiency)",
-      "Congenital microcephaly of other genetic cause",
-      "Early infantile epileptic encephalopathies",
-      "Congenital infections causing microcephaly",
-      "Neu-Laxova syndrome (severe end of the spectrum)",
-      "Other treatable neurometabolic epilepsies"
+    [
+     "Key Investigations",
+     "Plasma and cerebrospinal fluid amino acids showing low serine, Genetic testing of PHGDH, Brain MRI (may show hypomyelination and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Plasma and cerebrospinal fluid amino acids showing low serine",
-      "Genetic testing of PHGDH",
-      "Brain MRI (may show hypomyelination and cortical atrophy)",
-      "EEG for seizure characterisation",
-      "Assessment of the other serine-pathway enzymes if PHGDH is normal"
+    [
+     "Primary Differentials",
+     "Other serine biosynthesis defects (phosphoserine aminotransferase or phosphatase deficiency), Congenital microcephaly of other",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Congenital microcephaly with intractable neonatal seizures",
-      "Progressive developmental regression",
-      "Feeding difficulties and failure to thrive",
-      "Severe presentation overlapping with Neu-Laxova syndrome"
+    [
+     "Management Strategy",
+     "Provide lifelong oral L-serine supplementation, usually with added glycine, to bypass the enzymatic block and replenish central",
+     "Core treatment modality"
     ],
-    "prognosis": "Untreated classic disease carries a poor neurological prognosis; early serine (and glycine) supplementation can markedly reduce seizures and, when started antenatally or in early infancy, may substantially improve outcome.",
-    "pitfalls": [
-      "Measuring only plasma amino acids, as cerebrospinal fluid serine is more sensitive",
-      "Overlooking a treatable cause of a neonatal epileptic encephalopathy",
-      "Delaying a trial of serine supplementation while awaiting genetics",
-      "Confusing it with non-treatable causes of congenital microcephaly"
-    ],
-    "references": [
-      "Textbook of Inborn Metabolic Diseases (standard reference)",
-      "GeneReviews (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Provide lifelong oral L-serine supplementation, usually with added glycine, to bypass the enzymatic block and replenish central serine",
-      "Start supplementation as early as possible, including antenatally in affected pregnancies, to maximise neurological outcome",
-      "Control seizures with appropriate anticonvulsant therapy alongside serine replacement",
-      "Support development with physiotherapy, occupational therapy and speech and language input",
-      "Monitor cerebrospinal fluid and plasma serine and glycine and titrate supplementation against clinical and biochemical response",
-      "Offer genetic counselling with PHGDH cascade testing of the family and prenatal diagnosis for future pregnancies",
-      "Coordinate care through metabolic medicine and paediatric neurology"
+    [
+     "Clinical Pitfall",
+     "Measuring only plasma amino acids, as cerebrospinal fluid serine is more sensitive",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for phosphoglycerate dehydrogenase deficiency."
+  }
+ ]
 }

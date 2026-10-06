@@ -1,72 +1,144 @@
 {
-  "id": "cold_stimulus_headache",
-  "name": "Cold-stimulus headache",
-  "aliases": [
-    "ice-cream headache",
-    "brain freeze",
-    "cold-induced headache"
+ "id": "cold_stimulus_headache",
+ "name": "Cold-stimulus headache",
+ "aliases": [
+  "ice-cream headache",
+  "brain freeze",
+  "cold-induced headache"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system",
+ "specialty": "Neurology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "International Classification of Headache Disorders (ICHD-3)",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A brief headache triggered by a cold stimulus applied to the head or passing over the palate and posterior pharynx",
+   "The pain is short-lived, usually frontal or temporal, and resolves within seconds to a couple of minutes of removing the stimulus",
+   "The palatal (ingested-cold) form is the familiar response to rapidly eating or drinking something very cold",
+   "It is very common in the general population and especially frequent in people with migraine",
+   "No investigation is needed when the trigger is clear and the examination is normal",
+   "Simple avoidance or slowing intake of cold food and drink is sufficient management"
   ],
-  "class": "non_infective",
-  "system": "Nervous system",
-  "specialty": "Neurology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "International Classification of Headache Disorders (ICHD-3)",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A brief headache triggered by a cold stimulus applied to the head or passing over the palate and posterior pharynx",
-      "The pain is short-lived, usually frontal or temporal, and resolves within seconds to a couple of minutes of removing the stimulus",
-      "The palatal (ingested-cold) form is the familiar response to rapidly eating or drinking something very cold",
-      "It is very common in the general population and especially frequent in people with migraine",
-      "No investigation is needed when the trigger is clear and the examination is normal",
-      "Simple avoidance or slowing intake of cold food and drink is sufficient management"
+  "pathophysiology": "Cold-stimulus headache is a referred pain response in which sudden cooling of the palate, pharynx or head activates trigeminal sensory afferents and provokes transient changes in local blood vessels, generating brief referred pain to the frontotemporal region. It is a benign physiological phenomenon rather than a disease, though its heightened frequency in migraine suggests a lower threshold of trigeminovascular activation in those individuals.",
+  "additionalDifferentials": [
+   "Migraine attack triggered by cold",
+   "Primary stabbing headache",
+   "Trigeminal neuralgia",
+   "Sinus or dental pain provoked by cold",
+   "Secondary headache if the temporal link to cold is unclear"
+  ],
+  "additionalInvestigations": [
+   "Clinical diagnosis from the clear temporal relationship to a cold stimulus",
+   "Neurological examination to confirm no focal signs",
+   "Investigation only if features are atypical or examination is abnormal"
+  ],
+  "redFlags": [
+   "Headache that outlasts the cold stimulus substantially",
+   "Focal neurological signs",
+   "Progressive or new pattern unrelated to cold exposure",
+   "Associated systemic or alarm features"
+  ],
+  "prognosis": "The condition is entirely benign and self-limiting, with pain resolving promptly once the cold stimulus is withdrawn.",
+  "pitfalls": [
+   "Confusing a cold-triggered migraine with a simple cold-stimulus headache",
+   "Investigating an obviously benign, stimulus-locked headache",
+   "Overlooking that it flags an underlying tendency to migraine",
+   "Attributing an unrelated persistent headache to cold exposure"
+  ],
+  "references": [
+   "International Classification of Headache Disorders (ICHD-3)",
+   "Bradley and Daroff Neurology in Clinical Practice"
+  ],
+  "crossLinks": [],
+  "management": [
+   "The mainstay is avoiding or slowing the ingestion of very cold food and drink and limiting sudden cold exposure to the head and palate",
+   "Abort an attack by warming the palate, for example pressing the tongue against the roof of the mouth, with pain settling within seconds to a couple of minutes",
+   "Reassurance that this is a benign, self-limiting physiological phenomenon requiring no specific treatment",
+   "No investigation is needed when the trigger is clear and neurological examination is normal",
+   "Recognise the heightened susceptibility in people with migraine and address migraine management where relevant",
+   "Reassess and investigate only if the headache is atypical, prolonged or accompanied by abnormal neurological signs"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "cold_stimulus_headache-pathway",
+   "title": "Cold-stimulus headache: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A brief headache triggered by a cold stimulus applied to the head or passing over the palate and posterior pharynx",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Headache that outlasts the cold stimulus substantially",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical diagnosis from the clear temporal relationship to a cold stimulus, Neurological examination to confirm no focal signs, Investigation only if features are atypical or examination is abnormal"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: The mainstay is avoiding or slowing the ingestion of very cold food and drink and limiting sudden cold exposure to the head and palate"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing a cold-triggered migraine with a simple cold-stimulus headache"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of cold-stimulus headache."
+  }
+ ],
+ "tables": [
+  {
+   "id": "cold_stimulus_headache-matrix",
+   "title": "Cold-stimulus headache: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A brief headache triggered by a cold stimulus applied to the head or passing over the palate and posterior pharynx",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Cold-stimulus headache is a referred pain response in which sudden cooling of the palate, pharynx or head activates trigeminal sensory afferents and provokes transient changes in local blood vessels, generating brief referred pain to the frontotemporal region. It is a benign physiological phenomenon rather than a disease, though its heightened frequency in migraine suggests a lower threshold of trigeminovascular activation in those individuals.",
-    "additionalDifferentials": [
-      "Migraine attack triggered by cold",
-      "Primary stabbing headache",
-      "Trigeminal neuralgia",
-      "Sinus or dental pain provoked by cold",
-      "Secondary headache if the temporal link to cold is unclear"
+    [
+     "Key Investigations",
+     "Clinical diagnosis from the clear temporal relationship to a cold stimulus, Neurological examination to confirm no focal signs,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical diagnosis from the clear temporal relationship to a cold stimulus",
-      "Neurological examination to confirm no focal signs",
-      "Investigation only if features are atypical or examination is abnormal"
+    [
+     "Primary Differentials",
+     "Migraine attack triggered by cold, Primary stabbing headache, Trigeminal neuralgia",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Headache that outlasts the cold stimulus substantially",
-      "Focal neurological signs",
-      "Progressive or new pattern unrelated to cold exposure",
-      "Associated systemic or alarm features"
+    [
+     "Management Strategy",
+     "The mainstay is avoiding or slowing the ingestion of very cold food and drink and limiting sudden cold exposure to the head and",
+     "Core treatment modality"
     ],
-    "prognosis": "The condition is entirely benign and self-limiting, with pain resolving promptly once the cold stimulus is withdrawn.",
-    "pitfalls": [
-      "Confusing a cold-triggered migraine with a simple cold-stimulus headache",
-      "Investigating an obviously benign, stimulus-locked headache",
-      "Overlooking that it flags an underlying tendency to migraine",
-      "Attributing an unrelated persistent headache to cold exposure"
-    ],
-    "references": [
-      "International Classification of Headache Disorders (ICHD-3)",
-      "Bradley and Daroff Neurology in Clinical Practice"
-    ],
-    "crossLinks": [],
-    "management": [
-      "The mainstay is avoiding or slowing the ingestion of very cold food and drink and limiting sudden cold exposure to the head and palate",
-      "Abort an attack by warming the palate, for example pressing the tongue against the roof of the mouth, with pain settling within seconds to a couple of minutes",
-      "Reassurance that this is a benign, self-limiting physiological phenomenon requiring no specific treatment",
-      "No investigation is needed when the trigger is clear and neurological examination is normal",
-      "Recognise the heightened susceptibility in people with migraine and address migraine management where relevant",
-      "Reassess and investigate only if the headache is atypical, prolonged or accompanied by abnormal neurological signs"
+    [
+     "Clinical Pitfall",
+     "Confusing a cold-triggered migraine with a simple cold-stimulus headache",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for cold-stimulus headache."
+  }
+ ]
 }

@@ -1,82 +1,154 @@
 {
-  "id": "congenital_dyserythropoietic_anaemia_type_2",
-  "name": "Congenital dyserythropoietic anaemia type 2",
-  "aliases": [
-    "CDA II",
-    "HEMPAS",
-    "SEC23B-related CDA"
+ "id": "congenital_dyserythropoietic_anaemia_type_2",
+ "name": "Congenital dyserythropoietic anaemia type 2",
+ "aliases": [
+  "CDA II",
+  "HEMPAS",
+  "SEC23B-related CDA"
+ ],
+ "class": "non_infective",
+ "system": "Haematological",
+ "specialty": "Haematology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Haematology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The most common congenital dyserythropoietic anaemia; autosomal recessive, caused by biallelic SEC23B mutations affecting COPII endoplasmic-reticulum-to-Golgi trafficking.",
+   "Historically termed HEMPAS: hereditary erythroblastic multinuclearity with a positive acidified serum lysis test.",
+   "Bone marrow shows characteristic bi- and multinucleated erythroblasts, with a double plasma membrane appearance on electron microscopy.",
+   "The acidified-serum (Ham) test is positive with a proportion of ABO-compatible normal sera but negative with the patient's own serum, and the sucrose lysis test is negative, which distinguishes it from paroxysmal nocturnal haemoglobinuria.",
+   "Red cell membrane SDS-PAGE shows hypoglycosylated, faster-migrating band 3 (anion exchanger 1).",
+   "Iron overload develops independently of transfusion because of ineffective erythropoiesis and suppressed hepcidin, so ferritin and organ iron should be monitored.",
+   "Splenectomy can raise the haemoglobin but does not correct iron loading, and pigment gallstones are common.",
+   "Anaemia is often mild to moderate, so the diagnosis is easily missed unless dyserythropoiesis is specifically sought."
   ],
-  "class": "non_infective",
-  "system": "Haematological",
-  "specialty": "Haematology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Haematology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The most common congenital dyserythropoietic anaemia; autosomal recessive, caused by biallelic SEC23B mutations affecting COPII endoplasmic-reticulum-to-Golgi trafficking.",
-      "Historically termed HEMPAS: hereditary erythroblastic multinuclearity with a positive acidified serum lysis test.",
-      "Bone marrow shows characteristic bi- and multinucleated erythroblasts, with a double plasma membrane appearance on electron microscopy.",
-      "The acidified-serum (Ham) test is positive with a proportion of ABO-compatible normal sera but negative with the patient's own serum, and the sucrose lysis test is negative, which distinguishes it from paroxysmal nocturnal haemoglobinuria.",
-      "Red cell membrane SDS-PAGE shows hypoglycosylated, faster-migrating band 3 (anion exchanger 1).",
-      "Iron overload develops independently of transfusion because of ineffective erythropoiesis and suppressed hepcidin, so ferritin and organ iron should be monitored.",
-      "Splenectomy can raise the haemoglobin but does not correct iron loading, and pigment gallstones are common.",
-      "Anaemia is often mild to moderate, so the diagnosis is easily missed unless dyserythropoiesis is specifically sought."
+  "pathophysiology": "Congenital dyserythropoietic anaemia type 2 is an autosomal recessive disorder of ineffective erythropoiesis caused by biallelic mutations in SEC23B, which encodes a core component of the COPII coat complex that mediates anterograde protein transport from the endoplasmic reticulum to the Golgi apparatus. Impaired vesicular trafficking disrupts glycosylation of erythroid membrane proteins, producing the hallmark hypoglycosylated band 3 (anion exchanger 1) and abnormal N-linked glycans. Erythroblasts become bi- and multinucleated and undergo intramedullary apoptosis, so red cell production is ineffective despite marrow erythroid hyperplasia. Chronic haemolysis together with inappropriately low hepcidin increases dietary iron absorption, driving progressive parenchymal iron overload that can occur even in patients who have never been transfused.",
+  "additionalDifferentials": [
+   "Other congenital dyserythropoietic anaemias (types I and III, and CDA variants such as KLF1- or GATA1-related)",
+   "Hereditary spherocytosis and other red cell membrane disorders",
+   "Thalassaemia syndromes",
+   "Paroxysmal nocturnal haemoglobinuria",
+   "Autoimmune haemolytic anaemia",
+   "Myelodysplastic syndrome with dyserythropoiesis",
+   "Congenital sideroblastic anaemias"
+  ],
+  "additionalInvestigations": [
+   "Bone marrow aspirate and trephine to assess erythroblast morphology",
+   "Electron microscopy of erythroblasts for the double-membrane appearance",
+   "Acidified serum (Ham) and sucrose lysis tests, with flow cytometry (CD55/CD59) to exclude paroxysmal nocturnal haemoglobinuria",
+   "Red cell membrane protein SDS-PAGE for band 3 glycosylation",
+   "SEC23B molecular testing",
+   "Iron studies and ferritin, with hepatic and cardiac iron quantification by MRI",
+   "Reticulocyte count, haptoglobin, bilirubin and lactate dehydrogenase"
+  ],
+  "redFlags": [
+   "Symptomatic iron overload with cardiac, hepatic or endocrine dysfunction",
+   "Aplastic crisis, for example after parvovirus B19, with an abrupt fall in haemoglobin",
+   "Symptomatic gallstone disease or biliary obstruction",
+   "Severe or transfusion-dependent anaemia"
+  ],
+  "prognosis": "Many patients have mild-to-moderate anaemia and a near-normal life expectancy, but iron overload is the major long-term threat and can cause organ damage if not monitored and treated. Anaemia severity is variable and a minority require regular transfusion.",
+  "pitfalls": [
+   "Misdiagnosing paroxysmal nocturnal haemoglobinuria because of a positive acidified-serum test, when the patient's own serum does not lyse the cells and PNH flow cytometry is normal.",
+   "Attributing iron overload solely to transfusion and under-treating it in non-transfused patients.",
+   "Overlooking dyserythropoietic anaemia when reticulocytes are inappropriately low for the degree of anaemia.",
+   "Confusing the picture with thalassaemia intermedia."
+  ],
+  "references": [
+   "Haematology reference texts",
+   "Congenital dyserythropoietic anaemia guidelines",
+   "Inherited anaemia references"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Iron chelation with deferasirox, deferiprone or desferrioxamine is the therapeutic mainstay, since parenchymal iron overload accrues even without transfusion because ineffective erythropoiesis suppresses hepcidin",
+   "Give folic acid supplementation to meet the demands of chronically expanded but ineffective erythropoiesis",
+   "Reserve leucodepleted, phenotype-matched red-cell transfusion for symptomatic or severe anaemia to limit alloimmunisation",
+   "Consider splenectomy in transfusion-dependent or symptomatically anaemic patients to reduce haemolysis, with prior vaccination against encapsulated organisms and awareness of thrombotic risk",
+   "Monitor hepatic and cardiac iron burden with serial ferritin and MRI, and screen for pigment gallstones from chronic haemolysis",
+   "Offer genetic counselling and cascade family testing given autosomal recessive SEC23B inheritance",
+   "Refer to a specialist haematology centre and consider allogeneic haematopoietic stem cell transplantation in severe transfusion-dependent childhood disease"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "congenital_dyserythropoietic_anaemia_type_2-pathway",
+   "title": "Congenital dyserythropoietic anaemia type 2: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The most common congenital dyserythropoietic anaemia; autosomal recessive, caused by biallelic SEC23B mutations affecting COPII endoplasmic-reticulum-to-Golgi trafficking.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Symptomatic iron overload with cardiac, hepatic or endocrine dysfunction",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Bone marrow aspirate and trephine to assess erythroblast morphology, Electron microscopy of erythroblasts for the double-membrane appearance, Acidified serum (Ham) and sucrose lysis tests, with flow cytometry (CD55/CD59)"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Iron chelation with deferasirox, deferiprone or desferrioxamine is the therapeutic mainstay, since parenchymal iron overload accrues even without transfusion because ineffective erythropoiesis suppresses hepcidin"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misdiagnosing paroxysmal nocturnal haemoglobinuria because of a positive acidified-serum test, when the patient's own serum does not lyse the cells and PNH flow cytometry is normal."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of congenital dyserythropoietic anaemia type 2."
+  }
+ ],
+ "tables": [
+  {
+   "id": "congenital_dyserythropoietic_anaemia_type_2-matrix",
+   "title": "Congenital dyserythropoietic anaemia type 2: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The most common congenital dyserythropoietic anaemia; autosomal recessive, caused by biallelic SEC23B mutations affecting COPII",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Congenital dyserythropoietic anaemia type 2 is an autosomal recessive disorder of ineffective erythropoiesis caused by biallelic mutations in SEC23B, which encodes a core component of the COPII coat complex that mediates anterograde protein transport from the endoplasmic reticulum to the Golgi apparatus. Impaired vesicular trafficking disrupts glycosylation of erythroid membrane proteins, producing the hallmark hypoglycosylated band 3 (anion exchanger 1) and abnormal N-linked glycans. Erythroblasts become bi- and multinucleated and undergo intramedullary apoptosis, so red cell production is ineffective despite marrow erythroid hyperplasia. Chronic haemolysis together with inappropriately low hepcidin increases dietary iron absorption, driving progressive parenchymal iron overload that can occur even in patients who have never been transfused.",
-    "additionalDifferentials": [
-      "Other congenital dyserythropoietic anaemias (types I and III, and CDA variants such as KLF1- or GATA1-related)",
-      "Hereditary spherocytosis and other red cell membrane disorders",
-      "Thalassaemia syndromes",
-      "Paroxysmal nocturnal haemoglobinuria",
-      "Autoimmune haemolytic anaemia",
-      "Myelodysplastic syndrome with dyserythropoiesis",
-      "Congenital sideroblastic anaemias"
+    [
+     "Key Investigations",
+     "Bone marrow aspirate and trephine to assess erythroblast morphology, Electron microscopy of erythroblasts for the double-membrane",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Bone marrow aspirate and trephine to assess erythroblast morphology",
-      "Electron microscopy of erythroblasts for the double-membrane appearance",
-      "Acidified serum (Ham) and sucrose lysis tests, with flow cytometry (CD55/CD59) to exclude paroxysmal nocturnal haemoglobinuria",
-      "Red cell membrane protein SDS-PAGE for band 3 glycosylation",
-      "SEC23B molecular testing",
-      "Iron studies and ferritin, with hepatic and cardiac iron quantification by MRI",
-      "Reticulocyte count, haptoglobin, bilirubin and lactate dehydrogenase"
+    [
+     "Primary Differentials",
+     "Other congenital dyserythropoietic anaemias (types I and III, and CDA variants such as KLF1- or GATA1-related), Hereditary",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Symptomatic iron overload with cardiac, hepatic or endocrine dysfunction",
-      "Aplastic crisis, for example after parvovirus B19, with an abrupt fall in haemoglobin",
-      "Symptomatic gallstone disease or biliary obstruction",
-      "Severe or transfusion-dependent anaemia"
+    [
+     "Management Strategy",
+     "Iron chelation with deferasirox, deferiprone or desferrioxamine is the therapeutic mainstay, since parenchymal iron overload",
+     "Core treatment modality"
     ],
-    "prognosis": "Many patients have mild-to-moderate anaemia and a near-normal life expectancy, but iron overload is the major long-term threat and can cause organ damage if not monitored and treated. Anaemia severity is variable and a minority require regular transfusion.",
-    "pitfalls": [
-      "Misdiagnosing paroxysmal nocturnal haemoglobinuria because of a positive acidified-serum test, when the patient's own serum does not lyse the cells and PNH flow cytometry is normal.",
-      "Attributing iron overload solely to transfusion and under-treating it in non-transfused patients.",
-      "Overlooking dyserythropoietic anaemia when reticulocytes are inappropriately low for the degree of anaemia.",
-      "Confusing the picture with thalassaemia intermedia."
-    ],
-    "references": [
-      "Haematology reference texts",
-      "Congenital dyserythropoietic anaemia guidelines",
-      "Inherited anaemia references"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Iron chelation with deferasirox, deferiprone or desferrioxamine is the therapeutic mainstay, since parenchymal iron overload accrues even without transfusion because ineffective erythropoiesis suppresses hepcidin",
-      "Give folic acid supplementation to meet the demands of chronically expanded but ineffective erythropoiesis",
-      "Reserve leucodepleted, phenotype-matched red-cell transfusion for symptomatic or severe anaemia to limit alloimmunisation",
-      "Consider splenectomy in transfusion-dependent or symptomatically anaemic patients to reduce haemolysis, with prior vaccination against encapsulated organisms and awareness of thrombotic risk",
-      "Monitor hepatic and cardiac iron burden with serial ferritin and MRI, and screen for pigment gallstones from chronic haemolysis",
-      "Offer genetic counselling and cascade family testing given autosomal recessive SEC23B inheritance",
-      "Refer to a specialist haematology centre and consider allogeneic haematopoietic stem cell transplantation in severe transfusion-dependent childhood disease"
+    [
+     "Clinical Pitfall",
+     "Misdiagnosing paroxysmal nocturnal haemoglobinuria because of a positive acidified-serum test, when the patient's own serum does",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for congenital dyserythropoietic anaemia type 2."
+  }
+ ]
 }

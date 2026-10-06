@@ -5,7 +5,21 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Primary care, urology or andrology outpatient",
- "aliases": ["ED", "impotence", "erectile failure", "PDE5 inhibitor", "PDE5i", "sildenafil", "tadalafil", "vardenafil", "avanafil", "Princeton consensus", "IIEF", "alprostadil", "sexual dysfunction male"],
+ "aliases": [
+  "ED",
+  "impotence",
+  "erectile failure",
+  "PDE5 inhibitor",
+  "PDE5i",
+  "sildenafil",
+  "tadalafil",
+  "vardenafil",
+  "avanafil",
+  "Princeton consensus",
+  "IIEF",
+  "alprostadil",
+  "sexual dysfunction male"
+ ],
  "summary": "Treat ED as a marker of cardiovascular disease: take a medical and sexual history, check glucose, lipids and morning testosterone, stratify cardiac risk (Princeton IV), modify risk factors, and use a PDE5 inhibitor first line unless the man takes nitrates, nicorandil or riociguat.",
  "sections": [
   {
@@ -83,18 +97,136 @@
   }
  ],
  "drugs": [
-  { "name": "Sildenafil", "dose": "50 mg orally about 1 hour before sex (range 25 to 100 mg), no more than once daily", "notes": "Start 25 mg with severe renal or hepatic impairment or strong CYP3A4 inhibitors. Absorption slowed by fatty meals. Contraindicated with nitrates." },
-  { "name": "Tadalafil (on demand)", "dose": "10 mg orally at least 30 minutes before sex, increased to 20 mg if needed, no more than once daily", "notes": "Effective up to 36 hours. No nitrates for 48 hours after a dose." },
-  { "name": "Tadalafil (daily)", "dose": "5 mg orally once daily", "notes": "For frequent sexual activity or coexisting LUTS." },
-  { "name": "Vardenafil", "dose": "10 mg orally 25 to 60 minutes before sex (range 5 to 20 mg), no more than once daily", "notes": "Contraindicated with nitrates." },
-  { "name": "Avanafil", "dose": "100 mg orally 15 to 30 minutes before sex (range 50 to 200 mg), no more than once daily", "notes": "Fastest onset. Contraindicated with nitrates." },
-  { "name": "Alprostadil (intracavernous)", "dose": "5 to 40 micrograms by intracavernous injection, titrated from a low dose under supervision", "notes": "Second line or when PDE5 inhibitors are contraindicated. Penile pain; priapism risk about 1%." },
-  { "name": "Alprostadil (intraurethral)", "dose": "Start 500 micrograms, increase to 1000 micrograms if needed", "notes": "Less effective than injection." }
+  {
+   "name": "Sildenafil",
+   "dose": "50 mg orally about 1 hour before sex (range 25 to 100 mg), no more than once daily",
+   "notes": "Start 25 mg with severe renal or hepatic impairment or strong CYP3A4 inhibitors. Absorption slowed by fatty meals. Contraindicated with nitrates."
+  },
+  {
+   "name": "Tadalafil (on demand)",
+   "dose": "10 mg orally at least 30 minutes before sex, increased to 20 mg if needed, no more than once daily",
+   "notes": "Effective up to 36 hours. No nitrates for 48 hours after a dose."
+  },
+  {
+   "name": "Tadalafil (daily)",
+   "dose": "5 mg orally once daily",
+   "notes": "For frequent sexual activity or coexisting LUTS."
+  },
+  {
+   "name": "Vardenafil",
+   "dose": "10 mg orally 25 to 60 minutes before sex (range 5 to 20 mg), no more than once daily",
+   "notes": "Contraindicated with nitrates."
+  },
+  {
+   "name": "Avanafil",
+   "dose": "100 mg orally 15 to 30 minutes before sex (range 50 to 200 mg), no more than once daily",
+   "notes": "Fastest onset. Contraindicated with nitrates."
+  },
+  {
+   "name": "Alprostadil (intracavernous)",
+   "dose": "5 to 40 micrograms by intracavernous injection, titrated from a low dose under supervision",
+   "notes": "Second line or when PDE5 inhibitors are contraindicated. Penile pain; priapism risk about 1%."
+  },
+  {
+   "name": "Alprostadil (intraurethral)",
+   "dose": "Start 500 micrograms, increase to 1000 micrograms if needed",
+   "notes": "Less effective than injection."
+  }
  ],
  "sources": [
-  { "org": "European Association of Urology (EAU)", "title": "EAU guidelines on sexual and reproductive health: management of erectile dysfunction (2025)", "year": 2025, "url": "https://uroweb.org/guidelines/sexual-and-reproductive-health/chapter/management-of-erectile-dysfunction" },
-  { "org": "European Association of Urology (EAU)", "title": "EAU pocket guidelines on sexual and reproductive health (limited text update March 2025)", "year": 2025, "url": "https://d56bochluxqnz.cloudfront.net/documents/EAU-Pocket-on-Sexual-Reproductive-Health-2025.pdf" },
-  { "org": "European Association of Urology (EAU)", "title": "EAU guidelines on male sexual and reproductive health: 2025 update on male hypogonadism, erectile dysfunction, premature ejaculation, and Peyronie's disease", "year": 2025, "url": "https://pubmed.ncbi.nlm.nih.gov/40340108/" }
+  {
+   "org": "European Association of Urology (EAU)",
+   "title": "EAU guidelines on sexual and reproductive health: management of erectile dysfunction (2025)",
+   "year": 2025,
+   "url": "https://uroweb.org/guidelines/sexual-and-reproductive-health/chapter/management-of-erectile-dysfunction"
+  },
+  {
+   "org": "European Association of Urology (EAU)",
+   "title": "EAU pocket guidelines on sexual and reproductive health (limited text update March 2025)",
+   "year": 2025,
+   "url": "https://d56bochluxqnz.cloudfront.net/documents/EAU-Pocket-on-Sexual-Reproductive-Health-2025.pdf"
+  },
+  {
+   "org": "European Association of Urology (EAU)",
+   "title": "EAU guidelines on male sexual and reproductive health: 2025 update on male hypogonadism, erectile dysfunction, premature ejaculation, and Peyronie's disease",
+   "year": 2025,
+   "url": "https://pubmed.ncbi.nlm.nih.gov/40340108/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "erectile-dysfunction-pathway",
+   "title": "Erectile dysfunction (ED) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "ED: persistent inability to attain and maintain an erection sufficient for satisfactory sexual performance. Most cases are mixed organic and psychogenic.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "ED raises the risk of cardiovascular disease, coronary heart disease, stroke, atrial fibrillation and death, and can be an early sign of coronary or peripheral vascular disease.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "No known cardiovascular disease: calculate 10-year ASCVD risk. With a suspected vasculogenic cause and intermediate risk, coronary artery calcium scoring can guide statin and aspirin decisions (Princeton IV, adopted by EAU)."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Start lifestyle and risk factor changes (weight loss, exercise, stopping smoking, control of glucose, BP and lipids) before or alongside ED treatment; change culprit drugs where possible."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Prescribing a PDE5 inhibitor without asking about nitrates, nicorandil or recreational poppers."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for erectile dysfunction (ed)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "erectile-dysfunction-summary-matrix",
+   "title": "Erectile dysfunction (ED) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "ED: persistent inability to attain and maintain an erection sufficient for satisfactory sexual performance. Most cases are mixed organic",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Start lifestyle and risk factor changes (weight loss, exercise, stopping smoking, control of glucose, BP and lipids) before or alongside ED",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "No known cardiovascular disease: calculate 10-year ASCVD risk. With a suspected vasculogenic cause and intermediate risk, coronary artery",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Sildenafil: 50 mg orally about 1 hour before sex (range 25 to 100 mg), no more than once daily",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Prescribing a PDE5 inhibitor without asking about nitrates, nicorandil or recreational poppers.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for erectile dysfunction (ed)."
+  }
+ ]
 }

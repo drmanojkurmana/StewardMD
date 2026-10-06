@@ -143,5 +143,77 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-25"
- }
+ },
+ "algorithms": [
+  {
+   "id": "delirium-pathway",
+   "title": "Delirium (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Acute (hours to days) and fluctuating disturbance of attention and awareness with altered cognition, perception or behaviour.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "4AT (alertness, AMT4, months backwards, acute change or fluctuation): 4 or more suggests delirium; 1 to 3 suggests cognitive impairment; 0 makes delirium unlikely. In ICU or recovery use CAM-ICU or ICDSC.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Often multifactorial, and in up to 30% no cause is found. Consider infection, drugs, dehydration, metabolic and electrolyte disturbance, hypoxia, retention, constipation, pain, alcohol or drug withdrawal, stroke and head injury."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Only if the person is distressed or a risk to themselves or others and de-escalation has failed: short-term haloperidol, usually for 1 week or less (NICE); review daily and stop as soon as possible, typically within 1 to 2 days (SIGN)."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Repeat the delirium assessment until 2 successive daily assessments are negative."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for delirium (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "delirium-summary-matrix",
+   "title": "Delirium (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Acute (hours to days) and fluctuating disturbance of attention and awareness with altered cognition, perception or behaviour.",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "4AT (alertness, AMT4, months backwards, acute change or fluctuation): 4 or more suggests delirium; 1 to 3 suggests cognitive impairment; 0",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Often multifactorial, and in up to 30% no cause is found. Consider infection, drugs, dehydration, metabolic and electrolyte disturbance,",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Haloperidol: 0.5 to 1 mg orally, or 0.5 mg IM; maximum 2 mg in 24 hours in older people",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Missing hypoactive delirium or labelling it as depression or dementia.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for delirium (adult)."
+  }
+ ]
 }

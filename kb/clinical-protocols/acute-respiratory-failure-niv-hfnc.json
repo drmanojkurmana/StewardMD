@@ -5,7 +5,20 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, HDU, ICU",
- "aliases": ["NIV", "BiPAP", "CPAP", "HFNC", "HFNO", "high flow nasal cannula", "non-invasive ventilation", "hypercapnic respiratory failure", "type 2 respiratory failure", "type 1 respiratory failure", "AHRF", "ROX index"],
+ "aliases": [
+  "NIV",
+  "BiPAP",
+  "CPAP",
+  "HFNC",
+  "HFNO",
+  "high flow nasal cannula",
+  "non-invasive ventilation",
+  "hypercapnic respiratory failure",
+  "type 2 respiratory failure",
+  "type 1 respiratory failure",
+  "AHRF",
+  "ROX index"
+ ],
  "summary": "Use bilevel NIV for COPD exacerbation with respiratory acidosis persisting after medical therapy and CPAP or NIV for cardiogenic pulmonary oedema. In hypoxaemic respiratory failure, prefer high-flow nasal oxygen over conventional oxygen. Reassess early and do not let non-invasive support delay intubation.",
  "sections": [
   {
@@ -84,16 +97,127 @@
   }
  ],
  "drugs": [
-  { "name": "Controlled oxygen", "dose": "Venturi mask 24 to 28% (or nasal cannula 1 to 2 L/min) titrated to SpO2 88 to 92% in patients at risk of hypercapnia", "notes": "Entrain into the NIV circuit to the same target." },
-  { "name": "Salbutamol (nebulised)", "dose": "2.5 to 5 mg nebulised, repeated as needed", "notes": "Air-driven in hypercapnic COPD, or in-line with NIV." },
-  { "name": "Ipratropium (nebulised)", "dose": "500 micrograms nebulised, up to every 6 hours", "notes": "COPD exacerbation, with salbutamol." },
-  { "name": "Prednisolone", "dose": "40 mg orally once daily for 5 days", "notes": "COPD exacerbation (IV hydrocortisone if unable to take orally)." }
+  {
+   "name": "Controlled oxygen",
+   "dose": "Venturi mask 24 to 28% (or nasal cannula 1 to 2 L/min) titrated to SpO2 88 to 92% in patients at risk of hypercapnia",
+   "notes": "Entrain into the NIV circuit to the same target."
+  },
+  {
+   "name": "Salbutamol (nebulised)",
+   "dose": "2.5 to 5 mg nebulised, repeated as needed",
+   "notes": "Air-driven in hypercapnic COPD, or in-line with NIV."
+  },
+  {
+   "name": "Ipratropium (nebulised)",
+   "dose": "500 micrograms nebulised, up to every 6 hours",
+   "notes": "COPD exacerbation, with salbutamol."
+  },
+  {
+   "name": "Prednisolone",
+   "dose": "40 mg orally once daily for 5 days",
+   "notes": "COPD exacerbation (IV hydrocortisone if unable to take orally)."
+  }
  ],
  "sources": [
-  { "org": "ERS / ATS", "title": "Official ERS/ATS clinical practice guidelines: noninvasive ventilation for acute respiratory failure", "year": 2017, "url": "https://doi.org/10.1183/13993003.02426-2016" },
-  { "org": "European Respiratory Society", "title": "ERS clinical practice guidelines: high-flow nasal cannula in acute respiratory failure", "year": 2022, "url": "https://doi.org/10.1183/13993003.01574-2021" },
-  { "org": "British Thoracic Society / Intensive Care Society", "title": "BTS/ICS guideline for the ventilatory management of acute hypercapnic respiratory failure in adults", "year": 2016, "url": "https://www.brit-thoracic.org.uk/document-library/guidelines/niv/btsics-guideline-for-the-ventilatory-management-of-acute-hypercapnic-respiratory-failure-in-adults/" },
-  { "org": "ESICM", "title": "ESICM guidelines on acute respiratory distress syndrome: definition, phenotyping and respiratory support strategies (HFNO, CPAP/NIV)", "year": 2023, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10354163/" }
+  {
+   "org": "ERS / ATS",
+   "title": "Official ERS/ATS clinical practice guidelines: noninvasive ventilation for acute respiratory failure",
+   "year": 2017,
+   "url": "https://doi.org/10.1183/13993003.02426-2016"
+  },
+  {
+   "org": "European Respiratory Society",
+   "title": "ERS clinical practice guidelines: high-flow nasal cannula in acute respiratory failure",
+   "year": 2022,
+   "url": "https://doi.org/10.1183/13993003.01574-2021"
+  },
+  {
+   "org": "British Thoracic Society / Intensive Care Society",
+   "title": "BTS/ICS guideline for the ventilatory management of acute hypercapnic respiratory failure in adults",
+   "year": 2016,
+   "url": "https://www.brit-thoracic.org.uk/document-library/guidelines/niv/btsics-guideline-for-the-ventilatory-management-of-acute-hypercapnic-respiratory-failure-in-adults/"
+  },
+  {
+   "org": "ESICM",
+   "title": "ESICM guidelines on acute respiratory distress syndrome: definition, phenotyping and respiratory support strategies (HFNO, CPAP/NIV)",
+   "year": 2023,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10354163/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "acute-respiratory-failure-niv-hfnc-pathway",
+   "title": "Acute respiratory failure: NIV and high-flow nasal oxygen (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Hypoxaemic (type 1): PaO2 below 60 mmHg (8 kPa) with normal or low PaCO2. Hypercapnic (type 2): PaCO2 above 45 mmHg (6 kPa) with acidosis (pH below 7.35) in acute or acute-on-chronic failure.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Oxygen target: SpO2 88 to 92% if at risk of hypercapnia (COPD, obesity hypoventilation, neuromuscular or chest wall disease); 94 to 98% for most others.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Signs of fatigue: respiratory rate above 30/min, accessory muscle use, abdominal paradox, rising PaCO2, falling GCS."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Hypoxaemic failure not due to cardiogenic oedema or COPD exacerbation: HFNO rather than conventional oxygen to reduce intubation (ESICM 2023 strong; ERS 2022 conditional). ERS 2022 also suggests HFNO over NIV here; ESICM makes no"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Manage in HDU, ICU or a staffed NIV area: continuous SpO2, respiratory rate, heart rate, BP, GCS, synchrony and leak; clinical review within the first hour."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for acute respiratory failure: niv and high-flow nasal oxygen (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "acute-respiratory-failure-niv-hfnc-summary-matrix",
+   "title": "Acute respiratory failure: NIV and high-flow nasal oxygen (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Hypoxaemic (type 1): PaO2 below 60 mmHg (8 kPa) with normal or low PaCO2. Hypercapnic (type 2): PaCO2 above 45 mmHg (6 kPa) with acidosis",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Hypoxaemic failure not due to cardiogenic oedema or COPD exacerbation: HFNO rather than conventional oxygen to reduce intubation (ESICM",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Controlled oxygen: Venturi mask 24 to 28% (or nasal cannula 1 to 2 L/min) titrated to SpO2 88 to 92% in patients at risk of hypercapnia",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Uncontrolled high-concentration oxygen in COPD, worsening hypercapnia.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for acute respiratory failure: niv and high-flow nasal oxygen (adult)."
+  }
+ ]
 }

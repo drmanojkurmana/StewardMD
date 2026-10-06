@@ -120,5 +120,77 @@
       "importedAt": "2026-06-29T13:28:11Z",
       "contentHash": "he0ad026b"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "opioid_od-dx-algo",
+      "title": "Opioid overdose: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "The classic overdose picture is shallow/slow respirations, miosis, bradycardia, hypothermia, and stupor or coma; toxicology can confirm but immediate management is clinical (p.3690).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Dilated pupils in a suspected opioid overdose suggest cerebral anoxia has already occurred (p.3690)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Blood/urine toxicology can confirm a suspected diagnosis but must not delay clinical management (p.3690), ECG to detect QT prolongation (e.g. methadone), which can cause sudden death (p.3733), Chest imaging for"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison frames poisoning severity by physiologic state (Tables 470-1/470-2): opioids produce a 'depressed' physiologic state (decreased pulse, BP, respiratory rate, temperature, neuromuscular activity, with miosis)."
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Do not assume normal-sized or dilated pupils exclude opioids - mydriasis does NOT occur until significant brain anoxia supervenes (p.3690)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for opioid overdose."
+    }
+  ],
+  "tables": [
+    {
+      "id": "opioid_od-matrix",
+      "title": "Opioid overdose: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The classic overdose picture is shallow/slow respirations, miosis, bradycardia, hypothermia, and stupor or coma; toxicology can",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Blood/urine toxicology can confirm a suspected diagnosis but must not delay clinical management (p.3690), ECG to detect QT",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Cholinergic (muscarinic/nicotinic) poisoning - also causes miosis plus a depressed physiologic state (p.3748), Sedative-hypnotic",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Dilated pupils in a suspected opioid overdose suggest cerebral anoxia has already occurred (p.3690)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Do not assume normal-sized or dilated pupils exclude opioids - mydriasis does NOT occur until significant brain anoxia supervenes",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for opioid overdose."
+    }
+  ]
 }

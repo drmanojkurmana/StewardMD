@@ -6,7 +6,26 @@
  "basis": "india",
  "counterpart": "dyslipidaemia-management",
  "setting": "Outpatient clinic, cardiology, diabetes clinic, post-ACS discharge",
- "aliases": ["dyslipidemia", "hyperlipidaemia", "high cholesterol", "LDL-C target", "non-HDL cholesterol", "statin", "atorvastatin", "rosuvastatin", "ezetimibe", "bempedoic acid", "PCSK9 inhibitor", "evolocumab", "inclisiran", "hypertriglyceridaemia", "familial hypercholesterolaemia", "Lp(a)", "CSI lipid guidelines 2024", "atherogenic dyslipidaemia"],
+ "aliases": [
+  "dyslipidemia",
+  "hyperlipidaemia",
+  "high cholesterol",
+  "LDL-C target",
+  "non-HDL cholesterol",
+  "statin",
+  "atorvastatin",
+  "rosuvastatin",
+  "ezetimibe",
+  "bempedoic acid",
+  "PCSK9 inhibitor",
+  "evolocumab",
+  "inclisiran",
+  "hypertriglyceridaemia",
+  "familial hypercholesterolaemia",
+  "Lp(a)",
+  "CSI lipid guidelines 2024",
+  "atherogenic dyslipidaemia"
+ ],
  "summary": "Use non-fasting lipids, place the patient in one of five CSI risk categories and treat to LDL-C and non-HDL-C goals (below 55 and 85 mg/dL in very high risk). Start with a statin, add ezetimibe early (at initiation after ACS), then bempedoic acid, a PCSK9 inhibitor or inclisiran if the goal is not met by 4 weeks.",
  "sections": [
   {
@@ -98,19 +117,139 @@
   }
  ],
  "drugs": [
-  { "name": "Atorvastatin", "dose": "High intensity 40 to 80 mg; moderate 10 to 20 mg; low 5 mg; orally once daily", "notes": "Contraindicated in pregnancy, breastfeeding, decompensated cirrhosis." },
-  { "name": "Rosuvastatin", "dose": "High intensity 20 to 40 mg; moderate 5 to 10 mg; orally once daily", "notes": "Start lower in the elderly." },
-  { "name": "Pitavastatin", "dose": "Moderate 2 to 4 mg; low 1 mg; orally once daily", "notes": "Preferred with antiretroviral therapy." },
-  { "name": "Ezetimibe", "dose": "10 mg orally once daily", "notes": "At initiation after ACS and in HeFH; lowers LDL-C about 15% alone. Not in moderate to severe hepatic insufficiency." },
-  { "name": "Bempedoic acid", "dose": "180 mg orally once daily", "notes": "Add-on or statin intolerance; about 25% LDL-C fall alone. Raises uric acid. Not in pregnancy." },
-  { "name": "Evolocumab", "dose": "140 mg SC every 2 weeks, or 420 mg SC once a month", "notes": "About 50 to 60% LDL-C reduction; very high risk not at goal." },
-  { "name": "Inclisiran", "dose": "284 mg SC on day 1 and day 90, then every 6 months", "notes": "About 50% LDL-C reduction; adjunct to statin in ASCVD and HeFH." },
-  { "name": "Fenofibrate", "dose": "145 mg orally once daily", "notes": "Fasting triglycerides above 500 mg/dL. Contraindicated in acute liver and severe renal disease." },
-  { "name": "Icosapent ethyl", "dose": "2 g orally twice daily", "notes": "Persistent triglycerides on statin in diabetes or ASCVD." },
-  { "name": "Colesevelam", "dose": "625 mg tablets, 3 tablets twice daily", "notes": "Add-on; bile acid sequestrants are the only lipid drugs considered safe in pregnancy and lactation." }
+  {
+   "name": "Atorvastatin",
+   "dose": "High intensity 40 to 80 mg; moderate 10 to 20 mg; low 5 mg; orally once daily",
+   "notes": "Contraindicated in pregnancy, breastfeeding, decompensated cirrhosis."
+  },
+  {
+   "name": "Rosuvastatin",
+   "dose": "High intensity 20 to 40 mg; moderate 5 to 10 mg; orally once daily",
+   "notes": "Start lower in the elderly."
+  },
+  {
+   "name": "Pitavastatin",
+   "dose": "Moderate 2 to 4 mg; low 1 mg; orally once daily",
+   "notes": "Preferred with antiretroviral therapy."
+  },
+  {
+   "name": "Ezetimibe",
+   "dose": "10 mg orally once daily",
+   "notes": "At initiation after ACS and in HeFH; lowers LDL-C about 15% alone. Not in moderate to severe hepatic insufficiency."
+  },
+  {
+   "name": "Bempedoic acid",
+   "dose": "180 mg orally once daily",
+   "notes": "Add-on or statin intolerance; about 25% LDL-C fall alone. Raises uric acid. Not in pregnancy."
+  },
+  {
+   "name": "Evolocumab",
+   "dose": "140 mg SC every 2 weeks, or 420 mg SC once a month",
+   "notes": "About 50 to 60% LDL-C reduction; very high risk not at goal."
+  },
+  {
+   "name": "Inclisiran",
+   "dose": "284 mg SC on day 1 and day 90, then every 6 months",
+   "notes": "About 50% LDL-C reduction; adjunct to statin in ASCVD and HeFH."
+  },
+  {
+   "name": "Fenofibrate",
+   "dose": "145 mg orally once daily",
+   "notes": "Fasting triglycerides above 500 mg/dL. Contraindicated in acute liver and severe renal disease."
+  },
+  {
+   "name": "Icosapent ethyl",
+   "dose": "2 g orally twice daily",
+   "notes": "Persistent triglycerides on statin in diabetes or ASCVD."
+  },
+  {
+   "name": "Colesevelam",
+   "dose": "625 mg tablets, 3 tablets twice daily",
+   "notes": "Add-on; bile acid sequestrants are the only lipid drugs considered safe in pregnancy and lactation."
+  }
  ],
  "sources": [
-  { "org": "Cardiological Society of India", "title": "CSI clinical practice guidelines for dyslipidemia management: executive summary (Indian Heart Journal 76 Suppl 1)", "year": 2024, "url": "https://csi.org.in/frontend/assets/assets/CSI-clinical-practice-guidelines-for-dyslipidemia-_240413_141815.pdf" }
+  {
+   "org": "Cardiological Society of India",
+   "title": "CSI clinical practice guidelines for dyslipidemia management: executive summary (Indian Heart Journal 76 Suppl 1)",
+   "year": 2024,
+   "url": "https://csi.org.in/frontend/assets/assets/CSI-clinical-practice-guidelines-for-dyslipidemia-_240413_141815.pdf"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "dyslipidaemia-management-india-pathway",
+   "title": "Dyslipidaemia: risk categories, LDL-C goals and lipid-lowering therapy (India, CSI) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Measure a non-fasting lipid profile (total, LDL, HDL and non-HDL cholesterol, triglycerides) for risk estimation and treatment; a fasting sample is not required. Check every adult by age 18. Measure Lp(a) at least once in a lifetime.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Low risk: no risk factors. Moderate risk: one of smoking or tobacco use, hypertension, diabetes, or family history of premature CAD (men under 55, women under 60).",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "High risk: 2 or more risk factors without ASCVD, chronic kidney disease, diabetes for more than 10 years, or heterozygous FH."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Treat the cause (obesity, diabetes, alcohol, hypothyroidism, drugs) and restrict excess calories, sugars, refined carbohydrates, fried food and trans fats; use a statin to reach the non-HDL-C goal."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Waiting for a fasting sample, which delays treatment after ACS."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for dyslipidaemia: risk categories, ldl-c goals and lipid-lowering therapy (india, csi)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "dyslipidaemia-management-india-summary-matrix",
+   "title": "Dyslipidaemia: risk categories, LDL-C goals and lipid-lowering therapy (India, CSI) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Measure a non-fasting lipid profile (total, LDL, HDL and non-HDL cholesterol, triglycerides) for risk estimation and treatment; a fasting",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Treat the cause (obesity, diabetes, alcohol, hypothyroidism, drugs) and restrict excess calories, sugars, refined carbohydrates, fried food",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Atorvastatin: High intensity 40 to 80 mg; moderate 10 to 20 mg; low 5 mg; orally once daily",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Waiting for a fasting sample, which delays treatment after ACS.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for dyslipidaemia: risk categories, ldl-c goals and lipid-lowering therapy (india, csi)."
+  }
+ ]
 }

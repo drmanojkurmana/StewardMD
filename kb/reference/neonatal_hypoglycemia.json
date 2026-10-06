@@ -1,81 +1,153 @@
 {
-  "id": "neonatal_hypoglycemia",
-  "name": "Neonatal Hypoglycaemia",
-  "aliases": [
-    "Neonatal hypoglycaemia",
-    "hypoglycaemia of the newborn",
-    "low blood glucose in the newborn",
-    "low blood sugar in newborn",
-    "neonatal hypoglycaemia",
-    "neonatal low glucose"
+ "id": "neonatal_hypoglycemia",
+ "name": "Neonatal Hypoglycaemia",
+ "aliases": [
+  "Neonatal hypoglycaemia",
+  "hypoglycaemia of the newborn",
+  "low blood glucose in the newborn",
+  "low blood sugar in newborn",
+  "neonatal hypoglycaemia",
+  "neonatal low glucose"
+ ],
+ "class": "non_infective",
+ "system": "Endocrine/Metabolic",
+ "specialty": "Paediatrics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nelson Textbook of Pediatrics",
+  "sourceEdition": "22e",
+  "pages": null,
+  "clinicalPearls": [
+   "Low blood glucose is common in the transitional period after birth as the newborn adapts from continuous placental glucose supply to intermittent feeding.",
+   "Infants at highest risk include those of diabetic mothers, large- or small-for-gestational-age babies, preterm infants, and any newborn who is stressed, cold, or septic.",
+   "Signs are often subtle and non-specific: jitteriness, poor feeding, lethargy, hypotonia, temperature instability, apnoea, or seizures; many affected infants appear asymptomatic.",
+   "At-risk and symptomatic infants should be screened with bedside glucose testing, with low values confirmed on a laboratory sample given the imprecision of point-of-care meters.",
+   "Early and frequent feeding is the first-line measure; infants who cannot maintain adequate glucose or who are symptomatic require intravenous dextrose.",
+   "Symptomatic hypoglycaemia with a documented low glucose that resolves when glucose is normalised (Whipple triad) warrants investigation and treatment.",
+   "Persistent or recurrent hypoglycaemia beyond the first days of life suggests an underlying disorder such as hyperinsulinism, endocrine deficiency, or an inborn error of metabolism.",
+   "The clinical concern is that prolonged or severe low glucose can injure the developing brain, so prevention and prompt correction are priorities."
   ],
-  "class": "non_infective",
-  "system": "Endocrine/Metabolic",
-  "specialty": "Paediatrics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nelson Textbook of Pediatrics",
-    "sourceEdition": "22e",
-    "pages": null,
-    "clinicalPearls": [
-      "Low blood glucose is common in the transitional period after birth as the newborn adapts from continuous placental glucose supply to intermittent feeding.",
-      "Infants at highest risk include those of diabetic mothers, large- or small-for-gestational-age babies, preterm infants, and any newborn who is stressed, cold, or septic.",
-      "Signs are often subtle and non-specific: jitteriness, poor feeding, lethargy, hypotonia, temperature instability, apnoea, or seizures; many affected infants appear asymptomatic.",
-      "At-risk and symptomatic infants should be screened with bedside glucose testing, with low values confirmed on a laboratory sample given the imprecision of point-of-care meters.",
-      "Early and frequent feeding is the first-line measure; infants who cannot maintain adequate glucose or who are symptomatic require intravenous dextrose.",
-      "Symptomatic hypoglycaemia with a documented low glucose that resolves when glucose is normalised (Whipple triad) warrants investigation and treatment.",
-      "Persistent or recurrent hypoglycaemia beyond the first days of life suggests an underlying disorder such as hyperinsulinism, endocrine deficiency, or an inborn error of metabolism.",
-      "The clinical concern is that prolonged or severe low glucose can injure the developing brain, so prevention and prompt correction are priorities."
+  "pathophysiology": "After the cord is cut, the newborn loses its steady maternal glucose supply and must mobilise hepatic glycogen, activate gluconeogenesis, and use alternative fuels such as ketones and lactate, processes driven by a surge in counter-regulatory hormones and a fall in insulin. When glycogen stores are limited (prematurity, growth restriction), glucose demand is high (stress, sepsis, hypothermia), or insulin secretion is excessive (infant of a diabetic mother, hyperinsulinism), this adaptation fails and blood glucose falls. Because the neonatal brain depends heavily on glucose, inadequate supply combined with immature ketogenesis in some infants places the brain at risk.",
+  "additionalDifferentials": [
+   "Sepsis",
+   "Neonatal seizures from other causes",
+   "Hypocalcaemia or other electrolyte disturbance",
+   "Congenital hyperinsulinism",
+   "Panhypopituitarism or cortisol deficiency",
+   "Inborn errors of metabolism"
+  ],
+  "additionalInvestigations": [
+   "Confirmatory laboratory plasma glucose",
+   "Critical sample during hypoglycaemia (insulin, cortisol, growth hormone, ketones, free fatty acids) when persistent",
+   "Serum electrolytes and calcium",
+   "Sepsis screen if clinically indicated",
+   "Metabolic screen (ammonia, lactate, acylcarnitine profile) in recurrent or refractory cases"
+  ],
+  "redFlags": [
+   "Seizures, apnoea, or coma",
+   "Persistent hypoglycaemia despite feeding and initial glucose infusion",
+   "High glucose infusion requirement suggesting hyperinsulinism",
+   "Recurrent hypoglycaemia beyond the transitional period",
+   "Associated hypotonia, poor feeding, or encephalopathy"
+  ],
+  "prognosis": "Brief, promptly treated transitional hypoglycaemia in an otherwise well infant usually has an excellent outcome, whereas severe, prolonged, symptomatic, or recurrent hypoglycaemia carries a risk of long-term neurodevelopmental impairment.",
+  "pitfalls": [
+   "Treating an isolated low bedside meter reading without confirming on a laboratory sample or clinical context",
+   "Assuming all at-risk infants are symptomatic, or dismissing subtle signs as normal newborn behaviour",
+   "Failing to investigate hypoglycaemia that persists or recurs beyond the first days of life",
+   "Overlooking hyperinsulinism when a high rate of glucose infusion is needed to keep glucose normal"
+  ],
+  "references": [
+   "Nelson Textbook of Pediatrics, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Initiate early, frequent feeding (breast or formula) as first-line treatment for at-risk and mildly affected newborns",
+   "Escalate to intravenous dextrose for symptomatic hypoglycaemia or when feeding fails to normalise glucose",
+   "Investigate and treat persistent hyperinsulinism with diazoxide, reserving octreotide or glucagon for unresponsive cases",
+   "Correct and prevent contributing factors such as hypothermia, sepsis and inadequate intake",
+   "Confirm low bedside glucose values on a laboratory sample given point-of-care imprecision",
+   "Draw a critical (hypoglycaemia) sample during a low-glucose episode in persistent cases and pursue a metabolic and endocrine work-up",
+   "Refer refractory or congenital hyperinsulinism to specialist endocrine and metabolic services"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "neonatal_hypoglycemia-pathway",
+   "title": "Neonatal Hypoglycaemia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Low blood glucose is common in the transitional period after birth as the newborn adapts from continuous placental glucose supply to intermittent feeding.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Seizures, apnoea, or coma",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Confirmatory laboratory plasma glucose, Critical sample during hypoglycaemia (insulin, cortisol, growth hormone, ketones, free fatty acids) when persistent, Serum electrolytes and calcium"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Initiate early, frequent feeding (breast or formula) as first-line treatment for at-risk and mildly affected newborns"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Treating an isolated low bedside meter reading without confirming on a laboratory sample or clinical context"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of neonatal hypoglycaemia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "neonatal_hypoglycemia-matrix",
+   "title": "Neonatal Hypoglycaemia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Low blood glucose is common in the transitional period after birth as the newborn adapts from continuous placental glucose supply",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "After the cord is cut, the newborn loses its steady maternal glucose supply and must mobilise hepatic glycogen, activate gluconeogenesis, and use alternative fuels such as ketones and lactate, processes driven by a surge in counter-regulatory hormones and a fall in insulin. When glycogen stores are limited (prematurity, growth restriction), glucose demand is high (stress, sepsis, hypothermia), or insulin secretion is excessive (infant of a diabetic mother, hyperinsulinism), this adaptation fails and blood glucose falls. Because the neonatal brain depends heavily on glucose, inadequate supply combined with immature ketogenesis in some infants places the brain at risk.",
-    "additionalDifferentials": [
-      "Sepsis",
-      "Neonatal seizures from other causes",
-      "Hypocalcaemia or other electrolyte disturbance",
-      "Congenital hyperinsulinism",
-      "Panhypopituitarism or cortisol deficiency",
-      "Inborn errors of metabolism"
+    [
+     "Key Investigations",
+     "Confirmatory laboratory plasma glucose, Critical sample during hypoglycaemia (insulin, cortisol, growth hormone, ketones, free",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Confirmatory laboratory plasma glucose",
-      "Critical sample during hypoglycaemia (insulin, cortisol, growth hormone, ketones, free fatty acids) when persistent",
-      "Serum electrolytes and calcium",
-      "Sepsis screen if clinically indicated",
-      "Metabolic screen (ammonia, lactate, acylcarnitine profile) in recurrent or refractory cases"
+    [
+     "Primary Differentials",
+     "Sepsis, Neonatal seizures from other causes, Hypocalcaemia or other electrolyte disturbance",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Seizures, apnoea, or coma",
-      "Persistent hypoglycaemia despite feeding and initial glucose infusion",
-      "High glucose infusion requirement suggesting hyperinsulinism",
-      "Recurrent hypoglycaemia beyond the transitional period",
-      "Associated hypotonia, poor feeding, or encephalopathy"
+    [
+     "Management Strategy",
+     "Initiate early, frequent feeding (breast or formula) as first-line treatment for at-risk and mildly affected newborns",
+     "Core treatment modality"
     ],
-    "prognosis": "Brief, promptly treated transitional hypoglycaemia in an otherwise well infant usually has an excellent outcome, whereas severe, prolonged, symptomatic, or recurrent hypoglycaemia carries a risk of long-term neurodevelopmental impairment.",
-    "pitfalls": [
-      "Treating an isolated low bedside meter reading without confirming on a laboratory sample or clinical context",
-      "Assuming all at-risk infants are symptomatic, or dismissing subtle signs as normal newborn behaviour",
-      "Failing to investigate hypoglycaemia that persists or recurs beyond the first days of life",
-      "Overlooking hyperinsulinism when a high rate of glucose infusion is needed to keep glucose normal"
-    ],
-    "references": [
-      "Nelson Textbook of Pediatrics, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Initiate early, frequent feeding (breast or formula) as first-line treatment for at-risk and mildly affected newborns",
-      "Escalate to intravenous dextrose for symptomatic hypoglycaemia or when feeding fails to normalise glucose",
-      "Investigate and treat persistent hyperinsulinism with diazoxide, reserving octreotide or glucagon for unresponsive cases",
-      "Correct and prevent contributing factors such as hypothermia, sepsis and inadequate intake",
-      "Confirm low bedside glucose values on a laboratory sample given point-of-care imprecision",
-      "Draw a critical (hypoglycaemia) sample during a low-glucose episode in persistent cases and pursue a metabolic and endocrine work-up",
-      "Refer refractory or congenital hyperinsulinism to specialist endocrine and metabolic services"
+    [
+     "Clinical Pitfall",
+     "Treating an isolated low bedside meter reading without confirming on a laboratory sample or clinical context",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for neonatal hypoglycaemia."
+  }
+ ]
 }

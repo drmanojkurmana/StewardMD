@@ -1,80 +1,152 @@
 {
-  "id": "hand_arm_vibration",
-  "name": "Hand-arm vibration syndrome",
-  "aliases": [
-    "HAVS",
-    "VWF",
-    "hand arm vibration syndrome",
-    "hand-arm vibration syndrome",
-    "vibration white finger"
+ "id": "hand_arm_vibration",
+ "name": "Hand-arm vibration syndrome",
+ "aliases": [
+  "HAVS",
+  "VWF",
+  "hand arm vibration syndrome",
+  "hand-arm vibration syndrome",
+  "vibration white finger"
+ ],
+ "class": "non_infective",
+ "system": "Occupational / Environmental",
+ "specialty": "Occupational & Environmental Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Hunter's Diseases of Occupations / WHO",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "HAVS follows prolonged use of vibrating hand-held tools such as grinders, chainsaws, drills and chipping hammers",
+   "It has three linked components: vascular (episodic finger blanching), sensorineural (numbness and tingling) and musculoskeletal effects on the hands",
+   "The vascular attacks resemble Raynaud's phenomenon, provoked by cold, with sharply demarcated blanching of one or more fingers followed by recovery",
+   "Staging with the Stockholm Workshop scale separately grades the vascular and sensorineural components and guides management",
+   "Reduced grip strength, clumsiness and loss of dexterity and fine sensation can impair work and daily tasks",
+   "Cold exposure and smoking worsen the vascular symptoms, so warmth and smoking cessation are practical advice",
+   "Diagnosis rests on a clear exposure history with a compatible pattern, supported by cold-provocation and sensory testing where available",
+   "Early recognition matters because progression can be limited by reducing vibration exposure, whereas advanced disease may persist after exposure stops"
   ],
-  "class": "non_infective",
-  "system": "Occupational / Environmental",
-  "specialty": "Occupational & Environmental Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Hunter's Diseases of Occupations / WHO",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "HAVS follows prolonged use of vibrating hand-held tools such as grinders, chainsaws, drills and chipping hammers",
-      "It has three linked components: vascular (episodic finger blanching), sensorineural (numbness and tingling) and musculoskeletal effects on the hands",
-      "The vascular attacks resemble Raynaud's phenomenon, provoked by cold, with sharply demarcated blanching of one or more fingers followed by recovery",
-      "Staging with the Stockholm Workshop scale separately grades the vascular and sensorineural components and guides management",
-      "Reduced grip strength, clumsiness and loss of dexterity and fine sensation can impair work and daily tasks",
-      "Cold exposure and smoking worsen the vascular symptoms, so warmth and smoking cessation are practical advice",
-      "Diagnosis rests on a clear exposure history with a compatible pattern, supported by cold-provocation and sensory testing where available",
-      "Early recognition matters because progression can be limited by reducing vibration exposure, whereas advanced disease may persist after exposure stops"
+  "pathophysiology": "Repeated transmission of vibration energy to the hand damages digital blood vessels, peripheral nerves and supporting tissues. Vascular injury with endothelial damage and exaggerated sympathetic vasoconstriction produces episodic digital artery closure and finger blanching, while injury to peripheral nerve fibres and mechanoreceptors causes sensory loss; musculoskeletal and joint changes contribute to reduced grip and function.",
+  "additionalDifferentials": [
+   "Primary Raynaud's phenomenon",
+   "Connective tissue disease such as systemic sclerosis",
+   "Carpal tunnel syndrome and other entrapment neuropathies",
+   "Peripheral vascular disease",
+   "Cervical radiculopathy",
+   "Thoracic outlet syndrome"
+  ],
+  "additionalInvestigations": [
+   "Detailed vibration exposure history including tools and years of use",
+   "Stockholm Workshop staging of vascular and sensorineural components",
+   "Cold provocation testing with rewarming assessment where available",
+   "Sensory testing including thermal and vibrotactile thresholds",
+   "Nerve conduction studies to distinguish carpal tunnel syndrome",
+   "Investigations to exclude connective tissue disease when features suggest it"
+  ],
+  "redFlags": [
+   "Digital ulceration or tissue necrosis indicating severe vascular compromise",
+   "Features suggesting an underlying connective tissue disease",
+   "Rapidly progressive sensory or motor loss",
+   "Persistent severe symptoms despite cessation of exposure"
+  ],
+  "prognosis": "Symptoms may stabilise or partly improve if vibration exposure is stopped early, but well-established vascular and sensorineural changes are often permanent and can continue to affect hand function even after exposure ceases.",
+  "pitfalls": [
+   "Attributing finger blanching to primary Raynaud's without taking an occupational history",
+   "Missing coexisting carpal tunnel syndrome that also causes numbness",
+   "Failing to advise on cold protection and smoking cessation",
+   "Delaying exposure reduction until the disease is advanced and irreversible"
+  ],
+  "references": [
+   "Hunter's Diseases of Occupations",
+   "WHO guidance"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Reduce or eliminate vibration exposure through engineering controls, low-vibration tools, limiting exposure time and job rotation",
+   "Advise keeping the hands and body warm and stopping smoking to limit vascular attacks",
+   "Calcium channel blockers for disabling cold-induced vasospastic (vibration white finger) symptoms",
+   "Ongoing health surveillance with Stockholm Workshop staging of the vascular and sensorineural components",
+   "Report as a prescribed or reportable occupational disease and advise on workplace risk assessment",
+   "Investigate and treat coexisting carpal tunnel syndrome and exclude connective tissue disease"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "hand_arm_vibration-pathway",
+   "title": "Hand-arm vibration syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "HAVS follows prolonged use of vibrating hand-held tools such as grinders, chainsaws, drills and chipping hammers",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Digital ulceration or tissue necrosis indicating severe vascular compromise",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Detailed vibration exposure history including tools and years of use, Stockholm Workshop staging of vascular and sensorineural components, Cold provocation testing with rewarming assessment where available"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Reduce or eliminate vibration exposure through engineering controls, low-vibration tools, limiting exposure time and job rotation"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing finger blanching to primary Raynaud's without taking an occupational history"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of hand-arm vibration syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hand_arm_vibration-matrix",
+   "title": "Hand-arm vibration syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "HAVS follows prolonged use of vibrating hand-held tools such as grinders, chainsaws, drills and chipping hammers",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Repeated transmission of vibration energy to the hand damages digital blood vessels, peripheral nerves and supporting tissues. Vascular injury with endothelial damage and exaggerated sympathetic vasoconstriction produces episodic digital artery closure and finger blanching, while injury to peripheral nerve fibres and mechanoreceptors causes sensory loss; musculoskeletal and joint changes contribute to reduced grip and function.",
-    "additionalDifferentials": [
-      "Primary Raynaud's phenomenon",
-      "Connective tissue disease such as systemic sclerosis",
-      "Carpal tunnel syndrome and other entrapment neuropathies",
-      "Peripheral vascular disease",
-      "Cervical radiculopathy",
-      "Thoracic outlet syndrome"
+    [
+     "Key Investigations",
+     "Detailed vibration exposure history including tools and years of use, Stockholm Workshop staging of vascular and sensorineural",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Detailed vibration exposure history including tools and years of use",
-      "Stockholm Workshop staging of vascular and sensorineural components",
-      "Cold provocation testing with rewarming assessment where available",
-      "Sensory testing including thermal and vibrotactile thresholds",
-      "Nerve conduction studies to distinguish carpal tunnel syndrome",
-      "Investigations to exclude connective tissue disease when features suggest it"
+    [
+     "Primary Differentials",
+     "Primary Raynaud's phenomenon, Connective tissue disease such as systemic sclerosis, Carpal tunnel syndrome and other entrapment",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Digital ulceration or tissue necrosis indicating severe vascular compromise",
-      "Features suggesting an underlying connective tissue disease",
-      "Rapidly progressive sensory or motor loss",
-      "Persistent severe symptoms despite cessation of exposure"
+    [
+     "Management Strategy",
+     "Reduce or eliminate vibration exposure through engineering controls, low-vibration tools, limiting exposure time and job rotation",
+     "Core treatment modality"
     ],
-    "prognosis": "Symptoms may stabilise or partly improve if vibration exposure is stopped early, but well-established vascular and sensorineural changes are often permanent and can continue to affect hand function even after exposure ceases.",
-    "pitfalls": [
-      "Attributing finger blanching to primary Raynaud's without taking an occupational history",
-      "Missing coexisting carpal tunnel syndrome that also causes numbness",
-      "Failing to advise on cold protection and smoking cessation",
-      "Delaying exposure reduction until the disease is advanced and irreversible"
-    ],
-    "references": [
-      "Hunter's Diseases of Occupations",
-      "WHO guidance"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Reduce or eliminate vibration exposure through engineering controls, low-vibration tools, limiting exposure time and job rotation",
-      "Advise keeping the hands and body warm and stopping smoking to limit vascular attacks",
-      "Calcium channel blockers for disabling cold-induced vasospastic (vibration white finger) symptoms",
-      "Ongoing health surveillance with Stockholm Workshop staging of the vascular and sensorineural components",
-      "Report as a prescribed or reportable occupational disease and advise on workplace risk assessment",
-      "Investigate and treat coexisting carpal tunnel syndrome and exclude connective tissue disease"
+    [
+     "Clinical Pitfall",
+     "Attributing finger blanching to primary Raynaud's without taking an occupational history",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for hand-arm vibration syndrome."
+  }
+ ]
 }

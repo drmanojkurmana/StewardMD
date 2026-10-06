@@ -5,7 +5,17 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, ward, outpatient",
- "aliases": ["pneumothorax", "PSP", "SSP", "primary spontaneous pneumothorax", "secondary spontaneous pneumothorax", "collapsed lung", "tension pneumothorax", "ambulatory pneumothorax", "BTS pleural 2023"],
+ "aliases": [
+  "pneumothorax",
+  "PSP",
+  "SSP",
+  "primary spontaneous pneumothorax",
+  "secondary spontaneous pneumothorax",
+  "collapsed lung",
+  "tension pneumothorax",
+  "ambulatory pneumothorax",
+  "BTS pleural 2023"
+ ],
  "summary": "BTS 2023: size no longer dictates intervention. High-risk patients (tension, significant hypoxia, bilateral, underlying lung disease, age 50 or more with smoking history, haemopneumothorax) get a chest drain; others choose conservative care, an ambulatory device or needle aspiration according to symptoms and preference.",
  "sections": [
   {
@@ -81,12 +91,105 @@
   }
  ],
  "drugs": [
-  { "name": "Oxygen", "dose": "Titrate to SpO2 94 to 98%, or 88 to 92% if at risk of hypercapnic respiratory failure", "notes": "BTS 2017 oxygen targets." },
-  { "name": "Paracetamol", "dose": "1 g orally or IV every 6 hours, maximum 4 g/day", "notes": "Reduce dose if weight below 50 kg or hepatic risk. Add an opioid if needed, especially around pleurodesis." }
+  {
+   "name": "Oxygen",
+   "dose": "Titrate to SpO2 94 to 98%, or 88 to 92% if at risk of hypercapnic respiratory failure",
+   "notes": "BTS 2017 oxygen targets."
+  },
+  {
+   "name": "Paracetamol",
+   "dose": "1 g orally or IV every 6 hours, maximum 4 g/day",
+   "notes": "Reduce dose if weight below 50 kg or hepatic risk. Add an opioid if needed, especially around pleurodesis."
+  }
  ],
  "sources": [
-  { "org": "BTS", "title": "British Thoracic Society Guideline for Pleural Disease (Thorax 2023) and Appendix 1 pneumothorax pathway", "year": 2023, "url": "https://www.brit-thoracic.org.uk/clinical-resources/guidelines/pleural-disease/" },
-  { "org": "BTS", "title": "BTS guideline for oxygen use in adults in healthcare and emergency settings", "year": 2017, "url": "https://www.brit-thoracic.org.uk/clinical-resources/guidelines/emergency-oxygen/" }
+  {
+   "org": "BTS",
+   "title": "British Thoracic Society Guideline for Pleural Disease (Thorax 2023) and Appendix 1 pneumothorax pathway",
+   "year": 2023,
+   "url": "https://www.brit-thoracic.org.uk/clinical-resources/guidelines/pleural-disease/"
+  },
+  {
+   "org": "BTS",
+   "title": "BTS guideline for oxygen use in adults in healthcare and emergency settings",
+   "year": 2017,
+   "url": "https://www.brit-thoracic.org.uk/clinical-resources/guidelines/emergency-oxygen/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "spontaneous-pneumothorax-pathway",
+   "title": "Spontaneous pneumothorax (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Sudden pleuritic chest pain and breathlessness; reduced breath sounds and hyper-resonance on the affected side. Confirm on chest X-ray; CT if unclear or to plan an intervention.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "High-risk characteristics: haemodynamic compromise, significant hypoxia, bilateral pneumothorax, underlying lung disease, age 50 or more with significant smoking history, haemopneumothorax.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Tension pneumothorax: haemodynamic compromise, severe hypoxia, tracheal deviation away from the affected side. Decompress immediately without waiting for imaging, then insert a chest drain."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Chest drains should be inserted by trained operators following the BTS Clinical Statement on Pleural Procedures, using imaging to confirm a safe site. Attach to an underwater seal; never clamp a bubbling drain."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Ambulatory device: outpatient review every 2 to 3 days. Conservative PSP: every 2 to 4 days. Chest drain: daily inpatient review."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for spontaneous pneumothorax (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "spontaneous-pneumothorax-summary-matrix",
+   "title": "Spontaneous pneumothorax (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Sudden pleuritic chest pain and breathlessness; reduced breath sounds and hyper-resonance on the affected side. Confirm on chest X-ray; CT",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "High-risk characteristics: haemodynamic compromise, significant hypoxia, bilateral pneumothorax, underlying lung disease, age 50 or more",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Oxygen: Titrate to SpO2 94 to 98%, or 88 to 92% if at risk of hypercapnic respiratory failure",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Imaging before decompressing a clinically obvious tension pneumothorax.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for spontaneous pneumothorax (adult)."
+  }
+ ]
 }

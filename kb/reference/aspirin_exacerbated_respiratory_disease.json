@@ -1,75 +1,147 @@
 {
-  "id": "aspirin_exacerbated_respiratory_disease",
-  "name": "Aspirin-exacerbated respiratory disease",
-  "aliases": [
-    "AERD",
-    "Samter triad",
-    "NSAID-exacerbated respiratory disease"
+ "id": "aspirin_exacerbated_respiratory_disease",
+ "name": "Aspirin-exacerbated respiratory disease",
+ "aliases": [
+  "AERD",
+  "Samter triad",
+  "NSAID-exacerbated respiratory disease"
+ ],
+ "class": "non_infective",
+ "system": "Respiratory / Immunology",
+ "specialty": "Respiratory medicine / Allergy / Otolaryngology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Allergy and respiratory reference texts",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A triad of asthma, recurrent nasal polyposis with chronic rhinosinusitis and respiratory reactions to aspirin and other non-selective NSAIDs",
+   "Ingestion of aspirin or an NSAID provokes upper and lower airway reactions such as rhinorrhoea, nasal congestion, bronchospasm and sometimes flushing",
+   "The asthma and nasal polyps are typically severe and the polyps recur rapidly after surgery",
+   "It usually develops in adulthood and is not a classic IgE-mediated allergy",
+   "Diagnosis may be confirmed by a supervised aspirin challenge where the history is unclear",
+   "Management includes standard asthma and polyp treatment, avoidance of NSAIDs, and aspirin desensitisation in selected patients"
   ],
-  "class": "non_infective",
-  "system": "Respiratory / Immunology",
-  "specialty": "Respiratory medicine / Allergy / Otolaryngology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Allergy and respiratory reference texts",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A triad of asthma, recurrent nasal polyposis with chronic rhinosinusitis and respiratory reactions to aspirin and other non-selective NSAIDs",
-      "Ingestion of aspirin or an NSAID provokes upper and lower airway reactions such as rhinorrhoea, nasal congestion, bronchospasm and sometimes flushing",
-      "The asthma and nasal polyps are typically severe and the polyps recur rapidly after surgery",
-      "It usually develops in adulthood and is not a classic IgE-mediated allergy",
-      "Diagnosis may be confirmed by a supervised aspirin challenge where the history is unclear",
-      "Management includes standard asthma and polyp treatment, avoidance of NSAIDs, and aspirin desensitisation in selected patients"
+  "pathophysiology": "Aspirin-exacerbated respiratory disease is driven by dysregulation of arachidonic acid metabolism. Inhibition of cyclo-oxygenase-1 by aspirin and non-selective NSAIDs reduces protective prostaglandin E2 and shifts metabolism toward overproduction of cysteinyl leukotrienes, which are already elevated at baseline. The resulting eosinophilic inflammation of the upper and lower airways produces severe asthma and nasal polyposis, and NSAID exposure precipitates acute reactions by unmasking this leukotriene excess rather than through an IgE mechanism.",
+  "additionalDifferentials": [
+   "Allergic asthma with rhinitis",
+   "Chronic rhinosinusitis with nasal polyps without NSAID sensitivity",
+   "Eosinophilic granulomatosis with polyangiitis",
+   "IgE-mediated NSAID allergy or urticaria",
+   "Allergic fungal rhinosinusitis"
+  ],
+  "additionalInvestigations": [
+   "Detailed history of respiratory reactions to aspirin or NSAIDs",
+   "Assessment of asthma control and sinonasal disease including nasal endoscopy and imaging",
+   "Supervised aspirin (or NSAID) challenge in a controlled setting when diagnosis is uncertain",
+   "Eosinophil and, where relevant, leukotriene assessment",
+   "Exclusion of eosinophilic granulomatosis with polyangiitis"
+  ],
+  "redFlags": [
+   "Severe bronchospasm after NSAID exposure",
+   "Features suggesting eosinophilic granulomatosis with polyangiitis (neuropathy, vasculitic rash)",
+   "Poorly controlled asthma with frequent exacerbations",
+   "Rapidly recurrent obstructive nasal polyposis"
+  ],
+  "prognosis": "The disease is chronic, but with NSAID avoidance, modern asthma and polyp therapies and aspirin desensitisation in appropriate patients, control is often substantially improved.",
+  "pitfalls": [
+   "Not warning patients to avoid non-selective NSAIDs",
+   "Attempting aspirin challenge or desensitisation without appropriate supervision",
+   "Missing eosinophilic granulomatosis with polyangiitis as a mimic",
+   "Undertreating the underlying asthma and rhinosinusitis"
+  ],
+  "references": [
+   "Allergy reference texts (standard reference)",
+   "Respiratory medicine reference texts (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Strict avoidance of aspirin and non-selective NSAIDs, substituting paracetamol or a selective COX-2 inhibitor when analgesia or anti-inflammatory treatment is needed",
+   "Optimised asthma control with inhaled corticosteroids and long-acting bronchodilators",
+   "Leukotriene-modifying therapy, using a receptor antagonist such as montelukast or a synthesis inhibitor, targeting the cysteinyl-leukotriene overproduction central to the disease",
+   "Nasal polyp and rhinosinusitis treatment with intranasal corticosteroids and endoscopic sinus surgery for refractory or obstructing polyps, recognising their rapid recurrence",
+   "Aspirin desensitisation followed by regular aspirin therapy in selected patients to improve sinonasal and asthma control",
+   "Biologic therapy such as anti-IL-5, anti-IL-4/13 dupilumab or anti-IgE for severe eosinophilic asthma and polyposis",
+   "Exclusion of eosinophilic granulomatosis with polyangiitis, with multidisciplinary respiratory, allergy and ENT follow-up"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "aspirin_exacerbated_respiratory_disease-pathway",
+   "title": "Aspirin-exacerbated respiratory disease: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A triad of asthma, recurrent nasal polyposis with chronic rhinosinusitis and respiratory reactions to aspirin and other non-selective NSAIDs",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe bronchospasm after NSAID exposure",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Detailed history of respiratory reactions to aspirin or NSAIDs, Assessment of asthma control and sinonasal disease including nasal endoscopy and imaging, Supervised aspirin (or NSAID) challenge in a controlled setting when"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Strict avoidance of aspirin and non-selective NSAIDs, substituting paracetamol or a selective COX-2 inhibitor when analgesia or anti-inflammatory treatment is needed"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Not warning patients to avoid non-selective NSAIDs"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of aspirin-exacerbated respiratory disease."
+  }
+ ],
+ "tables": [
+  {
+   "id": "aspirin_exacerbated_respiratory_disease-matrix",
+   "title": "Aspirin-exacerbated respiratory disease: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A triad of asthma, recurrent nasal polyposis with chronic rhinosinusitis and respiratory reactions to aspirin and other",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Aspirin-exacerbated respiratory disease is driven by dysregulation of arachidonic acid metabolism. Inhibition of cyclo-oxygenase-1 by aspirin and non-selective NSAIDs reduces protective prostaglandin E2 and shifts metabolism toward overproduction of cysteinyl leukotrienes, which are already elevated at baseline. The resulting eosinophilic inflammation of the upper and lower airways produces severe asthma and nasal polyposis, and NSAID exposure precipitates acute reactions by unmasking this leukotriene excess rather than through an IgE mechanism.",
-    "additionalDifferentials": [
-      "Allergic asthma with rhinitis",
-      "Chronic rhinosinusitis with nasal polyps without NSAID sensitivity",
-      "Eosinophilic granulomatosis with polyangiitis",
-      "IgE-mediated NSAID allergy or urticaria",
-      "Allergic fungal rhinosinusitis"
+    [
+     "Key Investigations",
+     "Detailed history of respiratory reactions to aspirin or NSAIDs, Assessment of asthma control and sinonasal disease including",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Detailed history of respiratory reactions to aspirin or NSAIDs",
-      "Assessment of asthma control and sinonasal disease including nasal endoscopy and imaging",
-      "Supervised aspirin (or NSAID) challenge in a controlled setting when diagnosis is uncertain",
-      "Eosinophil and, where relevant, leukotriene assessment",
-      "Exclusion of eosinophilic granulomatosis with polyangiitis"
+    [
+     "Primary Differentials",
+     "Allergic asthma with rhinitis, Chronic rhinosinusitis with nasal polyps without NSAID sensitivity, Eosinophilic granulomatosis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe bronchospasm after NSAID exposure",
-      "Features suggesting eosinophilic granulomatosis with polyangiitis (neuropathy, vasculitic rash)",
-      "Poorly controlled asthma with frequent exacerbations",
-      "Rapidly recurrent obstructive nasal polyposis"
+    [
+     "Management Strategy",
+     "Strict avoidance of aspirin and non-selective NSAIDs, substituting paracetamol or a selective COX-2 inhibitor when analgesia or",
+     "Core treatment modality"
     ],
-    "prognosis": "The disease is chronic, but with NSAID avoidance, modern asthma and polyp therapies and aspirin desensitisation in appropriate patients, control is often substantially improved.",
-    "pitfalls": [
-      "Not warning patients to avoid non-selective NSAIDs",
-      "Attempting aspirin challenge or desensitisation without appropriate supervision",
-      "Missing eosinophilic granulomatosis with polyangiitis as a mimic",
-      "Undertreating the underlying asthma and rhinosinusitis"
-    ],
-    "references": [
-      "Allergy reference texts (standard reference)",
-      "Respiratory medicine reference texts (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Strict avoidance of aspirin and non-selective NSAIDs, substituting paracetamol or a selective COX-2 inhibitor when analgesia or anti-inflammatory treatment is needed",
-      "Optimised asthma control with inhaled corticosteroids and long-acting bronchodilators",
-      "Leukotriene-modifying therapy, using a receptor antagonist such as montelukast or a synthesis inhibitor, targeting the cysteinyl-leukotriene overproduction central to the disease",
-      "Nasal polyp and rhinosinusitis treatment with intranasal corticosteroids and endoscopic sinus surgery for refractory or obstructing polyps, recognising their rapid recurrence",
-      "Aspirin desensitisation followed by regular aspirin therapy in selected patients to improve sinonasal and asthma control",
-      "Biologic therapy such as anti-IL-5, anti-IL-4/13 dupilumab or anti-IgE for severe eosinophilic asthma and polyposis",
-      "Exclusion of eosinophilic granulomatosis with polyangiitis, with multidisciplinary respiratory, allergy and ENT follow-up"
+    [
+     "Clinical Pitfall",
+     "Not warning patients to avoid non-selective NSAIDs",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for aspirin-exacerbated respiratory disease."
+  }
+ ]
 }

@@ -1,79 +1,151 @@
 {
-  "id": "freiberg_infraction",
-  "name": "Freiberg infraction",
-  "aliases": [
-    "Freiberg disease",
-    "Freiberg infarction",
-    "metatarsal head osteonecrosis",
-    "osteochondrosis of the metatarsal head"
+ "id": "freiberg_infraction",
+ "name": "Freiberg infraction",
+ "aliases": [
+  "Freiberg disease",
+  "Freiberg infarction",
+  "metatarsal head osteonecrosis",
+  "osteochondrosis of the metatarsal head"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Orthopaedics",
+ "specialty": "Orthopaedics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Tachdjian's Pediatric Orthopaedics / Campbell's Operative Orthopaedics",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A true osteonecrosis of a lesser metatarsal head, most commonly the second, rather than a traction apophysitis",
+   "Affected bone is the metatarsal head, with the second metatarsal involved most often, followed by the third",
+   "Typically presents in adolescents around puberty and is notable for being more common in girls than boys",
+   "Complaints include forefoot pain and swelling localised to the affected metatarsophalangeal joint, worse on weight-bearing and push-off",
+   "The radiographic hallmark is flattening, sclerosis and collapse of the metatarsal head with widening of the joint and later osteophytes and loose bodies",
+   "The Smillie staging system describes progression from subchondral change to head flattening, fragmentation and joint destruction",
+   "It is one of the few osteochondroses that predominates in females, possibly reflecting footwear and loading patterns",
+   "Management ranges from offloading with orthoses and activity modification to joint debridement or reconstructive surgery for advanced disease as needed"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Orthopaedics",
-  "specialty": "Orthopaedics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Tachdjian's Pediatric Orthopaedics / Campbell's Operative Orthopaedics",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A true osteonecrosis of a lesser metatarsal head, most commonly the second, rather than a traction apophysitis",
-      "Affected bone is the metatarsal head, with the second metatarsal involved most often, followed by the third",
-      "Typically presents in adolescents around puberty and is notable for being more common in girls than boys",
-      "Complaints include forefoot pain and swelling localised to the affected metatarsophalangeal joint, worse on weight-bearing and push-off",
-      "The radiographic hallmark is flattening, sclerosis and collapse of the metatarsal head with widening of the joint and later osteophytes and loose bodies",
-      "The Smillie staging system describes progression from subchondral change to head flattening, fragmentation and joint destruction",
-      "It is one of the few osteochondroses that predominates in females, possibly reflecting footwear and loading patterns",
-      "Management ranges from offloading with orthoses and activity modification to joint debridement or reconstructive surgery for advanced disease as needed"
+  "pathophysiology": "Freiberg infraction is an osteonecrosis of the head of a lesser metatarsal, usually the second, resulting from interruption of the subchondral blood supply. Repetitive loading and microtrauma across a relatively long or rigid second metatarsal are thought to produce subchondral stress and vascular compromise, leading to necrosis of the articular bone. The subchondral bone subsequently collapses, the metatarsal head flattens and the articular cartilage fissures and fragments. Progressive incongruity of the metatarsophalangeal joint follows, with loose body formation, osteophytosis and secondary degenerative arthritis. A comparatively long second metatarsal and the increased forefoot loading associated with certain footwear are recognised contributing factors.",
+  "additionalDifferentials": [
+   "Metatarsal stress fracture",
+   "Metatarsophalangeal joint synovitis or capsulitis",
+   "Morton neuroma (interdigital neuroma)",
+   "Metatarsophalangeal joint osteoarthritis",
+   "Septic arthritis of a metatarsophalangeal joint",
+   "Plantar plate injury"
+  ],
+  "additionalInvestigations": [
+   "Weight-bearing forefoot radiographs to assess metatarsal head flattening, sclerosis and joint changes",
+   "Magnetic resonance imaging for early disease before collapse and to assess the articular surface",
+   "Assessment of relative metatarsal lengths and forefoot loading pattern",
+   "Smillie staging on radiographs to guide management",
+   "Ultrasound to evaluate synovitis or to exclude an interdigital neuroma",
+   "Inflammatory markers if septic arthritis is a concern"
+  ],
+  "redFlags": [
+   "Advanced head collapse with joint destruction and fixed deformity",
+   "Locking or mechanical symptoms suggesting intra-articular loose bodies",
+   "Warmth, marked swelling or systemic features raising the possibility of infection",
+   "Progressive pain despite conservative measures indicating the need for surgical assessment"
+  ],
+  "prognosis": "Early disease often responds well to offloading and activity modification, but established head collapse and articular fragmentation may progress to metatarsophalangeal osteoarthritis with persistent pain requiring surgical intervention.",
+  "pitfalls": [
+   "Attributing forefoot pain to a neuroma and overlooking metatarsal head osteonecrosis on radiographs",
+   "Missing early disease when plain films are normal and not obtaining magnetic resonance imaging",
+   "Failing to address abnormal forefoot loading or footwear as a contributing factor",
+   "Delaying surgical referral once joint incongruity and mechanical symptoms have developed"
+  ],
+  "references": [
+   "Campbell's Operative Orthopaedics",
+   "Mann's Surgery of the Foot and Ankle"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Early-stage management with offloading, activity modification, metatarsal pads or bars, stiff-soled or rocker-bottom footwear and orthoses to unload the affected metatarsal head",
+   "Immobilisation or protected weight-bearing to permit revascularisation before head collapse",
+   "Analgesia and non-steroidal anti-inflammatory drugs for pain and synovitis",
+   "Stage-guided surgery using the Smillie classification, with joint debridement, loose-body and osteophyte removal, dorsal closing-wedge osteotomy, or arthroplasty for advanced collapse and fragmentation",
+   "Correction of contributing forefoot loading and footwear to limit recurrence",
+   "Orthopaedic follow-up to monitor progression to metatarsophalangeal osteoarthritis"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "freiberg_infraction-pathway",
+   "title": "Freiberg infraction: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A true osteonecrosis of a lesser metatarsal head, most commonly the second, rather than a traction apophysitis",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Advanced head collapse with joint destruction and fixed deformity",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Weight-bearing forefoot radiographs to assess metatarsal head flattening, sclerosis and joint changes, Magnetic resonance imaging for early disease before collapse and to assess the articular surface, Assessment of"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Early-stage management with offloading, activity modification, metatarsal pads or bars, stiff-soled or rocker-bottom footwear and orthoses to unload the affected metatarsal head"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing forefoot pain to a neuroma and overlooking metatarsal head osteonecrosis on radiographs"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of freiberg infraction."
+  }
+ ],
+ "tables": [
+  {
+   "id": "freiberg_infraction-matrix",
+   "title": "Freiberg infraction: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A true osteonecrosis of a lesser metatarsal head, most commonly the second, rather than a traction apophysitis",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Freiberg infraction is an osteonecrosis of the head of a lesser metatarsal, usually the second, resulting from interruption of the subchondral blood supply. Repetitive loading and microtrauma across a relatively long or rigid second metatarsal are thought to produce subchondral stress and vascular compromise, leading to necrosis of the articular bone. The subchondral bone subsequently collapses, the metatarsal head flattens and the articular cartilage fissures and fragments. Progressive incongruity of the metatarsophalangeal joint follows, with loose body formation, osteophytosis and secondary degenerative arthritis. A comparatively long second metatarsal and the increased forefoot loading associated with certain footwear are recognised contributing factors.",
-    "additionalDifferentials": [
-      "Metatarsal stress fracture",
-      "Metatarsophalangeal joint synovitis or capsulitis",
-      "Morton neuroma (interdigital neuroma)",
-      "Metatarsophalangeal joint osteoarthritis",
-      "Septic arthritis of a metatarsophalangeal joint",
-      "Plantar plate injury"
+    [
+     "Key Investigations",
+     "Weight-bearing forefoot radiographs to assess metatarsal head flattening, sclerosis and joint changes, Magnetic resonance imaging",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Weight-bearing forefoot radiographs to assess metatarsal head flattening, sclerosis and joint changes",
-      "Magnetic resonance imaging for early disease before collapse and to assess the articular surface",
-      "Assessment of relative metatarsal lengths and forefoot loading pattern",
-      "Smillie staging on radiographs to guide management",
-      "Ultrasound to evaluate synovitis or to exclude an interdigital neuroma",
-      "Inflammatory markers if septic arthritis is a concern"
+    [
+     "Primary Differentials",
+     "Metatarsal stress fracture, Metatarsophalangeal joint synovitis or capsulitis, Morton neuroma (interdigital neuroma)",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Advanced head collapse with joint destruction and fixed deformity",
-      "Locking or mechanical symptoms suggesting intra-articular loose bodies",
-      "Warmth, marked swelling or systemic features raising the possibility of infection",
-      "Progressive pain despite conservative measures indicating the need for surgical assessment"
+    [
+     "Management Strategy",
+     "Early-stage management with offloading, activity modification, metatarsal pads or bars, stiff-soled or rocker-bottom footwear and",
+     "Core treatment modality"
     ],
-    "prognosis": "Early disease often responds well to offloading and activity modification, but established head collapse and articular fragmentation may progress to metatarsophalangeal osteoarthritis with persistent pain requiring surgical intervention.",
-    "pitfalls": [
-      "Attributing forefoot pain to a neuroma and overlooking metatarsal head osteonecrosis on radiographs",
-      "Missing early disease when plain films are normal and not obtaining magnetic resonance imaging",
-      "Failing to address abnormal forefoot loading or footwear as a contributing factor",
-      "Delaying surgical referral once joint incongruity and mechanical symptoms have developed"
-    ],
-    "references": [
-      "Campbell's Operative Orthopaedics",
-      "Mann's Surgery of the Foot and Ankle"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Early-stage management with offloading, activity modification, metatarsal pads or bars, stiff-soled or rocker-bottom footwear and orthoses to unload the affected metatarsal head",
-      "Immobilisation or protected weight-bearing to permit revascularisation before head collapse",
-      "Analgesia and non-steroidal anti-inflammatory drugs for pain and synovitis",
-      "Stage-guided surgery using the Smillie classification, with joint debridement, loose-body and osteophyte removal, dorsal closing-wedge osteotomy, or arthroplasty for advanced collapse and fragmentation",
-      "Correction of contributing forefoot loading and footwear to limit recurrence",
-      "Orthopaedic follow-up to monitor progression to metatarsophalangeal osteoarthritis"
+    [
+     "Clinical Pitfall",
+     "Attributing forefoot pain to a neuroma and overlooking metatarsal head osteonecrosis on radiographs",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for freiberg infraction."
+  }
+ ]
 }

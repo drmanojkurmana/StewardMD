@@ -1,75 +1,147 @@
 {
-  "id": "femoroacetabular_impingement",
-  "name": "Femoroacetabular impingement",
-  "aliases": [
-    "FAI",
-    "cam impingement",
-    "pincer impingement"
+ "id": "femoroacetabular_impingement",
+ "name": "Femoroacetabular impingement",
+ "aliases": [
+  "FAI",
+  "cam impingement",
+  "pincer impingement"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Sports & Trauma",
+ "specialty": "Orthopaedics / Sports Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Miller's Review of Orthopaedics / Brukner and Khan's Clinical Sports Medicine",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Abnormal contact between the proximal femur and acetabular rim during hip motion, classified as cam, pincer or mixed",
+   "Cam morphology (aspherical femoral head-neck junction) is common in young athletic men; pincer (acetabular over-coverage) is more often described in women",
+   "Presents with activity-related groin pain, often with a C-sign as the patient grips the hip",
+   "The FADIR test (flexion, adduction, internal rotation) reproducing groin pain is the key provocative sign",
+   "The diagnosis requires the triad of symptoms, clinical signs and imaging findings, since morphology alone is often asymptomatic",
+   "Labral tears and chondral damage frequently coexist and may drive symptoms",
+   "Management begins with activity modification and physiotherapy, with arthroscopic osteochondroplasty and labral repair for refractory cases"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Sports & Trauma",
-  "specialty": "Orthopaedics / Sports Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Miller's Review of Orthopaedics / Brukner and Khan's Clinical Sports Medicine",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Abnormal contact between the proximal femur and acetabular rim during hip motion, classified as cam, pincer or mixed",
-      "Cam morphology (aspherical femoral head-neck junction) is common in young athletic men; pincer (acetabular over-coverage) is more often described in women",
-      "Presents with activity-related groin pain, often with a C-sign as the patient grips the hip",
-      "The FADIR test (flexion, adduction, internal rotation) reproducing groin pain is the key provocative sign",
-      "The diagnosis requires the triad of symptoms, clinical signs and imaging findings, since morphology alone is often asymptomatic",
-      "Labral tears and chondral damage frequently coexist and may drive symptoms",
-      "Management begins with activity modification and physiotherapy, with arthroscopic osteochondroplasty and labral repair for refractory cases"
+  "pathophysiology": "A non-spherical femoral head-neck junction (cam) or acetabular over-coverage (pincer) causes repetitive abutment of the femoral neck against the acetabular rim during flexion and internal rotation. This shears the chondrolabral junction, tearing the labrum and delaminating adjacent cartilage. Over time the cumulative damage can progress to hip osteoarthritis, particularly with cam-type impingement.",
+  "additionalDifferentials": [
+   "Hip osteoarthritis",
+   "Labral tear without impingement morphology",
+   "Athletic pubalgia / adductor-related groin pain",
+   "Iliopsoas tendinopathy or snapping hip",
+   "Stress fracture of the femoral neck",
+   "Referred lumbar spine pain"
+  ],
+  "additionalInvestigations": [
+   "Radiographs including a well-centred AP pelvis and lateral (Dunn) view for alpha angle and crossover sign",
+   "MR arthrography of the hip for labral and chondral assessment",
+   "Diagnostic intra-articular local anaesthetic injection to confirm the joint as the pain source",
+   "CT for detailed bony morphology and surgical planning"
+  ],
+  "redFlags": [
+   "Night pain or constitutional symptoms suggesting infection or tumour",
+   "Femoral neck stress fracture in an athlete or amenorrhoeic runner",
+   "Rapidly progressive joint-space loss indicating advanced osteoarthritis"
+  ],
+  "prognosis": "Many patients improve with physiotherapy and activity modification; arthroscopic correction relieves symptoms in appropriately selected patients, though established osteoarthritis predicts poorer outcomes.",
+  "pitfalls": [
+   "Treating incidental cam/pincer morphology in an asymptomatic hip",
+   "Attributing groin pain to FAI while missing a femoral neck stress fracture",
+   "Overlooking coexisting osteoarthritis that limits arthroscopic benefit",
+   "Neglecting core and hip rehabilitation before considering surgery"
+  ],
+  "references": [
+   "Miller's Review of Orthopaedics",
+   "Brukner and Khan's Clinical Sports Medicine"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Begin with conservative care through activity modification, avoiding provocative deep hip flexion and internal rotation",
+   "Refer for physiotherapy targeting hip and core strengthening, neuromuscular control and range of movement",
+   "Offer symptomatic relief with simple analgesics or non-steroidal anti-inflammatory drugs",
+   "Use a diagnostic and therapeutic intra-articular corticosteroid and local anaesthetic injection to confirm the joint as the pain source and give relief",
+   "Offer arthroscopic or open surgery to reshape the cam or pincer morphology and repair or debride labral and chondral damage in appropriately selected patients who fail conservative care",
+   "Counsel that established osteoarthritis predicts poorer surgical outcomes and may warrant joint-preserving or arthroplasty consideration",
+   "Refer to orthopaedic or sports medicine specialists where symptoms persist with concordant clinical and imaging findings"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "femoroacetabular_impingement-pathway",
+   "title": "Femoroacetabular impingement: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Abnormal contact between the proximal femur and acetabular rim during hip motion, classified as cam, pincer or mixed",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Night pain or constitutional symptoms suggesting infection or tumour",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Radiographs including a well-centred AP pelvis and lateral (Dunn) view for alpha angle and crossover sign, MR arthrography of the hip for labral and chondral assessment, Diagnostic intra-articular local anaesthetic"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Begin with conservative care through activity modification, avoiding provocative deep hip flexion and internal rotation"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Treating incidental cam/pincer morphology in an asymptomatic hip"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of femoroacetabular impingement."
+  }
+ ],
+ "tables": [
+  {
+   "id": "femoroacetabular_impingement-matrix",
+   "title": "Femoroacetabular impingement: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Abnormal contact between the proximal femur and acetabular rim during hip motion, classified as cam, pincer or mixed",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "A non-spherical femoral head-neck junction (cam) or acetabular over-coverage (pincer) causes repetitive abutment of the femoral neck against the acetabular rim during flexion and internal rotation. This shears the chondrolabral junction, tearing the labrum and delaminating adjacent cartilage. Over time the cumulative damage can progress to hip osteoarthritis, particularly with cam-type impingement.",
-    "additionalDifferentials": [
-      "Hip osteoarthritis",
-      "Labral tear without impingement morphology",
-      "Athletic pubalgia / adductor-related groin pain",
-      "Iliopsoas tendinopathy or snapping hip",
-      "Stress fracture of the femoral neck",
-      "Referred lumbar spine pain"
+    [
+     "Key Investigations",
+     "Radiographs including a well-centred AP pelvis and lateral (Dunn) view for alpha angle and crossover sign, MR arthrography of the",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Radiographs including a well-centred AP pelvis and lateral (Dunn) view for alpha angle and crossover sign",
-      "MR arthrography of the hip for labral and chondral assessment",
-      "Diagnostic intra-articular local anaesthetic injection to confirm the joint as the pain source",
-      "CT for detailed bony morphology and surgical planning"
+    [
+     "Primary Differentials",
+     "Hip osteoarthritis, Labral tear without impingement morphology, Athletic pubalgia / adductor-related groin pain",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Night pain or constitutional symptoms suggesting infection or tumour",
-      "Femoral neck stress fracture in an athlete or amenorrhoeic runner",
-      "Rapidly progressive joint-space loss indicating advanced osteoarthritis"
+    [
+     "Management Strategy",
+     "Begin with conservative care through activity modification, avoiding provocative deep hip flexion and internal rotation",
+     "Core treatment modality"
     ],
-    "prognosis": "Many patients improve with physiotherapy and activity modification; arthroscopic correction relieves symptoms in appropriately selected patients, though established osteoarthritis predicts poorer outcomes.",
-    "pitfalls": [
-      "Treating incidental cam/pincer morphology in an asymptomatic hip",
-      "Attributing groin pain to FAI while missing a femoral neck stress fracture",
-      "Overlooking coexisting osteoarthritis that limits arthroscopic benefit",
-      "Neglecting core and hip rehabilitation before considering surgery"
-    ],
-    "references": [
-      "Miller's Review of Orthopaedics",
-      "Brukner and Khan's Clinical Sports Medicine"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Begin with conservative care through activity modification, avoiding provocative deep hip flexion and internal rotation",
-      "Refer for physiotherapy targeting hip and core strengthening, neuromuscular control and range of movement",
-      "Offer symptomatic relief with simple analgesics or non-steroidal anti-inflammatory drugs",
-      "Use a diagnostic and therapeutic intra-articular corticosteroid and local anaesthetic injection to confirm the joint as the pain source and give relief",
-      "Offer arthroscopic or open surgery to reshape the cam or pincer morphology and repair or debride labral and chondral damage in appropriately selected patients who fail conservative care",
-      "Counsel that established osteoarthritis predicts poorer surgical outcomes and may warrant joint-preserving or arthroplasty consideration",
-      "Refer to orthopaedic or sports medicine specialists where symptoms persist with concordant clinical and imaging findings"
+    [
+     "Clinical Pitfall",
+     "Treating incidental cam/pincer morphology in an asymptomatic hip",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for femoroacetabular impingement."
+  }
+ ]
 }

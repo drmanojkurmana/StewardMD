@@ -1,82 +1,154 @@
 {
-  "id": "radial_scar",
-  "name": "Radial scar",
-  "aliases": [
-    "Complex sclerosing lesion",
-    "Radial sclerosing lesion"
+ "id": "radial_scar",
+ "name": "Radial scar",
+ "aliases": [
+  "Complex sclerosing lesion",
+  "Radial sclerosing lesion"
+ ],
+ "class": "non_infective",
+ "system": "Breast",
+ "specialty": "Breast surgery / Radiology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "WHO Classification of Tumours: Breast Tumours",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A benign sclerosing lesion with a fibroelastic core from which ducts and lobules radiate, termed a complex sclerosing lesion when larger than about 1 cm.",
+   "Usually impalpable and detected on screening mammography as a stellate or spiculated lesion that closely mimics invasive carcinoma.",
+   "The mammographic appearance may show a radiolucent centre and long radiating spicules, sometimes varying between projections ('black star').",
+   "Frequently harbours or is associated with atypical hyperplasia, in situ carcinoma or, less often, invasive carcinoma at its periphery.",
+   "Core biopsy sampling can under-represent associated atypia, so diagnostic excision or vacuum-assisted excision is usually recommended.",
+   "The lesion itself is benign but is regarded as a marker of modestly increased future breast cancer risk.",
+   "Preserved myoepithelial layer around entrapped tubules distinguishes it from tubular carcinoma histologically.",
+   "Careful radiological-pathological correlation is essential given the strong radiological overlap with malignancy."
   ],
-  "class": "non_infective",
-  "system": "Breast",
-  "specialty": "Breast surgery / Radiology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "WHO Classification of Tumours: Breast Tumours",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A benign sclerosing lesion with a fibroelastic core from which ducts and lobules radiate, termed a complex sclerosing lesion when larger than about 1 cm.",
-      "Usually impalpable and detected on screening mammography as a stellate or spiculated lesion that closely mimics invasive carcinoma.",
-      "The mammographic appearance may show a radiolucent centre and long radiating spicules, sometimes varying between projections ('black star').",
-      "Frequently harbours or is associated with atypical hyperplasia, in situ carcinoma or, less often, invasive carcinoma at its periphery.",
-      "Core biopsy sampling can under-represent associated atypia, so diagnostic excision or vacuum-assisted excision is usually recommended.",
-      "The lesion itself is benign but is regarded as a marker of modestly increased future breast cancer risk.",
-      "Preserved myoepithelial layer around entrapped tubules distinguishes it from tubular carcinoma histologically.",
-      "Careful radiological-pathological correlation is essential given the strong radiological overlap with malignancy."
+  "pathophysiology": "A radial scar forms around a central zone of fibroelastic (fibroelastotic) tissue into which ducts and lobules are drawn and distorted, creating a stellate architecture with entrapped, sometimes distorted, tubules at the centre. The radiating arms show a range of proliferative changes including adenosis, ductal hyperplasia, cyst formation and papillomatosis. Although the process is benign and probably reflects a localised reparative or sclerosing response, the entrapment of tubules within dense stroma can mimic stromal invasion, and the associated proliferative epithelium may progress to atypical hyperplasia or carcinoma, explaining both the diagnostic difficulty and the increased cancer risk.",
+  "additionalDifferentials": [
+   "Tubular carcinoma",
+   "Invasive carcinoma of no special type presenting as a spiculated mass",
+   "Sclerosing adenosis",
+   "Fat necrosis with scarring",
+   "Postsurgical scar",
+   "Complex sclerosing lesion with atypia",
+   "Low-grade adenosquamous carcinoma"
+  ],
+  "additionalInvestigations": [
+   "Diagnostic mammography with additional projections",
+   "Tomosynthesis to characterise the stellate lesion",
+   "Targeted ultrasound of the mammographic abnormality",
+   "Image-guided core or vacuum-assisted biopsy",
+   "Diagnostic surgical or vacuum-assisted excision for definitive assessment",
+   "Histology with myoepithelial immunohistochemistry",
+   "Radiological-pathological concordance review at multidisciplinary meeting"
+  ],
+  "redFlags": [
+   "Associated atypical hyperplasia or in situ carcinoma on biopsy",
+   "Discordance between imaging and core biopsy findings",
+   "Increasing size or a developing palpable mass",
+   "Foci suspicious for tubular carcinoma at the lesion periphery",
+   "Suspicious microcalcification within the lesion"
+  ],
+  "prognosis": "The radial scar itself is benign, and after appropriate excision the outlook is excellent. It signals a mild-to-moderate increase in long-term breast cancer risk, warranting continued participation in screening.",
+  "pitfalls": [
+   "Confidently diagnosing malignancy on imaging alone, or conversely dismissing a spiculated lesion as benign",
+   "Relying on limited core biopsy that misses associated atypia or carcinoma",
+   "Misinterpreting entrapped tubules as invasive tubular carcinoma without myoepithelial stains",
+   "Failing to ensure radiological-pathological concordance",
+   "Neglecting ongoing surveillance given the increased future risk"
+  ],
+  "references": [
+   "WHO Classification of Tumours: Breast Tumours (current edition)",
+   "Standard textbook of breast imaging on stellate lesions",
+   "National breast screening pathology guidance"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Image-guided core or vacuum-assisted biopsy to sample the stellate lesion and detect associated atypia or malignancy",
+   "Diagnostic surgical or vacuum-assisted excision, because core sampling under-represents peripheral atypical hyperplasia, in situ or invasive carcinoma",
+   "Histological confirmation with myoepithelial immunohistochemistry to distinguish entrapped tubules from true stromal invasion",
+   "Escalation to the relevant oncological pathway if atypical hyperplasia or carcinoma is found at the periphery",
+   "Continued participation in mammographic screening given the modestly increased long-term breast cancer risk",
+   "Management within a breast multidisciplinary team combining radiology, surgery and pathology"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "radial_scar-pathway",
+   "title": "Radial scar: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A benign sclerosing lesion with a fibroelastic core from which ducts and lobules radiate, termed a complex sclerosing lesion when larger than about 1 cm.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Associated atypical hyperplasia or in situ carcinoma on biopsy",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Diagnostic mammography with additional projections, Tomosynthesis to characterise the stellate lesion, Targeted ultrasound of the mammographic abnormality"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Image-guided core or vacuum-assisted biopsy to sample the stellate lesion and detect associated atypia or malignancy"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confidently diagnosing malignancy on imaging alone, or conversely dismissing a spiculated lesion as benign"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of radial scar."
+  }
+ ],
+ "tables": [
+  {
+   "id": "radial_scar-matrix",
+   "title": "Radial scar: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A benign sclerosing lesion with a fibroelastic core from which ducts and lobules radiate, termed a complex sclerosing lesion when",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "A radial scar forms around a central zone of fibroelastic (fibroelastotic) tissue into which ducts and lobules are drawn and distorted, creating a stellate architecture with entrapped, sometimes distorted, tubules at the centre. The radiating arms show a range of proliferative changes including adenosis, ductal hyperplasia, cyst formation and papillomatosis. Although the process is benign and probably reflects a localised reparative or sclerosing response, the entrapment of tubules within dense stroma can mimic stromal invasion, and the associated proliferative epithelium may progress to atypical hyperplasia or carcinoma, explaining both the diagnostic difficulty and the increased cancer risk.",
-    "additionalDifferentials": [
-      "Tubular carcinoma",
-      "Invasive carcinoma of no special type presenting as a spiculated mass",
-      "Sclerosing adenosis",
-      "Fat necrosis with scarring",
-      "Postsurgical scar",
-      "Complex sclerosing lesion with atypia",
-      "Low-grade adenosquamous carcinoma"
+    [
+     "Key Investigations",
+     "Diagnostic mammography with additional projections, Tomosynthesis to characterise the stellate lesion, Targeted ultrasound of the",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Diagnostic mammography with additional projections",
-      "Tomosynthesis to characterise the stellate lesion",
-      "Targeted ultrasound of the mammographic abnormality",
-      "Image-guided core or vacuum-assisted biopsy",
-      "Diagnostic surgical or vacuum-assisted excision for definitive assessment",
-      "Histology with myoepithelial immunohistochemistry",
-      "Radiological-pathological concordance review at multidisciplinary meeting"
+    [
+     "Primary Differentials",
+     "Tubular carcinoma, Invasive carcinoma of no special type presenting as a spiculated mass, Sclerosing adenosis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Associated atypical hyperplasia or in situ carcinoma on biopsy",
-      "Discordance between imaging and core biopsy findings",
-      "Increasing size or a developing palpable mass",
-      "Foci suspicious for tubular carcinoma at the lesion periphery",
-      "Suspicious microcalcification within the lesion"
+    [
+     "Management Strategy",
+     "Image-guided core or vacuum-assisted biopsy to sample the stellate lesion and detect associated atypia or malignancy",
+     "Core treatment modality"
     ],
-    "prognosis": "The radial scar itself is benign, and after appropriate excision the outlook is excellent. It signals a mild-to-moderate increase in long-term breast cancer risk, warranting continued participation in screening.",
-    "pitfalls": [
-      "Confidently diagnosing malignancy on imaging alone, or conversely dismissing a spiculated lesion as benign",
-      "Relying on limited core biopsy that misses associated atypia or carcinoma",
-      "Misinterpreting entrapped tubules as invasive tubular carcinoma without myoepithelial stains",
-      "Failing to ensure radiological-pathological concordance",
-      "Neglecting ongoing surveillance given the increased future risk"
-    ],
-    "references": [
-      "WHO Classification of Tumours: Breast Tumours (current edition)",
-      "Standard textbook of breast imaging on stellate lesions",
-      "National breast screening pathology guidance"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Image-guided core or vacuum-assisted biopsy to sample the stellate lesion and detect associated atypia or malignancy",
-      "Diagnostic surgical or vacuum-assisted excision, because core sampling under-represents peripheral atypical hyperplasia, in situ or invasive carcinoma",
-      "Histological confirmation with myoepithelial immunohistochemistry to distinguish entrapped tubules from true stromal invasion",
-      "Escalation to the relevant oncological pathway if atypical hyperplasia or carcinoma is found at the periphery",
-      "Continued participation in mammographic screening given the modestly increased long-term breast cancer risk",
-      "Management within a breast multidisciplinary team combining radiology, surgery and pathology"
+    [
+     "Clinical Pitfall",
+     "Confidently diagnosing malignancy on imaging alone, or conversely dismissing a spiculated lesion as benign",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for radial scar."
+  }
+ ]
 }

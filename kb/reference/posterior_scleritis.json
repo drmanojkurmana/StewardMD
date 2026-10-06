@@ -1,78 +1,150 @@
 {
-  "id": "posterior_scleritis",
-  "name": "posterior scleritis",
-  "aliases": [
-    "posterior scleral inflammation"
+ "id": "posterior_scleritis",
+ "name": "posterior scleritis",
+ "aliases": [
+  "posterior scleral inflammation"
+ ],
+ "class": "non_infective",
+ "system": "Ophthalmic",
+ "specialty": "Ophthalmology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Kanski's Clinical Ophthalmology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A rare, potentially sight-threatening inflammation of the sclera posterior to the equator, often with minimal or absent anterior signs so it is easily missed.",
+   "Pain is typically severe, deep and boring, worse on eye movement, and may radiate to the brow, jaw or temple with globe tenderness.",
+   "It may produce proptosis, diplopia and restricted ocular motility, mimicking orbital disease.",
+   "B-scan ultrasonography is the key investigation, showing scleral and choroidal thickening with fluid tracking into the sub-Tenon space producing the T-sign.",
+   "Posterior segment signs include exudative retinal detachment, choroidal folds, disc oedema, uveal effusion, macular oedema and a subretinal mass mimicking a tumour.",
+   "Around half of cases are associated with a systemic autoimmune disease such as rheumatoid arthritis, granulomatosis with polyangiitis, lupus, relapsing polychondritis or IgG4-related disease.",
+   "Management is graded by severity, using systemic non-steroidal anti-inflammatory drugs, corticosteroids and steroid-sparing immunosuppression or biologics.",
+   "Infective and masquerade causes should be excluded before committing to immunosuppression."
   ],
-  "class": "non_infective",
-  "system": "Ophthalmic",
-  "specialty": "Ophthalmology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Kanski's Clinical Ophthalmology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A rare, potentially sight-threatening inflammation of the sclera posterior to the equator, often with minimal or absent anterior signs so it is easily missed.",
-      "Pain is typically severe, deep and boring, worse on eye movement, and may radiate to the brow, jaw or temple with globe tenderness.",
-      "It may produce proptosis, diplopia and restricted ocular motility, mimicking orbital disease.",
-      "B-scan ultrasonography is the key investigation, showing scleral and choroidal thickening with fluid tracking into the sub-Tenon space producing the T-sign.",
-      "Posterior segment signs include exudative retinal detachment, choroidal folds, disc oedema, uveal effusion, macular oedema and a subretinal mass mimicking a tumour.",
-      "Around half of cases are associated with a systemic autoimmune disease such as rheumatoid arthritis, granulomatosis with polyangiitis, lupus, relapsing polychondritis or IgG4-related disease.",
-      "Management is graded by severity, using systemic non-steroidal anti-inflammatory drugs, corticosteroids and steroid-sparing immunosuppression or biologics.",
-      "Infective and masquerade causes should be excluded before committing to immunosuppression."
+  "pathophysiology": "Posterior scleritis is an immune-mediated inflammation of the collagen-rich posterior sclera, frequently occurring as an ocular manifestation of systemic autoimmune or vasculitic disease. Immune-complex deposition and cell-mediated hypersensitivity drive inflammatory infiltration and oedema that thicken the sclera and track into the sub-Tenon space and adjacent choroid. This produces the characteristic ultrasonographic findings and secondary changes such as choroidal effusion, exudative retinal detachment and disc swelling.",
+  "additionalDifferentials": [
+   "Orbital inflammatory disease or orbital cellulitis",
+   "Choroidal tumour such as melanoma or metastasis",
+   "Vogt-Koyanagi-Harada disease",
+   "Central serous chorioretinopathy",
+   "Optic neuritis or papilloedema",
+   "Uveal effusion syndrome"
+  ],
+  "additionalInvestigations": [
+   "B-scan ultrasonography seeking scleral thickening and the T-sign",
+   "Optical coherence tomography to demonstrate subretinal fluid and choroidal folds",
+   "Fluorescein and indocyanine green angiography",
+   "Magnetic resonance imaging or computed tomography of the orbits when orbital or mass pathology is suspected",
+   "Inflammatory and autoimmune serology including full blood count, ESR, CRP, ANA, ANCA, rheumatoid factor and angiotensin-converting enzyme",
+   "Infective screen for syphilis and tuberculosis before starting immunosuppression"
+  ],
+  "redFlags": [
+   "Severe pain accompanied by significant visual loss",
+   "Proptosis with restricted motility raising concern for orbital cellulitis",
+   "Systemic features suggesting an underlying vasculitis",
+   "A subretinal or choroidal mass raising suspicion of malignancy"
+  ],
+  "prognosis": "The outlook is generally good when treatment is prompt and appropriately intensive, though recurrences occur and any associated systemic disease influences overall outcome. Delayed recognition and treatment risk permanent visual loss.",
+  "pitfalls": [
+   "Misdiagnosis as orbital cellulitis or a choroidal tumour leading to inappropriate management",
+   "Overlooking the diagnosis in a painful eye with a normal anterior segment",
+   "Failing to investigate for an associated systemic autoimmune disorder",
+   "Commencing corticosteroids without first excluding an infective cause"
+  ],
+  "references": [
+   "Kanski's Clinical Ophthalmology",
+   "American Academy of Ophthalmology, Basic and Clinical Science Course, Uveitis and Ocular Inflammation",
+   "Ryan's Retina"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat with systemic corticosteroids as the mainstay, by oral or intravenous route according to severity, to control the scleral inflammation",
+   "Add non-steroidal anti-inflammatory drugs in milder disease and for adjunctive symptom control",
+   "Introduce steroid-sparing immunosuppression such as methotrexate or mycophenolate, or a biologic such as an anti-TNF agent or rituximab, for refractory or recurrent disease",
+   "Exclude infective mimics including syphilis and tuberculosis before starting immunosuppression",
+   "Investigate and co-manage any associated systemic autoimmune disease (rheumatoid arthritis, granulomatosis with polyangiitis, lupus, relapsing polychondritis, IgG4-related disease) with rheumatology",
+   "Monitor treatment response with B-scan ultrasonography and optical coherence tomography, watching for exudative retinal detachment and macular oedema",
+   "Treat promptly and escalate immunosuppression for recurrence to prevent permanent visual loss"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "posterior_scleritis-pathway",
+   "title": "posterior scleritis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A rare, potentially sight-threatening inflammation of the sclera posterior to the equator, often with minimal or absent anterior signs so it is easily missed.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe pain accompanied by significant visual loss",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: B-scan ultrasonography seeking scleral thickening and the T-sign, Optical coherence tomography to demonstrate subretinal fluid and choroidal folds, Fluorescein and indocyanine green angiography"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat with systemic corticosteroids as the mainstay, by oral or intravenous route according to severity, to control the scleral inflammation"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misdiagnosis as orbital cellulitis or a choroidal tumour leading to inappropriate management"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of posterior scleritis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "posterior_scleritis-matrix",
+   "title": "posterior scleritis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A rare, potentially sight-threatening inflammation of the sclera posterior to the equator, often with minimal or absent anterior",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Posterior scleritis is an immune-mediated inflammation of the collagen-rich posterior sclera, frequently occurring as an ocular manifestation of systemic autoimmune or vasculitic disease. Immune-complex deposition and cell-mediated hypersensitivity drive inflammatory infiltration and oedema that thicken the sclera and track into the sub-Tenon space and adjacent choroid. This produces the characteristic ultrasonographic findings and secondary changes such as choroidal effusion, exudative retinal detachment and disc swelling.",
-    "additionalDifferentials": [
-      "Orbital inflammatory disease or orbital cellulitis",
-      "Choroidal tumour such as melanoma or metastasis",
-      "Vogt-Koyanagi-Harada disease",
-      "Central serous chorioretinopathy",
-      "Optic neuritis or papilloedema",
-      "Uveal effusion syndrome"
+    [
+     "Key Investigations",
+     "B-scan ultrasonography seeking scleral thickening and the T-sign, Optical coherence tomography to demonstrate subretinal fluid",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "B-scan ultrasonography seeking scleral thickening and the T-sign",
-      "Optical coherence tomography to demonstrate subretinal fluid and choroidal folds",
-      "Fluorescein and indocyanine green angiography",
-      "Magnetic resonance imaging or computed tomography of the orbits when orbital or mass pathology is suspected",
-      "Inflammatory and autoimmune serology including full blood count, ESR, CRP, ANA, ANCA, rheumatoid factor and angiotensin-converting enzyme",
-      "Infective screen for syphilis and tuberculosis before starting immunosuppression"
+    [
+     "Primary Differentials",
+     "Orbital inflammatory disease or orbital cellulitis, Choroidal tumour such as melanoma or metastasis, Vogt-Koyanagi-Harada disease",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe pain accompanied by significant visual loss",
-      "Proptosis with restricted motility raising concern for orbital cellulitis",
-      "Systemic features suggesting an underlying vasculitis",
-      "A subretinal or choroidal mass raising suspicion of malignancy"
+    [
+     "Management Strategy",
+     "Treat with systemic corticosteroids as the mainstay, by oral or intravenous route according to severity, to control the scleral",
+     "Core treatment modality"
     ],
-    "prognosis": "The outlook is generally good when treatment is prompt and appropriately intensive, though recurrences occur and any associated systemic disease influences overall outcome. Delayed recognition and treatment risk permanent visual loss.",
-    "pitfalls": [
-      "Misdiagnosis as orbital cellulitis or a choroidal tumour leading to inappropriate management",
-      "Overlooking the diagnosis in a painful eye with a normal anterior segment",
-      "Failing to investigate for an associated systemic autoimmune disorder",
-      "Commencing corticosteroids without first excluding an infective cause"
-    ],
-    "references": [
-      "Kanski's Clinical Ophthalmology",
-      "American Academy of Ophthalmology, Basic and Clinical Science Course, Uveitis and Ocular Inflammation",
-      "Ryan's Retina"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat with systemic corticosteroids as the mainstay, by oral or intravenous route according to severity, to control the scleral inflammation",
-      "Add non-steroidal anti-inflammatory drugs in milder disease and for adjunctive symptom control",
-      "Introduce steroid-sparing immunosuppression such as methotrexate or mycophenolate, or a biologic such as an anti-TNF agent or rituximab, for refractory or recurrent disease",
-      "Exclude infective mimics including syphilis and tuberculosis before starting immunosuppression",
-      "Investigate and co-manage any associated systemic autoimmune disease (rheumatoid arthritis, granulomatosis with polyangiitis, lupus, relapsing polychondritis, IgG4-related disease) with rheumatology",
-      "Monitor treatment response with B-scan ultrasonography and optical coherence tomography, watching for exudative retinal detachment and macular oedema",
-      "Treat promptly and escalate immunosuppression for recurrence to prevent permanent visual loss"
+    [
+     "Clinical Pitfall",
+     "Misdiagnosis as orbital cellulitis or a choroidal tumour leading to inappropriate management",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for posterior scleritis."
+  }
+ ]
 }

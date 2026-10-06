@@ -6,7 +6,21 @@
  "basis": "india",
  "counterpart": "anaemia-in-pregnancy-international",
  "setting": "Antenatal clinic, PHC to district hospital (FRU), labour room",
- "aliases": ["anemia in pregnancy", "AMB", "Anemia Mukt Bharat", "Anaemia Mukt Bharat", "IFA", "iron folic acid", "iron deficiency anaemia pregnancy", "IV iron", "iron sucrose", "FCM", "ferric carboxymaltose", "severe anaemia pregnancy", "postpartum anaemia"],
+ "aliases": [
+  "anemia in pregnancy",
+  "AMB",
+  "Anemia Mukt Bharat",
+  "Anaemia Mukt Bharat",
+  "IFA",
+  "iron folic acid",
+  "iron deficiency anaemia pregnancy",
+  "IV iron",
+  "iron sucrose",
+  "FCM",
+  "ferric carboxymaltose",
+  "severe anaemia pregnancy",
+  "postpartum anaemia"
+ ],
  "summary": "Anaemia in pregnancy is Hb below 11 g/dL (below 10.5 in the second trimester, WHO 2024). Give daily IFA from the second trimester; treat mild or moderate anaemia with 2 IFA tablets daily; IV iron after the first trimester if oral iron fails or Hb is 5 to 6.9 g/dL up to 34 weeks; transfuse if Hb is below 5 or severe after 34 weeks.",
  "sections": [
   {
@@ -87,17 +101,131 @@
   }
  ],
  "drugs": [
-  { "name": "IFA tablet (60 mg elemental iron + 500 mcg folic acid)", "dose": "Prophylaxis: 1 tablet daily from the second trimester for at least 180 days, and 180 days postpartum. Treatment: 2 tablets daily", "notes": "Red sugar-coated tablet supplied under Anaemia Mukt Bharat. Constipation and nausea common; take after food if needed." },
-  { "name": "Folic acid", "dose": "400 mcg orally daily from preconception to the end of the first trimester", "notes": "Neural tube defect prevention." },
-  { "name": "Albendazole", "dose": "400 mg orally, single dose after the first trimester", "notes": "Preferably in the second trimester." },
-  { "name": "Iron sucrose", "dose": "200 mg in 100 mL 0.9% saline IV over 20 to 30 minutes; maximum 600 mg per week", "notes": "Total dose by Ganzoni formula. After the first trimester only. Monitor during infusion." },
-  { "name": "Ferric carboxymaltose (FCM)", "dose": "Up to 20 mg/kg (maximum 1000 mg) IV in up to 250 mL 0.9% saline over at least 15 minutes; maximum 1000 mg per week", "notes": "Second and third trimester and postpartum. Monitor during infusion; resuscitation equipment ready." },
-  { "name": "Packed red cells", "dose": "One unit at a time, reassessing between units", "notes": "Hb below 5 g/dL at any gestation, or 5.0 to 6.9 g/dL after 34 weeks, or decompensation." }
+  {
+   "name": "IFA tablet (60 mg elemental iron + 500 mcg folic acid)",
+   "dose": "Prophylaxis: 1 tablet daily from the second trimester for at least 180 days, and 180 days postpartum. Treatment: 2 tablets daily",
+   "notes": "Red sugar-coated tablet supplied under Anaemia Mukt Bharat. Constipation and nausea common; take after food if needed."
+  },
+  {
+   "name": "Folic acid",
+   "dose": "400 mcg orally daily from preconception to the end of the first trimester",
+   "notes": "Neural tube defect prevention."
+  },
+  {
+   "name": "Albendazole",
+   "dose": "400 mg orally, single dose after the first trimester",
+   "notes": "Preferably in the second trimester."
+  },
+  {
+   "name": "Iron sucrose",
+   "dose": "200 mg in 100 mL 0.9% saline IV over 20 to 30 minutes; maximum 600 mg per week",
+   "notes": "Total dose by Ganzoni formula. After the first trimester only. Monitor during infusion."
+  },
+  {
+   "name": "Ferric carboxymaltose (FCM)",
+   "dose": "Up to 20 mg/kg (maximum 1000 mg) IV in up to 250 mL 0.9% saline over at least 15 minutes; maximum 1000 mg per week",
+   "notes": "Second and third trimester and postpartum. Monitor during infusion; resuscitation equipment ready."
+  },
+  {
+   "name": "Packed red cells",
+   "dose": "One unit at a time, reassessing between units",
+   "notes": "Hb below 5 g/dL at any gestation, or 5.0 to 6.9 g/dL after 34 weeks, or decompensation."
+  }
  ],
  "sources": [
-  { "org": "MoHFW, Government of India", "title": "Anemia Mukt Bharat training tool kit: training manual", "year": 2019, "url": "https://resource.anemiamuktbharat.info/Training%20Tool%20Kit/Training%20Manual/English.pdf" },
-  { "org": "WHO", "title": "Guideline on haemoglobin cutoffs to define anaemia in individuals and populations", "year": 2024, "url": "https://www.who.int/publications/i/item/9789240088542" },
-  { "org": "WHO / FIGO / ICM", "title": "Consolidated guidelines for the prevention, diagnosis and treatment of postpartum haemorrhage (antenatal anaemia recommendations)", "year": 2025, "url": "https://www.who.int/publications/i/item/9789240115637" }
+  {
+   "org": "MoHFW, Government of India",
+   "title": "Anemia Mukt Bharat training tool kit: training manual",
+   "year": 2019,
+   "url": "https://resource.anemiamuktbharat.info/Training%20Tool%20Kit/Training%20Manual/English.pdf"
+  },
+  {
+   "org": "WHO",
+   "title": "Guideline on haemoglobin cutoffs to define anaemia in individuals and populations",
+   "year": 2024,
+   "url": "https://www.who.int/publications/i/item/9789240088542"
+  },
+  {
+   "org": "WHO / FIGO / ICM",
+   "title": "Consolidated guidelines for the prevention, diagnosis and treatment of postpartum haemorrhage (antenatal anaemia recommendations)",
+   "year": 2025,
+   "url": "https://www.who.int/publications/i/item/9789240115637"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "anaemia-in-pregnancy-pathway",
+   "title": "Anaemia in pregnancy: Anaemia Mukt Bharat protocol Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Anaemia in pregnancy (Anaemia Mukt Bharat, AMB): Hb below 11.0 g/dL. Mild 10.0 to 10.9, moderate 7.0 to 9.9, severe below 7.0 g/dL.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "WHO 2024 cut-offs: below 11.0 g/dL in the first and third trimesters and below 10.5 g/dL in the second trimester (second trimester mild 9.5 to 10.4, moderate 7.0 to 9.4, severe below 7.0 g/dL).",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "CBC with red cell indices and peripheral smear; serum ferritin where available (low ferritin confirms iron deficiency; inflammation can raise it)."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Indications (AMB): moderate anaemia after the first trimester or postpartum when oral iron is not tolerated or not taken, or Hb rises less than 1 g/dL after 1 month of oral IFA; severe anaemia (Hb 5.0 to 6.9 g/dL) at 13 to 34 weeks. WHO"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: IV iron in the first trimester, or for anaemia due to thalassaemia or sickle cell disease."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for anaemia in pregnancy: anaemia mukt bharat protocol."
+  }
+ ],
+ "tables": [
+  {
+   "id": "anaemia-in-pregnancy-summary-matrix",
+   "title": "Anaemia in pregnancy: Anaemia Mukt Bharat protocol Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Anaemia in pregnancy (Anaemia Mukt Bharat, AMB): Hb below 11.0 g/dL. Mild 10.0 to 10.9, moderate 7.0 to 9.9, severe below 7.0 g/dL.",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Indications (AMB): moderate anaemia after the first trimester or postpartum when oral iron is not tolerated or not taken, or Hb rises less",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "CBC with red cell indices and peripheral smear; serum ferritin where available (low ferritin confirms iron deficiency; inflammation can",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "IFA tablet (60 mg elemental iron + 500 mcg folic acid): Prophylaxis: 1 tablet daily from the second trimester for at least 180 days, and",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "IV iron in the first trimester, or for anaemia due to thalassaemia or sickle cell disease.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for anaemia in pregnancy: anaemia mukt bharat protocol."
+  }
+ ]
 }

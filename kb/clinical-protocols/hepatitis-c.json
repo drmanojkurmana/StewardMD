@@ -5,7 +5,18 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Outpatient, primary care, hepatology",
- "aliases": ["HCV", "hepatitis C", "anti-HCV", "DAA", "direct-acting antivirals", "sofosbuvir velpatasvir", "glecaprevir pibrentasvir", "sofosbuvir daclatasvir", "SVR12", "pangenotypic"],
+ "aliases": [
+  "HCV",
+  "hepatitis C",
+  "anti-HCV",
+  "DAA",
+  "direct-acting antivirals",
+  "sofosbuvir velpatasvir",
+  "glecaprevir pibrentasvir",
+  "sofosbuvir daclatasvir",
+  "SVR12",
+  "pangenotypic"
+ ],
  "summary": "Confirm viraemia (HCV RNA or core antigen) after a positive antibody test, assess for cirrhosis with FIB-4 or APRI, and treat all viraemic patients with a pangenotypic regimen: sofosbuvir/velpatasvir for 12 weeks or glecaprevir/pibrentasvir for 8 weeks. Cure is undetectable HCV RNA 12 weeks after treatment (SVR12).",
  "sections": [
   {
@@ -71,14 +82,116 @@
   }
  ],
  "drugs": [
-  { "name": "Sofosbuvir/velpatasvir", "dose": "400/100 mg (one tablet) orally once daily for 12 weeks", "notes": "Pangenotypic; with or without food. If a PPI is essential, take with food 4 hours before omeprazole 20 mg." },
-  { "name": "Glecaprevir/pibrentasvir", "dose": "300/120 mg (three 100/40 mg tablets) orally once daily with food for 8 weeks", "notes": "No cirrhosis or compensated cirrhosis, treatment-naive. Contraindicated in Child-Pugh B or C." },
-  { "name": "Sofosbuvir + daclatasvir", "dose": "Sofosbuvir 400 mg + daclatasvir 60 mg orally once daily for 12 weeks (24 weeks with compensated cirrhosis)", "notes": "WHO pangenotypic option. Daclatasvir 30 mg with strong CYP3A inhibitors; 90 mg with moderate inducers." }
+  {
+   "name": "Sofosbuvir/velpatasvir",
+   "dose": "400/100 mg (one tablet) orally once daily for 12 weeks",
+   "notes": "Pangenotypic; with or without food. If a PPI is essential, take with food 4 hours before omeprazole 20 mg."
+  },
+  {
+   "name": "Glecaprevir/pibrentasvir",
+   "dose": "300/120 mg (three 100/40 mg tablets) orally once daily with food for 8 weeks",
+   "notes": "No cirrhosis or compensated cirrhosis, treatment-naive. Contraindicated in Child-Pugh B or C."
+  },
+  {
+   "name": "Sofosbuvir + daclatasvir",
+   "dose": "Sofosbuvir 400 mg + daclatasvir 60 mg orally once daily for 12 weeks (24 weeks with compensated cirrhosis)",
+   "notes": "WHO pangenotypic option. Daclatasvir 30 mg with strong CYP3A inhibitors; 90 mg with moderate inducers."
+  }
  ],
  "sources": [
-  { "org": "WHO", "title": "Updated recommendations on treatment of adolescents and children with chronic HCV infection, and HCV simplified service delivery and diagnostics", "year": 2022, "url": "https://www.who.int/publications/i/item/9789240052734" },
-  { "org": "AASLD / IDSA", "title": "HCV Guidance: Simplified HCV treatment for treatment-naive adults without cirrhosis", "year": 2023, "url": "https://www.hcvguidelines.org/guidance/simplified-hcv-treatment-for-treatment-naive-adults-without-cirrhosis/" },
-  { "org": "AASLD / IDSA", "title": "HCV Guidance: Simplified HCV treatment algorithm for treatment-naive adults with compensated cirrhosis", "year": 2023, "url": "https://www.hcvguidelines.org/guidance/simplified-hcv-treatment-algorithm-for-treatment-naive-adults-with-compensated-cirrhosis/" }
+  {
+   "org": "WHO",
+   "title": "Updated recommendations on treatment of adolescents and children with chronic HCV infection, and HCV simplified service delivery and diagnostics",
+   "year": 2022,
+   "url": "https://www.who.int/publications/i/item/9789240052734"
+  },
+  {
+   "org": "AASLD / IDSA",
+   "title": "HCV Guidance: Simplified HCV treatment for treatment-naive adults without cirrhosis",
+   "year": 2023,
+   "url": "https://www.hcvguidelines.org/guidance/simplified-hcv-treatment-for-treatment-naive-adults-without-cirrhosis/"
+  },
+  {
+   "org": "AASLD / IDSA",
+   "title": "HCV Guidance: Simplified HCV treatment algorithm for treatment-naive adults with compensated cirrhosis",
+   "year": 2023,
+   "url": "https://www.hcvguidelines.org/guidance/simplified-hcv-treatment-algorithm-for-treatment-naive-adults-with-compensated-cirrhosis/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "hepatitis-c-pathway",
+   "title": "Chronic hepatitis C (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Step 1: anti-HCV antibody (rapid test or laboratory immunoassay). Step 2: if positive, HCV RNA (or HCV core antigen) to confirm current viraemic infection.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Positive antibody with negative RNA means past, cleared infection: no treatment; antibodies stay positive lifelong, so use HCV RNA to test for reinfection.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Assess fibrosis: FIB-4 above 3.25 (or APRI, elastography or clinical signs) suggests cirrhosis. If cirrhotic, calculate the Child-Pugh score: 7 or more means decompensated disease."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Treat everyone with viraemic HCV (WHO: adults, adolescents and children aged 3 years and over)."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Without cirrhosis, routine on-treatment laboratory monitoring is not needed in simplified care; review adherence, and warn diabetic patients (risk of hypoglycaemia) and warfarin users (INR changes) as the liver improves."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for chronic hepatitis c (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hepatitis-c-summary-matrix",
+   "title": "Chronic hepatitis C (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Step 1: anti-HCV antibody (rapid test or laboratory immunoassay). Step 2: if positive, HCV RNA (or HCV core antigen) to confirm current",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Treat everyone with viraemic HCV (WHO: adults, adolescents and children aged 3 years and over).",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Assess fibrosis: FIB-4 above 3.25 (or APRI, elastography or clinical signs) suggests cirrhosis. If cirrhotic, calculate the Child-Pugh",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Sofosbuvir/velpatasvir: 400/100 mg (one tablet) orally once daily for 12 weeks",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Treating on a positive antibody alone without confirming viraemia.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for chronic hepatitis c (adult)."
+  }
+ ]
 }

@@ -142,5 +142,77 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-25"
- }
+ },
+ "algorithms": [
+  {
+   "id": "parkinsons-disease-pathway",
+   "title": "Parkinson's disease: diagnosis and drug management Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Parkinsonism: bradykinesia plus rest tremor, rigidity or both (MDS 2015 criteria). Supportive features: clear response to levodopa, levodopa-induced dyskinesia, rest tremor of a limb, loss of smell.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Refer suspected Parkinson's disease quickly and untreated to a specialist (NICE). Review the diagnosis every 6 to 12 months and reconsider it if atypical features develop.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Red flags for another cause: early falls, rapid progression, early severe autonomic failure, vertical gaze palsy, cerebellar signs, early dementia, parkinsonism limited to the legs, no response to high-dose levodopa."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Impulse control disorders (gambling, hypersexuality, binge eating, shopping) can occur with any dopaminergic drug, most with agonists, and are often concealed: ask at every review. Reduce the agonist gradually first and watch for agonist"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Labelling drug-induced or vascular parkinsonism, essential tremor or progressive supranuclear palsy as Parkinson's disease."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for parkinson's disease: diagnosis and drug management."
+  }
+ ],
+ "tables": [
+  {
+   "id": "parkinsons-disease-summary-matrix",
+   "title": "Parkinson's disease: diagnosis and drug management Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Parkinsonism: bradykinesia plus rest tremor, rigidity or both (MDS 2015 criteria). Supportive features: clear response to levodopa,",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Impulse control disorders (gambling, hypersexuality, binge eating, shopping) can occur with any dopaminergic drug, most with agonists, and",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Co-careldopa (levodopa with carbidopa): 25/100 mg: 1 tablet orally three times daily to start; titrate one tablet at a time to response",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Labelling drug-induced or vascular parkinsonism, essential tremor or progressive supranuclear palsy as Parkinson's disease.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for parkinson's disease: diagnosis and drug management."
+  }
+ ]
 }

@@ -5,7 +5,19 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Operating theatre, emergency department, ICU, ward",
- "aliases": ["RSI", "rapid sequence intubation", "emergency intubation", "failed intubation", "difficult airway", "CICO", "cannot intubate cannot oxygenate", "eFONA", "front of neck access", "DAS 2025", "Plan A B C D"],
+ "aliases": [
+  "RSI",
+  "rapid sequence intubation",
+  "emergency intubation",
+  "failed intubation",
+  "difficult airway",
+  "CICO",
+  "cannot intubate cannot oxygenate",
+  "eFONA",
+  "front of neck access",
+  "DAS 2025",
+  "Plan A B C D"
+ ],
  "summary": "Plan and brief before induction, preoxygenate head-up to an end-tidal O2 of 0.9, give an induction agent and a full dose of rocuronium or suxamethonium without delay, intubate with a videolaryngoscope, confirm with waveform capnography, and move promptly through DAS Plans A to D if intubation fails.",
  "sections": [
   {
@@ -93,19 +105,142 @@
   }
  ],
  "drugs": [
-  { "name": "Ketamine", "dose": "1 to 2 mg/kg IV", "notes": "Favoured when haemodynamics are unstable (DAS ICU 2018); smaller doses in severe shock." },
-  { "name": "Etomidate", "dose": "0.3 mg/kg IV", "notes": "Haemodynamically stable; single dose causes transient adrenal suppression. SCCM 2023 found no outcome difference versus other agents and suggests against routine steroids after it." },
-  { "name": "Propofol", "dose": "1.5 to 2.5 mg/kg IV in fit adults; much lower titrated doses in elderly, shocked or septic patients", "notes": "Most hypotensive of the induction agents." },
-  { "name": "Thiopental (thiopentone)", "dose": "3 to 5 mg/kg IV", "notes": "Still used for classic RSI in India; reduce in shock." },
-  { "name": "Rocuronium", "dose": "1.2 mg/kg IV (1 to 1.2 mg/kg range)", "notes": "Preferred when suxamethonium is contraindicated. Intubating conditions in about 60 seconds; lasts 30 to 60 minutes or more, so give post-intubation sedation promptly." },
-  { "name": "Suxamethonium (succinylcholine)", "dose": "1.5 mg/kg IV (1 to 1.5 mg/kg range)", "notes": "Short acting; contraindicated in hyperkalaemia, burns or crush after 24 to 48 hours, denervation, myopathy, malignant hyperthermia history. Use rocuronium instead." },
-  { "name": "Sugammadex", "dose": "16 mg/kg IV for immediate reversal of rocuronium 1.2 mg/kg; 2 to 4 mg/kg IV for routine reversal (4 mg/kg for deep block, 2 mg/kg once T2 has reappeared)", "notes": "Draw up early if planning to wake; not a reliable rescue in CICO." }
+  {
+   "name": "Ketamine",
+   "dose": "1 to 2 mg/kg IV",
+   "notes": "Favoured when haemodynamics are unstable (DAS ICU 2018); smaller doses in severe shock."
+  },
+  {
+   "name": "Etomidate",
+   "dose": "0.3 mg/kg IV",
+   "notes": "Haemodynamically stable; single dose causes transient adrenal suppression. SCCM 2023 found no outcome difference versus other agents and suggests against routine steroids after it."
+  },
+  {
+   "name": "Propofol",
+   "dose": "1.5 to 2.5 mg/kg IV in fit adults; much lower titrated doses in elderly, shocked or septic patients",
+   "notes": "Most hypotensive of the induction agents."
+  },
+  {
+   "name": "Thiopental (thiopentone)",
+   "dose": "3 to 5 mg/kg IV",
+   "notes": "Still used for classic RSI in India; reduce in shock."
+  },
+  {
+   "name": "Rocuronium",
+   "dose": "1.2 mg/kg IV (1 to 1.2 mg/kg range)",
+   "notes": "Preferred when suxamethonium is contraindicated. Intubating conditions in about 60 seconds; lasts 30 to 60 minutes or more, so give post-intubation sedation promptly."
+  },
+  {
+   "name": "Suxamethonium (succinylcholine)",
+   "dose": "1.5 mg/kg IV (1 to 1.5 mg/kg range)",
+   "notes": "Short acting; contraindicated in hyperkalaemia, burns or crush after 24 to 48 hours, denervation, myopathy, malignant hyperthermia history. Use rocuronium instead."
+  },
+  {
+   "name": "Sugammadex",
+   "dose": "16 mg/kg IV for immediate reversal of rocuronium 1.2 mg/kg; 2 to 4 mg/kg IV for routine reversal (4 mg/kg for deep block, 2 mg/kg once T2 has reappeared)",
+   "notes": "Draw up early if planning to wake; not a reliable rescue in CICO."
+  }
  ],
  "sources": [
-  { "org": "Difficult Airway Society", "title": "Difficult Airway Society 2025 guidelines for management of unanticipated difficult tracheal intubation in adults (Br J Anaesth 2026;136:283-307)", "year": 2025, "url": "https://www.sciencedirect.com/science/article/pii/S0007091225006932" },
-  { "org": "DAS / ICS / FICM / RCoA", "title": "Guidelines for the management of tracheal intubation in critically ill adults (Br J Anaesth 2018;120:323-352)", "year": 2018, "url": "https://www.bjanaesthesia.org/article/S0007-0912(17)54060-X/fulltext" },
-  { "org": "All India Difficult Airway Association", "title": "AIDAA 2025 guidelines for the management of unanticipated difficult airway in adults under general anaesthesia", "year": 2025, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12643155/" },
-  { "org": "SCCM", "title": "Clinical practice guidelines for rapid sequence intubation in the critically ill adult patient", "year": 2023, "url": "https://pubmed.ncbi.nlm.nih.gov/37707379/" }
+  {
+   "org": "Difficult Airway Society",
+   "title": "Difficult Airway Society 2025 guidelines for management of unanticipated difficult tracheal intubation in adults (Br J Anaesth 2026;136:283-307)",
+   "year": 2025,
+   "url": "https://www.sciencedirect.com/science/article/pii/S0007091225006932"
+  },
+  {
+   "org": "DAS / ICS / FICM / RCoA",
+   "title": "Guidelines for the management of tracheal intubation in critically ill adults (Br J Anaesth 2018;120:323-352)",
+   "year": 2018,
+   "url": "https://www.bjanaesthesia.org/article/S0007-0912(17)54060-X/fulltext"
+  },
+  {
+   "org": "All India Difficult Airway Association",
+   "title": "AIDAA 2025 guidelines for the management of unanticipated difficult airway in adults under general anaesthesia",
+   "year": 2025,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12643155/"
+  },
+  {
+   "org": "SCCM",
+   "title": "Clinical practice guidelines for rapid sequence intubation in the critically ill adult patient",
+   "year": 2023,
+   "url": "https://pubmed.ncbi.nlm.nih.gov/37707379/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "rapid-sequence-intubation-pathway",
+   "title": "Rapid sequence induction and failed intubation (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "RSI is for patients at increased risk of pulmonary aspiration (full stomach, bowel obstruction, upper GI bleed, pregnancy, emergency surgery, critically ill).",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Use a checklist and a team brief: allocate roles (intubator, drugs, monitoring, cricoid force, equipment assistant, runner, second intubator) and state Plans A to D aloud.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "MACOCHA score in critical care: Mallampati 3 or 4 (5 points), obstructive sleep apnoea (2), reduced neck mobility, mouth opening under 3 cm, coma, SpO2 under 80%, non-anaesthetist operator (1 each); 3 or more predicts difficulty."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Use a videolaryngoscope first line where available; with a hyperangulated blade always use a stylet, bougie or bronchoscope. Make the first attempt the best attempt."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Secure the tube, note depth, check bilateral air entry and chest X-ray; insert a nasogastric tube."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for rapid sequence induction and failed intubation (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "rapid-sequence-intubation-summary-matrix",
+   "title": "Rapid sequence induction and failed intubation (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "RSI is for patients at increased risk of pulmonary aspiration (full stomach, bowel obstruction, upper GI bleed, pregnancy, emergency",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Use a checklist and a team brief: allocate roles (intubator, drugs, monitoring, cricoid force, equipment assistant, runner, second",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Ketamine: 1 to 2 mg/kg IV",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Underdosing the neuromuscular blocker, or giving it late: worsens intubating conditions and mask ventilation.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for rapid sequence induction and failed intubation (adult)."
+  }
+ ]
 }

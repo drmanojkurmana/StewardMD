@@ -1,89 +1,161 @@
 {
-  "id": "renal_glucosuria",
-  "name": "Familial Renal Glucosuria",
-  "aliases": [
-    "FRG",
-    "Familial renal glucosuria (SGLT2/SLC5A2)",
-    "Renal glycosuria",
-    "SGLT2",
-    "SGLT2 deficiency",
-    "SLC5A2",
-    "SLC5A2-related glucosuria",
-    "familial renal glucosuria",
-    "renal glycosuria"
+ "id": "renal_glucosuria",
+ "name": "Familial Renal Glucosuria",
+ "aliases": [
+  "FRG",
+  "Familial renal glucosuria (SGLT2/SLC5A2)",
+  "Renal glycosuria",
+  "SGLT2",
+  "SGLT2 deficiency",
+  "SLC5A2",
+  "SLC5A2-related glucosuria",
+  "familial renal glucosuria",
+  "renal glycosuria"
+ ],
+ "class": "non_infective",
+ "system": "Renal / Tubulopathy",
+ "specialty": "Nephrology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nephrology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Caused by loss-of-function variants in SLC5A2, encoding the sodium-glucose cotransporter SGLT2 that reclaims the bulk of filtered glucose in the early proximal tubule.",
+   "Defined by persistent glucosuria with a normal plasma glucose and a normal oral glucose tolerance test, in the absence of any other proximal tubular defect.",
+   "Inheritance is co-dominant; homozygous or compound heterozygous individuals show the heaviest urinary glucose loss while heterozygotes may have only mild glucosuria.",
+   "Traditionally graded as type A (reduced threshold and reduced maximal reabsorptive capacity), type B (reduced threshold with near-normal maximal capacity) and type O (virtually absent glucose reabsorption).",
+   "The great majority of individuals are entirely asymptomatic, the condition being found incidentally on routine urinalysis.",
+   "Severe (type O) cases may show polyuria, enuresis, mild volume depletion and a tendency to ketosis during prolonged fasting or pregnancy.",
+   "It is a benign isolated transport defect that does not evolve into diabetes mellitus or chronic kidney disease.",
+   "Pharmacological SGLT2 inhibition reproduces the same isolated glucosuria, which underscores the essential safety of the inherited condition."
   ],
-  "class": "non_infective",
-  "system": "Renal / Tubulopathy",
-  "specialty": "Nephrology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nephrology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Caused by loss-of-function variants in SLC5A2, encoding the sodium-glucose cotransporter SGLT2 that reclaims the bulk of filtered glucose in the early proximal tubule.",
-      "Defined by persistent glucosuria with a normal plasma glucose and a normal oral glucose tolerance test, in the absence of any other proximal tubular defect.",
-      "Inheritance is co-dominant; homozygous or compound heterozygous individuals show the heaviest urinary glucose loss while heterozygotes may have only mild glucosuria.",
-      "Traditionally graded as type A (reduced threshold and reduced maximal reabsorptive capacity), type B (reduced threshold with near-normal maximal capacity) and type O (virtually absent glucose reabsorption).",
-      "The great majority of individuals are entirely asymptomatic, the condition being found incidentally on routine urinalysis.",
-      "Severe (type O) cases may show polyuria, enuresis, mild volume depletion and a tendency to ketosis during prolonged fasting or pregnancy.",
-      "It is a benign isolated transport defect that does not evolve into diabetes mellitus or chronic kidney disease.",
-      "Pharmacological SGLT2 inhibition reproduces the same isolated glucosuria, which underscores the essential safety of the inherited condition."
+  "pathophysiology": "Filtered glucose is normally reclaimed almost entirely within the proximal tubule, with the high-capacity, low-affinity transporter SGLT2 handling the majority in the early convoluted segment and SGLT1 retrieving the small remainder more distally. Loss-of-function variants in SLC5A2 reduce or abolish SGLT2 activity, lowering the tubular threshold at which glucose begins to spill into the urine and, in the most severe forms, the maximal reabsorptive capacity as well. Glucose therefore appears in the urine despite entirely normal blood concentrations and normal insulin action. Because the lesion is confined to a single apical transporter, the remaining proximal tubular functions - amino-acid, phosphate, urate and bicarbonate handling - stay intact, which distinguishes the disorder from generalised proximal tubulopathy. The obligatory glucose in the tubular fluid can produce a mild osmotic diuresis, and in the type O phenotype the persistent urinary loss of glucose and fluid underlies the occasional dehydration and ketotic tendency seen during fasting or pregnancy.",
+  "additionalDifferentials": [
+   "Diabetes mellitus and impaired glucose tolerance, in which glucosuria accompanies hyperglycaemia",
+   "Fanconi syndrome, where glucosuria is joined by generalised aminoaciduria, phosphaturia and bicarbonate wasting",
+   "Fanconi-Bickel syndrome (GLUT2/SLC2A2 defect) with hepatorenal glycogen accumulation and disordered glucose homeostasis",
+   "Gestational glucosuria from the physiologically lowered threshold of pregnancy",
+   "Proximal tubular injury from drugs, heavy metals or paraproteins",
+   "Maturity-onset diabetes of the young and neonatal diabetes when hyperglycaemia coexists",
+   "Alimentary (lag-storage) glucosuria following gastric surgery"
+  ],
+  "additionalInvestigations": [
+   "Quantitative urine glucose alongside a simultaneously drawn plasma glucose",
+   "Fasting plasma glucose, glycated haemoglobin and, where needed, an oral glucose tolerance test",
+   "Urine amino acids to exclude generalised proximal tubulopathy",
+   "Serum phosphate, bicarbonate and urate to confirm that glucose handling is isolated",
+   "Renal function and urinary protein to exclude acquired tubular injury",
+   "Molecular testing of SLC5A2",
+   "Urinalysis of first-degree relatives given the co-dominant inheritance"
+  ],
+  "redFlags": [
+   "Coexisting hyperglycaemia or a raised glycated haemoglobin pointing to true diabetes",
+   "Aminoaciduria, phosphaturia or acidosis indicating generalised Fanconi syndrome",
+   "Hepatomegaly with fasting hypoglycaemia and post-prandial hyperglycaemia suggesting Fanconi-Bickel syndrome",
+   "Growth failure or rickets, which are not features of isolated renal glucosuria",
+   "Symptomatic dehydration or ketosis in a severe (type O) case, particularly during pregnancy"
+  ],
+  "prognosis": "The outlook is excellent. Familial renal glucosuria is a benign, non-progressive condition that does not cause diabetes, renal impairment or the metabolic complications of glycaemic disease.",
+  "pitfalls": [
+   "Misdiagnosing the condition as diabetes mellitus because the urinalysis was not paired with a plasma glucose measurement.",
+   "Failing to exclude generalised Fanconi syndrome, in which glucosuria is only one component of a broader proximal leak.",
+   "Confusing it with Fanconi-Bickel syndrome, a glycogen-storage disorder with hepatomegaly and disordered glucose homeostasis rather than an isolated transporter defect.",
+   "Attributing coincidental symptoms to the glucosuria when the condition is almost always clinically silent.",
+   "Overlooking pregnancy, where the lowered renal threshold can unmask or exaggerate glucosuria."
+  ],
+  "references": [
+   "Inherited tubulopathy references",
+   "Clinical nephrology references",
+   "Renal physiology references"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Reassure and educate the patient that isolated SGLT2-related glucosuria is a benign, non-progressive condition requiring no specific drug therapy",
+   "Confirm the diagnosis and actively distinguish it from diabetes mellitus so that unnecessary glucose-lowering treatment is avoided",
+   "Ensure adequate fluid and carbohydrate intake during prolonged fasting, intercurrent illness and pregnancy to offset urinary glucose loss and the tendency to ketosis in severe (type O) disease",
+   "Monitor for and manage the polyuria, enuresis and mild volume depletion that can occur in heavier urinary losses",
+   "Exclude a generalised proximal tubulopathy by checking that amino-acid, phosphate, bicarbonate and urate handling remain normal",
+   "Offer genetic counselling for this co-dominantly inherited SLC5A2 disorder, explaining the milder phenotype in heterozygotes"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "renal_glucosuria-pathway",
+   "title": "Familial Renal Glucosuria: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Caused by loss-of-function variants in SLC5A2, encoding the sodium-glucose cotransporter SGLT2 that reclaims the bulk of filtered glucose in the early proximal tubule.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Coexisting hyperglycaemia or a raised glycated haemoglobin pointing to true diabetes",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Quantitative urine glucose alongside a simultaneously drawn plasma glucose, Fasting plasma glucose, glycated haemoglobin and, where needed, an oral glucose tolerance test, Urine amino acids to exclude generalised proximal"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Reassure and educate the patient that isolated SGLT2-related glucosuria is a benign, non-progressive condition requiring no specific drug therapy"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misdiagnosing the condition as diabetes mellitus because the urinalysis was not paired with a plasma glucose measurement."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of familial renal glucosuria."
+  }
+ ],
+ "tables": [
+  {
+   "id": "renal_glucosuria-matrix",
+   "title": "Familial Renal Glucosuria: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Caused by loss-of-function variants in SLC5A2, encoding the sodium-glucose cotransporter SGLT2 that reclaims the bulk of filtered",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Filtered glucose is normally reclaimed almost entirely within the proximal tubule, with the high-capacity, low-affinity transporter SGLT2 handling the majority in the early convoluted segment and SGLT1 retrieving the small remainder more distally. Loss-of-function variants in SLC5A2 reduce or abolish SGLT2 activity, lowering the tubular threshold at which glucose begins to spill into the urine and, in the most severe forms, the maximal reabsorptive capacity as well. Glucose therefore appears in the urine despite entirely normal blood concentrations and normal insulin action. Because the lesion is confined to a single apical transporter, the remaining proximal tubular functions - amino-acid, phosphate, urate and bicarbonate handling - stay intact, which distinguishes the disorder from generalised proximal tubulopathy. The obligatory glucose in the tubular fluid can produce a mild osmotic diuresis, and in the type O phenotype the persistent urinary loss of glucose and fluid underlies the occasional dehydration and ketotic tendency seen during fasting or pregnancy.",
-    "additionalDifferentials": [
-      "Diabetes mellitus and impaired glucose tolerance, in which glucosuria accompanies hyperglycaemia",
-      "Fanconi syndrome, where glucosuria is joined by generalised aminoaciduria, phosphaturia and bicarbonate wasting",
-      "Fanconi-Bickel syndrome (GLUT2/SLC2A2 defect) with hepatorenal glycogen accumulation and disordered glucose homeostasis",
-      "Gestational glucosuria from the physiologically lowered threshold of pregnancy",
-      "Proximal tubular injury from drugs, heavy metals or paraproteins",
-      "Maturity-onset diabetes of the young and neonatal diabetes when hyperglycaemia coexists",
-      "Alimentary (lag-storage) glucosuria following gastric surgery"
+    [
+     "Key Investigations",
+     "Quantitative urine glucose alongside a simultaneously drawn plasma glucose, Fasting plasma glucose, glycated haemoglobin and,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Quantitative urine glucose alongside a simultaneously drawn plasma glucose",
-      "Fasting plasma glucose, glycated haemoglobin and, where needed, an oral glucose tolerance test",
-      "Urine amino acids to exclude generalised proximal tubulopathy",
-      "Serum phosphate, bicarbonate and urate to confirm that glucose handling is isolated",
-      "Renal function and urinary protein to exclude acquired tubular injury",
-      "Molecular testing of SLC5A2",
-      "Urinalysis of first-degree relatives given the co-dominant inheritance"
+    [
+     "Primary Differentials",
+     "Diabetes mellitus and impaired glucose tolerance, in which glucosuria accompanies hyperglycaemia, Fanconi syndrome, where",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Coexisting hyperglycaemia or a raised glycated haemoglobin pointing to true diabetes",
-      "Aminoaciduria, phosphaturia or acidosis indicating generalised Fanconi syndrome",
-      "Hepatomegaly with fasting hypoglycaemia and post-prandial hyperglycaemia suggesting Fanconi-Bickel syndrome",
-      "Growth failure or rickets, which are not features of isolated renal glucosuria",
-      "Symptomatic dehydration or ketosis in a severe (type O) case, particularly during pregnancy"
+    [
+     "Management Strategy",
+     "Reassure and educate the patient that isolated SGLT2-related glucosuria is a benign, non-progressive condition requiring no",
+     "Core treatment modality"
     ],
-    "prognosis": "The outlook is excellent. Familial renal glucosuria is a benign, non-progressive condition that does not cause diabetes, renal impairment or the metabolic complications of glycaemic disease.",
-    "pitfalls": [
-      "Misdiagnosing the condition as diabetes mellitus because the urinalysis was not paired with a plasma glucose measurement.",
-      "Failing to exclude generalised Fanconi syndrome, in which glucosuria is only one component of a broader proximal leak.",
-      "Confusing it with Fanconi-Bickel syndrome, a glycogen-storage disorder with hepatomegaly and disordered glucose homeostasis rather than an isolated transporter defect.",
-      "Attributing coincidental symptoms to the glucosuria when the condition is almost always clinically silent.",
-      "Overlooking pregnancy, where the lowered renal threshold can unmask or exaggerate glucosuria."
-    ],
-    "references": [
-      "Inherited tubulopathy references",
-      "Clinical nephrology references",
-      "Renal physiology references"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Reassure and educate the patient that isolated SGLT2-related glucosuria is a benign, non-progressive condition requiring no specific drug therapy",
-      "Confirm the diagnosis and actively distinguish it from diabetes mellitus so that unnecessary glucose-lowering treatment is avoided",
-      "Ensure adequate fluid and carbohydrate intake during prolonged fasting, intercurrent illness and pregnancy to offset urinary glucose loss and the tendency to ketosis in severe (type O) disease",
-      "Monitor for and manage the polyuria, enuresis and mild volume depletion that can occur in heavier urinary losses",
-      "Exclude a generalised proximal tubulopathy by checking that amino-acid, phosphate, bicarbonate and urate handling remain normal",
-      "Offer genetic counselling for this co-dominantly inherited SLC5A2 disorder, explaining the milder phenotype in heterozygotes"
+    [
+     "Clinical Pitfall",
+     "Misdiagnosing the condition as diabetes mellitus because the urinalysis was not paired with a plasma glucose measurement.",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for familial renal glucosuria."
+  }
+ ]
 }

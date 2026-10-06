@@ -5,7 +5,29 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Primary care, outpatient, sexual health clinic",
- "aliases": ["family planning", "WHO MEC", "UKMEC", "MEC categories", "emergency contraception", "EC", "morning after pill", "ulipristal", "ellaOne", "levonorgestrel EC", "copper IUD", "Cu-IUD", "LNG-IUD", "LNG-IUS", "COC", "combined pill", "CHC", "POP", "DMPA", "implant", "quick start"],
+ "aliases": [
+  "family planning",
+  "WHO MEC",
+  "UKMEC",
+  "MEC categories",
+  "emergency contraception",
+  "EC",
+  "morning after pill",
+  "ulipristal",
+  "ellaOne",
+  "levonorgestrel EC",
+  "copper IUD",
+  "Cu-IUD",
+  "LNG-IUD",
+  "LNG-IUS",
+  "COC",
+  "combined pill",
+  "CHC",
+  "POP",
+  "DMPA",
+  "implant",
+  "quick start"
+ ],
  "summary": "Offer all methods, highlighting long-acting reversible contraception (implant, IUDs) as most effective; check every method against WHO MEC or UKMEC 2025 (category 4 = do not use). For emergency contraception offer a copper IUD first, otherwise ulipristal 30 mg up to 120 hours or levonorgestrel 1.5 mg up to 72 hours.",
  "sections": [
   {
@@ -91,18 +113,136 @@
   }
  ],
  "drugs": [
-  { "name": "Ulipristal acetate (EC)", "dose": "30 mg orally, single dose, as soon as possible within 120 hours of unprotected sex", "notes": "Wait 5 days before starting hormonal contraception. Not recommended with enzyme inducers or severe asthma on oral steroids. May be less effective if BMI above 30 kg/m2; do not double the dose." },
-  { "name": "Levonorgestrel (EC)", "dose": "1.5 mg orally, single dose, within 72 hours (ineffective beyond 96 hours)", "notes": "3 mg with enzyme inducers; consider 3 mg if BMI above 26 kg/m2 or weight above 70 kg. Quick start ongoing contraception the same day." },
-  { "name": "Copper IUD (EC and ongoing)", "dose": "Insert within 120 hours of the first unprotected sex in the cycle, or within 5 days of the earliest likely ovulation", "notes": "Most effective EC; unaffected by weight or enzyme inducers. Same contraindications as routine IUD insertion." },
-  { "name": "Combined oral contraceptive", "dose": "Ethinylestradiol 30 micrograms with levonorgestrel 150 micrograms orally daily for 21 days then a 7-day break, or a tailored or continuous regimen", "notes": "Check MEC first. 7 days of extra precautions unless started on days 1 to 5." },
-  { "name": "Desogestrel progestogen-only pill", "dose": "75 micrograms orally once daily without a break", "notes": "12-hour missed-pill window. 2 days of extra precautions unless started on days 1 to 5." },
-  { "name": "Medroxyprogesterone acetate (DMPA)", "dose": "150 mg deep IM (or 104 mg subcutaneously) every 13 weeks", "notes": "Bone density loss and delayed return of fertility; UKMEC 2 under 18 and over 45. 7 days of extra precautions unless given on days 1 to 5." },
-  { "name": "Etonogestrel implant", "dose": "68 mg subdermal implant in the inner upper arm, replace every 3 years", "notes": "Irregular bleeding is the main side effect. Reduced by enzyme inducers." }
+  {
+   "name": "Ulipristal acetate (EC)",
+   "dose": "30 mg orally, single dose, as soon as possible within 120 hours of unprotected sex",
+   "notes": "Wait 5 days before starting hormonal contraception. Not recommended with enzyme inducers or severe asthma on oral steroids. May be less effective if BMI above 30 kg/m2; do not double the dose."
+  },
+  {
+   "name": "Levonorgestrel (EC)",
+   "dose": "1.5 mg orally, single dose, within 72 hours (ineffective beyond 96 hours)",
+   "notes": "3 mg with enzyme inducers; consider 3 mg if BMI above 26 kg/m2 or weight above 70 kg. Quick start ongoing contraception the same day."
+  },
+  {
+   "name": "Copper IUD (EC and ongoing)",
+   "dose": "Insert within 120 hours of the first unprotected sex in the cycle, or within 5 days of the earliest likely ovulation",
+   "notes": "Most effective EC; unaffected by weight or enzyme inducers. Same contraindications as routine IUD insertion."
+  },
+  {
+   "name": "Combined oral contraceptive",
+   "dose": "Ethinylestradiol 30 micrograms with levonorgestrel 150 micrograms orally daily for 21 days then a 7-day break, or a tailored or continuous regimen",
+   "notes": "Check MEC first. 7 days of extra precautions unless started on days 1 to 5."
+  },
+  {
+   "name": "Desogestrel progestogen-only pill",
+   "dose": "75 micrograms orally once daily without a break",
+   "notes": "12-hour missed-pill window. 2 days of extra precautions unless started on days 1 to 5."
+  },
+  {
+   "name": "Medroxyprogesterone acetate (DMPA)",
+   "dose": "150 mg deep IM (or 104 mg subcutaneously) every 13 weeks",
+   "notes": "Bone density loss and delayed return of fertility; UKMEC 2 under 18 and over 45. 7 days of extra precautions unless given on days 1 to 5."
+  },
+  {
+   "name": "Etonogestrel implant",
+   "dose": "68 mg subdermal implant in the inner upper arm, replace every 3 years",
+   "notes": "Irregular bleeding is the main side effect. Reduced by enzyme inducers."
+  }
  ],
  "sources": [
-  { "org": "WHO", "title": "Medical eligibility criteria for contraceptive use, sixth edition", "year": 2025, "url": "https://www.who.int/publications/b/81082" },
-  { "org": "College of Sexual and Reproductive Healthcare (CoSRH)", "title": "UK Medical Eligibility Criteria for Contraceptive Use (UKMEC 2025): summary tables", "year": 2025, "url": "https://www.cosrh.org/Common/Uploaded%20files/documents/UKMEC_2025_Summary_Tables.pdf" },
-  { "org": "FSRH", "title": "FSRH guideline: Emergency contraception (March 2017, amended April 2026)", "year": 2017, "url": "https://www.cosrh.org/Common/Uploaded%20files/documents/fsrh-guideline-emergency-contraception03dec2020-amendedjuly2023-11jul.pdf" }
+  {
+   "org": "WHO",
+   "title": "Medical eligibility criteria for contraceptive use, sixth edition",
+   "year": 2025,
+   "url": "https://www.who.int/publications/b/81082"
+  },
+  {
+   "org": "College of Sexual and Reproductive Healthcare (CoSRH)",
+   "title": "UK Medical Eligibility Criteria for Contraceptive Use (UKMEC 2025): summary tables",
+   "year": 2025,
+   "url": "https://www.cosrh.org/Common/Uploaded%20files/documents/UKMEC_2025_Summary_Tables.pdf"
+  },
+  {
+   "org": "FSRH",
+   "title": "FSRH guideline: Emergency contraception (March 2017, amended April 2026)",
+   "year": 2017,
+   "url": "https://www.cosrh.org/Common/Uploaded%20files/documents/fsrh-guideline-emergency-contraception03dec2020-amendedjuly2023-11jul.pdf"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "contraception-pathway",
+   "title": "Contraception: method choice, medical eligibility and emergency contraception Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "History: age, parity, postpartum and breastfeeding status, smoking, BMI, blood pressure, migraine type (aura or not), personal or family VTE, cardiovascular disease, cancers, liver and kidney disease, current medicines (enzyme inducers,",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "MEC categories (WHO and UKMEC): 1 no restriction; 2 benefits generally outweigh risks; 3 risks usually outweigh benefits, use only with expert judgement when no acceptable alternative; 4 unacceptable health risk, do not use.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Several category 2 conditions can add up, and several category 3 conditions together may amount to an unacceptable risk (UKMEC 2025)."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Offer EC after unprotected sex or method failure (missed pills, late injection, condom failure). Oral EC does not cover sex later in the same cycle; oral EC taken after ovulation is ineffective."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Prescribing CHC without checking blood pressure, smoking, age and migraine type; migraine with aura is an absolute contraindication."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for contraception: method choice, medical eligibility and emergency contraception."
+  }
+ ],
+ "tables": [
+  {
+   "id": "contraception-summary-matrix",
+   "title": "Contraception: method choice, medical eligibility and emergency contraception Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "History: age, parity, postpartum and breastfeeding status, smoking, BMI, blood pressure, migraine type (aura or not), personal or family",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Offer EC after unprotected sex or method failure (missed pills, late injection, condom failure). Oral EC does not cover sex later in the",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Ulipristal acetate (EC): 30 mg orally, single dose, as soon as possible within 120 hours of unprotected sex",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Prescribing CHC without checking blood pressure, smoking, age and migraine type; migraine with aura is an absolute contraindication.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for contraception: method choice, medical eligibility and emergency contraception."
+  }
+ ]
 }

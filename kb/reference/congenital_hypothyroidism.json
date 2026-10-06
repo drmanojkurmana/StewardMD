@@ -1,77 +1,149 @@
 {
-  "id": "congenital_hypothyroidism",
-  "name": "Congenital hypothyroidism",
-  "aliases": [
-    "CH",
-    "neonatal hypothyroidism",
-    "cretinism",
-    "congenital thyroid deficiency"
+ "id": "congenital_hypothyroidism",
+ "name": "Congenital hypothyroidism",
+ "aliases": [
+  "CH",
+  "neonatal hypothyroidism",
+  "cretinism",
+  "congenital thyroid deficiency"
+ ],
+ "class": "non_infective",
+ "system": "Endocrinology",
+ "specialty": "Paediatrics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nelson Textbook of Pediatrics",
+  "sourceEdition": "22e",
+  "pages": null,
+  "clinicalPearls": [
+   "One of the most common preventable causes of intellectual disability, resulting from inadequate thyroid hormone at birth or in early infancy.",
+   "Most affected newborns appear normal at birth because of transplacental maternal thyroid hormone, so clinical detection is unreliable and newborn screening is essential.",
+   "The commonest cause worldwide is thyroid dysgenesis (aplasia, hypoplasia, or an ectopic gland); dyshormonogenesis and, in some regions, iodine deficiency also contribute.",
+   "Later clinical features include prolonged jaundice, poor feeding, lethargy, constipation, a large fontanelle, macroglossia, umbilical hernia, hypotonia, and hoarse cry.",
+   "Screening measures TSH and/or T4 on a heel-prick sample; a raised TSH with low T4 confirms primary hypothyroidism.",
+   "Treatment is early thyroid hormone replacement with levothyroxine, and the key to normal neurodevelopment is starting therapy as early as possible.",
+   "Regular monitoring of growth, development, and thyroid function is needed to keep levels in the target range during infancy.",
+   "Delay in starting treatment is associated with irreversible loss of cognitive potential, making prompt recognition critical."
   ],
-  "class": "non_infective",
-  "system": "Endocrinology",
-  "specialty": "Paediatrics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nelson Textbook of Pediatrics",
-    "sourceEdition": "22e",
-    "pages": null,
-    "clinicalPearls": [
-      "One of the most common preventable causes of intellectual disability, resulting from inadequate thyroid hormone at birth or in early infancy.",
-      "Most affected newborns appear normal at birth because of transplacental maternal thyroid hormone, so clinical detection is unreliable and newborn screening is essential.",
-      "The commonest cause worldwide is thyroid dysgenesis (aplasia, hypoplasia, or an ectopic gland); dyshormonogenesis and, in some regions, iodine deficiency also contribute.",
-      "Later clinical features include prolonged jaundice, poor feeding, lethargy, constipation, a large fontanelle, macroglossia, umbilical hernia, hypotonia, and hoarse cry.",
-      "Screening measures TSH and/or T4 on a heel-prick sample; a raised TSH with low T4 confirms primary hypothyroidism.",
-      "Treatment is early thyroid hormone replacement with levothyroxine, and the key to normal neurodevelopment is starting therapy as early as possible.",
-      "Regular monitoring of growth, development, and thyroid function is needed to keep levels in the target range during infancy.",
-      "Delay in starting treatment is associated with irreversible loss of cognitive potential, making prompt recognition critical."
+  "pathophysiology": "Thyroid hormone is essential for normal brain growth and myelination, particularly in the first years of life. In congenital hypothyroidism, deficient hormone production results from failure of thyroid gland development, an enzymatic defect in hormone synthesis (dyshormonogenesis), inadequate iodine substrate, or, less commonly, hypothalamic-pituitary (central) dysfunction. In primary disease, low circulating thyroid hormone removes negative feedback on the pituitary, raising TSH. Because maternal thyroid hormone crosses the placenta, the fetus is partly protected in utero, but after birth the untreated infant becomes progressively hypothyroid, and prolonged deficiency during the critical window of brain development produces permanent neurological injury.",
+  "additionalDifferentials": [
+   "Transient neonatal hypothyroidism (e.g. maternal antithyroid drugs, iodine exposure, maternal antibodies)",
+   "Central (secondary/tertiary) hypothyroidism",
+   "Other causes of prolonged neonatal jaundice",
+   "Down syndrome and other conditions with hypotonia and feeding difficulty",
+   "Constitutional causes of poor feeding and lethargy"
+  ],
+  "additionalInvestigations": [
+   "Newborn screening TSH and/or T4 on heel-prick blood",
+   "Confirmatory serum free T4 and TSH",
+   "Thyroid imaging (ultrasound and/or radionuclide scan) to define aetiology",
+   "Maternal thyroid history and antibody status where relevant",
+   "Knee radiograph for bone age in some cases to assess in utero severity"
+  ],
+  "redFlags": [
+   "Positive newborn screen requiring urgent confirmation and treatment",
+   "Signs of significant hypothyroidism (marked lethargy, poor feeding, hypothermia)",
+   "Prolonged unexplained neonatal jaundice",
+   "Delayed diagnosis beyond the early weeks of life, risking neurodevelopmental harm"
+  ],
+  "prognosis": "With early diagnosis through screening and prompt, adequately dosed replacement, neurodevelopmental outcome is typically normal; delayed or inadequate treatment risks permanent intellectual impairment.",
+  "pitfalls": [
+   "Relying on clinical signs, which are usually absent or subtle in the newborn period",
+   "Delaying treatment while awaiting further tests once screening is clearly abnormal",
+   "Under- or over-treating due to infrequent monitoring during infancy",
+   "Missing central hypothyroidism when screening is TSH-based only"
+  ],
+  "references": [
+   "Nelson Textbook of Pediatrics, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Start levothyroxine replacement as early as possible after a positive newborn screen to preserve neurodevelopment",
+   "Give crushed levothyroxine in a little water or breast milk, separated from soya feeds, iron and calcium that impair absorption",
+   "Monitor TSH and free thyroxine regularly and titrate the dose to growth and requirements",
+   "Developmental surveillance and hearing assessment to detect and address any deficits early",
+   "Thyroid ultrasound and radionuclide imaging to define aetiology and decide whether therapy is lifelong or can be trialled off later",
+   "Ongoing paediatric endocrinology follow-up",
+   "Parental education on adherence and the harm of interrupted therapy"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "congenital_hypothyroidism-pathway",
+   "title": "Congenital hypothyroidism: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "One of the most common preventable causes of intellectual disability, resulting from inadequate thyroid hormone at birth or in early infancy.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Positive newborn screen requiring urgent confirmation and treatment",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Newborn screening TSH and/or T4 on heel-prick blood, Confirmatory serum free T4 and TSH, Thyroid imaging (ultrasound and/or radionuclide scan) to define aetiology"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Start levothyroxine replacement as early as possible after a positive newborn screen to preserve neurodevelopment"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Relying on clinical signs, which are usually absent or subtle in the newborn period"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of congenital hypothyroidism."
+  }
+ ],
+ "tables": [
+  {
+   "id": "congenital_hypothyroidism-matrix",
+   "title": "Congenital hypothyroidism: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "One of the most common preventable causes of intellectual disability, resulting from inadequate thyroid hormone at birth or in",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Thyroid hormone is essential for normal brain growth and myelination, particularly in the first years of life. In congenital hypothyroidism, deficient hormone production results from failure of thyroid gland development, an enzymatic defect in hormone synthesis (dyshormonogenesis), inadequate iodine substrate, or, less commonly, hypothalamic-pituitary (central) dysfunction. In primary disease, low circulating thyroid hormone removes negative feedback on the pituitary, raising TSH. Because maternal thyroid hormone crosses the placenta, the fetus is partly protected in utero, but after birth the untreated infant becomes progressively hypothyroid, and prolonged deficiency during the critical window of brain development produces permanent neurological injury.",
-    "additionalDifferentials": [
-      "Transient neonatal hypothyroidism (e.g. maternal antithyroid drugs, iodine exposure, maternal antibodies)",
-      "Central (secondary/tertiary) hypothyroidism",
-      "Other causes of prolonged neonatal jaundice",
-      "Down syndrome and other conditions with hypotonia and feeding difficulty",
-      "Constitutional causes of poor feeding and lethargy"
+    [
+     "Key Investigations",
+     "Newborn screening TSH and/or T4 on heel-prick blood, Confirmatory serum free T4 and TSH, Thyroid imaging (ultrasound and/or",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Newborn screening TSH and/or T4 on heel-prick blood",
-      "Confirmatory serum free T4 and TSH",
-      "Thyroid imaging (ultrasound and/or radionuclide scan) to define aetiology",
-      "Maternal thyroid history and antibody status where relevant",
-      "Knee radiograph for bone age in some cases to assess in utero severity"
+    [
+     "Primary Differentials",
+     "Transient neonatal hypothyroidism (e.g. maternal antithyroid drugs, iodine exposure, maternal antibodies), Central",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Positive newborn screen requiring urgent confirmation and treatment",
-      "Signs of significant hypothyroidism (marked lethargy, poor feeding, hypothermia)",
-      "Prolonged unexplained neonatal jaundice",
-      "Delayed diagnosis beyond the early weeks of life, risking neurodevelopmental harm"
+    [
+     "Management Strategy",
+     "Start levothyroxine replacement as early as possible after a positive newborn screen to preserve neurodevelopment",
+     "Core treatment modality"
     ],
-    "prognosis": "With early diagnosis through screening and prompt, adequately dosed replacement, neurodevelopmental outcome is typically normal; delayed or inadequate treatment risks permanent intellectual impairment.",
-    "pitfalls": [
-      "Relying on clinical signs, which are usually absent or subtle in the newborn period",
-      "Delaying treatment while awaiting further tests once screening is clearly abnormal",
-      "Under- or over-treating due to infrequent monitoring during infancy",
-      "Missing central hypothyroidism when screening is TSH-based only"
-    ],
-    "references": [
-      "Nelson Textbook of Pediatrics, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Start levothyroxine replacement as early as possible after a positive newborn screen to preserve neurodevelopment",
-      "Give crushed levothyroxine in a little water or breast milk, separated from soya feeds, iron and calcium that impair absorption",
-      "Monitor TSH and free thyroxine regularly and titrate the dose to growth and requirements",
-      "Developmental surveillance and hearing assessment to detect and address any deficits early",
-      "Thyroid ultrasound and radionuclide imaging to define aetiology and decide whether therapy is lifelong or can be trialled off later",
-      "Ongoing paediatric endocrinology follow-up",
-      "Parental education on adherence and the harm of interrupted therapy"
+    [
+     "Clinical Pitfall",
+     "Relying on clinical signs, which are usually absent or subtle in the newborn period",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for congenital hypothyroidism."
+  }
+ ]
 }
