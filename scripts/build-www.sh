@@ -231,6 +231,11 @@ rm -rf "$WWW/tokos/learn/units" "$WWW/tokos/learn/media"/credits-*.json "$WWW/to
 # Tokós models (tokos-models/*.js, listed in tokos/models.json and loaded on first open by tokos-loader.js): a
 # subdirectory, so the root *.js glob misses it. The engine files (specialty-*.js, specialty.css) are root globs.
 [ -d tokos-models ] && mkdir -p "$WWW/tokos-models" && cp -R tokos-models/. "$WWW/tokos-models/"
+# Narkē (narke.js on the specialty engine, Anaesthesia): the same layout as Tokós. Unit sources, per-unit credits and
+# the competency files are build inputs for tools/tokos-learn-index.mjs; the app never reads them.
+[ -d narke ] && mkdir -p "$WWW/narke" && cp -R narke/. "$WWW/narke/"
+rm -rf "$WWW/narke/learn/units" "$WWW/narke/learn/media"/credits-*.json "$WWW/narke/learn/competencies.json" "$WWW/narke/learn/competency-map.json"
+[ -d narke-models ] && mkdir -p "$WWW/narke-models" && cp -R narke-models/. "$WWW/narke-models/"
 
 # NMC Logbook curriculum packs + assessment templates. Same rule and the same failure mode as clinix
 # and surgx above: the root *.js glob copies the module code, DATA DIRECTORIES ARE NOT COPIED. Without

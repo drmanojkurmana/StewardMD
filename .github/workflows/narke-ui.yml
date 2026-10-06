@@ -1,0 +1,23 @@
+name: Narkē UI
+on:
+  pull_request:
+    branches: [main]
+    paths: ['narke*', 'narke/**', 'specialty*', 'home.js', 'swipe-back.js', 'index.html', 'review-desk.js', 'test/run-narke-*.mjs', '.github/workflows/narke-ui.yml']
+  push:
+    branches: [main]
+    paths: ['narke*', 'narke/**', 'specialty*', 'home.js', 'swipe-back.js', 'index.html', 'review-desk.js', 'test/run-narke-*.mjs', '.github/workflows/narke-ui.yml']
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CHROME: /usr/bin/google-chrome
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Narkē in the real app (lazy load, route, back, Review Desk tab, kill switch; 390 px)
+        run: node test/run-narke-app-ui.mjs

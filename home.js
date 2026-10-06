@@ -1109,6 +1109,12 @@
       if (!t || !homeToolEligible(t)) return;
       if (window.TOKOS && TOKOS.open) TOKOS.open(); else toast("Tokós loading…");
     },
+    // Narkē (Anaesthesia), the same kill-switch rule as Tokós.
+    narke: function () {
+      var t = HOME_TOOLS.filter(function (x) { return x.act === "narke"; })[0];
+      if (!t || !homeToolEligible(t)) return;
+      if (window.NARKE && NARKE.open) NARKE.open(); else toast("Narkē loading…");
+    },
     oncohome: function () { if (window.SMD_ONCOHOME && SMD_ONCOHOME.open) SMD_ONCOHOME.open(); else toast("ONCQIS loading…"); },
     oncotree: function () { if (window.SMD_ONCOTREE && SMD_ONCOTREE.open) SMD_ONCOTREE.open(); else toast("OncoTree loading…"); },
     staging: function () { if (window.SMD_ONCOSTAGING && SMD_ONCOSTAGING.openList) SMD_ONCOSTAGING.openList(); else toast("Cancer Staging loading…"); },
@@ -2144,6 +2150,10 @@
     // obstetrician approves each case in the Review Desk.
     { act: "tokos", ic: "monitor_heart", tt: "Tokós", sub: "Obstetrics and gynae",
       eligible: function () { try { var q = (location.search.match(/[?&]tokos=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_tokos") !== "0"; } catch (e) { return true; } } },
+    // Narkē (narke.js on the specialty engine, loaded on first open by narke-loader.js): Anaesthesia learning. Off Home
+    // (available in Add Tool) while it is being built; kill switch smd_narke="0" or ?narke=0.
+    { act: "narke", ic: "masks", tt: "Narkē", sub: "Anaesthesia", defOn: false,
+      eligible: function () { try { var q = (location.search.match(/[?&]narke=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_narke") !== "0"; } catch (e) { return true; } } },
     { act: "electrolytes", ic: "science", tt: "Electrolytes", sub: "ICU correction", defOn: false },
     // Everything else the app can open — available in "Add Tool" (off by default; the doctor pins what they want).
     { act: "hospital", ic: "local_hospital", tt: "Hospital", sub: "OPD · ICU · Ward", defOn: false },
