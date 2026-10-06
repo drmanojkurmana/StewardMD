@@ -41,6 +41,14 @@ To restart a Batch runner: `pkill -f <tool>.mjs`, confirm `pgrep`, then relaunch
    v2 pyq index, `/api/prep/arena/events` (401 without token), Worker `/health`.
 6. Final report to the owner; update this note and memory.
 
+## 2026-10-07 status
+- Fill DONE: bank v4 = 176,430 Q (v1 147,310 + 29,120 gated Layer B), on R2, app reads v4 (prep.js VER, token prep14), OTA v207.
+  v3 (partial, 522 modules) was OTA v202. 7 modules skipped: no source pack. Fill outputs in gs://...-prep-batch/fill-out/.
+- Nudges live (OTA v201): D1 social_push, PREP_CRON_TOKEN in Pages + Worker, Worker cron 0 13 * * *.
+- Premium redesign IN PROGRESS on feat/prep-premium-ui (worktree ~/prep-work/prep-native): Motion vanilla vendored,
+  Aceternity-style effects in CSS, AI/source labels removed from the app (owner 2026-10-07), sources moved to Privacy/Terms.
+  Owner reviews before/after screenshots before merge. Owner budget: $50 total for this.
+
 ## After the merge (still open)
 - Fill: per-module outputs are NOT in git any more (Pages 20,000-file cap; deploy is about 18,200). They go to R2 bank v2 and
   `gs://...-prep-batch/fill-out/`; `node tools/prep-accuracy.mjs --pack-fill` writes `prep/fill/reports.json` + accuracy.json.
