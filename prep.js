@@ -184,7 +184,7 @@
 
   /* ================= browser ================= */
   var D = G.document, C = G.SPECIALTY_CORE;
-  var STATIC = G.SMD_PREP_BASE || "/prep/", API = G.SMD_PREP_BANK_API || "/api/prep/bank/", FLAG_API = G.SMD_PREP_FLAG_API || "/api/prep/flag", VER = "v1";
+  var STATIC = G.SMD_PREP_BASE || "/prep/", API = G.SMD_PREP_BANK_API || "/api/prep/bank/", FLAG_API = G.SMD_PREP_FLAG_API || "/api/prep/flag", VER = G.SMD_PREP_BANK_VER || "v3";
   var HID_TTL = 6 * 3600e3;
   var KEY = "smd_prep_v1", SESSION = 20;
   var st = { open: false, stack: [], tax: null, ix: {}, mem: {}, store: null, run: null, timer: 0, prevOverflow: "", prevFocus: null, sub: null, filter: "all" };

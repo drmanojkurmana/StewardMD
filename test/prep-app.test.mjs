@@ -146,7 +146,7 @@ test("wiring: index.html boots only the loader, at the loader's token; home, bac
   assert.match(sb, /window\.PREP\.back\(\) !== false/);
   const www = read("scripts/build-www.sh");
   assert.match(www, /cp prep\/taxonomy\.json/);
-  assert.match(www, /prep\/bank\/v1\/\*\/index\.json/);
+  assert.match(www, /prep\/bank\/\$\{BV:-v1\}\/\*\/index\.json/);
   assert.doesNotMatch(www, /cp -R prep/, "never the whole prep directory (question files stay in R2)");
 });
 

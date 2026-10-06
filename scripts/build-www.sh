@@ -246,7 +246,7 @@ if [ -f prep/taxonomy.json ]; then
   # Public accuracy numbers (tools/prep-accuracy.mjs; PrepSocial.openAccuracy() reads it), a few KB.
   [ -f prep/accuracy.json ] && cp prep/accuracy.json "$WWW/prep/"
   [ -d prep/profiles ] && mkdir -p "$WWW/prep/profiles" && cp prep/profiles/*.json "$WWW/prep/profiles/"
-  for ix in prep/bank/v1/*/index.json; do [ -f "$ix" ] && mkdir -p "$WWW/$(dirname "$ix")" && cp "$ix" "$WWW/$ix"; done
+  BV=$(sed -n 's/.*VER = G.SMD_PREP_BANK_VER || "\(v[0-9]*\)".*/\1/p' prep.js); for ix in prep/bank/${BV:-v1}/*/index.json; do [ -f "$ix" ] && mkdir -p "$WWW/$(dirname "$ix")" && cp "$ix" "$WWW/$ix"; done
   # Lessons (prep-lessons.js): the committed pilot lessons, their index and their original diagrams, a few KB each.
   # tools/prep-lessons.mjs work files (prep/lessons/work) never ship.
   if [ -f prep/lessons/v1/index.json ]; then
