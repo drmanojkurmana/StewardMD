@@ -1,0 +1,266 @@
+{
+  "id": "asr6-trauma-haemorrhage",
+  "unit": "asr6",
+  "level": "resident",
+  "minutes": 6,
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "Shock index 0.9 to 1.0 as an activation trigger",
+      "Ionised calcium 1.1 to 1.3 mmol/L and calcium chloride as preferred agent",
+      "Fibrinogen trigger 1.5 g/L and first dose 3 to 4 g"
+    ]
+  },
+  "title": {
+    "en": "Major trauma haemorrhage: damage control resuscitation",
+    "hi": "Major trauma haemorrhage: damage control resuscitation"
+  },
+  "idea": {
+    "en": "Bleeding trauma patients die of the lethal triad: cold, acid and clotting failure. Stop the bleeding, give blood not crystalloid, give TXA early and keep calcium normal.",
+    "hi": "रक्तस्राव वाले trauma रोगी lethal triad से मरते हैं: ठंड, acid और थक्का न बनना। रक्तस्राव रोकें, crystalloid नहीं रक्त दें, TXA जल्दी दें और calcium सामान्य रखें।"
+  },
+  "see": {
+    "diagram": "diagrams/asr6-triad.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "A grey triangle with a blue, an amber and a red circle at its corners; three blood bags in red, amber and pale yellow side by side; and a clock face with a teal shaded quarter from twelve to three.",
+      "hi": "धूसर त्रिकोण जिसके कोनों पर नीला, पीला और लाल घेरा; पास-पास लाल, पीली और हल्की पीली तीन रक्त थैलियाँ; और घड़ी जिसमें बारह से तीन तक teal छाया वाला चौथाई भाग।"
+    },
+    "caption": {
+      "en": "The lethal triad, balanced blood products and the 3-hour window for tranexamic acid.",
+      "hi": "Lethal triad, संतुलित रक्त-उत्पाद और tranexamic acid की 3 घंटे की खिड़की।"
+    },
+    "credit": "Original, MAIKNOWLEDGE LLP",
+    "hotspots": [
+      {
+        "x": 0.26,
+        "y": 0.183,
+        "label": {
+          "en": "Hypothermia",
+          "hi": "Hypothermia"
+        },
+        "note": {
+          "en": "Slows clotting enzymes and platelets. Warm every fluid and aim for 36 to 37 C.",
+          "hi": "थक्का बनाने वाले enzymes और platelets को धीमा करता है। हर fluid गर्म करें और 36 से 37 C रखें।"
+        }
+      },
+      {
+        "x": 0.094,
+        "y": 0.717,
+        "label": {
+          "en": "Acidosis",
+          "hi": "Acidosis"
+        },
+        "note": {
+          "en": "From poor perfusion. It weakens clotting factors and the heart.",
+          "hi": "कम perfusion से। यह clotting factors और हृदय को कमज़ोर करता है।"
+        }
+      },
+      {
+        "x": 0.427,
+        "y": 0.717,
+        "label": {
+          "en": "Coagulopathy",
+          "hi": "Coagulopathy"
+        },
+        "note": {
+          "en": "About one-third of severely injured patients arrive already coagulopathic.",
+          "hi": "गंभीर रूप से घायल लगभग एक-तिहाई रोगी पहले से coagulopathic पहुँचते हैं।"
+        }
+      },
+      {
+        "x": 0.719,
+        "y": 0.307,
+        "label": {
+          "en": "Balanced products",
+          "hi": "संतुलित रक्त-उत्पाद"
+        },
+        "note": {
+          "en": "Plasma to red cells 1:1 with platelets, often packaged 1:1:1, until lab results guide therapy.",
+          "hi": "Lab नतीजे आने तक platelets के साथ plasma और red cells 1:1, अक्सर 1:1:1 पैक में।"
+        }
+      },
+      {
+        "x": 0.719,
+        "y": 0.733,
+        "label": {
+          "en": "TXA within 3 hours",
+          "hi": "3 घंटे में TXA"
+        },
+        "note": {
+          "en": "1 g over 10 minutes then 1 g over 8 hours. Do not start after 3 hours.",
+          "hi": "10 मिनट में 1 g फिर 8 घंटे में 1 g। 3 घंटे के बाद शुरू न करें।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Activate the major haemorrhage protocol on physiology: shock index 0.9 to 1 or more, rising lactate, or a positive FAST with hypotension.",
+        "hi": "Physiology पर major haemorrhage protocol शुरू करें: shock index 0.9 से 1 या अधिक, बढ़ता lactate, या hypotension के साथ positive FAST।"
+      },
+      {
+        "en": "Stop the bleeding: pressure, tourniquet, pelvic binder, then theatre or interventional radiology.",
+        "hi": "रक्तस्राव रोकें: दबाव, tourniquet, pelvic binder, फिर theatre या interventional radiology।"
+      },
+      {
+        "en": "Do not use crystalloid for active bleeding in hospital. Give plasma and red cells 1:1 with platelets.",
+        "hi": "अस्पताल में सक्रिय रक्तस्राव के लिए crystalloid न दें। Platelets के साथ plasma और red cells 1:1 दें।"
+      },
+      {
+        "en": "Tranexamic acid 1 g IV over 10 minutes, then 1 g over 8 hours, within 3 hours of injury. Later starts increased bleeding deaths in CRASH-2.",
+        "hi": "चोट के 3 घंटे में tranexamic acid 1 g IV 10 मिनट में, फिर 8 घंटे में 1 g। CRASH-2 में देर से शुरू करने पर रक्तस्राव से मौतें बढ़ीं।"
+      },
+      {
+        "en": "Permissive hypotension until bleeding stops: SBP 80 to 90 mmHg without brain injury. With severe TBI keep MAP 80 mmHg or more.",
+        "hi": "रक्तस्राव रुकने तक permissive hypotension: brain injury न हो तो SBP 80 से 90 mmHg। गंभीर TBI में MAP 80 mmHg या अधिक रखें।"
+      },
+      {
+        "en": "Citrate in stored blood binds calcium. Keep ionised calcium 1.1 to 1.3 mmol/L; calcium chloride 10% 10 mL IV is preferred.",
+        "hi": "जमा रक्त का citrate calcium बाँधता है। Ionised calcium 1.1 से 1.3 mmol/L रखें; calcium chloride 10% 10 mL IV बेहतर है।"
+      },
+      {
+        "en": "Move to targeted therapy when results arrive. Give fibrinogen if 1.5 g/L or less, and plasma if PT or APTT is over 1.5 times normal. Keep platelets above 50, or 100 with TBI.",
+        "hi": "नतीजे आने पर targeted therapy: fibrinogen 1.5 g/L या कम हो तो, platelets 50 से ऊपर (TBI में 100), PT या APTT सामान्य के 1.5 गुना से ज़्यादा हो तो plasma।"
+      }
+    ],
+    "analogy": {
+      "en": "Replace what was lost with what was lost: blood in its parts, not salt water.",
+      "hi": "जो खोया वही लौटाएँ: रक्त उसके भागों में, नमक का पानी नहीं।"
+    }
+  },
+  "spot": [
+    {
+      "en": "A normal first haemoglobin does not exclude major bleeding; repeat it.",
+      "hi": "पहला सामान्य haemoglobin बड़े रक्तस्राव को ख़ारिज नहीं करता; दोहराएँ।"
+    },
+    {
+      "en": "Ionised calcium 0.85 mmol/L during massive transfusion: give calcium now.",
+      "hi": "Massive transfusion के दौरान ionised calcium 0.85 mmol/L: अभी calcium दें।"
+    },
+    {
+      "en": "Core temperature 34.5 C and oozing from every wound: coagulopathy is worsening.",
+      "hi": "Core तापमान 34.5 C और हर घाव से रिसाव: coagulopathy बिगड़ रही है।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Two large-bore lines or intraosseous access, a warmed rapid infuser, and cell salvage if available.",
+      "hi": "दो बड़ी line या intraosseous access, गर्म rapid infuser, और उपलब्ध हो तो cell salvage।"
+    },
+    {
+      "en": "Send blood gas, coagulation and fibrinogen every 30 to 60 minutes while bleeding.",
+      "hi": "रक्तस्राव रहते हर 30 से 60 मिनट blood gas, coagulation और fibrinogen भेजें।"
+    },
+    {
+      "en": "Stand down the protocol and tell the blood bank once bleeding is controlled.",
+      "hi": "रक्तस्राव नियंत्रित होने पर protocol बंद करें और blood bank को बताएँ।"
+    }
+  ],
+  "remember": {
+    "en": "Blood not saline, 1:1:1, TXA within 3 hours, calcium above 1.1, keep warm.",
+    "hi": "Saline नहीं रक्त, 1:1:1, 3 घंटे में TXA, calcium 1.1 से ऊपर, गर्म रखें।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "A trauma patient arrives 4 hours after injury, still bleeding. Tranexamic acid?",
+        "hi": "Trauma रोगी चोट के 4 घंटे बाद आता है, रक्तस्राव जारी। Tranexamic acid?"
+      },
+      "o": [
+        {
+          "en": "Do not start it now",
+          "hi": "अब शुरू न करें"
+        },
+        {
+          "en": "Give 1 g now then 1 g over 8 hours",
+          "hi": "अभी 1 g फिर 8 घंटे में 1 g"
+        },
+        {
+          "en": "Give 4 g bolus",
+          "hi": "4 g bolus दें"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "In CRASH-2, starting after 3 hours increased deaths from bleeding.",
+        "hi": "CRASH-2 में 3 घंटे बाद शुरू करने से रक्तस्राव से मौतें बढ़ीं।"
+      }
+    },
+    {
+      "q": {
+        "en": "Bleeding trauma patient without head injury. BP target until bleeding is controlled?",
+        "hi": "बिना सिर की चोट वाला रक्तस्राव trauma रोगी। रक्तस्राव नियंत्रण तक BP लक्ष्य?"
+      },
+      "o": [
+        {
+          "en": "SBP 80 to 90 mmHg",
+          "hi": "SBP 80 से 90 mmHg"
+        },
+        {
+          "en": "SBP 120 to 140 mmHg",
+          "hi": "SBP 120 से 140 mmHg"
+        },
+        {
+          "en": "MAP 90 mmHg or more",
+          "hi": "MAP 90 mmHg या अधिक"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Permissive hypotension limits bleeding until surgical control. With severe TBI keep MAP 80 mmHg or more instead.",
+        "hi": "Permissive hypotension सर्जिकल नियंत्रण तक रक्तस्राव सीमित रखता है। गंभीर TBI में इसकी जगह MAP 80 mmHg या अधिक रखें।"
+      }
+    },
+    {
+      "q": {
+        "en": "During massive transfusion ionised calcium is 0.9 mmol/L. Best action?",
+        "hi": "Massive transfusion के दौरान ionised calcium 0.9 mmol/L। सबसे अच्छा कदम?"
+      },
+      "o": [
+        {
+          "en": "Calcium chloride 10% 10 mL IV slowly via a large vein",
+          "hi": "बड़ी शिरा से calcium chloride 10% 10 mL IV धीरे"
+        },
+        {
+          "en": "No action until below 0.5",
+          "hi": "0.5 से नीचे तक कुछ नहीं"
+        },
+        {
+          "en": "Give sodium bicarbonate",
+          "hi": "Sodium bicarbonate दें"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Keep ionised calcium at or above 1.1 mmol/L. Citrate in stored blood lowers it.",
+        "hi": "Ionised calcium 1.1 mmol/L या अधिक रखें। जमा रक्त का citrate इसे घटाता है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "fluids-blood",
+    "sim": "haemorrhage"
+  },
+  "deeper": {
+    "note": "asr6-trauma-haemorrhage",
+    "text": {
+      "en": "Viscoelastic tests (ROTEM or TEG) give clot strength and fibrinogen function within minutes. Many centres switch from fixed ratios to these tests as soon as they are available. Fibrinogen concentrate 3 to 4 g, or 15 to 20 single-donor units of cryoprecipitate, is the usual first fibrinogen dose.",
+      "hi": "Viscoelastic जाँच (ROTEM या TEG) कुछ मिनटों में थक्के की ताकत और fibrinogen का काम बताती हैं। कई centre उपलब्ध होते ही तय अनुपात से इन जाँचों पर आ जाते हैं। Fibrinogen concentrate 3 से 4 g, या cryoprecipitate की 15 से 20 single-donor इकाइयाँ, सामान्य पहली fibrinogen खुराक है।"
+    }
+  },
+  "glossary": [
+    "lethal-triad"
+  ],
+  "sources": [
+    "Rossaint R, Afshari A, Bouillon B, et al. The European guideline on management of major bleeding and coagulopathy following trauma: sixth edition. Crit Care 2023;27:80.",
+    "National Institute for Health and Care Excellence. Major trauma: assessment and initial management (NG39). 2016.",
+    "CRASH-2 collaborators. The importance of early treatment with tranexamic acid in bleeding trauma patients: an exploratory analysis of the CRASH-2 randomised controlled trial. Lancet 2011;377:1096-1101.",
+    "StewardMD clinical protocols: major haemorrhage in trauma and blood transfusion (kb/clinical-protocols/major-haemorrhage-trauma.json, blood-transfusion.json)."
+  ],
+  "competencies": [
+    "AS9.4"
+  ]
+}

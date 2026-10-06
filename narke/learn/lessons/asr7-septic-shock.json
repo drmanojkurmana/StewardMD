@@ -1,0 +1,261 @@
+{
+  "id": "asr7-septic-shock",
+  "unit": "asr7",
+  "level": "resident",
+  "minutes": 6,
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "Vasopressin threshold 0.25 to 0.5 mcg/kg/min noradrenaline",
+      "Hydrocortisone trigger 0.25 mcg/kg/min for 4 hours",
+      "The app protocol cites SSC 2026 updates (MAP 60 to 65 at age 65 or over; albumin no longer suggested); these were left out pending owner review"
+    ]
+  },
+  "title": {
+    "en": "Septic shock and vasopressors",
+    "hi": "Septic shock और vasopressors"
+  },
+  "idea": {
+    "en": "Recognise early and give antimicrobials within 1 hour. Give 30 mL/kg balanced crystalloid for hypoperfusion, start noradrenaline for a MAP of 65, then add vasopressin and hydrocortisone at set doses.",
+    "hi": "जल्दी पहचानें और 1 घंटे में antimicrobial दें। Hypoperfusion में 30 mL/kg balanced crystalloid दें, MAP 65 के लिए noradrenaline शुरू करें, फिर तय खुराक पर vasopressin और hydrocortisone जोड़ें।"
+  },
+  "see": {
+    "diagram": "diagrams/asr7-shock.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "Five grey steps rising from left to right. On them sit a blue drop, a red syringe, a violet vial, an amber capsule and a pink heart.",
+      "hi": "बाएँ से दाएँ चढ़ती पाँच धूसर सीढ़ियाँ। उन पर नीली बूँद, लाल syringe, बैंगनी vial, पीला capsule और गुलाबी हृदय।"
+    },
+    "caption": {
+      "en": "The escalation ladder in septic shock: fluid, noradrenaline, vasopressin, hydrocortisone and inotrope.",
+      "hi": "Septic shock में बढ़ते इलाज की सीढ़ी: fluid, noradrenaline, vasopressin, hydrocortisone और inotrope।"
+    },
+    "credit": "Original, MAIKNOWLEDGE LLP",
+    "hotspots": [
+      {
+        "x": 0.146,
+        "y": 0.693,
+        "label": {
+          "en": "Balanced crystalloid",
+          "hi": "Balanced crystalloid"
+        },
+        "note": {
+          "en": "At least 30 mL/kg in the first 3 hours for hypotension or lactate 4 or more, reassessing after each bolus.",
+          "hi": "Hypotension या lactate 4 या अधिक में पहले 3 घंटे में कम से कम 30 mL/kg, हर bolus के बाद पुनर्मूल्यांकन।"
+        }
+      },
+      {
+        "x": 0.329,
+        "y": 0.567,
+        "label": {
+          "en": "Noradrenaline",
+          "hi": "Noradrenaline"
+        },
+        "note": {
+          "en": "First-line. Start 0.05 to 0.1 mcg/kg/min to a MAP of 65. A large proximal peripheral vein is fine at first.",
+          "hi": "पहली पसंद। MAP 65 के लिए 0.05 से 0.1 mcg/kg/min से शुरू। शुरू में बड़ी proximal peripheral शिरा ठीक है।"
+        }
+      },
+      {
+        "x": 0.521,
+        "y": 0.42,
+        "label": {
+          "en": "Vasopressin",
+          "hi": "Vasopressin"
+        },
+        "note": {
+          "en": "Add 0.03 units/min when noradrenaline reaches 0.25 to 0.5 mcg/kg/min.",
+          "hi": "Noradrenaline 0.25 से 0.5 mcg/kg/min पहुँचे तो 0.03 units/min जोड़ें।"
+        }
+      },
+      {
+        "x": 0.708,
+        "y": 0.293,
+        "label": {
+          "en": "Hydrocortisone",
+          "hi": "Hydrocortisone"
+        },
+        "note": {
+          "en": "50 mg IV every 6 hours when noradrenaline or adrenaline of 0.25 mcg/kg/min or more is needed for 4 hours.",
+          "hi": "Noradrenaline या adrenaline 0.25 mcg/kg/min या अधिक 4 घंटे चाहिए तो हर 6 घंटे 50 mg IV।"
+        }
+      },
+      {
+        "x": 0.858,
+        "y": 0.207,
+        "label": {
+          "en": "Inotrope",
+          "hi": "Inotrope"
+        },
+        "note": {
+          "en": "Dobutamine, or a switch to adrenaline, for a weak heart with persistent hypoperfusion.",
+          "hi": "कमज़ोर हृदय और बने hypoperfusion में dobutamine, या adrenaline पर बदलाव।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "[[septic-shock]] means vasopressors are needed for a MAP of 65 or more and lactate stays above 2 mmol/L despite fluid.",
+        "hi": "[[septic-shock]] का अर्थ: fluid के बावजूद MAP 65 या अधिक के लिए vasopressor चाहिए और lactate 2 mmol/L से ऊपर रहे।"
+      },
+      {
+        "en": "Take blood cultures if this causes no delay, then give broad-spectrum antimicrobials within 1 hour.",
+        "hi": "देर न हो तो blood culture लें, फिर 1 घंटे में broad-spectrum antimicrobial दें।"
+      },
+      {
+        "en": "For hypotension or lactate 4 mmol/L or more, give at least 30 mL/kg balanced crystalloid within 3 hours. Reassess after each bolus.",
+        "hi": "Hypotension या lactate 4 mmol/L या अधिक में 3 घंटे में कम से कम 30 mL/kg balanced crystalloid दें। हर bolus के बाद पुनर्मूल्यांकन करें।"
+      },
+      {
+        "en": "Guide further fluid by dynamic tests such as passive leg raising and by capillary refill, not by CVP alone.",
+        "hi": "आगे का fluid passive leg raising जैसी dynamic जाँच और capillary refill से तय करें, केवल CVP से नहीं।"
+      },
+      {
+        "en": "Start noradrenaline if MAP stays below 65. Do not delay it while waiting for a central line.",
+        "hi": "MAP 65 से कम रहे तो noradrenaline शुरू करें। Central line के इंतज़ार में देर न करें।"
+      },
+      {
+        "en": "Add vasopressin 0.03 units/min at noradrenaline 0.25 to 0.5 mcg/kg/min. Add hydrocortisone 200 mg/day when vasopressor need persists.",
+        "hi": "Noradrenaline 0.25 से 0.5 mcg/kg/min पर vasopressin 0.03 units/min जोड़ें। Vasopressor की ज़रूरत बनी रहे तो hydrocortisone 200 mg/day जोड़ें।"
+      },
+      {
+        "en": "Find and control the source early: drain, debride or remove the device.",
+        "hi": "Source जल्दी खोजें और नियंत्रित करें: drain, debride या device निकालें।"
+      }
+    ],
+    "analogy": {
+      "en": "Septic shock is a leaking, slack hose: refill it, tighten it with vasopressors, and fix the leak by treating the infection.",
+      "hi": "Septic shock एक रिसती, ढीली नली है: इसे भरें, vasopressor से कसें, और infection का इलाज करके रिसाव ठीक करें।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Lactate rising despite MAP 65: perfusion is still poor; look at capillary refill, urine and the heart.",
+      "hi": "MAP 65 के बावजूद बढ़ता lactate: perfusion अभी भी ख़राब है; capillary refill, urine और हृदय देखें।"
+    },
+    {
+      "en": "Crackles and falling SpO2 after fluid boluses: stop fluid and rely on vasopressor.",
+      "hi": "Fluid bolus के बाद crackles और गिरता SpO2: fluid रोकें और vasopressor पर निर्भर रहें।"
+    },
+    {
+      "en": "No improvement after 24 hours of antibiotics: search for an undrained source.",
+      "hi": "24 घंटे antibiotic के बाद सुधार नहीं: बिना drain हुआ source खोजें।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Place an arterial line as soon as practical for patients on vasopressors.",
+      "hi": "Vasopressor वाले रोगियों में जितनी जल्दी हो सके arterial line लगाएँ।"
+    },
+    {
+      "en": "Repeat lactate within 2 to 4 hours if the first value was above 2.",
+      "hi": "पहला मान 2 से ऊपर हो तो 2 से 4 घंटे में lactate दोहराएँ।"
+    },
+    {
+      "en": "Review antimicrobials daily for de-escalation.",
+      "hi": "De-escalation के लिए रोज़ antimicrobial की समीक्षा करें।"
+    }
+  ],
+  "remember": {
+    "en": "Antibiotics in 1 hour, 30 mL/kg, noradrenaline to MAP 65, vasopressin at 0.25 to 0.5, hydrocortisone 50 mg 6-hourly.",
+    "hi": "1 घंटे में antibiotic, 30 mL/kg, MAP 65 तक noradrenaline, 0.25 से 0.5 पर vasopressin, हर 6 घंटे hydrocortisone 50 mg।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "Noradrenaline 0.3 mcg/kg/min, MAP 62 mmHg. Next step?",
+        "hi": "Noradrenaline 0.3 mcg/kg/min, MAP 62 mmHg। अगला कदम?"
+      },
+      "o": [
+        {
+          "en": "Add vasopressin 0.03 units/min",
+          "hi": "Vasopressin 0.03 units/min जोड़ें"
+        },
+        {
+          "en": "Add phenylephrine boluses",
+          "hi": "Phenylephrine bolus जोड़ें"
+        },
+        {
+          "en": "Stop fluids and wait",
+          "hi": "Fluid रोककर इंतज़ार करें"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Vasopressin is added at 0.25 to 0.5 mcg/kg/min of noradrenaline rather than escalating noradrenaline alone.",
+        "hi": "केवल noradrenaline बढ़ाने के बजाय 0.25 से 0.5 mcg/kg/min noradrenaline पर vasopressin जोड़ा जाता है।"
+      }
+    },
+    {
+      "q": {
+        "en": "A 70 kg woman is hypotensive with lactate 5 mmol/L. Initial crystalloid?",
+        "hi": "70 kg महिला, hypotension और lactate 5 mmol/L। शुरुआती crystalloid?"
+      },
+      "o": [
+        {
+          "en": "At least 2.1 L within 3 hours, reassessing after each bolus",
+          "hi": "3 घंटे में कम से कम 2.1 L, हर bolus के बाद पुनर्मूल्यांकन"
+        },
+        {
+          "en": "500 mL only",
+          "hi": "केवल 500 mL"
+        },
+        {
+          "en": "5 L in the first hour",
+          "hi": "पहले घंटे में 5 L"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "30 mL/kg times 70 kg is 2.1 L. Give it in boluses with reassessment.",
+        "hi": "30 mL/kg गुणा 70 kg बराबर 2.1 L। पुनर्मूल्यांकन के साथ bolus में दें।"
+      }
+    },
+    {
+      "q": {
+        "en": "When is hydrocortisone added?",
+        "hi": "Hydrocortisone कब जोड़ा जाता है?"
+      },
+      "o": [
+        {
+          "en": "Noradrenaline or adrenaline 0.25 mcg/kg/min or more for at least 4 hours",
+          "hi": "Noradrenaline या adrenaline 0.25 mcg/kg/min या अधिक कम से कम 4 घंटे"
+        },
+        {
+          "en": "In every patient with sepsis",
+          "hi": "Sepsis के हर रोगी में"
+        },
+        {
+          "en": "Only after a cortisol test",
+          "hi": "केवल cortisol जाँच के बाद"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Give 50 mg IV every 6 hours. A cortisol test is not needed first.",
+        "hi": "हर 6 घंटे 50 mg IV दें। पहले cortisol जाँच ज़रूरी नहीं।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "icu-ventilation"
+  },
+  "deeper": {
+    "note": "asr7-septic-shock",
+    "text": {
+      "en": "Shock has four mechanisms: hypovolaemic, cardiogenic, obstructive and distributive. Point-of-care ultrasound helps sort them at the bedside. A collapsing IVC, a weak ventricle, a pericardial effusion or a dilated right ventricle each point to a different cause.",
+      "hi": "Shock के चार तंत्र हैं: hypovolaemic, cardiogenic, obstructive और distributive। Point-of-care ultrasound bedside पर इन्हें अलग करने में मदद करता है: छोटी सिकुड़ती IVC, कमज़ोर सिकुड़ता ventricle, pericardial effusion या फैला right ventricle, हर एक अलग कारण और अलग इलाज बताता है।"
+    }
+  },
+  "glossary": [
+    "septic-shock"
+  ],
+  "sources": [
+    "Evans L, Rhodes A, Alhazzani W, et al. Surviving Sepsis Campaign: international guidelines for management of sepsis and septic shock 2021. Intensive Care Med 2021;47:1181-1247.",
+    "Singer M, Deutschman CS, Seymour CW, et al. The third international consensus definitions for sepsis and septic shock (Sepsis-3). JAMA 2016;315:801-810.",
+    "StewardMD clinical protocol: sepsis and septic shock (kb/clinical-protocols/sepsis-septic-shock.json)."
+  ]
+}
