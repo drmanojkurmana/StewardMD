@@ -37,7 +37,7 @@
    },
    "pearl": {
     "en": "If 100% oxygen barely moves PaO2, think shunt and reach for PEEP.",
-    "hi": "100% ऑक्सीजन से भी PaO2 मुश्किल से बढ़े, तो shunt सोचें और PEEP देखें।"
+    "hi": "100% ऑक्सीजन से भी PaO2 मुश्किल से बढ़े, तो shunt सोचें और PEEP बढ़ाने पर विचार करें।"
    },
    "beginner": {
     "en": "FiO2 is how rich the air is in oxygen. Like adding more milk to watery tea.",
@@ -163,7 +163,7 @@
    },
    "pearl": {
     "en": "A normal rate can be a dangerous rate if the patient was compensating for acid.",
-    "hi": "अगर रोगी acid की भरपाई कर रहा था, तो सामान्य rate ख़तरनाक हो सकता है।"
+    "hi": "अगर मरीज़ acid की भरपाई कर रहा था, तो सामान्य rate ख़तरनाक हो सकता है।"
    },
    "beginner": {
     "en": "Rate is how many breaths each minute. More breaths blow off more CO2.",
@@ -204,8 +204,8 @@
     "hi": "वह दबाव चुनें जो लक्ष्य tidal volume दे, फिर volume alarms लगाएँ।"
    },
    "pearl": {
-    "en": "Driving pressure in passive pressure control is simply the set inspiratory pressure.",
-    "hi": "Passive pressure control में driving pressure सीधे set inspiratory pressure ही है।"
+    "en": "In passive pressure control, driving pressure equals the set pressure. This holds only if inspiratory flow reaches zero and there is no auto-PEEP.",
+    "hi": "Passive pressure control में driving pressure set दबाव के बराबर होता है। यह तभी सही है जब inspiratory flow शून्य तक पहुँचे और auto-PEEP न हो।"
    },
    "beginner": {
     "en": "Inspiratory pressure is how hard the machine pushes each breath.",
@@ -215,11 +215,11 @@
   "ps": {
    "what": {
     "en": "Pressure support is the help added to each breath the patient starts.",
-    "hi": "Pressure support रोगी की शुरू की हर साँस में जोड़ी गई मदद है।"
+    "hi": "Pressure support मरीज़ की शुरू की हर साँस में जोड़ी गई मदद है।"
    },
    "controls": {
     "en": "It sets the pressure above PEEP during patient-triggered breaths. The patient sets the rate.",
-    "hi": "यह रोगी की trigger की साँसों में PEEP के ऊपर दबाव तय करता है। Rate रोगी तय करता है।"
+    "hi": "यह मरीज़ की trigger की साँसों में PEEP के ऊपर दबाव तय करता है। Rate मरीज़ तय करता है।"
    },
    "up": {
     "en": "Bigger breaths, slower rate and less work of breathing.",
@@ -235,23 +235,23 @@
    },
    "ventilation": {
     "en": "Moderate effect. The patient's drive still decides minute ventilation.",
-    "hi": "मध्यम असर। Minute ventilation अब भी रोगी की drive तय करती है।"
+    "hi": "मध्यम असर। Minute ventilation अब भी मरीज़ की drive तय करती है।"
    },
    "risks": {
     "en": "Too much causes ineffective triggers and delayed cycling. Too little tires the patient.",
-    "hi": "ज़्यादा से ineffective triggers और delayed cycling होते हैं। कम से रोगी थकता है।"
+    "hi": "ज़्यादा से ineffective triggers और delayed cycling होते हैं। कम से मरीज़ थकता है।"
    },
    "use": {
     "en": "Used when the patient breathes on their own, often during weaning.",
-    "hi": "जब रोगी ख़ुद साँस ले, अक्सर weaning के समय उपयोग होता है।"
+    "hi": "जब मरीज़ ख़ुद साँस ले, अक्सर weaning के समय उपयोग होता है।"
    },
    "pearl": {
     "en": "There is no backup rate. If the patient stops, only the apnoea alarm saves them.",
-    "hi": "कोई backup rate नहीं। रोगी रुके तो केवल apnoea alarm बचाता है।"
+    "hi": "कोई backup rate नहीं। मरीज़ रुके तो केवल apnoea alarm बचाता है।"
    },
    "beginner": {
     "en": "Pressure support is a helping hand for each breath the patient takes.",
-    "hi": "Pressure support रोगी की हर साँस को सहारा देने वाला हाथ है।"
+    "hi": "Pressure support मरीज़ की हर साँस को सहारा देने वाला हाथ है।"
    }
   },
   "ti": {
@@ -341,7 +341,7 @@
   "trigType": {
    "what": {
     "en": "Trigger type is how the ventilator senses that the patient wants a breath.",
-    "hi": "Trigger type बताता है ventilator कैसे समझता है कि रोगी साँस चाहता है।"
+    "hi": "Trigger type बताता है ventilator कैसे समझता है कि मरीज़ साँस चाहता है।"
    },
    "controls": {
     "en": "Flow trigger senses a small flow into the lungs. Pressure trigger senses a small pressure drop.",
@@ -353,7 +353,7 @@
    },
    "down": {
     "en": "Pressure triggering needs the patient to pull harder first.",
-    "hi": "Pressure triggering में रोगी को पहले ज़्यादा खींचना पड़ता है।"
+    "hi": "Pressure triggering में मरीज़ को पहले ज़्यादा खींचना पड़ता है।"
    },
    "oxygenation": {
     "en": "No direct effect.",
@@ -361,7 +361,7 @@
    },
    "ventilation": {
     "en": "Affects how many extra breaths the patient can take.",
-    "hi": "रोगी कितनी extra साँसें ले सकता है, उस पर असर डालता है।"
+    "hi": "मरीज़ कितनी extra साँसें ले सकता है, उस पर असर डालता है।"
    },
    "risks": {
     "en": "Too sensitive causes auto-triggering. Too stiff causes missed efforts.",
@@ -373,11 +373,11 @@
    },
    "pearl": {
     "en": "Auto-PEEP makes any trigger harder. The patient must first overcome the trapped pressure.",
-    "hi": "Auto-PEEP हर trigger को मुश्किल बनाता है। रोगी को पहले फँसा दबाव पार करना होता है।"
+    "hi": "Auto-PEEP हर trigger को मुश्किल बनाता है। मरीज़ को पहले फँसा दबाव पार करना होता है।"
    },
    "beginner": {
     "en": "The trigger is the doorbell the patient rings to ask for a breath.",
-    "hi": "Trigger वह doorbell है जो रोगी साँस माँगने के लिए बजाता है।"
+    "hi": "Trigger वह doorbell है जो मरीज़ साँस माँगने के लिए बजाता है।"
    }
   },
   "trigFlow": {
@@ -415,7 +415,7 @@
    },
    "pearl": {
     "en": "If the rate is high but the patient looks calm, suspect auto-triggering.",
-    "hi": "Rate ऊँचा हो पर रोगी शांत दिखे, तो auto-triggering का शक करें।"
+    "hi": "Rate ऊँचा हो पर मरीज़ शांत दिखे, तो auto-triggering का शक करें।"
    },
    "beginner": {
     "en": "This decides how light a knock opens the door for a breath.",
@@ -437,7 +437,7 @@
    },
    "down": {
     "en": "More negative: the patient must pull harder, so more missed efforts.",
-    "hi": "ज़्यादा negative: रोगी को ज़्यादा खींचना पड़ता है, इसलिए ज़्यादा छूटे प्रयास।"
+    "hi": "ज़्यादा negative: मरीज़ को ज़्यादा खींचना पड़ता है, इसलिए ज़्यादा छूटे प्रयास।"
    },
    "oxygenation": {
     "en": "No direct effect.",
@@ -461,7 +461,7 @@
    },
    "beginner": {
     "en": "This sets how hard the patient must suck before the machine helps.",
-    "hi": "यह तय करता है मशीन की मदद से पहले रोगी को कितना खींचना पड़े।"
+    "hi": "यह तय करता है मशीन की मदद से पहले मरीज़ को कितना खींचना पड़े।"
    }
   },
   "cycle": {
@@ -499,11 +499,11 @@
    },
    "pearl": {
     "en": "A pressure spike at the end of a support breath means the patient is fighting to exhale.",
-    "hi": "Support साँस के अंत में दबाव का उछाल मतलब रोगी साँस छोड़ने के लिए लड़ रहा है।"
+    "hi": "Support साँस के अंत में दबाव का उछाल मतलब मरीज़ साँस छोड़ने के लिए लड़ रहा है।"
    },
    "beginner": {
     "en": "Cycle tells the machine when to stop blowing and let the patient breathe out.",
-    "hi": "Cycle मशीन को बताता है कब हवा भरना रोके और रोगी को साँस छोड़ने दे।"
+    "hi": "Cycle मशीन को बताता है कब हवा भरना रोके और मरीज़ को साँस छोड़ने दे।"
    }
   },
   "rise": {
@@ -516,12 +516,12 @@
     "hi": "यह pressure control और support साँसों के शुरुआती flow का आकार तय करता है।"
    },
    "up": {
-    "en": "Faster rise gives more early flow for a hungry patient.",
-    "hi": "तेज़ rise भूखे रोगी को ज़्यादा शुरुआती flow देता है।"
+    "en": "Longer rise time: pressure climbs more slowly. A hungry patient may feel flow starved.",
+    "hi": "Rise time बढ़ाने पर दबाव धीरे चढ़ता है। तेज़ हवा चाहने वाला मरीज़ flow के लिए भूखा रह सकता है।"
    },
    "down": {
-    "en": "Slower rise is gentler but may starve a patient who wants air fast.",
-    "hi": "धीमा rise नरम है पर तेज़ हवा चाहने वाले रोगी को भूखा रख सकता है।"
+    "en": "Shorter rise time: pressure climbs faster and early flow is higher. Overshoot may appear.",
+    "hi": "Rise time घटाने पर दबाव तेज़ी से चढ़ता है और शुरुआती flow ज़्यादा होता है। Overshoot दिख सकता है।"
    },
    "oxygenation": {
     "en": "Very small effect.",
@@ -541,7 +541,7 @@
    },
    "pearl": {
     "en": "A scooped pressure curve means the patient wants more flow than you give.",
-    "hi": "गड्ढेदार दबाव curve मतलब रोगी आपके दिए से ज़्यादा flow चाहता है।"
+    "hi": "गड्ढेदार दबाव curve मतलब मरीज़ आपके दिए से ज़्यादा flow चाहता है।"
    },
    "beginner": {
     "en": "Rise is how quickly the push starts, gentle or brisk.",
@@ -583,7 +583,7 @@
    },
    "pearl": {
     "en": "The patient breathes freely at P high. Sedation can often be lighter.",
-    "hi": "रोगी P high पर खुलकर साँस लेता है। Sedation अक्सर हल्का रह सकता है।"
+    "hi": "मरीज़ P high पर खुलकर साँस लेता है। Sedation अक्सर हल्का रह सकता है।"
    },
    "beginner": {
     "en": "P high is the high pressure that keeps the lungs inflated most of the time.",
@@ -785,7 +785,7 @@
    },
    "risks": {
     "en": "High EPAP adds leak and discomfort. It can lower BP if the patient is dry.",
-    "hi": "ऊँचा EPAP leak और असुविधा बढ़ाता है। रोगी में पानी कम हो तो BP घटा सकता है।"
+    "hi": "ऊँचा EPAP leak और असुविधा बढ़ाता है। मरीज़ में पानी कम हो तो BP घटा सकता है।"
    },
    "use": {
     "en": "At least 3 to flush CO2. Raise it for hypoxaemia, oedema or airway obstruction.",
@@ -835,7 +835,7 @@
    },
    "pearl": {
     "en": "Silencing an alarm is not fixing it. Look at the patient first.",
-    "hi": "Alarm चुप कराना उसे ठीक करना नहीं है। पहले रोगी को देखें।"
+    "hi": "Alarm चुप कराना उसे ठीक करना नहीं है। पहले मरीज़ को देखें।"
    },
    "beginner": {
     "en": "This is the smoke alarm for pressure that is too high.",
@@ -915,11 +915,11 @@
    },
    "use": {
     "en": "Set above the expected value, wider when the patient is compensating.",
-    "hi": "अपेक्षित मान से ऊपर, रोगी compensate कर रहा हो तो ज़्यादा चौड़ा।"
+    "hi": "अपेक्षित मान से ऊपर, मरीज़ compensate कर रहा हो तो ज़्यादा चौड़ा।"
    },
    "pearl": {
     "en": "Ask why the patient wants so much air before you stop it.",
-    "hi": "रोकने से पहले पूछें कि रोगी को इतनी हवा क्यों चाहिए।"
+    "hi": "रोकने से पहले पूछें कि मरीज़ को इतनी हवा क्यों चाहिए।"
    },
    "beginner": {
     "en": "This warns when far more air than expected is moving.",
@@ -949,7 +949,7 @@
    },
    "ventilation": {
     "en": "Protects against CO2 build-up when the patient stops breathing.",
-    "hi": "रोगी के साँस रोकने पर CO2 जमा होने से बचाता है।"
+    "hi": "मरीज़ के साँस रोकने पर CO2 जमा होने से बचाता है।"
    },
    "risks": {
     "en": "Too long in pressure support can allow dangerous pauses.",
@@ -1007,7 +1007,7 @@
    },
    "beginner": {
     "en": "This warns when the patient is breathing far too fast.",
-    "hi": "यह चेताता है जब रोगी बहुत तेज़ साँस ले रहा हो।"
+    "hi": "यह चेताता है जब मरीज़ बहुत तेज़ साँस ले रहा हो।"
    }
   },
   "fio2Low": {
@@ -1199,15 +1199,15 @@
    },
    "when": {
     "en": "A patient with no breathing effort, such as under deep anaesthesia or paralysis.",
-    "hi": "बिना साँस प्रयास वाला रोगी, जैसे गहरे anaesthesia या paralysis में।"
+    "hi": "बिना साँस प्रयास वाला मरीज़, जैसे गहरे anaesthesia या paralysis में।"
    },
    "risks": {
     "en": "If the patient tries to breathe, the breaths fight. A stiffening lung raises pressure.",
-    "hi": "रोगी साँस लेने की कोशिश करे तो साँसें टकराती हैं। सख़्त होता फेफड़ा दबाव बढ़ाता है।"
+    "hi": "मरीज़ साँस लेने की कोशिश करे तो साँसें टकराती हैं। सख़्त होता फेफड़ा दबाव बढ़ाता है।"
    },
    "beginner": {
     "en": "The machine gives the same size breath on a timer, whatever the patient does.",
-    "hi": "मशीन timer पर एक ही आकार की साँस देती है, रोगी कुछ भी करे।"
+    "hi": "मशीन timer पर एक ही आकार की साँस देती है, मरीज़ कुछ भी करे।"
    }
   },
   "acvc": {
@@ -1217,7 +1217,7 @@
    },
    "variable": {
     "en": "Airway pressure varies. The total rate rises if the patient triggers extra breaths.",
-    "hi": "Airway दबाव बदलता है। रोगी extra साँसें trigger करे तो कुल rate बढ़ता है।"
+    "hi": "Airway दबाव बदलता है। मरीज़ extra साँसें trigger करे तो कुल rate बढ़ता है।"
    },
    "guarantees": {
     "en": "Every breath, set or triggered, gets the full set tidal volume.",
@@ -1225,7 +1225,7 @@
    },
    "dependsOn": {
     "en": "Pressure depends on compliance and resistance. Rate depends partly on the patient.",
-    "hi": "दबाव compliance और resistance पर निर्भर है। Rate कुछ हद तक रोगी पर।"
+    "hi": "दबाव compliance और resistance पर निर्भर है। Rate कुछ हद तक मरीज़ पर।"
    },
    "when": {
     "en": "The common starting mode after intubation in most ICUs.",
@@ -1233,11 +1233,11 @@
    },
    "risks": {
     "en": "A fast-breathing patient can stack breaths and build auto-PEEP or alkalosis.",
-    "hi": "तेज़ साँस लेने वाला रोगी साँसें जमा कर auto-PEEP या alkalosis बना सकता है।"
+    "hi": "तेज़ साँस लेने वाला मरीज़ साँसें जमा कर auto-PEEP या alkalosis बना सकता है।"
    },
    "beginner": {
     "en": "The machine gives a full breath on a timer, and also whenever the patient asks.",
-    "hi": "मशीन timer पर पूरी साँस देती है, और जब भी रोगी माँगे तब भी।"
+    "hi": "मशीन timer पर पूरी साँस देती है, और जब भी मरीज़ माँगे तब भी।"
    }
   },
   "pc": {
@@ -1247,11 +1247,11 @@
    },
    "variable": {
     "en": "Tidal volume varies with compliance, resistance and patient effort.",
-    "hi": "Tidal volume compliance, resistance और रोगी के प्रयास के साथ बदलता है।"
+    "hi": "Tidal volume compliance, resistance और मरीज़ के प्रयास के साथ बदलता है।"
    },
    "guarantees": {
-    "en": "A capped airway pressure. The lung never sees more than the set pressure.",
-    "hi": "सीमित airway दबाव। फेफड़े पर set दबाव से ज़्यादा कभी नहीं आता।"
+    "en": "Airway pressure never exceeds PEEP plus the set pressure.",
+    "hi": "Airway दबाव PEEP और set दबाव के जोड़ से ऊपर नहीं जाता।"
    },
    "dependsOn": {
     "en": "Volume depends on compliance, resistance, Ti and effort.",
@@ -1259,7 +1259,7 @@
    },
    "when": {
     "en": "When you want to limit pressure, or the patient has a leak.",
-    "hi": "जब दबाव सीमित रखना हो, या रोगी में leak हो।"
+    "hi": "जब दबाव सीमित रखना हो, या मरीज़ में leak हो।"
    },
    "risks": {
     "en": "Volume falls silently if the lung stiffens. Set volume alarms.",
@@ -1285,19 +1285,19 @@
    },
    "dependsOn": {
     "en": "Volume depends on compliance, resistance and patient effort.",
-    "hi": "Volume compliance, resistance और रोगी के प्रयास पर निर्भर है।"
+    "hi": "Volume compliance, resistance और मरीज़ के प्रयास पर निर्भर है।"
    },
    "when": {
     "en": "Stiff lungs where pressure limits matter, or patients who need variable flow.",
-    "hi": "सख़्त फेफड़े जहाँ दबाव सीमा ज़रूरी हो, या जिन रोगियों को बदलता flow चाहिए।"
+    "hi": "सख़्त फेफड़े जहाँ दबाव सीमा ज़रूरी हो, या जिन मरीज़ों को बदलता flow चाहिए।"
    },
    "risks": {
     "en": "Strong patient effort can pull in large volumes despite the pressure limit.",
-    "hi": "रोगी का तेज़ प्रयास दबाव सीमा के बावजूद बड़ा volume खींच सकता है।"
+    "hi": "मरीज़ का तेज़ प्रयास दबाव सीमा के बावजूद बड़ा volume खींच सकता है।"
    },
    "beginner": {
     "en": "A fixed push for each breath, on a timer and whenever the patient asks.",
-    "hi": "हर साँस के लिए तय धक्का, timer पर और जब भी रोगी माँगे।"
+    "hi": "हर साँस के लिए तय धक्का, timer पर और जब भी मरीज़ माँगे।"
    }
   },
   "simv": {
@@ -1315,7 +1315,7 @@
    },
    "dependsOn": {
     "en": "Total ventilation depends on the patient's own breaths.",
-    "hi": "कुल ventilation रोगी की अपनी साँसों पर निर्भर है।"
+    "hi": "कुल ventilation मरीज़ की अपनी साँसों पर निर्भर है।"
    },
    "when": {
     "en": "Some units use it for weaning, though evidence favours other methods.",
@@ -1323,11 +1323,11 @@
    },
    "risks": {
     "en": "Weak spontaneous breaths can tire the patient. Weaning may be slower.",
-    "hi": "कमज़ोर spontaneous साँसें रोगी को थका सकती हैं। Weaning धीमी हो सकती है।"
+    "hi": "कमज़ोर spontaneous साँसें मरीज़ को थका सकती हैं। Weaning धीमी हो सकती है।"
    },
    "beginner": {
     "en": "A few full breaths are guaranteed. In between, the patient breathes with a little help.",
-    "hi": "कुछ पूरी साँसें पक्की हैं। बीच में रोगी थोड़ी मदद से साँस लेता है।"
+    "hi": "कुछ पूरी साँसें पक्की हैं। बीच में मरीज़ थोड़ी मदद से साँस लेता है।"
    }
   },
   "psv": {
@@ -1337,19 +1337,19 @@
    },
    "variable": {
     "en": "Rate, tidal volume and inspiratory time are decided by the patient.",
-    "hi": "Rate, tidal volume और inspiratory time रोगी तय करता है।"
+    "hi": "Rate, tidal volume और inspiratory time मरीज़ तय करता है।"
    },
    "guarantees": {
     "en": "A set pressure for each patient breath. No set rate.",
-    "hi": "रोगी की हर साँस को तय दबाव। कोई तय rate नहीं।"
+    "hi": "मरीज़ की हर साँस को तय दबाव। कोई तय rate नहीं।"
    },
    "dependsOn": {
     "en": "Everything depends on the patient's drive and effort.",
-    "hi": "सब कुछ रोगी की drive और प्रयास पर निर्भर है।"
+    "hi": "सब कुछ मरीज़ की drive और प्रयास पर निर्भर है।"
    },
    "when": {
     "en": "A patient breathing on their own, during weaning or a breathing trial.",
-    "hi": "ख़ुद साँस लेता रोगी, weaning या breathing trial के समय।"
+    "hi": "ख़ुद साँस लेता मरीज़, weaning या breathing trial के समय।"
    },
    "risks": {
     "en": "Apnoea gives no breaths except backup. Too much support causes dyssynchrony.",
@@ -1357,7 +1357,7 @@
    },
    "beginner": {
     "en": "The patient leads every breath. The machine gives a helping push each time.",
-    "hi": "हर साँस रोगी शुरू करता है। मशीन हर बार सहारे का धक्का देती है।"
+    "hi": "हर साँस मरीज़ शुरू करता है। मशीन हर बार सहारे का धक्का देती है।"
    }
   },
   "cpap": {
@@ -1367,7 +1367,7 @@
    },
    "variable": {
     "en": "Rate and tidal volume are fully the patient's own.",
-    "hi": "Rate और tidal volume पूरी तरह रोगी के अपने हैं।"
+    "hi": "Rate और tidal volume पूरी तरह मरीज़ के अपने हैं।"
    },
    "guarantees": {
     "en": "A steady pressure that holds the alveoli open. No breaths are given.",
@@ -1375,7 +1375,7 @@
    },
    "dependsOn": {
     "en": "Ventilation depends entirely on the patient.",
-    "hi": "Ventilation पूरी तरह रोगी पर निर्भर है।"
+    "hi": "Ventilation पूरी तरह मरीज़ पर निर्भर है।"
    },
    "when": {
     "en": "Breathing trials, and cardiogenic oedema on a mask.",
@@ -1383,11 +1383,11 @@
    },
    "risks": {
     "en": "No help with CO2. A tiring patient will build up CO2.",
-    "hi": "CO2 में कोई मदद नहीं। थकता रोगी CO2 जमा करेगा।"
+    "hi": "CO2 में कोई मदद नहीं। थकता मरीज़ CO2 जमा करेगा।"
    },
    "beginner": {
     "en": "A steady breeze that keeps the air sacs open while the patient does all the breathing.",
-    "hi": "स्थिर हवा जो थैलियाँ खुली रखती है, साँस का सारा काम रोगी करता है।"
+    "hi": "स्थिर हवा जो थैलियाँ खुली रखती है, साँस का सारा काम मरीज़ करता है।"
    }
   },
   "prvc": {
@@ -1405,7 +1405,7 @@
    },
    "dependsOn": {
     "en": "Pressure depends on compliance and on patient effort.",
-    "hi": "दबाव compliance और रोगी के प्रयास पर निर्भर है।"
+    "hi": "दबाव compliance और मरीज़ के प्रयास पर निर्भर है।"
    },
    "when": {
     "en": "When you want volume targets with the flow pattern of pressure control.",
@@ -1435,7 +1435,7 @@
    },
    "dependsOn": {
     "en": "It needs an awake, cooperative patient who can protect the airway.",
-    "hi": "इसके लिए जागा, सहयोग करता रोगी चाहिए जो airway बचा सके।"
+    "hi": "इसके लिए जागा, सहयोग करता मरीज़ चाहिए जो airway बचा सके।"
    },
    "when": {
     "en": "COPD with acidosis and cardiogenic pulmonary oedema are the strongest uses.",
@@ -1783,6 +1783,20 @@
      },
      "do": {
       "scenario": "postop-atelectasis"
+     }
+    },
+    {
+     "say": {
+      "en": "First make the tidal volume safe. Her predicted weight is about 48 kg, so use 330 mL, about 7 mL/kg.",
+      "hi": "पहले tidal volume सुरक्षित करें। उनका predicted weight लगभग 48 kg है, इसलिए 330 mL, लगभग 7 mL/kg रखें।"
+     },
+     "do": {
+      "key": "vt",
+      "to": 330
+     },
+     "expect": {
+      "key": "drivingP",
+      "direction": "down"
      }
     },
     {
@@ -2246,22 +2260,8 @@
     },
     {
      "say": {
-      "en": "Lower tidal volume to 420 mL. The open lung is small, so give small breaths.",
-      "hi": "Tidal volume 420 mL करें। खुला फेफड़ा छोटा है, इसलिए छोटी साँसें दें।"
-     },
-     "do": {
-      "key": "vt",
-      "to": 420
-     },
-     "expect": {
-      "key": "drivingP",
-      "direction": "down"
-     }
-    },
-    {
-     "say": {
-      "en": "Raise the rate to 28 to limit the rise in CO2.",
-      "hi": "CO2 की बढ़त सीमित करने को rate 28 करें।"
+      "en": "First raise the rate to 28. The smaller breaths that come next will need it to clear CO2.",
+      "hi": "पहले rate 28 करें। आगे की छोटी साँसों को CO2 निकालने के लिए इसकी ज़रूरत होगी।"
      },
      "do": {
       "key": "rr",
@@ -2269,6 +2269,20 @@
      },
      "expect": {
       "key": "paco2",
+      "direction": "down"
+     }
+    },
+    {
+     "say": {
+      "en": "Now lower tidal volume to 420 mL. The open lung is small, so give small breaths.",
+      "hi": "अब tidal volume 420 mL करें। खुला फेफड़ा छोटा है, इसलिए छोटी साँसें दें।"
+     },
+     "do": {
+      "key": "vt",
+      "to": 420
+     },
+     "expect": {
+      "key": "drivingP",
       "direction": "down"
      }
     },
@@ -2421,7 +2435,7 @@
     },
     {
      "en": "A kinked tube or the patient biting the tube.",
-     "hi": "मुड़ी हुई tube या रोगी का tube को दाँत से दबाना।"
+     "hi": "मुड़ी हुई tube या मरीज़ का tube को दाँत से दबाना।"
     },
     {
      "en": "Bronchospasm, which narrows the airways.",
@@ -2447,7 +2461,7 @@
    "steps": [
     {
      "en": "Look at the patient first: SpO2, BP, chest movement.",
-     "hi": "पहले रोगी को देखें: SpO2, BP, छाती की हरकत।"
+     "hi": "पहले मरीज़ को देखें: SpO2, BP, छाती की हरकत।"
     },
     {
      "en": "If unstable, the usual teaching is to disconnect and bag with 100% oxygen.",
@@ -2525,8 +2539,8 @@
     }
    ],
    "fix": {
-    "en": "Lower the tidal volume towards 4 to 6 mL/kg so plateau stays 30 or less. Treat any pneumothorax.",
-    "hi": "Tidal volume 4 से 6 mL/kg की ओर घटाएँ ताकि plateau 30 या कम रहे। कोई pneumothorax हो तो इलाज करें।"
+    "en": "Lower the tidal volume towards 4 to 6 mL/kg so plateau stays 30 or less. Raise the rate to hold pH. Treat any pneumothorax.",
+    "hi": "Tidal volume 4 से 6 mL/kg की ओर घटाएँ ताकि plateau 30 या कम रहे। pH बनाए रखने के लिए rate बढ़ाएँ। कोई pneumothorax हो तो इलाज करें।"
    }
   },
   "vtLow": {
@@ -2549,7 +2563,7 @@
     },
     {
      "en": "Weaker patient effort in pressure support.",
-     "hi": "Pressure support में रोगी का कमज़ोर प्रयास।"
+     "hi": "Pressure support में मरीज़ का कमज़ोर प्रयास।"
     }
    ],
    "clue": {
@@ -2559,7 +2573,7 @@
    "steps": [
     {
      "en": "Check the patient: chest rise, SpO2, BP.",
-     "hi": "रोगी जाँचें: छाती का उठना, SpO2, BP।"
+     "hi": "मरीज़ जाँचें: छाती का उठना, SpO2, BP।"
     },
     {
      "en": "If unstable, disconnect and bag with 100% oxygen.",
@@ -2587,7 +2601,7 @@
    "causes": [
     {
      "en": "The patient breathes less: sedation, fatigue or weak muscles.",
-     "hi": "रोगी कम साँस ले रहा है: sedation, थकान या कमज़ोर muscles।"
+     "hi": "मरीज़ कम साँस ले रहा है: sedation, थकान या कमज़ोर muscles।"
     },
     {
      "en": "A leak in the circuit or around the cuff.",
@@ -2599,7 +2613,7 @@
     },
     {
      "en": "Set rate or support too low for the patient.",
-     "hi": "रोगी के लिए set rate या support बहुत कम।"
+     "hi": "मरीज़ के लिए set rate या support बहुत कम।"
     }
    ],
    "clue": {
@@ -2609,7 +2623,7 @@
    "steps": [
     {
      "en": "Check the patient is breathing and SpO2 is stable.",
-     "hi": "जाँचें कि रोगी साँस ले रहा है और SpO2 स्थिर है।"
+     "hi": "जाँचें कि मरीज़ साँस ले रहा है और SpO2 स्थिर है।"
     },
     {
      "en": "Look for a leak: compare inspired and expired volume.",
@@ -2637,7 +2651,7 @@
     },
     {
      "en": "Metabolic acidosis that the patient is compensating.",
-     "hi": "Metabolic acidosis जिसकी रोगी भरपाई कर रहा है।"
+     "hi": "Metabolic acidosis जिसकी मरीज़ भरपाई कर रहा है।"
     },
     {
      "en": "Hypoxaemia driving fast breathing.",
@@ -2650,12 +2664,12 @@
    ],
    "clue": {
     "en": "Many breaths close together. Check whether each one starts with a real patient effort.",
-    "hi": "पास-पास बहुत सी साँसें। देखें कि हर साँस असली रोगी प्रयास से शुरू हो रही है या नहीं।"
+    "hi": "पास-पास बहुत सी साँसें। देखें कि हर साँस असली मरीज़ प्रयास से शुरू हो रही है या नहीं।"
    },
    "steps": [
     {
      "en": "Look at the patient: distress, pain, fever?",
-     "hi": "रोगी को देखें: बेचैनी, दर्द, बुख़ार?"
+     "hi": "मरीज़ को देखें: बेचैनी, दर्द, बुख़ार?"
     },
     {
      "en": "Check the ABG. Is the fast breathing compensating for acidosis?",
@@ -2701,7 +2715,7 @@
    "steps": [
     {
      "en": "Check the patient and the circuit connection.",
-     "hi": "रोगी और circuit का connection जाँचें।"
+     "hi": "मरीज़ और circuit का connection जाँचें।"
     },
     {
      "en": "Confirm backup ventilation has started.",
@@ -2747,7 +2761,7 @@
    "steps": [
     {
      "en": "Look at the patient and the SpO2.",
-     "hi": "रोगी और SpO2 देखें।"
+     "hi": "मरीज़ और SpO2 देखें।"
     },
     {
      "en": "Check the waveform for dyssynchrony or auto-triggering.",
@@ -2789,7 +2803,7 @@
    "steps": [
     {
      "en": "Check SpO2 and the patient.",
-     "hi": "SpO2 और रोगी जाँचें।"
+     "hi": "SpO2 और मरीज़ जाँचें।"
     },
     {
      "en": "Check wall oxygen and the cylinder backup.",
@@ -2859,7 +2873,7 @@
     },
     {
      "en": "Strong patient efforts pulling pressure down.",
-     "hi": "रोगी के तेज़ प्रयास दबाव नीचे खींचते हैं।"
+     "hi": "मरीज़ के तेज़ प्रयास दबाव नीचे खींचते हैं।"
     }
    ],
    "clue": {
@@ -2869,7 +2883,7 @@
    "steps": [
     {
      "en": "Check the patient and SpO2.",
-     "hi": "रोगी और SpO2 जाँचें।"
+     "hi": "मरीज़ और SpO2 जाँचें।"
     },
     {
      "en": "Check all connections and the cuff.",
@@ -2945,7 +2959,7 @@
    "steps": [
     {
      "en": "Look at the patient and the circuit at once.",
-     "hi": "तुरंत रोगी और circuit देखें।"
+     "hi": "तुरंत मरीज़ और circuit देखें।"
     },
     {
      "en": "Reconnect, or bag with 100% oxygen if unsure.",
@@ -3023,11 +3037,11 @@
     },
     {
      "en": "Flow or tidal volume less than the patient wants.",
-     "hi": "Flow या tidal volume रोगी की चाहत से कम।"
+     "hi": "Flow या tidal volume मरीज़ की चाहत से कम।"
     },
     {
      "en": "Breath ends too early or too late for the patient.",
-     "hi": "साँस रोगी के लिए बहुत जल्दी या देर से ख़त्म होती है।"
+     "hi": "साँस मरीज़ के लिए बहुत जल्दी या देर से ख़त्म होती है।"
     },
     {
      "en": "Pain, anxiety or changing sedation.",
@@ -3041,7 +3055,7 @@
    "steps": [
     {
      "en": "Look at the patient: comfort, pain, distress.",
-     "hi": "रोगी को देखें: आराम, दर्द, बेचैनी।"
+     "hi": "मरीज़ को देखें: आराम, दर्द, बेचैनी।"
     },
     {
      "en": "Name the type from the waveform.",
@@ -3049,7 +3063,7 @@
     },
     {
      "en": "Change trigger, flow, Ti or cycle to match the patient.",
-     "hi": "रोगी के अनुसार trigger, flow, Ti या cycle बदलें।"
+     "hi": "मरीज़ के अनुसार trigger, flow, Ti या cycle बदलें।"
     },
     {
      "en": "Consider sedation only after settings are fixed.",
@@ -3058,7 +3072,7 @@
    ],
    "fix": {
     "en": "Match the machine to the patient. Fix the setting before adding sedation.",
-    "hi": "मशीन को रोगी के अनुसार ढालें। Sedation बढ़ाने से पहले setting ठीक करें।"
+    "hi": "मशीन को मरीज़ के अनुसार ढालें। Sedation बढ़ाने से पहले setting ठीक करें।"
    }
   }
  },
@@ -3074,7 +3088,7 @@
    },
    "cause": {
     "en": "The patient still wants air when the set breath ends. Ti or tidal volume is too small.",
-    "hi": "Set साँस ख़त्म होने पर भी रोगी को हवा चाहिए। Ti या tidal volume बहुत छोटा है।"
+    "hi": "Set साँस ख़त्म होने पर भी मरीज़ को हवा चाहिए। Ti या tidal volume बहुत छोटा है।"
    },
    "fix": {
     "en": "Lengthen Ti or raise tidal volume within safe limits. In ARDS, deeper sedation may be needed.",
@@ -3113,7 +3127,7 @@
    },
    "cause": {
     "en": "Usually auto-PEEP. The patient must first overcome trapped pressure. Weak effort or a stiff trigger also cause it.",
-    "hi": "अक्सर auto-PEEP। रोगी को पहले फँसा दबाव पार करना पड़ता है। कमज़ोर प्रयास या सख़्त trigger भी कारण हैं।"
+    "hi": "अक्सर auto-PEEP। मरीज़ को पहले फँसा दबाव पार करना पड़ता है। कमज़ोर प्रयास या सख़्त trigger भी कारण हैं।"
    },
    "fix": {
     "en": "Reduce gas trapping, add external PEEP, and make the trigger more sensitive.",
@@ -3148,7 +3162,7 @@
    },
    "clue": {
     "en": "Breaths start with no dip of patient effort. The rate may be high and regular.",
-    "hi": "रोगी के प्रयास वाले गड्ढे के बिना साँसें शुरू होती हैं। Rate ऊँची और नियमित हो सकती है।"
+    "hi": "मरीज़ के प्रयास वाले गड्ढे के बिना साँसें शुरू होती हैं। Rate ऊँची और नियमित हो सकती है।"
    },
    "cause": {
     "en": "A leak, water in the circuit, or heartbeats fooling a very sensitive trigger.",
@@ -3191,7 +3205,7 @@
    },
    "cause": {
     "en": "The patient pulls harder than the set flow can supply.",
-    "hi": "रोगी set flow से ज़्यादा ज़ोर से हवा खींचता है।"
+    "hi": "मरीज़ set flow से ज़्यादा ज़ोर से हवा खींचता है।"
    },
    "fix": {
     "en": "Raise the flow or shorten Ti, or switch to a pressure mode where flow is free.",
@@ -3226,11 +3240,11 @@
    },
    "clue": {
     "en": "The breath ends while the patient still pulls. A dip follows, and flow may reverse briefly.",
-    "hi": "रोगी के खींचते रहने पर ही साँस ख़त्म हो जाती है। बाद में गड्ढा आता है, flow थोड़ी देर उलट सकता है।"
+    "hi": "मरीज़ के खींचते रहने पर ही साँस ख़त्म हो जाती है। बाद में गड्ढा आता है, flow थोड़ी देर उलट सकता है।"
    },
    "cause": {
     "en": "The machine's breath is shorter than the patient's own breath in.",
-    "hi": "मशीन की साँस रोगी की अपनी साँस से छोटी है।"
+    "hi": "मशीन की साँस मरीज़ की अपनी साँस से छोटी है।"
    },
    "fix": {
     "en": "Lower the cycle percentage or lengthen Ti.",
@@ -3265,7 +3279,7 @@
    },
    "clue": {
     "en": "A pressure spike at the end of the breath as the patient pushes out early.",
-    "hi": "साँस के अंत में दबाव का उछाल, क्योंकि रोगी जल्दी बाहर धकेलता है।"
+    "hi": "साँस के अंत में दबाव का उछाल, क्योंकि मरीज़ जल्दी बाहर धकेलता है।"
    },
    "cause": {
     "en": "Flow falls slowly in COPD, so a low cycle percentage holds the breath too long.",
@@ -3304,7 +3318,7 @@
    },
    "clue": {
     "en": "A machine breath starts first, then a patient effort follows inside it, sometimes causing a second breath.",
-    "hi": "पहले मशीन की साँस शुरू होती है, फिर उसके भीतर रोगी का प्रयास आता है, कभी दूसरी साँस भी बनती है।"
+    "hi": "पहले मशीन की साँस शुरू होती है, फिर उसके भीतर मरीज़ का प्रयास आता है, कभी दूसरी साँस भी बनती है।"
    },
    "cause": {
     "en": "Under deep sedation the machine breath sets off a reflex effort. It is common in ARDS.",
@@ -3384,7 +3398,7 @@
    "q2": {
     "ask": {
      "en": "Which single ventilator change fits this simulated patient best?",
-     "hi": "इस simulated रोगी के लिए कौन सा एक ventilator बदलाव सबसे सही है?"
+     "hi": "इस simulated मरीज़ के लिए कौन सा एक ventilator बदलाव सबसे सही है?"
     },
     "options": [
      {
@@ -3481,7 +3495,7 @@
    "q2": {
     "ask": {
      "en": "Which single ventilator change fits this simulated patient best?",
-     "hi": "इस simulated रोगी के लिए कौन सा एक ventilator बदलाव सबसे सही है?"
+     "hi": "इस simulated मरीज़ के लिए कौन सा एक ventilator बदलाव सबसे सही है?"
     },
     "options": [
      {
@@ -3578,7 +3592,7 @@
    "q2": {
     "ask": {
      "en": "Which single ventilator change fits this simulated patient best?",
-     "hi": "इस simulated रोगी के लिए कौन सा एक ventilator बदलाव सबसे सही है?"
+     "hi": "इस simulated मरीज़ के लिए कौन सा एक ventilator बदलाव सबसे सही है?"
     },
     "options": [
      {
@@ -3675,7 +3689,7 @@
    "q2": {
     "ask": {
      "en": "Which single ventilator change fits this simulated patient best?",
-     "hi": "इस simulated रोगी के लिए कौन सा एक ventilator बदलाव सबसे सही है?"
+     "hi": "इस simulated मरीज़ के लिए कौन सा एक ventilator बदलाव सबसे सही है?"
     },
     "options": [
      {
@@ -3772,7 +3786,7 @@
    "q2": {
     "ask": {
      "en": "Which single ventilator change fits this simulated patient best?",
-     "hi": "इस simulated रोगी के लिए कौन सा एक ventilator बदलाव सबसे सही है?"
+     "hi": "इस simulated मरीज़ के लिए कौन सा एक ventilator बदलाव सबसे सही है?"
     },
     "options": [
      {
@@ -3818,8 +3832,8 @@
     ],
     "answer": 1,
     "why": {
-     "en": "Pus in the lobe does not open with PEEP. PEEP 15 overstretches the healthy lung and drops BP. FiO2 100% buys time safely.",
-     "hi": "Lobe में भरा pus PEEP से नहीं खुलता। PEEP 15 स्वस्थ फेफड़े को ज़्यादा खींचता है और BP गिराता है। FiO2 100% सुरक्षित रूप से समय देता है।"
+     "en": "Raise FiO2 for now and recheck the gas. A small PEEP trial, 8 to 10, is still reasonable. Watch SpO2 and BP.",
+     "hi": "अभी FiO2 बढ़ाएँ और gas दोबारा देखें। PEEP 8 से 10 का छोटा trial अब भी ठीक है। SpO2 और BP देखें।"
     }
    }
   },
@@ -3827,12 +3841,12 @@
    "id": "abg-06",
    "scenario": "cardiogenic-oedema",
    "abg": {
-    "pH": 7.34,
-    "PaCO2": 38,
-    "PaO2": 60,
+    "pH": 7.37,
+    "PaCO2": 36,
+    "PaO2": 59,
     "HCO3": 20,
     "SaO2": 90,
-    "BE": -4.9,
+    "BE": -4.5,
     "lactate": 2.8,
     "FiO2": 0.6
    },
@@ -3869,7 +3883,7 @@
    "q2": {
     "ask": {
      "en": "Which single ventilator change fits this simulated patient best?",
-     "hi": "इस simulated रोगी के लिए कौन सा एक ventilator बदलाव सबसे सही है?"
+     "hi": "इस simulated मरीज़ के लिए कौन सा एक ventilator बदलाव सबसे सही है?"
     },
     "options": [
      {
@@ -3924,16 +3938,16 @@
    "id": "abg-07",
    "scenario": "copd",
    "abg": {
-    "pH": 7.32,
-    "PaCO2": 65,
-    "PaO2": 58,
-    "HCO3": 32.5,
-    "SaO2": 86,
-    "BE": 6.4,
+    "pH": 7.27,
+    "PaCO2": 72,
+    "PaO2": 59,
+    "HCO3": 32.2,
+    "SaO2": 85,
+    "BE": 5.5,
     "lactate": 1.2,
     "FiO2": 0.4
    },
-   "spo2": 86,
+   "spo2": 85,
    "q1": {
     "ask": {
      "en": "What is the main problem in this gas?",
@@ -3959,14 +3973,14 @@
     ],
     "answer": 1,
     "why": {
-     "en": "PaCO2 is 65 but pH is only mildly low. The high HCO3 shows the kidneys compensated over weeks.",
-     "hi": "PaCO2 65 है पर pH थोड़ा ही कम है। ऊँचा HCO3 बताता है कि गुर्दों ने हफ़्तों में compensate किया।"
+     "en": "PaCO2 is 72 and pH 7.27. HCO3 32 is above acute buffering but below full chronic compensation. A fresh rise sits on chronic retention.",
+     "hi": "PaCO2 72 और pH 7.27 है। HCO3 32 acute buffering से ज़्यादा पर पूरे chronic compensation से कम है। पुराने retention पर नई बढ़त है।"
     }
    },
    "q2": {
     "ask": {
-     "en": "Expiratory flow does not reach zero. Total PEEP is 7.5 on a set PEEP of 5. Which change fits best?",
-     "hi": "Expiratory flow शून्य तक नहीं पहुँचता। Set PEEP 5 पर total PEEP 7.5 है। कौन सा बदलाव सबसे सही है?"
+     "en": "Expiratory flow does not reach zero. Total PEEP is 7.4 on a set PEEP of 5. Which change fits best?",
+     "hi": "Expiratory flow शून्य तक नहीं पहुँचता। Set PEEP 5 पर total PEEP 7.4 है। कौन सा बदलाव सबसे सही है?"
     },
     "options": [
      {
@@ -3981,12 +3995,12 @@
      },
      {
       "label": {
-       "en": "Lengthen inspiratory time to 1.5 s",
-       "hi": "Inspiratory time को 1.5 s करें"
+       "en": "Lengthen inspiratory time to 2.0 s",
+       "hi": "Inspiratory time को 2.0 s करें"
       },
       "change": {
        "key": "ti",
-       "to": 1.5
+       "to": 2.0
       }
      },
      {
@@ -4021,16 +4035,16 @@
    "id": "abg-08",
    "scenario": "copd",
    "abg": {
-    "pH": 7.46,
-    "PaCO2": 44,
-    "PaO2": 50,
-    "HCO3": 30,
-    "SaO2": 86,
-    "BE": 6,
-    "lactate": 1.6,
+    "pH": 7.45,
+    "PaCO2": 46,
+    "PaO2": 57,
+    "HCO3": 30.6,
+    "SaO2": 89,
+    "BE": 6.4,
+    "lactate": 1.2,
     "FiO2": 0.4
    },
-   "spo2": 86,
+   "spo2": 89,
    "q1": {
     "ask": {
      "en": "The rate had been raised to 28. What does the gas show?",
@@ -4056,14 +4070,14 @@
     ],
     "answer": 0,
     "why": {
-     "en": "His kidneys keep HCO3 high for a PaCO2 near 60. Bringing PaCO2 to 44 leaves that HCO3 unopposed, so pH rises.",
-     "hi": "उसके गुर्दे PaCO2 लगभग 60 के हिसाब से HCO3 ऊँचा रखते हैं। PaCO2 44 करने पर वह HCO3 अकेला रह जाता है, pH बढ़ता है।"
+     "en": "His kidneys keep HCO3 high for a PaCO2 near 60. Bringing PaCO2 to 46 leaves that HCO3 unopposed, so pH rises.",
+     "hi": "उसके गुर्दे PaCO2 लगभग 60 के हिसाब से HCO3 ऊँचा रखते हैं। PaCO2 46 करने पर वह HCO3 अकेला रह जाता है, pH बढ़ता है।"
     }
    },
    "q2": {
     "ask": {
      "en": "Which single ventilator change fits this simulated patient best?",
-     "hi": "इस simulated रोगी के लिए कौन सा एक ventilator बदलाव सबसे सही है?"
+     "hi": "इस simulated मरीज़ के लिए कौन सा एक ventilator बदलाव सबसे सही है?"
     },
     "options": [
      {
@@ -4120,14 +4134,14 @@
    "abg": {
     "pH": 7.16,
     "PaCO2": 70,
-    "PaO2": 106,
+    "PaO2": 92,
     "HCO3": 24,
-    "SaO2": 96,
+    "SaO2": 94,
     "BE": -3.7,
     "lactate": 2.5,
     "FiO2": 0.6
    },
-   "spo2": 96,
+   "spo2": 94,
    "q1": {
     "ask": {
      "en": "What is the main problem in this gas?",
@@ -4244,8 +4258,8 @@
       "hi": "Metabolic alkalosis (चयापचय से क्षारता)"
      },
      {
-      "en": "A normal gas because PaCO2 is 38",
-      "hi": "सामान्य gas, क्योंकि PaCO2 38 है"
+      "en": "A normal gas because PaCO2 is 32",
+      "hi": "सामान्य gas, क्योंकि PaCO2 32 है"
      }
     ],
     "answer": 1,
@@ -4257,7 +4271,7 @@
    "q2": {
     "ask": {
      "en": "Which single ventilator change fits this simulated patient best?",
-     "hi": "इस simulated रोगी के लिए कौन सा एक ventilator बदलाव सबसे सही है?"
+     "hi": "इस simulated मरीज़ के लिए कौन सा एक ventilator बदलाव सबसे सही है?"
     },
     "options": [
      {
@@ -4354,7 +4368,7 @@
    "q2": {
     "ask": {
      "en": "Which single ventilator change fits this simulated patient best?",
-     "hi": "इस simulated रोगी के लिए कौन सा एक ventilator बदलाव सबसे सही है?"
+     "hi": "इस simulated मरीज़ के लिए कौन सा एक ventilator बदलाव सबसे सही है?"
     },
     "options": [
      {
@@ -4451,7 +4465,7 @@
    "q2": {
     "ask": {
      "en": "Which single ventilator change fits this simulated patient best?",
-     "hi": "इस simulated रोगी के लिए कौन सा एक ventilator बदलाव सबसे सही है?"
+     "hi": "इस simulated मरीज़ के लिए कौन सा एक ventilator बदलाव सबसे सही है?"
     },
     "options": [
      {
@@ -4476,12 +4490,15 @@
      },
      {
       "label": {
-       "en": "Lower tidal volume to 420 mL",
-       "hi": "Tidal volume को 420 mL करें"
+       "en": "Lower VT to 420 mL and raise rate to 30",
+       "hi": "Tidal volume 420 mL करें और rate 30 करें"
       },
       "change": {
        "key": "vt",
-       "to": 420
+       "to": 420,
+       "also": {
+        "rr": 30
+       }
       }
      },
      {
@@ -4548,7 +4565,7 @@
    "q2": {
     "ask": {
      "en": "Which single ventilator change fits this simulated patient best?",
-     "hi": "इस simulated रोगी के लिए कौन सा एक ventilator बदलाव सबसे सही है?"
+     "hi": "इस simulated मरीज़ के लिए कौन सा एक ventilator बदलाव सबसे सही है?"
     },
     "options": [
      {
@@ -4645,7 +4662,7 @@
    "q2": {
     "ask": {
      "en": "Which single ventilator change fits this simulated patient best?",
-     "hi": "इस simulated रोगी के लिए कौन सा एक ventilator बदलाव सबसे सही है?"
+     "hi": "इस simulated मरीज़ के लिए कौन सा एक ventilator बदलाव सबसे सही है?"
     },
     "options": [
      {
@@ -4752,7 +4769,7 @@
      "step": "abg",
      "text": {
       "en": "PaO2 rises. PaCO2 and pH barely change in most patients.",
-      "hi": "PaO2 बढ़ता है। ज़्यादातर रोगियों में PaCO2 और pH लगभग नहीं बदलते।"
+      "hi": "PaO2 बढ़ता है। ज़्यादातर मरीज़ों में PaCO2 और pH लगभग नहीं बदलते।"
      }
     },
     {
@@ -5089,7 +5106,7 @@
      "step": "patient",
      "text": {
       "en": "Less ventilator lung injury. The patient may feel air hunger and breathe harder.",
-      "hi": "Ventilator से फेफड़े की चोट कम होती है। रोगी को हवा की कमी लग सकती है और वह ज़ोर से साँस ले सकता है।"
+      "hi": "Ventilator से फेफड़े की चोट कम होती है। मरीज़ को हवा की कमी लग सकती है और वह ज़ोर से साँस ले सकता है।"
      }
     }
    ]
@@ -5207,7 +5224,7 @@
      "step": "monitor",
      "text": {
       "en": "Minute ventilation falls and EtCO2 rises. If the patient breathes over the set rate, little may change.",
-      "hi": "Minute ventilation घटता है और EtCO2 बढ़ता है। रोगी set rate से ज़्यादा साँस ले तो कम बदलाव होगा।"
+      "hi": "Minute ventilation घटता है और EtCO2 बढ़ता है। मरीज़ set rate से ज़्यादा साँस ले तो कम बदलाव होगा।"
      }
     },
     {
@@ -5287,7 +5304,7 @@
      "step": "patient",
      "text": {
       "en": "Better oxygenation. An awake patient may feel uncomfortable, and blood pressure may fall.",
-      "hi": "Oxygenation बेहतर होती है। जागा हुआ रोगी असहज हो सकता है, और blood pressure गिर सकता है।"
+      "hi": "Oxygenation बेहतर होती है। जागा हुआ मरीज़ असहज हो सकता है, और blood pressure गिर सकता है।"
      }
     }
    ]
@@ -5485,7 +5502,7 @@
      "step": "patient",
      "text": {
       "en": "Less stretch on the lung. The patient may work harder to breathe.",
-      "hi": "फेफड़े पर कम खिंचाव। रोगी को साँस के लिए ज़्यादा मेहनत करनी पड़ सकती है।"
+      "hi": "फेफड़े पर कम खिंचाव। मरीज़ को साँस के लिए ज़्यादा मेहनत करनी पड़ सकती है।"
      }
     }
    ]
@@ -5502,7 +5519,7 @@
      "step": "setting",
      "text": {
       "en": "Pressure support is help added to each breath the patient starts. You raise it.",
-      "hi": "Pressure support रोगी की शुरू की हर साँस में जोड़ी मदद है। आप इसे बढ़ाते हैं।"
+      "hi": "Pressure support मरीज़ की शुरू की हर साँस में जोड़ी मदद है। आप इसे बढ़ाते हैं।"
      }
     },
     {
@@ -5516,7 +5533,7 @@
      "step": "mechanics",
      "text": {
       "en": "Each breath gets bigger for the same effort. The patient's muscles do less work.",
-      "hi": "उसी प्रयास पर हर साँस बड़ी होती है। रोगी की मांसपेशियाँ कम काम करती हैं।"
+      "hi": "उसी प्रयास पर हर साँस बड़ी होती है। मरीज़ की मांसपेशियाँ कम काम करती हैं।"
      }
     },
     {
@@ -5537,7 +5554,7 @@
      "step": "monitor",
      "text": {
       "en": "Tidal volume rises and the patient's rate usually falls.",
-      "hi": "Tidal volume बढ़ता है और रोगी की rate आमतौर पर घटती है।"
+      "hi": "Tidal volume बढ़ता है और मरीज़ की rate आमतौर पर घटती है।"
      }
     },
     {
@@ -5568,7 +5585,7 @@
      "step": "setting",
      "text": {
       "en": "You give less help to each breath the patient starts.",
-      "hi": "आप रोगी की शुरू की हर साँस को कम मदद देते हैं।"
+      "hi": "आप मरीज़ की शुरू की हर साँस को कम मदद देते हैं।"
      }
     },
     {
@@ -5582,7 +5599,7 @@
      "step": "mechanics",
      "text": {
       "en": "The patient's muscles must do more of the work.",
-      "hi": "रोगी की मांसपेशियों को ज़्यादा काम करना पड़ता है।"
+      "hi": "मरीज़ की मांसपेशियों को ज़्यादा काम करना पड़ता है।"
      }
     },
     {
@@ -5596,7 +5613,7 @@
      "step": "gasExchange",
      "text": {
       "en": "If the patient cannot keep up, alveolar ventilation falls and PaCO2 rises.",
-      "hi": "रोगी साथ न दे पाए तो alveolar ventilation घटता है और PaCO2 बढ़ता है।"
+      "hi": "मरीज़ साथ न दे पाए तो alveolar ventilation घटता है और PaCO2 बढ़ता है।"
      }
     },
     {
@@ -5634,7 +5651,7 @@
      "step": "setting",
      "text": {
       "en": "Flow trigger is how much patient flow starts a breath. A higher number means less sensitive.",
-      "hi": "Flow trigger वह रोगी flow है जो साँस शुरू करता है। बड़ी संख्या का अर्थ कम sensitive।"
+      "hi": "Flow trigger वह मरीज़ flow है जो साँस शुरू करता है। बड़ी संख्या का अर्थ कम sensitive।"
      }
     },
     {
@@ -5648,7 +5665,7 @@
      "step": "mechanics",
      "text": {
       "en": "Lung mechanics do not change. The patient must pull harder to be heard.",
-      "hi": "फेफड़े की mechanics नहीं बदलती। रोगी को सुने जाने के लिए ज़्यादा खींचना पड़ता है।"
+      "hi": "फेफड़े की mechanics नहीं बदलती। मरीज़ को सुने जाने के लिए ज़्यादा खींचना पड़ता है।"
      }
     },
     {
@@ -5707,7 +5724,7 @@
      "step": "ventilator",
      "text": {
       "en": "The ventilator answers a smaller patient effort.",
-      "hi": "Ventilator छोटे रोगी प्रयास का जवाब देता है।"
+      "hi": "Ventilator छोटे मरीज़ प्रयास का जवाब देता है।"
      }
     },
     {
@@ -5735,7 +5752,7 @@
      "step": "monitor",
      "text": {
       "en": "The total rate may rise above the patient's own rate.",
-      "hi": "कुल rate रोगी की अपनी rate से ऊपर जा सकती है।"
+      "hi": "कुल rate मरीज़ की अपनी rate से ऊपर जा सकती है।"
      }
     },
     {
@@ -5853,7 +5870,7 @@
      "step": "waveforms",
      "text": {
       "en": "The flow wave runs longer. The patient may push out against it, causing a pressure spike at the end.",
-      "hi": "Flow लहर देर तक चलती है। रोगी उसके विरुद्ध बाहर धकेल सकता है, जिससे अंत में pressure spike आता है।"
+      "hi": "Flow लहर देर तक चलती है। मरीज़ उसके विरुद्ध बाहर धकेल सकता है, जिससे अंत में pressure spike आता है।"
      }
     },
     {
@@ -5888,7 +5905,7 @@
   },
   {
    "key": "rise",
-   "direction": "up",
+   "direction": "down",
    "label": {
     "en": "Faster rise",
     "hi": "तेज़ rise"
@@ -5912,7 +5929,7 @@
      "step": "mechanics",
      "text": {
       "en": "A hungry patient gets gas when needed, so effort and work fall.",
-      "hi": "भूखे रोगी को ज़रूरत के समय gas मिलती है, इसलिए प्रयास और मेहनत घटती है।"
+      "hi": "भूखे मरीज़ को ज़रूरत के समय gas मिलती है, इसलिए प्रयास और मेहनत घटती है।"
      }
     },
     {
@@ -5940,7 +5957,7 @@
      "step": "abg",
      "text": {
       "en": "Little change in most patients.",
-      "hi": "ज़्यादातर रोगियों में कम बदलाव।"
+      "hi": "ज़्यादातर मरीज़ों में कम बदलाव।"
      }
     },
     {
@@ -5954,7 +5971,7 @@
   },
   {
    "key": "rise",
-   "direction": "down",
+   "direction": "up",
    "label": {
     "en": "Slower rise",
     "hi": "धीमा rise"
@@ -5978,7 +5995,7 @@
      "step": "mechanics",
      "text": {
       "en": "A patient with strong effort may not get enough gas early, so work rises.",
-      "hi": "तेज़ प्रयास वाले रोगी को शुरू में पर्याप्त gas न मिले, इसलिए मेहनत बढ़ती है।"
+      "hi": "तेज़ प्रयास वाले मरीज़ को शुरू में पर्याप्त gas न मिले, इसलिए मेहनत बढ़ती है।"
      }
     },
     {
@@ -6006,7 +6023,7 @@
      "step": "abg",
      "text": {
       "en": "Little change in most patients.",
-      "hi": "ज़्यादातर रोगियों में कम बदलाव।"
+      "hi": "ज़्यादातर मरीज़ों में कम बदलाव।"
      }
     },
     {
@@ -6277,7 +6294,7 @@
      "step": "patient",
      "text": {
       "en": "More comfort for some patients. Upper airway collapse may return in sleep.",
-      "hi": "कुछ रोगियों को ज़्यादा आराम। नींद में ऊपरी airway का सिकुड़ना लौट सकता है।"
+      "hi": "कुछ मरीज़ों को ज़्यादा आराम। नींद में ऊपरी airway का सिकुड़ना लौट सकता है।"
      }
     }
    ]
@@ -6586,7 +6603,7 @@
   },
   "dyssynchrony": {
    "en": "A mismatch between the patient's own breathing and the ventilator's breaths.",
-   "hi": "रोगी की अपनी साँस और ventilator की साँसों का बेमेल।"
+   "hi": "मरीज़ की अपनी साँस और ventilator की साँसों का बेमेल।"
   },
   "etco2": {
    "en": "CO2 measured at the end of each breath out. Usually a little below PaCO2.",
@@ -6678,7 +6695,7 @@
   },
   "trigger": {
    "en": "The signal that starts a breath: the patient's effort or the timer.",
-   "hi": "साँस शुरू करने का संकेत: रोगी का प्रयास या timer।"
+   "hi": "साँस शुरू करने का संकेत: मरीज़ का प्रयास या timer।"
   },
   "upper-inflection": {
    "en": "Pressure above which the lung stiffens because it is overstretched.",
@@ -6699,6 +6716,6 @@
  },
  "disclaimer": {
   "en": "Educational simulator. Not a real ventilator and not a guide to treating a real patient.",
-  "hi": "शैक्षिक simulator। यह असली ventilator नहीं है और असली रोगी के इलाज की guide नहीं है।"
+  "hi": "शैक्षिक simulator। यह असली ventilator नहीं है और असली मरीज़ के इलाज की guide नहीं है।"
  }
 }

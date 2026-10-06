@@ -228,6 +228,61 @@ test("learn.cases: at least 12 ABG cases, one correct answer each, consistent nu
   }
 });
 
+/* ---------- clinical review regressions (content) ---------- */
+const caseBy = (id) => L.cases.find((c) => c.id === id);
+const scBy = (id) => S.scenarios.find((s) => s.id === id);
+
+test("M7: rise time is a time, so up means slower pressure climb", () => {
+  assert.match(L.settings.rise.up.en, /Longer rise time: pressure climbs more slowly/);
+  assert.match(L.settings.rise.down.en, /Shorter rise time: pressure climbs faster/);
+  assert.equal(L.whatIf.find((w) => w.key === "rise" && w.label.en === "Faster rise").direction, "down");
+  assert.equal(L.whatIf.find((w) => w.key === "rise" && w.label.en === "Slower rise").direction, "up");
+});
+
+test("M10: abg-07 keyed answer is defensible by the Boston rules", () => {
+  const c = caseBy("abg-07"), g = c.abg, acute = 24 + 0.1 * (g.PaCO2 - 40), chronic = 24 + 0.35 * (g.PaCO2 - 40);
+  assert.ok(g.HCO3 > acute + 1 && g.HCO3 < chronic - 1, `HCO3 ${g.HCO3} between acute ${acute} and chronic ${chronic}: acute on chronic`);
+  assert.ok(g.pH < 7.3, "the acute component shows as acidaemia");
+  assert.match(c.q1.options[c.q1.answer].en, /Acute respiratory acidosis on top of chronic/);
+  assert.ok(c.q2.ask.en.includes("Total PEEP is 7.4"), "ask quotes the model's total PEEP");
+});
+
+test("m1 to m8: case and card wording from the review", () => {
+  const o12 = caseBy("abg-12").q2.options[caseBy("abg-12").q2.answer];
+  assert.deepEqual(o12.change, { key: "vt", to: 420, also: { rr: 30 } });
+  assert.equal(o12.label.en, "Lower VT to 420 mL and raise rate to 30");
+  assert.match(caseBy("abg-05").q2.why.en, /A small PEEP trial, 8 to 10, is still reasonable/);
+  assert.ok(caseBy("abg-07").q2.options.some((o) => o.change.key === "ti" && o.change.to === 2));
+  const c10 = caseBy("abg-10");
+  c10.q1.options.forEach((o) => { const m = o.en.match(/PaCO2 is (\d+)/); if (m) assert.equal(+m[1], c10.abg.PaCO2, "distractor quotes the gas"); });
+  assert.match(L.settings.pinsp.pearl.en, /only if inspiratory flow reaches zero and there is no auto-PEEP/);
+  assert.equal(L.modes.pc.guarantees.en, "Airway pressure never exceeds PEEP plus the set pressure.");
+  assert.ok(L.settings.fio2.pearl.hi.includes("PEEP बढ़ाने पर विचार करें"));
+  // m8: the oxygen tutorial makes VT protective before anything else
+  const tut = L.tutorials.find((t) => t.id === "fio2-peep"), at = scBy("postop-atelectasis"), kg = pbw(at.patient.sex, at.patient.heightCm);
+  const firstSet = tut.steps.find((s) => s.do && s.do.key);
+  assert.ok(firstSet.do.key === "vt" && firstSet.do.to / kg <= 8, "first change is VT " + firstSet.do.to);
+});
+
+test("m11 to m14: plateau fix, SpO2 target source, GINA, Hindi patient word", () => {
+  assert.match(L.alarms.pPlatHigh.fix.en, /Raise the rate to hold pH/);
+  for (const s of S.scenarios) if (s.goals.spo2[0] === 92 && s.goals.spo2[1] === 96)
+    assert.ok(s.sources.some((x) => /Siemieniuk/.test(x.label) && /k4169/.test(x.label)), s.id + " cites the BMJ 2018 Rapid Recommendation");
+  assert.ok(scBy("asthma").sources.some((x) => /GINA 2026/.test(x.label) && /ginasthma\.org/.test(x.url)), "GINA 2026 (published May 2026) with its link");
+  assert.ok(L.disclaimer.hi.includes("मरीज़"));
+  if (E) assert.ok(E.disclaimer.hi.includes("मरीज़"));
+  assert.ok(!/रोगी/.test(JSON.stringify(L) + JSON.stringify(S)), "one Hindi word for patient");
+});
+
+test("M9/m9: conditional timeline events are well formed; trauma has no scripted drain", () => {
+  for (const s of S.scenarios) for (const e of s.timeline) if (e.requires) {
+    const r = e.requires;
+    assert.ok((r.action && (!E || E.ACTIONS[r.action])) || (SETTING_KEYS.includes(r.key) && typeof r.min === "number"), s.id + " requires");
+  }
+  assert.ok(scBy("cardiogenic-oedema").timeline.find((e) => e.event === "improve").requires, "oedema improvement needs adequate support");
+  assert.ok(!scBy("trauma-contusion").timeline.some((e) => e.event === "improve"), "the learner places the drain");
+});
+
 test("learn.whatIf: every main setting both ways, full cause-effect chain", () => {
   MAIN_WHATIF.forEach((k) => ["up", "down"].forEach((d) => {
     const w = L.whatIf.find((x) => x.key === k && x.direction === d);

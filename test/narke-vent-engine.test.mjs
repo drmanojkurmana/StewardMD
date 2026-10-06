@@ -301,12 +301,13 @@ test("score rewards protective, on-target runs and penalises unsafe ones", () =>
 test("learn.json tutorial expectations hold in the engine (timeline off)", () => {
   const get = (r, k) => [r.vent, r.gas, r.vitals].map((o) => o[k]).find((v) => v !== undefined);
   let checked = 0;
-  for (const t of LEARN.tutorials) {
+  // each expectation must hold against the state just before its own step, whether the learner waits 10 or 60 min
+  for (const wait of [600, 3600]) for (const t of LEARN.tutorials) {
     let s, st, before = null;
     t.steps.forEach((step, i) => {
       const d = step.do || {};
       if (d.scenario) { s = E.init(quiet(d.scenario)); st = Object.assign({}, s.settings); before = null; }
-      else if (d.mode || d.key) { before = E.readout(s, st); if (d.mode) st.mode = d.mode; else st[d.key] = d.to; s = E.step(s, st, 1800); }
+      else if (d.mode || d.key) { before = E.readout(s, st); if (d.mode) st.mode = d.mode; else st[d.key] = d.to; s = E.step(s, st, wait); }
       if (!step.expect || !before) return;
       const k = step.expect.key, b = get(before, k), a = get(E.readout(s, st), k);
       assert.notEqual(a, undefined, "readout exposes " + k);
@@ -404,10 +405,12 @@ test("calibration: the typical mistake produces the expected harm", () => {
     "postop-atelectasis": (r, s) => s.harm.vili > 50 && flagIds(r).includes("vili"),
     pneumonia: (r, s) => s.harm.vili > 50 && r.vent.drivingP > 15,
     "cardiogenic-oedema": (r) => r.vitals.spo2 < 90,
-    copd: (r) => r.vent.autoPeep >= 10 && r.vitals.map < 65 && r.gas.ph > 7.45,
-    asthma: (r) => r.vent.autoPeep >= 10 && r.vitals.map < 55,
+    // high rate in airflow obstruction: trapping, hypotension and no better CO2 than the slow good strategy (Tuxen 1987)
+    copd: (r) => r.vent.autoPeep >= 10 && r.vitals.map < 65 && r.gas.paco2 >= at("copd", STRATEGIES.copd.good, 3600).r.gas.paco2,
+    asthma: (r) => r.vent.autoPeep >= 10 && r.vitals.map < 55 && r.gas.paco2 >= at("asthma", STRATEGIES.asthma.good, 3600).r.gas.paco2,
     "metabolic-dka": (r) => r.gas.ph < 7.0 && r.vitals.map < 65,
-    ards: (r, s) => r.vent.pplat > 30 && s.harm.vili > 100 && r.flags.some((f) => f.id === "vili" && f.severity === "danger"),
+    // VT 700 meets the 40 cmH2O peak limit, so delivered VT is about 610 mL: still 8.7 mL/kg with driving pressure above 20
+    ards: (r, s) => r.vent.drivingP > 20 && s.harm.vili > 100 && r.flags.some((f) => f.id === "vili" && f.severity === "danger"),
     "trauma-contusion": (r) => r.vitals.map < 55 && r.gas.lactate > 5
   };
   for (const sc of SC) {
@@ -422,26 +425,30 @@ test("calibration: the typical mistake produces the expected harm", () => {
 });
 
 test("calibration: ARDS is winnable with lung protection and worse at 10 mL/kg", () => {
-  const good = at("ards", STRATEGIES.ards.good, 3600).r, big = at("ards", Object.assign({}, STRATEGIES.ards.good, { vt: 700, rr: 20 }), 3600);
+  const good = at("ards", STRATEGIES.ards.good, 3600).r, big = at("ards", Object.assign({}, STRATEGIES.ards.good, { vt: 700, rr: 20, pPeakHigh: 60 }), 3600);
   assert.ok(good.vent.pplat <= 30 && good.vent.drivingP <= 15 && good.gas.ph >= 7.2 && good.vitals.spo2 >= 88 && good.vitals.spo2 <= 95);
   assert.ok(big.r.vent.pplat > 35 && big.r.vent.drivingP > 20 && big.s.harm.vili > 100 && flagIds(big.r).includes("baro"));
 });
 
 test("calibration: timeline events behave sensibly under good practice", () => {
   const run = (id, until) => at(id, STRATEGIES[id].good, until, true).r;
-  // trauma: pneumothorax at 15 min drops SpO2 and BP; drain and blood at 25 min bring them back
-  const t14 = run("trauma-contusion", 840), t20 = run("trauma-contusion", 1200), t40 = run("trauma-contusion", 2400);
-  assert.ok(t20.vitals.spo2 < t14.vitals.spo2 - 3 && t20.vitals.map < t14.vitals.map && t20.vent.pplat > t14.vent.pplat, "pneumothorax");
-  assert.ok(t40.vitals.spo2 >= t14.vitals.spo2 && t40.vitals.map >= 65, "drain");
+  // trauma: pneumothorax at 15 min drops SpO2 and BP; it does not resolve by itself; the learner's decompression does
+  const t14 = run("trauma-contusion", 840), t20 = at("trauma-contusion", STRATEGIES["trauma-contusion"].good, 1200, true);
+  assert.ok(t20.r.vitals.spo2 < t14.vitals.spo2 - 3 && t20.r.vitals.map < t14.vitals.map && t20.r.vent.pplat > t14.vent.pplat, "pneumothorax");
+  const left = E.step(t20.s, t20.st, 1200), drained = E.step(E.act(t20.s, "decompress"), t20.st, 1200);
+  assert.ok(E.readout(left, t20.st).vitals.spo2 < t14.vitals.spo2 - 3, "no self resolution");
+  const dr = E.readout(drained, t20.st);
+  assert.ok(dr.vitals.spo2 >= t14.vitals.spo2 - 1 && dr.vitals.map >= 65, "drain " + dr.vitals.spo2 + " " + dr.vitals.map);
   // COPD: bronchospasm at 20 min raises auto-PEEP; bronchodilators at 40 min undo it
   const c19 = run("copd", 1140), c30 = run("copd", 1800), c50 = run("copd", 3000);
   assert.ok(c30.vent.autoPeep > c19.vent.autoPeep + 3 && c50.vent.autoPeep < c19.vent.autoPeep + 1 && c50.vitals.map >= 65, "COPD bronchospasm");
   // asthma: bronchospasm at 10 min, steroids and bronchodilators at 40 min
   const a9 = run("asthma", 540), a20 = run("asthma", 1200), a60 = run("asthma", 3600);
-  assert.ok(a20.vent.ppeak > a9.vent.ppeak + 5 && a60.vent.autoPeep < a20.vent.autoPeep && a60.vitals.map >= 65, "asthma");
-  // ARDS: suction disconnect at 40 min derecruits; 20 min later the lung has reopened
+  // the 50 cmH2O peak limit now cuts the breath short in bronchospasm (M4), so CO2 builds until the drugs work
+  assert.ok(a20.vent.ppeak > a9.vent.ppeak + 5 && a20.vent.vte < a9.vent.vte && a60.vent.autoPeep < a20.vent.autoPeep && a60.vitals.map > a20.vitals.map, "asthma");
+  // ARDS: suction disconnect at 40 min derecruits fast; at the same PEEP the lung stays partly closed (see C1 test)
   const r39 = run("ards", 2390), r41 = run("ards", 2460), r60 = run("ards", 3600);
-  assert.ok(r41.vitals.spo2 < r39.vitals.spo2 && r60.vitals.spo2 >= r39.vitals.spo2 - 1, "ARDS disconnect");
+  assert.ok(r41.vitals.spo2 < r39.vitals.spo2 - 5 && r60.vitals.spo2 < r39.vitals.spo2, "ARDS disconnect");
   // every scenario with its timeline stays finite and physiological for 3 hours
   for (const sc of SC) {
     let s = E.init(sc); const st = Object.assign({}, s.settings, STRATEGIES[sc.id].good);
@@ -478,4 +485,163 @@ test("Hindi labels are real Hindi, and score maxima add to 100", () => {
   for (const p of ps.concat(lits)) assert.ok(p.hi !== p.en || abbr(p.en), "Hindi equals English: " + p.en);
   const M = E.SCORE_MAX, sum = M.mode + M.initial + M.oxygenation + M.ventilation + M.protection + M.alarms + M.abg + M.time;
   assert.equal(sum, 100); assert.equal(M.unsafeMin, -30);
+});
+
+/* ---------- clinical review regressions (vent-review.md: C1, M1 to M10, m1 to m14) ---------- */
+const scoreRun = (sc, set, secs = 3600, every = 60) => {
+  let s = E.init(sc); const st = Object.assign({}, s.settings, set), log = [];
+  for (let t = 0; t <= secs; t += every) { log.push({ t: s.t, settings: st, readout: E.readout(s, st) }); s = E.step(s, st, every); }
+  return { s, sc: E.score({ scenarioId: sc.id, scenario: sc, log, answers: [] }) };
+};
+
+test("C1: ARDS disconnect derecruits within 60 s and stays worse at the same PEEP until the lung is recruited again", () => {
+  const sc = byId("ards"), good = STRATEGIES.ards.good;
+  let s = E.init(sc); const st = Object.assign({}, s.settings, good);
+  s = E.step(s, st, 2390); const pre = E.readout(s, st), pa0 = s.pao2A;
+  const d20 = E.step(s, st, 30); // 20 s into the 30 s disconnect at 2400 s
+  assert.ok(E.readout(d20, st).vitals.spo2 <= pre.vitals.spo2 - 5, "SpO2 falls within 60 s: " + pre.vitals.spo2 + " to " + E.readout(d20, st).vitals.spo2);
+  assert.ok(d20.pao2A < pa0 - 20, "alveolar O2 store empties on room air: " + pa0 + " to " + d20.pao2A);
+  const after = E.step(s, st, 610), r10 = E.readout(after, st); // 10 min after reconnection at the same PEEP
+  assert.ok(r10.vitals.spo2 <= pre.vitals.spo2 - 3 && r10.gas.shunt > pre.gas.shunt, "still derecruited: " + r10.vitals.spo2);
+  const rec = E.step(E.step(after, Object.assign({}, st, { peep: 18 }), 180), st, 600), rr = E.readout(rec, st); // PEEP 18 for 3 min, back to 14
+  assert.ok(rr.vitals.spo2 >= pre.vitals.spo2 - 1 && rr.gas.shunt <= pre.gas.shunt + 0.01, "recruited again: " + rr.vitals.spo2);
+});
+
+test("M1: in COPD missed triggers fall as external PEEP approaches about 80% of intrinsic PEEP", () => {
+  const miss = (peep) => { const sc = quiet("copd"); let s = E.init(sc, { vt: 500, rr: 16, ti: 0.8, fio2: 45, peep }); s = E.step(s, s.settings, 1800); return E.readout(s, s.settings).vent; };
+  const z = miss(0), pi = z.peepTotal, m = [0, 1, 2, 3].map((p) => miss(p).ineffective);
+  assert.ok(pi >= 3 && z.ineffective > 0, "intrinsic PEEP " + pi + " and missed efforts " + z.ineffective);
+  for (let i = 1; i < m.length; i++) assert.ok(m[i] <= m[i - 1], "monotonic " + m);
+  assert.ok(miss(Math.round(0.8 * pi)).ineffective < z.ineffective, "PEEPe near 80% of PEEPi removes the trigger load");
+  assert.ok(Math.abs(miss(Math.round(0.8 * pi)).peepTotal - pi) < 1, "and total PEEP barely rises (waterfall)");
+});
+
+test("M2: plateau never exceeds peak in any mode or scenario", () => {
+  for (const sc of SC) for (const mode of Object.keys(E.MODES)) {
+    const s = E.init(quiet(sc.id), { mode, ps: 8, peep: 8 }), v = E.readout(s, s.settings).vent;
+    assert.ok(v.pplat <= v.ppeak + 0.05, sc.id + " " + mode + " plateau " + v.pplat + " peak " + v.ppeak);
+  }
+});
+
+test("M3: NIV EtCO2 is below PaCO2 by a sensible gap, from the breaths that carry the minute volume", () => {
+  let s = E.init(quiet("copd"), { mode: "niv", ipap: 20, epap: 5, rr: 12 }); s = E.step(s, s.settings, 1800);
+  const r = E.readout(s, s.settings);
+  assert.ok(r.vitals.etco2 > 0 && r.vitals.etco2 < r.gas.paco2 && r.vitals.etco2 >= 0.5 * r.gas.paco2, "EtCO2 " + r.vitals.etco2 + " PaCO2 " + r.gas.paco2);
+  const n = steady(textbook(), { mode: "vc", vt: 500, rr: 12, fio2: 21, peep: 5 }).r;
+  assert.ok(n.gas.paco2 - n.vitals.etco2 >= 1 && n.gas.paco2 - n.vitals.etco2 <= 5, "normal gap stays 2 to 5");
+});
+
+test("M4: the peak pressure alarm ends a volume breath; delivered VT falls and the volume alarms fire", () => {
+  const sc = quiet("asthma"); sc.timeline = [{ t: 10, event: "bronchospasm", note: { en: "x", hi: "x" } }];
+  let s = E.init(sc, { pPeakHigh: 40 }); s = E.step(s, s.settings, 300);
+  const r = E.readout(s, s.settings), ids = E.alarms(s, s.settings).map((a) => a.id);
+  assert.ok(r.vent.ppeak <= 40, "peak held at the limit: " + r.vent.ppeak);
+  assert.ok(r.vent.vte < 0.8 * s.settings.vt, "VT falls: " + r.vent.vte);
+  for (const id of ["pPeakHigh", "vtLow", "veLow"]) assert.ok(ids.includes(id), id + " in " + ids);
+  const b = E.breath(s, s.settings, 200);
+  assert.ok(Math.max(...b.paw) <= 40.5 && Math.max(...b.vol) < 0.8 * s.settings.vt, "waveform is cut at the limit");
+});
+
+test("M5: dynamic hyperinflation adds dead space, so high rate does not out-clear the slow strategy in asthma and COPD", () => {
+  const co2 = (id, ch) => at(id, ch, 3600).r.gas.paco2;
+  inside(co2("asthma", {}), [55, 70], "asthma start settings hold PaCO2");
+  assert.ok(co2("copd", {}) >= 60, "COPD start settings do not wash out his CO2");
+  for (const id of ["asthma", "copd"]) assert.ok(co2(id, STRATEGIES[id].mistake) >= co2(id, STRATEGIES[id].good), id + " high-rate mistake vs good");
+  const g = at("asthma", STRATEGIES.asthma.good, 3600).r;
+  assert.ok(g.gas.ph >= 7.2 && g.gas.paco2 > 45, "permissive hypercapnia still holds: " + g.gas.paco2 + " pH " + g.gas.ph);
+});
+
+test("M6: delayed cycling shows mechanical Ti beyond neural Ti, expiratory effort in inspiration and an end-inspiratory spike", () => {
+  const d = E.dyssync("delayedCycle", { ps: 14, peep: 5 }), t0 = d.marks.trigger[0], t1 = d.marks.cycle.find((c) => c > t0);
+  const inI = d.t.map((t, i) => i).filter((i) => d.t[i] >= t0 && d.t[i] < t1);
+  const neural = d.t.filter((t, i) => t >= t0 - 0.2 && t < t1 && d.pmus[i] < 0).length * (d.t[1] - d.t[0]);
+  assert.ok(t1 - t0 > 0.7 + 0.3, "mechanical Ti " + (t1 - t0) + " vs neural 0.7");
+  assert.ok(neural < t1 - t0, "neural Ti " + neural + " shorter than mechanical");
+  assert.ok(inI.some((i) => d.pmus[i] > 2), "expiratory muscles push while the valve is still in inspiration");
+  assert.ok(Math.max(...inI.map((i) => d.paw[i])) > 5 + 14 + 1, "pressure spike above the set level");
+});
+
+test("M8: apnoea when breaths are further apart than the apnoea time, with alarm and backup", () => {
+  for (const mode of ["cpap", "psv"]) {
+    let s = E.init(quiet("postop-normal")); const st = Object.assign({}, s.settings, { mode, ps: 0, apnoea: 20 });
+    s = E.step(s, st, 30);
+    assert.ok(E.alarms(s, st).some((a) => a.id === "apnoea"), mode + " apnoea alarm");
+    assert.ok(E.readout(s, st).flags.some((f) => f.id === "apnoeaBackup"), mode + " backup");
+    s = E.step(s, st, 1800);
+    assert.ok(E.readout(s, st).vitals.spo2 >= 94, mode + " backup keeps him oxygenated: " + E.readout(s, st).vitals.spo2);
+  }
+});
+
+test("M9: cardiogenic oedema separates good NIV support from too little; high volume status keeps BP with pressure", () => {
+  const sc = byId("cardiogenic-oedema"), good = scoreRun(sc, STRATEGIES["cardiogenic-oedema"].good), bad = scoreRun(sc, STRATEGIES["cardiogenic-oedema"].mistake);
+  assert.ok(good.sc.total >= bad.sc.total + 10, "score " + good.sc.total + " vs " + bad.sc.total);
+  const imp = sc.timeline.findIndex((e) => e.event === "improve");
+  assert.ok(good.s.fired.includes(imp) && !bad.s.fired.includes(imp), "improvement waits for adequate support");
+  const map = (epap) => { const s = E.init(quiet("cardiogenic-oedema"), { ipap: epap + 6, epap }); return E.readout(s, s.settings).vitals.map; };
+  assert.ok(map(12) >= map(4), "MAP does not fall with EPAP in a full circulation: " + map(4) + " to " + map(12));
+});
+
+test("m9: scripted harmful events are not counted as unsafe in their response window", () => {
+  const sc = { id: "x", patient: { sex: "M", heightCm: 175 }, goals: { spo2: [88, 95] }, timeline: [{ t: 600, event: "disconnect" }] };
+  const rd = (spo2) => ({ vitals: { spo2, map: 80 }, vent: { pplat: 25, drivingP: 12, vte: 420, autoPeep: 0 }, gas: { ph: 7.3, paco2: 45 }, flags: [] });
+  const log = [{ t: 0, settings: { mode: "acvc" }, readout: rd(92) }, { t: 620, settings: { mode: "acvc" }, readout: rd(80) }];
+  assert.equal(E.score({ scenario: sc, log }).parts.unsafe, 0);
+  assert.equal(E.score({ scenario: Object.assign({}, sc, { timeline: [] }), log }).parts.unsafe, -5);
+  log.push({ t: 1200, settings: { mode: "acvc" }, readout: rd(80) }); // after the window the learner owns it
+  assert.equal(E.score({ scenario: sc, log }).parts.unsafe, -5);
+});
+
+test("m9: learner actions: E.ACTIONS and E.act decompress, suction and bag", () => {
+  assert.deepEqual(Object.keys(E.ACTIONS).sort(), ["bag100", "decompress", "suction"]);
+  for (const [id, a] of Object.entries(E.ACTIONS)) { assert.equal(a.id, id); assert.ok(a.label.en && a.label.hi && typeof a.available === "function"); }
+  // trauma: the pneumothorax stays until the learner decompresses it
+  const sc = byId("trauma-contusion"); assert.ok(!sc.timeline.some((e) => e.event === "improve"), "no scripted drain");
+  let s = E.init(sc); const st = Object.assign({}, s.settings, STRATEGIES["trauma-contusion"].good);
+  s = E.step(s, st, 1200);
+  const ptx = E.readout(s, st), d = E.act(s, "decompress");
+  assert.equal(s.acts.length, 0, "act is pure");
+  assert.ok(d.acts.length === 1 && !E.ACTIONS.decompress.available(d));
+  const dr = E.readout(E.step(d, st, 600), st);
+  assert.ok(dr.vent.pplat < ptx.vent.pplat - 3 && dr.vitals.map > ptx.vitals.map && dr.vitals.spo2 > ptx.vitals.spo2, "decompression resolves it");
+  // suction clears secretions
+  const pn = quiet("pneumonia"); pn.timeline = [{ t: 0, event: "secretions", note: { en: "x", hi: "x" } }];
+  const p0 = E.init(pn), p = E.step(p0, p0.settings, 60), pk = E.readout(p, p.settings).vent.ppeak;
+  assert.ok(E.readout(E.act(p, "suction"), p.settings).vent.ppeak < pk - 1, "suction lowers peak pressure");
+  // bag 100%: FiO2 1.0 off the ventilator for 60 s, the ventilator alarms disconnect, PEEP is lost
+  const a0 = E.init(quiet("postop-atelectasis")), b = E.act(a0, "bag100"), bs = b.settings, br = E.readout(b, bs);
+  assert.ok(br.flags.some((f) => f.id === "bagging") && E.alarms(b, bs).some((x) => x.id === "disconnect") && br.vent.peepTotal < 1);
+  assert.ok(E.readout(E.step(b, bs, 50), bs).gas.pao2 > E.readout(a0, bs).gas.pao2, "PaO2 rises on 100%");
+  assert.ok(!E.readout(E.step(b, bs, 70), bs).flags.some((f) => f.id === "bagging"), "back on the ventilator after 60 s");
+});
+
+test("m10: improve raises HCO3 first order over about an hour, not as a jump", () => {
+  const sc = quiet("pneumonia"); sc.timeline = [{ t: 10, event: "improve", note: { en: "x", hi: "x" } }];
+  const s = E.init(sc), h0 = E.abg(s).HCO3, st = s.settings;
+  const h1 = E.abg(E.step(s, st, 70)).HCO3, h60 = E.abg(E.step(s, st, 3610)).HCO3;
+  assert.ok(h1 - h0 < 1.5, "one minute: " + h0 + " to " + h1);
+  assert.ok(h60 - h0 >= 3, "one hour: " + h0 + " to " + h60);
+});
+
+test("m11: controlled modes say efforts are ignored, not missed", () => {
+  const sc = quiet("pneumonia"); sc.patient.drive.sedation = 0.2;
+  const v = E.init(sc, { mode: "vc" }), a = E.init(sc, { mode: "acvc" });
+  const fv = E.readout(v, v.settings).flags.map((f) => f.id);
+  assert.ok(fv.includes("effortsIgnored") && !fv.includes("ineffective"), fv.join());
+  assert.ok(!E.readout(a, a.settings).flags.some((f) => f.id === "effortsIgnored"));
+});
+
+test("timeline events can wait for a setting or a learner action", () => {
+  const sc = quiet("postop-normal"); sc.timeline = [{ t: 10, event: "fever", requires: { key: "peep", min: 8 }, note: { en: "x", hi: "x" } }];
+  let s = E.init(sc); const lo = E.step(s, s.settings, 60), hi = E.step(s, Object.assign({}, s.settings, { peep: 8 }), 60);
+  assert.ok(E.readout(hi, hi.settings).vitals.temp > E.readout(lo, lo.settings).vitals.temp);
+  sc.timeline = [{ t: 10, event: "fever", requires: { action: "suction" }, note: { en: "x", hi: "x" } }];
+  s = E.init(sc);
+  assert.ok(E.step(E.act(s, "suction"), s.settings, 60).fired.length === 1 && E.step(s, s.settings, 60).fired.length === 0);
+});
+
+test("m3: no ABG case option repeats the case's current setting", () => {
+  for (const c of LEARN.cases) {
+    const { st } = caseState(E, SC.find((x) => x.id === c.scenario), CASES[c.id]);
+    for (const o of c.q2.options) assert.ok(st[o.change.key] !== o.change.to || o.change.also || /^Keep /.test(o.label.en), c.id + " no-op option " + o.label.en);
+  }
 });

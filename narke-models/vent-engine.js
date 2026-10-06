@@ -12,7 +12,11 @@
       Peff = 0.7 x PEEPtotal + 0.3 x Pmean; at PEEP 5 the reference is Peff 5.9 (Pmean about 8), open5 = 0.18.
       Collapsed lung fraction = shunt x recruitable x (1 - open) / (1 - open5) (collapsed volume taken equal to
       its perfusion share). Crs = c x (1 - collapsed) x event factor. Approach is first order: tau 120 s when
-      recruiting, 300 s when derecruiting. Opening midpoint 12 cmH2O and width 4 are teaching values.
+      recruiting, 8 s when derecruiting (collapse takes seconds once PEEP is lost: Katz 1981; Gattinoni and
+      Chiumello). Hysteresis: a sharp fall of Peff (more than 5 below its pre-collapse level, as in a disconnect)
+      stores a memory h (0 to 1, the share of open units lost); open* is then computed at Peff - 6 h, so the lung
+      stays partly closed at the old PEEP. h fades in 60 s once Peff is 2 above the pre-collapse level (recruit),
+      else with tau 30 min. Opening midpoint 12, width 4, shift 6 and the time constants are teaching values.
       Overdistension: elastic recoil is linear up to the upper inflection UI (scenario); above it the incremental
       compliance is 0.5 x Crs, so plateau climbs steeply (Roupie 1995 upper inflection; 0.5 is a teaching value).
       Pel(V) = V / C below V = C x UI; UI + (V - C x UI) / (0.5 C) above. V is volume above relaxation volume.
@@ -29,25 +33,33 @@
       Peak (VC square) = Pplat + R x flow; Pmean (Marini 1981) = PEEP + k (Ppeak - PEEP) Ti / Ttot, k 0.5 for square
       volume breaths, 1 for pressure breaths. Driving pressure = Pplat - PEEPtotal (Amato 2015).
       Mechanical power, simplified (Gattinoni 2016): MP J/min = 0.098 x RR x VT(L) x (Ppeak - 0.5 x driving P).
-   3. PATIENT EFFORT AND CHEMOREFLEX. chemo = 1 + 5 (7.40 - pH) + 0.02 (PaCO2 - 40) + 0.03 max(0, 60 - PaO2),
-      clamped 0 to 3; below 0.3 the patient is apnoeic (apnoeic threshold). Sedation s (0 to 1) scales it:
+   3. PATIENT EFFORT AND CHEMOREFLEX. chemo = 1 + 5 (7.40 - pH) + 0.02 (PaCO2 - 40) + 0.03 max(0, 60 - PaO2)
+      + 0.04 per % SpO2 below 94 (dyspnoea and hypoxic drive fall as support restores oxygenation), clamped 0 to 3; below 0.3 the patient is apnoeic (apnoeic threshold). Sedation s (0 to 1) scales it:
       Pmus = effort x chemo x (1 - s); rate = drive rate x (0.6 + 0.4 chemo) x (1 - s). Teaching gains.
       Mean effective pressure of an effort = 0.7 Pmus over a neural Ti of 1.0 s.
-      Triggering load = (PEEPtotal - PEEPe) + sensitivity (pressure trigger |set|; flow trigger 0.3 + 0.1 x L/min).
+      Triggering load = (PEEPtotal - PEEPe) + sensitivity (pressure trigger |set|; flow trigger 0.3 + 0.1 x L/min);
+      in a flow-limited lung external PEEP up to about 80% of PEEPi removes this load without raising PEEPtotal.
       Missed (ineffective) efforts = clamp((load - 0.5 Pmus) / (0.5 Pmus + 0.1), 0, 1): auto-PEEP must be
       overcome before the ventilator sees the effort (Tobin, Principles and Practice of Mechanical Ventilation).
    4. MODES. vc and pc are controlled (efforts do not trigger); acvc, acpc and prvc are assist control; simv gives
       set VC breaths plus pressure-supported spontaneous breaths; psv is patient-triggered, flow-cycled; cpap gives
       no inspiratory support; prvc moves the pressure up to 3 cmH2O per breath toward the target VT, capped 5 below
       the peak pressure alarm; niv is IPAP/EPAP with a timed backup rate and a 10% leak; aprv is Phigh/Plow/Thigh/Tlow
-      with unsupported breathing at Phigh. PSV and CPAP switch to apnoea backup (VC at the set VT and rate) after
-      the apnoea alarm time, as real ventilators do.
+      with unsupported breathing at Phigh. In PSV and CPAP the patient is apnoeic when breaths come further apart than
+      the apnoea time (60 / rate > apnoea s) or are smaller than the anatomic dead space; after the apnoea time the
+      apnoea alarm sounds and backup VC (set VT and rate) runs, as real ventilators do.
+      Volume breaths are pressure limited: inspiration ends when Paw reaches the peak pressure alarm (vcLimit), so
+      delivered VT falls and vtLow / veLow fire. Displayed VT, Ti and EtCO2 come from the breath class carrying the
+      most minute volume; peak and plateau are the highest over the classes, and plateau never exceeds peak.
    5. VENTILATION (West). VD = anatomic 2.2 mL/kg PBW + alveolar (deadSpace x VT, + 0.005 per cmH2O plateau above UI,
-      + 0.1 x fractional fall in cardiac output; capped at 0.6). VA = sum of rate x (VT - VD). Steady state PaCO2 = 0.863 VCO2 / VA.
+      + 0.1 x fractional fall in cardiac output, + 1.6 x (trapped volume / FRC - 0.1) when gas trapping exceeds 10%
+      of FRC (30 mL/kg PBW): hyperinflation squeezes alveolar capillaries, so a high rate in asthma or COPD adds dead
+      space and does not clear CO2 (Tuxen and Lane 1987; Leatherman 2015); capped at 0.6). VA = sum of rate x (VT - VD). Steady state PaCO2 = 0.863 VCO2 / VA.
       Kinetics from a CO2 store mass balance: dPaCO2/dt = (VCO2 - VA x PaCO2 / 0.863) / K, K = 40 mL/mmHg, giving an
       apnoeic rise of about 5 mmHg/min and a time constant near 8 min at normal VA (teaching value; ABG equilibrates
       in 10 to 30 min after a change). PBW (ARDSNet 2000): men 50, women 45.5, + 0.91 (height cm - 152.4).
-      EtCO2 = PaCO2 x (1 - 0.05 - VDalv / (VT - VDanat)) (Bohr; normal gap 2 to 5 mmHg, wider with dead space).
+      EtCO2 = PaCO2 x (1 - 0.05 - 0.5 VDalv / (VT - VDanat)) (Bohr; normal gap 2 to 5 mmHg, wider with dead space;
+      0.5 because end-tidal gas comes last from slow, CO2-rich units; teaching value).
    6. OXYGENATION. Alveolar gas equation PAO2 = FiO2 (760 - 47) - PaCO2 / 0.8 is the target; PAO2 approaches it
       with an FRC oxygen store (30 mL/kg PBW x (1 - collapsed) + C x PEEPtotal) washed by VA, so apnoea or disconnection
       desaturates over minutes. Shunt = shunt x (1 - recruitable) + collapsed fraction + events.
@@ -68,8 +80,9 @@
       Lactate rises 0.1 mmol/L/min per unit stress, stress = max(0, (80 - SpO2) / 20) + max(0, (60 - MAP) / 20);
       without stress it clears to baseline with a 90 min time constant (teaching values).
    8. HAEMODYNAMICS. Mean intrathoracic (alveolar) pressure = Pmean + auto-PEEP x expiratory fraction.
-      CO = CO0 x max(0.35, 1 - k (Pitp - 7)) x event factor; k per cmH2O: low volume 0.045, normal 0.022, high 0.008
-      (venous return falls as intrathoracic pressure rises: Guyton; Pinsky). Baselines: low volume CO0 4.0, MAP 72,
+      CO = CO0 x clamp(1 - k (Pitp - 7), 0.35, 1.1) x event factor; k per cmH2O: low volume 0.045, normal 0.022,
+      high -0.005 (venous return falls as intrathoracic pressure rises: Guyton; in a full circulation with a failing
+      left ventricle, pressure lowers LV afterload and CO may rise slightly: Pinsky). Baselines: low volume CO0 4.0, MAP 72,
       HR 105; normal 5.0, 85, 80; high 5.0, 88, 85. MAP = MAP0 (1 - 0.6 (1 - CO/CO0)) (partial baroreflex), x
       (1 - 0.5 (7.2 - pH)) below pH 7.2. HR = HR0 + 50 (1 - CO/CO0) + 0.5 per % SpO2 below 92 + 0.4 per mmHg PaCO2 above 45
       + 10 per degree above 37.5; SpO2 below 70 brings bradycardia (HR x (SpO2/70)^2) and falling MAP. Teaching gains.
@@ -79,9 +92,19 @@
    10. EVENTS (scenario timeline, see EVENTS): secretions (R x1.5, shunt +0.03), bronchospasm (R x2.5), pneumothorax
       (C x0.6, shunt +0.10, CO x0.75), disconnect (no ventilator, PEEP 0, room air; duration default 30 s), hypotension
       (CO x0.7 for duration default 900 s, volume status low), fever (VCO2 x1.2, +1.5 degrees), improve (event insults
-      cleared; R x0.7, shunt x0.7, c x1.15, HCO3 +6 up to 24 if below 22, sedation -0.3). Also plug, cuffLeak,
-      o2Failure, sedationLight, sedationDeep, hypovolaemia, fluidBolus, fatigue, bronchospasmEases.
+      cleared; R x0.7, shunt x0.7, c x1.15, sedation -0.3; HCO3 rises toward +6 (up to 24, if below 22) first order,
+      tau 20 min). Also plug, cuffLeak, o2Failure, sedationLight, sedationDeep, hypovolaemia, fluidBolus, fatigue,
+      bronchospasmEases. A pneumothorax stays until the learner decompresses it. An event may carry requires
+      {key, min} (fires once that setting reaches min) or {action} (fires after that learner action).
       whatIf() marks pending events as fired, so its 30 min result shows only the one setting change.
+      whatIf change may carry also: {key: value} for a combined change (e.g. lower VT and raise rate together).
+   11. LEARNER ACTIONS. E.ACTIONS = { decompress, suction, bag100 }, each {id, label {en, hi}, available(state)}.
+      E.act(state, id) -> new state (pure; logs {t, id} in state.acts). decompress: needle then drain, undoes every
+      pneumothorax (C, shunt, CO), available until a drain is in. suction: clears secretions and mucus plugs (R,
+      shunt, C). bag100: 60 s of hand bagging off the circuit at FiO2 1.0, about 7 mL/kg PBW x 12 a minute, no
+      PEEP valve (so a recruitable lung derecruits); the ventilator shows a disconnect alarm and VTe 0.
+   12. SCORE. VT per kg PBW is scored only in modes where the ventilator sets the breath (not psv, cpap, niv).
+      Unsafe moments are not counted for 5 min (plus the event's duration) after a scripted harmful event.
    Settings also accept flowPattern "square" | "decel" for volume breaths (not in SETTINGS until learn.json covers it).
    Integration: step() sub-steps at 10 s or less with exact exponential updates, so dt from 1 s to 3600 s is stable.
    Teaching gains marked above are model choices for a clinical reviewer to tune, not measured patient data.
@@ -105,7 +128,7 @@
   function clone(o) { return JSON.parse(JSON.stringify(o)); }
   function log10(x) { return Math.log(x) / Math.LN10; }
 
-  var K_CO2 = 40, KOD = 0.5, PATM = 760, PH2O = 47, RQ = 0.8, TIN = 1.0, SUB = 10;
+  var LAG = 0.6, HYPER_DS = 1.6, HYS_P = 6, K_CO2 = 40, KOD = 0.5, PATM = 760, PH2O = 47, RQ = 0.8, TIN = 1.0, SUB = 10;
 
   var SOURCES = [
     { label: "West JB, Luks AM. West's Respiratory Physiology: The Essentials, 11th edition (alveolar gas equation, PaCO2 and alveolar ventilation, shunt, V/Q, O2 content)" },
@@ -117,6 +140,10 @@
     { label: "Gattinoni L et al. Ventilator-related causes of lung injury: the mechanical power. Intensive Care Med 2016;42(10):1567-1575", url: "https://pubmed.ncbi.nlm.nih.gov/27620287/" },
     { label: "Severinghaus JW. Simple, accurate equations for human blood O2 dissociation computations. J Appl Physiol 1979;46(3):599-602", url: "https://pubmed.ncbi.nlm.nih.gov/35496/" },
     { label: "Marini JJ, Ravenscraft SA. Mean airway pressure: physiologic determinants and clinical importance. Crit Care Med 1992;20(10):1461-1472", url: "https://pubmed.ncbi.nlm.nih.gov/1395670/" },
+    { label: "Katz JA et al. Time course and mechanisms of lung-volume increase with PEEP in acute pulmonary failure. Anesthesiology 1981;54:9-16 (fast loss of volume when PEEP is removed)" },
+    { label: "Tuxen DV, Lane S. The effects of ventilatory pattern on hyperinflation, airway pressures, and circulation in mechanical ventilation of patients with severe air-flow obstruction. Am Rev Respir Dis 1987;136:872-879" },
+    { label: "Thille AW et al. Patient-ventilator asynchrony during assisted mechanical ventilation. Intensive Care Med 2006;32:1515-1522 (delayed cycling, ineffective triggering)" },
+    { label: "Pinsky MR. Heart-lung interactions (positive pressure lowers LV afterload in heart failure)" },
     { label: "StewardMD reviewed protocols: kb/clinical-protocols/ards-lung-protective-ventilation.json, acute-respiratory-failure-niv-hfnc.json, acute-asthma-adult.json, copd-exacerbation.json" }
   ];
 
@@ -254,7 +281,8 @@
   function vOf(P, C, ui) { return P <= ui ? P * C : C * ui + (P - ui) * C * KOD; }
   function openOf(peff) { return 1 / (1 + Math.exp(-(peff - 12) / 4)); }
   var OPEN5 = openOf(0.7 * 5 + 0.3 * 8);
-  function recTarget(s, peepTot, pmean) { return openOf(0.7 * peepTot + 0.3 * pmean); }
+  function peffOf(peepTot, pmean) { return 0.7 * peepTot + 0.3 * pmean; }
+  function recTarget(s, peepTot, pmean) { return openOf(peffOf(peepTot, pmean) - HYS_P * (s.hys || 0)); }
   function collapsed(s) { return clamp(s.p.shunt0 * s.p.recr * (1 - s.rec) / (1 - OPEN5), 0, 0.7); }
   function hco3Of(s, paco2) {
     var buf = (bufOf(paco2) - bufOf(s.p.pco2Ref)) * Math.min(1, s.p.hco3 / 24);
@@ -265,12 +293,21 @@
 
   function drive(s) {
     var p = s.p, m = s.m, act = 1 - m.sed;
-    var chemo = clamp(1 + 5 * (7.4 - s.ch.ph) + 0.02 * (s.paco2 - 40) + 0.03 * Math.max(0, 60 - s.ch.pao2), 0, 3);
+    var sp = s.ch.spo2 == null ? 97 : s.ch.spo2;
+    var chemo = clamp(1 + 5 * (7.4 - s.ch.ph) + 0.02 * (s.paco2 - 40) + 0.03 * Math.max(0, 60 - s.ch.pao2) + 0.04 * Math.max(0, 94 - sp), 0, 3);
     if (chemo < 0.3 || act < 0.05 || p.rate <= 0) return { rate: 0, pmus: 0, chemo: chemo };
     return { rate: clamp(p.rate * (0.6 + 0.4 * chemo) * act, 0, 45), pmus: clamp(p.effort * chemo * act * m.effF, 0, 30), chemo: chemo };
   }
 
   function disconnected(s) { return s.m.discUntil > s.t; }
+  function bagging(s) { return s.m.bagUntil > s.t; }
+  /* Manual bagging off the circuit (action bag100): FiO2 1.0, about 7 mL/kg PBW at 12 a minute, no PEEP valve. */
+  function bagSettings(st, p) {
+    var o = {}, k;
+    for (k in st) if (own(st, k)) o[k] = st[k];
+    o.mode = "vc"; o.vt = Math.round(7 * p.pbw); o.rr = 12; o.ti = 1; o.peep = 0; o.fio2 = 100; o.flowPattern = "square";
+    return o;
+  }
 
   /* Steady breath solution for one class of breath. */
   function solve(cl, L, Ttot) {
@@ -281,50 +318,63 @@
       else if (cl.k === "sp") ti = TIN;
       else ti = cl.ti;
       ti = Math.min(ti, Math.max(0.2, Ttot - 0.15));
+      var vee = vOf(L.peepTot, C, L.ui), lim = null;
+      if (cl.k === "vc" && cl.plim) { lim = vcLimit(cl.vt, ti, cl.decel, L, vee, cl.plim); if (lim) ti = Math.max(0.05, lim.ti); }
       var te = Math.max(0.15, Ttot - ti), eE = Math.exp(-te / tauE), vt, x0;
-      if (cl.k === "vc") { vt = cl.vt; x0 = vt * eE / (1 - eE); }
+      if (cl.k === "vc") { vt = lim ? lim.vt : cl.vt; x0 = vt * eE / (1 - eE); }
       else { var eI = Math.exp(-ti / tauI), x1 = ce * cl.p * (1 - eI) / (1 - eI * eE); x0 = x1 * eE; vt = Math.max(0, x1 - x0); }
-      var vee = vOf(L.peepTot, C, L.ui), pplat = pel(vee + vt, C, L.ui);
+      var pplat = pel(vee + vt, C, L.ui);
       var cn = vt > 1 ? vt / Math.max(0.3, pplat - L.peepTot) : C;
-      res = { vt: vt, ti: ti, te: te, x0: x0, ap: x0 / ce, pplat: pplat, ce: ce, tauI: tauI, tauE: tauE };
+      res = { vt: vt, ti: ti, te: te, x0: x0, ap: x0 / ce, pplat: pplat, ce: ce, tauI: tauI, tauE: tauE, limited: !!lim };
       ce = 0.5 * ce + 0.5 * cn;
     }
     return res;
   }
 
+  /* Volume breath against the peak pressure alarm: inspiration ends where Paw first reaches the limit (pressure-limited
+     cycling). Returns the volume and time at the limit, or null when the full VT fits under it. */
+  function vcLimit(vt, ti, decel, L, vee, plim) {
+    var k, prev = 0;
+    for (k = 0; k <= 40; k++) {
+      var t = ti * k / 40, q = decel ? 2 * vt / ti * (1 - t / ti) : vt / ti, V = decel ? 2 * vt / ti * (t - t * t / (2 * ti)) : vt * t / ti;
+      if (pel(vee + V, L.C, L.ui) + L.R * q / 1000 >= plim) return { vt: prev, ti: t };
+      prev = V;
+    }
+    return null;
+  }
+
   /* mech(s, st): every ventilator and lung number for these settings and this lung state. */
   function mech(s, st) {
-    var p = s.p, m = s.m, dr = drive(s), disc = disconnected(s);
-    var mode = disc ? "cpap" : st.mode;
+    var p = s.p, m = s.m, dr = drive(s), bag = bagging(s), disc = disconnected(s) && !bag;
+    if (bag) st = bagSettings(st, p);
+    var mode = disc ? "cpap" : st.mode, vdA = 2.2 * p.pbw, weak = false, plim = bag ? 0 : st.pPeakHigh, decel = st.flowPattern === "decel";
     var C = Math.max(3, p.c * (1 - collapsed(s)) * m.cF), R = p.r * m.rF, Re = R * (p.fl ? 2 : 1);
     var peep = disc ? 0 : mode === "niv" ? st.epap : mode === "aprv" ? st.plow : st.peep;
     if (!disc && m.leak > 0) peep = Math.max(0, peep - 3 * m.leak / 0.3);
     var leakF = mode === "niv" ? 0.9 : 1 - m.leak, pm = dr.pmus, peff = 0.7 * pm;
     var sens = st.trigType === "pressure" ? Math.abs(st.trigPress) : 0.3 + 0.1 * st.trigFlow;
     var L = { C: C, R: R, Re: Re, ui: p.ui, peepTot: peep };
-    var ap = 0, pass, out = null;
+    var ap = 0, trapV = 0, pass, out = null;
     for (pass = 0; pass < 3; pass++) {
-      var load = ap + sens;
+      var load = (L.peepTot - peep) + sens; // trapped pressure above set PEEP must be overcome first
       var fmiss = dr.rate > 0 ? (pm > 0 ? clamp((load - 0.5 * pm) / (0.5 * pm + 0.1), 0, 1) : 1) : 0;
       var trig = dr.rate * (1 - fmiss), cls = [], backup = false, apnoea = false, ineff = dr.rate * fmiss, rrT;
       if (mode === "vc" || mode === "pc") {
         ineff = dr.rate;
-        cls.push(mode === "vc" ? { k: "vc", rate: st.rr, vt: st.vt, ti: st.ti, mand: true } : { k: "pc", rate: st.rr, p: st.pinsp, pset: st.pinsp, ti: st.ti, mand: true });
+        cls.push(mode === "vc" ? { k: "vc", rate: st.rr, vt: st.vt, ti: st.ti, mand: true, plim: plim, decel: decel } : { k: "pc", rate: st.rr, p: st.pinsp, pset: st.pinsp, ti: st.ti, mand: true });
       } else if (mode === "acvc") {
-        cls.push({ k: "vc", rate: Math.max(st.rr, trig), vt: st.vt, ti: st.ti, mand: true, assist: trig > st.rr ? peff : 0 });
+        cls.push({ k: "vc", rate: Math.max(st.rr, trig), vt: st.vt, ti: st.ti, mand: true, assist: trig > st.rr ? peff : 0, plim: plim, decel: decel });
       } else if (mode === "acpc" || mode === "prvc") {
         var r1_ = Math.max(st.rr, trig), share = r1_ > 0 ? Math.min(1, trig / r1_) : 0, pin = mode === "prvc" ? s.prvcP : st.pinsp;
         cls.push({ k: "pc", rate: r1_, p: pin + peff * share, pset: pin, ti: st.ti, mand: true });
       } else if (mode === "simv") {
-        cls.push({ k: "vc", rate: st.rr, vt: st.vt, ti: st.ti, mand: true });
+        cls.push({ k: "vc", rate: st.rr, vt: st.vt, ti: st.ti, mand: true, plim: plim, decel: decel });
         if (trig > st.rr) cls.push({ k: st.ps > 0 ? "ps" : "sp", rate: trig - st.rr, p: st.ps + peff, pset: st.ps, cycle: st.cycle });
       } else if (mode === "psv" || mode === "cpap") {
-        if (trig >= 1) cls.push(mode === "psv" && st.ps > 0 ? { k: "ps", rate: trig, p: st.ps + peff, pset: st.ps, cycle: st.cycle } : { k: "sp", rate: trig, p: peff, pset: 0 });
-        else if (disc) apnoea = true;
-        else {
-          apnoea = true;
-          if (s.apS >= st.apnoea) { backup = true; cls.push({ k: "vc", rate: st.rr, vt: st.vt, ti: st.ti, mand: true }); }
-        }
+        // apnoea: breaths further apart than the apnoea time, or too small to clear the anatomic dead space
+        apnoea = !(trig > 0 && 60 / trig <= st.apnoea && !weak);
+        if (apnoea && !disc && s.apS >= st.apnoea) { backup = true; cls.push({ k: "vc", rate: st.rr, vt: st.vt, ti: st.ti, mand: true, plim: plim, decel: decel }); }
+        else if (trig > 0) cls.push(mode === "psv" && st.ps > 0 ? { k: "ps", rate: trig, p: st.ps + peff, pset: st.ps, cycle: st.cycle } : { k: "sp", rate: trig, p: peff, pset: 0 });
       } else if (mode === "niv") {
         var psn = Math.max(0, st.ipap - st.epap);
         if (trig > 0) cls.push({ k: "ps", rate: trig, p: (psn + peff) * leakF, pset: psn, cycle: st.cycle });
@@ -335,10 +385,14 @@
       var Ttot = rrT > 0 ? 60 / rrT : 60, sumAp = 0, sumR = 0;
       for (i = 0; i < cls.length; i++) { cls[i].sol = solve(cls[i], L, Ttot); sumAp += cls[i].sol.ap * cls[i].rate; sumR += cls[i].rate; }
       ap = sumR > 0 ? sumAp / sumR : 0;
+      trapV = 0; for (i = 0; i < cls.length; i++) trapV += cls[i].sol.x0 * cls[i].rate / sumR;
+      if ((mode === "psv" || mode === "cpap") && !backup && cls.length && cls[0].sol.vt < vdA) weak = true;
       L.peepTot = p.fl ? Math.max(peep + 0.2 * ap, ap) : peep + ap;
-      out = { cls: cls, rrT: rrT, Ttot: Ttot, backup: backup, apnoea: apnoea, ineff: ineff, fmiss: fmiss, trig: trig };
+      out = { cls: cls, rrT: rrT, Ttot: Ttot, backup: backup, apnoea: apnoea, ineff: ineff, fmiss: fmiss, trig: trig, trapV: trapV };
     }
-    return finishMech(s, st, out, L, peep, mode, dr, leakF, disc);
+    var mo_ = finishMech(s, st, out, L, peep, mode, dr, leakF, disc);
+    mo_.bag = bag; mo_.st = st;
+    return mo_;
   }
 
   function aprv(s, st, L, dr) {
@@ -361,52 +415,61 @@
     return { cls: cls, rrT: rrT, Ttot: 60 / rrT, backup: false, apnoea: false, ineff: 0, fmiss: 0, trig: spRate, aprv: true };
   }
 
+  /* Displayed numbers: VT, Ti and EtCO2 come from the breath class that moves the most minute volume; peak and
+     plateau are the highest over all classes (the breath that stretches the lung most), and plateau never exceeds
+     peak (a patient's own effort stretch is not a plateau). */
   function finishMech(s, st, o, L, peep, mode, dr, leakF, disc) {
-    var p = s.p, cls = o.cls, i, ve = 0, vtw = 0, rr = o.rrT, pm = 0, prim = null, best = -1;
+    var p = s.p, cls = o.cls, i, ve = 0, vtw = 0, rr = o.rrT, pm = 0, prim = null, best = -1, plc = null, mand = null;
     for (i = 0; i < cls.length; i++) {
       var c = cls[i], sl = c.sol;
       if (c.k === "vc") {
         var fl = sl.vt / 1000 / sl.ti;
         c.ppeak = st.flowPattern === "decel" ? Math.max(L.peepTot + L.R * 2 * fl, sl.pplat) : sl.pplat + L.R * fl;
         c.ppeak -= 0.5 * (c.assist || 0);
+        if (sl.limited) c.ppeak = c.plim; // the breath ended when Paw reached the limit
         c.kk = st.flowPattern === "decel" ? 0.67 : 0.5;
       } else if (c.k === "sp") { c.ppeak = (o.aprv ? st.phigh : peep) + 0.5; c.kk = 0; }
-      else { c.ppeak = (o.aprv ? st.plow : peep) + c.pset; c.kk = 1; if (c.mand) sl.pplat = Math.min(sl.pplat, c.ppeak); }
+      else { c.ppeak = (o.aprv ? st.plow : peep) + c.pset; c.kk = 1; }
+      sl.pplat = Math.min(sl.pplat, c.ppeak);
       ve += c.rate * sl.vt / 1000; vtw += c.rate * sl.vt;
       pm += c.rate * sl.ti / 60 * c.kk * (c.ppeak - (o.aprv ? st.plow : peep));
-      var score = (c.mand ? 1000 : 0) + c.rate;
-      if (score > best) { best = score; prim = c; }
+      var mv = c.rate * sl.vt;
+      if (mv > best) { best = mv; prim = c; }
+      if (!plc || sl.pplat > plc.sol.pplat) plc = c;
+      if (c.mand && !mand) mand = c;
     }
     var pmean = o.aprv ? (st.phigh * st.thigh + st.plow * st.tlow) / (st.thigh + st.tlow) : peep + pm;
     var vtAvg = rr > 0 ? vtw / rr : 0, apShown = L.peepTot - peep;
     var teFrac = prim ? clamp(prim.sol.te / (prim.sol.ti + prim.sol.te), 0, 1) : 1;
     var pitp = pmean + Math.max(0, apShown) * teFrac;
-    var pplat = prim ? prim.sol.pplat : L.peepTot, ppeak = prim ? prim.ppeak : peep;
+    var pplat = plc ? plc.sol.pplat : L.peepTot, ppeak = peep;
+    for (i = 0; i < cls.length; i++) ppeak = Math.max(ppeak, cls[i].ppeak);
     var vtP = prim ? prim.sol.vt : 0, drv = Math.max(0, pplat - L.peepTot);
     var C = L.C;
     return {
       mode: mode, disc: disc, peep: peep, peepTot: L.peepTot, autoPeep: Math.max(0, apShown), pplat: pplat, ppeak: ppeak, pmean: pmean, pitp: pitp,
-      vt: vtP, vtAvg: vtAvg, ve: ve, vte: vtP * leakF, veMeasured: disc ? 0 : ve * leakF, rr: rr, ti: prim ? prim.sol.ti : 0, te: prim ? prim.sol.te : 0,
-      driving: drv, cstat: drv > 0.3 ? vtP / drv : C, C: C, R: L.R, Re: L.Re, ce: prim ? prim.sol.ce : C,
+      vt: vtP, vtAvg: vtAvg, ve: ve, vte: vtP * leakF, veMeasured: disc || s.m.bagUntil > s.t ? 0 : ve * leakF, rr: rr, ti: prim ? prim.sol.ti : 0, te: prim ? prim.sol.te : 0,
+      driving: drv, cstat: drv > 0.3 && plc ? plc.sol.vt / drv : C, trapV: o.trapV || 0, prim: prim, vtMand: mand ? mand.sol.vt * leakF : null, C: C, R: L.R, Re: L.Re, ce: prim ? prim.sol.ce : C,
       mp: 0.098 * rr * vtP / 1000 * Math.max(0, ppeak - 0.5 * drv), cls: cls, backup: o.backup, apnoea: o.apnoea,
       ineff: o.ineff, fmiss: o.fmiss, trig: o.trig, drive: dr, leakF: leakF
     };
   }
 
   /* model(s, st): mechanics + haemodynamics + ventilation + oxygenation + acid base, all from the state. */
-  function hemoBase(vs) { return vs === "low" ? { co: 4.0, map: 72, hr: 105, k: 0.045 } : vs === "high" ? { co: 5.0, map: 88, hr: 85, k: 0.008 } : { co: 5.0, map: 85, hr: 80, k: 0.022 }; }
+  function hemoBase(vs) { return vs === "low" ? { co: 4.0, map: 72, hr: 105, k: 0.045 } : vs === "high" ? { co: 5.0, map: 88, hr: 85, k: -0.005 } : { co: 5.0, map: 85, hr: 80, k: 0.022 }; }
   function model(s, st) {
     st = norm(st);
     var p = s.p, m = s.m, mc = mech(s, st), hb0 = hemoBase(m.vs);
-    var co = hb0.co * Math.max(0.35, 1 - hb0.k * Math.max(0, mc.pitp - 7)) * m.coF * (m.hypoUntil > s.t ? 0.7 : 1), cof = co / hb0.co;
-    var vdA = 2.2 * p.pbw, va = 0, vdW = 0, i, dsf = Math.min(0.6, p.ds + 0.005 * Math.max(0, mc.pplat - p.ui) + 0.1 * Math.max(0, 1 - cof)), vdAlvP = 0;
+    var co = hb0.co * clamp(1 - hb0.k * Math.max(0, mc.pitp - 7), 0.35, 1.1) * m.coF * (m.hypoUntil > s.t ? 0.7 : 1), cof = co / hb0.co;
+    var frc = 30 * p.pbw, hyper = HYPER_DS * Math.max(0, mc.trapV / frc - 0.1);
+    var vdA = 2.2 * p.pbw, va = 0, vdW = 0, i, dsf = Math.min(0.6, p.ds + hyper + 0.005 * Math.max(0, mc.pplat - p.ui) + 0.1 * Math.max(0, 1 - cof)), vdAlvP = 0;
     for (i = 0; i < mc.cls.length; i++) {
       var c = mc.cls[i], v = c.sol.vt, vd = vdA + dsf * v;
       va += c.rate * Math.max(0, v - vd) / 1000; vdW += c.rate * Math.min(v, vd);
-      if (c === mc.cls[0]) vdAlvP = dsf * v;
+      if (c === mc.prim) vdAlvP = dsf * v;
     }
     var vdvt = mc.ve > 0 ? vdW / 1000 / mc.ve : 1;
-    var fio2 = mc.disc || m.o2Until > s.t ? 0.21 : st.fio2 / 100;
+    var fio2 = mc.bag ? 1 : mc.disc || m.o2Until > s.t ? 0.21 : st.fio2 / 100;
     var hco3 = hco3Of(s, s.paco2), ph = phOf(hco3, s.paco2);
     var vco2 = p.vco2 * m.vco2F, vo2 = vco2 / RQ, temp = p.temp + m.tempAdd;
     var shunt = clamp(p.shunt0 * (1 - p.recr) + collapsed(s) + m.shuntAdd, 0.01, 0.8);
@@ -416,7 +479,8 @@
     if (spo2 < 70) { var q = spo2 / 70; hr *= q * q; map *= 0.5 + 0.5 * q; }
     hr = clamp(hr, 20, 190); map = Math.max(15, map); // floors: an agonal patient, not a number below physiology
     var pp = 45 * clamp(cof, 0.4, 1.2), vtAlv = mc.vt - vdA;
-    var etco2 = mc.ve > 0.2 && vtAlv > 0 ? s.paco2 * clamp(1 - 0.05 - vdAlvP / vtAlv, 0.05, 1) : 0;
+    // end-tidal gas comes last from slow, CO2-rich units, so only half the alveolar dead space dilutes it (teaching value)
+    var etco2 = mc.ve > 0.2 && vtAlv > 0 ? s.paco2 * clamp(1 - 0.05 - 0.5 * vdAlvP / vtAlv, 0.05, 1) : 0;
     var PAtarget = Math.max(0, fio2 * (PATM - PH2O) - s.paco2 / RQ);
     return {
       st: st, mech: mc, co: co, cof: cof, va: va, vdvt: vdvt, vdAnat: vdA, dsf: dsf, fio2: fio2, vco2: vco2, vo2: vo2, temp: temp,
@@ -443,10 +507,10 @@
       ds: lg.deadSpace || 0, pco2Ref: 40, ui: lg.upperInflection || 30, lowvq: lowvqOf(lg)
     };
     var s = {
-      v: 1, id: sc.id || "custom", t: 0, p: p, rec: 1, paco2: 40, pao2A: 100, lac: p.lac0, prvcP: 15, apS: 0,
+      v: 1, id: sc.id || "custom", t: 0, p: p, rec: 1, hys: 0, hysRef: 0, peffLast: 0, paco2: 40, pao2A: 100, lac: p.lac0, prvcP: 15, apS: 0, acts: [],
       ch: { ph: 7.4, pao2: 95 },
-      m: { rF: 1, cF: 1, shuntAdd: 0, coF: 1, leak: 0, discUntil: -1, o2Until: -1, sed: clamp(dv.sedation == null ? 0.5 : dv.sedation, 0, 1), effF: 1, vco2F: 1, tempAdd: 0, vs: pt.volumeStatus || "normal", leakUntil: -1, hypoUntil: -1 },
-      timeline: (sc.timeline || []).map(function (e) { return { t: e.t, event: e.event, duration: e.duration || 0 }; }),
+      m: { rF: 1, cF: 1, shuntAdd: 0, coF: 1, leak: 0, discUntil: -1, o2Until: -1, sed: clamp(dv.sedation == null ? 0.5 : dv.sedation, 0, 1), effF: 1, vco2F: 1, tempAdd: 0, vs: pt.volumeStatus || "normal", leakUntil: -1, hypoUntil: -1, bagUntil: -1, ptx: 0, sec: 0, plug: 0, hco3T: null },
+      timeline: (sc.timeline || []).map(function (e) { var o = { t: e.t, event: e.event, duration: e.duration || 0 }; if (e.requires) o.requires = clone(e.requires); return o; }),
       fired: [], harm: { vili: 0, o2h: 0, hypotMin: 0, hypoxMin: 0, baroMin: 0, apHypoMin: 0 }, settings: st, last: null, log: []
     };
     var ab = start.abg || {};
@@ -466,12 +530,13 @@
       s.paco2 = presenting != null ? presenting : 0.6 * s.paco2 + 0.4 * pss;
       s.p.pco2Ref = s.paco2; // scenario HCO3 is the bicarbonate at the presenting (start) PaCO2
       s.pao2A = mo.PAtarget;
-      s.ch = { ph: mo.ph, pao2: mo.pao2 };
+      s.ch = { ph: mo.ph, pao2: mo.pao2, spo2: mo.spo2 };
       if (st.mode === "prvc") prvcAdjust(s, st, mo.mech, 10);
       a = mo;
     }
     s.apS = mo.mech.apnoea ? 1e9 : 0;
     a = model(s, st);
+    s.peffLast = s.hysRef = peffOf(a.mech.peepTot, a.mech.pmean);
     store(s, a);
   }
   function prvcAdjust(s, st, mc, n) {
@@ -490,11 +555,11 @@
   function applyEvent(s, e) {
     var m = s.m, d = e.duration || 0;
     switch (e.event) {
-      case "secretions": m.rF *= 1.5; m.shuntAdd += 0.03; break;
+      case "secretions": m.rF *= 1.5; m.shuntAdd += 0.03; m.sec++; break;
       case "bronchospasm": m.rF *= 2.5; break;
       case "bronchospasmEases": m.rF = 1; break;
-      case "pneumothorax": m.cF *= 0.6; m.shuntAdd += 0.1; m.coF *= 0.75; break;
-      case "plug": m.shuntAdd += 0.1; m.cF *= 0.85; break;
+      case "pneumothorax": m.cF *= 0.6; m.shuntAdd += 0.1; m.coF *= 0.75; m.ptx++; break;
+      case "plug": m.shuntAdd += 0.1; m.cF *= 0.85; m.plug++; break;
       case "disconnect": m.discUntil = s.t + (d || 30); break;
       case "cuffLeak": m.leak = 0.3; m.leakUntil = d ? s.t + d : 1e12; break;
       case "o2Failure": m.o2Until = s.t + (d || 60); break;
@@ -504,19 +569,49 @@
       case "hypovolaemia": m.vs = "low"; break;
       case "hypotension": m.hypoUntil = s.t + (d || 900); m.vs = "low"; break;
       case "improve":
-        m.rF = 1; m.cF = 1; m.shuntAdd = 0; m.coF = 1; m.effF = 1; m.hypoUntil = -1;
+        m.rF = 1; m.cF = 1; m.shuntAdd = 0; m.coF = 1; m.effF = 1; m.hypoUntil = -1; m.ptx = 0; m.sec = 0; m.plug = 0;
         s.p.r = Math.max(8, s.p.r * 0.7); s.p.shunt0 *= 0.7; s.p.c = Math.min(100, s.p.c * 1.15);
-        if (s.p.hco3 < 22) s.p.hco3 = Math.min(24, s.p.hco3 + 6);
+        if (s.p.hco3 < 22) m.hco3T = Math.min(24, s.p.hco3 + 6); // renal and metabolic recovery: first order, see step()
         m.sed = Math.max(0, m.sed - 0.3); break;
       case "fluidBolus": m.vs = m.vs === "low" ? "normal" : "high"; break;
       case "fatigue": m.effF *= 0.5; break;
     }
   }
 
+  /* Learner actions at the bedside (the UI shows them as buttons). act() is pure: it returns a new state. */
+  var ACTIONS = {
+    decompress: { id: "decompress", label: T("Decompress the chest: needle, then drain", "Chest decompress करें: पहले needle, फिर drain"),
+      available: function (s) { return !s.m.drain; } },
+    suction: { id: "suction", label: T("Suction the tube", "Tube को suction करें"), available: function () { return true; } },
+    bag100: { id: "bag100", label: T("Hand bag with 100% oxygen off the ventilator", "Ventilator हटाकर 100% oxygen से हाथ से bag करें"),
+      available: function (s) { return !(s.m.bagUntil > s.t); } }
+  };
+  function act(state, id) {
+    var s = clone(state), m = s.m, a = ACTIONS[id];
+    if (!a || !a.available(s)) return s;
+    s.acts.push({ t: s.t, id: id });
+    if (id === "decompress") {
+      // a tension pneumothorax drained: compliance, shunt and venous return recover (inverse of the event)
+      while (m.ptx > 0) { m.cF /= 0.6; m.shuntAdd = Math.max(0, m.shuntAdd - 0.1); m.coF /= 0.75; m.ptx--; }
+      m.drain = true;
+    } else if (id === "suction") {
+      while (m.sec > 0) { m.rF /= 1.5; m.shuntAdd = Math.max(0, m.shuntAdd - 0.03); m.sec--; }
+      while (m.plug > 0) { m.shuntAdd = Math.max(0, m.shuntAdd - 0.1); m.cF /= 0.85; m.plug--; }
+    } else if (id === "bag100") m.bagUntil = s.t + 60;
+    return s;
+  }
+
+  /* A timeline event may wait for a condition: requires {key, min} on the settings, or {action} already taken. */
+  function met(s, st, rq) {
+    if (!rq) return true;
+    if (rq.action) { for (var i = 0; i < s.acts.length; i++) if (s.acts[i].id === rq.action) return true; return false; }
+    if (rq.key && typeof rq.min === "number") return st[rq.key] >= rq.min;
+    return true;
+  }
   function step(state, settings, dt) {
     var s = clone(state), st = norm(settings), left = Math.max(0, Math.min(86400, +dt || 0)), i;
     while (left > 1e-9) {
-      for (i = 0; i < s.timeline.length; i++) if (s.fired.indexOf(i) < 0 && s.timeline[i].t <= s.t + 1e-9) { s.fired.push(i); applyEvent(s, s.timeline[i]); }
+      for (i = 0; i < s.timeline.length; i++) if (s.fired.indexOf(i) < 0 && s.timeline[i].t <= s.t + 1e-9 && met(s, st, s.timeline[i].requires)) { s.fired.push(i); applyEvent(s, s.timeline[i]); }
       if (s.m.leakUntil <= s.t) s.m.leak = 0;
       var h = Math.min(SUB, left), mo = model(s, st), mc = mo.mech, p = s.p;
       // CO2 store mass balance, exact over h
@@ -528,9 +623,17 @@
       if (mo.va > 0.3) { var tauO = cap / (1.16 * mo.va); s.pao2A = mo.PAtarget + (s.pao2A - mo.PAtarget) * Math.exp(-h / 60 / tauO); }
       // apnoea: the store empties at VO2 / capacity; 0.5 allows for aventilatory mass flow (teaching value)
       else s.pao2A = Math.max(15, s.pao2A - mo.vo2 / Math.max(0.5, cap) * h / 60 * 0.5);
-      // recruitment
-      var tgt = recTarget(s, mc.peepTot, mc.pmean), tau = tgt > s.rec ? 120 : 300;
-      s.rec = tgt + (s.rec - tgt) * Math.exp(-h / tau);
+      // recruitment: reopening is slow (tau 120 s); collapse is fast (tau 8 s) once the pressure holding it open is lost.
+      // Hysteresis: after a sharp loss of Peff (disconnect, PEEP cut) the collapsed units need HYS_P more Peff to reopen;
+      // the memory fades only when Peff goes 2 above its pre-collapse level (recruit), else very slowly (tau 30 min).
+      var peff = peffOf(mc.peepTot, mc.pmean);
+      if (s.hys < 0.02) s.hysRef = s.peffLast;
+      var tgt = recTarget(s, mc.peepTot, mc.pmean), rec0 = s.rec;
+      s.rec = tgt + (s.rec - tgt) * Math.exp(-h / (tgt > s.rec ? 120 : 8));
+      if (s.rec < rec0 && peff < s.hysRef - 5) s.hys = Math.min(1, s.hys + (rec0 - s.rec) / Math.max(0.05, rec0));
+      s.hys *= Math.exp(-h / (peff >= s.hysRef + 2 ? 60 : 1800));
+      s.peffLast = peff;
+      if (s.m.hco3T != null) { p.hco3 = s.m.hco3T + (p.hco3 - s.m.hco3T) * Math.exp(-h / 1200); if (Math.abs(p.hco3 - s.m.hco3T) < 0.01) { p.hco3 = s.m.hco3T; s.m.hco3T = null; } }
       if (st.mode === "prvc" && !mc.disc) prvcAdjust(s, st, mc, Math.max(1, Math.min(10, Math.round(mc.rr * h / 60))));
       s.apS = mc.apnoea ? s.apS + h : 0;
       // lactate
@@ -547,7 +650,7 @@
       if (mc.autoPeep >= 5 && mo.map < 65) hm.apHypoMin += mn;
       s.t += h; left -= h;
       var after = model(s, st);
-      s.ch = { ph: after.ph, pao2: after.pao2 };
+      s.ch = { ph: after.ph, pao2: after.pao2, spo2: after.spo2 };
       store(s, after);
     }
     s.settings = st;
@@ -567,6 +670,8 @@
     alkalosis: T("Alkalaemia", "ख़ून में क्षारीयता (alkalaemia)"),
     apnoeaBackup: T("Apnoea backup ventilation running", "Apnoea backup ventilation चल रहा है"),
     ineffective: T("Ineffective efforts: the ventilator misses breaths", "Ineffective efforts: ventilator साँसें नहीं पकड़ रहा"),
+    effortsIgnored: T("Patient efforts ignored in a controlled mode", "Controlled mode में मरीज़ के efforts अनदेखे"),
+    bagging: T("Hand bagging with 100% oxygen", "100% oxygen से हाथ से bagging"),
     leak: T("Leak present", "Leak है"),
     gastric: T("IPAP above 20: gastric insufflation risk", "IPAP 20 से ऊपर: पेट में हवा जाने का ख़तरा"),
     inverseRatio: T("Inverse ratio: inspiration longer than expiration", "Inverse ratio: inspiration expiration से लंबा"),
@@ -588,7 +693,8 @@
     if (mo.ph < 7.30) f.push(flag("acidosis", mo.ph < 7.20 ? "danger" : "warn"));
     if (mo.ph > 7.50) f.push(flag("alkalosis", mo.ph > 7.55 ? "danger" : "warn"));
     if (mc.backup) f.push(flag("apnoeaBackup", "warn"));
-    if (mc.ineff > 2 && mc.drive.pmus > 1) f.push(flag("ineffective", "warn"));
+    if (mc.ineff > 2 && mc.drive.pmus > 1) f.push(flag(mc.mode === "vc" || mc.mode === "pc" ? "effortsIgnored" : "ineffective", "warn"));
+    if (mc.bag) f.push(flag("bagging", "info"));
     if (st.mode === "niv" || s.m.leak > 0) f.push(flag("leak", s.m.leak > 0 ? "warn" : "info"));
     if (st.mode === "niv" && st.ipap > 20) f.push(flag("gastric", "warn"));
     if (mc.ti > mc.te && st.mode !== "aprv") f.push(flag("inverseRatio", "info"));
@@ -601,7 +707,7 @@
       vent: {
         vte: r0(mc.vte), ve: r1(mc.veMeasured), ppeak: r1(mc.ppeak), pplat: r1(mc.pplat), pmean: r1(mc.pmean), peepTotal: r1(mc.peepTot),
         autoPeep: r1(mc.autoPeep), drivingP: r1(mc.driving), cstat: r0(mc.cstat), raw: r0(mc.R), rrTotal: r0(mc.rr),
-        ieActual: mc.ti > 0 ? r1(mc.te / mc.ti) : 0, mechPower: r1(mc.mp)
+        ieActual: mc.ti > 0 ? r1(mc.te / mc.ti) : 0, mechPower: r1(mc.mp), ineffective: r0(mc.ineff), trapV: r0(mc.trapV)
       },
       gas: {
         pao2: r0(mo.pao2), paco2: r0(mo.paco2), ph: r2(mo.ph), hco3: r1(mo.hco3), sao2: r0(mo.sao2 * 100), be: r1(mo.be), lactate: r1(mo.lactate),
@@ -626,10 +732,11 @@
   function alarms(state, settings) {
     var st = norm(settings || state.settings), mo = model(state, st), mc = mo.mech, a = [];
     var volMode = ["vc", "acvc", "simv", "prvc"].indexOf(st.mode) >= 0, setPeep = st.mode === "niv" ? st.epap : st.mode === "aprv" ? st.plow : st.peep;
-    if (mc.disc) a.push(alarm("disconnect", "danger"));
+    if (mc.disc || mc.bag) a.push(alarm("disconnect", "danger"));
+    if (mc.bag) return a; // off the ventilator: only the disconnect alarm sounds
     if (mc.ppeak >= st.pPeakHigh) a.push(alarm("pPeakHigh", "danger"));
     if (mc.pplat > 30) a.push(alarm("pPlatHigh", "warn"));
-    if (mc.vte < 4 * state.p.pbw || (volMode && mc.vte < 0.8 * st.vt)) a.push(alarm("vtLow", "warn"));
+    if (mc.vte < 4 * state.p.pbw || (volMode && mc.vtMand != null && mc.vtMand < 0.8 * st.vt)) a.push(alarm("vtLow", "warn"));
     if (mc.veMeasured < st.veLow) a.push(alarm("veLow", "danger"));
     if (mc.veMeasured > st.veHigh) a.push(alarm("veHigh", "warn"));
     if (mc.apnoea && (state.apS >= st.apnoea || mc.disc)) a.push(alarm("apnoea", "danger"));
@@ -709,6 +816,7 @@
   function whatIf(state, settings, change) {
     var st = norm(settings || state.settings), s2 = clone(st);
     s2[change.key] = change.to;
+    if (change.also) for (var k in change.also) if (own(change.also, k)) s2[k] = change.also[k]; // combined change
     s2 = norm(s2);
     var frozen = clone(state), i;
     for (i = 0; i < frozen.timeline.length; i++) if (frozen.fired.indexOf(i) < 0) frozen.fired.push(i); // isolate the change
@@ -725,7 +833,8 @@
       for (i = 0; i < ef.length; i++) {
         var e = ef[i];
         if (t >= e.start && t < e.start + e.tin) pm -= e.amp * Math.sin(Math.PI * (t - e.start) / e.tin);
-        if (e.expAmp && t >= e.start + e.tin && t < e.start + e.tin + 0.5) pm += e.expAmp * Math.sin(Math.PI * (t - e.start - e.tin) / 0.5);
+        var xd = e.expDur || 0.5, x0 = e.start + e.tin + (e.expDelay || 0);
+        if (e.expAmp && t >= x0 && t < x0 + xd) pm += e.expAmp * Math.sin(Math.PI * (t - x0) / xd);
       }
       active = null;
       for (i = 0; i < vb.length; i++) {
@@ -737,9 +846,12 @@
         var tt = t - active.start;
         q = active.flowPattern === "decel" ? 2 * active.vt / 1000 / active.ti * (1 - tt / active.ti) : active.vt / 1000 / active.ti;
         paw = palv + q * R;
+        if (active.plim && paw >= active.plim) { paw = active.plim; q = Math.max(0, (paw - palv) / R); ends[active._i] = t + dt; } // pressure-limited cycling
       } else if (active) {
         var pset = peep + active.p * Math.min(1, (t - active.start) / (active.rise || 0.1));
-        q = (pset - palv) / R; paw = pset;
+        // controller lag: an expiratory push against the closed exhalation valve lifts Paw above the set level
+        paw = pset + (pm > 0 && active.type === "ps" ? LAG * pm : 0);
+        q = (paw - palv) / R;
         if (active.type === "ps") {
           if (t - active.start < 0.05) psPeak = 0;
           if (q > psPeak) psPeak = q;
@@ -788,7 +900,7 @@
       span = period * seq.length;
       for (k = 0; k < cycles * seq.length; k++, t += period) {
         var c = seq[k % seq.length], trig = !!c && (!c.mand || assisted), b = null;
-        if (c && c.k === "vc") b = { type: "vc", vt: c.vt, ti: c.sol.ti, flowPattern: st.flowPattern };
+        if (c && c.k === "vc") b = { type: "vc", vt: c.vt, ti: c.sol.limited ? c.ti : c.sol.ti, flowPattern: st.flowPattern, plim: c.plim };
         else if (c && c.k !== "sp") b = { type: c.k, p: c.pset * mc.leakF, ti: c.k === "ps" ? 3 : c.sol.ti, cycle: c.cycle || 25, rise: st.rise };
         if (b) { b.start = t + (trig ? 0.1 : 0); b.triggered = trig; vent.push(b); }
         if (pm > 0 && (trig || !c)) ef.push({ start: t, tin: TIN, amp: pm });
@@ -831,9 +943,11 @@
         vent.push({ type: "ps", p: st.ps || 10, ti: 3, cycle: 70, start: t0 + 0.1, triggered: true });
         ef.push({ start: t0, tin: 1.6, amp: 10 }); ev.push({ t: t0 + 0.6, id: kind });
       } else if (kind === "delayedCycle") {
-        R = 25; Re = 40;
+        // long time constant (R 25, C 60) and a 5% cycle: the breath outlasts the neural Ti of 0.7 s; the patient then
+        // pushes to exhale while the valve is still in inspiration, so Paw spikes above the set level before cycling
+        C = 60; R = 25; Re = 40;
         vent.push({ type: "ps", p: st.ps || 14, ti: 3, cycle: 5, start: t0 + 0.1, triggered: true });
-        ef.push({ start: t0, tin: 0.7, amp: 8, expAmp: 7 }); ev.push({ t: t0 + 0.9, id: kind });
+        ef.push({ start: t0, tin: 0.7, amp: 8, expAmp: 10, expDur: 1.4, expDelay: 0.3 }); ev.push({ t: t0 + 1.2, id: kind });
       } else if (kind === "reverseTrigger") {
         vent.push({ type: "vc", vt: vt, ti: ti, start: t0 + 0.1, triggered: false });
         ef.push({ start: t0 + 0.7, tin: 0.9, amp: 8 }); ev.push({ t: t0 + 0.7, id: kind });
@@ -850,29 +964,37 @@
   /* ---------- score ---------- */
   function inR(x, r) { return r && x >= r[0] && x <= r[1]; }
   /* Score part maxima (initial is 4 + 3 + 3 points; unsafe is a penalty down to unsafeMin). The UI reads these. */
+  var SPONT = ["psv", "cpap", "niv"];
+  var HARMFUL = { secretions: 1, bronchospasm: 1, pneumothorax: 1, plug: 1, disconnect: 1, cuffLeak: 1, o2Failure: 1, hypotension: 1, hypovolaemia: 1, fever: 1, fatigue: 1, sedationLight: 1, sedationDeep: 1 };
   var SCORE_MAX = { mode: 10, initial: 10, oxygenation: 15, ventilation: 15, protection: 20, alarms: 10, abg: 10, time: 10, unsafeMin: -30 };
   function score(run) {
     run = run || {};
     var sc = run.scenario || {}, g = run.goals || sc.goals || {}, pt = sc.patient || {}, log = run.log || [], notes = [];
     var spo2R = g.spo2 || [92, 98], pplatMax = g.pplatMax || 30, drvMax = g.drivingMax || 15, vtR = g.vtPerKg || [4, 8];
     var kg = pt.heightCm ? pbw(pt) : null, n = log.length, i, oxOK = 0, vOK = 0, prOK = 0, alOK = 0, unsafe = 0, backup = 0, ineff = 0, tGoal = null;
+    // windows after scripted harmful events: the learner gets 5 minutes (plus the event's duration) to respond
+    var tl = sc.timeline || [], win = [];
+    for (i = 0; i < tl.length; i++) if (HARMFUL[tl[i].event]) win.push([tl[i].t, tl[i].t + (tl[i].duration || 0) + 300]);
+    function scripted(t) { for (var w = 0; w < win.length; w++) if (t >= win[w][0] && t <= win[w][1]) return true; return false; }
     for (i = 0; i < n; i++) {
-      var r = log[i].readout || { vitals: {}, vent: {}, gas: {}, flags: [] }, f = r.flags || [], j;
-      var o = inR(r.vitals.spo2, spo2R) && !(r.vitals.spo2 > spo2R[1] && (log[i].settings || {}).fio2 > 50);
+      var r = log[i].readout || { vitals: {}, vent: {}, gas: {}, flags: [] }, f = r.flags || [], j, ls = log[i].settings || {};
+      var o = inR(r.vitals.spo2, spo2R) && !(r.vitals.spo2 > spo2R[1] && ls.fio2 > 50);
       var v = g.ph ? inR(r.gas.ph, g.ph) : inR(r.gas.paco2, g.paco2 || [35, 45]);
-      var vk = kg ? r.vent.vte / kg : null;
+      // VT per kg is scored only when the ventilator sets the volume or pressure; a spontaneous mode's VT is the patient's
+      var vk = kg && SPONT.indexOf(ls.mode) < 0 ? r.vent.vte / kg : null;
       var pr = r.vent.pplat <= pplatMax && r.vent.drivingP <= drvMax && (vk === null || inR(vk, [vtR[0] - 0.5, vtR[1] + 0.5]));
       var dg = false;
-      for (j = 0; j < f.length; j++) { if (f[j].severity === "danger") dg = true; if (f[j].id === "apnoeaBackup") backup++; if (f[j].id === "ineffective") ineff++; }
+      for (j = 0; j < f.length; j++) { if (f[j].severity === "danger") dg = true; if (f[j].id === "apnoeaBackup") backup++; if (f[j].id === "ineffective" || f[j].id === "effortsIgnored") ineff++; }
       if (o) oxOK++; if (v) vOK++; if (pr) prOK++; if (!dg) alOK++;
       if (o && v && pr && tGoal === null) tGoal = log[i].t;
-      if (r.vent.pplat > 35 || r.vitals.spo2 < 85 || (vk !== null && vk > 10) || (r.vent.autoPeep >= 10 && r.vitals.map < 65)) unsafe++;
+      if (!scripted(log[i].t) && (r.vent.pplat > 35 || r.vitals.spo2 < 85 || (vk !== null && vk > 10) || (r.vent.autoPeep >= 10 && r.vitals.map < 65))) unsafe++;
     }
     var fr = function (x) { return n ? x / n : 0; };
     var ans = run.answers || [];
     function ansFrac(kind) { var c = 0, t = 0, k; for (k = 0; k < ans.length; k++) if (ans[k] && ans[k].kind === kind) { t++; if (ans[k].correct) c++; } return t ? c / t : null; }
     var first = n ? (log[Math.min(n - 1, 1)].readout || null) : null, init = 0;
-    if (first) init = (inR(first.vitals.spo2, [Math.min(spo2R[0], 88), 100]) ? 4 : 0) + (first.vent.pplat <= pplatMax ? 3 : 0) + (kg && inR(first.vent.vte / kg, vtR) || !kg ? 3 : 0);
+    var spont1 = n && SPONT.indexOf((log[Math.min(n - 1, 1)].settings || {}).mode) >= 0;
+    if (first) init = (inR(first.vitals.spo2, [Math.min(spo2R[0], 88), 100]) ? 4 : 0) + (first.vent.pplat <= pplatMax ? 3 : 0) + (spont1 || !kg || inR(first.vent.vte / kg, vtR) ? 3 : 0);
     var aa = ansFrac("alarm"), ab = ansFrac("abg");
     var last = n ? log[n - 1].readout : null;
     var X = SCORE_MAX, parts = {
@@ -884,7 +1006,7 @@
       alarms: Math.round(X.alarms * (aa === null ? fr(alOK) : aa)),
       abg: Math.round(X.abg * (ab === null ? (last && (g.ph ? inR(last.gas.ph, g.ph) : inR(last.gas.paco2, g.paco2 || [35, 45])) ? 1 : 0) : ab)),
       time: tGoal === null ? 0 : Math.round(X.time * clamp(1 - (tGoal - 900) / 2700, 0, 1)),
-      unsafe: Math.max(X.unsafeMin, -unsafe * 5)
+      unsafe: unsafe ? Math.max(X.unsafeMin, -unsafe * 5) : 0
     };
     var total = 0, k;
     for (k in parts) if (own(parts, k)) total += parts[k];
@@ -904,6 +1026,6 @@
     sources: SOURCES, MODES: MODES, SETTINGS: SETTINGS, EVENTS: EVENTS, CHAIN_STEPS: CHAIN_STEPS, CHAIN_LABELS: CHAIN_LABELS, DYSSYNC: DYS,
     constants: { kCO2: K_CO2, overdistensionFactor: KOD, neuralTi: TIN, substep: SUB, plateauMax: 30, drivingMax: 15 },
     init: init, step: step, breath: breath, readout: readout, abg: abg, explainDelta: explainDelta, alarms: alarms,
-    dyssync: dyssync, whatIf: whatIf, score: score, SCORE_MAX: SCORE_MAX, pbw: pbw, normSettings: norm
+    dyssync: dyssync, whatIf: whatIf, score: score, SCORE_MAX: SCORE_MAX, pbw: pbw, normSettings: norm, ACTIONS: ACTIONS, act: act
   };
 });
