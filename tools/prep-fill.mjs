@@ -5,7 +5,7 @@
 //
 // RUN
 //   PREP_VERTEX_PROJECT=<gcp project> PREP_GCS_BUCKET=<bucket> node tools/prep-fill.mjs [--module <id>[,<id>]]
-//       [--shortfall prep/fill/shortfall.json] [--packs prep/fill/packs] [--work prep/fill/work] [--out prep/fill]
+//       [--shortfall prep/fill/shortfall.json] [--packs prep/fill/packs] [--packs-extra <dir>] [--work prep/fill/work] [--out prep/fill]
 //       [--bank prep/bank/v1] [--tax prep/taxonomy] [--run <id>] [--usmle-share 0.3] [--overgen 1.15] [--need <n>]
 //       [--chunk-tok 1500] [--poll-sec 60] [--max-wait-min 1440] [--max-jobs 8] [--no-wait]
 //   node tools/prep-fill.mjs --dry-run [...same selection...]          plan + token and cost estimate, zero calls
@@ -17,6 +17,8 @@
 //                                                        headings; a form feed starts a new page)
 //                    prep/fill/packs/<module>/pack.json { srcPack: [{ id, title, url? }], avoid?: ["term", ...] }
 //                    ids are neutral slugs; titles and urls stay in the work folder (owner audit), never on an item
+//                    A second pack root (--packs-extra <dir>, or env PREP_PACKS_EXTRA) holds packs that must stay out
+//                    of this public repo (non-commercial licensed text, tools/prep-packs.mjs); --packs wins on a tie.
 // STAGES per module  prep/fill/work/<module>/01-facts.jsonl   one request per pack chunk        -> finalizeFacts, fid
 //   (one Batch job   02-mcq.jsonl     7 facts a request, exam profile style   -> code gates 1 2 3 5 9b 12, the 12-word
 //    each; files                       verbatim check against the WHOLE pack, no book name or page, seeded shuffle
@@ -34,6 +36,7 @@
 //                    touched subject's index with prep-build-bank.mjs subjectIndex, rebuilds its search.json and manifest.
 import fs from "node:fs";
 import path from "node:path";
+import os from "node:os";
 import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
 import {
@@ -264,6 +267,11 @@ export function groupProfiles(n, subject, share) {
   const p = profilesFor(subject);
   return Array.from({ length: n }, (_, i) => (p.usmle && share > 0 && Math.floor((i + 1) * share) > Math.floor(i * share) ? "usmle" : p.base));
 }
+/* packDirOf(roots, module) -> the first root's folder that holds the module's pack (else the first root's). */
+export function packDirOf(roots, module) {
+  const dirs = roots.map((r) => path.join(r, module));
+  return dirs.find((d) => fs.existsSync(d)) || dirs[0];
+}
 export function loadPack(dir) {
   if (!fs.existsSync(dir)) return null;
   const files = fs.readdirSync(dir).filter((f) => f.endsWith(".txt")).sort().map((f) => ({ name: f, text: fs.readFileSync(path.join(dir, f), "utf8") }));
@@ -330,8 +338,9 @@ export async function fillModule(ctx, row) {
   const ent = ctx.modules.get(row.module);
   if (!ent) throw new Error(`unknown module ${row.module}`);
   const { subject } = ent;
-  const pack = loadPack(path.join(ctx.packs, row.module));
-  if (!pack) return { module: row.module, skipped: "no source pack at " + path.join(ctx.packs, row.module) };
+  const packDir = packDirOf(ctx.packRoots || [ctx.packs], row.module);
+  const pack = loadPack(packDir);
+  if (!pack) return { module: row.module, skipped: "no source pack at " + packDir };
   const work = path.join(ctx.workDir, row.module);
   const stFile = path.join(work, "state.json");
   const state = readJson(stFile, null) || { v: 1, module: row.module, subject: subject.id, run: ctx.run, model: ctx.model, created: new Date().toISOString(), stages: {} };
@@ -513,6 +522,8 @@ export async function main(argv = process.argv.slice(2), deps = {}) {
   const args = parseArgs(argv);
   const root = deps.root || ROOT, log = deps.log || console.log;
   const R = (p, d) => path.resolve(root, args[p] || d);
+  const extra = args["packs-extra"] || (deps.env || process.env).PREP_PACKS_EXTRA;
+  const packRoots = [R("packs", "prep/fill/packs"), ...(extra ? [path.resolve(root, String(extra).replace(/^~(?=\/|$)/, os.homedir()))] : [])];
   const subjects = loadTaxonomy(R("tax", "prep/taxonomy"));
   const modules = moduleMap(subjects);
   const cfg = { ...vertexConfig(deps.env || process.env), ...(deps.config || {}) };
@@ -530,14 +541,13 @@ export async function main(argv = process.argv.slice(2), deps = {}) {
       return { dryRun: true, ...e };
     }
     const rows = selectRows(args, root, modules, R("bank", "prep/bank/v1"));
-    const packs = R("packs", "prep/fill/packs");
     let tot = { inTok: 0, outTok: 0, usd: 0, need: 0 };
     const out = [];
     log(`DRY RUN (no calls). ${rows.length} modules, model ${cfg.model}, Batch price:`);
     for (const r of rows) {
       const ent = modules.get(r.module);
       if (!ent) { log(`  ${r.module}: not in the taxonomy`); continue; }
-      const pack = loadPack(path.join(packs, r.module));
+      const pack = loadPack(packDirOf(packRoots, r.module));
       // Same rule as the real run (fillModule): --need wins, else the module's shortfall; 0 means nothing is written.
       const n = args.need != null ? Number(args.need) : (r.fill != null ? r.fill : 0);
       if (!n) { log(`  ${r.module.padEnd(32)} need    0  (not short; pass --need to write anyway)`); continue; }
@@ -571,7 +581,7 @@ export async function main(argv = process.argv.slice(2), deps = {}) {
   let active = 0;
   for (const r of rows) { const st = readJson(path.join(workDir, r.module, "state.json"), null); if (st) for (const s of Object.values(st.stages || {})) if (s.status === "submitted") active++; }
   const ctx = {
-    vx, log, modules, model: vx.cfg.model, workDir, packs: R("packs", "prep/fill/packs"), outDir: R("out", "prep/fill"), bank: R("bank", "prep/bank/v1"),
+    vx, log, modules, model: vx.cfg.model, workDir, packs: packRoots[0], packRoots, outDir: R("out", "prep/fill"), bank: R("bank", "prep/bank/v1"),
     run: args.run || "fill-" + new Date().toISOString().slice(0, 16).replace(/[-:T]/g, ""),
     usmleShare: share, overgen: args.overgen != null ? Number(args.overgen) : EST.overgen, need: args.need != null ? Number(args.need) : null,
     chunkTok: Number(args["chunk-tok"]) || EST.chunkTok, pollMs: (args["poll-sec"] != null ? Number(args["poll-sec"]) : 60) * 1000,

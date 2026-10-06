@@ -45,6 +45,20 @@ FSRS-6 spaced review through `specialty-core.js`. Students can also turn their o
   `prep-vertex.mjs`. Every `--dry-run` makes no call. Batch format checked against a real job 2026-10-06: Batch for
   `gemini-3.1-flash-lite` runs only in location `global` (us-central1 refuses it, MODEL_NOT_SUPPORTED_FOR_BATCH), now
   the default; `key` is echoed on each output line; user (non-ADC) gcloud logins need the `x-goog-user-project` header.
+- Layer B source packs: `tools/prep-packs.mjs` ($0, no model call) builds a pack for every shortfall module without
+  a hand-made one. Repo KB first (`kb/clinical-protocols`, `kb/diseases` + `kb/treatments`, `kb/reference`,
+  `kb/protocols`, `kb/onco/staging`, flattened without ids, sources, references, review, provenance or source names;
+  BM25 match, threshold 0.30), then up to 3 StatPearls chapters for modules short of their word target (E-utilities
+  esearch/esummary for the chapter ids, text from one streamed pass over the NCBI Literature Archive bundle, because
+  the Bookshelf pages answer bots with a reCAPTCHA and efetch has no book text). Cap 6,000 words a pack.
+  **Two pack roots:** KB-only packs in `prep/fill/packs/<module>/` (committed); any pack with StatPearls text in
+  `~/prep-data/packs-statpearls/<module>/` (outside the repo: the repo is public, StatPearls is CC BY-NC-ND; copy in
+  `gs://project-6074a703-e86c-40a5-848-prep-batch/packs-statpearls`). `prep-fill.mjs` reads both: `--packs-extra
+  <dir>` or env `PREP_PACKS_EXTRA` (the `--packs` root wins on a tie). Raw StatPearls cache:
+  `~/prep-data/statpearls-cache/`. Generated packs carry `"gen": "prep-packs"` in `pack.json`; a pack without it is
+  hand-made and never overwritten. Coverage report: `vault/plans/prep-packs-<date>.md`. Run 2026-10-06: 194 KB-only
+  packs, 697 with StatPearls, 7 modules uncovered; fill dry run over the 891 covered modules $28.57 (not run).
+  Test: `test/prep-packs.test.mjs`.
 - Taxonomy source: `prep/taxonomy/*.json` (one per subject; `validateSubject` in the builder).
 
 ## Arena server (2026-10-06, merged into `feat/prepnucleus`, not deployed)
