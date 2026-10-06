@@ -52,6 +52,9 @@ export function writeSearch(dir) {
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const dir = path.join(ROOT, "tokos", "decks", "mcq");
+  const hi = process.argv.indexOf("--host");
+  const sub = hi > 0 ? process.argv[hi + 1] : "tokos";
+  if (!["tokos", "narke"].includes(sub)) throw new Error(`unknown --host ${sub}`);
+  const dir = path.join(ROOT, sub, "decks", "mcq");
   console.log(`wrote ${path.relative(ROOT, dir)}/search.json ${(writeSearch(dir) / 1e6).toFixed(2)} MB`);
 }
