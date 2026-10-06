@@ -31,15 +31,24 @@ To restart a Batch runner: `pkill -f <tool>.mjs`, confirm `pgrep`, then relaunch
 2. DONE 2026-10-06 (branch `feat/prep-native`, merge it into `feat/prepnucleus` before step 5): R2 `prep-bank/v1/lessons/` 1,083 files (1,082 lessons + index) and `prep-bank/v1/cards/` 865 files (864 decks + index), both index files SHA-256 matched R2; live serving starts when the bank route deploys (step 5). Was: Lessons + cards served from R2: extend `functions/api/prep/bank/[[path]].js` whitelist with `v<n>/lessons/...` and
    `v<n>/cards/...` (+ tests), client loads them through the API (fall back to the bundled pilot), upload
    `prep/lessons/gen` and `~/prep-data/cards-gen`; SS modules have no cards (no v1 bank).
-3. Flags ON for all: `smd_prep` and `smd_prep_arena` default ON (prep-loader.js `enabled`, home.js `eligible`,
+3. DONE 2026-10-06 (18e6f019f, token prep11). Flags ON for all: `smd_prep` and `smd_prep_arena` default ON (prep-loader.js `enabled`, home.js `eligible`,
    prep-arena flag, vault/Flags.md); `smd_prep_pro_enforce` stays OFF until a real payment test. Bump `?v=` token
    (currently prep10) in prep-loader.js + index.html.
-4. D1: `npx wrangler d1 execute prep-arena-db --remote --file prep-arena-worker/migrations/0001_prep_sync.sql`
+4. DONE 2026-10-06 (tables live; Worker version 72e3b8ff). D1: `npx wrangler d1 execute prep-arena-db --remote --file prep-arena-worker/migrations/0001_prep_sync.sql`
    and `.../0002_social.sql`. Redeploy Worker: `cd prep-arena-worker && npx wrangler deploy` (adds `room`).
-5. Merge `feat/prepnucleus` to main (owner authorised; app not public), Pages auto-deploys; OTA:
+5. DONE 2026-10-06: main ad9813430, Pages production deploy success, live checks pass (v1 manifest, v2 pyq, lessons, cards, flag, arena 401, Worker 200); OTA run 37468223406. Merge `feat/prepnucleus` to main (owner authorised; app not public), Pages auto-deploys; OTA:
    `gh workflow run ota-publish.yml`. Verify: `curl -s https://stewardmd.in/api/prep/bank/v1/manifest.json | head`,
    v2 pyq index, `/api/prep/arena/events` (401 without token), Worker `/health`.
 6. Final report to the owner; update this note and memory.
+
+## After the merge (still open)
+- Fill: per-module outputs are NOT in git any more (Pages 20,000-file cap; deploy is about 18,200). They go to R2 bank v2 and
+  `gs://...-prep-batch/fill-out/`; `node tools/prep-accuracy.mjs --pack-fill` writes `prep/fill/reports.json` + accuracy.json.
+  When the fill ends: merge, upload v2, back up outputs to GCS, pack-fill, commit, push to main (server-side data needs no OTA
+  unless bundled indexes change; if they do, bump prep token and run OTA).
+- PYQ second batch: 10,485 items (7,914 explained), R2 v2/pyq; zip inputs deleted. Open: 11 MB items file not phone-tested;
+  2012-2016 compilations labelled aipgmee may be too narrow.
+- test/usage-unlimited.test.mjs fails on main too (another session's owner-exemption change), not PrepNucleus.
 
 ## Owner decisions (2026-10-06)
 Price list Rs 5,999/yr renewal; launch Rs 1,499 first year until 2027-03-31 23:59 IST; one-time win-back Rs 999
