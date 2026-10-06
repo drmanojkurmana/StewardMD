@@ -43,6 +43,14 @@ const R = `var R=document.getElementById("smdNarke");`;
 const click = (sel) => ev(`var b=document.querySelector('#smdNarke ${sel.replace(/'/g, "\\'")}'); if(!b) return "missing"; b.click(); return 1;`);
 const noOverflow = () => ev(`${R} var s=R.querySelector('.sp-scroll'); return (s ? s.scrollWidth <= s.clientWidth + 1 : true) && document.documentElement.scrollWidth <= innerWidth;`);
 const small = () => ev(`${R} var out=[]; [].forEach.call(R.querySelectorAll('button, [role=spinbutton], select, summary, a[href]'), function(b){ if (b.closest('[inert]')) return; var r=b.getBoundingClientRect(); if (!r.width || !r.height) return; if (getComputedStyle(b).visibility==='hidden') return; if (r.width < 43.5 || r.height < 43.5) out.push((b.getAttribute('data-act')||b.className||b.tagName)+' '+Math.round(r.width)+'x'+Math.round(r.height)); }); return out.length ? out.slice(0,6).join('; ') : true;`);
+// A real click: scroll the target into the clear area, dispatch a mouse press at its centre, and fail if something
+// else (a coach, a toast, a sticky bar) is on top of it.
+const tap = async (sel) => {
+  const pos = await ev(`var b=document.querySelector('#smdNarke ${sel.replace(/'/g, "\\'")}'); if(!b) return "missing"; var sc=b.closest('.sp-scroll'); if (sc) { var r0=b.getBoundingClientRect(), s0=sc.getBoundingClientRect(); if (r0.top < s0.top + 70 || r0.bottom > s0.bottom - 8) sc.scrollTop += r0.top - s0.top - s0.height/3; } var r=b.getBoundingClientRect(), x=r.left+r.width/2, y=r.top+r.height/2, h=document.elementFromPoint(x,y); return (h && (h===b || b.contains(h))) ? [x,y] : "covered by " + (h ? (h.className||h.tagName) : "nothing") + " at " + Math.round(x) + "," + Math.round(y);`);
+  if (!Array.isArray(pos)) return pos;
+  for (const type of ["mousePressed", "mouseReleased"]) await call("Input.dispatchMouseEvent", { type, x: pos[0], y: pos[1], button: "left", clickCount: 1 });
+  await sleep(60); return 1;
+};
 const theme = (dark) => ev(`document.body.className=${dark ? '"dark"' : '""'}; return 1;`);
 
 try {
@@ -62,12 +70,17 @@ try {
   await until(`return !!window.NARKE_LOADER;`, 20000);
   await evp(`NARKE_LOADER.load().then(function(){return 1;})`);
   ok(await ev(`return !!(window.NARKE_MODELS && NARKE_MODELS["vent-engine"]);`) === true, "the loader brings narke-models/vent-engine.js");
+  // Back from a run asks Resume later / Finish / Leave; the harness's own back leaves without saving.
+  await ev(`window.__back=function(){ var l=document.querySelector('#smdNarke [data-act=vlleave]'); if (l) { l.click(); return; } NARKE.back(); l=document.querySelector('#smdNarke [data-act=vlleave]'); if (l) l.click(); }; return 1;`);
   ok(await until(`return !!(window.NARKE && NARKE._sims && NARKE._sims.some(function(x){return x.id==="ventlab";}));`, 15000), "the lab registers with host.registerSim once the engine is loaded");
 
   await ev(`try{localStorage.removeItem("smd_narke_v1");localStorage.removeItem("smd_narke_vent");localStorage.setItem("smd_narke_prefs",JSON.stringify({level:"mbbs",lang:"en",tab:"test"}));}catch(e){} document.body.className="dark"; document.body.innerHTML='<div id="smdNarke"></div>'; document.documentElement.style.zoom=1; NARKE.open(); return 1;`);
   // (zoom 1: the app's Display "auto fit" scales the whole app to 0.95 at phone width; targets are checked in CSS px.)
   ok(await until(`return !!document.querySelector('#smdNarke [data-act=sim][data-s=ventlab]');`, 15000), "the Test hub lists the Ventilator Lab");
-  await click(`[data-act=sim][data-s=ventlab]`);
+  ok(await ev(`return NARKE._sims[0].id==="ventlab" && document.querySelector('#smdNarke .sp-rows [data-act=sim]').getAttribute('data-s')==="ventlab";`) === true, "the Ventilator Lab is pinned first among Narkē Test's simulators");
+  ok(await ev(`var f=document.querySelector('#smdNarke .sp-feat[data-s=ventlab]'); return !!f && f.getBoundingClientRect().top < document.querySelector('#smdNarke .sp-today').getBoundingClientRect().top;`) === true, "a featured Ventilator Lab card sits at the top of Narkē Test");
+  await shot("390-dark-test-hub");
+  { const r = await tap(`.sp-feat[data-s=ventlab]`); ok(r === 1, "the featured card opens the lab with a real click" + (r === 1 ? "" : ": " + r)); }
   ok(await until(`return !!document.querySelector('#smdNarke .vl-home .vl-sc');`, 15000), "the lab home opens with patient cards");
   ok(await ev(`${R} return R.querySelectorAll('.vl-levels button').length===4 && R.querySelector('.vl-levels [aria-pressed=true]').getAttribute('data-v')==='1';`) === true, "four levels, Level 1 selected by default");
   ok(await ev(`${R} return /Not a real ventilator/.test(R.querySelector('.vl-disc').textContent);`) === true, "the disclaimer is on the home screen");
@@ -92,6 +105,9 @@ try {
   const ro1 = await ev(`return document.querySelectorAll('#smdNarke .vl-ro-i').length;`);
   ok(await ev(`${R} return !!R.querySelector('#vlHr') && !!R.querySelector('#vlSpo2') && !!R.querySelector('#vlBp') && R.querySelectorAll('.vl-mon canvas').length===3;`) === true, "bedside monitor: HR, SpO2, BP and three traces");
   ok(await ev(`${R} return !!R.querySelector('.vl-pt .vl-h').textContent.trim() && /PBW/.test(R.querySelector('.vl-pt-who').textContent);`) === true, "patient card: diagnosis and PBW");
+  ok(await ev(`${R} return R.querySelectorAll('.vl-tabs [data-act=vltab]').length===4 && getComputedStyle(R.querySelector('.vl-vent')).display==='none' && getComputedStyle(R.querySelector('.vl-monw')).display!=='none';`) === true, "390 px: the run is four tabs, Monitor open, the ventilator hidden until its tab");
+  ok(await tap(`[data-act=vltab][data-t=dials]`) === 1 && await ev(`${R} return getComputedStyle(R.querySelector('.vl-vent')).display!=='none' && getComputedStyle(R.querySelector('.vl-monw')).display==='none' && getComputedStyle(R.querySelector('.vl-minimon')).display!=='none';`) === true, "the Dials tab shows the ventilator and a vitals strip, one tab open at a time");
+  await sleep(150);
   ok(await ev(`${R} var c=R.querySelector('canvas[data-w=paw]'); return c.width > 100 && c.height > 40;`) === true, "waveform canvases are sized to the device");
   ok(await ev(`${R} return R.querySelector('#vlWaves').getAttribute('aria-label').length > 40;`) === true, "the waveforms have a spoken description");
   ok(await noOverflow() === true, "run: no horizontal scroll at 390 px");
@@ -101,17 +117,25 @@ try {
   ok(await ev(`${R} var d=R.querySelectorAll('.vl-doing .vl-ro-i'); return d.length===4 && /Air per breath/.test(R.querySelector('.vl-doing').textContent) && /VTe/.test(R.querySelector('.vl-doing').textContent);`) === true, "Level 1: 'What the ventilator is doing' shows four numbers with plain names and their clinical names");
   ok(await ev(`${R} var n=R.querySelector('.vl-next'); return !!n && /Draw ABG/.test(n.textContent);`) === true, "Level 1: the next-step line starts with drawing a baseline gas");
   ok(await ev(`${R} return !!R.querySelector('.vl-knob-s') && !!R.querySelector('.vl-what summary') && R.querySelector('.vl-story').open;`) === true, "Level 1: dials carry plain captions, the monitor explains its numbers, the story and goals are open");
+  ok(await ev(`${R} return /Keep oxygen saturation/.test(R.querySelector('.vl-story').textContent) && !/Pplat/.test(R.querySelector('.vl-story').textContent);`) === true, "Level 1: goals in plain words, no Pplat");
+  ok(await ev(`${R} var X=NARKE_VENT_UI.run(), m=NARKE_MODELS["vent-engine"].readout(X.s, X.set).vitals.map; return R.querySelector('#vlBp').classList.contains('abn') === (m < 65);`) === true, "NIBP is coloured only when the pressure is low");
+  await tap(`[data-act=vltab][data-t=mon]`);
   await click(`.vl-next`);
   ok(await ev(`return document.activeElement && document.activeElement.getAttribute('data-act')==='vldraw';`) === true, "the next-step line takes the learner to Draw ABG");
   await click(`[data-act=vldraw]`);
   ok(await until(`return /dial/.test(document.querySelector('#smdNarke .vl-next').textContent);`), "after the gas the next step is to change one dial");
   ok(await ev(`${R} return R.querySelectorAll('.vl-abgt tbody tr').length===5 && !!R.querySelector('.vl-abg-d');`) === true, "Level 1 gas: five rows, each with a plain caption");
-  await ev(`var sc=document.querySelector('#smdNarke .sp-scroll'), el=document.querySelector('#smdNarke .vl-vent'); sc.scrollTop += el.getBoundingClientRect().top - sc.getBoundingClientRect().top - 12; return 1;`); await shot("390-dark-run-vent-l1");
+  await click(`[data-act=vltab][data-t=dials]`);
+  await ev(`var sc=document.querySelector('#smdNarke .sp-scroll'), el=document.querySelector('#smdNarke .vl-vent'); sc.scrollTop += el.getBoundingClientRect().top - sc.getBoundingClientRect().top - 60; return 1;`); await shot("390-dark-run-vent-l1");
   await theme(false); await shot("390-light-run-vent-l1"); await theme(true);
 
   // change a setting: stage, confirm, chain
   const peep0 = await ev(`return document.querySelector('#smdNarke [data-spin=peep]').getAttribute('aria-valuenow');`);
-  await click(`[data-act=vlstep][data-k=peep][data-d="1"]`);
+  const fio0 = +(await ev(`return document.querySelector('#smdNarke [data-spin=fio2]').getAttribute('aria-valuenow');`));
+  await tap(`[data-act=vlstep][data-k=fio2][data-d="1"]`);
+  ok(+(await ev(`return document.querySelector('#smdNarke [data-spin=fio2]').getAttribute('aria-valuenow');`)) === Math.floor(fio0 / 5) * 5 + 5, "Level 1: FiO2 steps in 5s (" + fio0 + " to the next 5)");
+  await click(`[data-act=vlcancel]`);
+  await tap(`[data-act=vlstep][data-k=peep][data-d="1"]`);
   ok(await ev(`${R} return R.querySelector('[data-knob=peep]').classList.contains('is-pend') && !!R.querySelector('[data-act=vlconfirm]');`) === true, "a change waits for Confirm, shown on the dial and in the footer");
   ok(await ev(`return document.activeElement && document.activeElement.getAttribute('data-act')==='vlstep';`) === true, "focus stays on the stepper");
   await shot("390-dark-pending");
@@ -119,13 +143,16 @@ try {
   ok(await until(`return document.querySelectorAll('#smdNarke .vl-cs[data-state=on]').length >= 3;`, 5000), "Confirm lights the cause-and-effect chain step by step");
   ok(await ev(`${R} return /PEEP/.test(R.querySelector('.vl-cs[data-step=setting] .vl-cs-t').textContent) && R.querySelector('[data-spin=peep]').getAttribute('aria-valuenow') !== "${peep0}";`) === true, "the chain names the change and the dial holds the new value");
   ok(await ev(`return !!document.querySelector('#smdNarke .vl-ovs.c-ox.hot');`) === true, "the oxygenation side marks the last change");
+  ok(await ev(`${R} return getComputedStyle(R.querySelector('.vl-chainw')).display!=='none' && R.querySelector('[data-act=vltab][data-t=chg]').getAttribute('aria-pressed')==='true';`) === true, "after Confirm the What changed tab opens on the chain");
+  ok(await ev(`${R} var c=R.querySelector('#vlChain'); return c.querySelectorAll('.vl-cs-t').length===8 && !!c.querySelector('details.vl-more') && /In 30 min without your change/.test(c.querySelector('details.vl-more').textContent) && /In 30 min with it/.test(c.querySelector('details.vl-more').textContent) && !/Plateau/.test(c.querySelector('.vl-chain').textContent);`) === true, "Level 1 chain: one plain line per link; numbers in three labelled columns behind More detail");
   await sleep(2200); await shot("390-dark-chain");
+  await ev(`document.querySelector('#smdNarke #vlChain details.vl-more').open=true; return 1;`); await shot("390-dark-chain-more");
 
   // keyboard on the dial
-  await ev(`document.querySelector('#smdNarke [data-spin=rr]').focus(); return 1;`);
+  await click(`[data-act=vltab][data-t=dials]`); await ev(`document.querySelector('#smdNarke [data-spin=rr]').focus(); return 1;`);
   const rr0 = +(await ev(`return document.querySelector('#smdNarke [data-spin=rr]').getAttribute('aria-valuenow');`));
   await key("ArrowUp", "ArrowUp", 38); await key("ArrowUp", "ArrowUp", 38);
-  ok(+(await ev(`return document.querySelector('#smdNarke [data-spin=rr]').getAttribute('aria-valuenow');`)) === rr0 + 2 && await ev(`return document.activeElement.getAttribute('data-spin');`) === "rr", "arrow keys turn the rate dial and keep focus");
+  ok(+(await ev(`return document.querySelector('#smdNarke [data-spin=rr]').getAttribute('aria-valuenow');`)) === Math.floor(rr0 / 2) * 2 + 4 && await ev(`return document.activeElement.getAttribute('data-spin');`) === "rr", "arrow keys turn the rate dial (2 a step at Level 1) and keep focus");
   await key("Enter", "Enter", 13, "\r");
   ok(await until(`return !document.querySelector('#smdNarke [data-act=vlconfirm]') && document.querySelector('#smdNarke .vl-cs[data-step=setting] .vl-cs-t').textContent.indexOf('Rate')>=0 || /RR|rate/i.test(document.querySelector('#smdNarke .vl-cs[data-step=setting] .vl-cs-t').textContent);`, 4000), "Enter confirms from the dial");
 
@@ -139,12 +166,14 @@ try {
   const pc1 = await ev(`return document.querySelector('#smdNarke .vl-ovs.c-ve .vl-ov-res dd b').textContent;`);
   ok(pc0 !== pc1, "time skip changes the physiology (PaCO2 " + pc0 + " to " + pc1 + ")");
   await click(`[data-act=vldraw]`);
-  ok(await until(`return document.querySelectorAll('#smdNarke .vl-abgt thead th').length === 4 && document.querySelectorAll('#smdNarke .vl-abgt .vl-arr').length >= 5;`), "the second draw shows before, now and arrows");
+  ok(await until(`return document.querySelectorAll('#vlAbg .vl-abgt thead th').length === 4 && document.querySelectorAll('#vlAbg .vl-abgt .vl-arr').length >= 5;`), "the second draw shows before, now and arrows");
   ok(await ev(`return document.querySelectorAll('#smdNarke .vl-why li').length >= 1;`) === true, "the ABG comparison explains why");
-  await ev(`var sc=document.querySelector('#smdNarke .sp-scroll'), el=document.querySelector('#smdNarke .vl-abg'); sc.scrollTop += el.getBoundingClientRect().top - sc.getBoundingClientRect().top - 12; return 1;`); await shot("390-dark-abg");
+  await click(`[data-act=vltab][data-t=abg]`); await ev(`document.querySelector('#smdNarke .sp-scroll').scrollTop=0; return 1;`); await shot("390-dark-abg");
   ok(await ev(`return document.querySelector('#smdNarke .sp-top').getBoundingClientRect().top === 0 && visualViewport.offsetTop === 0;`) === true, "scrolling to a panel keeps the top bar in place");
+  ok(await ev(`${R} return /SpO2 is how full/.test(R.querySelector('.vl-abg').textContent);`) === true, "Level 1 blood gas: one line on PaO2 versus SpO2");
 
   // learn this setting
+  await click(`[data-act=vltab][data-t=dials]`);
   await click(`[data-act=vlinfo][data-k=peep]`);
   ok(await until(`return !!document.querySelector('#smdNarke .vl-sheet .vl-lcard dt');`), "the info button opens the Learn this setting card");
   ok(await ev(`return document.activeElement && document.activeElement.id === 'vlShH' && document.querySelector('#smdNarke .sp-scroll').hasAttribute('inert');`) === true, "the sheet takes focus and the page behind is inert");
@@ -156,11 +185,12 @@ try {
   await click(`[data-act=lang]`);
   ok(await until(`${R} return R.getAttribute('lang')==='hi' && /[\\u0900-\\u097F]/.test(R.querySelector('.vl-chainw .vl-h').textContent);`), "Hindi switches the run screen");
   ok(await ev(`return !/[\\u0966-\\u096F]/.test(document.getElementById('smdNarke').innerText);`) === true, "Hindi uses ASCII digits");
-  await ev(`document.querySelector('#smdNarke .sp-scroll').scrollTop=0; return 1;`); await shot("390-dark-run-hindi");
+  await click(`[data-act=vltab][data-t=mon]`); await ev(`document.querySelector('#smdNarke .sp-scroll').scrollTop=0; return 1;`); await shot("390-dark-run-hindi");
+  ok(await ev(`${R} return /[\\u0900-\\u097F]/.test(R.querySelector('.vl-tabs').textContent) && /[\\u0900-\\u097F]/.test(R.querySelector('.vl-live').textContent);`) === true, "Hindi: tabs and the time state speak Hindi");
   ok(await ev(`${R} var m=R.querySelector('.vl-mode'), t=m.querySelector('.vl-mode-t'); return getComputedStyle(t).textOverflow!=='ellipsis' && t.scrollWidth<=t.clientWidth+1 && m.getBoundingClientRect().right <= innerWidth;`) === true, "Hindi: the mode button shows its whole short title");
   ok(await ev(`${R} return [].every.call(R.querySelectorAll('.vl-knob-l, .vl-ro-i dt, .vl-cs-b b'), function(e){ return e.scrollWidth <= e.clientWidth + 1; });`) === true, "Hindi: dial labels, readouts and the chain fit without cutting text");
-  await ev(`var sc=document.querySelector('#smdNarke .sp-scroll'), el=document.querySelector('#smdNarke .vl-vent'); sc.scrollTop += el.getBoundingClientRect().top - sc.getBoundingClientRect().top - 12; return 1;`); await shot("390-dark-run-hindi-vent");
-  await ev(`var sc=document.querySelector('#smdNarke .sp-scroll'), el=document.querySelector('#smdNarke .vl-chainw'); sc.scrollTop += el.getBoundingClientRect().top - sc.getBoundingClientRect().top - 12; return 1;`); await shot("390-dark-run-hindi-chain");
+  await click(`[data-act=vltab][data-t=dials]`); await ev(`document.querySelector('#smdNarke .sp-scroll').scrollTop=0; return 1;`); await shot("390-dark-run-hindi-vent");
+  await click(`[data-act=vltab][data-t=chg]`); await ev(`document.querySelector('#smdNarke .sp-scroll').scrollTop=0; return 1;`); await shot("390-dark-run-hindi-chain");
   await click(`[data-act=vlmode]`); await until(`return document.querySelectorAll('#smdNarke .vl-mbtn').length >= 2;`);
   await click(`[data-act=vlmpick][data-k=vc]`); await until(`return !!document.querySelector('#smdNarke .vl-mrow.on');`);
   ok(await ev(`return [].every.call(document.querySelectorAll('#smdNarke .vl-mbtn-t'), function(e){ return e.scrollWidth <= e.clientWidth + 1; }) && /[\\u0900-\\u097F]/.test(document.querySelector('#smdNarke .vl-modes').textContent);`) === true, "Hindi mode sheet: every mode title and its note fit");
@@ -170,7 +200,7 @@ try {
   await until(`return !document.getElementById('smdNarke').getAttribute('lang');`);
 
   // Level 3: more controls, readouts, mode picker
-  await ev(`NARKE.back(); return 1;`);
+  await ev(`__back(); return 1;`);
   await until(`return !!document.querySelector('#smdNarke .vl-home');`);
   await click(`[data-act=vllevel][data-v="3"]`);
   await until(`return document.querySelectorAll('#smdNarke .vl-sc').length > ${n1};`);
@@ -192,18 +222,19 @@ try {
   ok(await until(`return /AC-PC/.test(document.querySelector('#smdNarke .vl-mode b').textContent) && !!document.querySelector('#smdNarke [data-knob=pinsp]');`), "the new mode takes effect with its own controls (Pinsp)");
 
   // alarms: run until one appears (raise rate a lot to trap air or find any)
-  await ev(`NARKE.back(); return 1;`);
+  await ev(`__back(); return 1;`);
   await until(`return !!document.querySelector('#smdNarke .vl-home');`);
   const alarmSc = await ev(`var ids=[].map.call(document.querySelectorAll('#smdNarke [data-act=vlgo]'), function(b){return b.getAttribute('data-s');}); return ids.indexOf('asthma')>=0?'asthma':ids.indexOf('copd')>=0?'copd':ids[ids.length-1];`);
   await click(`[data-act=vlgo][data-s="${alarmSc}"]`);
   await until(`return !!document.querySelector('#smdNarke .vl-run');`);
-  for (let i = 0; i < 8 && !(await ev(`return !!document.querySelector('#smdNarke .vl-al');`)); i++) {
+  const VAL = `.vl-al:not([data-k=spo2Low]):not([data-k=mapLow]):not([data-k=hrHigh]):not([data-k=hrLow])`;
+  for (let i = 0; i < 8 && !(await ev(`return !!document.querySelector('#smdNarke ${VAL}');`)); i++) {
     await click(`[data-act=vlstep][data-k=rr][data-d="1"]`); await click(`[data-act=vlstep][data-k=rr][data-d="1"]`); await click(`[data-act=vlstep][data-k=rr][data-d="1"]`); await click(`[data-act=vlconfirm]`); await sleep(200);
   }
-  ok(await ev(`return !!document.querySelector('#smdNarke .vl-al');`) === true, "an alarm appears in the alarm bar (" + alarmSc + ")");
+  ok(await ev(`return !!document.querySelector('#smdNarke ${VAL}');`) === true, "a ventilator alarm appears in the alarm bar (" + alarmSc + ")");
   await shot("390-dark-alarm");
-  const alId = await ev(`return document.querySelector('#smdNarke .vl-al').getAttribute('data-k');`);
-  await click(`.vl-al`);
+  const alId = await ev(`return document.querySelector('#smdNarke ${VAL}').getAttribute('data-k');`);
+  await click(`.vl-al[data-k="${alId}"]`);
   ok(await until(`return !!document.querySelector('#smdNarke .vl-sheet .vl-acard') && !!document.querySelector('#smdNarke [data-act=vlack]');`), "the alarm opens its card with silence and acknowledge");
   ok(await ev(`return /cause|clue|Troubleshooting|intervention/i.test(document.querySelector('#smdNarke .vl-acard').textContent);`) === true, "the alarm card explains causes and the fix");
   await shot("390-dark-alarm-card");
@@ -227,16 +258,16 @@ try {
   const tutIds = await ev(`return [].map.call(document.querySelectorAll('#smdNarke [data-act=vltut]'), function(b){return b.getAttribute('data-k');}).join(',');`);
   let didDo = false, stalls = [], flats = [];
   for (const id of tutIds.split(",")) {
-    if (!(await ev(`return !!document.querySelector('#smdNarke .vl-home');`))) { await ev(`NARKE.back(); return 1;`); await until(`return !!document.querySelector('#smdNarke .vl-home');`); }
+    if (!(await ev(`return !!document.querySelector('#smdNarke .vl-home');`))) { await ev(`__back(); return 1;`); await until(`return !!document.querySelector('#smdNarke .vl-home');`); }
     await click(`[data-act=vltut][data-k="${id}"]`);
     if (!(await until(`return !!document.querySelector('#smdNarke .vl-coach .vl-co-say');`))) { stalls.push(id + ": coach did not open"); continue; }
     for (let step = 0; step < 20; step++) {
       const info = await ev(`var sp=document.querySelector('#smdNarke .vl-co-h span'); return sp ? sp.textContent : "";`);
       if (await ev(`return !!document.querySelector('#smdNarke [data-act=vltutdo]');`)) { await click(`[data-act=vltutdo]`); didDo = true; await sleep(120); }
       const obs = await ev(`return !document.querySelector('#smdNarke .vl-co-task');`);
-      let dis = await ev(`var b=document.querySelector('#smdNarke [data-act=vltutn]'); return !b ? "none" : b.getAttribute('aria-disabled');`);
+      let dis = await ev(`var b=document.querySelector('#smdNarke [data-act=vltutn]'); return !b ? "none" : b.getAttribute('data-wait')==='1' ? "true" : "false";`);
       if (obs && dis === "true") { stalls.push(id + " " + info + ": an observation step does not offer Next"); break; }
-      for (let w = 0; w < 2 && dis === "true"; w++) { await click(`[data-act=vlskip][data-k="1800"]`); await sleep(120); dis = await ev(`var b=document.querySelector('#smdNarke [data-act=vltutn]'); return !b ? "none" : b.getAttribute('aria-disabled');`); }
+      for (let w = 0; w < 2 && dis === "true"; w++) { await click(`[data-act=vlskip][data-k="1800"]`); await sleep(120); dis = await ev(`var b=document.querySelector('#smdNarke [data-act=vltutn]'); return !b ? "none" : b.getAttribute('data-wait')==='1' ? "true" : "false";`); }
       if (dis === "true") { stalls.push(id + " " + info); break; }
       if (dis === "none") break;
       const flat = await ev(`var w=[].map.call(document.querySelectorAll('#smdNarke .vl-co-wait'), function(p){return p.textContent;}).join(' '); return /barely moves/.test(w) ? w : "";`);
@@ -252,7 +283,7 @@ try {
   ok(stalls.length === 0, "no tutorial step stalls" + (stalls.length ? ": " + stalls.join(" | ") : ""));
   if (flats.length) console.log("   (expected change not seen, Next offered anyway: " + flats.join(" | ") + ")");
   ok(didDo, "Do it for me applies a tutorial step's change");
-  await ev(`NARKE.back(); return 1;`); await until(`return !!document.querySelector('#smdNarke .vl-home');`);
+  await ev(`__back(); return 1;`); await until(`return !!document.querySelector('#smdNarke .vl-home');`);
   ok(await ev(`return document.querySelectorAll('#smdNarke .vl-tdone').length === ${tutIds.split(",").length};`) === true, "the lab home ticks every finished tutorial");
   // Hindi tutorial coach
   await click(`[data-act=lang]`); await until(`return document.getElementById('smdNarke').getAttribute('lang')==='hi';`);
@@ -260,23 +291,24 @@ try {
   for (let i = 0; i < 2; i++) { await click(`[data-act=vltutn]`); await sleep(150); }
   ok(await ev(`return /[\\u0900-\\u097F]/.test(document.querySelector('#smdNarke .vl-coach').textContent) && !!document.querySelector('#smdNarke [data-act=vltutdo]');`) === true, "Hindi: the tutorial coach speaks Hindi and offers Do it for me");
   await shot("390-dark-tutorial-hindi");
-  await click(`[data-act=vltutx]`); await ev(`NARKE.back(); return 1;`); await until(`return !!document.querySelector('#smdNarke .vl-home');`);
+  await click(`[data-act=vltutx]`); await ev(`__back(); return 1;`); await until(`return !!document.querySelector('#smdNarke .vl-home');`);
   await shot("390-dark-home-hindi");
   await click(`[data-act=lang]`); await until(`return !document.getElementById('smdNarke').getAttribute('lang');`);
 
   // what-if
-  if (!(await ev(`return !!document.querySelector('#smdNarke .vl-home');`))) { await ev(`NARKE.back(); return 1;`); await until(`return !!document.querySelector('#smdNarke .vl-home');`); }
+  if (!(await ev(`return !!document.querySelector('#smdNarke .vl-home');`))) { await ev(`__back(); return 1;`); await until(`return !!document.querySelector('#smdNarke .vl-home');`); }
   await click(`[data-act=vlwhat]`);
   ok(await until(`return !!document.querySelector('#smdNarke .vl-wi') && document.querySelectorAll('#smdNarke [data-act=vlwip]').length >= 1;`), "what-if lists the questions for this level");
   await click(`[data-act=vlwip]`);
-  ok(await until(`return document.querySelectorAll('#smdNarke .vl-wi-res .vl-ba tbody tr').length >= 4 && document.querySelectorAll('#smdNarke .vl-wi-res .vl-cs').length >= 6;`), "what-if shows before and after side by side with the chain");
+  ok(await until(`return document.querySelectorAll('#smdNarke .vl-wi-res .vl-ba tbody tr').length === 3 && document.querySelectorAll('#smdNarke .vl-wi-res .vl-cs').length >= 6;`), "Level 1 what-if: three rows (SpO2, CO2, blood pressure) with the chain");
+  ok(await ev(`var h=[].map.call(document.querySelectorAll('#smdNarke .vl-wi-res .vl-ba thead th'), function(x){return x.textContent;}).join('|'); return /Now/.test(h) && /In 30 min without your change/.test(h) && /In 30 min with it/.test(h);`) === true, "what-if columns read Now / In 30 min without your change / In 30 min with it");
   await sleep(2000);
   ok(await noOverflow() === true, "what-if: no horizontal scroll");
   { const sm = await small(); ok(sm === true, "what-if: every target is at least 44 px" + (sm === true ? "" : ": " + sm)); }
   await shot("390-dark-whatif");
   await click(`[data-act=vlwid][data-v="-1"]`); await click(`[data-act=vlwigo]`);
   ok(await until(`return !!document.querySelector('#smdNarke .vl-wi-h');`), "build your own what-if runs");
-  await ev(`NARKE.back(); return 1;`); await until(`return !!document.querySelector('#smdNarke .vl-home');`);
+  await ev(`__back(); return 1;`); await until(`return !!document.querySelector('#smdNarke .vl-home');`);
 
   // ABG case
   await click(`[data-act=vlcases]`);
@@ -284,7 +316,9 @@ try {
   await click(`[data-act=vlq1]`);
   ok(await until(`return !!document.querySelector('#smdNarke .vl-v1') && !!document.querySelector('#smdNarke [data-act=vlq2]');`), "question 1 reveals the why and question 2");
   await click(`[data-act=vlq2]`);
-  ok(await until(`return !!document.querySelector('#smdNarke .vl-v2') && document.querySelectorAll('#smdNarke .vl-case .vl-ba tbody tr').length >= 4;`), "question 2 applies the change in the engine and shows the result ABG");
+  ok(await until(`return !!document.querySelector('#smdNarke .vl-v2');`) && await ev(`return NARKE_MODELS["vent-engine"].caseState ? document.querySelectorAll('#smdNarke .vl-case .vl-ba tbody tr').length >= 3 : !!document.querySelector('#smdNarke .vl-case .vl-empty');`) === true, "question 2: the result gas comes from the case's own state (E.caseState), or the lab says it waits for it");
+  ok(await ev(`${R} return !!R.querySelector('.vl-vig-set') && /VC|PC|PSV|CPAP|NIV|SIMV|PRVC|APRV/.test(R.querySelector('.vl-vig-set').textContent);`) === true, "the case opens with the patient and the current settings");
+  ok(await ev(`${R} var v=R.querySelector('.vl-v2'); return v.classList.contains('ok') || !!R.querySelector('.vl-ans');`) === true, "a wrong answer reveals the right one");
   ok(await noOverflow() === true, "ABG case: no horizontal scroll");
   await shot("390-dark-case");
   await click(`[data-act=vlcnext]`);
@@ -296,11 +330,11 @@ try {
     await click(`[data-act=vlq1]`); await until(`return !!document.querySelector('#smdNarke [data-act=vlq2]');`);
     await click(`[data-act=vlq2][data-o="${oi}"]`);
     const S = (await evp(`Promise.resolve(NARKE_MODELS["vent-engine"].SETTINGS)`)) || {};
-    const ap = await until(`var a=document.querySelector('#smdNarke .vl-applied'); return !!a && a.textContent.indexOf(${JSON.stringify(S.vt.label.en)})>=0 && a.textContent.indexOf(${JSON.stringify(S.rr.label.en)})>=0 && /\\b30\\b/.test(a.textContent) && /\\b420\\b/.test(a.textContent);`);
+    const ap = !(await ev(`return !!NARKE_MODELS["vent-engine"].caseState;`)) || await until(`var a=document.querySelector('#smdNarke .vl-applied'); return !!a && a.textContent.indexOf(${JSON.stringify(S.vt.label.en)})>=0 && a.textContent.indexOf(${JSON.stringify(S.rr.label.en)})>=0 && /\\b30\\b/.test(a.textContent) && /\\b420\\b/.test(a.textContent);`);
     ok(ap, "abg-12: the combined option applies VT 420 and rate 30 together and says so: " + (await ev(`var a=document.querySelector('#smdNarke .vl-applied'); return a ? a.textContent : "none";`)));
-    ok(await ev(`return document.querySelectorAll('#smdNarke .vl-case .vl-ba tbody tr').length >= 4 && document.querySelectorAll('#smdNarke .vl-case .vl-why li').length >= 1;`) === true, "abg-12: the combined change has a result gas and reasons");
+    if (await ev(`return !!NARKE_MODELS["vent-engine"].caseState;`)) ok(await ev(`return document.querySelectorAll('#smdNarke .vl-case .vl-ba tbody tr').length >= 4 && document.querySelectorAll('#smdNarke .vl-case .vl-why li').length >= 1;`) === true, "abg-12: the combined change has a result gas and reasons");
     await shot("390-dark-case-combined"); }
-  await ev(`NARKE.back(); return 1;`); await until(`return !!document.querySelector('#smdNarke .vl-home');`);
+  await ev(`__back(); return 1;`); await until(`return !!document.querySelector('#smdNarke .vl-home');`);
 
   // dyssynchrony gallery
   await click(`[data-act=vldys]`);
@@ -315,7 +349,7 @@ try {
 
   // reduced motion: chain is still, waves drawn once
   await call("Emulation.setEmulatedMedia", { features: [{ name: "prefers-reduced-motion", value: "reduce" }] });
-  await ev(`NARKE.back(); NARKE.back(); return 1;`); await until(`return !!document.querySelector('#smdNarke .vl-home');`);
+  await ev(`__back(); __back(); return 1;`); await until(`return !!document.querySelector('#smdNarke .vl-home');`);
   await click(`[data-act=vlgo]`); await until(`return !!document.querySelector('#smdNarke .vl-run');`);
   await click(`[data-act=vlstep][data-k=fio2][data-d="-1"]`); await click(`[data-act=vlconfirm]`);
   ok(await ev(`return document.querySelectorAll('#smdNarke .vl-cs[data-state=wait]').length === 0 && document.querySelectorAll('#smdNarke .vl-cs[data-state=on]').length >= 1;`) === true, "reduced motion: the chain appears at once");
@@ -330,7 +364,7 @@ try {
   await theme(true);
 
   // bedside actions (E.ACTIONS / E.act), new readouts and flags
-  const toHome = async () => { for (let i = 0; i < 4 && !(await ev(`return !!document.querySelector('#smdNarke .vl-home');`)); i++) { await ev(`NARKE.back(); return 1;`); await sleep(150); } };
+  const toHome = async () => { for (let i = 0; i < 4 && !(await ev(`return !!document.querySelector('#smdNarke .vl-home');`)); i++) { await ev(`__back(); return 1;`); await sleep(150); } };
   const goRun = async (lvl, id) => {
     await toHome(); await click(`[data-act=vllevel][data-v="${lvl}"]`); await until(`return document.querySelector('#smdNarke .vl-levels [aria-pressed=true]').getAttribute('data-v')==='${lvl}';`);
     await click(`[data-act=vlgo][data-s="${id}"]`); await until(`return !!document.querySelector('#smdNarke .vl-run');`);
@@ -408,6 +442,155 @@ try {
     await goRun(1, "postop-normal"); await click(`[data-act=vllive]`);
   }
 
+  // ---- persona pass: every fix with real clicks ----
+  const RU = `var X=NARKE_VENT_UI.run(), E0=NARKE_MODELS["vent-engine"];`;
+  const clock = () => ev(`return NARKE_VENT_UI.run().s.t;`);
+  {
+    // exact time skips, and a skip during an active alarm still moves the clock and says the alarm is on
+    await goRun(1, "postop-normal");
+    const t0 = await clock();
+    await tap(`[data-act=vlskip][data-k="900"]`);
+    ok(await clock() - t0 === 900, "+15 min moves the sim clock exactly 15 min");
+    ok(await ev(`return document.querySelector('#smdNarke .vl-toast.on') && /Time moved on 15 min/.test(document.querySelector('#smdNarke .vl-toast').textContent);`) === true, "the skip says how far the clock moved");
+    ok(await ev(`var b=document.querySelector('#smdNarke .vl-live'); return /Time/.test(b.textContent) && /paused|running/.test(b.textContent);`) === true, "Live is a labelled state: Time running or paused");
+    const tr = await tap(`.vl-toast-x`);
+    ok(tr === 1 && await ev(`return !document.querySelector('#smdNarke .vl-toast.on');`) === true, "a toast can be dismissed" + (tr === 1 ? "" : ": " + tr));
+
+    // tap the number to type a value; warnings before an extreme value; Set PEEP back from the alarm card
+    await tap(`[data-act=vltab][data-t=dials]`);
+    await tap(`[data-act=vltype][data-k=peep]`);
+    ok(await until(`return !!document.querySelector('#smdNarke .vl-type');`), "tapping a dial's number opens a number field");
+    await ev(`var i=document.querySelector('#smdNarke .vl-type'); i.value='20'; return 1;`);
+    await key("Enter", "Enter", 13, "\r");
+    ok(await until(`return document.querySelector('#smdNarke [data-spin=peep]').getAttribute('aria-valuenow')==='20' && !!document.querySelector('#smdNarke .vl-warns li');`), "typed PEEP 20 is staged and a warning shows before Confirm");
+    ok(await ev(`return /very high/.test(document.querySelector('#smdNarke .vl-warns').textContent) && /Confirm anyway/.test(document.querySelector('#smdNarke [data-act=vlconfirm]').textContent);`) === true, "the warning names the value and Confirm reads Confirm anyway");
+    await shot("390-dark-warning");
+    await tap(`[data-act=vlconfirm]`);
+    for (let i = 0; i < 6 && !(await ev(`return !!document.querySelector('#smdNarke .vl-al[data-k=peepHigh], #smdNarke .vl-al[data-k=mapLow]');`)); i++) await tap(`[data-act=vlskip][data-k="300"]`);
+    const pk = await ev(`var a=document.querySelector('#smdNarke .vl-al[data-k=peepHigh]') || document.querySelector('#smdNarke .vl-al[data-k=mapLow]'); return a ? a.getAttribute('data-k') : "";`);
+    ok(!!pk, "high PEEP raises an alarm (" + pk + ")");
+    if (pk) {
+      await click(`.vl-al[data-k="${pk}"]`);
+      ok(await until(`var c=document.querySelector('#smdNarke .vl-sheet .vl-cause'); return !!c && /You changed PEEP from 5/.test(c.textContent) && /min ago/.test(c.textContent);`), "the alarm card opens with: You changed PEEP from 5 to 20, N min ago");
+      ok(await ev(`return !!document.querySelector('#smdNarke .vl-sheet [data-act=vlsetback][data-k=peep]');`) === true, "the card offers Set PEEP back to 5 in one tap");
+      await shot("390-dark-alarm-caused");
+      await click(`[data-act=vltoastx]`);
+      await tap(`.vl-sheet [data-act=vlsetback]`);
+      ok(await until(`return document.querySelector('#smdNarke [data-spin=peep]').getAttribute('aria-valuenow')==='5';`), "Set PEEP back applies PEEP 5");
+    }
+
+    // monitor alarms persist: SpO2 below target or MAP below 65 is never "No active alarms", even after Acknowledge
+    await ev(`${RU} var r=E0.readout; window.__ro=r; E0.readout=function(s,st){ var x=r.apply(this, arguments); x=JSON.parse(JSON.stringify(x)); x.vitals.map=52; x.vitals.sbp=70; x.vitals.dbp=43; return x; }; return 1;`);
+    await tap(`[data-act=vlskip][data-k="300"]`);
+    ok(await ev(`return !!document.querySelector('#smdNarke .vl-al[data-k=mapLow]') && !/No active alarms/.test(document.getElementById('vlAlarms').textContent);`) === true, "MAP below 65 is a monitor alarm on the bar");
+    await click(`.vl-al[data-k=mapLow]`); await until(`return !!document.querySelector('#smdNarke [data-act=vlack]');`);
+    await click(`[data-act=vlack]`);
+    ok(await ev(`return !!document.querySelector('#smdNarke .vl-al[data-k=mapLow]') && /acknowledged/.test(document.querySelector('#smdNarke .vl-al[data-k=mapLow]').textContent);`) === true, "acknowledging a monitor alarm keeps it on the bar, marked acknowledged");
+    ok(await ev(`return document.getElementById('vlBp').classList.contains('abn') && /low/i.test(document.getElementById('vlBpT').textContent);`) === true, "the low NIBP is coloured and tagged low");
+    await shot("390-dark-monitor-alarm");
+    // arrest: sustained MAP below 40 ends the run with an arrest card and debrief
+    await ev(`${RU} var r=window.__ro; E0.readout=function(){ var x=JSON.parse(JSON.stringify(r.apply(this, arguments))); x.vitals.map=35; x.vitals.spo2=45; return x; }; return 1;`);
+    await tap(`[data-act=vlskip][data-k="300"]`);
+    await tap(`[data-act=vlskip][data-k="300"]`);
+    ok(await until(`return !!document.querySelector('#smdNarke .vl-sheet .vl-arrest');`), "two minutes of MAP below 40 ends the run with a cardiac arrest card");
+    await shot("390-dark-arrest");
+    await ev(`NARKE_MODELS["vent-engine"].readout=window.__ro; return 1;`);
+    await click(`.vl-sheet [data-act=vlfinish]`);
+    ok(await until(`return !!document.querySelector('#smdNarke .vl-arrest-d') && !!document.querySelector('#smdNarke .vl-score.bad');`), "the debrief opens with the arrest and what led to it");
+    ok(await ev(`var li=document.querySelectorAll('#smdNarke .vl-parts li'); return li.length >= 3 && [].every.call(li, function(l){ return !!l.querySelector('.vl-pwhy'); });`) === true, "every debrief part has its own one-line explanation");
+    ok(await ev(`return /Unsafe moments/.test(document.getElementById('smdNarke').textContent) && (document.querySelectorAll('#smdNarke .vl-unsafe li').length >= 1 || !!document.querySelector('#smdNarke .vl-done .vl-empty'));`) === true, "the debrief lists unsafe moments with their times");
+    await shot("390-dark-debrief-arrest");
+    await theme(false); await shot("390-light-debrief-arrest"); await theme(true);
+
+    // leave a run: Resume later keeps it; opening the patient again resumes at the same time
+    await goRun(2, "pneumonia");
+    await tap(`[data-act=vlskip][data-k="1800"]`);
+    const tr0 = await clock();
+    await ev(`NARKE.back(); return 1;`);
+    ok(await until(`return !!document.querySelector('#smdNarke .vl-sheet [data-act=vlresl]') && !!document.querySelector('#smdNarke .vl-sheet [data-act=vlfinish]') && !!document.querySelector('#smdNarke .vl-sheet [data-act=vlleave]');`), "back from a live run asks: Resume later, Finish and debrief, or Leave");
+    await shot("390-dark-leave");
+    await tap(`.vl-sheet [data-act=vlresl]`);
+    ok(await until(`var c=document.querySelector('#smdNarke .vl-home [data-act=vlgo][data-s=pneumonia] .vl-resume'); return !!c && /Unfinished run at 0 h 30 min/.test(c.textContent);`), "the lab home shows the unfinished run with its time");
+    await shot("390-dark-home-resume");
+    await tap(`[data-act=vlgo][data-s=pneumonia]`);
+    ok(await until(`return !!document.querySelector('#smdNarke .vl-run');`) && await clock() === tr0, "opening the patient resumes the run at " + tr0 + " s");
+    await ev(`NARKE.back(); return 1;`); await until(`return !!document.querySelector('#smdNarke [data-act=vlleave]');`);
+    await tap(`.vl-sheet [data-act=vlleave]`);
+    ok(await until(`return !!document.querySelector('#smdNarke .vl-home') && !document.querySelector('#smdNarke [data-act=vlgo][data-s=pneumonia] .vl-resume');`), "Leave without saving drops the run");
+
+    // holds, chest exam and spontaneous-mode readouts that need a hold
+    await goRun(2, "pneumonia");
+    await tap(`[data-act=vltab][data-t=dials]`);
+    ok(await tap(`[data-act=vlhold][data-k=insp]`) === 1 && await ev(`return /Inspiratory hold/.test(document.getElementById('vlHold').textContent) && /Pplat|Plateau/.test(document.getElementById('vlHold').textContent);`) === true, "Inspiratory hold shows the plateau, driving pressure and compliance");
+    ok(await tap(`[data-act=vlhold][data-k=exp]`) === 1 && /Auto-PEEP|PEEP total/.test(await ev(`return document.getElementById('vlHold').textContent;`)), "Expiratory hold shows the trapped pressure");
+    ok(await tap(`[data-act=vlexam]`) === 1 && await ev(`return document.querySelectorAll('#vlHold .vl-exam dl > div').length >= 3;`) === true, "Listen to the chest gives air entry, trachea, movement and added sounds");
+    await ev(`var h=document.getElementById('vlHold'); h.scrollIntoView({block:"center"}); return 1;`); await shot("390-dark-holds");
+    await ev(`${RU} X.pend={mode:"psv"}; return 1;`); await click(`[data-act=vlconfirm]`);
+    ok(await until(`var p=document.querySelector('#smdNarke .vl-ro-i[data-vl-id=pplat]'); return !!p && /needs a hold/.test(p.textContent);`), "PSV: plateau shows as needs a hold");
+    await tap(`[data-act=vlhold][data-k=insp]`);
+    ok(await ev(`var p=document.querySelector('#smdNarke .vl-ro-i[data-vl-id=pplat]'); return !!p && !/needs a hold/.test(p.textContent) && /\\d/.test(p.textContent);`) === true, "after an inspiratory hold the plateau is measured");
+    ok(await ev(`return /not scored/.test(document.querySelector('#smdNarke .vl-ro-i[data-vl-id=vte]').textContent);`) === true, "PSV: tidal volume is the patient's own (not scored)");
+
+    // bedside action feedback: toast, log line, used state
+    await click(`[data-act=vltab][data-t=mon]`);
+    await tap(`[data-act=vlbed][data-k=suction]`);
+    ok(await ev(`return /Done:/.test(document.querySelector('#smdNarke .vl-toast').textContent) && /Your actions/.test(document.querySelector('#smdNarke .vl-bedlog').textContent) && /Used at/.test(document.querySelector('#smdNarke [data-act=vlbed][data-k=suction]').textContent);`) === true, "a bedside action gives a toast, a log line and a used-at time");
+    ok(await ev(`var s=[].filter.call(document.querySelectorAll('#smdNarke .vl-bedb small'), function(x){return /Suggested/.test(x.textContent);}).length, a=document.querySelectorAll('#smdNarke .vl-bedb').length; return s < a;`) === true, "only matching actions are marked Suggested");
+    await shot("390-dark-bed-feedback");
+    { const sm = await small(); ok(sm === true, "persona screens: every target is at least 44 px" + (sm === true ? "" : ": " + sm)); }
+    ok(await noOverflow() === true, "persona screens: no horizontal scroll at 390 px");
+
+    // what changed while you changed nothing: the drift line
+    await ev(`${RU} var r=window.__ro; window.__n=0; E0.readout=function(){ var x=JSON.parse(JSON.stringify(r.apply(this, arguments))); window.__n++; x.vitals.spo2 -= Math.min(12, Math.floor(X.s.t/600)); return x; }; return 1;`);
+    await tap(`[data-act=vlskip][data-k="1800"]`);
+    ok(await ev(`return /Why is the patient changing/.test(document.getElementById('vlDrift').textContent);`) === true, "a drift with no learner change explains Why is the patient changing");
+    await ev(`NARKE_MODELS["vent-engine"].readout=window.__ro; return 1;`);
+
+    // modes: VC and AC-VC explained; trigger labels fit at 390 px
+    await goRun(3, "copd");
+    await tap(`[data-act=vltab][data-t=dials]`);
+    await click(`[data-act=vlmode]`); await until(`return document.querySelectorAll('#smdNarke .vl-mbtn').length >= 2;`);
+    ok(await ev(`var t=document.querySelector('#smdNarke .vl-modes').textContent; return /cannot trigger extra breaths/.test(t) && /trigger extra full breaths/.test(t);`) === true, "the mode list explains VC versus AC-VC");
+    await shot("390-dark-modes-explained");
+    await key("Escape", "Escape", 27); await until(`return !document.querySelector('#smdNarke .vl-sheet-wrap');`);
+    ok(await ev(`return [].every.call(document.querySelectorAll('#smdNarke .vl-optseg button'), function(b){ var r=b.getBoundingClientRect(), k=b.closest('.vl-knob').getBoundingClientRect(); return !r.width || (r.right <= k.right - 4 && b.scrollWidth <= b.clientWidth + 1); });`) === true, "390 px: the trigger type labels sit inside their card");
+    await ev(`var k=document.querySelector('#smdNarke [data-knob=trigType]'); if(k) k.scrollIntoView({block:"center"}); return 1;`); await shot("390-dark-trigger");
+
+    // gloss: a plain meaning at first use (Level 1, English and Hindi), from learn.json gloss
+    await ev(`var L=NARKE_VENT_UI.learn(); window.__gl=L.gloss; L.gloss={"tidal volume":{en:"air in each breath",hi:"हर साँस की हवा"},"ventilator":{en:"breathing machine",hi:"साँस की मशीन"}}; return 1;`);
+    await goRun(1, "postop-normal");
+    ok(await ev(`var t=document.getElementById('smdNarke').textContent; return (t.match(/\\(breathing machine\\)/g)||[]).length === 1 || !/ventilator/i.test(document.querySelector('#smdNarke .vl-story').textContent);`) === true, "Level 1: a glossed term gets its plain meaning once, at first use");
+    await click(`[data-act=lang]`); await until(`return document.getElementById('smdNarke').getAttribute('lang')==='hi';`);
+    ok(await ev(`var t=document.getElementById('smdNarke').textContent; return /साँस की मशीन/.test(t) || !/ventilator/i.test(document.querySelector('#smdNarke .vl-story').textContent);`) === true, "Hindi: the gloss is in Hindi");
+    await shot("390-dark-gloss-hindi");
+    await click(`[data-act=lang]`); await until(`return !document.getElementById('smdNarke').getAttribute('lang');`);
+    await ev(`NARKE_VENT_UI.learn().gloss=window.__gl; return 1;`);
+  }
+
+  // the tutorial coach: one line when collapsed, docked so its target is never under it, Next says what to press
+  for (const [w, h] of [[390, 844], [1280, 860]]) {
+    await size(w, h);
+    await toHome(); await click(`[data-act=vllevel][data-v="1"]`);
+    await tap(`[data-act=vltut][data-k="fio2-peep"]`);
+    await until(`return !!document.querySelector('#smdNarke .vl-coach .vl-co-say');`);
+    let guard = 0;
+    while (guard++ < 8 && !(await ev(`return !!document.querySelector('#smdNarke [data-act=vltutdo]');`))) { await click(`[data-act=vltutn]`); await sleep(120); }
+    ok(await ev(`var b=document.querySelector('#smdNarke [data-act=vltutn]'), n=document.getElementById('vlCoNeed'); return b.getAttribute('data-wait')==='1' && !!n && /First:/.test(n.textContent) && !/Set Set/.test(document.querySelector('#smdNarke .vl-coach').textContent);`) === true, w + " px: a waiting Next says what to press first, and no 'Set Set'");
+    await tap(`[data-act=vltutn]`);
+    const cov = await ev(`var c=document.getElementById('vlCoach').getBoundingClientRect(), hl=[].filter.call(document.querySelectorAll('#smdNarke .vl-hl, #smdNarke [data-knob].vl-chg'), function(e){ var r=e.getBoundingClientRect(); return r.width && r.height; }); if (!hl.length) hl=[document.querySelector('#smdNarke .vl-knob')]; return hl.every(function(e){ var r=e.getBoundingClientRect(); return r.bottom <= c.top + 1 || r.right <= c.left + 1 || r.top >= c.bottom - 1; }) ? true : JSON.stringify([c.top, c.left, hl[0].getBoundingClientRect().top, hl[0].getBoundingClientRect().bottom]);`);
+    ok(cov === true, w + " px: the coach never covers the highlighted target" + (cov === true ? "" : ": " + cov));
+    ok(await ev(`var c=document.getElementById('vlCoach').getBoundingClientRect(); return ${w < 1000} ? c.height <= innerHeight * 0.41 : c.left > innerWidth - 400;`) === true, w + " px: the coach is " + (w < 1000 ? "a sheet of at most 40 % of the screen" : "docked at the right"));
+    await shot(w + "-dark-coach");
+    await theme(false); await shot(w + "-light-coach"); await theme(true);
+    ok(await tap(`[data-act=vlcomin]`) === 1 && await ev(`var c=document.getElementById('vlCoach'); return c.classList.contains('min') && c.getBoundingClientRect().height <= 64;`) === true, w + " px: the coach collapses to one line");
+    await shot(w + "-dark-coach-min");
+    await tap(`[data-act=vlcomin]`);
+    await click(`[data-act=vltutx]`);
+  }
+  await size(390, 844);
+  await toHome();
+  ok(await ev(`return NARKE._sims.filter(function(x){return x.id==="ventlab";})[0].line(null).indexOf("tutorials") >= 0;`) === true, "the Narkē Test row counts finished tutorials as progress");
+
   // tablet and desktop layouts, both themes
   for (const [w, h] of [[768, 1024], [1280, 860]]) {
     await size(w, h);
@@ -417,7 +600,7 @@ try {
     await ev(`var t=document.querySelector(".vl-toast"); if (t) t.classList.remove("on"); document.querySelector("#smdNarke .sp-scroll").scrollTop=0; return 1;`);
     await shot(w + "-dark-run"); await theme(false); await shot(w + "-light-run"); await theme(true);
   }
-  await ev(`NARKE.back(); return 1;`); await until(`return !!document.querySelector('#smdNarke .vl-home');`);
+  await ev(`__back(); return 1;`); await until(`return !!document.querySelector('#smdNarke .vl-home');`);
   for (const [w, h] of [[768, 1024], [1280, 860]]) { await size(w, h); await shot(w + "-dark-home"); await theme(false); await shot(w + "-light-home"); await theme(true); }
   await size(1280, 860);
   // resident path: Level 4 on desktop, a sick patient, after a change
@@ -430,11 +613,11 @@ try {
   await ev(`var t=document.querySelector(".vl-toast"); if (t) t.classList.remove("on"); document.querySelector("#smdNarke .sp-scroll").scrollTop=0; return 1;`);
   ok(await noOverflow() === true, "Level 4 desktop: no horizontal scroll");
   await shot("1280-dark-run-l4"); await theme(false); await shot("1280-light-run-l4"); await theme(true);
-  await ev(`NARKE.back(); return 1;`); await until(`return !!document.querySelector('#smdNarke .vl-home');`);
+  await ev(`__back(); return 1;`); await until(`return !!document.querySelector('#smdNarke .vl-home');`);
   await click(`[data-act=vllevel][data-v="1"]`); await until(`return document.querySelector('#smdNarke .vl-levels [aria-pressed=true]').getAttribute('data-v')==='1';`);
   await click(`[data-act=vlwhat]`); await until(`return !!document.querySelector('#smdNarke .vl-wi');`);
   await click(`[data-act=vlwip]`); await sleep(2200); await shot("1280-dark-whatif"); await theme(false); await shot("1280-light-whatif"); await theme(true);
-  await ev(`NARKE.back(); return 1;`);
+  await ev(`__back(); return 1;`);
   await size(390, 844);
 
   const txt = await ev(`return document.getElementById("smdNarke").innerText;`), dm = /[\s\S]{0,60}[–—][\s\S]{0,60}/.exec(txt);

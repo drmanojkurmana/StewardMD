@@ -330,7 +330,7 @@
         '<div class="sp-scroll sp-pad"><div class="sp-col">' + (host._learn ? host._learn.tabs("test") : "") +
         '<div class="sp-levelrow"><div class="sp-seg" role="group" aria-label="' + s("level") + '">' + seg + "</div>" +
         '<span class="sp-small">' + s(lv === "resident" ? "residentSub" : "mbbsSub") + "</span></div>" +
-        '<section class="sp-today" aria-label="' + s("today") + '">' + todayHtml + "</section>" +
+        featuredHtml() + '<section class="sp-today" aria-label="' + s("today") + '">' + todayHtml + "</section>" +
         section("clinics", clinicRows(lv)) + section("questions", bankRows()) + section("drills", simRows(lv)) +
         (host._learn ? "" : section("reading", readRows()) + section("tools", toolRow())) +
         '<p class="sp-note"><button type="button" class="sp-link" data-act="sources">' + s("sources") + "</button></p>" +
@@ -350,6 +350,13 @@
     function simLine(x) {
       var r = (st.store.sims || {})[x.id];
       return (x.line ? x.line(r) : r && r.n ? s("simLine", { ok: fmt(r.ok), n: fmt(r.n) }) : s("simNone")) + (x.level === "resident" ? " " + lockBadge("drill." + x.id) : "");
+    }
+    // A featured simulator card (Narkē: the Ventilator Lab) on the Test hub and the Learn home.
+    function featuredHtml() {
+      return host._sims.filter(function (x) { return x.feature && x.open; }).map(function (x) {
+        return '<button type="button" class="sp-feat" data-act="sim" data-s="' + esc(x.id) + '"><span class="sp-lead" aria-hidden="true">' + tile(x.icon || "target") + "</span>" +
+          '<span class="sp-feat-b"><b>' + tx(x.title) + "</b><span>" + tx(x.feature) + '</span><small>' + simLine(x) + '</small></span><span class="sp-chev" aria-hidden="true">' + ico("chev") + "</span></button>";
+      }).join("");
     }
     function simRows() {
       return host._sims.map(function (x) { return row("sim", ' data-s="' + esc(x.id) + '"', tile(x.icon || "target"), tx(x.title), x.sub ? tx(x.sub) : "", simLine(x)); }).join("");
@@ -640,15 +647,17 @@
       ls: ls, save: save, savePrefs: savePrefs, setPref: setPref, today: today, imgUrl: imgUrl, getJSON: getJSON, level: level, levelLocked: levelLocked,
       trial: trial, gate: gate, lockBadge: lockBadge, enabled: enabled, maikBtn: maikBtn, root: root, paint: paint, top: top, markTop: markTop,
       langBtn: langBtn, row: row, tile: tile, section: section, leave: leave, setRet: setRet, renderHub: renderHub, renderTest: renderTest,
-      renderStats: renderStats, renderSources: renderSources, renderTools: renderTools, clinic: clinic, clinicItems: clinicItems, startClinic: startClinic,
+      renderStats: renderStats, featuredHtml: featuredHtml, renderSources: renderSources, renderTools: renderTools, clinic: clinic, clinicItems: clinicItems, startClinic: startClinic,
       loadAll: loadAll, ACTIONS: ACTIONS, KEYS: KEYS, BASE: BASE, SESSION_SIZE: SESSION_SIZE, NEW_CAP: NEW_CAP, FEW: FEW
     };
     host.open = open; host.close = close; host.back = back; host.isOpen = isOpen; host.openCase = openCase;
     host.registerClinic = registerClinic;
     // A simulator's own UI replaces the placeholder entry the drills feature lists for its model.
+    // pin: true lists it first on the Test hub; feature: {en, hi} also gives it a featured card above the plan.
     host.registerSim = function (x) {
-      for (var i = 0; i < host._sims.length; i++) if (host._sims[i].id === x.id) { host._sims[i] = x; return x; }
-      host._sims.push(x); return x;
+      for (var i = 0; i < host._sims.length; i++) if (host._sims[i].id === x.id) { host._sims.splice(i, 1); break; }
+      if (x.pin) host._sims.unshift(x); else host._sims.splice(i, 0, x);
+      return x;
     };
     host.registerExplorer = function (x) { if (!host._explore.some(function (y) { return y.id === x.id; })) host._explore.push(x); return x; };
     // Repaint the current screen (language, content reload); the hub when a screen has no repaint of its own.

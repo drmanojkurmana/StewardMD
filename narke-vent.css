@@ -77,7 +77,6 @@ body:not(.dark):not(.v3-dark) .nrk-root {
 
 /* ================= run: layout ================= */
 .nrk-root .vl-scroll { padding: 12px 12px 20px; scroll-padding-top: 12px; }
-.nrk-root .vl-scroll.has-coach { padding-bottom: 260px; }
 .nrk-root .vl-run { display: flex; flex-direction: column; gap: 12px; }
 .nrk-root .vl-colA, .nrk-root .vl-colB, .nrk-root .vl-colC { display: contents; }
 .nrk-root .vl-pt { order: 1; } .nrk-root .vl-monw { order: 2; } .nrk-root .vl-vent { order: 3; } .nrk-root .vl-set { order: 4; }
@@ -291,33 +290,60 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-al.danger, body:not(.dark):not(.v3-d
 /* ---- end, toast, status ---- */
 .nrk-root .vl-end { display: flex; flex-direction: column; gap: 4px; }
 .nrk-root .vl-end .sp-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
-.nrk-root .vl-toast { position: absolute; z-index: 30; left: 12px; right: 12px; bottom: calc(env(safe-area-inset-bottom, 0px) + 84px); max-width: 520px; margin: 0 auto;
-  display: flex; flex-direction: column; gap: 4px; padding: 12px 14px; border-radius: 14px; background: var(--nk-s2); color: var(--sp-text); border: 1px solid var(--vl-cline);
-  box-shadow: var(--vl-shadow); font-size: 14.5px; line-height: 1.45; opacity: 0; transform: translateY(8px); pointer-events: none; transition: opacity 200ms ease, transform 260ms var(--nk-ease); }
-.nrk-root .vl-toast.on { opacity: 1; transform: none; }
-.nrk-root .vl-toast:empty { display: none; }
-.nrk-root .vl-toast-k { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; letter-spacing: .03em; color: var(--nk-acc); }
+/* The toast is a strip in the page flow under the alarm bar: it never covers a control and it can be dismissed. */
+.nrk-root .vl-toast { flex: 0 0 auto; display: none; align-items: flex-start; gap: 10px; padding: 8px 6px 8px 12px; border-bottom: 1px solid var(--vl-cline);
+  background: color-mix(in srgb, var(--nk-acc) 9%, var(--sp-bg)); color: var(--sp-text); font-size: 14px; line-height: 1.45; }
+.nrk-root .vl-toast.on { display: flex; }
+@media (prefers-reduced-motion: no-preference) { .nrk-root .vl-toast.on { animation: vl-in 220ms cubic-bezier(0.23, 1, 0.32, 1); } }
+@keyframes vl-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+.nrk-root .vl-toast-k { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 6px; padding-top: 2px; font-size: 12px; font-weight: 700; letter-spacing: .03em; color: var(--nk-acc); }
 .nrk-root .vl-toast-k .smd-ico { width: 16px; height: 16px; }
+.nrk-root .vl-toast-m { flex: 1 1 auto; min-width: 0; padding-top: 1px; text-wrap: pretty; }
+.nrk-root .vl-toast-x { flex: 0 0 44px; width: 44px; height: 44px; margin: -8px 0 -8px; display: grid; place-items: center; border: 0; background: none; color: var(--sp-mut); border-radius: 10px; }
+.nrk-root .vl-toast-x .smd-ico { width: 18px; height: 18px; }
 
-/* ---- tutorial coach ---- */
-.nrk-root .vl-coach { position: absolute; z-index: 20; left: 12px; right: 12px; bottom: calc(env(safe-area-inset-bottom, 0px) + 80px); max-width: 560px; margin: 0 auto;
-  background: var(--vl-card); border: 1.5px solid var(--nk-acc); border-radius: 18px; padding: 12px 14px 12px; box-shadow: var(--vl-shadow); }
-.nrk-root .vl-co-h { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 12.5px; color: var(--sp-mut); font-weight: 600; }
-.nrk-root .vl-co-x { min-height: 44px; padding: 0 4px; border: 0; background: none; color: var(--sp-link); font-weight: 600; font-size: 13px; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--sp-link-line); }
+/* ---- tutorial coach: docked, never over its target ---- */
+/* Phone and tablet: a compact sheet in the flow above the footer (the scroller shrinks), at most 40 % of the screen. */
+.nrk-root .vl-coach { position: relative; z-index: 20; flex: 0 0 auto; max-height: 40dvh; overflow-y: auto; overscroll-behavior: contain;
+  background: var(--vl-card); border-top: 1.5px solid var(--nk-acc); border-radius: 18px 18px 0 0; padding: 4px 14px 10px; box-shadow: 0 -10px 30px rgba(0, 0, 0, .18); }
+.nrk-root .vl-co-h { display: flex; justify-content: space-between; align-items: center; gap: 4px; font-size: 12.5px; color: var(--sp-mut); font-weight: 600; }
+.nrk-root .vl-co-min { flex: 1 1 auto; min-width: 0; min-height: 44px; display: flex; align-items: center; gap: 6px; padding: 0; border: 0; background: none; color: var(--sp-mut); font: inherit; font-size: 12.5px; font-weight: 650; text-align: left; }
+.nrk-root .vl-co-ht { min-width: 0; text-wrap: balance; }
+.nrk-root .vl-co-chev { display: inline-flex; transform: rotate(90deg); transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1); }
+.nrk-root .vl-co-chev .smd-ico { width: 16px; height: 16px; }
+.nrk-root .vl-coach.min .vl-co-chev { transform: rotate(-90deg); }
+.nrk-root .vl-coach.min .vl-co-body, .nrk-root .vl-coach.min .vl-co-bar, .nrk-root .vl-coach.min .vl-co-need, .nrk-root .vl-coach.min .vl-co-f { display: none; }
+.nrk-root .vl-coach.min { padding-bottom: 4px; }
+.nrk-root .vl-co-x { min-height: 44px; padding: 0 4px; border: 0; background: none; color: var(--sp-link); font-weight: 600; font-size: 13px; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--sp-link-line); white-space: nowrap; flex: 0 0 auto; }
 .nrk-root .vl-co-bar { height: 3px; border-radius: 2px; background: var(--vl-cline); overflow: hidden; margin: 0 0 10px; }
 .nrk-root .vl-co-bar i { display: block; width: 100%; height: 100%; background: var(--nk-acc); transform-origin: left; transition: transform 260ms var(--nk-ease); }
-.nrk-root .vl-co-say { margin: 0; font-size: 16px; line-height: 1.45; text-wrap: pretty; outline: none; }
+.nrk-root .vl-co-say { margin: 0; font-size: 15.5px; line-height: 1.45; text-wrap: pretty; outline: none; }
 .nrk-root .vl-co-task { margin: 8px 0 0; font-size: 14.5px; line-height: 1.45; }
 .nrk-root .vl-co-task b { color: var(--nk-acc); }
-.nrk-root .vl-co-done, .nrk-root .vl-co-ok { display: inline-flex; align-items: center; gap: 4px; color: var(--nk-ok); font-weight: 650; }
+.nrk-root .vl-co-done, .nrk-root .vl-co-ok { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 4px; color: var(--nk-ok); font-weight: 650; }
 .nrk-root .vl-co-ok { margin: 8px 0 0; font-size: 14.5px; }
 .nrk-root .vl-co-done .smd-ico, .nrk-root .vl-co-ok .smd-ico { width: 16px; height: 16px; }
 .nrk-root .vl-co-wait { margin: 8px 0 0; font-size: 14px; color: var(--sp-mut); }
-.nrk-root .vl-co-f { display: flex; gap: 8px; justify-content: flex-end; margin-top: 10px; }
+.nrk-root .vl-co-nums { margin: 8px 0 0; display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 13.5px; font-variant-numeric: tabular-nums; }
+.nrk-root .vl-co-nums b { font-size: 11.5px; font-weight: 750; letter-spacing: .04em; text-transform: uppercase; color: var(--sp-mut); align-self: center; }
+.nrk-root .vl-co-nums i { font-style: normal; color: var(--sp-mut); }
+.nrk-root .vl-co-link { min-height: 44px; margin-top: 4px; padding: 0; border: 0; background: none; color: var(--sp-link); font: inherit; font-size: 14px; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--sp-link-line); }
+.nrk-root .vl-co-need { margin: 10px 0 0; font-size: 13.5px; line-height: 1.4; font-weight: 600; color: var(--nk-acc); text-wrap: pretty; }
+.nrk-root .vl-co-f { display: flex; gap: 8px; justify-content: flex-end; margin-top: 8px; }
 .nrk-root .vl-co-f .sp-btn { min-height: 46px; flex: 1 1 0; max-width: 220px; }
-.nrk-root .vl-co-f .sp-btn[aria-disabled="true"] { background: var(--nk-s2); color: var(--sp-mut); }
+.nrk-root .vl-co-f .sp-btn.is-wait { background: var(--nk-s2); color: var(--sp-mut); }
 .nrk-root .vl-hl { outline: 2px solid var(--nk-acc); outline-offset: 3px; box-shadow: 0 0 0 7px var(--nk-acc-soft); border-radius: 12px; }
 .nrk-root tr.vl-hl { outline-offset: -2px; box-shadow: none; }
+/* Wide screens: a column at the right of the run, above the footer; the run keeps clear of it. */
+@media (min-width: 1000px) {
+  .nrk-root .vl-coach { position: absolute; right: 16px; bottom: var(--vl-cob, 96px); width: 360px; max-height: calc(100% - var(--vl-cob, 96px) - 150px);
+    border: 1.5px solid var(--nk-acc); border-radius: 18px; padding: 4px 16px 12px; box-shadow: var(--vl-shadow); }
+  .nrk-root .vl-scroll.has-coach { padding-right: 392px; }
+  .nrk-root .vl-scroll.has-coach .vl-run { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
+  .nrk-root .vl-scroll.has-coach .vl-colA { grid-column: 1; grid-row: 1; }
+  .nrk-root .vl-scroll.has-coach .vl-colB { grid-column: 2; grid-row: 1 / span 2; }
+  .nrk-root .vl-scroll.has-coach .vl-colC { grid-column: 1; grid-row: 2; }
+}
 
 /* ---- sheet ---- */
 .nrk-root .vl-sheet-wrap { position: absolute; inset: 0; z-index: 60; }
@@ -537,3 +563,112 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-bedb-i { color: var(--nk-text); }
 .nrk-root .vl-bag-p { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--vl-ox); transform-origin: left; transform: scaleX(var(--p, 1)); }
 @media (prefers-reduced-motion: no-preference) { .nrk-root .vl-bag-p { transition: transform 1s linear; } }
 .nrk-root .vl-applied { margin: 12px 0 0; font-size: 14px; line-height: 1.45; }
+
+/* ================= persona pass (UI pass 4) ================= */
+/* Phone: four tabs, one open at a time, with a vitals strip so the patient is never out of sight. */
+.nrk-root .vl-tabbar { display: none; }
+@media (max-width: 759px) {
+  .nrk-root .vl-tabbar { display: block; position: sticky; top: -12px; z-index: 6; margin: -12px -12px 12px; padding: 8px 12px 6px; background: var(--sp-bg); border-bottom: 1px solid var(--vl-cline); }
+  .nrk-root .vl-tabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); width: 100%; }
+  .nrk-root .vl-tabs button { padding: 0 4px; font-size: 13px; line-height: 1.2; white-space: normal; text-wrap: balance; touch-action: manipulation; }
+  .nrk-root .vl-tabs button[aria-pressed="true"] { background: var(--nk-acc-soft); color: var(--sp-text); font-weight: 700; box-shadow: inset 0 0 0 1.5px var(--nk-acc); }
+  .nrk-root .vl-scroll[data-tab="mon"] [data-g]:not([data-g="mon"]), .nrk-root .vl-scroll[data-tab="dials"] [data-g]:not([data-g="dials"]),
+  .nrk-root .vl-scroll[data-tab="chg"] [data-g]:not([data-g="chg"]), .nrk-root .vl-scroll[data-tab="abg"] [data-g]:not([data-g="abg"]) { display: none; }
+  .nrk-root .vl-scroll[data-tab="mon"] .vl-minimon { display: none; }
+}
+.nrk-root .vl-minimon { margin: 6px 2px 0; display: flex; flex-wrap: wrap; gap: 2px 14px; font-size: 13px; font-weight: 650; font-variant-numeric: tabular-nums; }
+.nrk-root .vl-minimon i { font-style: normal; font-weight: 600; color: var(--sp-mut); font-size: 11.5px; }
+.nrk-root .vl-minimon .abn { color: var(--nk-bad); }
+
+/* Values coloured only when outside this patient's targets; NIBP is ink unless low. */
+.nrk-root .vl-nibp .vl-bp { color: var(--sp-text); }
+.nrk-root .vl-v.abn, .nrk-root .vl-nibp .vl-v.abn { color: var(--nk-bad); }
+.nrk-root .vl-abn:empty { display: none; }
+.nrk-root .vl-abn-t { display: inline-block; margin-top: 2px; padding: 1px 5px; border-radius: 5px; font-size: 11px; font-weight: 750; letter-spacing: .03em; text-transform: uppercase; color: #fff; background: var(--nk-bad); }
+.nrk-root .vl-bp .vl-abn-t { margin: 0 0 0 4px; vertical-align: 3px; }
+.nrk-root .vl-drift:empty { display: none; }
+.nrk-root .vl-drift-p { margin: 10px 0 0; padding: 8px 10px; border-radius: 10px; background: color-mix(in srgb, var(--nk-warn) 12%, transparent); font-size: 13.5px; line-height: 1.45; text-wrap: pretty; }
+.nrk-root .vl-drift-p b { color: var(--sp-text); }
+
+/* dials: tap the number to type; warnings before Confirm */
+.nrk-root button.vl-dial-v { top: 18px; left: 14px; right: 14px; min-height: 48px; border: 0; background: none; color: inherit; font: inherit; line-height: 1; padding: 6px 0 0; justify-content: flex-start; cursor: text; touch-action: manipulation; }
+.nrk-root button.vl-dial-v small { margin-top: 3px; }
+.nrk-root .vl-dial-v:focus-visible { outline: 2px solid var(--sp-acc); outline-offset: 2px; border-radius: 8px; }
+.nrk-root .vl-type { position: absolute; left: 14px; right: 14px; top: 24px; height: 40px; font: inherit; font-size: 20px; font-weight: 700; text-align: center; font-variant-numeric: tabular-nums;
+  color: var(--sp-text); background: var(--vl-card); border: 1.5px solid var(--nk-acc); border-radius: 10px; padding: 0 4px; -moz-appearance: textfield; }
+.nrk-root .vl-type::-webkit-inner-spin-button, .nrk-root .vl-type::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.nrk-root .vl-warns { list-style: none; max-width: 760px; margin: 0 auto 8px; padding: 0; display: grid; gap: 4px; }
+.nrk-root .vl-warns li { display: flex; gap: 8px; align-items: flex-start; padding: 8px 10px; border-radius: 10px; background: color-mix(in srgb, var(--nk-warn) 16%, var(--sp-bg)); font-size: 13.5px; line-height: 1.4; }
+.nrk-root .vl-warns .smd-ico { width: 18px; height: 18px; color: var(--nk-warn); flex: 0 0 auto; }
+.nrk-root .vl-warnbtn { background: var(--nk-warn) !important; color: #1d1300 !important; }
+.nrk-root .vl-optseg button { padding: 0 6px; font-size: 13px; min-width: 0; overflow-wrap: anywhere; }
+.nrk-root .vl-knob-opt { padding-right: 10px; }
+.nrk-root .vl-optseg { margin-right: 0; width: 100%; }
+
+/* time: a labelled state, not a mystery "Live" */
+.nrk-root .vl-live-t { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.1; }
+.nrk-root .vl-live-t small { font-size: 10.5px; font-weight: 600; color: var(--sp-mut); letter-spacing: .03em; }
+.nrk-root .vl-time { grid-template-columns: 1.35fr repeat(4, 1fr); }
+
+/* holds and the chest exam */
+.nrk-root .vl-holds { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.nrk-root .vl-hbtn { flex: 1 1 140px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--vl-cline);
+  background: var(--nk-s2); color: var(--sp-text); font-size: 13.5px; font-weight: 650; touch-action: manipulation; transition: transform 120ms ease-out; }
+.nrk-root .vl-hbtn:active { transform: scale(0.97); }
+.nrk-root .vl-hbtn .smd-ico { width: 18px; height: 18px; }
+.nrk-root #vlHold:empty { display: none; }
+.nrk-root #vlHold { margin-top: 8px; padding: 10px 12px; border-radius: 12px; background: var(--vl-knob); font-size: 13.5px; line-height: 1.45; }
+.nrk-root .vl-hres { margin: 0 0 4px; font-variant-numeric: tabular-nums; }
+.nrk-root .vl-exam dl { margin: 4px 0 0; display: grid; gap: 4px; }
+.nrk-root .vl-exam dl > div { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 8px; }
+.nrk-root .vl-exam dt { color: var(--sp-mut); font-weight: 600; }
+.nrk-root .vl-exam dd { margin: 0; }
+.nrk-root .vl-ro-i.nm b.vl-nmv { font-size: 13px; font-weight: 650; color: var(--sp-mut); }
+.nrk-root .vl-rrnote { margin-top: 6px; }
+
+/* alarm card: the learner's own change first */
+.nrk-root .vl-cause { margin: 0 0 12px; padding: 12px; border-radius: 12px; background: color-mix(in srgb, var(--nk-warn) 14%, transparent); display: grid; gap: 10px; }
+.nrk-root .vl-cause p { margin: 0; font-weight: 600; line-height: 1.45; }
+.nrk-root .vl-look { margin: 0 0 10px !important; font-weight: 600; }
+.nrk-root .vl-more { margin-top: 12px; }
+.nrk-root .vl-more > summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; font-weight: 600; font-size: 14px; color: var(--sp-link); }
+.nrk-root .vl-bedlog { margin-top: 10px; }
+.nrk-root .vl-bedlog .vl-h3 { margin-top: 4px; }
+.nrk-root .vl-bedlog ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; font-size: 13.5px; }
+.nrk-root .vl-bedlog b { font-variant-numeric: tabular-nums; color: var(--sp-mut); font-weight: 650; margin-right: 6px; }
+
+/* projections: now, 30 min without, 30 min with */
+.nrk-root .vl-p3 { margin-top: 12px; }
+.nrk-root .vl-p3 thead th { font-size: 11.5px; line-height: 1.25; text-wrap: balance; }
+.nrk-root .vl-p3 th small { font-size: 10.5px; font-weight: 500; color: var(--sp-mut); }
+.nrk-root .vl-p3 td b + .vl-arr { margin-left: 2px; }
+.nrk-root .vl-little { margin: 10px 0 0; padding: 8px 10px; border-radius: 10px; background: var(--vl-knob); font-size: 13.5px; line-height: 1.45; font-weight: 600; }
+.nrk-root .vl-tech { margin: 8px 0 0; padding-left: 18px; display: grid; gap: 4px; font-size: 13px; line-height: 1.45; color: var(--sp-mut); }
+
+/* home: resume an unfinished run */
+.nrk-root .vl-cards > li { display: flex; flex-direction: column; gap: 6px; }
+.nrk-root .vl-resume { display: block; margin-top: 4px; font-size: 12.5px; font-weight: 650; color: var(--nk-acc); }
+.nrk-root .vl-fresh { align-self: flex-end; min-height: 44px; padding: 0 12px; border: 0; background: none; color: var(--sp-link); font-size: 13.5px; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--sp-link-line); }
+.nrk-root .vl-leave-b { margin: 0 !important; }
+.nrk-root .vl-leave-f { display: grid; gap: 8px; width: 100%; }
+.nrk-root .vl-leave-x { color: var(--nk-bad); }
+
+/* debrief: one sentence per part, unsafe moments with times, a good run */
+.nrk-root .vl-pwhy { grid-column: 1 / -1; margin: -4px 0 4px; font-size: 13px; line-height: 1.45; color: var(--sp-mut); text-wrap: pretty; }
+.nrk-root .vl-unsafe b { font-variant-numeric: tabular-nums; }
+.nrk-root .vl-good { font-size: 15px; line-height: 1.5; }
+.nrk-root .vl-good ul { margin: 0; padding-left: 20px; }
+.nrk-root .vl-goals td.nsc { color: var(--sp-mut); font-weight: 600; }
+.nrk-root .vl-arrest { font-size: 15px; line-height: 1.5; }
+.nrk-root .vl-arrest p { margin: 0 0 8px; }
+.nrk-root .vl-arrest-d { margin: 4px 0 14px; padding: 14px; border-radius: 14px; border: 1.5px solid var(--nk-bad); background: color-mix(in srgb, var(--nk-bad) 10%, transparent); }
+.nrk-root .vl-arrest-d .vl-h { color: var(--nk-bad); margin-bottom: 6px; }
+
+/* ABG cases: the patient and the settings first */
+.nrk-root .vl-vig { margin-bottom: 12px; font-size: 14.5px; line-height: 1.5; }
+.nrk-root .vl-vig p { margin: 0; }
+.nrk-root .vl-vig-set { margin-top: 6px !important; font-variant-numeric: tabular-nums; color: var(--sp-mut); }
+.nrk-root .vl-vig-set b { color: var(--sp-text); }
+.nrk-root .vl-ans { margin: 6px 0 0; font-size: 14.5px; font-weight: 650; }
+.nrk-root .vl-abgcard dt .vl-abg-d { font-weight: 500; }
+.nrk-root .vl-mv { display: block; margin-top: 2px; font-size: 12px !important; font-weight: 500; color: var(--sp-mut); }

@@ -211,7 +211,7 @@
       else if (!allIds().length) body = '<section class="sp-today ln-empty"><p class="sp-today-line">' + s("none") + '</p><button type="button" class="sp-btn sec sp-wide" data-act="tab" data-t="test">' + ico("target") + " " + s("goTest") + "</button></section>";
       else body = startCard() + reviseRow() + unitsHtml();
       paint(I.markTop(s("homeSub")) +
-        '<div class="sp-scroll sp-pad ln-home"><div class="sp-col">' + tabs("learn") + body + (host._exploreUI ? host._exploreUI.homeHtml() : "") + referenceHtml() +
+        '<div class="sp-scroll sp-pad ln-home"><div class="sp-col">' + tabs("learn") + (I.featuredHtml ? I.featuredHtml() : "") + body + (host._exploreUI ? host._exploreUI.homeHtml() : "") + referenceHtml() +
         "</div></div>", focusSel);
       wireUnits();
     }
