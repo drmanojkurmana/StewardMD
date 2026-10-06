@@ -1,0 +1,20 @@
+# Local smoke config (smoke/run.sh). Never deploy this.
+name = "prep-arena-smoke"
+main = "entry.js"
+compatibility_date = "2026-06-27"
+[[durable_objects.bindings]]
+name = "MATCHMAKER"
+class_name = "Matchmaker"
+[[durable_objects.bindings]]
+name = "BATTLE_ROOM"
+class_name = "BattleRoom"
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["Matchmaker", "BattleRoom"]
+[[d1_databases]]
+binding = "PREP_ARENA_DB"
+database_name = "prep-arena-db"
+database_id = "local-smoke"
+[[r2_buckets]]
+binding = "PREP_BANK_R2"
+bucket_name = "stewardmd-offline"

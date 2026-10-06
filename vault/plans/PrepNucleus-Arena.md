@@ -67,3 +67,26 @@ StewardMD teal identity). Everything stays behind `smd_prep` (OFF) plus a second
 ## Deploy (owner yes each)
 Create D1 `prep-arena-db` + apply schema; `wrangler deploy` the Worker; add the D1 + DO bindings to the Pages
 `wrangler.toml`; then the Pages deploy goes with the branch merge (owner).
+
+## Server build notes and deviations (2026-10-06, branch `feat/prep-arena-server`)
+Built as specified unless listed here. Details: [[modules/PrepNucleus]] "Arena server".
+1. **Sockets:** the exam's `Matchmaker` keeps the client's socket for queue AND battle; `BattleRoom` holds the state and
+   timing and is reached by RPC (a WebSocket cannot move between Durable Objects). The wire protocol is unchanged.
+2. **Extra server messages** the client should handle: `{t:"busy"}` (already in a battle), `{t:"slow"}` (more than 10
+   queue joins a minute), `match` with `resume:true` and `score` after a reconnect (followed by the open `q` if the
+   player has not answered it), `end` with `forfeit:"you"|"opp"|"both"` when a disconnect decided it (both gone = draw).
+   Before round 1 the match screen shows for 3 s; between rounds the result shows for 2.5 s.
+3. **Schema:** `arena_battles` also has `a_after`, `b_after` (each side's rating after the battle) for the rating trend
+   in `me/stats`; `battles`/`wins` default 0. A leaver's id in past battles becomes `gone` (the opponent keeps the record).
+4. **Events:** exams `neet-pg`, `neet-ss`, `usmle` (USMLE: 20 Q daily, 100 Q weekly, +1/0). Ids are
+   `<daily|weekly>-<exam>-<YYYYMMDD IST>`; only events within 35 days of now are created. `events` returns, per kind,
+   `current` (latest started, open or closed) and `next`, each with `status` and the caller's `entry` state.
+5. **Start/submit:** `start` also returns `id` and `startedAt`; calling it again resumes the same paper. `ms` is the
+   server's elapsed time up to the entry's end (the client's `ms` is ignored). Errors: 403 `consent-required`, 425
+   `not-open`, 409 `not-started` / `already-submitted`, 410 `too-late` / `closed`, 503 `bank-empty` (NEET-SS today).
+6. **Draw:** subjects in seeded order (one each, then in proportion to counts) rather than largest first, so a 20 Q
+   paper does not always favour the same subjects; flagged items excluded; the KV auto-hidden list is not applied
+   (it could change the paper between start and submit).
+7. **Rating board:** one rating per player (as in the table); `board?exam=&period=` lists players with a battle in
+   that exam in the period (7 days for `week`), by rating. `me/stats` returns `{ player, events, battles, trend }`.
+8. **One active battle per uid** is enforced per exam (one Matchmaker per exam), not across exams.
