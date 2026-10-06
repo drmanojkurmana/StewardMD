@@ -249,8 +249,55 @@
   // Every subject line is protected from re-scrubbing (its titles would otherwise match BOOK_RE).
   var LINES_RE = new RegExp(SUBJECTS.map(function (x) { return lineOf(x[2]).replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }).join("|"), "gi");
   function hasBooks(v) { var s = String(v || "").replace(LINES_RE, ""); LINES_RE.lastIndex = 0; return (BOOKS_TEST.test(s) || BOOKS_TEST2.test(s)) && !/^\s*page\s+\d+\s+of\s+\d+\s*$/i.test(s); }
-  function scrubBooks(text, opts) {
+  /* Book locators inside brackets (owner, 2026-10-06, HIV page: "(cross-ref ch.49)", "(the reference
+   * ch.208; opportunistic-infection associations cross-ref ch.62, ch.222 ...)" - "I shouldn't see this").
+   * The KB writes chapters in lowercase ("ch.49"), which CHAP_RE (capital "Ch." only, so "CH50" stays a
+   * lab test) never matched. Inside a bracket every "; "/", " item that is a citation (a chapter, page,
+   * table, cross-ref or a book name) is dropped; a bracket left empty goes, "(AML, Ch.109)" keeps "(AML)".
+   * Bare "cross-ref ch.49" outside a bracket goes too. */
+  var CITE_ITEM = /(?:\b(?:[Cc]hapter|[Cc]hap\.|[Cc]h\.)\s*\d|\bCh \d|\bcross-?ref(?:erence)?s?\b|\b(?:pp?\.|pg\.?)\s*\d|\bpages?\s+\d|\bTables?\s+\d+[-\u2013]\d+|\bHarrison\b|\bSanford\b|\b\d{1,2}(?:st|nd|rd|th)?\s*ed(?:ition|\.)?\b|\b2[12]e\b)/;
+  function stripLocators(text) {
     var t = String(text == null ? "" : text);
+    if (!/\b(?:[Cc]h(?:apter|ap)?\.?\s*\d|cross-?ref|Tables?\s+\d+[-\u2013]\d)|\b(?:pp?\.|pg\.?)\s*\d/.test(t)) return t;
+    var o = t;
+    t = t.replace(/\s*\(([^()]*)\)/g, function (m, inner) {
+      var segs = inner.split(/\s*;\s*/), keep = [], cited = false;
+      segs.forEach(function (seg) {
+        if (/\bcross-?ref/i.test(seg) || /^\s*(?:the reference|see(?: also)?)\b/i.test(seg)) { cited = true; return; }   // a pointer, whatever follows
+        var items = seg.split(/\s*,\s*/).filter(function (x) { if (x && CITE_ITEM.test(x)) { cited = true; return false; } return !!x; });
+        if (items.length) keep.push(items);
+      });
+      // a citation bracket's bare figure/page numbers ("(801, Table 105-7)") go with it
+      if (cited) keep = keep.map(function (items) { return items.filter(function (x) { return !/^\d{1,4}(?:\s*[-\u2013\/]\s*\d{1,4})*$/.test(x.trim()); }); }).filter(function (items) { return items.length; });
+      keep = keep.map(function (items) { return items.join(", "); });
+      if (keep.length === segs.length && keep.join("; ") === inner.trim()) return m;
+      return keep.length ? m.replace(/\([^()]*\)/, "(" + keep.join("; ") + ")") : "";
+    });
+    // bare pointers outside a bracket: "cross-ref ch.49", "see ch.12", "(cf. Ch. 3)"
+    t = t.replace(/\s*[,;]?\s*\b(?:cross-?ref(?:erence)?s?|see(?: also)?|cf\.)\s+(?:[Cc]h(?:apter|ap)?\.?\s*\d{1,4}[A-Za-z]?(?:\s*[,;]\s*(?:[Cc]h\.?\s*)?\d{1,4}[A-Za-z]?)*)/g, "");
+    t = t.replace(/\s*[,;(]?\s*\bch\.\s*\d{1,4}[A-Za-z]?(?:\s*,\s*ch\.\s*\d{1,4}[A-Za-z]?)*\)?/g, function (m) { var a = /^\s*\(/.test(m), z = /\)\s*$/.test(m); return a && z ? "" : a ? "(" : z ? ")" : ""; });
+    // Book TABLE numbers in prose ("per Table 231-2 (Manifestations ...)", "catalogued in Table 468-1"):
+    // a trailing "per/in/see Table N-N" goes with any bracketed table title; one standing as the subject of
+    // a sentence ("Table 23-1 lists ...") reads "the reference", the app's word for the source in prose.
+    var TBL = "(?:(?:Harrison(?:'s|\u2019s)?|the reference)\\s+)?Tables?\\s+\\d{1,4}[-\u2013]\\d{1,3}[A-Za-z]?(?:\\s*\\([^()]*\\))?";
+    t = t.replace(new RegExp("\\s*\\b(?:per|in|from|see|using)\\s+" + TBL, "g"), "");
+    var lead = function (str, off) { return /(?:^|[.!?:]\s+)$/.test(str.slice(0, off)) ? "The reference" : "the reference"; };
+    t = t.replace(new RegExp("\\b" + TBL + "(?=\\s+[a-z])", "g"), function (m, off, str) { return lead(str, off); });   // "Table 23-1 lists ..."
+    t = t.replace(new RegExp("\\s*[,;]?\\s*\\b" + TBL, "g"), "");                                                          // a bare citation
+    // "Harrison's chapter 383 does not ..." / "chapter 12 describes ..." -> "The reference does not ..."
+    t = t.replace(/\b(?:(?:Harrison(?:'s|\u2019s)?|the reference)\s+)?[Cc]hapter\s+\d{1,4}[A-Za-z]?\b(?=\s+[a-z])/g, function (m, off, str) { return lead(str, off); });
+    // A bracket that only held book locators ("(Tables 470-1/470-2)" -> "(the reference/470-2)",
+    // "(Fig 801, Table 105-7)" -> "(801, the reference, 105-7)") goes; bare numbers are dropped only when
+    // the bracket is a converted citation, so "(types 1, 2, 3)" is never touched.
+    t = t.replace(/\s*\(([^()]*\bthe reference\b[^()]*)\)/g, function (m, inner) {
+      var items = inner.split(/\s*[;,]\s*/).filter(function (x) { return x && !/^(?:the reference(?:\s*\/\s*\d[\d\-\u2013\/]*)?|\d{1,4}(?:\s*[-\u2013\/]\s*\d{1,4})*)$/i.test(x.trim()); });
+      return items.length ? " (" + items.join(", ") + ")" : "";
+    });
+    t = t.replace(/\(\s*\)/g, "").replace(/\s+([,.;:)])/g, "$1").replace(/ {2,}/g, " ");
+    return t === o ? o : t;
+  }
+  function scrubBooks(text, opts) {
+    var t = stripLocators(String(text == null ? "" : text));
     if (!hasBooks(t)) return t;
     var o = t, REF = (opts && opts.ref) || GENERIC_REF, kept = [];
     t = t.replace(LINES_RE, function (m) { if (m === REF) return "\u0003"; kept.push(m); return "\u0004" + (kept.length - 1) + "\u0004"; });
@@ -488,5 +535,5 @@
   if (W && W.document) {
     if (W.document.readyState === "loading") W.document.addEventListener("DOMContentLoaded", boot); else boot();
   }
-  return { strip: strip, scrubBooks: scrubBooks, GENERIC_REF: GENERIC_REF, refFor: refFor, SUBJECTS: SUBJECTS, hasBooks: hasBooks, booksOn: booksOn, tidy: tidy, display: display, norm: norm, same: same, hasDash: hasDash, dashOn: dashOn, stripDeep: stripDeep, segments: segments, has: has, classify: classify, enabled: enabled, fixTree: function (n) { return fixTree(n); }, MAP: MAP };
+  return { strip: strip, scrubBooks: scrubBooks, stripLocators: stripLocators, GENERIC_REF: GENERIC_REF, refFor: refFor, SUBJECTS: SUBJECTS, hasBooks: hasBooks, booksOn: booksOn, tidy: tidy, display: display, norm: norm, same: same, hasDash: hasDash, dashOn: dashOn, stripDeep: stripDeep, segments: segments, has: has, classify: classify, enabled: enabled, fixTree: function (n) { return fixTree(n); }, MAP: MAP };
 });

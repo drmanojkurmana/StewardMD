@@ -2930,6 +2930,9 @@
   // Only strips citation parentheticals (Harrison… / p.NNN); clinical parentheticals
   // like "(>45 mg/dL)" or "(meningoencephalitis)" are preserved.
   function stripCite(t) {
+    // Chapter / cross-ref / table locators first (emoji-icons.js stripLocators): done here, before the
+    // text is split into bold runs, so a bracket like "(cross-ref ch.49)" is still one piece.
+    try { if (window.SMD_EMOJI_ICONS && SMD_EMOJI_ICONS.stripLocators) t = SMD_EMOJI_ICONS.stripLocators(t); } catch (e) {}
     return String(t == null ? "" : t)
       .replace(/\s*\((?:pp?\.?\s*\d|Harrison)[^)]*\)/gi, "")
       .replace(/\b(?:pages?\s+|pp?\.\s*)\d+(?:\s*[–-]\s*\d+)?(?:\s*,\s*(?:pp?\.\s*)?\d+(?:\s*[–-]\s*\d+)?)*\b/gi, "")
@@ -3018,6 +3021,7 @@
     if (e.prognosis) full += '<div class="ev-subh">Prognosis</div><p>' + medFormat(e.prognosis) + '</p>';
     if (!pearls.length && !sections.length) return null;
     function referenceTitle(value) {
+      try { if (window.SMD_EMOJI_ICONS && SMD_EMOJI_ICONS.stripLocators) value = SMD_EMOJI_ICONS.stripLocators(value); } catch (e) {}
       return String(value || "").replace(/Harrison(?:[’']s)?(?:\s+Principles of Internal Medicine)?/gi, "Harrison's Principles of Internal Medicine")
         .replace(/\s*[,;·–-]?\s*\(?\d+(?:e\b|(?:st|nd|rd|th)\s+ed(?:ition)?\.?)[\s\S]*$/i, "")
         .replace(/\s*\(?\bpp?\.\s*\d[\s\S]*$/i, "").replace(/[,;\s]+$/, "").trim();
