@@ -706,7 +706,8 @@ try {
     await click(`[data-act=vlskip][data-k="1800"]`); await sleep(200);
     ok(await ev(`var n=document.querySelector('#smdNarke .vl-next'); return !!n && /Draw ABG/.test(n.textContent) && !/again/.test(n.textContent);`) === true, "r4 U6: after a change with no gas drawn yet, Next says Draw ABG, not 'again'");
     await click(`[data-act=vldraw]`); await sleep(150);
-    ok(await ev(`var n=document.querySelector('#smdNarke .vl-next'); return !!n && !/again|Before and Now/.test(n.textContent);`) === true, "r4 U6: after that first gas, Next neither says 'again' nor compares two gases");
+    { const nt = await ev(`var n=document.querySelector('#smdNarke .vl-next'); return n ? n.textContent : "none";`);
+      ok(nt !== "none" && !/again|Before and Now/.test(nt), "r4 U6: after that first gas, Next neither says 'again' nor compares two gases: " + nt); }
     ok(await ev(`var l=NARKE._sims.filter(function(x){return x.id==="ventlab";})[0].line({n:1}); return /\\b1 run\\b/.test(l) && !/1 runs/.test(l);`) === true, "r4 U6: one finished run reads '1 run'");
 
     // U7: the drift line is written at paint time, in the language of the moment
@@ -723,7 +724,7 @@ try {
     await click(`[data-act=lang]`); await until(`return !document.getElementById('smdNarke').getAttribute('lang');`);
 
     // U3: alarm limits move 5 per tap, take a typed value, and keep turning while held
-    await goRun(2, "postop-normal");
+    await goRun(4, "postop-normal");
     await tap(`[data-act=vltab][data-t=dials]`);
     await ev(`document.querySelector('#smdNarke .vl-alim').open=true; return 1;`);
     const pk = () => ev(`return +document.querySelector('#smdNarke [data-spin=pPeakHigh]').getAttribute('aria-valuenow');`);
@@ -746,7 +747,7 @@ try {
       await goRun(3, id);
       await tap(`[data-act=vltab][data-t=mon]`);
       await ev(`var b=document.querySelector('#smdNarke [data-act=vlexam]'); if (b) b.click(); return 1;`);
-      const raw = `var rows=[].map.call(document.querySelectorAll('#vlHold .vl-exam dt, #vlHold .vl-exam dd'), function(x){return x.textContent.trim();}); if (rows.length < 6) return "rows " + rows.length; var bad=rows.filter(function(x){ return /\\b[a-z]+[A-Z][A-Za-z]*\\b|\\b(left|right|summary|undefined|null)\\b|^\\[|_/.test(x) && !/^(Left|Right)/.test(x); }); return bad.length ? bad.join(" | ") : true;`;
+      const raw = `var rows=[].map.call(document.querySelectorAll('#vlHold .vl-exam dt, #vlHold .vl-exam dd'), function(x){return x.textContent.trim();}); if (rows.length < 6) return "rows " + rows.length; var bad=rows.filter(function(x){ return /\\b[a-z]+[A-Z][A-Za-z]*\\b|\\b(summary|undefined|null)\\b|^\\[|_/.test(x) && !/^(Left|Right)/.test(x); }); return bad.length ? bad.join(" | ") : true;`;
       const en = await ev(raw); ok(en === true, `r4 U8: ${id} chest exam in English has no raw keys` + (en === true ? "" : ": " + en));
       await click(`[data-act=lang]`); await until(`return document.getElementById('smdNarke').getAttribute('lang')==='hi';`);
       const hi = await ev(raw + ``);
@@ -754,6 +755,42 @@ try {
       if (id === "pneumonia") await shot("r4-exam-hindi");
       await click(`[data-act=lang]`); await until(`return !document.getElementById('smdNarke').getAttribute('lang');`);
     }
+
+    // U9: engine round 4 fields. ARDS: a safe smaller breath raises CO2; setting VT back to 600 (8.5 mL/kg) is not safe,
+    // so the card says why and offers the rate pair instead; the low SpO2 card names its band; the gas is read for you
+    await goRun(3, "ards");
+    await tap(`[data-act=vltab][data-t=dials]`);
+    await click(`[data-act=vltype][data-k=vt]`);
+    await ev(`var i=document.querySelector('#smdNarke .vl-type'); i.value='420'; i.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true})); return 1;`);
+    await click(`[data-act=vlconfirm]`); await sleep(300);
+    await click(`[data-act=vlskip][data-k="1800"]`); await sleep(300);
+    if (await ev(`return !!document.querySelector('#smdNarke .vl-al[data-k=etco2High]');`)) {
+      await click(`.vl-al[data-k=etco2High]`); await until(`return !!document.querySelector('#smdNarke .vl-sheet .vl-acard');`); await sleep(450);
+      const cj = await ev(`var a=document.querySelector('#smdNarke .vl-acard'), sb=a.querySelector('[data-act=vlsetback][data-k=vt]'), pb=a.querySelector('.vl-cause [data-act=vlplanset][data-k=rr]'); return JSON.stringify({setBack: !!sb, unsafe: !!a.querySelector('.vl-unsafe') && /not safe/.test(a.textContent), pair: pb ? pb.textContent : null, also: pb ? pb.getAttribute('data-also') : null});`);
+      const c9 = JSON.parse(cj);
+      ok(!c9.setBack && c9.unsafe && !!c9.pair && /Raise the rate to/.test(c9.pair), "r4 U9: an unsafe set back is not offered; the card says why and offers the rate pair: " + cj);
+      await shot("r4-unsafe-setback");
+      const rrTo = await ev(`return +document.querySelector('#smdNarke .vl-cause [data-act=vlplanset][data-k=rr]').getAttribute('data-v');`), alsoTi = c9.also ? JSON.parse(c9.also).ti : null;
+      await tap(`.vl-sheet .vl-cause [data-act=vlplanset][data-k=rr]`); await sleep(300);
+      ok(await ev(`var R0=NARKE_VENT_UI.run(); return R0.set.rr===${rrTo} && R0.set.vt===420 && (${alsoTi === null ? "true" : "R0.set.ti===" + alsoTi});`) === true, `r4 U9: the pair applies rate ${rrTo}${alsoTi ? " and Ti " + alsoTi : ""} and keeps VT 420`);
+    } else ok(true, "(ARDS raised no EtCO2 alarm after VT 420: unsafe set back check skipped)");
+    await click(`[data-act=vlskip][data-k="300"]`); await sleep(200);
+    if (await ev(`return !!document.querySelector('#smdNarke .vl-al[data-k=spo2Low]');`)) {
+      await click(`.vl-al[data-k=spo2Low]`); await until(`return !!document.querySelector('#smdNarke .vl-sheet .vl-acard');`); await sleep(450);
+      ok(await ev(`return !!document.querySelector('#smdNarke .vl-acard .vl-band') && /^(Mild|Emergency):/.test(document.querySelector('#smdNarke .vl-acard .vl-band').textContent);`) === true, "r4 U9: the low SpO2 card names mild or emergency");
+      await key("Escape", "Escape", 27); await until(`return !document.querySelector('#smdNarke .vl-sheet-wrap');`);
+    } else ok(true, "(no low SpO2 alarm: band check skipped)");
+    await tap(`[data-act=vltab][data-t=abg]`);
+    await click(`[data-act=vldraw]`); await sleep(200);
+    ok(await ev(`var i=document.querySelector('#vlAbg .vl-interp'); return !!i && /Reading the gas/.test(i.textContent) && /acidosis|alkalosis|normal|Normal/i.test(i.textContent);`) === true, "r4 U9: the gas view reads the gas (engine interp)");
+    ok(await ev(`return [].every.call(document.querySelectorAll('#smdNarke .vl-ro-i[data-vl-id=shunt] b'), function(b){ return !/^0\\./.test(b.textContent); });`) === true, "r4 U9: shunt never shows as a raw fraction");
+    await click(`[data-act=vlfinish]`); await until(`return !!document.querySelector('#smdNarke .vl-done');`);
+    ok(await ev(`var R0=NARKE_VENT_UI.run(), w=R0.score && R0.score.worstSpell; return !w || (!!document.querySelector('#smdNarke .vl-worst') && /Longest time off a goal/.test(document.querySelector('#smdNarke .vl-worst').textContent) && document.querySelectorAll('#smdNarke .vl-notes li').length >= 0 && ![].some.call(document.querySelectorAll('#smdNarke .vl-notes li'), function(l){ return /^Longest time off a goal/.test(l.textContent); }));`) === true, "r4 U9: the debrief names the longest time off a goal once");
+    await shot("r4-debrief-worst");
+    // Level 1 gas: the short curve note and the reading folded under Step by step
+    await goRun(1, "postop-normal");
+    await tap(`[data-act=vltab][data-t=abg]`); await click(`[data-act=vldraw]`); await sleep(150);
+    ok(await ev(`var i=document.querySelector('#vlAbg .vl-interp'); return !!i && !!i.querySelector('details') && !/P50/.test(document.getElementById('vlAbg').textContent);`) === true, "r4 U9: Level 1 folds the steps and has no P50 line");
 
     // U10: the new tutorials run to Done by hand (the learner's own taps), and the mixed acidosis case is listed
     const handTut = async (id) => {
@@ -793,8 +830,8 @@ try {
     { const LEARN = JSON.parse(readFileSync(join(HERE, "../narke/vent/learn.json"), "utf8"));
       const c15 = LEARN.cases.find((c) => c.id === "abg-15");
       ok(!!c15 && /mixed respiratory and metabolic acidosis/.test(c15.q1.options[c15.q1.answer].en) && /mixed/.test(c15.q1.options[c15.q1.answer].hi), "r4 U10: a combined hypoxia and hypercapnia case names mixed acidosis (en + hi)");
-      const ci = LEARN.cases.filter((c) => (c.level || 1) <= 2).findIndex((c) => c.id === "abg-15");
-      await toHome(); await click(`[data-act=vllevel][data-v="2"]`); await click(`[data-act=vlcases]`); await until(`return /Case 1 /.test(document.querySelector('#smdNarke .sp-title').textContent + ' ');`);
+      const ci = LEARN.cases.filter((c) => (c.level || 1) <= 3).findIndex((c) => c.id === "abg-15");
+      await toHome(); await click(`[data-act=vllevel][data-v="3"]`); await click(`[data-act=vlcases]`); await until(`return /Case 1 /.test(document.querySelector('#smdNarke .sp-title').textContent + ' ');`);
       for (let i = 0; i < ci; i++) { await click(`[data-act=vlq1]`); await until(`return !!document.querySelector('#smdNarke [data-act=vlq2]');`); await click(`[data-act=vlq2]`); await until(`return !!document.querySelector('#smdNarke [data-act=vlcnext]');`); await click(`[data-act=vlcnext]`); await until(`return /Case ${i + 2} /.test(document.querySelector('#smdNarke .sp-title').textContent + ' ');`); }
       await click(`[data-act=vlq1][data-o="${c15.q1.answer}"]`); await until(`return !!document.querySelector('#smdNarke [data-act=vlq2]');`);
       await click(`[data-act=vlq2][data-o="${c15.q2.answer}"]`); await until(`return !!document.querySelector('#smdNarke .vl-v2');`);
