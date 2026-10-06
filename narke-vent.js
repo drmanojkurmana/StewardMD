@@ -306,8 +306,65 @@
     featLine: T("Ventilate a simulated patient. Tutorials, patients, blood gases and alarms.", "सिम्युलेटेड मरीज़ को वेंटिलेट करें। ट्यूटोरियल, मरीज़, ब्लड गैस और अलार्म।"),
     newT: T("New", "नया"), lvMine: T("Patient level {n}", "मरीज़ स्तर {n}"),
     goalsPlain: T("Keep oxygen saturation {a} to {b}%. Keep CO2 near normal. Keep each breath gentle.", "ऑक्सीजन सैचुरेशन {a} से {b}% रखें। CO2 सामान्य के पास रखें। हर साँस कोमल रखें।"),
-    abnLow: T("low", "कम"), abnHigh: T("high", "ऊँचा")
+    abnLow: T("low", "कम"), abnHigh: T("high", "ऊँचा"),
+    // round 2: chest exam labels, alarm card, coach, tutorial runs, time, flags, debrief
+    exl_airEntry: T("Air entry", "हवा का प्रवेश"), exl_trachea: T("Trachea", "श्वासनली (trachea)"), exl_wheeze: T("Wheeze", "सीटी (wheeze)"),
+    exl_crackles: T("Crackles", "कर्कश आवाज़ (crackles)"), exl_chestRise: T("Chest rise", "छाती का उठना"), exLR: T("Left: {a}. Right: {b}.", "बाईं ओर: {a}। दाईं ओर: {b}।"),
+    ex_ppeak: T("peak pressure (Ppeak)", "पीक प्रेशर (Ppeak)"), ex_ve: T("air per minute (VE)", "प्रति मिनट हवा (VE)"), ex_hco3: T("bicarbonate (HCO3)", "बाइकार्बोनेट (HCO3)"),
+    went: T("{x} went {d}: {a} to {b}.", "{x} {d}: {a} से {b}।"),
+    sawMove: T("You saw it: {x} {d}, {a} to {b}.", "आपने देखा: {x} {d}, {a} से {b}।"),
+    alreadyDid: T("You already did this at {t}. It counts.", "आपने यह {t} पर कर दिया था। यह गिना गया।"),
+    showCtl: T("Show me the control", "कंट्रोल दिखाएँ"), openLim: T("Open alarm limits", "अलार्म सीमाएँ खोलें"), openBed: T("Open bedside actions", "बेडसाइड काम खोलें"),
+    doNow: T("Do now, in this order", "अभी करें, इसी क्रम में"),
+    ck_look: T("Look at the patient: is the chest moving, what colour is the skin, what does SpO2 show?", "मरीज़ को देखें: छाती हिल रही है, त्वचा का रंग कैसा है, SpO2 क्या दिखा रहा है?"),
+    ck_bag: T("If SpO2 is falling or the patient is unstable: take them off the ventilator and bag with 100% oxygen.", "SpO2 गिर रहा हो या मरीज़ अस्थिर हो: ventilator हटाकर 100% oxygen से bag करें।"),
+    ck_dope: T("Think DOPE: Displacement of the tube, Obstruction (suction it), Pneumothorax, Equipment and circuit.", "DOPE सोचें: tube का खिसकना (Displacement), रुकावट (Obstruction, suction करें), Pneumothorax, Equipment और circuit।"),
+    ck_probe: T("Check the SpO2 probe and its trace, and the circuit from the wall to the tube.", "SpO2 probe और उसका trace जाँचें, और दीवार से tube तक circuit जाँचें।"),
+    ck_senior: T("Call your senior now if SpO2 stays below 85 after bagging, MAP stays below 65, or you cannot find the cause.", "Bagging के बाद भी SpO2 85 से कम रहे, MAP 65 से कम रहे, या कारण न मिले, तो अभी senior को बुलाएँ।"),
+    fio2Max: T("FiO2 is already 100%. The dial cannot give more oxygen: bag, suction, think DOPE and call your senior.", "FiO2 पहले से 100% है। Dial से और oxygen नहीं मिल सकती: bag करें, suction करें, DOPE सोचें और senior को बुलाएँ।"),
+    fio2Hi: T("FiO2 is already {v}%. More oxygen buys time only: find the cause (DOPE) and think about PEEP with your senior.", "FiO2 पहले से {v}% है। और oxygen सिर्फ़ समय देती है: कारण ढूँढें (DOPE) और senior के साथ PEEP के बारे में सोचें।"),
+    limBack: T("Set the alarm back to {a}", "अलार्म वापस {a} करें"), limNote: T("This hides the alarm. It does not fix the patient.", "यह अलार्म छिपाता है। मरीज़ को ठीक नहीं करता।"),
+    limYou: T("You changed this alarm limit from {a} to {b} {n} min ago. The limit only decides when the alarm sounds.", "आपने {n} मिनट पहले यह अलार्म सीमा {a} से {b} की। सीमा सिर्फ़ तय करती है कि अलार्म कब बजे।"),
+    tutDoneH: T("Tutorial done", "ट्यूटोरियल पूरा"), tutPractice: T("Tutorial done. This practice patient is not saved or scored. Open a patient from the lab home for a scored run.", "ट्यूटोरियल पूरा। यह अभ्यास वाला मरीज़ सहेजा या गिना नहीं जाता। गिने जाने वाले रन के लिए लैब होम से मरीज़ खोलें।"),
+    tutRunNote: T("Practice run from a tutorial: not saved, not scored.", "ट्यूटोरियल से अभ्यास रन: सहेजा नहीं, गिना नहीं।"),
+    timeStopped: T("Time is stopped while you read. Tap Time to run it.", "आप पढ़ रहे हैं, इसलिए समय रुका है। चलाने के लिए समय दबाएँ।"),
+    noAlarms: T("No alarms", "कोई अलार्म नहीं"),
+    perKgLine: T("{n} mL/kg PBW", "{n} mL/kg PBW"), perKgSafe: T("Safe band 6 to 8", "सुरक्षित दायरा 6 से 8"),
+    scaleTo: T("{a} to {b}", "{a} से {b}"),
+    wRrHigh: T("Rate {v} is fast. Short breaths out can trap air. Check before you confirm.", "Rate {v} तेज़ है। छोटी साँस छोड़ने में हवा फँस सकती है। पक्का करने से पहले जाँचें।"),
+    wVtLow: T("{v} mL is only {k} mL/kg PBW. Small breaths let CO2 rise: watch the pH and minute volume.", "{v} mL सिर्फ़ {k} mL/kg PBW है। छोटी साँसों से CO2 बढ़ सकती है: pH और minute volume देखें।"),
+    wVtHigh: T("{v} mL is {k} mL/kg PBW, above the 6 to 8 band. Check before you confirm.", "{v} mL यानी {k} mL/kg PBW, 6 से 8 के दायरे से ऊपर। पक्का करने से पहले जाँचें।"),
+    nFio2: T("FiO2 100% is for now, while you find the cause. Wean it as soon as SpO2 allows.", "FiO2 100% अभी के लिए है, जब तक कारण मिले। SpO2 ठीक होते ही घटाएँ।"),
+    aboveTgt: T("above target", "लक्ष्य से ऊपर"), lowForFio2: T("low for the FiO2", "FiO2 के हिसाब से कम"),
+    pl_mechPeep: T("The plateau rises with the PEEP, but each breath stretches the lung less.", "PEEP के साथ प्लेटो बढ़ता है, पर हर साँस फेफड़े को कम खींचती है।"),
+    pl_mechPeepUp: T("The plateau rises with the PEEP. Each breath stretches the lung about the same.", "PEEP के साथ प्लेटो बढ़ता है। हर साँस फेफड़े को लगभग उतना ही खींचती है।"),
+    missedAl: T("Missed: {x} at {t}. No change or bedside action within 5 min.", "छूटा: {t} पर {x}। 5 मिनट में कोई बदलाव या बेडसाइड काम नहीं।"),
+    px_alarmsUnsc: T("Alarms sounded: {x}. None was cleared by your change or action, and none stayed 5 min unanswered. So this part was not scored.", "अलार्म बजे: {x}। कोई आपके बदलाव या काम से नहीं हटा, और कोई 5 मिनट बिना जवाब नहीं रहा। इसलिए यह हिस्सा नहीं गिना गया।"),
+    px_alarmsNone2: T("No alarm sounded during this run, so nothing to score here.", "इस रन में कोई अलार्म नहीं बजा, इसलिए यहाँ कुछ नहीं गिना गया।"),
+    atEndT: T("At the end ({t})", "अंत में ({t})"),
+    draft: T("To be verified, draft", "सत्यापन बाकी, ड्राफ़्ट"),
+    o2Why: T("Why is the oxygen low?", "ऑक्सीजन कम क्यों है?"), o2Call: T("Call your senior now.", "अभी senior को बुलाएँ।"),
+    // Level 1 "why": one plain line per gas and direction; the engine's formulas wait under More detail (U9)
+    wp_PaCO2_down: T("More air each minute washes more CO2 out of the blood.", "हर मिनट ज़्यादा हवा खून से ज़्यादा CO2 निकालती है।"),
+    wp_PaCO2_up: T("Less air each minute leaves more CO2 in the blood.", "हर मिनट कम हवा से खून में ज़्यादा CO2 रहती है।"),
+    wp_PaO2_up: T("More oxygen gets from the lungs into the blood.", "फेफड़ों से खून में ज़्यादा ऑक्सीजन पहुँचती है।"),
+    wp_PaO2_down: T("Less oxygen gets from the lungs into the blood.", "फेफड़ों से खून में कम ऑक्सीजन पहुँचती है।"),
+    wp_SaO2_up: T("More of the blood's oxygen carriers are full.", "खून के ज़्यादा ऑक्सीजन वाहक भरे हैं।"), wp_SaO2_down: T("Fewer of the blood's oxygen carriers are full.", "खून के कम ऑक्सीजन वाहक भरे हैं।"),
+    wp_pH_up: T("Less CO2 makes the blood less acid.", "कम CO2 से खून कम अम्लीय होता है।"), wp_pH_down: T("More CO2 makes the blood more acid.", "ज़्यादा CO2 से खून ज़्यादा अम्लीय होता है।"),
+    wp_HCO3_up: T("The body's buffer rises slowly to balance the acid.", "अम्ल को संतुलित करने के लिए शरीर का बफ़र धीरे बढ़ता है।"), wp_HCO3_down: T("The body's buffer falls slowly to balance the change.", "बदलाव को संतुलित करने के लिए शरीर का बफ़र धीरे घटता है।")
   };
+  // Plain line for an engine reason: the engine's own `plain` when it gives one, else the table above, else its text.
+  function plainWhy(x) {
+    if (x.plain) return t(x.plain);
+    var k = "wp_" + x.param + "_" + (x.direction === "down" ? "down" : "up");
+    return STR[k] ? raw(k) : t(x.because);
+  }
+  // The bedside actions in a fixed order (never reordered by suggestion, so a hand learns where each one lives).
+  var BED_ORDER = ["suction", "bag100", "bronchodilator", "sedate", "paralyse", "fluid", "blood", "disconnect", "decompress"];
+  // Alarm card defaults when the engine gives no bedside list for an alarm (E7): the bedside fix leads, never a limit.
+  var CARD_ACTS = { pPeakHigh: ["suction", "bag100"], vtLow: ["suction", "bag100"], veLow: ["bag100", "suction"], apnoea: ["bag100"], spo2Low: ["bag100", "suction"], disconnect: ["bag100"], pPlatHigh: [], autoPeep: ["disconnect"] };
+  var CARD_CK = { pPeakHigh: ["ck_look", "ck_bag", "ck_dope", "ck_senior"], vtLow: ["ck_look", "ck_bag", "ck_dope", "ck_senior"], veLow: ["ck_look", "ck_bag", "ck_dope", "ck_senior"],
+    apnoea: ["ck_look", "ck_bag", "ck_dope", "ck_senior"], disconnect: ["ck_look", "ck_bag", "ck_dope", "ck_senior"], spo2Low: ["ck_look", "ck_bag", "ck_dope", "ck_probe", "ck_senior"], fio2Low: ["ck_look", "ck_probe", "ck_senior"] };
   var MODE_SHORT = { vc: "VC", acvc: "AC-VC", pc: "PC", acpc: "AC-PC", simv: "SIMV", psv: "PSV", cpap: "CPAP", prvc: "PRVC", niv: "NIV", aprv: "APRV" };
   var RO_UNIT = { pfRatio: "", shunt: "", vdvt: "", aaGradient: "mmHg", vte: "mL", ve: "L/min", ppeak: "cmH2O", pplat: "cmH2O", pmean: "cmH2O", peepTotal: "cmH2O", autoPeep: "cmH2O", drivingP: "cmH2O", cstat: "mL/cmH2O", raw: "cmH2O/L/s", rrTotal: "/min", ieActual: "", mechPower: "J/min", trapV: "mL", ineffective: "/min" };
   var RO_ORDER = ["ppeak", "pplat", "peepTotal", "vte", "ve", "rrTotal", "ineffective", "drivingP", "autoPeep", "trapV", "pmean", "cstat", "raw", "ieActual", "mechPower", "pfRatio", "shunt", "vdvt", "aaGradient"];
@@ -475,14 +532,20 @@
   /* ---------- waveform canvases ---------- */
   // Each plot: {cv, src: {p, v[]}, lo, hi, win (s), zero, marks: [{ph, k}], auto}. One rAF loop sweeps them all.
   var WV = { plots: [], raf: 0, t0: 0, frame: 0, still: false };
-  function wvColor(p) { try { var cs = G.getComputedStyle(p.cv); p.color = cs.color; p.grid = cs.getPropertyValue("--vl-gridc").trim() || "rgba(128,128,128,.25)"; p.mut = cs.getPropertyValue("--vl-mutc").trim() || "#888"; p.font = cs.fontFamily; } catch (e) {} }
+  function wvColor(p) { try { var cs = G.getComputedStyle(p.cv); p.color = cs.color; p.grid = cs.getPropertyValue("--vl-gridc").trim() || "rgba(128,128,128,.25)"; p.mut = cs.getPropertyValue("--vl-mutc").trim() || "#888"; p.plate = cs.getPropertyValue("--vl-plate").trim() || "#000"; p.warn = cs.getPropertyValue("--nk-warn").trim() || p.mut; p.font = cs.fontFamily; } catch (e) {} }
   function wvSize(p) {
-    var r = p.cv.getBoundingClientRect(), d = Math.min(2, G.devicePixelRatio || 1);
+    var r = p.cv.getBoundingClientRect(), d = Math.min(3, G.devicePixelRatio || 1);
     var w = Math.max(1, Math.round(r.width * d)), h = Math.max(1, Math.round(r.height * d));
     if (p.cv.width !== w || p.cv.height !== h) { p.cv.width = w; p.cv.height = h; }
     p.d = d; wvColor(p);
   }
-  function wvAt(src, time) { var f = (time % src.p) / src.p; if (f < 0) f += 1; return src.v[Math.floor(f * src.v.length) % src.v.length]; }
+  // Linear between samples (smooth traces); nearest sample for the ECG so its R peak keeps its height.
+  function wvAt(src, time, near) {
+    var f = (time % src.p) / src.p, n = src.v.length; if (f < 0) f += 1;
+    var x = f * n, i = Math.floor(x) % n;
+    if (near) return src.v[i];
+    return src.v[i] + (src.v[(i + 1) % n] - src.v[i]) * (x - Math.floor(x));
+  }
   function wvDraw(p, now) {
     var cv = p.cv, c = cv.getContext && cv.getContext("2d");
     if (!c || !p.src) return;
@@ -493,7 +556,7 @@
     var G0 = p.ticks ? 26 * d : 0;
     c.setTransform(1, 0, 0, 1, 0, 0);
     if (p.ticks) {
-      c.font = (10 * d) + "px " + (p.font || "sans-serif"); c.textAlign = "right"; c.textBaseline = "middle";
+      c.font = (11 * d) + "px " + (p.font || "sans-serif"); c.textAlign = "right"; c.textBaseline = "middle";
       p.ticks.concat(p.zero ? [0] : []).forEach(function (v) {
         var ty = Math.round(yOf(v)) + 0.5;
         if (v !== 0) { c.strokeStyle = p.grid; c.lineWidth = 1; c.setLineDash([2 * d, 5 * d]); c.beginPath(); c.moveTo(G0, ty); c.lineTo(W, ty); c.stroke(); c.setLineDash([]); }
@@ -505,14 +568,16 @@
     var sweepT = WV.still ? win : (now / 1000) % win, cyc = WV.still ? 0 : Math.floor((now / 1000) / win) * win;
     var head = sweepT / win * W, gap = 14 * d, step = (p.peak ? 1 : 2) * d, started = false, prevPh = null, marks = [];
     c.strokeStyle = p.color; c.lineWidth = 2 * d; c.lineJoin = "round"; c.lineCap = "round";
+    var segs = [], seg = null, hx = null, hy = null;
     c.beginPath();
     for (x = 0; x <= W; x += step) {
       if (!WV.still && x > head && x < head + gap) { started = false; prevPh = null; continue; }
       tt = (x <= head ? cyc : cyc - win) + x / W * win;
       if (WV.still) tt = x / W * win;
-      if (p.peak) { var v0 = wvAt(p.src, tt), v1 = wvAt(p.src, tt + win * step / W / 2), v2 = wvAt(p.src, tt - win * step / W / 2); y = yOf(Math.abs(v1) > Math.abs(v0) ? (Math.abs(v2) > Math.abs(v1) ? v2 : v1) : Math.abs(v2) > Math.abs(v0) ? v2 : v0); }
+      if (p.peak) { var v0 = wvAt(p.src, tt, 1), v1 = wvAt(p.src, tt + win * step / W / 2, 1), v2 = wvAt(p.src, tt - win * step / W / 2, 1); y = yOf(Math.abs(v1) > Math.abs(v0) ? (Math.abs(v2) > Math.abs(v1) ? v2 : v1) : Math.abs(v2) > Math.abs(v0) ? v2 : v0); }
       else y = yOf(wvAt(p.src, tt));
-      if (!started) { c.moveTo(x, y); started = true; } else c.lineTo(x, y);
+      if (!started) { c.moveTo(x, y); started = true; seg = [x, x]; segs.push(seg); } else { c.lineTo(x, y); seg[1] = x; }
+      if (x <= head) { hx = x; hy = y; }
       if (p.marks && p.marks.length) {
         var ph = ((tt % p.src.p) + p.src.p) % p.src.p / p.src.p;
         if (prevPh != null) p.marks.forEach(function (m) { if ((prevPh <= m.ph && ph > m.ph) || (prevPh > ph && (m.ph >= prevPh || m.ph < ph))) marks.push({ x: x, y: y, k: m.k }); });
@@ -521,13 +586,25 @@
     }
     c.stroke();
     if (WV.still && !started) return;
+    // pressure: a faint fill down to zero under the trace (the area a learner reads as "the push")
+    if (p.fill && segs.length) {
+      c.save(); c.globalAlpha = 0.12; c.fillStyle = p.color; c.beginPath();
+      segs.forEach(function (sg) {
+        var xx, first = true;
+        for (xx = sg[0]; xx <= sg[1] + 0.01; xx += step) { var t2 = WV.still ? xx / W * win : (xx <= head ? cyc : cyc - win) + xx / W * win, yy = yOf(wvAt(p.src, t2)); if (first) { c.moveTo(xx, yOf(0)); first = false; } c.lineTo(xx, yy); }
+        c.lineTo(sg[1], yOf(0)); c.closePath();
+      });
+      c.fill(); c.restore();
+    }
+    // the sweep head: a small dot on the plate colour halo, so the eye finds where "now" is
+    if (!WV.still && hx != null) { c.fillStyle = p.plate || "#000"; c.beginPath(); c.arc(hx, hy, 4.5 * d, 0, Math.PI * 2); c.fill(); c.fillStyle = p.color; c.beginPath(); c.arc(hx, hy, 2.5 * d, 0, Math.PI * 2); c.fill(); }
     marks.forEach(function (m) {
       c.fillStyle = m.k === "auto" ? p.warn || p.color : p.color;
       c.beginPath();
       if (m.k === "trig") { c.moveTo(m.x, H - pad); c.lineTo(m.x - 4 * d, H); c.lineTo(m.x + 4 * d, H); c.closePath(); c.fill(); }
-      else if (m.k === "cyc") { c.fillRect(m.x - d / 2, pad, d, H - 2 * pad); }
+      else if (m.k === "cyc") { c.save(); c.globalAlpha = 0.6; c.fillRect(m.x - d / 2, H - pad - 6 * d, d, 6 * d); c.restore(); }
       else { c.arc(m.x, m.y, 3.5 * d, 0, Math.PI * 2); c.fill(); }
-      if (m.k === "auto" && p.autoLabel) { c.font = (11 * d) + "px " + (p.font || "sans-serif"); c.fillStyle = p.mut; c.textAlign = "right"; c.fillText(p.autoLabel, Math.max(60 * d, m.x - 6 * d), m.y - 6 * d); }
+      if (m.k === "auto" && p.autoLabel) { c.font = "600 " + (11 * d) + "px " + (p.font || "sans-serif"); c.textAlign = "right"; c.textBaseline = "top"; c.lineJoin = "round"; c.lineWidth = 3 * d; c.strokeStyle = p.plate || "#000"; c.strokeText(p.autoLabel, W - 4 * d, 2 * d); c.fillStyle = p.warn || p.mut; c.fillText(p.autoLabel, W - 4 * d, 2 * d); }
     });
   }
   function wvLoop(now) {
@@ -582,7 +659,7 @@
     // At most two scale lines per plot, on round steps, so short phone plots stay readable.
     function ticks(hi) { var steps = [10, 20, 50, 100, 200, 250, 500, 1000], i, o = [], v, stp = steps[steps.length - 1]; for (i = 0; i < steps.length; i++) if (Math.floor((hi - steps[i] * 0.4) / steps[i]) <= 2) { stp = steps[i]; break; } for (v = stp; v < hi - stp * 0.4; v += stp) o.push(v); return o; }
     return {
-      paw: { src: tp, lo: 0, hi: pmax, win: win, marks: marks, ticks: ticks(pmax) },
+      paw: { src: tp, lo: 0, hi: pmax, win: win, marks: marks, ticks: ticks(pmax), fill: true },
       flow: { src: tf, lo: -fmax, hi: fmax, win: win, zero: true, marks: trapped ? [{ ph: 0.995, k: "auto" }] : [], autoLabel: trapped ? raw("mkAuto") : "", ticks: [fmax / 2, -fmax / 2] },
       vol: { src: tv, lo: 0, hi: vmax, win: win, ticks: ticks(vmax) },
       scale: { paw: pmax, flow: fmax, vol: vmax }, trapped: trapped, trig: ((b.marks && b.marks.trigger) || []).length > 0
@@ -615,7 +692,7 @@
     SH.ret = trigger || prev || G.document.activeElement;
     w.className = "vl-sheet-wrap";
     w.innerHTML = '<div class="vl-scrim" data-act="vlsheetx"></div><div class="vl-sheet" role="dialog" aria-modal="true" aria-labelledby="vlShH">' +
-      '<div class="vl-sheet-h"><h2 id="vlShH" tabindex="-1">' + title + '</h2><button type="button" class="sp-icon vl-x" data-act="vlsheetx" aria-label="' + s("close") + '">' + (ico("close") || "x") + "</button></div>" +
+      '<div class="vl-grab" aria-hidden="true"></div><div class="vl-sheet-h"><h2 id="vlShH" tabindex="-1">' + title + '</h2><button type="button" class="sp-icon vl-x" data-act="vlsheetx" aria-label="' + s("close") + '">' + (ico("close") || "x") + "</button></div>" +
       '<div class="vl-sheet-b">' + body + "</div>" + (foot ? '<div class="vl-sheet-f">' + foot + "</div>" : "") + "</div>";
     r.appendChild(w);
     SH.el = w;
@@ -624,6 +701,43 @@
     st.onBack = function () { closeSheet(); return true; };
     try { w.querySelector("#vlShH").focus({ preventScroll: true }); } catch (e) {}
     G.requestAnimationFrame(function () { if (SH.el === w) w.classList.add("on"); });
+    sheetDrag(w);
+  }
+  // Phone: drag the sheet down by its grabber or title bar, 1:1; let go past 30 % of its height or with a flick
+  // (> 0.11 px/ms) and it closes from where it is; otherwise it springs back. Upward drags meet a rubber band.
+  function sheetDrag(w) {
+    var el = w.querySelector(".vl-sheet"), D = null;
+    if (!el || !G.PointerEvent) return;
+    function onDown(e) {
+      if (D || !isPhone() || e.button > 0 || (e.target.closest && e.target.closest("button"))) return;
+      D = { id: e.pointerId, y0: e.clientY, t0: Date.now(), dy: 0, last: [{ y: e.clientY, t: Date.now() }] };
+      try { el.setPointerCapture(e.pointerId); } catch (x) {}
+      el.style.transition = "none";
+    }
+    function onMove(e) {
+      if (!D || e.pointerId !== D.id) return;
+      var dy = e.clientY - D.y0;
+      D.dy = dy;
+      D.last.push({ y: e.clientY, t: Date.now() }); if (D.last.length > 5) D.last.shift();
+      var shown = dy >= 0 ? dy : -(Math.abs(dy) * 0.55 * 40) / (40 + 0.55 * Math.abs(dy));
+      el.style.transform = "translateY(" + shown.toFixed(1) + "px)";
+    }
+    function onUp(e) {
+      if (!D || e.pointerId !== D.id) return;
+      var a = D.last[0], b = D.last[D.last.length - 1], v = b.t > a.t ? (b.y - a.y) / (b.t - a.t) : 0, h = el.offsetHeight || 1, dy = D.dy;
+      D = null;
+      el.style.transition = "";
+      if (dy > h * 0.3 || (v > 0.11 && dy > 8)) {
+        el.style.transition = "transform 200ms cubic-bezier(0.32, 0.72, 0, 1)";
+        el.style.transform = "translateY(100%)";
+        closeSheet();
+      } else el.style.transform = "";
+    }
+    var hd = w.querySelectorAll(".vl-grab, .vl-sheet-h");
+    [].forEach.call(hd, function (n) { n.addEventListener("pointerdown", onDown); });
+    el.addEventListener("pointermove", onMove);
+    el.addEventListener("pointerup", onUp);
+    el.addEventListener("pointercancel", onUp);
   }
   function closeSheet(quiet) {
     if (!SH.el) return;
@@ -639,10 +753,18 @@
 
   /* ---------- toast and status ---------- */
   var TO = { tm: 0 };
-  // A strip in the page flow under the alarm bar: it pushes content down for a moment and never covers a control.
+  // A card floating over the top of the page, under the alarm bar and the phone's tab bar: it never moves the layout
+  // (a strip in the flow pushed every control down by its height, and taps landed on the wrong thing).
+  function toastPlace(el) {
+    var r = I.root(), sc = q(".sp-scroll"), tb = q(".vl-tabbar");
+    if (!r || !sc) return;
+    var top = sc.getBoundingClientRect().top - r.getBoundingClientRect().top + (tb && tb.offsetHeight ? tb.offsetHeight : 0);
+    el.style.top = Math.round(top + 6) + "px";
+  }
   function toast(kind, html) {
     var el = q(".vl-toast");
     if (!el) return;
+    toastPlace(el);
     el.innerHTML = '<span class="vl-toast-k">' + (ico(kind === "hint" ? "spark" : "info")) + "<b>" + s(kind === "hint" ? "hint" : "event") + '</b></span><span class="vl-toast-m">' + html + "</span>" +
       '<button type="button" class="vl-toast-x" data-act="vltoastx" aria-label="' + s("dismiss") + '">' + (ico("close") || "x") + "</button>";
     el.classList.add("on");
@@ -655,7 +777,9 @@
     var sc = q(".sp-scroll");
     if (!sc || !el) return;
     var r = el.getBoundingClientRect(), b = sc.getBoundingClientRect();
-    var top = sc.scrollTop + r.top - b.top - (center ? Math.max(12, (b.height - r.height) / 2) : 12);
+    // on a phone the sticky tab bar covers the top of the scroller: land below it, not under it
+    var tb = q(".vl-tabbar"), off = tb && tb.offsetHeight && sc.contains(tb) ? tb.offsetHeight : 0;
+    var top = sc.scrollTop + r.top - b.top - (center ? Math.max(12 + off, (b.height - r.height) / 2) : off + 12);
     try { sc.scrollTo({ top: Math.max(0, top), behavior: reduced() ? "auto" : "smooth" }); } catch (e) { sc.scrollTop = Math.max(0, top); }
   }
   function say(txt) { var el = $("vlSay"); if (el) { el.textContent = ""; G.setTimeout(function () { el.textContent = txt; }, 30); } }
@@ -695,7 +819,7 @@
     I.paint(I.top(t(STR.backTest), s("title"), s("sub"), I.langBtn()) +
       '<div class="sp-scroll sp-pad"><div class="vl-wrap vl-home">' +
       '<p class="vl-lede">' + s("lede") + "</p>" +
-      '<p class="vl-disc" role="note">' + (ico("info") ? '<span aria-hidden="true">' + ico("info") + "</span>" : "") + "<span>" + disc() + "</span></p>" +
+      '<p class="vl-disc" role="note">' + (ico("info") ? '<span aria-hidden="true">' + ico("info") + "</span>" : "") + "<span>" + disc() + ' <span class="vl-draft">' + s("draft") + ".</span></span></p>" +
       '<h2 class="sp-h2" id="vlLvH">' + s("level") + '</h2><div class="vl-levels" role="group" aria-labelledby="vlLvH">' + seg + "</div>" +
       (intro ? '<p class="vl-lvintro">' + tx(intro) + "</p>" : "") +
       (n <= 2 ? tutBlock : "") +
@@ -743,17 +867,18 @@
   function forLevel(sc) { if (lv() > 1 || !(sc.timeline || []).length) return sc; var c = clone(sc); c.timeline = (c.timeline || []).filter(function (ev) { return ev.teach; }); return c; }
   function start(sc, tut) {
     var e = E(), s0 = e.init(clone(sc), null), set = s0 && s0.settings ? clone(s0.settings) : baseSettings(sc);
-    R = { sc: sc, s: s0, set: set, startSet: clone(set), pend: {}, log: [], abgs: [], answers: [], seen: {}, lastSet: 0, lastAct: 0, lastLog: 0, bedSig: "", chain: null, live: true, sil: {}, ack: {}, hints: [], evSeen: 0, tut: tut || null, side: null, alarmSig: "", bsig: "", msig: "",
-      acts: [], hold: null, exam: null, drift: null, driftBase: { t: 0, r: null }, bad: 0, arrest: null, tab: "mon", coMin: false };
-    R.log.push({ t: 0, settings: clone(set), readout: e.readout(s0, set), action: "start" });
+    // Level 1 starts with the clock stopped: a beginner reads first, then runs time (U8).
+    R = { sc: sc, s: s0, set: set, startSet: clone(set), pend: {}, log: [], abgs: [], answers: [], seen: {}, lastSet: 0, lastAct: 0, lastLog: 0, bedSig: "", chain: null, live: lv() > 1, sil: {}, ack: {}, hints: [], evSeen: 0, tut: tut || null, side: null, alarmSig: "", bsig: "", msig: "",
+      acts: [], hold: null, exam: null, drift: null, driftBase: { t: 0, r: null }, bad: 0, arrest: null, tab: "mon", coMin: false, fromTut: !!tut, alLab: {}, alT: {}, alIds: {} };    R.log.push({ t: 0, settings: clone(set), readout: e.readout(s0, set), action: "start" });
     if (!tut) dropSaved(sc.id);
     run();
   }
   /* ---- unfinished runs: Resume later keeps the run (this device only); opening the patient again resumes it ---- */
-  var RK = "smd_narke_vent_runs", KEEP = ["s", "set", "startSet", "log", "abgs", "answers", "seen", "lastSet", "lastAct", "lastLog", "sil", "ack", "hints", "evSeen", "side", "acts", "hold", "exam", "bad", "tab"];
+  var RK = "smd_narke_vent_runs", KEEP = ["s", "set", "startSet", "log", "abgs", "answers", "seen", "lastSet", "lastAct", "lastLog", "sil", "ack", "hints", "evSeen", "side", "acts", "hold", "exam", "bad", "tab", "alLab"];
   function savedRuns() { var o = null; try { o = JSON.parse(I.ls().getItem(RK)); } catch (e) {} return o && typeof o === "object" ? o : {}; }
+  // A tutorial's patient is practice: it never writes the patient's own save slot (U5), even after the coach is done.
   function saveRun() {
-    if (!R || R.tut) return;
+    if (!R || R.tut || R.fromTut) return;
     var all = savedRuns(), o = { sc: R.sc.id, at: Date.now() };
     KEEP.forEach(function (k) { o[k] = R[k]; });
     all[R.sc.id] = o;
@@ -774,8 +899,8 @@
   }
   // Back from a run with history asks first: Resume later, Finish and debrief, or Leave.
   function runBack() {
-    if (R && !R.tut && !R.arrest && (R.s.t > 0 || R.log.length > 1)) { leaveSheet(); return true; }
-    if (R && R.tut) dropSaved(R.sc.id);
+    if (R && !R.tut && !R.fromTut && !R.arrest && (R.s.t > 0 || R.log.length > 1)) { leaveSheet(); return true; }
+    stopLive();
     home('[data-act=vlgo][data-s="' + R.sc.id + '"]'); return true;
   }
   function leaveSheet() {
@@ -826,13 +951,15 @@
     st.onLeave = function () { stopLive(); wvStop(); closeSheet(true); };
     var r = cur(), sc = R.sc;
     glossReset();
-    I.paint(I.top(t(STR.backLab), tx(sc.title), '<span id="vlClock">' + s("simTime", { x: clockText(R.s.t) }) + "</span>", I.langBtn()) +
-      '<div class="vl-alarms" id="vlAlarms" data-vl-id="alarms">' + alarmsHtml() + "</div>" +
+    var al0 = alarmsHtml();
+    I.paint(I.top(t(STR.backLab), tx(sc.title), '<span id="vlClock">' + s("simTime", { x: clockText(R.s.t) }) + "</span>" + okChip(), I.langBtn()) +
+      '<div class="vl-alarms' + (R.alN ? "" : " is-none") + '" id="vlAlarms" data-vl-id="alarms">' + al0 + "</div>" +
       '<div class="vl-bagw" id="vlBag">' + bagHtml() + "</div>" +
       '<div class="vl-toast" role="status" aria-live="polite"></div>' +
       '<div class="sp-scroll vl-scroll' + (R.tut ? " has-coach" : "") + '" data-tab="' + R.tab + '">' + tabsHtml() +
-      '<div class="vl-wrap" id="vlBedW" data-g="mon">' + bedHtml() + '</div><div class="vl-wrap vl-run">' +
-      '<div class="vl-colA">' + ptHtml(r) + monHtml(r) + "</div>" +
+      (R.fromTut && !R.tut ? '<p class="vl-tutrun" role="note">' + s("tutRunNote") + "</p>" : "") +
+      '<div class="vl-wrap vl-run">' +
+      '<div class="vl-colA">' + ptHtml(r) + monHtml(r) + '<div class="vl-bedw" id="vlBedW" data-g="mon">' + bedHtml() + "</div></div>" +
       '<div class="vl-colB">' + ventHtml(r) + setHtml() + "</div>" +
       '<div class="vl-colC">' + chainHtml() + '<section class="vl-card vl-ov" data-vl-id="oxvent" data-g="chg" aria-labelledby="vlOvH" id="vlOv">' + ovHtml(r) + "</section>" +
       '<section class="vl-card vl-abg" data-vl-id="abg" data-g="abg" aria-labelledby="vlAbgH" id="vlAbg">' + abgHtml() + "</section>" +
@@ -855,7 +982,8 @@
   // [lo, hi] for an ABG value against the scenario's goals (null bound = not judged). PaO2: low below what the SpO2
   // target needs; high only when FiO2 is above 50 % (hyperoxia is a lesson only when oxygen is being wasted).
   function gasRange(k, fio2) {
-    var g = goals(), n = { pH: [7.35, 7.45], PaCO2: [35, 45], HCO3: [22, 26], BE: [-2, 2], lactate: [null, 2] };
+    // HCO3 and BE are the body's metabolic side, not the ventilator's target: flagged only when clearly abnormal (U10)
+    var g = goals(), n = { pH: [7.35, 7.45], PaCO2: [35, 45], HCO3: [18, 30], BE: [-6, 6], lactate: [null, 2] };
     if (k === "pH" && g.ph) return g.ph;
     if (k === "PaCO2" && g.paco2) return g.paco2;
     if (k === "SaO2") return [g.spo2 ? g.spo2[0] : 92, null];
@@ -865,6 +993,15 @@
   function outOf(v, rg) { return v == null || !rg ? 0 : rg[0] != null && v < rg[0] ? -1 : rg[1] != null && v > rg[1] ? 1 : 0; }
 
   /* ---- patient ---- */
+  // Level 1 opens the story the first time a patient is seen (outside a tutorial); after that it stays folded (U2 audit).
+  function storyOpen(sc) {
+    if (lv() > 1 || R.tut || R.fromTut) return false;
+    var p = prefs(); p.story = p.story || {};
+    if (R.storyShown === sc.id) return true;
+    if (p.story[sc.id]) return false;
+    p.story[sc.id] = 1; savePrefs(); R.storyShown = sc.id;
+    return true;
+  }
   function ptHtml(r) {
     var sc = R.sc, p = sc.patient || {}, l = sc.lung || {}, g = sc.goals || {}, n = lv();
     var vs = p.volumeStatus === "low" ? "volLow" : p.volumeStatus === "high" ? "volHigh" : "volNormal";
@@ -882,7 +1019,7 @@
       '<p class="vl-pt-who">' + s(p.sex === "F" ? "female" : "male") + ", " + s("yrs", { n: p.age }) + " · " + esc(fmtN(p.heightCm)) + " cm · " + esc(fmtN(p.weightKg)) + ' kg · <b title="' + s("pbwFull", { n: ptPbw(sc) }) + '">' + s("pbw") + " " + esc(fmtN(ptPbw(sc))) + " kg</b></p>" +
       '<div class="vl-tags">' + lungTags(sc).map(function (k) { return '<span class="vl-tag2">' + s(k) + "</span>"; }).join("") + '<span class="vl-tag2 vs-' + esc(p.volumeStatus || "normal") + '">' + s(vs) + "</span></div>" +
       (n >= 2 ? '<p class="vl-pt-mech">' + s("compl", { n: l.c }) + " · " + s("resist", { n: l.r }) + "</p>" : '<p class="vl-plain">' + s("pbwWhy") + "</p>") +
-      '<details class="vl-story"' + (n <= 1 && !R.tut ? " open" : "") + "><summary>" + s("storyGoals") + "</summary><p>" + txg(sc.story) + "</p>" + (sc.why ? "<p><b>" + s("why") + "</b> " + txg(sc.why) + "</p>" : "") +
+      '<details class="vl-story"' + (storyOpen(sc) ? " open" : "") + "><summary>" + s("storyGoals") + "</summary><p>" + txg(sc.story) + "</p>" + (sc.why ? "<p><b>" + s("why") + "</b> " + txg(sc.why) + "</p>" : "") +
       (goalsL.length ? "<p><b>" + s("targets") + "</b> " + goalsL.join(" · ") + "</p>" : "") +
       (n >= 2 && (g.other || []).length ? "<ul>" + g.other.map(function (o) { return "<li>" + txg(o) + "</li>"; }).join("") + "</ul>" : "") + "</details></section>";
   }
@@ -896,17 +1033,19 @@
   function monAbn(r) {
     var v = r.vitals || {}, o = {};
     if (v.spo2 != null && v.spo2 < spo2Lo()) o.vlSpo2 = -1;
+    // above the target on added oxygen: amber "above target" (the oxygen can come down), never red (U10)
+    else if (v.spo2 != null && goals().spo2 && v.spo2 > goals().spo2[1] && R.set.fio2 > 21) o.vlSpo2 = 2;
     if (v.map != null && v.map < 65) o.vlBp = -1;
     if (v.hr != null && (v.hr > 120 || v.hr < 50)) o.vlHr = v.hr > 120 ? 1 : -1;
     return o;
   }
-  function abnTag(d) { return d ? '<span class="vl-abn-t">' + s(d < 0 ? "abnLow" : "abnHigh") + "</span>" : ""; }
+  function abnTag(d) { return d === 2 ? '<span class="vl-abn-t amb">' + s("aboveTgt") + "</span>" : d ? '<span class="vl-abn-t">' + s(d < 0 ? "abnLow" : "abnHigh") + "</span>" : ""; }
   function monHtml(r) {
     var m = monNums(r), ab = monAbn(r);
     function ch(cls, tag, w, num, id) {
       return '<div class="vl-ch ' + cls + '" data-vl-id="' + id + '"><div class="vl-ch-w"><span class="vl-tag">' + tag + '</span><canvas class="vl-cv" data-w="' + w + '" aria-hidden="true"></canvas></div><div class="vl-num">' + num + "</div></div>";
     }
-    function big(k, id, v, sub) { return '<span class="vl-k">' + s(k) + '</span><b class="vl-v' + (ab[id] ? " abn" : "") + '" id="' + id + '">' + esc(v) + '</b><span class="vl-abn" id="' + id + 'T">' + abnTag(ab[id]) + "</span>" + (sub || ""); }
+    function big(k, id, v, sub) { return '<span class="vl-k">' + s(k) + '</span><b class="vl-v' + (ab[id] === 2 ? " amb" : ab[id] ? " abn" : "") + '" id="' + id + '">' + esc(v) + '</b><span class="vl-abn" id="' + id + 'T">' + abnTag(ab[id]) + "</span>" + (sub || ""); }
     return '<section class="vl-card vl-monw" data-vl-id="monitor" data-g="mon" aria-labelledby="vlMonH"><h2 class="vl-h" id="vlMonH">' + s("monitor") + "</h2>" +
       '<div class="vl-plate vl-mon">' +
       ch("c-ecg", s("ecg"), "ecg", big("hr", "vlHr", m.hr), "hr") +
@@ -916,23 +1055,35 @@
       '<span class="vl-temp"><span class="vl-k">' + s("temp") + '</span><b id="vlTemp">' + esc(m.temp) + "</b></span></div></div>" +
       '<div class="vl-flags" id="vlFlags">' + flagsHtml(r) + "</div>" +
       '<div class="vl-drift" id="vlDrift">' + driftHtml() + "</div>" +
+      '<div class="vl-o2w" id="vlO2h">' + o2Html(r) + "</div>" +
       (lv() <= 2 ? '<details class="vl-what"><summary>' + s("monWhat") + "</summary><ul>" + ["mHr", "mSpo2"].map(function (k) { return "<li>" + s(k) + "</li>"; }).join("") +
         "<li>" + tx((learn().glossary || {}).etco2 ? { en: "EtCO2: " + learn().glossary.etco2.en, hi: "EtCO2: " + learn().glossary.etco2.hi } : "EtCO2") + "</li>" +
         ["mRr", "mBp", "mUnit", "pfVsS"].map(function (k) { return "<li>" + s(k) + "</li>"; }).join("") + "</ul></details>" : "") +
       '<p class="sp-sr" id="vlMonSay">' + monSay(r) + "</p></section>";
+  }
+  // SpO2 below target: the engine's reason and what to do next (readout.oxygenHelp), e.g. a lung that will not
+  // recruit at FiO2 100% (Sameer stalled at 89 with no hint). Shown only while the oxygen is actually low.
+  function o2Html(r) {
+    var h = r && r.oxygenHelp, v = (r && r.vitals) || {};
+    if (!h || !h.reason || !(v.spo2 < spo2Lo())) return "";
+    return '<div class="vl-o2h" role="note"><p class="vl-o2h-h"><b>' + s("o2Why") + "</b></p><p>" + tx(h.reason) + "</p>" +
+      ((h.next || []).length ? '<ol class="vl-ol">' + h.next.map(function (x) { return "<li>" + tx(x) + "</li>"; }).join("") + "</ol>" : "") +
+      (h.callSenior ? '<p class="vl-call">' + s("o2Call") + "</p>" : "") + "</div>";
   }
   function flagsHtml(r) {
     return (r.flags || []).map(function (f) { return '<span class="vl-fl ' + esc(f.severity || "info") + '">' + tx(f.label) + "</span>"; }).join("");
   }
   function monSay(r) { var v = r.vitals || {}; return s("monSay", { a: fmtN(v.hr), b: fmtN(v.spo2), c: fmtN(v.sbp), d: fmtN(v.dbp), e: fmtN(v.map), f: fmtN(v.rr), g: fmtN(v.etco2), h: v.temp }); }
   function pulse(el) { if (!el || reduced()) return; el.classList.remove("vl-chg"); void el.offsetWidth; el.classList.add("vl-chg"); }
+  function commitBeat(el) { if (!el || reduced()) return; el.classList.remove("vl-commit"); void el.offsetWidth; el.classList.add("vl-commit"); }
   function updMonitor(r, flash) {
     var m = monNums(r), ab = monAbn(r);
     [["vlHr", m.hr], ["vlSpo2", m.spo2], ["vlEt", m.et], ["vlRr", m.rr], ["vlBp", m.bp], ["vlMap", m.map], ["vlTemp", m.temp]].forEach(function (x) { var el = $(x[0]); if (el && el.textContent !== x[1]) { el.textContent = x[1]; if (flash) pulse(el); } });
-    ["vlHr", "vlSpo2", "vlBp"].forEach(function (id) { var el = $(id), tg = $(id + "T"), h = abnTag(ab[id]); if (el) el.classList.toggle("abn", !!ab[id]); if (tg && tg.innerHTML !== h) tg.innerHTML = h; });
+    ["vlHr", "vlSpo2", "vlBp"].forEach(function (id) { var el = $(id), tg = $(id + "T"), h = abnTag(ab[id]); if (el) { el.classList.toggle("abn", !!ab[id] && ab[id] !== 2); el.classList.toggle("amb", ab[id] === 2); } if (tg && tg.innerHTML !== h) tg.innerHTML = h; });
     var sr = $("vlMonSay"); if (sr) sr.innerHTML = monSay(r);
     var fl = $("vlFlags"), fh = flagsHtml(r); if (fl && fl.innerHTML !== fh) fl.innerHTML = fh;
     var mm = $("vlMini"), mh = miniMon(r); if (mm && mm.innerHTML !== mh) mm.innerHTML = mh;
+    var oh = $("vlO2h"); if (oh) { var o2 = o2Html(r); if (oh.innerHTML !== o2) oh.innerHTML = o2; }
   }
 
   /* ---- why is the patient changing: engine E.whyDrift when present, else the numbers that moved with no change ---- */
@@ -1030,7 +1181,15 @@
     var e = E(), x = e.exam ? safe(function () { return e.exam(R.s, R.set); }, null) : null, out = [];
     if (x) {
       if (Array.isArray(x)) x.forEach(function (it) { if (it) out.push([it.label ? tx(it.label) : esc(it.key || ""), tx(it.finding || it.text || it.value || "")]); });
-      else Object.keys(x).forEach(function (k) { var v = x[k]; if (v && typeof v === "object" && (v.en || v.hi)) out.push([STR["ex_" + k] ? s("ex_" + k) : esc(k), tx(v)]); else if (v && v.label) out.push([tx(v.label), tx(v.finding || v.text || "")]); });
+      else Object.keys(x).forEach(function (k) {
+        // the engine's keys (airEntry {left, right}, trachea, wheeze, crackles, chestRise) get labels; its summary
+        // sentence repeats the rows, so it is not shown; an unknown key is never printed raw (U6)
+        var v = x[k];
+        if (k === "summary" || !v || typeof v !== "object") return;
+        if (k === "airEntry" && v.left && v.right) { out.push([s("exl_airEntry"), v.left.en === v.right.en ? tx(v.left) : s("exLR", { a: t(v.left), b: t(v.right) })]); return; }
+        if (v.en || v.hi) { if (STR["exl_" + k]) out.push([s("exl_" + k), tx(v)]); }
+        else if (v.label) out.push([tx(v.label), tx(v.finding || v.text || "")]);
+      });
       if (out.length) return out;
     }
     var r = cur(), vv = r.vent || {}, gg = r.gas || {}, ptx = (R.s.m && (R.s.m.ptx || R.s.m.pneumothorax)) || /pneumothorax|tension/i.test(JSON.stringify(r.flags || []));
@@ -1093,7 +1252,7 @@
   function waveText(r, vs) {
     var el = $("vlWaves"), vv = r.vent || {};
     if (vs) {
-      [["vlScP", vs.scale.paw], ["vlScF", vs.scale.flow], ["vlScV", vs.scale.vol]].forEach(function (x) { var n = $(x[0]); if (n) n.textContent = (x[0] === "vlScF" ? "±" : "0 to ") + x[1]; });
+      [["vlScP", vs.scale.paw], ["vlScF", vs.scale.flow], ["vlScV", vs.scale.vol]].forEach(function (x) { var n = $(x[0]); if (n) n.textContent = x[0] === "vlScF" ? "±" + x[1] : raw("scaleTo", { a: 0, b: x[1] }); });
     }
     if (el) el.setAttribute("aria-label", raw("waveSay", { a: fmtN(vv.ppeak), b: fmtN(vv.pplat), c: vs && vs.trapped ? raw("flowNot") : raw("flowZero"), d: vs && vs.trig ? raw("trigSay") : "" }).trim());
     var leg = q(".vl-legend .mk-auto");
@@ -1151,16 +1310,25 @@
       esc(was != null ? raw("valWas", { v: vt, w: setText(k, was) }) : vt) + '">' +
       '<svg viewBox="0 0 80 72" aria-hidden="true" focusable="false"><path class="vl-arc-t" d="' + ARC + '" pathLength="100"/><path class="vl-arc-v" d="' + ARC + '" pathLength="100" stroke-dasharray="' + (frac * 100).toFixed(1) + ' 100"/></svg>' +
       '<button type="button" class="vl-dial-v" data-act="vltype" data-k="' + esc(k) + '" tabindex="-1" aria-label="' + s("typeVal", { x: lab }) + '"><b>' + esc(setText(k, v)) + "</b><small>" + esc(unit) + "</small></button>" +
-      (was != null ? '<span class="vl-was">' + s("was", { v: setText(k, was) }) + "</span>" : "") + "</div>" +
+      (was != null ? '<span class="vl-was">' + s("was", { v: setText(k, was) }) + "</span>" : "") + "</div>" + perKgHtml(k, v) +
       '<div class="vl-step"><button type="button" data-act="vlstep" data-k="' + esc(k) + '" data-d="-1" aria-label="' + s("dec", { x: lab }) + '"' + ((+v) <= d.min ? " disabled" : "") + ">" + MINUS + "</button>" +
       '<button type="button" data-act="vlstep" data-k="' + esc(k) + '" data-d="1" aria-label="' + s("inc", { x: lab }) + '"' + ((+v) >= d.max ? " disabled" : "") + ">" + PLUS + "</button></div></div>";
+  }
+  // Under the tidal volume dial: the breath per kg of predicted body weight, live as it is turned, on a 4 to 10 scale
+  // with the 6 to 8 band in green (U7). Volume modes only (in pressure modes the patient's lung sets the volume).
+  function perKgHtml(k, v) {
+    var mode = R.pend.mode || R.set.mode;
+    if (k !== "vt" || !VOL_MODES[mode]) return "";
+    var kg = ptPbw(R.sc), x = Math.round(v / kg * 10) / 10, pos = clamp((x - 4) / 6, 0, 1), inb = x >= 6 && x <= 8;
+    return '<div class="vl-perkg' + (inb ? " ok" : "") + '"><span class="vl-perkg-t"><b>' + s("perKgLine", { n: fmtN(x) }) + "</b><small>" + s("perKgSafe") + "</small></span>" +
+      '<span class="vl-perkg-s" aria-hidden="true"><i class="vl-perkg-b"></i><i class="vl-perkg-m" style="left:' + (pos * 100).toFixed(1) + '%"></i></span></div>';
   }
   function setHtml() {
     var mode = R.pend.mode || R.set.mode, keys = visSettings(mode, lv()), al = visAlarmKeys(lv());
     return '<section class="vl-card vl-set" data-vl-id="settings" data-g="dials" aria-labelledby="vlSetH" id="vlSet"><div class="vl-sec-h"><h2 class="vl-h" id="vlSetH">' + s("settings") + "</h2>" +
       '<span class="vl-note">' + s("pendNote") + "</span></div>" +
       '<div class="vl-knobs">' + keys.map(knob).join("") + "</div>" +
-      (al.length ? '<details class="vl-alim"><summary>' + s("alarmLimits") + '</summary><div class="vl-knobs">' + al.map(knob).join("") + "</div></details>" : "") + "</section>";
+      (al.length ? '<details class="vl-alim"' + (al.some(tutKey) ? " open" : "") + "><summary>" + s("alarmLimits") + '</summary><div class="vl-knobs">' + al.map(knob).join("") + "</div></details>" : "") + "</section>";
   }
   function refreshKnob(k, focusSel) {
     var el = q('[data-knob="' + k + '"]');
@@ -1235,19 +1403,26 @@
     e.preventDefault();
     refreshKnob(k, '[data-spin="' + k + '"]');
   };
-  // Range check before Confirm: a warning chip for values that would harm this patient.
+  // Range check before Confirm: a warning for values that could harm this patient ("Confirm anyway"), and a quieter
+  // note for a value that is right in the moment but must not stay (FiO2 100%). Strings are made with raw().
   function warnings() {
     var o = pendSet(), w = [], kg = ptPbw(R.sc), r = cur(), sp = (r.vitals || {}).spo2, n = lv();
-    if (R.pend.peep != null && o.peep > (n <= 2 ? 12 : 18)) w.push(raw("wHigh", { x: "PEEP", v: o.peep }));
-    if (R.pend.peep != null && o.peep < 3 && n <= 2) w.push(raw("wLow", { x: "PEEP", v: o.peep }));
-    if (R.pend.fio2 != null && o.fio2 < R.set.fio2 && sp != null && sp < spo2Lo()) w.push(raw("wO2", { v: o.fio2 }));
-    if (R.pend.rr != null && o.rr < 8) w.push(raw("wLow", { x: setLabel("rr"), v: o.rr }));
-    if (R.pend.rr != null && o.rr > 32) w.push(raw("wHigh", { x: setLabel("rr"), v: o.rr }));
-    if (R.pend.vt != null && VOL_MODES[o.mode] && (o.vt / kg > 10 || o.vt / kg < 4)) w.push(raw("wVt", { v: o.vt, k: Math.round(o.vt / kg * 10) / 10 }));
-    if (R.pend.pinsp != null && o.pinsp > 30) w.push(raw("wHigh", { x: setLabel("pinsp"), v: o.pinsp }));
+    function W(x) { w.push({ t: x }); }
+    if (R.pend.peep != null && o.peep > (n <= 2 ? 12 : 18)) W(raw("wHigh", { x: "PEEP", v: o.peep }));
+    if (R.pend.peep != null && o.peep < 3 && n <= 2) W(raw("wLow", { x: "PEEP", v: o.peep }));
+    if (R.pend.fio2 != null && o.fio2 < R.set.fio2 && sp != null && sp < spo2Lo()) W(raw("wO2", { v: o.fio2 }));
+    if (R.pend.rr != null && o.rr < 8) W(raw("wLow", { x: setLabel("rr"), v: o.rr }));
+    if (R.pend.rr != null && o.rr >= 30) W(raw("wRrHigh", { v: o.rr }));
+    if (R.pend.vt != null && VOL_MODES[o.mode]) {
+      var k = Math.round(o.vt / kg * 10) / 10;
+      if (k > 10) W(raw("wVt", { v: o.vt, k: k }));
+      else if (k > 8.5) W(raw("wVtHigh", { v: o.vt, k: k }));
+      else if (k < 5) W(raw("wVtLow", { v: o.vt, k: k }));
+    }
+    if (R.pend.pinsp != null && o.pinsp > 30) W(raw("wHigh", { x: setLabel("pinsp"), v: o.pinsp }));
+    if (R.pend.fio2 != null && o.fio2 >= 100) w.push({ t: raw("nFio2"), info: true });
     return w;
   }
-
   /* ---- footer: time controls, or Confirm while changes wait ---- */
   // Beginner levels: one always-visible "what to do next" line above the footer controls; tapping it goes there.
   function nextStep() {
@@ -1275,13 +1450,14 @@
   function footHtml() {
     var n = nPend();
     if (n) {
-      var w = warnings();
-      return nextHtml() + (w.length ? '<ul class="vl-warns" role="alert">' + w.map(function (x) { return "<li>" + (ico("warn") ? '<span aria-hidden="true">' + ico("warn") + "</span>" : "") + "<span>" + esc(x) + "</span></li>"; }).join("") + "</ul>" : "") +
+      var w = warnings(), hard = w.filter(function (x) { return !x.info; }).length;
+      return nextHtml() + (w.length ? '<ul class="vl-warns"' + (hard ? ' role="alert"' : "") + ">" + w.map(function (x) { return '<li class="' + (x.info ? "info" : "") + '">' + (ico(x.info ? "info" : "warn") ? '<span aria-hidden="true">' + ico(x.info ? "info" : "warn") + "</span>" : "") + "<span>" + esc(x.t) + "</span></li>"; }).join("") + "</ul>" : "") +
         '<div class="vl-confirm"><button type="button" class="sp-btn sec" data-act="vlcancel">' + s("cancel") + "</button>" +
-        '<button type="button" class="sp-btn pri' + (w.length ? " vl-warnbtn" : "") + '" data-act="vlconfirm">' + (ico("check") || "") + " " + (w.length ? s("confirmAny") : n === 1 ? s("confirm1") : s("confirmN", { n: n })) + "</button></div>";
+        '<button type="button" class="sp-btn pri' + (hard ? " vl-warnbtn" : "") + '" data-act="vlconfirm">' + (ico("check") || "") + " " + (hard ? s("confirmAny") : n === 1 ? s("confirm1") : s("confirmN", { n: n })) + "</button></div>";
     }
     var waits = [["300", "t5"], ["900", "t15"], ["1800", "t30"], ["3600", "t60"]];
-    return nextHtml() + '<div class="vl-time" role="group" aria-label="' + s("simTime", { x: clockText(R.s.t) }) + '">' +
+    var stopped = lv() <= 1 && !R.live && !R.arrest ? '<p class="vl-tstop">' + s("timeStopped") + "</p>" : "";
+    return nextHtml() + stopped + '<div class="vl-time" role="group" aria-label="' + s("simTime", { x: clockText(R.s.t) }) + '">' +
       '<button type="button" class="vl-tbtn vl-live" data-act="vllive" aria-pressed="' + !!R.live + '" aria-label="' + s(R.live ? "liveOn" : "liveOff") + '">' +
       '<span class="vl-dot" aria-hidden="true"></span><span class="vl-live-t"><small>' + s("timeK") + "</small>" + s(R.live ? "timeRun" : "timePause") + "</span></button>" +
       waits.map(function (w) { return '<button type="button" class="vl-tbtn" data-act="vlskip" data-k="' + w[0] + '" aria-label="' + s("skipAria", { x: t(STR[w[1]]) }) + '">' + s(w[1]) + "</button>"; }).join("") + "</div>";
@@ -1308,7 +1484,7 @@
     R.side = keys.some(function (k) { return OX_KEYS[k]; }) ? "ox" : "ve";
     R.chain = compose({ setB: setB, setA: setA, keys: keys, roB: roB, roA: roA, now: roB, prB: prB, prA: prA, reasons: reasons });
     R.log.push({ t: R.s.t, settings: clone(setA), readout: roA, action: "set:" + keys.join(",") });
-    if (R.tut) { R.tut.pre = { r: roB, t: R.s.t }; R.tut.base = null; }
+    if (R.tut && !R.tut.saw) { R.tut.pre = { r: roB, t: R.s.t }; R.tut.base = null; }
     markChange();
     var sEl = $("vlSet"); if (sEl) sEl.outerHTML = setHtml();
     var f = $("vlFoot"); if (f) f.innerHTML = footHtml();
@@ -1316,8 +1492,18 @@
     paintChain(false);
     I.haptic("success");
     say(R.chain.say);
+    // commit beat: the confirmed dials flash once where the hand is, then (220 ms later) the What changed tab opens
+    keys.forEach(function (k) { var d = q('[data-knob="' + k + '"] .vl-dial-v b'); if (d) commitBeat(d); });
     var ch = $("vlChH");
-    if (ch && !R.tut) { reveal(ch); try { ch.focus({ preventScroll: true }); var rc = ch.getBoundingClientRect(), sb = q(".sp-scroll").getBoundingClientRect(); if (rc.top < sb.top || rc.bottom > sb.bottom - 40) scrollTo(ch, false); } catch (x) {} }
+    if (ch && !R.tut) {
+      var go = function () {
+        if (!R || st.view !== "vl-run" || !$("vlChH")) return;
+        var c2 = $("vlChH"); reveal(c2);
+        try { c2.focus({ preventScroll: true }); var rc = c2.getBoundingClientRect(), sb = q(".sp-scroll").getBoundingClientRect(); if (rc.top < sb.top || rc.bottom > sb.bottom - 40) scrollTo(c2, false); } catch (x) {}
+        var cw = c2.closest(".vl-chainw"); if (cw && !reduced()) { cw.classList.remove("vl-in"); void cw.offsetWidth; cw.classList.add("vl-in"); }
+      };
+      if (reduced() || !isPhone()) go(); else G.setTimeout(go, 220);
+    }
     G.setTimeout(function () { if (st.view === "vl-run") hint(roA); }, reduced() ? 0 : 1900);
     if (R.tut) tutCheck();
   }
@@ -1339,13 +1525,30 @@
         return '<tr><th scope="row">' + esc(x[0]) + (x[3] ? ' <small>' + esc(x[3]) + "</small>" : "") + "</th><td>" + esc(fmtN(a)) + "</td><td>" + esc(fmtN(b)) + "</td><td><b>" + esc(fmtN(c)) + "</b> " + arrow(d) + '<span class="sp-sr">' + s(d > 0 ? "up" : d < 0 ? "down" : "same") + "</span></td></tr>";
       }).join("") + "</tbody></table>" + (tiny(wo, wi) ? '<p class="vl-little">' + s("littleGain") + "</p>" : "");
   }
+  // The setting as a noun in a sentence: "the rate", never "Set rate" after "You set" (U6). At Level 1 in English the
+  // dial's own plain caption follows in brackets, so the chain and the dial use the same words (U9).
+  function setNoun(k, n) {
+    var lab = setLabel(k);
+    if (L() !== "en") return lab;
+    if (/^set\s/i.test(lab)) lab = "the " + lab.slice(4).toLowerCase();
+    return n <= 1 && STR["k_" + k] ? lab + " (" + t(STR["k_" + k]).toLowerCase() + ")" : lab;
+  }
+  // The stretch line follows driving pressure (the stretch on the lung), not the plateau alone: a smaller breath with a
+  // higher PEEP raises the plateau yet stretches the lung less (round 2: "stretches the lung more" was wrong there).
+  function mechPlain(v0, v1, dpl) {
+    var dd = dirOf(v0.drivingP, v1.drivingP, 0.4);
+    if (v0.drivingP == null || v1.drivingP == null) return dpl ? raw(dpl > 0 ? "pl_mechUp" : "pl_mechDn") : "";
+    if (dpl > 0 && dd < 0) return raw("pl_mechPeep");
+    if (dpl > 0 && !dd && dirOf(v0.peepTotal, v1.peepTotal, 0.4) > 0) return raw("pl_mechPeepUp");
+    return dd ? raw(dd > 0 ? "pl_mechUp" : "pl_mechDn") : dpl ? raw(dpl > 0 ? "pl_mechUp" : "pl_mechDn") : "";
+  }
   function compose(o) {
     var v0 = o.roB.vent || {}, v1 = o.roA.vent || {}, a0 = o.prB, a1 = o.prA, out = {}, said = [], n = lv();
     function u(k) { return setUnit(k) ? " " + setUnit(k) : ""; }
     out.setting = { on: true, lines: o.keys.map(function (k) {
       if (k === "mode") return raw("cMode", { a: modeShort(o.setB.mode), b: modeShort(o.setA.mode) });
       return raw("cSet", { x: setLabel(k), a: setText(k, o.setB[k]) + u(k), b: setText(k, o.setA[k]) + u(k) });
-    }), plain: o.keys.map(function (k) { return k === "mode" ? raw("pl_mode", { a: modeShort(o.setB.mode), b: modeShort(o.setA.mode) }) : raw("pl_setting", { x: setLabel(k), a: setText(k, o.setB[k]) + u(k), b: setText(k, o.setA[k]) + u(k) }); }).join(" ") };
+    }), plain: o.keys.map(function (k) { return k === "mode" ? raw("pl_mode", { a: modeShort(o.setB.mode), b: modeShort(o.setA.mode) }) : raw("pl_setting", { x: setNoun(k, n), a: setText(k, o.setB[k]) + u(k), b: setText(k, o.setA[k]) + u(k) }); }).join(" ") };
     var dve = dirOf(v0.ve, v1.ve, 0.05);
     out.ventilator = { on: v0.vte !== v1.vte || v0.rrTotal !== v1.rrTotal || o.setA.mode !== o.setB.mode || v0.ve !== v1.ve, lines: [raw("cVent", { v: fmtN(v1.vte), r: fmtN(v1.rrTotal), m: fmtN(v1.ve) })],
       plain: raw(dve > 0 ? "pl_ventUp" : dve < 0 ? "pl_ventDn" : "pl_ventSame", { m: fmtN(v1.ve), w: fmtN(v0.ve) }) };
@@ -1354,7 +1557,7 @@
     if (v0.peepTotal !== v1.peepTotal && v1.autoPeep > 0.5) mp.push(raw("cPeepT", { a: fmtN(v0.peepTotal), b: fmtN(v1.peepTotal) }));
     if (mp.length) mp.push(v0.drivingP !== v1.drivingP ? raw("cDrive", { a: fmtN(v0.drivingP), b: fmtN(v1.drivingP) }) : raw("cDriveSame", { a: fmtN(v0.drivingP) }));
     var dpl = dirOf(v0.pplat, v1.pplat, 0.4);
-    out.mechanics = { on: mp.length > 0, lines: mp.length ? [mp.join(", ") + "."] : [], plain: dpl ? raw(dpl > 0 ? "pl_mechUp" : "pl_mechDn") : "" };
+    out.mechanics = { on: mp.length > 0, lines: mp.length ? [mp.join(", ") + "."] : [], plain: mechPlain(v0, v1, dpl) };
     var auto0 = (v0.autoPeep || 0) > 1, auto1 = (v1.autoPeep || 0) > 1, dpk = dirOf(v0.ppeak, v1.ppeak, 0.4);
     out.waveforms = { on: v0.ppeak !== v1.ppeak || auto0 !== auto1, lines: [auto1 && !auto0 ? raw("cWaveAuto", { a: fmtN(v1.autoPeep) }) : auto0 && !auto1 ? raw("cWaveFree") : raw("cWave", { a: fmtN(v0.ppeak), b: fmtN(v1.ppeak) })],
       plain: auto1 && !auto0 ? raw("pl_trap") : auto0 && !auto1 ? raw("pl_free") : dpk ? raw(dpk > 0 ? "pl_waveUp" : "pl_waveDn") : "" };
@@ -1373,7 +1576,8 @@
       if (!out[stp]) return;
       out[stp].on = true;
       out[stp].lines.push((x.param ? x.param + " " + raw(x.direction === "down" ? "down" : "up") + ": " : "") + t(x.detail || x.because));
-      if (!out[stp].plain || stp === "gasExchange") out[stp].plain = (out[stp].plainR ? out[stp].plain + " " : "") + t(x.because);
+      var pw = plainWhy(x);
+      if ((!out[stp].plain || stp === "gasExchange") && (out[stp].plain || "").indexOf(pw) < 0) out[stp].plain = (out[stp].plainR ? out[stp].plain + " " : "") + pw;
       out[stp].plainR = true;
     });
     // Static teaching copy (learn.json whatIf) never overrides the model's own lines; it sits under More detail.
@@ -1420,11 +1624,15 @@
     var quick = still || reduced();
     box.innerHTML = chainBody(c, quick);
     if (quick) return;
-    c.steps.forEach(function (k, i) {
-      CHT.push(G.setTimeout(function () {
-        var li = box.querySelector('[data-step="' + k + '"]');
-        if (li) li.setAttribute("data-state", c.data[k].on ? "on" : "same");
-      }, 140 + i * 210));
+    staggerChain(box, c);
+  }
+  // Only the links that light up animate, 120 ms apart; the unchanged ones settle at once (a shorter, truer cascade).
+  function staggerChain(box, c) {
+    var j = 0;
+    c.steps.forEach(function (k) {
+      var li = box.querySelector('[data-step="' + k + '"]');
+      if (!c.data[k].on) { if (li) li.setAttribute("data-state", "same"); return; }
+      CHT.push(G.setTimeout(function () { var l2 = box.querySelector('[data-step="' + k + '"]'); if (l2) l2.setAttribute("data-state", "on"); }, 100 + (j++) * 120));
     });
   }
 
@@ -1453,22 +1661,28 @@
     var rows = ABG_ROWS.filter(function (x) { return !beg || STR["ab_" + x[0]]; }).map(function (x) {
       var v1 = abgVal(a1.abg, x[0]), v0 = a0 ? abgVal(a0.abg, x[0]) : null, d = a0 ? dirOf(v0, v1, x[0] === "pH" ? 0.004 : x[0] === "lactate" ? 0.05 : 0.5) : 0;
       var od = v1 != null ? outOf(v1, gasRange(x[0], a1.fio2)) : 0, out = !!od;
-      return '<tr data-vl-id="' + x[0].toLowerCase() + '"' + (out ? ' class="out"' : "") + '><th scope="row">' + (x[1] === "lact" ? s("lact") : esc(x[1])) + (beg ? '<span class="vl-abg-d">' + s("ab_" + x[0]) + "</span>" : "") + "</th>" + (a0 ? "<td>" + esc(fmtN(v0)) + "</td>" : "") + "<td><b>" + esc(fmtN(v1)) + "</b>" + (od ? '<span class="vl-flag">' + s(od < 0 ? "abnLow" : "abnHigh") + "</span>" : "") + "</td>" +
+      // a PaO2 in range can still be low for the oxygen given (P/F under 300): an amber flag, not a red one (U10)
+      var lowF = x[0] === "PaO2" && !od && v1 != null && a1.fio2 > 21 && v1 / (a1.fio2 / 100) < 300;
+      return '<tr data-vl-id="' + x[0].toLowerCase() + '"' + (out ? ' class="out"' : lowF ? ' class="amb"' : "") + '><th scope="row">' + (x[1] === "lact" ? s("lact") : esc(x[1])) + (beg ? '<span class="vl-abg-d">' + s("ab_" + x[0]) + "</span>" : "") + "</th>" + (a0 ? "<td>" + esc(fmtN(v0)) + "</td>" : "") + "<td><b>" + esc(fmtN(v1)) + "</b>" + (od ? '<span class="vl-flag">' + s(od < 0 ? "abnLow" : "abnHigh") + "</span>" : lowF ? '<span class="vl-flag amb">' + s("lowForFio2") + "</span>" : "") + "</td>" +
         (a0 ? "<td>" + arrow(d) + '<span class="sp-sr">' + s(d > 0 ? "up" : d < 0 ? "down" : "same") + "</span></td>" : "") + "</tr>";
     }).join("");
     var pf = a1.fio2 ? Math.round(a1.abg.PaO2 / (a1.fio2 / 100)) : null;
     var why = "";
     if (a0) {
       var rs = agree(safe(function () { return E().explainDelta(a0.abg, a1.abg, a0.set, a1.set, a0.st, a1.st); }, []), a0.abg, a1.abg);
-      if (rs.length) why = '<h3 class="vl-h3">' + s("whyH") + '</h3><ul class="vl-why">' + rs.map(function (x) {
-        return "<li>" + arrow(x.direction === "down" ? -1 : 1) + "<span><b>" + esc(x.param || "") + "</b> " + tx(x.because) + "</span></li>";
-      }).join("") + "</ul>";
+      var whyLi = function (x, txt) { return "<li>" + arrow(x.direction === "down" ? -1 : 1) + "<span><b>" + esc(x.param || "") + "</b> " + txt + "</span></li>"; };
+      if (rs.length && beg) {
+        // Level 1: one plain line per gas and direction; the formulas sit under More detail
+        var seenW = {}, pl = rs.filter(function (x) { var k = x.param + x.direction; if (seenW[k]) return false; seenW[k] = 1; return true; });
+        why = '<h3 class="vl-h3">' + s("whyH") + '</h3><ul class="vl-why">' + pl.map(function (x) { return whyLi(x, esc(plainWhy(x))); }).join("") + "</ul>" +
+          '<details class="vl-more"><summary>' + s("moreDetail") + '</summary><ul class="vl-why">' + rs.map(function (x) { return whyLi(x, tx(x.because)); }).join("") + "</ul></details>";
+      } else if (rs.length) why = '<h3 class="vl-h3">' + s("whyH") + '</h3><ul class="vl-why">' + rs.map(function (x) { return whyLi(x, tx(x.because)); }).join("") + "</ul>";
     }
     return head + '<table class="vl-abgt"><thead><tr><th scope="col"><span class="sp-sr">ABG</span></th>' +
       (a0 ? '<th scope="col">' + s("before") + "<small>" + esc(clockText(a0.t)) + "</small></th>" : "") +
       '<th scope="col">' + s(a0 ? "now" : "now") + "<small>" + esc(clockText(a1.t)) + "</small></th>" + (a0 ? '<th scope="col"><span class="sp-sr">' + s("whyH") + "</span></th>" : "") + "</tr></thead><tbody>" + rows +
       (pf != null && !beg ? '<tr><th scope="row">' + s("pf") + "</th>" + (a0 ? "<td>" + esc(fmtN(a0.fio2 ? Math.round(a0.abg.PaO2 / (a0.fio2 / 100)) : null)) + "</td>" : "") + "<td><b>" + esc(fmtN(pf)) + "</b></td>" + (a0 ? "<td></td>" : "") + "</tr>" : "") +
-      "</tbody></table>" + (lv() <= 2 ? '<p class="vl-plain">' + s("pfVsS") + "</p>" : "") + (a0 ? why : '<p class="vl-empty">' + s("abgAgain") + "</p>");
+      "</tbody></table>" + (a1.abg.curveNote ? '<p class="vl-plain vl-curve">' + esc(t(a1.abg.curveNote).replace(/^./, function (c) { return c.toUpperCase(); })) + "</p>" : "") + (lv() <= 2 ? '<p class="vl-plain">' + s("pfVsS") + "</p>" : "") + (a0 ? why : '<p class="vl-empty">' + s("abgAgain") + "</p>");
   }
   // A reason whose direction disagrees with the numbers it sits next to is dropped, never shown.
   function agree(rs, b, a) {
@@ -1514,24 +1728,32 @@
     var list = allAlarms(), ids = {};
     list.forEach(function (a) { ids[a.id] = 1; });
     Object.keys(R.ack).forEach(function (id) { if (!ids[id]) delete R.ack[id]; });
-    return list.filter(function (a) { return !R.ack[a.id] || MON_AL[a.id]; }).sort(function (a, b) { return (b.severity === "danger") - (a.severity === "danger") || (!!R.ack[a.id]) - (!!R.ack[b.id]); });
+    // highest tier first; on a tie the patient's own alarms (SpO2, blood pressure) before the machine's; acknowledged last
+    return list.filter(function (a) { return !R.ack[a.id] || MON_AL[a.id]; }).sort(function (a, b) {
+      return tier(b) - tier(a) || (!!R.ack[a.id]) - (!!R.ack[b.id]) || (!!MON_AL[b.id]) - (!!MON_AL[a.id]);
+    });
   }
+  function tier(a) { var v = sevOf(a); return v === "danger" ? 3 : v === "warn" ? 2 : 1; }
+  function okChip() { return '<span class="vl-okchip" id="vlOk"' + (R && R.alN ? " hidden" : "") + ">" + (ico("check") ? '<span aria-hidden="true">' + ico("check") + "</span>" : "") + s("noAlarms") + "</span>"; }
   function alSig(list) { return list.map(function (a) { return a.id + (R.sil[a.id] > R.s.t ? "s" : "") + (R.ack[a.id] ? "a" : ""); }).join(",") + "|" + L(); }
   function alarmsHtml() {
     var list = activeAlarms();
-    R.alarmSig = alSig(list);
+    R.alarmSig = alSig(list); R.alN = list.length;
     if (!list.length) return '<p class="vl-al-none">' + (ico("check") ? '<span aria-hidden="true">' + ico("check") + "</span>" : "") + s("alarmsNone") + "</p>";
-    var more = list.length > 1 ? '<button type="button" class="vl-al-more" data-act="vlalall" aria-label="' + s("allAlarms", { n: list.length }) + '">' + s("plusN", { n: list.length - 1 }) + "</button>" : "";
+    // the "+N more" chip on a phone takes the colour of the worst alarm it hides, so a hidden red never looks grey
+    var hid = list.slice(1), worst = hid.reduce(function (m, a) { return Math.max(m, R.sil[a.id] > R.s.t || R.ack[a.id] ? 0 : tier(a)); }, 0);
+    var more = list.length > 1 ? '<button type="button" class="vl-al-more' + (worst === 3 ? " danger" : worst === 2 ? " warn" : "") + '" data-act="vlalall" aria-label="' + s("allAlarms", { n: list.length }) + '">' + s("plusN", { n: list.length - 1 }) + "</button>" : "";
     return '<h2 class="sp-sr">' + s("alarmsH") + '</h2><ul class="vl-al-list">' + list.map(function (a) {
       var sil = R.sil[a.id] > R.s.t, ak = !!R.ack[a.id];
-      return '<li><button type="button" class="vl-al ' + esc(a.severity || "warn") + (sil || ak ? " sil" : "") + '" data-act="vlalarm" data-k="' + esc(a.id) + '" aria-label="' + s("alarmOpen", { x: t(a.label) }) + (sil ? ", " + s("silenced") : ak ? ", " + s("acked") : "") + '">' +
-        '<span class="vl-al-i" aria-hidden="true">' + (ico(a.severity === "danger" ? "siren" : "warn") || "!") + "</span>" + tx(a.label) + (sil ? ' <small>' + s("silenced") + "</small>" : ak ? ' <small>' + s("acked") + "</small>" : "") + "</button></li>";
+      return '<li><button type="button" class="vl-al ' + esc(sevOf(a)) + (sil || ak ? " sil" : "") + '" data-act="vlalarm" data-k="' + esc(a.id) + '" aria-label="' + s("alarmOpen", { x: t(a.label) }) + (sil ? ", " + s("silenced") : ak ? ", " + s("acked") : "") + '">' +
+        '<span class="vl-al-i" aria-hidden="true">' + (ico(sevOf(a) === "danger" ? "siren" : "warn") || "!") + "</span>" + tx(a.label) + (sil ? ' <small>' + s("silenced") + "</small>" : ak ? ' <small>' + s("acked") + "</small>" : "") + "</button></li>";
     }).join("") + "</ul>" + more;
   }
   // Alarm answers for the score: an alarm that clears after a learner change counts as handled.
   function trackAlarms() {
     var now = allAlarms(), ids = {};
-    now.forEach(function (a) { ids[a.id] = 1; if (R.seen[a.id] == null) R.seen[a.id] = R.s.t; });
+    if (!R.alLab) R.alLab = {};
+    now.forEach(function (a) { ids[a.id] = 1; if (R.seen[a.id] == null) R.seen[a.id] = R.s.t; R.alLab[a.id] = a.label; });
     Object.keys(R.seen).forEach(function (id) {
       if (ids[id]) return;
       if (R.lastSet >= R.seen[id] || R.lastAct >= R.seen[id]) R.answers.push({ kind: "alarm", id: id, correct: true });
@@ -1540,7 +1762,7 @@
   }
   function finalAnswers() {
     var out = R.answers.slice();
-    Object.keys(R.seen).forEach(function (id) { if (R.s.t - R.seen[id] >= 300) out.push({ kind: "alarm", id: id, correct: false }); });
+    Object.keys(R.seen).forEach(function (id) { if (R.s.t - R.seen[id] >= 300) out.push({ kind: "alarm", id: id, correct: false, t: R.seen[id] }); });
     return out;
   }
   function updAlarms() {
@@ -1549,7 +1771,14 @@
     var list = activeAlarms(), sig = alSig(list);
     if (sig === R.alarmSig) return;
     var a = G.document.activeElement, keep = a && el.contains(a) ? a.getAttribute("data-k") : null;
+    // arrival cue: one haptic for a new alarm (strong for high priority), never for one already on the bar
+    var fresh = list.filter(function (x) { return !R.alIds[x.id] && !(R.sil[x.id] > R.s.t); }), ids = {};
+    list.forEach(function (x) { ids[x.id] = 1; });
+    R.alIds = ids;
+    if (fresh.length) I.haptic(fresh.some(function (x) { return sevOf(x) === "danger"; }) ? "error" : "warning");
     el.innerHTML = alarmsHtml();
+    el.classList.toggle("is-none", !R.alN);
+    var ok = $("vlOk"); if (ok) ok.hidden = !!R.alN;
     if (keep) { var n = el.querySelector('[data-k="' + keep + '"]'); if (n) n.focus({ preventScroll: true }); }
   }
   // Which setting change most likely raised this alarm: the engine's alarm.causedBy, else the learner's last change
@@ -1575,28 +1804,76 @@
     }
     return null;
   }
+  // The alarm card leads with the patient and the bedside fix, in order (look, bag, DOPE, suction, call the senior). The
+  // engine's plan (E.alarms() items, or E.alarmPlan for the UI's own monitor alarms) gives the ordered checklist, the
+  // actions and the primary step, which is the one filled button. A changed alarm LIMIT never leads: setting it back only
+  // hides the alarm, so it sits under "Other causes and checks" and says so. A changed SETTING (PEEP) is a real cause.
+  function planOf(a, id) {
+    if (a && a.checklist && a.checklist.length) return a;
+    var e = E(), p = e.alarmPlan ? safe(function () { return e.alarmPlan(R.s, id, R.set); }, null) : null;
+    return p && p.checklist && p.checklist.length ? p : null;
+  }
+  // Without an engine plan (an older engine): the UI's own ordered list and bedside actions.
+  function fallbackChecks(id) { return (CARD_CK[id] || (MON_AL[id] ? [] : ["ck_look", "ck_dope", "ck_senior"])).map(function (k) { return { text: STR[k] }; }); }
+  function fallbackActs(a, id) {
+    var A0 = E().ACTIONS || {}, out = [];
+    function add(k) { if (k && A0[k] && out.indexOf(k) < 0) out.push(k); }
+    sugFor([a || { id: id }]).forEach(add);
+    (CARD_ACTS[id] || []).forEach(add);
+    return out;
+  }
+  function sevOf(a) { var p = a && a.priority; return p === "high" ? "danger" : p === "medium" ? "warn" : p === "low" ? "info" : (a && a.severity) || "warn"; }
   A.vlalarm = function (b) {
     var id = b.getAttribute("data-k"), a = activeAlarms().filter(function (x) { return x.id === id; })[0], c = (learn().alarms || {})[id] || {}, beg = lv() <= 1;
     var list = function (arr) { return arr && arr.length ? "<ul>" + arr.map(function (x) { return "<li>" + txg(x) + "</li>"; }).join("") + "</ul>" : ""; };
     glossReset();
-    var cb = a ? causedBy(a) : null, top = "";
+    var cb = a ? causedBy(a) : null, top = "", lim = "", sev = sevOf(a), A0 = E().ACTIONS || {};
     if (cb) {
-      var u = setUnit(cb.key) ? " " + setUnit(cb.key) : "";
-      top = '<div class="vl-cause"><p>' + (cb.key === "peep" && (id === "peepHigh" || id === "peepSetHigh") ? s("peepYou") + " " : "") + s("youChanged", { x: setLabel(cb.key), a: setText(cb.key, cb.from) + u, b: setText(cb.key, cb.to) + u, n: cb.minutesAgo != null ? cb.minutesAgo : 0 }) + "</p>" +
-        (setDef(cb.key) && String(R.set[cb.key]) === String(cb.to) ? '<button type="button" class="sp-btn pri" data-act="vlsetback" data-k="' + esc(cb.key) + '" data-v="' + esc(cb.from) + '">' + s("setBack", { x: setLabel(cb.key), a: setText(cb.key, cb.from) + u }) + "</button>" : "") + "</div>";
+      var u = setUnit(cb.key) ? " " + setUnit(cb.key) : "", can = setDef(cb.key) && String(R.set[cb.key]) === String(cb.to), n0 = cb.minutesAgo != null ? cb.minutesAgo : 0;
+      if (ALARM_KEYS.indexOf(cb.key) >= 0) {
+        lim = '<div class="vl-limit"><p>' + s("limYou", { a: setText(cb.key, cb.from) + u, b: setText(cb.key, cb.to) + u, n: n0 }) + "</p>" +
+          (can ? '<button type="button" class="sp-btn sec" data-act="vlsetback" data-k="' + esc(cb.key) + '" data-v="' + esc(cb.from) + '">' + s("limBack", { a: setText(cb.key, cb.from) + u }) + "</button>" : "") +
+          '<p class="vl-note">' + s("limNote") + "</p></div>";
+      } else {
+        top = '<div class="vl-cause"><p>' + (cb.key === "peep" && (id === "peepHigh" || id === "peepSetHigh") ? s("peepYou") + " " : "") + s("youChanged", { x: setLabel(cb.key), a: setText(cb.key, cb.from) + u, b: setText(cb.key, cb.to) + u, n: n0 }) + "</p>" +
+          (can ? '<button type="button" class="sp-btn pri" data-act="vlsetback" data-k="' + esc(cb.key) + '" data-v="' + esc(cb.from) + '">' + s("setBack", { x: setLabel(cb.key), a: setText(cb.key, cb.from) + u }) + "</button>" : "") + "</div>";
+      }
     }
-    var mon = MON_AL[id] && !c.causes && !c.steps ? '<p>' + s(id === "spo2Low" ? "am_spo2Low" : id === "mapLow" ? "am_mapLow" : "am_hr") + "</p>" + (id === "spo2Low" || id === "mapLow" ? '<p class="vl-fix">' + s(id === "spo2Low" ? "ams_spo2Low" : "ams_mapLow") + "</p>" : "") + '<p class="vl-note">' + s("monStays") + "</p>" : "";
-    var acts = sugFor([a || { id: id }]), A0 = E().ACTIONS || {};
-    var body = (beg ? '<p class="vl-look">' + s("lookFirst") + "</p>" : "") + mon +
-      (acts.length ? '<h3 class="vl-h3">' + s("bedH") + '</h3><div class="vl-bed-g vl-bed-s">' + acts.filter(function (k) { return A0[k]; }).map(function (k) { return bedBtn({ id: k, a: A0[k], on: safe(function () { return A0[k].available(R.s); }, false), sug: true }, true); }).join("") + "</div>" : "") +
-      (c.causes ? '<h3 class="vl-h3">' + s(beg ? "a1_causes" : "causes") + "</h3>" + list(c.causes) : "") +
+    var P = planOf(a, id), checks = P ? P.checklist : fallbackChecks(id), acts = P ? (P.actions || []) : fallbackActs(a, id), pr = P && P.primary, lead = !top;
+    function actBtn(k, isLead) { if (!A0[k]) return ""; var on = safe(function () { return A0[k].available(R.s); }, false), h = bedBtn({ id: k, a: A0[k], on: on, sug: true }, true); return isLead && on ? h.replace('class="vl-bedb', 'class="vl-bedb lead') : h; }
+    // the primary step: a bedside action, a setting (never a limit), or a check the learner does with their eyes
+    var prim = "", primAct = null;
+    if (pr && pr.kind === "action" && A0[pr.id]) { primAct = pr.id; prim = '<div class="vl-prim">' + actBtn(pr.id, lead) + "</div>"; }
+    else if (pr && pr.kind === "setting" && setDef(pr.key) && ALARM_KEYS.indexOf(pr.key) < 0 && String(R.set[pr.key]) !== String(pr.to)) prim = '<button type="button" class="sp-btn ' + (lead ? "pri" : "sec") + ' sp-wide vl-prim" data-act="vlplanset" data-k="' + esc(pr.key) + '" data-v="' + esc(pr.to) + '">' + tx(pr.label) + "</button>";
+    else if (pr && pr.label) prim = '<p class="vl-prim vl-prim-c">' + tx(pr.label) + "</p>";
+    else if (!P && acts.length) { primAct = acts[0]; prim = '<div class="vl-prim">' + actBtn(acts[0], lead) + "</div>"; }
+    var call = P && P.callNow ? '<p class="vl-call" role="note">' + (P.callWhy ? txg(P.callWhy) : s("ck_senior")) + "</p>" : "";
+    var lineActs = {};
+    var ol = checks.length ? '<h3 class="vl-h3 vl-now-h">' + s("doNow") + '</h3><ol class="vl-ol vl-now">' + checks.map(function (x) {
+      var k = x.action && A0[x.action] && x.action !== primAct ? x.action : null; if (k) lineActs[k] = 1;
+      return "<li><span>" + (x.text ? txg(x.text) : txg(x)) + "</span>" + (k ? actBtn(k, false) : "") + "</li>";
+    }).join("") + "</ol>" : (beg ? '<p class="vl-look">' + s("lookFirst") + "</p>" : "");
+    var rest = acts.filter(function (k) { return k !== primAct && !lineActs[k] && A0[k]; });
+    var fio2 = !P && id === "spo2Low" ? '<p class="vl-fix vl-fio2l">' + (R.set.fio2 >= 100 ? s("fio2Max") : R.set.fio2 >= 60 ? s("fio2Hi", { v: R.set.fio2 }) : s("ams_spo2Low")) + "</p>" : "";
+    var now = call + prim + ol + fio2 + (rest.length ? '<div class="vl-bed-g vl-bed-s" role="group" aria-label="' + s("bedH") + '">' + rest.map(function (k) { return actBtn(k, false); }).join("") + "</div>" : "");
+    var mon = MON_AL[id] ? "<p>" + s(id === "spo2Low" ? "am_spo2Low" : id === "mapLow" ? "am_mapLow" : "am_hr") + "</p>" + (!P && id === "mapLow" ? '<p class="vl-fix">' + s("ams_mapLow") + "</p>" : "") + '<p class="vl-note">' + s("monStays") + "</p>" : "";
+    var more = mon + (c.causes ? '<h3 class="vl-h3">' + s(beg ? "a1_causes" : "causes") + "</h3>" + list(c.causes) : "") +
       (c.clue ? '<h3 class="vl-h3">' + s("clue") + "</h3><p>" + txg(c.clue) + "</p>" : "") +
       (c.steps ? '<h3 class="vl-h3">' + s(beg ? "a1_steps" : "trouble") + '</h3><ol class="vl-ol">' + c.steps.map(function (x) { return "<li>" + txg(x) + "</li>"; }).join("") + "</ol>" : "") +
-      (c.fix ? '<h3 class="vl-h3">' + s(beg ? "a1_fix" : "fix") + '</h3><p class="vl-fix">' + txg(c.fix) + "</p>" : "");
-    // A learner-caused alarm leads with the cause; the general troubleshooting folds away under it.
+      (c.fix ? '<h3 class="vl-h3">' + s(beg ? "a1_fix" : "fix") + '</h3><p class="vl-fix">' + txg(c.fix) + "</p>" : "") + lim;
+    // open for a high-priority alarm or a changed limit (the real guidance must not hide); folded under a setting cause
+    var open = sev === "danger" || !!lim || !top;
     sheet((a ? tx(a.label) : esc(id)),
-      '<div class="vl-acard ' + esc((a && a.severity) || "warn") + '">' + top + (top && (c.causes || c.steps) ? '<details class="vl-more"><summary>' + s("otherCauses") + "</summary>" + body + "</details>" : body) + "</div>",
-      '<button type="button" class="sp-btn sec" data-act="vlsil" data-k="' + esc(id) + '">' + s("silence") + '</button><button type="button" class="sp-btn pri" data-act="vlack" data-k="' + esc(id) + '">' + s("ack") + "</button>", b);
+      '<div class="vl-acard ' + esc(sev) + '">' + top + now + (more ? '<details class="vl-more"' + (open ? " open" : "") + "><summary>" + s("otherCauses") + "</summary>" + more + "</details>" : "") + "</div>",
+      '<button type="button" class="sp-btn sec" data-act="vlsil" data-k="' + esc(id) + '">' + s("silence") + '</button><button type="button" class="sp-btn sec" data-act="vlack" data-k="' + esc(id) + '">' + s("ack") + "</button>", b);
+  };
+  // The plan's primary setting step (e.g. FiO2 to 100% for low SpO2): applied like any change, through Confirm.
+  A.vlplanset = function (b) {
+    var k = b.getAttribute("data-k"), v = b.getAttribute("data-v"), d = setDef(k);
+    if (!d || ALARM_KEYS.indexOf(k) >= 0) return;
+    closeSheet(true);
+    R.pend = {}; R.pend[k] = d.options ? v : +v;
+    confirmChanges();
   };
   A.vlsetback = function (b) {
     var k = b.getAttribute("data-k"), v = b.getAttribute("data-v"), d = setDef(k);
@@ -1607,7 +1884,7 @@
   A.vlalall = function (b) {
     var list = activeAlarms();
     sheet(s("alarmsH"), '<ul class="vl-al-list vl-al-sheet">' + list.map(function (a) {
-      return '<li><button type="button" class="vl-al ' + esc(a.severity || "warn") + '" data-act="vlalarm" data-k="' + esc(a.id) + '"><span class="vl-al-i" aria-hidden="true">' + (ico(a.severity === "danger" ? "siren" : "warn") || "!") + "</span>" + tx(a.label) + "</button></li>";
+      return '<li><button type="button" class="vl-al ' + esc(sevOf(a)) + '" data-act="vlalarm" data-k="' + esc(a.id) + '"><span class="vl-al-i" aria-hidden="true">' + (ico(sevOf(a) === "danger" ? "siren" : "warn") || "!") + "</span>" + tx(a.label) + "</button></li>";
     }).join("") + "</ul>", null, b);
   };
   A.vlsil = function (b) { var id = b.getAttribute("data-k"); R.sil[id] = R.s.t + 120; R.log.push({ t: R.s.t, settings: clone(R.set), readout: cur(), action: "silence:" + id }); closeSheet(true); R.alarmSig = ""; updAlarms(); focusAlarmBar(); };
@@ -1637,15 +1914,17 @@
   function actLeft(id) { var m = R.s.m || {}, u = m[id + "Until"] || m[id.replace(/\d+$/, "") + "Until"]; return u > R.s.t ? Math.ceil(u - R.s.t) : 0; }
   function lastUse(id) { for (var i = (R.acts || []).length - 1; i >= 0; i--) if (R.acts[i].id === id) return R.acts[i].t; return null; }
   function bedList() {
-    var acts = (E() && E().ACTIONS) || {}, sug = bedSuggested();
-    return Object.keys(acts).filter(function (k) { return lv() >= 2 || sug[k]; }).map(function (k) {
+    var acts = (E() && E().ACTIONS) || {}, sug = bedSuggested(), ks = BED_ORDER.filter(function (k) { return acts[k]; });
+    Object.keys(acts).forEach(function (k) { if (ks.indexOf(k) < 0) ks.push(k); });
+    // every action, in one fixed order (U4: Level 1 has them too, folded); suggestion marks, never reorders
+    return ks.map(function (k) {
       return { id: k, a: acts[k], on: safe(function () { return acts[k].available(R.s); }, false), sug: !!sug[k] };
-    }).sort(function (a, b) { return b.sug - a.sug; });
+    });
   }
   function bedBtn(x, inSheet) {
     var left = actLeft(x.id), used = lastUse(x.id);
     var stat = !x.on ? (x.id === "decompress" ? s("drainIn") : left ? s("bagLeft", { n: left }) : x.id === "bag100" ? s("bagging") : used != null ? s("usedAt", { t: clockText(used) }) : "")
-      : x.sug ? s("sugg") : used != null ? s("usedAt", { t: clockText(used) }) : "";
+      : [x.sug ? s("sugg") : "", used != null ? s("usedAt", { t: clockText(used) }) : ""].filter(Boolean).join(" · ");
     return '<button type="button" class="vl-bedb' + (x.sug && x.on ? " sug" : "") + '" data-act="vlbed" data-k="' + esc(x.id) + '"' + (x.on ? "" : ' aria-disabled="true"') + ">" +
       '<span class="vl-bedb-i" aria-hidden="true">' + (ico(BED_ICO[x.id]) || ico("plus")) + '</span><span class="vl-bedb-t">' + tx(x.a.label) + (stat ? "<small>" + stat + "</small>" : "") + "</span></button>";
   }
@@ -1658,8 +1937,13 @@
     var list = bedList();
     R.bedSig = bedSigOf(list);
     if (!list.length) return "";
-    return '<section class="vl-bed" data-vl-id="bedside" aria-labelledby="vlBedH"><div class="vl-bed-h"><h2 class="vl-h" id="vlBedH">' + s("bedH") + '</h2><p class="vl-bed-n">' + s("bedNote") + "</p></div>" +
-      '<div class="vl-bed-g" role="group" aria-labelledby="vlBedH">' + list.map(function (x) { return bedBtn(x); }).join("") + "</div>" + bedLogHtml() + "</section>";
+    var grid = '<div class="vl-bed-g" role="group" aria-labelledby="vlBedH">' + list.map(function (x) { return bedBtn(x); }).join("") + "</div>" + bedLogHtml();
+    if (lv() <= 1) {
+      // Level 1: one folded line, opened by an alarm that suggests an action, a tutorial step that asks for one, or a tap
+      var sp = tutStep(), want = list.some(function (x) { return x.sug && x.on; }) || !!(sp && sp.do && sp.do.action), open = R.bedOpen != null ? R.bedOpen || want : want;
+      return '<details class="vl-bed vl-bedd" data-vl-id="bedside"' + (open ? " open" : "") + '><summary><span class="vl-h" id="vlBedH">' + s("bedH") + '</span><span class="vl-bed-n">' + s("bedNote") + "</span></summary>" + grid + "</details>";
+    }
+    return '<section class="vl-bed" data-vl-id="bedside" aria-labelledby="vlBedH"><div class="vl-bed-h"><h2 class="vl-h" id="vlBedH">' + s("bedH") + '</h2><p class="vl-bed-n">' + s("bedNote") + "</p></div>" + grid + "</section>";
   }
   function bagHtml() {
     var n = bagLeft();
@@ -1684,7 +1968,10 @@
     var id = b.getAttribute("data-k"), e = E(), a = e.ACTIONS && e.ACTIONS[id];
     if (!a || !safe(function () { return a.available(R.s); }, false)) return;
     var inSheet = !!b.closest(".vl-sheet"), r0 = cur();
-    if (R.tut) { R.tut.pre = { r: r0, t: R.s.t }; R.tut.base = null; }
+    // a tutorial remembers every bedside action with the readout just before it: a later step that asks for the same
+    // action accepts it (the first-alarm deadlock: suction from the alarm card, then a step that asks for suction)
+    // (a step whose change was already seen keeps its evidence: it is not re-judged against this action)
+    if (R.tut) { if (!R.tut.saw) { R.tut.pre = { r: r0, t: R.s.t }; R.tut.base = null; } R.tut.acted = R.tut.acted || {}; R.tut.acted[id] = { r: r0, t: R.s.t }; }
     R.s = e.act(R.s, id);
     R.lastAct = R.s.t || 0.001;
     if (!R.acts) R.acts = [];
@@ -1693,9 +1980,10 @@
     markChange();
     if (inSheet) closeSheet(true);
     var r1 = refresh(true), v0 = r0.vitals || {}, v1 = r1.vitals || {}, vv0 = r0.vent || {}, vv1 = r1.vent || {}, eff = [];
-    if (vv0.ppeak !== vv1.ppeak && vv1.ppeak != null) eff.push("Ppeak " + fmtN(vv0.ppeak) + " to " + fmtN(vv1.ppeak));
-    if (v0.spo2 !== v1.spo2) eff.push("SpO2 " + fmtN(v0.spo2) + " to " + fmtN(v1.spo2));
-    if (v0.map !== v1.map) eff.push("MAP " + fmtN(v0.map) + " to " + fmtN(v1.map));
+    // off the ventilator (bagging, a disconnect) the ventilator measures no airway pressure: no Ppeak line then
+    if (id !== "bag100" && id !== "disconnect" && vv0.ppeak !== vv1.ppeak && vv1.ppeak != null) eff.push(raw("sawVal", { x: "Ppeak", a: fmtN(vv0.ppeak), b: fmtN(vv1.ppeak) }));
+    if (v0.spo2 !== v1.spo2) eff.push(raw("sawVal", { x: "SpO2", a: fmtN(v0.spo2), b: fmtN(v1.spo2) }));
+    if (v0.map !== v1.map) eff.push(raw("sawVal", { x: "MAP", a: fmtN(v0.map), b: fmtN(v1.map) }));
     I.haptic("tap");
     toast("event", s("bedDone", { x: t(a.label) }) + (eff.length ? ". " + esc(eff.join(", ")) + "." : ""));
     say(raw("bedDone", { x: t(a.label) }) + (id === "bag100" ? ". " + raw("bagOff") : ""));
@@ -1749,7 +2037,7 @@
     var v = r.vitals || {}, last = null, i;
     for (i = R.log.length - 1; i >= 0; i--) if (/^set:/.test(R.log[i].action || "")) { last = R.log[i]; break; }
     R.arrest = { t: R.s.t, spo2: v.spo2, map: v.map, why: r.arrest && (r.arrest.en || r.arrest.because) ? r.arrest : null, last: last ? { t: last.t, keys: last.action.slice(4) } : null };
-    R.live = false; stopLive(); dropSaved(R.sc.id);
+    R.live = false; stopLive(); if (!R.fromTut) dropSaved(R.sc.id);
     R.log.push({ t: R.s.t, settings: clone(R.set), readout: r, action: "arrest" });
     paintFoot(); I.haptic("error");
     sheet(s("arrestH"), arrestHtml(), '<button type="button" class="sp-btn pri sp-wide" data-act="vlfinish">' + s("finish") + "</button>", q(".vl-mode"));
@@ -1866,19 +2154,28 @@
   function expMet(sp, base, r) { var d = dirOf(roVal(base, expKey(sp)), roVal(r, expKey(sp))); return sp.expect.direction === "down" ? d < 0 : d > 0; }
   function tutEnter() {
     var sp = tutStep(); if (!sp) return;
-    R.tut.did = null; R.tut.ok = !sp.do || !!sp.do.scenario || !!sp.do.event; R.tut.saw = !sp.expect; R.tut.base = null; R.tut.moved = 0; R.tut.flat = false;
-    if (sp.do && sp.do.scenario && sp.do.scenario !== R.sc.id) { var sc = scById(sp.do.scenario); if (sc) { var tu = R.tut; tu.pre = null; start(tu.tu.keepTimeline ? clone(sc) : noTimeline(sc), tu); return; } }
+    R.tut.did = null; R.tut.ok = !sp.do || !!sp.do.scenario || !!sp.do.event; R.tut.saw = !sp.expect; R.tut.base = null; R.tut.moved = 0; R.tut.flat = false; R.tut.early = null;
+    if (sp.do && sp.do.scenario && sp.do.scenario !== R.sc.id) { var sc = scById(sp.do.scenario); if (sc) { var tu = R.tut; tu.pre = null; tu.acted = {}; tu.evT = 0; start(tu.tu.keepTimeline ? clone(sc) : noTimeline(sc), tu); return; } }
     if (sp.do && sp.do.key != null && String(R.set[sp.do.key]) === String(sp.do.to)) R.tut.ok = true;
     if (sp.do && sp.do.mode && R.set.mode === sp.do.mode) R.tut.ok = true;
+    // asked for a bedside action the learner already took after the last event (e.g. suction from the alarm card): done,
+    // and its effect is judged from the readout just before that action, so Next never deadlocks (U1)
+    var did = sp.do && sp.do.action && R.tut.acted && R.tut.acted[sp.do.action];
+    if (did && did.t >= (R.tut.evT || 0)) { R.tut.ok = true; R.tut.early = did; R.tut.pre = { r: did.r, t: did.t }; }
     // an event step: the coach makes it happen now (the scenario timeline is off in a tutorial)
     if (sp.do && sp.do.event) {
+      R.tut.evT = R.s.t; R.tut.acted = {};
       R.tut.pre = { r: cur(), t: R.s.t };
       R.s = E().inject(R.s, sp.do.event, sp.do);
       R.log.push({ t: R.s.t, settings: clone(R.set), readout: cur(), action: "event:" + sp.do.event });
-      if (!sp.expect) refresh(true);
+      // repaint at once (the clock may be stopped at Level 1, so no tick would show the alarm the event raises)
+      refresh(true);
     }
     if (sp.expect && R.tut.ok) tutObserve(sp);
     var ro = $("vlRo"); if (ro) ro.innerHTML = roHtml(cur());
+    // the control the step asks for exists and is open: a dial above the level, the alarm limits, the bedside group
+    if (sp.do && sp.do.key != null && !nPend()) { var sE = $("vlSet"); if (sE) sE.outerHTML = setHtml(); }
+    R.bedSig = ""; updBed();
     paintCoach(); tutHighlight();
   }
   function tutObserve(sp) {
@@ -1931,26 +2228,32 @@
     var tu = R.tut.tu, sp = tutStep(), n = tu.steps.length, last = R.tut.i >= n - 1, task = taskText(sp), exp = "";
     var keep = GL.seen; GL.seen = {};
     if (sp.expect) {
-      var bv = R.tut.base ? roVal(R.tut.base.r, expKey(sp)) : null, nv = roVal(cur(), expKey(sp));
-      if (R.tut.saw) exp = '<p class="vl-co-ok">' + (ico("check") || "") + s("sawIt", { x: expName(sp), d: raw(sp.expect.direction === "down" ? "down" : "up") }) + (bv != null && nv != null ? " " + s("sawVal", { x: expName(sp), a: fmtN(bv), b: fmtN(nv) }) + "." : "") + "</p>";
+      var bv = R.tut.base ? roVal(R.tut.base.r, expKey(sp)) : null, nv = roVal(cur(), expKey(sp)), d = dirOf(bv, nv);
+      // the evidence names the real direction and the plain label ("peak pressure (Ppeak) went down, 25 to 17.8")
+      if (R.tut.saw) exp = '<p class="vl-co-ok">' + (task ? "" : ico("check") || "") + (bv != null && nv != null && d ? s("sawMove", { x: expName(sp), d: raw(d < 0 ? "down" : "up"), a: fmtN(bv), b: fmtN(nv) }) : s("sawIt", { x: expName(sp), d: raw(sp.expect.direction === "down" ? "down" : "up") })) + "</p>";
       else if (R.tut.flat) exp = '<p class="vl-co-wait">' + s("tutFlat", { x: expName(sp) }) + "</p>";
       else if (R.tut.ok) exp = '<p class="vl-co-wait">' + s("waitSee", { x: expName(sp) }) + "</p>";
       else exp = '<p class="vl-co-wait">' + s("tutLook", { x: expName(sp) }) + "</p>";
       if (R.tut.moved) exp += '<p class="vl-co-wait">' + s("tutMoved", { m: R.tut.moved }) + "</p>";
     }
+    if (R.tut.early) exp = '<p class="vl-co-wait">' + s("alreadyDid", { t: clockText(R.tut.early.t) }) + "</p>" + exp;
     var canNext = R.tut.ok && (R.tut.saw || R.tut.flat);
-    // Next never looks dead without a reason: the line under it says what to press first.
-    // nothing to name before tutEnter has set the step up (first paint) or on a step with no task and no expected change
-    var needTx = !R.tut.ok && task ? s("needDo", { x: task }) : sp.expect ? s("needWait", { x: expName(sp) }) : "";
-    var need = canNext || !needTx ? "" : '<p class="vl-co-need" id="vlCoNeed">' + needTx + "</p>";
-    var say = txg(sp.say);
+    // Next never looks dead without a reason: while the task waits, the task line itself ("Your turn") describes Next;
+    // once it is done and the change is still to come, one line says to move time on. No line repeats another.
+    var waitTask = !R.tut.ok && !!task, needTx = !waitTask && !canNext && sp.expect ? s("needWait", { x: expName(sp) }) : "";
+    var need = needTx ? '<p class="vl-co-need" id="vlCoNeed">' + needTx + "</p>" : "";
+    // a step about an alarm that the learner has already cleared says so instead of narrating it as still sounding
+    var cleared = sp.cleared && sp.alarm && !activeAlarms().some(function (a) { return a.id === sp.alarm; });
+    var say = txg(cleared ? sp.cleared : sp.say);
+    var show = !R.tut.ok && sp.do && (sp.do.key != null || sp.do.action || sp.do.mode) ? '<button type="button" class="vl-co-link vl-co-show" data-act="vltutshow">' +
+      s(sp.do.key != null && ALARM_KEYS.indexOf(sp.do.key) >= 0 ? "openLim" : sp.do.action ? "openBed" : "showCtl") + "</button>" : "";
     GL.seen = keep;
     return '<div class="vl-co-h"><button type="button" class="vl-co-min" data-act="vlcomin" aria-expanded="' + !R.coMin + '" aria-controls="vlCoBody"><span class="vl-co-ht">' + tx(tu.title) + " · " + s("stepOf", { i: R.tut.i + 1, n: n }) +
       '</span><span class="vl-co-chev" aria-hidden="true">' + ico("chev") + '</span><span class="sp-sr">' + s(R.coMin ? "coMax" : "coMin") + '</span></button><button type="button" class="vl-co-x" data-act="vltutx">' + s("exitTut") + "</button></div>" +
       '<div class="vl-co-bar" aria-hidden="true"><i style="transform:scaleX(' + ((R.tut.i + 1) / n).toFixed(3) + ')"></i></div>' +
       '<div class="vl-co-body" id="vlCoBody">' +
       '<p class="vl-co-say" id="vlCoSay" tabindex="-1">' + say + "</p>" +
-      (task ? '<p class="vl-co-task"><b>' + s("yourTurn") + "</b> " + task + (R.tut.ok ? ' <span class="vl-co-done">' + (ico("check") || "") + s("doneStep") + "</span>" : "") + "</p>" : "") + exp + coachNums(sp) +
+      (task ? '<p class="vl-co-task"' + (waitTask ? ' id="vlCoNeed"' : "") + "><b>" + s("yourTurn") + "</b> " + task + (R.tut.ok ? ' <span class="vl-co-done">' + (ico("check") || "") + s("doneStep") + "</span>" : "") + "</p>" + show : "") + exp + coachNums(sp) +
       (last ? tutLeftHtml() : "") + "</div>" +
       need + '<div class="vl-co-f">' + (task && !R.tut.ok ? '<button type="button" class="sp-btn sec" data-act="vltutdo">' + s("doIt") + "</button>" : "") +
       '<button type="button" class="sp-btn pri' + (canNext ? "" : " is-wait") + '" data-act="vltutn"' + (canNext ? "" : ' data-wait="1" aria-describedby="vlCoNeed"') + ">" + s(last ? "done" : "next") + "</button></div>";
@@ -1963,11 +2266,27 @@
       if (f) r.insertBefore(el, f); else r.appendChild(el);
       var sc = q(".vl-scroll"); if (sc) sc.classList.add("has-coach");
     }
+    var old = $("vlCoSay"), oldTx = old ? old.textContent : null, bodyTop = $("vlCoBody") ? $("vlCoBody").scrollTop : 0;
     el.classList.toggle("min", !!R.coMin);
     el.innerHTML = coachHtml();
+    var nw = $("vlCoSay"), bd = $("vlCoBody");
+    // a new line crossfades in (160 ms); a repaint of the same step keeps its scroll and does not flash
+    if (nw && oldTx != null && oldTx !== nw.textContent && !reduced()) { nw.classList.add("swap"); if (bd) bd.scrollTop = 0; }
+    else if (bd) bd.scrollTop = bodyTop;
     var ft = $("vlFoot"); if (ft) el.style.setProperty("--vl-cob", (ft.offsetHeight + 16) + "px");
     if (focus) { var n = $("vlCoSay"); if (n && !R.coMin) n.focus({ preventScroll: true }); }
   }
+  // "Show me the control": open its tab (and the folded group it sits in), scroll it into the clear area, focus it.
+  A.vltutshow = function () {
+    var sp = tutStep(); if (!sp || !sp.do) return;
+    var tg = null;
+    if (sp.do.key != null) { tg = q('[data-knob="' + sp.do.key + '"]'); var det = tg && tg.closest("details"); if (det) det.open = true; }
+    else if (sp.do.action) { var bd = q(".vl-bedd"); if (bd) { bd.open = true; R.bedOpen = true; } tg = q('#vlBedW [data-k="' + sp.do.action + '"]'); }
+    else if (sp.do.mode) tg = q(".vl-mode");
+    if (!tg) return;
+    reveal(tg);
+    G.requestAnimationFrame(function () { scrollTo(tg, true); pulse(tg); var f = tg.querySelector ? tg.querySelector(".vl-dial") || tg : tg; try { f.focus({ preventScroll: true }); } catch (e) {} });
+  };
   A.vlcomin = function () { R.coMin = !R.coMin; paintCoach(); var b = q("[data-act=vlcomin]"); if (b) b.focus({ preventScroll: true }); if (!R.coMin) tutHighlight(); };
   // The highlighted target comes into the clear area: its tab opens on a phone, then it scrolls to the middle of the
   // visible page (the coach is outside the scroller, so the middle is always clear).
@@ -2011,8 +2330,9 @@
   A.vltutn = function (b) {
     if (b.getAttribute("data-wait") === "1") {
       // Waiting: point at what to press first instead of doing nothing.
-      var sp = tutStep(), tg = sp && sp.do && sp.do.key != null ? q('[data-knob="' + sp.do.key + '"]') : sp && sp.do && sp.do.mode ? q(".vl-mode") : R.tut.ok ? q('[data-act=vlskip][data-k="300"]') : null;
-      if (tg) { reveal(tg); scrollTo(tg, true); pulse(tg); var f = tg.querySelector ? tg.querySelector(".vl-dial") || tg : tg; try { f.focus({ preventScroll: true }); } catch (e) {} }
+      var sp = tutStep();
+      if (!R.tut.ok && sp && sp.do && (sp.do.key != null || sp.do.mode || sp.do.action)) A.vltutshow();
+      else if (R.tut.ok) { var tg = q('[data-act=vlskip][data-k="300"]'); if (tg) { pulse(tg); try { tg.focus({ preventScroll: true }); } catch (e) {} } }
       pulse($("vlCoNeed")); say(($("vlCoNeed") || {}).textContent || "");
       return;
     }
@@ -2027,7 +2347,7 @@
     toast("event", s("restored"));
     paintCoach();
   };
-  function tutEnd() { R.tut = null; var c = $("vlCoach"); if (c) c.parentNode.removeChild(c); var sc = q(".vl-scroll"); if (sc) sc.classList.remove("has-coach"); tutHighlight(); paintFoot(); var m = q(".vl-mode"); if (m) m.focus(); }
+  function tutEnd() { R.tut = null; var c = $("vlCoach"); if (c) c.parentNode.removeChild(c); var sc = q(".vl-scroll"); if (sc) sc.classList.remove("has-coach"); tutHighlight(); paintFoot(); R.bedSig = ""; updBed(); var tb = q(".vl-tabbar"); if (tb && !q(".vl-tutrun")) tb.insertAdjacentHTML("afterend", '<p class="vl-tutrun" role="note">' + s("tutRunNote") + "</p>"); toast("event", s("tutPractice")); var m = q(".vl-mode"); if (m) m.focus({ preventScroll: true }); }
   A.vltutx = function () { tutEnd(); };
 
   /* ================= debrief ================= */
@@ -2036,22 +2356,42 @@
     var e = E(), r = cur();
     closeSheet(true); stopLive();
     R.log.push({ t: R.s.t, settings: clone(R.set), readout: r, action: "finish" });
-    R.score = safe(function () { return e.score({ scenario: R.sc, scenarioId: R.sc.id, log: R.log, answers: finalAnswers(), arrest: R.arrest }); }, { total: 0, parts: {}, notes: [] });
+    R.score = safe(function () { return e.score({ scenario: R.sc, scenarioId: R.sc.id, log: R.log, answers: finalAnswers(), arrest: R.arrest, tutorial: !!R.fromTut }); }, { total: 0, parts: {}, notes: [] });
     R.final = r;
-    dropSaved(R.sc.id);
     var ok = (R.score.total || 0) >= 70 && !R.arrest, today = I.today();
-    if (C && st.store) { try { C.recordSim(st.store, "ventlab", ok, ok ? null : "low", today); I.save(); } catch (x) {} }
-    var b = prefs().best; b[R.sc.id] = Math.max(b[R.sc.id] || 0, R.score.total || 0); savePrefs();
+    // A tutorial's practice patient is never a scored run: no hub count, no "best", and the patient's own save stays (U5).
+    if (!R.fromTut && R.score.countsForBest !== false) {
+      dropSaved(R.sc.id);
+      if (C && st.store) { try { C.recordSim(st.store, "ventlab", ok, ok ? null : "low", today); I.save(); } catch (x) {} }
+      var b = prefs().best; b[R.sc.id] = Math.max(b[R.sc.id] || 0, R.score.total || 0); savePrefs();
+    }
     I.haptic(ok ? "success" : "error");
     debrief(".vl-score");
+    countUp();
   };
+  // The score counts up once (700 ms, strong ease-out) as the debrief opens; the bars grow in a short stagger (CSS).
+  function countUp() {
+    var b = q(".vl-score b"), to = +((R.score || {}).total || 0);
+    if (!b || reduced() || !G.requestAnimationFrame || to <= 0) return;
+    var t0 = 0, D = 700;
+    function ease(x) { var u = 1 - x; return 1 - u * u * u * u; }
+    function f(now) { if (!t0) t0 = now; var x = Math.min(1, (now - t0) / D); b.textContent = I.fmt(Math.round(to * ease(x))); if (x < 1 && st.view === "vl-done") G.requestAnimationFrame(f); else b.textContent = I.fmt(to); }
+    b.textContent = "0"; G.requestAnimationFrame(f);
+    var l = q(".vl-parts"); if (l) l.classList.add("grow");
+  }
   function anyTx(v) { return v == null ? "" : typeof v === "string" ? esc(v) : v.en || v.hi ? tx(v) : v.text ? tx(v.text) : v.because ? tx(v.because) : ""; }
   // One sentence per part: the engine's own explanation when it gives one, else what the run log shows.
   function partWhy(k, sco) {
     var src = sco.explain || sco.why || sco.partNotes || sco.partWhy || {}, v = src[k];
+    var labs = R.alLab || {}, seenIds = Object.keys(labs);
+    if (k === "alarms") {
+      // name every alarm that went unanswered, with its time (U12); an unscored part says which alarms did sound
+      var missed = finalAnswers().filter(function (a) { return a.kind === "alarm" && !a.correct; }).map(function (a) { return s("missedAl", { x: labs[a.id] ? t(labs[a.id]) : a.id, t: clockText(a.t != null ? a.t : 0) }); });
+      var scored = R.answers.some(function (a) { return a.kind === "alarm"; }) || missed.length;
+      if (!scored) return seenIds.length ? s("px_alarmsUnsc", { x: seenIds.map(function (id) { return t(labs[id]); }).join(", ") }) : s("px_alarmsNone2");
+      return (v ? anyTx(v) : s("px_alarms")) + (missed.length ? " " + missed.join(" ") : "");
+    }
     if (v) return anyTx(v);
-    var alarmsSeen = R.answers.some(function (a) { return a.kind === "alarm"; }) || Object.keys(R.seen).length > 0;
-    if (k === "alarms" && !alarmsSeen) return s("px_alarmsNone");
     if (k === "abg" && !R.abgs.length) return s("px_abgNone");
     return STR["px_" + k] ? s("px_" + k) : "";
   }
@@ -2077,13 +2417,13 @@
     st.onBack = function () { home(); return true; };
     glossReset();
     var MX = E().SCORE_MAX || {};
-    var parts = Object.keys(sco.parts || {}).map(function (k) {
+    var iP = 0, parts = Object.keys(sco.parts || {}).map(function (k) {
       var v = +sco.parts[k] || 0, mx = MX[k], why = partWhy(k, sco);
       // null = not part of this run (no such decision made): say why instead of showing a zero
       if (sco.parts[k] === null) return '<li class="vl-pna"><span class="vl-pl">' + s("p_" + k) + '</span><span class="vl-pnote vl-pwhy">' + why + "</span><b>" + s("notScored") + "</b></li>";
       if (k === "unsafe") return v < 0 ? '<li class="vl-pen"><span class="vl-pl">' + s("p_unsafe") + '</span><span class="vl-pnote">' + s("penalty") + "</span><b>" + I.fmt(v) + "</b>" + (why ? '<p class="vl-pwhy">' + why + "</p>" : "") + "</li>" : "";
       var pct = mx ? clamp(v / mx * 100, 0, 100) : clamp(v, 0, 100);
-      return '<li><span class="vl-pl">' + s("p_" + k) + '</span><span class="vl-pbar" aria-hidden="true"><i style="width:' + pct.toFixed(0) + '%"></i></span><b>' + I.fmt(v) + (mx ? '<small>/' + mx + "</small>" : "") + "</b>" + (why ? '<p class="vl-pwhy">' + why + "</p>" : "") + "</li>";
+      return '<li><span class="vl-pl">' + s("p_" + k) + '</span><span class="vl-pbar ' + (pct >= 80 ? "hi" : pct >= 40 ? "mid" : "lo") + '" aria-hidden="true"><i style="width:' + pct.toFixed(0) + '%;--i:' + (iP++) + '"></i></span><b>' + I.fmt(v) + (mx ? '<small>/' + mx + "</small>" : "") + "</b>" + (why ? '<p class="vl-pwhy">' + why + "</p>" : "") + "</li>";
     }).join("");
     var v = r.vitals || {}, vv = r.vent || {}, gs = r.gas || {}, tg = [];
     function goal(lab, val, ok, note) { tg.push("<tr><th scope=\"row\">" + lab + "</th><td>" + val + '</td><td class="' + (ok ? "ok" : "bad") + '">' + (note || s(ok ? "met" : "notMet")) + "</td></tr>"); }
@@ -2109,17 +2449,17 @@
       '<div class="vl-score ' + tone + '" tabindex="-1"><b>' + I.fmt(sco.total || 0) + "</b><span>" + s("outOf") + "</span></div>" +
       '<ul class="vl-parts">' + parts + "</ul>" +
       '<h2 class="sp-h2">' + s("unsafeH") + "</h2>" + (us.length ? '<ul class="dr-lines vl-notes vl-unsafe">' + us.map(function (x) { return "<li>" + x + "</li>"; }).join("") + "</ul>" : '<p class="vl-empty">' + s("unsafeNone") + "</p>") +
-      (tg.length ? '<h2 class="sp-h2">' + s("atEnd") + '</h2><table class="vl-goals"><tbody>' + tg.join("") + "</tbody></table>" : "") +
+      (tg.length ? '<h2 class="sp-h2">' + s("atEndT", { t: clockText(R.s.t) }) + '</h2><table class="vl-goals"><tbody>' + tg.join("") + "</tbody></table>" + (sco.goals && sco.goals.missedText ? '<p class="vl-plain">' + anyTx(sco.goals.missedText) + "</p>" : "") : "") +
       (notes.length ? '<h2 class="sp-h2">' + s("takeaway") + '</h2><ul class="dr-lines vl-notes">' + notes.map(function (n) { return "<li>" + n + "</li>"; }).join("") + "</ul>" : "") +
       (good ? '<h2 class="sp-h2">' + s("goodH") + '</h2><div class="vl-good">' + (Array.isArray(good) ? "<ul>" + good.map(function (x) { return "<li>" + anyTx(x) + "</li>"; }).join("") + "</ul>" : "<p>" + anyTx(good) + "</p>") + "</div>"
         : key.length ? '<h2 class="sp-h2">' + s("goodH") + '</h2><ul class="dr-lines vl-notes">' + key.map(function (n) { return "<li>" + n + "</li>"; }).join("") + "</ul>" : "") +
       I.maikBtn(STR.maikQ.en + ": " + (sc.title && sc.title.en) + ". Score " + sco.total + ". " + (sco.notes || []).map(function (n) { return typeof n === "string" ? n : n.en; }).join(" ") + " Explain what the best ventilator settings would have been and why.") +
-      '<p class="vl-disc vl-disc-end" role="note"><span>' + disc() + "</span></p></div></div>" +
+      '<p class="vl-disc vl-disc-end" role="note"><span>' + disc() + ' <span class="vl-draft">' + s("draft") + ".</span></span></p></div></div>" +
       '<div class="sp-foot"><div class="mcq-foot2"><button type="button" class="sp-btn sec" data-act="vlhome">' + s("labHome") + '</button><button type="button" class="sp-btn pri" data-act="vlrerun">' + s("again") + "</button></div></div>",
       typeof focusSel === "string" ? focusSel : null);
   }
   A.vlhome = function () { home(); };
-  A.vlrerun = function () { if (R) { dropSaved(R.sc.id); start(forLevel(scById(R.sc.id) || R.sc)); } };
+  A.vlrerun = function () { if (R) { if (!R.fromTut) dropSaved(R.sc.id); start(forLevel(scById(R.sc.id) || R.sc)); } };
 
   /* ================= what-if sandbox ================= */
   var WI = { sc: null, key: null, dir: 1, preset: null, res: null };
@@ -2174,7 +2514,8 @@
     var box = $("vlChain"), c = WI.res.chain;
     if (box && !reduced()) {
       box.innerHTML = chainBody(c, false, true);
-      c.steps.forEach(function (k, i) { CHT.push(G.setTimeout(function () { var li = box.querySelector('[data-step="' + k + '"]'); if (li) li.setAttribute("data-state", c.data[k].on ? "on" : "same"); }, 140 + i * 210)); });
+      CHT.forEach(function (x) { G.clearTimeout(x); }); CHT = [];
+      staggerChain(box, c);
     }
     say(c.say);
     scrollTo($("vlWiRes"), false);
@@ -2362,6 +2703,7 @@
     if (!el || el._vl) return;
     el._vl = 1;
     el.addEventListener("change", onSel);
+    el.addEventListener("toggle", function (e) { if (R && e.target && e.target.classList && e.target.classList.contains("vl-bedd")) R.bedOpen = e.target.open; }, true);
     el.addEventListener("pointerdown", holdStart);
     ["pointerup", "pointercancel", "pointerleave"].forEach(function (x) { el.addEventListener(x, holdStop); });
   }

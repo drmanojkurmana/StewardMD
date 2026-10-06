@@ -1959,12 +1959,22 @@
      },
      "highlight": [
       "alarms"
-     ]
+     ],
+     "alarm": "pPeakHigh",
+     "cleared": {
+      "en": "The alarm sounded because the tube was narrower, so each breath needed more push. You have already cleared it.",
+      "hi": "Alarm इसलिए बजी क्योंकि tube सँकरी थी, तो हर साँस को ज़्यादा धक्का चाहिए था। आप इसे पहले ही ठीक कर चुके हैं।"
+     }
     },
     {
      "say": {
       "en": "Look at the patient first. His chest moves less and you hear gurgling in the tube.",
       "hi": "पहले मरीज़ को देखें। उनकी छाती कम हिलती है और tube में गुड़गुड़ सुनाई देती है।"
+     },
+     "alarm": "pPeakHigh",
+     "cleared": {
+      "en": "That order is right: look at the patient first. His chest moved less and the tube gurgled, so suction was the fix.",
+      "hi": "यही क्रम सही है: पहले मरीज़ को देखें। उनकी छाती कम हिल रही थी और tube में गुड़गुड़ थी, इसलिए suction सही कदम था।"
      }
     },
     {
@@ -3510,6 +3520,52 @@
    "fix": {
     "en": "Give 100% oxygen and fix the airway first.",
     "hi": "100% oxygen दें और पहले airway ठीक करें।"
+   }
+  },
+  "etco2High": {
+   "causes": [
+    {
+     "en": "Too little air each minute: the rate or the breath is too small.",
+     "hi": "हर मिनट बहुत कम हवा: rate या साँस बहुत छोटी है।"
+    },
+    {
+     "en": "Air trapping or a partly blocked tube.",
+     "hi": "हवा का फँसना या आंशिक रूप से बंद tube।"
+    },
+    {
+     "en": "More CO2 made by the body: fever, shivering, sepsis.",
+     "hi": "शरीर ज़्यादा CO2 बना रहा है: बुख़ार, कँपकँपी, sepsis।"
+    }
+   ],
+   "clue": {
+    "en": "The capnography trace stays tall. Compare the minute volume with what you set.",
+    "hi": "Capnography trace ऊँचा रहता है। Minute volume की तुलना set मान से करें।"
+   },
+   "steps": [
+    {
+     "en": "Look at the patient first: chest rise, colour, SpO2.",
+     "hi": "पहले मरीज़ को देखें: छाती का उठना, रंग, SpO2।"
+    },
+    {
+     "en": "Check the tube and suction it if you hear secretions.",
+     "hi": "Tube जाँचें और secretions सुनाई दें तो suction करें।"
+    },
+    {
+     "en": "Read the measured minute volume and the total rate.",
+     "hi": "मापा गया minute volume और कुल rate पढ़ें।"
+    },
+    {
+     "en": "Draw a blood gas to see the PaCO2 and pH.",
+     "hi": "PaCO2 और pH देखने के लिए blood gas लें।"
+    }
+   ],
+   "fix": {
+    "en": "Give more air each minute: raise the rate first, keeping VT protective. Tell your senior.",
+    "hi": "हर मिनट ज़्यादा हवा दें: पहले rate बढ़ाएँ, VT सुरक्षित रखें। Senior को बताएँ।"
+   },
+   "plain": {
+    "en": "The breathed out CO2 is high: the lungs are not clearing enough CO2.",
+    "hi": "साँस से निकली CO2 ज़्यादा है: फेफड़े पर्याप्त CO2 नहीं निकाल रहे।"
    }
   }
  },
