@@ -11476,3 +11476,8 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
 - **Terms:** 7-day full refund; student verification discount (default 20% for verified MBBS students/interns, owner may change); referral credit (default one free month per friend who subscribes).
 - **Social next:** friends + challenge a friend, college leaderboards (opt-in college tag), public accuracy page, study groups.
 - Payments ride the existing StewardMD monetization (Razorpay + store IAP); Pro enforcement only after a real payment test.
+
+## 2026-10-06 - PrepNucleus finish line and budget (owner)
+- Price ladder: list Rs 5,999/yr (renewal); launch price Rs 1,499 first year until 2027-03-31 23:59 IST; one-time win-back Rs 999 first year (48 h real expiry); "Cancel anytime" always shown and true.
+- Remaining paid AI runs pre-approved up to $25 combined (ask if a single run > $10 or the total would pass $25); every run dry-run first and logged.
+- Finish line: merge `feat/prepnucleus` to main, deploy (Pages + Arena Worker), turn `smd_prep` and `smd_prep_arena` ON for all (app not yet public). `smd_prep_pro_enforce` stays OFF until a real payment test.
