@@ -1,7 +1,7 @@
 /* PrepNucleus Arena client and My stats: window.PREP_ARENA. ES5. Loaded by prep-loader.js after prep.js and drawn
    through PREP._host (the same overlay, back stack, runner and store). Plan: vault/plans/PrepNucleus-Arena.md.
 
-   Flag smd_prep_arena: default OFF. localStorage smd_prep_arena = "1" or ?arena=1 turns it on, "0" or ?arena=0 off.
+   Flag smd_prep_arena: default ON (owner 2026-10-06). localStorage smd_prep_arena = "0" or ?arena=0 turns it off.
    With it off the home has no Compete section and nothing here calls the network; My stats (practice on this phone)
    works either way.
 
@@ -13,7 +13,7 @@
 
   /* ================= pure ================= */
   function enabled(search, get) {
-    try { var q = (String(search || "").match(/[?&]arena=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return get("smd_prep_arena") === "1"; } catch (e) { return false; }
+    try { var q = (String(search || "").match(/[?&]arena=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return get("smd_prep_arena") !== "0"; } catch (e) { return true; }
   }
   // Server times may be seconds or milliseconds; everything here works in milliseconds.
   function ms(t) { t = Number(t); return !isFinite(t) || t <= 0 ? 0 : t < 1e12 ? t * 1000 : t; }

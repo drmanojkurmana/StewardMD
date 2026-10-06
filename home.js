@@ -2153,9 +2153,9 @@
     { act: "tokos", ic: "monitor_heart", tt: "Tokós", sub: "Obstetrics and gynae",
       eligible: function () { try { var q = (location.search.match(/[?&]tokos=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_tokos") !== "0"; } catch (e) { return true; } } },
     // PrepNucleus (prep.js, loaded on first open by prep-loader.js): the NEET-PG, INI-CET, NEET-SS and USMLE question
-    // bank (vault/plans/PrepNucleus.md). OFF by default while the bank is filled; smd_prep="1" or ?prep=1 shows it.
+    // bank (vault/plans/PrepNucleus.md). ON for all (owner 2026-10-06); smd_prep="0" or ?prep=0 hides it.
     { act: "prep", ic: "quiz", tt: "PrepNucleus", sub: "Exam question bank",
-      eligible: function () { try { var q = (location.search.match(/[?&]prep=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_prep") === "1"; } catch (e) { return false; } } },
+      eligible: function () { try { var q = (location.search.match(/[?&]prep=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_prep") !== "0"; } catch (e) { return true; } } },
     { act: "electrolytes", ic: "science", tt: "Electrolytes", sub: "ICU correction", defOn: false },
     // Everything else the app can open — available in "Add Tool" (off by default; the doctor pins what they want).
     { act: "hospital", ic: "local_hospital", tt: "Hospital", sub: "OPD · ICU · Ward", defOn: false },

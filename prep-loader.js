@@ -2,16 +2,16 @@
    window.PREP starts as this small stand-in with the module's public surface (open, isOpen, back, close). The first
    open injects the stylesheets, specialty-core.js (FSRS), specialty-bank.js (search helpers), prep.js and the Layer C
    files, in order, at one ?v= token; prep.js replaces window.PREP with the real module and the call that started the load goes through to it.
-   Flag smd_prep: default OFF while the bank is being filled. localStorage smd_prep = "1" or ?prep=1 turns it on,
+   Flag smd_prep: default ON (owner 2026-10-06). localStorage smd_prep = "0" or ?prep=0 turns it off,
    "0" or ?prep=0 turns it off (same rule as the home tile in home.js). prep-arena.js (Arena and My stats) always loads; its
-   own flag smd_prep_arena (default OFF, ?arena=1) decides whether the Compete section shows. prep-lessons.js (Lessons) has
+   own flag smd_prep_arena (default ON, ?arena=0 off) decides whether the Compete section shows. prep-lessons.js (Lessons) has
    no flag of its own: a module shows its Lesson row only when prep/lessons/v1/index.json lists it. prep-plan.js
    (onboarding, readiness, today's plan) and prep-flash.js (module flashcards) have no flag of their own either.
    prep-sync.js (opt-in encrypted sync) and prep-native.js (reminder, widget, Live Activity) load with them. prep-pro.js (free tier gates, pricing; flag smd_prep_pro_enforce, default OFF) and prep-social.js are optional: a
    404 skips them. */
 (function (G) {
   "use strict";
-  var V = "prep10";
+  var V = "prep11";
   // Layer C (prep-source, prep-decks, prep-cards, prep-create) after prep.js; prep-create.js reads the two before it.
   var CSS = ["prep.css", "prep-create.css", "prep-plan.css", "prep-flash.css", "prep-pro.css", "prep-social.css"];
   var JS = ["specialty-core.js", "specialty-bank.js", "prep.js", "prep-sync.js", "prep-arena.js", "prep-lessons.js", "prep-pyq.js", "prep-plan.js", "prep-native.js", "prep-flash.js", "prep-teacher.js", "prep-pro.js", "prep-social.js", "prep-source.js", "prep-decks.js", "prep-cards.js", "prep-create.js"];
@@ -20,7 +20,7 @@
   var loading = null;
 
   function enabled() {
-    try { var q = (G.location.search.match(/[?&]prep=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return G.localStorage.getItem("smd_prep") === "1"; } catch (e) { return false; }
+    try { var q = (G.location.search.match(/[?&]prep=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return G.localStorage.getItem("smd_prep") !== "0"; } catch (e) { return true; }
   }
   function css(href) {
     if (G.document.querySelector('link[data-prep="' + href + '"]')) return;

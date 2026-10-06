@@ -249,6 +249,9 @@ default (ON) is what you get.
 | Flag | Def | Why |
 |---|---|---|
 | `smd_dose_calc` | **ON** | [[Dose Calculator]]. Owner 2026-09-28: monograph doses are verified, so the calculator ships on. Off per device with `smd_dose_calc = "0"` or `?dosecalc=0`. |
+| `smd_prep` | **ON** | [[PrepNucleus]] exam prep. Owner 2026-10-06: "Merge deploy on for all as app still not published for public." Off per device: `?prep=0` or `smd_prep = "0"`. |
+| `smd_prep_arena` | **ON** | PrepNucleus Arena (battles, daily/weekly events, boards, social). Same owner decision. Off: `?arena=0` or `smd_prep_arena = "0"`. |
+| `smd_prep_pro_enforce` | OFF | PrepNucleus free-tier limits and paywall. Stays OFF until a real payment test (owner). |
 | `smd_neo` | **ON** (Beta) | [[Neonatal]]. Owner 2026-10-01: "Make it default on for everyone under beta label" (was OFF 2026-09-30). Content ai_drafted with Draft badges; licences not cleared (see the Decisions entry). Off per device: Experimental toggle, `?neo=0` or `smd_neo = "0"`. Per-tool `smd_neo_<dose\|prep\|inf\|fluids\|growth\|bili\|scores\|ref\|proc\|tdm>` default ON under the master; `"0"` pulls one tool. |
 
 ### Insulin  <sub>3 ON · 0 OFF</sub>

@@ -112,12 +112,12 @@ function loaderIn(search, stored) {
   return { win, added };
 }
 
-test("loader: OFF by default; smd_prep=1 or ?prep=1 turns it on, ?prep=0 wins over storage", () => {
-  assert.equal(loaderIn("", {}).win.PREP_LOADER.enabled(), false);
-  assert.equal(loaderIn("", { smd_prep: "1" }).win.PREP_LOADER.enabled(), true);
-  assert.equal(loaderIn("?prep=1", {}).win.PREP_LOADER.enabled(), true);
+test("loader: ON by default (owner 2026-10-06); smd_prep=0 or ?prep=0 turns it off, ?prep=1 wins over storage", () => {
+  assert.equal(loaderIn("", {}).win.PREP_LOADER.enabled(), true);
+  assert.equal(loaderIn("", { smd_prep: "0" }).win.PREP_LOADER.enabled(), false);
+  assert.equal(loaderIn("?prep=1", { smd_prep: "0" }).win.PREP_LOADER.enabled(), true);
   assert.equal(loaderIn("?prep=0", { smd_prep: "1" }).win.PREP_LOADER.enabled(), false);
-  const off = loaderIn("", {});
+  const off = loaderIn("?prep=0", {});
   assert.equal(off.win.PREP.open(), false, "open is a no-op while off");
   assert.equal(off.added.length, 0, "nothing loads while off");
   assert.equal(off.win.PREP.isOpen(), false);
@@ -139,7 +139,7 @@ test("wiring: index.html boots only the loader, at the loader's token; home, bac
   assert.ok(!/src="\/prep\.js/.test(html), "prep.js is never in index.html");
   const home = read("home.js");
   assert.match(home, /act: "prep", ic: "quiz"/);
-  assert.match(home, /localStorage\.getItem\("smd_prep"\) === "1"/);
+  assert.match(home, /localStorage\.getItem\("smd_prep"\) !== "0"/);
   assert.match(home, /prep: function \(\) \{[\s\S]{0,200}homeToolEligible/);
   const sb = read("swipe-back.js");
   assert.match(sb, /window\.PREP\.isOpen\(\)\) return true/);
@@ -205,13 +205,12 @@ test("findModule: typed topic to the best module", () => {
 /* ---- Arena client (prep-arena.js) ---- */
 const AR = require("../prep-arena.js");
 
-test("arena flag: OFF by default; smd_prep_arena=1 or ?arena=1 on, ?arena=0 wins; the loader ships prep-arena.js after prep.js", () => {
+test("arena flag: ON by default (owner 2026-10-06); smd_prep_arena=0 or ?arena=0 off, ?arena=1 wins; the loader ships prep-arena.js after prep.js", () => {
   const get = (m) => (k) => (k in m ? m[k] : null);
-  assert.equal(AR.enabled("", get({})), false);
-  assert.equal(AR.enabled("", get({ smd_prep_arena: "1" })), true);
-  assert.equal(AR.enabled("?prep=1&arena=1", get({})), true);
+  assert.equal(AR.enabled("", get({})), true);
+  assert.equal(AR.enabled("", get({ smd_prep_arena: "0" })), false);
+  assert.equal(AR.enabled("?prep=1&arena=1", get({ smd_prep_arena: "0" })), true);
   assert.equal(AR.enabled("?arena=0", get({ smd_prep_arena: "1" })), false);
-  assert.equal(AR.enabled("", get({ smd_prep: "1" })), false, "smd_prep alone does not turn the Arena on");
   const L = loaderIn("?prep=1", {}).win.PREP_LOADER;
   assert.ok(L.JS.indexOf("prep-arena.js") > L.JS.indexOf("prep.js"));
 });
