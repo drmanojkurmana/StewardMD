@@ -9,8 +9,10 @@ FSRS-6 spaced review through `specialty-core.js`. Students can also turn their o
 - **Entry points:** Home tile `prep` (flag-gated) · `PREP.open()` · `PREP.open({ subject })`
 - **Flag + default:** `smd_prep`, default **OFF**. `localStorage.smd_prep = "1"` or `?prep=1` turns it on; `"0"`
   or `?prep=0` off. The same rule lives in `prep-loader.js` (`enabled`) and `home.js` (`eligible`).
-- **Status:** built behind the flag; bank not yet uploaded to R2; Layer B fill and the key screen not yet run
-  (owner-run, cost money). Doctor grading deferred by the owner (D7): automatic checks are the gate.
+- **Status (2026-10-06):** bank v1 (147,310 questions, Gemini-mapped, key-screened: about 16.6k disputed keys flagged)
+  uploaded to R2 `stewardmd-offline/prep-bank/`; Phase 0 passed (98% seeded-key catch, temperatures set; billing
+  reconciliation pending); Layer B pilot run; full fill and phone tests pending. Doctor grading deferred by the owner
+  (D7): automatic checks are the gate.
 
 ## Files
 - Boot: `prep-loader.js` (the only file at boot; loads `prep.css`, `specialty-core.js`, `specialty-bank.js`,
