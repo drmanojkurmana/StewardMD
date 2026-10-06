@@ -466,10 +466,14 @@
         if (!rows.length) return;
         html += '<h2 class="pn-sec">' + tx(sec.name) + '</h2><ol class="pn-mods" start="' + (first + 1) + '">' + rows.map(function (t) { return modRow(sid, t, prog, s, all.indexOf(t) + first + 1); }).join("") + "</ol>";
       });
+      // Summary: modules completed and MCQs in this subject for the exam.
+      var mods = ix.topics.filter(function (t) { return t.group !== "mixed"; }), done = 0, q = 0;
+      mods.forEach(function (t) { var c = countFor(t, s.exam); q += c; if (c && statusOf((prog[t.id] || {}).answered, c) === "done") done++; });
+      var head = '<section class="pn-subhead"><span class="pn-ic" aria-hidden="true">' + subjIco(sid) + '</span><span class="pn-tb"><b>' + done + " of " + mods.length + " modules completed</b><small>" + (q ? fmt(q) + " MCQs" : "Questions coming soon") + '</small><span class="pn-prog" aria-hidden="true"><i style="width:' + (mods.length ? Math.round(done * 100 / mods.length) : 0) + '%"></i></span></span></section>';
       var mixed = ix.topics.filter(function (t) { return t.group === "mixed"; })[0];
       if (mixed && mixed.count && st.filter === "all") html += '<h2 class="pn-sec">More</h2><ol class="pn-mods">' + modRow(sid, mixed, prog, s, null) + "</ol>";
       var box = root.querySelector("#pnSub");
-      if (box) box.innerHTML = html || '<p class="pn-empty">Nothing in this filter yet.</p>';
+      if (box) box.innerHTML = head + (html || '<p class="pn-empty">Nothing in this filter yet.</p>');
     });
   }
   function modRow(sid, t, prog, s, num) {

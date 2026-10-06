@@ -97,6 +97,7 @@ try {
   // ---- practice
   await click('#smdPrep .pn-mod[data-m=ana-gametogenesis]');
   ok(await until(`return /6 MCQs/.test((document.querySelector("#smdPrep .pn-big")||{}).textContent||"");`, 5000), "module screen shows 6 usable MCQs (the flagged one is not counted)");
+  await shot("module");
   await click('#smdPrep [data-act=start][data-k=study]');
   ok(await until(`return !!document.querySelector("#smdPrep .pn-q");`, 10000), "practice starts");
   let seen = [];
@@ -154,6 +155,7 @@ try {
   ok(await until(`return document.activeElement && document.activeElement.id === "pnSearch";`, 3000), "search opens with the field focused");
   await ev(`var i=document.getElementById("pnSearch"); i.value="brachial fixture"; i.dispatchEvent(new Event("input",{bubbles:true})); return 1;`);
   ok(await until(`return document.querySelectorAll("#smdPrep [data-act=hit]").length === 3;`, 5000), "search finds the 3 matching questions: " + await ev(`return (document.getElementById("pnHits")||{}).textContent;`));
+  await shot("search");
   await click('#smdPrep [data-act=hit][data-i="ana-brachial-plexus-q2"]');
   ok(await until(`var q=document.querySelector("#smdPrep .pn-q"); return !!q && /Fixture question 2 of ana-brachial-plexus/.test(q.textContent);`, 5000), "a hit opens that question");
   await ev(`PREP.back(); PREP.back(); return 1;`);
@@ -179,6 +181,7 @@ try {
   await until(`return !!document.querySelector("#smdPrep [data-act=mocks]");`, 3000);
   await click("#smdPrep [data-act=mocks]");
   ok(await until(`return document.querySelectorAll("#smdPrep [data-act=mock]").length === 4;`, 3000), "NEET-PG and INI-CET patterns, full and mini");
+  await shot("mocks");
   await click('#smdPrep [data-act=mock][data-v=neet-pg][data-k=mini]');
   ok(await until(`return !!document.getElementById("pnClock") && document.querySelector("#smdPrep .pn-t h1").textContent === "NEET-PG pattern (mini)";`, 10000), "the mini mock starts with a clock");
   await ev(`var r=PREP._st.run; r.ans=r.items.map(function(it,i){return i===0?it.a:i===1?(it.a+1)%4:-1;}); return 1;`);
@@ -186,6 +189,8 @@ try {
   await click("#smdPrep .pn-qgrid + p + [data-act=submit]");
   ok(await until(`return document.querySelector("#smdPrep .pn-score .pn-big").textContent.split(" / ")[0] === "3";`, 5000), "marked +4 / -1: one right, one wrong = 3: " + await ev(`return (document.querySelector("#smdPrep .pn-score .pn-big")||{}).textContent;`));
   ok(await ev(`return !!document.querySelector('#smdPrep .pn-mod[data-act=subject][data-s=anatomy]');`) === true, "the analysis lists subjects, each opening its subject");
+  await shot("mock-result");
+  ok(await ev(`var m=JSON.parse(localStorage.getItem("smd_prep_v1")).mh; return m.length===1 && m[0].marks===3 && /mini/.test(m[0].label);`) === true, "the finished mock is kept in the mock history");
   await click("#smdPrep [data-act=donerun]");
   await ev(`PREP.back(); return 1;`);
   await until(`return !!document.querySelector("#smdPrep .pn-plan");`, 3000);
@@ -207,6 +212,18 @@ try {
   await click('#smdPrep .pn-tab[data-v=neet-pg]');
   await ev(`PREP.back(); return 1;`);
   ok(await until(`return !PREP.isOpen() && !document.getElementById("smdPrep");`, 3000), "back() on home closes PrepNucleus");
+
+  // ---- screenshots only: custom module, bookmarks, downloads, My stats
+  if (process.env.SHOTS) {
+    for (const [act, name] of [["custom", "custom"], ["bookmarks", "bookmarks"], ["downloads", "downloads"], ["a-stats", "stats"]]) {
+      await ev(`PREP.close(); PREP.open(); return 1;`);
+      await until(`return !!document.querySelector("#smdPrep [data-act=${act}]");`, 5000);
+      await click(`#smdPrep [data-act=${act}]`);
+      if (act === "custom") await click("#smdPrep [data-act=cmsub]");
+      await sleep(400); await shot(name);
+    }
+    await ev(`PREP.close(); return 1;`);
+  }
 
   // ---- offline: reload, block the bank route, the module still opens from IndexedDB
   await load(BASE + "?prep=1");

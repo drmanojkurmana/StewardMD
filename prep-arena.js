@@ -334,7 +334,7 @@
       '<h2 class="pn-h">Leaderboard</h2>' + boardHtml(a.board, "score", 10) +
       (missed.length ? '<h2 class="pn-h">Review the missed</h2><ol class="pn-missed">' + missed.map(function (i) {
         var it = r.items[i];
-        return '<li><button type="button" class="pn-mod" data-act="reviewq" data-i="' + i + '"><span class="pn-mb"><b>' + esc(it.q.length > 120 ? it.q.slice(0, 117) + "..." : it.q) + "</b><small>Answer: " + esc(it.o[it.a]) + (r.ans[i] >= 0 ? " · you chose " + esc(it.o[r.ans[i]]) : " · not answered") + "</small></span></button></li>";
+        return '<li><button type="button" class="pn-mod" data-act="reviewq" data-i="' + i + '"><span class="pn-mb"><b>' + esc(it.q.length > 120 ? it.q.slice(0, 116) + "\u2026" : it.q) + "</b><small>Answer: " + esc(it.o[it.a]) + (r.ans[i] >= 0 ? " · you chose " + esc(it.o[r.ans[i]]) : " · not answered") + "</small></span></button></li>";
       }).join("") + "</ol>" : "") +
       '<div class="pn-navrow"><button type="button" class="pn-btn pri" data-act="donerun">Done</button></div></div>');
   }
