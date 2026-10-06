@@ -1,0 +1,1507 @@
+{
+  "v": 1,
+  "review": "ai_drafted",
+  "reviewNote": {
+    "en": "Draft, for clinical review. Your unit's policy and your senior come first.",
+    "hi": "ड्राफ़्ट, clinical review बाकी। आपके unit की policy और आपके senior सबसे पहले।"
+  },
+  "sources": [
+    {
+      "en": "ARDS Network low tidal volume trial (NEJM 2000): VT 6 mL/kg PBW, plateau 30 cmH2O or less.",
+      "hi": "ARDS Network low tidal volume trial (NEJM 2000): VT 6 mL/kg PBW, plateau 30 cmH2O या कम।"
+    },
+    {
+      "en": "Standard ICU teaching for a ventilator alarm: patient first, DOPE, hand ventilate with 100% oxygen when in doubt, call for help.",
+      "hi": "Ventilator alarm की standard ICU शिक्षा: पहले मरीज़, DOPE, शक हो तो 100% oxygen से hand ventilate, मदद बुलाएँ।"
+    },
+    {
+      "en": "SBAR handover (Situation, Background, Assessment, Recommendation).",
+      "hi": "SBAR handover (Situation, Background, Assessment, Recommendation)।"
+    }
+  ],
+  "brandNote": {
+    "en": "Panels are generic drawings in the layout style of common ICU ventilators. Brand names appear only as text, to help you recognise labels. No logos, no affiliation. Labels change with model and software version: always check the machine on your unit.",
+    "hi": "ये panels आम ICU ventilators के layout जैसी generic drawings हैं। Brand नाम सिर्फ़ text में हैं, ताकि आप labels पहचान सकें। कोई logo नहीं, कोई संबंध नहीं। Labels model और software version के साथ बदलते हैं: अपने unit की machine पर हमेशा जाँचें।"
+  },
+  "bed": {
+    "title": {
+      "en": "Walk up to the bed",
+      "hi": "Bed तक जाएँ"
+    },
+    "sub": {
+      "en": "Your first five minutes with a ventilated patient",
+      "hi": "Ventilated मरीज़ के साथ आपके पहले पाँच मिनट"
+    },
+    "intro": {
+      "en": "Do these in order, every time you take over a ventilated patient. Look and check only: you change nothing.",
+      "hi": "हर बार ventilated मरीज़ सँभालते समय यह क्रम से करें। सिर्फ़ देखें और जाँचें: कुछ भी न बदलें।"
+    },
+    "groups": [
+      {
+        "title": {
+          "en": "The patient first",
+          "hi": "पहले मरीज़"
+        },
+        "items": [
+          {
+            "id": "pt",
+            "label": {
+              "en": "Look at the patient: colour, comfort, both sides of the chest rising.",
+              "hi": "मरीज़ को देखें: रंग, आराम, छाती के दोनों तरफ़ उठना।"
+            },
+            "why": {
+              "en": "The screen can be wrong. The patient cannot.",
+              "hi": "Screen गलत हो सकती है। मरीज़ नहीं।"
+            }
+          },
+          {
+            "id": "spo2",
+            "label": {
+              "en": "SpO2 with a good pleth trace, plus HR and BP.",
+              "hi": "अच्छे pleth trace के साथ SpO2, साथ में HR और BP।"
+            },
+            "why": {
+              "en": "A flat or noisy trace means the number may be false: check the probe before you act.",
+              "hi": "Trace सपाट या टूटा हो तो number गलत हो सकता है: कुछ करने से पहले probe जाँचें।"
+            }
+          }
+        ]
+      },
+      {
+        "title": {
+          "en": "The airway",
+          "hi": "वायुमार्ग (airway)"
+        },
+        "items": [
+          {
+            "id": "tube",
+            "label": {
+              "en": "Tube: size, depth mark at the lips or teeth, tied securely.",
+              "hi": "Tube: size, होंठ या दाँत पर depth mark, ठीक से बँधी हुई।"
+            },
+            "why": {
+              "en": "Compare the mark with the last note. A changed mark means the tube has moved.",
+              "hi": "Mark को पिछले note से मिलाएँ। Mark बदला हो तो tube खिसकी है।"
+            }
+          },
+          {
+            "id": "cuff",
+            "label": {
+              "en": "Cuff: no air leak sound at the mouth; cuff pressure about 20 to 30 cmH2O if you have a gauge.",
+              "hi": "Cuff: मुँह पर हवा निकलने की आवाज़ नहीं; gauge हो तो cuff pressure लगभग 20 से 30 cmH2O।"
+            },
+            "why": {
+              "en": "A leaking cuff loses volume and lets secretions down; too high a pressure harms the trachea.",
+              "hi": "Leak करता cuff volume खोता है और secretions नीचे जाने देता है; बहुत ज़्यादा pressure trachea को नुकसान करता है।"
+            }
+          },
+          {
+            "id": "etco2",
+            "label": {
+              "en": "EtCO2: a square wave on every breath.",
+              "hi": "EtCO2: हर साँस पर square wave।"
+            },
+            "why": {
+              "en": "No trace means the tube may be out or blocked, or the patient has no circulation. Treat it as an emergency until proved otherwise.",
+              "hi": "Trace न हो तो tube बाहर या बंद हो सकती है, या circulation नहीं है। जब तक साबित न हो, इसे emergency मानें।"
+            }
+          }
+        ]
+      },
+      {
+        "title": {
+          "en": "The machine",
+          "hi": "मशीन"
+        },
+        "items": [
+          {
+            "id": "circuit",
+            "label": {
+              "en": "Circuit: connected end to end, no kinks, no water pooling, filter in place.",
+              "hi": "Circuit: शुरू से अंत तक जुड़ा, कोई मोड़ नहीं, पानी जमा नहीं, filter लगा।"
+            },
+            "why": {
+              "en": "Follow the tubing with your hand from the tube to the machine.",
+              "hi": "Tube से machine तक tubing को हाथ से follow करें।"
+            }
+          },
+          {
+            "id": "set",
+            "label": {
+              "en": "Read the mode and the SET values: VT or pressure, rate, PEEP, FiO2.",
+              "hi": "Mode और SET values पढ़ें: VT या pressure, rate, PEEP, FiO2।"
+            },
+            "why": {
+              "en": "Know them so you can tell your senior. Do not change them.",
+              "hi": "इन्हें जानें ताकि senior को बता सकें। इन्हें न बदलें।"
+            }
+          },
+          {
+            "id": "meas",
+            "label": {
+              "en": "Read the MEASURED values: Ppeak, VTe, total rate, minute volume. Compare with the set values.",
+              "hi": "MEASURED values पढ़ें: Ppeak, VTe, total rate, minute volume। SET values से मिलाएँ।"
+            },
+            "why": {
+              "en": "VTe far below set VT, or a rising Ppeak, is the first sign of trouble.",
+              "hi": "VTe set VT से बहुत कम हो, या Ppeak बढ़ रहा हो, तो यह परेशानी का पहला संकेत है।"
+            }
+          },
+          {
+            "id": "alarms",
+            "label": {
+              "en": "Alarm limits are set, the sound is on, nothing is silenced.",
+              "hi": "Alarm limits set हैं, आवाज़ चालू है, कुछ भी silenced नहीं।"
+            },
+            "why": {
+              "en": "An alarm you cannot hear cannot help you at 3 am.",
+              "hi": "जो alarm सुनाई न दे वह रात 3 बजे मदद नहीं कर सकता।"
+            }
+          }
+        ]
+      },
+      {
+        "title": {
+          "en": "Safety kit at the bedside",
+          "hi": "Bedside पर safety kit"
+        },
+        "items": [
+          {
+            "id": "bvm",
+            "label": {
+              "en": "Self-inflating bag with mask and PEEP valve, connected to oxygen, within reach.",
+              "hi": "Mask और PEEP valve के साथ self-inflating bag, oxygen से जुड़ा, हाथ की पहुँच में।"
+            },
+            "why": {
+              "en": "If anything goes wrong, you bag the patient with 100% oxygen. The bag must be ready before you need it.",
+              "hi": "कुछ भी गलत हो तो आप मरीज़ को 100% oxygen से bag करते हैं। ज़रूरत से पहले bag तैयार होना चाहिए।"
+            }
+          },
+          {
+            "id": "suction",
+            "label": {
+              "en": "Suction works, with the right size catheter (or the in-line suction) ready.",
+              "hi": "Suction चालू है, सही size का catheter (या in-line suction) तैयार है।"
+            },
+            "why": {
+              "en": "Secretions are the commonest cause of a high pressure alarm.",
+              "hi": "High pressure alarm का सबसे आम कारण secretions हैं।"
+            }
+          },
+          {
+            "id": "call",
+            "label": {
+              "en": "You know who your senior is tonight and how to reach them.",
+              "hi": "आपको पता है आज रात आपका senior कौन है और उन तक कैसे पहुँचना है।"
+            },
+            "why": {
+              "en": "Save the number before you need it.",
+              "hi": "ज़रूरत से पहले number save कर लें।"
+            }
+          }
+        ]
+      }
+    ],
+    "done": {
+      "en": "All checked. Write down the set values, the measured values and the time. Now you know what normal looks like for this patient.",
+      "hi": "सब जाँच लिया। Set values, measured values और समय लिख लें। अब आपको पता है इस मरीज़ के लिए सामान्य कैसा दिखता है।"
+    }
+  },
+  "screen": {
+    "title": {
+      "en": "Reading a real ventilator screen",
+      "hi": "असली ventilator screen पढ़ना"
+    },
+    "sub": {
+      "en": "SET by you, MEASURED by the machine",
+      "hi": "SET आप करते हैं, MEASURED machine करती है"
+    },
+    "intro": {
+      "en": "Every ventilator shows two kinds of number. SET numbers are your orders to the machine; they sit on the buttons or knobs. MEASURED numbers are what actually happened; they sit beside the waveforms. Tap any number to learn it.",
+      "hi": "हर ventilator दो तरह के numbers दिखाता है। SET numbers machine को आपके आदेश हैं; ये buttons या knobs पर होते हैं। MEASURED numbers बताते हैं असल में क्या हुआ; ये waveforms के पास होते हैं। कोई भी number सीखने के लिए उस पर tap करें।"
+    },
+    "styles": [
+      {
+        "id": "drager",
+        "name": {
+          "en": "Dräger-style panel",
+          "hi": "Dräger जैसा panel"
+        }
+      },
+      {
+        "id": "hamilton",
+        "name": {
+          "en": "Hamilton-style panel",
+          "hi": "Hamilton जैसा panel"
+        }
+      },
+      {
+        "id": "mindray",
+        "name": {
+          "en": "Mindray-style panel",
+          "hi": "Mindray जैसा panel"
+        }
+      }
+    ],
+    "tiles": [
+      {
+        "id": "mode",
+        "kind": "set",
+        "value": "AC-VC",
+        "unit": "",
+        "labels": {
+          "generic": "Mode",
+          "drager": "VC-AC",
+          "hamilton": "(S)CMV",
+          "mindray": "V-A/C"
+        },
+        "name": {
+          "en": "Mode",
+          "hi": "Mode"
+        },
+        "what": {
+          "en": "How each breath is given. Here a volume controlled breath, assisted: the patient can trigger extra breaths and each gets the full set volume.",
+          "hi": "हर साँस कैसे दी जाती है। यहाँ volume controlled breath, assisted: मरीज़ extra साँस trigger कर सकता है और हर साँस को पूरा set volume मिलता है।"
+        },
+        "watch": {
+          "en": "The same mode has a different name on each brand. Read the mode list in this section.",
+          "hi": "एक ही mode का हर brand पर अलग नाम होता है। इस section की mode list पढ़ें।"
+        }
+      },
+      {
+        "id": "vtset",
+        "kind": "set",
+        "value": "450",
+        "unit": "mL",
+        "labels": {
+          "generic": "VT",
+          "drager": "VT",
+          "hamilton": "Vt",
+          "mindray": "VT"
+        },
+        "name": {
+          "en": "Set tidal volume",
+          "hi": "Set tidal volume"
+        },
+        "what": {
+          "en": "The volume you ordered for each machine breath.",
+          "hi": "हर machine साँस के लिए आपने जो volume माँगा।"
+        },
+        "watch": {
+          "en": "Usually 6 to 8 mL per kg of predicted body weight (6 in ARDS). Compare with VTe, which is what the patient actually breathed out.",
+          "hi": "आम तौर पर predicted body weight के हर kg पर 6 से 8 mL (ARDS में 6)। VTe से मिलाएँ, जो मरीज़ ने असल में बाहर छोड़ा।"
+        }
+      },
+      {
+        "id": "fset",
+        "kind": "set",
+        "value": "16",
+        "unit": "/min",
+        "labels": {
+          "generic": "f set",
+          "drager": "RR",
+          "hamilton": "Rate",
+          "mindray": "f"
+        },
+        "name": {
+          "en": "Set rate",
+          "hi": "Set rate"
+        },
+        "what": {
+          "en": "The minimum number of machine breaths each minute.",
+          "hi": "हर मिनट machine साँसों की न्यूनतम संख्या।"
+        },
+        "watch": {
+          "en": "The patient can breathe above it. Look at f total to see the real rate.",
+          "hi": "मरीज़ इससे ज़्यादा साँस ले सकता है। असली rate के लिए f total देखें।"
+        }
+      },
+      {
+        "id": "peepset",
+        "kind": "set",
+        "value": "5",
+        "unit": "cmH2O",
+        "labels": {
+          "generic": "PEEP",
+          "drager": "PEEP",
+          "hamilton": "PEEP",
+          "mindray": "PEEP"
+        },
+        "name": {
+          "en": "Set PEEP",
+          "hi": "Set PEEP"
+        },
+        "what": {
+          "en": "The pressure kept in the lungs at the end of breathing out, so the alveoli stay open.",
+          "hi": "साँस छोड़ने के अंत में फेफड़ों में रखा गया pressure, ताकि alveoli खुले रहें।"
+        },
+        "watch": {
+          "en": "A PEEP change is a senior decision. It can drop the blood pressure.",
+          "hi": "PEEP बदलना senior का निर्णय है। इससे blood pressure गिर सकता है।"
+        }
+      },
+      {
+        "id": "fio2",
+        "kind": "set",
+        "value": "40",
+        "unit": "%",
+        "labels": {
+          "generic": "FiO2",
+          "drager": "FiO2",
+          "hamilton": "Oxygen",
+          "mindray": "O2%"
+        },
+        "name": {
+          "en": "Set oxygen (FiO2)",
+          "hi": "Set oxygen (FiO2)"
+        },
+        "what": {
+          "en": "The oxygen fraction in the gas you give: 21% is room air, 100% is pure oxygen.",
+          "hi": "दी जाने वाली gas में oxygen का हिस्सा: 21% कमरे की हवा, 100% शुद्ध oxygen।"
+        },
+        "watch": {
+          "en": "In an emergency, turning FiO2 up to 100% is usually allowed. Check your unit's policy and tell your senior.",
+          "hi": "Emergency में FiO2 को 100% करना आम तौर पर allowed है। अपने unit की policy जाँचें और senior को बताएँ।"
+        }
+      },
+      {
+        "id": "ie",
+        "kind": "set",
+        "value": "1:2.8",
+        "unit": "",
+        "labels": {
+          "generic": "I:E",
+          "drager": "I:E",
+          "hamilton": "I:E",
+          "mindray": "I:E"
+        },
+        "name": {
+          "en": "I:E ratio",
+          "hi": "I:E ratio"
+        },
+        "what": {
+          "en": "Time breathing in compared with time breathing out. Many machines let you set the inspiratory time (Ti) and show the I:E that results.",
+          "hi": "साँस अंदर लेने का समय बनाम बाहर छोड़ने का समय। कई machines पर आप inspiratory time (Ti) set करते हैं और जो I:E बनता है वह दिखता है।"
+        },
+        "watch": {
+          "en": "Usually 1:2 or longer. Asthma and COPD need a long time to breathe out.",
+          "hi": "आम तौर पर 1:2 या उससे लंबा। Asthma और COPD को साँस छोड़ने के लिए लंबा समय चाहिए।"
+        }
+      },
+      {
+        "id": "ppeak",
+        "kind": "measured",
+        "value": "24",
+        "unit": "cmH2O",
+        "labels": {
+          "generic": "Ppeak",
+          "drager": "PIP",
+          "hamilton": "Ppeak",
+          "mindray": "Ppeak"
+        },
+        "name": {
+          "en": "Peak pressure",
+          "hi": "Peak pressure"
+        },
+        "what": {
+          "en": "The highest pressure during the breath. It includes the push needed through the tube and airways.",
+          "hi": "साँस के दौरान सबसे ऊँचा pressure। इसमें tube और airways से हवा धकेलने का दबाव भी शामिल है।"
+        },
+        "watch": {
+          "en": "A sudden rise: think secretions, a kinked or bitten tube, bronchospasm, pneumothorax. Run the high pressure drill.",
+          "hi": "अचानक बढ़े तो सोचें: secretions, मुड़ी या दबाई tube, bronchospasm, pneumothorax। High pressure drill करें।"
+        }
+      },
+      {
+        "id": "pplat",
+        "kind": "measured",
+        "value": "19",
+        "unit": "cmH2O",
+        "labels": {
+          "generic": "Pplat",
+          "drager": "Pplat",
+          "hamilton": "Pplateau",
+          "mindray": "Pplat"
+        },
+        "name": {
+          "en": "Plateau pressure",
+          "hi": "Plateau pressure"
+        },
+        "what": {
+          "en": "The pressure in the alveoli, read during an inspiratory hold when the flow stops.",
+          "hi": "Alveoli में pressure, inspiratory hold के दौरान पढ़ा जाता है जब flow रुकता है।"
+        },
+        "watch": {
+          "en": "Keep it 30 cmH2O or less (ARDSnet). Peak high but plateau normal means the airway or tube; both high means stiff lungs or chest.",
+          "hi": "इसे 30 cmH2O या कम रखें (ARDSnet)। Peak ऊँचा पर plateau सामान्य तो airway या tube; दोनों ऊँचे तो फेफड़े या छाती सख़्त।"
+        }
+      },
+      {
+        "id": "peepm",
+        "kind": "measured",
+        "value": "5",
+        "unit": "cmH2O",
+        "labels": {
+          "generic": "PEEP",
+          "drager": "PEEP",
+          "hamilton": "PEEP/CPAP",
+          "mindray": "PEEP"
+        },
+        "name": {
+          "en": "Measured PEEP",
+          "hi": "Measured PEEP"
+        },
+        "what": {
+          "en": "The pressure the machine actually measured at the end of breathing out.",
+          "hi": "साँस छोड़ने के अंत में machine ने असल में जो pressure मापा।"
+        },
+        "watch": {
+          "en": "Lower than set PEEP suggests a leak. An expiratory hold can show trapped air (auto-PEEP) on top of it.",
+          "hi": "Set PEEP से कम हो तो leak का संकेत। Expiratory hold उसके ऊपर फँसी हवा (auto-PEEP) दिखा सकता है।"
+        }
+      },
+      {
+        "id": "vte",
+        "kind": "measured",
+        "value": "452",
+        "unit": "mL",
+        "labels": {
+          "generic": "VTe",
+          "drager": "VT",
+          "hamilton": "VTE",
+          "mindray": "VTe"
+        },
+        "name": {
+          "en": "Exhaled tidal volume (VTe)",
+          "hi": "Exhaled tidal volume (VTe)"
+        },
+        "what": {
+          "en": "The volume that came back out of the patient on this breath. This is the volume the lungs really got.",
+          "hi": "इस साँस में मरीज़ से जो volume बाहर आया। फेफड़ों को असल में यही volume मिला।"
+        },
+        "watch": {
+          "en": "Compare with set VT. Much lower: a leak (cuff, circuit) or, in pressure modes, stiffer lungs.",
+          "hi": "Set VT से मिलाएँ। बहुत कम हो तो leak (cuff, circuit) या pressure modes में सख़्त फेफड़े।"
+        }
+      },
+      {
+        "id": "vti",
+        "kind": "measured",
+        "value": "465",
+        "unit": "mL",
+        "labels": {
+          "generic": "VTi",
+          "drager": "VTi",
+          "hamilton": "VTI",
+          "mindray": "VTi"
+        },
+        "name": {
+          "en": "Inspired tidal volume (VTi)",
+          "hi": "Inspired tidal volume (VTi)"
+        },
+        "what": {
+          "en": "The volume the machine sent in.",
+          "hi": "Machine ने जो volume अंदर भेजा।"
+        },
+        "watch": {
+          "en": "VTi much bigger than VTe means gas went in but did not come back: a leak at the cuff or in the circuit.",
+          "hi": "VTi, VTe से बहुत ज़्यादा हो तो gas अंदर गई पर वापस नहीं आई: cuff या circuit में leak।"
+        }
+      },
+      {
+        "id": "mve",
+        "kind": "measured",
+        "value": "8.1",
+        "unit": "L/min",
+        "labels": {
+          "generic": "MVe",
+          "drager": "MV",
+          "hamilton": "ExpMinVol",
+          "mindray": "MV"
+        },
+        "name": {
+          "en": "Exhaled minute volume",
+          "hi": "Exhaled minute volume"
+        },
+        "what": {
+          "en": "VTe times the total rate: how much gas the patient breathes out each minute. It sets the CO2.",
+          "hi": "VTe गुणा total rate: मरीज़ हर मिनट कितनी gas छोड़ता है। यही CO2 तय करता है।"
+        },
+        "watch": {
+          "en": "A low minute volume alarm: check the patient is breathing, the circuit, and the mode. Run the apnoea drill.",
+          "hi": "Low minute volume alarm: जाँचें मरीज़ साँस ले रहा है, circuit, और mode। Apnoea drill करें।"
+        }
+      },
+      {
+        "id": "ftot",
+        "kind": "measured",
+        "value": "18",
+        "unit": "/min",
+        "labels": {
+          "generic": "f total",
+          "drager": "ftotal",
+          "hamilton": "fTotal",
+          "mindray": "ftotal"
+        },
+        "name": {
+          "en": "Total rate",
+          "hi": "Total rate"
+        },
+        "what": {
+          "en": "All breaths in a minute: the set machine breaths plus the ones the patient triggers.",
+          "hi": "एक मिनट की सभी साँसें: set machine साँसें और मरीज़ की trigger की हुई साँसें।"
+        },
+        "watch": {
+          "en": "Here 18 against a set rate of 16: the patient takes 2 breaths of their own. Rising fast: think pain, distress, sepsis, acidosis.",
+          "hi": "यहाँ set rate 16 के मुक़ाबले 18: मरीज़ 2 साँसें खुद ले रहा है। तेज़ी से बढ़े तो सोचें: दर्द, बेचैनी, sepsis, acidosis।"
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "q": {
+          "en": "Which of these is MEASURED?",
+          "hi": "इनमें से कौन MEASURED है?"
+        },
+        "options": [
+          {
+            "en": "VT 450 mL",
+            "hi": "VT 450 mL"
+          },
+          {
+            "en": "VTe 452 mL",
+            "hi": "VTe 452 mL"
+          },
+          {
+            "en": "FiO2 40%",
+            "hi": "FiO2 40%"
+          },
+          {
+            "en": "PEEP set 5",
+            "hi": "PEEP set 5"
+          }
+        ],
+        "answer": 1,
+        "why": {
+          "en": "VTe is what came back out of the patient. VT, FiO2 and set PEEP are your orders.",
+          "hi": "VTe वह है जो मरीज़ से वापस बाहर आया। VT, FiO2 और set PEEP आपके आदेश हैं।"
+        }
+      },
+      {
+        "q": {
+          "en": "Which number tells you the patient is breathing over the ventilator?",
+          "hi": "कौन सा number बताता है कि मरीज़ ventilator से ऊपर साँस ले रहा है?"
+        },
+        "options": [
+          {
+            "en": "f set 16",
+            "hi": "f set 16"
+          },
+          {
+            "en": "Ppeak 24",
+            "hi": "Ppeak 24"
+          },
+          {
+            "en": "f total 18",
+            "hi": "f total 18"
+          },
+          {
+            "en": "I:E 1:2.8",
+            "hi": "I:E 1:2.8"
+          }
+        ],
+        "answer": 2,
+        "why": {
+          "en": "f total counts every breath. Above the set rate means the patient triggers breaths of their own.",
+          "hi": "f total हर साँस गिनता है। Set rate से ज़्यादा का मतलब मरीज़ अपनी साँसें trigger कर रहा है।"
+        }
+      },
+      {
+        "q": {
+          "en": "Which pressure needs an inspiratory hold to read?",
+          "hi": "कौन सा pressure पढ़ने के लिए inspiratory hold चाहिए?"
+        },
+        "options": [
+          {
+            "en": "Ppeak",
+            "hi": "Ppeak"
+          },
+          {
+            "en": "Pplat",
+            "hi": "Pplat"
+          },
+          {
+            "en": "Set PEEP",
+            "hi": "Set PEEP"
+          },
+          {
+            "en": "Measured PEEP",
+            "hi": "Measured PEEP"
+          }
+        ],
+        "answer": 1,
+        "why": {
+          "en": "Plateau is read when flow stops, during a short hold at the end of the breath in.",
+          "hi": "Plateau तब पढ़ा जाता है जब flow रुकता है, साँस अंदर लेने के अंत में छोटे hold के दौरान।"
+        }
+      },
+      {
+        "q": {
+          "en": "VTi is 465 mL but VTe is 300 mL. What is the most likely problem?",
+          "hi": "VTi 465 mL है पर VTe 300 mL। सबसे संभावित समस्या क्या है?"
+        },
+        "options": [
+          {
+            "en": "Stiff lungs",
+            "hi": "सख़्त फेफड़े"
+          },
+          {
+            "en": "A leak at the cuff or in the circuit",
+            "hi": "Cuff या circuit में leak"
+          },
+          {
+            "en": "The rate is too high",
+            "hi": "Rate बहुत ज़्यादा है"
+          },
+          {
+            "en": "FiO2 is too low",
+            "hi": "FiO2 बहुत कम है"
+          }
+        ],
+        "answer": 1,
+        "why": {
+          "en": "Gas went in but did not come back out. Listen for a cuff leak and follow the circuit.",
+          "hi": "Gas अंदर गई पर वापस नहीं आई। Cuff leak सुनें और circuit follow करें।"
+        }
+      },
+      {
+        "q": {
+          "en": "Which of these is SET by you?",
+          "hi": "इनमें से कौन आप SET करते हैं?"
+        },
+        "options": [
+          {
+            "en": "Ppeak",
+            "hi": "Ppeak"
+          },
+          {
+            "en": "Exhaled minute volume",
+            "hi": "Exhaled minute volume"
+          },
+          {
+            "en": "Set rate",
+            "hi": "Set rate"
+          },
+          {
+            "en": "VTe",
+            "hi": "VTe"
+          }
+        ],
+        "answer": 2,
+        "why": {
+          "en": "The set rate is an order. Ppeak, minute volume and VTe are results the machine measures.",
+          "hi": "Set rate एक आदेश है। Ppeak, minute volume और VTe वे परिणाम हैं जो machine मापती है।"
+        }
+      }
+    ],
+    "labelRows": [
+      {
+        "term": {
+          "en": "Set tidal volume",
+          "hi": "Set tidal volume"
+        },
+        "drager": "VT",
+        "hamilton": "Vt",
+        "mindray": "VT"
+      },
+      {
+        "term": {
+          "en": "Exhaled tidal volume",
+          "hi": "Exhaled tidal volume"
+        },
+        "drager": "VT (measured)",
+        "hamilton": "VTE",
+        "mindray": "VTe"
+      },
+      {
+        "term": {
+          "en": "Peak pressure",
+          "hi": "Peak pressure"
+        },
+        "drager": "PIP",
+        "hamilton": "Ppeak",
+        "mindray": "Ppeak"
+      },
+      {
+        "term": {
+          "en": "Plateau pressure",
+          "hi": "Plateau pressure"
+        },
+        "drager": "Pplat",
+        "hamilton": "Pplateau",
+        "mindray": "Pplat"
+      },
+      {
+        "term": {
+          "en": "Total rate",
+          "hi": "Total rate"
+        },
+        "drager": "ftotal",
+        "hamilton": "fTotal",
+        "mindray": "ftotal"
+      },
+      {
+        "term": {
+          "en": "Exhaled minute volume",
+          "hi": "Exhaled minute volume"
+        },
+        "drager": "MV",
+        "hamilton": "ExpMinVol",
+        "mindray": "MV"
+      },
+      {
+        "term": {
+          "en": "Oxygen setting",
+          "hi": "Oxygen setting"
+        },
+        "drager": "FiO2",
+        "hamilton": "Oxygen",
+        "mindray": "O2%"
+      },
+      {
+        "term": {
+          "en": "Volume control, assisted",
+          "hi": "Volume control, assisted"
+        },
+        "drager": "VC-AC, VC-CMV",
+        "hamilton": "(S)CMV",
+        "mindray": "V-A/C"
+      },
+      {
+        "term": {
+          "en": "Pressure control, assisted",
+          "hi": "Pressure control, assisted"
+        },
+        "drager": "PC-AC, PC-CMV",
+        "hamilton": "P-CMV",
+        "mindray": "P-A/C"
+      },
+      {
+        "term": {
+          "en": "Volume target with pressure breaths (PRVC type)",
+          "hi": "Pressure breaths के साथ volume target (PRVC type)"
+        },
+        "drager": "AutoFlow",
+        "hamilton": "APVcmv",
+        "mindray": "PRVC"
+      },
+      {
+        "term": {
+          "en": "SIMV",
+          "hi": "SIMV"
+        },
+        "drager": "VC-SIMV, PC-SIMV",
+        "hamilton": "SIMV, P-SIMV",
+        "mindray": "V-SIMV, P-SIMV"
+      },
+      {
+        "term": {
+          "en": "Spontaneous with pressure support",
+          "hi": "Pressure support के साथ spontaneous"
+        },
+        "drager": "SPN-CPAP/PS",
+        "hamilton": "SPONT",
+        "mindray": "CPAP/PSV"
+      },
+      {
+        "term": {
+          "en": "Two pressure levels, free breathing",
+          "hi": "दो pressure levels, खुली साँस"
+        },
+        "drager": "PC-BIPAP",
+        "hamilton": "DuoPAP",
+        "mindray": "DuoLevel"
+      },
+      {
+        "term": {
+          "en": "APRV",
+          "hi": "APRV"
+        },
+        "drager": "PC-APRV",
+        "hamilton": "APRV",
+        "mindray": "APRV"
+      }
+    ]
+  },
+  "modes": {
+    "title": {
+      "en": "Mode names you will meet",
+      "hi": "Mode के नाम जो आप देखेंगे"
+    },
+    "sub": {
+      "en": "Read only. Know the name, do not change it",
+      "hi": "सिर्फ़ पढ़ने के लिए। नाम जानें, बदलें नहीं"
+    },
+    "intro": {
+      "en": "The same idea has different names on different machines. One plain line for each, and the lab mode it is closest to.",
+      "hi": "एक ही विचार के अलग machines पर अलग नाम होते हैं। हर एक की एक सरल पंक्ति, और lab का सबसे नज़दीकी mode।"
+    },
+    "never": {
+      "en": "Do not change alone as an intern",
+      "hi": "Intern के रूप में अकेले न बदलें"
+    },
+    "items": [
+      {
+        "id": "vc",
+        "names": "VC, AC-VC, VC-AC, CMV, (S)CMV, V-A/C",
+        "lab": [
+          "acvc",
+          "vc"
+        ],
+        "plain": {
+          "en": "You set the volume of each breath. The pressure is whatever it takes, so watch Ppeak and Pplat.",
+          "hi": "आप हर साँस का volume set करते हैं। Pressure जितना लगे उतना होता है, इसलिए Ppeak और Pplat देखें।"
+        }
+      },
+      {
+        "id": "pc",
+        "names": "PC, AC-PC, PC-AC, P-CMV, P-A/C",
+        "lab": [
+          "acpc",
+          "pc"
+        ],
+        "plain": {
+          "en": "You set the pressure of each breath. The volume is whatever the lungs take, so watch VTe.",
+          "hi": "आप हर साँस का pressure set करते हैं। Volume जितना फेफड़े लें उतना होता है, इसलिए VTe देखें।"
+        }
+      },
+      {
+        "id": "simv",
+        "names": "SIMV, VC-SIMV, PC-SIMV, SIMV+PS",
+        "lab": "simv",
+        "plain": {
+          "en": "A set number of machine breaths; breaths the patient takes in between get only pressure support, or none.",
+          "hi": "Machine साँसों की एक तय संख्या; बीच में मरीज़ की साँसों को सिर्फ़ pressure support मिलता है, या कुछ नहीं।"
+        }
+      },
+      {
+        "id": "prvc",
+        "names": "PRVC, VC+, AutoFlow, APV",
+        "lab": "prvc",
+        "plain": {
+          "en": "You set a target volume; the machine gives pressure breaths and adjusts the pressure breath by breath to reach it.",
+          "hi": "आप लक्ष्य volume set करते हैं; machine pressure breaths देती है और उसे पाने के लिए हर साँस पर pressure बदलती है।"
+        }
+      },
+      {
+        "id": "ps",
+        "names": "PS, PSV, Pressure support, SPONT",
+        "lab": "psv",
+        "plain": {
+          "en": "The patient starts every breath; the machine helps each one with a set pressure. No backup rate unless apnoea backup is on.",
+          "hi": "हर साँस मरीज़ शुरू करता है; machine हर साँस को set pressure से मदद देती है। Apnoea backup चालू न हो तो कोई backup rate नहीं।"
+        }
+      },
+      {
+        "id": "cpap",
+        "names": "CPAP, CPAP+PS, SPN-CPAP/PS",
+        "lab": [
+          "cpap",
+          "psv"
+        ],
+        "plain": {
+          "en": "A steady pressure to keep the lungs open while the patient breathes on their own, often with pressure support added. Often used for weaning.",
+          "hi": "मरीज़ खुद साँस लेता है और फेफड़े खुले रखने को एक स्थिर pressure, अक्सर pressure support के साथ। अक्सर weaning में।"
+        }
+      },
+      {
+        "id": "bipap",
+        "names": "BiPAP, BIPAP, PC-BIPAP, DuoPAP, DuoLevel, Bilevel",
+        "lab": [
+          "niv",
+          "acpc"
+        ],
+        "plain": {
+          "en": "Two pressure levels. Careful: on a mask (NIV), BiPAP means IPAP and EPAP; on an intubated patient, BIPAP is a pressure controlled mode where the patient can breathe freely. Ask which one it is.",
+          "hi": "दो pressure levels। सावधान: mask (NIV) पर BiPAP का मतलब IPAP और EPAP; intubated मरीज़ पर BIPAP एक pressure controlled mode है जिसमें मरीज़ खुलकर साँस ले सकता है। पूछें कौन सा है।"
+        }
+      },
+      {
+        "id": "aprv",
+        "names": "APRV, PC-APRV",
+        "lab": "aprv",
+        "plain": {
+          "en": "A long high pressure with short releases, for hard to oxygenate lungs. A specialist mode: leave it to the senior.",
+          "hi": "लंबा ऊँचा pressure और छोटे releases, मुश्किल से oxygenate होने वाले फेफड़ों के लिए। Specialist mode: senior पर छोड़ें।"
+        }
+      },
+      {
+        "id": "niv",
+        "names": "NIV, BiPAP, IPAP/EPAP, NIV-PS",
+        "lab": "niv",
+        "plain": {
+          "en": "Breathing support through a tight mask, no tube. IPAP helps each breath, EPAP is the PEEP. Watch for mask leak, vomiting and tiring.",
+          "hi": "Tube नहीं, कसे हुए mask से साँस में मदद। IPAP हर साँस में मदद करता है, EPAP ही PEEP है। Mask leak, उल्टी और थकान पर नज़र रखें।"
+        }
+      }
+    ]
+  },
+  "drills": {
+    "title": {
+      "en": "3 am drill",
+      "hi": "रात 3 बजे की drill"
+    },
+    "sub": {
+      "en": "Put the steps in order, then check",
+      "hi": "Steps को क्रम में रखें, फिर जाँचें"
+    },
+    "intro": {
+      "en": "The alarm is going and you are alone. Tap the steps in the order you would do them. Leave out anything you should not do.",
+      "hi": "Alarm बज रहा है और आप अकेले हैं। Steps को उसी क्रम में tap करें जिसमें आप करेंगे। जो नहीं करना चाहिए उसे छोड़ दें।"
+    },
+    "items": [
+      {
+        "id": "highp",
+        "title": {
+          "en": "High pressure alarm",
+          "hi": "High pressure alarm"
+        },
+        "scene": {
+          "en": "3 am. The ventilator is alarming: Ppeak 42, it was 24. SpO2 90 and falling.",
+          "hi": "रात 3 बजे। Ventilator alarm कर रहा है: Ppeak 42, पहले 24 था। SpO2 90 और गिर रहा है।"
+        },
+        "steps": [
+          {
+            "id": "look",
+            "rank": 1,
+            "text": {
+              "en": "Look at the patient: chest rise, colour, coughing or biting the tube.",
+              "hi": "मरीज़ को देखें: छाती का उठना, रंग, खाँसी या tube को दाँत से दबाना।"
+            },
+            "why": {
+              "en": "Patient first, screen second.",
+              "hi": "पहले मरीज़, फिर screen।"
+            }
+          },
+          {
+            "id": "bag",
+            "rank": 2,
+            "text": {
+              "en": "SpO2 is falling: disconnect and bag with 100% oxygen. Feel the bag.",
+              "hi": "SpO2 गिर रहा है: ventilator हटाएँ और 100% oxygen से bag करें। Bag को महसूस करें।"
+            },
+            "why": {
+              "en": "Bagging takes the machine out of the problem. A stiff bag points to the tube or the patient; an easy bag points to the ventilator or circuit. With SpO2 falling, bag early; in a stable patient the alarm card puts suction and DOPE first.",
+              "hi": "Bag करने से machine समस्या से बाहर हो जाती है। सख़्त bag हो तो tube या मरीज़; आसान bag हो तो ventilator या circuit। SpO2 गिर रहा हो तो जल्दी bag करें; stable मरीज़ में alarm card पहले suction और DOPE रखता है।"
+            }
+          },
+          {
+            "id": "suction",
+            "rank": 2,
+            "text": {
+              "en": "Pass a suction catheter down the tube.",
+              "hi": "Tube में suction catheter डालें।"
+            },
+            "why": {
+              "en": "It tests and treats the O of DOPE: a catheter that will not pass means a blocked or kinked tube.",
+              "hi": "यह DOPE के O की जाँच और इलाज दोनों है: catheter न जाए तो tube बंद या मुड़ी है।"
+            }
+          },
+          {
+            "id": "dope",
+            "rank": 2,
+            "text": {
+              "en": "Run DOPE: Displacement (tube mark, EtCO2), Obstruction, Pneumothorax (unequal chest, falling BP), Equipment.",
+              "hi": "DOPE करें: Displacement (tube mark, EtCO2), Obstruction, Pneumothorax (असमान छाती, गिरता BP), Equipment।"
+            },
+            "why": {
+              "en": "The four causes that kill quickly. Check each one.",
+              "hi": "चार कारण जो जल्दी जान लेते हैं। हर एक जाँचें।"
+            }
+          },
+          {
+            "id": "call",
+            "rank": 4,
+            "flex": true,
+            "text": {
+              "en": "Call your senior with SBAR.",
+              "hi": "SBAR के साथ senior को call करें।"
+            },
+            "why": {
+              "en": "Right at any point once you have seen the patient. If they are unstable, call while you bag: do not wait to finish the list.",
+              "hi": "मरीज़ देखने के बाद कभी भी सही। मरीज़ अस्थिर हो तो bag करते हुए call करें: list ख़त्म होने का इंतज़ार न करें।"
+            }
+          },
+          {
+            "id": "trap",
+            "rank": null,
+            "text": {
+              "en": "Raise the high pressure alarm limit so it stops.",
+              "hi": "High pressure alarm limit बढ़ा दें ताकि वह बंद हो जाए।"
+            },
+            "why": {
+              "en": "This hides the alarm and does nothing for the patient. Never do this.",
+              "hi": "इससे alarm छिपता है और मरीज़ के लिए कुछ नहीं होता। ऐसा कभी न करें।"
+            }
+          }
+        ],
+        "sbar": {
+          "s": {
+            "en": "Bed 4, Mr X on the ventilator: high pressure alarm, Ppeak 42 up from 24, SpO2 90 falling.",
+            "hi": "Bed 4, Mr X ventilator पर: high pressure alarm, Ppeak 24 से बढ़कर 42, SpO2 90 और गिर रहा है।"
+          },
+          "b": {
+            "en": "Ventilated for pneumonia, day 2, AC-VC 450, rate 16, PEEP 5, FiO2 40.",
+            "hi": "Pneumonia के लिए ventilated, दूसरा दिन, AC-VC 450, rate 16, PEEP 5, FiO2 40।"
+          },
+          "a": {
+            "en": "I am bagging with 100% oxygen. The bag is stiff; suction gave thick secretions; chest rise equal; BP 110/70.",
+            "hi": "मैं 100% oxygen से bag कर रहा हूँ। Bag सख़्त है; suction से गाढ़े secretions निकले; छाती बराबर उठ रही है; BP 110/70।"
+          },
+          "r": {
+            "en": "Please come and see the patient now.",
+            "hi": "कृपया अभी आकर मरीज़ को देखें।"
+          }
+        }
+      },
+      {
+        "id": "lowspo2",
+        "title": {
+          "en": "Low SpO2",
+          "hi": "Low SpO2"
+        },
+        "scene": {
+          "en": "3 am. SpO2 alarm: 84%. It was 95% an hour ago. FiO2 is 40%.",
+          "hi": "रात 3 बजे। SpO2 alarm: 84%। एक घंटे पहले 95% था। FiO2 40% है।"
+        },
+        "steps": [
+          {
+            "id": "look",
+            "rank": 1,
+            "text": {
+              "en": "Look at the patient and the pleth trace: is the probe on and reading well?",
+              "hi": "मरीज़ और pleth trace देखें: क्या probe लगा है और ठीक पढ़ रहा है?"
+            },
+            "why": {
+              "en": "A cold finger or a loose probe gives a false low. A real low with a good trace is an emergency.",
+              "hi": "ठंडी उँगली या ढीला probe झूठा low देता है। अच्छे trace के साथ असली low एक emergency है।"
+            }
+          },
+          {
+            "id": "fio2",
+            "rank": 2,
+            "text": {
+              "en": "Turn FiO2 up to 100% (allowed in an emergency in most units).",
+              "hi": "FiO2 को 100% करें (ज़्यादातर units में emergency में allowed)।"
+            },
+            "why": {
+              "en": "Buys time while you look for the cause. Check your unit's policy.",
+              "hi": "कारण ढूँढते समय वक़्त मिलता है। अपने unit की policy जाँचें।"
+            }
+          },
+          {
+            "id": "bag",
+            "rank": 2,
+            "text": {
+              "en": "SpO2 below 88%, not improving, or any doubt: disconnect and bag with 100% oxygen.",
+              "hi": "SpO2 88% से कम, सुधार नहीं, या कोई शक: ventilator हटाएँ और 100% oxygen से bag करें।"
+            },
+            "why": {
+              "en": "Takes the machine and circuit out of the problem.",
+              "hi": "Machine और circuit को समस्या से बाहर करता है।"
+            }
+          },
+          {
+            "id": "dope",
+            "rank": 3,
+            "text": {
+              "en": "DOPE and suction: tube mark, EtCO2 trace, secretions, chest rise on both sides, the circuit and the oxygen supply.",
+              "hi": "DOPE और suction: tube mark, EtCO2 trace, secretions, दोनों तरफ़ छाती का उठना, circuit और oxygen supply।"
+            },
+            "why": {
+              "en": "Find the cause: the tube, the lungs or the machine.",
+              "hi": "कारण ढूँढें: tube, फेफड़े या machine।"
+            }
+          },
+          {
+            "id": "call",
+            "rank": 4,
+            "flex": true,
+            "text": {
+              "en": "Call your senior with SBAR.",
+              "hi": "SBAR के साथ senior को call करें।"
+            },
+            "why": {
+              "en": "SpO2 below target that does not rise quickly on 100% oxygen needs a senior now. Call early.",
+              "hi": "SpO2 लक्ष्य से नीचे हो और 100% oxygen पर जल्दी न बढ़े तो अभी senior चाहिए। जल्दी call करें।"
+            }
+          },
+          {
+            "id": "trap",
+            "rank": null,
+            "text": {
+              "en": "Turn PEEP up to 15 yourself.",
+              "hi": "खुद PEEP 15 कर दें।"
+            },
+            "why": {
+              "en": "A PEEP change can drop the BP or worsen a pneumothorax. It is a senior decision.",
+              "hi": "PEEP बदलने से BP गिर सकता है या pneumothorax बिगड़ सकता है। यह senior का निर्णय है।"
+            }
+          }
+        ],
+        "sbar": {
+          "s": {
+            "en": "Bed 4, Mr X on the ventilator: SpO2 84%, was 95% an hour ago.",
+            "hi": "Bed 4, Mr X ventilator पर: SpO2 84%, एक घंटे पहले 95% था।"
+          },
+          "b": {
+            "en": "Ventilated for pneumonia, AC-VC 450, rate 16, PEEP 5, FiO2 was 40.",
+            "hi": "Pneumonia के लिए ventilated, AC-VC 450, rate 16, PEEP 5, FiO2 40 था।"
+          },
+          "a": {
+            "en": "Good trace. FiO2 now 100%, SpO2 88%. Suctioned, tube mark unchanged, EtCO2 trace present, chest rise equal.",
+            "hi": "Trace अच्छा है। FiO2 अब 100%, SpO2 88%। Suction किया, tube mark वही, EtCO2 trace मौजूद, छाती बराबर उठ रही है।"
+          },
+          "r": {
+            "en": "Please come now. Shall I send a blood gas and call for a chest X-ray?",
+            "hi": "कृपया अभी आएँ। क्या मैं blood gas भेजूँ और chest X-ray बुलाऊँ?"
+          }
+        }
+      },
+      {
+        "id": "disc",
+        "title": {
+          "en": "Disconnect or low pressure",
+          "hi": "Disconnect या low pressure"
+        },
+        "scene": {
+          "en": "3 am. Alarm: circuit disconnected, low pressure. VTe reads 0. The patient was turned 2 minutes ago.",
+          "hi": "रात 3 बजे। Alarm: circuit disconnected, low pressure। VTe 0 पढ़ रहा है। मरीज़ को 2 मिनट पहले करवट दी गई थी।"
+        },
+        "steps": [
+          {
+            "id": "look",
+            "rank": 1,
+            "text": {
+              "en": "Look at the patient: is the chest moving at all?",
+              "hi": "मरीज़ को देखें: क्या छाती बिल्कुल हिल रही है?"
+            },
+            "why": {
+              "en": "A patient with no ventilation needs breaths within seconds.",
+              "hi": "जिस मरीज़ को ventilation नहीं मिल रहा उसे सेकंडों में साँस चाहिए।"
+            }
+          },
+          {
+            "id": "reconnect",
+            "rank": 2,
+            "text": {
+              "en": "Follow the circuit from the tube to the machine; reconnect if the joint is simply off.",
+              "hi": "Tube से machine तक circuit follow करें; जोड़ बस खुला हो तो फिर से जोड़ें।"
+            },
+            "why": {
+              "en": "Turning the patient is the commonest cause. This is the quickest fix.",
+              "hi": "करवट देना सबसे आम कारण है। यह सबसे तेज़ इलाज है।"
+            }
+          },
+          {
+            "id": "bag",
+            "rank": 3,
+            "text": {
+              "en": "Not fixed at once: bag with 100% oxygen.",
+              "hi": "तुरंत ठीक न हो: 100% oxygen से bag करें।"
+            },
+            "why": {
+              "en": "Do not search for a leak while the patient has no breaths.",
+              "hi": "जब मरीज़ को साँस न मिल रही हो तब leak न ढूँढते रहें।"
+            }
+          },
+          {
+            "id": "tube",
+            "rank": 4,
+            "text": {
+              "en": "Check the tube is still in: mark at the lips, EtCO2 trace, cuff leak sound.",
+              "hi": "जाँचें tube अभी भी अंदर है: होंठ पर mark, EtCO2 trace, cuff leak की आवाज़।"
+            },
+            "why": {
+              "en": "No EtCO2 trace after turning: the tube may be out. Bag with a mask and call for help at once.",
+              "hi": "करवट के बाद EtCO2 trace न हो: tube बाहर हो सकती है। Mask से bag करें और तुरंत मदद बुलाएँ।"
+            }
+          },
+          {
+            "id": "call",
+            "rank": 5,
+            "flex": true,
+            "text": {
+              "en": "Call your senior with SBAR.",
+              "hi": "SBAR के साथ senior को call करें।"
+            },
+            "why": {
+              "en": "Any doubt about the tube is a senior emergency.",
+              "hi": "Tube पर कोई भी शक senior emergency है।"
+            }
+          },
+          {
+            "id": "trap",
+            "rank": null,
+            "text": {
+              "en": "Silence the alarm while you look for the leak.",
+              "hi": "Leak ढूँढते समय alarm silence कर दें।"
+            },
+            "why": {
+              "en": "The alarm is your only warning if it happens again. Keep it on.",
+              "hi": "दोबारा हो तो alarm ही आपकी एकमात्र चेतावनी है। इसे चालू रखें।"
+            }
+          }
+        ],
+        "sbar": {
+          "s": {
+            "en": "Bed 4, Mr X: circuit disconnected after turning, now reconnected.",
+            "hi": "Bed 4, Mr X: करवट के बाद circuit खुल गया था, अब जोड़ दिया।"
+          },
+          "b": {
+            "en": "Ventilated for pneumonia, AC-VC 450, rate 16, PEEP 5, FiO2 40.",
+            "hi": "Pneumonia के लिए ventilated, AC-VC 450, rate 16, PEEP 5, FiO2 40।"
+          },
+          "a": {
+            "en": "Off the ventilator about 1 minute. Now VTe 440, EtCO2 trace present, tube mark unchanged, SpO2 92.",
+            "hi": "लगभग 1 मिनट ventilator से हटे रहे। अब VTe 440, EtCO2 trace मौजूद, tube mark वही, SpO2 92।"
+          },
+          "r": {
+            "en": "I am watching closely. Is there anything else you want me to do?",
+            "hi": "मैं ध्यान से देख रहा हूँ। क्या आप चाहते हैं कि मैं और कुछ करूँ?"
+          }
+        }
+      },
+      {
+        "id": "apnoea",
+        "title": {
+          "en": "Apnoea or low minute volume",
+          "hi": "Apnoea या low minute volume"
+        },
+        "scene": {
+          "en": "3 am. Alarm: apnoea, low minute volume 2.1 L/min. Mode is pressure support. Morphine was given at 2 am.",
+          "hi": "रात 3 बजे। Alarm: apnoea, low minute volume 2.1 L/min। Mode pressure support है। 2 बजे morphine दी गई थी।"
+        },
+        "steps": [
+          {
+            "id": "look",
+            "rank": 1,
+            "text": {
+              "en": "Look at the patient: breathing effort, chest rise, conscious level, SpO2 and EtCO2.",
+              "hi": "मरीज़ को देखें: साँस का प्रयास, छाती का उठना, होश, SpO2 और EtCO2।"
+            },
+            "why": {
+              "en": "Is the patient not breathing, or is the gas leaking away?",
+              "hi": "मरीज़ साँस नहीं ले रहा, या gas बाहर leak हो रही है?"
+            }
+          },
+          {
+            "id": "bag",
+            "rank": 2,
+            "text": {
+              "en": "Not breathing enough: bag with 100% oxygen.",
+              "hi": "साँस पर्याप्त नहीं: 100% oxygen से bag करें।"
+            },
+            "why": {
+              "en": "In a support mode the patient gets breaths only if they try (unless apnoea backup is on).",
+              "hi": "Support mode में मरीज़ को साँस तभी मिलती है जब वह कोशिश करे (जब तक apnoea backup चालू न हो)।"
+            }
+          },
+          {
+            "id": "check",
+            "rank": 2,
+            "text": {
+              "en": "Check the cause: recent sedation or opioid, a circuit or cuff leak, the mode on the screen.",
+              "hi": "कारण जाँचें: हाल का sedation या opioid, circuit या cuff leak, screen पर mode।"
+            },
+            "why": {
+              "en": "Here the morphine is the likely cause of a drop in breathing drive.",
+              "hi": "यहाँ morphine साँस की इच्छा घटने का संभावित कारण है।"
+            }
+          },
+          {
+            "id": "call",
+            "rank": 3,
+            "flex": true,
+            "text": {
+              "en": "Call your senior with SBAR: a change to a mode with a set rate is their decision.",
+              "hi": "SBAR के साथ senior को call करें: set rate वाले mode में बदलना उनका निर्णय है।"
+            },
+            "why": {
+              "en": "Call at once if the patient is not breathing.",
+              "hi": "मरीज़ साँस न ले रहा हो तो तुरंत call करें।"
+            }
+          },
+          {
+            "id": "trap",
+            "rank": null,
+            "text": {
+              "en": "Silence the alarm and recheck in 30 minutes.",
+              "hi": "Alarm silence करें और 30 मिनट बाद देखें।"
+            },
+            "why": {
+              "en": "An apnoeic patient cannot wait 30 minutes.",
+              "hi": "Apnoea वाला मरीज़ 30 मिनट इंतज़ार नहीं कर सकता।"
+            }
+          }
+        ],
+        "sbar": {
+          "s": {
+            "en": "Bed 4, Mr X: apnoea alarm on pressure support, minute volume 2.1 L/min.",
+            "hi": "Bed 4, Mr X: pressure support पर apnoea alarm, minute volume 2.1 L/min।"
+          },
+          "b": {
+            "en": "Weaning on PS 10, PEEP 5, FiO2 30. Morphine 2 mg at 2 am.",
+            "hi": "PS 10, PEEP 5, FiO2 30 पर weaning। 2 बजे morphine 2 mg।"
+          },
+          "a": {
+            "en": "Drowsy, few breaths of his own. I am bagging with 100% oxygen; SpO2 95, EtCO2 trace present, no leak.",
+            "hi": "नींद में, अपनी साँसें कम। मैं 100% oxygen से bag कर रहा हूँ; SpO2 95, EtCO2 trace मौजूद, कोई leak नहीं।"
+          },
+          "r": {
+            "en": "Please come now. Do you want a mode with a set rate?",
+            "hi": "कृपया अभी आएँ। क्या आप set rate वाला mode चाहेंगे?"
+          }
+        }
+      }
+    ]
+  },
+  "never": {
+    "title": {
+      "en": "Never change settings alone on day one",
+      "hi": "पहले दिन कभी अकेले settings न बदलें"
+    },
+    "sub": {
+      "en": "What you may do, and when to call",
+      "hi": "आप क्या कर सकते हैं, और कब call करें"
+    },
+    "may": [
+      {
+        "en": "Look at the patient and call for help.",
+        "hi": "मरीज़ को देखें और मदद बुलाएँ।"
+      },
+      {
+        "en": "Disconnect and bag with 100% oxygen.",
+        "hi": "Ventilator हटाकर 100% oxygen से bag करें।"
+      },
+      {
+        "en": "Suction the tube.",
+        "hi": "Tube में suction करें।"
+      },
+      {
+        "en": "Reconnect a circuit that has come apart.",
+        "hi": "खुले हुए circuit को फिर से जोड़ें।"
+      },
+      {
+        "en": "Turn FiO2 up to 100% in an emergency, if your unit's policy allows, and tell your senior.",
+        "hi": "Emergency में FiO2 को 100% करें, अगर unit की policy अनुमति दे, और senior को बताएँ।"
+      },
+      {
+        "en": "Write down what you saw, what you did and the time.",
+        "hi": "जो देखा, जो किया और समय लिखें।"
+      }
+    ],
+    "mayNot": [
+      {
+        "en": "Change the mode, VT, pressure, rate, PEEP or I:E.",
+        "hi": "Mode, VT, pressure, rate, PEEP या I:E बदलना।"
+      },
+      {
+        "en": "Raise an alarm limit or silence an alarm you cannot explain.",
+        "hi": "Alarm limit बढ़ाना या जिस alarm को समझा न सकें उसे silence करना।"
+      },
+      {
+        "en": "Move the tube, deflate the cuff or extubate.",
+        "hi": "Tube खिसकाना, cuff खाली करना या extubate करना।"
+      },
+      {
+        "en": "Give extra sedation or a paralysing drug that is not prescribed.",
+        "hi": "बिना prescription के extra sedation या paralysing दवा देना।"
+      }
+    ],
+    "callNow": [
+      {
+        "en": "SpO2 below 85%, or below target on FiO2 80% or more.",
+        "hi": "SpO2 85% से कम, या FiO2 80% या ज़्यादा पर भी लक्ष्य से कम।"
+      },
+      {
+        "en": "No EtCO2 trace, or any doubt that the tube is in place.",
+        "hi": "EtCO2 trace नहीं, या tube के अपनी जगह होने पर कोई शक।"
+      },
+      {
+        "en": "Mean arterial pressure below 65, heart rate below 50, or a new arrhythmia.",
+        "hi": "Mean arterial pressure 65 से नीचे, धड़कन 50 से कम, या नई arrhythmia।"
+      },
+      {
+        "en": "Unequal chest rise with falling BP: possible tension pneumothorax.",
+        "hi": "असमान छाती का उठना और गिरता BP: tension pneumothorax हो सकता है।"
+      },
+      {
+        "en": "Ppeak or Pplat rising and not explained by suction, or auto-PEEP of 10 or more.",
+        "hi": "Ppeak या Pplat बढ़ रहा है और suction से नहीं समझ आता, या auto-PEEP 10 या ज़्यादा।"
+      },
+      {
+        "en": "pH below 7.20 on a blood gas.",
+        "hi": "Blood gas पर pH 7.20 से नीचे।"
+      },
+      {
+        "en": "A circuit you cannot reconnect at once.",
+        "hi": "Circuit जो तुरंत न जुड़ सके।"
+      },
+      {
+        "en": "Any alarm you cannot explain within a couple of minutes. When in doubt, call.",
+        "hi": "कोई भी alarm जो कुछ मिनट में समझ न आए। शक हो तो call करें।"
+      }
+    ],
+    "sbarH": {
+      "en": "What to say: SBAR",
+      "hi": "क्या कहें: SBAR"
+    },
+    "sbar": [
+      {
+        "k": "S",
+        "label": {
+          "en": "Situation",
+          "hi": "Situation"
+        },
+        "text": {
+          "en": "Who and where, the alarm, the number now.",
+          "hi": "कौन और कहाँ, alarm, अभी का number।"
+        }
+      },
+      {
+        "k": "B",
+        "label": {
+          "en": "Background",
+          "hi": "Background"
+        },
+        "text": {
+          "en": "Why ventilated, the mode and set values, the last blood gas.",
+          "hi": "Ventilation क्यों, mode और set values, पिछली blood gas।"
+        }
+      },
+      {
+        "k": "A",
+        "label": {
+          "en": "Assessment",
+          "hi": "Assessment"
+        },
+        "text": {
+          "en": "What you found and what you have done (bagged, suctioned, FiO2).",
+          "hi": "आपने क्या पाया और क्या किया (bag, suction, FiO2)।"
+        }
+      },
+      {
+        "k": "R",
+        "label": {
+          "en": "Recommendation",
+          "hi": "Recommendation"
+        },
+        "text": {
+          "en": "What you need: please come now, or what should I do next.",
+          "hi": "आपको क्या चाहिए: कृपया अभी आएँ, या आगे मैं क्या करूँ।"
+        }
+      }
+    ]
+  }
+}

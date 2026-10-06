@@ -699,6 +699,7 @@
       '<h2 class="sp-h2" id="vlLvH">' + s("level") + '</h2><div class="vl-levels" role="group" aria-labelledby="vlLvH">' + seg + "</div>" +
       (intro ? '<p class="vl-lvintro">' + tx(intro) + "</p>" : "") +
       (n <= 2 ? tutBlock : "") +
+      (G.NARKE_VENT_BRIDGE && G.NARKE_VENT_BRIDGE.homeBlock ? G.NARKE_VENT_BRIDGE.homeBlock(n) : "") + // real-ventilator bridge (narke-vent-bridge.js)
       '<h2 class="sp-h2">' + s("patients") + '</h2><ul class="vl-cards">' + cards + "</ul>" +
       (more > 0 ? '<p class="sp-small vl-more">' + s("morePts", { n: more }) + "</p>" : "") +
       (n > 2 ? tutBlock : "") +

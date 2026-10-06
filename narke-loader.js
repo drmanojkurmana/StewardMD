@@ -7,9 +7,9 @@
 (function (G) {
   "use strict";
   var V = "nrk4";
-  var CSS = ["specialty.css", "narke.css", "narke-explore-ui.css", "narke-clinic.css", "narke-vent.css"];
+  var CSS = ["specialty.css", "narke.css", "narke-explore-ui.css", "narke-clinic.css", "narke-vent.css", "narke-vent-bridge.css"];
   var JS = ["specialty-core.js", "specialty-data.js", "specialty-stage.js", "specialty-shell.js", "specialty-learn.js", "specialty-bank.js",
-    "specialty-explore.js", "specialty-tools.js", "specialty-notes.js", "narke.js", "narke-explore-ui.js", "narke-clinic.js", "narke-vent.js"];
+    "specialty-explore.js", "specialty-tools.js", "specialty-notes.js", "narke.js", "narke-explore-ui.js", "narke-clinic.js", "narke-vent.js", "narke-vent-bridge.js"];
   var BASE = G.SMD_NARKE_BASE || "/narke/";
   var loading = null;
 
