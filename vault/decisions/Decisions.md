@@ -11369,3 +11369,23 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   (KV) is not applied, because it can change between a player's start and submit and the paper must not.
 - Leaving deletes the player row and entries and replaces the player's id in past battles with `gone`, so the
   opponent keeps their record. **Status:** branch `feat/prep-arena-server`, not deployed (owner creates D1, deploys).
+
+## 2026-10-06 - PrepNucleus Lessons: structured visuals from data, gated generation, on-device narration
+- **Decision** ([[PrepNucleus]], "Lessons"): a lesson is data, not HTML: `prep/lessons/v1/<module>.json` with 4 to 8
+  steps of `tx` (40-90 words, `**bold**` key terms), `say` (plain narration under 120 words) and one `vis` of kind
+  table, flow, compare or image, plus 3 bank item ids for the quiz. `prep-lessons.js` draws every visual as HTML/SVG
+  in the app's tokens (so light and dark come free and nothing is a picture of text), and refuses a visual that cannot
+  fit a phone (`checkVis`). Images only from cleared in-app media (`prep/lessons/media`, StewardMD originals; cleared
+  Tokós media); no third-party photos.
+- **Generation** (`tools/prep-lessons.mjs`, Vertex Batch, gemini-3.1-flash-lite): grounded only in our KB (or the
+  KB-only fill pack), citations stripped; code gates (shape, numbers and drug names in the grounding via
+  `prep-teacher.js check()`, no 12-word copy, no dashes), a blind self-check call per lesson, one regeneration of a
+  failed step, then drop. A lesson with fewer than 4 surviving steps is not written; a `gen: "hand"` lesson is never
+  overwritten. Pilot of 13 modules: about $0.07 (dry run); whole catalogue about $9.5 at the same rate.
+- **Narration:** the existing `@capacitor-community/text-to-speech` plugin on native, `speechSynthesis` on the web.
+  No cloud TTS: free, offline, and nothing about the student leaves the phone. Pause restarts the step (the plugin has
+  no pause). **Ask MaiK** about a step reuses the offline teacher (`PREP_TEACHER.explainStep`, same check) and is
+  hidden without an on-device model.
+- **No flag of its own:** a module shows its Lesson row only when the index lists it, so shipping lessons is shipping
+  data. Progress `ls`, prefs `lsp` in `smd_prep_v1`; XP 10 a step, once per lesson. **Status:** branch
+  `feat/prepnucleus`; one hand-written lesson (`sur-breast-cancer`); no paid run yet.

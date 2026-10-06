@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 340" font-family="-apple-system, 'Segoe UI', Roboto, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Breast cancer T category by tumour size</title>
+  <desc id="d">Three circles drawn to one scale: T1 up to 2 cm, T2 over 2 cm up to 5 cm, T3 over 5 cm. A fourth panel shows T4: a tumour of any size reaching the chest wall or the skin; T4d is inflammatory cancer. StewardMD original schematic.</desc>
+  <rect width="720" height="340" fill="#ffffff"/>
+  <!-- scale: 1 cm = 26 px -->
+  <g fill="#e1f1ee" stroke="#0f766e" stroke-width="2.5">
+    <circle cx="64" cy="150" r="26"/>
+    <circle cx="228" cy="150" r="52"/>
+    <circle cx="416" cy="150" r="91"/>
+  </g>
+  <g fill="#0d1b24" text-anchor="middle">
+    <text x="64" y="282" font-size="30" font-weight="700">T1</text>
+    <text x="64" y="310" font-size="19" fill="#4c5e6a">up to 2 cm</text>
+    <text x="228" y="282" font-size="30" font-weight="700">T2</text>
+    <text x="228" y="310" font-size="19" fill="#4c5e6a">over 2, up to 5 cm</text>
+    <text x="416" y="282" font-size="30" font-weight="700">T3</text>
+    <text x="416" y="310" font-size="19" fill="#4c5e6a">over 5 cm</text>
+    <text x="608" y="282" font-size="30" font-weight="700">T4</text>
+    <text x="608" y="310" font-size="19" fill="#4c5e6a">chest wall or skin</text>
+    <text x="608" y="333" font-size="19" fill="#4c5e6a">(T4d: inflammatory)</text>
+  </g>
+  <!-- T4 panel: skin line on top, chest wall below, a tumour reaching both -->
+  <path d="M520 70 Q608 56 696 70" fill="none" stroke="#b9852f" stroke-width="5" stroke-linecap="round"/>
+  <g fill="none" stroke="#9aa9b2" stroke-width="7" stroke-linecap="round">
+    <path d="M524 206 Q608 218 692 206"/>
+    <path d="M524 226 Q608 238 692 226"/>
+  </g>
+  <path d="M570 70 C546 106 548 172 580 208 C610 220 644 210 650 172 C662 126 652 80 628 66 C608 58 584 60 570 70 Z" fill="#fbe9ec" stroke="#b42332" stroke-width="2.5"/>
+  <text x="700" y="52" font-size="17" fill="#4c5e6a" text-anchor="end">skin</text>
+  <text x="700" y="256" font-size="17" fill="#4c5e6a" text-anchor="end">chest wall</text>
+  <!-- scale bar -->
+  <g stroke="#4c5e6a" stroke-width="2">
+    <line x1="24" y1="22" x2="154" y2="22"/>
+    <line x1="24" y1="15" x2="24" y2="29"/><line x1="76" y1="15" x2="76" y2="29"/><line x1="154" y1="15" x2="154" y2="29"/>
+  </g>
+  <text x="164" y="28" font-size="17" fill="#4c5e6a">0, 2 and 5 cm: circles to this scale</text>
+</svg>

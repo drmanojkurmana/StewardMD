@@ -240,6 +240,12 @@ if [ -f prep/taxonomy.json ]; then
   mkdir -p "$WWW/prep" && cp prep/taxonomy.json "$WWW/prep/"
   [ -d prep/profiles ] && mkdir -p "$WWW/prep/profiles" && cp prep/profiles/*.json "$WWW/prep/profiles/"
   for ix in prep/bank/v1/*/index.json; do [ -f "$ix" ] && mkdir -p "$WWW/$(dirname "$ix")" && cp "$ix" "$WWW/$ix"; done
+  # Lessons (prep-lessons.js): the committed pilot lessons, their index and their original diagrams, a few KB each.
+  # tools/prep-lessons.mjs work files (prep/lessons/work) never ship.
+  if [ -f prep/lessons/v1/index.json ]; then
+    mkdir -p "$WWW/prep/lessons/v1" && cp prep/lessons/v1/*.json "$WWW/prep/lessons/v1/"
+    [ -d prep/lessons/media ] && mkdir -p "$WWW/prep/lessons/media" && cp prep/lessons/media/* "$WWW/prep/lessons/media/"
+  fi
 fi
 
 # NMC Logbook curriculum packs + assessment templates. Same rule and the same failure mode as clinix

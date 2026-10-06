@@ -222,9 +222,39 @@
     }, function () { return fail("model-error"); });
   }
 
+  /* ---- lessons (prep-lessons.js): "Ask MaiK about this step" ---- */
+  var STEP_SYSTEM =
+    "You are MaiK, a medical exam teacher inside StewardMD PrepNucleus. A student is reading a short lesson step and asked you to explain it again.\n" +
+    "RULES:\n" +
+    "- Explain using ONLY the facts in the GROUNDING block. Do not add any drug, dose, number, criterion, name or fact that is not written there.\n" +
+    "- Simpler words than the step, 3 to 5 short sentences, then one line that starts with: Remember:\n" +
+    "- Plain prose. No headings, no lists, no preamble, no question back to the student.";
+  /* stepGround(step, title) -> the lesson step as grounding: its text (bold marks dropped) and every string of its visual. */
+  function stepGround(step, title) {
+    var P = G && G.PREP_LESSONS ? G.PREP_LESSONS._pure : null, v = step && step.vis;
+    var vis = P ? P.visText(v) : "";
+    return clip("Lesson: " + str(title) + "\nStep: " + str(step && step.tx).replace(/\*\*/g, "") + (vis ? "\nVisual: " + vis.replace(/\s*\n\s*/g, "; ") : ""), LIM.total);
+  }
+  /* teachStep(step, title, deps) -> Promise<{ ok, text } | { ok: false, reason, note }>; the same check as teach(). */
+  function teachStep(step, title, deps) {
+    deps = deps || {};
+    var ground = stepGround(step, title);
+    if (!step || !str(step.tx).trim()) return Promise.resolve({ ok: false, reason: "no-grounding", note: "This step has nothing for MaiK to teach from." });
+    if (typeof deps.generate !== "function") return Promise.resolve({ ok: false, reason: "no-model", note: NOTES["no-model"] });
+    var prompt = "GROUNDING:\n" + ground + "\n\nTASK: Explain this step again in simpler words, using only the grounding.";
+    return Promise.resolve().then(function () { return deps.generate(prompt, STEP_SYSTEM); }).then(function (r) {
+      if (r && typeof r === "object" && r.error) return { ok: false, reason: "model-error", note: "MaiK could not answer on this phone just now." };
+      var text = cleanAnswer(r && typeof r === "object" ? r.text : r);
+      if (!text) return { ok: false, reason: "empty", note: "MaiK gave no answer on this phone just now." };
+      var ck = check(text, ground, deps.lexicon);
+      if (!ck.ok) return { ok: false, reason: "check", note: "MaiK's answer named a drug or a number that is not in this step, so it is not shown.", check: ck };
+      return { ok: true, text: text, check: ck };
+    }, function () { return { ok: false, reason: "model-error", note: "MaiK could not answer on this phone just now." }; });
+  }
+
   var PURE = { SYSTEM: SYSTEM, LIM: LIM, NOTES: NOTES, groundParts: groundParts, groundingText: groundingText, promptFor: promptFor, teachable: teachable,
     numbersIn: numbersIn, sourceNumbers: sourceNumbers, missingNumbers: missingNumbers, lexMap: lexMap, drugsIn: drugsIn, capsTerms: capsTerms,
-    check: check, cleanAnswer: cleanAnswer, fallbackFor: fallbackFor, teach: teach };
+    check: check, cleanAnswer: cleanAnswer, fallbackFor: fallbackFor, teach: teach, stepGround: stepGround, teachStep: teachStep, STEP_SYSTEM: STEP_SYSTEM };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= app ================= */
@@ -310,5 +340,33 @@
     });
   }
 
-  G.PREP_TEACHER = { available: available, ready: ready, explain: explain, _pure: PURE };
+  /* explainStep(step, title, host): a lesson step explained again by the phone's own model, checked like explain();
+     on any failure the screen says why and the step's own text stays the answer. */
+  function explainStep(step, title, host) {
+    if (!step || !host || !host.push) return;
+    var token = "ps" + (++seq), S = { phase: "wait", res: null }, esc = host.esc;
+    function body() {
+      var back = '<div class="pn-navrow"><button type="button" class="pn-btn" data-act="back">Back to the lesson</button></div>';
+      if (S.phase === "wait") return '<p class="pn-load" role="status">Checking for MaiK on this phone...</p>';
+      if (S.phase === "none") return '<div class="pn-empty"><p><b>Ask MaiK needs MaiK on this phone.</b></p><p class="pn-mut">It runs only on a downloaded on-device model. Nothing is sent to a server.</p></div>' + back;
+      if (S.phase === "busy") return '<p class="pn-load" role="status">MaiK is still working on another answer. Try again in a moment.</p>' + back;
+      if (S.phase === "run") return '<p class="pn-load" role="status">MaiK is working on your phone. This takes 10 to 40 seconds.</p>';
+      var r = S.res || {};
+      if (r.ok) return '<section class="pn-fb" role="status" tabindex="-1"><h3>MaiK explains</h3>' + r.text.split(/\n{2,}|\n/).map(function (p) { return '<p class="pn-exp">' + esc(p) + "</p>"; }).join("") +
+        '<p class="pn-note">Written on this phone by ' + esc(packLabel()) + " from this step. Checked: every drug and number in it appears in the step.</p></section>" + back;
+      return '<section class="pn-fb" role="status" tabindex="-1"><p class="pn-mut pn-small">' + esc(r.note || "MaiK could not answer just now.") + '</p><p class="pn-exp">' + esc(str(step.tx).replace(/\*\*/g, "")) + "</p></section>" + back;
+    }
+    function view() { host.paint(host.bar("Ask MaiK", esc(title), "back") + '<div class="pn-body pn-run" data-pt="' + token + '">' + body() + "</div>", S.phase === "done" ? ".pn-fb" : null); }
+    function update() { try { var rt = host.root && host.root(); if (rt && rt.querySelector('[data-pt="' + token + '"]')) view(); } catch (e) {} }
+    host.push(view);
+    available().then(function (ok) {
+      if (!ok) { S.phase = "none"; return update(); }
+      if (busy) { S.phase = "busy"; return update(); }
+      busy = true; S.phase = "run"; update();
+      return teachStep(step, title, { generate: localGenerate, lexicon: G.SMD_DRUG_LEXICON || null }).then(function (res) { busy = false; S.res = res; S.phase = "done"; update(); },
+        function () { busy = false; S.res = { ok: false }; S.phase = "done"; update(); });
+    });
+  }
+
+  G.PREP_TEACHER = { available: available, ready: ready, explain: explain, explainStep: explainStep, _pure: PURE };
 })(typeof window !== "undefined" ? window : this);

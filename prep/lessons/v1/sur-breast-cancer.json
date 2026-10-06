@@ -1,0 +1,115 @@
+{
+ "v": 1,
+ "module": "sur-breast-cancer",
+ "subject": "surgery",
+ "title": "Breast cancer",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Breast cancer** is the commonest non-skin cancer in women. The main drivers are **female sex**, rising **age** and long **estrogen exposure**: about 70% of cases are found at 55 or older. A first-degree relative with the disease doubles the risk, yet only 20% of patients have any family history. Inherited **BRCA1** and **BRCA2** mutations explain a small share of cases.",
+   "say": "Breast cancer is the commonest non-skin cancer in women. The main drivers are female sex, rising age and long exposure to estrogen. About 70 percent of cases are found at 55 or older. A first-degree relative with breast cancer doubles the risk, but only 20 percent of patients have any family history at all. Inherited BRCA1 and BRCA2 mutations explain a small share of cases.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Risk factor", "What it does"],
+    "rows": [
+     ["Age", "Risk climbs with age; median age at diagnosis 63"],
+     ["First-degree relative", "Doubles the risk"],
+     ["BRCA1 or BRCA2 carrier", "Lifetime risk 50-80% by age 80"],
+     ["Atypical hyperplasia", "Risk up about four- to fivefold"],
+     ["Lobular carcinoma in situ", "Risk up 7- to 12-fold"]
+    ]
+   }
+  },
+  {
+   "tx": "A suspicious lump goes through **triple assessment**: clinical examination, breast imaging and tissue diagnosis. Imaging is **mammography**, with ultrasound and sometimes MRI, and both breasts are imaged because up to 3% have hidden disease on the other side. The diagnosis rests on an **image-guided core biopsy**, which also gives the grade and the receptor status. A normal mammogram never clears a palpable lump.",
+   "say": "A suspicious lump goes through triple assessment: clinical examination, breast imaging, and tissue diagnosis. Imaging means mammography, with ultrasound and sometimes MRI. Both breasts are imaged, because up to 3 percent of women have hidden disease on the other side. The diagnosis rests on an image-guided core biopsy, which also gives the grade and the receptor status. Remember: a normal mammogram never clears a lump you can feel.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     { "id": "lump", "label": "Lump or abnormal mammogram" },
+     { "id": "exam", "label": "Clinical examination" },
+     { "id": "img", "label": "Imaging", "sub": "Mammography of both breasts, ultrasound, MRI if needed" },
+     { "id": "bx", "label": "Image-guided core biopsy" },
+     { "id": "ax", "label": "Suspicious axillary node", "sub": "Image-guided biopsy" },
+     { "id": "rx", "label": "Grade, ER, PR, HER2" }
+    ],
+    "edges": [["lump", "exam"], ["exam", "img"], ["img", "bx", "breast"], ["img", "ax", "axilla"], ["bx", "rx"]]
+   }
+  },
+  {
+   "tx": "Most invasive cancers are **ductal**. About 10-15% are **lobular**: usually ER positive and HER2 negative, and recognised by loss of **E-cadherin**. Lobular cancer likes unusual sites such as the pleura, peritoneum, meninges, ovaries and gut, so a recurrence can present atypically. **DCIS** is malignancy still confined within the basement membrane: non-invasive, but treated.",
+   "say": "Most invasive breast cancers are ductal. About 10 to 15 percent are lobular. Lobular cancers are usually ER positive and HER2 negative, and they are recognised by loss of E-cadherin. They like unusual sites such as the pleura, peritoneum, meninges, ovaries and gut, so a recurrence can look atypical. Ductal carcinoma in situ, or DCIS, is malignancy still confined within the basement membrane. It is non-invasive, but it is treated.",
+   "vis": {
+    "kind": "compare",
+    "left": { "title": "Invasive ductal", "points": ["Most invasive breast cancers", "Any receptor subtype", "Usual metastatic sites: soft tissue, lung, bone, liver, brain"] },
+    "right": { "title": "Invasive lobular", "points": ["About 10-15% of invasive cancers", "Usually ER positive, HER2 negative", "E-cadherin absent", "Serosa, ovaries and gut: atypical recurrence"] }
+   }
+  },
+  {
+   "tx": "Receptor testing sorts invasive cancers into four **molecular subtypes**. **Luminal A** and **luminal B** are both ER positive; luminal B has lower PR or higher Ki67 and does worse. **HER2-enriched** tumours over-express HER2 and benefit from HER2-targeted drugs. **Triple-negative** cancer lacks ER, PR and HER2, and carries a poorer prognosis.",
+   "say": "Receptor testing sorts invasive breast cancers into four molecular subtypes. Luminal A and luminal B are both ER positive. Luminal B has lower PR or a higher Ki67, and a worse outcome. HER2-enriched tumours over-express HER2, and they benefit from HER2-targeted drugs. Triple-negative cancer lacks ER, PR and HER2, and it carries a poorer prognosis.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Subtype", "Receptors", "Main systemic lever"],
+    "rows": [
+     ["Luminal A", "ER positive", "Endocrine therapy"],
+     ["Luminal B", "ER positive, lower PR or higher Ki67", "Endocrine therapy; chemotherapy if high risk"],
+     ["HER2-enriched", "High HER2", "HER2-directed drugs with chemotherapy"],
+     ["Triple-negative", "No ER, PR or HER2", "Chemotherapy, with immunotherapy"]
+    ]
+   }
+  },
+  {
+   "tx": "Staging uses **TNM**. The T category rises with size: over 2 cm is T2 and over 5 cm is T3, while spread to the **chest wall or skin** is T4, and **inflammatory cancer** is T4d. Stages I and II are early disease, stage III is **locally advanced** and stage IV is metastatic. Survival follows stage: over 99% at 5 years for stage I, about 29% for stage IV.",
+   "say": "Staging uses the TNM system. The T category rises with size. Over 2 centimetres is T2, and over 5 centimetres is T3. Spread to the chest wall or the skin is T4, and inflammatory cancer is T4d. Stages one and two are early disease, stage three is locally advanced, and stage four is metastatic. Survival follows stage: over 99 percent at 5 years for stage one, and about 29 percent for stage four.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/breast-t-size.svg",
+    "alt": "Circles drawn to scale for T1 up to 2 cm, T2 over 2 up to 5 cm and T3 over 5 cm, and a tumour reaching the skin and chest wall for T4.",
+    "caption": "T category by size and extent. Schematic; circles to one scale. StewardMD original diagram."
+   }
+  },
+  {
+   "tx": "Local control is **breast-conserving surgery** with whole-breast radiotherapy, or **mastectomy**. The axilla is staged at the same operation: **sentinel lymph node biopsy** when the nodes are clinically negative, **axillary clearance** when nodes are proven involved. After mastectomy, four or more positive nodes make chest wall and nodal radiotherapy mandatory; a node-negative tumour of 5 cm or less with clear margins needs none.",
+   "say": "Local control means breast-conserving surgery with whole-breast radiotherapy, or a mastectomy. The axilla is staged at the same operation. When the nodes are clinically negative, a sentinel lymph node biopsy is done. When nodes are proven to be involved, the axilla is cleared. After mastectomy, four or more positive nodes make radiotherapy to the chest wall and nodes mandatory. A node-negative tumour of 5 centimetres or less, with clear margins, needs none.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     { "id": "op", "label": "Operable breast cancer" },
+     { "id": "neg", "label": "Nodes clinically negative" },
+     { "id": "pos", "label": "Nodes proven involved" },
+     { "id": "slnb", "label": "Sentinel lymph node biopsy" },
+     { "id": "alnd", "label": "Axillary clearance" }
+    ],
+    "edges": [["op", "neg"], ["op", "pos"], ["neg", "slnb"], ["pos", "alnd"]]
+   }
+  },
+  {
+   "tx": "Systemic therapy follows the receptors. **ER-positive** disease gets endocrine therapy: **tamoxifen** or an **aromatase inhibitor**, adding ovarian suppression for selected premenopausal women. **HER2-positive** disease gets **trastuzumab**, often with pertuzumab, combined with chemotherapy, and the LVEF is monitored. **Triple-negative** disease relies on chemotherapy, with immunotherapy added. Bone metastases get a bisphosphonate or denosumab.",
+   "say": "Systemic therapy follows the receptors. ER-positive disease gets endocrine therapy: tamoxifen or an aromatase inhibitor, with ovarian suppression added for selected premenopausal women. HER2-positive disease gets trastuzumab, often with pertuzumab, combined with chemotherapy, and the heart's ejection fraction is monitored. Triple-negative disease relies on chemotherapy, with immunotherapy added. Bone metastases are treated with a bisphosphonate or denosumab.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Tumour", "Main systemic option"],
+    "rows": [
+     ["ER positive", "Tamoxifen or an aromatase inhibitor"],
+     ["HER2 positive", "Trastuzumab and pertuzumab with chemotherapy"],
+     ["Triple negative", "Chemotherapy with immunotherapy"],
+     ["Bone metastases", "Bisphosphonate or denosumab"]
+    ]
+   }
+  },
+  {
+   "tx": "Two presentations are easily mistaken for benign disease. **Paget disease of the nipple** looks like eczema of the nipple and areola but sits over DCIS or an invasive cancer. **Inflammatory breast cancer** causes rapid redness, swelling and **peau d'orange**; it is staged T4d. A 'mastitis' that does not settle on antibiotics needs a breast or skin biopsy.",
+   "say": "Two presentations are easily mistaken for benign disease. Paget disease of the nipple looks like eczema of the nipple and areola, but it sits over DCIS or an invasive cancer. Inflammatory breast cancer causes rapid redness, swelling and peau d'orange, and it is staged T4d. So a mastitis that does not settle on antibiotics needs a breast or skin biopsy.",
+   "vis": {
+    "kind": "compare",
+    "left": { "title": "Paget disease of the nipple", "points": ["Eczema-like change of nipple and areola", "DCIS or invasive cancer underneath", "Not a simple dermatitis"] },
+    "right": { "title": "Inflammatory breast cancer", "points": ["Rapid erythema, oedema, peau d'orange", "Staged T4d: locally advanced", "Up to one-third have metastases at diagnosis", "Biopsy if 'mastitis' persists"] }
+   }
+  }
+ ],
+ "quiz": ["24ecaf97-2196-4894-999a-a808506eb383", "1894027f-e5db-44e1-ae23-78b7b6b4b8ed", "14aebfa4-f65c-460e-90a0-9884725698aa"],
+ "src": ["kb-reference-breast-cancer", "kb-oncotree-breast", "kb-reference-hereditary-breast-ovarian"],
+ "gen": "hand",
+ "checks": { "shape": true, "numbers": true, "drugs": true, "verbatim": true, "selfCheck": "hand", "by": "tools/prep-lessons.mjs --check" }
+}
