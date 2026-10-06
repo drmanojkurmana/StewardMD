@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS prep_sync (
   ver INTEGER NOT NULL DEFAULT 0,
   blob BLOB,
   updated_at INTEGER
-
+);
 
 -- PrepNucleus social (friends, challenges, college tags, study groups). Owner decision 2026-10-06. Same keys as the
 -- Arena (uidh = sha256(uid) prefix 24). Leave Arena deletes every row (functions/_prep-social.js socialDeleteStmts).
