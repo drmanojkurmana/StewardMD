@@ -1,0 +1,210 @@
+/* Narkē explorers (narke-explore-ui.js). Every rule sits under .nrk-root and uses the engine's --sp-* and Narkē's
+   --nk-* tokens (narke.css: monitor dark, paper chart light). The waveform plates are the one place that stays a black
+   monitor in both themes, with the workstation's channel colours (pressure red, flow green, volume and SpO2 cyan,
+   CO2 yellow); those are the --nkx-mon-* tokens below, each above 4.5:1 on the plate. Lines also differ by role, not
+   colour alone: every trace sits in its own labelled channel. */
+.nrk-root {
+  --nkx-mon-bg: #05070a; --nkx-mon-grid: #1a2330; --nkx-mon-text: #e8eaee; --nkx-mon-mut: #9aa3b2;
+  --nkx-mon-art: #fb7185; --nkx-mon-ecg: #3ee07a; --nkx-mon-spo2: #38bdf8; --nkx-mon-co2: #facc15;
+  --nkx-ok-bg: color-mix(in srgb, var(--sp-ok) 14%, transparent); --nkx-bad-bg: color-mix(in srgb, var(--sp-bad) 14%, transparent);
+  --nkx-warn-bg: color-mix(in srgb, var(--sp-warn) 16%, transparent);
+  --nkx-skin: #2a2b2f; --nkx-block: rgba(56, 189, 248, .42); --nkx-violet: #8b5cf6;
+}
+body:not(.dark):not(.v3-dark) .nrk-root { --nkx-skin: #ebe4d4; --nkx-block: rgba(14, 111, 134, .34); --nkx-violet: #6d28d9; }
+
+.nrk-root .nkx { display: block; }
+.nrk-root .nkx-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin: 2px 0 18px; font-size: 13px; color: var(--sp-mut); }
+.nrk-root .nkx-lv { font-weight: 650; color: var(--sp-text); padding: 3px 9px; border-radius: 8px; background: var(--sp-s2); }
+.nrk-root .nkx-draft { color: var(--sp-warn); font-weight: 600; }
+.nrk-root .nkx-sec { margin: 0; }
+.nrk-root .nkx-sec + .nkx-sec { margin-top: 12px; }
+.nrk-root .nkx-h { display: flex; flex-direction: column; gap: 4px; font-size: 20px; line-height: 1.25; font-weight: 700; letter-spacing: -0.01em; margin: 14px 0 12px; text-wrap: balance; }
+.nrk-root .nkx-h .sp-small { font-weight: 500; letter-spacing: 0; text-wrap: pretty; }
+.nrk-root .nkx-first > .nkx-h:first-child { margin-top: 0; }
+.nrk-root .nkx-h3 { font-size: 15px; font-weight: 650; margin: 18px 0 8px; }
+.nrk-root .nkx-p { font-size: 15px; line-height: 1.55; margin: 10px 0; max-width: 65ch; }
+.nrk-root .nkx-lbl { font-size: 13px; font-weight: 650; color: var(--sp-mut); }
+.nrk-root .nkx-hint { margin: 2px 0 12px; }
+.nrk-root .nkx-link { border: 0; background: none; color: var(--sp-link); font: inherit; font-weight: 600; min-height: 44px; padding: 0 4px; margin-top: 6px;
+  text-decoration: underline; text-decoration-color: var(--sp-link-line); text-underline-offset: 3px; }
+
+/* fields: label and value on one line, the slider under them */
+.nrk-root .nkx-field { display: block; margin: 12px 0 0; }
+.nrk-root .nkx-fl { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.nrk-root .nkx-val { font-size: 15px; font-weight: 650; color: var(--sp-text); font-variant-numeric: tabular-nums; }
+.nrk-root .nkx-range { width: 100%; height: 44px; margin: 0; accent-color: var(--sp-acc); background: transparent; }
+.nrk-root .nkx-range:focus-visible, .nrk-root .nkx-select:focus-visible { outline: 2px solid var(--sp-acc); outline-offset: 2px; border-radius: 8px; }
+.nrk-root .nkx-select { width: 100%; min-height: 48px; border-radius: 12px; border: 1px solid var(--sp-line); background: var(--sp-s1); color: var(--sp-text); font: inherit; font-size: 16px; padding: 0 12px; }
+.nrk-root .nkx-segrow { display: grid; gap: 6px; margin: 14px 0 0; }
+.nrk-root .nkx-seg { justify-self: start; flex-wrap: wrap; }
+.nrk-root .nkx-seg.nkx-fill { display: grid; grid-template-columns: repeat(5, 1fr); width: 100%; }
+.nrk-root .nkx-seg.nkx-wrap { margin-top: 2px; }
+.nrk-root .nkx-seg button { font-variant-numeric: tabular-nums; }
+.nrk-root .nkx-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.nrk-root .nkx-chip { min-height: 44px; padding: 0 14px; border-radius: 12px; border: 1px solid var(--sp-line); background: transparent; color: var(--sp-text);
+  font: inherit; font-size: 14px; font-weight: 600; text-align: left; transition: background-color 160ms ease, border-color 160ms ease, transform 140ms var(--nk-ease); }
+.nrk-root .nkx-chip:active { transform: scale(0.97); }
+.nrk-root .nkx-chip[aria-pressed="true"] { background: var(--sp-acc-soft); border-color: var(--sp-acc); }
+.nrk-root .nkx-toggle { width: 100%; min-height: 48px; display: flex; align-items: flex-start; gap: 12px; text-align: left; padding: 12px; margin: 14px 0 0;
+  border-radius: 12px; border: 1px solid var(--sp-line); background: transparent; color: var(--sp-text); font: inherit; font-size: 15px; line-height: 1.4;
+  transition: background-color 160ms ease, border-color 160ms ease, transform 140ms var(--nk-ease); }
+.nrk-root .nkx-toggle:active { transform: scale(0.985); }
+.nrk-root .nkx-toggle[aria-pressed="true"] { border-color: var(--sp-acc); background: var(--sp-acc-soft); }
+.nrk-root .nkx-box { flex: 0 0 auto; width: 20px; height: 20px; margin-top: 1px; border-radius: 6px; border: 2px solid var(--sp-mut); position: relative; }
+.nrk-root .nkx-toggle[aria-pressed="true"] .nkx-box { background: var(--sp-acc); border-color: var(--sp-acc); }
+.nrk-root .nkx-toggle[aria-pressed="true"] .nkx-box::after { content: ""; position: absolute; left: 5px; top: 1px; width: 5px; height: 10px;
+  border: solid var(--sp-on-pri); border-width: 0 2.5px 2.5px 0; transform: rotate(45deg); }
+.nrk-root .nkx-tg-b { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.nrk-root .nkx-stepper { display: flex; align-items: center; gap: 10px; margin: 14px 0 0; }
+.nrk-root .nkx-stepper .nkx-lbl { flex: 1 1 auto; }
+.nrk-root .nkx-num { min-width: 3em; text-align: center; font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.nrk-root .nkx-icon { width: 48px; height: 48px; flex: 0 0 auto; border-radius: 50%; border: 0; background: var(--sp-s2); color: var(--sp-text); font-size: 24px; line-height: 1;
+  display: inline-flex; align-items: center; justify-content: center; transition: transform 140ms var(--nk-ease), background-color 160ms ease; }
+.nrk-root .nkx-icon:active { transform: scale(0.94); }
+.nrk-root .nkx-icon[disabled] { color: var(--sp-mut); opacity: .5; }
+
+/* readouts */
+.nrk-root .nkx-readout { margin: 12px 0 0; }
+.nrk-root .nkx-big { display: flex; align-items: baseline; gap: 6px; margin: 0; font-variant-numeric: tabular-nums; }
+.nrk-root .nkx-big output { font-size: 40px; line-height: 1.05; font-weight: 750; letter-spacing: -0.02em; color: var(--sp-text); }
+.nrk-root .nkx-big span { font-size: 17px; font-weight: 650; color: var(--sp-mut); }
+.nrk-root .nkx-stage { font-size: 24px; font-weight: 750; letter-spacing: -0.01em; margin: 0 0 4px; }
+.nrk-root .nkx-shift.is-left, .nrk-root .nkx-shift.is-right { font-weight: 600; }
+.nrk-root .nkx-alert { margin: 10px 0 0; padding: 12px 14px; border-radius: 12px; background: var(--nkx-warn-bg); color: var(--sp-text); font-size: 14px; line-height: 1.5; font-weight: 600; }
+.nrk-root .nkx-result { border-radius: 14px; padding: 14px 16px 4px; margin: 12px 0 0; background: var(--sp-s1); }
+.nrk-root .nkx-result.is-ok { background: var(--nkx-ok-bg); }
+.nrk-root .nkx-result.is-bad { background: var(--nkx-bad-bg); }
+.nrk-root .nkx-rt { font-size: 16px; font-weight: 700; margin: 0 0 10px; line-height: 1.45; }
+.nrk-root .nkx-dose { font-size: 17px; font-weight: 700; margin: 4px 0; font-variant-numeric: tabular-nums; }
+.nrk-root .nkx-lesson { padding: 12px 14px; border-radius: 12px; background: var(--sp-s1); }
+.nrk-root .nkx-role { margin-top: 10px; }
+
+/* chart on the page (ODC): theme surface, channel colour from Narkē */
+.nrk-root .nkx-plate { position: relative; border-radius: 14px; background: var(--sp-s1); padding: 10px 10px 4px 10px; }
+.nrk-root .nkx-chart { display: block; width: 100%; height: auto; overflow: visible; }
+.nrk-root .nkx-grid { stroke: var(--sp-line); stroke-width: 1; }
+.nrk-root .nkx-dash { stroke-dasharray: 3 4; }
+.nrk-root .nkx-line { fill: none; stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.nrk-root .nkx-spo2 { stroke: var(--nk-spo2); }
+.nrk-root .nkx-ref { fill: none; stroke: var(--sp-mut); stroke-width: 1.5; stroke-dasharray: 5 5; vector-effect: non-scaling-stroke; }
+.nrk-root .nkx-cross { stroke: var(--sp-mut); stroke-width: 1; stroke-dasharray: 2 3; }
+.nrk-root .nkx-dot { fill: var(--nk-spo2); stroke: var(--sp-bg); stroke-width: 2.5; }
+.nrk-root .nkx-p50 { fill: var(--sp-text); }
+.nrk-root .nkx-yl { position: absolute; left: 10px; top: 10px; height: calc(100% * 170 / 208 - 4px); display: flex; flex-direction: column; justify-content: space-between; font-size: 12px; color: var(--sp-mut); pointer-events: none; }
+.nrk-root .nkx-axx { display: flex; justify-content: space-between; padding: 2px 0 2px 10%; font-size: 12px; color: var(--sp-mut); font-variant-numeric: tabular-nums; }
+
+/* monitor plate: black in both themes */
+.nrk-root .nkx-mon { background: var(--nkx-mon-bg); color: var(--nkx-mon-text); padding: 8px 10px 10px; }
+.nrk-root .nkx-figw, .nrk-root .nkx-fig { margin: 0; }
+.nrk-root .nkx-ch + .nkx-ch { margin-top: 4px; border-top: 1px solid var(--nkx-mon-grid); padding-top: 4px; }
+.nrk-root .nkx-ch-h { display: flex; justify-content: space-between; font-size: 12px; font-weight: 650; letter-spacing: .02em; font-variant-numeric: tabular-nums; }
+.nrk-root .nkx-ch-u { color: var(--nkx-mon-mut); font-weight: 500; }
+.nrk-root .nkx-c-paw .nkx-ch-h span:first-child { color: var(--nkx-mon-art); }
+.nrk-root .nkx-c-flow .nkx-ch-h span:first-child { color: var(--nkx-mon-ecg); }
+.nrk-root .nkx-c-vol .nkx-ch-h span:first-child { color: var(--nkx-mon-spo2); }
+.nrk-root .nkx-c-co2 .nkx-ch-h span:first-child { color: var(--nkx-mon-co2); }
+.nrk-root .nkx-wave { display: block; width: 100%; height: 64px; }
+.nrk-root .nkx-mz { stroke: var(--nkx-mon-grid); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.nrk-root .nkx-mon .nkx-art { stroke: var(--nkx-mon-art); }
+.nrk-root .nkx-mon .nkx-ecg { stroke: var(--nkx-mon-ecg); }
+.nrk-root .nkx-mon .nkx-spo2 { stroke: var(--nkx-mon-spo2); }
+.nrk-root .nkx-mon .nkx-co2 { stroke: var(--nkx-mon-co2); }
+.nrk-root .nkx-num6 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px 10px; margin: 10px 0 0; }
+.nrk-root .nkx-num6 > div { min-width: 0; }
+.nrk-root .nkx-num6 dt { font-size: 12px; color: var(--nkx-mon-mut); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.nrk-root .nkx-num6 dd { margin: 0; font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.nrk-root .nkx-mon-u { margin: 6px 0 0; font-size: 11px; color: var(--nkx-mon-mut); }
+
+/* MAC table */
+.nrk-root .nkx-agents { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 1px; border-radius: 14px; overflow: hidden; background: var(--sp-line); }
+.nrk-root .nkx-agents li { background: var(--sp-s1); padding: 12px 14px; }
+.nrk-root .nkx-agents .sp-small { margin: 6px 0 0; }
+.nrk-root .nkx-ag-h { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.nrk-root .nkx-ag-h b { font-size: 16px; }
+.nrk-root .nkx-ag-mac { display: flex; align-items: baseline; gap: 6px; font-variant-numeric: tabular-nums; }
+.nrk-root .nkx-ag-mac output { font-size: 20px; font-weight: 700; }
+.nrk-root .nkx-ag-bg { display: grid; grid-template-columns: 8.5em 1fr; align-items: center; gap: 10px; margin-top: 6px; }
+.nrk-root .nkx-meter { height: 6px; border-radius: 3px; background: var(--sp-s3); overflow: hidden; }
+.nrk-root .nkx-meter span { display: block; height: 100%; border-radius: 3px; background: var(--sp-acc); }
+.nrk-root .nkx-gauge { position: relative; height: 10px; margin: 10px 0 0; border-radius: 5px; background: var(--sp-s2); overflow: hidden; }
+.nrk-root .nkx-gauge-f { display: block; height: 100%; background: var(--sp-acc); border-radius: 5px; transition: width 200ms var(--nk-ease); }
+.nrk-root .nkx-gauge i { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--sp-text); }
+.nrk-root .nkx-gauge-t { position: relative; height: 18px; margin: 2px 0 6px; font-size: 12px; color: var(--sp-mut); font-variant-numeric: tabular-nums; }
+.nrk-root .nkx-gauge-t span { position: absolute; top: 0; }
+.nrk-root .nkx-gauge-t span:first-child { left: 0; }
+.nrk-root .nkx-gauge-t span:nth-child(2), .nrk-root .nkx-gauge-t span:nth-child(3) { transform: translateX(-50%); color: var(--sp-text); font-weight: 600; }
+.nrk-root .nkx-gauge-t span:last-child { right: 0; }
+
+/* TOF */
+.nrk-root .nkx-plate-s { padding: 8px; }
+.nrk-root .nkx-tw { fill: var(--nk-acc); }
+.nrk-root .nkx-tw0 { stroke: var(--sp-mut); stroke-width: 2; stroke-dasharray: 3 3; }
+.nrk-root .nkx-ptc { fill: var(--nk-spo2); }
+.nrk-root .nkx-depths { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin: 8px 0 0; padding: 0; }
+.nrk-root .nkx-depths li { font-size: 12px; line-height: 1.25; text-align: center; padding: 7px 4px; border-radius: 8px; background: var(--sp-s1); color: var(--sp-mut); }
+.nrk-root .nkx-depths li.is-on { background: var(--sp-pri); color: var(--sp-on-pri); font-weight: 700; }
+
+/* dermatomes */
+.nrk-root .nkx-bodyrow { display: grid; grid-template-columns: minmax(0, 150px) 1fr; gap: 14px; align-items: start; }
+.nrk-root .nkx-body { display: block; width: 100%; height: auto; }
+.nrk-root .nkx-skin { fill: var(--nkx-skin); }
+.nrk-root .nkx-outline { fill: none; stroke: var(--sp-mut); stroke-width: 1.2; stroke-linejoin: round; }
+.nrk-root .nkx-blk { fill: transparent; }
+.nrk-root .nkx-blk.is-on { fill: var(--nkx-block); }
+.nrk-root .nkx-pt { fill: var(--sp-text); }
+.nrk-root .nkx-lm { stroke: var(--sp-mut); stroke-width: 1; stroke-dasharray: 2 3; }
+.nrk-root .nkx-lm.is-on { stroke: var(--sp-text); }
+.nrk-root .nkx-lvl { stroke: var(--sp-acc); stroke-width: 3; stroke-linecap: round; }
+.nrk-root .nkx-symp { stroke: var(--sp-warn); stroke-width: 1.5; stroke-dasharray: 5 3; }
+.nrk-root .nkx-bodyside .nkx-readout { margin-top: 0; }
+.nrk-root .nkx-lms { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.nrk-root .nkx-lms li { display: grid; grid-template-columns: 2.6em 1fr; gap: 0 8px; font-size: 14px; color: var(--sp-mut); }
+.nrk-root .nkx-lms li .sp-small { grid-column: 2; }
+.nrk-root .nkx-lms li.is-on { color: var(--sp-text); }
+.nrk-root .nkx-lms b { font-variant-numeric: tabular-nums; }
+
+/* circle system */
+.nrk-root .nkx-figc { border-radius: 14px; background: var(--sp-s1); padding: 10px; margin-bottom: 10px; }
+.nrk-root .nkx-circ { display: block; width: 100%; height: auto; }
+.nrk-root .nkx-tube { fill: none; stroke: var(--sp-s3); stroke-width: 9; stroke-linejoin: round; stroke-linecap: round; transition: stroke 200ms ease; }
+.nrk-root .nkx-tube-e { stroke: color-mix(in srgb, var(--nk-co2) 45%, var(--sp-s3)); }
+.nrk-root .nkx-tube-i.has-co2 { stroke: color-mix(in srgb, var(--nk-co2) 45%, var(--sp-s3)); }
+.nrk-root .nkx-flowline { fill: none; stroke: var(--sp-text); stroke-width: 1.5; stroke-dasharray: 2 10; stroke-linecap: round; opacity: .7; }
+.nrk-root .nkx-part { fill: var(--sp-card); stroke: var(--sp-text); stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round; transition: stroke 160ms ease; }
+.nrk-root .nkx-part path { fill: none; }
+.nrk-root .nkx-part .nkx-lungs { fill: var(--sp-s2); }
+.nrk-root .nkx-gran { fill: var(--sp-s2); stroke: none; }
+.nrk-root .nkx-used { fill: var(--nkx-violet); stroke: none; }
+.nrk-root .nkx-hl, .nrk-root .nkx-part.nkx-hl { stroke: var(--sp-acc); stroke-width: 3; }
+.nrk-root .nkx-tube.nkx-hl { stroke: var(--sp-acc); }
+
+/* sources */
+.nrk-root .nkx-src { margin: 28px 0 0; }
+.nrk-root .nkx-src summary { min-height: 44px; display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 650; cursor: pointer; color: var(--sp-text); list-style: none; }
+.nrk-root .nkx-src summary::-webkit-details-marker { display: none; }
+.nrk-root .nkx-src summary::after { content: ""; width: 7px; height: 7px; border: solid var(--sp-mut); border-width: 0 2px 2px 0; transform: translateY(-2px) rotate(45deg); transition: transform 160ms var(--nk-ease); }
+.nrk-root .nkx-src[open] summary::after { transform: translateY(1px) rotate(225deg); }
+.nrk-root .nkx-src:not([open]) .nkx-src-b { display: none; }
+.nrk-root .nkx-notes, .nrk-root .nkx-refs { margin: 6px 0 10px; padding-left: 20px; font-size: 14px; line-height: 1.55; color: var(--sp-mut); display: grid; gap: 6px; }
+.nrk-root .nkx-refs a { color: var(--sp-link); text-decoration-color: var(--sp-link-line); text-underline-offset: 3px; overflow-wrap: anywhere; }
+.nrk-root .ex-wrap .nkx + .ex-end { margin-top: 8px; }
+
+/* touch and hover */
+.nrk-root .nkx-chip, .nrk-root .nkx-toggle, .nrk-root .nkx-icon, .nrk-root .nkx-link, .nrk-root .nkx-src summary { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+@media (hover: hover) and (pointer: fine) {
+  .nrk-root .nkx-icon:not([disabled]):hover { background: var(--sp-s3); }
+  .nrk-root .nkx-chip:hover, .nrk-root .nkx-toggle:hover { border-color: var(--sp-mut); }
+  .nrk-root .nkx-link:hover { text-decoration-color: currentColor; }
+}
+
+/* motion: the one moving thing is gas going round the circle, in its real direction; it stops under reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  .nrk-root .nkx-flowline { animation: nkx-flow 1.6s linear infinite; }
+  @keyframes nkx-flow { to { stroke-dashoffset: -24; } }
+  .nrk-root .nkx-result[role="status"] { animation: nkx-in 200ms var(--nk-ease) both; }
+  @keyframes nkx-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nrk-root .nkx-chip, .nrk-root .nkx-toggle, .nrk-root .nkx-icon, .nrk-root .nkx-gauge-f, .nrk-root .nkx-tube, .nrk-root .nkx-part { transition: none; }
+  .nrk-root .nkx-chip:active, .nrk-root .nkx-toggle:active, .nrk-root .nkx-icon:active { transform: none; }
+}
