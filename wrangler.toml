@@ -50,6 +50,14 @@ binding = "ICD_DB"
 database_name = "stewardmd-icd"
 database_id = "b38bab39-65aa-41d3-9200-033ab41da541"
 
+# D1 - PrepNucleus Arena (functions/api/prep/arena, and the prep-arena Worker binds the same DB). Schema:
+# prep-arena-worker/schema.sql. CREATE FIRST: npx wrangler d1 create prep-arena-db, then replace
+# REPLACE_AFTER_CREATE below (both blocks) and in prep-arena-worker/wrangler.toml with the returned id.
+[[d1_databases]]
+binding = "PREP_ARENA_DB"
+database_name = "prep-arena-db"
+database_id = "REPLACE_AFTER_CREATE"
+
 # R2 — FollowCare patient photos (wound/rash/etc). PHI-minimising: private bucket, 7-day lifecycle expiry on
 # the followcare/ prefix + view-once (FOLLOWCARE_PHOTO_VIEW_ONCE=1) + purge-on-erase. Code binding = FOLLOWCARE_R2.
 [[r2_buckets]]
@@ -283,6 +291,14 @@ database_id = "2ad07897-93b7-424c-b1fc-e3d9643937f5"
 binding = "ICD_DB"
 database_name = "stewardmd-icd"
 database_id = "b38bab39-65aa-41d3-9200-033ab41da541"
+
+# D1 - PrepNucleus Arena (functions/api/prep/arena, and the prep-arena Worker binds the same DB). Schema:
+# prep-arena-worker/schema.sql. CREATE FIRST: npx wrangler d1 create prep-arena-db, then replace
+# REPLACE_AFTER_CREATE below (both blocks) and in prep-arena-worker/wrangler.toml with the returned id.
+[[env.production.d1_databases]]
+binding = "PREP_ARENA_DB"
+database_name = "prep-arena-db"
+database_id = "REPLACE_AFTER_CREATE"
 
 [[env.production.r2_buckets]]
 binding = "FOLLOWCARE_R2"
