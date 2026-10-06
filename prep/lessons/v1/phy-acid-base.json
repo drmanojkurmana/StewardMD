@@ -1,0 +1,146 @@
+{
+ "v": 1,
+ "module": "phy-acid-base",
+ "subject": "physiology",
+ "title": "Acid-Base Balance and Compensation",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "The body maintains a strict blood pH range of 7.35 to 7.45. **Buffer systems** including proteins, phosphate, and bicarbonate act within seconds to minimise pH fluctuations. The **respiratory system** provides compensation within minutes by modulating gas exhalation. The **renal system** offers long-term regulation over hours or days by managing hydrogen ion excretion and bicarbonate conservation.",
+   "say": "The body maintains a strict blood pH range of seven point three five to seven point four five. Buffer systems including proteins, phosphate, and bicarbonate act within seconds to minimise pH fluctuations. The respiratory system provides compensation within minutes by modulating gas exhalation. The renal system offers long-term regulation over hours or days by managing hydrogen ion excretion and bicarbonate conservation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "System",
+     "Speed of Action",
+     "Primary Mechanism"
+    ],
+    "rows": [
+     [
+      "Chemical Buffers",
+      "Seconds",
+      "Ion binding"
+     ],
+     [
+      "Respiratory",
+      "Minutes",
+      "Gas exhalation"
+     ],
+     [
+      "Renal",
+      "Hours to days",
+      "Ion excretion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **bicarbonate-carbonic acid buffer** is the primary extracellular system, maintaining a 20:1 ratio in healthy blood. An enzyme within red blood cells facilitates the conversion of acid to gas. This system is highly efficient at neutralising metabolic wastes like lactic acid. The respiratory centre, sensitive to gas levels, modulates breathing to correct imbalances.",
+   "say": "The bicarbonate carbonic acid buffer is the primary extracellular system, maintaining a twenty to one ratio in healthy blood. An enzyme within red blood cells facilitates the conversion of acid to gas. This system is highly efficient at neutralising metabolic wastes like lactic acid. The respiratory centre, sensitive to gas levels, modulates breathing to correct imbalances.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "1",
+      "label": "Metabolic acid"
+     },
+     {
+      "id": "2",
+      "label": "Buffer capture"
+     },
+     {
+      "id": "3",
+      "label": "pH stability"
+     }
+    ],
+    "edges": [
+     [
+      "1",
+      "2",
+      "neutralises"
+     ],
+     [
+      "2",
+      "3",
+      "maintains"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Metabolic acidosis involves a **primary bicarbonate deficiency**, often caused by ketone bodies or lactic acid. The body attempts **respiratory compensation** by increasing breathing to exhale excess gas. Conversely, metabolic alkalosis arises from bicarbonate excess, such as through vomiting or diuretic use, prompting decreased respiration to conserve carbonic acid. These **compensatory mechanisms** help maintain blood pH within the narrow physiological range.",
+   "say": "Metabolic acidosis involves a primary bicarbonate deficiency, often caused by ketone bodies or lactic acid. The body attempts respiratory compensation by increasing breathing to exhale excess gas. Conversely, metabolic alkalosis arises from bicarbonate excess, such as through vomiting or diuretic use, prompting decreased respiration to conserve carbonic acid. These compensatory mechanisms help maintain blood pH within the narrow physiological range.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Metabolic Acidosis",
+     "points": [
+      "Primary bicarbonate deficiency",
+      "Caused by ketones or lactic acid",
+      "Increased respiratory rate"
+     ]
+    },
+    "right": {
+     "title": "Metabolic Alkalosis",
+     "points": [
+      "Primary bicarbonate excess",
+      "Caused by vomiting or diuretics",
+      "Decreased respiratory rate"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **renal tubule** regulates blood pH by exchanging sodium for hydrogen ions. This process conserves **bicarbonate** for return to the blood. When potassium levels are elevated, the kidneys prioritise potassium excretion over hydrogen ions, which impairs bicarbonate conservation and may cause **acidosis**. Additionally, the loss of chloride ions triggers increased bicarbonate reabsorption to maintain electrical neutrality within the body fluids.",
+   "say": "The renal tubule regulates blood pH by exchanging sodium for hydrogen ions. This process conserves bicarbonate for return to the blood. When potassium levels are elevated, the kidneys prioritise potassium excretion over hydrogen ions, which impairs bicarbonate conservation and may cause acidosis. Additionally, the loss of chloride ions triggers increased bicarbonate reabsorption to maintain electrical neutrality within the body fluids.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "1",
+      "label": "High Potassium"
+     },
+     {
+      "id": "2",
+      "label": "H+ Secretion Blocked"
+     },
+     {
+      "id": "3",
+      "label": "Reduced Bicarbonate Conservation"
+     }
+    ],
+    "edges": [
+     [
+      "1",
+      "2"
+     ],
+     [
+      "2",
+      "3"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "0fc3fb4e-5f77-4733-a8dc-750732f2bd47",
+  "3e4cc230-09db-4cb0-a213-bfd99dbaf6bf",
+  "9644a674-cfed-4c60-9af2-9341742e01dd"
+ ],
+ "src": [
+  "openstax-ap2e-26-4-26-5"
+ ],
+ "gen": "AI",
+ "run": "lessons-202610060812",
+ "model": "gemini-3.1-flash-lite",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true,
+  "redone": 4,
+  "dropped": 1,
+  "bank": "v1"
+ }
+}

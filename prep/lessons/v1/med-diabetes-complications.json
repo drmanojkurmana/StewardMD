@@ -1,0 +1,181 @@
+{
+ "v": 1,
+ "module": "med-diabetes-complications",
+ "subject": "medicine",
+ "title": "Management of Diabetic Ketoacidosis",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Diabetic ketoacidosis requires three criteria for diagnosis: hyperglycaemia or known diabetes, positive blood **beta-hydroxybutyrate** or urine ketones, and metabolic acidosis with low pH or **bicarbonate**. Clinical features include polyuria, vomiting, and Kussmaul breathing. Always investigate for common precipitants like infection, missed insulin, or recent SGLT2 inhibitor use.",
+   "say": "To diagnose diabetic ketoacidosis, look for hyperglycemia, elevated ketones, and metabolic acidosis. Patients often present with polyuria, vomiting, and deep breathing patterns. Always screen for triggers such as infections, insulin omission, or the use of SGLT2 inhibitors.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Severity",
+     "pH",
+     "Bicarbonate",
+     "BOHB"
+    ],
+    "rows": [
+     [
+      "Mild",
+      ">7.25",
+      "15-18",
+      "Not stated"
+     ],
+     [
+      "Moderate",
+      "7.0-7.25",
+      "10-15",
+      "Not stated"
+     ],
+     [
+      "Severe",
+      "<7.0",
+      "<10",
+      ">6.0"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Initial management focuses on fluid resuscitation and electrolyte correction. Before starting insulin, check **potassium** levels. If potassium is below 3.5 mmol/L, withhold insulin and provide replacement to prevent arrhythmias. If levels are between 3.5 and 5.0 mmol/L, add potassium to IV fluids while initiating insulin therapy.",
+   "say": "Fluid resuscitation is essential. Crucially, check potassium before starting insulin. If potassium is too low, you must replace it first to avoid heart rhythm issues. If it is within a safe range, you can add it to the fluids while starting insulin.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "1",
+      "label": "Potassium < 3.5"
+     },
+     {
+      "id": "2",
+      "label": "Hold insulin"
+     },
+     {
+      "id": "3",
+      "label": "Replace K"
+     },
+     {
+      "id": "4",
+      "label": "Potassium 3.5-5.0"
+     },
+     {
+      "id": "5",
+      "label": "Start Insulin"
+     },
+     {
+      "id": "6",
+      "label": "Add K to fluids"
+     }
+    ],
+    "edges": [
+     [
+      "1",
+      "2"
+     ],
+     [
+      "2",
+      "3"
+     ],
+     [
+      "4",
+      "5"
+     ],
+     [
+      "5",
+      "6"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Administer **fixed-rate IV insulin** at 0.1 units/kg/h. Once blood glucose drops below 250 mg/dL, introduce dextrose alongside saline to prevent hypoglycaemia. Continue the insulin infusion until **ketoacidosis resolution**, marked by ketone levels below 0.6 mmol/L and pH normalization. Avoid using the **anion gap** to judge resolution as it may be misleading due to hyperchloraemic acidosis.",
+   "say": "Administer fixed rate intravenous insulin at zero point one units per kilogram per hour. Once blood glucose drops below two hundred and fifty milligrams per decilitre, introduce dextrose alongside saline to prevent hypoglycaemia. Continue the insulin infusion until ketoacidosis resolution, marked by ketone levels below zero point six millimoles per litre and pH normalisation. Avoid using the anion gap to judge resolution as it may be misleading due to hyperchloraemic acidosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "1",
+      "label": "Start IV Insulin"
+     },
+     {
+      "id": "2",
+      "label": "Glucose < 250 mg/dL"
+     },
+     {
+      "id": "3",
+      "label": "Add Dextrose"
+     },
+     {
+      "id": "4",
+      "label": "Resolution"
+     }
+    ],
+    "edges": [
+     [
+      "1",
+      "2"
+     ],
+     [
+      "2",
+      "3"
+     ],
+     [
+      "3",
+      "4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Transitioning to subcutaneous insulin requires administering basal insulin one to two hours before stopping the IV infusion. This prevents **rebound ketoacidosis**. For insulin-naive patients, calculate the total daily dose based on body weight, typically splitting it into basal and mealtime components. Never stop basal insulin during this transition.",
+   "say": "When moving to subcutaneous insulin, give the basal dose before you turn off the IV insulin. This step is vital to stop the ketoacidosis from returning. For new patients, calculate the dose based on their weight and divide it into basal and bolus shots.",
+   "vis": null
+  },
+  {
+   "tx": "Patients on **SGLT2 inhibitors** may present with **euglycaemic DKA**, where blood glucose remains near normal. This condition is a significant diagnostic pitfall. Clinicians must screen for ketones in any unwell patient taking these drugs. Management requires concurrent administration of **dextrose** and insulin to address the underlying acidosis while preventing hypoglycaemia. Always maintain a high index of suspicion for this presentation in pregnancy or cases of poor nutritional intake.",
+   "say": "Patients on SGLT2 inhibitors may present with euglycaemic DKA, where blood glucose remains near normal. This condition is a significant diagnostic pitfall. Clinicians must screen for ketones in any unwell patient taking these drugs. Management requires concurrent administration of dextrose and insulin to address the underlying acidosis while preventing hypoglycaemia. Always maintain a high index of suspicion for this presentation in pregnancy or cases of poor nutritional intake.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Standard DKA",
+     "points": [
+      "High blood glucose",
+      "Classic symptoms",
+      "Easier to detect"
+     ]
+    },
+    "right": {
+     "title": "Euglycaemic DKA",
+     "points": [
+      "Normal blood glucose",
+      "SGLT2 inhibitor use",
+      "High risk of delay"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "7e3c4fa8-e996-4f33-9e02-c505160fd085",
+  "609e514e-cfae-4b18-b4a2-b44e8807a427",
+  "eb7bcee3-67a0-4298-a72b-c8b5a9278935"
+ ],
+ "src": [
+  "kb-diabetic-ketoacidosis"
+ ],
+ "gen": "AI",
+ "run": "lessons-202610060812",
+ "model": "gemini-3.1-flash-lite",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true,
+  "redone": 2,
+  "dropped": 0,
+  "bank": "v1"
+ }
+}

@@ -1,0 +1,187 @@
+{
+ "v": 1,
+ "module": "phm-anticoagulants",
+ "subject": "pharmacology",
+ "title": "Clinical Management of Anticoagulants and Their Reversal",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "For **major bleeding** with haemodynamic instability or critical site involvement, stop the anticoagulant immediately. Activate the **major haemorrhage protocol**, secure access with large-bore cannulae, and perform cross-matching. Early source control via compression, endoscopy, or surgery is essential. Do not wait for coagulation results when the clinical history is clear.",
+   "say": "For major bleeding with haemodynamic instability or critical site involvement, stop the anticoagulant immediately. Activate the major haemorrhage protocol, secure access with large-bore cannulae, and perform cross-matching. Early source control via compression, endoscopy, or surgery is essential. Do not wait for coagulation results when the clinical history is clear.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "1",
+      "label": "Assess Bleed"
+     },
+     {
+      "id": "2",
+      "label": "Stop Agent"
+     },
+     {
+      "id": "3",
+      "label": "Source Control"
+     }
+    ],
+    "edges": [
+     [
+      "1",
+      "2"
+     ],
+     [
+      "2",
+      "3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Major warfarin-associated bleeding requires **4-factor PCC** and **vitamin K** 5 to 10 mg IV. PCC dosing is based on the INR: 25 units/kg for INR 2 to under 4, 35 units/kg for 4 to 6, and 50 units/kg for INR above 6. Always administer vitamin K because the PCC effect is transient.",
+   "say": "Major warfarin-associated bleeding requires four factor PCC and vitamin K five to ten milligrams intravenously. PCC dosing is based on the INR: twenty five units per kilogram for INR two to under four, thirty five units per kilogram for four to six, and fifty units per kilogram for INR above six. Always administer vitamin K because the PCC effect is transient.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "INR Range",
+     "PCC Dose (Units/kg)",
+     "Max Dose (Units)"
+    ],
+    "rows": [
+     [
+      "2 to <4",
+      "25",
+      "2500"
+     ],
+     [
+      "4 to 6",
+      "35",
+      "3500"
+     ],
+     [
+      ">6",
+      "50",
+      "5000"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For **dabigatran**-related major bleeding, administer **idarucizumab** 5 g IV. If unavailable, PCC or activated PCC 50 units/kg is an alternative. For apixaban, rivaroxaban, or edoxaban, use 4-factor PCC 50 units/kg. Reversal is rarely needed for minor bleeding, where supportive care is sufficient.",
+   "say": "For dabigatran-related major bleeding, administer idarucizumab five grams intravenously. If unavailable, PCC or activated PCC fifty units per kilogram is an alternative. For apixaban, rivaroxaban, or edoxaban, use four-factor PCC fifty units per kilogram. Reversal is rarely needed for minor bleeding, where supportive care is sufficient.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dabigatran Reversal",
+     "points": [
+      "Idarucizumab 5 g IV",
+      "PCC 50 units/kg if unavailable",
+      "Haemodialysis may assist"
+     ]
+    },
+    "right": {
+     "title": "Factor Xa Inhibitor Reversal",
+     "points": [
+      "4-factor PCC 50 units/kg",
+      "Andexanet not available in India",
+      "Supportive care for minor bleeds"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Use **protamine** to reverse unfractionated heparin (1 mg per 100 units) and enoxaparin. For enoxaparin, use 1 mg per 1 mg if given within 8 hours, or 0.5 mg per 1 mg for doses 8 to 12 hours prior. Administer slowly over 10 minutes to avoid hypotension, bradycardia, or anaphylaxis.",
+   "say": "Use protamine to reverse unfractionated heparin and enoxaparin. For enoxaparin, use one milligram per one milligram if given within eight hours, or zero point five milligrams per one milligram for doses eight to twelve hours prior. Administer slowly over ten minutes to avoid hypotension, bradycardia, or anaphylaxis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anticoagulant",
+     "Protamine Dose",
+     "Max Dose"
+    ],
+    "rows": [
+     [
+      "UFH",
+      "1 mg / 100 units",
+      "50 mg"
+     ],
+     [
+      "Enoxaparin <8h",
+      "1 mg / 1 mg",
+      "50 mg"
+     ],
+     [
+      "Enoxaparin 8-12h",
+      "0.5 mg / 1 mg",
+      "50 mg"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Suspect **HIT** if platelets fall by over 50% within 5 to 10 days of starting heparin. Use the 4Ts score to estimate probability. In intermediate or high-risk cases, stop all heparin sources and start non-heparin anticoagulants like **argatroban** or bivalirudin. Avoid warfarin during the acute phase to prevent venous limb gangrene.",
+   "say": "Suspect HIT if platelets fall by over fifty percent within five to ten days of starting heparin. Use the four Ts score to estimate probability. In intermediate or high-risk cases, stop all heparin sources and start non-heparin anticoagulants like argatroban or bivalirudin. Avoid warfarin during the acute phase to prevent venous limb gangrene.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "1",
+      "label": "Suspect HIT"
+     },
+     {
+      "id": "2",
+      "label": "4Ts Score"
+     },
+     {
+      "id": "3",
+      "label": "Stop Heparin"
+     },
+     {
+      "id": "4",
+      "label": "Non-heparin Agent"
+     }
+    ],
+    "edges": [
+     [
+      "1",
+      "2"
+     ],
+     [
+      "2",
+      "3"
+     ],
+     [
+      "3",
+      "4"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "2d5804a9-27c4-4e47-9352-6ca381883d8f",
+  "d6818236-8ede-443f-af4a-9acb35b9c0c4",
+  "1751df60-3208-4345-98e4-012336e404c0"
+ ],
+ "src": [
+  "kb-clinical-protocols-anticoagulant-associated-bleeding",
+  "kb-clinical-protocols-heparin-induced-thrombocytopenia",
+  "kb-clinical-protocols-perioperative-anticoagulation-management",
+  "kb-clinical-protocols-intracerebral-haemorrhage",
+  "kb-clinical-protocols-antithrombotics-gi-bleeding-endoscopy-india",
+  "kb-clinical-protocols-major-haemorrhage-trauma",
+  "kb-clinical-protocols-perioperative-vte-prophylaxis"
+ ],
+ "gen": "AI",
+ "run": "lessons-202610060812",
+ "model": "gemini-3.1-flash-lite",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true,
+  "redone": 0,
+  "dropped": 0,
+  "bank": "v1"
+ }
+}

@@ -1,0 +1,152 @@
+{
+ "v": 1,
+ "module": "med-heart-failure",
+ "subject": "medicine",
+ "title": "Management of Chronic Heart Failure with Reduced Ejection Fraction",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Heart failure is classified by **LVEF** on echocardiography. HFrEF is defined as an LVEF of 40% or below. HFmrEF ranges from 41% to 49%, while HFpEF is 50% or above. The foundational treatment for HFrEF is the early initiation of the four pillars, which are vital to reduce mortality and hospitalisation.",
+   "say": "Heart failure is categorised by the left ventricular ejection fraction measured on an echo. HFrEF is forty percent or less. HFmrEF is forty-one to forty-nine percent. HFpEF is fifty percent or more. The core treatment for HFrEF involves the early start of the four pillars of therapy to improve survival and reduce hospital admissions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Classification",
+     "LVEF Threshold",
+     "Clinical Focus"
+    ],
+    "rows": [
+     [
+      "HFrEF",
+      "<= 40%",
+      "Four pillars"
+     ],
+     [
+      "HFmrEF",
+      "41-49%",
+      "Symptom control"
+     ],
+     [
+      "HFpEF",
+      ">= 50%",
+      "Comorbidities"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Management of **HFrEF** relies on four essential drug groups: **ARNI** (or ACEI/ARB), a beta-blocker, an **MRA**, and an **SGLT2 inhibitor**. Begin these therapies at minimal doses promptly, ideally before leaving the hospital. Adjust dosages every one to two weeks, aiming for target or peak tolerated levels within a six-week window.",
+   "say": "Management of HFrEF relies on four essential drug groups: ARNI or ACE inhibitor or ARB, a beta-blocker, an MRA, and an SGLT2 inhibitor. Begin these therapies at minimal doses promptly, ideally before leaving the hospital. Adjust dosages every one to two weeks, aiming for target or peak tolerated levels within a six-week window.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "1",
+      "label": "Start 4 Pillars"
+     },
+     {
+      "id": "2",
+      "label": "Titrate Doses"
+     },
+     {
+      "id": "3",
+      "label": "Reach Target"
+     }
+    ],
+    "edges": [
+     [
+      "1",
+      "2",
+      "Every 1-2 weeks"
+     ],
+     [
+      "2",
+      "3",
+      "Within 6 weeks"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Diuretics are used only for congestion and do not improve survival. In acute decompensation, patients often require twice their usual oral dose as an IV bolus or infusion. **Diuretic resistance** is suggested if urine sodium does not rise above 90 mEq/L despite high daily doses of loop diuretics for 3 days.",
+   "say": "Diuretics are strictly for managing congestion and do not change survival rates. During acute episodes, double the oral dose for intravenous administration. If the urine sodium remains low despite high doses of furosemide, it indicates diuretic resistance, requiring alternative strategies like adding thiazides or acetazolamide.",
+   "vis": null
+  },
+  {
+   "tx": "Monitoring renal function and potassium is essential. A creatinine increase of up to 50% from baseline is acceptable when initiating or titrating **RAAS blockers**. If potassium levels exceed 5.5 mEq/L, reduce or stop the **MRA** and review therapy. For hypotension, prioritize withdrawing non-essential agents like **NSAIDs** or extra vasodilators rather than reducing foundational **heart failure** medications.",
+   "say": "Monitoring renal function and potassium is essential. A creatinine increase of up to 50 percent from baseline is acceptable when initiating or titrating RAAS blockers. If potassium levels exceed 5.5 milliequivalents per litre, reduce or stop the MRA and review therapy. For hypotension, prioritize withdrawing non-essential agents like NSAIDs or extra vasodilators rather than reducing foundational heart failure medications.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Parameter",
+     "Threshold",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Creatinine",
+      "Up to 50% rise",
+      "Continue therapy"
+     ],
+     [
+      "Potassium",
+      "> 5.5 mEq/L",
+      "Adjust MRA"
+     ],
+     [
+      "Hypotension",
+      "Symptomatic",
+      "Stop non-essential"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Additional therapies are reserved for specific clinical indications. **Ivabradine** is indicated for patients in sinus rhythm with LVEF below 35% who remain symptomatic despite maximally tolerated beta-blockers. **Digoxin** can be used to reduce hospitalisations in symptomatic patients, while iron deficiency should be treated with IV ferric carboxymaltose.",
+   "say": "Specific cases require extra interventions. Ivabradine is used for patients with a low ejection fraction in sinus rhythm who still have symptoms despite beta blockers. Digoxin helps reduce hospital visits, and iron deficiency is corrected with intravenous ferric carboxymaltose.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ivabradine Criteria",
+     "points": [
+      "Sinus rhythm",
+      "LVEF <= 35%",
+      "HR >= 70/min"
+     ]
+    },
+    "right": {
+     "title": "Digoxin Criteria",
+     "points": [
+      "Symptomatic HFrEF",
+      "Sinus rhythm or AF",
+      "Target level 0.5-0.9 ng/mL"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "595e8d34-2e20-4ae9-bfc3-601842f87031",
+  "19ad9221-dab8-4f5e-921c-08de1358b3ad",
+  "1f39077f-701f-44db-828e-c52c0aa85ae9"
+ ],
+ "src": [
+  "kb-clinical-protocols-chronic-heart-failure-hfref-india",
+  "kb-clinical-protocols-chronic-heart-failure-hfref",
+  "kb-reference-heart-failure-management",
+  "kb-reference-heart-failure-pathophysiology-and-diagnosi"
+ ],
+ "gen": "AI",
+ "run": "lessons-202610060812",
+ "model": "gemini-3.1-flash-lite",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true,
+  "redone": 2,
+  "dropped": 0,
+  "bank": "v1"
+ }
+}

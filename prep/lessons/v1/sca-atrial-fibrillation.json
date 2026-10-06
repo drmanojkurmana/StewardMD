@@ -1,0 +1,127 @@
+{
+ "v": 1,
+ "module": "sca-atrial-fibrillation",
+ "subject": "ss-cardiology",
+ "title": "Management of Atrial Fibrillation",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Atrial fibrillation is identified on ECG as an **irregularly irregular** rhythm lacking distinct P waves. It is classified based on duration as first-diagnosed, paroxysmal, persistent, or permanent. Clinicians must actively look for reversible triggers such as **thyrotoxicosis**, electrolyte imbalances, or rheumatic mitral valve disease, which is particularly relevant in India.",
+   "say": "Atrial fibrillation appears on an ECG as an irregularly irregular rhythm without clear P waves. We classify it by duration into first diagnosed, paroxysmal, persistent, or permanent. Always screen for triggers like thyroid issues, electrolyte disturbances, or rheumatic heart disease.",
+   "vis": null
+  },
+  {
+   "tx": "For haemodynamically **unstable** patients, perform urgent synchronised DC cardioversion under sedation. In stable patients, the immediate goal is heart rate control, targeting a resting rate below 110 beats per minute. Select agents based on cardiac function; use beta-blockers, diltiazem, or verapamil when the LVEF is above 40 percent.",
+   "say": "If a patient is haemodynamically unstable, perform urgent synchronised DC cardioversion. For stable patients, prioritise heart rate control, aiming for a resting heart rate under 110 beats per minute. If the ejection fraction is above 40 percent, beta-blockers, diltiazem, or verapamil are appropriate choices.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical State",
+     "Action",
+     "Rate Control",
+     "Avoid"
+    ],
+    "rows": [
+     [
+      "Unstable",
+      "DC Cardioversion",
+      "Amiodarone",
+      "None"
+     ],
+     [
+      "Stable LVEF >40",
+      "Rate Control",
+      "BB, Dilt, Verap",
+      "None"
+     ],
+     [
+      "Stable LVEF <=40",
+      "Rate Control",
+      "BB, Digoxin",
+      "Dilt, Verap"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Never cardiovert if the arrhythmia duration exceeds 24 hours or is unknown, unless the patient has received three weeks of effective anticoagulation or a transoesophageal echocardiogram has excluded a **left atrial thrombus**. This safety protocol prevents embolic events following the restoration of sinus rhythm.",
+   "say": "Do not attempt cardioversion if the rhythm has lasted longer than 24 hours or if the start time is unknown. You must first ensure three weeks of therapeutic anticoagulation or perform a transoesophageal echocardiogram to rule out a clot in the left atrium to prevent strokes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "1",
+      "label": "AF >24h or Unknown"
+     },
+     {
+      "id": "2",
+      "label": "Anticoagulate 3w or TOE"
+     },
+     {
+      "id": "3",
+      "label": "Cardioversion"
+     }
+    ],
+    "edges": [
+     [
+      "1",
+      "2"
+     ],
+     [
+      "2",
+      "3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Stroke risk is assessed using the **CHA2DS2-VA** score. Anticoagulation is recommended for scores of two or higher. DOACs are generally preferred over VKAs, but VKAs remain mandatory for patients with mechanical heart valves or moderate to severe rheumatic mitral stenosis. Antiplatelets should not be used as a substitute for anticoagulants.",
+   "say": "Use the CHA2DS2-VA score to determine stroke risk. If the score is two or more, oral anticoagulation is recommended. Choose DOACs over VKAs, but remember that VKAs are strictly required for mechanical valves or rheumatic mitral stenosis. Never use aspirin alone instead of proper anticoagulation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "DOACs",
+     "points": [
+      "Preferred for most",
+      "Do not use in valves",
+      "Avoid in severe CKD"
+     ]
+    },
+    "right": {
+     "title": "VKAs",
+     "points": [
+      "Mechanical valves",
+      "Rheumatic MS",
+      "Target INR 2.0-3.0"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Do not administer AV nodal blockers like diltiazem, verapamil, or digoxin to patients with pre-excited AF, such as those with **Wolff-Parkinson-White syndrome**. These agents can accelerate conduction through the accessory pathway, potentially leading to ventricular fibrillation. If the patient is unstable, perform DC cardioversion immediately.",
+   "say": "Avoid AV nodal blockers like diltiazem, verapamil, or digoxin in patients with pre-excited AF, such as those with Wolff-Parkinson-White syndrome. These medications can worsen the heart rate by speeding up the accessory pathway. If the patient is unstable, proceed directly to DC cardioversion.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_b000bc9d168d",
+  "q_3fab5a98e1c7",
+  "q_b4802e8df70d"
+ ],
+ "src": [
+  "kb-atrial-fibrillation"
+ ],
+ "gen": "AI",
+ "run": "lessons-202610060812",
+ "model": "gemini-3.1-flash-lite",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true,
+  "redone": 0,
+  "dropped": 0,
+  "bank": "v2"
+ }
+}

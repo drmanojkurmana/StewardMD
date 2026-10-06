@@ -221,3 +221,11 @@ test("teachStep: the step is the grounding and the answer is checked like the qu
   assert.equal((await T.teachStep(st, "x", {})).reason, "no-model");
   assert.equal((await T.teachStep(st, "x", { generate: () => ({ error: "x" }) })).reason, "model-error");
 });
+
+test("onTopic: off-topic grounding is refused (phy-cardiac-cycle vs heart failure protocols)", async () => {
+  const L = await import("../tools/prep-lessons.mjs");
+  const hf = "Heart failure with reduced ejection fraction. Beta-blocker, ARNI, MRA, SGLT2 inhibitor. Heart failure admissions.";
+  assert.equal(L.onTopic(hf, { title: "Cardiac cycle" }), false);
+  assert.equal(L.onTopic("The cardiac cycle has systole and diastole. Each cardiac cycle lasts 0.8 s at 75 per minute.", { title: "Cardiac cycle" }), true);
+  assert.equal(L.onTopic("Anticoagulant reversal. Each anticoagulant has an antidote.", { title: "Anticoagulants" }), true);
+});

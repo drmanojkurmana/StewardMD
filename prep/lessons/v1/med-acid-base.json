@@ -1,0 +1,164 @@
+{
+ "v": 1,
+ "module": "med-acid-base",
+ "subject": "medicine",
+ "title": "Approach to Metabolic Acidosis and Renal Tubular Acidosis",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Metabolic acidosis is classified by the **anion gap**. A normal anion gap, or hyperchloraemic acidosis, often points to renal tubular disorders or gastrointestinal losses. In contrast, a high anion gap acidosis is typical of advanced renal failure, lactic acidosis, or ketoacidosis. Distinguishing between these is essential for accurate diagnosis.",
+   "say": "Metabolic acidosis is classified by the anion gap. A normal anion gap, or hyperchloraemic acidosis, often points to renal tubular disorders or gastrointestinal losses. In contrast, a high anion gap acidosis is typical of advanced renal failure, lactic acidosis, or ketoacidosis. Distinguishing between these is essential for accurate diagnosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal Anion Gap",
+     "points": [
+      "Renal tubular acidosis",
+      "Diarrhoea",
+      "Ureteral diversion",
+      "Saline infusion"
+     ]
+    },
+    "right": {
+     "title": "High Anion Gap",
+     "points": [
+      "Renal failure",
+      "Lactic acidosis",
+      "Diabetic ketoacidosis",
+      "Toxic ingestion"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **urine anion gap** serves as a vital bedside tool. A positive value during acidosis suggests impaired renal ammonium excretion, characteristic of renal tubular acidosis, whereas a negative value points towards gastrointestinal bicarbonate loss. This simple calculation helps clinicians localise the site of the acid-base disturbance.",
+   "say": "The urine anion gap serves as a vital bedside tool. A positive value during acidosis suggests impaired renal ammonium excretion, characteristic of renal tubular acidosis, whereas a negative value points towards gastrointestinal bicarbonate loss. This simple calculation helps clinicians localise the site of the acid-base disturbance.",
+   "vis": null
+  },
+  {
+   "tx": "Renal tubular acidosis subtypes are defined by site and electrolyte patterns. **Type 1 (distal)** RTA results from failure to secrete hydrogen ions, leading to alkaline urine and hypokalaemia. **Type 2 (proximal)** RTA involves impaired bicarbonate reabsorption, often associated with Fanconi syndrome. **Type 4** RTA is linked to aldosterone deficiency and presents with hyperkalaemia.",
+   "say": "Renal tubular acidosis subtypes are defined by site and electrolyte patterns. Type 1 distal RTA results from failure to secrete hydrogen ions, leading to alkaline urine and hypokalaemia. Type 2 proximal RTA involves impaired bicarbonate reabsorption, often associated with Fanconi syndrome. Type 4 RTA is linked to aldosterone deficiency and presents with hyperkalaemia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Site",
+     "Potassium",
+     "Urine pH"
+    ],
+    "rows": [
+     [
+      "Type 1",
+      "Distal",
+      "Low",
+      ">5.5"
+     ],
+     [
+      "Type 2",
+      "Proximal",
+      "Low",
+      "<5.5"
+     ],
+     [
+      "Type 4",
+      "Aldosterone",
+      "High",
+      "<5.5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Management of **renal tubular acidosis** centers on alkali replacement. Type 1 requires modest alkali and potassium. Type 2 necessitates larger alkali loads and potassium, as bicarbonate therapy can exacerbate **kaliuresis**. Type 4 management involves dietary potassium restriction and addressing **hypoaldosteronism**, often by withdrawing potassium-retaining drugs. Monitoring electrolytes and acid-base status is essential to prevent complications like **nephrocalcinosis** and stones.",
+   "say": "Management of renal tubular acidosis centers on alkali replacement. Type 1 requires modest alkali and potassium. Type 2 necessitates larger alkali loads and potassium, as bicarbonate therapy can exacerbate kaliuresis. Type 4 management involves dietary potassium restriction and addressing hypoaldosteronism, often by withdrawing potassium-retaining drugs. Monitoring electrolytes and acid-base status is essential to prevent complications like nephrocalcinosis and stones.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "RTA Type",
+     "Primary Defect",
+     "Potassium Status",
+     "Management Focus"
+    ],
+    "rows": [
+     [
+      "Type 1",
+      "Distal H+ secretion",
+      "Hypokalaemia",
+      "Alkali and potassium"
+     ],
+     [
+      "Type 2",
+      "Proximal HCO3- reabsorption",
+      "Hypokalaemia",
+      "Large alkali and potassium"
+     ],
+     [
+      "Type 4",
+      "Aldosterone deficiency",
+      "Hyperkalaemia",
+      "Restrict K+ and stop drugs"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In diabetic patients, ketoacidosis (DKA) causes a high anion gap acidosis. Diagnosis relies on **beta-hydroxybutyrate** measurements, as urine dipsticks may underestimate severity. Treatment requires aggressive fluid resuscitation and fixed-rate insulin infusion. Clinicians must monitor potassium levels closely, as insulin therapy drives intracellular potassium shifts, risking severe hypokalaemia.",
+   "say": "In diabetic patients, ketoacidosis causes a high anion gap acidosis. Diagnosis relies on beta-hydroxybutyrate measurements, as urine dipsticks may underestimate severity. Treatment requires aggressive fluid resuscitation and fixed-rate insulin infusion. Clinicians must monitor potassium levels closely, as insulin therapy drives intracellular potassium shifts, risking severe hypokalaemia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "1",
+      "label": "Fluid Resuscitation"
+     },
+     {
+      "id": "2",
+      "label": "Potassium Check"
+     },
+     {
+      "id": "3",
+      "label": "Insulin Infusion"
+     }
+    ],
+    "edges": [
+     [
+      "1",
+      "2"
+     ],
+     [
+      "2",
+      "3"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "53d85179-b240-4de8-aa62-f211cc59bc11",
+  "d812ec6a-5fac-4c4c-b667-edf727f22410",
+  "fdb51ec0-bf33-484f-9a29-c8648e9c14ba"
+ ],
+ "src": [
+  "kb-reference-renal-tubular-acidosis",
+  "kb-diseases-dka",
+  "kb-reference-diabetes-mellitus-management-and-therapies",
+  "kb-diseases-salicylate-tox",
+  "kb-reference-salicylate-poisoning",
+  "kb-clinical-protocols-diabetic-ketoacidosis",
+  "kb-diseases-hyperkalemia",
+  "kb-reference-propofol-infusion-syndrome"
+ ],
+ "gen": "AI",
+ "run": "lessons-202610060812",
+ "model": "gemini-3.1-flash-lite",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true,
+  "redone": 1,
+  "dropped": 0,
+  "bank": "v1"
+ }
+}

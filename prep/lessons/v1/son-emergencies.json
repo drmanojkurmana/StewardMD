@@ -1,0 +1,174 @@
+{
+ "v": 1,
+ "module": "son-emergencies",
+ "subject": "ss-medical-oncology",
+ "title": "Management of Oncologic Emergencies",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Tumour lysis syndrome requires rapid identification using **Cairo-Bishop** criteria. It involves hyperkalaemia, hyperphosphataemia, hyperuricaemia, and hypocalcaemia. High-risk patients, such as those with bulky high-grade lymphomas, require aggressive hydration and prophylactic **rasburicase**. Always screen for **G6PD deficiency** before administration, as it is a strict contraindication due to haemolysis risk.",
+   "say": "Tumour lysis syndrome is identified using Cairo-Bishop criteria which includes high uric acid, potassium, and phosphate levels alongside low calcium. High-risk cases, especially those with bulky tumours, need aggressive fluids and rasburicase. You must always screen for G6PD deficiency before using rasburicase because it can cause severe haemolysis in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Parameter",
+     "Threshold",
+     "Action",
+     "Monitoring"
+    ],
+    "rows": [
+     [
+      "Uric Acid",
+      ">8 mg/dL",
+      "Rasburicase",
+      "6-hourly"
+     ],
+     [
+      "Potassium",
+      ">6.0 mmol/L",
+      "Insulin/Glucose",
+      "6-hourly"
+     ],
+     [
+      "Phosphate",
+      ">4.5 mg/dL",
+      "Hydration",
+      "6-hourly"
+     ],
+     [
+      "Calcium",
+      "<7 mg/dL",
+      "Treat symptoms",
+      "6-hourly"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hypercalcaemia of malignancy is a frequent inpatient emergency. Initial management centres on volume resuscitation with **IV saline**. For definitive therapy, **zoledronic acid** or denosumab are preferred. Calcitonin is reserved for severe cases but is limited by rapid tachyphylaxis. Always measure **PTH** levels to distinguish between PTH-mediated and PTH-independent causes.",
+   "say": "Hypercalcaemia of malignancy is a frequent inpatient emergency. Initial management centres on volume resuscitation with IV saline. For definitive therapy, zoledronic acid or denosumab are preferred. Calcitonin is reserved for severe cases but is limited by rapid tachyphylaxis. Always measure PTH levels to distinguish between PTH-mediated and PTH-independent causes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Intervention",
+     "Purpose",
+     "Timing",
+     "Notes"
+    ],
+    "rows": [
+     [
+      "IV Saline",
+      "Rehydration",
+      "Immediate",
+      "Monitor output"
+     ],
+     [
+      "Zoledronic Acid",
+      "Antiresorptive",
+      "2 to 4 days",
+      "Adjust for GFR"
+     ],
+     [
+      "Denosumab",
+      "Antiresorptive",
+      "Monthly",
+      "Not renally cleared"
+     ],
+     [
+      "Calcitonin",
+      "Rapid lowering",
+      "48 to 72 hours",
+      "Tachyphylaxis risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Malignant spinal cord compression is a surgical and oncological emergency. Upon suspicion, administer **dexamethasone** 16 mg immediately to reduce oedema and provide neurological protection. Definitive diagnosis requires whole-spine MRI performed within 24 hours. Delaying imaging while waiting for motor deficits or sphincter loss is a major clinical pitfall.",
+   "say": "Malignant spinal cord compression is a medical emergency. Once you suspect it, give 16 milligrams of dexamethasone right away to protect the nerves. You must arrange for a whole-spine MRI within 24 hours. Never wait for the patient to develop weakness or bowel problems before ordering the scan.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "1",
+      "label": "Suspect MSCC"
+     },
+     {
+      "id": "2",
+      "label": "Dexamethasone 16mg"
+     },
+     {
+      "id": "3",
+      "label": "Whole-spine MRI"
+     }
+    ],
+    "edges": [
+     [
+      "1",
+      "2"
+     ],
+     [
+      "2",
+      "3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Avoid common errors in oncologic emergencies. Do not use **loop diuretics** for hypercalcaemia until the patient is fully rehydrated. In tumour lysis syndrome, never **alkalinise urine** as it promotes calcium phosphate precipitation. Finally, do not start **steroids** for suspected lymphoma before biopsy unless neurological symptoms of **spinal cord compression** are present.",
+   "say": "Avoid common errors in oncologic emergencies. Do not use loop diuretics for hypercalcaemia until the patient is fully rehydrated. In tumour lysis syndrome, never alkalinise urine as it promotes calcium phosphate precipitation. Finally, do not start steroids for suspected lymphoma before biopsy unless neurological symptoms of spinal cord compression are present.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Emergency",
+     "Pitfall",
+     "Rationale",
+     "Correction"
+    ],
+    "rows": [
+     [
+      "Hypercalcaemia",
+      "Early diuretics",
+      "Dehydration risk",
+      "Rehydrate first"
+     ],
+     [
+      "TLS",
+      "Urine alkalinisation",
+      "Crystal precipitation",
+      "Avoid bicarbonate"
+     ],
+     [
+      "Lymphoma",
+      "Early steroids",
+      "Diagnostic delay",
+      "Biopsy first"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_421aed653d79",
+  "q_7d392b7fa2bf",
+  "q_a8d670d2fb41"
+ ],
+ "src": [
+  "kb-malignant-spinal-cord-compression",
+  "kb-tumour-lysis-syndrome",
+  "kb-hypercalcaemia"
+ ],
+ "gen": "AI",
+ "run": "lessons-202610060812",
+ "model": "gemini-3.1-flash-lite",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true,
+  "redone": 2,
+  "dropped": 1,
+  "bank": "v2"
+ }
+}

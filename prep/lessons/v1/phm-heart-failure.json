@@ -1,0 +1,163 @@
+{
+ "v": 1,
+ "module": "phm-heart-failure",
+ "subject": "pharmacology",
+ "title": "Management of Chronic Heart Failure and Digoxin Toxicity",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The foundation of **HFrEF** management involves four classes of medication: an **ARNI** (or ACEI/ARB), a beta-blocker, an MRA, and an SGLT2 inhibitor. Initiate all classes at low doses and titrate to target levels within 4 to 6 weeks. Diuretics should be reserved for managing congestion and do not improve mortality. Prioritise adding new drug classes over increasing doses of existing ones.",
+   "say": "The foundation of heart failure management with reduced ejection fraction involves four classes of medication. These are an ARNI or ACE inhibitor or ARB, a beta-blocker, a mineralocorticoid receptor antagonist, and an SGLT2 inhibitor. Initiate all classes at low doses and titrate to target levels within four to six weeks. Diuretics should be reserved for managing congestion and do not improve mortality. Prioritise adding new drug classes over increasing doses of existing ones.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug Class",
+     "Example",
+     "Start Dose",
+     "Target Dose"
+    ],
+    "rows": [
+     [
+      "Beta-blocker",
+      "Bisoprolol",
+      "1.25 mg",
+      "10 mg"
+     ],
+     [
+      "MRA",
+      "Spironolactone",
+      "25 mg",
+      "25-50 mg"
+     ],
+     [
+      "SGLT2i",
+      "Dapagliflozin",
+      "10 mg",
+      "10 mg"
+     ],
+     [
+      "ACEI",
+      "Enalapril",
+      "2.5 mg",
+      "10 mg"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "During follow-up, track renal markers and serum potassium. A mild increase in creatinine up to one-fifth of baseline is tolerable. However, if levels reach 2.5 mg/dL, reduce or pause treatment. If potassium levels surpass 5.5 mEq/L, discontinue the **MRA** and reassess the **RAAS blockade**. Should **hypotension** occur, first omit non-essential medications such as **NSAIDs** or extra diuretics rather than decreasing the core heart failure regimen.",
+   "say": "During follow-up, track renal markers and serum potassium. A mild increase in creatinine up to one-fifth of baseline is tolerable. However, if levels reach 2.5 milligrams per decilitre, reduce or pause treatment. If potassium levels surpass 5.5 milliequivalents per litre, discontinue the MRA and reassess the RAAS blockade. Should hypotension occur, first omit non-essential medications such as NSAIDs or extra diuretics rather than decreasing the core heart failure regimen.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Parameter",
+     "Action Threshold",
+     "Clinical Response"
+    ],
+    "rows": [
+     [
+      "Creatinine",
+      "2.5 mg/dL",
+      "Reduce or pause"
+     ],
+     [
+      "Potassium",
+      "5.5 mEq/L",
+      "Stop MRA"
+     ],
+     [
+      "Hypotension",
+      "Symptomatic",
+      "Withdraw non-essential"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Digoxin is indicated for symptomatic patients in sinus rhythm despite foundational therapy or for rate control in AF. It functions by inhibiting the myocardial **Na+K+ ATPase** pump, increasing intracellular calcium and vagal tone. Target serum levels are narrow, between 0.5 and 0.9 ng/mL. Always exercise caution in the elderly and patients with chronic kidney disease.",
+   "say": "Digoxin is indicated for symptomatic patients in sinus rhythm despite foundational therapy or for rate control in atrial fibrillation. It functions by inhibiting the myocardial sodium potassium ATPase pump, increasing intracellular calcium and vagal tone. Target serum levels are narrow, between zero point five and zero point nine nanograms per millilitre. Always exercise caution in the elderly and patients with chronic kidney disease.",
+   "vis": null
+  },
+  {
+   "tx": "Digoxin toxicity manifests with GI symptoms, confusion, and **xanthopsia**. ECG findings often show increased automaticity combined with AV block, such as bidirectional ventricular tachycardia. Chronic toxicity is often triggered by hypokalaemia or renal impairment. In acute overdose, inhibition of the membrane pump leads to severe **hyperkalaemia**, which is a critical marker of poisoning severity.",
+   "say": "Digoxin toxicity manifests with gastrointestinal symptoms, confusion, and xanthopsia. ECG findings often show increased automaticity combined with AV block, such as bidirectional ventricular tachycardia. Chronic toxicity is often triggered by hypokalaemia or renal impairment. In acute overdose, inhibition of the membrane pump leads to severe hyperkalaemia, which is a critical marker of poisoning severity.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Chronic Toxicity",
+     "points": [
+      "Renal/Electrolyte triggers",
+      "Lower drug levels",
+      "Correct hypokalaemia",
+      "Correct hypomagnesaemia"
+     ]
+    },
+    "right": {
+     "title": "Acute Overdose",
+     "points": [
+      "Inhibits Na/K pump",
+      "Causes hyperkalaemia",
+      "Avoid IV calcium",
+      "Use specific antidote"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "For life-threatening arrhythmias or severe hyperkalaemia in acute poisoning, administer **digoxin immune Fab**. Avoid intravenous calcium in acute toxicity due to potential risk of worsening myocardial contracture. Management also includes continuous cardiac monitoring, serial electrolyte assessment, and early consultation with toxicology services. Correct electrolyte disturbances to prevent recurrence of arrhythmias.",
+   "say": "For life-threatening arrhythmias or severe hyperkalaemia in acute poisoning, administer digoxin immune Fab. Avoid intravenous calcium in acute toxicity due to potential risk of worsening myocardial contracture. Management also includes continuous cardiac monitoring, serial electrolyte assessment, and early consultation with toxicology services. Correct electrolyte disturbances to prevent recurrence of arrhythmias.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "1",
+      "label": "Toxicity"
+     },
+     {
+      "id": "2",
+      "label": "Assess"
+     },
+     {
+      "id": "3",
+      "label": "Antidote"
+     }
+    ],
+    "edges": [
+     [
+      "1",
+      "2",
+      "ECG/Labs"
+     ],
+     [
+      "2",
+      "3",
+      "If severe"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "23ed0007-9e37-455f-a6eb-2e269f840c66",
+  "0dc60e40-e86d-4bb9-85bd-ed96a4a8d1b9",
+  "c5cbf272-199c-4c38-9175-27036bf250f3"
+ ],
+ "src": [
+  "kb-clinical-protocols-chronic-heart-failure-hfref-india",
+  "kb-clinical-protocols-chronic-heart-failure-hfref",
+  "kb-reference-digoxin-toxicity"
+ ],
+ "gen": "AI",
+ "run": "lessons-202610060812",
+ "model": "gemini-3.1-flash-lite",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true,
+  "redone": 1,
+  "dropped": 0,
+  "bank": "v1"
+ }
+}

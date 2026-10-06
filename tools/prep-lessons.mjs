@@ -261,14 +261,27 @@ export function moduleIndex(subjects) {
   for (const s of subjects) for (const mod of modulesOf(s)) m.set(mod.id, { subject: s, mod });
   return m;
 }
-/* groundingFor(ctx, moduleId) -> { text, src, from }: the fill pack, else the KB match. */
+/* onTopic(text, mod) -> true when the module's head topic (the title before " and " or a comma, generic words like
+ * "pathophysiology" dropped) is in the grounding: each head word (4+ letters) occurs, matched on its first 6 letters
+ * so "anticoagulant" meets "Anticoagulants". The KB is clinical: without this, phy-cardiac-cycle matched heart failure
+ * protocols and produced an accurate lesson on the wrong topic. */
+const GENERIC = new Set("pathophysiology physiology principles basics overview introduction general approach clinical".split(" "));
+export function onTopic(text, mod) {
+  const t = normText(text), title = String((mod.title && mod.title.en) || mod.title || "");
+  const head = normText(title.split(/\s+and\s+|,|:/i)[0]);
+  const words = head.split(" ").filter((w) => w.length >= 4 && !STOP.has(w) && !GENERIC.has(w));
+  return words.length > 0 && words.every((w) => t.includes(w.slice(0, 6)));
+}
+/* groundingFor(ctx, moduleId) -> { text, src, from }: the fill pack, else the KB match; empty text (module skipped) when
+ * the grounding is off the module's topic. */
 export function groundingFor(ctx, id) {
   const ent = ctx.modules.get(id);
   if (!ent) throw new Error("unknown module " + id);
   const pk = packGrounding(path.join(ctx.root, "prep/fill/packs", id));
-  if (pk && pk.words >= 300) return { ...pk, from: "pack" };
-  ctx.kb = ctx.kb || loadKb(ctx.root);
-  return { ...kbGrounding(ctx.kb, ent.mod), from: "kb" };
+  let g = pk && pk.words >= 300 ? { ...pk, from: "pack" } : null;
+  if (!g) { ctx.kb = ctx.kb || loadKb(ctx.root); g = { ...kbGrounding(ctx.kb, ent.mod), from: "kb" }; }
+  // A pack is picked for its module on purpose; only a lexical KB match can drift off topic.
+  return g.from === "pack" || onTopic(g.text, ent.mod) ? g : { ...g, text: "", offTopic: true };
 }
 
 // ---- stages ------------------------------------------------------------------------------------------------------

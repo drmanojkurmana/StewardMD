@@ -1,0 +1,185 @@
+{
+ "v": 1,
+ "module": "son-myelosuppression",
+ "subject": "ss-medical-oncology",
+ "title": "Management of Febrile Neutropenia",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Febrile neutropenia is a medical emergency. It is defined as a fever of 38.3°C or higher, or 38.0°C sustained for one hour, with an **absolute neutrophil count** below 500 cells/mm3. Do not wait for lab results; start empirical antibiotics within one hour of triage.",
+   "say": "Febrile neutropenia is an emergency. It is identified by a fever of thirty eight point three degrees Celsius or higher, or thirty eight point zero degrees Celsius sustained for one hour, alongside an absolute neutrophil count below five hundred cells per cubic millimetre. Do not delay treatment for lab results; administer antibiotics within one hour.",
+   "vis": null
+  },
+  {
+   "tx": "Risk stratification is essential using the **MASCC score**. A score of 21 or higher identifies low-risk patients who may be eligible for oral outpatient therapy. High-risk patients, or those with a score below 21, require inpatient management and intravenous antibiotics.",
+   "say": "Risk stratification relies on the MASCC score. Patients scoring twenty one or more are low risk and may qualify for oral outpatient care. Those with lower scores are high risk and require admission for intravenous antibiotic therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Risk Status",
+     "Setting",
+     "Therapy"
+    ],
+    "rows": [
+     [
+      "MASCC 21+",
+      "Low Risk",
+      "Outpatient",
+      "Oral"
+     ],
+     [
+      "MASCC <21",
+      "High Risk",
+      "Inpatient",
+      "IV Antibiotics"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For high-risk febrile neutropenia, initiate **empirical monotherapy** using anti-pseudomonal beta-lactams like **piperacillin-tazobactam** or **cefepime**. Reserve **vancomycin** strictly for clinical indications such as haemodynamic instability, suspected catheter-related infection, pneumonia, or severe mucositis in patients on fluoroquinolone prophylaxis. Avoid routine glycopeptide use, as it should be discontinued within 72 hours if no gram-positive organism is identified. Always ensure adequate anaerobic coverage if the patient presents with abdominal symptoms or perianal infection.",
+   "say": "For high-risk febrile neutropenia, initiate empirical monotherapy using anti-pseudomonal beta-lactams like piperacillin-tazobactam or cefepime. Reserve vancomycin strictly for clinical indications such as haemodynamic instability, suspected catheter-related infection, pneumonia, or severe mucositis in patients on fluoroquinolone prophylaxis. Avoid routine glycopeptide use, as it should be discontinued within 72 hours if no gram-positive organism is identified. Always ensure adequate anaerobic coverage if the patient presents with abdominal symptoms or perianal infection.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Scenario",
+     "Primary Therapy",
+     "Anaerobic Cover",
+     "Vancomycin Use"
+    ],
+    "rows": [
+     [
+      "High-risk inpatient",
+      "Pip-Tazo or Cefepime",
+      "Add Metronidazole",
+      "Specific indications only"
+     ],
+     [
+      "Septic shock",
+      "Carbapenem",
+      "Included",
+      "Specific indications only"
+     ],
+     [
+      "Abdominal pain",
+      "Pip-Tazo or Carbapenem",
+      "Included",
+      "Specific indications only"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In high-risk patients with **persistent fever** after 4 to 7 days, perform a chest CT and check **serum galactomannan**. If neutropenia is expected to last beyond 7 days, initiate **antifungal therapy** such as caspofungin or liposomal amphotericin B. Do not alter antibacterial treatment based solely on fever if the patient remains stable. Instead, focus on identifying documented organisms or clinical deterioration to guide changes in management.",
+   "say": "In high-risk patients with persistent fever after four to seven days, perform a chest CT and check serum galactomannan. If neutropenia is expected to last beyond seven days, initiate antifungal therapy such as caspofungin or liposomal amphotericin B. Do not alter antibacterial treatment based solely on fever if the patient remains stable. Instead, focus on identifying documented organisms or clinical deterioration to guide changes in management.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Investigation",
+     "Clinical Context",
+     "Action",
+     "Duration"
+    ],
+    "rows": [
+     [
+      "Chest CT",
+      "Fever 4-7 days",
+      "Fungal screen",
+      "High risk"
+     ],
+     [
+      "Galactomannan",
+      "Fever 4-7 days",
+      "Fungal screen",
+      "High risk"
+     ],
+     [
+      "Antifungals",
+      "Neutropenia >7d",
+      "Start therapy",
+      "High risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Establishing the risk of **febrile neutropenia** is essential for management. Clinical assessment identifies patients requiring urgent intervention. **MASCC scoring** helps determine if a patient is suitable for outpatient care. High-risk individuals require immediate hospital admission and **empirical antibiotics**. Always avoid delaying treatment while waiting for laboratory results. Prophylactic measures should be tailored to the specific chemotherapy regimen and patient status to balance clinical benefits against potential risks.",
+   "say": "Establishing the risk of febrile neutropenia is essential for management. Clinical assessment identifies patients requiring urgent intervention. MASCC scoring helps determine if a patient is suitable for outpatient care. High-risk individuals require immediate hospital admission and empirical antibiotics. Always avoid delaying treatment while waiting for laboratory results. Prophylactic measures should be tailored to the specific chemotherapy regimen and patient status to balance clinical benefits against potential risks.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Category",
+     "High Risk",
+     "Low Risk",
+     "Management"
+    ],
+    "rows": [
+     [
+      "MASCC Score",
+      "< 21",
+      ">= 21",
+      "Triage"
+     ],
+     [
+      "Neutropenia",
+      "Profound",
+      "Mild",
+      "Assessment"
+     ],
+     [
+      "Setting",
+      "Inpatient",
+      "Outpatient",
+      "Admission"
+     ],
+     [
+      "Therapy",
+      "IV Beta-lactam",
+      "Oral Antibiotics",
+      "Treatment"
+     ],
+     [
+      "Monitoring",
+      "Frequent",
+      "Daily Review",
+      "Follow-up"
+     ],
+     [
+      "Comorbidity",
+      "Present",
+      "Absent",
+      "Risk Stratify"
+     ],
+     [
+      "Duration",
+      "Extended",
+      "Short",
+      "Outcome"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_8e36b1f4380b",
+  "q_3ab7ed6f9256",
+  "q_0a2741014277"
+ ],
+ "src": [
+  "kb-febrile-neutropenia"
+ ],
+ "gen": "AI",
+ "run": "lessons-202610060812",
+ "model": "gemini-3.1-flash-lite",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true,
+  "redone": 3,
+  "dropped": 0,
+  "bank": "v2"
+ }
+}

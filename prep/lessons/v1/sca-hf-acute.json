@@ -1,0 +1,167 @@
+{
+ "v": 1,
+ "module": "sca-hf-acute",
+ "subject": "ss-cardiology",
+ "title": "Management of Acute Decompensated Heart Failure",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Acute heart failure requires immediate assessment of **perfusion** and **congestion**. Clinicians classify patients into four profiles using clinical signs like JVP, orthopnoea, and cold peripheries. The warm-wet profile is the most common presentation. Determining these profiles is critical as they dictate the initial management strategy, including the use of diuretics, vasodilators, or inotropes.",
+   "say": "Clinicians assess perfusion and congestion to classify heart failure patients into four clinical profiles. The warm and wet profile is most frequent. This classification is vital for deciding on the use of diuretics, vasodilators, or inotropes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Profile",
+     "Perfusion",
+     "Congestion",
+     "Treatment"
+    ],
+    "rows": [
+     [
+      "Warm-Wet",
+      "Warm",
+      "Wet",
+      "Diuretic/Vasodilator"
+     ],
+     [
+      "Warm-Dry",
+      "Warm",
+      "Dry",
+      "Adjust oral meds"
+     ],
+     [
+      "Cold-Wet",
+      "Cold",
+      "Wet",
+      "Inotrope/Diuretic"
+     ],
+     [
+      "Cold-Dry",
+      "Cold",
+      "Dry",
+      "Fluid challenge"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Initial management focuses on stabilisation. Use non-invasive ventilation for respiratory distress to reduce the need for intubation. Administer IV loop diuretics promptly for congestion, using a dose one to two times the patient's total daily oral dose. For patients with a systolic blood pressure above 110 mmHg, IV **nitrates** serve as effective vasodilators.",
+   "say": "Stabilisation involves using non-invasive ventilation for respiratory distress to prevent intubation. Give intravenous loop diuretics for congestion at one to two times the daily oral dose. Use intravenous nitrates for patients with a systolic blood pressure over one hundred and ten.",
+   "vis": null
+  },
+  {
+   "tx": "Natriuretic peptides are essential diagnostic tools. Levels of **BNP** below 100 pg/mL or NT-proBNP below 300 pg/mL make acute heart failure unlikely. Conversely, values may be elevated due to age, chronic kidney disease, or atrial fibrillation. Obesity typically results in lower peptide concentrations.",
+   "say": "Natriuretic peptides help rule out heart failure. BNP below one hundred or NT-proBNP below three hundred makes the diagnosis unlikely. Remember that age, kidney disease, and atrial fibrillation increase these levels, while obesity decreases them.",
+   "vis": null
+  },
+  {
+   "tx": "Effective decongestion requires monitoring the response to loop diuretics. Inadequate response is marked by low urine output or low spot urine sodium. If congestion persists, clinicians should employ **sequential nephron blockade** by adding acetazolamide or a thiazide. A slight rise in creatinine during successful decongestion is acceptable and should not lead to stopping diuretic therapy.",
+   "say": "Monitor diuretic response using urine output and sodium levels. If response is poor, add acetazolamide or thiazides for sequential nephron blockade. Do not stop diuretics for a mild rise in creatinine if the patient is still congested.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "1",
+      "label": "Initial IV Diuretic"
+     },
+     {
+      "id": "2",
+      "label": "Assess Response"
+     },
+     {
+      "id": "3",
+      "label": "Escalate Dose"
+     },
+     {
+      "id": "4",
+      "label": "Sequential Blockade"
+     }
+    ],
+    "edges": [
+     [
+      "1",
+      "2"
+     ],
+     [
+      "2",
+      "3",
+      "Poor response"
+     ],
+     [
+      "3",
+      "4",
+      "Persistent congestion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Use **inotropes** only for patients presenting with hypotension and hypoperfusion. Administer the lowest effective dose for the briefest period. Avoid these agents in normotensive individuals. For refractory cases, add **noradrenaline** as the preferred vasopressor. Ensure patients receive **intensive care** and monitoring when requiring these interventions for **cardiogenic shock**.",
+   "say": "Use inotropes only for patients presenting with hypotension and hypoperfusion. Administer the lowest effective dose for the briefest period. Avoid these agents in normotensive individuals. For refractory cases, add noradrenaline as the preferred vasopressor. Ensure patients receive intensive care and monitoring when requiring these interventions for cardiogenic shock.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "1",
+      "label": "Hypotension + Hypoperfusion"
+     },
+     {
+      "id": "2",
+      "label": "Inotrope"
+     },
+     {
+      "id": "3",
+      "label": "Refractory Hypotension"
+     },
+     {
+      "id": "4",
+      "label": "Noradrenaline"
+     }
+    ],
+    "edges": [
+     [
+      "1",
+      "2",
+      "start"
+     ],
+     [
+      "2",
+      "3",
+      "if persistent"
+     ],
+     [
+      "3",
+      "4",
+      "add"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Before discharge, patients must be euvolaemic and stable on oral medication for at least 24 hours. A key aspect of care is the initiation and rapid titration of **foundational therapy**, including SGLT2 inhibitors, beta-blockers, and MRAs. Reviewing the patient within one to two weeks post-discharge is vital to ensure long-term stability and prevent readmission.",
+   "say": "Discharge patients only when euvolaemic and stable on oral drugs for twenty-four hours. Initiate foundational therapies like SGLT2 inhibitors and beta-blockers quickly. Schedule a follow-up review within two weeks of discharge to maintain stability.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_740ee84fe6bb",
+  "q_8390da83e2f2",
+  "q_13d82549baeb"
+ ],
+ "src": [
+  "kb-acute-heart-failure"
+ ],
+ "gen": "AI",
+ "run": "lessons-202610060812",
+ "model": "gemini-3.1-flash-lite",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true,
+  "redone": 1,
+  "dropped": 0,
+  "bank": "v2"
+ }
+}
