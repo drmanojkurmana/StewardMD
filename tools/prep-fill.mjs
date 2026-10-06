@@ -538,8 +538,9 @@ export async function main(argv = process.argv.slice(2), deps = {}) {
       const ent = modules.get(r.module);
       if (!ent) { log(`  ${r.module}: not in the taxonomy`); continue; }
       const pack = loadPack(path.join(packs, r.module));
-      const need = r.fill != null ? r.fill : 0;
-      const n = need || 10;
+      // Same rule as the real run (fillModule): --need wins, else the module's shortfall; 0 means nothing is written.
+      const n = args.need != null ? Number(args.need) : (r.fill != null ? r.fill : 0);
+      if (!n) { log(`  ${r.module.padEnd(32)} need    0  (not short; pass --need to write anyway)`); continue; }
       const gp = groupProfiles(Math.ceil((n * EST.overgen) / MCQ_N), ent.subject, share);
       const mix = {};
       gp.forEach((p) => { mix[p] = (mix[p] || 0) + MCQ_N; });

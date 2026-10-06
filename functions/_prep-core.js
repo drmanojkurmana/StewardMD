@@ -28,7 +28,7 @@
  *   solveMatches(pickedText, item)            normalised compare of the blind pick with o[a]
  *   toStoredItem(rq, sh, ctx)                 6.4 stored item
  *
- * Model-facing short keys (6.1 to 6.3): facts { f: [{ ft, cq, sn, fk }] }; mcq { q: [{ st, key: { ot, wr },
+ * Model-facing short keys (6.1 to 6.3): facts { fs: [{ ft, cq, sn, fk }] }; mcq { q: [{ st, key: { ot, wr },
  * dis: [{ ot, wr, et }] x3, kp, fi, dl, cog }] }; solve { s: [{ i, ot }] }; review { g: [{ i, g4, g6..g11,
  * old, why }] }. "rq" below means one sanitized mcq question in that raw shape.
  */
@@ -69,12 +69,14 @@ const OBJ = (props, order) => ({ type: "OBJECT", properties: props, required: or
 /* SCHEMAS.facts | .mcq | .solve | .review: the generationConfig.responseSchema for each op. */
 export const SCHEMAS = {
   facts: OBJ({
-    f: S("ARRAY", { maxItems: PREP_LIMITS.facts.maxItems, items: OBJ({
+    // "fs", not "f": Vertex Batch reads a one-letter "f" (or "t") string as a boolean and rejects the whole request
+    // ("invalid JSON ... propertyOrdering[0]"), while online calls accept it (2026-10-06).
+    fs: S("ARRAY", { maxItems: PREP_LIMITS.facts.maxItems, items: OBJ({
       ft: S("STRING"), cq: S("STRING"),
       sn: S("ARRAY", { minItems: 1, maxItems: 2, items: S("INTEGER") }),
       fk: S("STRING", { enum: FACT_KINDS }),
     }, ["ft", "cq", "sn", "fk"]) }),
-  }, ["f"]),
+  }, ["fs"]),
   mcq: OBJ({
     q: S("ARRAY", { maxItems: PREP_LIMITS.mcq.maxItems, items: OBJ({
       st: S("STRING"),
@@ -285,7 +287,7 @@ export function buildMcqPrompt(args) {
   const system = [
     "You write single-best-answer MCQs for " + profile.name + " preparation. Exam style: " + profile.style + ". Stem style: " + profile.stem + ".",
     "Write one question per fact, testing that fact. Write the correct option first (key, with wr: why it is right, at most 20 words), then exactly three plausible distractors, each wrong for a stated reason (wr, at most 20 words) with its error type et.",
-    "Rules: exactly one defensible best answer; no grammar or length clues (options parallel in form and similar in length); no 'all of the above' or 'none of the above'; stem at most 90 words; exam pearl kp at most 25 words.",
+    "Rules: exactly one defensible best answer; no grammar or length clues (options parallel in form; the key is never the longest or most detailed option, and no option is more than 1.5 times as long as another); no 'all of the above' or 'none of the above'; stem at most 90 words; exam pearl kp at most 25 words.",
     "The key must follow from the fact and its sentences; every number in the key and its reason must appear in those sentences. Write fresh text: never copy a sentence of the source word for word.",
     "fi is the index of the fact the question tests. dl is difficulty 1 to 3. cog is one of " + COG_LEVELS.join(", ") + ".",
     DATA_RULE,
@@ -338,8 +340,9 @@ const enumOr = (v, list, d) => (list.indexOf(v) >= 0 ? v : d);
 const intOr = (v, d) => (Number.isInteger(v) ? v : (typeof v === "string" && /^\d+$/.test(v) ? Number(v) : d));
 /* sanitizeFacts(raw) -> [{ ft, cq, sn: [1 or 2 ints], fk }], or null when raw is not the facts shape. */
 export function sanitizeFacts(raw) {
-  if (!raw || typeof raw !== "object" || !Array.isArray(raw.f)) return null;
-  return raw.f.slice(0, 30).filter((x) => x && typeof x === "object").map((x) => ({
+  const list = raw && typeof raw === "object" ? (Array.isArray(raw.fs) ? raw.fs : raw.f) : null;
+  if (!Array.isArray(list)) return null;
+  return list.slice(0, 30).filter((x) => x && typeof x === "object").map((x) => ({
     ft: cleanText(x.ft, 400), cq: cleanText(x.cq, 300),
     sn: (Array.isArray(x.sn) ? x.sn : []).map((n) => intOr(n, -1)).filter((n) => n >= 0).slice(0, 2),
     fk: enumOr(x.fk, FACT_KINDS, "recall"),
