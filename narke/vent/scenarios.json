@@ -1,0 +1,464 @@
+{
+  "v": 1,
+  "review": "ai_drafted",
+  "units": {
+    "patient.vco2": "mL/min",
+    "patient.drive.rate": "spontaneous breaths per minute the brain asks for at normal PaCO2, before sedation",
+    "patient.drive.effort": "peak inspiratory muscle pressure (Pmus) in cmH2O at that drive",
+    "patient.drive.sedation": "0 awake to 1 fully suppressed",
+    "lung.c": "static respiratory system compliance in mL/cmH2O with the recruitable lung open",
+    "lung.r": "inspiratory airway resistance in cmH2O/L/s including the tracheal tube",
+    "lung.shunt": "shunt fraction at PEEP 5 before any recruitment",
+    "lung.recruitable": "fraction of the shunt that PEEP and mean airway pressure can reopen",
+    "lung.deadSpace": "alveolar dead space as a fraction of tidal volume, added to anatomic dead space",
+    "lung.upperInflection": "plateau pressure in cmH2O above which overdistension lowers compliance",
+    "timeline.event": "secretions | bronchospasm | pneumothorax | disconnect | hypotension | fever | improve"
+  },
+  "scenarios": [
+    {
+      "id": "postop-normal",
+      "level": 1,
+      "title": { "en": "After surgery: healthy lungs", "hi": "ऑपरेशन के बाद: स्वस्थ फेफड़े" },
+      "story": {
+        "en": "Mr Rao is 45 years old. He had a long hip operation under general anaesthesia. His lungs are healthy. He is still sleepy from the drugs, so he stays on the ventilator for a short while.",
+        "hi": "श्री राव 45 साल के हैं। General anaesthesia में उनका लंबा hip ऑपरेशन हुआ। उनके फेफड़े स्वस्थ हैं। दवाओं के असर से वे अभी नींद में हैं, इसलिए कुछ देर ventilator पर रहेंगे।"
+      },
+      "why": {
+        "en": "Anaesthetic drugs still blunt his drive to breathe. The ventilator breathes for him until the drugs wear off.",
+        "hi": "Anaesthesia की दवाएँ अभी साँस लेने की इच्छा को दबा रही हैं। दवाओं का असर उतरने तक ventilator उनके लिए साँस लेता है।"
+      },
+      "patient": {
+        "age": 45, "sex": "M", "heightCm": 172, "weightKg": 78,
+        "diagnosis": { "en": "Residual anaesthesia after hip replacement", "hi": "Hip replacement के बाद बचा हुआ anaesthesia असर" },
+        "hb": 12, "temp": 36.4, "volumeStatus": "normal",
+        "metabolic": { "hco3": 24, "lactate": 1.0 },
+        "vco2": 200,
+        "drive": { "rate": 12, "effort": 4, "sedation": 0.8 }
+      },
+      "lung": { "c": 55, "r": 10, "flowLimited": false, "shunt": 0.05, "recruitable": 0.2, "deadSpace": 0.05, "upperInflection": 35 },
+      "start": { "mode": "acvc", "settings": { "fio2": 50, "peep": 5, "vt": 450, "rr": 12, "ti": 1.0, "trigType": "flow", "trigFlow": 2 } },
+      "goals": {
+        "spo2": [92, 96], "paco2": [35, 45], "pplatMax": 30, "drivingMax": 15, "vtPerKg": [6, 8],
+        "other": [
+          { "en": "Lower FiO2 to the lowest value that keeps SpO2 in range.", "hi": "FiO2 को उतना कम करें जितने में SpO2 सीमा में रहे।" },
+          { "en": "Keep PaCO2 normal, because these lungs and this brain are normal.", "hi": "PaCO2 सामान्य रखें, क्योंकि ये फेफड़े और यह दिमाग़ सामान्य हैं।" }
+        ]
+      },
+      "timeline": [
+        { "t": 2700, "event": "improve", "note": { "en": "The drugs are wearing off. He starts to trigger his own breaths.", "hi": "दवाओं का असर उतर रहा है। वे ख़ुद साँसें trigger करने लगे हैं।" } }
+      ],
+      "debrief": [
+        { "en": "Tidal volume is set on predicted body weight from height. Here 68 kg, so 410 to 540 mL.", "hi": "Tidal volume लंबाई से निकले predicted body weight पर set होता है। यहाँ 68 kg, यानी 410 से 540 mL।" },
+        { "en": "Healthy lungs need little oxygen. A high FiO2 for no reason only adds risk.", "hi": "स्वस्थ फेफड़ों को कम ऑक्सीजन चाहिए। बिना कारण ऊँचा FiO2 केवल जोखिम बढ़ाता है।" },
+        { "en": "Rate and tidal volume set the CO2. FiO2 and PEEP set the oxygen.", "hi": "Rate और tidal volume CO2 तय करते हैं। FiO2 और PEEP ऑक्सीजन तय करते हैं।" }
+      ],
+      "sources": [
+        { "label": "Narke lesson as11-mechanical-ventilation (starting settings)", "url": "narke/learn/lessons/as11-mechanical-ventilation.json" },
+        { "label": "Hess DR, Kacmarek RM. Essentials of Mechanical Ventilation, 4th ed. McGraw Hill 2019", "url": "" },
+        { "label": "West JB, Luks AM. West's Respiratory Physiology: The Essentials, 11th ed. 2020", "url": "" }
+      ]
+    },
+    {
+      "id": "neuromuscular-gbs",
+      "level": 1,
+      "title": { "en": "Weak muscles: Guillain-Barre syndrome", "hi": "कमज़ोर मांसपेशियाँ: Guillain-Barre syndrome" },
+      "story": {
+        "en": "Ms Kaur is 32 years old. Her legs, then arms, then breathing muscles became weak over 5 days. Her vital capacity fell below 15 mL/kg. She was intubated before she tired out.",
+        "hi": "सुश्री कौर 32 साल की हैं। 5 दिनों में पहले पैर, फिर हाथ, फिर साँस की मांसपेशियाँ कमज़ोर हुईं। उनकी vital capacity 15 mL/kg से नीचे गिर गई। थकने से पहले उन्हें intubate किया गया।"
+      },
+      "why": {
+        "en": "Her lungs are fine, but the pump is weak. The ventilator does the work her muscles cannot do.",
+        "hi": "उनके फेफड़े ठीक हैं, पर pump कमज़ोर है। जो काम मांसपेशियाँ नहीं कर पातीं, वह ventilator करता है।"
+      },
+      "patient": {
+        "age": 32, "sex": "F", "heightCm": 160, "weightKg": 55,
+        "diagnosis": { "en": "Guillain-Barre syndrome with respiratory muscle weakness", "hi": "साँस की मांसपेशियों की कमज़ोरी के साथ Guillain-Barre syndrome" },
+        "hb": 12.5, "temp": 37.0, "volumeStatus": "normal",
+        "metabolic": { "hco3": 25, "lactate": 1.0 },
+        "vco2": 180,
+        "drive": { "rate": 24, "effort": 2, "sedation": 0.3 }
+      },
+      "lung": { "c": 45, "r": 9, "flowLimited": false, "shunt": 0.08, "recruitable": 0.5, "deadSpace": 0.05, "upperInflection": 32 },
+      "start": { "mode": "acvc", "settings": { "fio2": 40, "peep": 5, "vt": 380, "rr": 14, "ti": 1.0, "trigType": "flow", "trigFlow": 2 } },
+      "goals": {
+        "spo2": [92, 96], "paco2": [35, 45], "pplatMax": 30, "drivingMax": 15, "vtPerKg": [6, 8],
+        "other": [
+          { "en": "Give full support. Weak muscles cannot share the work yet.", "hi": "पूरा support दें। कमज़ोर मांसपेशियाँ अभी काम नहीं बाँट सकतीं।" },
+          { "en": "Watch the blood pressure. This illness can upset the autonomic nerves.", "hi": "Blood pressure पर नज़र रखें। यह बीमारी autonomic nerves को बिगाड़ सकती है।" }
+        ]
+      },
+      "timeline": [
+        { "t": 1800, "event": "secretions", "note": { "en": "She cannot cough well. Mucus builds up in the tube and airways.", "hi": "वे ठीक से खाँस नहीं पातीं। Tube और airways में बलगम जमा होता है।" } },
+        { "t": 3600, "event": "hypotension", "note": { "en": "Autonomic swing: the blood pressure drops suddenly for a while.", "hi": "Autonomic उतार चढ़ाव: blood pressure कुछ देर के लिए अचानक गिरता है।" } }
+      ],
+      "debrief": [
+        { "en": "In neuromuscular failure the lungs are normal. Normal settings and normal CO2 targets work.", "hi": "Neuromuscular failure में फेफड़े सामान्य होते हैं। सामान्य settings और सामान्य CO2 लक्ष्य काम करते हैं।" },
+        { "en": "Rising CO2 is a late sign of muscle failure. Vital capacity falls first.", "hi": "बढ़ता CO2 मांसपेशी failure का देर से आने वाला संकेत है। Vital capacity पहले गिरती है।" },
+        { "en": "Weak cough means secretions. A rising peak pressure is often the first clue.", "hi": "कमज़ोर खाँसी का मतलब है secretions। बढ़ता peak pressure अक्सर पहला संकेत होता है।" }
+      ],
+      "sources": [
+        { "label": "StewardMD protocol: acute respiratory failure, NIV and HFNC (neuromuscular disease)", "url": "kb/clinical-protocols/acute-respiratory-failure-niv-hfnc.json" },
+        { "label": "Tobin MJ, ed. Principles and Practice of Mechanical Ventilation, 3rd ed. McGraw Hill 2013", "url": "" },
+        { "label": "Hess DR, Kacmarek RM. Essentials of Mechanical Ventilation, 4th ed. McGraw Hill 2019", "url": "" }
+      ]
+    },
+    {
+      "id": "postop-atelectasis",
+      "level": 2,
+      "title": { "en": "After laparotomy: collapsed lung bases", "hi": "Laparotomy के बाद: फेफड़ों के निचले हिस्से बैठे हुए" },
+      "story": {
+        "en": "Mrs Das is 68 years old, short and heavy. She had emergency surgery for a perforated bowel. Her belly is swollen. The bases of both lungs have collapsed. Someone set 500 mL out of habit.",
+        "hi": "श्रीमती दास 68 साल की हैं, क़द छोटा और वज़न ज़्यादा। आँत फटने पर उनकी emergency सर्जरी हुई। पेट फूला है। दोनों फेफड़ों के निचले हिस्से बैठ गए हैं। किसी ने आदतन 500 mL set कर दिया।"
+      },
+      "why": {
+        "en": "She is sedated after a big operation. Her oxygen is low because collapsed alveoli get blood but no air.",
+        "hi": "बड़े ऑपरेशन के बाद वे sedated हैं। ऑक्सीजन कम है क्योंकि बैठे alveoli को ख़ून मिलता है पर हवा नहीं।"
+      },
+      "patient": {
+        "age": 68, "sex": "F", "heightCm": 155, "weightKg": 82,
+        "diagnosis": { "en": "Basal atelectasis after emergency laparotomy", "hi": "Emergency laparotomy के बाद basal atelectasis" },
+        "hb": 10.5, "temp": 37.8, "volumeStatus": "low",
+        "metabolic": { "hco3": 21, "lactate": 2.2 },
+        "vco2": 220,
+        "drive": { "rate": 18, "effort": 4, "sedation": 0.7 }
+      },
+      "lung": { "c": 32, "r": 12, "flowLimited": false, "shunt": 0.18, "recruitable": 0.65, "deadSpace": 0.1, "upperInflection": 30 },
+      "start": { "mode": "acvc", "settings": { "fio2": 60, "peep": 5, "vt": 500, "rr": 14, "ti": 1.0, "trigType": "flow", "trigFlow": 2 } },
+      "goals": {
+        "spo2": [92, 96], "paco2": [35, 45], "pplatMax": 30, "drivingMax": 15, "vtPerKg": [6, 8],
+        "other": [
+          { "en": "Work out her predicted body weight. It is about 48 kg, not 82 kg.", "hi": "उनका predicted body weight निकालें। यह लगभग 48 kg है, 82 kg नहीं।" },
+          { "en": "Use PEEP to reopen the bases, then bring FiO2 down.", "hi": "निचले हिस्से खोलने के लिए PEEP लगाएँ, फिर FiO2 घटाएँ।" }
+        ]
+      },
+      "timeline": [
+        { "t": 1200, "event": "hypotension", "note": { "en": "She is a little dry. Watch BP as you raise PEEP.", "hi": "उनमें पानी थोड़ा कम है। PEEP बढ़ाते समय BP देखें।" } }
+      ],
+      "debrief": [
+        { "en": "500 mL is over 10 mL/kg for her height. Short women are the most often overdosed.", "hi": "उनकी लंबाई के लिए 500 mL, 10 mL/kg से ज़्यादा है। छोटे क़द की महिलाओं को सबसे अधिक ज़्यादा volume मिलता है।" },
+        { "en": "Atelectasis is recruitable shunt. PEEP lifts PaO2 far more than FiO2 does here.", "hi": "Atelectasis खुल सकने वाला shunt है। यहाँ PEEP, FiO2 से कहीं ज़्यादा PaO2 बढ़ाता है।" },
+        { "en": "A tight abdomen stiffens the chest wall. Plateau rises even with normal lung tissue.", "hi": "कसा पेट chest wall को सख़्त बनाता है। सामान्य lung tissue में भी plateau बढ़ता है।" }
+      ],
+      "sources": [
+        { "label": "StewardMD protocol: ARDS lung-protective ventilation (PBW formula)", "url": "kb/clinical-protocols/ards-lung-protective-ventilation.json" },
+        { "label": "Hess DR, Kacmarek RM. Essentials of Mechanical Ventilation, 4th ed. McGraw Hill 2019", "url": "" },
+        { "label": "West JB, Luks AM. West's Respiratory Physiology: The Essentials, 11th ed. 2020", "url": "" }
+      ]
+    },
+    {
+      "id": "pneumonia",
+      "level": 2,
+      "title": { "en": "Severe pneumonia: one lobe full of pus", "hi": "गंभीर pneumonia: एक lobe मवाद से भरा" },
+      "story": {
+        "en": "Mr Yadav is 55 years old. He had fever and cough for 4 days. His right lower lobe is consolidated. He tired out on high-flow oxygen and was intubated.",
+        "hi": "श्री यादव 55 साल के हैं। उन्हें 4 दिन से बुख़ार और खाँसी थी। दाहिना निचला lobe consolidated है। High-flow ऑक्सीजन पर वे थक गए और intubate किए गए।"
+      },
+      "why": {
+        "en": "Blood passes the pus-filled lobe without picking up oxygen. That is shunt, and he could not keep up.",
+        "hi": "ख़ून मवाद भरे lobe से बिना ऑक्सीजन लिए गुज़र जाता है। यह shunt है, और वे इसे सँभाल नहीं पाए।"
+      },
+      "patient": {
+        "age": 55, "sex": "M", "heightCm": 168, "weightKg": 62,
+        "diagnosis": { "en": "Severe community-acquired pneumonia, right lower lobe", "hi": "गंभीर community-acquired pneumonia, दाहिना निचला lobe" },
+        "hb": 12, "temp": 39.0, "volumeStatus": "low",
+        "metabolic": { "hco3": 20, "lactate": 2.5 },
+        "vco2": 260,
+        "drive": { "rate": 28, "effort": 8, "sedation": 0.6 }
+      },
+      "lung": { "c": 38, "r": 12, "flowLimited": false, "shunt": 0.28, "recruitable": 0.25, "deadSpace": 0.12, "upperInflection": 30 },
+      "start": { "mode": "acvc", "settings": { "fio2": 80, "peep": 5, "vt": 450, "rr": 18, "ti": 0.9, "trigType": "flow", "trigFlow": 2 } },
+      "goals": {
+        "spo2": [92, 96], "paco2": [35, 45], "pplatMax": 30, "drivingMax": 15, "vtPerKg": [6, 8],
+        "other": [
+          { "en": "Fever raises CO2 production. Minute ventilation must rise to match it.", "hi": "बुख़ार CO2 बनना बढ़ाता है। उसके बराबर minute ventilation बढ़ाना होगा।" },
+          { "en": "Test whether PEEP helps. Solid consolidation may not open.", "hi": "जाँचें कि PEEP मदद करता है या नहीं। ठोस consolidation शायद न खुले।" }
+        ]
+      },
+      "timeline": [
+        { "t": 1500, "event": "secretions", "note": { "en": "Thick sputum partly blocks the tube. Peak pressure climbs.", "hi": "गाढ़ा बलगम tube को कुछ रोकता है। Peak pressure चढ़ता है।" } },
+        { "t": 3000, "event": "fever", "note": { "en": "Temperature spikes to 40 degrees. CO2 production rises.", "hi": "तापमान 40 degree तक चढ़ता है। CO2 बनना बढ़ता है।" } }
+      ],
+      "debrief": [
+        { "en": "Consolidated lung is poorly recruitable. Extra PEEP mostly stretches the healthy lung.", "hi": "Consolidated फेफड़ा मुश्किल से खुलता है। ज़्यादा PEEP ज़्यादातर स्वस्थ फेफड़े को खींचता है।" },
+        { "en": "With a large true shunt, raising FiO2 helps less than you expect.", "hi": "बड़े असली shunt में FiO2 बढ़ाने से उम्मीद से कम फ़ायदा होता है।" },
+        { "en": "Secretions raise the peak but not the plateau. Suction fixes the gap.", "hi": "Secretions peak बढ़ाते हैं, plateau नहीं। Suction से यह अंतर ठीक होता है।" }
+      ],
+      "sources": [
+        { "label": "StewardMD protocol: acute respiratory failure, NIV and HFNC", "url": "kb/clinical-protocols/acute-respiratory-failure-niv-hfnc.json" },
+        { "label": "StewardMD protocol: sepsis and septic shock", "url": "kb/clinical-protocols/sepsis-septic-shock.json" },
+        { "label": "West JB, Luks AM. West's Respiratory Physiology: The Essentials, 11th ed. 2020", "url": "" }
+      ]
+    },
+    {
+      "id": "cardiogenic-oedema",
+      "level": 2,
+      "title": { "en": "Heart failure: water in the lungs", "hi": "Heart failure: फेफड़ों में पानी" },
+      "story": {
+        "en": "Mr Iyer is 70 years old. He had a heart attack this morning. Now he is breathless, sweaty and frothing. His BP is high. He is on NIV with a face mask.",
+        "hi": "श्री अय्यर 70 साल के हैं। आज सुबह उन्हें heart attack हुआ। अब वे हाँफ रहे हैं, पसीने में हैं और झाग आ रहा है। BP ऊँचा है। वे face mask से NIV पर हैं।"
+      },
+      "why": {
+        "en": "A failing left ventricle backs fluid into the lungs. Positive pressure pushes fluid back and eases the heart's work.",
+        "hi": "कमज़ोर left ventricle पानी को फेफड़ों में लौटा देता है। Positive pressure पानी को पीछे धकेलता है और दिल का काम हल्का करता है।"
+      },
+      "patient": {
+        "age": 70, "sex": "M", "heightCm": 165, "weightKg": 75,
+        "diagnosis": { "en": "Acute cardiogenic pulmonary oedema after myocardial infarction", "hi": "Myocardial infarction के बाद acute cardiogenic pulmonary oedema" },
+        "hb": 13, "temp": 36.8, "volumeStatus": "high",
+        "metabolic": { "hco3": 20, "lactate": 2.8 },
+        "vco2": 230,
+        "drive": { "rate": 32, "effort": 12, "sedation": 0 }
+      },
+      "lung": { "c": 35, "r": 14, "flowLimited": false, "shunt": 0.25, "recruitable": 0.7, "deadSpace": 0.08, "upperInflection": 32 },
+      "start": { "mode": "niv", "settings": { "fio2": 60, "ipap": 12, "epap": 5, "rr": 12, "ti": 1.0 } },
+      "goals": {
+        "spo2": [92, 96], "paco2": [35, 45], "pplatMax": 30, "drivingMax": 15, "vtPerKg": [6, 8],
+        "other": [
+          { "en": "Raise EPAP to reopen flooded alveoli and unload the left ventricle.", "hi": "भरे alveoli खोलने और left ventricle का बोझ घटाने को EPAP बढ़ाएँ।" },
+          { "en": "Watch for NIV failure: falling consciousness, shock or worsening gas.", "hi": "NIV failure पर नज़र रखें: घटती चेतना, shock या बिगड़ती gas।" }
+        ]
+      },
+      "timeline": [
+        { "t": 1800, "event": "improve", "note": { "en": "Diuretic and nitrate start to work. Lung water begins to fall.", "hi": "Diuretic और nitrate असर करने लगे। फेफड़ों का पानी घटने लगा।" } }
+      ],
+      "debrief": [
+        { "en": "CPAP or NIV is first-line in cardiogenic oedema. Many patients avoid intubation.", "hi": "Cardiogenic oedema में CPAP या NIV पहली पसंद है। कई रोगी intubation से बच जाते हैं।" },
+        { "en": "In a full circulation, PEEP lowers preload and afterload. Here BP often stays stable.", "hi": "भरे circulation में PEEP preload और afterload घटाता है। यहाँ BP अक्सर स्थिर रहता है।" },
+        { "en": "Oedema fluid is recruitable shunt. EPAP helps oxygen more than FiO2 alone.", "hi": "Oedema का पानी खुल सकने वाला shunt है। अकेले FiO2 से ज़्यादा EPAP ऑक्सीजन में मदद करता है।" }
+      ],
+      "sources": [
+        { "label": "StewardMD protocol: acute respiratory failure, NIV and HFNC (cardiogenic oedema)", "url": "kb/clinical-protocols/acute-respiratory-failure-niv-hfnc.json" },
+        { "label": "ERS/ATS guideline: noninvasive ventilation for acute respiratory failure", "url": "https://doi.org/10.1183/13993003.02426-2016" },
+        { "label": "Tobin MJ, ed. Principles and Practice of Mechanical Ventilation, 3rd ed. McGraw Hill 2013", "url": "" }
+      ]
+    },
+    {
+      "id": "copd",
+      "level": 3,
+      "title": { "en": "COPD: air that cannot get out", "hi": "COPD: हवा जो बाहर नहीं निकल पाती" },
+      "story": {
+        "en": "Mr Singh is 66 years old and smoked for 40 years. A chest infection made his COPD worse. NIV failed and he became drowsy. He was intubated an hour ago.",
+        "hi": "श्री सिंह 66 साल के हैं और 40 साल धूम्रपान किया। सीने के infection से उनका COPD बिगड़ा। NIV विफल हुआ और वे ऊँघने लगे। एक घंटा पहले intubate किए गए।"
+      },
+      "why": {
+        "en": "Narrow airways trap air and tire the muscles. CO2 rose until he became drowsy.",
+        "hi": "सँकरी airways हवा फँसाती हैं और मांसपेशियों को थका देती हैं। CO2 तब तक बढ़ा जब तक वे ऊँघने नहीं लगे।"
+      },
+      "patient": {
+        "age": 66, "sex": "M", "heightCm": 170, "weightKg": 54,
+        "diagnosis": { "en": "Acute exacerbation of COPD with hypercapnic respiratory failure", "hi": "Hypercapnic respiratory failure के साथ COPD का acute exacerbation" },
+        "hb": 15.5, "temp": 37.5, "volumeStatus": "normal",
+        "metabolic": { "hco3": 32, "lactate": 1.2 },
+        "vco2": 220,
+        "drive": { "rate": 22, "effort": 8, "sedation": 0.6 }
+      },
+      "lung": { "c": 60, "r": 22, "flowLimited": true, "shunt": 0.08, "recruitable": 0.1, "deadSpace": 0.25, "upperInflection": 40 },
+      "start": { "mode": "acvc", "settings": { "fio2": 40, "peep": 5, "vt": 600, "rr": 20, "ti": 1.0, "trigType": "flow", "trigFlow": 2 } },
+      "goals": {
+        "spo2": [88, 92], "ph": [7.3, 7.4], "pplatMax": 30, "drivingMax": 15, "vtPerKg": [6, 8],
+        "other": [
+          { "en": "Aim for his usual pH, not a normal PaCO2. His kidneys have kept extra bicarbonate.", "hi": "सामान्य PaCO2 नहीं, उनके सामान्य pH का लक्ष्य रखें। उनकी kidneys ने extra bicarbonate रखा है।" },
+          { "en": "Give time to breathe out: lower rate, shorter Ti, smaller tidal volume.", "hi": "साँस छोड़ने का समय दें: कम rate, छोटा Ti, छोटा tidal volume।" },
+          { "en": "Keep auto-PEEP low and watch BP.", "hi": "Auto-PEEP कम रखें और BP देखें।" }
+        ]
+      },
+      "timeline": [
+        { "t": 1200, "event": "bronchospasm", "note": { "en": "Airways tighten. Expiratory flow slows and trapping worsens.", "hi": "Airways सिकुड़ती हैं। साँस छोड़ने का flow धीमा होता है और trapping बढ़ती है।" } },
+        { "t": 2400, "event": "secretions", "note": { "en": "Thick sputum in the tube raises airway resistance.", "hi": "Tube में गाढ़ा बलगम airway resistance बढ़ाता है।" } }
+      ],
+      "debrief": [
+        { "en": "Flow that does not return to zero means trapped air and auto-PEEP.", "hi": "Flow शून्य पर न लौटे तो हवा फँसी है और auto-PEEP है।" },
+        { "en": "Expiratory time matters most. Cutting the rate lengthens it more than anything else.", "hi": "साँस छोड़ने का समय सबसे ज़रूरी है। Rate घटाने से यह सबसे ज़्यादा बढ़ता है।" },
+        { "en": "Driving PaCO2 to 40 in a chronic retainer causes alkalosis and makes weaning harder.", "hi": "Chronic retainer में PaCO2 को 40 तक लाने से alkalosis होता है और weaning मुश्किल होती है।" },
+        { "en": "Oxygen target is 88 to 92% in this patient group.", "hi": "इस तरह के रोगियों में ऑक्सीजन लक्ष्य 88 से 92% है।" }
+      ],
+      "sources": [
+        { "label": "StewardMD protocol: COPD exacerbation", "url": "kb/clinical-protocols/copd-exacerbation.json" },
+        { "label": "BTS/ICS guideline: ventilatory management of acute hypercapnic respiratory failure", "url": "https://www.brit-thoracic.org.uk/document-library/guidelines/niv/btsics-guideline-for-the-ventilatory-management-of-acute-hypercapnic-respiratory-failure-in-adults/" },
+        { "label": "Tobin MJ, ed. Principles and Practice of Mechanical Ventilation, 3rd ed. McGraw Hill 2013 (dynamic hyperinflation)", "url": "" }
+      ]
+    },
+    {
+      "id": "asthma",
+      "level": 3,
+      "title": { "en": "Near-fatal asthma: the tightest airways", "hi": "जानलेवा asthma: सबसे सँकरी airways" },
+      "story": {
+        "en": "Priya is 24 years old with asthma since childhood. Tonight her chest went silent and she became drowsy. She was intubated in the emergency room.",
+        "hi": "प्रिया 24 साल की हैं और बचपन से asthma है। आज रात उनका सीना silent हो गया और वे ऊँघने लगीं। Emergency में उन्हें intubate किया गया।"
+      },
+      "why": {
+        "en": "Her airways were too narrow to move air. A normal CO2 in a breathless asthmatic is a danger sign.",
+        "hi": "उनकी airways हवा चलाने के लिए बहुत सँकरी थीं। हाँफते asthma रोगी में सामान्य CO2 ख़तरे का संकेत है।"
+      },
+      "patient": {
+        "age": 24, "sex": "F", "heightCm": 158, "weightKg": 50,
+        "diagnosis": { "en": "Near-fatal acute severe asthma", "hi": "जानलेवा acute severe asthma" },
+        "hb": 13, "temp": 37.2, "volumeStatus": "low",
+        "metabolic": { "hco3": 22, "lactate": 3.0 },
+        "vco2": 230,
+        "drive": { "rate": 30, "effort": 12, "sedation": 0.8 }
+      },
+      "lung": { "c": 45, "r": 35, "flowLimited": true, "shunt": 0.1, "recruitable": 0.1, "deadSpace": 0.2, "upperInflection": 35 },
+      "start": { "mode": "acvc", "settings": { "fio2": 60, "peep": 5, "vt": 450, "rr": 20, "ti": 1.0, "trigType": "flow", "trigFlow": 2 } },
+      "goals": {
+        "spo2": [92, 95], "ph": [7.2, 7.45], "pplatMax": 30, "drivingMax": 15, "vtPerKg": [6, 8],
+        "other": [
+          { "en": "Use a low rate and a long expiratory time. Accept a high PaCO2.", "hi": "कम rate और लंबा expiratory time रखें। ऊँचा PaCO2 स्वीकार करें।" },
+          { "en": "Check auto-PEEP with an expiratory hold. A falling BP may be trapped air.", "hi": "Expiratory hold से auto-PEEP जाँचें। गिरता BP फँसी हवा हो सकता है।" }
+        ]
+      },
+      "timeline": [
+        { "t": 600, "event": "bronchospasm", "note": { "en": "Bronchospasm worsens. Peak pressure jumps and expiratory flow slows.", "hi": "Bronchospasm बढ़ता है। Peak pressure उछलता है और expiratory flow धीमा होता है।" } },
+        { "t": 3000, "event": "improve", "note": { "en": "Steroids and bronchodilators start to work. Resistance falls.", "hi": "Steroids और bronchodilators असर करने लगे। Resistance घटता है।" } }
+      ],
+      "debrief": [
+        { "en": "In asthma the danger is gas stacking breath after breath. Rate is the main lever.", "hi": "Asthma में ख़तरा है साँस दर साँस gas का जमा होना। Rate मुख्य lever है।" },
+        { "en": "Peak pressure is high from resistance. Plateau and auto-PEEP show the real lung strain.", "hi": "Peak pressure resistance से ऊँचा है। Plateau और auto-PEEP फेफड़े का असली तनाव दिखाते हैं।" },
+        { "en": "If BP crashes from trapping, disconnecting briefly lets the trapped air out.", "hi": "Trapping से BP गिरे तो थोड़ी देर disconnect करने से फँसी हवा निकल जाती है।" },
+        { "en": "Permissive hypercapnia is safer than chasing a normal PaCO2 here.", "hi": "यहाँ सामान्य PaCO2 के पीछे भागने से permissive hypercapnia ज़्यादा सुरक्षित है।" }
+      ],
+      "sources": [
+        { "label": "StewardMD protocol: acute asthma, adult", "url": "kb/clinical-protocols/acute-asthma-adult.json" },
+        { "label": "GINA 2026 Strategy Report", "url": "https://ginasthma.org/wp-content/uploads/2026/05/GINA-2026-Strategy-Report-WMS.pdf" },
+        { "label": "Tobin MJ, ed. Principles and Practice of Mechanical Ventilation, 3rd ed. McGraw Hill 2013 (ventilation in severe asthma)", "url": "" }
+      ]
+    },
+    {
+      "id": "metabolic-dka",
+      "level": 3,
+      "title": { "en": "DKA: do not take away her compensation", "hi": "DKA: उसका compensation मत छीनिए" },
+      "story": {
+        "en": "Anjali is 22 years old with type 1 diabetes. She has severe DKA and kept vomiting. She was breathing 34 times a minute. Her GCS fell to 7, so she was intubated.",
+        "hi": "अंजलि 22 साल की हैं और type 1 diabetes है। उन्हें गंभीर DKA है और बार बार उल्टी हो रही थी। वे मिनट में 34 बार साँस ले रही थीं। GCS 7 तक गिरा, इसलिए intubate किया गया।"
+      },
+      "why": {
+        "en": "She could not protect her airway. Her lungs are fine; the acid is in her blood.",
+        "hi": "वे अपना airway नहीं बचा पा रही थीं। फेफड़े ठीक हैं; acid उनके ख़ून में है।"
+      },
+      "patient": {
+        "age": 22, "sex": "F", "heightCm": 162, "weightKg": 58,
+        "diagnosis": { "en": "Severe diabetic ketoacidosis with reduced consciousness", "hi": "घटी चेतना के साथ गंभीर diabetic ketoacidosis" },
+        "hb": 14, "temp": 36.9, "volumeStatus": "low",
+        "metabolic": { "hco3": 6, "lactate": 2.0 },
+        "vco2": 250,
+        "drive": { "rate": 34, "effort": 10, "sedation": 0.7 }
+      },
+      "lung": { "c": 50, "r": 10, "flowLimited": false, "shunt": 0.06, "recruitable": 0.3, "deadSpace": 0.05, "upperInflection": 35 },
+      "start": { "mode": "acvc", "settings": { "fio2": 40, "peep": 5, "vt": 400, "rr": 14, "ti": 0.9, "trigType": "flow", "trigFlow": 2 } },
+      "goals": {
+        "spo2": [92, 96], "paco2": [16, 26], "pplatMax": 30, "drivingMax": 15, "vtPerKg": [6, 8],
+        "other": [
+          { "en": "Match the minute ventilation she had before intubation. A normal rate is dangerous here.", "hi": "Intubation से पहले जितना minute ventilation था, उतना रखें। यहाँ सामान्य rate ख़तरनाक है।" },
+          { "en": "Expected PaCO2 by Winter's formula is 1.5 x 6 + 8, about 17.", "hi": "Winter's formula से अपेक्षित PaCO2 है 1.5 x 6 + 8, लगभग 17।" }
+        ]
+      },
+      "timeline": [
+        { "t": 7200, "event": "improve", "note": { "en": "Insulin and fluids are working. Bicarbonate slowly rises.", "hi": "Insulin और fluids असर कर रहे हैं। Bicarbonate धीरे धीरे बढ़ता है।" } }
+      ],
+      "debrief": [
+        { "en": "Her fast breathing was keeping her alive. It blew off CO2 to balance the acid.", "hi": "उनकी तेज़ साँस उन्हें ज़िंदा रख रही थी। वह CO2 निकालकर acid को संतुलित कर रही थी।" },
+        { "en": "At rate 14, PaCO2 climbs toward 40 and pH can fall below 7.0.", "hi": "Rate 14 पर PaCO2 40 की ओर चढ़ता है और pH 7.0 से नीचे जा सकता है।" },
+        { "en": "Set a high rate from the first breath. Check a gas within 30 minutes.", "hi": "पहली साँस से ऊँचा rate set करें। 30 मिनट में gas जाँचें।" },
+        { "en": "The ventilator only buys time. Insulin and fluids treat the acid.", "hi": "Ventilator केवल समय देता है। Acid का इलाज insulin और fluids हैं।" }
+      ],
+      "sources": [
+        { "label": "StewardMD protocol: diabetic ketoacidosis", "url": "kb/clinical-protocols/diabetic-ketoacidosis.json" },
+        { "label": "StewardMD protocol: rapid sequence intubation", "url": "kb/clinical-protocols/rapid-sequence-intubation.json" },
+        { "label": "Narke lesson asr7-abg (Winter's formula)", "url": "narke/learn/lessons/asr7-abg.json" }
+      ]
+    },
+    {
+      "id": "ards",
+      "level": 4,
+      "title": { "en": "ARDS: a small, stiff lung", "hi": "ARDS: छोटा, सख़्त फेफड़ा" },
+      "story": {
+        "en": "Mr Khan is 38 years old, tall and heavy. Influenza turned into severe ARDS. Both lungs are white on X-ray. He arrived on 600 mL, set by actual weight.",
+        "hi": "श्री ख़ान 38 साल के हैं, लंबे और भारी। Influenza गंभीर ARDS बन गया। X-ray पर दोनों फेफड़े सफ़ेद हैं। वे असली वज़न से set 600 mL पर आए।"
+      },
+      "why": {
+        "en": "Leaky capillaries flooded his alveoli. Only a small part of the lung still takes air.",
+        "hi": "रिसती capillaries ने alveoli भर दिए। फेफड़े का छोटा हिस्सा ही अब हवा ले पाता है।"
+      },
+      "patient": {
+        "age": 38, "sex": "M", "heightCm": 175, "weightKg": 90,
+        "diagnosis": { "en": "Severe ARDS from influenza pneumonia", "hi": "Influenza pneumonia से गंभीर ARDS" },
+        "hb": 12, "temp": 38.8, "volumeStatus": "normal",
+        "metabolic": { "hco3": 20, "lactate": 2.4 },
+        "vco2": 240,
+        "drive": { "rate": 30, "effort": 10, "sedation": 0.8 }
+      },
+      "lung": { "c": 28, "r": 14, "flowLimited": false, "shunt": 0.4, "recruitable": 0.5, "deadSpace": 0.3, "upperInflection": 26 },
+      "start": { "mode": "acvc", "settings": { "fio2": 80, "peep": 5, "vt": 600, "rr": 18, "ti": 0.9, "trigType": "flow", "trigFlow": 2 } },
+      "goals": {
+        "spo2": [88, 95], "ph": [7.2, 7.45], "pplatMax": 30, "drivingMax": 15, "vtPerKg": [4, 8],
+        "other": [
+          { "en": "Tidal volume 6 mL/kg predicted body weight, range 4 to 8. Here about 420 mL.", "hi": "Tidal volume 6 mL/kg predicted body weight, सीमा 4 से 8। यहाँ लगभग 420 mL।" },
+          { "en": "Plateau below 30 cmH2O and driving pressure as low as possible, ideally 15 or less.", "hi": "Plateau 30 cmH2O से नीचे और driving pressure जितना कम हो सके, आदर्श रूप से 15 या कम।" },
+          { "en": "Oxygenation goal PaO2 55 to 80 mmHg or SpO2 88 to 95%.", "hi": "Oxygenation लक्ष्य PaO2 55 से 80 mmHg या SpO2 88 से 95%।" },
+          { "en": "Raise the rate up to about 35 and accept permissive hypercapnia.", "hi": "Rate लगभग 35 तक बढ़ाएँ और permissive hypercapnia स्वीकार करें।" }
+        ]
+      },
+      "timeline": [
+        { "t": 2400, "event": "disconnect", "note": { "en": "The circuit was opened for suction. PEEP was lost and alveoli collapsed again.", "hi": "Suction के लिए circuit खोला गया। PEEP चला गया और alveoli फिर बैठ गए।" } },
+        { "t": 5400, "event": "fever", "note": { "en": "A fever spike raises CO2 production.", "hi": "बुख़ार चढ़ने से CO2 बनना बढ़ता है।" } }
+      ],
+      "debrief": [
+        { "en": "ARDS lungs are small, not just stiff. Small lungs need small breaths.", "hi": "ARDS के फेफड़े सिर्फ़ सख़्त नहीं, छोटे भी हैं। छोटे फेफड़ों को छोटी साँसें चाहिए।" },
+        { "en": "Driving pressure is plateau minus PEEP. It tracks strain on the open lung.", "hi": "Driving pressure है plateau minus PEEP। यह खुले फेफड़े पर तनाव दिखाता है।" },
+        { "en": "PEEP that recruits lowers driving pressure. PEEP that overdistends raises it.", "hi": "जो PEEP फेफड़ा खोलता है वह driving pressure घटाता है। जो ज़्यादा खींचता है वह बढ़ाता है।" },
+        { "en": "If PaO2/FiO2 stays below 150, prone positioning for 16 hours or more is the usual next step.", "hi": "PaO2/FiO2 150 से नीचे रहे तो 16 घंटे या ज़्यादा prone position सामान्य अगला कदम है।" }
+      ],
+      "sources": [
+        { "label": "StewardMD protocol: ARDS lung-protective ventilation", "url": "kb/clinical-protocols/ards-lung-protective-ventilation.json" },
+        { "label": "ARDS Network. Lower tidal volumes in ALI and ARDS. N Engl J Med 2000;342:1301-1308", "url": "https://doi.org/10.1056/NEJM200005043421801" },
+        { "label": "Amato MBP, et al. Driving pressure and survival in ARDS. N Engl J Med 2015;372:747-755", "url": "https://doi.org/10.1056/NEJMsa1410639" },
+        { "label": "ATS 2024 ARDS guideline", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10870893/" }
+      ]
+    },
+    {
+      "id": "trauma-contusion",
+      "level": 4,
+      "title": { "en": "Chest trauma: bruised lung, hidden air leak", "hi": "Chest trauma: चोटिल फेफड़ा, छिपा air leak" },
+      "story": {
+        "en": "Arjun is 30 years old. His motorbike hit a truck. He has broken left ribs and a bruised left lung. He lost blood and was intubated in the emergency room.",
+        "hi": "अर्जुन 30 साल के हैं। उनकी motorbike truck से टकराई। बाईं पसलियाँ टूटी हैं और बायाँ फेफड़ा चोटिल है। ख़ून बहा और emergency में intubate किए गए।"
+      },
+      "why": {
+        "en": "Bleeding into the lung causes shunt. Pain and broken ribs stop him breathing deeply.",
+        "hi": "फेफड़े में ख़ून आने से shunt होता है। दर्द और टूटी पसलियाँ गहरी साँस नहीं लेने देतीं।"
+      },
+      "patient": {
+        "age": 30, "sex": "M", "heightCm": 178, "weightKg": 80,
+        "diagnosis": { "en": "Left pulmonary contusion with rib fractures and blood loss", "hi": "पसली fractures और ख़ून की कमी के साथ बाएँ फेफड़े का contusion" },
+        "hb": 9, "temp": 35.8, "volumeStatus": "low",
+        "metabolic": { "hco3": 19, "lactate": 3.5 },
+        "vco2": 220,
+        "drive": { "rate": 26, "effort": 8, "sedation": 0.7 }
+      },
+      "lung": { "c": 35, "r": 12, "flowLimited": false, "shunt": 0.25, "recruitable": 0.35, "deadSpace": 0.15, "upperInflection": 28 },
+      "start": { "mode": "acvc", "settings": { "fio2": 60, "peep": 8, "vt": 480, "rr": 18, "ti": 0.9, "trigType": "flow", "trigFlow": 2 } },
+      "goals": {
+        "spo2": [92, 96], "paco2": [35, 45], "pplatMax": 30, "drivingMax": 15, "vtPerKg": [6, 8],
+        "other": [
+          { "en": "He is bleeding and dry. High PEEP and auto-PEEP can drop his BP.", "hi": "वे bleed कर रहे हैं और पानी कम है। ऊँचा PEEP और auto-PEEP BP गिरा सकते हैं।" },
+          { "en": "Any sudden change: think DOPE, and look for a pneumothorax first.", "hi": "कोई भी अचानक बदलाव: DOPE सोचें, और पहले pneumothorax देखें।" }
+        ]
+      },
+      "timeline": [
+        { "t": 900, "event": "pneumothorax", "note": { "en": "A broken rib tears the lung. Air builds up under pressure in the left chest.", "hi": "टूटी पसली फेफड़े को फाड़ती है। बाएँ सीने में दबाव से हवा भरती है।" } },
+        { "t": 2700, "event": "secretions", "note": { "en": "Blood and secretions collect in the airway.", "hi": "Airway में ख़ून और secretions जमा होते हैं।" } }
+      ],
+      "debrief": [
+        { "en": "Positive pressure can turn a small pneumothorax into a tension pneumothorax.", "hi": "Positive pressure छोटे pneumothorax को tension pneumothorax बना सकता है।" },
+        { "en": "The clue was a sudden rise in peak and plateau, then falling SpO2 and BP.", "hi": "संकेत था peak और plateau का अचानक बढ़ना, फिर SpO2 और BP का गिरना।" },
+        { "en": "Tension pneumothorax is a clinical diagnosis. Decompression comes before the X-ray.", "hi": "Tension pneumothorax clinical diagnosis है। Decompression X-ray से पहले आता है।" },
+        { "en": "In a bleeding patient, low Hb lowers oxygen delivery even when SpO2 looks good.", "hi": "Bleed करते रोगी में कम Hb, SpO2 अच्छा दिखने पर भी oxygen delivery घटाता है।" }
+      ],
+      "sources": [
+        { "label": "StewardMD protocol: acute respiratory failure, NIV and HFNC (chest trauma)", "url": "kb/clinical-protocols/acute-respiratory-failure-niv-hfnc.json" },
+        { "label": "StewardMD protocol: ARDS lung-protective ventilation", "url": "kb/clinical-protocols/ards-lung-protective-ventilation.json" },
+        { "label": "Tobin MJ, ed. Principles and Practice of Mechanical Ventilation, 3rd ed. McGraw Hill 2013 (barotrauma)", "url": "" }
+      ]
+    }
+  ]
+}
