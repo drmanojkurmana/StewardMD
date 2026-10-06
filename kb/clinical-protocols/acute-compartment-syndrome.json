@@ -98,40 +98,6 @@
  ],
  "algorithms": [
   {
-   "id": "delta-pressure-pathway",
-   "title": "Delta Pressure Evaluation and Decompression Pathway",
-   "steps": [
-    { "step": "Suspect and Expose", "action": "Pain out of proportion or pain on passive stretch: release all circumferential dressings, casts and padding down to skin, elevate the limb and re-evaluate within 30 minutes.", "critical": true },
-    { "step": "Reliable Examination", "branch": "Examinable Patient", "action": "If pain settles with a normal neurovascular examination, continue hourly observation for 48 hours after tibial fracture or fixation." },
-    { "step": "Measure Compartment Pressure", "branch": "Unreliable or Inconclusive", "action": "Measure pressure in all suspected compartments with simultaneous diastolic blood pressure. Delta pressure equals diastolic BP minus compartment pressure." },
-    { "step": "Delta Pressure Below 30 mmHg", "branch": "Delta P Low", "action": "With the clinical picture this supports compartment syndrome: keep nil by mouth and perform immediate fasciotomy of all involved compartments.", "critical": true },
-    { "step": "Delta Pressure 30 mmHg or More", "branch": "Delta P Preserved", "action": "Continue hourly neurovascular monitoring and repeat measurement if the picture worsens. A single normal reading never rules out compartment syndrome." }
-   ],
-   "caption": "Delta pressure below 30 mmHg with the clinical picture supports fasciotomy (BOAST 2025)."
-  }
- ],
- "tables": [
-  {
-   "id": "findings-timeline-matrix",
-   "title": "Clinical Findings: Sensitivity, Specificity and Timeline",
-   "headers": ["Finding", "Timing", "Test Value"],
-   "rows": [
-    ["Pain out of proportion", "Earliest", "Sensitive early warning and the most reliable trigger to act"],
-    ["Pain on passive stretch", "Early", "Sensitive classic bedside test for the involved compartment"],
-    ["Tense swollen compartment", "Early to middle", "Supportive but examiner dependent and poorly specific"],
-    ["Paraesthesia", "Middle", "Nerve ischaemia has begun; never wait for this sign to act"],
-    ["Weakness or paralysis", "Late", "Motor loss means advanced ischaemia; decompress immediately"],
-    ["Pallor and absent pulses", "Late", "Very late and insensitive; palpable pulses never exclude the diagnosis"]
-   ],
-   "caption": "Early signs are sensitive but non-specific; late signs are specific but mean ischaemia is advanced."
-  }
- ],
- "review": {
-  "status": "ai_drafted",
-  "compiled": "2026-09-25"
- },
- "algorithms": [
-  {
    "id": "acs-decompression-algo",
    "title": "Acute Compartment Syndrome Assessment and Decompression Pathway",
    "steps": [
@@ -209,12 +175,39 @@
    "caption": "Diagnosis is primarily clinical; irreversible muscle necrosis occurs within 6 to 8 hours."
   }
  ],
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
  "calculators": [
   {
    "id": "calc-delta-p",
    "title": "Delta Pressure (Perfusion Pressure) Calculator",
    "linkId": "delta_pressure",
    "description": "Calculates delta P (Diastolic BP minus Compartment Pressure); delta P <= 30 mmHg indicates tissue ischaemia and need for fasciotomy."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "acute-compartment-syndrome-diagram",
+   "title": "Acute compartment syndrome of the limb: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
   }
  ]
 }

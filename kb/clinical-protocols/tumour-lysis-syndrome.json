@@ -161,41 +161,6 @@
  ],
  "algorithms": [
   {
-   "id": "tls-prevention-treatment",
-   "title": "TLS Risk Stratified Prevention and Treatment Pathway",
-   "steps": [
-    { "step": "Risk Stratify Before Therapy", "action": "High risk: Burkitt lymphoma or leukaemia, ALL, AML with WBC 100 x 10^9/L or more, bulky high-grade NHL with LDH above 2 times normal, or pre-existing renal impairment. All others are low or intermediate risk.", "critical": true },
-    { "step": "Low or Intermediate Risk Prophylaxis", "branch": "Low or Intermediate", "action": "Oral or IV fluids 2 to 3 L per day on the day before, the day of and the day after starting therapy, plus allopurinol 300 mg once daily for 7 days started 12 to 24 hours before treatment." },
-    { "step": "High Risk Prophylaxis", "branch": "High Risk", "action": "IV hydration from 24 hours before treatment to a urine output of 100 mL/m2/hour, plus rasburicase 3 mg IV single dose 30 to 60 minutes before therapy. Exclude G6PD deficiency before giving rasburicase.", "critical": true },
-    { "step": "Established TLS Treatment", "branch": "TLS Present", "action": "Rasburicase 0.2 mg/kg IV once daily, aggressive IV fluids above 3 L/m2/day with no added potassium, stop allopurinol while on rasburicase, and involve renal and ICU teams early for dialysis.", "critical": true }
-   ],
-   "caption": "Prevention and treatment pathway aligned with BSH 2025 TLS guidelines."
-  }
- ],
- "tables": [
-  {
-   "id": "cairo-bishop-classification",
-   "title": "Cairo-Bishop Classification: Laboratory vs Clinical TLS",
-   "headers": ["Criterion", "Laboratory TLS", "Clinical TLS"],
-   "rows": [
-    ["Definition", "2 or more metabolic changes in the window below", "Laboratory TLS plus kidney injury, arrhythmia or seizure"],
-    ["Time Window", "3 days before to 7 days after starting therapy", "Same window as laboratory TLS"],
-    ["Uric Acid", "476 micromol/L (8 mg/dL) or more, or 25% change from baseline", "Uses the laboratory uric acid criterion"],
-    ["Potassium", "6.0 mmol/L or more, or 25% change from baseline", "Uses the laboratory potassium criterion"],
-    ["Phosphate", "1.45 mmol/L (4.5 mg/dL) or more, or 25% change from baseline", "Uses the laboratory phosphate criterion"],
-    ["Calcium", "1.75 mmol/L (7 mg/dL) or less, or 25% change from baseline", "Uses the laboratory calcium criterion"],
-    ["Kidney Criterion", "Not part of laboratory TLS", "Creatinine 1.5 times the upper limit of normal or more"],
-    ["Cardiac or Neurological", "Not part of laboratory TLS", "Cardiac arrhythmia, sudden death, or seizure"]
-   ],
-   "caption": "Laboratory TLS needs 2 or more metabolic changes; clinical TLS adds end organ effects."
-  }
- ],
- "review": {
-  "status": "ai_drafted",
-  "compiled": "2026-09-25"
- },
- "algorithms": [
-  {
    "id": "tls-strat-algo",
    "title": "TLS Risk Stratification and Management Algorithm",
    "steps": [
@@ -266,6 +231,33 @@
     ]
    ],
    "caption": "Diagnosis requires 2 or more laboratory criteria within 3 to 7 days of treatment."
+  }
+ ],
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "diagrams": [
+  {
+   "id": "tumour-lysis-syndrome-diagram",
+   "title": "Tumour lysis syndrome (adult): Peripheral Blood Smear & Haematological Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/haematology-diagram.svg?v=kbdx1",
+   "caption": "Haematological schematic illustrating peripheral blood cellular morphology, erythrocyte indices, white blood cell lineages, and coagulation cascade.",
+   "annotations": [
+    {
+     "label": "Erythrocytes",
+     "description": "Cell size, central pallor, polychromasia, and inclusion bodies."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Granulocytic, lymphocytic, and monocytic lineage maturation."
+    },
+    {
+     "label": "Hemostatic Markers",
+     "description": "Platelet aggregation, coagulation factor activation, and fibrinolysis."
+    }
+   ]
   }
  ]
 }
