@@ -58,7 +58,7 @@ try {
   await load(BASE);
   const ENG = /\/(specialty(-(core|data|stage|shell|learn|bank|explore|tools|notes))?\.(js|css)|narke\.(js|css)|narke-models\/)/;
   ok(reqs.some((u) => /narke-loader\.js\?v=nrk2/.test(u)) && !reqs.some((u) => ENG.test(u)), "app boot loads narke-loader.js and no engine or Narkē file" + (reqs.filter((u) => ENG.test(u)).length ? ": " + reqs.filter((u) => ENG.test(u)).join(", ") : ""));
-  ok(await ev(tile) === false, "while it is built, Narkē is off Home by default (available in Add Tool)");
+  ok(await until(tile, 10000), "ON for all (owner 2026-10-06): the Narkē home tile renders by default");
   await ev(`SMD_openRoute("narke"); return 1;`);
   ok(await until(`return NARKE.isOpen() && !!document.getElementById("smdNarke");`, 20000), "stewardmd://narke opens the Narkē overlay");
   ok(await until(`return !!document.querySelector('#smdNarke [data-act=pick][data-t=learn]');`, 20000), "first open loads Narkē and asks Learn or Test");
@@ -81,6 +81,7 @@ try {
 
   await ev(`localStorage.setItem("smd_narke","0"); return 1;`);
   await load(BASE);
+  ok(await ev(tile) === false, "smd_narke=0: the Narkē home tile is absent");
   await ev(`SMD_openRoute("narke"); return 1;`); await sleep(500);
   ok(await ev(`return !NARKE.isOpen();`) === true, "smd_narke=0: stewardmd://narke does not open Narkē");
   await ev(`localStorage.removeItem("smd_narke"); return 1;`);
