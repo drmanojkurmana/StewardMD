@@ -209,13 +209,15 @@
   }
 
   /* ---------- consent ---------- */
+  // Remembered on this phone (smd_prep_arena_in) so prep-nudges.js can mention the sprint only to players.
+  function consentIs(c) { A.consent = c; try { if (c.joined) G.localStorage.setItem("smd_prep_arena_in", "1"); else G.localStorage.removeItem("smd_prep_arena_in"); } catch (e) {} }
   function displayName() { var u = user(), n = (A.consent && A.consent.name) || (u && u.displayName) || ""; n = String(n).trim().slice(0, 40); return n || "Doctor"; }
   // Runs then() once the player has joined: guests and offline get a message, others the consent sheet first.
   function joined(then) {
     if (!online()) return H.toast("Needs a connection. Practice works offline.");
     if (!user()) return H.toast("Sign in to compete. Practice works without an account.");
     if (A.consent && A.consent.joined) return then();
-    api("GET", "consent").then(function (j) { A.consent = { joined: !!j.joined, name: j.name || "" }; if (A.consent.joined) then(); else openSheet(then); }, function (e) { H.toast(errText(e)); });
+    api("GET", "consent").then(function (j) { consentIs({ joined: !!j.joined, name: j.name || "" }); if (A.consent.joined) then(); else openSheet(then); }, function (e) { H.toast(errText(e)); });
   }
   function openSheet(then) {
     var r = root(); if (!r) return;
@@ -241,14 +243,14 @@
   function join(btn) {
     btn.disabled = true; btn.textContent = "Joining";
     api("POST", "consent", {}).then(function (j) {
-      A.consent = { joined: true, name: (j && j.name) || displayName() };
+      consentIs({ joined: true, name: (j && j.name) || displayName() });
       var s = closeSheet(); if (s && s.then) s.then();
     }, function (e) { btn.disabled = false; btn.textContent = "Join Arena"; H.toast(errText(e)); });
   }
   function leaveArena() {
     if (G.confirm && !G.confirm("Leave the Arena? Your Arena results, leaderboard places, friends, challenges, college tag and study groups are deleted. Practice on this phone is kept.")) return;
     api("DELETE", "consent").then(function () {
-      A.consent = { joined: false, name: "" }; A.events = null;
+      consentIs({ joined: false, name: "" }); A.events = null;
       H.toast("You left the Arena. Your results, friends and groups were deleted.");
       H.back();
     }, function (e) { H.toast(errText(e)); });
@@ -495,7 +497,7 @@
     if (!arena) return;
     var put = function (html) { var el = root() && root().querySelector("#pnArenaStats"); if (el) el.innerHTML = html; };
     api("GET", "consent").then(function (c) {
-      A.consent = { joined: !!c.joined, name: c.name || "" };
+      consentIs({ joined: !!c.joined, name: c.name || "" });
       if (!c.joined) return put('<div class="pn-group">' + H.row("a-boards", H.ico("trophy"), "Not in the Arena", "Join to enter daily sprints and battles") + "</div>");
       return api("GET", "me/stats").then(function (j) { put(arenaStatsHtml(j)); });
     }).then(null, function (e) { put('<p class="pn-err" role="alert">' + esc(errText(e)) + "</p>"); });

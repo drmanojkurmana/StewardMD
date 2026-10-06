@@ -31,3 +31,8 @@ binding = "PREP_BANK_R2"
 bucket_name = "stewardmd-offline"
 
 # FIREBASE_PROJECT_ID defaults to stewardmd-498ec in functions/_fbauth.js.
+
+# PrepNucleus social nudges: the evening "friends studied today" digest, 13:00 UTC = 18:30 IST (src/index.js scheduled).
+# Needs the secret PREP_CRON_TOKEN here (npx wrangler secret put PREP_CRON_TOKEN) and the same value in Pages.
+[triggers]
+crons = ["0 13 * * *"]

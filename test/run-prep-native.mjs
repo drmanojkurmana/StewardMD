@@ -3,6 +3,7 @@
  * What must hold: the plan settings sheet shows "Sync progress across devices" off by default; signed out it is disabled
  * and says "Sign in to sync"; turning it on calls PREP_SYNC.enable(); Sync now calls sync("manual"); turning it off offers
  * keeping or deleting the server copy and passes { wipe }; opening PrepNucleus syncs when sync is on. The reminder switch
+ * (Smart nudges by default, test/run-prep-nudges.mjs; "Daily reminder only" here)
  * asks for notification permission only when tapped, then schedules one notification (stable id, next 07:30, the plan's
  * count, route prep) and cancels it when turned off; a denied permission shows the state inline and keeps the time. The
  * widget gets the snapshot JSON; starting a plan item starts the Live Activity. stewardmd://prep opens PrepNucleus.
@@ -137,6 +138,13 @@ try {
   await click("#pnPlanSheet [data-act=p-n-rem]");
   ok(await until(`return window.__pn.ln.some(function(c){return c[0]==="schedule";});`, 3000), "turning it on schedules a reminder");
   ok(await P(`L.ln.findIndex(function(c){return c[0]==="requestPermissions";}) >= 0`) === true, "permission asked on the tap");
+  // Smart nudges are the default: a set in the nudge id range, no single daily reminder.
+  const sm = JSON.parse(await P(`JSON.stringify(L.ln.filter(function(c){return c[0]==="schedule";}).pop()[1].notifications)`));
+  ok(sm.length >= 1 && sm.every((n) => n.id >= 2147483001 && n.id < 2147483061 && n.extra.route === "prep" && n.title && n.body), "smart by default: " + sm.length + " nudges, first: " + JSON.stringify(sm[0]));
+  ok(await ev(`var b=document.querySelector('#pnPlanSheet [data-act=p-n-mode][data-v=smart]'); return !!b && b.getAttribute("aria-checked")==="true";`) === true && /Smart nudges, at most 2 a day/.test(await text("#pnPlanSheet [data-act=p-n-rem]")), "Smart nudges is checked and named on the switch");
+  await click('#pnPlanSheet [data-act=p-n-mode][data-v=daily]');
+  ok(await until(`return window.__pn.ln.some(function(c){return c[0]==="schedule"&&c[1].notifications[0].id===2147483100;});`, 3000), "Daily reminder only schedules the single reminder");
+  ok(await P(`(function(){var i=L.ln.findIndex(function(c){return c[0]==="schedule"&&c[1].notifications[0].id===2147483100;}); return L.ln.slice(0,i).some(function(c){return c[0]==="cancel"&&c[1].notifications.length===60&&c[1].notifications[0].id===2147483001;});})()`) === true, "the nudges are cancelled before");
   const sc = JSON.parse(await P(`JSON.stringify(L.ln.filter(function(c){return c[0]==="schedule";}).pop()[1].notifications[0])`));
   const want = (() => { const n = new Date(), d = new Date(n.getFullYear(), n.getMonth(), n.getDate(), 7, 30); if (d <= n) d.setDate(d.getDate() + 1); return d.getTime(); })();
   const nPlan = items.length, body = new Date(want).getDate() === new Date().getDate() && nPlan ? "Today's plan: " + nPlan + (nPlan === 1 ? " item" : " items") : "Today's plan is ready";

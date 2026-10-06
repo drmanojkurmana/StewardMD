@@ -140,7 +140,7 @@ test("wiring: index.html boots only the loader, at the loader's token; home, bac
   const home = read("home.js");
   assert.match(home, /act: "prep", ic: "quiz"/);
   assert.match(home, /localStorage\.getItem\("smd_prep"\) !== "0"/);
-  assert.match(home, /prep: function \(\) \{[\s\S]{0,200}homeToolEligible/);
+  assert.match(home, /prep: function \(opts\) \{[\s\S]{0,200}homeToolEligible/);
   const sb = read("swipe-back.js");
   assert.match(sb, /window\.PREP\.isOpen\(\)\) return true/);
   assert.match(sb, /window\.PREP\.back\(\) !== false/);

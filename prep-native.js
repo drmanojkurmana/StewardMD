@@ -2,10 +2,13 @@
    Plan: vault/plans/PrepNucleus-Plan2.md (phase 4). Loaded by prep-loader.js after prep-plan.js. Every native call is
    guarded: on the web (or a build without a plugin) each part quietly does nothing.
 
-   Reminder: one local notification (@capacitor/local-notifications) at pl.rem ("HH:MM"), scheduled for its next
-   occurrence only under a stable id, and re-scheduled on each open and plan change so the count stays fresh. On or off
-   is per device (localStorage smd_prep_rem = "1"); the time itself lives in the plan. Permission is asked only when the
-   student turns the reminder on. A tap opens PrepNucleus home (extra.route "prep", routed by native-push.js).
+   Reminders: on or off per device (localStorage smd_prep_rem = "1"); the time itself lives in the plan. Permission is
+   asked only when the student turns them on. Two modes (localStorage smd_prep_ndg_mode, per device): "smart" (the
+   default) hands every flush to prep-nudges.js, which schedules personal nudges (vault/plans/PrepNucleus-Nudges.md);
+   "daily" is one local notification (@capacitor/local-notifications) at pl.rem, scheduled for its next occurrence only
+   under a stable id and re-scheduled on each open and plan change so the count stays fresh. Quiet hours (smart mode)
+   live in prep-nudges.js. A tap opens PrepNucleus (extra.route "prep", extra.prep = PREP.open options, routed by
+   native-push.js).
    Widget and Live Activity: Capacitor.Plugins.PrepWidgets (setData, activityStatus, startActivity, updateActivity,
    endActivity) with { v: 1, score, exam, daysLeft, done, total, next, day, updated }. The Live Activity starts when the
    student starts an item of today's plan and the system allows it (never prompted), follows the items, and ends when
@@ -75,7 +78,7 @@
 
   /* ================= browser ================= */
   var H = null;
-  var R = { perm: null, start: false, timer: 0, last: "", remKey: "", confirmOff: false, msg: "", wired: false, at: null };
+  var R = { perm: null, start: false, timer: 0, last: "", remKey: "", ndg: "", confirmOff: false, msg: "", wired: false, at: null };
   function noop() {}
   function cap() { return G.Capacitor || null; }
   function native() { var C = cap(); return !!(C && (typeof C.isNativePlatform === "function" ? C.isNativePlatform() : (C.platform && C.platform !== "web"))); }
@@ -87,6 +90,8 @@
   function host() { return H || (G.PREP && G.PREP._host) || null; }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function remOn() { return lsGet("smd_prep_rem") === "1"; }
+  function nudges() { return G.PREP_NUDGES || null; }
+  function smart() { return lsGet("smd_prep_ndg_mode") !== "daily" && !!nudges(); }
   function root() { var h = host(); return h && h.root(); }
 
   /* ---------- feed: widget, Live Activity, reminder ---------- */
@@ -105,7 +110,7 @@
       if (key !== R.last) { R.last = key; call(W, "setData", { data: json }).catch(noop); }
       activity(W, d, json);
     }
-    reminder(x.planDay, x.items.length);
+    reminder(x.planDay, x.items.length, false, x);
   }
   // Debounced: an answer, a plan change, home mounting and a sync can all land within a moment.
   function changed() { if (R.timer) G.clearTimeout(R.timer); R.timer = G.setTimeout(flush, 600); }
@@ -120,10 +125,17 @@
   }
   function cancelReminder(LN) { R.remKey = "off"; return call(LN, "cancel", { notifications: [{ id: NOTIF_ID }] }).catch(noop); }
   // Re-schedules only when the time or text changed; never asks for permission (that happens on the switch).
-  function reminder(planDay, n, force) {
+  function reminder(planDay, n, force, x) {
     var LN = plug("LocalNotifications"); if (!LN) return Promise.resolve();
-    var h = host(), rem = h && h.store().pl && h.store().pl.rem;
-    if (!rem || !remOn()) return R.remKey !== "off" || force ? cancelReminder(LN) : Promise.resolve();
+    var h = host(), rem = h && h.store().pl && h.store().pl.rem, N = nudges();
+    if (!rem || !remOn()) { if (N && (R.ndg !== "off" || force)) { R.ndg = "off"; N.stop(LN); } return R.remKey !== "off" || force ? cancelReminder(LN) : Promise.resolve(); }
+    // Smart: the nudges replace the single daily reminder.
+    if (smart()) {
+      R.ndg = "on";
+      var c = R.remKey !== "off" || force ? cancelReminder(LN) : Promise.resolve();
+      return c.then(function () { return N.feed(h, x || data(), LN); });
+    }
+    if (N && (R.ndg !== "off" || force)) { R.ndg = "off"; N.stop(LN); }
     var p = reminderPayload(rem, Date.now(), planDay, n); if (!p) return Promise.resolve();
     var key = p.schedule.at.getTime() + "|" + p.body;
     if (key === R.remKey && !force) return Promise.resolve();
@@ -133,7 +145,7 @@
       return call(LN, "cancel", { notifications: [{ id: NOTIF_ID }] }).catch(noop).then(function () { return call(LN, "schedule", { notifications: [p] }); }).then(function () { R.remKey = key; });
     }).catch(noop);
   }
-  function remNow(force) { var x = data(); return reminder(x ? x.planDay : null, x ? x.items.length : 0, force); }
+  function remNow(force) { var x = data(); return reminder(x ? x.planDay : null, x ? x.items.length : 0, force, x); }
 
   /* ---------- hooks from prep.js ---------- */
   function opened(h) {
@@ -164,17 +176,38 @@
     return '<button type="button" class="pl-sw" role="switch" aria-checked="' + !!on + '" data-act="' + act + '"' + (dis ? " disabled" : "") + (extra || "") + '>' +
       '<span class="pn-rb"><b>' + label + "</b>" + (sub ? "<small>" + sub + "</small>" : "") + '</span><span class="pl-track" aria-hidden="true"><i></i></span></button>';
   }
-  // The reminder controls under the time field. c = the plan answers being edited.
-  function remHtml(c) {
+  function clock(m) { var h = Math.floor(m / 60); return (h % 12 || 12) + (h < 12 ? " am" : " pm"); }
+  /* The reminder controls under the time field. c = the plan answers being edited; sheet = the settings sheet (the mode
+     and quiet hours show there, not in onboarding). */
+  function remHtml(c, sheet) {
     if (!plug("LocalNotifications")) return '<p class="pn-mut pn-small">Reminders arrive in the StewardMD app on your phone. Your time is kept.</p>';
-    var on = remOn(), denied = R.perm === "denied" && (on || R.msg === "denied");
-    var sub = !c.rem ? "Pick a time first" : on && !denied ? "Every day at " + esc(c.rem) + ", with the count from today's plan" : "One notification a day at " + esc(c.rem);
-    return sw("p-n-rem", on && !denied, "Remind me daily", sub, !c.rem) +
+    var on = remOn(), denied = R.perm === "denied" && (on || R.msg === "denied"), N = nudges(), sm = smart();
+    var sub = !c.rem ? "Pick a time first" : !on || denied ? "Off. Nothing is sent." : sm ? "Smart nudges, at most 2 a day" : "Every day at " + esc(c.rem) + ", with the count from today's plan";
+    var h = sw("p-n-rem", on && !denied, "Study reminders", sub, !c.rem) +
       (denied ? '<p class="pl-warn pn-small" role="status">Notifications are off for StewardMD in Settings. Turn them on there, then here. Your time is kept.</p>' : "");
+    if (!sheet || !on || denied || !N || !c.rem) return h;
+    var opt = function (v, on1, label, small) {
+      return '<button type="button" class="pl-opt' + (on1 ? " on" : "") + '" role="radio" aria-checked="' + on1 + '" data-act="p-n-mode" data-v="' + v + '"><span class="pn-rb"><b>' + label + "</b><small>" + small + '</small></span><span class="pl-dot" aria-hidden="true">' + (on1 ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>' : "") + "</span></button>";
+    };
+    var lt = N.learned(), q = String(N.quiet()).split("-");
+    h += '<div class="pl-opts" role="radiogroup" aria-label="Reminder style">' +
+      opt("smart", sm, "Smart nudges", "Your plan, due reviews, streak and exam countdown, from your own progress.") +
+      opt("daily", !sm, "Daily reminder only", "One a day at " + esc(c.rem) + ".") + "</div>";
+    if (sm) h += '<p class="pn-mut pn-small pl-when" role="status">' + (lt != null ? "Timed to when you usually start, around " + clock(lt) + "." : "At " + esc(c.rem) + " until PrepNucleus learns when you usually study.") + " Fewer if you don't open them.</p>" +
+      '<fieldset class="pl-quiet"><legend>Quiet hours</legend><label><span class="pn-mut pn-small">From</span><input class="pn-in" type="time" id="plQa" name="quietFrom" autocomplete="off" value="' + esc(q[0]) + '"></label>' +
+      '<label><span class="pn-mut pn-small">To</span><input class="pn-in" type="time" id="plQb" name="quietTo" autocomplete="off" value="' + esc(q[1]) + '"></label></fieldset>';
+    return h;
+  }
+  // The quiet hour inputs report on change (prep-plan.js calls this after drawing the sheet).
+  function wire(r) {
+    var a = r && r.querySelector("#plQa"), b = r && r.querySelector("#plQb"), N = nudges();
+    if (!a || !b || !N) return;
+    var on = function () { if (/^\d{2}:\d{2}$/.test(a.value) && /^\d{2}:\d{2}$/.test(b.value)) { N.setQuiet(a.value, b.value); remNow(true); } };
+    a.addEventListener("change", on); b.addEventListener("change", on);
   }
   function remToggle(redraw) {
     var LN = plug("LocalNotifications"); if (!LN) return Promise.resolve();
-    if (remOn()) { lsSet("smd_prep_rem", null); R.msg = ""; return cancelReminder(LN).then(redraw); }
+    if (remOn()) { lsSet("smd_prep_rem", null); R.msg = ""; R.ndg = "off"; return Promise.all([cancelReminder(LN), nudges() ? nudges().stop(LN) : null]).then(redraw); }
     // Asked here, in context, and only here.
     return call(LN, "checkPermissions").then(function (r) {
       var d = r && r.display;
@@ -213,6 +246,11 @@
   function act(a, b, h, redraw) {
     H = h || H;
     var S = sync();
+    if (a === "p-n-mode") {
+      lsSet("smd_prep_ndg_mode", b.getAttribute("data-v") === "daily" ? "daily" : null);
+      R.remKey = ""; R.ndg = "";
+      return remNow(true).then(function () { if (redraw) redraw(); var r1 = root(), f1 = r1 && r1.querySelector('[data-act="p-n-mode"][aria-checked="true"]'); try { if (f1) f1.focus(); } catch (e) {} });
+    }
     if (a === "p-n-rem") return remToggle(function () { if (redraw) redraw(); var r = root(), f = r && r.querySelector('[data-act="p-n-rem"]'); try { if (f) f.focus(); } catch (e) {} });
     if (!S) return;
     var st = {}; try { st = S.status() || {}; } catch (e) {}
@@ -236,5 +274,5 @@
   }
   function leave() { R.confirmOff = false; R.msg = ""; }
 
-  G.PREP_NATIVE = { opened: opened, changed: changed, finished: finished, planStarted: planStarted, remHtml: remHtml, syncHtml: syncHtml, act: act, leave: leave, _pure: PURE, _r: R, _flush: flush };
+  G.PREP_NATIVE = { opened: opened, changed: changed, finished: finished, planStarted: planStarted, remHtml: remHtml, wire: wire, syncHtml: syncHtml, act: act, leave: leave, _pure: PURE, _r: R, _flush: flush };
 })(typeof window !== "undefined" ? window : this);

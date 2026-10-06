@@ -346,7 +346,7 @@ Owner checklist: [[plans/PrepNucleus-Phase4-OwnerChecklist]]. Cache token `prep8
   `store.rl` grows while sync is on but offline.
 - **Reminders:** `prep-native.js` (`window.PREP_NATIVE`), `@capacitor/local-notifications` (already installed). One daily
   notification (id 2147483100) at `pl.rem`, re-scheduled on each open/plan change for the next occurrence only;
-  permission only from the "Remind me daily" switch; on/off per device in localStorage `smd_prep_rem`; tap
+  permission only from the reminder switch ("Study reminders" since the nudges); on/off per device in localStorage `smd_prep_rem`; tap
   `extra.route = "prep"` -> `native-push.js` -> `SMD_openRoute("prep")` (home.js).
 - **Widgets + Live Activity:** plugin `@stewardmd/capacitor-prep-widgets` (`local-plugins/capacitor-prep-widgets`, JS
   `PrepWidgets`: `setData/activityStatus/startActivity/updateActivity/endActivity`). Data JSON `{v, score, exam, daysLeft,
@@ -356,7 +356,16 @@ Owner checklist: [[plans/PrepNucleus-Phase4-OwnerChecklist]]. Cache token `prep8
   Android `PrepWidgetProvider` (hourly refresh). Taps open `stewardmd://prep`. Live Activity starts on tapping a plan item
   (only if enabled in system settings), updates as items complete, ends when all done or on the next day's first open.
   No Android ongoing notification (owner).
-- **Feeds update only after PrepNucleus was opened in that app session** (prep-native.js loads with PrepNucleus).
+- **Smart nudges (2026-10-06, branch `feat/prep-nudges`, not deployed):** the reminder switch is now "Study reminders"
+  with two modes, Smart nudges (default) and Daily reminder only (`smd_prep_ndg_mode`). `prep-nudges.js`
+  (`window.PREP_NUDGES`) schedules up to about 12 personal, true local notifications (ids 2147483001 to 2147483060): plan,
+  due reviews, weak subject, streak, wins, exam countdown, comeback, weekly recap, Arena sprint; 2 a day, 4 h apart,
+  quiet hours, back-off. Social pushes (challenge, passed you on the college board, friends studied today) from
+  `functions/_prep-nudge-push.js` (D1 `social_push`, migration 0003, NOT applied; Worker cron + `PREP_CRON_TOKEN`, NOT
+  set). Taps open the exact screen through `SMD_openRoute("prep", opts)`. Full catalogue and rules:
+  [[plans/PrepNucleus-Nudges]]. Token `prep12`.
+- **Feeds update only after PrepNucleus was opened in that app session** (prep-native.js loads with PrepNucleus). The
+  same holds for nudges: they are computed when PrepNucleus is open and scheduled ahead (up to day 21).
 - **Tests:** `test/prep-sync.test.mjs` (11), `test/prep-sync-route.test.mjs` (4), `test/prep-native.test.mjs` (5), headless
   `test/run-prep-native.mjs`; Swift `PrepSnapshotTests` in StewardMDWatchCore.
 - **Not verified:** full iOS app build and `assembleDebug` (disk ran out), anything on a device, real D1 BLOB binding.
@@ -400,7 +409,7 @@ still reads cards and questions together (`recall()` over `p:<module>`).
 ## Tests
 `test/prep-app.test.mjs`, `test/prep-build-bank.test.mjs`, `test/prep-server.test.mjs`, `test/prep-core.test.mjs`,
 `test/prep-generate.test.mjs`, `test/prep-layerc-e2e.test.mjs`, `test/prep-create.test.mjs`, `test/prep-teacher.test.mjs`,
-`test/prep-tools.test.mjs`, `test/prep-lessons.test.mjs`, `test/prep-plan.test.mjs`, headless `test/run-prep-plan-ui.mjs`, `test/prep-flash.test.mjs`, headless `test/run-prep-flash-ui.mjs`, `test/edge-start-mcq.test.mjs`, headless `test/run-prep-lessons-ui.mjs`, headless `test/run-prep-create-ui.mjs`, `test/run-prep-arena-ui.mjs` and `test/run-prep-ui.mjs` (real app + fixture bank in `test/fixtures/prep/`;
+`test/prep-tools.test.mjs`, `test/prep-lessons.test.mjs`, `test/prep-plan.test.mjs`, headless `test/run-prep-plan-ui.mjs`, `test/prep-flash.test.mjs`, headless `test/run-prep-flash-ui.mjs`, `test/edge-start-mcq.test.mjs`, headless `test/run-prep-lessons-ui.mjs`, headless `test/run-prep-create-ui.mjs`, `test/run-prep-arena-ui.mjs`, `test/prep-nudges.test.mjs`, headless `test/run-prep-nudges.mjs` and `test/run-prep-ui.mjs` (real app + fixture bank in `test/fixtures/prep/`;
 Chromium at `/opt/pw-browsers/chromium` by default, `CHROME=` to override).
 
 ## Bank v1 mapping (2026-10-06)

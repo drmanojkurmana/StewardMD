@@ -18,6 +18,13 @@ import { N_ROUNDS, ROOM_RE, parseClient, tokenFromProtocol, allowQueue, matchQue
 const text = (s, status) => new Response(s, { status, headers: { "Content-Type": "text/plain", "Cache-Control": "no-store" } });
 
 export default {
+  /* Evening digest of PrepNucleus social nudges ("N friends studied today"): the push path lives in Pages
+   * (functions/_prep-nudge-push.js, PUSH_KV and the APNs/FCM secrets), so the cron only calls it. Needs the secret
+   * PREP_CRON_TOKEN set here and in Pages; PREP_DIGEST_URL overrides the default. */
+  async scheduled(event, env, ctx) {
+    if (!env.PREP_CRON_TOKEN) return;
+    ctx.waitUntil(fetch(env.PREP_DIGEST_URL || "https://stewardmd.in/api/prep/social/digest", { method: "POST", headers: { "X-Prep-Cron": env.PREP_CRON_TOKEN } }).catch(() => null));
+  },
   async fetch(request, env) {
     const url = new URL(request.url);
     if (url.pathname === "/health") return text("ok", 200);

@@ -97,6 +97,7 @@ export function socialDeleteStmts(db, uidh) {
     db.prepare("DELETE FROM social_challenges WHERE from_uidh = ? OR to_uidh = ?").bind(uidh, uidh),
     db.prepare("DELETE FROM social_college WHERE uidh = ?").bind(uidh),
     db.prepare("DELETE FROM social_progress WHERE uidh = ?").bind(uidh),
+    db.prepare("DELETE FROM social_push WHERE uidh = ?").bind(uidh),
     ...leaveGroupStmts(db, uidh, null),
     db.prepare("DELETE FROM social_ids WHERE uidh = ?").bind(uidh),
   ];
