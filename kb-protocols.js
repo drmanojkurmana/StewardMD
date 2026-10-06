@@ -16,7 +16,7 @@
 (function (root) {
   "use strict";
   var G = root, D = root.document;
-  var CONTENT_V = "3b909e633aad";
+  var CONTENT_V = "4fb9dffa7c44";
   var BASE = "/kb/clinical-protocols/";
 
   var KINDS = {
@@ -291,6 +291,28 @@
       p.tables.forEach(function (t, i) { toc.push('<button type="button" class="kbp-jump" data-kbp-jump="' + pre + 'Tbl' + i + '">' + esc(t.title) + '</button>'); });
     }
 
+    // Clinical diagrams and diagnostic imaging: annotated figures (ECG, X-ray, CT schematic)
+    // with structured callout badges for each annotation. Each card is a jump target.
+    var DTYPE = { ecg: "ECG", xray: "X-ray", ct: "CT", diagram: "Diagram", ultrasound: "Ultrasound" };
+    var diagrams = (p.diagrams && p.diagrams.length)
+      ? '<section class="kbp-sec kbp-sec-diagrams" id="' + pre + 'Diagrams"><h2><span class="kbp-kind">Imaging</span>Clinical diagrams and imaging</h2>' +
+        p.diagrams.map(function (d, i) {
+          var src = String(d.src || "");
+          var media = src.charAt(0) === "#"
+            ? '<svg class="kbp-diagram-img" role="img" aria-label="' + esc(d.title) + '"><use href="' + esc(src) + '"></use></svg>'
+            : '<img class="kbp-diagram-img" src="' + esc(src) + '" alt="' + esc(d.title) + '" loading="lazy">';
+          var ann = (d.annotations && d.annotations.length)
+            ? '<ul class="kbp-diagram-ann">' + d.annotations.map(function (a) {
+                return '<li><strong>' + esc(a.label) + '</strong><span>' + esc(a.description) + '</span></li>';
+              }).join("") + '</ul>' : '';
+          return '<figure class="kbp-diagram-card" id="' + pre + 'Diagram' + i + '"><span class="kbp-diagram-type">' + esc(DTYPE[d.type] || d.type) + '</span>' +
+            media + '<figcaption><strong>' + esc(d.title) + '</strong><span class="kbp-diagram-meta">' + esc(d.caption) + '</span></figcaption>' + ann + '</figure>';
+        }).join("") + '</section>'
+      : "";
+    if (p.diagrams && p.diagrams.length) {
+      p.diagrams.forEach(function (d, i) { toc.push('<button type="button" class="kbp-jump" data-kbp-jump="' + pre + 'Diagram' + i + '">' + esc(d.title) + '</button>'); });
+    }
+
     var calcs = (p.calculators && p.calculators.length)
       ? '<section class="kbp-sec kbp-sec-calcs" id="' + pre + 'Calcs"><h2><span class="kbp-kind">Decision Tools</span>Calculators and Scores</h2><div class="kbp-calc-grid">' +
         p.calculators.map(function (c) {
@@ -315,7 +337,7 @@
       (opts.back ? '<button type="button" class="kbp-back" data-kbp-back aria-label="Back to protocols"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><span>All protocols</span></button>' : "") +
       '<header class="kblib-tool-intro kbp-hero">' + (opts.brand ? brandHTML() : "") + '<span class="kblib-tool-kicker">' + esc(subjectLabel(p.subject)) + "</span><h1>" + esc(p.title) + "</h1>" +
       (meta ? '<div class="kbp-metas">' + meta + "</div>" : "") + '<p class="kbp-summary">' + esc(p.summary) + "</p></header>" +
-      statusHTML(p) + twin + '<nav class="kbp-toc" aria-label="Jump to section">' + toc.join("") + "</nav>" + secs + algos + tables + calcs + drugs + sources + "</div>";
+      statusHTML(p) + twin + '<nav class="kbp-toc" aria-label="Jump to section">' + toc.join("") + "</nav>" + secs + algos + tables + diagrams + calcs + drugs + sources + "</div>";
   }
   /* ---- assign: a protocol as case-sheet instructions (flag smd_protocol_assign) ------------------
    * Everything here is PURE (no DOM, no state, unit-tested): the host owns the patient record.

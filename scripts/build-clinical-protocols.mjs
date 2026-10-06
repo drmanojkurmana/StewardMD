@@ -32,6 +32,9 @@
  *   drugs       optional { name, dose, notes? }[]
  *   sources     >= 1 of { org, title, year, url (https) }
  *   review      { status: ai_drafted | reviewed | approved, compiled: YYYY-MM-DD, reviewer?: string }
+*   diagrams    optional [{ id (kebab-case), title, type (ecg|xray|ct|diagram|ultrasound),
+*               src (relative path like /assets/kb-diagrams/... or inline SVG identifier),
+*               caption, annotations?: [{ label, description }] }]
  * Every string: no em dash (U+2014) or en dash (U+2013), no HTML tags, no placeholder text.
  */
 import { readdirSync, readFileSync, writeFileSync, existsSync } from "node:fs";
@@ -70,7 +73,8 @@ export const SECTION_KINDS = ["recognise", "immediate", "investigations", "treat
 export const REVIEW_STATUS = ["ai_drafted", "reviewed", "approved"];
 // Labels are app-facing text (filter chips, row and reader pills).
 export const BASES = [["international", "International"], ["india", "India"]];
-const TOP_KEYS = ["id", "title", "subject", "population", "basis", "counterpart", "setting", "aliases", "summary", "sections", "drugs", "sources", "review", "tables", "algorithms", "calculators"];
+const TOP_KEYS = ["id", "title", "subject", "population", "basis", "counterpart", "setting", "aliases", "summary", "sections", "drugs", "sources", "review", "tables", "algorithms", "calculators", "diagrams"];
+export const DIAGRAM_TYPES = ["ecg", "xray", "ct", "diagram", "ultrasound"];
 const BASIS_KEYS = BASES.map((b) => b[0]);
 
 const SUBJECT_KEYS = SUBJECTS.map((s) => s[0]);
@@ -204,6 +208,30 @@ export function validateProtocol(p, fileId) {
       if (!isStr(c.title)) e.push(`${w}: title required`);
       if (!isStr(c.linkId)) e.push(`${w}: linkId required`);
       if (c.description != null && !isStr(c.description)) e.push(`${w}: description must be a string`);
+    });
+  }
+
+  if (p.diagrams != null) {
+    if (!Array.isArray(p.diagrams)) e.push(`${tag}: diagrams must be an array`);
+    else p.diagrams.forEach((d, i) => {
+      const w = `${tag}.diagrams[${i}]`;
+      if (!d || typeof d !== "object") { e.push(`${w}: not an object`); return; }
+      Object.keys(d).forEach((k) => { if (["id", "title", "type", "src", "caption", "annotations"].indexOf(k) < 0) e.push(`${w}: unknown key "${k}"`); });
+      if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(d.id || "")) e.push(`${w}: id must be kebab-case or alphanumeric`);
+      if (!isStr(d.title)) e.push(`${w}: title required`);
+      if (DIAGRAM_TYPES.indexOf(d.type) < 0) e.push(`${w}: type "${d.type}" is not one of ${DIAGRAM_TYPES.join(", ")}`);
+      if (!isStr(d.src)) e.push(`${w}: src required`);
+      if (!isStr(d.caption)) e.push(`${w}: caption required`);
+      if (d.annotations != null) {
+        if (!Array.isArray(d.annotations)) e.push(`${w}: annotations must be an array`);
+        else d.annotations.forEach((a, ai) => {
+          const aw = `${w}.annotations[${ai}]`;
+          if (!a || typeof a !== "object") { e.push(`${aw}: not an object`); return; }
+          Object.keys(a).forEach((k) => { if (["label", "description"].indexOf(k) < 0) e.push(`${aw}: unknown key "${k}"`); });
+          if (!isStr(a.label)) e.push(`${aw}: label required`);
+          if (!isStr(a.description)) e.push(`${aw}: description required`);
+        });
+      }
     });
   }
 

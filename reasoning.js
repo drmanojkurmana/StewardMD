@@ -3031,6 +3031,25 @@
       }).join("");
       sections.push({ ic: rIco("table"), title: "Clinical diagnostic matrix", html: tblHtml });
     }
+    // Annotated clinical diagrams and diagnostic imaging (ECG, X-ray, CT schematic) carried
+    // through kb.enrichment.js. Rendered in the clinical reasoning drawer with figure/caption
+    // and structured callout badges for annotations.
+    if (e.diagrams && e.diagrams.length) {
+      var DTYPES = { ecg: "ECG", xray: "X-ray", ct: "CT", diagram: "Diagram", ultrasound: "Ultrasound" };
+      var dgHtml = e.diagrams.map(function (d) {
+        var dsrc = String(d.src || "");
+        var media = dsrc.charAt(0) === "#"
+          ? '<svg role="img" aria-label="' + esc(d.title) + '" style="display:block;width:100%;height:auto;border:1px solid #e2e8f0;border-radius:8px;background:#f8fafc"><use href="' + esc(dsrc) + '"></use></svg>'
+          : '<img src="' + esc(dsrc) + '" alt="' + esc(d.title) + '" loading="lazy" style="display:block;width:100%;max-width:100%;height:auto;border:1px solid #e2e8f0;border-radius:8px;background:#f8fafc">';
+        var ann = (d.annotations && d.annotations.length)
+          ? '<ul style="list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:6px">' + d.annotations.map(function (a) {
+              return '<li style="padding:6px 8px;border:1px solid #e2e8f0;border-radius:6px;background:#f0fdfa;font-size:11.5px;line-height:1.4;color:#334155"><strong style="color:#0f766e">' + esc(a.label) + '</strong> ' + esc(a.description) + '</li>';
+            }).join("") + '</ul>' : '';
+        return '<figure style="margin:0 0 12px;min-width:0;overflow:hidden"><span style="display:inline-block;margin-bottom:6px;padding:1px 8px;border-radius:999px;background:#ccfbf1;color:#0f766e;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">' + esc(DTYPES[d.type] || d.type) + '</span>' +
+          media + '<figcaption style="margin-top:6px"><strong style="display:block;color:#0f172a;font-size:13px">' + esc(d.title) + '</strong><span style="display:block;font-size:12px;line-height:1.5;color:#475569">' + esc(d.caption) + '</span></figcaption>' + ann + '</figure>';
+      }).join("");
+      sections.push({ ic: rIco("pulse"), title: "Clinical diagrams and imaging", html: dgHtml });
+    }
     // Expanded clinical detail uses the same citation-free presentation as the summary.
     var rawUl = function (arr) { return (arr && arr.length) ? '<ul class="ev-ul">' + arr.map(function (x) { return '<li>' + medFormat(x) + '</li>'; }).join("") + '</ul>' : ""; };
     var full = "";

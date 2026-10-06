@@ -47,7 +47,8 @@ for (const f of readdirSync(DZ).filter((x) => x.endsWith(".json"))) {
     crossLinks: h.crossLinks || [],
     algorithms: d.algorithms || h.algorithms || [],
     tables: d.tables || h.tables || [],
-    calculators: d.calculators || h.calculators || []
+    calculators: d.calculators || h.calculators || [],
+    diagrams: d.diagrams || h.diagrams || []
   };
 }
 
@@ -84,7 +85,8 @@ if (existsSync(REF)) {
       crossLinks: h.crossLinks || [],
       algorithms: d.algorithms || h.algorithms || [],
       tables: d.tables || h.tables || [],
-      calculators: d.calculators || h.calculators || []
+      calculators: d.calculators || h.calculators || [],
+      diagrams: d.diagrams || h.diagrams || []
     };
     referenceAdded++;
   }

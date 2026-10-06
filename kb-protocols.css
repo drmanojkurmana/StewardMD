@@ -161,3 +161,24 @@ body.dark .kblib-tool-protocols .kbp-calc-btn:hover, body.dark .kbp-embed .kbp-c
   .kblib-tool-protocols .kbp-calc-card, .kbp-embed .kbp-calc-card { flex-direction:column; align-items:stretch; }
   .kblib-tool-protocols .kbp-calc-btn, .kbp-embed .kbp-calc-btn { width:100%; }
 }
+
+/* Clinical diagrams and diagnostic imaging (schema field "diagrams") */
+.kblib-tool-protocols .kbp-sec-diagrams, .kbp-embed .kbp-sec-diagrams { --kbp-c:var(--kbp-teal); min-width:0; overflow:hidden; }
+.kblib-tool-protocols .kbp-diagram-card, .kbp-embed .kbp-diagram-card { margin:0 0 14px; padding:12px 14px; border:1px solid var(--kl-line); border-radius:12px; background:var(--kl-paper); min-width:0; overflow:hidden; }
+.kblib-tool-protocols .kbp-diagram-card:last-child, .kbp-embed .kbp-diagram-card:last-child { margin-bottom:2px; }
+.kblib-tool-protocols .kbp-diagram-type, .kbp-embed .kbp-diagram-type { display:inline-block; margin-bottom:8px; padding:2px 9px; border-radius:999px; background:color-mix(in srgb,var(--kbp-c) 12%,var(--kl-paper)); color:var(--kbp-c); font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; }
+.kblib-tool-protocols .kbp-diagram-img, .kbp-embed .kbp-diagram-img { display:block; width:100%; max-width:100%; height:auto; border:1px solid var(--kl-line); border-radius:8px; background:color-mix(in srgb,var(--ink) 3%,var(--kl-paper)); }
+.kblib-tool-protocols .kbp-diagram-card figcaption, .kbp-embed .kbp-diagram-card figcaption { margin-top:8px; }
+.kblib-tool-protocols .kbp-diagram-card figcaption strong, .kbp-embed .kbp-diagram-card figcaption strong { display:block; font-size:14px; font-weight:650; color:var(--ink); }
+.kblib-tool-protocols .kbp-diagram-meta, .kbp-embed .kbp-diagram-meta { display:block; margin-top:3px; font-size:13px; line-height:1.5; color:var(--kl-muted); }
+.kblib-tool-protocols .kbp-diagram-ann, .kbp-embed .kbp-diagram-ann { margin:10px 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:6px; }
+.kblib-tool-protocols .kbp-diagram-ann li, .kbp-embed .kbp-diagram-ann li { display:flex; gap:8px; align-items:baseline; margin:0; padding:7px 10px; border:1px solid var(--kl-line); border-radius:8px; background:color-mix(in srgb,var(--kbp-c) 6%,var(--kl-paper)); font-size:12.5px; line-height:1.45; }
+.kblib-tool-protocols .kbp-diagram-ann strong, .kbp-embed .kbp-diagram-ann strong { flex:0 0 auto; color:var(--kbp-c); font-weight:700; white-space:nowrap; }
+.kblib-tool-protocols .kbp-diagram-ann span, .kbp-embed .kbp-diagram-ann span { color:var(--ink); min-width:0; }
+body.dark .kblib-tool-protocols .kbp-diagram-card, body.dark .kbp-embed .kbp-diagram-card { background:color-mix(in srgb,var(--ink) 4%,var(--kl-paper)); }
+body.dark .kblib-tool-protocols .kbp-diagram-img, body.dark .kbp-embed .kbp-diagram-img { background:#101418; border-color:color-mix(in srgb,var(--ink) 18%,var(--kl-line)); }
+@media(max-width:429px) {
+  .kblib-tool-protocols .kbp-diagram-card, .kbp-embed .kbp-diagram-card { padding:10px; }
+  .kblib-tool-protocols .kbp-diagram-ann li, .kbp-embed .kbp-diagram-ann li { flex-direction:column; gap:2px; }
+  .kblib-tool-protocols .kbp-diagram-ann strong, .kbp-embed .kbp-diagram-ann strong { white-space:normal; }
+}
