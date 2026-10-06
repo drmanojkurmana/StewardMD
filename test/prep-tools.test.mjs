@@ -182,7 +182,7 @@ test("vertex: prices come from MODEL_RATES (Rs 96 per USD) and Batch is half", (
   assert.deepEqual(V.priceUsdPer1M("gemini-3.1-flash-lite"), { in: 0.25, out: 1.5 });
   assert.deepEqual(V.priceUsdPer1M("gemini-3.1-flash-lite", { batch: true }), { in: 0.125, out: 0.75 });
   assert.equal(V.costUsd({ inTok: 1e6, outTok: 5e5, thinkTok: 5e5 }, "gemini-3.1-flash-lite", { batch: true }), 0.125 + 0.75);
-  assert.deepEqual(V.vertexConfig({}), { project: "", location: "us-central1", model: "gemini-3.1-flash-lite", bucket: "" });
+  assert.deepEqual(V.vertexConfig({}), { project: "", location: "global", model: "gemini-3.1-flash-lite", bucket: "" });
   assert.deepEqual(V.labelsFor("Measure 2026/10"), { app: "prep", run: "measure-2026-10" });
 });
 

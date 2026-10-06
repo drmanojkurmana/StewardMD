@@ -5,7 +5,7 @@
 //
 // RUN (nothing to run directly; the tools import it). Environment read by every tool:
 //   PREP_VERTEX_PROJECT   GCP project id that holds Vertex AI (required for any real call)
-//   PREP_VERTEX_LOCATION  default us-central1 ("global" uses the global host)
+//   PREP_VERTEX_LOCATION  default global (gemini-3.1-flash-lite Batch is refused in us-central1: MODEL_NOT_SUPPORTED_FOR_BATCH, 2026-10-05)
 //   PREP_MODEL            default gemini-3.1-flash-lite (MODEL_HARD_DEFAULT in functions/_ai_usage.js)
 //   PREP_GCS_BUCKET       bucket for Batch input and output JSONL (required for Batch)
 //   Auth: `gcloud auth print-access-token` (the owner's gcloud login or ADC), spawned once and cached 45 minutes.
@@ -34,7 +34,7 @@ export const OK_STATES = new Set(["JOB_STATE_SUCCEEDED", "JOB_STATE_PARTIALLY_SU
 export function vertexConfig(env = process.env) {
   return {
     project: String(env.PREP_VERTEX_PROJECT || "").trim(),
-    location: String(env.PREP_VERTEX_LOCATION || "us-central1").trim(),
+    location: String(env.PREP_VERTEX_LOCATION || "global").trim(),
     model: String(env.PREP_MODEL || MODEL_HARD_DEFAULT).trim(),
     bucket: String(env.PREP_GCS_BUCKET || "").trim().replace(/^gs:\/\//, "").replace(/\/+$/, ""),
   };
@@ -100,18 +100,17 @@ export function readResponse(j) {
   };
 }
 
-// ---- Batch file format (CHECK AGAINST THE CURRENT VERTEX DOCS BEFORE THE FIRST REAL RUN) -----------------------------
-// Written from memory of the Vertex "Batch prediction for Gemini" page; the three functions below are the only places
-// that encode it, so a correction stays local.
-//   batchLine: each input JSONL line is { "request": GenerateContentRequest }. We add a top-level "key" so outputs can
-//     be matched. If Vertex rejects or drops unknown top-level fields, matching falls back to a hash of the request
-//     (requestHash), which every output line echoes under "request". Per-request "labels" are left out of the lines
-//     (the job carries { app, run }); check whether Batch accepts them before adding them back.
+// ---- Batch file format (checked against a real Vertex Batch job 2026-10-05, global, gemini-3.1-flash-lite) ----------
+// The three functions below are the only places that encode it, so a correction stays local.
+//   batchLine: each input JSONL line is { "key", "request": GenerateContentRequest }. Vertex echoes the top-level "key"
+//     on every output line, so outputs match by key; requestHash stays as a fallback. Per-request "labels" are left out
+//     of the lines (the job carries { app, run }). generationConfig.thinkingConfig { thinkingBudget: 0 } is accepted.
 //   batchJobBody: POST .../locations/{loc}/batchPredictionJobs with model "publishers/google/models/{model}",
 //     inputConfig { instancesFormat: "jsonl", gcsSource: { uris } }, outputConfig { predictionsFormat: "jsonl",
-//     gcsDestination: { outputUriPrefix } }, labels. The finished job names its folder in outputInfo.gcsOutputDirectory.
-//   outputLines: every *.jsonl object under that folder; each line { request, response?, status? }, where a non-empty
-//     status string is a per-request error.
+//     gcsDestination: { outputUriPrefix } }, labels. The finished job names its folder in outputInfo.gcsOutputDirectory
+//     (<outputUriPrefix>/prediction-model-<timestamp>/predictions.jsonl).
+//   outputLines: every *.jsonl object under that folder; each line { key, request, response?, status, processed_time },
+//     where a non-empty status string is a per-request error.
 export function requestHash(req) {
   const r = req || {};
   return sha12(JSON.stringify([r.systemInstruction || null, r.contents || null, (r.generationConfig || {}).temperature]));
@@ -203,7 +202,7 @@ export function createVertex(o = {}) {
   async function http(url, init = {}) {
     let n429 = 0, retries = 0, reauth = false;
     for (let attempt = 0; ; attempt++) {
-      const headers = { Authorization: "Bearer " + (await token()), ...(init.headers || {}) };
+      const headers = { Authorization: "Bearer " + (await token()), ...(cfg.project ? { "x-goog-user-project": cfg.project } : {}), ...(init.headers || {}) };
       let r = null, netErr = null;
       calls++;
       try { r = await fetchFn(url, { ...init, headers }); } catch (e) { netErr = e; }
