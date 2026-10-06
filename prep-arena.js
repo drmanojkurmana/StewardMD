@@ -487,7 +487,7 @@
       }).join("") + '</div><p class="pn-days-ax" aria-hidden="true"><span>30 days ago</span><span>Today</span></p></section>' +
       '<h2 class="pn-h">Accuracy by subject</h2>' + (acc.length ? '<ul class="pn-acc">' + acc.map(function (x) {
         var sb = H.subjectById(x.sid);
-        return '<li><span class="pn-ic sm" aria-hidden="true">' + H.subjIco(x.sid) + '</span><span class="pn-acc-b"><span class="pn-acc-h"><b>' + (sb ? H.tx(sb.name) : esc(x.sid)) + "</b><span>" + x.pct + '%</span></span><span class="pn-meter" aria-hidden="true"><i style="width:' + x.pct + '%"></i></span><small>' + H.fmt(x.ok) + " of " + H.fmt(x.t) + " right</small></span></li>";
+        return '<li><span class="pn-ic sm" aria-hidden="true" style="--h:' + (H.subjHue ? H.subjHue(x.sid) : 172) + '">' + H.subjIco(x.sid) + '</span><span class="pn-acc-b"><span class="pn-acc-h"><b>' + (sb ? H.tx(sb.name) : esc(x.sid)) + "</b><span>" + x.pct + '%</span></span><span class="pn-meter" aria-hidden="true"><i style="width:' + x.pct + '%"></i></span><small>' + H.fmt(x.ok) + " of " + H.fmt(x.t) + " right</small></span></li>";
       }).join("") + "</ul>" : '<p class="pn-empty">Answer a few questions and each subject shows its share right here.</p>') +
       '<h2 class="pn-h">Mock exams</h2>' + (mh.length ? '<ul class="pn-mods">' + mh.map(function (m) {
         var d = new Date(m.ts), ds = ""; try { ds = d.toLocaleDateString("en-IN", { day: "numeric", month: "short" }); } catch (e) {}

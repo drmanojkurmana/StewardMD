@@ -336,7 +336,15 @@
   function svg(body, filled, size) { return '<svg viewBox="0 0 24 24" width="' + (size || 20) + '" height="' + (size || 20) + '" aria-hidden="true" fill="' + (filled ? "currentColor" : "none") + '" stroke="currentColor" stroke-width="' + (size === 24 ? 1.75 : 2) + '" stroke-linecap="round" stroke-linejoin="round">' + body + "</svg>"; }
   function ico(n, filled) { return svg(ICON[n] || "", filled); }
   // A subject's icon at 24px; a subject without its own glyph gets the open-book fallback.
-  function subjIco(id) { return svg(SUBJ[id] || '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 21V5M8 7h7"/>', false, 24); }
+  // Drawn duotone on the gradient tile: a soft fill of the shape under the stroke (open strokes only get the stroke).
+  var SUBJ_OPEN = { physiology: 1, pathology: 1, "forensic-medicine": 1, ent: 1, surgery: 1, dermatology: 1, anaesthesia: 1, "ss-rheumatology-immunology": 1, "ss-biostatistics": 1, "ss-medical-oncology": 1, "ss-endocrinology": 1, "obstetrics-gynaecology": 1, anatomy: 1, orthopaedics: 1 };
+  function subjIco(id) {
+    var p = SUBJ[id] || '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 21V5M8 7h7"/>';
+    return svg((SUBJ_OPEN[id] || !SUBJ[id] ? "" : '<g fill="currentColor" fill-opacity=".28" stroke="none">' + p + "</g>") + p, false, 24);
+  }
+  // A subject's tile hue (--h): a fixed categorical set, cycled in taxonomy order so neighbours never match.
+  var HUES = [172, 212, 262, 334, 16, 34, 146, 192, 292, 230];
+  function subjHue(id) { var k = Object.keys(SUBJ), i = k.indexOf(id); return HUES[(i < 0 ? 0 : i) % HUES.length]; }
   function bar(title, sub, left, right) {
     return '<header class="pn-bar"><button type="button" class="pn-ib" data-act="' + (left || "back") + '" aria-label="' + (left === "close" ? "Close PrepNucleus" : "Back") + '">' + ico(left === "close" ? "close" : "back") + "</button>" +
       '<div class="pn-t"><h1>' + title + "</h1>" + (sub ? "<p>" + sub + "</p>" : "") + "</div>" + (right || '<span class="pn-ib-sp"></span>') + "</header>";
@@ -477,7 +485,7 @@
     var s = load(), prog = progressByModule(s, today()), mods = ix ? ix.topics.filter(function (t) { return t.group !== "mixed"; }) : [], done = 0, total = mods.length, q = 0;
     mods.forEach(function (t) { var n = countFor(t, s.exam); q += n; if (n && statusOf((prog[t.id] || {}).answered, n) === "done") done++; });
     var pct = total ? Math.round(done * 100 / total) : 0;
-    return '<button type="button" class="pn-tile" data-act="subject" data-s="' + esc(sb.id) + '"><span class="pn-ic" aria-hidden="true">' + subjIco(sb.id) + "</span>" +
+    return '<button type="button" class="pn-tile" data-act="subject" data-s="' + esc(sb.id) + '" style="--h:' + subjHue(sb.id) + '"><span class="pn-ic" aria-hidden="true">' + subjIco(sb.id) + "</span>" +
       '<span class="pn-tb"><b>' + tx(sb.name) + "</b><small>" + (ix ? done + "/" + total + " modules · " + (q ? fmt(q) + " MCQs" : "questions coming soon") : "&nbsp;") + "</small>" +
       '<span class="pn-prog" aria-hidden="true"><i style="width:' + pct + '%"></i></span></span>' + ico("chev") + "</button>";
   }
@@ -503,7 +511,7 @@
       // Summary: modules completed and MCQs in this subject for the exam.
       var mods = ix.topics.filter(function (t) { return t.group !== "mixed"; }), done = 0, q = 0;
       mods.forEach(function (t) { var c = countFor(t, s.exam); q += c; if (c && statusOf((prog[t.id] || {}).answered, c) === "done") done++; });
-      var head = '<section class="pn-subhead"><span class="pn-ic" aria-hidden="true">' + subjIco(sid) + '</span><span class="pn-tb"><b>' + done + " of " + mods.length + " modules completed</b><small>" + (q ? fmt(q) + " MCQs" : "Questions coming soon") + '</small><span class="pn-prog" aria-hidden="true"><i style="width:' + (mods.length ? Math.round(done * 100 / mods.length) : 0) + '%"></i></span></span></section>';
+      var head = '<section class="pn-subhead" style="--h:' + subjHue(sid) + '"><span class="pn-ic" aria-hidden="true">' + subjIco(sid) + '</span><span class="pn-tb"><b>' + done + " of " + mods.length + " modules completed</b><small>" + (q ? fmt(q) + " MCQs" : "Questions coming soon") + '</small><span class="pn-prog" aria-hidden="true"><i style="width:' + (mods.length ? Math.round(done * 100 / mods.length) : 0) + '%"></i></span></span></section>';
       var mixed = ix.topics.filter(function (t) { return t.group === "mixed"; })[0];
       if (mixed && mixed.count && st.filter === "all") html += '<h2 class="pn-sec">More</h2><ol class="pn-mods">' + modRow(sid, mixed, prog, s, null) + "</ol>";
       var box = root.querySelector("#pnSub");
@@ -666,7 +674,8 @@
     r.items.forEach(function (it, i) { if (r.ans[i] === it.a) ok++; else missed.push(i); });
     var pct = r.items.length ? Math.round(ok * 100 / r.items.length) : 0;
     paint(bar(r.mode === "exam" ? "Test marked" : "Set finished", esc(r.title), "back") + '<div class="pn-body">' + (r.scheme ? mockAnalysis(r) : '<section class="pn-panel pn-score">' +
-      '<p class="pn-big">' + ok + " / " + r.items.length + '</p><p class="pn-mut">' + pct + "% right" + (r.mode === "exam" ? " · " + fmtTime(r.secs) + " taken" : "") + "</p></section>") +
+      '<div class="pn-ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="rt" cx="60" cy="60" r="52" pathLength="100"/><circle class="rv" cx="60" cy="60" r="52" pathLength="100" stroke-dasharray="' + pct + ' 100"/></svg>' +
+      '<p class="pn-big">' + ok + " / " + r.items.length + '</p></div><p class="pn-mut">' + pct + "% right" + (r.mode === "exam" ? " · " + fmtTime(r.secs) + " taken" : "") + "</p></section>") +
       (missed.length ? '<h2 class="pn-sec">Review the missed</h2><ol class="pn-missed">' + missed.map(function (i) {
         var it = r.items[i];
         return '<li><button type="button" class="pn-mod" data-act="reviewq" data-i="' + i + '"><span class="pn-mb"><b>' + esc(it.q.length > 120 ? it.q.slice(0, 117) + "..." : it.q) + "</b><small>Answer: " + esc(it.o[it.a]) + (r.ans[i] >= 0 ? " · you chose " + esc(it.o[r.ans[i]]) : " · not answered") + "</small></span></button></li>";
@@ -1029,7 +1038,7 @@
     run: runQuestions, today: today, store: load, save: save, core: function () { return C; }, root: function () { return root; },
     exam: function () { return examOf(load().exam); },
     // Arena and My stats (prep-arena.js)
-    subjIco: subjIco, row: row, fmtTime: fmtTime, mockOf: mockOf, subjectOfModule: subjectOfModule, subjectById: subjectById, tx: tx,
+    subjIco: subjIco, subjHue: subjHue, row: row, fmtTime: fmtTime, mockOf: mockOf, subjectOfModule: subjectOfModule, subjectById: subjectById, tx: tx,
     stackTop: function () { return st.stack[st.stack.length - 1]; }, home: renderHome, run_: function () { return st.run; },
     // Lessons (prep-lessons.js)
     // Plan (prep-plan.js)

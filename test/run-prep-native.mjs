@@ -153,7 +153,7 @@ try {
   ok(await ev(`return document.querySelector("#pnPlanSheet [data-act=p-n-rem]").getAttribute("aria-checked");`) === "true" && /Every day at 07:30/.test(await text("#pnPlanSheet [data-act=p-n-rem]")), "the switch is on and names the time");
   await ev(`document.querySelector("#pnPlanSheet .pl-sheet").scrollTop = 0; document.querySelector("#pnPlanSheet [data-act=p-n-rem]").scrollIntoView({block:"center"}); return 1;`);
   await shot("sheet-reminder-on-dark");
-  await ev(`document.body.classList.remove("dark"); return 1;`);
+  await ev(`if (!document.getElementById("pnNoTr")) { var t = document.createElement("style"); t.id = "pnNoTr"; t.textContent = "*{transition:none!important}"; document.head.appendChild(t); } document.body.classList.remove("dark"); return 1;`);
   await shot("sheet-reminder-on-light");
   await ev(`document.querySelector("#pnPlanSheet .pl-sheet").scrollTop = 1e6; return 1;`);
   await shot("sheet-sync-light");

@@ -6,7 +6,7 @@
 .pn-root a.pp-cancel { display: inline-flex; align-items: center; min-height: 44px; font-size: 14px; text-decoration: underline; text-underline-offset: 3px; }
 .pn-root a.pp-cancel:focus-visible { outline: 2px solid var(--pn-pri); outline-offset: 2px; border-radius: 6px; }
 .pn-root .pp-price { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 10px; }
-.pn-root .pp-price b { font-size: 34px; font-weight: 750; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.pn-root .pp-price b { font-family: var(--pn-num); font-size: 40px; font-weight: 800; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
 .pn-root .pp-price span { color: var(--pn-mut); font-size: 15px; }
 .pn-root .pp-strike { color: var(--pn-mut); font-size: 15px; text-decoration-thickness: 1.5px; }
 .pn-root .pp-save { align-self: flex-start; padding: 2px 10px; border-radius: 999px; background: var(--pn-pri-soft); color: var(--pn-pri-ink); font-size: 13px; font-weight: 650; }
@@ -18,7 +18,7 @@
 .pn-root .pp-start { justify-content: flex-start; align-self: flex-start; padding: 0; }
 .pn-root .pp-refund { gap: 4px; }
 .pn-root .pp-refund p { line-height: 1.5; }
-.pn-root .pp-cmp { width: 100%; border-collapse: separate; border-spacing: 0; background: var(--pn-card); border: 1px solid var(--pn-line); border-radius: 16px; overflow: hidden; font-size: 14px; }
+.pn-root .pp-cmp { width: 100%; border-collapse: separate; border-spacing: 0; background: var(--pn-card); border: 1px solid var(--pn-edge); box-shadow: var(--pn-elev); border-radius: 20px; overflow: hidden; font-size: 14px; }
 .pn-root .pp-cmp th, .pn-root .pp-cmp td { padding: 12px 12px; text-align: left; vertical-align: top; border-top: 1px solid var(--pn-line); }
 .pn-root .pp-cmp thead th { border-top: 0; font-size: 13px; color: var(--pn-mut); font-weight: 650; }
 .pn-root .pp-cmp tbody th { font-weight: 600; }

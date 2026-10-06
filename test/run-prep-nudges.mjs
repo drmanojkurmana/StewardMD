@@ -136,7 +136,7 @@ try {
   ok(!/[—–]/.test(await text("#pnPlanSheet")), "no dashes in the sheet");
   await ev(`document.querySelector("#pnPlanSheet .pl-quiet").scrollIntoView({block:"end"}); return 1;`);
   await shot("sheet-smart-dark");
-  await ev(`document.body.classList.remove("dark"); return 1;`); await shot("sheet-smart-light"); await ev(`document.body.classList.add("dark"); return 1;`);
+  await ev(`if (!document.getElementById("pnNoTr")) { var t = document.createElement("style"); t.id = "pnNoTr"; t.textContent = "*{transition:none!important}"; document.head.appendChild(t); } document.body.classList.remove("dark"); return 1;`); await shot("sheet-smart-light"); await ev(`document.body.classList.add("dark"); return 1;`);
   const n0 = await P(`L.ln.filter(function(c){return c[0]==="schedule";}).length`);
   await ev(`var a=document.getElementById("plQa"), b=document.getElementById("plQb"); a.value="20:00"; b.value="09:00"; b.dispatchEvent(new Event("change",{bubbles:true})); return 1;`);
   ok(await until(`return window.__pn.ln.filter(function(c){return c[0]==="schedule";}).length > ${n0};`, 3000), "new quiet hours reschedule");

@@ -172,7 +172,9 @@
   var ICO = {
     check: '<path d="M5 12l5 5 9-10"/>', cal: '<rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
     book: '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 21V5M8 7h7"/>', clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
-    redo: '<path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/>', plus: '<path d="M12 5v14M5 12h14"/>', chev: '<path d="M9 6l6 6-6 6"/>'
+    redo: '<path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/>', bolt: '<path d="M13 3L5 14h6l-1 7 8-11h-6z"/>',
+    flame: '<path d="M12 21c-3.9 0-7-2.8-7-6.6 0-3.1 2-5.2 3.6-7 .4 1.8 1.5 3 2.6 3.4C11 7.4 12.6 4.6 15 3c-.3 2.6.9 4.4 2.2 6 1.1 1.4 1.8 3 1.8 4.9C19 18 15.9 21 12 21z"/>',
+    spark: '<path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6-5.6-1.9 5.6-1.9zM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z"/>', plus: '<path d="M12 5v14M5 12h14"/>', chev: '<path d="M9 6l6 6-6 6"/>'
   };
   function ic(n) { return '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + ICO[n] + "</svg>"; }
   function esc(s) { return H.esc(s); }
@@ -230,13 +232,24 @@
   function planValid(s) { return s.pt && s.pt.d === H.today() && s.pt.ex === H.exam().id && s.pt.min === cfg().min; }
 
   /* ---------- home ---------- */
+  // The hero: the readiness ring, the exam countdown, then today's real counts (streak, answers, lesson XP). One button:
+  // the whole card opens "How this is computed".
   function heroHtml(rd) {
-    var dl = examDays(), name = examLabel();
+    var dl = examDays(), name = examLabel(), s = store(), td = H.today();
     var when = dl == null ? "" : dl === 0 ? "Exam day" : plural(dl, "day", "days") + " to the exam";
-    var line = [when, rd.empty ? "Your first answers start it moving" : ""].filter(Boolean).join(". ") || "How this is computed";
-    var label = "Readiness " + rd.score + " of 100 for " + name + (when ? ", " + when : "") + ". How this is computed";
-    return '<button type="button" class="pl-hero" data-act="p-why" aria-label="' + esc(label) + '"><span class="pl-num" aria-hidden="true">' + rd.score + '<small>/100</small></span>' +
-      '<span class="pl-hb" aria-hidden="true"><b>' + esc(name) + " readiness</b><small>" + esc(line) + "</small></span>" + H.ico("chev") + "</button>";
+    var line = rd.empty ? "Your first answers start it moving" : "How this is computed";
+    var streak = CORE && CORE.streak ? CORE.streak(s, td) : 0, todayN = (s.days && s.days[td]) || 0, xp = 0;
+    for (var k in (s.ls || {})) xp += s.ls[k].xp || 0;
+    var chips = [["flame", plural(streak, "day", "days") + " streak"], ["bolt", todayN + " answered today"]];
+    if (G.PREP_LESSONS) chips.push(["spark", H.fmt(xp) + " lesson XP"]);
+    var label = "Readiness " + rd.score + " of 100 for " + name + (when ? ", " + when : "") + ". " + chips.map(function (c) { return c[1]; }).join(", ") + ". How this is computed";
+    return '<button type="button" class="pl-hero" data-act="p-why" aria-label="' + esc(label) + '">' +
+      '<span class="pl-ring" aria-hidden="true"><svg viewBox="0 0 120 120"><circle class="rt" cx="60" cy="60" r="52" pathLength="100"/>' +
+      (rd.score > 0 ? '<circle class="rv" cx="60" cy="60" r="52" pathLength="100" stroke-dasharray="' + rd.score + ' 100"/>' : "") + '</svg><span class="pl-num">' + rd.score + "<small>/100</small></span></span>" +
+      '<span class="pl-hb" aria-hidden="true"><b>' + esc(name).replace(/-/g, "\u2011") + " readiness</b>" +
+      (when ? '<span class="pl-cd">' + (dl > 0 ? "<strong>" + dl + "</strong> " + (dl === 1 ? "day" : "days") + " to the exam" : "<strong>Exam day</strong>") + "</span>" : "") +
+      "<small>" + esc(line) + "</small></span>" + H.ico("chev") +
+      '<span class="pl-chips" aria-hidden="true">' + chips.map(function (c) { return '<span class="pl-chip ' + c[0] + '">' + ic(c[0]) + esc(c[1]) + "</span>"; }).join("") + "</span></button>";
   }
   // The item's one-line name: the plan row, the widget's "next" and the Live Activity.
   function itemTitle(it) {

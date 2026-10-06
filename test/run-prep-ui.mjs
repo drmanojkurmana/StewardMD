@@ -41,7 +41,7 @@ const ev = async (e) => { const r = await call("Runtime.evaluate", { expression:
 const until = async (e, ms = 10000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (await ev(e) === true) return true; await sleep(150); } return false; };
 const reqs = []; let fails = 0; const ok = (c, m) => { console.log((c ? "PASS " : "FAIL ") + m); if (!c) fails++; };
 const click = (sel) => ev(`var b=document.querySelector(${JSON.stringify(sel)}); if(!b) return "missing"; b.click(); return 1;`);
-const shot = async (name) => { if (!process.env.SHOTS) return; if (process.env.PN_LIGHT) await ev(`document.body.classList.remove("dark"); return 1;`); const r = await call("Page.captureScreenshot", { format: "png" }); if (r.result) (await import("node:fs")).writeFileSync(join(process.env.SHOTS, "prep-" + (process.env.PN_LIGHT ? "light-" : "") + name + ".png"), Buffer.from(r.result.data, "base64")); };
+const shot = async (name) => { if (!process.env.SHOTS) return; if (process.env.PN_LIGHT) await ev(`if (!document.getElementById("pnNoTr")) { var t = document.createElement("style"); t.id = "pnNoTr"; t.textContent = "*{transition:none!important}"; document.head.appendChild(t); } document.body.classList.remove("dark"); return 1;`); const r = await call("Page.captureScreenshot", { format: "png" }); if (r.result) (await import("node:fs")).writeFileSync(join(process.env.SHOTS, "prep-" + (process.env.PN_LIGHT ? "light-" : "") + name + ".png"), Buffer.from(r.result.data, "base64")); };
 
 try {
   let ver, t = 0; while (t++ < 300) { try { ver = await (await fetch(`http://localhost:${PORT}/json/version`)).json(); break; } catch { await sleep(200); } }

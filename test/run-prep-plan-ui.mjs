@@ -66,7 +66,7 @@ try {
   await call("Page.navigate", { url: BASE }); await until(`return !!window.PREP;`, 30000);
   await ev(`try{localStorage.setItem("smd_prep","1"); localStorage.removeItem("smd_prep_v1"); localStorage.removeItem("smd_prep_arena");}catch(e){} indexedDB.deleteDatabase("prep-bank"); return 1;`);
   await call("Page.navigate", { url: BASE + "?prep=1" }); await until(`return !!(window.PREP && window.SMD_showHome);`, 30000); await ev(clean);
-  await ev(process.env.PN_LIGHT ? `document.body.classList.remove("dark"); return 1;` : `document.body.classList.add("dark"); return 1;`);
+  await ev(process.env.PN_LIGHT ? `if (!document.getElementById("pnNoTr")) { var t = document.createElement("style"); t.id = "pnNoTr"; t.textContent = "*{transition:none!important}"; document.head.appendChild(t); } document.body.classList.remove("dark"); return 1;` : `document.body.classList.add("dark"); return 1;`);
 
   // ---- onboarding
   await ev(`PREP.open(); return 1;`);
