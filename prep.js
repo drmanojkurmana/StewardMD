@@ -21,12 +21,14 @@
   var EXAMS = [
     { id: "neet-pg", label: "NEET-PG / INI-CET", branch: "mbbs", tag: "neet-pg", sec: 60 },
     { id: "neet-ss", label: "NEET-SS", branch: "ss-medicine", tag: "neet-ss", sec: 60 },
-    { id: "usmle", label: "USMLE", branch: "mbbs", tag: "usmle", sec: 90 }
+    { id: "usmle", label: "USMLE", branch: "mbbs", tag: "usmle", sec: 90 },
+    // FMGE: the MBBS bank as is (all 19 subjects; all: true ignores the subjects' exam tags).
+    { id: "fmge", label: "FMGE", branch: "mbbs", tag: "fmge", all: true, sec: 60 }
   ];
   function examOf(id) { for (var i = 0; i < EXAMS.length; i++) if (EXAMS[i].id === id) return EXAMS[i]; return EXAMS[0]; }
   // mt: mistakes { itemId: [subject, module, tag, ts, preview] }, removed when the item is next answered right.
   // goal: new questions a day for the daily plan. mh: finished mocks, newest last, at most 20 ({ ts, label, marks, max, n }).
-  function emptyStore() { return { v: 1, cards: {}, conf: {}, days: {}, mod: {}, bm: {}, rep: {}, exam: "neet-pg", last: null, dl: {}, hid: { ids: {}, ts: 0 }, mt: {}, goal: 30, mh: [], ls: {}, lsp: { r: 1, au: 0 } }; }
+  function emptyStore() { return { v: 1, cards: {}, conf: {}, days: {}, mod: {}, bm: {}, rep: {}, exam: "neet-pg", last: null, dl: {}, hid: { ids: {}, ts: 0 }, mt: {}, goal: 30, mh: [], ls: {}, lsp: { r: 1, au: 0 }, pl: null, pt: null, ra: [] }; }
   function deckKey(moduleId) { return "p:" + moduleId; }
   // hidden: item ids withdrawn after repeated student reports (/api/prep/flag?hidden=1), as an id -> 1 map.
   function usable(it, hidden) { return !!it && !(it.flags && it.flags.length) && !(hidden && hidden[it.id]); }
@@ -121,7 +123,10 @@
   var MOCKS = {
     "neet-pg": [{ id: "neet-pg", label: "NEET-PG pattern", n: 200, min: 210, plus: 4, minus: 1 }, { id: "ini-cet", label: "INI-CET pattern", n: 200, min: 180, plus: 1, minus: 1 / 3 }],
     "neet-ss": [{ id: "neet-ss", label: "NEET-SS pattern", n: 150, min: 150, plus: 4, minus: 1 }],
-    "usmle": [{ id: "usmle-block", label: "USMLE block", n: 40, min: 60, plus: 1, minus: 0 }]
+    "usmle": [{ id: "usmle-block", label: "USMLE block", n: 40, min: 60, plus: 1, minus: 0 }],
+    // FMGE: NBEMS FMGE October 2026 information bulletin, section 5: 300 questions in 2 parts of 150, 150 min each,
+    // +1, no negative marking, pass at 150 of 300. A full mock here is one part.
+    "fmge": [{ id: "fmge", label: "FMGE pattern", n: 300, min: 300, plus: 1, minus: 0, parts: 2, pass: 150 }]
   };
   function mockOf(exam, id) { var l = MOCKS[exam] || MOCKS["neet-pg"]; for (var i = 0; i < l.length; i++) if (l[i].id === id) return l[i]; return l[0]; }
   // Module picks for a mock: up to maxFiles modules, shared across subjects by their question counts (every subject
@@ -209,7 +214,7 @@
   }
   function subjectsOf(exam) {
     var ex = examOf(exam), out = [];
-    (st.tax ? st.tax.branches : []).forEach(function (b) { if (b.id === ex.branch) b.subjects.forEach(function (s) { if (!s.ex || s.ex.indexOf(ex.tag) >= 0) out.push(s); }); });
+    (st.tax ? st.tax.branches : []).forEach(function (b) { if (b.id === ex.branch) b.subjects.forEach(function (s) { if (ex.all || !s.ex || s.ex.indexOf(ex.tag) >= 0) out.push(s); }); });
     return out;
   }
   function subjectById(id) { var r = null; (st.tax ? st.tax.branches : []).forEach(function (b) { b.subjects.forEach(function (s) { if (s.id === id) r = s; }); }); return r; }
@@ -351,6 +356,8 @@
     if (G.PREP_LESSONS && G.PREP_LESSONS.back()) return true;
     // PYQ: an enlarged question image closes first.
     if (G.PREP_PYQ && G.PREP_PYQ.back()) return true;
+    // Plan: a readiness or settings sheet closes first; onboarding steps back.
+    if (G.PREP_PLAN && G.PREP_PLAN.back()) return true;
     if (st.run && st.run.mode === "exam" && !st.run.done) { if (!G.confirm || G.confirm("Leave the test? Your answers in this test will be lost.")) { stopTimer(); st.run = null; } else return true; }
     stopTimer();
     if (st.stack.length > 1) { st.stack.pop(); rerender(); return true; }
@@ -380,6 +387,8 @@
       else if (opts && opts.mode === "mistakes") { st.stack = [renderHome]; mf.tag = "all"; push(renderMistakes); }
       else if (opts && opts.mode === "plan") { st.stack = [renderHome]; renderHome(); startPlan(); }
       else if (opts && opts.query) openQuery(opts);
+      // First plain open: onboarding (prep-plan.js), skippable. SMD_PREP_ONBOARD = false (UI tests) skips it.
+      else if (G.PREP_PLAN && G.SMD_PREP_ONBOARD !== false && G.PREP_PLAN.needsOnboard(load())) push(function () { G.PREP_PLAN.onboard(HOST); });
       else push(renderHome);
     }, function () { paint(bar("PrepNucleus", "", "close") + '<div class="pn-body"><p class="pn-err" role="alert">PrepNucleus did not load. Check the connection and try again.</p><button type="button" class="pn-btn" data-act="retry">Try again</button></div>'); });
     return true;
@@ -402,6 +411,7 @@
     try { if (G.PREP_ARENA && G.PREP_ARENA.leave) G.PREP_ARENA.leave(); } catch (e) {}
     try { if (G.PREP_LESSONS) G.PREP_LESSONS.leave(); } catch (e) {}
     try { if (G.PREP_PYQ) G.PREP_PYQ.leave(); } catch (e) {}
+    try { if (G.PREP_PLAN) G.PREP_PLAN.leave(); } catch (e) {}
     st.open = false; st.run = null; st.stack = [];
     if (root && root.parentNode) root.parentNode.removeChild(root);
     root = null;
@@ -423,7 +433,8 @@
     var nb = Object.keys(s.bm).length;
     paint(bar("PrepNucleus", ex.label, "close", '<button type="button" class="pn-ib" data-act="downloads" aria-label="Offline downloads">' + ico("dl") + "</button>") +
       tabs + '<div class="pn-body pn-home" id="pnHome">' +
-      '<h2 class="pn-h">Today</h2>' + planCard(s) +
+      // Readiness and Today's plan (prep-plan.js); the older Today card without it.
+      (G.PREP_PLAN ? G.PREP_PLAN.homeHtml(HOST) : '<h2 class="pn-h">Today</h2>' + planCard(s)) +
       (arena ? '<h2 class="pn-h">Compete</h2><div id="pnCompete">' + G.PREP_ARENA.homeHtml(HOST) + "</div>" : "") +
       '<h2 class="pn-h">Practise</h2>' +
       '<button type="button" class="pn-next" data-act="solvenext" id="pnNext" hidden><span class="pn-ri" aria-hidden="true">' + ico("target") + '</span><span class="pn-rb"><small>Solve next</small><b id="pnNextT"></b></span>' + ico("chev") + "</button>" +
@@ -432,6 +443,7 @@
       row("custom", ico("plus"), "Custom module", "Your own mix and count") +
       row("mistakes", ico("x"), "My mistakes", fmt(Object.keys(s.mt).length) + " to fix") +
       row("mocks", ico("clock"), "Mock exam", "Full pattern, marked") +
+      (G.PREP_PLAN ? row("weak", ico("target"), "Weak areas", "Mistakes and modules under 60%") : "") +
       // Previous year papers (prep-pyq.js): NEET-PG recall papers only, so the row shows on that tab.
       (G.PREP_PYQ && s.exam === "neet-pg" ? G.PREP_PYQ.homeRow(HOST) : "") +
       (G.PREP_C ? row("c-home", ico("deck"), "Your decks", "Questions and cards from your PDF or notes") : "") +
@@ -444,6 +456,7 @@
       var grid = root.querySelector("#pnGrid");
       if (grid) grid.innerHTML = subs.map(function (sb) { return tile(sb, st.ix[sb.id]); }).join("");
       var nx = solveNext(subs, st.ix, s, today(), s.exam), el = root.querySelector("#pnNext");
+      if (G.PREP_PLAN) G.PREP_PLAN.homeMounted(HOST);
       if (nx && el) { el.hidden = false; el.setAttribute("data-s", nx.subject); el.setAttribute("data-m", nx.module); root.querySelector("#pnNextT").textContent = (nx.title && nx.title.en) + (nx.why === "due" ? " · " + nx.n + " due" : ""); }
     });
   }
@@ -604,6 +617,8 @@
     var ms = s.mod[it._m || it.t] || (s.mod[it._m || it.t] = { t: 0, ok: 0 });
     ms.t++; if (ok) ms.ok++; ms.last = td;
     s.last = { s: it._s, m: it._m || it.t };
+    // Answer log for readiness accuracy (prep-plan.js): [module, 1|0], newest last.
+    if (G.PREP_PLAN) G.PREP_PLAN.noteAnswer(s, it._m || it.t, ok);
     // Mistakes (bank questions only; a deck's questions live in Layer C storage): kept until answered right.
     // PYQ items live in their paper, not a module file, so My mistakes (which reloads modules) leaves them out.
     if (it._s !== "deck" && !it._py) { if (ok) delete s.mt[it.id]; else s.mt[it.id] = [it._s, it._m || it.t, (s.mt[it.id] || [])[2] || null, Date.now(), String(it.q || "").slice(0, 140)]; }
@@ -733,16 +748,17 @@
   function renderMocks() {
     var s = load(), list = MOCKS[s.exam] || MOCKS["neet-pg"];
     paint(bar("Mock exam", examOf(s.exam).label, "back") + '<div class="pn-body">' + list.map(function (m) {
-      var mini = Math.min(50, m.n);
-      return '<section class="pn-panel"><p class="pn-big pn-mid">' + esc(m.label) + '</p><p class="pn-mut">' + m.n + " questions, " + fmtMin(m.min) + ". Right +" + fmtMark(m.plus) + (m.minus ? ", wrong minus " + fmtMark(m.minus) : ", no negative marking") + ", unanswered 0.</p>" +
-        '<button type="button" class="pn-btn pri" data-act="mock" data-v="' + m.id + '" data-k="full">' + ico("clock") + " Full mock: " + m.n + " questions</button>" +
+      var mini = Math.min(50, m.n), part = m.parts ? m.n / m.parts : 0;
+      return '<section class="pn-panel"><p class="pn-big pn-mid">' + esc(m.label) + '</p><p class="pn-mut">' + m.n + " questions" + (part ? " in " + m.parts + " parts of " + part + ", " + fmtMin(m.min / m.parts) + " each" : ", " + fmtMin(m.min)) + ". Right +" + fmtMark(m.plus) + (m.minus ? ", wrong minus " + fmtMark(m.minus) : ", no negative marking") + ", unanswered 0." + (m.pass ? " Pass mark " + m.pass + " of " + m.n * m.plus + "." : "") + "</p>" +
+        (part ? '<button type="button" class="pn-btn pri" data-act="mock" data-v="' + m.id + '" data-k="part">' + ico("clock") + " One part: " + part + " questions, " + fmtMin(m.min / m.parts) + "</button>"
+          : '<button type="button" class="pn-btn pri" data-act="mock" data-v="' + m.id + '" data-k="full">' + ico("clock") + " Full mock: " + m.n + " questions</button>") +
         (mini < m.n ? '<button type="button" class="pn-btn" data-act="mock" data-v="' + m.id + '" data-k="mini">' + ico("clock") + " Mini mock: " + mini + " questions, " + fmtMin(Math.round(m.min * mini / m.n)) + "</button>" : "") + "</section>";
     }).join("") + '<p class="pn-mut pn-small">Questions are drawn across every subject of the exam in proportion to the bank. Patterns follow the published bulletins; check the current one before your exam.</p></div>');
   }
   function fmtMin(m) { var h = Math.floor(m / 60), r = m % 60; return (h ? h + " h" : "") + (h && r ? " " : "") + (r ? r + " min" : ""); }
   function fmtMark(x) { return Math.abs(x - 1 / 3) < 1e-9 ? "1/3" : String(x); }
   function startMock(id, kind) {
-    var s = load(), m = mockOf(s.exam, id), n = kind === "mini" ? Math.min(50, m.n) : m.n, subs = subjectsOf(s.exam), hid = hidden();
+    var s = load(), m = mockOf(s.exam, id), n = kind === "mini" ? Math.min(50, m.n) : kind === "part" && m.parts ? m.n / m.parts : m.n, subs = subjectsOf(s.exam), hid = hidden();
     st.stack.push(function () {}); loadingScreen(m.label, "Choosing questions");
     Promise.all(subs.map(function (sb) { return loadIndex(sb.id); })).then(function () {
       var pairs = mockModules(subs.map(function (sb) { return { id: sb.id, ix: st.ix[sb.id] }; }), s.exam, kind === "mini" ? 12 : 30);
@@ -751,13 +767,14 @@
       var list = customDraw(lists.map(function (l) { return poolFor(l.items, s.exam, hid); }), n, 0);
       st.stack.pop();
       if (list.length < Math.min(n, 5)) { toast("Not enough questions loaded for a mock. Check the connection and try again."); return rerender(); }
-      runQuestions(list, "exam", m.label + (kind === "mini" ? " (mini)" : ""), { limit: Math.round(m.min * 60 * list.length / m.n), scheme: { plus: m.plus, minus: m.minus, label: m.label } });
+      runQuestions(list, "exam", m.label + (kind === "mini" ? " (mini)" : kind === "part" ? " (one part)" : ""), { limit: Math.round(m.min * 60 * list.length / m.n), scheme: { plus: m.plus, minus: m.minus, label: m.label, pass: m.pass ? m.pass / (m.n * m.plus) : 0 } });
     });
   }
   function mockAnalysis(r) {
     var sc = scoreMock(r.items, r.ans, r.scheme), rows = Object.keys(sc.bySubject).map(function (sid) { var b = sc.bySubject[sid], sb = subjectById(sid); return { sid: sid, sb: sb, name: sb ? tx(sb.name) : "Not sorted into a subject yet", n: b.n, right: b.right, wrong: b.wrong, pct: b.n ? Math.round(b.right * 100 / b.n) : 0 }; });
     rows.sort(function (a, b) { return a.pct - b.pct; });
-    return '<section class="pn-panel pn-score"><p class="pn-big">' + fmtMark(sc.marks) + " / " + sc.max + '</p><p class="pn-mut">' + sc.right + " right · " + sc.wrong + " wrong · " + sc.blank + " unanswered · " + fmtTime(r.secs) + " taken</p></section>" +
+    return '<section class="pn-panel pn-score"><p class="pn-big">' + fmtMark(sc.marks) + " / " + sc.max + '</p><p class="pn-mut">' + sc.right + " right · " + sc.wrong + " wrong · " + sc.blank + " unanswered · " + fmtTime(r.secs) + " taken</p>" +
+      (r.scheme.pass ? '<p class="pn-mut pn-small">Pass mark in the exam: ' + Math.round(r.scheme.pass * 100) + "% of the maximum. This set: " + (sc.max ? Math.round(Math.max(0, sc.marks) * 100 / sc.max) : 0) + "%.</p>" : "") + "</section>" +
       '<h2 class="pn-sec">By subject, weakest first</h2><ul class="pn-mods">' + rows.map(function (x) {
         // A previous-year question not yet sorted into a subject (_s "pyq") has no subject screen to open.
         var inner = '<span class="pn-mb"><b>' + x.name + "</b><small>" + x.right + " of " + x.n + " right · " + x.wrong + ' wrong</small></span><span class="pn-st' + (x.pct >= 70 ? " done" : "") + '">' + x.pct + "%</span>";
@@ -961,6 +978,8 @@
     if (a.indexOf("l-") === 0 && G.PREP_LESSONS) return G.PREP_LESSONS.act(a, b, HOST);
     // Previous year papers (prep-pyq.js) own every data-act starting "y-".
     if (a.indexOf("y-") === 0 && G.PREP_PYQ) return G.PREP_PYQ.act(a, b, HOST);
+    // Onboarding, readiness and today's plan (prep-plan.js) own every data-act starting "p-".
+    if (a.indexOf("p-") === 0 && G.PREP_PLAN) return G.PREP_PLAN.act(a, b, HOST);
   }
   function openGrid() {
     var r = st.run;
@@ -983,6 +1002,8 @@
     subjIco: subjIco, row: row, fmtTime: fmtTime, mockOf: mockOf, subjectOfModule: subjectOfModule, subjectById: subjectById, tx: tx,
     stackTop: function () { return st.stack[st.stack.length - 1]; }, home: renderHome, run_: function () { return st.run; },
     // Lessons (prep-lessons.js)
+    // Plan (prep-plan.js)
+    subjectsOf: subjectsOf, loadIndex: loadIndex, ix: function () { return st.ix; }, startMock: startMock, pure: PURE,
     stack: function () { return st.stack; }, loadModule: loadModule, bankApi: API, pool: function (items) { var h = hidden(); return (items || []).filter(function (it) { return usable(it, h); }); }, cacheGet: cacheGet, cachePut: cachePut };
 
   var API_OBJ = { open: open, close: close, back: back, isOpen: function () { return st.open; }, _pure: PURE, _st: st, _host: HOST };

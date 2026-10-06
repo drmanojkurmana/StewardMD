@@ -58,7 +58,8 @@ const bank = () => A.bankFrom(bankR2());
 /* ---------- pure helpers ---------- */
 
 test("marking matches prep.js scoreMock for every MOCKS pattern", () => {
-  const pats = [].concat(...Object.values(P.MOCKS));
+  // FMGE has no Arena yet (client shows "coming soon", no server scheme), so its pattern is not compared.
+  const pats = [].concat(...Object.values(P.MOCKS)).filter((p) => p.id !== "fmge");
   for (const pat of pats) {
     const scheme = A.SCHEMES[pat.id === "usmle-block" ? "usmle" : pat.id];
     assert.deepEqual(scheme, { plus: pat.plus, minus: pat.minus }, pat.id);
