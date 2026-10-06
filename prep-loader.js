@@ -3,13 +3,14 @@
    open injects the stylesheets, specialty-core.js (FSRS), specialty-bank.js (search helpers), prep.js and the Layer C
    files, in order, at one ?v= token; prep.js replaces window.PREP with the real module and the call that started the load goes through to it.
    Flag smd_prep: default OFF while the bank is being filled. localStorage smd_prep = "1" or ?prep=1 turns it on,
-   "0" or ?prep=0 turns it off (same rule as the home tile in home.js). */
+   "0" or ?prep=0 turns it off (same rule as the home tile in home.js). prep-arena.js (Arena and My stats) always loads; its
+   own flag smd_prep_arena (default OFF, ?arena=1) decides whether the Compete section shows. */
 (function (G) {
   "use strict";
-  var V = "prep2";
+  var V = "prep3";
   // Layer C (prep-source, prep-decks, prep-cards, prep-create) after prep.js; prep-create.js reads the two before it.
   var CSS = ["prep.css", "prep-create.css"];
-  var JS = ["specialty-core.js", "specialty-bank.js", "prep.js", "prep-teacher.js", "prep-source.js", "prep-decks.js", "prep-cards.js", "prep-create.js"];
+  var JS = ["specialty-core.js", "specialty-bank.js", "prep.js", "prep-arena.js", "prep-teacher.js", "prep-source.js", "prep-decks.js", "prep-cards.js", "prep-create.js"];
   var loading = null;
 
   function enabled() {

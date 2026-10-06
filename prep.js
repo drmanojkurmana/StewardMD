@@ -25,8 +25,8 @@
   ];
   function examOf(id) { for (var i = 0; i < EXAMS.length; i++) if (EXAMS[i].id === id) return EXAMS[i]; return EXAMS[0]; }
   // mt: mistakes { itemId: [subject, module, tag, ts, preview] }, removed when the item is next answered right.
-  // goal: new questions a day for the daily plan.
-  function emptyStore() { return { v: 1, cards: {}, conf: {}, days: {}, mod: {}, bm: {}, rep: {}, exam: "neet-pg", last: null, dl: {}, hid: { ids: {}, ts: 0 }, mt: {}, goal: 30 }; }
+  // goal: new questions a day for the daily plan. mh: finished mocks, newest last, at most 20 ({ ts, label, marks, max, n }).
+  function emptyStore() { return { v: 1, cards: {}, conf: {}, days: {}, mod: {}, bm: {}, rep: {}, exam: "neet-pg", last: null, dl: {}, hid: { ids: {}, ts: 0 }, mt: {}, goal: 30, mh: [] }; }
   function deckKey(moduleId) { return "p:" + moduleId; }
   // hidden: item ids withdrawn after repeated student reports (/api/prep/flag?hidden=1), as an id -> 1 map.
   function usable(it, hidden) { return !!it && !(it.flags && it.flags.length) && !(hidden && hidden[it.id]); }
@@ -284,9 +284,53 @@
     bm: '<path d="M6 3h12v18l-6-4-6 4z"/>', plus: '<path d="M12 5v14M5 12h14"/>', star: '<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>',
     flag: '<path d="M5 21V4h11l-1.5 4L16 12H5"/>', play: '<path d="M7 5l12 7-12 7z"/>', clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
     dl: '<path d="M12 4v11M7 10l5 5 5-5M5 20h14"/>', search: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>', next: '<path d="M5 12h14M13 6l6 6-6 6"/>', check: '<path d="M5 12l5 5 9-10"/>', x: '<path d="M6 6l12 12M18 6L6 18"/>',
-    grid: '<rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/>'
+    grid: '<rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/>',
+    deck: '<rect x="4" y="6" width="13" height="15" rx="2"/><path d="M8 3h10a2 2 0 0 1 2 2v12"/>', target: '<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><path d="M12 12h.01"/>',
+    stats: '<path d="M4 20h16M7 16v-5M12 16V6M17 16v-8"/>', bolt: '<path d="M13 3L5 14h6l-1 7 8-11h-6z"/>', cal: '<rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
+    versus: '<path d="M4 4l8 8M4 4v4M4 4h4M20 4l-8 8M20 4v4M20 4h-4M7 17l-3 3M17 17l3 3M9 15l-2 2M15 15l2 2"/>', trophy: '<path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M9 21h6M10 17h4"/>',
+    off: '<path d="M3 3l18 18M8.5 8.6A9 9 0 0 0 5 11M2 8a14 14 0 0 1 4-2.4M16 11.5a9 9 0 0 1 3 1.5M10.7 5.1A14 14 0 0 1 22 8M8.5 15a5 5 0 0 1 6.5-.5M12 19h.01"/>',
+    user: '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>', leave: '<path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10"/>'
   };
-  function ico(n, filled) { return '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="' + (filled ? "currentColor" : "none") + '" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + (ICON[n] || "") + "</svg>"; }
+  /* Subject icons: one authored 24px set, 2px stroke, round caps, to match ICON. Keyed by subject id (taxonomy.json). */
+  var SUBJ = {
+    anatomy: '<circle cx="12" cy="4.5" r="2"/><path d="M12 7.5v7M7 10l5-1.5 5 1.5M12 14.5l-3 6.5M12 14.5l3 6.5"/>',
+    physiology: '<path d="M3 12h4l2-5 4 10 2-5h6"/>',
+    biochemistry: '<path d="M12 3l7.8 4.5v9L12 21l-7.8-4.5v-9z"/><circle cx="12" cy="12" r="3.5"/>',
+    pathology: '<path d="M5 21h14M8 17h8M13.5 3.5l3 3-5 5-3-3zM11 12l-2 5M16.5 11a5 5 0 0 1-2.5 6"/>',
+    pharmacology: '<path d="M10.5 20.5a5 5 0 0 1-7-7l7-7a5 5 0 0 1 7 7z"/><path d="M7 10l7 7"/>',
+    microbiology: '<path d="M8.5 15.5l7-7a2.8 2.8 0 0 0-4-4l-7 7a2.8 2.8 0 0 0 4 4z"/><path d="M15.5 8.5l2 4 3 .5M8.5 15.5l-1 3-2.5 2M9 9l2 2"/>',
+    "forensic-medicine": '<path d="M12 4v16M8 20h8M5 7h14M5 7l-3 6h6zM19 7l-3 6h6z"/>',
+    "community-medicine": '<circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.2a5 5 0 0 1 5 5"/>',
+    ophthalmology: '<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+    ent: '<path d="M7 9a5 5 0 0 1 10 0c0 3-3 4-3 7a3 3 0 0 1-5.5 1.5"/><path d="M10 9a2 2 0 0 1 4 0c0 1.5-2 2-2 3.5"/>',
+    medicine: '<path d="M5 3v5a4 4 0 0 0 8 0V3"/><path d="M9 12v3a5 5 0 0 0 10 0v-2"/><circle cx="19" cy="11" r="2"/>',
+    surgery: '<path d="M14 10l6.5-6.5c.6 1.6.2 4.6-2 6.8L15 13.8z"/><path d="M14 10L3 21"/>',
+    "obstetrics-gynaecology": '<circle cx="11" cy="4.5" r="2"/><path d="M10 8c-2 2-2 5 0 6v7M10 8c3 0 6 2 6 4.5S13 14 10 14"/>',
+    paediatrics: '<path d="M9 8h6v11a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2zM10 8V6a2 2 0 0 1 4 0v2M12 4V2.5M9 12h3M9 15h3"/>',
+    orthopaedics: '<path d="M7 4a2.1 2.1 0 0 0-3 2.6A2.1 2.1 0 0 0 5.5 9.5l9 9a2.1 2.1 0 0 0 2.9 1.5 2.1 2.1 0 0 0 2.6-3 2.1 2.1 0 0 0-1.5-2.9l-9-9A2.1 2.1 0 0 0 7 4z"/>',
+    dermatology: '<path d="M3 10c3-2 6 2 9 0s6-2 9 0M3 15h18M3 20h18M9 10V4M14.5 9.5l1.5-5"/>',
+    psychiatry: '<path d="M8 21v-3a7 7 0 1 1 9-6.7l1.6 3.2-2.1.5v2a2 2 0 0 1-2 2h-1v2"/><path d="M11 8.5a2 2 0 1 1 2 2"/>',
+    anaesthesia: '<path d="M18 2l4 4M20 4l-3 3M17 7L7.5 16.5 4 18l1.5-3.5L15 5zM11 9l2 2M8.5 11.5l2 2M2 22l2.5-2.5"/>',
+    radiology: '<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M12 6v12M8 9h8M7.5 12h9M9 15h6"/>',
+    "ss-general-medicine": '<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M12 9v6M9 12h6"/>',
+    "ss-cardiology": '<path d="M12 20s-7-4.4-9-9a4.6 4.6 0 0 1 9-3 4.6 4.6 0 0 1 9 3c-2 4.6-9 9-9 9z"/><path d="M7 12h3l1-2 2 4 1-2h3"/>',
+    "ss-neurology": '<path d="M12 5a3 3 0 0 0-6 1 3 3 0 0 0-2 5.5A3 3 0 0 0 6 17a3 3 0 0 0 6 2zM12 5a3 3 0 0 1 6 1 3 3 0 0 1 2 5.5 3 3 0 0 1-2 5.5 3 3 0 0 1-6 2"/>',
+    "ss-nephrology": '<path d="M15 4c-4 0-9 3-9 9s3 8 6 8c2.5 0 3-2 3-4s-2-3-2-5 1.5-2 3-2a3 3 0 0 0 0-6z"/>',
+    "ss-gastroenterology": '<path d="M9 3v4c0 2-4 2.5-4 7a7 7 0 0 0 12 5c2-2 1-5-1-5-2.5 0-2 3-5 3-2 0-2-3 0-5l2-2V3"/>',
+    "ss-hepatology": '<path d="M3 9c0-2 2-3 5-3h12c1 0 1.5 1 1 2-2 5-8 10-13 10-3 0-5-4-5-9z"/><path d="M12 6v6"/>',
+    "ss-endocrinology": '<path d="M12 8v8M12 10c-1-4-7-5-7 1s4 7 7 3M12 10c1-4 7-5 7 1s-4 7-7 3"/>',
+    "ss-haematology": '<path d="M12 3s-6 7-6 11a6 6 0 0 0 12 0c0-4-6-11-6-11z"/><path d="M9.5 14.5a2.5 2.5 0 0 0 2.5 2.5"/>',
+    "ss-medical-oncology": '<path d="M9 21l5.6-9.5a4 4 0 1 0-5.2 0L15 21"/>',
+    "ss-rheumatology-immunology": '<path d="M12 21v-8M12 13L6.5 6M12 13l5.5-7M6.5 6L4 8M6.5 6L8 3.5M17.5 6L20 8M17.5 6L16 3.5"/>',
+    "ss-pulmonology": '<path d="M12 4v8l-3-2M12 12l3-2"/><path d="M8 7c-3 1-5 6-5 10 0 2 1.5 3 3 3 2 0 3-1 3-3V8a1 1 0 0 0-1-1zM16 7c3 1 5 6 5 10 0 2-1.5 3-3 3-2 0-3-1-3-3V8a1 1 0 0 1 1-1z"/>',
+    "ss-infectious-diseases": '<circle cx="12" cy="12" r="5"/><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.9 2.9M15.5 15.5l2.9 2.9M5.6 18.4l2.9-2.9M15.5 8.5l2.9-2.9"/>',
+    "ss-critical-care": '<rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M6 11h3l1.5-3 3 6 1.5-3h3"/>',
+    "ss-biostatistics": '<path d="M4 20h16M7 16v-4M12 16V7M17 16v-7"/>'
+  };
+  function svg(body, filled, size) { return '<svg viewBox="0 0 24 24" width="' + (size || 20) + '" height="' + (size || 20) + '" aria-hidden="true" fill="' + (filled ? "currentColor" : "none") + '" stroke="currentColor" stroke-width="' + (size === 24 ? 1.75 : 2) + '" stroke-linecap="round" stroke-linejoin="round">' + body + "</svg>"; }
+  function ico(n, filled) { return svg(ICON[n] || "", filled); }
+  // A subject's icon at 24px; a subject without its own glyph gets the open-book fallback.
+  function subjIco(id) { return svg(SUBJ[id] || '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 21V5M8 7h7"/>', false, 24); }
   function bar(title, sub, left, right) {
     return '<header class="pn-bar"><button type="button" class="pn-ib" data-act="' + (left || "back") + '" aria-label="' + (left === "close" ? "Close PrepNucleus" : "Back") + '">' + ico(left === "close" ? "close" : "back") + "</button>" +
       '<div class="pn-t"><h1>' + title + "</h1>" + (sub ? "<p>" + sub + "</p>" : "") + "</div>" + (right || '<span class="pn-ib-sp"></span>') + "</header>";
@@ -301,6 +345,8 @@
   function rerender() { var v = st.stack[st.stack.length - 1]; if (v) v(); }
   function back() {
     if (!st.open) return false;
+    // Arena: a sheet closes first; a live battle asks before it is left.
+    if (G.PREP_ARENA && G.PREP_ARENA.back && G.PREP_ARENA.back()) return true;
     if (st.run && st.run.mode === "exam" && !st.run.done) { if (!G.confirm || G.confirm("Leave the test? Your answers in this test will be lost.")) { stopTimer(); st.run = null; } else return true; }
     stopTimer();
     if (st.stack.length > 1) { st.stack.pop(); rerender(); return true; }
@@ -349,6 +395,7 @@
   }
   function close() {
     stopTimer();
+    try { if (G.PREP_ARENA && G.PREP_ARENA.leave) G.PREP_ARENA.leave(); } catch (e) {}
     st.open = false; st.run = null; st.stack = [];
     if (root && root.parentNode) root.parentNode.removeChild(root);
     root = null;
@@ -357,23 +404,33 @@
   }
 
   /* ---------- home ---------- */
+  function arenaOn() { return !!(G.PREP_ARENA && G.PREP_ARENA.enabled()); }
+  // A row in a grouped list: icon, title, one line of detail, chevron.
+  function row(act, icon, title, sub, attrs) {
+    return '<button type="button" class="pn-row" data-act="' + act + '"' + (attrs || "") + '><span class="pn-ri" aria-hidden="true">' + icon + '</span><span class="pn-rb"><b>' + title + "</b><small>" + sub + "</small></span>" + ico("chev") + "</button>";
+  }
   function renderHome() {
-    var s = load(), ex = examOf(s.exam), subs = subjectsOf(s.exam);
+    var s = load(), ex = examOf(s.exam), subs = subjectsOf(s.exam), arena = arenaOn();
     var tabs = '<div class="pn-tabs" role="tablist" aria-label="Exam">' + EXAMS.map(function (e) {
       return '<button type="button" role="tab" class="pn-tab' + (e.id === ex.id ? " on" : "") + '" aria-selected="' + (e.id === ex.id) + '" data-act="exam" data-v="' + e.id + '">' + esc(e.label) + "</button>";
     }).join("") + "</div>";
     var nb = Object.keys(s.bm).length;
     paint(bar("PrepNucleus", ex.label, "close", '<button type="button" class="pn-ib" data-act="downloads" aria-label="Offline downloads">' + ico("dl") + "</button>") +
-      tabs + '<div class="pn-body" id="pnHome">' +
-      planCard(s) +
-      '<button type="button" class="pn-next" data-act="solvenext" id="pnNext" hidden><span>Solve next</span><b id="pnNextT"></b>' + ico("chev") + "</button>" +
-      '<div class="pn-cards"><button type="button" class="pn-card" data-act="bookmarks">' + ico("bm") + "<span><b>Bookmarks</b><small>" + fmt(nb) + " saved</small></span></button>" +
-      '<button type="button" class="pn-card" data-act="custom">' + ico("plus") + "<span><b>Custom module</b><small>Your own mix and count</small></span></button>" +
-      '<button type="button" class="pn-card" data-act="mistakes">' + ico("x") + "<span><b>My mistakes</b><small>" + fmt(Object.keys(s.mt).length) + " to fix</small></span></button>" +
-      '<button type="button" class="pn-card" data-act="mocks">' + ico("clock") + "<span><b>Mock exam</b><small>Full pattern, marked</small></span></button>" +
-      (G.PREP_C ? '<button type="button" class="pn-card pn-card-wide" data-act="c-home">' + ico("dl") + "<span><b>Your decks</b><small>Questions and cards from your PDF or notes</small></span></button>" : "") + "</div>" +
-      '<div class="pn-grid" id="pnGrid">' + subs.map(function (sb) { return tile(sb, null); }).join("") + "</div>" +
-      '<p class="pn-note">Questions: MedMCQA (MIT licence), cleaned and sorted into modules; AI-generated questions are labelled. Progress stays on this device.</p></div>');
+      tabs + '<div class="pn-body pn-home" id="pnHome">' +
+      '<h2 class="pn-h">Today</h2>' + planCard(s) +
+      (arena ? '<h2 class="pn-h">Compete</h2><div id="pnCompete">' + G.PREP_ARENA.homeHtml(HOST) + "</div>" : "") +
+      '<h2 class="pn-h">Practise</h2>' +
+      '<button type="button" class="pn-next" data-act="solvenext" id="pnNext" hidden><span class="pn-ri" aria-hidden="true">' + ico("target") + '</span><span class="pn-rb"><small>Solve next</small><b id="pnNextT"></b></span>' + ico("chev") + "</button>" +
+      '<div class="pn-group">' +
+      row("bookmarks", ico("bm"), "Bookmarks", fmt(nb) + " saved") +
+      row("custom", ico("plus"), "Custom module", "Your own mix and count") +
+      row("mistakes", ico("x"), "My mistakes", fmt(Object.keys(s.mt).length) + " to fix") +
+      row("mocks", ico("clock"), "Mock exam", "Full pattern, marked") +
+      (G.PREP_C ? row("c-home", ico("deck"), "Your decks", "Questions and cards from your PDF or notes") : "") +
+      (G.PREP_ARENA ? row("a-stats", ico("stats"), "My stats", "Accuracy by subject, the last 30 days") : "") + "</div>" +
+      '<h2 class="pn-h">Subjects</h2><div class="pn-subs" id="pnGrid">' + subs.map(function (sb) { return tile(sb, null); }).join("") + "</div>" +
+      '<p class="pn-note">Questions: MedMCQA (MIT licence), cleaned and sorted into modules; AI-generated questions are labelled. Practice and progress stay on this device.</p></div>');
+    if (arena) G.PREP_ARENA.homeMounted(HOST);
     Promise.all(subs.map(function (sb) { return loadIndex(sb.id); })).then(function () {
       if (!st.open || st.stack[st.stack.length - 1] !== renderHome) return;
       var grid = root.querySelector("#pnGrid");
@@ -386,9 +443,9 @@
     var s = load(), prog = progressByModule(s, today()), mods = ix ? ix.topics.filter(function (t) { return t.group !== "mixed"; }) : [], done = 0, total = mods.length, q = 0;
     mods.forEach(function (t) { var n = countFor(t, s.exam); q += n; if (n && statusOf((prog[t.id] || {}).answered, n) === "done") done++; });
     var pct = total ? Math.round(done * 100 / total) : 0;
-    return '<button type="button" class="pn-tile" data-act="subject" data-s="' + esc(sb.id) + '"><span class="pn-ic" aria-hidden="true">' + esc((sb.code || sb.id).slice(0, 3).toUpperCase()) + "</span>" +
-      '<span class="pn-tb"><b>' + tx(sb.name) + '</b><span class="pn-prog" aria-hidden="true"><i style="width:' + pct + '%"></i></span>' +
-      "<small>" + (ix ? done + "/" + total + " modules · " + (q ? fmt(q) + " MCQs" : "questions coming soon") : "&nbsp;") + "</small></span></button>";
+    return '<button type="button" class="pn-tile" data-act="subject" data-s="' + esc(sb.id) + '"><span class="pn-ic" aria-hidden="true">' + subjIco(sb.id) + "</span>" +
+      '<span class="pn-tb"><b>' + tx(sb.name) + "</b><small>" + (ix ? done + "/" + total + " modules · " + (q ? fmt(q) + " MCQs" : "questions coming soon") : "&nbsp;") + "</small>" +
+      '<span class="pn-prog" aria-hidden="true"><i style="width:' + pct + '%"></i></span></span>' + ico("chev") + "</button>";
   }
 
   /* ---------- subject ---------- */
@@ -461,11 +518,12 @@
   }
 
   /* ---------- runner ---------- */
-  // opts (mock exams): { limit: seconds, scheme: {plus, minus, label} }.
+  // opts (mock exams): { limit: seconds, scheme: {plus, minus, label} }. opts.custom (Arena events): { submit(run), render(run) }:
+  // the runner neither marks nor records (the items carry no key); submit sends the answers and render draws the result.
   function runQuestions(items, mode, title, opts) {
     var ex = examOf(load().exam);
     opts = opts || {};
-    st.run = { items: items, i: 0, mode: mode, title: title, ans: items.map(function () { return -1; }), mark: {}, done: false, t0: Date.now(), limit: mode === "exam" ? (opts.limit || items.length * ex.sec) : 0, scheme: opts.scheme || null };
+    st.run = { items: items, i: 0, mode: mode, title: title, ans: items.map(function () { return -1; }), mark: {}, done: false, t0: Date.now(), limit: mode === "exam" ? (opts.limit || items.length * ex.sec) : 0, scheme: opts.scheme || null, custom: opts.custom || null };
     st.stack.push(renderRun);
     renderRun();
     if (mode === "exam") startTimer();
@@ -483,7 +541,7 @@
   function provLine(it) { return it.gen || it.prov === "SMD" ? "AI-generated, auto-checked" : it.prov === "USR" ? "Your deck" : "Source: MedMCQA (MIT licence)"; }
   function renderRun() {
     var r = st.run; if (!r) return;
-    if (r.done) return renderResult();
+    if (r.done) return r.custom ? r.custom.render(r) : renderResult();
     var it = r.items[r.i], chosen = r.ans[r.i], shown = r.mode === "study" && chosen >= 0, s = load(), bm = !!s.bm[it.id], own = it._s === "deck";
     var L = ["A", "B", "C", "D"];
     var opts = it.o.map(function (o, k) {
@@ -543,8 +601,10 @@
     stopTimer();
     // Submitted from the question grid (or timed out there): drop the grid so the results sit on the runner's entry.
     while (st.stack.length && st.stack[st.stack.length - 1] !== renderRun) st.stack.pop();
-    if (r.mode === "exam") r.items.forEach(function (it, i) { if (r.ans[i] >= 0) record(it, r.ans[i]); else record(it, -1); });
     r.done = true; r.secs = Math.round((Date.now() - r.t0) / 1000);
+    if (r.custom) return r.custom.submit(r);
+    if (r.mode === "exam") r.items.forEach(function (it, i) { if (r.ans[i] >= 0) record(it, r.ans[i]); else record(it, -1); });
+    if (r.scheme) { var sc = scoreMock(r.items, r.ans, r.scheme), s = load(); s.mh = (s.mh || []).concat([{ ts: Date.now(), label: r.title, marks: sc.marks, max: sc.max, n: r.items.length }]).slice(-20); save(); }
     renderResult();
   }
   function renderResult() {
@@ -574,8 +634,8 @@
   /* ---------- Phase 4: today's plan, mistakes, weak areas ---------- */
   function planCard(s) {
     var p = planToday(s, today()), pct = p.goal ? Math.min(100, Math.round(p.done * 100 / p.goal)) : 0;
-    return '<section class="pn-plan" aria-label="Today"><div class="pn-plan-h"><b>Today</b><button type="button" class="pn-link" data-act="goal" aria-label="Daily goal ' + p.goal + ' questions, change">Goal ' + p.goal + "</button></div>" +
-      '<span class="pn-prog" aria-hidden="true"><i style="width:' + pct + '%"></i></span><p class="pn-mut pn-small">' + fmt(p.done) + " of " + fmt(p.goal) + " answered today" + (p.due ? " · " + fmt(p.due) + " reviews due" : "") + "</p>" +
+    return '<section class="pn-plan" aria-label="Today\'s plan"><div class="pn-plan-h"><p class="pn-plan-n"><b>' + fmt(p.done) + "</b> of " + fmt(p.goal) + ' answered today</p><button type="button" class="pn-link pn-goal" data-act="goal" aria-label="Daily goal ' + p.goal + ' questions, change">Goal ' + p.goal + "</button></div>" +
+      '<span class="pn-prog" aria-hidden="true"><i style="width:' + pct + '%"></i></span>' + (p.due ? '<p class="pn-mut pn-small">' + fmt(p.due) + " reviews due</p>" : "") +
       '<div class="pn-plan-act"><button type="button" class="pn-btn pri" data-act="plan"' + (p.due || p.left ? "" : " disabled") + ">" + ico("play") + (p.due ? " Start today's reviews" : " Start today's set") + "</button>" +
       '<button type="button" class="pn-link" data-act="weak"' + (p.weak.length || Object.keys(s.mt).length ? "" : " disabled") + ">Fix my weak areas</button></div></section>";
   }
@@ -874,6 +934,8 @@
     if (a === "dlrm") return removeDownload(b.getAttribute("data-s"));
     // Layer C (prep-create.js and friends) owns every data-act starting "c-".
     if (a.indexOf("c-") === 0 && G.PREP_C && G.PREP_C.act) return G.PREP_C.act(a, b, HOST);
+    // Arena and My stats (prep-arena.js) own every data-act starting "a-".
+    if (a.indexOf("a-") === 0 && G.PREP_ARENA && G.PREP_ARENA.act) return G.PREP_ARENA.act(a, b, HOST);
   }
   function openGrid() {
     var r = st.run;
@@ -891,7 +953,10 @@
      the same store under deck key "p:deck-<id>". */
   var HOST = { push: push, rerender: rerender, back: back, paint: paint, bar: bar, ico: ico, esc: esc, toast: toast, fmt: fmt,
     run: runQuestions, today: today, store: load, save: save, core: function () { return C; }, root: function () { return root; },
-    exam: function () { return examOf(load().exam); } };
+    exam: function () { return examOf(load().exam); },
+    // Arena and My stats (prep-arena.js)
+    subjIco: subjIco, row: row, fmtTime: fmtTime, mockOf: mockOf, subjectOfModule: subjectOfModule, subjectById: subjectById, tx: tx,
+    stackTop: function () { return st.stack[st.stack.length - 1]; }, home: renderHome, run_: function () { return st.run; } };
 
   var API_OBJ = { open: open, close: close, back: back, isOpen: function () { return st.open; }, _pure: PURE, _st: st, _host: HOST };
   G.PREP = API_OBJ;
