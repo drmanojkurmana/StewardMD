@@ -13,17 +13,58 @@
  *   POST /api/entitlements/admin/clear-flag     {uid|smdId|email|regNo, feature}       -> delete explicit feature flag
  * (dispatch is by the LAST path segment, so the `admin/` prefix the console uses is honored.)
  *
+ * PrepNucleus Pro (signed-in user, Firebase ID token; NOT owner-gated; see functions/_prep_pro.js):
+ *   GET  /api/entitlements                      -> { prepPro:{active,until,source,autoRenews,manageUrl} }
+ *   GET  /api/entitlements/prep-quote[?plan=year] -> see prepQuote() in _prep_pro.js (best single first-year price)
+ *   GET  /api/entitlements/prep-offer           -> { offer:null } | { offer:{kind:"winback",...} } (first GET starts 48 h)
+ *   POST /api/entitlements/prep-offer/dismiss   -> { ok:true } (ends the offer forever)
+ *   POST /api/entitlements/prep-referral {code} -> { ok:true[, already] } | { ok:false, error }
+ *
  * Owner-gated (same OWNER_EMAILS / legacy admin-token gate as every other admin surface).
  * The handlers themselves are pure + deps-injectable (see _entitlements.js); this router
  * just authenticates, stamps the auditable `updatedBy`, and dispatches by last path segment.
  */
 import { ownerOK, emailFromToken } from "../../_adminauth.js";
+import { identify } from "../../_fbauth.js";
+import { getPrepRecord, prepProView, quoteFor, getOffer, dismissOffer, recordReferral } from "../../_prep_pro.js";
 import { adminLookup, adminSetRole, adminSetTier, adminClearOverride, adminSetBudget, adminAddGrant, adminSetModel, adminSetFlag, adminClearFlag, adminSetPlan, adminUltimateMigration } from "../../_entitlements.js";
 
 const json = (o, s = 200) => new Response(JSON.stringify(o), { status: s, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } });
 
+// Firebase uid of the caller, or null (CF Access / owner identities are not shoppers).
+async function prepUid(request, env) {
+  const id = await identify(request, env);
+  return typeof id === "string" && id.indexOf("fb:") === 0 ? id.slice(3) : null;
+}
+const lastSeg = (params) => { const r = (params && params.path) || []; return Array.isArray(r) ? (r[r.length - 1] || "") : r; };
+
+export async function onRequestGet(context) {
+  const { request, env, params } = context;
+  try {
+    const uid = await prepUid(request, env);
+    if (!uid) return json({ ok: false, error: "signin-required" }, 401);
+    const seg = lastSeg(params);
+    if (!seg) return json({ prepPro: prepProView(await getPrepRecord(env, uid), Date.now(), env) });
+    if (seg === "prep-quote") return json(await quoteFor(env, uid));   // one plan (year); ?plan is accepted and ignored
+    if (seg === "prep-offer") return json(await getOffer(env, uid));
+    return json({ ok: false, error: "not_found" }, 404);
+  } catch (e) { return json({ ok: false, error: "server_error" }, 500); }
+}
+
 export async function onRequestPost(context) {
   const { request, env, params } = context;
+  const pseg = lastSeg(params), pparts = (params && params.path) || [];
+  if (pseg === "prep-referral" || (pseg === "dismiss" && pparts[0] === "prep-offer")) {
+    try {
+      const uid = await prepUid(request, env);
+      if (!uid) return json({ ok: false, error: "signin-required" }, 401);
+      if (pseg === "dismiss") return json(await dismissOffer(env, uid));
+      let b = {}; try { b = (await request.json()) || {}; } catch (e) {}
+      const r = await recordReferral(env, uid, b.code);
+      const st = r.status || 200; delete r.status;
+      return json(r, st);
+    } catch (e) { return json({ ok: false, error: "server_error" }, 500); }
+  }
   if (!(await ownerOK(request, env))) return json({ ok: false, error: "forbidden" }, 403);
   const route = (params && params.path) || [];
   const seg = Array.isArray(route) ? route[route.length - 1] : route;   // .../admin/<seg>

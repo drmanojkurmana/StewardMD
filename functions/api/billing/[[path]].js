@@ -29,6 +29,7 @@ import { getEntitlement, writeEntitlement, clinicLimit, deviceLimit, recordTierP
 import { oncoTrialState } from "../../_features.js";
 import { deviceLockOn } from "../../_devices.js";
 import { cfgPrice, warmBillingCfg, getBillingCfg, setBillingCfg } from "../../_billingcfg.js";
+import { quoteFor, markCheckout, fulfilPrep, prepPlanKeyForProduct, prepProView } from "../../_prep_pro.js";
 import { quotaOn, quotaKv, quotaPacks, quotaPackFor, packKeyForProduct, credit as quotaCredit, state as quotaState,
   msgTiers, msgTierFromPlanKey, msgTierKeyForProduct, msgPurchasePatch } from "../../_quota.js";
 
@@ -114,6 +115,9 @@ export async function fulfilPurchase(env, uid, planKey, months, source, deps) {
   const lookupUser = (deps && deps.lookupUser) || lookupUserByUid;
   const kv = (deps && deps.kv) || usageKv(env);
   const grant = (deps && deps.grantPro) || grantPro;
+  /* PrepNucleus Pro buys the prep_pro entitlement only (never StewardMD Pro). Needs a payment ref
+   * (deps.ref) so a webhook replay is a no-op and the referral credit is paid once. */
+  if (/^prep:/i.test(String(planKey || ""))) return fulfilPrep(env, uid, planKey, { source, ref: deps && deps.ref, days: deps && deps.days, platform: deps && deps.platform }, deps);
   // Quota packs (patient credits / Scribe consults) — units re-read from the server price table, never
   // from the payment note. Keyed by uid, which is what functions/_quota.js meters.
   /* Clinic Messaging subscription. It buys a MONTHLY ALLOWANCE, not Pro and not a plan tier, so it
@@ -310,6 +314,7 @@ export async function onRequest(context) {
         // Purchase-derived ladder, so the client can render what was actually bought. The onco trial
         // end is advisory only — the trial clock starts server-side on first oncology-AI use.
         tier: effectiveTierFor(ent), tierExp: (ent && ent.tierExp) || null,
+        prepPro: prepProView(ent, Date.now(), env),
         oncoAddon: oncoAddonActive(ent), oncoTrialEndsAt: (ent && ent.oncoTrialStart) ? oncoTrialState(ent).endsAt : null,
       }, state));
     }
@@ -376,6 +381,13 @@ export async function onRequest(context) {
         if (!f.ok) return json({ ok: false, valid: true, reason: f.reason }, 502);
         return json({ ok: true, valid: true, platform: platform, tokens: f.tokens, balanceMt: inrToMt(f.balanceInr) });
       }
+      const iapPrep = prepPlanKeyForProduct(env, body.productId);
+      if (iapPrep) {
+        // Ref = the store token's hash: the same receipt re-posted extends nothing twice.
+        const f = await fulfilPurchase(env, uid, iapPrep, 0, "iap", { platform: platform === "apple" ? "ios" : "android", ref: "iap:" + (await sha256Hex(String(tok))).slice(0, 40), days: v.expiresAt ? daysFromExpiry(v.expiresAt) : 0 });
+        if (!f || !f.ok) return json({ ok: false, valid: true, reason: (f && f.reason) || "fulfil-failed" }, 502);
+        return json({ ok: true, valid: true, platform: platform, prepPro: f.prepPro });
+      }
       const days = daysFromExpiry(v.expiresAt);
       const g = await grantPro(env, uid, { days: days, source: "iap-" + platform });
       // Same as the webhook path: the store productId, never the client, says which plan this was.
@@ -423,7 +435,14 @@ export async function onRequest(context) {
       if (!uid) return json({ error: "signin-required" }, 401);
       let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
       const tv = await traineeGate(env, uid, body); if (tv) return json(tv, 403);
-      const sel = selectAmount(env, body);
+      let sel = selectAmount(env, body);
+      if (body.prepPlan) {
+        /* PrepNucleus: the amount comes from the server quote only (student discount / win-back /
+         * launch decided here); any client amount or price field is ignored. */
+        const q = await quoteFor(env, uid);
+        sel = { amount: q.firstYearPaise, months: 0, key: "prep:year:" + q.priceReason, label: "PrepNucleus Pro (1 year)" };
+        try { await markCheckout(env, uid); } catch (e) {}   // pending checkout; unpaid on a later visit = abandoned
+      }
       const r = await fetch("https://api.razorpay.com/v1/orders", {
         method: "POST",
         headers: { "Authorization": "Basic " + btoa(rz.keyId + ":" + rz.keySecret), "Content-Type": "application/json" },
@@ -447,7 +466,9 @@ export async function onRequest(context) {
         const pay = (evt.payload && ((evt.payload.payment && evt.payload.payment.entity) || (evt.payload.order && evt.payload.order.entity))) || {};
         const notes = pay.notes || {};
         const uid = rawUid(String(notes.uid || ""));
-        if (uid) { try { await fulfilPurchase(env, uid, notes.plan, notes.months, "razorpay"); } catch (e) {} }
+        // Ref = the ORDER id: payment.captured and order.paid both fire for one purchase.
+        const ref = "rzp:" + (pay.order_id || pay.id || "");
+        if (uid) { try { await fulfilPurchase(env, uid, notes.plan, notes.months, "razorpay", { ref }); } catch (e) {} }
       }
       return json({ ok: true });   // always 200 so Razorpay doesn't retry-storm
     }
@@ -458,6 +479,7 @@ export async function onRequest(context) {
       const uid = rawUid(await identify(request, env));
       if (!uid) return json({ error: "signin-required" }, 401);
       let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
+      if (body.prepPlan) return json({ error: "prep-razorpay-only" }, 400);   // PrepNucleus is quoted + sold via Razorpay/IAP only
       const tv = await traineeGate(env, uid, body); if (tv) return json(tv, 403);
       const sel = selectAmount(env, body);
       const token = await phonepeToken(env);
@@ -499,7 +521,7 @@ export async function onRequest(context) {
           if (sr.ok && String(s.state).toUpperCase() === "COMPLETED") {
             const mi = s.metaInfo || {};
             const uid = rawUid(String(mi.udf1 || ""));
-            if (uid) await fulfilPurchase(env, uid, mi.udf3, mi.udf2, "phonepe");
+            if (uid) await fulfilPurchase(env, uid, mi.udf3, mi.udf2, "phonepe", { ref: "pp:" + merchantOrderId });
           }
         } catch (e) {}
       }
