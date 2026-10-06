@@ -17,6 +17,18 @@
     {
       "en": "SBAR handover (Situation, Background, Assessment, Recommendation).",
       "hi": "SBAR handover (Situation, Background, Assessment, Recommendation)।"
+    },
+    {
+      "en": "IHI ventilator bundle: head of the bed up 30 to 45 degrees, a daily sedation hold with a check of readiness to wean, peptic ulcer and DVT prophylaxis, daily oral care.",
+      "hi": "IHI ventilator bundle: bed का सिर 30 से 45 degree ऊपर, रोज़ sedation hold और weaning की तैयारी की जाँच, peptic ulcer और DVT prophylaxis, रोज़ मुँह की सफ़ाई।"
+    },
+    {
+      "en": "Richmond Agitation Sedation Scale (RASS), Sessler 2002: 0 is alert and calm, -2 is light sedation.",
+      "hi": "Richmond Agitation Sedation Scale (RASS), Sessler 2002: 0 यानी जागा और शांत, -2 यानी हल्का sedation।"
+    },
+    {
+      "en": "Starting alarm limits are common ICU teaching (about 10 cmH2O above the usual peak, minute volume about a quarter either side of now). Your unit's policy comes first.",
+      "hi": "शुरुआती alarm limits आम ICU शिक्षा हैं (सामान्य peak से लगभग 10 cmH2O ऊपर, minute volume अभी से लगभग एक चौथाई ऊपर और नीचे)। आपके unit की policy सबसे पहले।"
     }
   ],
   "brandNote": {
@@ -217,8 +229,8 @@
       "hi": "SET आप करते हैं, MEASURED machine करती है"
     },
     "intro": {
-      "en": "Every ventilator shows two kinds of number. SET numbers are your orders to the machine; they sit on the buttons or knobs. MEASURED numbers are what actually happened; they sit beside the waveforms. Tap any number to learn it.",
-      "hi": "हर ventilator दो तरह के numbers दिखाता है। SET numbers machine को आपके आदेश हैं; ये buttons या knobs पर होते हैं। MEASURED numbers बताते हैं असल में क्या हुआ; ये waveforms के पास होते हैं। कोई भी number सीखने के लिए उस पर tap करें।"
+      "en": "Every ventilator shows two kinds of number. SET numbers are your orders to the machine; they sit on the keys along the bottom. MEASURED numbers are what actually happened; they sit beside the waveforms. Around them: the alarm bar at the top, the keys on the frame (silence, hold, freeze) and the alarm limits page. Tap anything to learn it.",
+      "hi": "हर ventilator दो तरह के numbers दिखाता है। SET numbers machine को आपके आदेश हैं; ये नीचे की keys पर होते हैं। MEASURED numbers बताते हैं असल में क्या हुआ; ये waveforms के पास होते हैं। इनके आसपास: ऊपर alarm bar, frame पर keys (silence, hold, freeze) और alarm limits page। सीखने के लिए किसी पर भी tap करें।"
     },
     "styles": [
       {
@@ -555,6 +567,342 @@
           "en": "Here 18 against a set rate of 16: the patient takes 2 breaths of their own. Rising fast: think pain, distress, sepsis, acidosis.",
           "hi": "यहाँ set rate 16 के मुक़ाबले 18: मरीज़ 2 साँसें खुद ले रहा है। तेज़ी से बढ़े तो सोचें: दर्द, बेचैनी, sepsis, acidosis।"
         }
+      },
+      {
+        "id": "abar",
+        "kind": "alarm",
+        "value": "Paw high",
+        "unit": "",
+        "labels": {
+          "generic": "Alarm",
+          "drager": "Paw high",
+          "hamilton": "Pressure high",
+          "mindray": "Paw Too High"
+        },
+        "name": {
+          "en": "Alarm bar",
+          "hi": "Alarm bar"
+        },
+        "what": {
+          "en": "The strip across the top of the screen. The newest, most urgent alarm shows here in red (high priority) or yellow (medium), with a sound. Older ones wait in an alarm list or log.",
+          "hi": "Screen के सबसे ऊपर की पट्टी। सबसे नया और सबसे urgent alarm यहाँ लाल (high priority) या पीले (medium) रंग में, आवाज़ के साथ दिखता है। पुराने alarms एक alarm list या log में रहते हैं।"
+        },
+        "watch": {
+          "en": "Read the message, then look at the patient before the screen. Red first: it can mean no breaths or a blocked tube.",
+          "hi": "Message पढ़ें, फिर screen से पहले मरीज़ को देखें। पहले लाल: इसका मतलब साँस न मिलना या tube बंद होना हो सकता है।"
+        }
+      },
+      {
+        "id": "silence",
+        "kind": "key",
+        "value": "",
+        "unit": "",
+        "labels": {
+          "generic": "Alarm silence",
+          "drager": "Audio paused 2 min",
+          "hamilton": "Alarm silence",
+          "mindray": "Alarm silence"
+        },
+        "name": {
+          "en": "Alarm silence key",
+          "hi": "Alarm silence key"
+        },
+        "what": {
+          "en": "Pauses the alarm SOUND for about 2 minutes. It does not fix anything: the message stays, and the sound comes back if the cause is still there. Usually a key on the frame beside the screen, often with a crossed-out bell.",
+          "hi": "Alarm की आवाज़ लगभग 2 मिनट के लिए रोकता है। यह कुछ ठीक नहीं करता: message बना रहता है, और कारण बना रहे तो आवाज़ लौट आती है। आम तौर पर screen के पास frame पर एक key, अक्सर कटी हुई घंटी के निशान के साथ।"
+        },
+        "watch": {
+          "en": "Silence only while you stay at the bed and work on a cause you can see. Never silence and walk away.",
+          "hi": "Silence तभी करें जब आप bed पर रहकर दिखते हुए कारण पर काम कर रहे हों। Silence करके कभी न चले जाएँ।"
+        }
+      },
+      {
+        "id": "limits",
+        "kind": "key",
+        "value": "",
+        "unit": "",
+        "labels": {
+          "generic": "Alarm limits",
+          "drager": "Alarm limits",
+          "hamilton": "Alarms",
+          "mindray": "Alarm limits"
+        },
+        "name": {
+          "en": "Alarm limits key",
+          "hi": "Alarm limits key"
+        },
+        "what": {
+          "en": "Opens the alarm limits page: the low and high value for each alarm. Usually a key on the frame or a tab on the screen. Tapping it here opens the page.",
+          "hi": "Alarm limits page खोलता है: हर alarm की low और high value। आम तौर पर frame पर एक key या screen पर एक tab। यहाँ tap करने से page खुलता है।"
+        },
+        "watch": {
+          "en": "Read the limits when you take over. Do not change them to stop a sound: a limit only decides when the alarm rings.",
+          "hi": "सँभालते समय limits पढ़ें। आवाज़ बंद करने के लिए इन्हें न बदलें: limit सिर्फ़ तय करती है कि alarm कब बजे।"
+        }
+      },
+      {
+        "id": "hold",
+        "kind": "key",
+        "value": "",
+        "unit": "",
+        "labels": {
+          "generic": "Insp hold",
+          "drager": "Insp. hold",
+          "hamilton": "Man breath / Insp hold",
+          "mindray": "Insp Hold"
+        },
+        "name": {
+          "en": "Hold keys (inspiratory and expiratory)",
+          "hi": "Hold keys (inspiratory और expiratory)"
+        },
+        "what": {
+          "en": "Inspiratory hold stops the flow at the end of a breath in, so the screen can show the plateau pressure (Pplat). Expiratory hold, often next to it, shows total PEEP and auto-PEEP. Usually keys on the frame, or in a menu.",
+          "hi": "Inspiratory hold साँस अंदर लेने के अंत में flow रोकता है, ताकि screen plateau pressure (Pplat) दिखा सके। Expiratory hold, अक्सर उसके पास, total PEEP और auto-PEEP दिखाता है। आम तौर पर frame पर keys, या किसी menu में।"
+        },
+        "watch": {
+          "en": "Looking is safe, but ask your senior before your first hold, and do it with them the first time.",
+          "hi": "देखना सुरक्षित है, पर पहले hold से पहले senior से पूछें, और पहली बार उनके साथ करें।"
+        }
+      },
+      {
+        "id": "freeze",
+        "kind": "key",
+        "value": "",
+        "unit": "",
+        "labels": {
+          "generic": "Freeze",
+          "drager": "Freeze",
+          "hamilton": "Freeze",
+          "mindray": "Freeze"
+        },
+        "name": {
+          "en": "Freeze key",
+          "hi": "Freeze key"
+        },
+        "what": {
+          "en": "Freezes the waveforms on the screen so you can study one breath (for example, flow not reaching zero). Ventilation carries on normally.",
+          "hi": "Screen पर waveforms को रोक देता है ताकि आप एक साँस ध्यान से देख सकें (जैसे flow का zero तक न पहुँचना)। Ventilation सामान्य रूप से चलता रहता है।"
+        },
+        "watch": {
+          "en": "Safe to use. Unfreeze when you are done so the live waves come back.",
+          "hi": "इस्तेमाल करना सुरक्षित है। काम होने पर unfreeze करें ताकि live waves लौट आएँ।"
+        }
+      },
+      {
+        "id": "o2",
+        "kind": "key",
+        "value": "",
+        "unit": "",
+        "labels": {
+          "generic": "O2 100%",
+          "drager": "O2 suction",
+          "hamilton": "O2 enrichment",
+          "mindray": "O2 100%"
+        },
+        "name": {
+          "en": "Oxygen 100% key (timed)",
+          "hi": "Oxygen 100% key (समय वाली)"
+        },
+        "what": {
+          "en": "Gives 100% oxygen for a few minutes (often 2), then goes back to the set FiO2 by itself. Meant for before and after suction. The name differs between machines.",
+          "hi": "कुछ मिनट (अक्सर 2) के लिए 100% oxygen देता है, फिर अपने आप set FiO2 पर लौट आता है। Suction से पहले और बाद के लिए। नाम machines में अलग होता है।"
+        },
+        "watch": {
+          "en": "It ends by itself. If the patient needs more oxygen for longer, bag with 100% oxygen and call your senior.",
+          "hi": "यह अपने आप ख़त्म हो जाता है। मरीज़ को लंबे समय तक ज़्यादा oxygen चाहिए तो 100% oxygen से bag करें और senior को call करें।"
+        }
+      },
+      {
+        "id": "lim_ppeak",
+        "kind": "limit",
+        "value": "35",
+        "unit": "cmH2O",
+        "labels": {
+          "generic": "Ppeak high",
+          "drager": "Paw high",
+          "hamilton": "Pressure high",
+          "mindray": "Paw high"
+        },
+        "name": {
+          "en": "High pressure limit",
+          "hi": "High pressure limit"
+        },
+        "what": {
+          "en": "The alarm rings, and most machines stop the breath, when the airway pressure reaches this number. It protects the lungs.",
+          "hi": "Airway pressure इस number तक पहुँचे तो alarm बजता है, और ज़्यादातर machines साँस रोक देती हैं। यह फेफड़ों को बचाता है।"
+        },
+        "watch": {
+          "en": "A sensible start: about 10 above this patient's usual peak (24 here, so about 35), and not above 40 without your senior. Your unit's policy first.",
+          "hi": "समझदार शुरुआत: इस मरीज़ के सामान्य peak से लगभग 10 ऊपर (यहाँ 24, तो लगभग 35), और senior के बिना 40 से ऊपर नहीं। पहले आपके unit की policy।"
+        }
+      },
+      {
+        "id": "lim_mvlow",
+        "kind": "limit",
+        "value": "6",
+        "unit": "L/min",
+        "labels": {
+          "generic": "MVe low",
+          "drager": "MV low",
+          "hamilton": "ExpMinVol low",
+          "mindray": "MV low"
+        },
+        "name": {
+          "en": "Low minute volume limit",
+          "hi": "Low minute volume limit"
+        },
+        "what": {
+          "en": "Rings when the gas coming out each minute falls below this: a disconnection, a big leak, or a patient who stops breathing in a support mode.",
+          "hi": "हर मिनट बाहर आने वाली gas इससे कम हो तो बजता है: circuit अलग होना, बड़ा leak, या support mode में मरीज़ का साँस रोकना।"
+        },
+        "watch": {
+          "en": "A sensible start: about a quarter below the minute volume now (8.1 here, so about 6). Your unit's policy first.",
+          "hi": "समझदार शुरुआत: अभी के minute volume से लगभग एक चौथाई कम (यहाँ 8.1, तो लगभग 6)। पहले आपके unit की policy।"
+        }
+      },
+      {
+        "id": "lim_mvhigh",
+        "kind": "limit",
+        "value": "12",
+        "unit": "L/min",
+        "labels": {
+          "generic": "MVe high",
+          "drager": "MV high",
+          "hamilton": "ExpMinVol high",
+          "mindray": "MV high"
+        },
+        "name": {
+          "en": "High minute volume limit",
+          "hi": "High minute volume limit"
+        },
+        "what": {
+          "en": "Rings when the patient breathes much more than now: pain, distress, fever, or the machine triggering by itself on a leak (auto-triggering).",
+          "hi": "मरीज़ अभी से बहुत ज़्यादा साँस ले तो बजता है: दर्द, बेचैनी, बुख़ार, या leak से machine का अपने आप trigger होना (auto-triggering)।"
+        },
+        "watch": {
+          "en": "A sensible start: about half above the minute volume now (so about 12). Your unit's policy first.",
+          "hi": "समझदार शुरुआत: अभी के minute volume से लगभग आधा ज़्यादा (तो लगभग 12)। पहले आपके unit की policy।"
+        }
+      },
+      {
+        "id": "lim_vtlow",
+        "kind": "limit",
+        "value": "350",
+        "unit": "mL",
+        "labels": {
+          "generic": "VTe low",
+          "drager": "VT low",
+          "hamilton": "Vt low",
+          "mindray": "VTe low"
+        },
+        "name": {
+          "en": "Low tidal volume limit",
+          "hi": "Low tidal volume limit"
+        },
+        "what": {
+          "en": "Rings when each breath out is smaller than this: a leak at the cuff or circuit, or, in a pressure mode, stiffer lungs or a blocked tube.",
+          "hi": "हर साँस बाहर इससे छोटी हो तो बजता है: cuff या circuit पर leak, या pressure mode में सख़्त फेफड़े या बंद tube।"
+        },
+        "watch": {
+          "en": "A sensible start: about a quarter below the set VT (450 here, so about 350). Your unit's policy first.",
+          "hi": "समझदार शुरुआत: set VT से लगभग एक चौथाई कम (यहाँ 450, तो लगभग 350)। पहले आपके unit की policy।"
+        }
+      },
+      {
+        "id": "lim_vthigh",
+        "kind": "limit",
+        "value": "600",
+        "unit": "mL",
+        "labels": {
+          "generic": "VTe high",
+          "drager": "VT high",
+          "hamilton": "Vt high",
+          "mindray": "VTe high"
+        },
+        "name": {
+          "en": "High tidal volume limit",
+          "hi": "High tidal volume limit"
+        },
+        "what": {
+          "en": "Rings when breaths are much bigger than planned: a patient pulling big breaths in a pressure or support mode.",
+          "hi": "साँसें plan से बहुत बड़ी हों तो बजता है: pressure या support mode में मरीज़ का बड़ी साँसें खींचना।"
+        },
+        "watch": {
+          "en": "A sensible start: about a third above the set VT (so about 600). Big breaths can injure the lungs: tell your senior.",
+          "hi": "समझदार शुरुआत: set VT से लगभग एक तिहाई ज़्यादा (तो लगभग 600)। बड़ी साँसें फेफड़ों को नुकसान कर सकती हैं: senior को बताएँ।"
+        }
+      },
+      {
+        "id": "lim_fhigh",
+        "kind": "limit",
+        "value": "35",
+        "unit": "/min",
+        "labels": {
+          "generic": "f total high",
+          "drager": "ftotal high",
+          "hamilton": "fTotal high",
+          "mindray": "ftotal high"
+        },
+        "name": {
+          "en": "High rate limit",
+          "hi": "High rate limit"
+        },
+        "what": {
+          "en": "Rings when the total breathing rate goes above this: distress, pain, hypoxia, or auto-triggering.",
+          "hi": "कुल साँस दर इससे ऊपर जाए तो बजता है: बेचैनी, दर्द, hypoxia, या auto-triggering।"
+        },
+        "watch": {
+          "en": "A sensible start: about 35 a minute for an adult. Your unit's policy first.",
+          "hi": "समझदार शुरुआत: वयस्क के लिए लगभग 35 प्रति मिनट। पहले आपके unit की policy।"
+        }
+      },
+      {
+        "id": "lim_apnoea",
+        "kind": "limit",
+        "value": "20",
+        "unit": "s",
+        "labels": {
+          "generic": "Apnoea time",
+          "drager": "Tapn",
+          "hamilton": "Apnea time",
+          "mindray": "Apnea Tm"
+        },
+        "name": {
+          "en": "Apnoea time",
+          "hi": "Apnoea time"
+        },
+        "what": {
+          "en": "Rings when no breath has come for this many seconds. In a support mode it is the only warning that the patient has stopped breathing, unless apnoea backup is on.",
+          "hi": "इतने सेकंड तक कोई साँस न आए तो बजता है। Support mode में यही एकमात्र चेतावनी है कि मरीज़ ने साँस लेना बंद कर दिया, जब तक apnoea backup चालू न हो।"
+        },
+        "watch": {
+          "en": "A sensible start: about 20 seconds. Your unit's policy first.",
+          "hi": "समझदार शुरुआत: लगभग 20 सेकंड। पहले आपके unit की policy।"
+        }
+      },
+      {
+        "id": "lim_fio2",
+        "kind": "limit",
+        "value": "34 to 46",
+        "unit": "%",
+        "labels": {
+          "generic": "FiO2 limits",
+          "drager": "FiO2 limits",
+          "hamilton": "Oxygen limits",
+          "mindray": "FiO2 limits"
+        },
+        "name": {
+          "en": "Oxygen limits",
+          "hi": "Oxygen limits"
+        },
+        "what": {
+          "en": "Rings when the oxygen the machine measures is not what you set: an oxygen supply problem or a sensor fault.",
+          "hi": "Machine जो oxygen मापती है वह set से अलग हो तो बजता है: oxygen supply की समस्या या sensor की ख़राबी।"
+        },
+        "watch": {
+          "en": "Most machines set these by themselves, a few points either side of the set FiO2 (40% here). Low oxygen alarm: check the supply and bag from a separate oxygen source.",
+          "hi": "ज़्यादातर machines इन्हें खुद set करती हैं, set FiO2 (यहाँ 40%) से कुछ points ऊपर और नीचे। Low oxygen alarm: supply जाँचें और अलग oxygen source से bag करें।"
+        }
       }
     ],
     "quiz": [
@@ -702,6 +1050,35 @@
           "en": "The set rate is an order. Ppeak, minute volume and VTe are results the machine measures.",
           "hi": "Set rate एक आदेश है। Ppeak, minute volume और VTe वे परिणाम हैं जो machine मापती है।"
         }
+      },
+      {
+        "q": {
+          "en": "You press alarm silence. What happens?",
+          "hi": "आप alarm silence दबाते हैं। क्या होता है?"
+        },
+        "options": [
+          {
+            "en": "The alarm is fixed and will not come back",
+            "hi": "Alarm ठीक हो गया और नहीं लौटेगा"
+          },
+          {
+            "en": "The sound pauses for about 2 minutes and comes back if the cause is still there",
+            "hi": "आवाज़ लगभग 2 मिनट रुकती है और कारण बना रहे तो लौट आती है"
+          },
+          {
+            "en": "The alarm limits are widened",
+            "hi": "Alarm limits चौड़ी हो जाती हैं"
+          },
+          {
+            "en": "The ventilator stops for 2 minutes",
+            "hi": "Ventilator 2 मिनट के लिए रुक जाता है"
+          }
+        ],
+        "answer": 1,
+        "why": {
+          "en": "Silence only pauses the sound. Stay at the bed and treat the cause; never silence and walk away.",
+          "hi": "Silence सिर्फ़ आवाज़ रोकता है। Bed पर रहें और कारण का इलाज करें; silence करके कभी न चले जाएँ।"
+        }
       }
     ],
     "labelRows": [
@@ -830,8 +1207,270 @@
         "drager": "PC-APRV",
         "hamilton": "APRV",
         "mindray": "APRV"
+      },
+      {
+        "term": {
+          "en": "Flow trigger",
+          "hi": "Flow trigger"
+        },
+        "plain": {
+          "en": "How much flow the patient must pull to start a breath. Smaller means easier to trigger.",
+          "hi": "साँस शुरू करने के लिए मरीज़ को कितना flow खींचना होगा। कम यानी trigger करना आसान।"
+        },
+        "drager": "Trigger",
+        "hamilton": "Trigger",
+        "mindray": "F-Trig"
+      },
+      {
+        "term": {
+          "en": "End of a support breath (expiratory trigger)",
+          "hi": "Support साँस का अंत (expiratory trigger)"
+        },
+        "plain": {
+          "en": "The breath ends when flow falls to this % of its peak.",
+          "hi": "जब flow अपने peak के इस % तक गिरे तब साँस ख़त्म होती है।"
+        },
+        "drager": "Exp. term.",
+        "hamilton": "ETS",
+        "mindray": "Exp%"
+      },
+      {
+        "term": {
+          "en": "Rise time",
+          "hi": "Rise time"
+        },
+        "plain": {
+          "en": "How fast the pressure climbs at the start of a breath.",
+          "hi": "साँस की शुरुआत में pressure कितनी तेज़ी से चढ़ता है।"
+        },
+        "drager": "Slope",
+        "hamilton": "P-ramp",
+        "mindray": "Tslope"
+      },
+      {
+        "term": {
+          "en": "Inspiratory time",
+          "hi": "Inspiratory time"
+        },
+        "plain": {
+          "en": "How long each machine breath in lasts, in seconds.",
+          "hi": "हर machine साँस अंदर कितने सेकंड चलती है।"
+        },
+        "drager": "Ti",
+        "hamilton": "TI",
+        "mindray": "Tinsp"
+      },
+      {
+        "term": {
+          "en": "I:E ratio",
+          "hi": "I:E ratio"
+        },
+        "plain": {
+          "en": "Time breathing in against time breathing out. 1:2 is usual; a long E gives time to empty.",
+          "hi": "साँस अंदर का समय बनाम बाहर का समय। 1:2 आम है; लंबा E खाली होने का समय देता है।"
+        },
+        "drager": "I:E",
+        "hamilton": "I:E",
+        "mindray": "I:E"
+      },
+      {
+        "term": {
+          "en": "Alarm silence",
+          "hi": "Alarm silence"
+        },
+        "plain": {
+          "en": "Pauses the sound for about 2 minutes.",
+          "hi": "आवाज़ लगभग 2 मिनट रोकता है।"
+        },
+        "drager": "Audio paused 2 min",
+        "hamilton": "Alarm silence",
+        "mindray": "Alarm silence"
+      },
+      {
+        "term": {
+          "en": "Inspiratory hold",
+          "hi": "Inspiratory hold"
+        },
+        "plain": {
+          "en": "Stops flow at the end of a breath in to read Pplat.",
+          "hi": "Pplat पढ़ने के लिए साँस अंदर के अंत में flow रोकता है।"
+        },
+        "drager": "Insp. hold",
+        "hamilton": "Man breath / Insp hold",
+        "mindray": "Insp Hold"
+      },
+      {
+        "term": {
+          "en": "Oxygen 100% for suction",
+          "hi": "Suction के लिए oxygen 100%"
+        },
+        "plain": {
+          "en": "Timed 100% oxygen, then back to the set FiO2.",
+          "hi": "समय वाला 100% oxygen, फिर set FiO2 पर वापस।"
+        },
+        "drager": "O2 suction",
+        "hamilton": "O2 enrichment",
+        "mindray": "O2 100%"
       }
-    ]
+    ],
+    "limitRows": [
+      {
+        "id": "ppeak",
+        "now": "ppeak",
+        "low": null,
+        "high": "lim_ppeak"
+      },
+      {
+        "id": "mve",
+        "now": "mve",
+        "low": "lim_mvlow",
+        "high": "lim_mvhigh"
+      },
+      {
+        "id": "vte",
+        "now": "vte",
+        "low": "lim_vtlow",
+        "high": "lim_vthigh"
+      },
+      {
+        "id": "ftot",
+        "now": "ftot",
+        "low": null,
+        "high": "lim_fhigh"
+      },
+      {
+        "id": "apnoea",
+        "now": null,
+        "low": null,
+        "high": "lim_apnoea",
+        "label": {
+          "en": "Apnoea",
+          "hi": "Apnoea"
+        }
+      },
+      {
+        "id": "fio2",
+        "now": "fio2",
+        "low": null,
+        "high": "lim_fio2",
+        "label": {
+          "en": "Oxygen",
+          "hi": "Oxygen"
+        }
+      }
+    ],
+    "find": {
+      "intro": {
+        "en": "Each question shows a panel in a different style. Tap the number or key it asks for.",
+        "hi": "हर प्रश्न एक अलग style का panel दिखाता है। जो number या key पूछी जाए उस पर tap करें।"
+      },
+      "items": [
+        {
+          "style": "drager",
+          "page": "main",
+          "target": "vte",
+          "q": {
+            "en": "Tap the tidal volume that came back out of the patient.",
+            "hi": "मरीज़ से बाहर आया tidal volume tap करें।"
+          },
+          "why": {
+            "en": "On this style the measured one is also called VT. It sits beside the waves; the VT key at the bottom is your order.",
+            "hi": "इस style में measured को भी VT कहते हैं। वह waves के पास है; नीचे की VT key आपका आदेश है।"
+          }
+        },
+        {
+          "style": "hamilton",
+          "page": "main",
+          "target": "peepset",
+          "q": {
+            "en": "Tap the PEEP you SET.",
+            "hi": "जो PEEP आपने SET किया उसे tap करें।"
+          },
+          "why": {
+            "en": "Set values are the keys along the bottom. The PEEP beside the waves is measured.",
+            "hi": "Set values नीचे की keys हैं। Waves के पास वाला PEEP measured है।"
+          }
+        },
+        {
+          "style": "mindray",
+          "page": "main",
+          "target": "silence",
+          "q": {
+            "en": "Tap the key that pauses the alarm sound for about 2 minutes.",
+            "hi": "वह key tap करें जो alarm की आवाज़ लगभग 2 मिनट रोकती है।"
+          },
+          "why": {
+            "en": "Alarm silence pauses the sound only. Stay at the bed and fix the cause.",
+            "hi": "Alarm silence सिर्फ़ आवाज़ रोकता है। Bed पर रहें और कारण ठीक करें।"
+          }
+        },
+        {
+          "style": "drager",
+          "page": "limits",
+          "target": "lim_ppeak",
+          "q": {
+            "en": "On the alarm limits page, tap the high pressure limit.",
+            "hi": "Alarm limits page पर high pressure limit tap करें।"
+          },
+          "why": {
+            "en": "About 10 above the usual peak. Never raise it just to stop the sound.",
+            "hi": "सामान्य peak से लगभग 10 ऊपर। सिर्फ़ आवाज़ बंद करने के लिए इसे कभी न बढ़ाएँ।"
+          }
+        },
+        {
+          "style": "hamilton",
+          "page": "limits",
+          "target": "lim_mvlow",
+          "q": {
+            "en": "Tap the limit that warns you about a disconnection or a patient who stops breathing.",
+            "hi": "वह limit tap करें जो circuit अलग होने या मरीज़ के साँस रोकने की चेतावनी देती है।"
+          },
+          "why": {
+            "en": "Low minute volume: little or no gas is coming back out each minute.",
+            "hi": "Low minute volume: हर मिनट बहुत कम या कोई gas बाहर नहीं आ रही।"
+          }
+        },
+        {
+          "style": "mindray",
+          "page": "limits",
+          "target": "lim_apnoea",
+          "q": {
+            "en": "Tap the apnoea time.",
+            "hi": "Apnoea time tap करें।"
+          },
+          "why": {
+            "en": "No breath for this many seconds rings the alarm. In a support mode it may be your only warning.",
+            "hi": "इतने सेकंड कोई साँस न आए तो alarm बजता है। Support mode में यह आपकी एकमात्र चेतावनी हो सकती है।"
+          }
+        },
+        {
+          "style": "hamilton",
+          "page": "main",
+          "target": "hold",
+          "q": {
+            "en": "Tap the key you would use to read the plateau pressure.",
+            "hi": "Plateau pressure पढ़ने के लिए जो key इस्तेमाल करेंगे उसे tap करें।"
+          },
+          "why": {
+            "en": "An inspiratory hold stops the flow so Pplat can be read. Do your first one with your senior.",
+            "hi": "Inspiratory hold flow रोकता है ताकि Pplat पढ़ा जा सके। पहला hold senior के साथ करें।"
+          }
+        },
+        {
+          "style": "drager",
+          "page": "main",
+          "target": "ftot",
+          "q": {
+            "en": "Tap the number that shows the patient is breathing above the set rate.",
+            "hi": "वह number tap करें जो दिखाता है कि मरीज़ set rate से ज़्यादा साँस ले रहा है।"
+          },
+          "why": {
+            "en": "Total rate counts every breath, the machine's and the patient's.",
+            "hi": "Total rate हर साँस गिनता है, machine की भी और मरीज़ की भी।"
+          }
+        }
+      ]
+    }
   },
   "modes": {
     "title": {
@@ -847,8 +1486,8 @@
       "hi": "एक ही विचार के अलग machines पर अलग नाम होते हैं। हर एक की एक सरल पंक्ति, और lab का सबसे नज़दीकी mode।"
     },
     "never": {
-      "en": "Do not change alone as an intern",
-      "hi": "Intern के रूप में अकेले न बदलें"
+      "en": "Do not change this on your own: ask your senior first",
+      "hi": "इसे खुद न बदलें: पहले senior से पूछें"
     },
     "items": [
       {
@@ -981,6 +1620,10 @@
             "why": {
               "en": "Patient first, screen second.",
               "hi": "पहले मरीज़, फिर screen।"
+            },
+            "short": {
+              "en": "Look at the patient",
+              "hi": "मरीज़ को देखें"
             }
           },
           {
@@ -993,6 +1636,10 @@
             "why": {
               "en": "Bagging takes the machine out of the problem. A stiff bag points to the tube or the patient; an easy bag points to the ventilator or circuit. With SpO2 falling, bag early; in a stable patient the alarm card puts suction and DOPE first.",
               "hi": "Bag करने से machine समस्या से बाहर हो जाती है। सख़्त bag हो तो tube या मरीज़; आसान bag हो तो ventilator या circuit। SpO2 गिर रहा हो तो जल्दी bag करें; stable मरीज़ में alarm card पहले suction और DOPE रखता है।"
+            },
+            "short": {
+              "en": "Bag with 100% oxygen",
+              "hi": "100% oxygen से bag"
             }
           },
           {
@@ -1005,6 +1652,10 @@
             "why": {
               "en": "It tests and treats the O of DOPE: a catheter that will not pass means a blocked or kinked tube.",
               "hi": "यह DOPE के O की जाँच और इलाज दोनों है: catheter न जाए तो tube बंद या मुड़ी है।"
+            },
+            "short": {
+              "en": "Suction the tube",
+              "hi": "Tube में suction"
             }
           },
           {
@@ -1017,6 +1668,10 @@
             "why": {
               "en": "The four causes that kill quickly. Check each one.",
               "hi": "चार कारण जो जल्दी जान लेते हैं। हर एक जाँचें।"
+            },
+            "short": {
+              "en": "Run DOPE",
+              "hi": "DOPE करें"
             }
           },
           {
@@ -1030,6 +1685,10 @@
             "why": {
               "en": "Right at any point once you have seen the patient. If they are unstable, call while you bag: do not wait to finish the list.",
               "hi": "मरीज़ देखने के बाद कभी भी सही। मरीज़ अस्थिर हो तो bag करते हुए call करें: list ख़त्म होने का इंतज़ार न करें।"
+            },
+            "short": {
+              "en": "Call senior (SBAR)",
+              "hi": "Senior को call (SBAR)"
             }
           },
           {
@@ -1042,6 +1701,10 @@
             "why": {
               "en": "This hides the alarm and does nothing for the patient. Never do this.",
               "hi": "इससे alarm छिपता है और मरीज़ के लिए कुछ नहीं होता। ऐसा कभी न करें।"
+            },
+            "short": {
+              "en": "Raise the alarm limit",
+              "hi": "Alarm limit बढ़ाएँ"
             }
           }
         ],
@@ -1085,30 +1748,26 @@
             "why": {
               "en": "A cold finger or a loose probe gives a false low. A real low with a good trace is an emergency.",
               "hi": "ठंडी उँगली या ढीला probe झूठा low देता है। अच्छे trace के साथ असली low एक emergency है।"
-            }
-          },
-          {
-            "id": "fio2",
-            "rank": 2,
-            "text": {
-              "en": "Turn FiO2 up to 100% (allowed in an emergency in most units).",
-              "hi": "FiO2 को 100% करें (ज़्यादातर units में emergency में allowed)।"
             },
-            "why": {
-              "en": "Buys time while you look for the cause. Check your unit's policy.",
-              "hi": "कारण ढूँढते समय वक़्त मिलता है। अपने unit की policy जाँचें।"
+            "short": {
+              "en": "Patient and pleth trace",
+              "hi": "मरीज़ और pleth trace"
             }
           },
           {
             "id": "bag",
             "rank": 2,
             "text": {
-              "en": "SpO2 below 88%, not improving, or any doubt: disconnect and bag with 100% oxygen.",
-              "hi": "SpO2 88% से कम, सुधार नहीं, या कोई शक: ventilator हटाएँ और 100% oxygen से bag करें।"
+              "en": "SpO2 is 84%, below 88% with a good trace: disconnect and bag with 100% oxygen. Feel the bag.",
+              "hi": "अच्छे trace के साथ SpO2 84% है, 88% से कम: ventilator हटाएँ और 100% oxygen से bag करें। Bag को महसूस करें।"
             },
             "why": {
-              "en": "Takes the machine and circuit out of the problem.",
-              "hi": "Machine और circuit को समस्या से बाहर करता है।"
+              "en": "Below 88% bag first: it gives 100% oxygen at once and takes the machine and circuit out of the problem. In a milder low (88 to 91%) with a good trace, raising FiO2 a step comes first instead.",
+              "hi": "88% से कम हो तो पहले bag: यह तुरंत 100% oxygen देता है और machine और circuit को समस्या से बाहर करता है। हल्की कमी (88 से 91%) और अच्छे trace में पहले FiO2 एक step बढ़ाना आता है।"
+            },
+            "short": {
+              "en": "Bag with 100% oxygen",
+              "hi": "100% oxygen से bag"
             }
           },
           {
@@ -1121,6 +1780,27 @@
             "why": {
               "en": "Find the cause: the tube, the lungs or the machine.",
               "hi": "कारण ढूँढें: tube, फेफड़े या machine।"
+            },
+            "short": {
+              "en": "DOPE and suction",
+              "hi": "DOPE और suction"
+            }
+          },
+          {
+            "id": "fio2",
+            "rank": 2,
+            "opt": true,
+            "short": {
+              "en": "Ventilator FiO2 to 100%",
+              "hi": "Ventilator का FiO2 100%"
+            },
+            "text": {
+              "en": "While you bag, turn the ventilator FiO2 up to 100%, ready for when you reconnect (if your unit's policy allows).",
+              "hi": "Bag करते हुए ventilator का FiO2 100% कर दें, ताकि फिर से जोड़ने पर तैयार रहे (अगर unit की policy अनुमति दे)।"
+            },
+            "why": {
+              "en": "Optional here: the bag already gives 100% oxygen. It is allowed in an emergency in most units, and helps when the patient goes back on the ventilator. Tell your senior you did it.",
+              "hi": "यहाँ वैकल्पिक: bag पहले से 100% oxygen देता है। ज़्यादातर units में emergency में allowed है, और मरीज़ को फिर ventilator पर लगाने पर मदद करता है। Senior को बताएँ कि आपने यह किया।"
             }
           },
           {
@@ -1134,6 +1814,10 @@
             "why": {
               "en": "SpO2 below target that does not rise quickly on 100% oxygen needs a senior now. Call early.",
               "hi": "SpO2 लक्ष्य से नीचे हो और 100% oxygen पर जल्दी न बढ़े तो अभी senior चाहिए। जल्दी call करें।"
+            },
+            "short": {
+              "en": "Call senior (SBAR)",
+              "hi": "Senior को call (SBAR)"
             }
           },
           {
@@ -1146,6 +1830,10 @@
             "why": {
               "en": "A PEEP change can drop the BP or worsen a pneumothorax. It is a senior decision.",
               "hi": "PEEP बदलने से BP गिर सकता है या pneumothorax बिगड़ सकता है। यह senior का निर्णय है।"
+            },
+            "short": {
+              "en": "Raise PEEP to 15",
+              "hi": "PEEP 15 करें"
             }
           }
         ],
@@ -1159,8 +1847,8 @@
             "hi": "Pneumonia के लिए ventilated, AC-VC 450, rate 16, PEEP 5, FiO2 40 था।"
           },
           "a": {
-            "en": "Good trace. FiO2 now 100%, SpO2 88%. Suctioned, tube mark unchanged, EtCO2 trace present, chest rise equal.",
-            "hi": "Trace अच्छा है। FiO2 अब 100%, SpO2 88%। Suction किया, tube mark वही, EtCO2 trace मौजूद, छाती बराबर उठ रही है।"
+            "en": "Good trace. I am bagging with 100% oxygen and SpO2 is up to 88%. Suctioned, tube mark unchanged, EtCO2 trace present, chest rise equal.",
+            "hi": "Trace अच्छा है। मैं 100% oxygen से bag कर रहा हूँ और SpO2 बढ़कर 88% है। Suction किया, tube mark वही, EtCO2 trace मौजूद, छाती बराबर उठ रही है।"
           },
           "r": {
             "en": "Please come now. Shall I send a blood gas and call for a chest X-ray?",
@@ -1189,6 +1877,10 @@
             "why": {
               "en": "A patient with no ventilation needs breaths within seconds.",
               "hi": "जिस मरीज़ को ventilation नहीं मिल रहा उसे सेकंडों में साँस चाहिए।"
+            },
+            "short": {
+              "en": "Look at the patient",
+              "hi": "मरीज़ को देखें"
             }
           },
           {
@@ -1201,6 +1893,10 @@
             "why": {
               "en": "Turning the patient is the commonest cause. This is the quickest fix.",
               "hi": "करवट देना सबसे आम कारण है। यह सबसे तेज़ इलाज है।"
+            },
+            "short": {
+              "en": "Follow the circuit, reconnect",
+              "hi": "Circuit follow करें, जोड़ें"
             }
           },
           {
@@ -1213,6 +1909,10 @@
             "why": {
               "en": "Do not search for a leak while the patient has no breaths.",
               "hi": "जब मरीज़ को साँस न मिल रही हो तब leak न ढूँढते रहें।"
+            },
+            "short": {
+              "en": "Not fixed: bag 100%",
+              "hi": "ठीक न हो: 100% bag"
             }
           },
           {
@@ -1225,6 +1925,10 @@
             "why": {
               "en": "No EtCO2 trace after turning: the tube may be out. Bag with a mask and call for help at once.",
               "hi": "करवट के बाद EtCO2 trace न हो: tube बाहर हो सकती है। Mask से bag करें और तुरंत मदद बुलाएँ।"
+            },
+            "short": {
+              "en": "Check the tube is in",
+              "hi": "Tube अंदर है, जाँचें"
             }
           },
           {
@@ -1238,6 +1942,10 @@
             "why": {
               "en": "Any doubt about the tube is a senior emergency.",
               "hi": "Tube पर कोई भी शक senior emergency है।"
+            },
+            "short": {
+              "en": "Call senior (SBAR)",
+              "hi": "Senior को call (SBAR)"
             }
           },
           {
@@ -1250,6 +1958,10 @@
             "why": {
               "en": "The alarm is your only warning if it happens again. Keep it on.",
               "hi": "दोबारा हो तो alarm ही आपकी एकमात्र चेतावनी है। इसे चालू रखें।"
+            },
+            "short": {
+              "en": "Silence the alarm",
+              "hi": "Alarm silence करें"
             }
           }
         ],
@@ -1293,6 +2005,10 @@
             "why": {
               "en": "Is the patient not breathing, or is the gas leaking away?",
               "hi": "मरीज़ साँस नहीं ले रहा, या gas बाहर leak हो रही है?"
+            },
+            "short": {
+              "en": "Look at the patient",
+              "hi": "मरीज़ को देखें"
             }
           },
           {
@@ -1305,6 +2021,10 @@
             "why": {
               "en": "In a support mode the patient gets breaths only if they try (unless apnoea backup is on).",
               "hi": "Support mode में मरीज़ को साँस तभी मिलती है जब वह कोशिश करे (जब तक apnoea backup चालू न हो)।"
+            },
+            "short": {
+              "en": "Bag with 100% oxygen",
+              "hi": "100% oxygen से bag"
             }
           },
           {
@@ -1317,6 +2037,10 @@
             "why": {
               "en": "Here the morphine is the likely cause of a drop in breathing drive.",
               "hi": "यहाँ morphine साँस की इच्छा घटने का संभावित कारण है।"
+            },
+            "short": {
+              "en": "Find the cause (opioid, leak)",
+              "hi": "कारण ढूँढें (opioid, leak)"
             }
           },
           {
@@ -1330,6 +2054,10 @@
             "why": {
               "en": "Call at once if the patient is not breathing.",
               "hi": "मरीज़ साँस न ले रहा हो तो तुरंत call करें।"
+            },
+            "short": {
+              "en": "Call senior (SBAR)",
+              "hi": "Senior को call (SBAR)"
             }
           },
           {
@@ -1342,6 +2070,10 @@
             "why": {
               "en": "An apnoeic patient cannot wait 30 minutes.",
               "hi": "Apnoea वाला मरीज़ 30 मिनट इंतज़ार नहीं कर सकता।"
+            },
+            "short": {
+              "en": "Silence, recheck in 30 min",
+              "hi": "Silence, 30 मिनट बाद देखें"
             }
           }
         ],
@@ -1361,6 +2093,167 @@
           "r": {
             "en": "Please come now. Do you want a mode with a set rate?",
             "hi": "कृपया अभी आएँ। क्या आप set rate वाला mode चाहेंगे?"
+          }
+        }
+      },
+      {
+        "id": "silence",
+        "title": {
+          "en": "It keeps alarming",
+          "hi": "Alarm बार बार बज रहा है"
+        },
+        "scene": {
+          "en": "3 am. The high pressure alarm has rung five times in 10 minutes. Each time the patient coughs, Ppeak touches 40, then settles to 26. SpO2 95%. A nurse calls you to another bed.",
+          "hi": "रात 3 बजे। High pressure alarm 10 मिनट में पाँच बार बजा है। हर बार मरीज़ खाँसता है, Ppeak 40 छूता है, फिर 26 पर आ जाता है। SpO2 95%। एक nurse आपको दूसरे bed पर बुलाती है।"
+        },
+        "steps": [
+          {
+            "id": "look",
+            "rank": 1,
+            "short": {
+              "en": "Look at the patient",
+              "hi": "मरीज़ को देखें"
+            },
+            "text": {
+              "en": "Look at the patient now: coughing, biting the tube, secretions, chest rise, the SpO2 trace.",
+              "hi": "अभी मरीज़ को देखें: खाँसी, tube को दाँत से दबाना, secretions, छाती का उठना, SpO2 trace।"
+            },
+            "why": {
+              "en": "Patient first, every time it rings.",
+              "hi": "हर बार बजने पर पहले मरीज़।"
+            }
+          },
+          {
+            "id": "suction",
+            "rank": 2,
+            "short": {
+              "en": "Suction the tube",
+              "hi": "Tube में suction"
+            },
+            "text": {
+              "en": "Suction the tube: see that the catheter passes and what comes up.",
+              "hi": "Tube में suction करें: देखें कि catheter जाता है और क्या निकलता है।"
+            },
+            "why": {
+              "en": "Secretions are the commonest cause of a high pressure alarm with coughing.",
+              "hi": "खाँसी के साथ high pressure alarm का सबसे आम कारण secretions हैं।"
+            }
+          },
+          {
+            "id": "dope",
+            "rank": 2,
+            "short": {
+              "en": "Run DOPE",
+              "hi": "DOPE करें"
+            },
+            "text": {
+              "en": "Check DOPE quickly: tube mark at the lips, EtCO2 trace, equal chest rise, water in the circuit.",
+              "hi": "जल्दी DOPE जाँचें: होंठ पर tube mark, EtCO2 trace, बराबर छाती का उठना, circuit में पानी।"
+            },
+            "why": {
+              "en": "Rule out a tube problem or a pneumothorax before you call it just coughing.",
+              "hi": "इसे सिर्फ़ खाँसी कहने से पहले tube की समस्या या pneumothorax को रद्द करें।"
+            }
+          },
+          {
+            "id": "pause",
+            "rank": 2,
+            "opt": true,
+            "short": {
+              "en": "Silence while you stay",
+              "hi": "रुकते हुए silence"
+            },
+            "text": {
+              "en": "Press alarm silence (about 2 minutes) only while you stay at the bed and work on the cause.",
+              "hi": "Alarm silence (लगभग 2 मिनट) तभी दबाएँ जब आप bed पर रहकर कारण पर काम कर रहे हों।"
+            },
+            "why": {
+              "en": "Optional. It is fine while you are hands-on at the bed; the sound comes back by itself. It never fixes anything.",
+              "hi": "वैकल्पिक। जब आप bed पर हाथ से काम कर रहे हों तब ठीक है; आवाज़ अपने आप लौट आती है। यह कुछ ठीक नहीं करता।"
+            }
+          },
+          {
+            "id": "nurse",
+            "rank": 3,
+            "short": {
+              "en": "Ask the nurse to call you",
+              "hi": "Nurse से call करने को कहें"
+            },
+            "text": {
+              "en": "Before you leave, ask the nurse to stay and call you at once if it rings again or the SpO2 falls.",
+              "hi": "जाने से पहले nurse से रुकने और दोबारा बजने या SpO2 गिरने पर तुरंत call करने को कहें।"
+            },
+            "why": {
+              "en": "Someone must be watching this patient when you walk to the other bed.",
+              "hi": "जब आप दूसरे bed पर जाएँ तब कोई इस मरीज़ को देख रहा हो।"
+            }
+          },
+          {
+            "id": "doc",
+            "rank": 3,
+            "short": {
+              "en": "Write a short note",
+              "hi": "छोटा note लिखें"
+            },
+            "text": {
+              "en": "Write a short note: the time, the alarm and the numbers, what you found, what you did, the result and who you told.",
+              "hi": "छोटा note लिखें: समय, alarm और numbers, आपने क्या पाया, क्या किया, नतीजा और किसे बताया।"
+            },
+            "why": {
+              "en": "The next doctor needs to see that it keeps happening. If it is not written, it did not happen.",
+              "hi": "अगले doctor को दिखना चाहिए कि यह बार बार हो रहा है। जो लिखा नहीं, वह हुआ ही नहीं।"
+            }
+          },
+          {
+            "id": "call",
+            "rank": 4,
+            "flex": true,
+            "short": {
+              "en": "Call senior (SBAR)",
+              "hi": "Senior को call (SBAR)"
+            },
+            "text": {
+              "en": "Call your senior with SBAR: an alarm that keeps coming back needs their plan (pain, sedation, the tube).",
+              "hi": "SBAR के साथ senior को call करें: बार बार लौटने वाले alarm के लिए उनकी plan चाहिए (दर्द, sedation, tube)।"
+            },
+            "why": {
+              "en": "Right at any point once you have seen the patient. Call at once if SpO2 falls or the catheter will not pass.",
+              "hi": "मरीज़ देखने के बाद कभी भी सही। SpO2 गिरे या catheter न जाए तो तुरंत call करें।"
+            }
+          },
+          {
+            "id": "trap",
+            "rank": null,
+            "short": {
+              "en": "Silence and walk away",
+              "hi": "Silence करके चले जाएँ"
+            },
+            "text": {
+              "en": "Press silence and go to the other bed.",
+              "hi": "Silence दबाएँ और दूसरे bed पर चले जाएँ।"
+            },
+            "why": {
+              "en": "Silence lasts about 2 minutes and the cause is still there. The next alarm could be a blocked tube with nobody at the bed. Never silence and walk away.",
+              "hi": "Silence लगभग 2 मिनट चलता है और कारण अब भी है। अगला alarm बंद tube का हो सकता है और bed पर कोई न हो। Silence करके कभी न जाएँ।"
+            }
+          }
+        ],
+        "sbar": {
+          "s": {
+            "en": "Bed 4, Mr X: high pressure alarm five times in 10 minutes with coughing; Ppeak up to 40, settles to 26.",
+            "hi": "Bed 4, Mr X: 10 मिनट में पाँच बार high pressure alarm, खाँसी के साथ; Ppeak 40 तक, फिर 26 पर।"
+          },
+          "b": {
+            "en": "Ventilated for pneumonia, day 2, AC-VC 450, rate 16, PEEP 5, FiO2 40.",
+            "hi": "Pneumonia के लिए ventilated, दूसरा दिन, AC-VC 450, rate 16, PEEP 5, FiO2 40।"
+          },
+          "a": {
+            "en": "Suctioned thick secretions, catheter passes, tube mark unchanged, EtCO2 trace present, chest rise equal, SpO2 95%. Still coughing. The nurse is with him and I have written a note.",
+            "hi": "गाढ़े secretions suction किए, catheter जाता है, tube mark वही, EtCO2 trace मौजूद, छाती बराबर उठ रही है, SpO2 95%। अब भी खाँस रहा है। Nurse उसके पास है और मैंने note लिख दिया है।"
+          },
+          "r": {
+            "en": "Could you review his pain relief and sedation? The nurse will call me at once if it rings again.",
+            "hi": "क्या आप उसका दर्द का इलाज और sedation देख सकते हैं? दोबारा बजे तो nurse मुझे तुरंत call करेगी।"
           }
         }
       }
@@ -1501,6 +2394,345 @@
           "en": "What you need: please come now, or what should I do next.",
           "hi": "आपको क्या चाहिए: कृपया अभी आएँ, या आगे मैं क्या करूँ।"
         }
+      }
+    ]
+  },
+  "care": {
+    "title": {
+      "en": "Daily care checks",
+      "hi": "रोज़ की care जाँच"
+    },
+    "sub": {
+      "en": "Sedation, head up and the VAP bundle",
+      "hi": "Sedation, सिर ऊपर और VAP bundle"
+    },
+    "intro": {
+      "en": "Check these on every round and when you take over. You check and report; changes to sedation or drugs are your senior's decision.",
+      "hi": "हर round पर और सँभालते समय ये जाँचें। आप जाँचते और बताते हैं; sedation या दवाओं में बदलाव senior का निर्णय है।"
+    },
+    "groups": [
+      {
+        "title": {
+          "en": "Position",
+          "hi": "स्थिति (position)"
+        },
+        "items": [
+          {
+            "id": "head",
+            "label": {
+              "en": "Head of the bed up 30 to 45 degrees, unless your senior has said not to (spine injury, very low BP).",
+              "hi": "Bed का सिर 30 से 45 degree ऊपर, जब तक senior ने मना न किया हो (spine injury, बहुत कम BP)।"
+            },
+            "why": {
+              "en": "Lying flat lets stomach contents and mouth secretions run into the lungs: a main cause of ventilator pneumonia (VAP).",
+              "hi": "सीधा लेटने से पेट और मुँह के secretions फेफड़ों में जाते हैं: ventilator pneumonia (VAP) का एक मुख्य कारण।"
+            }
+          }
+        ]
+      },
+      {
+        "title": {
+          "en": "Sedation and pain",
+          "hi": "Sedation और दर्द"
+        },
+        "items": [
+          {
+            "id": "pain",
+            "label": {
+              "en": "Pain treated first: look for grimacing, a fast heart rate, sweating, fighting the ventilator.",
+              "hi": "पहले दर्द का इलाज: चेहरा बिगाड़ना, तेज़ धड़कन, पसीना, ventilator से लड़ना देखें।"
+            },
+            "why": {
+              "en": "Pain relief first, then sedation. An agitated patient may simply be in pain.",
+              "hi": "पहले दर्द से राहत, फिर sedation। बेचैन मरीज़ शायद सिर्फ़ दर्द में हो।"
+            }
+          },
+          {
+            "id": "rass",
+            "label": {
+              "en": "The sedation score (for example RASS) matches the written target, often light: 0 to -2.",
+              "hi": "Sedation score (जैसे RASS) लिखे हुए लक्ष्य से मिलता है, अक्सर हल्का: 0 से -2।"
+            },
+            "why": {
+              "en": "Too deep slows weaning; too light means biting and fighting. If it does not match, tell your senior: you do not change the infusion alone.",
+              "hi": "बहुत गहरा weaning धीमा करता है; बहुत हल्का यानी tube दबाना और लड़ना। न मिले तो senior को बताएँ: infusion अकेले न बदलें।"
+            }
+          },
+          {
+            "id": "wean",
+            "label": {
+              "en": "Ask on the round: is a daily sedation hold and a breathing trial (SBT) planned today?",
+              "hi": "Round पर पूछें: क्या आज रोज़ का sedation hold और breathing trial (SBT) planned है?"
+            },
+            "why": {
+              "en": "A daily check of readiness to wean shortens time on the ventilator. It is a team decision.",
+              "hi": "Weaning की तैयारी की रोज़ जाँच ventilator पर समय घटाती है। यह team का निर्णय है।"
+            }
+          }
+        ]
+      },
+      {
+        "title": {
+          "en": "Prevent VAP",
+          "hi": "VAP से बचाव"
+        },
+        "items": [
+          {
+            "id": "cuff",
+            "label": {
+              "en": "Cuff pressure 20 to 30 cmH2O.",
+              "hi": "Cuff pressure 20 से 30 cmH2O।"
+            },
+            "why": {
+              "en": "Below 20, secretions slip past the cuff into the lungs; above 30 harms the trachea.",
+              "hi": "20 से कम पर secretions cuff के पार फेफड़ों में जाते हैं; 30 से ऊपर trachea को नुकसान।"
+            }
+          },
+          {
+            "id": "mouth",
+            "label": {
+              "en": "Mouth care to your unit's protocol: toothbrushing and oral suction.",
+              "hi": "आपके unit के protocol से मुँह की सफ़ाई: दाँत brush और मुँह का suction।"
+            },
+            "why": {
+              "en": "Fewer germs in the mouth means fewer reach the lungs. Chlorhexidine use differs between units: follow yours.",
+              "hi": "मुँह में कम कीटाणु यानी फेफड़ों तक कम पहुँचते हैं। Chlorhexidine का इस्तेमाल units में अलग है: अपने unit का पालन करें।"
+            }
+          },
+          {
+            "id": "subg",
+            "label": {
+              "en": "Subglottic suction is running if the tube has the extra port.",
+              "hi": "Tube में extra port हो तो subglottic suction चालू है।"
+            },
+            "why": {
+              "en": "It drains the secretions that pool above the cuff.",
+              "hi": "यह cuff के ऊपर जमा secretions निकालता है।"
+            }
+          },
+          {
+            "id": "circ",
+            "label": {
+              "en": "Circuit: water drained away from the patient; not changed routinely, only when soiled or broken.",
+              "hi": "Circuit: पानी मरीज़ से दूर निकाला गया; रोज़ नहीं बदला जाता, सिर्फ़ गंदा या टूटा होने पर।"
+            },
+            "why": {
+              "en": "Water running back into the tube carries germs. Routine changes do not lower VAP and risk a disconnection.",
+              "hi": "Tube में वापस बहता पानी कीटाणु ले जाता है। रोज़ बदलने से VAP कम नहीं होता और circuit अलग होने का ख़तरा है।"
+            }
+          },
+          {
+            "id": "hands",
+            "label": {
+              "en": "Clean hands and gloves before you touch the tube, the circuit or the suction.",
+              "hi": "Tube, circuit या suction छूने से पहले हाथ साफ़ और gloves।"
+            },
+            "why": {
+              "en": "Hands carry the germs that cause VAP.",
+              "hi": "हाथ वे कीटाणु ले जाते हैं जो VAP करते हैं।"
+            }
+          }
+        ]
+      },
+      {
+        "title": {
+          "en": "On the chart",
+          "hi": "Chart पर"
+        },
+        "items": [
+          {
+            "id": "dvt",
+            "label": {
+              "en": "DVT prophylaxis prescribed, or the reason it is not.",
+              "hi": "DVT prophylaxis लिखा है, या न लिखने का कारण।"
+            },
+            "why": {
+              "en": "Ventilated patients lie still and clot easily.",
+              "hi": "Ventilated मरीज़ हिलते नहीं और उनमें आसानी से clot बनता है।"
+            }
+          },
+          {
+            "id": "gi",
+            "label": {
+              "en": "Stomach ulcer prophylaxis per your unit's protocol, and a feeding plan.",
+              "hi": "आपके unit के protocol से stomach ulcer prophylaxis, और खाने की plan।"
+            },
+            "why": {
+              "en": "Stress ulcers can bleed; early feeding protects the gut. Both are prescribed by the team.",
+              "hi": "Stress ulcers से ख़ून बह सकता है; जल्दी खाना पेट को बचाता है। दोनों team लिखती है।"
+            }
+          }
+        ]
+      }
+    ],
+    "done": {
+      "en": "All checked. Write any that are missing in your note and tell your senior on the round.",
+      "hi": "सब जाँच लिया। जो छूटे हों उन्हें note में लिखें और round पर senior को बताएँ।"
+    }
+  },
+  "handover": {
+    "title": {
+      "en": "Handover to the next doctor",
+      "hi": "अगले doctor को handover"
+    },
+    "sub": {
+      "en": "A ventilator handover note",
+      "hi": "Ventilator का handover note"
+    },
+    "intro": {
+      "en": "Hand over at the bedside, looking at the patient and the screen together. Say it in this order; the next doctor reads the plan back.",
+      "hi": "Bedside पर handover करें, मरीज़ और screen को साथ देखते हुए। इसी क्रम में बताएँ; अगला doctor plan दोहराकर सुनाता है।"
+    },
+    "exH": {
+      "en": "Example",
+      "hi": "उदाहरण"
+    },
+    "rows": [
+      {
+        "id": "who",
+        "label": {
+          "en": "Patient and why ventilated",
+          "hi": "मरीज़ और ventilation का कारण"
+        },
+        "what": {
+          "en": "Bed, name, age, reason, day on the ventilator, tube size and mark.",
+          "hi": "Bed, नाम, उम्र, कारण, ventilator पर कौन सा दिन, tube size और mark।"
+        },
+        "example": {
+          "en": "Bed 4, Mr X, 58. Pneumonia, ventilated day 2. Tube 8.0, 22 cm at the lips.",
+          "hi": "Bed 4, Mr X, 58। Pneumonia, ventilated दूसरा दिन। Tube 8.0, होंठ पर 22 cm।"
+        }
+      },
+      {
+        "id": "set",
+        "label": {
+          "en": "Mode and SET values",
+          "hi": "Mode और SET values"
+        },
+        "what": {
+          "en": "Mode, VT or pressure, rate, PEEP, FiO2. VT per kg of predicted body weight.",
+          "hi": "Mode, VT या pressure, rate, PEEP, FiO2। Predicted body weight के हर kg पर VT।"
+        },
+        "example": {
+          "en": "AC-VC, VT 450 (6.4 mL/kg, PBW 70 kg), rate 16, PEEP 5, FiO2 40%.",
+          "hi": "AC-VC, VT 450 (6.4 mL/kg, PBW 70 kg), rate 16, PEEP 5, FiO2 40%।"
+        }
+      },
+      {
+        "id": "meas",
+        "label": {
+          "en": "MEASURED now",
+          "hi": "अभी MEASURED"
+        },
+        "what": {
+          "en": "Ppeak, Pplat if a hold was done, VTe, minute volume, total rate, SpO2, EtCO2.",
+          "hi": "Ppeak, hold हुआ हो तो Pplat, VTe, minute volume, total rate, SpO2, EtCO2।"
+        },
+        "example": {
+          "en": "Ppeak 24, Pplat 19, VTe 452, MVe 8.1, f total 18. SpO2 95%, EtCO2 38.",
+          "hi": "Ppeak 24, Pplat 19, VTe 452, MVe 8.1, f total 18। SpO2 95%, EtCO2 38।"
+        }
+      },
+      {
+        "id": "gas",
+        "label": {
+          "en": "Last blood gas",
+          "hi": "पिछली blood gas"
+        },
+        "what": {
+          "en": "The time, the FiO2 it was taken on, pH, PaCO2, PaO2, HCO3.",
+          "hi": "समय, किस FiO2 पर ली गई, pH, PaCO2, PaO2, HCO3।"
+        },
+        "example": {
+          "en": "02:00 on FiO2 40%: pH 7.38, PaCO2 42, PaO2 85, HCO3 24.",
+          "hi": "02:00, FiO2 40% पर: pH 7.38, PaCO2 42, PaO2 85, HCO3 24।"
+        }
+      },
+      {
+        "id": "alarms",
+        "label": {
+          "en": "Alarms tonight and the limits",
+          "hi": "आज रात के alarms और limits"
+        },
+        "what": {
+          "en": "What rang, when, what you did, the result. The limits now.",
+          "hi": "क्या बजा, कब, आपने क्या किया, नतीजा। अभी की limits।"
+        },
+        "example": {
+          "en": "High pressure alarm five times at 03:00 with coughing; settled after suction. Limits: Ppeak 35, MVe 6 to 12, apnoea 20 s.",
+          "hi": "03:00 पर खाँसी के साथ पाँच बार high pressure alarm; suction के बाद ठीक। Limits: Ppeak 35, MVe 6 से 12, apnoea 20 s।"
+        }
+      },
+      {
+        "id": "care",
+        "label": {
+          "en": "Sedation and care",
+          "hi": "Sedation और care"
+        },
+        "what": {
+          "en": "Sedation and the score against its target, pain, head up, cuff pressure.",
+          "hi": "Sedation और उसका score लक्ष्य के मुक़ाबले, दर्द, सिर ऊपर, cuff pressure।"
+        },
+        "example": {
+          "en": "Propofol, RASS -1 (target 0 to -2), comfortable. Head up 35 degrees, cuff 25.",
+          "hi": "Propofol, RASS -1 (लक्ष्य 0 से -2), आराम में। सिर 35 degree ऊपर, cuff 25।"
+        }
+      },
+      {
+        "id": "plan",
+        "label": {
+          "en": "Plan",
+          "hi": "Plan"
+        },
+        "what": {
+          "en": "What the team has decided for the next hours. Nothing new that the senior has not agreed.",
+          "hi": "अगले घंटों के लिए team ने क्या तय किया। ऐसा कुछ नया नहीं जो senior ने न माना हो।"
+        },
+        "example": {
+          "en": "Repeat gas at 08:00. Breathing trial to be decided on the morning round.",
+          "hi": "08:00 पर फिर gas। Breathing trial का निर्णय सुबह के round पर।"
+        }
+      },
+      {
+        "id": "esc",
+        "label": {
+          "en": "When to call the senior",
+          "hi": "Senior को कब call करें"
+        },
+        "what": {
+          "en": "The numbers that mean call now, as agreed for this patient.",
+          "hi": "वे numbers जिनका मतलब अभी call करना है, इस मरीज़ के लिए तय।"
+        },
+        "example": {
+          "en": "SpO2 below 92% that does not come up, FiO2 needed above 60%, no EtCO2 trace, MAP below 65, or the high pressure alarm with a falling SpO2.",
+          "hi": "SpO2 92% से नीचे और न बढ़े, FiO2 60% से ऊपर चाहिए, EtCO2 trace नहीं, MAP 65 से नीचे, या गिरते SpO2 के साथ high pressure alarm।"
+        }
+      }
+    ],
+    "docH": {
+      "en": "After any alarm, write down",
+      "hi": "किसी भी alarm के बाद लिखें"
+    },
+    "doc": [
+      {
+        "en": "The time and the alarm.",
+        "hi": "समय और alarm।"
+      },
+      {
+        "en": "The numbers: SpO2, Ppeak, VTe, BP.",
+        "hi": "Numbers: SpO2, Ppeak, VTe, BP।"
+      },
+      {
+        "en": "What you found at the bed.",
+        "hi": "Bed पर आपने क्या पाया।"
+      },
+      {
+        "en": "What you did, and the result.",
+        "hi": "आपने क्या किया, और नतीजा।"
+      },
+      {
+        "en": "Who you told, and what they advised.",
+        "hi": "किसे बताया, और उन्होंने क्या सलाह दी।"
       }
     ]
   }
