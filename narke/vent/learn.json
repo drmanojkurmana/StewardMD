@@ -1979,8 +1979,8 @@
     },
     {
      "say": {
-      "en": "What to try: suction the tube.",
-      "hi": "क्या करें: tube को suction करें।"
+      "en": "What to try: pass a suction catheter down the tube to clear the mucus.",
+      "hi": "क्या करें: tube में suction catheter डालकर बलगम साफ़ करें।"
      },
      "do": {
       "action": "suction"
@@ -5821,18 +5821,18 @@
   },
   {
    "id": "abg-15",
-   "scenario": "pneumonia",
+   "scenario": "ards",
    "abg": {
-    "pH": 7.19,
-    "PaCO2": 55,
-    "PaO2": 75,
-    "HCO3": 20.5,
-    "SaO2": 88,
-    "BE": -6.5,
-    "lactate": 4,
-    "FiO2": 0.7
+    "pH": 7.15,
+    "PaCO2": 59,
+    "PaO2": 57,
+    "HCO3": 20.1,
+    "SaO2": 75,
+    "BE": -7.5,
+    "lactate": 3.8,
+    "FiO2": 0.5
    },
-   "spo2": 88,
+   "spo2": 75,
    "q1": {
     "ask": {
      "en": "What is happening in this gas?",
@@ -5858,8 +5858,8 @@
     ],
     "answer": 0,
     "why": {
-     "en": "pH is low. CO2 is high, which explains part of it. But HCO3 is low too when it should rise, and lactate is 4. Two acids at once: a mixed respiratory and metabolic acidosis. PaO2 75 on 70% oxygen is also low for the oxygen given.",
-     "hi": "pH कम है। CO2 ज़्यादा है, जो इसका एक हिस्सा समझाता है। पर HCO3 भी कम है जबकि उसे बढ़ना चाहिए था, और lactate 4 है। एक साथ दो अम्ल: mixed respiratory और metabolic acidosis। 70% oxygen पर PaO2 75 भी दी गई oxygen के हिसाब से कम है।"
+     "en": "pH is low. CO2 is high, which explains part of it. But HCO3 is low too when it should rise, and lactate is 3.8. Two acids at once: a mixed respiratory and metabolic acidosis. PaO2 57 on 50% oxygen is low as well.",
+     "hi": "pH कम है। CO2 ज़्यादा है, जो इसका एक हिस्सा समझाता है। पर HCO3 भी कम है जबकि उसे बढ़ना चाहिए था, और lactate 3.8 है। एक साथ दो अम्ल: mixed respiratory और metabolic acidosis। 50% oxygen पर PaO2 57 भी कम है।"
     }
    },
    "q2": {
@@ -5870,14 +5870,14 @@
     "options": [
      {
       "label": {
-       "en": "Raise the rate to 24 and FiO2 to 90%",
-       "hi": "Rate 24 और FiO2 90% करें"
+       "en": "Raise PEEP to 12 and the rate to 30",
+       "hi": "PEEP 12 और rate 30 करें"
       },
       "change": {
-       "key": "rr",
-       "to": 24,
+       "key": "peep",
+       "to": 12,
        "also": {
-        "fio2": 90
+        "rr": 30
        }
       }
      },
@@ -5893,55 +5893,48 @@
      },
      {
       "label": {
-       "en": "Raise PEEP to 15",
-       "hi": "PEEP को 15 करें"
+       "en": "Raise tidal volume to 600 mL to clear the CO2",
+       "hi": "CO2 निकालने के लिए tidal volume 600 mL करें"
       },
       "change": {
-       "key": "peep",
-       "to": 15
+       "key": "vt",
+       "to": 600
       }
      },
      {
       "label": {
-       "en": "Lower the rate to 10 to rest the lungs",
-       "hi": "फेफड़ों को आराम देने के लिए rate 10 करें"
+       "en": "Lower the rate to 14 to rest the lungs",
+       "hi": "फेफड़ों को आराम देने के लिए rate 14 करें"
       },
       "change": {
        "key": "rr",
-       "to": 10
+       "to": 14
       }
      }
     ],
     "answer": 0,
     "why": {
-     "en": "The ventilator can fix the CO2 part and the oxygen: more breaths clear CO2 and FiO2 lifts oxygen. The metabolic part needs its cause treated: sepsis, fluids and perfusion. PEEP helps little in a solid lobe and can drop BP.",
-     "hi": "Ventilator CO2 वाला हिस्सा और oxygen ठीक कर सकता है: ज़्यादा साँसें CO2 निकालती हैं और FiO2 oxygen बढ़ाता है। Metabolic हिस्से के लिए उसका कारण ठीक करना होगा: sepsis, fluid और perfusion। ठोस lobe में PEEP कम मदद करता है और BP गिरा सकता है।"
+     "en": "PEEP reopens lung for oxygen, and a faster rate clears CO2 with small breaths. Big breaths clear CO2 but overstretch the injured lung. The metabolic part needs its cause treated: sepsis and perfusion. Watch the BP after PEEP.",
+     "hi": "PEEP फेफड़ा खोलकर oxygen बढ़ाता है, और तेज़ rate छोटी साँसों से CO2 निकालता है। बड़ी साँसें CO2 निकालती हैं पर घायल फेफड़े को ज़्यादा खींचती हैं। Metabolic हिस्से के लिए कारण का इलाज चाहिए: sepsis और perfusion। PEEP के बाद BP देखें।"
     }
    },
-   "level": 2,
+   "level": 3,
    "vignette": {
-    "en": "Severe pneumonia with sepsis. He is hot, his rate was set low, and his lactate is rising.",
-    "hi": "Sepsis के साथ गंभीर pneumonia। बुख़ार है, rate कम set था, और lactate बढ़ रहा है।"
+    "en": "Mr Khan with ARDS, an hour on small breaths at rate 24. He is septic and his lactate is rising.",
+    "hi": "ARDS वाले श्री खान, rate 24 पर छोटी साँसों के साथ एक घंटा। उन्हें sepsis है और lactate बढ़ रहा है।"
    },
    "setup": {
-    "patch": {
-     "patient": {
-      "vco2": 300,
-      "metabolic": {
-       "hco3": 20.5,
-       "lactate": 4
-      }
-     }
-    },
     "settings": {
-     "fio2": 70,
-     "rr": 14
+     "vt": 420,
+     "rr": 24,
+     "peep": 5,
+     "fio2": 50
     },
     "pre": 3600
    },
    "current": {
-    "en": "Settings: AC-VC, VT 450 mL, rate 14, PEEP 5, Ti 0.9 s, FiO2 70%.",
-    "hi": "सेटिंग: AC-VC, VT 450 mL, rate 14, PEEP 5, Ti 0.9 s, FiO2 70%।"
+    "en": "Settings: AC-VC, VT 420 mL, rate 24, PEEP 5, FiO2 50%.",
+    "hi": "सेटिंग: AC-VC, VT 420 mL, rate 24, PEEP 5, FiO2 50%।"
    }
   }
  ],
