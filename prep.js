@@ -499,7 +499,7 @@
     var fb = "";
     if (shown) {
       var ok = chosen === it.a;
-      fb = '<section class="pn-fb ' + (ok ? "ok" : "no") + '" role="status" tabindex="-1"><p class="pn-verdict">' + (ok ? "Correct" : "Incorrect") + " · Answer " + L[it.a] + ". " + esc(it.o[it.a]) + "</p>" +
+      fb = '<section class="pn-fb ' + (ok ? "ok" : "no") + '" role="status" tabindex="-1"><p class="pn-verdict">' + ico(ok ? "check" : "x") + "<span>" + (ok ? "Correct" : "Incorrect") + " · Answer " + L[it.a] + ". " + esc(it.o[it.a]) + "</span></p>" +
         (it.exp ? '<h3>Explanation</h3><p class="pn-exp">' + esc(it.exp) + "</p>" : '<p class="pn-mut">The source gives no explanation for this question.</p>') +
         (it.kp ? '<p class="pn-kp"><b>Exam pearl:</b> ' + esc(it.kp) + "</p>" : "") +
         (it.rv && it.rv.old ? '<p class="pn-old">This may be outdated: check current guidance.</p>' : "") +
@@ -513,7 +513,7 @@
     }
     var nav = r.mode === "exam" ?
       '<div class="pn-navrow"><button type="button" class="pn-btn" data-act="prev"' + (r.i ? "" : " disabled") + ">Previous</button>" +
-      '<button type="button" class="pn-btn' + (r.mark[r.i] ? " on" : "") + '" data-act="markq" aria-pressed="' + !!r.mark[r.i] + '">' + ico("flag") + " Mark for review</button>" +
+      '<button type="button" class="pn-btn' + (r.mark[r.i] ? " on" : "") + '" data-act="markq" aria-label="Mark for review" aria-pressed="' + !!r.mark[r.i] + '">' + ico("flag", !!r.mark[r.i]) + " Mark</button>" +
       (r.i < r.items.length - 1 ? '<button type="button" class="pn-btn pri" data-act="next">Next</button>' : '<button type="button" class="pn-btn pri" data-act="submit">Submit</button>') + "</div>" +
       '<button type="button" class="pn-link" data-act="qgrid">' + ico("grid") + " All questions · " + r.ans.filter(function (a) { return a >= 0; }).length + " of " + r.items.length + " answered</button>"
       : shown ? '<div class="pn-navrow">' + (own ? "" : '<button type="button" class="pn-btn" data-act="report">' + ico("flag") + " Report</button>") +
@@ -576,8 +576,8 @@
     var p = planToday(s, today()), pct = p.goal ? Math.min(100, Math.round(p.done * 100 / p.goal)) : 0;
     return '<section class="pn-plan" aria-label="Today"><div class="pn-plan-h"><b>Today</b><button type="button" class="pn-link" data-act="goal" aria-label="Daily goal ' + p.goal + ' questions, change">Goal ' + p.goal + "</button></div>" +
       '<span class="pn-prog" aria-hidden="true"><i style="width:' + pct + '%"></i></span><p class="pn-mut pn-small">' + fmt(p.done) + " of " + fmt(p.goal) + " answered today" + (p.due ? " · " + fmt(p.due) + " reviews due" : "") + "</p>" +
-      '<div class="pn-navrow"><button type="button" class="pn-btn pri" data-act="plan"' + (p.due || p.left ? "" : " disabled") + ">" + ico("play") + (p.due ? " Start today's reviews" : " Start today's set") + "</button>" +
-      '<button type="button" class="pn-btn" data-act="weak"' + (p.weak.length || Object.keys(s.mt).length ? "" : " disabled") + ">Fix my weak areas</button></div></section>";
+      '<div class="pn-plan-act"><button type="button" class="pn-btn pri" data-act="plan"' + (p.due || p.left ? "" : " disabled") + ">" + ico("play") + (p.due ? " Start today's reviews" : " Start today's set") + "</button>" +
+      '<button type="button" class="pn-link" data-act="weak"' + (p.weak.length || Object.keys(s.mt).length ? "" : " disabled") + ">Fix my weak areas</button></div></section>";
   }
   // Items for (subject, module) pairs, each module file once; modules that fail to load are skipped.
   function loadMany(pairs, onStep) {

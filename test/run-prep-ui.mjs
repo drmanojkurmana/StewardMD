@@ -40,7 +40,7 @@ const ev = async (e) => { const r = await call("Runtime.evaluate", { expression:
 const until = async (e, ms = 10000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (await ev(e) === true) return true; await sleep(150); } return false; };
 const reqs = []; let fails = 0; const ok = (c, m) => { console.log((c ? "PASS " : "FAIL ") + m); if (!c) fails++; };
 const click = (sel) => ev(`var b=document.querySelector(${JSON.stringify(sel)}); if(!b) return "missing"; b.click(); return 1;`);
-const shot = async (name) => { if (!process.env.SHOTS) return; const r = await call("Page.captureScreenshot", { format: "png" }); if (r.result) (await import("node:fs")).writeFileSync(join(process.env.SHOTS, "prep-" + name + ".png"), Buffer.from(r.result.data, "base64")); };
+const shot = async (name) => { if (!process.env.SHOTS) return; if (process.env.PN_LIGHT) await ev(`document.body.classList.remove("dark"); return 1;`); const r = await call("Page.captureScreenshot", { format: "png" }); if (r.result) (await import("node:fs")).writeFileSync(join(process.env.SHOTS, "prep-" + (process.env.PN_LIGHT ? "light-" : "") + name + ".png"), Buffer.from(r.result.data, "base64")); };
 
 try {
   let ver, t = 0; while (t++ < 300) { try { ver = await (await fetch(`http://localhost:${PORT}/json/version`)).json(); break; } catch { await sleep(200); } }
@@ -137,10 +137,13 @@ try {
   ok(await ev(`return /^\\d+:\\d\\d$/.test(document.getElementById("pnClock").textContent);`) === true, "clock reads m:ss");
   await click('#smdPrep .pn-opt[data-k="0"]');
   ok(await ev(`return !document.querySelector("#smdPrep .pn-fb");`) === true, "no feedback during a test");
+  await shot("exam");
   await click("#smdPrep [data-act=markq]");
   await click("#smdPrep [data-act=qgrid]");
+  await shot("qgrid");
   ok(await until(`return document.querySelectorAll("#smdPrep .pn-qn").length > 0 && !!document.querySelector("#smdPrep .pn-qn.ans.mark");`, 3000), "question grid shows answered and marked");
   await click("#smdPrep .pn-qgrid + p + [data-act=submit]");
+  await sleep(300); await shot("result");
   ok(await until(`return /Test marked/.test(document.querySelector("#smdPrep .pn-t h1").textContent);`, 5000), "submit marks the test");
   await click("#smdPrep [data-act=donerun]");
 
@@ -165,6 +168,7 @@ try {
   await click("#smdPrep [data-act=goal]");
   ok(await ev(`return JSON.parse(localStorage.getItem("smd_prep_v1")).goal;`) === 50, "the goal chip steps the daily goal");
   await click("#smdPrep [data-act=mistakes]");
+  await sleep(300); await shot("mistakes");
   ok(await until(`return document.querySelectorAll("#smdPrep .pn-mods .pn-mod").length === ${nmt};`, 5000), "My mistakes lists them");
   await click("#smdPrep [data-act=mpractice]");
   ok(await until(`return !!document.querySelector("#smdPrep .pn-q");`, 8000), "Practise these starts a set of the mistakes");
