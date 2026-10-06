@@ -11469,3 +11469,10 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   `PREP_FLASH`); the home "Cards due" row (prep-flash.js) already shows them. Add it once cards are generated for real.
 - Readiness retention keeps reading cards and questions together (`recall()` over `p:<module>`), as the Cards decision
   intended. Cache token `prep7`.
+
+## 2026-10-06 - PrepNucleus pricing, free tier and social (owner)
+- **Price:** Rs 1,499 / year (also Rs 599 / 3 months). No countdowns, no fake discounts, ever.
+- **Free tier ("taste"):** 50 questions/day, 1 lesson/day, 10 cards/day, the daily sprint; plus 1 to 2 modules per subject fully open so students can judge the content.
+- **Terms:** 7-day full refund; student verification discount (default 20% for verified MBBS students/interns, owner may change); referral credit (default one free month per friend who subscribes).
+- **Social next:** friends + challenge a friend, college leaderboards (opt-in college tag), public accuracy page, study groups.
+- Payments ride the existing StewardMD monetization (Razorpay + store IAP); Pro enforcement only after a real payment test.
