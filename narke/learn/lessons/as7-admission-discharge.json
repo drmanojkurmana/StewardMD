@@ -1,0 +1,272 @@
+{
+  "id": "as7-admission-discharge",
+  "unit": "as7",
+  "level": "mbbs",
+  "minutes": 6,
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "Indian MoHFW 2023 ICU admission and discharge guideline: title, year and criteria summarised.",
+      "Sepsis ICU triggers and the 6-hour admission target (kb sepsis-septic-shock).",
+      "First-hour bundle: antibiotics within 1 hour, 30 mL/kg crystalloid, MAP 65 mmHg (kb sepsis-septic-shock)."
+    ]
+  },
+  "competencies": [
+    "AS7.2",
+    "AS7.5"
+  ],
+  "title": {
+    "en": "Who goes to the ICU, and when they leave",
+    "hi": "ICU में कौन जाए और कब निकले"
+  },
+  "idea": {
+    "en": "Admit when an organ is failing or likely to fail and ICU care can help. Discharge when support is off and the patient is stable.",
+    "hi": "भर्ती तब कीजिए जब कोई अंग विफल हो रहा हो या होने वाला हो और ICU देखभाल मदद कर सके। छुट्टी तब दीजिए जब सहारा बंद हो और मरीज़ स्थिर हो।"
+  },
+  "see": {
+    "diagram": "diagrams/as7-admission-discharge.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "A flow from left to right. A ward bed sits under a red line that climbs. An arrow leads to an amber diamond gate. The next box is red and holds an ICU bed with a monitor. Next comes a green diamond gate and a ward bed with a green outline. From the amber gate, an arrow points down to a purple box with a heart.",
+      "hi": "बाएँ से दाएँ एक प्रवाह। वार्ड का बेड है जिसके ऊपर लाल रेखा चढ़ रही है। तीर एक पीले हीरे जैसे द्वार तक जाता है, फिर लाल डिब्बे में छोटे मॉनिटर वाले ICU बेड तक। फिर एक हरा हीरे जैसा द्वार और हरी रेखा वाला वार्ड बेड। पीले द्वार से एक तीर नीचे दिल वाले बैंगनी डिब्बे की ओर जाता है।"
+    },
+    "caption": {
+      "en": "Warning signs, the admission decision, ICU care, the discharge decision, and the palliative path.",
+      "hi": "चेतावनी के लक्षण, भर्ती का निर्णय, ICU देखभाल, छुट्टी का निर्णय, और palliative रास्ता।"
+    },
+    "credit": "Original diagram, Narkē (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.121,
+        "y": 0.333,
+        "label": {
+          "en": "Warning signs on the ward",
+          "hi": "वार्ड पर चेतावनी के लक्षण"
+        },
+        "note": {
+          "en": "A rising early warning score, falling SpO2, low BP, confusion or low urine output.",
+          "hi": "बढ़ता early warning score, गिरता SpO2, कम BP, उलझन या कम पेशाब।"
+        }
+      },
+      {
+        "x": 0.312,
+        "y": 0.517,
+        "label": {
+          "en": "Admission decision",
+          "hi": "भर्ती का निर्णय"
+        },
+        "note": {
+          "en": "Is an organ failing or about to fail? Can ICU support help? Does the patient accept it?",
+          "hi": "क्या कोई अंग विफल है या होने वाला है? क्या ICU का सहारा मदद करेगा? क्या मरीज़ इसे स्वीकार करता है?"
+        }
+      },
+      {
+        "x": 0.529,
+        "y": 0.517,
+        "label": {
+          "en": "ICU care",
+          "hi": "ICU देखभाल"
+        },
+        "note": {
+          "en": "Organ support and close monitoring while the cause is treated.",
+          "hi": "कारण के इलाज तक अंगों का सहारा और क़रीबी निगरानी।"
+        }
+      },
+      {
+        "x": 0.721,
+        "y": 0.517,
+        "label": {
+          "en": "Discharge decision",
+          "hi": "छुट्टी का निर्णय"
+        },
+        "note": {
+          "en": "Support is off, the acute problem has settled and observations are stable.",
+          "hi": "सहारा बंद है, अचानक आई समस्या शांत है और observations स्थिर हैं।"
+        }
+      },
+      {
+        "x": 0.892,
+        "y": 0.517,
+        "label": {
+          "en": "Ward or step-down unit",
+          "hi": "वार्ड या step-down यूनिट"
+        },
+        "note": {
+          "en": "Hand over clearly to the ward team, with a plan and warning signs to watch.",
+          "hi": "वार्ड टीम को साफ़ handover दीजिए, योजना और देखने वाले चेतावनी लक्षणों के साथ।"
+        }
+      },
+      {
+        "x": 0.312,
+        "y": 0.85,
+        "label": {
+          "en": "Palliative path",
+          "hi": "Palliative रास्ता"
+        },
+        "note": {
+          "en": "If ICU care cannot help, or a valid refusal exists, give comfort-focused care instead.",
+          "hi": "अगर ICU देखभाल मदद नहीं कर सकती, या वैध इनकार है, तो आराम पर केंद्रित देखभाल दीजिए।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Admit for shock, respiratory failure needing support, a falling GCS, or high-risk major surgery.",
+        "hi": "shock, सहारे की ज़रूरत वाली साँस की विफलता, गिरता GCS, या बड़ी high-risk सर्जरी में भर्ती कीजिए।"
+      },
+      {
+        "en": "Watch the ward for a rising [[news2]], falling SpO2, low BP, confusion and low urine output.",
+        "hi": "वार्ड पर बढ़ते [[news2]], गिरते SpO2, कम BP, उलझन और कम पेशाब पर नज़र रखिए।"
+      },
+      {
+        "en": "In [[sepsis]], any vasopressor need or lactate 4 mmol/L or more after fluids means ICU, ideally within 6 hours.",
+        "hi": "[[sepsis]] में vasopressor की कोई भी ज़रूरत, या fluids के बाद lactate 4 mmol/L या ज़्यादा, का मतलब ICU है, बेहतर हो 6 घंटे में।"
+      },
+      {
+        "en": "In [[septic-shock]], first-hour care starts before transfer: cultures, antibiotics within 1 hour, 30 mL/kg crystalloid, noradrenaline to MAP 65.",
+        "hi": "[[septic-shock]] में पहले घंटे का इलाज transfer से पहले शुरू होता है: cultures, 1 घंटे में antibiotics, 30 mL/kg crystalloid, MAP 65 तक noradrenaline।"
+      },
+      {
+        "en": "Do not admit against a valid refusal or when care cannot help. Offer palliative care instead.",
+        "hi": "वैध इनकार के ख़िलाफ़ या जब देखभाल मदद न कर सके, तब भर्ती मत कीजिए। उसकी जगह palliative care दीजिए।"
+      },
+      {
+        "en": "Discharge when organ support has stopped and the patient is stable enough for a ward or HDU.",
+        "hi": "छुट्टी तब दीजिए जब अंगों का सहारा बंद हो चुका हो और मरीज़ वार्ड या HDU के लिए पर्याप्त स्थिर हो।"
+      }
+    ],
+    "analogy": {
+      "en": "ICU beds are lifeboats. They are for those they can save, and they are freed as soon as people reach shore.",
+      "hi": "ICU बेड lifeboats हैं। ये उनके लिए हैं जिन्हें ये बचा सकें, और किनारे पहुँचते ही ख़ाली कर दिए जाते हैं।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Confusion, fast breathing and a low BP in an infected patient suggest sepsis.",
+      "hi": "संक्रमित मरीज़ में उलझन, तेज़ साँस और कम BP sepsis की ओर इशारा करते हैं।"
+    },
+    {
+      "en": "Late referral is a common cause of avoidable ICU death. Call early.",
+      "hi": "देर से रेफ़रल ICU में टाली जा सकने वाली मौत का आम कारण है। जल्दी बुलाइए।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "When you refer, state the failing organ, the support needed and the patient's wishes.",
+      "hi": "रेफ़र करते समय विफल अंग, ज़रूरी सहारा और मरीज़ की इच्छा बताइए।"
+    },
+    {
+      "en": "Start the sepsis first-hour bundle on the ward; do not wait for the ICU bed.",
+      "hi": "sepsis का पहले घंटे का bundle वार्ड पर ही शुरू कीजिए; ICU बेड का इंतज़ार मत कीजिए।"
+    }
+  ],
+  "remember": {
+    "en": "Admit: failing organ, support can help, patient agrees. Discharge: support off and stable. Otherwise, palliative care.",
+    "hi": "भर्ती: विफल अंग, सहारा मदद करे, मरीज़ सहमत। छुट्टी: सहारा बंद और स्थिर। वरना palliative care।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "Which patient most needs ICU admission?",
+        "hi": "किस मरीज़ को ICU भर्ती की सबसे ज़्यादा ज़रूरत है?"
+      },
+      "o": [
+        {
+          "en": "Cellulitis on oral antibiotics, normal vitals",
+          "hi": "मुँह से antibiotics पर cellulitis, vitals सामान्य"
+        },
+        {
+          "en": "Day 2 after appendicectomy, eating well",
+          "hi": "appendicectomy के बाद दूसरा दिन, अच्छा खा रहा"
+        },
+        {
+          "en": "Stable diabetes needing insulin adjustment",
+          "hi": "स्थिर मधुमेह, insulin समायोजन चाहिए"
+        },
+        {
+          "en": "Septic shock still on noradrenaline after fluids",
+          "hi": "fluids के बाद भी noradrenaline पर septic shock"
+        }
+      ],
+      "a": 3,
+      "why": {
+        "en": "A vasopressor need after fluids is a clear ICU trigger in sepsis.",
+        "hi": "fluids के बाद vasopressor की ज़रूरत sepsis में ICU का साफ़ संकेत है।"
+      }
+    },
+    {
+      "q": {
+        "en": "When is a patient ready to leave the ICU?",
+        "hi": "मरीज़ ICU छोड़ने के लिए कब तैयार है?"
+      },
+      "o": [
+        {
+          "en": "Organ support is off and observations are stable",
+          "hi": "अंगों का सहारा बंद है और observations स्थिर हैं"
+        },
+        {
+          "en": "Fever has settled but noradrenaline continues",
+          "hi": "बुख़ार उतरा है पर noradrenaline जारी है"
+        },
+        {
+          "en": "The ventilator is still needed at night",
+          "hi": "रात में अभी भी ventilator चाहिए"
+        },
+        {
+          "en": "The lactate is still rising slowly",
+          "hi": "lactate अभी भी धीरे-धीरे बढ़ रहा है"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Discharge needs the support stopped and the patient stable, not just one better sign.",
+        "hi": "छुट्टी के लिए सहारा बंद और मरीज़ स्थिर होना चाहिए, सिर्फ़ एक लक्षण का सुधार नहीं।"
+      }
+    },
+    {
+      "q": {
+        "en": "A patient with septic shock waits on the ward for an ICU bed. What should happen now?",
+        "hi": "septic shock का मरीज़ वार्ड पर ICU बेड का इंतज़ार कर रहा है। अभी क्या होना चाहिए?"
+      },
+      "o": [
+        {
+          "en": "Wait for the ICU team to start treatment",
+          "hi": "इलाज शुरू करने के लिए ICU टीम का इंतज़ार"
+        },
+        {
+          "en": "Cultures, antibiotics within 1 hour and fluids now",
+          "hi": "अभी cultures, 1 घंटे में antibiotics और fluids"
+        },
+        {
+          "en": "Oral antibiotics and a review the next day",
+          "hi": "मुँह से antibiotics और अगले दिन जाँच"
+        },
+        {
+          "en": "A CT scan before any treatment is given",
+          "hi": "कोई भी इलाज देने से पहले CT scan"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "The first-hour bundle saves lives and must not wait for a bed.",
+        "hi": "पहले घंटे का bundle जान बचाता है और बेड का इंतज़ार नहीं कर सकता।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "icu-ventilation"
+  },
+  "glossary": [
+    "news2",
+    "sepsis",
+    "septic-shock"
+  ],
+  "sources": [
+    "Ministry of Health and Family Welfare, India (DGHS expert committee). Guidelines for ICU admission and discharge criteria (2023).",
+    "Nates JL, Nunnally M, Kleinpell R, et al. ICU admission, discharge, and triage guidelines: a framework to enhance clinical operations. Crit Care Med 2016;44:1553-602.",
+    "StewardMD clinical protocol: Sepsis and septic shock, kb/clinical-protocols/sepsis-septic-shock.json (Surviving Sepsis Campaign 2021 and 2026)."
+  ]
+}
