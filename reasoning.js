@@ -3007,6 +3007,30 @@
     if (e.severityClassification) cp += '<div class="ev-subh">Severity</div><p>' + medFormat(stripCite(e.severityClassification)) + '</p>';
     if (e.prognosis) cp += '<div class="ev-subh">Prognosis</div><p>' + medFormat(stripCite(e.prognosis)) + '</p>';
     if (cp) sections.push({ ic: rIco("trend"), title: "Course & prognosis", html: cp });
+
+    if (e.algorithms && e.algorithms.length) {
+      var algHtml = e.algorithms.map(function (a) {
+        var steps = (a.steps || []).map(function (st, idx) {
+          return '<div class="kbp-flow-node' + (st.critical ? " kbp-flow-crit" : "") + '" style="margin-bottom:8px;padding:8px 10px;border:1px solid #cbd5e1;border-radius:8px;background:#f8fafc">' +
+            '<div style="display:flex;align-items:center;gap:6px;font-weight:700;font-size:12px;margin-bottom:4px"><span style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:#0284c7;color:#fff;font-size:10px">' + (idx + 1) + '</span><span>' + esc(st.step) + '</span>' +
+            (st.branch ? '<span style="margin-left:auto;padding:1px 6px;border-radius:4px;background:#e0f2fe;color:#0369a1;font-size:10px">' + esc(st.branch) + '</span>' : '') + '</div>' +
+            '<div style="font-size:12px;line-height:1.45;color:#334155">' + esc(st.action) + '</div></div>';
+        }).join("");
+        return '<div style="margin-bottom:12px"><strong style="display:block;margin-bottom:6px;color:#0f172a;font-size:13px">' + esc(a.title) + '</strong>' + steps + (a.caption ? '<p style="font-size:11px;color:#64748b;font-style:italic;margin:4px 0 0">' + esc(a.caption) + '</p>' : '') + '</div>';
+      }).join("");
+      sections.push({ ic: rIco("route"), title: "Clinical algorithm & pathway", html: algHtml });
+    }
+
+    if (e.tables && e.tables.length) {
+      var tblHtml = e.tables.map(function (t) {
+        var ths = (t.headers || []).map(function (h) { return '<th style="padding:6px 8px;background:#f1f5f9;border:1px solid #cbd5e1;font-size:11.5px;font-weight:700;color:#1e293b;text-align:left">' + esc(h) + '</th>'; }).join("");
+        var trs = (t.rows || []).map(function (row) {
+          return '<tr>' + (row || []).map(function (cell) { return '<td style="padding:6px 8px;border:1px solid #e2e8f0;font-size:11.5px;line-height:1.4;color:#334155;vertical-align:top">' + esc(cell) + '</td>'; }).join("") + '</tr>';
+        }).join("");
+        return '<div style="margin-bottom:14px;overflow-x:auto"><strong style="display:block;margin-bottom:6px;color:#0f172a;font-size:13px">' + esc(t.title) + '</strong><table style="width:100%;border-collapse:collapse"><thead><tr>' + ths + '</tr></thead><tbody>' + trs + '</tbody></table>' + (t.caption ? '<p style="font-size:11px;color:#64748b;font-style:italic;margin:4px 0 0">' + esc(t.caption) + '</p>' : '') + '</div>';
+      }).join("");
+      sections.push({ ic: rIco("table"), title: "Clinical diagnostic matrix", html: tblHtml });
+    }
     // Expanded clinical detail uses the same citation-free presentation as the summary.
     var rawUl = function (arr) { return (arr && arr.length) ? '<ul class="ev-ul">' + arr.map(function (x) { return '<li>' + medFormat(x) + '</li>'; }).join("") + '</ul>' : ""; };
     var full = "";

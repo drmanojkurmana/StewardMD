@@ -1,92 +1,176 @@
 {
-  "id": "DRESS_SYNDROME",
-  "name": "DRESS syndrome",
-  "system": "Dermatology",
-  "class": "non_infective",
-  "chapter": null,
-  "page": null,
-  "aliases": [
-    "dress syndrome",
-    "drug reaction eosinophilia",
-    "drug reaction with eosinophilia and systemic symptoms",
-    "drug hypersensitivity syndrome",
-    "drug-induced hypersensitivity syndrome",
-    "DIHS",
-    "DRESS"
+ "id": "DRESS_SYNDROME",
+ "name": "DRESS syndrome",
+ "system": "Dermatology",
+ "class": "non_infective",
+ "chapter": null,
+ "page": null,
+ "aliases": [
+  "dress syndrome",
+  "drug reaction eosinophilia",
+  "drug reaction with eosinophilia and systemic symptoms",
+  "drug hypersensitivity syndrome",
+  "drug-induced hypersensitivity syndrome",
+  "DIHS",
+  "DRESS"
+ ],
+ "referenceOnly": true,
+ "review": {
+  "status": "ai_drafted"
+ },
+ "reference": {
+  "clinicalPearls": [
+   "Onset is classically delayed, typically 2-8 weeks after starting the culprit drug, distinguishing it from more immediate hypersensitivity reactions.",
+   "Look for the triad of fever, widespread morbilliform (often confluent and edematous) rash, and facial edema, especially periorbital swelling.",
+   "Systemic involvement is the hallmark: lymphadenopathy plus at least one internal organ (liver most common, also kidney, lung, heart) helps separate DRESS from simple drug rash.",
+   "Peripheral eosinophilia and/or atypical lymphocytosis on blood smear strongly support the diagnosis but may lag behind skin findings.",
+   "Common culprits include aromatic anticonvulsants, allopurinol, sulfonamides, and certain antibiotics — always take a careful medication history covering the prior 2 months.",
+   "Symptoms can worsen for days to weeks even after the offending drug is stopped, and relapses/flares are common during the recovery phase.",
+   "Human herpesvirus-6 reactivation is frequently detected during the illness and may contribute to prolonged or relapsing disease course.",
+   "Cross-reactivity exists among structurally related anticonvulsants, so the entire drug class should generally be avoided going forward."
   ],
-  "referenceOnly": true,
-  "review": {
-    "status": "ai_drafted"
-  },
-  "harrison": {
-    "clinicalPearls": [
-      "Onset is classically delayed, typically 2-8 weeks after starting the culprit drug, distinguishing it from more immediate hypersensitivity reactions.",
-      "Look for the triad of fever, widespread morbilliform (often confluent and edematous) rash, and facial edema, especially periorbital swelling.",
-      "Systemic involvement is the hallmark: lymphadenopathy plus at least one internal organ (liver most common, also kidney, lung, heart) helps separate DRESS from simple drug rash.",
-      "Peripheral eosinophilia and/or atypical lymphocytosis on blood smear strongly support the diagnosis but may lag behind skin findings.",
-      "Common culprits include aromatic anticonvulsants, allopurinol, sulfonamides, and certain antibiotics — always take a careful medication history covering the prior 2 months.",
-      "Symptoms can worsen for days to weeks even after the offending drug is stopped, and relapses/flares are common during the recovery phase.",
-      "Human herpesvirus-6 reactivation is frequently detected during the illness and may contribute to prolonged or relapsing disease course.",
-      "Cross-reactivity exists among structurally related anticonvulsants, so the entire drug class should generally be avoided going forward."
-    ],
-    "pathophysiology": "DRESS is a severe, delayed T-cell-mediated drug hypersensitivity reaction, thought to arise from impaired drug detoxification pathways or specific HLA associations that lead to a robust immune response against drug-modified proteins. The resulting systemic activation of eosinophils and lymphocytes drives multi-organ inflammation. Reactivation of latent herpesviruses, particularly HHV-6, is commonly observed and may amplify and prolong the immune response, contributing to the characteristic waxing-waning course.",
-    "additionalDifferentials": [
-      "Stevens-Johnson syndrome/toxic epidermal necrolysis",
-      "Acute generalized exanthematous pustulosis",
-      "Viral exanthem (e.g., EBV, CMV, HHV-6 primary infection)",
-      "Hypereosinophilic syndrome",
-      "Serum sickness-like reaction",
-      "Autoimmune connective tissue disease with rash and organ involvement"
-    ],
-    "infectionMimics": [
-      "Infectious mononucleosis (EBV)",
-      "Primary CMV infection",
-      "Acute HIV seroconversion",
-      "Measles or other viral exanthems"
-    ],
-    "nonInfectiousMimics": [
-      "Stevens-Johnson syndrome/toxic epidermal necrolysis",
-      "Acute generalized exanthematous pustulosis",
-      "Hypereosinophilic syndrome",
-      "Lymphoma with paraneoplastic skin findings",
-      "Autoimmune/connective tissue disease flare"
-    ],
-    "additionalInvestigations": [
-      "Complete blood count with differential — assesses eosinophilia and atypical lymphocytosis",
-      "Liver function tests — screens for hepatitis, the most common visceral involvement",
-      "Serum creatinine and urinalysis — evaluates renal involvement",
-      "Chest imaging — assesses for pulmonary infiltrates or pneumonitis",
-      "Skin biopsy — supports diagnosis and helps exclude other severe cutaneous adverse reactions",
-      "HHV-6 (and other herpesvirus) serology/PCR — assesses viral reactivation contributing to disease course",
-      "Cardiac enzymes/echocardiography if myocarditis suspected — detects cardiac involvement",
-      "Thyroid function tests at follow-up — late autoimmune thyroiditis can occur after recovery"
-    ],
-    "redFlags": [
-      "Evidence of fulminant hepatitis or rising transaminases suggesting hepatic failure",
-      "Signs of myocarditis (chest pain, arrhythmia, heart failure) or interstitial pneumonitis",
-      "Acute kidney injury with rising creatinine",
-      "Rapidly progressive skin involvement raising concern for overlap with SJS/TEN",
-      "Hemophagocytic lymphohistiocytosis-like features (cytopenias, hyperferritinemia, hepatosplenomegaly)"
-    ],
-    "pitfalls": [
-      "Attributing the rash only to the most recently started drug while missing a culprit introduced weeks earlier due to the characteristic delayed onset.",
-      "Discontinuing suspected culprit and expecting immediate improvement — worsening despite drug withdrawal is common and should not prompt reinstatement.",
-      "Underestimating disease severity because eosinophilia or organ involvement may be absent or delayed at initial presentation.",
-      "Failing to screen for and monitor internal organ involvement once the skin findings are recognized, since mortality is driven by visceral disease, not the rash itself."
-    ],
-    "prognosis": "DRESS carries a mortality risk of roughly 5-10%, primarily related to fulminant hepatic, cardiac, or pulmonary involvement. Even after recovery, patients can develop delayed autoimmune sequelae such as thyroiditis, type 1 diabetes, or other autoimmune conditions over the following months to years, warranting longitudinal follow-up.",
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e — Chapter on Cutaneous Drug Reactions"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Immediately and permanently withdraw the culprit drug and avoid structurally related agents such as cross-reactive aromatic anticonvulsants",
-      "Treat significant visceral involvement with systemic corticosteroids, using topical corticosteroids and emollients for cutaneous disease",
-      "Provide supportive care with fluid and electrolyte correction, temperature control, and skin barrier protection",
-      "Reserve intravenous immunoglobulin or ciclosporin for severe or corticosteroid-refractory multi-organ disease, with intensive care for fulminant hepatic, cardiac, or pulmonary failure",
-      "Monitor serial liver, renal, cardiac, and pulmonary function and test for herpesvirus (HHV-6) reactivation given its role in the relapsing course",
-      "Taper corticosteroids slowly, since flares may occur weeks after the drug is stopped",
-      "Arrange long-term follow-up for delayed autoimmune sequelae such as thyroiditis and type 1 diabetes, and document the drug allergy prominently"
-    ]
+  "pathophysiology": "DRESS is a severe, delayed T-cell-mediated drug hypersensitivity reaction, thought to arise from impaired drug detoxification pathways or specific HLA associations that lead to a robust immune response against drug-modified proteins. The resulting systemic activation of eosinophils and lymphocytes drives multi-organ inflammation. Reactivation of latent herpesviruses, particularly HHV-6, is commonly observed and may amplify and prolong the immune response, contributing to the characteristic waxing-waning course.",
+  "additionalDifferentials": [
+   "Stevens-Johnson syndrome/toxic epidermal necrolysis",
+   "Acute generalized exanthematous pustulosis",
+   "Viral exanthem (e.g., EBV, CMV, HHV-6 primary infection)",
+   "Hypereosinophilic syndrome",
+   "Serum sickness-like reaction",
+   "Autoimmune connective tissue disease with rash and organ involvement"
+  ],
+  "infectionMimics": [
+   "Infectious mononucleosis (EBV)",
+   "Primary CMV infection",
+   "Acute HIV seroconversion",
+   "Measles or other viral exanthems"
+  ],
+  "nonInfectiousMimics": [
+   "Stevens-Johnson syndrome/toxic epidermal necrolysis",
+   "Acute generalized exanthematous pustulosis",
+   "Hypereosinophilic syndrome",
+   "Lymphoma with paraneoplastic skin findings",
+   "Autoimmune/connective tissue disease flare"
+  ],
+  "additionalInvestigations": [
+   "Complete blood count with differential — assesses eosinophilia and atypical lymphocytosis",
+   "Liver function tests — screens for hepatitis, the most common visceral involvement",
+   "Serum creatinine and urinalysis — evaluates renal involvement",
+   "Chest imaging — assesses for pulmonary infiltrates or pneumonitis",
+   "Skin biopsy — supports diagnosis and helps exclude other severe cutaneous adverse reactions",
+   "HHV-6 (and other herpesvirus) serology/PCR — assesses viral reactivation contributing to disease course",
+   "Cardiac enzymes/echocardiography if myocarditis suspected — detects cardiac involvement",
+   "Thyroid function tests at follow-up — late autoimmune thyroiditis can occur after recovery"
+  ],
+  "redFlags": [
+   "Evidence of fulminant hepatitis or rising transaminases suggesting hepatic failure",
+   "Signs of myocarditis (chest pain, arrhythmia, heart failure) or interstitial pneumonitis",
+   "Acute kidney injury with rising creatinine",
+   "Rapidly progressive skin involvement raising concern for overlap with SJS/TEN",
+   "Hemophagocytic lymphohistiocytosis-like features (cytopenias, hyperferritinemia, hepatosplenomegaly)"
+  ],
+  "pitfalls": [
+   "Attributing the rash only to the most recently started drug while missing a culprit introduced weeks earlier due to the characteristic delayed onset.",
+   "Discontinuing suspected culprit and expecting immediate improvement — worsening despite drug withdrawal is common and should not prompt reinstatement.",
+   "Underestimating disease severity because eosinophilia or organ involvement may be absent or delayed at initial presentation.",
+   "Failing to screen for and monitor internal organ involvement once the skin findings are recognized, since mortality is driven by visceral disease, not the rash itself."
+  ],
+  "prognosis": "DRESS carries a mortality risk of roughly 5-10%, primarily related to fulminant hepatic, cardiac, or pulmonary involvement. Even after recovery, patients can develop delayed autoimmune sequelae such as thyroiditis, type 1 diabetes, or other autoimmune conditions over the following months to years, warranting longitudinal follow-up.",
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e — Chapter on Cutaneous Drug Reactions"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Immediately and permanently withdraw the culprit drug and avoid structurally related agents such as cross-reactive aromatic anticonvulsants",
+   "Treat significant visceral involvement with systemic corticosteroids, using topical corticosteroids and emollients for cutaneous disease",
+   "Provide supportive care with fluid and electrolyte correction, temperature control, and skin barrier protection",
+   "Reserve intravenous immunoglobulin or ciclosporin for severe or corticosteroid-refractory multi-organ disease, with intensive care for fulminant hepatic, cardiac, or pulmonary failure",
+   "Monitor serial liver, renal, cardiac, and pulmonary function and test for herpesvirus (HHV-6) reactivation given its role in the relapsing course",
+   "Taper corticosteroids slowly, since flares may occur weeks after the drug is stopped",
+   "Arrange long-term follow-up for delayed autoimmune sequelae such as thyroiditis and type 1 diabetes, and document the drug allergy prominently"
+  ]
+ },
+ "specialty": "Dermatology",
+ "algorithms": [
+  {
+   "id": "dress-management-algo",
+   "title": "RegiSCAR Diagnostic Scoring and Staged Immunosuppression Pathway",
+   "steps": [
+    {
+     "step": "Suspicious Exposure & Latency Check",
+     "action": "Patient presenting with fever, morbilliform eruption, facial edema, and lymphadenopathy 2 to 8 weeks after starting a high-risk medication (allopurinol, carbamazepine, lamotrigine, phenytoin, sulfasalazine, vancomycin).",
+     "critical": true
+    },
+    {
+     "step": "Immediate Drug Discontinuation",
+     "action": "Immediately withdraw all potential culprit drugs. Do not rechallenge.",
+     "critical": true
+    },
+    {
+     "step": "Laboratory & Organ Assessment",
+     "action": "Complete Blood Count (absolute eosinophil count >= 700/microL or atypical lymphocytes), liver enzymes (ALT > 2x ULN in 75%), renal function (creatinine, urinalysis), troponin, and ECG (myocarditis screening)."
+    },
+    {
+     "step": "RegiSCAR Score Calculation",
+     "branch": "Score >= 4 (Probable / Definite DRESS)",
+     "action": "Confirm diagnosis. Screen for viral reactivation (HHV-6, CMV, EBV PCR)."
+    },
+    {
+     "step": "Staged Systemic Therapy",
+     "branch": "Internal Organ Involvement Present",
+     "action": "First-line: Systemic corticosteroids (IV methylprednisolone 1 mg/kg/day or oral prednisolone 0.5 to 1 mg/kg/day). Taper extremely slowly over 2 to 3 months to prevent severe relapse. For refractory cases, add IVIg or Cyclosporine.",
+     "critical": true
+    }
+   ],
+   "caption": "Algorithm aligned with RegiSCAR international consensus for DRESS/DiHS."
   }
+ ],
+ "tables": [
+  {
+   "id": "regiscar-scoring-matrix",
+   "title": "RegiSCAR Validation Scoring System for DRESS",
+   "headers": [
+    "Diagnostic Criteria Feature",
+    "Finding Present (Score)",
+    "Clinical Context & Threshold"
+   ],
+   "rows": [
+    [
+     "Fever",
+     "+1 (Yes) / 0 (No)",
+     "Body temperature >= 38.5 C"
+    ],
+    [
+     "Enlarged Lymph Nodes",
+     "+1 (Yes) / 0 (No)",
+     "Lymphadenopathy >= 1 cm in at least 2 distinct anatomic sites"
+    ],
+    [
+     "Atypical Lymphocytes",
+     "+1 (Yes) / 0 (No)",
+     "Circulating atypical lymphocytes on peripheral blood film"
+    ],
+    [
+     "Eosinophilia",
+     "+1 (0.7 to 1.49 x 10^9/L) / +2 (>= 1.5 x 10^9/L)",
+     "Marked peripheral blood eosinophilia (present in > 80% to 90% of cases)"
+    ],
+    [
+     "Skin Rash Extent & Morphology",
+     "+1 (Extent > 50% body surface area)",
+     "Polymorphous morbilliform rash, facial edema, infiltrated lesions, or purpura"
+    ],
+    [
+     "Internal Organ Involvement",
+     "+1 per organ (maximum +2)",
+     "Liver (ALT >= 2x ULN), Kidney (creatinine elevated), Heart (myocarditis), Lung (pneumonitis)"
+    ],
+    [
+     "Diagnostic Score Interpretation",
+     "Score < 2: Excluded; 2 to 3: Possible; 4 to 5: Probable; > 5: Definite",
+     "Requires comprehensive multisystem laboratory monitoring and careful long-term follow-up"
+    ]
+   ],
+   "caption": "Late viral reactivation (HHV-6) at 2 to 4 weeks often drives clinical flare-ups despite steroid therapy."
+  }
+ ]
 }

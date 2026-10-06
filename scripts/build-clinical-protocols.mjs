@@ -70,7 +70,7 @@ export const SECTION_KINDS = ["recognise", "immediate", "investigations", "treat
 export const REVIEW_STATUS = ["ai_drafted", "reviewed", "approved"];
 // Labels are app-facing text (filter chips, row and reader pills).
 export const BASES = [["international", "International"], ["india", "India"]];
-const TOP_KEYS = ["id", "title", "subject", "population", "basis", "counterpart", "setting", "aliases", "summary", "sections", "drugs", "sources", "review"];
+const TOP_KEYS = ["id", "title", "subject", "population", "basis", "counterpart", "setting", "aliases", "summary", "sections", "drugs", "sources", "review", "tables", "algorithms", "calculators"];
 const BASIS_KEYS = BASES.map((b) => b[0]);
 
 const SUBJECT_KEYS = SUBJECTS.map((s) => s[0]);
@@ -148,6 +148,63 @@ export function validateProtocol(p, fileId) {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(r.compiled || "")) e.push(`${tag}.review.compiled must be YYYY-MM-DD`);
     if (r.reviewer != null && typeof r.reviewer !== "string") e.push(`${tag}.review.reviewer must be a string`);
     if ((r.status === "reviewed" || r.status === "approved") && !isStr(r.reviewer)) e.push(`${tag}.review: a ${r.status} protocol must name its reviewer`);
+  }
+
+  if (p.tables != null) {
+    if (!Array.isArray(p.tables)) e.push(`${tag}: tables must be an array`);
+    else p.tables.forEach((t, i) => {
+      const w = `${tag}.tables[${i}]`;
+      if (!t || typeof t !== "object") { e.push(`${w}: not an object`); return; }
+      Object.keys(t).forEach((k) => { if (["id", "title", "headers", "rows", "caption"].indexOf(k) < 0) e.push(`${w}: unknown key "${k}"`); });
+      if (!isStr(t.id)) e.push(`${w}: id required`);
+      if (!isStr(t.title)) e.push(`${w}: title required`);
+      if (!Array.isArray(t.headers) || !t.headers.length || !t.headers.every(isStr)) e.push(`${w}: headers must be a non-empty string array`);
+      if (!Array.isArray(t.rows) || !t.rows.length) e.push(`${w}: rows must be a non-empty array`);
+      else {
+        const hLen = t.headers ? t.headers.length : 0;
+        t.rows.forEach((row, ri) => {
+          if (!Array.isArray(row) || (hLen && row.length !== hLen) || !row.every(isStr)) {
+            e.push(`${w}.rows[${ri}]: row must be an array of ${hLen} non-empty strings`);
+          }
+        });
+      }
+      if (t.caption != null && !isStr(t.caption)) e.push(`${w}: caption must be a string`);
+    });
+  }
+
+  if (p.algorithms != null) {
+    if (!Array.isArray(p.algorithms)) e.push(`${tag}: algorithms must be an array`);
+    else p.algorithms.forEach((a, i) => {
+      const w = `${tag}.algorithms[${i}]`;
+      if (!a || typeof a !== "object") { e.push(`${w}: not an object`); return; }
+      Object.keys(a).forEach((k) => { if (["id", "title", "steps", "caption"].indexOf(k) < 0) e.push(`${w}: unknown key "${k}"`); });
+      if (!isStr(a.id)) e.push(`${w}: id required`);
+      if (!isStr(a.title)) e.push(`${w}: title required`);
+      if (!Array.isArray(a.steps) || !a.steps.length) e.push(`${w}: steps must be a non-empty array`);
+      else a.steps.forEach((st, si) => {
+        const sw = `${w}.steps[${si}]`;
+        if (!st || typeof st !== "object") { e.push(`${sw}: not an object`); return; }
+        Object.keys(st).forEach((k) => { if (["step", "action", "branch", "critical"].indexOf(k) < 0) e.push(`${sw}: unknown key "${k}"`); });
+        if (!isStr(st.step)) e.push(`${sw}: step required`);
+        if (!isStr(st.action)) e.push(`${sw}: action required`);
+        if (st.branch != null && !isStr(st.branch)) e.push(`${sw}: branch must be a string`);
+        if (st.critical != null && typeof st.critical !== "boolean") e.push(`${sw}: critical must be a boolean`);
+      });
+      if (a.caption != null && !isStr(a.caption)) e.push(`${w}: caption must be a string`);
+    });
+  }
+
+  if (p.calculators != null) {
+    if (!Array.isArray(p.calculators)) e.push(`${tag}: calculators must be an array`);
+    else p.calculators.forEach((c, i) => {
+      const w = `${tag}.calculators[${i}]`;
+      if (!c || typeof c !== "object") { e.push(`${w}: not an object`); return; }
+      Object.keys(c).forEach((k) => { if (["id", "title", "linkId", "description"].indexOf(k) < 0) e.push(`${w}: unknown key "${k}"`); });
+      if (!isStr(c.id)) e.push(`${w}: id required`);
+      if (!isStr(c.title)) e.push(`${w}: title required`);
+      if (!isStr(c.linkId)) e.push(`${w}: linkId required`);
+      if (c.description != null && !isStr(c.description)) e.push(`${w}: description must be a string`);
+    });
   }
 
   // Walk every string in the object for banned characters / placeholders.
