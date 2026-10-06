@@ -2150,9 +2150,9 @@
     // obstetrician approves each case in the Review Desk.
     { act: "tokos", ic: "monitor_heart", tt: "Tokós", sub: "Obstetrics and gynae",
       eligible: function () { try { var q = (location.search.match(/[?&]tokos=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_tokos") !== "0"; } catch (e) { return true; } } },
-    // Narkē (narke.js on the specialty engine, loaded on first open by narke-loader.js): Anaesthesia learning. Off Home
-    // (available in Add Tool) while it is being built; kill switch smd_narke="0" or ?narke=0.
-    { act: "narke", ic: "masks", tt: "Narkē", sub: "Anaesthesia", defOn: false,
+    // Narkē (narke.js on the specialty engine, loaded on first open by narke-loader.js): Anaesthesia learning. ON for all
+    // (owner 2026-10-06); kill switch smd_narke="0" or ?narke=0. Content stays "draft" until an anaesthesiologist approves it.
+    { act: "narke", ic: "masks", tt: "Narkē", sub: "Anaesthesia",
       eligible: function () { try { var q = (location.search.match(/[?&]narke=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_narke") !== "0"; } catch (e) { return true; } } },
     { act: "electrolytes", ic: "science", tt: "Electrolytes", sub: "ICU correction", defOn: false },
     // Everything else the app can open — available in "Add Tool" (off by default; the doctor pins what they want).

@@ -2,8 +2,9 @@
 
 - **What:** Anaesthesia learning module for MBBS and residents, the second host on the [[Specialty Engine]] after [[Tokós]].
 - **Plan:** `docs/superpowers/plans/2026-10-06-narke-anaesthesia-master-plan.md` (46 NMC AS competencies, 2018 Vol III).
-- **Flag:** `smd_narke` (kill switch "0") and `?narke=0`. Home tile `act: "narke"` is `defOn: false` while it is built
-  (in Add Tool); flip to ON when the module is complete. Route `stewardmd://narke`.
+- **Flag:** `smd_narke` (kill switch "0") and `?narke=0`. Home tile `act: "narke"` is ON for all
+  (owner 2026-10-06). Route `stewardmd://narke`. Lidocaine plain default 3 mg/kg max 200 mg confirmed by the owner;
+  clinical sign-off pending (an anaesthesiologist via the Review Desk).
 - **Files:** `narke.js` (host config), `narke-loader.js` (only boot file, token `nrk2`), `narke.css` (palette on `.nrk-root`),
   `narke-explore-ui.js`/`.css` (the six explorers: ODC, MAC, TOF, dermatomes, ventilator, circle circuit; one persistent
   `#nkxSay` live region), `narke-clinic.js`/`.css` (reading clinics `capno` and `monitor`, decks `narke/decks/capno.json`,

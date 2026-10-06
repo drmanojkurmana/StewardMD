@@ -27,6 +27,7 @@ test("kill switch: smd_narke=\"0\" or ?narke=0 in the loader, the host and the H
   const tile = h.slice(i, i + 500);
   assert.ok(/smd_narke"\) !== "0"/.test(tile) && /\[\?&\]narke=/.test(tile));
   assert.ok(/narke: function \(\) \{/.test(h) && /NARKE\.open\(\)/.test(h), "Home opener");
+  assert.ok(!/defOn: false/.test(tile.slice(0, tile.indexOf("eligible"))), "ON for all (owner 2026-10-06)");
 });
 
 test("build-www.sh ships narke/ and narke-models/ and drops the build inputs", () => {
