@@ -27,7 +27,8 @@ test("sympathetic 2 above, motor 2 below; warnings", () => {
   assert.deepEqual(b.landmarksCovered, ["T10", "L1"]);
   assert.equal(b.blocked[0], "T10");
   assert.deepEqual(M.block("T10").warnings, []);
-  assert.deepEqual(M.block("T6").warnings.map((w) => w.id), ["cardiac"]);
+  assert.deepEqual(M.block("T6").warnings, [], "no cardiac warning below T4");
+  assert.deepEqual(M.block("T4").warnings.map((w) => w.id), ["cardiac"]);
   assert.deepEqual(M.block("C6").warnings.map((w) => w.id), ["high", "cardiac"]);
   assert.equal(M.block("C2").sympathetic, "C2", "clamped at the top");
   assert.equal(M.block("S5").motor, "S5", "clamped at the bottom");

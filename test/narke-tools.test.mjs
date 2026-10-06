@@ -51,13 +51,16 @@ test("fasting-deficit: 50/25/25 schedule on top of maintenance", () => {
   assert.match(en(r), /Hour 1: .*240 mL/); assert.match(en(r), /Hours 2 and 3: .*150 mL each/);
 });
 
-test("mabl: SPA worked case gives 237 mL by the Gross variant", () => {
-  assert.match(en(load("mabl").compute({ weight: 6, group: "i", hi: 36, hf: 21 })), /Gross variant.*: 237 mL/);
+test("mabl: SPA worked case inputs at 80 mL/kg (Morgan and Mikhail infant) give 253 mL by the Gross variant", () => {
+  assert.match(en(load("mabl").compute({ weight: 6, group: "i", hi: 36, hf: 21 })), /Gross variant.*: 253 mL/);
 });
 
 test("la-maxdose: mg/kg and caps match the app's LAST protocol", () => {
   const kb = readFileSync(new URL("../kb/clinical-protocols/local-anaesthetic-systemic-toxicity.json", import.meta.url), "utf8");
-  for (const s of ["plain 4.5 mg/kg (max 300 mg)", "with adrenaline 7 mg/kg (max 500 mg)", "levobupivacaine 2 mg/kg (max 150 mg)", "ropivacaine 3 mg/kg (max 200 mg)"]) assert.ok(kb.includes(s), s);
+  for (const s of ["lidocaine plain 3 mg/kg, max 200 mg", "plain 4.5 mg/kg (max 300 mg)", "with adrenaline 7 mg/kg (max 500 mg)", "levobupivacaine 2 mg/kg (max 150 mg)", "ropivacaine 3 mg/kg (max 200 mg)"]) assert.ok(kb.includes(s), s);
+  const L = load("la-maxdose").compute({ drug: "lido", weight: 70, conc: 1 });
+  assert.equal(L.value, 200, "UK default: 70 kg x 3 mg/kg = 210 mg, capped at 200 mg"); assert.equal(L.ml, 20);
+  assert.match(en(L), /US\/ASRA references allow 4\.5 mg\/kg, max 300 mg/);
   const r = load("la-maxdose").compute({ drug: "bupi", weight: 50 });
   assert.equal(r.ok, true); assert.equal(r.ml, null);
 });

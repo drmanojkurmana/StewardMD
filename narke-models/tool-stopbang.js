@@ -28,6 +28,7 @@
       var name = band === "danger" ? ["High risk", "उच्च जोखिम"] : band === "caution" ? ["Intermediate risk", "मध्यम जोखिम"] : ["Low risk", "कम जोखिम"];
       var lines = [{ en: "STOP part " + stop + " of 4; total " + s + " of 8.", hi: "STOP भाग 4 में से " + stop + "; कुल 8 में से " + s + "।" }];
       if (s >= 3 && s <= 4 && plus) lines.push({ en: "Score 3 to 4 is high risk with 2 or more STOP items. It also needs male sex, BMI over 35 or a large neck (Chung 2016).", hi: "स्कोर 3 से 4 हो और 2 या अधिक STOP बिंदु के साथ पुरुष, BMI 35 से अधिक या मोटी गर्दन हो, तो उच्च जोखिम (चुंग 2016)।" });
+      lines.push({ en: "Neck cut-off: Chung 2016 uses 40 cm. The current stopbang.ca version uses 43 cm (male) or 41 cm (female).", hi: "गर्दन की सीमा: चुंग 2016 में 40 cm। stopbang.ca के मौजूदा संस्करण में 43 cm (पुरुष) या 41 cm (महिला)।" });
       lines.push({ en: "This is a screen, not a diagnosis. Confirm OSA with a sleep study.", hi: "यह जाँच है, निदान नहीं। स्लीप स्टडी से OSA की पुष्टि करें।" });
       if (band !== "normal") lines.push({ en: "Plan for a possibly difficult mask airway and opioid sensitivity after surgery.", hi: "मास्क से कठिन वायुमार्ग और सर्जरी के बाद ओपिऑइड संवेदनशीलता की तैयारी रखें।" });
       return { ok: true, value: s, unit: "points", band: band, label: { en: "STOP-Bang " + s + ": " + name[0], hi: "STOP-Bang " + s + ": " + name[1] }, lines: lines,

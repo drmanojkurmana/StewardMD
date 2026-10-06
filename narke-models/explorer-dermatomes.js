@@ -54,7 +54,8 @@
     var sympK = k - SYMP_ABOVE, motorK = k + MOTOR_BELOW;
     var warnings = [];
     if (k <= idx("C8")) warnings.push({ id: "high", text: T("Cervical level: a high or total spinal. Expect arm weakness, trouble breathing and speaking; C3 to C5 block stops the diaphragm.", "Cervical level: high या total spinal। हाथ कमज़ोर, साँस और बोलने में दिक़्क़त; C3 से C5 block diaphragm रोक देता है।") });
-    if (sympK <= idx("T4")) warnings.push({ id: "cardiac", text: T("The sympathetic block likely reaches T1 to T4, the cardiac accelerator fibres: watch for bradycardia and hypotension.", "Sympathetic block शायद T1 से T4 (cardiac accelerator fibres) तक है: bradycardia और hypotension पर नज़र रखें।") });
+    // Cardiac warning from a sensory level of T4 or higher, where the cardiac accelerator fibres (T1 to T4) are reliably blocked.
+    if (k <= idx("T4")) warnings.push({ id: "cardiac", text: T("At T4 or higher the block reaches the cardiac accelerator fibres (T1 to T4): watch for bradycardia and hypotension.", "T4 या उससे ऊपर block cardiac accelerator fibres (T1 से T4) तक पहुँचता है: bradycardia और hypotension पर नज़र रखें।") });
     var covered = [];
     LANDMARKS.forEach(function (lm) { if (idx(lm.level) >= k) covered.push(lm.level); });
     return {

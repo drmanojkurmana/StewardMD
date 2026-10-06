@@ -128,5 +128,5 @@ test("paediatric and neonatal resuscitation numbers match the kb protocols", () 
   const nrp = readFileSync("kb/clinical-protocols/neonatal-resuscitation.json", "utf8");
   const l = json(R + "/lessons/asr4-resuscitation.json"), txt = JSON.stringify(l);
   ["0.01 mg/kg IV/IO", "max 1 mg", "15:2", "2 J/kg", "4 J/kg", "10 J/kg"].forEach((s) => { assert.ok(txt.includes(s), s); assert.ok(pals.includes(s), "kb " + s); });
-  ["0.01 to 0.03 mg/kg", "3:1", "20 to 30 cmH2O", "30 to 60 breaths"].forEach((s) => { assert.ok(txt.includes(s), s); assert.ok(nrp.includes(s), "kb " + s); });
+  ["0.01 to 0.03 mg/kg", "3:1", "20 to 30 cmH2O", "40 to 60"].forEach((s) => { assert.ok(txt.includes(s), s); assert.ok(nrp.includes(s), "kb " + s); });
 });

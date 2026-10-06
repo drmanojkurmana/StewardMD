@@ -46,16 +46,17 @@
       lines.push({ en: "Single bedside tests have limited accuracy. This is a list, not a probability.", hi: "अकेली बेडसाइड जाँच सीमित सटीक होती है। यह सूची है, संभावना नहीं।" });
       lines.push({ en: "Have a rescue airway plan for every patient.", hi: "हर रोगी के लिए वायुमार्ग बचाव योजना तैयार रखें।" });
       var n = found.length;
-      return { ok: true, value: n, unit: "predictors", band: n ? "caution" : "normal",
+      return { ok: true, value: n, unit: "predictors", band: n >= 3 ? "danger" : n ? "caution" : "normal",
         label: { en: n + (n === 1 ? " predictor" : " predictors") + " of difficult laryngoscopy present", hi: "कठिन लैरिंगोस्कोपी के " + n + " संकेतक मौजूद" }, lines: lines,
-        rule: { en: "Predictors: Mallampati III or IV; mouth opening under 3 cm; thyromental distance under 6 cm; chin cannot touch chest or neck cannot extend; upper lip bite class III. The tool lists those present.",
-          hi: "संकेतक: मल्लमपाटी III या IV; मुँह खुलना 3 cm से कम; थायरोमेंटल दूरी 6 cm से कम; ठुड्डी छाती तक नहीं या गर्दन पीछे नहीं जाती; अपर लिप बाइट वर्ग III। टूल मौजूद संकेतकों की सूची देता है।" } };
+        rule: { en: "Predictors: Mallampati III or IV; mouth opening under 3 cm; thyromental distance under 6 cm; chin cannot touch chest or neck cannot extend; upper lip bite class III. The tool lists those present; 3 or more is flagged red.",
+          hi: "संकेतक: मल्लमपाटी III या IV; मुँह खुलना 3 cm से कम; थायरोमेंटल दूरी 6 cm से कम; ठुड्डी छाती तक नहीं या गर्दन पीछे नहीं जाती; अपर लिप बाइट वर्ग III। टूल मौजूद संकेतकों की सूची देता है; 3 या अधिक पर लाल चेतावनी।" } };
     },
     examples: [
       { values: { mp: "1", mouth: 4.5, tmd: 7, neck: "normal", ulbt: "1" }, expect: { value: 0, band: "normal" } },
       { values: { mp: "3", mouth: 2.5, tmd: 7, neck: "normal", ulbt: "2" }, expect: { value: 2, band: "caution" } },
-      { values: { mp: "4", mouth: 4, tmd: 5.5, neck: "limited", ulbt: "3" }, expect: { value: 4 } },
-      { values: { mp: "4", mouth: 2, tmd: 5, neck: "limited", ulbt: "3" }, expect: { value: 5 } },
+      { values: { mp: "4", mouth: 4, tmd: 5.5, neck: "limited", ulbt: "3" }, expect: { value: 4, band: "danger" } },
+      { values: { mp: "4", mouth: 2, tmd: 5, neck: "limited", ulbt: "3" }, expect: { value: 5, band: "danger" } },
+      { values: { mp: "3", mouth: 2.5, tmd: 5, neck: "normal", ulbt: "1" }, expect: { value: 3, band: "danger" } },
       { values: { mp: "2", neck: "normal", ulbt: "1" }, expect: { value: 0 } }
     ]
   };

@@ -45,7 +45,7 @@ const PINS = {
   // Guideline-led drills (DAS, AIDAA, textbooks): only their kb-backed doses are pinned.
   highspinal: [["adult-cardiac-arrest", ["1 mg IV", "aiming for 5 minutes", "left uterine displacement"]]],
   laryngospasm: [["paediatric-cardiac-arrest", ["below 60/min"]]],
-  bronchospasm: [["acute-asthma-adult", ["2 g over 20 minutes"]], ["anaphylaxis", ["50 micrograms", "200 mg IV"]]]
+  bronchospasm: [["acute-asthma-adult", ["2 g over 20 minutes", "100 mg IV every 6 hours"]], ["anaphylaxis", ["50 micrograms"]]]
 };
 
 test("all twelve drills exist and nothing else is in narke/drill", () => assert.deepEqual(drillIds("narke"), IDS));

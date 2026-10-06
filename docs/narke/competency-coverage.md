@@ -43,7 +43,7 @@ A competency counts as taught when a lesson lists it in `competencies`, a shippe
 | AS5.4 | as5-la-pharmacology | tool:la-maxdose, drill:last | yes |
 | AS5.5 | as5-caudal |  |  |
 | AS5.6 | as5-peripheral-blocks, asr2-brachial-plexus-above-clavicle, asr2-femoral-fascia-iliaca |  |  |
-| AS6.1 | as6-recovery-monitoring, as6-airway-breathing, as6-circulation-discharge | tool:apfel |  |
+| AS6.1 | as6-recovery-monitoring, as6-airway-breathing, as6-circulation-discharge | clinic:monitor, tool:apfel |  |
 | AS6.2 | as6-crash-cart |  |  |
 | AS6.3 | as6-airway-breathing, as6-ponv-pain-temperature, as6-circulation-discharge | tool:apfel, drill:laryngospasm |  |
 | AS7.1 | as7-icu-functions |  |  |

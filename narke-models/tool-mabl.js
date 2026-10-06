@@ -7,21 +7,21 @@
   function bad(en, hi) { return { ok: false, error: { en: en, hi: hi } }; }
   function num(v) { if (typeof v === "string" && v.replace(/\s/g, "") !== "") v = +v; return typeof v === "number" && isFinite(v) ? v : null; }
   function o(v, en, hi) { return { value: v, label: { en: en, hi: hi } }; }
-  // mL/kg. Adults: Morgan and Mikhail 7e average blood volumes. Children: SPA table (Litman 3e), midpoint of each range.
-  var EBV = { m: 75, f: 65, c: 70, i: 75, n: 85, p: 95 };
+  // mL/kg. Adults and infants: Morgan and Mikhail 7e average blood volumes. Other children: SPA table (Litman 3e), midpoint of each range.
+  var EBV = { m: 75, f: 65, c: 70, i: 80, n: 85, p: 95 };
   return {
     id: "mabl", kind: "tool", group: "anaesthesia", level: "mbbs", review: "ai_drafted",
     title: { en: "Maximum allowable blood loss", hi: "अधिकतम स्वीकार्य रक्त हानि" },
     sources: [
       { label: "Society for Pediatric Anesthesia, Question of the Week 176: Allowable Blood Loss (EBV table from Litman's Basics of Pediatric Anesthesia 3e; worked case 6 kg, Hct 36 to 21%)", url: "https://pedsanesthesia.org/wp-content/uploads/2024/01/Week-176-Allowable-Blood-Loss-REV.pdf" },
       { label: "Gross JB. Estimating allowable blood loss: corrected for dilution. Anesthesiology 1983;58:277-80", url: "https://pubmed.ncbi.nlm.nih.gov/6829965/" },
-      { label: "Butterworth JF, Mackey DC, Wasnick JD. Morgan and Mikhail's Clinical Anesthesiology 7e, Fluid Management and Blood Component Therapy (average blood volume: adult men 75, women 65 mL/kg)", url: "https://accessanesthesiology.mhmedical.com/book.aspx?bookid=3194" }
+      { label: "Butterworth JF, Mackey DC, Wasnick JD. Morgan and Mikhail's Clinical Anesthesiology 7e, Fluid Management and Blood Component Therapy (average blood volume: adult men 75, women 65, infants 80 mL/kg)", url: "https://accessanesthesiology.mhmedical.com/book.aspx?bookid=3194" }
     ],
     inputs: [
       { id: "weight", label: { en: "Body weight", hi: "वज़न" }, type: "number", unit: "kg", min: 0.4, max: 200, step: 0.1, required: true },
       { id: "group", label: { en: "Age group (blood volume)", hi: "आयु वर्ग (रक्त आयतन)" }, type: "select", required: true,
         options: [o("m", "Adult man, 75 mL/kg", "वयस्क पुरुष, 75 mL/kg"), o("f", "Adult woman, 65 mL/kg", "वयस्क महिला, 65 mL/kg"), o("c", "Child over 1 year, 70 mL/kg", "1 वर्ष से बड़ा बच्चा, 70 mL/kg"),
-                  o("i", "Infant 3 months to 1 year, 75 mL/kg", "शिशु 3 महीने से 1 वर्ष, 75 mL/kg"), o("n", "Term neonate, 85 mL/kg", "पूर्ण-अवधि नवजात, 85 mL/kg"), o("p", "Preterm neonate, 95 mL/kg", "समय से पहले जन्मा नवजात, 95 mL/kg")] },
+                  o("i", "Infant 3 months to 1 year, 80 mL/kg", "शिशु 3 महीने से 1 वर्ष, 80 mL/kg"), o("n", "Term neonate, 85 mL/kg", "पूर्ण-अवधि नवजात, 85 mL/kg"), o("p", "Preterm neonate, 95 mL/kg", "समय से पहले जन्मा नवजात, 95 mL/kg")] },
       { id: "hi", label: { en: "Starting haematocrit", hi: "शुरुआती हीमैटोक्रिट" }, type: "number", unit: "%", min: 15, max: 70, step: 1, required: true },
       { id: "hf", label: { en: "Lowest acceptable haematocrit", hi: "न्यूनतम स्वीकार्य हीमैटोक्रिट" }, type: "number", unit: "%", min: 10, max: 60, step: 1, required: true }
     ],
@@ -45,7 +45,7 @@
     examples: [
       { values: { weight: 70, group: "m", hi: 42, hf: 30 }, expect: { value: 1500 } },
       { values: { weight: 60, group: "f", hi: 39, hf: 27 }, expect: { value: 1200 } },
-      { values: { weight: 6, group: "i", hi: 36, hf: 21 }, expect: { value: 188 } },
+      { values: { weight: 6, group: "i", hi: 36, hf: 21 }, expect: { value: 200 } },
       { values: { weight: 1.5, group: "p", hi: 45, hf: 35 }, expect: { value: 32 } }
     ]
   };

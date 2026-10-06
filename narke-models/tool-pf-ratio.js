@@ -33,10 +33,11 @@
       if (r <= 300 && (peep === null || peep < 5)) lines.push({ en: "Berlin grading needs PEEP or CPAP of at least 5 cmH2O. Enter it to grade.", hi: "बर्लिन ग्रेडिंग के लिए कम से कम 5 cmH2O PEEP या CPAP चाहिए। ग्रेड के लिए इसे भरें।" });
       lines.push({ en: "Mild may be on CPAP; moderate and severe need PEEP of 5 or more.", hi: "हल्का CPAP पर हो सकता है; मध्यम और गंभीर के लिए 5 या अधिक PEEP चाहिए।" });
       lines.push({ en: "Berlin also needs onset within 1 week and bilateral opacities on imaging.", hi: "बर्लिन में 1 सप्ताह के भीतर शुरुआत और इमेजिंग पर दोनों तरफ़ धुंधलापन भी चाहिए।" });
+      lines.push({ en: "The 2024 global definition also accepts SpO2/FiO2 and patients on HFNO at 30 L/min or more.", hi: "2024 की वैश्विक परिभाषा SpO2/FiO2 और 30 L/min या अधिक HFNO वाले मरीज़ भी स्वीकार करती है।" });
       lines.push({ en: "Respiratory failure must not be fully explained by heart failure or fluid overload.", hi: "श्वसन विफलता पूरी तरह हार्ट फेल्योर या अधिक तरल से न समझाई जा सके।" });
       var out = { ok: true, value: r, unit: "mmHg", label: { en: "P/F " + r + " mmHg: " + grade[0], hi: "P/F " + r + " mmHg: " + grade[1] }, lines: lines,
-        rule: { en: "P/F = PaO2 (mmHg) / FiO2. On PEEP or CPAP of 5 or more: 201 to 300 mild, 101 to 200 moderate, 100 or less severe. 1 kPa = 7.5 mmHg.",
-          hi: "P/F = PaO2 (mmHg) / FiO2। 5 या अधिक PEEP या CPAP पर: 201 से 300 हल्का, 101 से 200 मध्यम, 100 या कम गंभीर। 1 kPa = 7.5 mmHg।" } };
+        rule: { en: "Berlin definition (2012): P/F = PaO2 (mmHg) / FiO2. On PEEP or CPAP of 5 or more: 201 to 300 mild, 101 to 200 moderate, 100 or less severe. 1 kPa = 7.5 mmHg.",
+          hi: "बर्लिन परिभाषा (2012): P/F = PaO2 (mmHg) / FiO2। 5 या अधिक PEEP या CPAP पर: 201 से 300 हल्का, 101 से 200 मध्यम, 100 या कम गंभीर। 1 kPa = 7.5 mmHg।" } };
       if (band) out.band = band;
       return out;
     },
