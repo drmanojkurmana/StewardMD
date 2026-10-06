@@ -82,8 +82,9 @@ body.dark .pn-root .pk-occ img { filter: brightness(.94); }
 .pn-root .pk-end:focus { outline: none; }
 .pn-root .pk-end-n { font-size: 17px; color: var(--pn-mut); }
 .pn-root .pk-end-n b { display: block; font-size: 34px; line-height: 1.1; font-weight: 750; letter-spacing: -.02em; color: var(--pn-text); font-variant-numeric: tabular-nums; }
-.pn-root .pk-tally { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 0; }
-.pn-root .pk-tally div { padding: 10px 8px; border-radius: 12px; background: var(--pn-s1); text-align: center; }
+.pn-root .pk-tally { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; padding: 10px 0; border-top: 1px solid var(--pn-line); border-bottom: 1px solid var(--pn-line); }
+.pn-root .pk-tally div { text-align: center; }
+.pn-root .pk-tally div + div { border-left: 1px solid var(--pn-line); }
 .pn-root .pk-tally dt { font-size: 12px; color: var(--pn-mut); }
 .pn-root .pk-tally dd { margin: 0; font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums; }
 .pn-root .pk-tally .pk-again dd { color: var(--pn-bad); }
