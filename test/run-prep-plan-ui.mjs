@@ -95,7 +95,7 @@ try {
   await click("#smdPrep [data-act=p-ob-next]");
   ok(await until(`return /remind you/.test(document.querySelector("#smdPrep .pl-q").textContent) && document.getElementById("plRem").type==="time";`, 3000), "step 4: a native time input");
   await ev(`var d=document.getElementById("plRem"); d.value="07:30"; d.dispatchEvent(new Event("change",{bubbles:true})); return 1;`);
-  ok(/Reminders arrive in the StewardMD app|Remind me daily/.test(await text("#smdPrep .pl-ob")), "the reminder step offers the reminder (or says where it works)");
+  ok(/Reminders arrive in the StewardMD app|Study reminders/.test(await text("#smdPrep .pl-ob")), "the reminder step offers the reminder (or says where it works)");
   await shot("ob-reminder");
   ok(await text("#smdPrep [data-act=p-ob-next]") === "Start preparing", "the last step starts");
   await click("#smdPrep [data-act=p-ob-next]");

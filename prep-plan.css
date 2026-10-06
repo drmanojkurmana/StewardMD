@@ -88,3 +88,10 @@
 @media (prefers-reduced-motion: reduce) {
   .pn-root .pl-sw, .pn-root .pl-track, .pn-root .pl-track i { transition: none; }
 }
+
+/* ---- settings: nudge mode and quiet hours (prep-native.js, prep-nudges.js) ---- */
+.pn-root .pl-when { line-height: 1.45; text-wrap: pretty; }
+.pn-root .pl-quiet { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0; padding: 0; border: 0; min-width: 0; }
+.pn-root .pl-quiet legend { grid-column: 1 / -1; padding: 0; margin-bottom: 6px; font-size: 15px; font-weight: 700; color: var(--pn-text); }
+.pn-root .pl-quiet label { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.pn-root .pl-quiet .pn-in { width: 100%; min-height: 48px; font-variant-numeric: tabular-nums; }

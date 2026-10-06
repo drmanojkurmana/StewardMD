@@ -379,5 +379,5 @@
     });
   }
 
-  G.PrepSocial = { open: open, openAccuracy: openAccuracy, accuracyHtml: accuracyHtml, _pure: PURE, _s: S };
+  G.PrepSocial = { open: open, openAccuracy: openAccuracy, api: api, accuracyHtml: accuracyHtml, _pure: PURE, _s: S };
 })(typeof window !== "undefined" ? window : this);

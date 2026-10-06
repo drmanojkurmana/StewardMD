@@ -163,7 +163,7 @@
 
   var PURE = { EXAM_CHOICES: EXAM_CHOICES, MINUTES: MINUTES, BLUEPRINT: BLUEPRINT, choiceOf: choiceOf, emptyCfg: emptyCfg, needsOnboard: needsOnboard,
     dayOfDate: dayOfDate, daysLeft: daysLeft, geo: geo, readiness: readiness, subjectAction: subjectAction, pickLesson: pickLesson, planDay: planDay,
-    newToday: newToday, dueNow: dueNow, itemProgress: itemProgress, noteAnswer: noteAnswer };
+    newToday: newToday, dueNow: dueNow, itemProgress: itemProgress, noteAnswer: noteAnswer, isQ: isQ };
   if (NODE) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
@@ -277,14 +277,17 @@
       if (G.PREP_NATIVE) G.PREP_NATIVE.changed();
     });
   }
-  /* For prep-native.js: { score, exam, daysLeft, items: [{ label, done }], planDay "YYYY-MM-DD" | null }. items = today's
-     plan when it is made for today, else []. */
+  /* For prep-native.js and prep-nudges.js: { score, exam, examId, daysLeft, items: [{ label, done, k, x, of, min }],
+     planDay "YYYY-MM-DD" | null, weak: { id, name, score } | null }. items = today's plan when it is made for today,
+     else []. weak = the weakest blueprint subject the student has answered 5+ questions in. */
   function snapshot(h) {
     H = h;
-    var s = store(), td = H.today(), pt = planValid(s) ? s.pt : null, d = new Date(td * 864e5);
-    return { score: computeReadiness().score, exam: examLabel(), daysLeft: examDays(),
-      items: pt ? pt.items.map(function (it) { return { label: itemTitle(it), done: itemProgress(it, s, td, dayOf).done }; }) : [],
-      planDay: pt ? d.toISOString().slice(0, 10) : null };
+    var s = store(), td = H.today(), pt = planValid(s) ? s.pt : null, d = new Date(td * 864e5), rd = computeReadiness();
+    var w = rd.weakest.filter(function (r) { return r.att > 0 && r.n >= 5; })[0], sb = w && H.subjectById(w.id);
+    return { score: rd.score, exam: examLabel(), examId: H.exam().id, daysLeft: examDays(),
+      items: pt ? pt.items.map(function (it) { var p = itemProgress(it, s, td, dayOf); return { label: itemTitle(it), done: p.done, k: it.k, x: p.x, of: p.of, min: it.min }; }) : [],
+      planDay: pt ? d.toISOString().slice(0, 10) : null,
+      weak: sb ? { id: w.id, name: String(sb.name && typeof sb.name === "object" ? sb.name.en || "" : sb.name || ""), score: w.score } : null };
   }
 
   /* ---------- starting an item ---------- */
@@ -398,7 +401,7 @@
     }).join("") + "</div>";
     out.rem = '<label class="pn-sl"><span class="pn-mut pn-small">Reminder time</span><input class="pn-in" type="time" id="plRem" name="reminderTime" value="' + esc(c.rem || "") + '"></label>' +
       '<div class="pn-wrap">' + chip("p-f-norem", "1", !c.rem, "No reminder") + "</div>" +
-      (G.PREP_NATIVE ? G.PREP_NATIVE.remHtml(c) : '<p class="pn-mut pn-small">Your reminder time is kept on this phone.</p>');
+      (G.PREP_NATIVE ? G.PREP_NATIVE.remHtml(c, !step) : '<p class="pn-mut pn-small">Your reminder time is kept on this phone.</p>');
     return step ? out[step] : out;
   }
   function settingsSheet() {
@@ -414,6 +417,7 @@
     if (first) openSheet("set", html, "pnSetT");
     else { var sh = root().querySelector("#pnPlanSheet .pn-sheet"), body = sh && sh.querySelector(".pl-setbody"), y = body ? body.scrollTop : 0; if (sh) sh.innerHTML = html; body = sh && sh.querySelector(".pl-setbody"); if (body) body.scrollTop = y; }
     wireInputs(SET, function () { drawSettings(false); });
+    if (G.PREP_NATIVE && G.PREP_NATIVE.wire) G.PREP_NATIVE.wire(root());
   }
   // Native date and time inputs report on change; the chips beside them clear the value.
   function wireInputs(c, redraw) {

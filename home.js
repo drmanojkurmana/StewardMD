@@ -1110,10 +1110,13 @@
       if (window.TOKOS && TOKOS.open) TOKOS.open(); else toast("Tokós loading…");
     },
     // PrepNucleus (prep.js, loaded on first open by prep-loader.js): same quiet no-op when its flag is off.
-    prep: function () {
+    // opts: PREP.open options from a nudge tap (plan, due reviews, a subject, friends); an open PrepNucleus reopens there.
+    prep: function (opts) {
       var t = HOME_TOOLS.filter(function (x) { return x.act === "prep"; })[0];
       if (!t || !homeToolEligible(t)) return;
-      if (window.PREP && PREP.open) PREP.open(); else toast("PrepNucleus loading…");
+      opts = opts && typeof opts === "object" ? opts : undefined;
+      if (opts && window.PREP && PREP.isOpen && PREP.isOpen() && PREP.close) PREP.close();
+      if (window.PREP && PREP.open) PREP.open(opts); else toast("PrepNucleus loading…");
     },
     // Narkē (Anaesthesia), the same kill-switch rule as Tokós.
     narke: function () {
@@ -1342,7 +1345,7 @@
   // Deep-link router for widget taps + Control Center controls (stewardmd://<route>). native-bridge.js
   // forwards the URL here on appUrlOpen / cold-launch. Maps each route to the matching ACT opener.
   try {
-    window.SMD_openRoute = function (route) {
+    window.SMD_openRoute = function (route, opts) {
       var r = String(route || "").toLowerCase().replace(/^\/+/, "").replace(/[/?#].*$/, "");
       var map = { criticallabs: "icu", patients: "icu", tasks: "icu", ward: "ward",
                   askai: "askai", drugs: "drugs", drugmenu: "drugmenu", calculators: "calculators",
@@ -1366,7 +1369,7 @@
       }
       var key = map[r] || (ACT[r] ? r : null);
       if (key === "home") { try { closeAllModules && closeAllModules(); } catch (e) {} return; }
-      if (key && ACT[key]) { try { ACT[key](); } catch (e) {} }
+      if (key && ACT[key]) { try { if (key === "prep") ACT.prep(opts); else ACT[key](); } catch (e) {} }
     };
   } catch (e) {}
   // --- Resume where you left off. iOS suspends a backgrounded app and, under memory pressure,

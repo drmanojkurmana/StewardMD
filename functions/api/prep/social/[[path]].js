@@ -17,12 +17,17 @@
  *   GET    groups                      -> { groups:[{code,name,dailyTarget,owner,mine,members:[{name,todayDone}]}] }
  *   GET    groups/board?code=          -> { rows:[{name,score}], week }
  *   POST   progress {done}             -> { ok:true }   (questions done today; feeds todayDone and the group sprint)
+ *   POST   nudges {on, token, quiet, tz} -> { ok:true } | { error }   (social pushes for this phone, functions/_prep-nudge-push.js)
+ *   POST   digest  (no user: X-Prep-Cron = PREP_CRON_TOKEN, the prep-arena Worker's cron) -> { players, sent }
+ *
+ * A challenge pushes to the friend it names (their limits apply); see functions/_prep-nudge-push.js.
  *
  * Board score: the sum of the player's Arena event scores (submitted daily and weekly entries) over the last 30 days;
  * ties broken by battle rating. Group sprint score: questions done this IST week (Monday start), from progress.
  */
 import { verifiedClaimsFor } from "../../../_fbauth.js";
 import { EXAMS, uidHash } from "../../../_prep-arena.js";
+import { register as nudgeRegister, pushTo, digest, cronOk, safely, first } from "../../../_prep-nudge-push.js";
 import { istDay, weekStart, randomCode, ROOM_RE, GROUP_RE, COLLEGES, collegeKey, cleanText, uidhForSmd, ensureMySmd, leaveGroupStmts, normalizeSmdId } from "../../../_prep-social.js";
 
 const json = (o, s = 200) => new Response(JSON.stringify(o), { status: s, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } });
@@ -35,7 +40,14 @@ function ranked(rows, key) {
   return rows.map((r, i) => { const k = key(r); if (k !== prev) { rank = i + 1; prev = k; } return { rank, r }; });
 }
 
-export async function handle(request, env, path, now = Date.now()) {
+/* bg(promise): the platform's waitUntil, so a push never delays the answer; without it (tests) the push is awaited. */
+export async function handle(request, env, path, now = Date.now(), bg = null) {
+  const later = async (p) => { const q = safely(p); if (bg) bg(q); else await q; };
+  if (path === "digest") {
+    if (request.method !== "POST" || !cronOk(env, request.headers.get("X-Prep-Cron"))) return err("not-found", 404);
+    if (!(env && env.PREP_ARENA_DB)) return err("not-configured", 503);
+    return json(await digest(env, env.PREP_ARENA_DB, now));
+  }
   const claims = await verifiedClaimsFor(request, env);
   if (!claims || !claims.sub) return err("sign-in-required", 401);
   const db = env && env.PREP_ARENA_DB;
@@ -118,6 +130,8 @@ export async function handle(request, env, path, now = Date.now()) {
     await db.prepare("DELETE FROM social_challenges WHERE expires_at <= ?").bind(now - DAY).run();   // housekeeping
     const room = randomCode(16), expiresAt = now + CHALLENGE_MS;
     await db.prepare("INSERT INTO social_challenges (room, from_uidh, to_uidh, exam, created_at, expires_at, status) VALUES (?, ?, ?, ?, ?, ?, 'pending')").bind(room, uidh, o, exam, now, expiresAt).run();
+    const meRow = await db.prepare("SELECT name FROM arena_players WHERE uidh = ?").bind(uidh).first();
+    await later(pushTo(env, db, o, "challenge", { friend: first(meRow && meRow.name) }, now));
     return json({ room, expiresAt, exam });
   }
 
@@ -185,6 +199,11 @@ export async function handle(request, env, path, now = Date.now()) {
     return json({ ok: true });
   }
 
+  if (route === "POST nudges") {
+    const r = await nudgeRegister(env, db, claims.sub, uidh, b, now);
+    return r.ok ? json({ ok: true }) : err(r.error, r.status);
+  }
+
   const myGroupCount = async () => ((await db.prepare("SELECT COUNT(*) AS c FROM social_group_members WHERE uidh = ?").bind(uidh).first()) || {}).c || 0;
   if (route === "POST groups/create") {
     const name = cleanText(b.name, 40), target = b.dailyTarget;
@@ -244,8 +263,8 @@ export async function handle(request, env, path, now = Date.now()) {
   return err("not-found", 404);
 }
 
-export async function onRequest({ request, env, params }) {
+export async function onRequest({ request, env, params, waitUntil }) {
   const path = [].concat((params && params.path) || []).map(String).join("/");
-  try { return await handle(request, env, path); }
+  try { return await handle(request, env, path, Date.now(), typeof waitUntil === "function" ? waitUntil : null); }
   catch (e) { return err("server-error", 500); }
 }

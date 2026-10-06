@@ -392,6 +392,8 @@
       else if (opts && opts.mode === "mistakes") { st.stack = [renderHome]; mf.tag = "all"; push(renderMistakes); }
       else if (opts && opts.mode === "plan") { st.stack = [renderHome]; renderHome(); startPlan(); }
       else if (opts && opts.query) openQuery(opts);
+      // A friends or boards nudge (server push, prep-nudges.js): home, then that tab.
+      else if (opts && opts.social && G.PrepSocial) { push(renderHome); G.PrepSocial.open(String(opts.social)); }
       // First plain open: onboarding (prep-plan.js), skippable. SMD_PREP_ONBOARD = false (UI tests) skips it.
       else if (G.PREP_PLAN && G.SMD_PREP_ONBOARD !== false && G.PREP_PLAN.needsOnboard(load())) push(function () { G.PREP_PLAN.onboard(HOST); });
       else push(renderHome);
@@ -634,6 +636,7 @@
     s.last = { s: it._s, m: it._m || it.t };
     // Answer log for readiness accuracy (prep-plan.js): [module, 1|0], newest last.
     if (G.PREP_PLAN) G.PREP_PLAN.noteAnswer(s, it._m || it.t, ok);
+    if (G.PREP_NUDGES) G.PREP_NUDGES.studied();
     if (G.PREP_NATIVE) G.PREP_NATIVE.changed();
     // Mistakes (bank questions only; a deck's questions live in Layer C storage): kept until answered right.
     // PYQ items live in their paper, not a module file, so My mistakes (which reloads modules) leaves them out.

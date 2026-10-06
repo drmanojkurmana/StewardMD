@@ -11512,3 +11512,19 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   (`functions/api/ai/[[path]].js`). This reverses the earlier "the breaker exempts nobody, owners included"
   rule. Owner calls are still metered, so they show in the dashboards and still count toward the breaker
   for everyone else. The admin "pause" kill switch still applies to owners. Tests: `test/maik-owner-exempt.test.mjs`.
+
+## 2026-10-06 - PrepNucleus nudges: personal and playful, but every line true
+- **Decision** ([[plans/PrepNucleus-Nudges]], [[modules/PrepNucleus]]): the owner asked for automatic, personal follow-up
+  notifications after seeing a competitor's ("Your friends are studying", "Your parents think you're studying rn"). We
+  keep the casual Indian-student voice and light Hinglish, and drop anything untrue or manipulative (CCPA Dark Patterns
+  Guidelines 2023): no invented social proof, no parent guilt, no fear, no fake urgency or countdown pressure.
+- Smart nudges are computed on the phone from the student's own data and rescheduled on every app use, so a scheduled
+  count stays true; numbers that decay by themselves (readiness) only appear on the day they were computed.
+- Social lines (a friend challenged you, passed you on the college board, N friends studied today) only from the server,
+  from real rows at send time, only to Arena players who chose Smart nudges and already allowed push; the D1 row holds a
+  push token hash, never the uid.
+- Limits: 2 a day, 4 h apart, quiet hours (default 22:30 to 07:30), halve after 3 ignored, taper while the app stays
+  closed and stop after 21 days. Smart is the default for everyone who had the daily reminder on; "Daily reminder only"
+  keeps the old single reminder.
+- No emoji in the copy: the 2026-09-24 no-emoji rule stands and `emoji-icons.js` strips them from local notifications.
+  Allowing emoji in nudges needs an owner call and an exemption there.

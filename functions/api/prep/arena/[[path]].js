@@ -21,6 +21,7 @@
 import { verifiedClaimsFor } from "../../../_fbauth.js";
 import { EXAMS, SCHEMES, uidHash, displayName, markEntry, eventFromId, scheduleFor, submitDeadline, bankFrom, drawItems } from "../../../_prep-arena.js";
 import { socialDeleteStmts } from "../../../_prep-social.js";
+import { passed, safely } from "../../../_prep-nudge-push.js";
 
 const json = (o, s = 200) => new Response(JSON.stringify(o), { status: s, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } });
 const DAY = 86400e3;
@@ -54,7 +55,8 @@ function ranked(rows, key) {
   return rows.map((r, i) => { const k = key(r); if (k !== prev) { rank = i + 1; prev = k; } return { rank, r }; });
 }
 
-export async function handle(request, env, path, now = Date.now()) {
+// bg(promise): waitUntil for the "a friend passed you" pushes after a submit; without it (tests) they are awaited.
+export async function handle(request, env, path, now = Date.now(), bg = null) {
   const claims = await verifiedClaimsFor(request, env);
   if (!claims || !claims.sub) return json({ error: "sign-in-required" }, 401);
   const db = env && env.PREP_ARENA_DB;
@@ -147,6 +149,8 @@ export async function handle(request, env, path, now = Date.now()) {
     if (!(r && r.meta && r.meta.changes === 1)) return json({ error: "already-submitted" }, 409);
     const better = await db.prepare("SELECT COUNT(*) AS c FROM arena_entries WHERE event_id = ? AND submitted_at IS NOT NULL AND (score > ? OR (score = ? AND ms < ?))").bind(ev.id, m.score, m.score, ms).first();
     const of = await db.prepare("SELECT COUNT(*) AS c FROM arena_entries WHERE event_id = ? AND submitted_at IS NOT NULL").bind(ev.id).first();
+    const pq = safely(passed(env, db, uidh, m.score, now));
+    if (bg) bg(pq); else await pq;
     const key = {}; items.forEach((it) => { key[it.id] = it.a; });
     return json({ score: m.score, right: m.right, wrong: m.wrong, blank: m.blank, ms, rank: (better ? better.c : 0) + 1, of: of ? of.c : 1, key });
   }
@@ -189,8 +193,8 @@ export async function handle(request, env, path, now = Date.now()) {
   return json({ error: "not-found" }, 404);
 }
 
-export async function onRequest({ request, env, params }) {
+export async function onRequest({ request, env, params, waitUntil }) {
   const path = [].concat((params && params.path) || []).map(String).join("/");
-  try { return await handle(request, env, path); }
+  try { return await handle(request, env, path, Date.now(), typeof waitUntil === "function" ? waitUntil : null); }
   catch (e) { return json({ error: "server-error" }, 500); }
 }
