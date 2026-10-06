@@ -416,7 +416,7 @@ export function mergePyq(items) {
     if (i < 0) { kept.push(it); gs.push(g); continue; }
     const k = kept[i];
     merged++;
-    k.pyq.push(...it.pyq);
+    for (const x of it.pyq) if (!k.pyq.some((y) => y.src === x.src && y.n === x.n)) k.pyq.push(x);
     if (keyText(k) !== keyText(it) && !k.flags.includes("dup-key")) k.flags.push("dup-key");
     if (!k.img && it.img) { k.img = it.img; k.flags = k.flags.filter((f) => f !== "img-missing"); }
     if (!k.subject && it.subject) k.subject = it.subject;
@@ -504,9 +504,23 @@ export async function build(args, deps = {}) {
   const imgDir = path.join(out, "img");
   const report = { v: 1, at: new Date().toISOString(), papers: [], subjects: {}, images: { found: 0, logos: 0, small: 0, kept: 0 } };
   let all = [];
-  if (!args.flags.has("no-images")) fs.rmSync(imgDir, { recursive: true, force: true });
+  // A paper whose input files were deleted after use (owner rule: inputs go once the output is in the private bucket)
+  // is FROZEN: its items (with their merges) and images are kept from the last build instead of re-parsed.
+  const hasInput = (p) => (p.txt && fs.existsSync(p.txt)) || (p.pdf && fs.existsSync(p.pdf));
+  const prevIx = readJson(path.join(out, "index.json"), null);
+  const prevItems = prevIx ? readJson(path.join(out, prevIx.file), { items: [] }).items : [];
+  const frozen = new Set(conf.papers.filter((p) => !hasInput(p)).map((p) => p.id));
+  if (!args.flags.has("no-images")) for (const f of fs.existsSync(imgDir) ? fs.readdirSync(imgDir) : []) if (![...frozen].some((id) => f.startsWith(id + "-"))) fs.rmSync(path.join(imgDir, f));
+  for (const it of prevItems) if (it.pyq.some((x) => frozen.has(x.src))) {   // kept whole: same id, every source
+    const c = JSON.parse(JSON.stringify(it));
+    for (const k of ["flags", "r", "exp", "kp", "rv", "gen", "bank", "t", "ts"]) delete c[k];   // re-derived below
+    c.flags = (it.flags || []).filter((f) => f === "img-missing" || f === "key-unclear" || f === "brand" || f === "dup-key");
+    all.push(c);
+  }
+  if (frozen.size) { log(`frozen (inputs deleted, kept from the last build): ${[...frozen].join(", ")}`); report.frozen = [...frozen]; }
   for (const p of conf.papers) {
     checkPaper(p);
+    if (frozen.has(p.id)) continue;
     // the watermark text comes from the config (a publisher name stays out of this public file)
     const F = p.mark ? { ...FORMATS[p.format], mark: p.mark } : FORMATS[p.format];
     let text = p.txt && fs.existsSync(p.txt) ? fs.readFileSync(p.txt, "utf8") : spawnSync("pdftotext", ["-layout", p.pdf, "-"], { encoding: "utf8", maxBuffer: 1 << 30 }).stdout;
@@ -727,6 +741,15 @@ export async function stages(args, deps = {}) {
   const tax = loadTaxonomy(path.resolve(root, args.tax || "prep/taxonomy"));
   const cfg = { ...vertexConfig(deps.env || process.env), ...(deps.config || {}) };
   const want = ["map", "screen", "explain"].filter((s) => args.flags.has(s) || args.flags.has("all"));
+  // A later batch of papers: items already screened, explained, or left pending by an earlier run are not sent again,
+  // and a key the screen disputes is never explained. (Archive the earlier run's work files before a new run.)
+  const prior = readJson(path.join(work, "results.json"), {});
+  const fresh = (name, list) => list.filter((x) => {
+    const r = prior[x.id] || {};
+    if (name === "screen") return !r.v;
+    if (name === "explain") return !r.r && !r.pending && r.v !== "disputed" && !(x.flags || []).includes("disputed");
+    return true;
+  });
   if (args.flags.has("explain-redo")) want.push("explain-redo");
   const ctx = { tax, near };
   // The retry works from the first pass's saved requests and replies (the build has since applied the accepted ones).
@@ -748,7 +771,7 @@ export async function stages(args, deps = {}) {
         const mi = stageItems("map", items).map((x) => (x.subject ? x : { ...x, subject: "medicine" }));
         rows.push(estimate("map", stageLines("map", mi, ctx), mi.length, cfg.model));
       } else if (w === "explain") {
-        const ei = stageItems("explain", items), el = stageLines("explain", ei, ctx);
+        const ei = fresh("explain", stageItems("explain", items)), el = stageLines("explain", ei, ctx);
         rows.push(estimate("explain", el, ei.length, cfg.model));
         // review: the reviewer sees each item with its reasons and notes (about the explain request's size again)
         const rv = estimate("review", el, ei.length, cfg.model);
@@ -757,7 +780,7 @@ export async function stages(args, deps = {}) {
         const ri = redoList(), rl = stageLines("explain-redo", ri, ctx);
         rows.push(estimate("explain-redo", rl, ri.length, cfg.model));
         rows.push(estimate("review-redo", rl, ri.length, cfg.model));   // upper bound: every retry reaches review
-      } else { const si = stageItems(w, items); rows.push(estimate(w, stageLines(w, si, ctx), si.length, cfg.model)); }
+      } else { const si = fresh(w, stageItems(w, items)); rows.push(estimate(w, stageLines(w, si, ctx), si.length, cfg.model)); }
     }
     for (const r of rows) log(`  ${r.stage.padEnd(8)} ${String(r.items).padStart(5)} items ${String(r.requests).padStart(4)} requests  in ${r.inTok}  out ${r.outTok}  $${r.usd.toFixed(4)}`);
     const usd = rows.reduce((a, r) => a + r.usd, 0);
@@ -812,7 +835,7 @@ export async function stages(args, deps = {}) {
     }
   }
   if (want.includes("screen")) {
-    const si = stageItems("screen", items), sl = stageLines("screen", si, ctx), t = await job("screen", sl);
+    const si = fresh("screen", stageItems("screen", items)), sl = stageLines("screen", si, ctx), t = await job("screen", sl);
     if (t) {
       const c = { agree: 0, disputed: 0, unmatched: 0, nopick: 0 };
       for (const l of sl) { const picks = sanitizeSolve(parseModelJson(t.get(l.key)), l.ids.length) || []; l.ids.forEach((id, i) => { const v = verdict(picks[i] || "", byId.get(id)); c[v]++; R(id).v = v; }); }
@@ -820,7 +843,7 @@ export async function stages(args, deps = {}) {
     }
   }
   if (want.includes("explain")) {
-    const ei = stageItems("explain", items), el = stageLines("explain", ei, ctx), t = await job("explain", el);
+    const ei = fresh("explain", stageItems("explain", items)).filter((x) => R(x.id).v !== "disputed"), el = stageLines("explain", ei, ctx), t = await job("explain", el);
     if (t) {
       const pass = [], gate = {};
       for (const l of el) readExplain(t.get(l.key), l.ids.length).forEach((ex, i) => {

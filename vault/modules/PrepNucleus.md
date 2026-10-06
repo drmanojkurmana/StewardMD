@@ -226,6 +226,18 @@ own (inside `smd_prep`): the home row shows on the NEET-PG tab; data comes from 
   skipped), 28 accepted, 63 `exp-pending` (g9b 4, review 59). Now 237 items carry our explanation; 283 of 327 usable,
   220 of those explained. Uploaded to R2 `prep-bank/v2/pyq/` (verified by hash) and to the private bucket. The live
   `/api/prep/bank/v2/pyq/` route answers only after this branch's bank route deploys (main's whitelist lacks it).
+- **Second batch (2026-10-06, owner's zip of 13 compilations, 2012-2023):** three more layouts (`num`: "N." + "a)" +
+  "Correct Answer - X" with the publisher's explanation and its numbered lists, read by answer ordinal; `aipg17`: "Question
+  N" with mixed answer styles; `qno`: "Ques No:" bank export with Subject/Topic lines). Image-only pages OCRed with
+  macOS Vision (`conf.ocr`, 200 dpi, a page at a time; about 15 s a page; some pages failed and were left out). 2012-2016
+  are tagged `aipgmee` (pre-2017) but hold 1,450 to 2,100 questions each, so they are year-wise compilations, not single
+  papers: the app times any paper over 200 questions as 200 random ones. 2017 is tagged `neet-pg` (owner's rule) though
+  the file says AIPGMEE. Totals after merging all 17 papers: 10,485 items (587 repeats merged), 5,410 bank matches
+  (213 with a different key, hidden), 460 images. Paid run $3.50 (map, screen 1,243 disputed, explain 7,173 + 504 on
+  the retry); now 7,914 explained, 1,227 `exp-pending`, 8,975 usable. Uploaded to R2 and the private bucket.
+- **Frozen papers:** the owner deletes inputs after use, so a paper whose txt and pdf are gone is kept from the last
+  build (its items, merges, images) instead of re-parsed; a rebuild without the inputs reproduced the same 10,485 items.
+  `index.json` is now about 800 KB and the items file about 11 MB (split per paper if phones struggle).
 - **Gotcha:** `emoji-icons.js` removes page locators ("pg 45") from rendered text, which also ate "PG 2025" out of
   "NEET-PG 2025"; `scrubBooks` now protects "NEET-PG" (test in `test/emoji-icons.test.mjs`).
 - **Tests:** `test/prep-pyq.test.mjs` (three parsers on synthetic fixtures incl. watermark shreds, option matching,
