@@ -1,0 +1,127 @@
+{
+ "v": 1,
+ "module": "sur-thyroid",
+ "subject": "surgery",
+ "title": "Fixture: generated thyroid lesson",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Fibroadenoma is the most frequent benign solid mass in younger women. It presents as a mobile, firm, well-defined lump, often called a **breast mouse**. Diagnosis relies on **triple assessment** using ultrasound and core needle biopsy to distinguish it from a phyllodes tumour. Rapid growth or large size requires careful exclusion of malignancy.",
+   "say": "Fibroadenoma is the most frequent benign solid mass in younger women. It presents as a mobile, firm, well-defined lump, often called a breast mouse. Diagnosis relies on triple assessment using ultrasound and core needle biopsy to distinguish it from a phyllodes tumour. Rapid growth or large size requires careful exclusion of malignancy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Fibroadenoma",
+     "Phyllodes Tumour",
+     "Clinical Action"
+    ],
+    "rows": [
+     [
+      "Growth",
+      "Slow",
+      "Rapid",
+      "Biopsy"
+     ],
+     [
+      "Risk",
+      "Benign",
+      "Aggressive",
+      "Excision"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fat necrosis is an inflammatory response to breast adipose tissue injury. It mimics carcinoma clinically and on imaging. History often involves **trauma**, surgery, or radiation. Because it can present as a spiculated mass or with suspicious microcalcification, core biopsy is essential to confirm a benign diagnosis and exclude malignancy.",
+   "say": "Fat necrosis is an inflammatory response to breast adipose tissue injury. It mimics carcinoma clinically and on imaging. History often involves trauma, surgery, or radiation. Because it can present as a spiculated mass or with suspicious microcalcification, core biopsy is essential to confirm a benign diagnosis and exclude malignancy.",
+   "vis": null
+  },
+  {
+   "tx": "Breast abscesses present as painful, fluctuant masses with local erythema. Lactational cases are usually caused by **Staphylococcus aureus** following milk stasis. Non-lactational abscesses are strongly linked to smoking. Management involves **ultrasound-guided aspiration** and appropriate antibiotics. Incision and drainage are reserved for large or multiloculated cases.",
+   "say": "Breast abscesses present as painful, fluctuant masses with local erythema. Lactational cases are usually caused by Staphylococcus aureus following milk stasis. Non-lactational abscesses are strongly linked to smoking. Management involves ultrasound-guided aspiration and appropriate antibiotics. Incision and drainage are reserved for large or multiloculated cases.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "1",
+      "label": "Abscess"
+     },
+     {
+      "id": "2",
+      "label": "Aspiration"
+     },
+     {
+      "id": "3",
+      "label": "Drainage"
+     }
+    ],
+    "edges": [
+     [
+      "1",
+      "2",
+      "First-line"
+     ],
+     [
+      "2",
+      "3",
+      "If failed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Gynaecomastia is the benign proliferation of glandular male breast tissue, forming a tender disc behind the areola. It results from an imbalance between oestrogen and androgen. Clinicians must distinguish this from **pseudogynaecomastia** and male breast cancer. Malignancy should be suspected if the mass is hard, eccentric, or fixed.",
+   "say": "Gynaecomastia is the benign proliferation of glandular male breast tissue, forming a tender disc behind the areola. It results from an imbalance between oestrogen and androgen. Clinicians must distinguish this from pseudogynaecomastia and male breast cancer. Malignancy should be suspected if the mass is hard, eccentric, or fixed.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Gynaecomastia",
+     "points": [
+      "Firm disc",
+      "Central",
+      "Hormonal"
+     ]
+    },
+    "right": {
+     "title": "Breast Cancer",
+     "points": [
+      "Hard mass",
+      "Eccentric",
+      "Fixation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Mondor disease manifests as superficial thrombophlebitis of the breast or chest wall veins. It typically presents as a firm, tender, palpable cord. The condition is **self-limiting** and benign. However, clinicians must perform full triple assessment to exclude underlying malignancy, especially if there is an associated breast lump or atypical skin tethering.",
+   "say": "Mondor disease manifests as superficial thrombophlebitis of the breast or chest wall veins. It typically presents as a firm, tender, palpable cord. The condition is self-limiting and benign. However, clinicians must perform full triple assessment to exclude underlying malignancy, especially if there is an associated breast lump or atypical skin tethering.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "df976d65-9ca6-4357-a499-b14f43c91f1d",
+  "a4130bdc-eba1-483e-9bdf-c5f6067ff468",
+  "b6181938-7cf8-4b72-8d70-ced7df675f0c"
+ ],
+ "src": [
+  "kb-reference-fat-necrosis-breast",
+  "kb-reference-breast-abscess",
+  "kb-reference-breast-fibroadenoma",
+  "kb-reference-gynaecomastia",
+  "kb-reference-mondor-disease"
+ ],
+ "gen": "AI",
+ "run": "lessons-202610060812",
+ "model": "gemini-3.1-flash-lite",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true,
+  "redone": 0,
+  "dropped": 0,
+  "bank": "v1"
+ }
+}

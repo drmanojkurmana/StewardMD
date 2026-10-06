@@ -229,3 +229,14 @@ test("onTopic: off-topic grounding is refused (phy-cardiac-cycle vs heart failur
   assert.equal(L.onTopic("The cardiac cycle has systole and diastole. Each cardiac cycle lasts 0.8 s at 75 per minute.", { title: "Cardiac cycle" }), true);
   assert.equal(L.onTopic("Anticoagulant reversal. Each anticoagulant has an antidote.", { title: "Anticoagulants" }), true);
 });
+
+test("index merge: a generated (bank) lesson fills modules with none bundled and replaces a bundled AI one; a hand-written bundled lesson always wins", () => {
+  const app = { v: 1, modules: { "sur-breast-cancer": { gen: "hand", n: 10 }, "sur-breast-benign": { gen: "AI", n: 4 } } };
+  const bank = { v: 1, modules: { "sur-breast-cancer": { gen: "AI", n: 60 }, "sur-breast-benign": { gen: "AI", n: 50 }, "sur-thyroid": { gen: "AI", n: 40 } } };
+  const m = P.mergeIx(app, bank).modules;
+  assert.deepEqual(m["sur-breast-cancer"], { from: "app", gen: "hand", n: 10 });
+  assert.deepEqual(m["sur-breast-benign"], { from: "bank", gen: "AI", n: 50 });
+  assert.deepEqual(m["sur-thyroid"], { from: "bank", gen: "AI", n: 40 });
+  assert.deepEqual(P.mergeIx(app, null).modules["sur-breast-benign"], { from: "app", gen: "AI", n: 4 }, "offline with no bank index: bundled only");
+  assert.deepEqual(P.mergeIx(undefined, undefined), { v: 1, modules: {} });
+});

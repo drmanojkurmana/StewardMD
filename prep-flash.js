@@ -159,7 +159,16 @@
     return dx < 0 ? 1 : 3;
   }
 
-  var PURE = { KINDS: KINDS, LIM: LIM, CAPS: CAPS, CAP_DEFAULT: CAP_DEFAULT, ID_RE: ID_RE, IMG_RE: IMG_RE, GRADES: GRADES, words: words, clozeCount: clozeCount,
+  /* Bundled index (pilot files in the app) + bank index (generated, from R2 through /api/prep/bank): the bank copy
+     wins, except a hand-written bundled file ("gen":"hand") always wins for its module. Each entry says where its
+     file lives ("from": "app" or "bank"). */
+  function mergeIx(app, bank) {
+    var out = {}, a = (app && app.modules) || {}, b = (bank && bank.modules) || {}, m, k, e;
+    for (m in b) { e = { from: "bank" }; for (k in b[m]) e[k] = b[m][k]; out[m] = e; }
+    for (m in a) if (!out[m] || a[m].gen === "hand") { e = { from: "app" }; for (k in a[m]) e[k] = a[m][k]; out[m] = e; }
+    return { v: 1, modules: out };
+  }
+  var PURE = { mergeIx: mergeIx, KINDS: KINDS, LIM: LIM, CAPS: CAPS, CAP_DEFAULT: CAP_DEFAULT, ID_RE: ID_RE, IMG_RE: IMG_RE, GRADES: GRADES, words: words, clozeCount: clozeCount,
     clozeParts: clozeParts, plainFront: plainFront, deckKey: deckKey, cardKeyModule: cardKeyModule, frontSim: frontSim, checkCard: checkCard, checkDeck: checkDeck,
     newToday: newToday, newLeft: newLeft, capOf: capOf, deckCounts: deckCounts, session: session, dueByModule: dueByModule, hasCards: hasCards,
     intervalFor: intervalFor, fmtIvl: fmtIvl, ivlWords: ivlWords, grade: grade, nextDue: nextDue, swipeGrade: swipeGrade };
@@ -173,22 +182,39 @@
 
   function escH(s) { return str(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function getJSON(url) { return G.fetch(url, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }); }
+  // Generated cards live in R2: /api/prep/bank/v1/cards/... (the same API base as the bank, so tests can point it at fixtures).
+  function api() { return ((host && host.bankApi) || G.SMD_PREP_BANK_API || "/api/prep/bank/") + VER + "/cards/"; }
+  // The network copy, else the IndexedDB copy (offline); null when neither.
+  function fresh(url, key) {
+    return getJSON(url).then(function (x) { if (host && host.cachePut) host.cachePut(key, x); return x; }, function () {
+      return host && host.cacheGet ? host.cacheGet(key).then(null, function () { return null; }) : null;
+    });
+  }
   function index() {
     if (K.ix) return Promise.resolve(K.ix);
     if (K.ixP) return K.ixP;
-    var key = "cards/" + VER + "/index.json";
-    K.ixP = getJSON(BASE + VER + "/index.json").then(function (ix) { if (host && host.cachePut) host.cachePut(key, ix); return ix; }, function () {
-      return host && host.cacheGet ? host.cacheGet(key) : null;
-    }).then(function (ix) { K.ix = ix && ix.modules ? ix : { v: 1, modules: {} }; K.ixP = null; return K.ix; });
+    K.ixP = Promise.all([fresh(BASE + VER + "/index.json", "cards/" + VER + "/index.json"), fresh(api() + "index.json", VER + "/cards/index.json")])
+      .then(function (r) { K.ix = mergeIx(r[0], r[1]); K.ixP = null; return K.ix; });
     return K.ixP;
   }
-  // Memory, then the shipped file (refreshing the IndexedDB copy), then IndexedDB when offline.
-  function deckFile(mid) {
+  // Bundled file: memory, then the shipped file (refreshing the IndexedDB copy), then IndexedDB when offline.
+  function appFile(mid) {
     var key = "cards/" + VER + "/" + mid + ".json";
-    if (K.mem[mid]) return Promise.resolve(K.mem[mid]);
     return getJSON(BASE + VER + "/" + encodeURIComponent(mid) + ".json").then(function (f) { if (host.cachePut) host.cachePut(key, f); return f; }, function (e) {
       return (host.cacheGet ? host.cacheGet(key) : Promise.resolve(null)).then(function (hit) { if (!hit) throw e; return hit; });
-    }).then(function (f) {
+    });
+  }
+  // Bank file: immutable once uploaded, so IndexedDB first (like the bank's module files), then the API; the bundled
+  // file when the bank one cannot be had (offline before first open, or a 404).
+  function bankFile(mid) {
+    var key = VER + "/cards/" + mid + ".json";
+    return (host.cacheGet ? host.cacheGet(key).then(null, function () { return null; }) : Promise.resolve(null)).then(function (hit) {
+      return hit || getJSON(api() + encodeURIComponent(mid) + ".json").then(function (f) { if (host.cachePut) host.cachePut(key, f); return f; });
+    }).then(null, function () { return appFile(mid); });
+  }
+  function deckFile(mid) {
+    if (K.mem[mid]) return Promise.resolve(K.mem[mid]);
+    return index().then(function (ix) { var m = ix.modules[mid]; return m && m.from === "bank" ? bankFile(mid) : appFile(mid); }).then(function (f) {
       // A bad card is dropped, not the deck.
       var cards = (f && Array.isArray(f.cards) ? f.cards : []).filter(function (c) { return !checkCard(c).length; });
       if (!cards.length) throw new Error("empty deck");

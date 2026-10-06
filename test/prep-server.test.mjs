@@ -76,6 +76,30 @@ test("bank: PYQ index (short cache), hashed items file and webp images (immutabl
   assert.equal(asked, 0);
 });
 
+test("bank: lessons and cards (index short cache; module files and lesson media immutable, right types); nothing else", async () => {
+  const env = { PREP_BANK_R2: r2({ "prep-bank/v1/lessons/index.json": '{"v":1}', "prep-bank/v1/lessons/sur-thyroid.json": '{"v":1}', "prep-bank/v1/lessons/media/thyroid-flow.svg": "<svg/>",
+    "prep-bank/v1/lessons/media/neck-us.webp": "RIFF", "prep-bank/v1/cards/index.json": '{"v":1}', "prep-bank/v1/cards/sur-thyroid.json": '{"v":1}' }) };
+  for (const p of ["v1/lessons/index.json", "v1/cards/index.json"]) {
+    const r = await get(p, env);
+    assert.equal(r.status, 200, p);
+    assert.match(r.headers.get("Content-Type"), /json/);
+    assert.doesNotMatch(r.headers.get("Cache-Control"), /immutable/, p);
+  }
+  for (const [p, type] of [["v1/lessons/sur-thyroid.json", /json/], ["v1/cards/sur-thyroid.json", /json/], ["v1/lessons/media/thyroid-flow.svg", /^image\/svg\+xml$/], ["v1/lessons/media/neck-us.webp", /^image\/webp$/]]) {
+    const r = await get(p, env);
+    assert.equal(r.status, 200, p);
+    assert.match(r.headers.get("Content-Type"), type, p);
+    assert.match(r.headers.get("Cache-Control"), /immutable/, p);
+  }
+  assert.match((await get("v1/lessons/media/thyroid-flow.svg", env)).headers.get("Content-Security-Policy"), /default-src 'none'/);
+  let asked = 0;
+  const spy = { PREP_BANK_R2: { get: async () => { asked++; return { body: "x" }; } } };
+  for (const p of ["v1/lessons/Sur.json", "v1/lessons/a/b.json", "v1/lessons/x.svg", "v1/cards/media/x.webp", "v1/lessons/media/x.png", "v1/lessons/media/../index.json", "v1/lessons/media/a/b.svg", "v1/cards/x.json.bak", "v1/lessons/media/x.svg.json", "lessons/index.json"]) {
+    assert.equal((await get(p, spy)).status, 404, p);
+  }
+  assert.equal(asked, 0);
+});
+
 test("bank: no binding is a clear 503", async () => {
   assert.equal((await get("v1/anatomy/index.json", {})).status, 503);
 });

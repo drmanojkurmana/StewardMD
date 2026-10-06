@@ -217,6 +217,14 @@ try {
   ok(await evA(`PREP._host.cacheGet("lessons/v1/${MID}.json").then(function(f){ return !!(f && f.steps && f.steps.length===8); })`) === true, "the lesson is kept in IndexedDB for offline");
   ok(reqs.some((u) => u.includes("/prep-lessons.js?v=" + LOADER_V)) && reqs.some((u) => /\/prep\/lessons\/v1\/index\.json/.test(u)), "prep-lessons.js and the lesson index load");
   ok(!reqs.some((u) => /\/api\/(ai|prep\/bank)/.test(u)), "no request to /api/ai or the live bank");
+  // ---- generated lesson from the bank API (fixture api/v1/lessons): a module with no bundled lesson gets one
+  ok(/8 steps/.test(await ev(`return document.querySelector("#smdPrep [data-act=l-open]") ? "8 steps" : "";`)) && await ev(`return PREP_LESSONS._l.ix.modules["${MID}"].from === "app" && PREP_LESSONS._l.ix.modules["${MID}"].gen === "hand";`) === true, "the hand-written bundled lesson wins over the bank's generated one for the same module");
+  await ev(`var d=document.createElement("div"); d.id="genSlot"; document.body.appendChild(d); PREP_LESSONS.mount(d, "surgery", "sur-thyroid", PREP._host); return 1;`);
+  ok(await until(`var b=document.querySelector("#genSlot [data-act=l-open]"); return !!b && /steps/.test(b.textContent);`, 5000), "a module with no bundled lesson shows the generated lesson row");
+  await ev(`PREP_LESSONS.open("surgery", "sur-thyroid", PREP._host); return 1;`);
+  ok(await until(`return /^Step 1 of \\d+$/.test((document.querySelector("#smdPrep .pn-t p")||{}).textContent||"");`, 8000), "the generated lesson opens in the reader");
+  ok(reqs.some((u) => u.includes(FIX + "api/v1/lessons/sur-thyroid.json")) && reqs.some((u) => u.includes(FIX + "api/v1/lessons/index.json")), "the generated lesson and index load through the bank API base");
+  ok(await evA(`PREP._host.cacheGet("v1/lessons/sur-thyroid.json").then(function(f){ return !!(f && f.module === "sur-thyroid"); })`) === true, "the generated lesson is kept in IndexedDB like bank files");
   await ev(`PREP.close(); return 1;`);
   ok(errors.length === 0, "no uncaught PrepNucleus error" + (errors.length ? ": " + errors.join(" | ").slice(0, 400) : ""));
 } catch (e) {

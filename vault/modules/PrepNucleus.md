@@ -141,8 +141,14 @@ module. Decision: [[decisions/Decisions]] 2026-10-06 "PrepNucleus Lessons".
   web; nothing leaves the phone. Pause stops and Play restarts the current step (the plugin has no pause). Leaving the
   reader, closing PrepNucleus or Ask MaiK stops it. No voice available: the play and speed controls are not drawn.
 - **Data and offline:** lessons, the index and `prep/lessons/media/*` ship in www (`scripts/build-www.sh`); each lesson
-  is also kept in IndexedDB `prep-bank` under `lessons/v1/<module>.json`. A full generated set is too big for the bundle
-  and git: put it in R2 next to the bank and add `lessons/` to the bank route's whitelist first (not done).
+  is also kept in IndexedDB `prep-bank` under `lessons/v1/<module>.json`. **Generated lessons are served from R2**
+  (2026-10-06, branch `feat/prep-native`): `prep-bank/v1/lessons/index.json` + `<module>.json` (1,082 modules, uploaded
+  with `tools/prep-upload-bank.mjs --dir <gen dir> --as v1/lessons --yes`), read through `/api/prep/bank/v1/lessons/...`
+  (`host.bankApi`, so tests point it at `test/fixtures/prep-lessons/api/`). `index()` merges the bundled index with the
+  bank index (`mergeIx`: bank wins, a bundled `gen:"hand"` lesson always wins; each entry carries `from: app|bank`).
+  Bank lessons are kept in IndexedDB under `v1/lessons/<module>.json`, cache first (immutable); a bank 404 or offline
+  first open falls back to the bundled file. The route also whitelists `v<n>/lessons/media/<file>.(svg|webp)` (CSP on
+  SVG), but no generated lesson uses bank media yet and the upload tool only uploads `.json`/`.webp`.
 - **Store:** `ls: { <module>: { i, n, done, xp } }`, `lsp: { r: speed, au: 0|1 }` in `smd_prep_v1`.
 - **Generator** `tools/prep-lessons.mjs` (owner-run, costs money; `--dry-run` and `--check` are $0): grounding = the
   KB-only fill pack in `prep/fill/packs/<module>/` when it has 300+ words, else a lexical match of title + scope over
@@ -283,7 +289,10 @@ Module flashcards (Plan 2 phase 2). No flag of its own (inside `smd_prep`): a mo
   "Learn 10 more" when new cards remain, new cards a day 10/20/30/50 (`fc.cap`, default 20).
 - **Memory:** deck key `p:<module>:c` in the shared store; `progressByModule` skips card keys (MCQ counts unchanged),
   `recall(store, "p:<module>")` counts both. Store `fc: { cap, day, n, more }`. Decks are kept in IndexedDB `prep-bank`
-  under `cards/v1/<module>.json`; `scripts/build-www.sh` ships `prep/cards/v1`.
+  under `cards/v1/<module>.json`; `scripts/build-www.sh` ships `prep/cards/v1`. **Generated decks come from R2**
+  (2026-10-06): `prep-bank/v1/cards/index.json` + `<module>.json` (864 decks, 39,963 cards, from `~/prep-data/cards-gen`),
+  through `/api/prep/bank/v1/cards/...`, merged and cached exactly like lessons (`mergeIx`, IndexedDB
+  `v1/cards/<module>.json`, bundled hand deck wins, bundled fallback). SS modules have no decks (no SS bank).
 - **Generator** `tools/prep-cards.mjs` (owner-run, costs money; `--dry-run`, `--check`, `--index` are $0; `--bank <dir>`
   for a worktree without the gitignored bank). Sources: unflagged items with a 12+ word explanation (negative stems last),
   at most 120 (two per card), 12 per request asking 7 cards; plus one request per KB-only fill pack (8 cards). Stages

@@ -186,6 +186,14 @@ try {
   ok(reqs.some((u) => /\/prep\/cards\/v1\/sur-breast-cancer\.json/.test(u)) && reqs.some((u) => /prep-flash\.css/.test(u)), "the deck and the stylesheet load");
   ok(await evA(`PREP._host.cacheGet("cards/v1/${MID}.json").then(function(f){ return !!(f && f.cards && f.cards.length===10); })`) === true, "the deck is kept in IndexedDB for offline");
   await ev(`PREP.close(); return 1;`);
+  // ---- generated deck from the bank API (fixture api/v1/cards): hand deck still wins; a module with none bundled gets one
+  ok(await ev(`return PREP_FLASH._k.ix.modules["${MID}"].from === "app" && PREP_FLASH._k.ix.modules["${MID}"].n === 10;`) === true, "the hand-written bundled deck wins over the bank's generated one for the same module");
+  await ev(`var d=document.createElement("div"); d.id="genSlot"; document.body.appendChild(d); PREP_FLASH.mount(d, "surgery", "sur-thyroid", PREP._host); return 1;`);
+  ok(await until(`var b=document.querySelector("#genSlot [data-act=k-open]"); return !!b && /Cards · 4/.test(b.textContent);`, 5000), "a module with no bundled deck shows the generated deck row (Cards · 4)");
+  await ev(`PREP_FLASH.act("k-open", document.querySelector("#genSlot [data-act=k-open]"), PREP._host); return 1;`);
+  ok(await until(`var m=PREP_FLASH._k.mem["sur-thyroid"]; return !!(m && m.cards.length === 4);`, 8000), "the generated deck loads");
+  ok(reqs.some((u) => u.includes("/test/fixtures/prep/api/v1/cards/sur-thyroid.json")) && reqs.some((u) => u.includes("/test/fixtures/prep/api/v1/cards/index.json")), "the generated deck and index load through the bank API base");
+  ok(await evA(`PREP._host.cacheGet("v1/cards/sur-thyroid.json").then(function(f){ return !!(f && f.module === "sur-thyroid"); })`) === true, "the generated deck is kept in IndexedDB like bank files");
   ok(errors.length === 0, "no uncaught PrepNucleus error" + (errors.length ? ": " + errors.join(" | ").slice(0, 400) : ""));
 } catch (e) {
   console.log("FAIL harness: " + (e && e.stack || e)); fails++;

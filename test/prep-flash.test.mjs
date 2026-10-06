@@ -235,3 +235,14 @@ test("the committed sample deck passes every gate: 10 cards, 2 cloze, 1 occlusio
   const ix = JSON.parse(fs.readFileSync(join(ROOT, "prep/cards/v1/index.json"), "utf8"));
   assert.deepEqual(ix.modules["sur-breast-cancer"], { n: 10, gen: "hand" });
 });
+
+test("index merge: a generated (bank) deck fills modules with none bundled and replaces a bundled AI one; a hand-written bundled deck always wins", () => {
+  const app = { v: 1, modules: { "sur-breast-cancer": { gen: "hand", n: 10 }, "sur-breast-benign": { gen: "AI", n: 4 } } };
+  const bank = { v: 1, modules: { "sur-breast-cancer": { gen: "AI", n: 60 }, "sur-breast-benign": { gen: "AI", n: 50 }, "sur-thyroid": { gen: "AI", n: 40 } } };
+  const m = F.mergeIx(app, bank).modules;
+  assert.deepEqual(m["sur-breast-cancer"], { from: "app", gen: "hand", n: 10 });
+  assert.deepEqual(m["sur-breast-benign"], { from: "bank", gen: "AI", n: 50 });
+  assert.deepEqual(m["sur-thyroid"], { from: "bank", gen: "AI", n: 40 });
+  assert.deepEqual(F.mergeIx(app, null).modules["sur-breast-benign"], { from: "app", gen: "AI", n: 4 }, "offline with no bank index: bundled only");
+  assert.deepEqual(F.mergeIx(undefined, undefined), { v: 1, modules: {} });
+});

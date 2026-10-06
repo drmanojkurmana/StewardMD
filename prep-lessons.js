@@ -132,7 +132,16 @@
   function swipeDir(dx, dy) { return Math.abs(dx) >= 56 && Math.abs(dx) > 1.5 * Math.abs(dy) ? (dx < 0 ? 1 : -1) : 0; }
   function pickQuiz(items, ids) { var by = {}; (items || []).forEach(function (it) { by[it.id] = it; }); return (ids || []).map(function (id) { return by[id]; }).filter(Boolean); }
 
-  var PURE = { SPEEDS: SPEEDS, XP_STEP: XP_STEP, LIM: LIM, IMG_RE: IMG_RE, plain: plain, words: words, boldHtml: boldHtml, boldTerms: boldTerms, visText: visText,
+  /* Bundled index (pilot files in the app) + bank index (generated, from R2 through /api/prep/bank): the bank copy
+     wins, except a hand-written bundled file ("gen":"hand") always wins for its module. Each entry says where its
+     file lives ("from": "app" or "bank"). */
+  function mergeIx(app, bank) {
+    var out = {}, a = (app && app.modules) || {}, b = (bank && bank.modules) || {}, m, k, e;
+    for (m in b) { e = { from: "bank" }; for (k in b[m]) e[k] = b[m][k]; out[m] = e; }
+    for (m in a) if (!out[m] || a[m].gen === "hand") { e = { from: "app" }; for (k in a[m]) e[k] = a[m][k]; out[m] = e; }
+    return { v: 1, modules: out };
+  }
+  var PURE = { mergeIx: mergeIx, SPEEDS: SPEEDS, XP_STEP: XP_STEP, LIM: LIM, IMG_RE: IMG_RE, plain: plain, words: words, boldHtml: boldHtml, boldTerms: boldTerms, visText: visText,
     flowLevels: flowLevels, checkVis: checkVis, checkStep: checkStep, checkLesson: checkLesson, nextSpeed: nextSpeed, speedLabel: speedLabel, xpFor: xpFor,
     swipeDir: swipeDir, pickQuiz: pickQuiz };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
@@ -144,23 +153,39 @@
   var host = null;
 
   function getJSON(url) { return G.fetch(url, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }); }
+  // Generated lessons live in R2: /api/prep/bank/v1/lessons/... (the same API base as the bank, so tests can point it at fixtures).
+  function api() { return ((host && host.bankApi) || G.SMD_PREP_BANK_API || "/api/prep/bank/") + VER + "/lessons/"; }
+  // The network copy, else the IndexedDB copy (offline); null when neither.
+  function fresh(url, key) {
+    return getJSON(url).then(function (x) { if (host && host.cachePut) host.cachePut(key, x); return x; }, function () {
+      return host && host.cacheGet ? host.cacheGet(key).then(null, function () { return null; }) : null;
+    });
+  }
   function index() {
     if (L.ix) return Promise.resolve(L.ix);
     if (L.ixP) return L.ixP;
-    var key = "lessons/" + VER + "/index.json";
-    L.ixP = getJSON(BASE + VER + "/index.json").then(function (ix) { if (host && host.cachePut) host.cachePut(key, ix); return ix; }, function () {
-      return host && host.cacheGet ? host.cacheGet(key) : null;
-    }).then(function (ix) { L.ix = ix && ix.modules ? ix : { v: 1, modules: {} }; L.ixP = null; return L.ix; });
+    L.ixP = Promise.all([fresh(BASE + VER + "/index.json", "lessons/" + VER + "/index.json"), fresh(api() + "index.json", VER + "/lessons/index.json")])
+      .then(function (r) { L.ix = mergeIx(r[0], r[1]); L.ixP = null; return L.ix; });
     return L.ixP;
   }
-  // Memory, then IndexedDB, then the shipped file (the network in a browser). The copy in IndexedDB is refreshed
-  // whenever the file loads, so an edited lesson reaches the phone with the next bundle.
-  function lessonFile(mid) {
+  // Bundled file: memory, then the shipped file (refreshing the IndexedDB copy), then IndexedDB when offline.
+  function appFile(mid) {
     var key = "lessons/" + VER + "/" + mid + ".json";
-    if (L.mem[mid]) return Promise.resolve(L.mem[mid]);
     return getJSON(BASE + VER + "/" + encodeURIComponent(mid) + ".json").then(function (f) { if (host.cachePut) host.cachePut(key, f); return f; }, function (e) {
       return (host.cacheGet ? host.cacheGet(key) : Promise.resolve(null)).then(function (hit) { if (!hit) throw e; return hit; });
-    }).then(function (f) {
+    });
+  }
+  // Bank file: immutable once uploaded, so IndexedDB first (like the bank's module files), then the API; the bundled
+  // file when the bank one cannot be had (offline before first open, or a 404).
+  function bankFile(mid) {
+    var key = VER + "/lessons/" + mid + ".json";
+    return (host.cacheGet ? host.cacheGet(key).then(null, function () { return null; }) : Promise.resolve(null)).then(function (hit) {
+      return hit || getJSON(api() + encodeURIComponent(mid) + ".json").then(function (f) { if (host.cachePut) host.cachePut(key, f); return f; });
+    }).then(null, function () { return appFile(mid); });
+  }
+  function lessonFile(mid) {
+    if (L.mem[mid]) return Promise.resolve(L.mem[mid]);
+    return index().then(function (ix) { var m = ix.modules[mid]; return m && m.from === "bank" ? bankFile(mid) : appFile(mid); }).then(function (f) {
       if (checkLesson(f).length) throw new Error("bad lesson");
       return (L.mem[mid] = f);
     });

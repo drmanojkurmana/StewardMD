@@ -28,7 +28,7 @@ To restart a Batch runner: `pkill -f <tool>.mjs`, confirm `pgrep`, then relaunch
 1. When the fill ends: `node tools/prep-fill.mjs --merge` (writes bank v2, v1 untouched; packs extra root
    `PREP_PACKS_EXTRA=~/prep-data/packs-statpearls`), review reject rate + sample items, commit indexes/manifest +
    `prep/fill/*.json`, upload v2 (`node tools/prep-upload-bank.mjs` with the v2 dir, `--yes`), verify.
-2. Lessons + cards served from R2: extend `functions/api/prep/bank/[[path]].js` whitelist with `v<n>/lessons/...` and
+2. DONE 2026-10-06 (branch `feat/prep-native`, merge it into `feat/prepnucleus` before step 5): R2 `prep-bank/v1/lessons/` 1,083 files (1,082 lessons + index) and `prep-bank/v1/cards/` 865 files (864 decks + index), both index files SHA-256 matched R2; live serving starts when the bank route deploys (step 5). Was: Lessons + cards served from R2: extend `functions/api/prep/bank/[[path]].js` whitelist with `v<n>/lessons/...` and
    `v<n>/cards/...` (+ tests), client loads them through the API (fall back to the bundled pilot), upload
    `prep/lessons/gen` and `~/prep-data/cards-gen`; SS modules have no cards (no v1 bank).
 3. Flags ON for all: `smd_prep` and `smd_prep_arena` default ON (prep-loader.js `enabled`, home.js `eligible`,
