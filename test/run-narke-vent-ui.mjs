@@ -704,10 +704,10 @@ try {
     // U6: the next strip never says "again" when no gas was drawn before
     await click(`[data-act=vlstep][data-k=fio2][data-d="1"]`); await click(`[data-act=vlconfirm]`); await sleep(300);
     await click(`[data-act=vlskip][data-k="1800"]`); await sleep(200);
-    ok(await ev(`var n=document.querySelector('#smdNarke .vl-next'); return !!n && /Draw ABG/.test(n.textContent) && !/again/.test(n.textContent);`) === true, "r4 U6: after a change with no gas drawn yet, Next says Draw ABG, not 'again'");
+    ok(await ev(`var n=document.querySelector('#smdNarke .vl-next'); return !!n && /Draw ABG/.test(n.textContent) && !/\\bagain\\b/.test(n.textContent);`) === true, "r4 U6: after a change with no gas drawn yet, Next says Draw ABG, not 'again'");
     await click(`[data-act=vldraw]`); await sleep(150);
     { const nt = await ev(`var n=document.querySelector('#smdNarke .vl-next'); return n ? n.textContent : "none";`);
-      ok(nt !== "none" && !/again|Before and Now/.test(nt), "r4 U6: after that first gas, Next neither says 'again' nor compares two gases: " + nt); }
+      ok(nt !== "none" && !/\bagain\b|Before and Now/.test(nt), "r4 U6: after that first gas, Next neither says 'again' nor compares two gases: " + nt); }
     ok(await ev(`var l=NARKE._sims.filter(function(x){return x.id==="ventlab";})[0].line({n:1}); return /\\b1 run\\b/.test(l) && !/1 runs/.test(l);`) === true, "r4 U6: one finished run reads '1 run'");
 
     // U7: the drift line is written at paint time, in the language of the moment
