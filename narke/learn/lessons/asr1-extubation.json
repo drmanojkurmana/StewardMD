@@ -1,0 +1,209 @@
+{
+  "id": "asr1-extubation",
+  "unit": "asr1",
+  "level": "resident",
+  "minutes": 5,
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "DAS 2012 extubation: four stages and low-risk versus at-risk groups",
+      "Advanced techniques listed (supraglottic exchange, remifentanil, airway exchange catheter)",
+      "Train-of-four ratio 0.9 threshold for adequate recovery"
+    ]
+  },
+  "title": {
+    "en": "Planned extubation: low risk and at risk",
+    "hi": "Planned extubation: low risk और at risk"
+  },
+  "idea": {
+    "en": "Extubation is an elective step, and its problems are often predictable. Sort the patient into low risk or at risk. Then plan, prepare, perform and watch afterwards.",
+    "hi": "Extubation एक नियोजित कदम है, और इसकी समस्याएँ अक्सर पहले से पता होती हैं। मरीज़ को low risk या at risk में बाँटें। फिर plan, prepare, perform और बाद में निगरानी करें।"
+  },
+  "see": {
+    "diagram": "diagrams/asr1-extubation.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "Four circles in a row for the four stages, joined by lines. Below, the path splits into two boxes. The green box shows a tube being removed. The red box shows a supraglottic airway, an exchange catheter and a small tracheostomy shape.",
+      "hi": "चार चरणों के लिए एक पंक्ति में चार घेरे, रेखाओं से जुड़े। नीचे रास्ता बँटता है: हरा डिब्बा जिसमें tube निकल रही है, और लाल डिब्बा जिसमें तीन विकल्प: supraglottic airway, exchange catheter और छोटी tracheostomy आकृति।"
+    },
+    "caption": {
+      "en": "The four extubation stages and the split between low-risk and at-risk pathways.",
+      "hi": "Extubation के चार चरण और low-risk व at-risk रास्तों का बँटवारा।"
+    },
+    "credit": "Original, MAIKNOWLEDGE LLP",
+    "hotspots": [
+      {
+        "x": 0.16,
+        "y": 0.18,
+        "label": {
+          "en": "Stage 1: plan",
+          "hi": "चरण 1: plan"
+        },
+        "note": {
+          "en": "Decide the risk group from the airway history and the patient's current state.",
+          "hi": "Airway इतिहास और मरीज़ की वर्तमान स्थिति से risk group तय करें।"
+        }
+      },
+      {
+        "x": 0.25,
+        "y": 0.67,
+        "label": {
+          "en": "Low-risk extubation",
+          "hi": "Low-risk extubation"
+        },
+        "note": {
+          "en": "Fasted, uncomplicated airway, no general risk factors. Awake or, by choice, deep extubation.",
+          "hi": "Fasted, सरल airway, कोई सामान्य risk factor नहीं। जागते हुए या चुनाव से deep extubation।"
+        }
+      },
+      {
+        "x": 0.75,
+        "y": 0.67,
+        "label": {
+          "en": "At-risk extubation",
+          "hi": "At-risk extubation"
+        },
+        "note": {
+          "en": "Options include awake extubation, a supraglottic airway exchange, remifentanil, an airway exchange catheter, or delay.",
+          "hi": "विकल्प: awake extubation, supraglottic airway exchange, remifentanil, airway exchange catheter, या टालना।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Stage 1 is planning. A difficult intubation, airway swelling or restricted access makes the patient at risk.",
+        "hi": "चरण 1 planning है। कठिन intubation, airway सूजन या सीमित पहुँच मरीज़ को at risk बनाते हैं।"
+      },
+      {
+        "en": "General risks also count: full stomach, cardiovascular or respiratory instability, and neuromuscular or metabolic disorders.",
+        "hi": "सामान्य जोखिम भी गिने जाते हैं: भरा पेट, हृदय या श्वसन अस्थिरता, और neuromuscular या metabolic विकार।"
+      },
+      {
+        "en": "Stage 2 is preparation. Optimise the patient, confirm full reversal with a nerve stimulator and have airway kit and help ready.",
+        "hi": "चरण 2 तैयारी है। मरीज़ को बेहतर करें, nerve stimulator से पूरा reversal पक्का करें और airway kit व मदद तैयार रखें।"
+      },
+      {
+        "en": "Stage 3 is performing. Preoxygenate with 100% oxygen, suction under vision, then remove the tube at full inflation.",
+        "hi": "चरण 3 करना है। 100% oxygen से preoxygenate करें, देखते हुए suction करें, फिर पूरी फूली साँस पर tube निकालें।"
+      },
+      {
+        "en": "At-risk patients may need advanced methods. These include a supraglottic airway exchange, a remifentanil technique or an [[aec]].",
+        "hi": "At-risk मरीज़ों को उन्नत तरीके चाहिए हो सकते हैं। जैसे supraglottic airway exchange, remifentanil तकनीक या [[aec]]।"
+      },
+      {
+        "en": "Stage 4 is post-extubation care. Give oxygen, observe in recovery and hand over the airway plan clearly.",
+        "hi": "चरण 4 post-extubation care है। Oxygen दें, recovery में देखें और airway plan साफ़ हस्तांतरित करें।"
+      }
+    ],
+    "analogy": {
+      "en": "Landing a plane is harder than the take-off you rehearsed; plan the landing before you leave the ground.",
+      "hi": "विमान उतारना, अभ्यास किए उड़ान भरने से कठिन है; ज़मीन छोड़ने से पहले उतरने की योजना बनाएँ।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Train-of-four ratio below 0.9: residual block, do not extubate yet.",
+      "hi": "Train-of-four ratio 0.9 से कम: residual block, अभी extubate न करें।"
+    },
+    {
+      "en": "Stridor or high-pitched crowing after extubation: think [[laryngospasm]] first.",
+      "hi": "Extubation के बाद stridor या ऊँची आवाज़: पहले [[laryngospasm]] सोचें।"
+    },
+    {
+      "en": "No cuff leak after prolonged intubation or airway surgery: oedema is likely, treat as at risk.",
+      "hi": "लंबे intubation या airway surgery के बाद cuff leak नहीं: सूजन संभव, at risk मानें।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "State the extubation plan at the WHO sign-out.",
+      "hi": "WHO sign-out पर extubation plan बताएँ।"
+    },
+    {
+      "en": "Keep the intubation kit and a supraglottic airway ready at the bedside.",
+      "hi": "Intubation kit और supraglottic airway bedside पर तैयार रखें।"
+    },
+    {
+      "en": "Write the difficult airway details in the notes and tell the patient.",
+      "hi": "कठिन airway का विवरण notes में लिखें और मरीज़ को बताएँ।"
+    }
+  ],
+  "remember": {
+    "en": "Plan, prepare, perform, post-care. TOF ratio 0.9 or more. At risk means a backup route is ready.",
+    "hi": "Plan, prepare, perform, post-care। TOF ratio 0.9 या अधिक। At risk का अर्थ है backup रास्ता तैयार।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "Difficult intubation at induction; surgery done; patient fully reversed. Best plan?",
+        "hi": "Induction पर कठिन intubation; सर्जरी पूरी; मरीज़ पूरी तरह reversed। सबसे अच्छी योजना?"
+      },
+      "o": [
+        {
+          "en": "At-risk pathway: awake extubation or an advanced technique with help present",
+          "hi": "At-risk रास्ता: मदद मौजूद रखते हुए awake extubation या उन्नत तकनीक"
+        },
+        {
+          "en": "Deep extubation to avoid coughing",
+          "hi": "खाँसी से बचने के लिए deep extubation"
+        },
+        {
+          "en": "Extubate in the ward later",
+          "hi": "बाद में ward में extubate करें"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "A known difficult airway makes extubation at risk. Deep extubation is for low-risk airways.",
+        "hi": "ज्ञात कठिन airway extubation को at risk बनाता है। Deep extubation low-risk airway के लिए है।"
+      }
+    },
+    {
+      "q": {
+        "en": "Before extubation the train-of-four ratio is 0.7. What next?",
+        "hi": "Extubation से पहले train-of-four ratio 0.7 है। आगे क्या?"
+      },
+      "o": [
+        {
+          "en": "Give or complete reversal and wait for a ratio of 0.9 or more",
+          "hi": "Reversal दें या पूरा करें और 0.9 या अधिक ratio का इंतज़ार करें"
+        },
+        {
+          "en": "Extubate now",
+          "hi": "अभी extubate करें"
+        },
+        {
+          "en": "Give more opioid",
+          "hi": "और opioid दें"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "A ratio under 0.9 means residual block, with risk of aspiration and hypoxia.",
+        "hi": "0.9 से कम ratio का अर्थ residual block है, जिसमें aspiration और hypoxia का जोखिम है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "airway",
+    "sim": "laryngospasm"
+  },
+  "deeper": {
+    "note": "asr1-extubation",
+    "text": {
+      "en": "An airway exchange catheter can stay in the trachea after extubation. It allows oxygen and acts as a guide if the tube must go back.",
+      "hi": "Airway exchange catheter extubation के बाद trachea में रह सकता है। यह oxygen देने देता है और tube वापस डालनी पड़े तो guide बनता है।"
+    }
+  },
+  "glossary": [
+    "aec",
+    "laryngospasm"
+  ],
+  "sources": [
+    "Popat M, Mitchell V, Dravid R, et al. Difficult Airway Society guidelines for the management of tracheal extubation. Anaesthesia 2012;67:318-40. (Cited for facts; wording is original.)",
+    "Gropper MA, ed. Miller's Anesthesia, 9th edition. Elsevier 2020: chapter on airway management in the adult."
+  ]
+}
