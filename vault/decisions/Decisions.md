@@ -11325,3 +11325,13 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   mistranslate and misparse. Env pins to a 2.5 model are ignored; the console override can roll back to
   2.5 until 2026-10-16. Quality of both 3.x models is unmeasured. [[AI Control Center]]
 
+
+## 2026-10-06 - Narkē (Anaesthesia) is the second specialty-engine host; shared Tokós tooling takes a host
+- **Context**: the Anaesthesia module needs every engine feature Tokós uses. Copying Tokós's Review Desk tab,
+  apply-reviews targets and build tools would double about 300 lines.
+- **Decision**: Narkē copies only the host-named files (host config, loader, palette). Shared code takes a host instead:
+  the Review Desk specialty tab (`SPEC` map: name, base, models global, loader global), `apply-reviews.mjs` kind
+  `narke` with per-host targets and ledger, `tools/tokos-learn-index.mjs` (unit order `as`/`asr`, per-host coverage),
+  `tools/tokos-build-drills.mjs --host narke` (copies the shared drill core). Tokós output is byte-identical.
+- **Budget**: Pages caps a deploy at 20,000 files (about 16,850 now); Narkē is capped at 450 files by test.
+  [[Narkē]] [[Specialty Engine]]
