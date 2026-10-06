@@ -1,0 +1,287 @@
+{
+  "id": "as11-mechanical-ventilation",
+  "unit": "as11",
+  "level": "mbbs",
+  "minutes": 7,
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "Starting settings: tidal volume 6 to 8 mL/kg PBW, rate 12 to 16, PEEP 5 cmH2O, FiO2 1.0, I:E 1:2",
+      "PBW formula: men 50, women 45.5, plus 0.91 per cm above 152.4 cm (ARDSNet)",
+      "Plateau pressure 30 cmH2O or less, 6 mL/kg PBW in ARDS (ARDSNet 2000)",
+      "Blood gas 20 to 30 minutes after a ventilator change"
+    ]
+  },
+  "competencies": [
+    "AS11.6"
+  ],
+  "title": {
+    "en": "Principles and settings of mechanical ventilation",
+    "hi": "मैकेनिकल वेंटिलेशन के सिद्धांत और सेटिंग"
+  },
+  "idea": {
+    "en": "A ventilator pushes gas in under positive pressure. Minute ventilation clears CO2. FiO2 and [[peep]] drive oxygenation.",
+    "hi": "वेंटिलेटर धनात्मक दबाव से गैस अंदर धकेलता है। Minute ventilation CO2 हटाता है। FiO2 और [[peep]] ऑक्सीजन तय करते हैं।"
+  },
+  "see": {
+    "diagram": "diagrams/as11-mechanical-ventilation.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "Two dark monitor panels. The top one shows a yellow pressure trace for two breaths. Each rises to a peak, drops to a flat step, then falls to a dashed baseline. The bottom one shows a blue flow trace. A square block sits above the line, then a dip curves back to zero. Coloured bars mark the times under the top panel.",
+      "hi": "दो काले मॉनिटर पैनल। ऊपर वाले में दो साँसों की पीली दबाव रेखा है: चोटी तक तेज़ चढ़ाव, एक सपाट सीढ़ी तक गिरावट, फिर बिंदीदार पीली आधार रेखा तक गिरना। नीचे वाले में नीली प्रवाह रेखा है: रेखा के ऊपर चौकोर खंड, फिर नीचे एक गिरावट जो वापस शून्य तक मुड़ती है। रंगीन पट्टियाँ ऊपर वाले पैनल के नीचे समय दिखाती हैं।"
+    },
+    "caption": {
+      "en": "Volume-controlled breaths: pressure (top) and flow (bottom) against time, with peak, plateau and PEEP.",
+      "hi": "Volume-controlled साँसें: समय के साथ दबाव (ऊपर) और प्रवाह (नीचे), peak, plateau और PEEP के साथ।"
+    },
+    "credit": "Original diagram, Narkē (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.396,
+        "y": 0.373,
+        "label": {
+          "en": "PEEP",
+          "hi": "PEEP"
+        },
+        "note": {
+          "en": "Baseline pressure, usually 5 cmH2O to start. More PEEP keeps alveoli open and improves oxygenation.",
+          "hi": "आधार दबाव, आमतौर पर शुरुआत में 5 cmH2O। ज़्यादा PEEP alveoli खुले रखता है और ऑक्सीजन सुधारता है।"
+        }
+      },
+      {
+        "x": 0.173,
+        "y": 0.133,
+        "label": {
+          "en": "Peak pressure",
+          "hi": "Peak pressure"
+        },
+        "note": {
+          "en": "Airway resistance plus lung stiffness. A rising peak with a normal plateau points to the tube or bronchospasm.",
+          "hi": "वायुमार्ग का प्रतिरोध और फेफड़ों की कठोरता। सामान्य plateau के साथ बढ़ता peak नली या bronchospasm दिखाता है।"
+        }
+      },
+      {
+        "x": 0.24,
+        "y": 0.207,
+        "label": {
+          "en": "Plateau pressure",
+          "hi": "Plateau pressure"
+        },
+        "note": {
+          "en": "Measured with an end-inspiratory pause. Keep it 30 cmH2O or less to protect the lungs.",
+          "hi": "साँस के अंत के ठहराव में नापा जाता है। फेफड़ों की रक्षा के लिए 30 cmH2O या कम रखें।"
+        }
+      },
+      {
+        "x": 0.194,
+        "y": 0.5,
+        "label": {
+          "en": "Inspiratory time",
+          "hi": "Inspiratory time"
+        },
+        "note": {
+          "en": "Set with rate and I:E ratio. A usual start is I:E 1:2.",
+          "hi": "दर और I:E अनुपात से तय। सामान्य शुरुआत I:E 1:2 है।"
+        }
+      },
+      {
+        "x": 0.3875,
+        "y": 0.5,
+        "label": {
+          "en": "Expiratory time",
+          "hi": "Expiratory time"
+        },
+        "note": {
+          "en": "Expiration is passive. It needs enough time, especially in asthma and COPD.",
+          "hi": "साँस छोड़ना निष्क्रिय है। इसे पर्याप्त समय चाहिए, ख़ासकर asthma और COPD में।"
+        }
+      },
+      {
+        "x": 0.194,
+        "y": 0.587,
+        "label": {
+          "en": "Inspiratory flow",
+          "hi": "Inspiratory flow"
+        },
+        "note": {
+          "en": "In volume control the machine gives a set flow until the set tidal volume is in.",
+          "hi": "Volume control में मशीन तय tidal volume पूरा होने तक तय प्रवाह देती है।"
+        }
+      },
+      {
+        "x": 0.3125,
+        "y": 0.833,
+        "label": {
+          "en": "Expiratory flow",
+          "hi": "Expiratory flow"
+        },
+        "note": {
+          "en": "Flow should return to zero before the next breath. If not, gas is trapped (auto-PEEP).",
+          "hi": "अगली साँस से पहले प्रवाह शून्य पर लौटना चाहिए। न लौटे तो गैस फँस रही है (auto-PEEP)।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Volume control sets the tidal volume; pressure varies. Pressure control sets the pressure; volume varies.",
+        "hi": "Volume control में tidal volume तय होता है; दबाव बदलता है। Pressure control में दबाव तय होता है; आयतन बदलता है।"
+      },
+      {
+        "en": "Start: tidal volume 6 to 8 mL/kg [[pbw]], rate 12 to 16, PEEP 5 and FiO2 1.0. Then titrate FiO2 to the SpO2 target.",
+        "hi": "शुरुआत: tidal volume 6 से 8 mL/kg [[pbw]], दर 12 से 16, PEEP 5, FiO2 1.0, फिर SpO2 लक्ष्य तक घटाएँ।"
+      },
+      {
+        "en": "PBW in kg: men 50, women 45.5, plus 0.91 for each cm of height above 152.4 cm.",
+        "hi": "PBW kg में: पुरुष 50, महिला 45.5, और 152.4 cm से ऊपर हर cm पर 0.91 जोड़ें।"
+      },
+      {
+        "en": "To lower PaCO2, raise rate or tidal volume. To raise PaO2, raise FiO2 or PEEP.",
+        "hi": "PaCO2 घटाने के लिए दर या tidal volume बढ़ाएँ। PaO2 बढ़ाने के लिए FiO2 या PEEP बढ़ाएँ।"
+      },
+      {
+        "en": "In ARDS use 6 mL/kg PBW and keep [[plateau-pressure]] at 30 cmH2O or less. This lowers mortality.",
+        "hi": "ARDS में 6 mL/kg PBW रखें और [[plateau-pressure]] 30 cmH2O या कम। इससे मृत्यु दर घटती है।"
+      },
+      {
+        "en": "Sudden high pressure or falling SpO2: disconnect and bag by hand. Check tube displacement, obstruction, pneumothorax and equipment.",
+        "hi": "अचानक ऊँचा दबाव या गिरता SpO2: मशीन हटाकर हाथ से बैग करें। नली खिसकना, रुकावट, pneumothorax और उपकरण जाँचें।"
+      }
+    ],
+    "analogy": {
+      "en": "CO2 is the exhaust: you clear it by moving more air. Oxygen is the fuel: you add it with FiO2 and PEEP.",
+      "hi": "CO2 धुआँ है: ज़्यादा हवा चलाकर उसे हटाते हैं। ऑक्सीजन ईंधन है: उसे FiO2 और PEEP से बढ़ाते हैं।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Expiratory flow that does not reach zero means air trapping. Lower the rate or lengthen expiration.",
+      "hi": "शून्य तक न पहुँचने वाला expiratory flow air trapping बताता है। दर घटाएँ या expiration लंबा करें।"
+    },
+    {
+      "en": "Plateau above 30 cmH2O: reduce the tidal volume.",
+      "hi": "Plateau 30 cmH2O से ऊपर: tidal volume घटाएँ।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Calculate PBW from height before setting tidal volume, never from actual weight.",
+      "hi": "Tidal volume सेट करने से पहले लंबाई से PBW निकालें, असली भार से कभी नहीं।"
+    },
+    {
+      "en": "Check a blood gas about 20 to 30 minutes after a ventilator change.",
+      "hi": "वेंटिलेटर बदलाव के लगभग 20 से 30 मिनट बाद blood gas जाँचें।"
+    }
+  ],
+  "remember": {
+    "en": "Rate and tidal volume clear CO2. FiO2 and PEEP oxygenate. Tidal volume 6 to 8 mL/kg PBW, plateau 30 cmH2O or less.",
+    "hi": "दर और tidal volume CO2 हटाते हैं। FiO2 और PEEP ऑक्सीजन देते हैं। Tidal volume 6 से 8 mL/kg PBW, plateau 30 cmH2O या कम।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "A ventilated patient has PaCO2 60 mmHg and normal oxygenation. What change helps most?",
+        "hi": "वेंटिलेटर पर मरीज़ का PaCO2 60 mmHg है और ऑक्सीजन सामान्य है। कौन-सा बदलाव सबसे मदद करेगा?"
+      },
+      "o": [
+        {
+          "en": "Raise FiO2",
+          "hi": "FiO2 बढ़ाना"
+        },
+        {
+          "en": "Raise PEEP",
+          "hi": "PEEP बढ़ाना"
+        },
+        {
+          "en": "Raise the respiratory rate",
+          "hi": "साँस की दर बढ़ाना"
+        },
+        {
+          "en": "Lower the tidal volume",
+          "hi": "Tidal volume घटाना"
+        }
+      ],
+      "a": 2,
+      "why": {
+        "en": "CO2 clearance depends on minute ventilation. Raising the rate raises it.",
+        "hi": "CO2 हटना minute ventilation पर निर्भर है। दर बढ़ाने से यह बढ़ता है।"
+      }
+    },
+    {
+      "q": {
+        "en": "Tidal volume should be set per kg of which weight?",
+        "hi": "Tidal volume किस भार के प्रति kg पर सेट करना चाहिए?"
+      },
+      "o": [
+        {
+          "en": "Actual body weight",
+          "hi": "असली शरीर भार"
+        },
+        {
+          "en": "Predicted body weight from height and sex",
+          "hi": "लंबाई और लिंग से अनुमानित शरीर भार"
+        },
+        {
+          "en": "Lean body mass from skinfolds",
+          "hi": "Skinfold से lean body mass"
+        },
+        {
+          "en": "Weight at birth",
+          "hi": "जन्म का भार"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "Lung size follows height and sex, not body fat.",
+        "hi": "फेफड़ों का आकार लंबाई और लिंग पर निर्भर है, शरीर की चर्बी पर नहीं।"
+      }
+    },
+    {
+      "q": {
+        "en": "What plateau pressure limit protects the lungs?",
+        "hi": "फेफड़ों की रक्षा के लिए plateau pressure की सीमा क्या है?"
+      },
+      "o": [
+        {
+          "en": "30 cmH2O or less",
+          "hi": "30 cmH2O या कम"
+        },
+        {
+          "en": "50 cmH2O or less",
+          "hi": "50 cmH2O या कम"
+        },
+        {
+          "en": "Any value if SpO2 is normal",
+          "hi": "SpO2 सामान्य हो तो कोई भी"
+        },
+        {
+          "en": "Above 40 cmH2O",
+          "hi": "40 cmH2O से ऊपर"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "The ARDS Network trial kept plateau at 30 cmH2O or less with 6 mL/kg PBW.",
+        "hi": "ARDS Network trial में 6 mL/kg PBW के साथ plateau 30 cmH2O या कम रखा गया।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "icu-ventilation",
+    "explorer": "ventilator",
+    "tool": "pf-ratio"
+  },
+  "glossary": [
+    "peep",
+    "pbw",
+    "plateau-pressure"
+  ],
+  "sources": [
+    "ARDS Network. Ventilation with lower tidal volumes as compared with traditional tidal volumes for acute lung injury and ARDS. N Engl J Med 2000;342:1301-1308.",
+    "Butterworth JF, Mackey DC, Wasnick JD. Morgan and Mikhail's Clinical Anesthesiology, 7th edition (2022): airway management, and respiratory care chapters.",
+    "StewardMD reviewed protocol kb/clinical-protocols/acute-respiratory-failure-niv-hfnc.json: oxygen targets, HFNC settings and Venturi use.",
+    "National Medical Commission. CBME Curriculum 2024, Anaesthesiology, competencies AS11.1 to AS11.6."
+  ]
+}
