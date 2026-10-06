@@ -1,0 +1,22 @@
+{
+  "name": "@stewardmd/capacitor-prep-widgets",
+  "version": "1.0.0",
+  "description": "PrepNucleus home widgets and Live Activity bridge. setData writes the readiness snapshot to the App Group (iOS WidgetKit) or SharedPreferences (Android AppWidget) and refreshes the widgets; startActivity/updateActivity/endActivity drive the iOS 16.2+ Live Activity. Exposed to JS as Capacitor.Plugins.PrepWidgets.",
+  "capacitor": {
+    "ios": {
+      "src": "ios"
+    },
+    "android": {
+      "src": "android"
+    }
+  },
+  "files": [
+    "ios/Sources",
+    "Package.swift",
+    "android/src/main",
+    "android/build.gradle",
+    "package.json"
+  ],
+  "author": "StewardMD",
+  "license": "MIT"
+}

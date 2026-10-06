@@ -23,6 +23,8 @@ struct StewardMDWidgetsBundle: WidgetBundle {
         // Assistant + reference tiles (AssistantWidgetViews.swift)
         AskMaikHomeWidget()
         DrugIndexHomeWidget()
+        // PrepNucleus readiness + today's plan (PrepWidgets.swift)
+        PrepHomeWidget()
         // Lock Screen / StandBy accessory widgets (design §08)
         CriticalLabsLockWidget()
         RoundsLockWidget()
@@ -35,6 +37,7 @@ struct StewardMDWidgetsBundle: WidgetBundle {
             CodeBlueLiveActivity()
             SepsisLiveActivity()
             ProcedureLiveActivity()
+            PrepLiveActivity()
         }
         // Control Center / Action-button Controls (iOS 18+)
         if #available(iOS 18.0, *) {

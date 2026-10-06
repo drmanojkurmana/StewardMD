@@ -71,6 +71,9 @@ project(':stewardmd-capacitor-llama').projectDir = new File('../local-plugins/ca
 include ':stewardmd-capacitor-needle'
 project(':stewardmd-capacitor-needle').projectDir = new File('../local-plugins/capacitor-needle/android')
 
+include ':stewardmd-capacitor-prep-widgets'
+project(':stewardmd-capacitor-prep-widgets').projectDir = new File('../local-plugins/capacitor-prep-widgets/android')
+
 include ':stewardmd-capacitor-vision-ocr'
 project(':stewardmd-capacitor-vision-ocr').projectDir = new File('../local-plugins/capacitor-vision-ocr/android')
 
