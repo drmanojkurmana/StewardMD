@@ -38,11 +38,24 @@ let chromeErr = ""; chrome.stderr.on("data", (d) => { chromeErr += d; });
 let msgId = 1; const pending = new Map(); let ws, sessionId; const errors = []; const flagCalls = [];
 const call = (m, p) => { const i = msgId++; return new Promise((r) => { pending.set(i, r); ws.send(JSON.stringify({ id: i, method: m, params: p || {}, sessionId })); }); };
 const ev = async (e) => { const r = await call("Runtime.evaluate", { expression: `(function(){try{${e}}catch(x){return "ERR:"+String(x&&x.message||x)}})()`, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : undefined; };
-// Screenshots land on the final frame: finite animations (entrances, ring draw) are finished first; loops keep running.
-const shotCall = async (p) => { await ev(`document.getAnimations().forEach(function (a) { try { var t = a.effect && a.effect.getTiming(); if (t && t.iterations !== Infinity) a.finish(); } catch (e) {} }); return 1;`); return call("Page.captureScreenshot", p); };
+// Screenshots land on the final frame: after 150 ms (Motion starts its animations on the next frame), finite animations
+// (entrances, ring draw) are finished; loops keep running.
+const shotCall = async (p) => { await sleep(150); await ev(`document.getAnimations().forEach(function (a) { try { var t = a.effect && a.effect.getTiming(); if (t && t.iterations !== Infinity) a.finish(); } catch (e) {} }); return 1;`); return call("Page.captureScreenshot", p); };
 const until = async (e, ms = 10000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (await ev(e) === true) return true; await sleep(150); } return false; };
 const reqs = []; let fails = 0; const ok = (c, m) => { console.log((c ? "PASS " : "FAIL ") + m); if (!c) fails++; };
 const click = (sel) => ev(`var b=document.querySelector(${JSON.stringify(sel)}); if(!b) return "missing"; b.click(); return 1;`);
+// Motion strips (STRIP=<dir>): every running animation is paused and stepped to each time in ms, one frame a step.
+const strip = async (name, ts) => {
+  if (!process.env.STRIP) return;
+  const fsx = await import("node:fs");
+  if (process.env.PN_LIGHT) await ev(`document.body.classList.remove("dark"); return 1;`);
+  for (const t of ts) {
+    await ev(`document.getAnimations().forEach(function (a) { try { a.pause(); a.currentTime = ${t}; } catch (e) {} }); return 1;`);
+    const r = await call("Page.captureScreenshot", { format: "png" });
+    if (r.result) fsx.writeFileSync(join(process.env.STRIP, name + "-" + (process.env.PN_LIGHT ? "light" : "dark") + "-" + String(t).padStart(4, "0") + ".png"), Buffer.from(r.result.data, "base64"));
+  }
+  await ev(`document.getAnimations().forEach(function (a) { try { a.play(); } catch (e) {} }); return 1;`);
+};
 const shot = async (name) => { if (!process.env.SHOTS) return; if (process.env.PN_LIGHT) await ev(`if (!document.getElementById("pnNoTr")) { var t = document.createElement("style"); t.id = "pnNoTr"; t.textContent = "*{transition:none!important}"; document.head.appendChild(t); } document.body.classList.remove("dark"); return 1;`); const r = await shotCall({ format: "png" }); if (r.result) (await import("node:fs")).writeFileSync(join(process.env.SHOTS, "prep-" + (process.env.PN_LIGHT ? "light-" : "") + name + ".png"), Buffer.from(r.result.data, "base64")); };
 
 try {
@@ -103,12 +116,35 @@ try {
   await shot("module");
   await click('#smdPrep [data-act=start][data-k=study]');
   ok(await until(`return !!document.querySelector("#smdPrep .pn-q");`, 10000), "practice starts");
+  ok(await ev(`var i=document.querySelectorAll("#smdPrep .pn-qprog .pn-qseg i"); return i.length===5 && i[0].classList.contains("cur") && document.querySelector("#smdPrep .pn-qseg").getAttribute("aria-valuenow")==="0";`) === true, "focus mode: a segmented progress strip, one segment a question, the first lit");
   let seen = [];
+  const keyRun = (k) => ev(`var t=document.activeElement||document.body; if(!document.getElementById("smdPrep").contains(t)) t=document.getElementById("smdPrep"); var e=new KeyboardEvent("keydown",{key:${JSON.stringify("K")},bubbles:true,cancelable:true}); t.dispatchEvent(e); return e.defaultPrevented;`.replace('"K"', JSON.stringify(k)));
+  const swipeRun = (dx) => ev(`var b=document.querySelector("#smdPrep .pn-run"), r=b.getBoundingClientRect(), x=r.left+r.width*0.7, y=r.top+120, o={bubbles:true,pointerType:"touch",isPrimary:true,pointerId:5};
+    b.dispatchEvent(new PointerEvent("pointerdown",Object.assign({clientX:x,clientY:y},o)));
+    b.dispatchEvent(new PointerEvent("pointermove",Object.assign({clientX:x+${dx}/3,clientY:y+2},o)));
+    b.dispatchEvent(new PointerEvent("pointermove",Object.assign({clientX:x+${dx},clientY:y+3},o)));
+    var tr=document.getElementById("pnQw").style.transform;
+    b.dispatchEvent(new PointerEvent("pointerup",Object.assign({clientX:x+${dx},clientY:y+3},o))); return tr;`);
   for (let i = 0; i < 5; i++) {
     seen.push(await ev(`return document.querySelector("#smdPrep .pn-q").textContent;`));
     if (i === 0) { await click("#smdPrep [data-act=bookmark]"); ok(await ev(`return document.querySelector("#smdPrep [data-act=bookmark]").getAttribute("aria-pressed");`) === "true", "bookmark toggles on"); }
+    if (i === 1) {
+      // Round 3: a swipe before answering resists and stays; key B answers without the reveal motion; a swipe left goes on.
+      const tr = await swipeRun(-160);
+      ok(/translateX\(-\d/.test(tr) && Math.abs(parseFloat(tr.slice(11))) < 80 && /question 2 of|Question 2 of/.test(await ev(`return document.querySelector("#smdPrep .pn-t p").textContent;`)), "an unanswered question resists a swipe (rubber band) and stays: " + tr);
+      ok(await keyRun("b") === true && await until(`return !!document.querySelector("#smdPrep .pn-fb") && document.querySelector("#smdPrep .pn-opt[data-k='1']").getAttribute("aria-pressed")==="true";`, 2000), "key B answers option B");
+      ok(await ev(`return !document.querySelector("#smdPrep .pn-fb.pn-new");`) === true, "a key answer skips the reveal motion");
+      ok(await ev(`var b=document.querySelector("#smdPrep .pn-bar [data-act=report]"); return !!b && b.getAttribute("aria-label")==="Report this question" && !!document.querySelector("#smdPrep .pn-bar [data-act=bookmark][aria-label]");`) === true, "bookmark and report are labelled icon buttons in the bar");
+      ok(await ev(`var i=document.querySelectorAll("#smdPrep .pn-qseg i"); return (i[0].classList.contains("ok")||i[0].classList.contains("no")) && i[1].classList.contains("cur");`) === true, "the strip marks question 1 right or wrong and lights question 2");
+      await swipeRun(-160);
+      ok(await until(`return /Question 3 of/.test(document.querySelector("#smdPrep .pn-t p").textContent) && !!document.querySelector("#smdPrep .pn-qw.in-r");`, 2000), "a swipe left past the line moves to the next question, arriving from the right");
+      seen.push(await ev(`return document.querySelector("#smdPrep .pn-q").textContent;`));
+      i++;
+    }
     await click('#smdPrep .pn-opt[data-k="1"]');
+    if (i === 0 && process.env.STRIP) { await sleep(40); await strip("runner-reveal", [0, 60, 120, 180, 260, 360, 520, 900]); }
     if (i === 0) {
+      ok(await ev(`return !!document.querySelector("#smdPrep .pn-fb.pn-new");`) === true, "a tapped answer plays the reveal once (.pn-new)");
       ok(await until(`return !!document.querySelector("#smdPrep .pn-fb .pn-exp");`, 3000), "an answer shows the verdict and explanation at once");
       ok(await ev(`return !document.querySelector("#smdPrep .pn-prov") && !/MedMCQA|AI-generated|Source:/.test(document.querySelector("#smdPrep .pn-fb").textContent);`) === true, "no source or authorship line under the explanation (owner rule: credits live in Terms)");
       ok(await ev(`return document.querySelectorAll("#smdPrep .pn-opt.right").length === 1;`) === true, "the right option is marked");
@@ -139,6 +175,7 @@ try {
   await click('#smdPrep [data-act=start][data-k=exam]');
   ok(await until(`return !!document.getElementById("pnClock");`, 5000), "timed test shows a clock");
   ok(await ev(`return /^\\d+:\\d\\d$/.test(document.getElementById("pnClock").textContent);`) === true, "clock reads m:ss");
+  ok(await ev(`return !!document.querySelector("#smdPrep .pn-clockw .pn-pace .rv") && document.getElementById("pnClock").parentNode.classList.contains("pn-clockw");`) === true, "the clock sits in a pace ring");
   await click('#smdPrep .pn-opt[data-k="0"]');
   ok(await ev(`return !document.querySelector("#smdPrep .pn-fb");`) === true, "no feedback during a test");
   await shot("exam");

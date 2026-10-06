@@ -104,3 +104,42 @@ body.dark .pn-root .pk-occ img { filter: brightness(.94); }
 @media (prefers-reduced-transparency: reduce) {
   .pn-root .pk-bar { background: var(--pn-bg); -webkit-backdrop-filter: none; backdrop-filter: none; }
 }
+
+/* ---- Round 3 (2026-10-07): a physical stack ----
+   The next two cards peek from under the current one (blank backs) and the first rises as a throw grows; the thrown
+   card takes a tint and a stamp for its grade (Again left, Good right, Easy up), carries on from the finger and the
+   card underneath is promoted into place. Session progress is a ring in the bar with the cards left in it. */
+.pn-root .pk-stack { position: relative; display: grid; }
+.pn-root .pk-stack > * { grid-area: 1 / 1; }
+.pn-root .pk-peek { border-radius: 20px; background: var(--pn-card); border: 1px solid var(--pn-edge); box-shadow: var(--pn-elev); transform-origin: 50% 100%; pointer-events: none; transition: transform 220ms var(--pn-ease), opacity 220ms ease; }
+.pn-root .pk-peek.p1 { transform: translateY(14px) scale(.94); }
+.pn-root .pk-peek.p2 { transform: translateY(26px) scale(.88); opacity: .5; }
+body.dark .pn-root .pk-peek { background: #0a161b; }
+.pn-root .pk-peek.drag { transition: none; }
+.pn-root .pk-peek.p1.up { transform: none; transition-duration: 190ms; }
+.pn-root .pk-stack:has(.pk-peek) { margin-bottom: 26px; }
+.pn-root .pk-card.in { animation: pk-promote 220ms var(--pn-ease); }
+@keyframes pk-promote { from { transform: translateY(14px) scale(.94); } }
+.pn-root .pk-card.out-u { transform: translateY(-110%); opacity: 0; transition-duration: 190ms; }
+.pn-root .pk-tint { position: absolute; inset: 0; z-index: 2; border-radius: 20px; pointer-events: none; opacity: 0; }
+.pn-root .pk-tint.l { background: linear-gradient(270deg, rgba(220, 50, 70, 0) 10%, rgba(220, 50, 70, .26) 100%); box-shadow: inset 0 0 0 2px rgba(230, 70, 90, .7); }
+.pn-root .pk-tint.r { background: linear-gradient(90deg, rgba(20, 170, 150, 0) 10%, rgba(20, 170, 150, .26) 100%); box-shadow: inset 0 0 0 2px rgba(40, 200, 180, .75); }
+.pn-root .pk-tint.u { background: linear-gradient(0deg, rgba(70, 120, 240, 0) 10%, rgba(70, 120, 240, .26) 100%); box-shadow: inset 0 0 0 2px rgba(100, 150, 255, .75); }
+.pn-root .pk-stamp { z-index: 3; top: -15px; padding: 5px 12px; font-size: 14px; letter-spacing: .02em; text-transform: uppercase; box-shadow: 0 6px 16px -8px rgba(0, 0, 0, .5); }
+.pn-root .pk-stamp.l { transform: rotate(4deg); }
+.pn-root .pk-stamp.r { transform: rotate(-4deg); }
+.pn-root .pk-stamp.u { left: 50%; right: auto; transform: translateX(-50%); color: #4d7cf0; }
+body.dark .pn-root .pk-stamp.u { color: #8fb0ff; }
+.pn-root .pk-easy b { color: #3d6fe6; }
+body.dark .pn-root .pk-easy b { color: #8fb0ff; }
+.pn-root .pk-ring { position: relative; flex: 0 0 auto; width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+.pn-root .pk-ring svg { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+.pn-root .pk-ring circle { fill: none; stroke-width: 3.5; }
+.pn-root .pk-ring .rt { stroke: var(--pn-s2); }
+.pn-root .pk-ring .rv { stroke: var(--pn-pri); stroke-linecap: round; }
+.pn-root .pk-ring b { font-family: var(--pn-num); font-size: 14px; font-weight: 800; font-variant-numeric: tabular-nums; }
+@media (prefers-reduced-motion: reduce) {
+  .pn-root .pk-card.in { animation: pn-fade 150ms ease; }
+  .pn-root .pk-peek { transition: none; }
+}
+.pn-root .pk-body { padding-top: 22px; }

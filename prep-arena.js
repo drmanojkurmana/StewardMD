@@ -72,6 +72,20 @@
     return Object.keys(by).map(function (k) { var b = by[k]; b.pct = Math.round(b.ok * 100 / b.t); return b; })
       .sort(function (a, b) { return a.pct - b.pct || b.t - a.t || (a.sid < b.sid ? -1 : 1); });
   }
+  /* heatWeeks(days, today, weeks) -> [{ d, n }] in columns of Monday to Sunday, oldest week first, ending with this
+     week; days after today carry n = -1. dayNum 0 (1970-01-01) was a Thursday, so (d + 3) % 7 is 0 on a Monday. */
+  function heatWeeks(days, today, weeks) {
+    var start = today - (today + 3) % 7 - 7 * (weeks - 1), out = [];
+    for (var d = start; d < start + 7 * weeks; d++) out.push({ d: d, n: d > today ? -1 : Number((days || {})[d]) || 0 });
+    return out;
+  }
+  function heatLevel(n) { return n <= 0 ? 0 : n < 10 ? 1 : n < 25 ? 2 : n < 50 ? 3 : 4; }
+  // The longest run of consecutive study days in the store.
+  function bestStreak(days) {
+    var ks = Object.keys(days || {}).filter(function (k) { return days[k] > 0; }).map(Number).sort(function (a, b) { return a - b; }), best = 0, run = 0;
+    ks.forEach(function (d, i) { run = i && d === ks[i - 1] + 1 ? run + 1 : 1; if (run > best) best = run; });
+    return best;
+  }
   function signed(n) { n = Math.round(Number(n) || 0); return (n > 0 ? "+" : n < 0 ? "minus " : "") + Math.abs(n); }
   // The answers map an event submit sends: { itemId: optionIndex } for answered items only.
   function answersOf(items, ans) { var out = {}; items.forEach(function (it, i) { if (ans[i] >= 0) out[it.id] = ans[i]; }); return out; }
@@ -135,7 +149,7 @@
     return "The Arena did not answer. Try again in a moment.";
   }
   var PURE = { enabled: enabled, ms: ms, normEvent: normEvent, eventsFrom: eventsFrom, phase: phase, pickEvent: pickEvent, countdown: countdown, eventLine: eventLine,
-    lastDays: lastDays, accuracyBySubject: accuracyBySubject, signed: signed, answersOf: answersOf, battleNew: battleNew, battleStep: battleStep, battleClosed: battleClosed, canPick: canPick, liveBattle: liveBattle, errWord: errWord };
+    lastDays: lastDays, heatWeeks: heatWeeks, heatLevel: heatLevel, bestStreak: bestStreak, accuracyBySubject: accuracyBySubject, signed: signed, answersOf: answersOf, battleNew: battleNew, battleStep: battleStep, battleClosed: battleClosed, canPick: canPick, liveBattle: liveBattle, errWord: errWord };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
@@ -383,7 +397,7 @@
   function openBattle() { joined(function () { H.push(renderBattle); startBattle(); }); }
   function startBattle() {
     stopBattle();
-    A.battle = battleNew(); A.retry = 0;
+    A.battle = battleNew(); A.retry = 0; A.lastScore = null; A.ptsFor = -1;
     connect(false);
     paintBattle();
   }
@@ -424,12 +438,33 @@
     try { A.ws.send(JSON.stringify({ t: "a", i: b.i, k: k })); } catch (e) { return; }
     var x = {}, f; for (f in b) x[f] = b[f]; x.pick = k; A.battle = x; paintBattle();
   }
+  // Initials in a gradient ring, the hue fixed by the name (so a player keeps their colour across battles).
+  function initials(name) { var w = String(name || "").trim().split(/\s+/).filter(Boolean); return ((w[0] || "?").charAt(0) + (w.length > 1 ? w[w.length - 1].charAt(0) : "")).toUpperCase(); }
+  function hueOf(name) { var h = 0, t = String(name || ""); for (var i = 0; i < t.length; i++) h = (h * 31 + t.charCodeAt(i)) % 360; return h; }
+  function avatar(name, cls) { return '<span class="pn-av' + (cls ? " " + cls : "") + '" style="--h:' + hueOf(name) + '" aria-hidden="true"><span>' + esc(initials(name)) + "</span></span>"; }
+  // The score bar. A score that changed since the last paint rolls in (.tick); a round's points float up once.
   function versus(b) {
-    var me = displayName();
+    var me = displayName(), last = A.lastScore || [b.score[0], b.score[1]], pts = "";
+    if (b.phase === "r" && A.ptsFor !== b.i) {
+      A.ptsFor = b.i;
+      if (b.you && b.you.pts > 0) pts += '<span class="pn-pts l" aria-hidden="true">+' + b.you.pts + "</span>";
+      if (b.them && b.them.pts > 0) pts += '<span class="pn-pts r" aria-hidden="true">+' + b.them.pts + "</span>";
+    }
+    A.lastScore = [b.score[0], b.score[1]];
     return '<div class="pn-vs" aria-label="Score: you ' + b.score[0] + ", " + esc(b.opp.name) + " " + b.score[1] + '">' +
-      '<div class="pn-vs-p"><b>' + esc(me) + "</b><small>You</small></div>" +
-      '<div class="pn-vs-s" aria-hidden="true"><span>' + b.score[0] + "</span><i></i><span>" + b.score[1] + "</span></div>" +
-      '<div class="pn-vs-p r"><b>' + esc(b.opp.name) + "</b><small>" + (b.opp.rating ? "Rating " + b.opp.rating : "Opponent") + "</small></div></div>";
+      '<div class="pn-vs-p">' + avatar(me, "sm") + "<span><b>" + esc(me) + "</b><small>You</small></span></div>" +
+      '<div class="pn-vs-s" aria-hidden="true"><span' + (b.score[0] !== last[0] ? ' class="tick"' : "") + ">" + b.score[0] + "</span><i></i><span" + (b.score[1] !== last[1] ? ' class="tick"' : "") + ">" + b.score[1] + "</span></div>" +
+      '<div class="pn-vs-p r"><span><b>' + esc(b.opp.name) + "</b><small>" + (b.opp.rating ? "Rating " + b.opp.rating : "Opponent") + "</small></span>" + avatar(b.opp.name, "sm") + "</div>" + pts + "</div>";
+  }
+  // The match moment: both players, their ratings, and a bolt between them (prep-motion.js plays it in once).
+  var BOLT = '<svg class="pn-bolt" viewBox="0 0 24 48" aria-hidden="true"><path d="M15 1L3 27h8l-3 20L21 18h-8z"/></svg>';
+  function vsIntroHtml(b) {
+    var me = displayName();
+    return '<section class="pn-vs pn-vsi" role="status" aria-label="' + esc(me) + " versus " + esc(b.opp.name) + '">' +
+      '<div class="pn-vsi-p l">' + avatar(me) + "<b>" + esc(me) + "</b><small>You</small></div>" +
+      '<div class="pn-vsi-mid" aria-hidden="true"><span class="pn-flash"></span>' + BOLT + "</div>" +
+      '<div class="pn-vsi-p r">' + avatar(b.opp.name) + "<b>" + esc(b.opp.name) + "</b><small>" + (b.opp.rating ? "Rating " + b.opp.rating : "Opponent") + "</small></div>" +
+      '<p class="pn-vsi-sub"><b>' + (b.resumed ? "Back in the battle" : "Matched") + "</b> " + b.n + " questions, " + b.secs + " seconds each. Faster right answers score more.</p></section>";
   }
   function battleTitle(b) { return b.phase === "q" || b.phase === "r" ? "Round " + (b.i + 1) + " of " + b.n : "1v1 battle"; }
   function paintBattle() {
@@ -449,7 +484,7 @@
     else if (b.phase === "lost" && b.reconnecting) body = (b.opp ? versus(b) : "") + '<section class="pn-panel pn-mm" role="status"><span class="pn-mm-bar" aria-hidden="true"><i></i></span><p class="pn-mid">Reconnecting</p><p class="pn-mut">The connection dropped. Your battle is held for 10 seconds.</p></section>';
     else if (b.phase === "lost") body = (b.opp ? versus(b) : "") + '<section class="pn-panel pn-score" role="alert"><p class="pn-mid">Connection lost</p><p class="pn-mut">' + (b.opp ? "A player away for more than 10 seconds loses the battle." : "The battle server could not be reached.") + " Check the connection and try again.</p></section>" +
       '<div class="pn-navrow"><button type="button" class="pn-btn" data-act="back">Back</button><button type="button" class="pn-btn pri" data-act="a-again">Try again</button></div>';
-    else if (b.phase === "match") body = versus(b) + '<section class="pn-panel pn-score" role="status"><p class="pn-mid">' + (b.resumed ? "Back in the battle" : "Matched") + '</p><p class="pn-mut">' + b.n + " questions, " + b.secs + " seconds each. Faster right answers score more.</p></section>";
+    else if (b.phase === "match") { body = vsIntroHtml(b); A.lastScore = [b.score[0], b.score[1]]; }
     else if (b.phase === "q" || b.phase === "r") {
       var shown = b.phase === "r", now = Date.now(), total = Math.max(1, b.deadline - b.got), left = Math.max(0, b.deadline - now);
       body = versus(b) +
@@ -468,7 +503,7 @@
       var head = b.result === "win" ? "You won" : b.result === "loss" ? "You lost" : "A draw", rt = b.rating;
       var why = b.forfeit === "opp" ? esc(b.opp.name) + " left the battle." : b.forfeit === "you" ? "You were away for more than 10 seconds." : b.forfeit === "both" ? "Both players left, so it is a draw." : "";
       body = versus(b) + '<section class="pn-panel pn-score pn-final ' + b.result + '"><p class="pn-big">' + head + '</p><p class="pn-final-s">' + b.score[0] + " to " + b.score[1] + "</p>" + (why ? '<p class="pn-mut">' + why + "</p>" : "") +
-        (rt ? '<p class="pn-mut">Rating ' + rt.before + " to <b>" + rt.after + "</b> (" + signed(rt.after - rt.before) + ")</p>" : "") + "</section>" +
+        (rt ? '<p class="pn-mut pn-rtl">Rating ' + rt.before + ' to <b class="pn-rtick" data-from="' + rt.before + '" data-to="' + rt.after + '">' + rt.after + '</b> <span class="pn-dchip' + (rt.after >= rt.before ? " up" : " down") + '">(' + signed(rt.after - rt.before) + ")</span></p>" : "") + "</section>" +
         '<div class="pn-navrow"><button type="button" class="pn-btn' + (A.room ? " pri" : "") + '" data-act="back">Done</button>' + (A.room ? "" : '<button type="button" class="pn-btn pri" data-act="a-again">Play again</button>') + "</div>";
     }
     H.paint(H.bar(battleTitle(b), b.opp ? "vs " + esc(b.opp.name) : esc(H.exam().label), "back") + '<div class="pn-body pn-run pn-battle">' + body + "</div>", focus);
@@ -480,14 +515,14 @@
     var acc = accuracyBySubject(s.mod, function (m) { return H.subjectOfModule(m); });
     var mh = (s.mh || []).slice().reverse();
     var arena = on() && user() && online();
-    H.paint(H.bar("My stats", "Practice on this phone", "back") + '<div class="pn-body">' +
+    H.paint(H.bar("My stats", "Practice on this phone", "back") + '<div class="pn-body">' + profileHtml(s, td, acc) +
       '<h2 class="pn-h">Last 30 days</h2><section class="pn-panel"><p class="pn-stat-n"><b>' + H.fmt(sum) + "</b> questions answered</p>" +
       '<div class="pn-days" role="img" aria-label="Questions answered per day, last 30 days, ' + H.fmt(sum) + ' in all">' + days.map(function (n, i) {
         return '<i class="' + (n ? "" : "z") + (i === days.length - 1 ? " t" : "") + '" style="height:' + (n ? Math.max(8, Math.round(n * 100 / max)) : 4) + '%"></i>';
       }).join("") + '</div><p class="pn-days-ax" aria-hidden="true"><span>30 days ago</span><span>Today</span></p></section>' +
-      '<h2 class="pn-h">Accuracy by subject</h2>' + (acc.length ? '<ul class="pn-acc">' + acc.map(function (x) {
+      '<p class="pn-eb" aria-hidden="true">Share right, weakest first</p><h2 class="pn-h">Subject mastery</h2>' + (acc.length ? '<ul class="pn-acc pn-mast">' + acc.map(function (x) {
         var sb = H.subjectById(x.sid);
-        return '<li><span class="pn-ic sm" aria-hidden="true" style="--h:' + (H.subjHue ? H.subjHue(x.sid) : 172) + '">' + H.subjIco(x.sid) + '</span><span class="pn-acc-b"><span class="pn-acc-h"><b>' + (sb ? H.tx(sb.name) : esc(x.sid)) + "</b><span>" + x.pct + '%</span></span><span class="pn-meter" aria-hidden="true"><i style="width:' + x.pct + '%"></i></span><small>' + H.fmt(x.ok) + " of " + H.fmt(x.t) + " right</small></span></li>";
+        return '<li><span class="pn-ic sm" aria-hidden="true" style="--h:' + (H.subjHue ? H.subjHue(x.sid) : 172) + '">' + H.subjIco(x.sid) + '</span><span class="pn-acc-b"><span class="pn-acc-h"><b>' + (sb ? H.tx(sb.name) : esc(x.sid)) + "</b><span>" + x.pct + '%</span></span><span class="pn-meter" aria-hidden="true"><i data-p="' + (x.pct / 100).toFixed(3) + '" style="transform:scaleX(' + (x.pct / 100).toFixed(3) + ')"></i></span><small>' + H.fmt(x.ok) + " of " + H.fmt(x.t) + " right</small></span></li>";
       }).join("") + "</ul>" : '<p class="pn-empty">Answer a few questions and each subject shows its share right here.</p>') +
       '<h2 class="pn-h">Mock exams</h2>' + (mh.length ? '<ul class="pn-mods">' + mh.map(function (m) {
         var d = new Date(m.ts), ds = ""; try { ds = d.toLocaleDateString("en-IN", { day: "numeric", month: "short" }); } catch (e) {}
@@ -502,6 +537,84 @@
       return api("GET", "me/stats").then(function (j) { put(arenaStatsHtml(j)); });
     }).then(null, function (e) { put('<p class="pn-err" role="alert">' + esc(errText(e)) + "</p>"); });
   }
+  /* ---------- profile: level, streaks, the 12-week calendar, a shareable card ---------- */
+  function totals(s) { var t = 0, ok = 0; Object.keys(s.mod || {}).forEach(function (m) { t += s.mod[m].t || 0; ok += s.mod[m].ok || 0; }); return { t: t, ok: ok, pct: t ? Math.round(ok * 100 / t) : 0 }; }
+  function levelNow(s) { var P = G.PREP_PLAN && G.PREP_PLAN._pure; return P && P.levelOf ? P.levelOf(P.xpOf(s)) : null; }
+  function streakNow(s, td) { var C = H.core && H.core(); return C && C.streak ? C.streak(s, td) : 0; }
+  function profileHtml(s, td) {
+    var cur = streakNow(s, td), best = Math.max(cur, bestStreak(s.days)), tot = totals(s), lv = levelNow(s);
+    var cells = heatWeeks(s.days, td, 12), active = cells.filter(function (c) { return c.n > 0; }).length, top = cells.reduce(function (a, c) { return Math.max(a, c.n); }, 0);
+    var p = lv ? Math.max(0, Math.min(1, lv.p)) : 0;
+    return (lv ? '<section class="pn-panel pn-lvb" aria-label="Level ' + lv.n + ", " + esc(lv.rank) + ", " + H.fmt(lv.xp - lv.lo) + " of " + H.fmt(lv.hi - lv.lo) + " XP to level " + (lv.n + 1) + '">' +
+        '<div class="pn-lvb-h" aria-hidden="true"><span class="pn-lvb-n"><small>Level</small><b>' + lv.n + '</b></span><span class="pn-lvb-t"><b>' + esc(lv.rank) + "</b><small>" + H.fmt(lv.xp) + " XP in all</small></span></div>" +
+        '<span class="pn-lvbar" aria-hidden="true"><i data-p="' + p.toFixed(3) + '" style="transform:scaleX(' + p.toFixed(3) + ')"></i></span>' +
+        '<p class="pn-lvb-x" aria-hidden="true">' + H.fmt(lv.xp - lv.lo) + " / " + H.fmt(lv.hi - lv.lo) + " XP to level " + (lv.n + 1) + "</p>" +
+        '<button type="button" class="pn-btn pri" data-act="a-share">' + SHARE + " Share my progress</button></section>" : "") +
+      '<section class="pn-panel pn-rec pn-streaks"><div><b>' + cur + "</b><small>Day streak</small></div><div><b>" + best + "</b><small>Best streak</small></div><div><b>" + H.fmt(tot.t) + "</b><small>Answered</small></div><div><b>" + tot.pct + "%</b><small>Right</small></div></section>" +
+      '<p class="pn-eb" aria-hidden="true">The last 12 weeks</p><h2 class="pn-h">Study calendar</h2><section class="pn-panel pn-cal">' +
+      '<div class="pn-heat" role="img" aria-label="Study calendar, last 12 weeks: ' + active + " active " + (active === 1 ? "day" : "days") + (top ? ", the busiest with " + top + " answers" : "") + '">' +
+      '<span class="pn-heat-d" aria-hidden="true"><i>M</i><i></i><i>W</i><i></i><i>F</i><i></i><i>S</i></span><span class="pn-heat-g">' +
+      cells.map(function (c) { var l = heatLevel(c.n), cls = c.n < 0 ? "f" : (l ? "l" + l : "") + (c.d === td ? " t" : ""); cls = cls.trim(); return "<i" + (cls ? ' class="' + cls + '"' : "") + "></i>"; }).join("") + "</span></div>" +
+      '<p class="pn-heat-k" aria-hidden="true"><span>' + active + " active " + (active === 1 ? "day" : "days") + '</span><span class="pn-heat-l">Less<i></i><i class="l1"></i><i class="l2"></i><i class="l3"></i><i class="l4"></i>More</span></p></section>';
+  }
+  var SHARE = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 8l5-5 5 5M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg>';
+  /* The share card: 1080 x 1350, the night sky art, the level, the streak, the calendar and the totals. Only the
+     student's own counts from this phone; no name, email or ID. */
+  function img(src) { return new Promise(function (res) { var i = new G.Image(); i.onload = function () { res(i); }; i.onerror = function () { res(null); }; i.src = src; }); }
+  function rr(x, cx, y, w, h, r) { x.beginPath(); x.moveTo(cx + r, y); x.arcTo(cx + w, y, cx + w, y + h, r); x.arcTo(cx + w, y + h, cx, y + h, r); x.arcTo(cx, y + h, cx, y, r); x.arcTo(cx, y, cx + w, y, r); x.closePath(); }
+  function drawCard(s, td) {
+    var W = 1080, HT = 1350, cv = G.document.createElement("canvas"); cv.width = W; cv.height = HT;
+    var x = cv.getContext("2d"), F = '-apple-system, "SF Pro Rounded", "Segoe UI", Roboto, sans-serif';
+    var cur = streakNow(s, td), tot = totals(s), lv = levelNow(s), cells = heatWeeks(s.days, td, 12), M = 84;
+    return Promise.all([img("/prep/art/hero-dark.webp"), img("/prep/art/streak.webp")]).then(function (im) {
+      var g = x.createLinearGradient(0, 0, W * 0.4, HT); g.addColorStop(0, "#0f4f4b"); g.addColorStop(0.55, "#0a2f30"); g.addColorStop(1, "#061a1e");
+      x.fillStyle = g; x.fillRect(0, 0, W, HT);
+      if (im[0]) x.drawImage(im[0], 0, 0, W, W * im[0].height / im[0].width);
+      var fade = x.createLinearGradient(0, 260, 0, 860); fade.addColorStop(0, "rgba(6,26,30,0)"); fade.addColorStop(1, "rgba(6,26,30,1)");
+      x.fillStyle = fade; x.fillRect(0, 260, W, 600); x.fillStyle = "#061a1e"; x.fillRect(0, 859, W, HT - 859);
+      x.fillStyle = "#9ff5e8"; x.font = "700 32px " + F; x.fillText("PREPNUCLEUS", M, 116);
+      if (im[1]) { x.save(); x.beginPath(); x.arc(W - 196, 352, 112, 0, Math.PI * 2); x.clip(); x.drawImage(im[1], W - 308, 240, 224, 224); x.restore();
+        x.beginPath(); x.arc(W - 196, 352, 112, 0, Math.PI * 2); x.strokeStyle = "rgba(255,195,92,.55)"; x.lineWidth = 4; x.stroke(); }
+      if (lv) {
+        x.fillStyle = "#ffffff"; x.font = "800 96px " + F; x.fillText("Level " + lv.n, M, 470);
+        x.fillStyle = "#63f0db"; x.font = "700 46px " + F; x.fillText(lv.rank, M, 536);
+        rr(x, M, 576, W - 2 * M, 16, 8); x.fillStyle = "rgba(255,255,255,.14)"; x.fill();
+        rr(x, M, 576, Math.max(16, (W - 2 * M) * Math.max(0, Math.min(1, lv.p))), 16, 8); x.fillStyle = "#63f0db"; x.fill();
+      }
+      x.fillStyle = "#ffffff"; x.font = "800 150px " + F; x.fillText(String(cur), M, 776);
+      var sw = x.measureText(String(cur)).width;
+      x.fillStyle = "#ffc35c"; x.font = "700 44px " + F; x.fillText("day streak", M + sw + 24, 764);
+      var cw = 62, ch = 34, gx = M + (W - 2 * M - 12 * cw - 11 * 12) / 2, gy = 832;
+      cells.forEach(function (c, i) {
+        if (c.n < 0) return;
+        rr(x, gx + Math.floor(i / 7) * (cw + 12), gy + (i % 7) * (ch + 8), cw, ch, 8);
+        x.fillStyle = ["rgba(255,255,255,.08)", "rgba(99,240,219,.3)", "rgba(99,240,219,.52)", "rgba(99,240,219,.76)", "#63f0db"][heatLevel(c.n)]; x.fill();
+      });
+      [[H.fmt(tot.t), "answered"], [tot.pct + "%", "right"], [lv ? H.fmt(lv.xp) : "0", "XP"]].forEach(function (st, i) {
+        var cx = M + i * ((W - 2 * M) / 3);
+        x.fillStyle = "#ffffff"; x.font = "800 64px " + F; x.fillText(st[0], cx, 1214);
+        x.fillStyle = "#b5dbd5"; x.font = "600 32px " + F; x.fillText(st[1], cx, 1258);
+      });
+      x.fillStyle = "rgba(181,219,213,.7)"; x.font = "600 28px " + F; x.fillText("StewardMD", M, 1312);
+      return cv;
+    });
+  }
+  function shareProgress(btn) {
+    var s = H.store(), td = H.today();
+    btn.disabled = true;
+    drawCard(s, td).then(function (cv) {
+      var P = G.Capacitor && G.Capacitor.Plugins, data = cv.toDataURL("image/png"), name = "prepnucleus-progress.png";
+      if (G.SMD_IS_NATIVE && P && P.Filesystem && P.Filesystem.writeFile && P.Share && P.Share.share)
+        return P.Filesystem.writeFile({ path: name, data: data.split(",")[1], directory: "CACHE" }).then(function (w) { return P.Share.share({ title: "My PrepNucleus progress", url: w.uri, dialogTitle: "Share progress" }); });
+      return new Promise(function (res) { cv.toBlob(function (b) { res(b); }, "image/png"); }).then(function (b) {
+        var f = null; try { f = new G.File([b], name, { type: "image/png" }); } catch (e) {}
+        if (f && G.navigator.canShare && G.navigator.canShare({ files: [f] })) return G.navigator.share({ files: [f], title: "My PrepNucleus progress" });
+        var a = G.document.createElement("a"); a.href = data; a.download = name; G.document.body.appendChild(a); a.click(); a.remove();
+      });
+    }).then(null, function (e) { if (!(e && e.name === "AbortError")) H.toast("The progress card could not be shared."); }).then(function () { btn.disabled = false; });
+  }
+  A.drawCard = function (s, td) { return drawCard(s || H.store(), td || H.today()); };
+
   // me/stats: { player: { rating, battles, wins }, events: [{ kind, score, right, wrong, blank, at }], battles: [{ opp,
   // score, result, rating, endedAt }] (latest 60), trend }. Losses and draws come from the listed battles.
   function arenaStatsHtml(j) {
@@ -524,6 +637,7 @@
     H = host;
     var v = b.getAttribute("data-v");
     if (a === "a-stats") return H.push(renderStats);
+    if (a === "a-share") return shareProgress(b);
     // A battle or consent sheet opened from prep-social.js (friend challenge) works with the Arena flag off.
     if (!on() && !A.sheet && !A.battle) return;
     if (a === "a-retryhome") { A.events = null; return H.rerender(); }

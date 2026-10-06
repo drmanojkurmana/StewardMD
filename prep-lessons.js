@@ -223,6 +223,7 @@
 
   /* ---------- drawing ---------- */
   function ico(n) { return host.ico(n); }
+  function reduced() { try { return G.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } }
   var ICO = {
     pause: '<path d="M8 5v14M16 5v14"/>',
     book: '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 21V5M8 7h7M8 11h5"/>', ask: '<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5M12 16.5h.01"/>',
@@ -281,7 +282,9 @@
     return '<div class="pn-lsn-bar" id="pnLsnBar">' +
       (askable() ? '<button type="button" class="pn-ib" data-act="l-ask" aria-label="Ask MaiK about this step">' + ic("ask") + "</button>" : "") +
       '<button type="button" class="pn-ib" data-act="l-prev" aria-label="Previous step"' + (L.i ? "" : " disabled") + ">" + ic("back") + "</button>" +
-      (speak ? '<button type="button" class="pn-lsn-play' + (L.playing ? " on" : "") + '" data-act="l-play" aria-pressed="' + L.playing + '" aria-label="' + (L.playing ? "Pause narration" : "Play narration") + '">' + ic(L.playing ? "pause" : "play") + "</button>" +
+      // Play is a pill: the icon and a small waveform that moves only while the voice speaks.
+      (speak ? '<button type="button" class="pn-lsn-play' + (L.playing ? " on" : "") + '" data-act="l-play" aria-pressed="' + L.playing + '" aria-label="' + (L.playing ? "Pause narration" : "Play narration") + '">' + ic(L.playing ? "pause" : "play") +
+        '<span class="pn-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></button>' +
         '<button type="button" class="pn-lsn-spd" data-act="l-speed" aria-label="Narration speed ' + s.lsp.r + ' times, change">' + speedLabel(s.lsp.r) + "</button>" : "") +
       '<button type="button" class="pn-btn pri pn-lsn-next" data-act="l-next">' + (last ? "Finish" : "Next") + " " + ic(last ? "check" : "next") + "</button></div>";
   }
@@ -291,7 +294,7 @@
     var autoBtn = canSpeak() ? '<button type="button" class="pn-lsn-auto' + (s.lsp.au ? " on" : "") + '" data-act="l-auto" aria-pressed="' + !!s.lsp.au + '" aria-label="Auto-advance with narration">Auto</button>' : "";
     return host.bar(escH(les.title), "Step " + (L.i + 1) + " of " + n, "back", autoBtn) +
       '<div class="pn-lsn-prog" role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="' + n + '" aria-valuenow="' + (L.i + 1) + '">' +
-      les.steps.map(function (x, k) { return "<i" + (k <= L.i ? ' class="on"' : "") + "></i>"; }).join("") + "</div>" +
+      les.steps.map(function (x, k) { return "<i" + (k <= L.i ? ' class="on' + (k === L.i ? " cur" : "") + '"' : "") + "></i>"; }).join("") + "</div>" +
       '<div class="pn-body pn-lsn" id="pnLsn"><article class="pn-lsn-step' + (L.dir ? (L.dir > 0 ? " fwd" : " rev") : "") + '" tabindex="-1" aria-roledescription="lesson step">' +
       '<p class="pn-lsn-tx">' + boldHtml(step.tx) + "</p>" + visHtml(step.vis) + "</article>" +
       (L.i === 0 && canSpeak() ? '<p class="pn-note">Narration uses this device\'s own voice.</p>' : "") +
@@ -311,7 +314,7 @@
   function zoomHtml() {
     var v = L.les.steps[L.i].vis;
     return '<div class="pn-zoom" role="dialog" aria-modal="true" aria-label="Image, enlarged" id="pnZoom"><div class="pn-zoom-top"><p>' + escH(v.caption) + '</p><button type="button" class="pn-ib" data-act="l-unzoom" aria-label="Close image">' + ic("close") + "</button></div>" +
-      '<div class="pn-zoom-sc"><button type="button" class="pn-zoom-b" data-act="l-zoom2" aria-pressed="false" aria-label="Enlarge further"><img src="' + escH(imgSrc(v.src)) + '" alt="' + escH(v.alt) + '"></button></div><p class="pn-zoom-h">Tap the image to enlarge it further</p></div>';
+      '<div class="pn-zoom-sc"><button type="button" class="pn-zoom-b" data-act="l-zoom2" aria-pressed="false" aria-label="Enlarge further"><img src="' + escH(imgSrc(v.src)) + '" alt="' + escH(v.alt) + '"></button></div><p class="pn-zoom-h">Pinch or tap to zoom, drag to look around</p></div>';
   }
   function draw(focus) {
     if (!L.les || !host) return;
@@ -319,6 +322,50 @@
     host.paint(L.fin ? finishHtml() : readerHtml() + (L.zoom ? zoomHtml() : ""), focus || (L.fin ? ".pn-lsn-fin" : L.zoom ? "[data-act=l-unzoom]" : null));
     L.dir = 0;
     if (!L.fin) bindSwipe(r.querySelector("#pnLsn"));
+    if (L.zoom) bindPinch(r.querySelector(".pn-zoom-sc"));
+  }
+  /* The enlarged image: pinch between 1x and 4x around the fingers' midpoint, drag to pan once zoomed, tap to toggle
+     2.2x (the button, so keys work too). Transform only; it eases back to 1x when let go under 1.05x. */
+  var Z = { s: 1, x: 0, y: 0, moved: 0 };
+  function zoomTo(img, s, x, y, ease) {
+    var w = img.offsetWidth || 1, h = img.offsetHeight || 1, mx = (s - 1) * w / 2, my = (s - 1) * h / 2;
+    Z.s = s; Z.x = Math.max(-mx, Math.min(mx, x)); Z.y = Math.max(-my, Math.min(my, y));
+    img.style.transition = ease ? "transform 240ms cubic-bezier(.23, 1, .32, 1)" : "none";
+    img.style.transform = "translate(" + Z.x.toFixed(1) + "px, " + Z.y.toFixed(1) + "px) scale(" + Z.s.toFixed(3) + ")";
+  }
+  function bindPinch(sc) {
+    var btn = sc && sc.querySelector(".pn-zoom-b"), img = btn && btn.querySelector("img");
+    if (!img) return;
+    Z = { s: 1, x: 0, y: 0, moved: 0 };
+    var pts = {}, g = null;
+    var list = function () { return Object.keys(pts).map(function (k) { return pts[k]; }); };
+    var start = function () {
+      var p = list(), r = img.getBoundingClientRect(), cx = r.left + r.width / 2 - Z.x, cy = r.top + r.height / 2 - Z.y;
+      if (p.length >= 2) g = { pinch: 1, d: Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y) || 1, s: Z.s, x: Z.x, y: Z.y, mx: (p[0].x + p[1].x) / 2 - cx, my: (p[0].y + p[1].y) / 2 - cy };
+      else if (p.length === 1) g = { pinch: 0, px: p[0].x, py: p[0].y, x: Z.x, y: Z.y };
+      else g = null;
+    };
+    sc.addEventListener("pointerdown", function (e) { pts[e.pointerId] = { x: e.clientX, y: e.clientY }; try { sc.setPointerCapture(e.pointerId); } catch (x) {} start(); });
+    sc.addEventListener("pointermove", function (e) {
+      if (!pts[e.pointerId] || !g) return;
+      pts[e.pointerId] = { x: e.clientX, y: e.clientY };
+      var p = list();
+      if (g.pinch && p.length >= 2) {
+        var s = Math.max(1, Math.min(4, g.s * Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y) / g.d)), k = s / g.s;
+        zoomTo(img, s, g.mx - (g.mx - g.x) * k, g.my - (g.my - g.y) * k, false); Z.moved = Date.now();
+      } else if (!g.pinch && Z.s > 1) {
+        var dx = e.clientX - g.px, dy = e.clientY - g.py;
+        if (Math.abs(dx) + Math.abs(dy) > 6) { zoomTo(img, Z.s, g.x + dx, g.y + dy, false); Z.moved = Date.now(); }
+      }
+    });
+    var up = function (e) {
+      if (!pts[e.pointerId]) return;
+      delete pts[e.pointerId];
+      if (!list().length && Z.s < 1.05) { zoomTo(img, 1, 0, 0, true); btn.classList.remove("big"); btn.setAttribute("aria-pressed", "false"); }
+      else if (Z.s > 1.05) { btn.classList.add("big"); btn.setAttribute("aria-pressed", "true"); }
+      start();
+    };
+    sc.addEventListener("pointerup", up); sc.addEventListener("pointercancel", up);
   }
   function bindSwipe(el) {
     if (!el) return;
@@ -403,7 +450,13 @@
     if (a === "l-speed") { var s = store(); s.lsp.r = nextSpeed(s.lsp.r); host.save(); if (L.playing) narrate(); return drawBar(); }
     if (a === "l-auto") { var s2 = store(); s2.lsp.au = s2.lsp.au ? 0 : 1; host.save(); return draw("[data-act=l-auto]"); }
     if (a === "l-zoom") { L.zoom = true; return draw(); }
-    if (a === "l-zoom2") { var big = b.classList.toggle("big"); b.setAttribute("aria-pressed", String(big)); return; }
+    if (a === "l-zoom2") {
+      if (Date.now() - Z.moved < 350) return;   // the click that ends a pinch or a pan is not a tap
+      var big = Z.s <= 1.05, img = b.querySelector("img");
+      b.classList.toggle("big", big); b.setAttribute("aria-pressed", String(big));
+      if (img) zoomTo(img, big ? 2.2 : 1, 0, 0, !reduced());
+      return;
+    }
     if (a === "l-unzoom") { L.zoom = false; return draw("[data-act=l-zoom]"); }
     if (a === "l-again") { L.fin = false; L.i = 0; L.dir = 0; save(); return draw(); }
     if (a === "l-quiz") return startQuiz();

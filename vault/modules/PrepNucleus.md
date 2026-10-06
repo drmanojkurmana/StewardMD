@@ -436,6 +436,38 @@ Owner decisions: [[decisions/Decisions]] "PrepNucleus pricing, free tier and soc
   a lesson's first XP and a set at 70% or better; lesson XP counts up; the level bar fills; spotlight and tilt on tiles
   for mouse or trackpad only. Children of hero surfaces are `position: relative`, so the confetti layer is excluded.
 
+## Premium UI round 3 (2026-10-07, same branch, `?v=prep16`)
+- Runner focus mode (prep.js `renderRun`): `.pn-qprog` strip under the bar (one segment a question up to 30: right,
+  wrong, answered, marked, current; a plain fill beyond), `runStreak` chip "N in a row" (3 or more, practice only, from
+  this set's answers), a pace ring around the test clock (empties over limit / questions; `.over` turns it amber),
+  bookmark and report as labelled icon buttons in the bar (`.pn-acts`), larger stem, options press to 0.97.
+  The reveal plays once per answer: `r.fresh` puts `.pn-new` on the feedback card only on the paint right after a tap
+  (a bookmark or tag repaint keeps still; a key answer sets `st.kb` and skips it). prep-motion.js: chosen option lifts
+  or shakes once, the right option glows (CSS `pn-glow` via `:has(.pn-new)`), the card springs up 36 px.
+- Runner swipe (`bindRunSwipe`, touch and pen only): left = next once answered (any time in a test), right = previous in
+  a test; rubber band where it cannot go; commit past 80 px or 0.5 px/ms; the next question enters from that side
+  (`.pn-qw.in-r/in-l`). A drag that settles back sets `st.dragAt` so its trailing click is not an answer (cleared on the
+  next press). Keys (`onRunKey`): A to D or 1 to 4 answer, Enter or right arrow next, left arrow back in a test.
+- Cards: `swipeGrade` adds up = Easy (4); drag tint and stamp per grade (`.pk-tint.l/r/u`, stamp is a tab above the
+  card), next two cards peek (`.pk-stack .pk-peek`, blank backs) and the first rises with the throw; a thrown card
+  carries on from the finger; a short throw settles on a spring (`PREP_MOTION.settle`); one haptic when the commit line
+  is crossed. Progress is a ring in the bar (`.pk-ring`, cards left inside, animated from `K.ringAt`).
+- Lessons: step dots (current a lit pill, `i.on` semantics unchanged), 21 px reading type with key terms on a
+  highlighter stroke, image visuals edge to edge under 752 px, Play pill with a waveform that moves only while speaking,
+  32 px shared-axis step slide, pinch zoom on the enlarged image (`bindPinch`, 1x to 4x around the midpoint, pan when
+  zoomed, tap toggles 2.2x; transform only).
+- Arena: initials avatars in gradient rings (`hueOf(name)`); the match screen is a VS moment over `prep/art/vs.webp`
+  (`vsIntroHtml`, `.pn-vs.pn-vsi`, prep-motion.js `vsIntro`); scores roll when they change (`.tick`), a round's points
+  float up once (`.pn-pts`, CSS only); the end counts the rating to its new value (`.pn-rtick`) with a delta chip.
+- My stats is a profile: level card (`levelOf`/`xpOf` from prep-plan.js, `prep/art/level.webp`), day streak, best
+  streak (`bestStreak`), answered, share right, a 12-week study calendar (`heatWeeks`, Monday first, `heatLevel` 0 to 4 at
+  1/10/25/50 answers), "Subject mastery" bars (the accuracy list, fill by transform). "Share my progress" draws a
+  1080 x 1350 PNG on a canvas (`drawCard`: hero-dark and streak art, level, streak, calendar, totals; no name or ID) and
+  opens the native share sheet through Filesystem + Share (as atlas3d.js), else Web Share with a file, else a download.
+- Art: `streak.webp`, `level.webp`, `vs.webp` (51 KB), 3 calls, $0.20 (log in the job's imagen/log.tsv).
+- Headless suites wait 150 ms before each screenshot (Motion starts its animations on the next frame). `STRIP=<dir>`
+  on run-prep-ui, run-prep-flash-ui and run-prep-arena-ui writes motion frames (paused animations stepped in ms).
+
 ## Store
 localStorage `smd_prep_v1`: `{v, cards, conf, days, mod:{t,ok,last}, bm, rep, exam, last, dl, hid, mt, goal, mh, ls, lsp, pl, pt, ra, fc}` (`ls`/`lsp`: Lessons;
 `pl`/`pt`/`ra`: Plan; `fc`: Cards). FSRS deck key

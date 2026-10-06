@@ -150,13 +150,15 @@
     }
     return best == null ? null : { day: best, n: n };
   }
-  /* swipeGrade(dx, dy, ms) -> 1 (Again, left), 3 (Good, right) or 0: past 96 px, or a flick over 0.11 px/ms and 24 px,
-     and clearly horizontal. */
+  /* swipeGrade(dx, dy, ms) -> 1 (Again, left), 3 (Good, right), 4 (Easy, up) or 0: past 96 px, or a flick over
+     0.11 px/ms and 24 px, and clearly along one axis. Down is never a grade. */
   function swipeGrade(dx, dy, ms) {
-    var ax = Math.abs(dx);
-    if (ax < 24 || ax < 1.4 * Math.abs(dy)) return 0;
-    if (ax < 96 && !(ms > 0 && ax / ms > 0.11)) return 0;
-    return dx < 0 ? 1 : 3;
+    var ax = Math.abs(dx), up = -dy, d, g;
+    if (up > 0 && up >= 1.4 * ax) { d = up; g = 4; }
+    else if (ax >= 1.4 * Math.abs(dy)) { d = ax; g = dx < 0 ? 1 : 3; }
+    else return 0;
+    if (d < 24 || (d < 96 && !(ms > 0 && d / ms > 0.11))) return 0;
+    return g;
   }
 
   /* Bundled index (pilot files in the app) + bank index (generated, from R2 through /api/prep/bank): the bank copy
@@ -251,6 +253,11 @@
         return '<button type="button" class="pk-box' + (on ? " on" : "") + '" data-act="k-box" data-i="' + i + '" aria-pressed="' + on + '" aria-label="' + (on ? "Label " + (i + 1) + ": " + escH(b.label) : "Hidden label " + (i + 1) + ", reveal") + '" style="left:' + (b.x * 100).toFixed(2) + "%;top:" + (b.y * 100).toFixed(2) + "%;width:" + (b.w * 100).toFixed(2) + "%;height:" + (b.h * 100).toFixed(2) + '%"></button>';
       }).join("") + "</div>";
   }
+  // The next cards peek from under the current one (blank backs: nothing of the next card is given away).
+  function stackHtml(r) {
+    var left = r.list.length - r.i - 1;
+    return '<div class="pk-stack" id="pkStack">' + (left > 1 ? '<div class="pk-peek p2" aria-hidden="true"></div>' : "") + (left > 0 ? '<div class="pk-peek p1" aria-hidden="true"></div>' : "") + cardHtml(r) + "</div>";
+  }
   function cardHtml(r) {
     var c = curCard(), shown = r.shown, enter = r.enter ? " in" : "";
     r.enter = false;
@@ -279,15 +286,17 @@
       return '<button type="button" class="pk-g pk-' + x.k + '" data-act="k-grade" data-g="' + x.g + '" aria-label="' + x.label + ", next in " + ivlWords(d) + '"><b>' + x.label + "</b><small>" + fmtIvl(d) + '</small><kbd class="pk-kbd" aria-hidden="true">' + x.g + "</kbd></button>";
     }).join("") + "</div></div>";
   }
+  // Session progress: a ring in the bar, the cards left in its centre.
   function progHtml(r) {
     var pct = Math.round(r.i * 100 / r.list.length);
-    return '<div class="pk-prog" role="progressbar" aria-label="Cards done" aria-valuemin="0" aria-valuemax="' + r.list.length + '" aria-valuenow="' + r.i + '"><i style="transform:scaleX(' + (pct / 100) + ')"></i></div>';
+    return '<span class="pk-ring" role="progressbar" aria-label="Cards done" aria-valuemin="0" aria-valuemax="' + r.list.length + '" aria-valuenow="' + r.i + '"><svg viewBox="0 0 40 40" aria-hidden="true"><circle class="rt" cx="20" cy="20" r="16" pathLength="100"/>' +
+      '<circle class="rv" cx="20" cy="20" r="16" pathLength="100" stroke-dasharray="' + pct + ' 100"' + (pct ? "" : ' style="opacity:0"') + '/></svg><b aria-hidden="true">' + (r.list.length - r.i) + "</b></span>";
   }
   function runHtml() {
     var r = K.run, c = curCard();
-    return host.bar(escH(r.title), "Card " + (r.i + 1) + " of " + r.list.length + (r.relearn[c._m + ":" + c.id] ? " · again" : ""), "back") + progHtml(r) +
-      '<div class="pn-body pk-body" id="pkBody">' + cardHtml(r) +
-      (r.i === 0 && c.kind !== "occl" ? '<p class="pn-note pk-note">Swipe the answer right for Good, left for Again.</p>' : "") + "</div>" + barHtml(r);
+    return host.bar(escH(r.title), "Card " + (r.i + 1) + " of " + r.list.length + (r.relearn[c._m + ":" + c.id] ? " · again" : ""), "back", progHtml(r)) +
+      '<div class="pn-body pk-body" id="pkBody">' + stackHtml(r) +
+      (r.i === 0 && c.kind !== "occl" ? '<p class="pn-note pk-note">Swipe the answer right for Good, left for Again, up for Easy.</p>' : "") + "</div>" + barHtml(r);
   }
   function endHtml() {
     var r = K.run, s = store(), today = host.today(), mids = r.mids, nd = nextDue(s, mids, today), left = newLeft(s, today), more = r.moreNew;
@@ -317,7 +326,15 @@
     var r = K.run, done = r.i >= r.list.length;
     if (!r.list.length) return host.paint(emptyHtml(), "#pkEnd");
     host.paint(done ? endHtml() : runHtml(), focus || (done ? "#pkEnd" : null));
-    if (!done) bindSwipe();
+    if (!done) { bindSwipe(); ringFrom(r); }
+  }
+
+  // The ring moves from the last value it showed (the screen is repainted per card, so a CSS transition cannot).
+  function ringFrom(r) {
+    var rv = q(".pk-ring .rv"), to = Math.round(r.i * 100 / r.list.length), from = K.ringAt == null ? to : K.ringAt;
+    K.ringAt = to;
+    if (!rv || from === to || reduced() || !rv.animate) return;
+    try { rv.style.opacity = ""; rv.animate([{ strokeDasharray: from + " 100" }, { strokeDasharray: to + " 100" }], { duration: 260, easing: "cubic-bezier(.23, 1, .32, 1)" }); } catch (e) {}
   }
 
   /* ---------- reveal, grade ---------- */
@@ -348,7 +365,7 @@
     if (b) { b.classList.add("on"); b.setAttribute("aria-pressed", "true"); b.setAttribute("aria-label", "Label " + (i + 1) + ": " + c.boxes[i].label); }
     if (c.boxes.every(function (x, k) { return r.rev[k]; })) reveal(false);
   }
-  function doGrade(g, how) {
+  function doGrade(g, how, at) {
     var r = K.run, c = curCard();
     if (!c || !r.shown || r.busy) return;
     var s = store(), today = host.today(), key = c._m + ":" + c.id;
@@ -360,43 +377,75 @@
     if (g === 1 && !r.relearn[key]) { r.relearn[key] = 1; r.list.push(c); }
     var card = q("#pkCard"), next = function () { r.busy = false; r.i++; r.shown = false; r.rev = {}; r.enter = how !== "key"; draw(r.i >= r.list.length ? "#pkEnd" : how === "key" ? "#pkCard" : null); };
     if (how === "key" || reduced() || !card) return next();
-    // Leave the screen the way the grade points: left for Again, right otherwise.
+    // Leave the screen the way the grade points: left for Again, up for Easy, right otherwise. A thrown card carries on
+    // from where the finger let go; the card under it is already rising into place.
     r.busy = true;
-    card.classList.add(g === 1 ? "out-l" : "out-r");
+    var peek = q(".pk-peek.p1"); if (peek) peek.classList.add("up");
+    if (at) {
+      var w = (rootEl() && rootEl().clientWidth) || 400, h = (rootEl() && rootEl().clientHeight) || 800;
+      var tx = g === 4 ? at.x : g === 1 ? -w * 1.15 : w * 1.15, ty = g === 4 ? -h * 0.9 : at.y;
+      card.style.transition = "transform 200ms cubic-bezier(.32, .72, 0, 1), opacity 200ms ease-out";
+      card.style.transform = "translateX(" + Math.round(tx) + "px) translateY(" + Math.round(ty) + "px) rotate(" + (g === 4 ? 0 : g === 1 ? -10 : 10) + "deg)";
+      card.style.opacity = "0";
+      card.classList.add(g === 1 ? "out-l" : g === 4 ? "out-u" : "out-r");
+    } else card.classList.add(g === 1 ? "out-l" : g === 4 ? "out-u" : "out-r");
     G.setTimeout(next, 190);
   }
 
-  /* ---------- swipe (the answer side only; the left screen edge stays with the system back gesture) ---------- */
+  /* ---------- swipe (the answer side only; the left screen edge stays with the system back gesture) ----------
+     The card follows the finger in both axes (down is damped: it is not a grade), tilts with the throw, and takes a tint
+     and a stamp for the grade a release would give: Again to the left, Good to the right, Easy up. The next card under it
+     rises as the throw grows. Crossing the commit line gives one light haptic. A short throw settles back on a spring. */
+  var TINT = { 1: ["l", "Again"], 3: ["r", "Good"], 4: ["u", "Easy"] };
   function bindSwipe() {
     var el = q("#pkCard"), r = K.run;
     if (!el || curCard().kind === "occl") return;
-    var x0 = 0, y0 = 0, t0 = 0, on = false, moved = false, id = null;
-    var stamp = function (dx) {
-      var lab = el.querySelector(".pk-stamp");
-      if (!lab) { lab = G.document.createElement("span"); lab.className = "pk-stamp"; lab.setAttribute("aria-hidden", "true"); el.appendChild(lab); }
-      lab.textContent = dx < 0 ? "Again" : "Good"; lab.className = "pk-stamp " + (dx < 0 ? "l" : "r");
-      lab.style.opacity = String(Math.min(1, Math.abs(dx) / 96));
+    var x0 = 0, y0 = 0, t0 = 0, on = false, moved = false, id = null, dx = 0, dy = 0, armed = 0;
+    var peek = q(".pk-peek.p1");
+    var layer = function (cls) {
+      var n = el.querySelector("." + cls);
+      if (!n) { n = G.document.createElement("span"); n.className = cls; n.setAttribute("aria-hidden", "true"); el.appendChild(n); }
+      return n;
+    };
+    var paintDrag = function () {
+      var ax = Math.abs(dx), up = -dy, g = up > 0 && up >= 1.4 * ax ? 4 : ax >= 1.4 * Math.abs(dy) ? (dx < 0 ? 1 : 3) : 0;
+      var dist = g === 4 ? up : ax, p = Math.min(1, dist / 96), t = TINT[g];
+      el.style.transform = "translateX(" + Math.round(dx) + "px) translateY(" + Math.round(dy) + "px) rotate(" + Math.max(-8, Math.min(8, dx * 0.03)).toFixed(2) + "deg)";
+      var lab = layer("pk-stamp"), tint = layer("pk-tint");
+      if (t) { lab.textContent = t[1]; lab.className = "pk-stamp " + t[0]; tint.className = "pk-tint " + t[0]; }
+      lab.style.opacity = t ? String(p) : "0"; tint.style.opacity = t ? String((p * 0.9).toFixed(3)) : "0";
+      if (peek) peek.style.transform = "translateY(" + (14 - 14 * p).toFixed(1) + "px) scale(" + (0.94 + 0.06 * p).toFixed(3) + ")";
+      var now = t && dist >= 96 ? g : 0;
+      if (now && now !== armed) haptic();
+      armed = now;
     };
     el.addEventListener("pointerdown", function (e) {
       if (!r.shown || r.busy || on || e.pointerType === "mouse" || e.clientX < 28) return;
-      on = true; moved = false; id = e.pointerId; x0 = e.clientX; y0 = e.clientY; t0 = Date.now();
+      on = true; moved = false; id = e.pointerId; x0 = e.clientX; y0 = e.clientY; t0 = Date.now(); dx = dy = 0; armed = 0;
     });
     el.addEventListener("pointermove", function (e) {
       if (!on || e.pointerId !== id) return;
-      var dx = e.clientX - x0, dy = e.clientY - y0;
-      if (!moved) { if (Math.abs(dx) < 8 || Math.abs(dx) < Math.abs(dy)) { if (Math.abs(dy) > 12) on = false; return; } moved = true; try { el.setPointerCapture(id); } catch (x) {} el.classList.add("drag"); }
-      el.style.transform = "translateX(" + dx + "px) rotate(" + Math.max(-8, Math.min(8, dx * 0.03)) + "deg)";
-      stamp(dx);
+      var mx = e.clientX - x0, my = e.clientY - y0;
+      if (!moved) {
+        if (Math.max(Math.abs(mx), -my) < 8) { if (my > 12 && my > Math.abs(mx)) on = false; return; }
+        moved = true; try { el.setPointerCapture(id); } catch (x) {} el.classList.add("drag"); if (peek) peek.classList.add("drag");
+      }
+      dx = mx; dy = my > 0 ? my * 0.2 : my;
+      paintDrag();
     });
     var end = function (e) {
       if (!on || e.pointerId !== id) return;
       on = false;
       if (!moved) return;
       var g = e.type === "pointerup" ? swipeGrade(e.clientX - x0, e.clientY - y0, Date.now() - t0) : 0;
-      el.classList.remove("drag");
-      if (g) { el.style.transform = ""; return doGrade(g, "swipe"); }
-      el.style.transform = "";
-      var lab = el.querySelector(".pk-stamp"); if (lab) lab.style.opacity = "0";
+      el.classList.remove("drag"); if (peek) peek.classList.remove("drag");
+      if (g) return doGrade(g, "swipe", { x: dx, y: dy });
+      var from = el.style.transform;
+      if (peek) peek.style.transform = "";
+      var lab = el.querySelector(".pk-stamp"), tint = el.querySelector(".pk-tint");
+      if (lab) lab.style.opacity = "0"; if (tint) tint.style.opacity = "0";
+      if (!(G.PREP_MOTION && G.PREP_MOTION.settle && G.PREP_MOTION.settle(el, from, "translateX(0px) translateY(0px) rotate(0deg)"))) el.style.transform = "";
+      else G.setTimeout(function () { if (el.isConnected && !el.classList.contains("drag")) el.style.transform = ""; }, 700);
     };
     el.addEventListener("pointerup", end);
     el.addEventListener("pointercancel", end);
@@ -414,6 +463,7 @@
 
   /* ---------- sessions ---------- */
   function startRun(title, mids, list, moreNew) {
+    K.ringAt = null;
     K.run = { title: title, mids: mids, list: list, i: 0, shown: false, rev: {}, n: { 1: 0, 2: 0, 3: 0, 4: 0 }, relearn: {}, enter: true, moreNew: moreNew };
   }
   function newRemaining(decks) {

@@ -39,8 +39,9 @@ let chromeErr = ""; chrome.stderr.on("data", (d) => { chromeErr += d; });
 let msgId = 1; const pending = new Map(); let ws, sessionId; const errors = [];
 const call = (m, p) => { const i = msgId++; return new Promise((r) => { pending.set(i, r); ws.send(JSON.stringify({ id: i, method: m, params: p || {}, sessionId })); }); };
 const ev = async (e) => { const r = await call("Runtime.evaluate", { expression: `(function(){try{${e}}catch(x){return "ERR:"+String(x&&x.message||x)}})()`, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : undefined; };
-// Screenshots land on the final frame: finite animations (entrances, ring draw) are finished first; loops keep running.
-const shotCall = async (p) => { await ev(`document.getAnimations().forEach(function (a) { try { var t = a.effect && a.effect.getTiming(); if (t && t.iterations !== Infinity) a.finish(); } catch (e) {} }); return 1;`); return call("Page.captureScreenshot", p); };
+// Screenshots land on the final frame: after 150 ms (Motion starts its animations on the next frame), finite animations
+// (entrances, ring draw) are finished; loops keep running.
+const shotCall = async (p) => { await sleep(150); await ev(`document.getAnimations().forEach(function (a) { try { var t = a.effect && a.effect.getTiming(); if (t && t.iterations !== Infinity) a.finish(); } catch (e) {} }); return 1;`); return call("Page.captureScreenshot", p); };
 const evA = async (e) => { const r = await call("Runtime.evaluate", { expression: e, awaitPromise: true, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : undefined; };
 const until = async (e, ms = 10000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (await ev(e) === true) return true; await sleep(120); } return false; };
 const reqs = []; let fails = 0; const ok = (c, m) => { console.log((c ? "PASS " : "FAIL ") + m); if (!c) fails++; };
@@ -125,6 +126,8 @@ try {
   ok(await until(`return window.__tts.length===1;`, 3000), "Play speaks");
   ok(await ev(`var u=window.__tts[0]; return /^A suspicious lump goes through triple assessment/.test(u.text) && u.rate===1 && u.lang==="en-IN";`) === true, "it speaks the step's narration at 1x, en-IN");
   ok(await ev(`var b=document.querySelector("#smdPrep [data-act=l-play]"); return b.getAttribute("aria-pressed")==="true" && b.getAttribute("aria-label")==="Pause narration";`) === true, "Play becomes Pause");
+  ok(await ev(`var w=document.querySelectorAll("#smdPrep .pn-lsn-play.on .pn-wave i"); return w.length===5 && getComputedStyle(w[0]).animationName==="pn-wave";`) === true, "the Play pill's waveform moves while the voice speaks");
+  ok(await ev(`var i=document.querySelectorAll("#smdPrep .pn-lsn-prog i"); return i[1].classList.contains("cur") && i[0].classList.contains("on") && !i[0].classList.contains("cur") && i[1].getBoundingClientRect().width > i[0].getBoundingClientRect().width * 2;`) === true, "step dots: the current step is the lit pill");
   await shot("step2-playing");
   await click("#smdPrep [data-act=l-speed]");
   ok(await ev(`return document.querySelector("#smdPrep [data-act=l-speed]").textContent;`) === "1.25x", "speed cycles to 1.25x");
@@ -167,6 +170,16 @@ try {
   ok(await ev(`return document.activeElement && document.activeElement.getAttribute("data-act")==="l-unzoom";`) === true, "focus moves to Close");
   await click("#smdPrep .pn-zoom-b");
   ok(await ev(`var b=document.querySelector("#smdPrep .pn-zoom-b"); return b.classList.contains("big") && b.getAttribute("aria-pressed")==="true";`) === true, "tapping the enlarged image zooms further (a button, so keys work too)");
+  ok(await ev(`return /scale\\(2\\.2/.test(document.querySelector("#smdPrep .pn-zoom-b img").style.transform);`) === true, "the tap zooms the picture 2.2x (transform)");
+  // a two-finger pinch out takes the picture past 3x
+  await ev(`var sc=document.querySelector("#smdPrep .pn-zoom-sc"), r=sc.getBoundingClientRect(), cx=r.left+r.width/2, cy=r.top+r.height/2, o={bubbles:true,pointerType:"touch"};
+    sc.dispatchEvent(new PointerEvent("pointerdown",Object.assign({pointerId:11,clientX:cx-40,clientY:cy},o)));
+    sc.dispatchEvent(new PointerEvent("pointerdown",Object.assign({pointerId:12,clientX:cx+40,clientY:cy},o)));
+    sc.dispatchEvent(new PointerEvent("pointermove",Object.assign({pointerId:11,clientX:cx-70,clientY:cy},o)));
+    sc.dispatchEvent(new PointerEvent("pointermove",Object.assign({pointerId:12,clientX:cx+70,clientY:cy},o)));
+    sc.dispatchEvent(new PointerEvent("pointerup",Object.assign({pointerId:11,clientX:cx-70,clientY:cy},o)));
+    sc.dispatchEvent(new PointerEvent("pointerup",Object.assign({pointerId:12,clientX:cx+70,clientY:cy},o))); return 1;`);
+  ok(await ev(`var m=/scale\\(([\\d.]+)\\)/.exec(document.querySelector("#smdPrep .pn-zoom-b img").style.transform); return !!m && +m[1] > 3 && +m[1] <= 4;`) === true, "pinch zooms further, up to 4x");
   await shot("step5-zoom");
   await ev(`PREP.back(); return 1;`);
   ok(await ev(`return !document.querySelector("#smdPrep .pn-zoom") && /Step 5 of 8/.test(document.querySelector("#smdPrep .pn-t p").textContent);`) === true, "back() closes the enlarged image first and stays on the step");
@@ -187,7 +200,8 @@ try {
   await shot("step8-compare");
   await click("#smdPrep [data-act=l-next]");
   ok(await until(`return !!document.querySelector("#smdPrep .pn-lsn-fin");`, 3000), "Finish shows the finish screen");
-  ok(/\+80/.test(await ev(`return document.querySelector("#smdPrep .pn-lsn-xp").textContent;`)), "first finish earns +80 XP (10 a step)");
+  // The figure counts up from +0 (prep-motion.js), so wait for it to land.
+  ok(await until(`return /\\+80/.test(document.querySelector("#smdPrep .pn-lsn-xp").textContent);`, 2500), "first finish earns +80 XP (10 a step)");
   ok(await store(`s.ls["${MID}"].xp === 80 && s.ls["${MID}"].done > 0`) === true, "XP and finish time stored");
   await shot("finish");
 

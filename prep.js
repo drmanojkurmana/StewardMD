@@ -390,7 +390,7 @@
       if (srch.timer) G.clearTimeout(srch.timer);
       srch.timer = G.setTimeout(runSearch, 250);
     });
-    root.addEventListener("keydown", function (e) { if (e.key === "Escape") { e.preventDefault(); back(); } });
+    root.addEventListener("keydown", function (e) { if (e.key === "Escape") { e.preventDefault(); back(); } else onRunKey(e); });
     st.open = true; st.stack = [];
     refreshHidden();
     // Reminder, widget, Live Activity and sync on open (prep-native.js).
@@ -588,7 +588,7 @@
     st.timer = G.setInterval(function () {
       var r = st.run; if (!r || r.done) return stopTimer();
       var left = r.limit - (Date.now() - r.t0) / 1000, el = root && root.querySelector("#pnClock");
-      if (el) el.textContent = fmtTime(left);
+      if (el) { el.textContent = fmtTime(left); if (el.parentNode) el.parentNode.classList.toggle("over", (Date.now() - (r.qt0 || r.t0)) / 1000 > r.limit / r.items.length); }
       if (left <= 0) finish();
     }, 1000);
   }
@@ -597,9 +597,37 @@
   // A previous-year question still names its paper (exam, year, memory-based recall), which is the paper type, not the origin.
   function provLine(it) { return it._py && G.PREP_PYQ ? G.PREP_PYQ.prov(it) : ""; }
   function provHtml(it) { var l = provLine(it); return l ? '<p class="pn-prov">' + l + "</p>" : ""; }
+  /* Round 3 focus mode. The progress strip: one segment per question up to 30 (right, wrong or answered, the current one
+     lit), a plain fill beyond that. The streak counts right answers in a row in this set, ending at the current question. */
+  function runStreak(r) {
+    var n = 0;
+    if (r.mode !== "study") return 0;
+    for (var i = r.i; i >= 0 && r.ans[i] >= 0 && r.ans[i] === r.items[i].a; i--) n++;
+    return n;
+  }
+  function qprogHtml(r) {
+    var n = r.items.length, done = r.ans.filter(function (a) { return a >= 0; }).length, sk = runStreak(r), segs;
+    if (n <= 30) segs = r.items.map(function (it, i) {
+      var c = i === r.i ? "cur" : "";
+      if (r.ans[i] >= 0) c += r.mode === "study" ? (r.ans[i] === it.a ? " ok" : " no") : " ans";
+      if (r.mark[i]) c += " mark";
+      return "<i" + (c ? ' class="' + c.trim() + '"' : "") + "></i>";
+    }).join("");
+    else segs = '<i class="fill" style="transform:scaleX(' + (done / n).toFixed(3) + ')"></i>';
+    return '<div class="pn-qprog' + (n > 30 ? " long" : "") + '"><div class="pn-qseg" role="progressbar" aria-label="Questions answered" aria-valuemin="0" aria-valuemax="' + n + '" aria-valuenow="' + done + '">' + segs + "</div>" +
+      (sk >= 3 ? '<span class="pn-streak" data-n="' + sk + '">' + ico("bolt", true) + sk + " in a row</span>" : "") + "</div>";
+  }
+  // Timed mode: the clock sits in a pace ring that empties over this question's share of the time (limit / questions).
+  function clockHtml(r) {
+    var per = r.limit / r.items.length, spent = (Date.now() - (r.qt0 || r.t0)) / 1000;
+    return '<span class="pn-clockw' + (spent > per ? " over" : "") + '"><svg class="pn-pace" viewBox="0 0 40 40" aria-hidden="true"><circle class="rt" cx="20" cy="20" r="17" pathLength="100"/>' +
+      '<circle class="rv" cx="20" cy="20" r="17" pathLength="100" style="animation-duration:' + Math.max(1, per).toFixed(1) + "s;animation-delay:-" + Math.max(0, spent).toFixed(1) + 's"/></svg>' +
+      '<span class="pn-clock" id="pnClock" role="timer" aria-live="off">' + fmtTime(r.limit - (Date.now() - r.t0) / 1000) + "</span></span>";
+  }
   function renderRun() {
     var r = st.run; if (!r) return;
     if (r.done) return r.custom ? r.custom.render(r) : renderResult();
+    if (r.qi !== r.i) { r.qi = r.i; r.qt0 = Date.now(); }
     var it = r.items[r.i], chosen = r.ans[r.i], shown = r.mode === "study" && chosen >= 0, s = load(), bm = !!s.bm[it.id], own = it._s === "deck";
     // PYQ items (prep-pyq.js) are not in a bank module file, so a bookmark could not reload them: no ribbon.
     var pyq = G.PREP_PYQ ? { tags: G.PREP_PYQ.chips(it, HOST), fig: G.PREP_PYQ.figure(it, HOST) } : { tags: "", fig: "" };
@@ -612,12 +640,16 @@
         (shown && k === it.a ? '<span class="pn-mark">' + ico("check") + "</span>" : shown && k === chosen ? '<span class="pn-mark">' + ico("x") + "</span>" : "") + "</button></li>";
     }).join("");
     // Your own deck's questions stay on this phone: no bookmark (bookmarks reload from the bank) and no report.
-    var right = r.mode === "exam" ? '<span class="pn-clock" id="pnClock" role="timer" aria-live="off">' + fmtTime(r.limit - (Date.now() - r.t0) / 1000) + "</span>" : own || it._py ? "" :
-      '<button type="button" class="pn-ib' + (bm ? " on" : "") + '" data-act="bookmark" aria-pressed="' + bm + '" aria-label="' + (bm ? "Remove bookmark" : "Bookmark this question") + '">' + ico("bm", bm) + "</button>";
+    // Study: bookmark and, once answered, report, as labelled icon buttons in the bar.
+    var acts = (own || it._py ? "" : '<button type="button" class="pn-ib' + (bm ? " on" : "") + '" data-act="bookmark" aria-pressed="' + bm + '" aria-label="' + (bm ? "Remove bookmark" : "Bookmark this question") + '">' + ico("bm", bm) + "</button>") +
+      (shown && !own ? '<button type="button" class="pn-ib" data-act="report" aria-label="Report this question">' + ico("flag") + "</button>" : "");
+    var right = r.mode === "exam" ? clockHtml(r) : acts ? '<span class="pn-acts">' + acts + "</span>" : "";
     var fb = "";
     if (shown) {
-      var ok = chosen === it.a;
-      fb = '<section class="pn-fb ' + (ok ? "ok" : "no") + '" role="status" tabindex="-1"><p class="pn-verdict">' + ico(ok ? "check" : "x") + "<span>" + (ok ? "Correct" : "Incorrect") + " · Answer " + L[it.a] + ". " + esc(it.o[it.a]) + "</span></p>" +
+      var ok = chosen === it.a, fresh = r.fresh === r.i;
+      r.fresh = -1;   // the reveal plays once, on the paint right after the answer (a bookmark or tag repaint keeps still)
+      fb = '<section class="pn-fb ' + (ok ? "ok" : "no") + (fresh ? " pn-new" : "") + '" role="status" tabindex="-1">';
+      fb += '<p class="pn-verdict"><span class="pn-vb" aria-hidden="true">' + ico(ok ? "check" : "x") + "</span><span><b>" + (ok ? "Correct" : "Incorrect") + "</b><small> · Answer " + L[it.a] + ". " + esc(it.o[it.a]) + "</small></span></p>" +
         (it.exp ? '<h3>Explanation</h3><p class="pn-exp">' + esc(it.exp) + "</p>" : '<p class="pn-mut">' + (it._py ? "Explanation coming soon." : "No explanation is stored for this question yet.") + "</p>") +
         (it.kp ? '<p class="pn-kp"><b>Exam pearl:</b> ' + esc(it.kp) + "</p>" : "") +
         (it.rv && it.rv.old ? '<p class="pn-old">This may be outdated: check current guidance.</p>' : "") +
@@ -634,10 +666,81 @@
       '<button type="button" class="pn-btn' + (r.mark[r.i] ? " on" : "") + '" data-act="markq" aria-label="Mark for review" aria-pressed="' + !!r.mark[r.i] + '">' + ico("flag", !!r.mark[r.i]) + " Mark</button>" +
       (r.i < r.items.length - 1 ? '<button type="button" class="pn-btn pri" data-act="next">Next</button>' : '<button type="button" class="pn-btn pri" data-act="submit">Submit</button>') + "</div>" +
       '<button type="button" class="pn-link" data-act="qgrid">' + ico("grid") + " All questions · " + r.ans.filter(function (a) { return a >= 0; }).length + " of " + r.items.length + " answered</button>"
-      : shown ? '<div class="pn-navrow">' + (own ? "" : '<button type="button" class="pn-btn" data-act="report">' + ico("flag") + " Report</button>") +
-        '<button type="button" class="pn-btn pri" data-act="next">' + (r.i < r.items.length - 1 ? "Next question" : "Finish") + " " + ico("next") + "</button></div>" : "";
-    paint(bar(esc(r.title), "Question " + (r.i + 1) + " of " + r.items.length, "back", right) +
-      '<div class="pn-body pn-run">' + pyq.tags + '<p class="pn-q">' + esc(it.q) + "</p>" + pyq.fig + '<ol class="pn-opts" type="A">' + opts + "</ol>" + fb + nav + "</div>", shown ? ".pn-fb" : ".pn-opt");
+      : shown ? '<div class="pn-navrow"><button type="button" class="pn-btn pri" data-act="next">' + (r.i < r.items.length - 1 ? "Next question" : "Finish") + " " + ico("next") + "</button></div>" : "";
+    // A swipe arrives from the side it was thrown toward (shared axis); taps and keys change the question in place.
+    var enter = st.swipeIn ? (st.swipeIn > 0 ? " in-r" : " in-l") : "";
+    st.swipeIn = 0;
+    paint(bar(esc(r.title), "Question " + (r.i + 1) + " of " + r.items.length, "back", right) + qprogHtml(r) +
+      '<div class="pn-body pn-run"><div class="pn-qw' + enter + '" id="pnQw">' + pyq.tags + '<p class="pn-q">' + esc(it.q) + "</p>" + pyq.fig + '<ol class="pn-opts" type="A">' + opts + "</ol>" + fb + nav + "</div></div>", shown ? ".pn-fb" : ".pn-opt");
+    bindRunSwipe();
+  }
+  /* Swipe (touch and pen; the mouse has the buttons): left goes to the next question once this one is answered (or any
+     time in a timed test), right goes back in a timed test. The page follows the finger 1:1, resists where it cannot
+     go, and settles back on a spring when the throw is short; a throw past 80 px or faster than 0.5 px/ms commits. */
+  function canSwipe(dir) {
+    var r = st.run; if (!r || r.done) return false;
+    if (dir > 0) return r.mode === "exam" ? r.i < r.items.length - 1 : r.ans[r.i] >= 0;
+    return r.mode === "exam" && r.i > 0;
+  }
+  function bindRunSwipe() {
+    var body = root && root.querySelector(".pn-run"), qw = body && body.querySelector("#pnQw");
+    if (!qw) return;
+    var x0 = 0, y0 = 0, t0 = 0, id = null, on = false, moved = false, dx = 0, vx = 0, lt = 0, lx = 0;
+    body.addEventListener("pointerdown", function (e) {
+      st.dragAt = 0;   // a new press is a new intent
+      if (on || e.pointerType === "mouse" || e.clientX < 24 || (e.target.closest && e.target.closest(".pn-yq-fig,.pn-mtag,.pn-wrap"))) return;
+      on = true; moved = false; id = e.pointerId; x0 = lx = e.clientX; y0 = e.clientY; t0 = lt = Date.now(); dx = vx = 0;
+    });
+    body.addEventListener("pointermove", function (e) {
+      if (!on || e.pointerId !== id) return;
+      var mx = e.clientX - x0, my = e.clientY - y0, now = Date.now();
+      if (!moved) { if (Math.abs(mx) < 10 || Math.abs(mx) < Math.abs(my)) { if (Math.abs(my) > 12) on = false; return; } moved = true; try { body.setPointerCapture(id); } catch (x) {} qw.classList.add("drag"); }
+      // A direction that leads nowhere follows the finger with rising resistance.
+      var dir = mx < 0 ? 1 : -1, w = body.clientWidth || 360;
+      dx = canSwipe(dir) ? mx : (mx * w * 0.55) / (w + 0.55 * Math.abs(mx)) * 0.5;
+      if (now > lt) { vx = (e.clientX - lx) / (now - lt); lx = e.clientX; lt = now; }
+      qw.style.transform = "translateX(" + dx.toFixed(1) + "px)";
+      qw.style.opacity = String(Math.max(0.55, 1 - Math.abs(dx) / 900));
+    });
+    var end = function (e) {
+      if (!on || e.pointerId !== id) return;
+      on = false;
+      if (!moved) return;
+      qw.classList.remove("drag");
+      var dir = dx < 0 ? 1 : -1, fast = Math.abs(vx) > 0.5 && (vx < 0 ? 1 : -1) === dir;
+      if (e.type === "pointerup" && canSwipe(dir) && (Math.abs(dx) > 80 || fast)) {
+        st.swipeIn = dir;
+        if (G.PREP_MOTION && G.PREP_MOTION.haptic) G.PREP_MOTION.haptic("light");
+        if (dir > 0) { var r = st.run; if (r.i < r.items.length - 1) { r.i++; return renderRun(); } return finish(); }
+        st.run.i--; return renderRun();
+      }
+      // Settle back from where the finger left it; the click that may end this drag is not an answer.
+      st.dragAt = Date.now();
+      if (!(G.PREP_MOTION && G.PREP_MOTION.settle && G.PREP_MOTION.settle(qw, "translateX(" + dx.toFixed(1) + "px)", "translateX(0px)"))) { qw.style.transform = ""; }
+      qw.style.opacity = "";
+    };
+    body.addEventListener("pointerup", end);
+    body.addEventListener("pointercancel", end);
+  }
+  // Keys on a tablet or laptop: A to D (or 1 to 4) answer, Enter or the right arrow goes on, the left arrow goes back in a
+  // timed test. No motion for keys.
+  function onRunKey(e) {
+    var r = st.run;
+    if (!r || r.done || st.stack[st.stack.length - 1] !== renderRun || e.ctrlKey || e.metaKey || e.altKey) return;
+    var t = e.target, tag = t && t.tagName, k = String(e.key || "").toLowerCase();
+    if (tag === "INPUT" || tag === "TEXTAREA" || (t && t.isContentEditable)) return;
+    var idx = "abcd".indexOf(k); if (idx < 0 && /^[1-4]$/.test(k)) idx = Number(k) - 1;
+    if (idx >= 0 && idx < r.items[r.i].o.length) {
+      if (r.mode === "study" && r.ans[r.i] >= 0) return;
+      e.preventDefault(); st.kb = true; answer(idx); st.kb = false; return;
+    }
+    if ((k === "enter" && !(t && t.closest && t.closest("button"))) || k === "arrowright") {
+      if (!canSwipe(1) && !(r.mode === "study" && r.ans[r.i] >= 0)) return;
+      e.preventDefault(); st.kb = true;
+      if (r.i < r.items.length - 1) { r.i++; renderRun(); } else if (r.mode === "study") finish();
+      st.kb = false; return;
+    }
+    if (k === "arrowleft" && canSwipe(-1)) { e.preventDefault(); r.i--; renderRun(); }
   }
   function record(it, chosen) {
     var s = load(), ok = chosen === it.a, td = today(), dk = deckKey(it._m || it.t);
@@ -658,7 +761,7 @@
   }
   function answer(k) {
     var r = st.run; if (!r || r.done) return;
-    if (r.mode === "study") { if (r.ans[r.i] >= 0) return; r.ans[r.i] = k; record(r.items[r.i], k); }
+    if (r.mode === "study") { if (r.ans[r.i] >= 0) return; r.ans[r.i] = k; r.fresh = st.kb ? -1 : r.i; record(r.items[r.i], k); }
     else r.ans[r.i] = k;
     renderRun();
   }
@@ -972,7 +1075,7 @@
     if (a === "hit") return openHit(b.getAttribute("data-m"), b.getAttribute("data-i"));
     if (a === "module" || a === "solvenext") { var s1 = b.getAttribute("data-s"), m1 = b.getAttribute("data-m"); return loadIndex(s1).then(function () { push(function () { renderModule(s1, m1); }); }); }
     if (a === "start") { var c = st.cur; return startModule(c.s, c.m, b.getAttribute("data-k")); }
-    if (a === "answer") return answer(Number(b.getAttribute("data-k")));
+    if (a === "answer") { if (Date.now() - (st.dragAt || 0) < 350) return; return answer(Number(b.getAttribute("data-k"))); }
     if (a === "next") { var r = st.run; if (!r) return; if (r.i < r.items.length - 1) { r.i++; return renderRun(); } return finish(); }
     if (a === "prev") { if (st.run && st.run.i) { st.run.i--; renderRun(); } return; }
     if (a === "markq") { var rr = st.run; rr.mark[rr.i] = !rr.mark[rr.i]; return renderRun(); }

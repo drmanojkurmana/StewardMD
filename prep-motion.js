@@ -16,7 +16,7 @@
   "use strict";
   if (!G || !G.document) return;
   var D = G.document, SRC = "/vendor/motion/motion.js";
-  var M = null, loading = false, root = null, mo = null, io = null, seen = {}, tiltEl = null, skyRaf = 0;
+  var M = null, loading = false, root = null, mo = null, io = null, seen = {}, tiltEl = null, skyRaf = 0, lastSk = 0;
   var TILT = ".pn-tile, .pn-home > .pn-next + .pn-group > .pn-row, #pnCompete > .pn-group > .pn-row";
 
   function reduced() { try { return G.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } }
@@ -71,7 +71,7 @@
 
   function scan(el) {
     if (!el || el.nodeType !== 1) return;
-    var list = [el].concat(Array.prototype.slice.call(el.querySelectorAll(".pl-hero,.pn-home,.pn-fb,.pn-score,.pn-lsn-fin,.pk-end,.pn-sheet,.pn-round,.pn-lobby")));
+    var list = [el].concat(Array.prototype.slice.call(el.querySelectorAll(".pl-hero,.pn-home,.pn-fb,.pn-score,.pn-lsn-fin,.pk-end,.pn-sheet,.pn-round,.pn-lobby,.pn-streak,.pn-vsi,.pn-rtick,.pn-heat,.pn-mast,.pn-lvb")));
     list.forEach(function (n) {
       if (n.__pnMo) return;
       var c = n.classList;
@@ -91,13 +91,32 @@
         anim(kids, { opacity: [0, 1], transform: ["translateY(12px)", "translateY(0px)"] }, { duration: 0.32, ease: EASE, delay: M.stagger(0.03) });
         return;
       }
+      // The reveal, once per answer (.pn-new): the chosen option answers first (a lift when right, one shake when
+      // wrong), the right option lights, then the explanation springs up from below. A repaint (bookmark, tag) keeps still.
       if (c.contains("pn-fb")) {
         n.__pnMo = 1;
-        var ok = c.contains("ok");
-        anim(n, { opacity: [0, 1], transform: ["translateY(12px)", "translateY(0px)"] }, ENTER);
-        var opt = root && root.querySelector(ok ? ".pn-opt.right" : ".pn-opt.wrong");
-        if (opt) anim(opt, ok ? { transform: ["scale(1)", "scale(1.025)", "scale(1)"] } : { transform: ["translateX(0px)", "translateX(-6px)", "translateX(6px)", "translateX(-3px)", "translateX(0px)"] }, { duration: ok ? 0.28 : 0.3, ease: "easeOut" });
+        if (!c.contains("pn-new")) return;
+        var ok = c.contains("ok"), right = root && root.querySelector(".pn-opt.right"), wrong = root && root.querySelector(".pn-opt.wrong");
+        if (ok && right) anim(right, { transform: ["scale(1)", "scale(1.03)", "scale(1)"] }, { duration: 0.32, ease: EASE });
+        if (!ok && wrong) anim(wrong, { transform: ["translateX(0px)", "translateX(-7px)", "translateX(6px)", "translateX(-3px)", "translateX(0px)"] }, { duration: 0.32, ease: "easeOut" });
+        anim(n, { opacity: [0, 1], transform: ["translateY(36px)", "translateY(0px)"] }, { type: "spring", visualDuration: 0.38, bounce: 0.16, delay: ok ? 0.06 : 0.14 });
         haptic(ok ? "success" : "error");
+        return;
+      }
+      // "3 in a row": pops when the run grows, not when the next question repaints it.
+      if (c.contains("pn-streak")) {
+        n.__pnMo = 1;
+        var sk = +n.getAttribute("data-n") || 0;
+        if (sk > lastSk) anim(n, { opacity: [0, 1], transform: ["scale(0.8)", "scale(1)"] }, { type: "spring", visualDuration: 0.3, bounce: 0.35 });
+        lastSk = sk;
+        return;
+      }
+      if (c.contains("pn-vsi")) { n.__pnMo = 1; vsIntro(n); return; }
+      if (c.contains("pn-rtick")) { n.__pnMo = 1; tickNum(n, +n.getAttribute("data-from"), +n.getAttribute("data-to"), 900); return; }
+      if (c.contains("pn-heat")) { n.__pnMo = 1; var cells = n.querySelectorAll("i.l1,i.l2,i.l3,i.l4"); if (cells.length) anim(cells, { opacity: [0, 1], transform: ["scale(0.4)", "scale(1)"] }, { duration: 0.24, ease: EASE, delay: M.stagger(0.006) }); return; }
+      if (c.contains("pn-mast") || c.contains("pn-lvb")) {
+        n.__pnMo = 1;
+        Array.prototype.forEach.call(n.querySelectorAll("[data-p]"), function (b, i) { var v = +b.getAttribute("data-p") || 0; if (v > 0) anim(b, { transform: ["scaleX(0)", "scaleX(" + v + ")"] }, { duration: 0.7, ease: EASE, delay: 0.05 + i * 0.04 }); });
         return;
       }
       if (c.contains("pn-score") || c.contains("pn-lsn-fin") || c.contains("pk-end") || c.contains("pn-lobby")) {
@@ -116,6 +135,35 @@
     });
   }
 
+  // A number rolls from one value to another (the rating after a battle).
+  function tickNum(el, from, to, ms) {
+    if (!isFinite(from) || !isFinite(to) || from === to) return;
+    var t0 = 0;
+    (function tick(ts) {
+      if (!t0) t0 = ts || 1;
+      var p = Math.min(1, ((ts || t0) - t0) / ms), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = String(Math.round(from + (to - from) * e));
+      if (p < 1 && el.isConnected) G.requestAnimationFrame(tick); else el.textContent = String(to);
+    })();
+  }
+  // The battle's VS intro: the two players slide in from their sides, the bolt between them strikes (a short flash),
+  // then the rules line settles. About 700 ms in all, once per match.
+  function vsIntro(n) {
+    var l = n.querySelector(".pn-vsi-p.l"), r = n.querySelector(".pn-vsi-p.r"), bolt = n.querySelector(".pn-bolt"), flash = n.querySelector(".pn-flash"), sub = n.querySelector(".pn-vsi-sub");
+    if (l) anim(l, { opacity: [0, 1], transform: ["translateX(-40px)", "translateX(0px)"] }, { type: "spring", visualDuration: 0.42, bounce: 0.22 });
+    if (r) anim(r, { opacity: [0, 1], transform: ["translateX(40px)", "translateX(0px)"] }, { type: "spring", visualDuration: 0.42, bounce: 0.22, delay: 0.05 });
+    if (bolt) anim(bolt, { opacity: [0, 1], transform: ["scale(0.6) rotate(-8deg)", "scale(1) rotate(0deg)"] }, { type: "spring", visualDuration: 0.3, bounce: 0.4, delay: 0.22 });
+    if (flash) anim(flash, { opacity: [0, 0.9, 0], transform: ["scale(0.4)", "scale(1.2)", "scale(1.5)"] }, { duration: 0.5, ease: EASE, delay: 0.26 });
+    if (sub) anim(sub, { opacity: [0, 1], transform: ["translateY(8px)", "translateY(0px)"] }, { duration: 0.26, ease: EASE, delay: 0.42 });
+    haptic("medium");
+  }
+  // A drag that did not commit settles back on a spring from where the finger left it.
+  function settle(el, from, to) {
+    if (!M || !root || reduced()) return false;
+    el.style.transform = to;
+    var a = anim(el, { transform: [from, to] }, { type: "spring", visualDuration: 0.35, bounce: 0.24 });
+    return !!a;
+  }
   // "+80" counts up from 0 with the same curve as the ring.
   function countUp(el) {
     var mm = /^(\+?)(\d+)$/.exec(el.textContent || ""); if (!mm) return;
@@ -170,7 +218,7 @@
 
   function attach(r) {
     detach();
-    root = r; seen = {};
+    root = r; seen = {}; lastSk = 0;
     if (root) root.addEventListener("scroll", onScroll, true);
     if (!root || reduced()) return;
     ensure();
@@ -191,5 +239,5 @@
     if (root) { root.removeEventListener("pointermove", onMove); root.removeEventListener("pointerleave", untilt); root.removeEventListener("scroll", onScroll, true); }
     mo = io = null; root = null; tiltEl = null;
   }
-  G.PREP_MOTION = { attach: attach, detach: detach, ensure: ensure, ready: function () { return !!M; } };
+  G.PREP_MOTION = { attach: attach, detach: detach, ensure: ensure, ready: function () { return !!M; }, settle: settle, haptic: haptic, confetti: function (el) { if (M && root && !reduced()) confetti(el); } };
 })(typeof window !== "undefined" ? window : this);

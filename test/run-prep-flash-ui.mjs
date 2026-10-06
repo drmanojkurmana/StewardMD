@@ -1,7 +1,7 @@
 /* PrepNucleus Cards in the REAL app (headless Chrome over CDP): the shipped sample deck (prep/cards/v1/sur-breast-cancer.json,
  * 7 basic, 2 cloze, 1 occlusion) against the real taxonomy.
  * What must hold: the module screen shows "Cards · 10"; a card turns over on tap and shows four grades with FSRS interval
- * previews; Good, Again (by key 1, re-shown once at the end), a swipe right (Good) and Space all work; a cloze hides its term
+ * previews; Good, Again (by key 1, re-shown once at the end), a swipe right (Good), a swipe up (Easy, with its tint and the next card rising) and Space all work; a cloze hides its term
  * (silent to screen readers) until revealed; occlusion boxes reveal one by one and the grades appear once all are open;
  * the end screen counts the grades, says when cards are next due and keeps the daily new-card setting; every grade is an
  * FSRS row under p:<module>:c that the MCQ progress count ignores; the home shows Cards due and runs a due-only session;
@@ -35,12 +35,25 @@ let chromeErr = ""; chrome.stderr.on("data", (d) => { chromeErr += d; });
 let msgId = 1; const pending = new Map(); let ws, sessionId; const errors = [];
 const call = (m, p) => { const i = msgId++; return new Promise((r) => { pending.set(i, r); ws.send(JSON.stringify({ id: i, method: m, params: p || {}, sessionId })); }); };
 const ev = async (e) => { const r = await call("Runtime.evaluate", { expression: `(function(){try{${e}}catch(x){return "ERR:"+String(x&&x.message||x)}})()`, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : undefined; };
-// Screenshots land on the final frame: finite animations (entrances, ring draw) are finished first; loops keep running.
-const shotCall = async (p) => { await ev(`document.getAnimations().forEach(function (a) { try { var t = a.effect && a.effect.getTiming(); if (t && t.iterations !== Infinity) a.finish(); } catch (e) {} }); return 1;`); return call("Page.captureScreenshot", p); };
+// Screenshots land on the final frame: after 150 ms (Motion starts its animations on the next frame), finite animations
+// (entrances, ring draw) are finished; loops keep running.
+const shotCall = async (p) => { await sleep(150); await ev(`document.getAnimations().forEach(function (a) { try { var t = a.effect && a.effect.getTiming(); if (t && t.iterations !== Infinity) a.finish(); } catch (e) {} }); return 1;`); return call("Page.captureScreenshot", p); };
 const evA = async (e) => { const r = await call("Runtime.evaluate", { expression: e, awaitPromise: true, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : undefined; };
 const until = async (e, ms = 10000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (await ev(e) === true) return true; await sleep(120); } return false; };
 const reqs = []; let fails = 0; const ok = (c, m) => { console.log((c ? "PASS " : "FAIL ") + m); if (!c) fails++; };
 const click = (sel) => ev(`var b=document.querySelector(${JSON.stringify(sel)}); if(!b) return "missing"; b.click(); return 1;`);
+// Motion strips (STRIP=<dir>): every running animation is paused and stepped to each time in ms, one frame a step.
+const strip = async (name, ts) => {
+  if (!process.env.STRIP) return;
+  const fsx = await import("node:fs");
+  if (process.env.PN_LIGHT) await ev(`document.body.classList.remove("dark"); return 1;`);
+  for (const t of ts) {
+    await ev(`document.getAnimations().forEach(function (a) { try { a.pause(); a.currentTime = ${t}; } catch (e) {} }); return 1;`);
+    const r = await call("Page.captureScreenshot", { format: "png" });
+    if (r.result) fsx.writeFileSync(join(process.env.STRIP, name + "-" + (process.env.PN_LIGHT ? "light" : "dark") + "-" + String(t).padStart(4, "0") + ".png"), Buffer.from(r.result.data, "base64"));
+  }
+  await ev(`document.getAnimations().forEach(function (a) { try { a.play(); } catch (e) {} }); return 1;`);
+};
 const shot = async (name) => {
   if (!process.env.SHOTS) return;
   await sleep(320);
@@ -115,6 +128,15 @@ try {
 
   // ---- card 3: swipe right = Good
   await click("#pkCard");
+  if (process.env.STRIP) {
+    await sleep(400);
+    await ev(`var el=document.getElementById("pkCard"), r=el.getBoundingClientRect(); window.__sy=r.top+r.height/2; el.dispatchEvent(new PointerEvent("pointerdown",{bubbles:true,pointerType:"touch",isPrimary:true,pointerId:8,clientX:150,clientY:__sy})); return 1;`);
+    for (const x of [150, 175, 205, 240, 290]) { await ev(`document.getElementById("pkCard").dispatchEvent(new PointerEvent("pointermove",{bubbles:true,pointerType:"touch",isPrimary:true,pointerId:8,clientX:${x},clientY:__sy+${(x - 150) / 30}})); return 1;`); await strip("card-swipe-drag" + x, [0]); }
+    // let go short of the line: it settles back on a spring
+    await ev(`document.getElementById("pkCard").dispatchEvent(new PointerEvent("pointermove",{bubbles:true,pointerType:"touch",isPrimary:true,pointerId:8,clientX:200,clientY:__sy})); document.getElementById("pkCard").dispatchEvent(new PointerEvent("pointerup",{bubbles:true,pointerType:"touch",isPrimary:true,pointerId:8,clientX:200,clientY:__sy})); return 1;`);
+    await sleep(20); await strip("card-swipe-settle", [0, 80, 160, 260, 400]);
+    await sleep(500);
+  }
   await ev(`var el=document.getElementById("pkCard"), r=el.getBoundingClientRect(), y=r.top+r.height/2, o={bubbles:true,pointerType:"touch",isPrimary:true,pointerId:7};
     el.dispatchEvent(new PointerEvent("pointerdown",Object.assign({clientX:150,clientY:y},o)));
     el.dispatchEvent(new PointerEvent("pointermove",Object.assign({clientX:200,clientY:y+2},o)));
@@ -122,6 +144,7 @@ try {
   ok(await ev(`var s=document.querySelector("#pkCard .pk-stamp"); return !!s && s.textContent==="Good" && Number(s.style.opacity)>0.9 && /translateX\\(140px\\)/.test(document.getElementById("pkCard").style.transform);`) === true, "the card follows the finger and the stamp says Good");
   await shot("3-swipe");
   await ev(`var el=document.getElementById("pkCard"), r=el.getBoundingClientRect(), y=r.top+r.height/2; el.dispatchEvent(new PointerEvent("pointerup",{bubbles:true,pointerType:"touch",isPrimary:true,pointerId:7,clientX:300,clientY:y+4})); return 1;`);
+  if (process.env.STRIP) { await sleep(10); await strip("card-swipe-exit", [0, 60, 120, 180]); }
   ok(await nextCard(4), "releasing past the threshold grades it and moves on");
   ok(await store(`s.cards[${ck("c03")}][3]>s.cards[${ck("c03")}][2]+1`) === true, "the swipe wrote a Good (due after tomorrow)");
 
@@ -137,7 +160,18 @@ try {
   ok(await ev(`var g=document.querySelector("#pkCard .pk-gap"); return !g.querySelector(".pn-sr") && !g.querySelector(".pk-gap-t").hasAttribute("aria-hidden") && document.querySelector("#pkBack.on")!==null;`) === true, "cloze reveal shows the term and the why");
   await sleep(300); await shot("8-cloze-shown");
   await click("#smdPrep .pk-g[data-g='3']"); await nextCard(9);
-  await click("#pkCard"); await click("#smdPrep .pk-g[data-g='3']"); await nextCard(10);
+  // ---- card 9: swipe up = Easy (round 3): the stamp and tint say Easy and the card underneath rises with the throw
+  await click("#pkCard");
+  ok(await ev(`return !!document.querySelector("#pkStack .pk-peek.p1");`) === true, "the next card peeks from under the current one");
+  await ev(`var el=document.getElementById("pkCard"), r=el.getBoundingClientRect(), x=r.left+r.width/2, y=r.top+r.height/2, o={bubbles:true,pointerType:"touch",isPrimary:true,pointerId:9};
+    el.dispatchEvent(new PointerEvent("pointerdown",Object.assign({clientX:x,clientY:y},o)));
+    el.dispatchEvent(new PointerEvent("pointermove",Object.assign({clientX:x+2,clientY:y-30},o)));
+    el.dispatchEvent(new PointerEvent("pointermove",Object.assign({clientX:x+4,clientY:y-130},o))); return 1;`);
+  ok(await ev(`var s=document.querySelector("#pkCard .pk-stamp"), t=document.querySelector("#pkCard .pk-tint"), p=document.querySelector("#pkStack .pk-peek.p1"); return !!s && s.textContent==="Easy" && t.classList.contains("u") && Number(t.style.opacity)>0.8 && /translateY\\(-130px\\)/.test(document.getElementById("pkCard").style.transform) && /scale\\(1\\)$/.test(p.style.transform);`) === true, "an upward throw: Easy stamp, blue tint, the card follows and the next card rises");
+  await shot("9-swipe-up");
+  await ev(`var el=document.getElementById("pkCard"), r=el.getBoundingClientRect(), x=r.left+r.width/2, y=r.top+r.height/2; el.dispatchEvent(new PointerEvent("pointerup",{bubbles:true,pointerType:"touch",isPrimary:true,pointerId:9,clientX:x+4,clientY:y-140})); return 1;`);
+  ok(await nextCard(10), "releasing the upward throw grades it and moves on");
+  ok(await ev(`var r=document.querySelector("#smdPrep .pk-ring"); return !!r && r.getAttribute("aria-valuenow")==="9" && r.querySelector("b").textContent==="2";`) === true, "the progress ring in the bar: 9 done, 2 left");
 
   // ---- card 10: occlusion
   ok(await ev(`return document.querySelectorAll("#pkCard .pk-box").length===4 && !document.querySelector("#smdPrep .pk-g");`) === true, "occlusion: 4 masks, no grades yet");
@@ -158,7 +192,7 @@ try {
   // ---- end screen
   ok(await until(`return !!document.querySelector("#pkEnd");`, 3000), "the session ends with a summary");
   ok(/10 cards reviewed/.test(await ev(`return document.querySelector("#pkEnd .pk-end-n").textContent;`)), "10 cards reviewed (the repeat is not counted twice)");
-  ok(await ev(`return Array.from(document.querySelectorAll("#pkEnd .pk-tally dd")).map(function(d){return d.textContent;}).join(",");`) === "1,1,7,1", "tally Again 1, Hard 1, Good 7, Easy 1");
+  ok(await ev(`return Array.from(document.querySelectorAll("#pkEnd .pk-tally dd")).map(function(d){return d.textContent;}).join(",");`) === "1,1,6,2", "tally Again 1, Hard 1, Good 6, Easy 2 (one by an upward swipe)");
   ok(/Next cards are due tomorrow: \d+ card/.test(await ev(`return document.querySelector("#pkEnd").textContent;`)), "says when the next cards are due");
   ok(await ev(`return !document.querySelector("#smdPrep [data-act=k-more]");`) === true, "no 'learn more' when the deck has no new cards left");
   await shot("end");
