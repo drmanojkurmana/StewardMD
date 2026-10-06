@@ -1,0 +1,68 @@
+/* Narkē reading clinics (narke-clinic.js): the capnograph and multiparameter monitor screens.
+   Dark: the workstation screen, black plate, channel colours from narke.css (--nk-ecg, --nk-spo2, --nk-co2, --nk-art).
+   Light: the paper chart, warm card with ink-dark channel colours. Waves keep a 2 px stroke at any width
+   (vector-effect). The first paint of a case sweeps left to right once, like a monitor trace; reduced motion skips it. */
+.nrk-root { --nkc-plate: #000; --nkc-grid: #1c2633; }
+body:not(.dark):not(.v3-dark) .nrk-root { --nkc-plate: var(--sp-card); --nkc-grid: var(--nk-grid); }
+
+.nrk-root .nkc-scene { font-size: 16px; line-height: 1.45; margin: 4px 0 12px; color: var(--sp-text); text-wrap: pretty; }
+.nrk-root .nkc-mon { margin: 0; background: var(--nkc-plate); border: 1px solid var(--nk-line); border-radius: 14px; padding: 6px 0; overflow: hidden; }
+.nrk-root .nkc-ch { display: grid; grid-template-columns: minmax(0, 1fr) 84px; align-items: stretch; }
+.nrk-root .nkc-ch + .nkc-ch { border-top: 1px solid var(--nkc-grid); }
+.nrk-root .nkc-wave { position: relative; min-width: 0; padding: 18px 28px 6px 10px; }
+.nrk-root .nkc-svg { display: block; width: 100%; height: 56px; overflow: visible; }
+.nrk-root .nkc-ecg .nkc-svg { height: 72px; }
+.nrk-root .nkc-co2 .nkc-svg { height: 60px; }
+.nrk-root .nkc-co2.tall .nkc-svg { height: 168px; }
+.nrk-root .nkc-line { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.nrk-root .nkc-line.ecg { stroke: var(--nk-ecg); } .nrk-root .nkc-line.spo2 { stroke: var(--nk-spo2); } .nrk-root .nkc-line.co2 { stroke: var(--nk-co2); }
+.nrk-root .nkc-grid { stroke: var(--nkc-grid); stroke-width: 1; vector-effect: non-scaling-stroke; stroke-dasharray: 3 4; }
+.nrk-root .nkc-tag { position: absolute; left: 10px; top: 4px; font-size: 12px; font-weight: 650; letter-spacing: 0.02em; line-height: 1; }
+.nrk-root .nkc-tag i { font-style: normal; font-weight: 500; color: var(--sp-mut); margin-left: 4px; }
+.nrk-root .nkc-ecg .nkc-tag, .nrk-root .nkc-ecg .nkc-num { color: var(--nk-ecg); }
+.nrk-root .nkc-spo2 .nkc-tag, .nrk-root .nkc-spo2 .nkc-num { color: var(--nk-spo2); }
+.nrk-root .nkc-co2 .nkc-tag, .nrk-root .nkc-co2 .nkc-num, .nrk-root .nkc-trend .nkc-tag { color: var(--nk-co2); }
+.nrk-root .nkc-art .nkc-num { color: var(--nk-art); }
+/* scale ticks sit inside the wave area's right gutter, aligned to the grid lines */
+.nrk-root .nkc-plot { position: relative; }
+.nrk-root .nkc-tick { position: absolute; right: -24px; transform: translateY(-50%); font-size: 11px; color: var(--sp-mut); font-variant-numeric: tabular-nums; }
+.nrk-root .nkc-co2.tall .nkc-wave { padding-top: 22px; }
+.nrk-root .nkc-num { display: flex; flex-direction: column; justify-content: center; align-items: flex-end; gap: 0; padding: 6px 12px 6px 4px; text-align: right; }
+.nrk-root .nkc-k { font-size: 11px; font-weight: 650; letter-spacing: 0.03em; opacity: .9; }
+.nrk-root .nkc-v { font-size: 26px; font-weight: 700; line-height: 1.05; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.nrk-root .nkc-v + .nkc-k { margin-top: 4px; }
+.nrk-root .nkc-sub { font-size: 13px; font-variant-numeric: tabular-nums; }
+.nrk-root .nkc-nibp .nkc-v { font-size: 22px; }
+.nrk-root .nkc-off { display: flex; align-items: center; height: 60px; font-size: 14px; color: var(--sp-mut); }
+.nrk-root .nkc-trend { position: relative; padding-top: 14px; }
+.nrk-root .nkc-trend .nkc-tag { left: 0; top: 0; }
+.nrk-root .nkc-trend .nkc-svg { height: 36px; }
+.nrk-root .nkc-nibp .nkc-wave { padding-top: 8px; }
+.nrk-root .nkc-tends { display: flex; justify-content: space-between; font-size: 12px; color: var(--sp-mut); font-variant-numeric: tabular-nums; margin-top: 2px; }
+.nrk-root .nkc-mon > .nkc-trend { border-top: 1px solid var(--nkc-grid); padding: 18px 28px 8px 10px; }
+.nrk-root .nkc-mon > .nkc-trend .nkc-tag { left: 10px; top: 6px; }
+
+.nrk-root .nkc-label { display: flex; align-items: center; gap: 6px; margin: 8px 0 0; font-size: 13px; color: var(--sp-mut); }
+.nrk-root .nkc-label .smd-ico { width: 16px; height: 16px; }
+.nrk-root .nkc-q { margin-top: 20px; }
+.nrk-root .nkc-reveal { margin-top: 20px; scroll-margin-top: 12px; }
+.nrk-root .nkc-verdict { scroll-margin-top: 12px; }
+.nrk-root .nkc-key { margin: 10px 0 0; font-size: 17px; line-height: 1.35; }
+.nrk-root .nkc-key span { display: block; font-size: 12px; font-weight: 650; letter-spacing: 0.03em; color: var(--sp-mut); }
+.nrk-root .nkc-key.mine { font-size: 15px; color: var(--sp-mut); }
+.nrk-root .nkc-desc { margin: 0; line-height: 1.5; }
+.nrk-root .nkc-points { margin: 0; padding-left: 20px; line-height: 1.5; }
+.nrk-root .nkc-points li + li { margin-top: 6px; }
+.nrk-root .nkc-src { margin: 14px 0 0; font-size: 14px; color: var(--sp-mut); }
+.nrk-root .nkc-src summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; font-weight: 600; color: var(--sp-text); }
+.nrk-root .nkc-src ul { margin: 0; padding-left: 20px; }
+.nrk-root .nkc-ivl { margin: 14px 0; }
+.nrk-root .nkc-ivl b { color: var(--sp-text); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .nrk-root .nkc-new .nkc-svg { animation: nkc-sweep 640ms var(--nk-ease) backwards; }
+  .nrk-root .nkc-new .nkc-ch:nth-child(2) .nkc-svg { animation-delay: 40ms; }
+  .nrk-root .nkc-new .nkc-ch:nth-child(3) .nkc-svg { animation-delay: 80ms; }
+}
+@keyframes nkc-sweep { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@media (max-width: 359px) { .nrk-root .nkc-ch { grid-template-columns: minmax(0, 1fr) 72px; } .nrk-root .nkc-v { font-size: 22px; } }

@@ -7,9 +7,9 @@
 (function (G) {
   "use strict";
   var V = "nrk1";
-  var CSS = ["specialty.css", "narke.css"];
+  var CSS = ["specialty.css", "narke.css", "narke-clinic.css"];
   var JS = ["specialty-core.js", "specialty-data.js", "specialty-stage.js", "specialty-shell.js", "specialty-learn.js", "specialty-bank.js",
-    "specialty-explore.js", "specialty-tools.js", "specialty-notes.js", "narke.js"];
+    "specialty-explore.js", "specialty-tools.js", "specialty-notes.js", "narke.js", "narke-clinic.js"];
   var BASE = G.SMD_NARKE_BASE || "/narke/";
   var loading = null;
 
