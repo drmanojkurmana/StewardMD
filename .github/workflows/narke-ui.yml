@@ -23,3 +23,5 @@ jobs:
         run: node test/run-narke-app-ui.mjs
       - name: Narkē explorers (390 px, both themes, keyboard)
         run: node test/run-narke-explore-ui.mjs
+      - name: Narkē capnography and monitor clinics
+        run: node test/run-narke-clinic-ui.mjs
