@@ -83,7 +83,7 @@
     male: T("Male", "पुरुष"), female: T("Female", "महिला"), yrs: T("{n} y", "{n} वर्ष"),
     pbw: T("PBW", "PBW"), pbwFull: T("Predicted body weight {n} kg", "अनुमानित शरीर वज़न {n} kg"),
     tStiff: T("Stiff lung", "सख़्त फेफड़ा"), tNarrow: T("Narrow airways", "संकरे वायुमार्ग"), tTrap: T("Air trapping", "हवा का फँसना"), tShunt: T("Large shunt", "बड़ा शंट"), tNormal: T("Normal lungs", "सामान्य फेफड़े"),
-    volLow: T("Low volume status", "कम वॉल्यूम स्थिति"), volHigh: T("Fluid overloaded", "ज़्यादा फ़्लूइड"), volNormal: T("Normal volume status", "सामान्य वॉल्यूम स्थिति"),
+    volLow: T("Low on fluid", "शरीर में फ़्लूइड कम"), volHigh: T("Fluid overloaded", "ज़्यादा फ़्लूइड"), volNormal: T("Normal fluid status", "फ़्लूइड सामान्य"),
     scenario: T("Scenario", "परिदृश्य"), why: T("Why ventilated", "वेंटिलेशन क्यों"), lung: T("Lung", "फेफड़ा"), circ: T("Circulation", "रक्त संचार"),
     compl: T("Compliance {n} mL/cmH2O", "कंप्लायंस {n} mL/cmH2O"), resist: T("Resistance {n} cmH2O/L/s", "रेज़िस्टेंस {n} cmH2O/L/s"),
     targets: T("Targets", "लक्ष्य"), simulated: T("Simulated teaching values", "सिम्युलेटेड शिक्षण मान"),
@@ -172,7 +172,40 @@
     dysAria: T("Pressure and flow over two breaths, showing a patient and ventilator out of step.", "दो साँसों में प्रेशर और फ़्लो, मरीज़ और वेंटिलेटर का तालमेल नहीं।"),
     runs: T("{n} runs, best {b}", "{n} रन, सर्वोत्तम {b}"), none: T("Not started", "अभी शुरू नहीं"),
     maikQ: T("I ran a ventilator lab simulation", "I ran a ventilator lab simulation"),
-    fallbackDisc: T("Educational simulator. Not a real ventilator and not a guide to treating a real patient.", "शैक्षिक सिम्युलेटर। यह असली वेंटिलेटर नहीं है और असली मरीज़ के इलाज की गाइड नहीं है।")
+    fallbackDisc: T("Educational simulator. Not a real ventilator and not a guide to treating a real patient.", "शैक्षिक सिम्युलेटर। यह असली वेंटिलेटर नहीं है और असली मरीज़ के इलाज की गाइड नहीं है।"),
+    // beginner layer: plain words beside the clinical ones (Level 1 and 2)
+    startHere: T("Start here", "यहाँ से शुरू करें"), tutFirst: T("New to ventilators? Do the first two tutorials, then open a patient.", "वेंटिलेटर नया है? पहले दो ट्यूटोरियल करें, फिर एक मरीज़ खोलें।"),
+    storyGoals: T("Story and goals", "कहानी और लक्ष्य"),
+    pbwWhy: T("PBW is the weight predicted from height. Breath size is set from it, not from real weight.", "PBW लंबाई से अनुमानित वज़न है। साँस का आकार इसी से तय होता है, असली वज़न से नहीं।"),
+    monWhat: T("What these numbers mean", "इन संख्याओं का मतलब"),
+    mHr: T("HR: heartbeats a minute. Normal adult range is about 60 to 100.", "HR: दिल की धड़कन प्रति मिनट। वयस्क में सामान्य लगभग 60 से 100।"),
+    mSpo2: T("SpO2: how much of the blood's haemoglobin carries oxygen, in %.", "SpO2: खून का कितना हीमोग्लोबिन ऑक्सीजन ले जा रहा है, % में।"),
+    mRr: T("RR: breaths a minute, the machine's and the patient's together.", "RR: प्रति मिनट साँसें, मशीन और मरीज़ की मिलाकर।"),
+    mBp: T("NIBP: blood pressure, top over bottom. The number in brackets is the mean (MAP).", "NIBP: ब्लड प्रेशर, ऊपर बटा नीचे। कोष्ठक में औसत (MAP) है।"),
+    mUnit: T("cmH2O is the unit for airway pressure. mmHg is the unit for blood pressure and blood gases.", "cmH2O वायुमार्ग दबाव की इकाई है। mmHg ब्लड प्रेशर और ब्लड गैस की इकाई है।"),
+    wavesWhat: T("Each trace sweeps left to right, one breath after another: the push, the air moving, the air in the lung.", "हर ट्रेस बाएँ से दाएँ चलता है, एक साँस के बाद दूसरी: दबाव, चलती हवा, फेफड़े में हवा।"),
+    doingH: T("What the ventilator is doing", "वेंटिलेटर क्या कर रहा है"),
+    b_vte: T("Air per breath", "हर साँस में हवा"), b_rrTotal: T("Breaths a minute", "प्रति मिनट साँसें"), b_ve: T("Air per minute", "प्रति मिनट हवा"), b_ppeak: T("Highest push", "सबसे ऊँचा दबाव"),
+    doingNote: T("Air per minute is air per breath times breaths a minute. It clears the CO2.", "प्रति मिनट हवा = हर साँस की हवा गुणा प्रति मिनट साँसें। यही CO2 निकालती है।"),
+    k_fio2: T("Oxygen in the air", "हवा में ऑक्सीजन"), k_peep: T("Pressure kept in the lungs", "फेफड़ों में रखा दबाव"), k_vt: T("Size of each breath", "हर साँस का आकार"), k_rr: T("Machine breaths a minute", "मशीन की साँसें प्रति मिनट"),
+    cd_setting: T("What you changed", "आपने क्या बदला"), cd_ventilator: T("What the machine now gives", "मशीन अब क्या दे रही है"), cd_mechanics: T("How the lung takes the push", "फेफड़ा दबाव को कैसे लेता है"),
+    cd_waveforms: T("What the traces show", "ट्रेस क्या दिखाते हैं"), cd_gasExchange: T("Oxygen in and CO2 out, in the air sacs", "हवा की थैलियों में ऑक्सीजन अंदर, CO2 बाहर"),
+    cd_monitor: T("What the bedside monitor shows", "बेडसाइड मॉनिटर क्या दिखाता है"), cd_abg: T("What a blood gas would show", "ब्लड गैस क्या दिखाएगी"), cd_patient: T("Blood pressure and heart rate", "ब्लड प्रेशर और दिल की धड़कन"),
+    nextH: T("Next", "अगला कदम"),
+    nx0: T("Tap Draw ABG to see where the patient starts.", "शुरुआत देखने के लिए ABG लें दबाएँ।"),
+    nx1: T("Pick one dial, tap + or the minus button, then Confirm.", "एक dial चुनें, + या घटाने वाला बटन दबाएँ, फिर पक्का करें।"),
+    nx2: T("Press Confirm to apply it. A real ventilator waits for this too.", "लागू करने के लिए पक्का करें दबाएँ। असली वेंटिलेटर भी इसका इंतज़ार करता है।"),
+    nx3: T("Read the chain, then tap +15 min. Blood gases change slowly.", "चेन पढ़ें, फिर +15 मिनट दबाएँ। ब्लड गैस धीरे बदलती है।"),
+    nx4: T("Now Draw ABG again to see what your change did.", "अब फिर ABG लें और देखें आपके बदलाव ने क्या किया।"),
+    nx5: T("Compare Before and Now in the blood gas. Then try another change, or Finish.", "ब्लड गैस में पहले और अभी की तुलना करें। फिर कोई और बदलाव करें, या समाप्त करें।"),
+    tutMoved: T("The clock moved on {m} min so you can see it.", "आपको दिखाने के लिए घड़ी {m} मिनट आगे बढ़ी।"),
+    tutFlat: T("{x} barely moves in this patient. Go on when ready.", "इस मरीज़ में {x} लगभग नहीं बदलता। तैयार हों तो आगे बढ़ें।"),
+    tutLook: T("Watch {x}.", "{x} देखें।"),
+    ex_paco2: T("CO2 in the blood (PaCO2)", "खून में CO2 (PaCO2)"), ex_pao2: T("oxygen in the blood (PaO2)", "खून में ऑक्सीजन (PaO2)"), ex_ph: T("pH", "pH"),
+    ex_pplat: T("plateau pressure", "प्लेटो प्रेशर"), ex_map: T("mean blood pressure (MAP)", "औसत ब्लड प्रेशर (MAP)"), ex_vte: T("tidal volume", "टाइडल वॉल्यूम"),
+    ex_autoPeep: T("auto-PEEP", "ऑटो-PEEP"), ex_drivingP: T("driving pressure", "ड्राइविंग प्रेशर"), ex_spo2: T("SpO2", "SpO2"),
+    ab_pH: T("acidity: lower is more acid", "अम्लता: कम यानी ज़्यादा एसिड"), ab_PaCO2: T("CO2 in the blood", "खून में CO2"), ab_PaO2: T("oxygen in the blood", "खून में ऑक्सीजन"),
+    ab_HCO3: T("bicarbonate, the body's buffer", "बाइकार्बोनेट, शरीर का बफ़र"), ab_SaO2: T("% of haemoglobin carrying oxygen", "ऑक्सीजन ले जा रहा हीमोग्लोबिन %")
   };
   var MODE_SHORT = { vc: "VC", acvc: "AC-VC", pc: "PC", acpc: "AC-PC", simv: "SIMV", psv: "PSV", cpap: "CPAP", prvc: "PRVC", niv: "NIV", aprv: "APRV" };
   var RO_UNIT = { pfRatio: "", shunt: "", vdvt: "", aaGradient: "mmHg", vte: "mL", ve: "L/min", ppeak: "cmH2O", pplat: "cmH2O", pmean: "cmH2O", peepTotal: "cmH2O", autoPeep: "cmH2O", drivingP: "cmH2O", cstat: "mL/cmH2O", raw: "cmH2O/L/s", rrTotal: "/min", ieActual: "", mechPower: "J/min" };
@@ -183,8 +216,6 @@
   var DYS_KINDS = ["doubleTrigger", "ineffectiveTrigger", "autoTrigger", "flowStarvation", "prematureCycle", "delayedCycle", "reverseTrigger"];
   // What-if moves a setting by a teaching-sized amount in its own units; others move four steps.
   var WI_DELTA = { fio2: 20, peep: 4, vt: 100, rr: 6, pinsp: 5, ps: 5, ti: 0.4, ipap: 4, epap: 3, phigh: 4, plow: 3, thigh: 1, tlow: 0.2, trigFlow: 2, cycle: 15 };
-  // Points each score part can earn (engine score(): parts sum to 100; unsafe is a penalty down to -30).
-  var PART_MAX = { mode: 10, initial: 10, oxygenation: 15, ventilation: 15, protection: 20, alarms: 10, abg: 10, time: 10 };
   var OX_KEYS = { fio2: 1, peep: 1, epap: 1, plow: 1, phigh: 1, ti: 1, thigh: 1 };
 
   function L() { return I.lang(); }
@@ -226,7 +257,7 @@
     try { p = JSON.parse(I.ls().getItem(PK)); } catch (e) {}
     VL.p = p && typeof p === "object" ? p : {};
     if (!(VL.p.level >= 1 && VL.p.level <= 4)) VL.p.level = 1;
-    VL.p.dys = VL.p.dys || {}; VL.p.cases = VL.p.cases || {}; VL.p.best = VL.p.best || {};
+    VL.p.dys = VL.p.dys || {}; VL.p.cases = VL.p.cases || {}; VL.p.best = VL.p.best || {}; VL.p.tuts = VL.p.tuts || {};
     return VL.p;
   }
   function savePrefs() { try { I.ls().setItem(PK, JSON.stringify(VL.p)); } catch (e) {} }
@@ -248,6 +279,18 @@
   }
   function modeShort(m) { return MODE_SHORT[m] || String(m || "").toUpperCase(); }
   function modeTitle(m) { var x = E() && E().MODES && E().MODES[m]; return (x ? t(x.title) : modeShort(m)).replace(/-/g, "\u2011"); }
+  // Short-title rule for long engine titles ("Volume control (\u092a\u0942\u0930\u0940 \u0924\u0930\u0939 \u092e\u0936\u0940\u0928 \u0928\u093f\u092f\u0902\u0924\u094d\u0930\u093f\u0924)", "Assist control, volume (AC-VC): ..."):
+  // head = the name without the mode's own abbreviation; note = the explanation after ":" or in a trailing bracket.
+  // The mode button shows the head; the mode sheet shows head and note. Nothing is cut with an ellipsis.
+  function modeParts(m) {
+    var full = modeTitle(m), ab = modeShort(m).replace(/-/g, "\u2011"), head = full, note = "", i = full.indexOf(": ");
+    if (i > 0) { head = full.slice(0, i); note = full.slice(i + 2); }
+    head = head.replace(" (" + ab + ")", "");
+    var br = /^(.*\S)\s*\(([^()]+)\)$/.exec(head);
+    if (br && !note) { head = br[1]; note = br[2]; }
+    if (head === ab && note) { head = note; note = ""; }
+    return { head: head, note: note };
+  }
   // The settings for a scenario: every engine default, then the scenario's start settings and mode.
   function baseSettings(sc) {
     var e = E(), o = {}, k, S = (e && e.SETTINGS) || {};
@@ -311,8 +354,20 @@
     var cv = p.cv, c = cv.getContext && cv.getContext("2d");
     if (!c || !p.src) return;
     var W = cv.width, H = cv.height, d = p.d || 1, pad = 4 * d, win = p.win, x, y, tt;
-    c.clearRect(0, 0, W, H);
+    c.setTransform(1, 0, 0, 1, 0, 0); c.clearRect(0, 0, W, H);
     function yOf(v) { return pad + (1 - (clamp(v, p.lo, p.hi) - p.lo) / (p.hi - p.lo)) * (H - 2 * pad); }
+    // scale lines: hairlines snapped to device pixels, labelled in a left gutter the trace never enters
+    var G0 = p.ticks ? 26 * d : 0;
+    c.setTransform(1, 0, 0, 1, 0, 0);
+    if (p.ticks) {
+      c.font = (10 * d) + "px " + (p.font || "sans-serif"); c.textAlign = "right"; c.textBaseline = "middle";
+      p.ticks.concat(p.zero ? [0] : []).forEach(function (v) {
+        var ty = Math.round(yOf(v)) + 0.5;
+        if (v !== 0) { c.strokeStyle = p.grid; c.lineWidth = 1; c.setLineDash([2 * d, 5 * d]); c.beginPath(); c.moveTo(G0, ty); c.lineTo(W, ty); c.stroke(); c.setLineDash([]); }
+        c.fillStyle = p.mut; c.fillText(String(v), G0 - 5 * d, ty);
+      });
+      c.translate(G0, 0); W -= G0;
+    }
     if (p.zero) { c.strokeStyle = p.grid; c.lineWidth = d; c.setLineDash([3 * d, 4 * d]); c.beginPath(); c.moveTo(0, yOf(0)); c.lineTo(W, yOf(0)); c.stroke(); c.setLineDash([]); }
     var sweepT = WV.still ? win : (now / 1000) % win, cyc = WV.still ? 0 : Math.floor((now / 1000) / win) * win;
     var head = sweepT / win * W, gap = 14 * d, step = (p.peak ? 1 : 2) * d, started = false, prevPh = null, marks = [];
@@ -387,12 +442,16 @@
     ((b.marks && b.marks.trigger) || []).forEach(function (x) { marks.push({ ph: ((x - t0) / P) % 1 + 0.0005, k: "trig" }); });
     ((b.marks && b.marks.cycle) || []).forEach(function (x) { marks.push({ ph: ((x - t0) / P) % 1, k: "cyc" }); });
     var endFlow = b.flow[b.flow.length - 1], trapped = endFlow < -1.5;
+    // The sweep window holds whole breaths, so the last breath on screen is never cut at the right edge.
     var win = clamp(P * 2, 5, 14);
     if (b.t.length && b.marks && (b.events || []).length) win = clamp(P, 5, 14);
+    win = Math.max(1, Math.round(win / P)) * P;
+    // At most two scale lines per plot, on round steps, so short phone plots stay readable.
+    function ticks(hi) { var steps = [10, 20, 50, 100, 200, 250, 500, 1000], i, o = [], v, stp = steps[steps.length - 1]; for (i = 0; i < steps.length; i++) if (Math.floor((hi - steps[i] * 0.4) / steps[i]) <= 2) { stp = steps[i]; break; } for (v = stp; v < hi - stp * 0.4; v += stp) o.push(v); return o; }
     return {
-      paw: { src: tp, lo: 0, hi: pmax, win: win, marks: marks },
-      flow: { src: tf, lo: -fmax, hi: fmax, win: win, zero: true, marks: trapped ? [{ ph: 0.995, k: "auto" }] : [], autoLabel: trapped ? raw("mkAuto") : "" },
-      vol: { src: tv, lo: 0, hi: vmax, win: win },
+      paw: { src: tp, lo: 0, hi: pmax, win: win, marks: marks, ticks: ticks(pmax) },
+      flow: { src: tf, lo: -fmax, hi: fmax, win: win, zero: true, marks: trapped ? [{ ph: 0.995, k: "auto" }] : [], autoLabel: trapped ? raw("mkAuto") : "", ticks: [fmax / 2, -fmax / 2] },
+      vol: { src: tv, lo: 0, hi: vmax, win: win, ticks: ticks(vmax) },
       scale: { paw: pmax, flow: fmax, vol: vmax }, trapped: trapped, trig: ((b.marks && b.marks.trigger) || []).length > 0
     };
   }
@@ -402,7 +461,7 @@
     return {
       ecg: { src: fnTable(ecgShape, per, 600), lo: -0.35, hi: 1.1, win: 4, peak: true },
       pleth: { src: fnTable(plethShape, per, 400), lo: -0.05, hi: 1.1 + (100 - Math.min(100, v.spo2 || 98)) / 60, win: 4 },
-      capno: { src: fnTable(capnoShape(insp, slow), br, 400), lo: -0.05, hi: Math.max(1.05, 50 / Math.max(5, v.etco2 || 35)), win: clamp(br * 3, 8, 24) }
+      capno: { src: fnTable(capnoShape(insp, slow), br, 400), lo: -0.05, hi: Math.max(1.05, 50 / Math.max(5, v.etco2 || 35)), win: Math.max(1, Math.round(clamp(br * 3, 8, 24) / br)) * br }
     };
   }
 
@@ -483,9 +542,13 @@
     }).join("");
     var intro = lvIntro(n);
     var cards = open.map(function (sc) { return scCard(sc, e); }).join("");
-    var tuts = (learn().tutorials || []).map(function (tu) {
-      return I.row("vltut", ' data-k="' + esc(tu.id) + '"', I.tile("play"), tx(tu.title), s("steps", { n: (tu.steps || []).length }), "");
+    var tl = learn().tutorials || [], td = prefs().tuts, nextT = tl.filter(function (tu) { return !td[tu.id]; })[0];
+    var tuts = tl.map(function (tu) {
+      var right = td[tu.id] ? '<span class="vl-tdone">' + (ico("check") || "") + '<span class="sp-sr">' + s("done") + "</span></span>" : tu === nextT && n <= 2 ? '<span class="vl-start">' + s("startHere") + "</span>" : "";
+      return I.row("vltut", ' data-k="' + esc(tu.id) + '"', I.tile("play"), tx(tu.title), s("steps", { n: (tu.steps || []).length }), right);
     }).join("");
+    // Beginners meet the tutorials before the patients; residents (Level 3 and 4) see patients first.
+    var tutBlock = tuts ? '<h2 class="sp-h2">' + s("guided") + "</h2>" + (n <= 1 && !td[(tl[1] || {}).id] ? '<p class="vl-lvintro vl-tfirst">' + s("tutFirst") + "</p>" : "") + '<ul class="sp-rows vl-tuts">' + tuts + "</ul>" : "";
     var nd = Object.keys(learn().dyssync || {}).filter(function (k) { return DYS_KINDS.indexOf(k) >= 0; });
     var solved = nd.filter(function (k) { return prefs().dys[k]; }).length;
     var prac = I.row("vlwhat", "", I.tile("sliders"), s("whatIf"), s("whatIfSub"), "") +
@@ -497,9 +560,10 @@
       '<p class="vl-disc" role="note">' + (ico("info") ? '<span aria-hidden="true">' + ico("info") + "</span>" : "") + "<span>" + disc() + "</span></p>" +
       '<h2 class="sp-h2" id="vlLvH">' + s("level") + '</h2><div class="vl-levels" role="group" aria-labelledby="vlLvH">' + seg + "</div>" +
       (intro ? '<p class="vl-lvintro">' + tx(intro) + "</p>" : "") +
+      (n <= 2 ? tutBlock : "") +
       '<h2 class="sp-h2">' + s("patients") + '</h2><ul class="vl-cards">' + cards + "</ul>" +
       (more > 0 ? '<p class="sp-small vl-more">' + s("morePts", { n: more }) + "</p>" : "") +
-      (tuts ? '<h2 class="sp-h2">' + s("guided") + '</h2><ul class="sp-rows">' + tuts + "</ul>" : "") +
+      (n > 2 ? tutBlock : "") +
       '<h2 class="sp-h2">' + s("practise") + '</h2><ul class="sp-rows">' + prac + "</ul>" +
       "</div></div>", typeof focusSel === "string" ? focusSel : null);
   }
@@ -585,8 +649,8 @@
       '<div class="vl-pt-h"><h2 class="vl-h" id="vlPtH">' + tx(p.diagnosis) + '</h2><span class="vl-lvb">' + s("lvN", { n: n }) + "</span></div>" +
       '<p class="vl-pt-who">' + s(p.sex === "F" ? "female" : "male") + ", " + s("yrs", { n: p.age }) + " · " + esc(fmtN(p.heightCm)) + " cm · " + esc(fmtN(p.weightKg)) + ' kg · <b title="' + s("pbwFull", { n: ptPbw(sc) }) + '">' + s("pbw") + " " + esc(fmtN(ptPbw(sc))) + " kg</b></p>" +
       '<div class="vl-tags">' + lungTags(sc).map(function (k) { return '<span class="vl-tag2">' + s(k) + "</span>"; }).join("") + '<span class="vl-tag2 vs-' + esc(p.volumeStatus || "normal") + '">' + s(vs) + "</span></div>" +
-      (n >= 2 ? '<p class="vl-pt-mech">' + s("compl", { n: l.c }) + " · " + s("resist", { n: l.r }) + "</p>" : "") +
-      '<details class="vl-story"><summary>' + s("scenario") + "</summary><p>" + tx(sc.story) + "</p>" + (sc.why ? "<p><b>" + s("why") + "</b> " + tx(sc.why) + "</p>" : "") +
+      (n >= 2 ? '<p class="vl-pt-mech">' + s("compl", { n: l.c }) + " · " + s("resist", { n: l.r }) + "</p>" : '<p class="vl-plain">' + s("pbwWhy") + "</p>") +
+      '<details class="vl-story"' + (n <= 1 && !R.tut ? " open" : "") + "><summary>" + s("storyGoals") + "</summary><p>" + tx(sc.story) + "</p>" + (sc.why ? "<p><b>" + s("why") + "</b> " + tx(sc.why) + "</p>" : "") +
       (goals.length ? "<p><b>" + s("targets") + "</b> " + goals.join(" · ") + "</p>" : "") +
       ((g.other || []).length ? "<ul>" + g.other.map(function (o) { return "<li>" + tx(o) + "</li>"; }).join("") + "</ul>" : "") + "</details></section>";
   }
@@ -610,15 +674,19 @@
       '<div class="vl-ch vl-nibp c-art" data-vl-id="sbp"><span class="vl-k">' + s("nibp") + '</span><span class="vl-bp"><b class="vl-v" id="vlBp">' + esc(m.bp) + '</b><span class="vl-map" id="vlMap" data-vl-id="map">' + esc(m.map) + "</span></span>" +
       '<span class="vl-temp"><span class="vl-k">' + s("temp") + '</span><b id="vlTemp">' + esc(m.temp) + "</b></span></div></div>" +
       '<div class="vl-flags" id="vlFlags">' + flagsHtml(r) + "</div>" +
+      (lv() <= 2 ? '<details class="vl-what"><summary>' + s("monWhat") + "</summary><ul>" + ["mHr", "mSpo2"].map(function (k) { return "<li>" + s(k) + "</li>"; }).join("") +
+        "<li>" + tx((learn().glossary || {}).etco2 ? { en: "EtCO2: " + learn().glossary.etco2.en, hi: "EtCO2: " + learn().glossary.etco2.hi } : "EtCO2") + "</li>" +
+        ["mRr", "mBp", "mUnit"].map(function (k) { return "<li>" + s(k) + "</li>"; }).join("") + "</ul></details>" : "") +
       '<p class="sp-sr" id="vlMonSay">' + monSay(r) + "</p></section>";
   }
   function flagsHtml(r) {
     return (r.flags || []).map(function (f) { return '<span class="vl-fl ' + esc(f.severity || "info") + '">' + tx(f.label) + "</span>"; }).join("");
   }
   function monSay(r) { var v = r.vitals || {}; return s("monSay", { a: fmtN(v.hr), b: fmtN(v.spo2), c: fmtN(v.sbp), d: fmtN(v.dbp), e: fmtN(v.map), f: fmtN(v.rr), g: fmtN(v.etco2), h: v.temp }); }
-  function updMonitor(r) {
+  function pulse(el) { if (!el || reduced()) return; el.classList.remove("vl-chg"); void el.offsetWidth; el.classList.add("vl-chg"); }
+  function updMonitor(r, flash) {
     var m = monNums(r);
-    [["vlHr", m.hr], ["vlSpo2", m.spo2], ["vlEt", m.et], ["vlRr", m.rr], ["vlBp", m.bp], ["vlMap", m.map], ["vlTemp", m.temp]].forEach(function (x) { var el = $(x[0]); if (el && el.textContent !== x[1]) el.textContent = x[1]; });
+    [["vlHr", m.hr], ["vlSpo2", m.spo2], ["vlEt", m.et], ["vlRr", m.rr], ["vlBp", m.bp], ["vlMap", m.map], ["vlTemp", m.temp]].forEach(function (x) { var el = $(x[0]); if (el && el.textContent !== x[1]) { el.textContent = x[1]; if (flash) pulse(el); } });
     var sr = $("vlMonSay"); if (sr) sr.innerHTML = monSay(r);
     var fl = $("vlFlags"), fh = flagsHtml(r); if (fl && fl.innerHTML !== fh) fl.innerHTML = fh;
   }
@@ -627,11 +695,12 @@
   function ventHtml(r) {
     var m = R.set.mode;
     return '<section class="vl-card vl-vent" data-vl-id="vent" aria-labelledby="vlVentH"><div class="vl-vent-h"><h2 class="vl-h" id="vlVentH">' + s("vent") + "</h2>" +
-      '<button type="button" class="vl-mode" data-act="vlmode" data-vl-id="mode" aria-haspopup="dialog" aria-label="' + s("changeMode", { x: modeTitle(m) }) + '"><b>' + esc(modeShort(m)) + "</b><span>" + esc(modeTitle(m)) + '</span><span class="vl-chev" aria-hidden="true">' + ico("chev") + "</span></button></div>" +
+      '<button type="button" class="vl-mode" data-act="vlmode" data-vl-id="mode" aria-haspopup="dialog" aria-label="' + s("changeMode", { x: modeTitle(m) }) + '"><b>' + esc(modeShort(m)) + '</b><span class="vl-mode-t">' + esc(modeParts(m).head) + '</span><span class="vl-chev" aria-hidden="true">' + ico("chev") + "</span></button></div>" +
+      (lv() <= 2 ? '<p class="vl-plain vl-wplain">' + s("wavesWhat") + "</p>" : "") +
       '<figure class="vl-plate vl-waves" data-vl-id="waves" role="img" id="vlWaves" aria-label="">' +
       wch("c-paw", "paw", "cmH2O", "vlScP", "wave-pressure") + wch("c-flow", "flow", "L/min", "vlScF", "wave-flow") + wch("c-vol", "vol", "mL", "vlScV", "wave-volume") +
       '<figcaption class="vl-legend" aria-hidden="true"><span><i class="mk-trig"></i>' + s("mkTrig") + '</span><span><i class="mk-cyc"></i>' + s("mkCyc") + '</span><span><i class="mk-auto"></i>' + s("mkAuto") + "</span></figcaption></figure>" +
-      '<dl class="vl-ro" data-vl-id="readouts" id="vlRo">' + roHtml(r) + "</dl></section>";
+      '<div class="vl-ro-w" data-vl-id="readouts" id="vlRo">' + roHtml(r) + "</div></section>";
   }
   function wch(cls, w, unit, scId, id) {
     return '<div class="vl-wch ' + cls + '" data-vl-id="' + id + '"><span class="vl-tag">' + s(w) + " <i>" + esc(unit) + '</i></span><span class="vl-scale" id="' + scId + '"></span><canvas class="vl-cv" data-w="' + w + '" aria-hidden="true"></canvas></div>';
@@ -645,9 +714,25 @@
     if (k === "vte" && g.vtPerKg && v / kg > g.vtPerKg[1] + 0.5) return "warn";
     return "";
   }
+  // Level 1: the learner sees four plain numbers ("What the ventilator is doing"), each with its clinical name small
+  // beside it; the full readout grid starts at Level 2.
+  var DOING = ["vte", "rrTotal", "ve", "ppeak"];
+  // Readouts the current tutorial step points at, or asks the learner to watch, show even above the learner's level.
+  function tutRo() { var sp = R && R.tut && R.tut.tu.steps[R.tut.i], o = []; if (!sp) return o; (sp.highlight || []).concat(sp.expect ? [sp.expect.key || sp.expect.readout] : []).forEach(function (k) { if (RO_UNIT[k] != null && o.indexOf(k) < 0) o.push(k); }); return o; }
+  function doingHtml(r) {
+    var vv = r.vent || {};
+    return '<h3 class="vl-doing-h">' + s("doingH") + '</h3><dl class="vl-ro vl-doing">' + DOING.concat(tutRo().filter(function (k) { return DOING.indexOf(k) < 0; })).filter(function (k) { return vv[k] != null; }).map(function (k) {
+      return '<div class="vl-ro-i" data-vl-id="' + k + '"><dt>' + (STR["b_" + k] ? s("b_" + k) : STR["ex_" + k] ? s("ex_" + k) : "") + ' <abbr>' + s("ro_" + k) + "</abbr></dt><dd><b data-v=\"" + k + '">' + esc(fmtN(vv[k])) + '</b><span class="vl-u">' + esc(RO_UNIT[k] || "") + "</span></dd></div>";
+    }).join("") + '</dl><p class="vl-doing-n">' + s("doingNote") + "</p>";
+  }
   function roHtml(r) {
+    if (lv() <= 1) return doingHtml(r);
+    return '<dl class="vl-ro">' + roItems(r) + "</dl>";
+  }
+  function roItems(r) {
     var vv = r.vent || {}, gg = r.gas || {}, kg = ptPbw(R.sc);
-    return visReadouts(lv()).filter(function (k) { return vv[k] != null || gg[k] != null; }).map(function (k) {
+    var vis = visReadouts(lv()), extra = tutRo();
+    return RO_ORDER.filter(function (k) { return (vis.indexOf(k) >= 0 || extra.indexOf(k) >= 0) && (vv[k] != null || gg[k] != null); }).map(function (k) {
       var v = vv[k] != null ? vv[k] : gg[k];
       if (k === "ieActual" && typeof v === "number") v = "1:" + (Math.round(v * 10) / 10);
       var f = typeof v === "number" ? roFlag(k, v) : "", big = ["ppeak", "pplat", "peepTotal", "vte", "ve", "rrTotal"].indexOf(k) >= 0;
@@ -675,8 +760,15 @@
     var leg = q(".vl-legend .mk-auto");
     if (leg && leg.parentNode) leg.parentNode.hidden = !(vs && vs.trapped);
   }
-  function updVent(r) {
-    var ro = $("vlRo"); if (ro) ro.innerHTML = roHtml(r);
+  function updVent(r, flash) {
+    var ro = $("vlRo");
+    if (ro) {
+      var old = {};
+      [].forEach.call(ro.querySelectorAll(".vl-ro-i"), function (n) { old[n.getAttribute("data-vl-id")] = n.querySelector("b").textContent; });
+      ro.innerHTML = roHtml(r);
+      if (flash) [].forEach.call(ro.querySelectorAll(".vl-ro-i"), function (n) { var b = n.querySelector("b"), k = n.getAttribute("data-vl-id"); if (old[k] != null && old[k] !== b.textContent) pulse(b); });
+      if (R.tut) tutHighlight(true);
+    }
     var bs = breathSig(r);
     if (bs !== R.bsig) {
       R.bsig = bs;
@@ -691,7 +783,7 @@
       wvUpdate("ecg", x.ecg); wvUpdate("pleth", x.pleth); wvUpdate("capno", x.capno);
     }
     var mb = q(".vl-mode");
-    if (mb) { mb.querySelector("b").textContent = modeShort(R.set.mode); mb.querySelector("span").textContent = modeTitle(R.set.mode); mb.setAttribute("aria-label", raw("changeMode", { x: modeTitle(R.set.mode) })); }
+    if (mb) { mb.querySelector("b").textContent = modeShort(R.set.mode); mb.querySelector(".vl-mode-t").textContent = modeParts(R.set.mode).head; mb.setAttribute("aria-label", raw("changeMode", { x: modeTitle(R.set.mode) })); }
   }
 
   /* ---- settings: dials that wait for Confirm ---- */
@@ -701,7 +793,8 @@
   })();
   function knob(k) {
     var d = setDef(k), v = R.pend[k] != null ? R.pend[k] : R.set[k], was = R.pend[k] != null ? R.set[k] : null, lab = setLabel(k), unit = setUnit(k);
-    var head = '<div class="vl-knob-top"><span class="vl-knob-l" id="vlKL-' + esc(k) + '">' + esc(lab) + "</span>" +
+    var plain = lv() <= 1 && STR["k_" + k] ? '<span class="vl-knob-s">' + s("k_" + k) + "</span>" : "";
+    var head = '<div class="vl-knob-top"><span class="vl-knob-lw"><span class="vl-knob-l" id="vlKL-' + esc(k) + '">' + esc(lab) + "</span>" + plain + "</span>" +
       '<button type="button" class="vl-info" data-act="vlinfo" data-k="' + esc(k) + '" aria-label="' + s("info", { x: lab }) + '">' + (ico("info") || "i") + "</button></div>";
     if (d.options) {
       return '<div class="vl-knob vl-knob-opt' + (was != null ? " is-pend" : "") + '" data-vl-id="' + esc(k) + '" data-knob="' + esc(k) + '">' + head +
@@ -782,14 +875,36 @@
   };
 
   /* ---- footer: time controls, or Confirm while changes wait ---- */
+  // Beginner levels: one always-visible "what to do next" line above the footer controls; tapping it goes there.
+  function nextStep() {
+    if (lv() > 2 || R.tut) return null;
+    if (nPend()) return { k: "nx2", to: "confirm" };
+    var ch = R.lastSet > 0, after = ch && R.abgs.some(function (a) { return a.t >= R.lastSet; });
+    if (!ch) return R.abgs.length ? { k: "nx1", to: "settings" } : { k: "nx0", to: "abg" };
+    if (!after) return R.s.t - R.lastSet < 600 ? { k: "nx3", to: "chain" } : { k: "nx4", to: "abg" };
+    return { k: "nx5", to: "abg" };
+  }
+  function nextHtml() {
+    var x = nextStep();
+    return x ? '<button type="button" class="vl-next" data-act="vlnext" data-to="' + x.to + '"><b>' + s("nextH") + "</b><span>" + s(x.k) + '</span><span class="vl-chev" aria-hidden="true">' + ico("chev") + "</span></button>" : "";
+  }
+  function paintFoot() { var f = $("vlFoot"); if (f) f.innerHTML = footHtml(); }
+  A.vlnext = function (b) {
+    var to = b.getAttribute("data-to"), el, f;
+    if (to === "confirm") { f = q("[data-act=vlconfirm]"); if (f) f.focus({ preventScroll: true }); return; }
+    el = to === "abg" ? $("vlAbg") : to === "chain" ? $("vlChH") : $("vlSet");
+    f = to === "abg" ? q("[data-act=vldraw]") : to === "chain" ? $("vlChH") : q("#vlSet .vl-dial");
+    if (el) scrollTo(to === "chain" ? el.parentNode : el, false);
+    if (f) try { f.focus({ preventScroll: true }); } catch (e) {}
+  };
   function footHtml() {
     var n = nPend();
     if (n) {
-      return '<div class="vl-confirm"><button type="button" class="sp-btn sec" data-act="vlcancel">' + s("cancel") + "</button>" +
+      return nextHtml() + '<div class="vl-confirm"><button type="button" class="sp-btn sec" data-act="vlcancel">' + s("cancel") + "</button>" +
         '<button type="button" class="sp-btn pri" data-act="vlconfirm">' + (ico("check") || "") + " " + (n === 1 ? s("confirm1") : s("confirmN", { n: n })) + "</button></div>";
     }
     var waits = [["300", "t5"], ["900", "t15"], ["1800", "t30"], ["3600", "t60"]];
-    return '<div class="vl-time" role="group" aria-label="' + s("simTime", { x: clockText(R.s.t) }) + '">' +
+    return nextHtml() + '<div class="vl-time" role="group" aria-label="' + s("simTime", { x: clockText(R.s.t) }) + '">' +
       '<button type="button" class="vl-tbtn vl-live" data-act="vllive" aria-pressed="' + !!R.live + '" aria-label="' + s(R.live ? "liveOn" : "liveOff") + '">' +
       '<span class="vl-dot" aria-hidden="true"></span>' + s(R.live ? "live" : "pause") + "</button>" +
       waits.map(function (w) { return '<button type="button" class="vl-tbtn" data-act="vlskip" data-k="' + w[0] + '" aria-label="' + s("skipAria", { x: t(STR[w[1]]) }) + '">' + s(w[1]) + "</button>"; }).join("") + "</div>";
@@ -816,10 +931,10 @@
     R.side = keys.some(function (k) { return OX_KEYS[k]; }) ? "ox" : "ve";
     R.chain = compose({ setB: setB, setA: setA, keys: keys, roB: roB, roA: roA, prB: prB, prA: prA, reasons: reasons });
     R.log.push({ t: R.s.t, settings: clone(setA), readout: roA, action: "set:" + keys.join(",") });
-    if (R.tut) R.tut.base = { r: roA, t: R.s.t };
+    if (R.tut) { R.tut.pre = { r: roB, t: R.s.t }; R.tut.base = null; }
     var sEl = $("vlSet"); if (sEl) sEl.outerHTML = setHtml();
     var f = $("vlFoot"); if (f) f.innerHTML = footHtml();
-    refresh();
+    refresh(true);
     paintChain(false);
     I.haptic("success");
     say(R.chain.say);
@@ -857,9 +972,12 @@
     if (o.wiChain) o.wiChain.forEach(function (x) { if (out[x.step]) { out[x.step].on = true; out[x.step].lines = [t(x.text)]; } });
     var steps = (E().CHAIN_STEPS || ["setting", "ventilator", "mechanics", "waveforms", "gasExchange", "monitor", "abg", "patient"]);
     steps.forEach(function (k) { if (!out[k]) out[k] = { on: false, lines: [] }; if (!out[k].lines.length || !out[k].on) out[k].lines = out[k].on ? out[k].lines : [raw("cSame")]; if (out[k].on) said.push(raw("ch_" + k) + ": " + out[k].lines.join(" ")); });
-    return { steps: steps, data: out, say: raw("chainSay", { x: said.join(" ") }) };
+    return { steps: steps, data: out, say: raw("chainSay", { x: said.join(" ") }), src: o, lang: L() };
   }
+  // A chain is written in the language of the moment it was made; after a language switch it is written again.
+  function fresh(c) { return c && c.src && c.lang !== L() ? compose(c.src) : c; }
   function chainHtml() {
+    if (R && R.chain) R.chain = fresh(R.chain);
     return '<section class="vl-card vl-chainw" data-vl-id="chain" aria-labelledby="vlChH"><h2 class="vl-h" id="vlChH" tabindex="-1">' + s("chain") + "</h2>" +
       '<div id="vlChain">' + chainBody(R && R.chain, false) + "</div></section>";
   }
@@ -867,7 +985,7 @@
     var steps = (c && c.steps) || (E() && E().CHAIN_STEPS) || ["setting", "ventilator", "mechanics", "waveforms", "gasExchange", "monitor", "abg", "patient"];
     return (c ? "" : '<p class="vl-empty">' + s("chainEmpty") + "</p>") + '<ol class="vl-chain' + (c ? "" : " idle") + '">' + steps.map(function (k) {
       var d = c && c.data[k], state = !c ? "idle" : still ? (d.on ? "on" : "same") : "wait";
-      return '<li class="vl-cs" data-step="' + esc(k) + '" data-state="' + state + '"><span class="vl-cs-dot" aria-hidden="true"></span><div class="vl-cs-b"><b>' + s("ch_" + k) + "</b>" +
+      return '<li class="vl-cs" data-step="' + esc(k) + '" data-state="' + state + '"><span class="vl-cs-dot" aria-hidden="true"></span><div class="vl-cs-b"><b>' + s("ch_" + k) + "</b>" + (lv() <= 1 && STR["cd_" + k] ? '<span class="vl-cs-d">' + s("cd_" + k) + "</span>" : "") +
         (d ? '<p class="vl-cs-t">' + d.lines.map(esc).join("<br>") + "</p>" : "") + "</div></li>";
     }).join("") + "</ol>";
   }
@@ -908,10 +1026,11 @@
     var n = R.abgs.length, a1 = R.abgs[n - 1], a0 = R.abgs[n - 2];
     var head = '<div class="vl-sec-h"><h2 class="vl-h" id="vlAbgH">' + s("abg") + '</h2><button type="button" class="sp-btn sec vl-draw" data-act="vldraw">' + (ico("abg") || ico("droplet")) + " " + s("draw") + "</button></div>";
     if (!a1) return head + '<p class="vl-empty">' + s("abgNone") + "</p>";
-    var rows = ABG_ROWS.map(function (x) {
+    var beg = lv() <= 1;
+    var rows = ABG_ROWS.filter(function (x) { return !beg || STR["ab_" + x[0]]; }).map(function (x) {
       var v1 = abgVal(a1.abg, x[0]), v0 = a0 ? abgVal(a0.abg, x[0]) : null, d = a0 ? dirOf(v0, v1, x[0] === "pH" ? 0.004 : x[0] === "lactate" ? 0.05 : 0.5) : 0;
       var out = v1 != null && (v1 < x[2] || v1 > x[3]);
-      return '<tr data-vl-id="' + x[0].toLowerCase() + '"' + (out ? ' class="out"' : "") + '><th scope="row">' + (x[1] === "lact" ? s("lact") : esc(x[1])) + "</th>" + (a0 ? "<td>" + esc(fmtN(v0)) + "</td>" : "") + "<td><b>" + esc(fmtN(v1)) + "</b></td>" +
+      return '<tr data-vl-id="' + x[0].toLowerCase() + '"' + (out ? ' class="out"' : "") + '><th scope="row">' + (x[1] === "lact" ? s("lact") : esc(x[1])) + (beg ? '<span class="vl-abg-d">' + s("ab_" + x[0]) + "</span>" : "") + "</th>" + (a0 ? "<td>" + esc(fmtN(v0)) + "</td>" : "") + "<td><b>" + esc(fmtN(v1)) + "</b></td>" +
         (a0 ? "<td>" + arrow(d) + '<span class="sp-sr">' + s(d > 0 ? "up" : d < 0 ? "down" : "same") + "</span></td>" : "") + "</tr>";
     }).join("");
     var pf = a1.fio2 ? Math.round(a1.abg.PaO2 / (a1.fio2 / 100)) : null;
@@ -925,7 +1044,7 @@
     return head + '<table class="vl-abgt"><thead><tr><th scope="col"><span class="sp-sr">ABG</span></th>' +
       (a0 ? '<th scope="col">' + s("before") + "<small>" + esc(clockText(a0.t)) + "</small></th>" : "") +
       '<th scope="col">' + s(a0 ? "now" : "now") + "<small>" + esc(clockText(a1.t)) + "</small></th>" + (a0 ? '<th scope="col"><span class="sp-sr">' + s("whyH") + "</span></th>" : "") + "</tr></thead><tbody>" + rows +
-      (pf != null ? '<tr><th scope="row">' + s("pf") + "</th>" + (a0 ? "<td>" + esc(fmtN(a0.fio2 ? Math.round(a0.abg.PaO2 / (a0.fio2 / 100)) : null)) + "</td>" : "") + "<td><b>" + esc(fmtN(pf)) + "</b></td>" + (a0 ? "<td></td>" : "") + "</tr>" : "") +
+      (pf != null && !beg ? '<tr><th scope="row">' + s("pf") + "</th>" + (a0 ? "<td>" + esc(fmtN(a0.fio2 ? Math.round(a0.abg.PaO2 / (a0.fio2 / 100)) : null)) + "</td>" : "") + "<td><b>" + esc(fmtN(pf)) + "</b></td>" + (a0 ? "<td></td>" : "") + "</tr>" : "") +
       "</tbody></table>" + (a0 ? why : '<p class="vl-empty">' + s("abgAgain") + "</p>");
   }
   A.vldraw = function () {
@@ -936,6 +1055,7 @@
     R.answers.push({ kind: "abg", correct: R.lastSet === 0 || R.s.t - R.lastSet >= 900 });
     R.log.push({ t: R.s.t, settings: clone(R.set), readout: cur(), action: "abg" });
     var el = $("vlAbg"); if (el) el.innerHTML = abgHtml();
+    paintFoot();
     var b = q("[data-act=vldraw]"); if (b) b.focus({ preventScroll: true });
     I.haptic("tap");
     say(raw("abgSay", { t: clockText(R.s.t), a: fmtN(a.pH), b: fmtN(a.PaCO2), c: fmtN(a.PaO2), d: fmtN(a.HCO3) }));
@@ -1014,9 +1134,10 @@
     var r = refresh();
     if (R.s.t - R.lastLog >= 60) { R.lastLog = R.s.t; R.log.push({ t: R.s.t, settings: clone(R.set), readout: r, action: "live" }); }
   }
-  function refresh() {
+  // flash: a Confirm or a time skip (not a live tick): changed numbers get a brief tint so the eye finds them.
+  function refresh(flash) {
     var r = cur();
-    updMonitor(r); updVent(r);
+    updMonitor(r, flash); updVent(r, flash);
     var ov = $("vlOv"); if (ov) ov.innerHTML = ovHtml(r);
     updAlarms();
     var c = $("vlClock"); if (c) c.textContent = raw("simTime", { x: clockText(R.s.t) });
@@ -1047,7 +1168,7 @@
       R.log.push({ t: R.s.t, settings: clone(R.set), readout: E().readout(R.s, R.set), action: done + 300 >= k ? "wait:" + k : "wait" });
     }
     R.lastLog = R.s.t;
-    var r = refresh();
+    var r = refresh(true);
     var f = $("vlFoot"); if (f) f.innerHTML = footHtml();
     var n = q('[data-act=vlskip][data-k="' + k + '"]'); if (n) n.focus({ preventScroll: true });
     I.haptic("tap");
@@ -1067,7 +1188,7 @@
     else if (g.spo2 && w.spo2 < g.spo2[0]) id = "hO2";
     else if ((g.ph && (gs.ph < g.ph[0] || gs.ph > g.ph[1])) || (g.paco2 && (gs.paco2 < g.paco2[0] - 3 || gs.paco2 > g.paco2[1] + 3))) id = "hCo2";
     else if (g.spo2 && w.spo2 > g.spo2[1] && R.set.fio2 > 40) id = "hO2hi";
-    if (!id || R.hints.slice(-2).indexOf(id) >= 0) return;
+    if (!id || R.tut || R.hints.slice(-2).indexOf(id) >= 0) return;
     R.hints.push(id);
     toast("hint", s(id));
   }
@@ -1088,8 +1209,8 @@
     var curM = R.pend.mode || R.set.mode, list = visModes(lv(), curM);
     sheet(s("mode"), '<div class="vl-modes" role="group" aria-label="' + s("mode") + '">' + list.map(function (id) {
       var on = R.pick === id;
-      return '<div class="vl-mrow' + (on ? " on" : "") + '"><button type="button" class="vl-mbtn" data-act="vlmpick" data-k="' + esc(id) + '" aria-pressed="' + on + '"><b>' + esc(modeShort(id)) + "</b><span>" + esc(modeTitle(id)) + "</span>" +
-        (id === R.set.mode ? '<small>' + s("current") + "</small>" : "") + "</button>" + (on ? modeCard(id) : "") + "</div>";
+      return '<div class="vl-mrow' + (on ? " on" : "") + '"><button type="button" class="vl-mbtn" data-act="vlmpick" data-k="' + esc(id) + '" aria-pressed="' + on + '"><b>' + esc(modeShort(id)) + '</b><span class="vl-mbtn-t">' + esc(modeParts(id).head) + (modeParts(id).note ? "<small>" + esc(modeParts(id).note) + "</small>" : "") + "</span>" +
+        (id === R.set.mode ? '<em class="vl-cur">' + s("current") + "</em>" : "") + "</button>" + (on ? modeCard(id) : "") + "</div>";
     }).join("") + "</div>", '<button type="button" class="sp-btn pri sp-wide" data-act="vlmuse"' + (R.pick === curM ? " disabled" : "") + ">" + s("useMode") + "</button>", q(".vl-mode"));
     if (focusSel) { var n = q(focusSel); if (n) n.focus({ preventScroll: true }); }
   }
@@ -1122,20 +1243,49 @@
   // Tutorials run without the scenario's timeline, so events do not confound the steps.
   function noTimeline(sc) { var c = clone(sc); c.timeline = []; return c; }
   function tutStep() { return R && R.tut && R.tut.tu.steps[R.tut.i]; }
+  // Expected changes are judged against a base readout: for a step with a `do`, the readout just before that change
+  // (so an instant change such as plateau after a smaller breath counts at once); for an observation step (expect, no
+  // do), the readout before the previous `do`. A time-course effect gets the sim clock moved on in 5 min chunks.
+  // An expected change that never shows (a patient where it is tiny) still lets the learner go on: no step can stall.
+  function expKey(sp) { return sp.expect.key || sp.expect.readout; }
+  function expName(sp) { var k = expKey(sp); return STR["ex_" + k] ? raw("ex_" + k) : k; }
+  function expMet(sp, base, r) { var d = dirOf(roVal(base, expKey(sp)), roVal(r, expKey(sp))); return sp.expect.direction === "down" ? d < 0 : d > 0; }
   function tutEnter() {
     var sp = tutStep(); if (!sp) return;
-    R.tut.ok = !sp.do || !!sp.do.scenario; R.tut.saw = !sp.expect; R.tut.base = null;
-    if (sp.do && sp.do.scenario && sp.do.scenario !== R.sc.id) { var sc = scById(sp.do.scenario); if (sc) { var tu = R.tut; start(noTimeline(sc), tu); return; } }
+    R.tut.ok = !sp.do || !!sp.do.scenario; R.tut.saw = !sp.expect; R.tut.base = null; R.tut.moved = 0; R.tut.flat = false;
+    if (sp.do && sp.do.scenario && sp.do.scenario !== R.sc.id) { var sc = scById(sp.do.scenario); if (sc) { var tu = R.tut; tu.pre = null; start(noTimeline(sc), tu); return; } }
     if (sp.do && sp.do.key != null && String(R.set[sp.do.key]) === String(sp.do.to)) R.tut.ok = true;
     if (sp.do && sp.do.mode && R.set.mode === sp.do.mode) R.tut.ok = true;
+    if (sp.expect && R.tut.ok) tutObserve(sp);
+    var ro = $("vlRo"); if (ro) ro.innerHTML = roHtml(cur());
     paintCoach(); tutHighlight();
+  }
+  function tutObserve(sp) {
+    var base = R.tut.pre || { r: cur(), t: R.s.t }, i;
+    R.tut.base = base;
+    if (expMet(sp, base.r, cur())) { R.tut.saw = true; return; }
+    for (i = 0; i < 4 && !R.tut.saw; i++) {
+      R.s = E().step(R.s, R.set, 300); R.tut.moved += 5;
+      R.log.push({ t: R.s.t, settings: clone(R.set), readout: cur(), action: "wait" });
+      if (expMet(sp, base.r, cur())) R.tut.saw = true;
+    }
+    R.lastLog = R.s.t;
+    if (!R.tut.saw) R.tut.flat = true;
+    refresh(true);
   }
   function coachHtml() {
     var tu = R.tut.tu, sp = tutStep(), n = tu.steps.length, last = R.tut.i >= n - 1, task = "";
     if (sp.do && sp.do.key != null) task = s("setTo", { x: setLabel(sp.do.key), v: setText(sp.do.key, sp.do.to) + (setUnit(sp.do.key) ? " " + setUnit(sp.do.key) : "") });
     else if (sp.do && sp.do.mode) task = s("modeTo", { x: modeShort(sp.do.mode) });
-    var exp = sp.expect ? (R.tut.saw ? '<p class="vl-co-ok">' + (ico("check") || "") + s("sawIt", { x: (sp.expect.key || sp.expect.readout), d: raw(sp.expect.direction === "down" ? "down" : "up") }) + "</p>" : R.tut.ok ? '<p class="vl-co-wait">' + s("waitSee", { x: (sp.expect.key || sp.expect.readout) }) + "</p>" : "") : "";
-    var canNext = R.tut.ok && R.tut.saw;
+    var exp = "";
+    if (sp.expect) {
+      if (R.tut.saw) exp = '<p class="vl-co-ok">' + (ico("check") || "") + s("sawIt", { x: expName(sp), d: raw(sp.expect.direction === "down" ? "down" : "up") }) + "</p>";
+      else if (R.tut.flat) exp = '<p class="vl-co-wait">' + s("tutFlat", { x: expName(sp) }) + "</p>";
+      else if (R.tut.ok) exp = '<p class="vl-co-wait">' + s("waitSee", { x: expName(sp) }) + "</p>";
+      else exp = '<p class="vl-co-wait">' + s("tutLook", { x: expName(sp) }) + "</p>";
+      if (R.tut.moved) exp += '<p class="vl-co-wait">' + s("tutMoved", { m: R.tut.moved }) + "</p>";
+    }
+    var canNext = R.tut.ok && (R.tut.saw || R.tut.flat);
     return '<div class="vl-co-h"><span>' + tx(tu.title) + " · " + s("stepOf", { i: R.tut.i + 1, n: n }) + '</span><button type="button" class="vl-co-x" data-act="vltutx">' + s("exitTut") + "</button></div>" +
       '<div class="vl-co-bar" aria-hidden="true"><i style="transform:scaleX(' + ((R.tut.i + 1) / n).toFixed(3) + ')"></i></div>' +
       '<p class="vl-co-say" id="vlCoSay" tabindex="-1">' + tx(sp.say) + "</p>" +
@@ -1149,24 +1299,24 @@
     el.innerHTML = coachHtml();
     if (focus) { var n = $("vlCoSay"); if (n) n.focus({ preventScroll: true }); }
   }
-  function tutHighlight() {
+  function tutHighlight(still) {
     [].forEach.call(I.root().querySelectorAll(".vl-hl"), function (n) { n.classList.remove("vl-hl"); });
     var sp = tutStep(); if (!sp || !sp.highlight) return;
     var first = null;
     sp.highlight.forEach(function (id) { [].forEach.call(I.root().querySelectorAll('[data-vl-id="' + id + '"]'), function (n) { n.classList.add("vl-hl"); first = first || n; }); });
-    if (first) scrollTo(first, true);
+    if (first && !still) scrollTo(first, true);
   }
   function tutCheck() {
     var sp = tutStep(); if (!sp || !sp.do) return;
     if (sp.do.key != null && String(R.set[sp.do.key]) === String(sp.do.to)) R.tut.ok = true;
     if (sp.do.mode && R.set.mode === sp.do.mode) R.tut.ok = true;
-    if (R.tut.ok && sp.expect && !R.tut.base) R.tut.base = { r: cur(), t: R.s.t };
+    if (R.tut.ok && sp.expect && !R.tut.base) { R.tut.base = R.tut.pre || { r: cur(), t: R.s.t }; if (expMet(sp, R.tut.base.r, cur())) R.tut.saw = true; }
     paintCoach();
   }
   function tutWatch(r) {
     var sp = tutStep(); if (!sp || !sp.expect || R.tut.saw || !R.tut.ok || !R.tut.base) return;
-    var a = roVal(R.tut.base.r, (sp.expect.key || sp.expect.readout)), b = roVal(r, (sp.expect.key || sp.expect.readout)), d = dirOf(a, b);
-    if ((sp.expect.direction === "down" && d < 0) || (sp.expect.direction !== "down" && d > 0)) { R.tut.saw = true; paintCoach(); say(raw("sawIt", { x: (sp.expect.key || sp.expect.readout), d: raw(sp.expect.direction === "down" ? "down" : "up") })); }
+    if (expMet(sp, R.tut.base.r, r)) { R.tut.saw = true; R.tut.flat = false; paintCoach(); say(raw("sawIt", { x: expName(sp), d: raw(sp.expect.direction === "down" ? "down" : "up") })); }
+    else if (!R.tut.flat && R.s.t - R.tut.base.t >= 1800) { R.tut.flat = true; paintCoach(); }
   }
   A.vltutdo = function () {
     var sp = tutStep(); if (!sp || !sp.do) return;
@@ -1177,10 +1327,11 @@
   };
   A.vltutn = function (b) {
     if (b.getAttribute("aria-disabled") === "true") return;
-    if (R.tut.i >= R.tut.tu.steps.length - 1) { R.tut = null; var c = $("vlCoach"); if (c) c.parentNode.removeChild(c); var sc = q(".vl-scroll"); if (sc) sc.classList.remove("has-coach"); tutHighlight(); var m = q(".vl-mode"); if (m) m.focus(); return; }
+    if (R.tut.i >= R.tut.tu.steps.length - 1) { prefs().tuts[R.tut.tu.id] = 1; savePrefs(); return tutEnd(); }
     R.tut.i++; tutEnter(); paintCoach(true);
   };
-  A.vltutx = function () { R.tut = null; var c = $("vlCoach"); if (c) c.parentNode.removeChild(c); var sc = q(".vl-scroll"); if (sc) sc.classList.remove("has-coach"); tutHighlight(); var m = q(".vl-mode"); if (m) m.focus(); };
+  function tutEnd() { R.tut = null; var c = $("vlCoach"); if (c) c.parentNode.removeChild(c); var sc = q(".vl-scroll"); if (sc) sc.classList.remove("has-coach"); tutHighlight(); paintFoot(); var m = q(".vl-mode"); if (m) m.focus(); }
+  A.vltutx = function () { tutEnd(); };
 
   /* ================= debrief ================= */
   A.vlfinish = function () {
@@ -1200,8 +1351,9 @@
     I.leave(); closeSheet(true); wvStop();
     st.view = "vl-done"; st.again = debrief;
     st.onBack = function () { home(); return true; };
+    var MX = E().SCORE_MAX || {};
     var parts = Object.keys(sco.parts || {}).map(function (k) {
-      var v = +sco.parts[k] || 0, mx = PART_MAX[k];
+      var v = +sco.parts[k] || 0, mx = MX[k];
       if (k === "unsafe") return v < 0 ? '<li class="vl-pen"><span class="vl-pl">' + s("p_unsafe") + '</span><span class="vl-pnote">' + s("penalty") + "</span><b>" + I.fmt(v) + "</b></li>" : "";
       var pct = mx ? clamp(v / mx * 100, 0, 100) : clamp(v, 0, 100);
       return '<li><span class="vl-pl">' + s("p_" + k) + '</span><span class="vl-pbar" aria-hidden="true"><i style="width:' + pct.toFixed(0) + '%"></i></span><b>' + I.fmt(v) + (mx ? '<small>/' + mx + "</small>" : "") + "</b></li>";
@@ -1256,7 +1408,7 @@
       '<button type="button" class="sp-btn pri" data-act="vlwigo">' + s("wiGo") + "</button></div></div>" +
       '<div class="vl-wi-res" id="vlWiRes" tabindex="-1">' + (WI.res ? wiResHtml(WI.res) : '<p class="vl-empty">' + s("wiEmpty") + "</p>") + "</div>" +
       '<p class="vl-disc vl-disc-end" role="note"><span>' + disc() + "</span></p></div></div>", typeof focusSel === "string" ? focusSel : null);
-    if (WI.res) { var box = $("vlChain"); if (box) box.innerHTML = chainBody(WI.res.chain, true); }
+    if (WI.res) { WI.res.chain = fresh(WI.res.chain); var box = $("vlChain"); if (box) box.innerHTML = chainBody(WI.res.chain, true); }
   }
   function wiCompute(key, dir, presetChain) {
     var e = E(), sc = scById(WI.sc), st0 = e.init(clone(sc), null), set0 = baseSettings(sc), d = setDef(key);
@@ -1420,7 +1572,7 @@
     var b = dysBreath(k);
     if (b) {
       var vs = ventSources(b), win = vs.paw.src.p;
-      wvBind(function (n) { return n === "dpaw" ? { src: vs.paw.src, lo: 0, hi: vs.scale.paw, win: win, marks: vs.paw.marks } : n === "dflow" ? { src: vs.flow.src, lo: -vs.scale.flow, hi: vs.scale.flow, win: win, zero: true } : null; });
+      wvBind(function (n) { return n === "dpaw" ? { src: vs.paw.src, lo: 0, hi: vs.scale.paw, win: win, marks: vs.paw.marks, ticks: vs.paw.ticks } : n === "dflow" ? { src: vs.flow.src, lo: -vs.scale.flow, hi: vs.scale.flow, win: win, zero: true, ticks: vs.flow.ticks } : null; });
     }
   }
   A.vldyans = function (b) {

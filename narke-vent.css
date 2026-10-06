@@ -154,7 +154,7 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-al.danger, body:not(.dark):not(.v3-d
   border: 1px solid color-mix(in srgb, var(--nk-acc) 50%, var(--vl-cline)); background: var(--nk-acc-soft); color: var(--sp-text); text-align: left; transition: transform 140ms var(--nk-ease); }
 .nrk-root .vl-mode:active { transform: scale(0.97); }
 .nrk-root .vl-mode b { font-size: 15px; font-weight: 750; color: var(--nk-acc); letter-spacing: .01em; white-space: nowrap; }
-.nrk-root .vl-mode span:not(.vl-chev) { font-size: 12.5px; color: var(--sp-mut); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.nrk-root .vl-mode span:not(.vl-chev) { min-width: 0; }
 .nrk-root .vl-chev { display: inline-flex; transform: rotate(90deg); color: var(--sp-mut); }
 .nrk-root .vl-chev .smd-ico { width: 16px; height: 16px; }
 .nrk-root .vl-waves { margin: 0; padding: 2px 0 6px; overflow: hidden; }
@@ -431,3 +431,69 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-al.danger, body:not(.dark):not(.v3-d
 @media (min-width: 760px) { .nrk-root .vl-al-more { display: none; } }
 .nrk-root .vl-al-sheet { flex-direction: column; padding: 0 !important; display: flex !important; }
 .nrk-root .vl-al-sheet .vl-al { width: 100%; }
+
+/* ================= beginner layer, Hindi fit, motion (UI pass 2) ================= */
+/* mode button: abbreviation plus the short title; the title wraps (never an ellipsis), so long Hindi names keep meaning */
+.nrk-root .vl-vent-h { flex-wrap: wrap; }
+.nrk-root .vl-mode { max-width: 100%; flex: 0 1 auto; padding-top: 6px; padding-bottom: 6px; }
+.nrk-root .vl-mode .vl-mode-t { font-size: 13px; line-height: 1.25; color: var(--sp-mut); white-space: normal; text-wrap: balance; min-width: 0; }
+.nrk-root .vl-mbtn { grid-template-columns: 66px minmax(0, 1fr) auto; }
+.nrk-root .vl-mbtn-t { display: flex; flex-direction: column; gap: 2px; font-size: 14.5px; line-height: 1.3; font-weight: 600; text-wrap: pretty; }
+.nrk-root .vl-mbtn-t small { font-size: 12.5px; font-weight: 500; color: var(--sp-mut); line-height: 1.35; }
+.nrk-root .vl-cur { font-style: normal; font-size: 11.5px; font-weight: 650; color: var(--nk-acc); border: 1px solid color-mix(in srgb, var(--nk-acc) 45%, transparent); border-radius: 6px; padding: 1px 6px; white-space: nowrap; }
+/* readout labels and dial labels wrap instead of truncating */
+.nrk-root .vl-ro-i dt { white-space: normal; overflow: visible; line-height: 1.25; text-wrap: balance; }
+.nrk-root .vl-knob-lw { display: flex; flex-direction: column; gap: 1px; min-width: 0; padding: 6px 0 2px; }
+.nrk-root .vl-knob-l { text-wrap: balance; }
+.nrk-root .vl-knob-s { font-size: 12px; line-height: 1.3; color: var(--sp-mut); font-weight: 500; text-wrap: balance; }
+.nrk-root[lang="hi"] .vl-knob-l { font-size: 13px; line-height: 1.3; }
+.nrk-root[lang="hi"] .vl-cs-b b, .nrk-root[lang="hi"] .vl-ro-i dt { line-height: 1.4; }
+
+/* one-line plain explanations */
+.nrk-root .vl-plain { margin: 8px 0 0; font-size: 13px; line-height: 1.45; color: var(--sp-mut); max-width: 62ch; text-wrap: pretty; }
+.nrk-root .vl-wplain { margin: 0 0 10px; }
+.nrk-root .vl-what { margin-top: 8px; font-size: 13.5px; line-height: 1.5; }
+.nrk-root .vl-what summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; font-weight: 600; color: var(--sp-link); }
+.nrk-root .vl-what ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; color: var(--sp-mut); }
+.nrk-root .vl-cs-d { display: block; font-size: 12.5px; line-height: 1.35; color: var(--sp-mut); }
+.nrk-root .vl-abg-d { display: block; font-size: 11.5px; font-weight: 500; line-height: 1.3; color: var(--sp-mut); opacity: .9; }
+
+/* Level 1: what the ventilator is doing */
+.nrk-root .vl-ro-w { margin-top: 10px; }
+.nrk-root .vl-ro-w > .vl-ro { margin-top: 0; }
+.nrk-root .vl-doing-h { margin: 0 0 8px; font-size: 13.5px; font-weight: 650; color: var(--sp-text); }
+.nrk-root .vl-doing { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.nrk-root .vl-doing .vl-ro-i { padding: 10px 12px 11px; }
+.nrk-root .vl-doing dt { font-size: 12.5px; color: var(--sp-text); font-weight: 600; }
+.nrk-root .vl-doing abbr { text-decoration: none; font-size: 11px; font-weight: 600; color: var(--sp-mut); margin-left: 2px; }
+.nrk-root .vl-doing .vl-ro-i b { font-size: 22px; font-weight: 700; }
+.nrk-root .vl-doing-n { margin: 8px 2px 0; font-size: 12.5px; line-height: 1.4; color: var(--sp-mut); text-wrap: pretty; }
+
+/* always-visible next step (Level 1 and 2) */
+.nrk-root .vl-next { width: 100%; max-width: 760px; margin: 0 auto 8px; min-height: 44px; display: flex; align-items: center; gap: 10px; padding: 8px 8px 8px 12px; text-align: left;
+  border: 1px solid color-mix(in srgb, var(--nk-acc) 40%, var(--vl-cline)); border-radius: 12px; background: var(--nk-acc-soft); color: var(--sp-text); font-size: 13.5px; line-height: 1.35;
+  transition: transform 140ms var(--nk-ease); }
+.nrk-root .vl-next:active { transform: scale(0.985); }
+.nrk-root .vl-next b { flex: 0 0 auto; font-size: 11.5px; font-weight: 750; letter-spacing: .04em; text-transform: uppercase; color: var(--nk-acc); }
+.nrk-root .vl-next > span:not(.vl-chev) { flex: 1 1 auto; min-width: 0; text-wrap: pretty; }
+.nrk-root .vl-next .vl-chev { transform: none; }
+.nrk-root .vl-scroll { padding-bottom: 28px; }
+
+/* home: tutorials first for beginners */
+.nrk-root .vl-start { display: inline-block; margin-top: 4px; font-size: 11.5px; font-weight: 700; letter-spacing: .02em; color: var(--nk-acc); border: 1px solid color-mix(in srgb, var(--nk-acc) 50%, transparent); border-radius: 6px; padding: 1px 7px; }
+.nrk-root .vl-tdone { display: inline-flex; margin-top: 4px; color: var(--nk-ok); }
+.nrk-root .vl-tdone .smd-ico { width: 16px; height: 16px; }
+.nrk-root .vl-tfirst { margin: 0 0 10px; }
+
+/* a value that moved after Confirm or a time skip: a short tint, then it settles */
+@media (prefers-reduced-motion: no-preference) {
+  .nrk-root .vl-chg { animation: vl-chg 900ms cubic-bezier(0.23, 1, 0.32, 1); border-radius: 4px; }
+}
+@keyframes vl-chg { 0% { background-color: color-mix(in srgb, var(--nk-acc) 32%, transparent); } 100% { background-color: transparent; } }
+.nrk-root .vl-legend [hidden] { display: none; }
+.nrk-root .vl-ro-i.vl-hl { outline-offset: -3px; box-shadow: inset 0 0 0 6px var(--nk-acc-soft); border-radius: 0; }
+.nrk-root .vl-co-x { white-space: nowrap; flex: 0 0 auto; }
+.nrk-root .vl-co-h > span { min-width: 0; text-wrap: balance; }
+.nrk-root .vl-next { touch-action: manipulation; }
+.nrk-root .vl-next:focus-visible { outline: 2px solid var(--sp-acc); outline-offset: 2px; }
+@media (hover: hover) and (pointer: fine) { .nrk-root .vl-next:hover { border-color: var(--nk-acc); } }

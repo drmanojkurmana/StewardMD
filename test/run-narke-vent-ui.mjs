@@ -97,6 +97,17 @@ try {
   ok(await noOverflow() === true, "run: no horizontal scroll at 390 px");
   { const sm = await small(); ok(sm === true, "run: every target is at least 44 px" + (sm === true ? "" : ": " + sm)); }
   await shot("390-dark-run-top");
+  // beginner layer at Level 1
+  ok(await ev(`${R} var d=R.querySelectorAll('.vl-doing .vl-ro-i'); return d.length===4 && /Air per breath/.test(R.querySelector('.vl-doing').textContent) && /VTe/.test(R.querySelector('.vl-doing').textContent);`) === true, "Level 1: 'What the ventilator is doing' shows four numbers with plain names and their clinical names");
+  ok(await ev(`${R} var n=R.querySelector('.vl-next'); return !!n && /Draw ABG/.test(n.textContent);`) === true, "Level 1: the next-step line starts with drawing a baseline gas");
+  ok(await ev(`${R} return !!R.querySelector('.vl-knob-s') && !!R.querySelector('.vl-what summary') && R.querySelector('.vl-story').open;`) === true, "Level 1: dials carry plain captions, the monitor explains its numbers, the story and goals are open");
+  await click(`.vl-next`);
+  ok(await ev(`return document.activeElement && document.activeElement.getAttribute('data-act')==='vldraw';`) === true, "the next-step line takes the learner to Draw ABG");
+  await click(`[data-act=vldraw]`);
+  ok(await until(`return /dial/.test(document.querySelector('#smdNarke .vl-next').textContent);`), "after the gas the next step is to change one dial");
+  ok(await ev(`${R} return R.querySelectorAll('.vl-abgt tbody tr').length===5 && !!R.querySelector('.vl-abg-d');`) === true, "Level 1 gas: five rows, each with a plain caption");
+  await ev(`var sc=document.querySelector('#smdNarke .sp-scroll'), el=document.querySelector('#smdNarke .vl-vent'); sc.scrollTop += el.getBoundingClientRect().top - sc.getBoundingClientRect().top - 12; return 1;`); await shot("390-dark-run-vent-l1");
+  await theme(false); await shot("390-light-run-vent-l1"); await theme(true);
 
   // change a setting: stage, confirm, chain
   const peep0 = await ev(`return document.querySelector('#smdNarke [data-spin=peep]').getAttribute('aria-valuenow');`);
@@ -145,7 +156,16 @@ try {
   await click(`[data-act=lang]`);
   ok(await until(`${R} return R.getAttribute('lang')==='hi' && /[\\u0900-\\u097F]/.test(R.querySelector('.vl-chainw .vl-h').textContent);`), "Hindi switches the run screen");
   ok(await ev(`return !/[\\u0966-\\u096F]/.test(document.getElementById('smdNarke').innerText);`) === true, "Hindi uses ASCII digits");
-  await shot("390-dark-run-hindi");
+  await ev(`document.querySelector('#smdNarke .sp-scroll').scrollTop=0; return 1;`); await shot("390-dark-run-hindi");
+  ok(await ev(`${R} var m=R.querySelector('.vl-mode'), t=m.querySelector('.vl-mode-t'); return getComputedStyle(t).textOverflow!=='ellipsis' && t.scrollWidth<=t.clientWidth+1 && m.getBoundingClientRect().right <= innerWidth;`) === true, "Hindi: the mode button shows its whole short title");
+  ok(await ev(`${R} return [].every.call(R.querySelectorAll('.vl-knob-l, .vl-ro-i dt, .vl-cs-b b'), function(e){ return e.scrollWidth <= e.clientWidth + 1; });`) === true, "Hindi: dial labels, readouts and the chain fit without cutting text");
+  await ev(`var sc=document.querySelector('#smdNarke .sp-scroll'), el=document.querySelector('#smdNarke .vl-vent'); sc.scrollTop += el.getBoundingClientRect().top - sc.getBoundingClientRect().top - 12; return 1;`); await shot("390-dark-run-hindi-vent");
+  await ev(`var sc=document.querySelector('#smdNarke .sp-scroll'), el=document.querySelector('#smdNarke .vl-chainw'); sc.scrollTop += el.getBoundingClientRect().top - sc.getBoundingClientRect().top - 12; return 1;`); await shot("390-dark-run-hindi-chain");
+  await click(`[data-act=vlmode]`); await until(`return document.querySelectorAll('#smdNarke .vl-mbtn').length >= 2;`);
+  await click(`[data-act=vlmpick][data-k=vc]`); await until(`return !!document.querySelector('#smdNarke .vl-mrow.on');`);
+  ok(await ev(`return [].every.call(document.querySelectorAll('#smdNarke .vl-mbtn-t'), function(e){ return e.scrollWidth <= e.clientWidth + 1; }) && /[\\u0900-\\u097F]/.test(document.querySelector('#smdNarke .vl-modes').textContent);`) === true, "Hindi mode sheet: every mode title and its note fit");
+  await shot("390-dark-mode-sheet-hindi");
+  await key("Escape", "Escape", 27); await until(`return !document.querySelector('#smdNarke .vl-sheet-wrap');`);
   await click(`[data-act=lang]`);
   await until(`return !document.getElementById('smdNarke').getAttribute('lang');`);
 
@@ -193,31 +213,58 @@ try {
   // debrief
   await click(`[data-act=vlfinish]`);
   ok(await until(`return !!document.querySelector('#smdNarke .vl-score b') && document.querySelectorAll('#smdNarke .vl-parts li').length >= 3;`), "Finish shows the debrief with the score breakdown");
+  ok(await ev(`var X=NARKE_MODELS["vent-engine"].SCORE_MAX, sm=[].map.call(document.querySelectorAll('#smdNarke .vl-parts b small'), function(e){return e.textContent;}); return sm.length>=3 && sm.indexOf('/'+X.protection)>=0 && sm.indexOf('/'+X.oxygenation)>=0;`) === true, "debrief maxima come from the engine's SCORE_MAX");
   ok(await noOverflow() === true, "debrief: no horizontal scroll");
   await shot("390-dark-debrief");
   await theme(false); await shot("390-light-debrief"); await theme(true);
   await click(`[data-act=vlhome]`);
   await until(`return !!document.querySelector('#smdNarke .vl-home');`);
 
-  // tutorial
-  await click(`[data-act=vltut]`);
-  ok(await until(`return !!document.querySelector('#smdNarke .vl-coach .vl-co-say');`), "a tutorial opens the run with the coach card");
-  let guard = 0, didDo = false;
-  while (guard++ < 12) {
-    if (await ev(`return !!document.querySelector('#smdNarke [data-act=vltutdo]');`)) { await click(`[data-act=vltutdo]`); didDo = true; await sleep(150); }
-    const dis = await ev(`var b=document.querySelector('#smdNarke [data-act=vltutn]'); return !b ? "none" : b.getAttribute('aria-disabled');`);
-    if (dis === "true") { await click(`[data-act=vlskip][data-k="1800"]`); await sleep(150); }
-    const st2 = await ev(`var b=document.querySelector('#smdNarke [data-act=vltutn]'); return !b ? "none" : b.getAttribute('aria-disabled');`);
-    if (st2 === "none") break;
-    if (st2 === "true") continue;
-    if (guard === 3) await shot("390-dark-tutorial");
-    await click(`[data-act=vltutn]`); await sleep(150);
+  // every tutorial, end to end, with "Do it for me": no step may stall. A step stalls if Next is still disabled after
+  // its change is applied and the clock has been moved on twice by 30 min (observation steps must offer Next at once).
+  await click(`[data-act=vllevel][data-v="1"]`); await until(`return document.querySelector('#smdNarke .vl-levels [aria-pressed=true]').getAttribute('data-v')==='1';`);
+  const tutIds = await ev(`return [].map.call(document.querySelectorAll('#smdNarke [data-act=vltut]'), function(b){return b.getAttribute('data-k');}).join(',');`);
+  let didDo = false, stalls = [], flats = [];
+  for (const id of tutIds.split(",")) {
+    if (!(await ev(`return !!document.querySelector('#smdNarke .vl-home');`))) { await ev(`NARKE.back(); return 1;`); await until(`return !!document.querySelector('#smdNarke .vl-home');`); }
+    await click(`[data-act=vltut][data-k="${id}"]`);
+    if (!(await until(`return !!document.querySelector('#smdNarke .vl-coach .vl-co-say');`))) { stalls.push(id + ": coach did not open"); continue; }
+    for (let step = 0; step < 20; step++) {
+      const info = await ev(`var sp=document.querySelector('#smdNarke .vl-co-h span'); return sp ? sp.textContent : "";`);
+      if (await ev(`return !!document.querySelector('#smdNarke [data-act=vltutdo]');`)) { await click(`[data-act=vltutdo]`); didDo = true; await sleep(120); }
+      const obs = await ev(`return !document.querySelector('#smdNarke .vl-co-task');`);
+      let dis = await ev(`var b=document.querySelector('#smdNarke [data-act=vltutn]'); return !b ? "none" : b.getAttribute('aria-disabled');`);
+      if (obs && dis === "true") { stalls.push(id + " " + info + ": an observation step does not offer Next"); break; }
+      for (let w = 0; w < 2 && dis === "true"; w++) { await click(`[data-act=vlskip][data-k="1800"]`); await sleep(120); dis = await ev(`var b=document.querySelector('#smdNarke [data-act=vltutn]'); return !b ? "none" : b.getAttribute('aria-disabled');`); }
+      if (dis === "true") { stalls.push(id + " " + info); break; }
+      if (dis === "none") break;
+      const flat = await ev(`var w=[].map.call(document.querySelectorAll('#smdNarke .vl-co-wait'), function(p){return p.textContent;}).join(' '); return /barely moves/.test(w) ? w : "";`);
+      if (flat) flats.push(id + " " + info + ": " + flat);
+      if (id === "how-it-works" && step === 2) await shot("390-dark-tutorial");
+      if (id === "vt-rr" && step === 5) { ok(await ev(`return !!document.querySelector('#smdNarke .vl-co-ok');`) === true, "vt-rr observation step (plateau up) confirms what the learner saw"); await shot("390-dark-tutorial-observe"); }
+      await click(`[data-act=vltutn]`); await sleep(120);
+      if (!(await ev(`return !!document.querySelector('#smdNarke .vl-coach');`))) break;
+    }
+    ok(await ev(`return !document.querySelector('#smdNarke .vl-coach');`) === true, "tutorial " + id + " runs to Done");
+    ok(await ev(`return !!document.querySelector('#smdNarke .vl-next');`) === true, "after " + id + " the next-step line returns");
   }
+  ok(stalls.length === 0, "no tutorial step stalls" + (stalls.length ? ": " + stalls.join(" | ") : ""));
+  if (flats.length) console.log("   (expected change not seen, Next offered anyway: " + flats.join(" | ") + ")");
   ok(didDo, "Do it for me applies a tutorial step's change");
-  ok(await ev(`return !document.querySelector('#smdNarke .vl-coach');`) === true, "the tutorial runs to Done");
+  await ev(`NARKE.back(); return 1;`); await until(`return !!document.querySelector('#smdNarke .vl-home');`);
+  ok(await ev(`return document.querySelectorAll('#smdNarke .vl-tdone').length === ${tutIds.split(",").length};`) === true, "the lab home ticks every finished tutorial");
+  // Hindi tutorial coach
+  await click(`[data-act=lang]`); await until(`return document.getElementById('smdNarke').getAttribute('lang')==='hi';`);
+  await click(`[data-act=vltut][data-k="vt-rr"]`); await until(`return !!document.querySelector('#smdNarke .vl-coach .vl-co-say');`);
+  for (let i = 0; i < 2; i++) { await click(`[data-act=vltutn]`); await sleep(150); }
+  ok(await ev(`return /[\\u0900-\\u097F]/.test(document.querySelector('#smdNarke .vl-coach').textContent) && !!document.querySelector('#smdNarke [data-act=vltutdo]');`) === true, "Hindi: the tutorial coach speaks Hindi and offers Do it for me");
+  await shot("390-dark-tutorial-hindi");
+  await click(`[data-act=vltutx]`); await ev(`NARKE.back(); return 1;`); await until(`return !!document.querySelector('#smdNarke .vl-home');`);
+  await shot("390-dark-home-hindi");
+  await click(`[data-act=lang]`); await until(`return !document.getElementById('smdNarke').getAttribute('lang');`);
 
   // what-if
-  await ev(`NARKE.back(); return 1;`); await until(`return !!document.querySelector('#smdNarke .vl-home');`);
+  if (!(await ev(`return !!document.querySelector('#smdNarke .vl-home');`))) { await ev(`NARKE.back(); return 1;`); await until(`return !!document.querySelector('#smdNarke .vl-home');`); }
   await click(`[data-act=vlwhat]`);
   ok(await until(`return !!document.querySelector('#smdNarke .vl-wi') && document.querySelectorAll('#smdNarke [data-act=vlwip]').length >= 1;`), "what-if lists the questions for this level");
   await click(`[data-act=vlwip]`);
@@ -282,6 +329,18 @@ try {
   await ev(`NARKE.back(); return 1;`); await until(`return !!document.querySelector('#smdNarke .vl-home');`);
   for (const [w, h] of [[768, 1024], [1280, 860]]) { await size(w, h); await shot(w + "-dark-home"); await theme(false); await shot(w + "-light-home"); await theme(true); }
   await size(1280, 860);
+  // resident path: Level 4 on desktop, a sick patient, after a change
+  await click(`[data-act=vllevel][data-v="4"]`); await until(`return document.querySelector('#smdNarke .vl-levels [aria-pressed=true]').getAttribute('data-v')==='4';`);
+  await shot("1280-dark-home-l4");
+  { const sc4 = await ev(`var ids=[].map.call(document.querySelectorAll('#smdNarke [data-act=vlgo]'), function(b){return b.getAttribute('data-s');}); return ids.indexOf('ards')>=0?'ards':ids[ids.length-1];`);
+    await click(`[data-act=vlgo][data-s="${sc4}"]`); await until(`return !!document.querySelector('#smdNarke .vl-run');`); }
+  ok(await ev(`${R} return !R.querySelector('.vl-next') && !R.querySelector('.vl-doing') && R.querySelectorAll('.vl-ro-i').length >= 12;`) === true, "Level 4: no beginner strip or next-step line, the full readout grid");
+  await click(`[data-act=vlstep][data-k=peep][data-d="1"]`); await click(`[data-act=vlconfirm]`); await sleep(2200);
+  await ev(`var t=document.querySelector(".vl-toast"); if (t) t.classList.remove("on"); document.querySelector("#smdNarke .sp-scroll").scrollTop=0; return 1;`);
+  ok(await noOverflow() === true, "Level 4 desktop: no horizontal scroll");
+  await shot("1280-dark-run-l4"); await theme(false); await shot("1280-light-run-l4"); await theme(true);
+  await ev(`NARKE.back(); return 1;`); await until(`return !!document.querySelector('#smdNarke .vl-home');`);
+  await click(`[data-act=vllevel][data-v="1"]`); await until(`return document.querySelector('#smdNarke .vl-levels [aria-pressed=true]').getAttribute('data-v')==='1';`);
   await click(`[data-act=vlwhat]`); await until(`return !!document.querySelector('#smdNarke .vl-wi');`);
   await click(`[data-act=vlwip]`); await sleep(2200); await shot("1280-dark-whatif"); await theme(false); await shot("1280-light-whatif"); await theme(true);
   await ev(`NARKE.back(); return 1;`);
