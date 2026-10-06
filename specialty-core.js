@@ -72,6 +72,8 @@
     var due = today + (g === AGAIN ? 1 : intervalDays(next.s));
     store.cards[k] = [next.d, next.s, today, due, (c ? c[4] : 0) + 1, (c ? c[5] : 0) + (g === AGAIN && c ? 1 : 0)];
     store.days[today] = (store.days[today] || 0) + 1;
+    // Review log for PrepNucleus sync (prep-sync.js): only a store that opted in carries rl.
+    if (store.rl) store.rl.push([k, today, g, Date.now()]);
     return store.cards[k];
   }
 
