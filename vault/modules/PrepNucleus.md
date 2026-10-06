@@ -398,6 +398,25 @@ Owner decisions: [[decisions/Decisions]] "PrepNucleus pricing, free tier and soc
 10. Only after step 9: set `smd_prep_pro_enforce` on (it is a client flag today: localStorage / `?prepenforce=1`; a remote default needs a remote-config entry).
 11. Optional config: `PREP_STUDENT_DISCOUNT_PCT`, `PREP_REFERRAL_DAYS`, `PREP_LAUNCH_ENDS`, `PREP_INTRO_AFTER_LAUNCH`, `PREP_WINBACK_*` in KV `billing:cfg`.
 
+## Premium UI (2026-10-07, branch `feat/prep-premium-ui`, `?v=prep14`)
+- World: night-teal room lit from the top (`--pn-aura` on `.pn-root`), one deep teal hero surface (`--pn-hero`) for readiness,
+  finish screens (`.pn-score`, `.pn-lsn-fin`, `.pk-end`) and the Arena lobby; tokens are re-scoped inside the hero so children
+  read on teal. Rounded numerals (`--pn-num`: ui-rounded, system fallback). Gradient icon squircles hued by `--h`
+  (`subjHue()` in prep.js for subjects, `[data-act]` rules in prep.css for actions). Light cards: shadow, no border; dark
+  cards: hairline `--pn-edge`.
+- Home hero (`heroHtml` in prep-plan.js): readiness ring, exam countdown, chips for streak (`CORE.streak`), answers today
+  (`days[today]`) and lesson XP (sum of `ls[*].xp`). Practise and Compete rows render as two-column tiles (CSS only).
+- `prep-motion.js` (optional in the loader): MutationObserver on the overlay; ring draw and count-up, ease-out entrances,
+  spring pop on finish screens and sheets, answer lift or shake with `SMD_HAPTICS` success/error, mouse-only tile tilt.
+  Uses a modern Motion build (`/vendor/motion/motion.js`, evaluated privately because index.html keeps an older Motion One
+  on `window.Motion` for OncoTree). Off under reduced motion; CSS shows the final state without it. CSS-only effects:
+  aurora drift and meteors on hero surfaces (paused off screen), rotating light border on Solve next and the Daily sprint
+  tile, shimmer on the plan placeholder.
+- Owner rule (2026-10-07): no "AI-generated" labels and no per-item source or credit lines anywhere in PrepNucleus (runner,
+  lessons, cards, decks, accuracy page). Credits and how content is made live in terms.html section 31 and privacy.html
+  section 26. Data fields (`gen`, `prov`, deck `label`) stay in the JSON; only the PYQ paper type line still shows.
+- Headless suites finish finite animations before each screenshot (`shotCall`), so shots show final frames.
+
 ## Store
 localStorage `smd_prep_v1`: `{v, cards, conf, days, mod:{t,ok,last}, bm, rep, exam, last, dl, hid, mt, goal, mh, ls, lsp, pl, pt, ra, fc}` (`ls`/`lsp`: Lessons;
 `pl`/`pt`/`ra`: Plan; `fc`: Cards). FSRS deck key

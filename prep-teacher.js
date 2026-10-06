@@ -306,7 +306,7 @@
     function para(t) { return str(t).split(/\n{2,}/).map(function (p) { return '<p class="pn-exp">' + esc(p.trim()) + "</p>"; }).join(""); }
     function stored(f) {
       return (f.why ? "<h3>Why " + esc(f.chosen) + " is wrong</h3>" + para(f.why) : "") +
-        "<h3>Answer " + esc(f.key) + "</h3>" + (f.exp ? para(f.exp) : '<p class="pn-mut">The source gives no explanation for this question.</p>') +
+        "<h3>Answer " + esc(f.key) + "</h3>" + (f.exp ? para(f.exp) : '<p class="pn-mut">No explanation is stored for this question yet.</p>') +
         (f.kp ? '<p class="pn-kp"><b>Exam pearl:</b> ' + esc(f.kp) + "</p>" : "");
     }
     function body() {

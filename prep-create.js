@@ -129,7 +129,7 @@
   }
   function costLine(cost) {
     if (!cost || !(cost.inTok || cost.outTok)) return "";
-    return "AI cost so far: Rs " + (+cost.inr || 0).toFixed(2) + " (" + (cost.inTok + cost.outTok + (cost.thinkTok || 0)) + " tokens)";
+    return "Cost so far: Rs " + (+cost.inr || 0).toFixed(2) + " (" + (cost.inTok + cost.outTok + (cost.thinkTok || 0)) + " tokens)";
   }
 
   /* ---------- server responses -> stored records ---------- */
@@ -547,7 +547,7 @@
     var esc = host.esc, n = DK.questionCount(m), t = esc(m.title), id = esc(m.id), busy = job && !jobResult && job.deckId === m.id;
     var line = host.fmt(n) + (n === 1 ? " question" : " questions") + " · " + host.fmt(m.stats.cards || 0) + " cards" + (pg.due ? " · " + host.fmt(pg.due) + " due" : "") + (pg.cardsDue ? " · " + host.fmt(pg.cardsDue) + " cards due" : "");
     return '<section class="pn-panel pc-deck" aria-label="' + t + '"><div class="pc-dh"><span class="pn-mb"><b>' + t + "</b><small>" + line + "</small>" +
-      '<small class="pc-lab">' + esc(m.label || DK.LABEL) + (m.source && m.source.ocr ? " · partly read by OCR" : "") + (m.cost && m.cost.stopped ? " · stopped: " + esc(stopWord(m.cost.stopped)) : "") + "</small></span>" +
+      ((m.source && m.source.ocr) || (m.cost && m.cost.stopped) ? '<small class="pc-lab">' + [m.source && m.source.ocr ? "Partly read by OCR" : "", m.cost && m.cost.stopped ? "Stopped: " + esc(stopWord(m.cost.stopped)) : ""].filter(Boolean).join(" · ") + "</small>" : "") + "</span>" +
       '<button type="button" class="pn-ib" data-act="c-del" data-d="' + id + '" aria-label="Delete the deck ' + t + '">' + host.ico("x") + "</button></div>" +
       '<div class="pc-acts">' +
       '<button type="button" class="pn-btn sm pri" data-act="c-prac" data-d="' + id + '" aria-label="Practise ' + t + '"' + (n ? "" : " disabled") + ">" + host.ico("play") + " Practise</button>" +
@@ -578,7 +578,7 @@
       '<p class="pn-mut pn-small">Questions are written for ' + esc(ex.label) + ". Change the exam on the PrepNucleus home.</p>" +
       '<button type="button" class="pc-check" data-act="c-own" aria-pressed="' + cs.own + '"><span class="pc-box" aria-hidden="true">' + (cs.own ? host.ico("check") : "") + "</span>" +
       "<span>These are my own notes, or material I am allowed to use for study.</span></button>" +
-      '<p class="pn-mut pn-small">Before anything is sent, names, phone numbers and ID numbers are looked for and removed. Only the text is sent, never the file. Questions are written by AI and checked automatically.</p>' +
+      '<p class="pn-mut pn-small">Before anything is sent, names, phone numbers and ID numbers are looked for and removed. Only the text is sent, never the file. Questions are made from it and checked automatically.</p>' +
       (cl ? '<p class="pn-mut pn-small" id="pcCapLine">' + esc(cl) + "</p>" : "") +
       (cs.err ? '<p class="pn-err" role="alert" id="pcErr" tabindex="-1">' + esc(cs.err) + "</p>" : "") +
       '<button type="button" class="pn-btn pri" data-act="c-go"' + (cs.busy ? " disabled" : "") + ">Make 10 questions</button>" +

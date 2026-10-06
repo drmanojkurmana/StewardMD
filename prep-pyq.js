@@ -209,7 +209,7 @@
   }
   function prov(it) {
     var p = it.pyq && it.pyq[0], what = p ? (EXAM_LABEL[p.exam] || p.exam) + " " + p.year + " recall question (memory-based, not an official paper)" : "Recall question";
-    return what + (it.r ? ". Explanation written by StewardMD AI and checked." : ".");
+    return what + ".";
   }
   function zoomOpen(host, f) {
     zoomClose();

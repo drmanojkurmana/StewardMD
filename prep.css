@@ -106,6 +106,7 @@ body.dark .pn-root .pn-tabs { background: rgba(19, 37, 44, .78); box-shadow: ins
 .pn-root [data-act^=y-] .pn-ri, .pn-root [data-act=pyq] .pn-ri { --h: 262; }
 .pn-root [data-act^=k-] .pn-ri, .pn-root [data-act=a-stats] .pn-ri { --h: 192; }
 .pn-root [data-act^=soc-] .pn-ri, .pn-root [data-act=a-battle] .pn-ri { --h: 318; }
+.pn-root [data-act=soc-acc] .pn-ri { --h: 150; }
 .pn-root [data-act=a-boards] .pn-ri, .pn-root [data-k=daily] .pn-ri { --h: 34; }
 .pn-root [data-act^=pp-] .pn-ri, .pn-root [data-act^=l-] .pn-ri { --h: 150; }
 
@@ -125,7 +126,7 @@ body.dark .pn-root .pn-tabs { background: rgba(19, 37, 44, .78); box-shadow: ins
 .pn-root .pn-home > .pn-next + .pn-group, .pn-root #pnCompete > .pn-group { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; border: 0; background: none; box-shadow: none; overflow: visible; }
 .pn-root .pn-home > .pn-next + .pn-group > .pn-row, .pn-root #pnCompete > .pn-group > .pn-row { flex-direction: column; align-items: flex-start; gap: 12px; min-height: 124px; padding: 14px 14px 15px; border: 1px solid var(--pn-edge); border-radius: 20px; background: var(--pn-card); box-shadow: var(--pn-elev); transition: transform 140ms var(--pn-ease), background-color 120ms ease; }
 .pn-root .pn-home > .pn-next + .pn-group > .pn-row::before, .pn-root #pnCompete > .pn-group > .pn-row::before { display: none; }
-.pn-root .pn-home > .pn-next + .pn-group > .pn-row > svg:last-child, .pn-root #pnCompete > .pn-group > .pn-row > svg:last-child { position: absolute; top: 16px; right: 12px; opacity: .7; }
+.pn-root .pn-home > .pn-next + .pn-group > .pn-row > svg:last-child, .pn-root #pnCompete > .pn-group > .pn-row:not(:only-child) > svg:last-child { display: none; }
 .pn-root .pn-home > .pn-next + .pn-group > .pn-row:active, .pn-root #pnCompete > .pn-group > .pn-row:active { transform: scale(.97); background: var(--pn-card); }
 .pn-root .pn-home > .pn-next + .pn-group > .pn-row .pn-ri, .pn-root #pnCompete > .pn-group > .pn-row .pn-ri { width: 42px; height: 42px; border-radius: 13px; }
 .pn-root .pn-home > .pn-next + .pn-group > .pn-row .pn-rb b, .pn-root #pnCompete > .pn-group > .pn-row .pn-rb b { font-size: 15px; }
@@ -148,7 +149,7 @@ body.dark .pn-root .pn-next .pn-ri { background: rgba(2, 35, 31, .14); box-shado
 .pn-root .pn-subs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
 .pn-root .pn-tile { position: relative; width: 100%; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; min-height: 148px; padding: 14px 14px 16px; border: 1px solid var(--pn-edge); border-radius: 22px; background: var(--pn-card); box-shadow: var(--pn-elev); text-align: left; overflow: hidden; transition: transform 140ms var(--pn-ease); }
 .pn-root .pn-tile::before { content: ""; position: absolute; inset: 0 0 auto; height: 70px; background: radial-gradient(90% 100% at 0% 0%, hsl(var(--h, 172) 70% 50% / .14), hsl(var(--h, 172) 70% 50% / 0) 70%); pointer-events: none; }
-.pn-root .pn-tile > svg:last-child { position: absolute; top: 18px; right: 12px; opacity: .6; }
+.pn-root .pn-tile > svg:last-child { display: none; }
 .pn-root .pn-tile:active, .pn-root .pn-mod:active { transform: scale(.97); }
 .pn-root .pn-tile .pn-ic { --h: inherit; }
 .pn-root .pn-tb { flex: 1 1 auto; width: 100%; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
@@ -189,15 +190,19 @@ body.dark .pn-root .pn-next .pn-ri { background: rgba(2, 35, 31, .14); box-shado
 
 /* ---- panels and buttons ---- */
 .pn-root .pn-panel { position: relative; display: flex; flex-direction: column; gap: 10px; padding: 20px 18px; border-radius: 22px; background: var(--pn-card); border: 1px solid var(--pn-edge); box-shadow: var(--pn-elev); }
-/* Finish moments (set, test, battle, cards, lesson): the hero surface, the figure large and lit. */
-.pn-root .pn-score { align-items: center; text-align: center; gap: 6px; padding: 28px 18px 24px; overflow: hidden; background: var(--pn-hero); border-color: transparent; color: var(--pn-hero-ink); box-shadow: 0 18px 40px -24px rgba(4, 30, 30, .9); }
-.pn-root .pn-score .pn-mut, .pn-root .pn-score .pn-small { color: var(--pn-hero-mut); }
+/* Finish moments (set, test, battle, cards, lesson) and the Arena lobby: the hero surface, the figure large and lit.
+   The tokens are re-scoped inside, so every child (meters, tallies, notes, secondary buttons) reads on the teal. */
+.pn-root .pn-score, .pn-root .pn-lsn-fin, .pn-root .pk-end, .pn-root .pn-lobby {
+  --pn-text: var(--pn-hero-ink); --pn-mut: var(--pn-hero-mut); --pn-line: rgba(255, 255, 255, .12); --pn-s1: rgba(255, 255, 255, .09); --pn-s2: rgba(255, 255, 255, .16);
+  --pn-pri-ink: var(--pn-ring); --pn-bad: #ffb3bc; --pn-ok: #8ff0bf; --pn-warn: #ffd889;
+  overflow: hidden; background: var(--pn-hero); border-color: transparent; color: var(--pn-hero-ink); box-shadow: 0 18px 40px -24px rgba(4, 30, 30, .9), inset 0 1px 0 rgba(255, 255, 255, .08); }
+.pn-root .pn-score { align-items: center; text-align: center; gap: 6px; padding: 28px 18px 24px; }
 .pn-root .pn-score .pn-big { font-size: 46px; color: #fff; }
-.pn-root .pn-score .pn-btn:not(.pri) { background: rgba(255, 255, 255, .1); border-color: rgba(255, 255, 255, .14); color: var(--pn-hero-ink); box-shadow: none; }
-.pn-root .pn-score .pn-btn.pri { background: linear-gradient(180deg, #6ff3df, #34c9b7); color: #02231f; }
-.pn-root .pn-score .pn-link { color: var(--pn-ring); }
-.pn-root .pn-score .pn-meter, .pn-root .pn-score .pn-prog { background: var(--pn-ring-track); }
-.pn-root .pn-score .pn-meter i, .pn-root .pn-score .pn-prog i { background: var(--pn-ring); }
+.pn-root :is(.pn-score, .pn-lsn-fin, .pk-end, .pn-lobby) .pn-btn:not(.pri) { background: rgba(255, 255, 255, .1); border-color: rgba(255, 255, 255, .14); color: var(--pn-hero-ink); box-shadow: none; }
+.pn-root :is(.pn-score, .pn-lsn-fin, .pk-end, .pn-lobby) .pn-btn.pri, .pn-root :is(.pn-score, .pk-end) .pn-chip.on { background: linear-gradient(180deg, #6ff3df, #34c9b7); color: #02231f; }
+.pn-root :is(.pn-score, .pn-lsn-fin, .pk-end, .pn-lobby) .pn-link { color: var(--pn-ring); }
+.pn-root :is(.pn-score, .pn-lsn-fin, .pk-end) .pn-meter i, .pn-root :is(.pn-score, .pn-lsn-fin, .pk-end) .pn-prog i { background: var(--pn-ring); }
+.pn-root :is(.pn-score, .pn-lsn-fin, .pk-end, .pn-lobby) > *:not(.pn-fx) { position: relative; z-index: 1; }
 .pn-root .pn-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 0 18px; border-radius: 16px; border: 1px solid var(--pn-edge); background: var(--pn-card); box-shadow: var(--pn-elev); font-weight: 650; font-size: 15px; letter-spacing: -.005em; transition: transform 140ms var(--pn-ease), box-shadow 160ms ease; }
 .pn-root .pn-panel .pn-btn:not(.pri), .pn-root .pn-sheet .pn-btn:not(.pri) { background: var(--pn-s1); border-color: transparent; box-shadow: none; }
 .pn-root .pn-btn:active { transform: scale(.97); }
@@ -274,18 +279,14 @@ body.dark .pn-root .pn-sheet { background: #0f2027; box-shadow: inset 0 1px 0 rg
 .pn-root .pn-sheet-act { display: flex; flex-direction: column; gap: 8px; padding-top: 6px; }
 
 /* ---- Arena: lobby, results, boards ---- */
-.pn-root .pn-lobby { align-items: center; text-align: center; gap: 8px; padding: 28px 18px 20px; overflow: hidden; background: var(--pn-hero); border-color: transparent; color: var(--pn-hero-ink); box-shadow: 0 18px 40px -24px rgba(4, 30, 30, .9); }
-.pn-root .pn-lobby .pn-mut { color: var(--pn-hero-mut); }
+.pn-root .pn-lobby { align-items: center; text-align: center; gap: 8px; padding: 28px 18px 20px; }
 .pn-root .pn-lobby .pn-btn { align-self: stretch; margin-top: 10px; }
-.pn-root .pn-lobby .pn-btn.pri { background: linear-gradient(180deg, #6ff3df, #34c9b7); color: #02231f; }
-.pn-root .pn-lobby .pn-btn:not(.pri) { background: rgba(255, 255, 255, .1); border-color: rgba(255, 255, 255, .14); color: var(--pn-hero-ink); box-shadow: none; }
 .pn-root .pn-lobby-when { font-size: 14px; font-weight: 650; color: var(--pn-hero-mut); }
 .pn-root .pn-cdbig { font-size: 34px; letter-spacing: -.025em; color: #fff; }
 .pn-root .pn-rules { display: flex; flex-direction: column; gap: 10px; padding: 4px 4px; font-size: 14px; color: var(--pn-mut); }
 .pn-root .pn-rules li { position: relative; padding-left: 18px; text-wrap: pretty; }
 .pn-root .pn-rules li::before { content: ""; position: absolute; left: 2px; top: .55em; width: 7px; height: 7px; border-radius: 50%; background: var(--pn-pri); opacity: .7; }
 .pn-root .pn-rank { font-family: var(--pn-num); font-size: 18px; font-weight: 750; color: var(--pn-pri-ink); font-variant-numeric: tabular-nums; }
-.pn-root .pn-score .pn-rank { color: var(--pn-ring); }
 .pn-root .pn-board { display: flex; flex-direction: column; border: 1px solid var(--pn-edge); border-radius: 20px; background: var(--pn-card); box-shadow: var(--pn-elev); overflow: hidden; }
 .pn-root .pn-lb { display: grid; grid-template-columns: 40px 1fr auto; align-items: center; gap: 10px; min-height: 56px; padding: 8px 16px 8px 12px; font-variant-numeric: tabular-nums; }
 .pn-root .pn-lb + .pn-lb { border-top: 1px solid var(--pn-line); }
@@ -442,7 +443,7 @@ body.dark .pn-root .pn-vimg img, body.dark .pn-root .pn-zoom-b img { filter: bri
 /* finish */
 .pn-root .pn-lsn-fin { align-items: stretch; text-align: center; gap: 12px; padding: 32px 18px 22px; }
 .pn-root .pn-lsn-fin:focus { outline: none; }
-.pn-root .pn-lsn-xp { font-size: 17px; font-weight: 650; color: var(--pn-hero-mut); }
+.pn-root .pn-lsn-xp { font-size: 17px; font-weight: 650; color: var(--pn-mut); }
 .pn-root .pn-lsn-xp b { display: block; font-family: var(--pn-num); font-size: 56px; font-weight: 800; letter-spacing: -.03em; line-height: 1.02; color: var(--pn-ring); font-variant-numeric: tabular-nums; text-shadow: 0 0 24px rgba(99, 240, 219, .35); animation: pn-xp 460ms var(--pn-ease); }
 .pn-root .pn-lsn-fin .pn-navrow { margin-top: 2px; }
 /* zoom */
@@ -486,3 +487,50 @@ body.dark .pn-root .pn-vimg img, body.dark .pn-root .pn-zoom-b img { filter: bri
 .pn-root .pn-yq-fig .pn-vimg img { width: auto; max-width: 100%; max-height: 60vh; object-fit: contain; }
 .pn-root .pn-zoom-b, .pn-root .pn-vimg { -webkit-touch-callout: none; }
 .pn-root .pn-panel[hidden] { display: none; }
+
+/* ---- Motion layer (prep-motion.js) and hero effects ----
+   pn-mo on the root means prep-motion.js has a spring engine: it then owns the entrances below, so their CSS keyframes
+   step aside. Every effect is transform or opacity on a compositor layer; each stops under reduced motion and when its
+   hero is off screen (.pn-off). */
+.pn-root.pn-mo .pn-fb, .pn-root.pn-mo .pn-round, .pn-root.pn-mo .pn-sheet, .pn-root.pn-mo .pl-ring .rv, .pn-root.pn-mo .pn-ring .rv, .pn-root.pn-mo .pn-lsn-xp b { animation: none; }
+
+/* Aurora: two soft light pools drifting slowly inside hero surfaces. */
+.pn-root .pl-hero::before, .pn-root :is(.pn-score, .pn-lsn-fin, .pk-end, .pn-lobby)::before { content: ""; position: absolute; inset: -45% -30%; z-index: 0; pointer-events: none;
+  background: radial-gradient(38% 34% at 28% 38%, rgba(99, 240, 219, .20), rgba(99, 240, 219, 0) 70%), radial-gradient(34% 30% at 74% 62%, rgba(96, 150, 255, .16), rgba(96, 150, 255, 0) 70%);
+  animation: pn-aurora 18s ease-in-out infinite alternate; will-change: transform; }
+.pn-root .pl-hero > *:not(.pn-fx) { position: relative; z-index: 1; }
+.pn-root .pl-hero > svg:not(.pn-fx) { position: absolute; }
+@keyframes pn-aurora { from { transform: translate3d(-6%, -4%, 0) rotate(0deg); } to { transform: translate3d(6%, 5%, 0) rotate(8deg); } }
+
+/* Meteors: three thin streaks crossing the hero now and then. */
+.pn-root .pn-fx { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; border-radius: inherit; }
+.pn-root .pn-fx i { position: absolute; top: -10%; width: 1.5px; height: 80px; border-radius: 1px; opacity: 0; background: linear-gradient(to bottom, rgba(180, 255, 245, 0), rgba(180, 255, 245, .75)); transform: rotate(-35deg); animation: pn-meteor 7.5s linear infinite; }
+.pn-root .pn-fx i:nth-child(1) { left: 22%; animation-delay: .8s; }
+.pn-root .pn-fx i:nth-child(2) { left: 58%; animation-delay: 3.6s; animation-duration: 9s; }
+.pn-root .pn-fx i:nth-child(3) { left: 84%; animation-delay: 6.1s; animation-duration: 8.2s; }
+@keyframes pn-meteor { 0% { opacity: 0; transform: rotate(-35deg) translate3d(0, -40px, 0); } 6% { opacity: 1; } 22% { opacity: 0; transform: rotate(-35deg) translate3d(0, 320px, 0); } 100% { opacity: 0; transform: rotate(-35deg) translate3d(0, 320px, 0); } }
+.pn-root .pn-off::before, .pn-root .pn-off .pn-fx i { animation-play-state: paused; }
+
+/* Moving light border: Solve next and the Daily sprint tile. A conic square rotates behind a 1.5 px gap. */
+.pn-root .pn-next, .pn-root #pnCompete [data-k=daily] { isolation: isolate; overflow: hidden; }
+.pn-root .pn-next::before, .pn-root #pnCompete > .pn-group > [data-k=daily]::before { content: ""; display: block; position: absolute; z-index: -2; left: 50%; top: 50%; width: 160%; aspect-ratio: 1; height: auto; margin: 0; background: conic-gradient(from 0deg, transparent 0 62%, rgba(255, 255, 255, .95) 74%, rgba(130, 255, 236, .9) 80%, transparent 92%); transform: translate(-50%, -50%) rotate(0deg); animation: pn-orbit 4.2s linear infinite; }
+.pn-root .pn-next::after { z-index: -1; inset: 1.5px; border-radius: 20.5px; background: radial-gradient(80% 120% at 0% 0%, rgba(255, 255, 255, .22), rgba(255, 255, 255, 0) 60%), var(--pn-pri-grad); }
+.pn-root #pnCompete > .pn-group > [data-k=daily]::after { content: ""; position: absolute; z-index: -1; inset: 1.5px; border-radius: 18.5px; background: var(--pn-card); }
+body.dark .pn-root #pnCompete > .pn-group > [data-k=daily]::before { background: conic-gradient(from 0deg, transparent 0 62%, rgba(255, 196, 92, .95) 74%, rgba(99, 240, 219, .9) 82%, transparent 92%); }
+.pn-root #pnCompete > .pn-group > [data-k=daily]::before { background: conic-gradient(from 0deg, transparent 0 62%, rgba(230, 150, 30, .9) 74%, rgba(15, 118, 110, .9) 82%, transparent 92%); }
+@keyframes pn-orbit { to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+/* Shimmer while today's plan is worked out. */
+.pn-root .pl-wait { position: relative; overflow: hidden; }
+.pn-root .pl-wait::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, .10) 50%, rgba(255, 255, 255, 0) 80%); transform: translateX(-100%); animation: pn-shim 1.3s ease-in-out infinite; }
+body:not(.dark) .pn-root .pl-wait::after { background: linear-gradient(100deg, rgba(15, 118, 110, 0) 20%, rgba(15, 118, 110, .08) 50%, rgba(15, 118, 110, 0) 80%); }
+@keyframes pn-shim { to { transform: translateX(100%); } }
+
+/* Tilt (mouse and trackpad only, set by prep-motion.js): the tile follows the pointer, eases back on leave. */
+.pn-root .pn-tile { transition: transform 160ms var(--pn-ease); }
+.pn-root .pn-tile.pn-tilt { transition: transform 60ms linear; }
+
+@media (prefers-reduced-motion: reduce) {
+  .pn-root .pl-hero::before, .pn-root :is(.pn-score, .pn-lsn-fin, .pk-end, .pn-lobby)::before, .pn-root .pn-next::before, .pn-root #pnCompete > .pn-group > [data-k=daily]::before, .pn-root .pl-wait::after { animation: none; }
+  .pn-root .pn-fx { display: none; }
+}

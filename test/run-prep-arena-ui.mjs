@@ -74,6 +74,8 @@ function arena(method, path, body) {
 let msgId = 1; const pending = new Map(); let ws, sessionId; const errors = []; const reqs = [];
 const call = (m, p) => { const i = msgId++; return new Promise((r) => { pending.set(i, r); ws.send(JSON.stringify({ id: i, method: m, params: p || {}, sessionId })); }); };
 const ev = async (e) => { const r = await call("Runtime.evaluate", { expression: `(function(){try{${e}}catch(x){return "ERR:"+String(x&&x.message||x)}})()`, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : undefined; };
+// Screenshots land on the final frame: finite animations (entrances, ring draw) are finished first; loops keep running.
+const shotCall = async (p) => { await ev(`document.getAnimations().forEach(function (a) { try { var t = a.effect && a.effect.getTiming(); if (t && t.iterations !== Infinity) a.finish(); } catch (e) {} }); return 1;`); return call("Page.captureScreenshot", p); };
 const until = async (e, ms = 10000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (await ev(e) === true) return true; await sleep(120); } return false; };
 let fails = 0; const ok = (c, m) => { console.log((c ? "PASS " : "FAIL ") + m); if (!c) fails++; };
 const click = (sel) => ev(`var b=document.querySelector(${JSON.stringify(sel)}); if(!b) return "missing"; b.click(); return 1;`);
@@ -82,12 +84,12 @@ const shot = async (name) => {
   if (!process.env.SHOTS) return;
   for (const mode of ["dark", "light"]) {
     await ev(`document.body.classList.toggle("dark", ${mode === "dark"}); return 1;`); await sleep(120);
-    let r = await call("Page.captureScreenshot", { format: "png" });
+    let r = await shotCall({ format: "png" });
     if (r.result) fs.writeFileSync(join(process.env.SHOTS, `arena-${mode}-${name}.png`), Buffer.from(r.result.data, "base64"));
     const h = await ev(`var b=document.querySelector("#smdPrep .pn-body"); return b && b.scrollHeight > b.clientHeight + 4 ? Math.ceil(b.scrollHeight - b.clientHeight + 844) : 0;`);
     if (h) {
       await call("Emulation.setDeviceMetricsOverride", { width: 390, height: Math.min(h, 4000), deviceScaleFactor: 2, mobile: true }); await sleep(200);
-      r = await call("Page.captureScreenshot", { format: "png" });
+      r = await shotCall({ format: "png" });
       if (r.result) fs.writeFileSync(join(process.env.SHOTS, `arena-${mode}-${name}-full.png`), Buffer.from(r.result.data, "base64"));
       await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true }); await sleep(120);
     }

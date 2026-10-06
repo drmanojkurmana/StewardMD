@@ -9,15 +9,16 @@
    (onboarding, readiness, today's plan) and prep-flash.js (module flashcards) have no flag of their own either.
    prep-sync.js (opt-in encrypted sync), prep-nudges.js (smart study nudges, optional) and prep-native.js (reminder,
    widget, Live Activity) load with them. prep-pro.js (free tier gates, pricing; flag smd_prep_pro_enforce, default OFF) and prep-social.js are optional: a
-   404 skips them. */
+   404 skips them. prep-motion.js (springs, ring draw, haptics on answers and finishes; vendor/motion/motion.js fetched on
+   first open) is optional too: without it every screen shows its final state through prep.css. */
 (function (G) {
   "use strict";
   var V = "prep14";
   // Layer C (prep-source, prep-decks, prep-cards, prep-create) after prep.js; prep-create.js reads the two before it.
   var CSS = ["prep.css", "prep-create.css", "prep-plan.css", "prep-flash.css", "prep-pro.css", "prep-social.css"];
-  var JS = ["specialty-core.js", "specialty-bank.js", "prep.js", "prep-sync.js", "prep-arena.js", "prep-lessons.js", "prep-pyq.js", "prep-plan.js", "prep-nudges.js", "prep-native.js", "prep-flash.js", "prep-teacher.js", "prep-pro.js", "prep-social.js", "prep-source.js", "prep-decks.js", "prep-cards.js", "prep-create.js"];
+  var JS = ["specialty-core.js", "specialty-bank.js", "prep.js", "prep-motion.js", "prep-sync.js", "prep-arena.js", "prep-lessons.js", "prep-pyq.js", "prep-plan.js", "prep-nudges.js", "prep-native.js", "prep-flash.js", "prep-teacher.js", "prep-pro.js", "prep-social.js", "prep-source.js", "prep-decks.js", "prep-cards.js", "prep-create.js"];
   // Optional files: a missing one (404, not yet shipped) is skipped instead of failing PrepNucleus.
-  var OPTIONAL = { "prep-sync.js": 1, "prep-pro.js": 1, "prep-social.js": 1, "prep-nudges.js": 1 };
+  var OPTIONAL = { "prep-motion.js": 1, "prep-sync.js": 1, "prep-pro.js": 1, "prep-social.js": 1, "prep-nudges.js": 1 };
   var loading = null;
 
   function enabled() {

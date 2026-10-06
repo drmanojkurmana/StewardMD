@@ -36,12 +36,14 @@ let chromeErr = ""; chrome.stderr.on("data", (d) => { chromeErr += d; });
 let msgId = 1; const pending = new Map(); let ws, sessionId; const errors = [];
 const call = (m, p) => { const i = msgId++; return new Promise((r) => { pending.set(i, r); ws.send(JSON.stringify({ id: i, method: m, params: p || {}, sessionId })); }); };
 const ev = async (e) => { const r = await call("Runtime.evaluate", { expression: `(function(){try{${e}}catch(x){return "ERR:"+String(x&&x.message||x)}})()`, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : undefined; };
+// Screenshots land on the final frame: finite animations (entrances, ring draw) are finished first; loops keep running.
+const shotCall = async (p) => { await ev(`document.getAnimations().forEach(function (a) { try { var t = a.effect && a.effect.getTiming(); if (t && t.iterations !== Infinity) a.finish(); } catch (e) {} }); return 1;`); return call("Page.captureScreenshot", p); };
 const until = async (e, ms = 10000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (await ev(e) === true) return true; await sleep(150); } return false; };
 const reqs = []; let fails = 0; const ok = (c, m) => { console.log((c ? "PASS " : "FAIL ") + m); if (!c) fails++; };
 const click = (sel) => ev(`var b=document.querySelector(${JSON.stringify(sel)}); if(!b) return "missing"; b.click(); return 1;`);
 const text = (sel) => ev(`var e=document.querySelector(${JSON.stringify(sel)}); return e ? e.textContent.replace(/\\s+/g," ").trim() : "";`);
 const store = (expr) => ev(`var s=JSON.parse(localStorage.getItem("smd_prep_v1")||"{}"); return ${expr};`);
-const shot = async (name) => { if (!process.env.SHOTS) return; await sleep(350); const r = await call("Page.captureScreenshot", { format: "png" }); if (r.result) fs.writeFileSync(join(process.env.SHOTS, "plan-" + (process.env.PN_LIGHT ? "light-" : "") + name + ".png"), Buffer.from(r.result.data, "base64")); };
+const shot = async (name) => { if (!process.env.SHOTS) return; await sleep(350); const r = await shotCall({ format: "png" }); if (r.result) fs.writeFileSync(join(process.env.SHOTS, "plan-" + (process.env.PN_LIGHT ? "light-" : "") + name + ".png"), Buffer.from(r.result.data, "base64")); };
 // An ISO date n days from today, local time.
 const isoIn = (n) => { const d = new Date(); d.setDate(d.getDate() + n); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); };
 // The fixture has no lessons: the lesson index is stubbed with one fixture module, so the plan can offer it.

@@ -294,7 +294,7 @@
       les.steps.map(function (x, k) { return "<i" + (k <= L.i ? ' class="on"' : "") + "></i>"; }).join("") + "</div>" +
       '<div class="pn-body pn-lsn" id="pnLsn"><article class="pn-lsn-step' + (L.dir ? (L.dir > 0 ? " fwd" : " rev") : "") + '" tabindex="-1" aria-roledescription="lesson step">' +
       '<p class="pn-lsn-tx">' + boldHtml(step.tx) + "</p>" + visHtml(step.vis) + "</article>" +
-      (L.i === 0 ? '<p class="pn-note">' + (les.gen === "hand" ? "Written by the StewardMD team from the app's knowledge base." : "AI-written from the app's knowledge base, automatically checked: every number and drug name appears in the source.") + (canSpeak() ? " Narration uses this device's own voice." : "") + "</p>" : "") +
+      (L.i === 0 && canSpeak() ? '<p class="pn-note">Narration uses this device\'s own voice.</p>' : "") +
       "</div>" + barHtml();
   }
   function finishHtml() {

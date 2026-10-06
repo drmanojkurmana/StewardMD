@@ -221,7 +221,7 @@ test("deck counters come back on every response and the cap line shows them; cos
   assert.equal(job.m.cost.inTok, 12 * 900);
   assert.equal(job.m.cost.outTok, 12 * 300);
   assert.ok(job.m.cost.inr > 0);
-  assert.match(PC.costLine(job.m.cost), /^AI cost so far: Rs \d+\.\d\d \(14400 tokens\)$/);
+  assert.match(PC.costLine(job.m.cost), /^Cost so far: Rs \d+\.\d\d \(14400 tokens\)$/);
   assert.equal(recCount(env, "a@example.com"), 12, "one usage record per call");
 });
 

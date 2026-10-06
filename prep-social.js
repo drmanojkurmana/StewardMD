@@ -39,15 +39,16 @@
      only repeat them. */
   function accuracyHtml(j) {
     if (!j) return '<p class="pn-err" role="alert">The accuracy numbers did not load. Check the connection and try again.</p>';
-    var NA = '<span class="ps-na">Not yet published</span>', k = j.keys, q = j.ai && j.ai.questions, l = j.ai && j.ai.lessons, c = j.ai && j.ai.cards;
+    // Owner rule (2026-10-07): keys and reports only; how content is written and where it comes from is in the Terms.
+    var NA = '<span class="ps-na">Not yet published</span>', k = j.keys;
     var max = 0, h = "";
     h += '<p class="ps-lede">Every number on this page is computed by a script from our own build records, not typed by hand. Where we have no record yet, we say so.</p>';
     h += '<h2 class="pn-h">Answer keys</h2>';
     if (k) {
       (k.subjects || []).forEach(function (s) { if (s.rate > max) max = s.rate; });
-      h += '<p class="ps-say">An independent AI model answered all <b>' + fmt(k.screened) + "</b> questions in the bank without seeing the key. It chose a different answer on <b>" +
+      h += '<p class="ps-say">An independent check answered all <b>' + fmt(k.screened) + "</b> questions in the bank without seeing the key. It chose a different answer on <b>" +
         fmt(k.disputed) + "</b> (" + pct(k.rate, 1) + "). Those questions are hidden from practice until they are reviewed.</p>" +
-        '<section class="ps-chart" aria-labelledby="psKeysT"><h3 class="pn-sec" id="psKeysT">Disputed keys by subject</h3><p class="pn-mut pn-small">Share of each subject\'s questions where the model disagreed, highest first.</p>' +
+        '<section class="ps-chart" aria-labelledby="psKeysT"><h3 class="pn-sec" id="psKeysT">Disputed keys by subject</h3><p class="pn-mut pn-small">Share of each subject\'s questions where the check disagreed, highest first.</p>' +
         '<ol class="ps-bars">' + (k.subjects || []).map(function (s) {
           return '<li><span class="ps-bn">' + esc(s.name) + '</span><span class="ps-bv">' + pct(s.rate, 1) + '</span><span class="ps-bar" aria-hidden="true"><i style="width:' + (max ? Math.max(1, Math.round(s.rate * 1000 / max) / 10) : 0) + '%"></i></span>' +
             '<small class="ps-bs">' + fmt(s.disputed) + " of " + fmt(s.screened) + "</small></li>";
@@ -58,22 +59,11 @@
       "<div><dt>Hidden after " + esc(String((j.reports && j.reports.hideAfter) || 3)) + " separate reports</dt><dd>" + (j.reports && j.reports.autoHidden != null ? fmt(j.reports.autoHidden) : NA) + "</dd></div>" +
       "<div><dt>Median time from a report to its fix</dt><dd>" + (j.fixTime && j.fixTime.medianHours != null ? esc(String(j.fixTime.medianHours)) + " hours" : NA) + "</dd></div></dl>" +
       '<p class="pn-mut pn-small">Reports are stored on our server. These counts appear here once we export them.</p>';
-    h += '<h2 class="pn-h">AI-written questions</h2>';
-    if (q) {
-      h += '<p class="ps-say"><b>' + fmt(q.accepted) + "</b> of <b>" + fmt(q.generated) + "</b> drafted questions (" + pct(q.passRate, 1) + ") passed every check, across " + fmt(q.modules) + " modules. The rest were thrown away.</p>" +
-        '<p class="pn-mut pn-small">Each draft must pass all of these checks. Drafts rejected by each:</p><table class="ps-gates"><thead><tr><th scope="col">Check</th><th scope="col">Rejected</th></tr></thead><tbody>' +
-        q.gates.map(function (g) { return "<tr" + (g.rejected ? "" : ' class="z"') + "><td>" + esc(g.label) + "</td><td>" + fmt(g.rejected) + "</td></tr>"; }).join("") + "</tbody></table>";
-    } else h += "<p>" + NA + "</p>";
-    h += '<h2 class="pn-h">AI-written lessons and cards</h2>';
-    h += l ? '<p class="ps-say"><b>' + fmt(l.lessons) + "</b> AI lessons are published with <b>" + fmt(l.steps) + "</b> steps. Every step is checked for its numbers, drug doses, copied wording and support in the source; " +
-      fmt(l.redone) + " steps were rewritten after failing a check and " + fmt(l.dropped) + " were dropped (" + pct(l.passRate, 1) + " kept). " + (l.hand ? fmt(l.hand) + " more " + (l.hand === 1 ? "lesson is" : "lessons are") + " written by hand." : "") + "</p>" : "<p>" + NA + "</p>";
-    if (c) h += '<p class="ps-say">' + (c.ai ? fmt(c.ai) + " of " + fmt(c.cards) + " published flashcards are AI-written." : "All " + fmt(c.cards) + " published flashcards are written by hand. No AI cards are published yet.") + "</p>";
     h += '<h2 class="pn-h">How these numbers are made</h2><ul class="ps-how">' +
-      "<li>A script (tools/prep-accuracy.mjs) reads the records our build tools write and makes accuracy.json. This page shows that file and nothing else.</li>" +
-      "<li>Answer keys: the newest key screen" + (k && k.date ? " (" + esc(k.date) + (k.model ? ", model " + esc(k.model) : "") + ")" : "") + ". A different answer is a dispute, not proof the key is wrong; a person checks it before it returns.</li>" +
-      "<li>AI questions and lessons: the reports written when each module was made. Drafts that fail are never shown to students.</li>" +
+      "<li>A script reads the records our build tools write. This page shows those numbers and nothing else.</li>" +
+      "<li>Answer keys: the newest key screen" + (k && k.date ? " (" + esc(k.date) + ")" : "") + ". A different answer is a dispute, not proof the key is wrong; a person checks it before it returns.</li>" +
       "<li>Reports and fix times come from the report button on every question. Until we export them, they read “Not yet published”.</li></ul>" +
-      '<p class="pn-note">Generated ' + esc(j.generated || "") + "</p>";
+      '<p class="pn-note">Updated ' + esc(j.generated || "") + "</p>";
     return h;
   }
   var PURE = { esc: esc, initials: initials, left: left, cleanId: cleanId, errWord: errWord, accuracyHtml: accuracyHtml };

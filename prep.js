@@ -382,6 +382,7 @@
     root = D.createElement("div"); root.id = "smdPrep"; root.className = "pn-root";
     root.setAttribute("role", "dialog"); root.setAttribute("aria-modal", "true"); root.setAttribute("aria-label", "PrepNucleus");
     D.body.appendChild(root); D.body.style.overflow = "hidden";
+    try { if (G.PREP_MOTION) G.PREP_MOTION.attach(root); } catch (e) {}
     root.addEventListener("click", onClick);
     root.addEventListener("input", function (e) {
       if (!e.target || e.target.id !== "pnSearch") return;
@@ -428,6 +429,7 @@
     try { if (G.PREP_PYQ) G.PREP_PYQ.leave(); } catch (e) {}
     try { if (G.PREP_PLAN) G.PREP_PLAN.leave(); } catch (e) {}
     try { if (G.PREP_FLASH) G.PREP_FLASH.leave(); } catch (e) {}
+    try { if (G.PREP_MOTION) G.PREP_MOTION.detach(); } catch (e) {}
     st.open = false; st.run = null; st.stack = [];
     if (root && root.parentNode) root.parentNode.removeChild(root);
     root = null;
@@ -469,7 +471,7 @@
       (G.PrepSocial ? row("soc-open", ico("user"), "Friends and groups", "Challenge a friend, college boards") + row("soc-acc", ico("check"), "Accuracy", "Your public accuracy page") : "") + "</div>" +
       '<h2 class="pn-h">Subjects</h2><div class="pn-subs" id="pnGrid">' + subs.map(function (sb) { return tile(sb, null); }).join("") + "</div>" +
       (G.PrepPro ? G.PrepPro.homeHtml(HOST) : "") +
-      '<p class="pn-note">Questions: MedMCQA (MIT licence), cleaned and sorted into modules; AI-generated questions are labelled. Practice and progress stay on this device.</p></div>');
+      '<p class="pn-note">Practice and progress stay on this device.</p></div>');
     if (arena) G.PREP_ARENA.homeMounted(HOST);
     if (G.PrepPro) G.PrepPro.homeMounted(HOST);
     Promise.all(subs.map(function (sb) { return loadIndex(sb.id); })).then(function () {
@@ -591,7 +593,10 @@
     }, 1000);
   }
   function stopTimer() { if (st.timer) { G.clearInterval(st.timer); st.timer = 0; } }
-  function provLine(it) { if (it._py && G.PREP_PYQ) return G.PREP_PYQ.prov(it); return it.gen || it.prov === "SMD" ? "AI-generated, auto-checked" : it.prov === "USR" ? "Your deck" : "Source: MedMCQA (MIT licence)"; }
+  // Owner rule (2026-10-07): no authorship or source line on questions; content credits live in the Terms and Privacy pages.
+  // A previous-year question still names its paper (exam, year, memory-based recall), which is the paper type, not the origin.
+  function provLine(it) { return it._py && G.PREP_PYQ ? G.PREP_PYQ.prov(it) : ""; }
+  function provHtml(it) { var l = provLine(it); return l ? '<p class="pn-prov">' + l + "</p>" : ""; }
   function renderRun() {
     var r = st.run; if (!r) return;
     if (r.done) return r.custom ? r.custom.render(r) : renderResult();
@@ -613,7 +618,7 @@
     if (shown) {
       var ok = chosen === it.a;
       fb = '<section class="pn-fb ' + (ok ? "ok" : "no") + '" role="status" tabindex="-1"><p class="pn-verdict">' + ico(ok ? "check" : "x") + "<span>" + (ok ? "Correct" : "Incorrect") + " · Answer " + L[it.a] + ". " + esc(it.o[it.a]) + "</span></p>" +
-        (it.exp ? '<h3>Explanation</h3><p class="pn-exp">' + esc(it.exp) + "</p>" : '<p class="pn-mut">' + (it._py ? "Explanation coming soon." : "The source gives no explanation for this question.") + "</p>") +
+        (it.exp ? '<h3>Explanation</h3><p class="pn-exp">' + esc(it.exp) + "</p>" : '<p class="pn-mut">' + (it._py ? "Explanation coming soon." : "No explanation is stored for this question yet.") + "</p>") +
         (it.kp ? '<p class="pn-kp"><b>Exam pearl:</b> ' + esc(it.kp) + "</p>" : "") +
         (it.rv && it.rv.old ? '<p class="pn-old">This may be outdated: check current guidance.</p>' : "") +
         // Offline teacher (prep-teacher.js, Phase 6): only when MaiK runs on this phone; never a server call.
@@ -622,7 +627,7 @@
           var on = (s.mt[it.id] || [])[2] === t[0];
           return '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="mtag" data-v="' + t[0] + '">' + t[1] + "</button>";
         }).join("") + "</div></div>" : "") +
-        '<p class="pn-prov">' + provLine(it) + "</p></section>";
+        provHtml(it) + "</section>";
     }
     var nav = r.mode === "exam" ?
       '<div class="pn-navrow"><button type="button" class="pn-btn" data-act="prev"' + (r.i ? "" : " disabled") + ">Previous</button>" +
@@ -674,7 +679,7 @@
     r.items.forEach(function (it, i) { if (r.ans[i] === it.a) ok++; else missed.push(i); });
     var pct = r.items.length ? Math.round(ok * 100 / r.items.length) : 0;
     paint(bar(r.mode === "exam" ? "Test marked" : "Set finished", esc(r.title), "back") + '<div class="pn-body">' + (r.scheme ? mockAnalysis(r) : '<section class="pn-panel pn-score">' +
-      '<div class="pn-ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="rt" cx="60" cy="60" r="52" pathLength="100"/><circle class="rv" cx="60" cy="60" r="52" pathLength="100" stroke-dasharray="' + pct + ' 100"/></svg>' +
+      '<div class="pn-ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="rt" cx="60" cy="60" r="52" pathLength="100"/>' + (pct > 0 ? '<circle class="rv" cx="60" cy="60" r="52" pathLength="100" stroke-dasharray="' + pct + ' 100"/>' : "") + '</svg>' +
       '<p class="pn-big">' + ok + " / " + r.items.length + '</p></div><p class="pn-mut">' + pct + "% right" + (r.mode === "exam" ? " · " + fmtTime(r.secs) + " taken" : "") + "</p></section>") +
       (missed.length ? '<h2 class="pn-sec">Review the missed</h2><ol class="pn-missed">' + missed.map(function (i) {
         var it = r.items[i];
@@ -689,7 +694,7 @@
       var L = ["A", "B", "C", "D"];
       paint(bar("Review", esc(r.title), "back") + '<div class="pn-body pn-run">' + (G.PREP_PYQ ? G.PREP_PYQ.chips(it, HOST) : "") + '<p class="pn-q">' + esc(it.q) + "</p>" + (G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST) : "") + '<ol class="pn-opts">' + it.o.map(function (o, k) {
         return '<li><div class="pn-opt' + (k === it.a ? " right" : k === r.ans[i] ? " wrong" : "") + '"><span class="pn-l">' + L[k] + "</span><span>" + esc(o) + "</span></div></li>";
-      }).join("") + '</ol><section class="pn-fb"><h3>Explanation</h3><p class="pn-exp">' + esc(it.exp || "The source gives no explanation for this question.") + '</p><p class="pn-prov">' + provLine(it) + "</p></section></div>");
+      }).join("") + '</ol><section class="pn-fb"><h3>Explanation</h3><p class="pn-exp">' + esc(it.exp || "No explanation is stored for this question yet.") + '</p>' + provHtml(it) + "</section></div>");
     });
     rerender();
   }

@@ -236,7 +236,6 @@
 
   /* ---------- drawing ---------- */
   function curCard() { var r = K.run; return r && r.list[r.i]; }
-  function provLine(c) { return c.gen === "hand" ? "Written by the StewardMD team from the app's knowledge base." : "AI-written from this module's question explanations, automatically checked."; }
   // Cloze: the hidden term keeps its width (no reflow on reveal) but is invisible and silent until shown.
   function frontHtml(c, shown) {
     if (c.kind === "cloze") {
@@ -288,7 +287,7 @@
     var r = K.run, c = curCard();
     return host.bar(escH(r.title), "Card " + (r.i + 1) + " of " + r.list.length + (r.relearn[c._m + ":" + c.id] ? " · again" : ""), "back") + progHtml(r) +
       '<div class="pn-body pk-body" id="pkBody">' + cardHtml(r) +
-      '<p class="pn-note pk-note">' + escH(provLine(c)) + (r.i === 0 && c.kind !== "occl" ? " Swipe the answer right for Good, left for Again." : "") + "</p></div>" + barHtml(r);
+      (r.i === 0 && c.kind !== "occl" ? '<p class="pn-note pk-note">Swipe the answer right for Good, left for Again.</p>' : "") + "</div>" + barHtml(r);
   }
   function endHtml() {
     var r = K.run, s = store(), today = host.today(), mids = r.mids, nd = nextDue(s, mids, today), left = newLeft(s, today), more = r.moreNew;

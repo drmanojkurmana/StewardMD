@@ -38,10 +38,12 @@ let chromeErr = ""; chrome.stderr.on("data", (d) => { chromeErr += d; });
 let msgId = 1; const pending = new Map(); let ws, sessionId; const errors = []; const flagCalls = [];
 const call = (m, p) => { const i = msgId++; return new Promise((r) => { pending.set(i, r); ws.send(JSON.stringify({ id: i, method: m, params: p || {}, sessionId })); }); };
 const ev = async (e) => { const r = await call("Runtime.evaluate", { expression: `(function(){try{${e}}catch(x){return "ERR:"+String(x&&x.message||x)}})()`, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : undefined; };
+// Screenshots land on the final frame: finite animations (entrances, ring draw) are finished first; loops keep running.
+const shotCall = async (p) => { await ev(`document.getAnimations().forEach(function (a) { try { var t = a.effect && a.effect.getTiming(); if (t && t.iterations !== Infinity) a.finish(); } catch (e) {} }); return 1;`); return call("Page.captureScreenshot", p); };
 const until = async (e, ms = 10000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (await ev(e) === true) return true; await sleep(150); } return false; };
 const reqs = []; let fails = 0; const ok = (c, m) => { console.log((c ? "PASS " : "FAIL ") + m); if (!c) fails++; };
 const click = (sel) => ev(`var b=document.querySelector(${JSON.stringify(sel)}); if(!b) return "missing"; b.click(); return 1;`);
-const shot = async (name) => { if (!process.env.SHOTS) return; if (process.env.PN_LIGHT) await ev(`if (!document.getElementById("pnNoTr")) { var t = document.createElement("style"); t.id = "pnNoTr"; t.textContent = "*{transition:none!important}"; document.head.appendChild(t); } document.body.classList.remove("dark"); return 1;`); const r = await call("Page.captureScreenshot", { format: "png" }); if (r.result) (await import("node:fs")).writeFileSync(join(process.env.SHOTS, "prep-" + (process.env.PN_LIGHT ? "light-" : "") + name + ".png"), Buffer.from(r.result.data, "base64")); };
+const shot = async (name) => { if (!process.env.SHOTS) return; if (process.env.PN_LIGHT) await ev(`if (!document.getElementById("pnNoTr")) { var t = document.createElement("style"); t.id = "pnNoTr"; t.textContent = "*{transition:none!important}"; document.head.appendChild(t); } document.body.classList.remove("dark"); return 1;`); const r = await shotCall({ format: "png" }); if (r.result) (await import("node:fs")).writeFileSync(join(process.env.SHOTS, "prep-" + (process.env.PN_LIGHT ? "light-" : "") + name + ".png"), Buffer.from(r.result.data, "base64")); };
 
 try {
   let ver, t = 0; while (t++ < 300) { try { ver = await (await fetch(`http://localhost:${PORT}/json/version`)).json(); break; } catch { await sleep(200); } }
@@ -108,7 +110,7 @@ try {
     await click('#smdPrep .pn-opt[data-k="1"]');
     if (i === 0) {
       ok(await until(`return !!document.querySelector("#smdPrep .pn-fb .pn-exp");`, 3000), "an answer shows the verdict and explanation at once");
-      ok(await ev(`return document.querySelector("#smdPrep .pn-prov").textContent;`) === "Source: MedMCQA (MIT licence)", "source line under the explanation");
+      ok(await ev(`return !document.querySelector("#smdPrep .pn-prov") && !/MedMCQA|AI-generated|Source:/.test(document.querySelector("#smdPrep .pn-fb").textContent);`) === true, "no source or authorship line under the explanation (owner rule: credits live in Terms)");
       ok(await ev(`return document.querySelectorAll("#smdPrep .pn-opt.right").length === 1;`) === true, "the right option is marked");
       await shot("feedback");
       const wrong = await ev(`return !!document.querySelector("#smdPrep .pn-fb.no");`);
