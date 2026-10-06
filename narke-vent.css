@@ -7,11 +7,17 @@
 .nrk-root {
   --vl-plate: #030507; --vl-pline: #1a222d; --vl-gridc: rgba(148, 163, 184, .2); --vl-mutc: #9aa1ab;
   --vl-card: var(--nk-s1); --vl-cline: #26272c; --vl-knob: var(--nk-s2); --vl-shadow: 0 18px 48px rgba(0, 0, 0, .55);
-  --vl-ox: var(--nk-spo2); --vl-ve: var(--nk-co2); --vl-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --vl-ox: var(--nk-spo2); --vl-ve: var(--vl-co2); --vl-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  /* Round 2: the lab's own accent is indigo, never yellow. Yellow belongs to the medium-priority alarm (IEC 60601-1-8)
+     and red to high priority, so neither may mean "brand" or "pressure trace" on this screen. */
+  --vl-acc: #a5b4fc; --vl-acc-soft: rgba(165, 180, 252, .14); --vl-paw: #f0abfc; --vl-co2: #e2e8f0;
+  --vl-al-lo: #22d3ee; --vl-ease: cubic-bezier(0.23, 1, 0.32, 1);
 }
 body:not(.dark):not(.v3-dark) .nrk-root {
   --vl-plate: #fffdf8; --vl-pline: #e4dccb; --vl-gridc: rgba(90, 87, 79, .22); --vl-mutc: #5a574f;
   --vl-card: #fffdf8; --vl-cline: #e1d9c7; --vl-knob: #f4f0e6; --vl-shadow: 0 18px 48px rgba(60, 45, 20, .18);
+  --vl-acc: #4338ca; --vl-acc-soft: rgba(67, 56, 202, .10); --vl-paw: #a21caf; --vl-co2: #475569;
+  --vl-al-lo: #0e7490;
 }
 .nrk-root .vl-wrap { max-width: 1360px; margin: 0 auto; }
 .nrk-root .vl-h { font-size: 15px; font-weight: 650; letter-spacing: -0.005em; margin: 0; color: var(--sp-text); }
@@ -23,12 +29,12 @@ body:not(.dark):not(.v3-dark) .nrk-root {
 .nrk-root .vl-sec-h { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
 .nrk-root .vl-u { font-size: 12px; color: var(--sp-mut); margin-left: 3px; font-weight: 500; }
 .nrk-root .vl-flag { display: inline-block; margin-left: 6px; font-size: 11px; font-weight: 700; letter-spacing: .02em; color: var(--nk-bad); }
-.nrk-root .vl-lvb { flex: 0 0 auto; font-size: 11.5px; font-weight: 650; color: var(--nk-acc); border: 1px solid color-mix(in srgb, var(--nk-acc) 45%, transparent); border-radius: 6px; padding: 1px 6px; font-variant-numeric: tabular-nums; }
+.nrk-root .vl-lvb { flex: 0 0 auto; font-size: 11.5px; font-weight: 650; color: var(--vl-acc); border: 1px solid color-mix(in srgb, var(--vl-acc) 45%, transparent); border-radius: 6px; padding: 1px 6px; font-variant-numeric: tabular-nums; }
 .nrk-root .vl-tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .nrk-root .vl-tag2 { font-size: 12px; line-height: 1.2; padding: 4px 8px; border-radius: 6px; background: var(--nk-s2); color: var(--sp-text); }
 .nrk-root .vl-tag2.vs-low { color: var(--nk-warn); }
 .nrk-root .vl-disc { display: flex; gap: 8px; align-items: flex-start; margin: 0; font-size: 13px; line-height: 1.45; color: var(--sp-mut); }
-.nrk-root .vl-disc .smd-ico { width: 18px; height: 18px; margin-top: 1px; color: var(--nk-acc); }
+.nrk-root .vl-disc .smd-ico { width: 18px; height: 18px; margin-top: 1px; color: var(--vl-acc); }
 .nrk-root .vl-disc-end { margin-top: 18px; justify-content: center; text-align: center; }
 .nrk-root .vl-simlab { text-align: center; margin: 4px 0 0; }
 .nrk-root select, .nrk-root .vl-dial { font-variant-numeric: tabular-nums; }
@@ -43,8 +49,8 @@ body:not(.dark):not(.v3-dark) .nrk-root {
   border: 1px solid var(--vl-cline); background: var(--vl-card); transition: transform 140ms var(--nk-ease), border-color 160ms ease, background-color 160ms ease; }
 .nrk-root .vl-levels b { font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--sp-mut); min-width: 16px; }
 .nrk-root .vl-levels span { font-size: 13px; line-height: 1.3; font-weight: 550; text-wrap: balance; }
-.nrk-root .vl-levels button[aria-pressed="true"] { border-color: var(--nk-acc); background: var(--nk-acc-soft); }
-.nrk-root .vl-levels button[aria-pressed="true"] b { color: var(--nk-acc); }
+.nrk-root .vl-levels button[aria-pressed="true"] { border-color: var(--vl-acc); background: var(--vl-acc-soft); }
+.nrk-root .vl-levels button[aria-pressed="true"] b { color: var(--vl-acc); }
 .nrk-root .vl-levels button:active, .nrk-root .vl-sc:active, .nrk-root .vl-dcard:active { transform: scale(0.98); }
 .nrk-root .vl-lvintro { margin: 10px 0 0; font-size: 14px; line-height: 1.5; color: var(--sp-mut); max-width: 64ch; }
 .nrk-root .vl-cards, .nrk-root .vl-dgrid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; }
@@ -53,7 +59,7 @@ body:not(.dark):not(.v3-dark) .nrk-root {
 .nrk-root .vl-sc-plate { flex: 0 0 104px; display: block; background: var(--vl-plate); border: 1px solid var(--vl-pline); border-radius: 10px; padding: 6px 4px; min-height: 76px; }
 .nrk-root .vl-mini { display: block; width: 100%; height: 100%; min-height: 62px; }
 .nrk-root .vl-mini path { fill: none; stroke-width: 1.6; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
-.nrk-root .vl-mini-p { stroke: var(--nk-art); } .nrk-root .vl-mini-f { stroke: var(--nk-ecg); }
+.nrk-root .vl-mini-p { stroke: var(--vl-paw); } .nrk-root .vl-mini-f { stroke: var(--nk-ecg); }
 .nrk-root .vl-mini-z { stroke: var(--vl-gridc); stroke-width: 1; stroke-dasharray: 2 3; vector-effect: non-scaling-stroke; }
 .nrk-root .vl-sc-b { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
 .nrk-root .vl-sc-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
@@ -67,7 +73,7 @@ body:not(.dark):not(.v3-dark) .nrk-root {
 .nrk-root .vl-solved { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; color: var(--nk-ok); font-weight: 600; }
 .nrk-root .vl-solved .smd-ico { width: 16px; height: 16px; }
 @media (hover: hover) and (pointer: fine) {
-  .nrk-root .vl-sc:hover, .nrk-root .vl-dcard:hover, .nrk-root .vl-levels button:hover { border-color: color-mix(in srgb, var(--nk-acc) 55%, var(--vl-cline)); }
+  .nrk-root .vl-sc:hover, .nrk-root .vl-dcard:hover, .nrk-root .vl-levels button:hover { border-color: color-mix(in srgb, var(--vl-acc) 55%, var(--vl-cline)); }
   .nrk-root .vl-tbtn:hover, .nrk-root .vl-step button:hover:not([disabled]) { background: var(--nk-s3); }
 }
 @media (min-width: 600px) { .nrk-root .vl-levels { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
@@ -101,16 +107,33 @@ body:not(.dark):not(.v3-dark) .nrk-root {
 .nrk-root .vl-al { min-height: 44px; display: inline-flex; align-items: center; gap: 6px; padding: 0 12px; border-radius: 10px; border: 1.5px solid transparent; font-size: 14px; font-weight: 650; }
 .nrk-root .vl-al .smd-ico { width: 18px; height: 18px; }
 .nrk-root .vl-al.danger { background: var(--nk-bad); color: #1d0503; }
-.nrk-root .vl-al.warn, .nrk-root .vl-al.info { background: var(--nk-warn); color: #1d1300; }
+.nrk-root .vl-al.warn { background: var(--nk-warn); color: #1d1300; }
+.nrk-root .vl-al.info { background: var(--vl-al-lo); color: #00191d; }
 body:not(.dark):not(.v3-dark) .nrk-root .vl-al.danger, body:not(.dark):not(.v3-dark) .nrk-root .vl-al.warn, body:not(.dark):not(.v3-dark) .nrk-root .vl-al.info { color: #fff; }
 .nrk-root .vl-al.sil { background: transparent; color: var(--sp-text); border-color: var(--nk-warn); }
 .nrk-root .vl-al.sil.danger { border-color: var(--nk-bad); }
 .nrk-root .vl-al small { font-size: 12px; font-weight: 600; opacity: .85; }
+.nrk-root .vl-al { transition: transform 120ms var(--vl-ease); }
 .nrk-root .vl-al:active { transform: scale(0.97); }
+/* IEC 60601-1-8 visual priority: high flashes at 2 Hz, medium at about 0.6 Hz, low is steady. A dark veil over the
+   chip blinks (steps, not a glow), so the colour itself never changes. Both rates are under 3 Hz, so the flash stays
+   on under reduced motion too: it carries the priority, not decoration. Only the entrance movement is dropped. */
+.nrk-root .vl-al { position: relative; isolation: isolate; }
+.nrk-root .vl-al:not(.sil)::after { content: ""; position: absolute; inset: -1.5px; border-radius: inherit; background: #000; opacity: 0; pointer-events: none; }
+.nrk-root .vl-al.danger:not(.sil)::after { animation: vl-flash 500ms steps(1, end) infinite; }
+.nrk-root .vl-al.warn:not(.sil)::after { animation: vl-flash 1600ms steps(1, end) infinite; }
+@keyframes vl-flash { 50% { opacity: .42; } }
 @media (prefers-reduced-motion: no-preference) {
-  .nrk-root .vl-al.danger:not(.sil) { animation: vl-pulse 1.1s ease-in-out infinite; }
+  .nrk-root .vl-al-list > li { transition: opacity 180ms var(--vl-ease), transform 180ms var(--vl-ease); }
+  @starting-style { .nrk-root .vl-al-list > li { opacity: 0; transform: translateY(-4px); } }
 }
-@keyframes vl-pulse { 0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--nk-bad) 55%, transparent); } 50% { box-shadow: 0 0 0 5px color-mix(in srgb, var(--nk-bad) 0%, transparent); } }
+.nrk-root .vl-al-more.danger { border-color: var(--nk-bad); color: var(--nk-bad); }
+.nrk-root .vl-al-more.warn { border-color: var(--nk-warn); color: var(--sp-text); }
+/* no active alarm: the bar folds away and a green chip sits under the title (round 2 chrome diet) */
+.nrk-root .vl-alarms.is-none { display: none; }
+.nrk-root .vl-okchip { display: inline-flex; align-items: center; gap: 4px; margin-left: 8px; font-size: 12px; font-weight: 650; color: var(--nk-ok); vertical-align: 1px; }
+.nrk-root .vl-okchip[hidden] { display: none; }
+.nrk-root .vl-okchip .smd-ico { width: 14px; height: 14px; }
 
 /* ---- patient ---- */
 .nrk-root .vl-pt-h { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
@@ -133,8 +156,8 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-al.danger, body:not(.dark):not(.v3-d
 .nrk-root .c-ecg .vl-cv { height: 56px; }
 .nrk-root .vl-tag { position: absolute; left: 10px; top: 4px; font-size: 12px; font-weight: 650; line-height: 1; letter-spacing: .02em; }
 .nrk-root .vl-tag i { font-style: normal; font-weight: 500; color: var(--sp-mut); margin-left: 3px; }
-.nrk-root .c-ecg { color: var(--nk-ecg); } .nrk-root .c-spo2 { color: var(--nk-spo2); } .nrk-root .c-co2 { color: var(--nk-co2); } .nrk-root .c-art { color: var(--nk-art); }
-.nrk-root .c-paw { color: var(--nk-art); } .nrk-root .c-flow { color: var(--nk-ecg); } .nrk-root .c-vol { color: var(--nk-spo2); }
+.nrk-root .c-ecg { color: var(--nk-ecg); } .nrk-root .c-spo2 { color: var(--nk-spo2); } .nrk-root .c-co2 { color: var(--vl-co2); } .nrk-root .c-art { color: var(--nk-art); }
+.nrk-root .c-paw { color: var(--vl-paw); } .nrk-root .c-flow { color: var(--nk-ecg); } .nrk-root .c-vol { color: var(--nk-spo2); }
 .nrk-root .vl-num { display: flex; flex-direction: column; justify-content: center; align-items: flex-end; padding: 6px 12px 6px 4px; text-align: right; }
 .nrk-root .vl-k { font-size: 11.5px; font-weight: 650; letter-spacing: .03em; opacity: .9; }
 .nrk-root .vl-v { font-size: 28px; font-weight: 700; line-height: 1.05; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
@@ -150,9 +173,9 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-al.danger, body:not(.dark):not(.v3-d
 /* ---- ventilator ---- */
 .nrk-root .vl-vent-h { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
 .nrk-root .vl-mode { min-height: 44px; min-width: 0; max-width: 72%; display: inline-flex; align-items: center; gap: 8px; padding: 4px 6px 4px 12px; border-radius: 12px;
-  border: 1px solid color-mix(in srgb, var(--nk-acc) 50%, var(--vl-cline)); background: var(--nk-acc-soft); color: var(--sp-text); text-align: left; transition: transform 140ms var(--nk-ease); }
+  border: 1px solid color-mix(in srgb, var(--vl-acc) 50%, var(--vl-cline)); background: var(--vl-acc-soft); color: var(--sp-text); text-align: left; transition: transform 140ms var(--nk-ease); }
 .nrk-root .vl-mode:active { transform: scale(0.97); }
-.nrk-root .vl-mode b { font-size: 15px; font-weight: 750; color: var(--nk-acc); letter-spacing: .01em; white-space: nowrap; }
+.nrk-root .vl-mode b { font-size: 15px; font-weight: 750; color: var(--vl-acc); letter-spacing: .01em; white-space: nowrap; }
 .nrk-root .vl-mode span:not(.vl-chev) { min-width: 0; }
 .nrk-root .vl-chev { display: inline-flex; transform: rotate(90deg); color: var(--sp-mut); }
 .nrk-root .vl-chev .smd-ico { width: 16px; height: 16px; }
@@ -165,8 +188,8 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-al.danger, body:not(.dark):not(.v3-d
 .nrk-root .vl-legend { display: flex; flex-wrap: wrap; gap: 4px 14px; padding: 6px 10px 2px; font-size: 11.5px; color: var(--sp-mut); }
 .nrk-root .vl-legend span { display: inline-flex; align-items: center; gap: 5px; }
 .nrk-root .vl-legend i { display: inline-block; }
-.nrk-root .mk-trig { width: 8px; height: 6px; background: var(--nk-art); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
-.nrk-root .mk-cyc { width: 1.5px; height: 10px; background: var(--nk-art); }
+.nrk-root .mk-trig { width: 8px; height: 6px; background: var(--vl-paw); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.nrk-root .mk-cyc { width: 1.5px; height: 10px; background: var(--vl-paw); }
 .nrk-root .mk-auto { width: 7px; height: 7px; border-radius: 50%; background: var(--nk-ecg); }
 .nrk-root .vl-ro { margin: 10px 0 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); background: var(--vl-plate); border: 1px solid var(--vl-pline); border-radius: 12px; overflow: hidden; }
 .nrk-root .vl-ro:empty { display: none; }
@@ -184,21 +207,21 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-al.danger, body:not(.dark):not(.v3-d
 .nrk-root .vl-knobs { display: grid; grid-template-columns: repeat(auto-fill, minmax(148px, 1fr)); gap: 8px; }
 .nrk-root .vl-knob { position: relative; background: var(--vl-knob); border: 1px solid transparent; border-radius: 14px; padding: 4px 6px 6px 12px; display: flex; flex-direction: column;
   transition: border-color 160ms ease, background-color 160ms ease; }
-.nrk-root .vl-knob.is-pend { border-color: var(--nk-acc); background: color-mix(in srgb, var(--nk-acc) 7%, var(--vl-knob)); }
+.nrk-root .vl-knob.is-pend { border-color: var(--vl-acc); background: color-mix(in srgb, var(--vl-acc) 7%, var(--vl-knob)); }
 .nrk-root .vl-knob-top { display: flex; align-items: center; justify-content: space-between; gap: 4px; min-height: 44px; }
 .nrk-root .vl-knob-l { font-size: 13.5px; font-weight: 650; line-height: 1.2; min-width: 0; }
 .nrk-root .vl-info { width: 44px; height: 44px; flex: 0 0 auto; display: grid; place-items: center; border: 0; background: transparent; color: var(--sp-mut); border-radius: 50%; margin-right: -4px; }
 .nrk-root .vl-info .smd-ico { width: 20px; height: 20px; }
 .nrk-root .vl-info:active { transform: scale(0.94); }
-.nrk-root .vl-dial { position: relative; align-self: center; width: 112px; height: 88px; margin: -4px 0 0; border-radius: 12px; cursor: ns-resize; touch-action: manipulation; }
+.nrk-root .vl-dial { position: relative; align-self: center; width: 112px; height: 88px; margin: -4px 0 0; border-radius: 12px; touch-action: manipulation; }
 .nrk-root .vl-dial svg { position: absolute; inset: 0 8px 14px; width: calc(100% - 16px); height: calc(100% - 14px); overflow: visible; }
 .nrk-root .vl-arc-t, .nrk-root .vl-arc-v { fill: none; stroke-width: 6; stroke-linecap: round; }
 .nrk-root .vl-arc-t { stroke: color-mix(in srgb, var(--sp-mut) 28%, transparent); }
 .nrk-root .vl-arc-v { stroke: var(--sp-text); transition: stroke-dasharray 180ms var(--nk-ease); }
-.nrk-root .is-pend .vl-arc-v { stroke: var(--nk-acc); }
+.nrk-root .is-pend .vl-arc-v { stroke: var(--vl-acc); }
 .nrk-root .vl-dial-v { position: absolute; left: 0; right: 0; top: 28px; display: flex; flex-direction: column; align-items: center; line-height: 1; }
 .nrk-root .vl-dial-v b { font-size: 25px; font-weight: 700; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
-.nrk-root .is-pend .vl-dial-v b { color: var(--nk-acc); }
+.nrk-root .is-pend .vl-dial-v b { color: var(--vl-acc); }
 .nrk-root .vl-dial-v small { margin-top: 4px; font-size: 11px; color: var(--sp-mut); }
 .nrk-root .vl-was { position: absolute; left: 0; right: 0; bottom: 0; text-align: center; font-size: 11.5px; color: var(--sp-mut); font-variant-numeric: tabular-nums; }
 .nrk-root .vl-knob-opt .vl-was { position: static; text-align: left; margin-top: 6px; }
@@ -222,8 +245,8 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-al.danger, body:not(.dark):not(.v3-d
 .nrk-root .vl-live[aria-pressed="true"] { background: color-mix(in srgb, var(--nk-ok) 16%, var(--nk-s2)); }
 .nrk-root .vl-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--sp-mut); }
 .nrk-root .vl-live[aria-pressed="true"] .vl-dot { background: var(--nk-ok); }
-@media (prefers-reduced-motion: no-preference) { .nrk-root .vl-live[aria-pressed="true"] .vl-dot { animation: vl-blink 2s ease-in-out infinite; } }
-@keyframes vl-blink { 50% { opacity: .35; } }
+
+
 .nrk-root .vl-confirm { display: grid; grid-template-columns: 1fr 2fr; gap: 8px; max-width: 760px; margin: 0 auto; }
 .nrk-root .vl-confirm .sp-btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
 
@@ -242,9 +265,9 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-al.danger, body:not(.dark):not(.v3-d
 .nrk-root .vl-cs[data-state="wait"] .vl-cs-b { opacity: .38; }
 .nrk-root .vl-cs[data-state="wait"] .vl-cs-t { transform: translateY(-3px); }
 .nrk-root .vl-cs[data-state="wait"] .vl-cs-dot { transform: scale(.7); }
-.nrk-root .vl-cs[data-state="on"] .vl-cs-dot { background: var(--nk-acc); border-color: var(--nk-acc); box-shadow: 0 0 0 5px var(--nk-acc-soft); }
+.nrk-root .vl-cs[data-state="on"] .vl-cs-dot { background: var(--vl-acc); border-color: var(--vl-acc); box-shadow: 0 0 0 5px var(--vl-acc-soft); }
 .nrk-root .vl-cs[data-state="on"] .vl-cs-t { color: var(--sp-text); }
-.nrk-root .vl-cs[data-state="on"]::before { background: color-mix(in srgb, var(--nk-acc) 45%, var(--vl-cline)); }
+.nrk-root .vl-cs[data-state="on"]::before { background: color-mix(in srgb, var(--vl-acc) 45%, var(--vl-cline)); }
 .nrk-root .vl-cs[data-state="same"] .vl-cs-dot { border-color: var(--vl-cline); background: var(--vl-cline); transform: scale(.75); }
 .nrk-root .vl-cs[data-state="same"] .vl-cs-b b { color: var(--sp-mut); font-weight: 600; }
 .nrk-root .vl-chain.idle .vl-cs-dot { border-color: var(--vl-cline); }
@@ -292,11 +315,11 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-al.danger, body:not(.dark):not(.v3-d
 .nrk-root .vl-end .sp-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
 /* The toast is a strip in the page flow under the alarm bar: it never covers a control and it can be dismissed. */
 .nrk-root .vl-toast { flex: 0 0 auto; display: none; align-items: flex-start; gap: 10px; padding: 8px 6px 8px 12px; border-bottom: 1px solid var(--vl-cline);
-  background: color-mix(in srgb, var(--nk-acc) 9%, var(--sp-bg)); color: var(--sp-text); font-size: 14px; line-height: 1.45; }
+  background: color-mix(in srgb, var(--vl-acc) 9%, var(--sp-bg)); color: var(--sp-text); font-size: 14px; line-height: 1.45; }
 .nrk-root .vl-toast.on { display: flex; }
 @media (prefers-reduced-motion: no-preference) { .nrk-root .vl-toast.on { animation: vl-in 220ms cubic-bezier(0.23, 1, 0.32, 1); } }
 @keyframes vl-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
-.nrk-root .vl-toast-k { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 6px; padding-top: 2px; font-size: 12px; font-weight: 700; letter-spacing: .03em; color: var(--nk-acc); }
+.nrk-root .vl-toast-k { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 6px; padding-top: 2px; font-size: 12px; font-weight: 700; letter-spacing: .03em; color: var(--vl-acc); }
 .nrk-root .vl-toast-k .smd-ico { width: 16px; height: 16px; }
 .nrk-root .vl-toast-m { flex: 1 1 auto; min-width: 0; padding-top: 1px; text-wrap: pretty; }
 .nrk-root .vl-toast-x { flex: 0 0 44px; width: 44px; height: 44px; margin: -8px 0 -8px; display: grid; place-items: center; border: 0; background: none; color: var(--sp-mut); border-radius: 10px; }
@@ -305,7 +328,7 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-al.danger, body:not(.dark):not(.v3-d
 /* ---- tutorial coach: docked, never over its target ---- */
 /* Phone and tablet: a compact sheet in the flow above the footer (the scroller shrinks), at most 40 % of the screen. */
 .nrk-root .vl-coach { position: relative; z-index: 20; flex: 0 0 auto; max-height: 40dvh; overflow-y: auto; overscroll-behavior: contain;
-  background: var(--vl-card); border-top: 1.5px solid var(--nk-acc); border-radius: 18px 18px 0 0; padding: 4px 14px 10px; box-shadow: 0 -10px 30px rgba(0, 0, 0, .18); }
+  background: var(--vl-card); border-top: 1.5px solid var(--vl-acc); border-radius: 18px 18px 0 0; padding: 4px 14px 10px; box-shadow: 0 -10px 30px rgba(0, 0, 0, .18); }
 .nrk-root .vl-co-h { display: flex; justify-content: space-between; align-items: center; gap: 4px; font-size: 12.5px; color: var(--sp-mut); font-weight: 600; }
 .nrk-root .vl-co-min { flex: 1 1 auto; min-width: 0; min-height: 44px; display: flex; align-items: center; gap: 6px; padding: 0; border: 0; background: none; color: var(--sp-mut); font: inherit; font-size: 12.5px; font-weight: 650; text-align: left; }
 .nrk-root .vl-co-ht { min-width: 0; text-wrap: balance; }
@@ -316,10 +339,10 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-al.danger, body:not(.dark):not(.v3-d
 .nrk-root .vl-coach.min { padding-bottom: 4px; }
 .nrk-root .vl-co-x { min-height: 44px; padding: 0 4px; border: 0; background: none; color: var(--sp-link); font-weight: 600; font-size: 13px; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--sp-link-line); white-space: nowrap; flex: 0 0 auto; }
 .nrk-root .vl-co-bar { height: 3px; border-radius: 2px; background: var(--vl-cline); overflow: hidden; margin: 0 0 10px; }
-.nrk-root .vl-co-bar i { display: block; width: 100%; height: 100%; background: var(--nk-acc); transform-origin: left; transition: transform 260ms var(--nk-ease); }
+.nrk-root .vl-co-bar i { display: block; width: 100%; height: 100%; background: var(--vl-acc); transform-origin: left; transition: transform 260ms var(--nk-ease); }
 .nrk-root .vl-co-say { margin: 0; font-size: 15.5px; line-height: 1.45; text-wrap: pretty; outline: none; }
 .nrk-root .vl-co-task { margin: 8px 0 0; font-size: 14.5px; line-height: 1.45; }
-.nrk-root .vl-co-task b { color: var(--nk-acc); }
+.nrk-root .vl-co-task b { color: var(--vl-acc); }
 .nrk-root .vl-co-done, .nrk-root .vl-co-ok { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 4px; color: var(--nk-ok); font-weight: 650; }
 .nrk-root .vl-co-ok { margin: 8px 0 0; font-size: 14.5px; }
 .nrk-root .vl-co-done .smd-ico, .nrk-root .vl-co-ok .smd-ico { width: 16px; height: 16px; }
@@ -328,16 +351,16 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-al.danger, body:not(.dark):not(.v3-d
 .nrk-root .vl-co-nums b { font-size: 11.5px; font-weight: 750; letter-spacing: .04em; text-transform: uppercase; color: var(--sp-mut); align-self: center; }
 .nrk-root .vl-co-nums i { font-style: normal; color: var(--sp-mut); }
 .nrk-root .vl-co-link { min-height: 44px; margin-top: 4px; padding: 0; border: 0; background: none; color: var(--sp-link); font: inherit; font-size: 14px; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--sp-link-line); }
-.nrk-root .vl-co-need { margin: 10px 0 0; font-size: 13.5px; line-height: 1.4; font-weight: 600; color: var(--nk-acc); text-wrap: pretty; }
+.nrk-root .vl-co-need { margin: 10px 0 0; font-size: 13.5px; line-height: 1.4; font-weight: 600; color: var(--vl-acc); text-wrap: pretty; }
 .nrk-root .vl-co-f { display: flex; gap: 8px; justify-content: flex-end; margin-top: 8px; }
 .nrk-root .vl-co-f .sp-btn { min-height: 46px; flex: 1 1 0; max-width: 220px; }
 .nrk-root .vl-co-f .sp-btn.is-wait { background: var(--nk-s2); color: var(--sp-mut); }
-.nrk-root .vl-hl { outline: 2px solid var(--nk-acc); outline-offset: 3px; box-shadow: 0 0 0 7px var(--nk-acc-soft); border-radius: 12px; }
+.nrk-root .vl-hl { outline: 2px solid var(--vl-acc); outline-offset: 3px; box-shadow: 0 0 0 7px var(--vl-acc-soft); border-radius: 12px; }
 .nrk-root tr.vl-hl { outline-offset: -2px; box-shadow: none; }
 /* Wide screens: a column at the right of the run, above the footer; the run keeps clear of it. */
 @media (min-width: 1000px) {
   .nrk-root .vl-coach { position: absolute; right: 16px; bottom: var(--vl-cob, 96px); width: 360px; max-height: calc(100% - var(--vl-cob, 96px) - 150px);
-    border: 1.5px solid var(--nk-acc); border-radius: 18px; padding: 4px 16px 12px; box-shadow: var(--vl-shadow); }
+    border: 1.5px solid var(--vl-acc); border-radius: 18px; padding: 4px 16px 12px; box-shadow: var(--vl-shadow); }
   .nrk-root .vl-scroll.has-coach { padding-right: 392px; }
   .nrk-root .vl-scroll.has-coach .vl-run { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
   .nrk-root .vl-scroll.has-coach .vl-colA { grid-column: 1; grid-row: 1; }
@@ -367,13 +390,13 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-al.danger, body:not(.dark):not(.v3-d
 .nrk-root .vl-mcard > div { display: grid; gap: 2px; }
 .nrk-root .vl-mcard dt { font-size: 12.5px; font-weight: 650; color: var(--sp-mut); letter-spacing: .01em; }
 .nrk-root .vl-mcard dd { margin: 0; font-size: 15px; line-height: 1.5; text-wrap: pretty; }
-.nrk-root .vl-lcard .lk-up dt, .nrk-root .vl-lcard .lk-down dt { color: var(--nk-acc); }
+.nrk-root .vl-lcard .lk-up dt, .nrk-root .vl-lcard .lk-down dt { color: var(--vl-acc); }
 .nrk-root .vl-modes { display: grid; gap: 8px; }
 .nrk-root .vl-mrow { border: 1px solid var(--vl-cline); border-radius: 14px; padding: 2px; }
-.nrk-root .vl-mrow.on { border-color: var(--nk-acc); background: var(--nk-acc-soft); padding-bottom: 12px; }
+.nrk-root .vl-mrow.on { border-color: var(--vl-acc); background: var(--vl-acc-soft); padding-bottom: 12px; }
 .nrk-root .vl-mrow .vl-mcard { padding: 0 12px; }
 .nrk-root .vl-mbtn { width: 100%; min-height: 52px; display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; align-items: center; gap: 10px; padding: 6px 10px; border: 0; background: none; text-align: left; border-radius: 12px; }
-.nrk-root .vl-mbtn b { font-size: 14.5px; font-weight: 750; color: var(--nk-acc); }
+.nrk-root .vl-mbtn b { font-size: 14.5px; font-weight: 750; color: var(--vl-acc); }
 .nrk-root .vl-mbtn span { font-size: 14px; line-height: 1.3; }
 .nrk-root .vl-mbtn small { font-size: 11.5px; color: var(--sp-mut); font-weight: 600; }
 @media (min-width: 760px) {
@@ -390,7 +413,7 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-al.danger, body:not(.dark):not(.v3-d
 .nrk-root .vl-chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
 .nrk-root .vl-chip2 { min-height: 44px; padding: 0 14px; border-radius: 10px; border: 1px solid var(--vl-cline); background: var(--vl-card); font-size: 14px; font-weight: 550; text-align: left; transition: transform 120ms var(--nk-ease); }
 .nrk-root .vl-chip2:active { transform: scale(0.97); }
-.nrk-root .vl-chip2[aria-pressed="true"] { border-color: var(--nk-acc); background: var(--nk-acc-soft); }
+.nrk-root .vl-chip2[aria-pressed="true"] { border-color: var(--vl-acc); background: var(--vl-acc-soft); }
 .nrk-root .vl-wi-b { display: grid; gap: 12px; }
 .nrk-root .vl-wi-b .sp-seg { width: 100%; } .nrk-root .vl-wi-b .sp-seg button { flex: 1 1 0; }
 .nrk-root .vl-wi-res { margin-top: 24px; outline: none; scroll-margin-top: 8px; }
@@ -421,7 +444,7 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-al.danger, body:not(.dark):not(.v3-d
 .nrk-root .vl-parts li { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) 34px; align-items: center; gap: 10px; font-size: 14.5px; }
 .nrk-root .vl-parts b { text-align: right; font-variant-numeric: tabular-nums; font-weight: 650; }
 .nrk-root .vl-pbar { height: 8px; border-radius: 4px; background: var(--nk-s2); overflow: hidden; }
-.nrk-root .vl-pbar i { display: block; height: 100%; border-radius: 4px; background: var(--nk-acc); }
+.nrk-root .vl-pbar i { display: block; height: 100%; border-radius: 4px; background: var(--vl-acc); }
 .nrk-root .vl-goals { width: 100%; border-collapse: collapse; font-size: 14.5px; font-variant-numeric: tabular-nums; }
 .nrk-root .vl-goals th, .nrk-root .vl-goals td { padding: 8px 4px; border-bottom: 1px solid var(--vl-cline); text-align: right; }
 .nrk-root .vl-goals th { text-align: left; font-weight: 550; color: var(--sp-mut); }
@@ -448,7 +471,6 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-al.danger, body:not(.dark):not(.v3-d
 .nrk-root .vl-pna b { grid-column: 2; grid-row: 1; font-size: 12.5px; font-weight: 500; color: var(--sp-mut); white-space: nowrap; }
 .nrk-root .vl-pna .vl-pnote { grid-column: 1 / -1; grid-row: 2; margin: 0; }
 /* the coach sits where the toast would; the toast moves to the top while a tutorial runs */
-.nrk-root .vl-coach ~ .vl-toast { bottom: auto; top: calc(env(safe-area-inset-top, 0px) + 116px); }
 .nrk-root .vl-rr { display: flex; align-items: baseline; gap: 6px; margin-top: 4px; }
 /* programmatic focus targets (headings, verdicts, result blocks) carry no ring; real controls keep theirs */
 .nrk-root #vlShH:focus, .nrk-root .vl-co-say:focus, .nrk-root .vl-wi-res:focus, .nrk-root .vl-v1:focus, .nrk-root .vl-v2:focus,
@@ -470,7 +492,7 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-al.danger, body:not(.dark):not(.v3-d
 .nrk-root .vl-mbtn { grid-template-columns: 66px minmax(0, 1fr) auto; }
 .nrk-root .vl-mbtn-t { display: flex; flex-direction: column; gap: 2px; font-size: 14.5px; line-height: 1.3; font-weight: 600; text-wrap: pretty; }
 .nrk-root .vl-mbtn-t small { font-size: 12.5px; font-weight: 500; color: var(--sp-mut); line-height: 1.35; }
-.nrk-root .vl-cur { font-style: normal; font-size: 11.5px; font-weight: 650; color: var(--nk-acc); border: 1px solid color-mix(in srgb, var(--nk-acc) 45%, transparent); border-radius: 6px; padding: 1px 6px; white-space: nowrap; }
+.nrk-root .vl-cur { font-style: normal; font-size: 11.5px; font-weight: 650; color: var(--vl-acc); border: 1px solid color-mix(in srgb, var(--vl-acc) 45%, transparent); border-radius: 6px; padding: 1px 6px; white-space: nowrap; }
 /* readout labels and dial labels wrap instead of truncating */
 .nrk-root .vl-ro-i dt { white-space: normal; overflow: visible; line-height: 1.25; text-wrap: balance; }
 .nrk-root .vl-knob-lw { display: flex; flex-direction: column; gap: 1px; min-width: 0; padding: 6px 0 2px; }
@@ -501,16 +523,16 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-al.danger, body:not(.dark):not(.v3-d
 
 /* always-visible next step (Level 1 and 2) */
 .nrk-root .vl-next { width: 100%; max-width: 760px; margin: 0 auto 8px; min-height: 44px; display: flex; align-items: center; gap: 10px; padding: 8px 8px 8px 12px; text-align: left;
-  border: 1px solid color-mix(in srgb, var(--nk-acc) 40%, var(--vl-cline)); border-radius: 12px; background: var(--nk-acc-soft); color: var(--sp-text); font-size: 13.5px; line-height: 1.35;
+  border: 1px solid color-mix(in srgb, var(--vl-acc) 40%, var(--vl-cline)); border-radius: 12px; background: var(--vl-acc-soft); color: var(--sp-text); font-size: 13.5px; line-height: 1.35;
   transition: transform 140ms var(--nk-ease); }
 .nrk-root .vl-next:active { transform: scale(0.985); }
-.nrk-root .vl-next b { flex: 0 0 auto; font-size: 11.5px; font-weight: 750; letter-spacing: .04em; text-transform: uppercase; color: var(--nk-acc); }
+.nrk-root .vl-next b { flex: 0 0 auto; font-size: 11.5px; font-weight: 750; letter-spacing: .04em; text-transform: uppercase; color: var(--vl-acc); }
 .nrk-root .vl-next > span:not(.vl-chev) { flex: 1 1 auto; min-width: 0; text-wrap: pretty; }
 .nrk-root .vl-next .vl-chev { transform: none; }
 .nrk-root .vl-scroll { padding-bottom: 28px; }
 
 /* home: tutorials first for beginners */
-.nrk-root .vl-start { display: inline-block; margin-top: 4px; font-size: 11.5px; font-weight: 700; letter-spacing: .02em; color: var(--nk-acc); border: 1px solid color-mix(in srgb, var(--nk-acc) 50%, transparent); border-radius: 6px; padding: 1px 7px; }
+.nrk-root .vl-start { display: inline-block; margin-top: 4px; font-size: 11.5px; font-weight: 700; letter-spacing: .02em; color: var(--vl-acc); border: 1px solid color-mix(in srgb, var(--vl-acc) 50%, transparent); border-radius: 6px; padding: 1px 7px; }
 .nrk-root .vl-tdone { display: inline-flex; margin-top: 4px; color: var(--nk-ok); }
 .nrk-root .vl-tdone .smd-ico { width: 16px; height: 16px; }
 .nrk-root .vl-tfirst { margin: 0 0 10px; }
@@ -519,14 +541,14 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-al.danger, body:not(.dark):not(.v3-d
 @media (prefers-reduced-motion: no-preference) {
   .nrk-root .vl-chg { animation: vl-chg 900ms cubic-bezier(0.23, 1, 0.32, 1); border-radius: 4px; }
 }
-@keyframes vl-chg { 0% { background-color: color-mix(in srgb, var(--nk-acc) 32%, transparent); } 100% { background-color: transparent; } }
+@keyframes vl-chg { 0% { background-color: color-mix(in srgb, var(--vl-acc) 32%, transparent); } 100% { background-color: transparent; } }
 .nrk-root .vl-legend [hidden] { display: none; }
-.nrk-root .vl-ro-i.vl-hl { outline-offset: -3px; box-shadow: inset 0 0 0 6px var(--nk-acc-soft); border-radius: 0; }
+.nrk-root .vl-ro-i.vl-hl { outline-offset: -3px; box-shadow: inset 0 0 0 6px var(--vl-acc-soft); border-radius: 0; }
 .nrk-root .vl-co-x { white-space: nowrap; flex: 0 0 auto; }
 .nrk-root .vl-co-h > span { min-width: 0; text-wrap: balance; }
 .nrk-root .vl-next { touch-action: manipulation; }
 .nrk-root .vl-next:focus-visible { outline: 2px solid var(--sp-acc); outline-offset: 2px; }
-@media (hover: hover) and (pointer: fine) { .nrk-root .vl-next:hover { border-color: var(--nk-acc); } }
+@media (hover: hover) and (pointer: fine) { .nrk-root .vl-next:hover { border-color: var(--vl-acc); } }
 
 /* Bedside actions (E.ACTIONS): hands-on steps, set apart from the dials. Suggested by an active alarm: warn edge. */
 .nrk-root .vl-bed { margin-bottom: 12px; padding: 12px; border: 1px dashed var(--vl-cline); border-radius: 16px; }
@@ -539,7 +561,7 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-al.danger, body:not(.dark):not(.v3-d
   border: 1.5px solid var(--vl-cline); background: var(--nk-s2); color: var(--sp-text); font-size: 14px; font-weight: 600; line-height: 1.25;
   touch-action: manipulation; -webkit-tap-highlight-color: transparent; transition: transform 120ms ease-out, background-color 150ms ease-out; }
 .nrk-root .vl-bedb:focus-visible { outline: 2px solid var(--sp-acc); outline-offset: 2px; }
-.nrk-root .vl-bedb-i { flex: 0 0 36px; height: 36px; border-radius: 9px; display: grid; place-items: center; background: var(--vl-card); color: var(--nk-acc); }
+.nrk-root .vl-bedb-i { flex: 0 0 36px; height: 36px; border-radius: 9px; display: grid; place-items: center; background: var(--vl-card); color: var(--vl-acc); }
 body:not(.dark):not(.v3-dark) .nrk-root .vl-bedb-i { color: var(--nk-text); }
 .nrk-root .vl-bedb-i .smd-ico { width: 20px; height: 20px; }
 .nrk-root .vl-bedb-t { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
@@ -571,7 +593,7 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-bedb-i { color: var(--nk-text); }
   .nrk-root .vl-tabbar { display: block; position: sticky; top: -12px; z-index: 6; margin: -12px -12px 12px; padding: 8px 12px 6px; background: var(--sp-bg); border-bottom: 1px solid var(--vl-cline); }
   .nrk-root .vl-tabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); width: 100%; }
   .nrk-root .vl-tabs button { padding: 0 4px; font-size: 13px; line-height: 1.2; white-space: normal; text-wrap: balance; touch-action: manipulation; }
-  .nrk-root .vl-tabs button[aria-pressed="true"] { background: var(--nk-acc-soft); color: var(--sp-text); font-weight: 700; box-shadow: inset 0 0 0 1.5px var(--nk-acc); }
+  .nrk-root .vl-tabs button[aria-pressed="true"] { background: var(--vl-acc-soft); color: var(--sp-text); font-weight: 700; box-shadow: inset 0 0 0 1.5px var(--vl-acc); }
   .nrk-root .vl-scroll[data-tab="mon"] [data-g]:not([data-g="mon"]), .nrk-root .vl-scroll[data-tab="dials"] [data-g]:not([data-g="dials"]),
   .nrk-root .vl-scroll[data-tab="chg"] [data-g]:not([data-g="chg"]), .nrk-root .vl-scroll[data-tab="abg"] [data-g]:not([data-g="abg"]) { display: none; }
   .nrk-root .vl-scroll[data-tab="mon"] .vl-minimon { display: none; }
@@ -595,7 +617,7 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-bedb-i { color: var(--nk-text); }
 .nrk-root button.vl-dial-v small { margin-top: 3px; }
 .nrk-root .vl-dial-v:focus-visible { outline: 2px solid var(--sp-acc); outline-offset: 2px; border-radius: 8px; }
 .nrk-root .vl-type { position: absolute; left: 14px; right: 14px; top: 24px; height: 40px; font: inherit; font-size: 20px; font-weight: 700; text-align: center; font-variant-numeric: tabular-nums;
-  color: var(--sp-text); background: var(--vl-card); border: 1.5px solid var(--nk-acc); border-radius: 10px; padding: 0 4px; -moz-appearance: textfield; }
+  color: var(--sp-text); background: var(--vl-card); border: 1.5px solid var(--vl-acc); border-radius: 10px; padding: 0 4px; -moz-appearance: textfield; }
 .nrk-root .vl-type::-webkit-inner-spin-button, .nrk-root .vl-type::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
 .nrk-root .vl-warns { list-style: none; max-width: 760px; margin: 0 auto 8px; padding: 0; display: grid; gap: 4px; }
 .nrk-root .vl-warns li { display: flex; gap: 8px; align-items: flex-start; padding: 8px 10px; border-radius: 10px; background: color-mix(in srgb, var(--nk-warn) 16%, var(--sp-bg)); font-size: 13.5px; line-height: 1.4; }
@@ -649,7 +671,7 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-bedb-i { color: var(--nk-text); }
 
 /* home: resume an unfinished run */
 .nrk-root .vl-cards > li { display: flex; flex-direction: column; gap: 6px; }
-.nrk-root .vl-resume { display: block; margin-top: 4px; font-size: 12.5px; font-weight: 650; color: var(--nk-acc); }
+.nrk-root .vl-resume { display: block; margin-top: 4px; font-size: 12.5px; font-weight: 650; color: var(--vl-acc); }
 .nrk-root .vl-fresh { align-self: flex-end; min-height: 44px; padding: 0 12px; border: 0; background: none; color: var(--sp-link); font-size: 13.5px; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--sp-link-line); }
 .nrk-root .vl-leave-b { margin: 0 !important; }
 .nrk-root .vl-leave-f { display: grid; gap: 8px; width: 100%; }
@@ -674,3 +696,130 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-bedb-i { color: var(--nk-text); }
 .nrk-root .vl-ans { margin: 6px 0 0; font-size: 14.5px; font-weight: 650; }
 .nrk-root .vl-abgcard dt .vl-abg-d { font-weight: 500; }
 .nrk-root .vl-mv { display: block; margin-top: 2px; font-size: 12px !important; font-weight: 500; color: var(--sp-mut); }
+
+/* ================= round 2: blockers, beginner fixes, premium pass ================= */
+/* Primary buttons inside the lab are ink, not the host's yellow (yellow is the medium-alarm colour here). */
+.nrk-root:has(.vl-wrap, .vl-done, .vl-case, .vl-dys1) .sp-btn.pri:not(.vl-warnbtn):not(.is-wait) { background: var(--sp-text); color: var(--sp-bg); border-color: transparent; }
+.nrk-root .sp-scroll:has(.vl-wrap, .vl-done, .vl-case, .vl-dys1) > .sp-draft { display: none; }
+.nrk-root .vl-draft { color: var(--sp-mut); white-space: nowrap; }
+
+/* Event card: floats over the top of the page (JS sets its top under the alarm bar and tab bar); the layout never
+   moves when it appears, so a tap lands on what the finger aimed at (U11). */
+.nrk-root .vl-toast { position: absolute; left: 8px; right: 8px; z-index: 30; display: flex; border: 1px solid var(--vl-cline); border-radius: 14px;
+  background: color-mix(in srgb, var(--vl-acc) 8%, var(--vl-card)); box-shadow: 0 10px 30px rgba(0, 0, 0, .28); opacity: 0; transform: translateY(-6px); pointer-events: none;
+  transition: opacity 180ms var(--vl-ease), transform 220ms var(--vl-ease); max-width: 720px; margin: 0 auto; }
+.nrk-root .vl-toast.on { opacity: 1; transform: none; pointer-events: auto; animation: none; }
+@media (prefers-reduced-motion: reduce) { .nrk-root .vl-toast { transform: none; } }
+
+/* Phone run order: the monitor first on its tab, the patient card after it; on Dials the dials before the waveforms. */
+@media (max-width: 759px) {
+  .nrk-root .vl-monw { order: 1; } .nrk-root .vl-bedw { order: 2; } .nrk-root .vl-pt { order: 3; }
+  .nrk-root .vl-set { order: 4; } .nrk-root .vl-vent { order: 5; }
+  .nrk-root .vl-wch.c-paw .vl-cv { height: 88px; } .nrk-root .vl-wch.c-flow .vl-cv { height: 72px; }
+}
+@media (min-width: 760px) { .nrk-root .vl-colA .vl-monw { order: -1; } .nrk-root .vl-colA .vl-bedw { order: 0; } }
+.nrk-root .vl-bedw:empty { display: none; }
+.nrk-root .vl-bedw .vl-bed { margin: 0; }
+/* Level 1: bedside actions as one folded line (U4) */
+.nrk-root .vl-bedd > summary { min-height: 44px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; cursor: pointer; list-style: none; padding: 2px 0; }
+.nrk-root .vl-bedd > summary::-webkit-details-marker { display: none; }
+.nrk-root .vl-bedd > summary .vl-h { color: var(--sp-link); }
+.nrk-root .vl-bedd > summary::after { content: ""; width: 8px; height: 8px; margin-left: auto; align-self: center; border-right: 2px solid var(--sp-mut); border-bottom: 2px solid var(--sp-mut); transform: rotate(45deg); transition: transform 200ms var(--vl-ease); }
+.nrk-root .vl-bedd[open] > summary::after { transform: rotate(225deg); }
+.nrk-root .vl-bedd[open] > summary { margin-bottom: 10px; }
+.nrk-root .vl-tutrun { margin: 0 0 12px; padding: 8px 12px; border-radius: 10px; background: var(--vl-acc-soft); font-size: 13.5px; line-height: 1.4; }
+
+/* Alarm card: patient first, the bedside fix is the filled button, the limit sits apart and says what it does (U2) */
+.nrk-root .vl-prim { margin: 0 0 12px; }
+.nrk-root .vl-prim .vl-bedb { width: 100%; }
+.nrk-root .vl-prim-c { padding: 10px 12px; border-radius: 12px; background: var(--vl-acc-soft); font-weight: 650; line-height: 1.4; }
+.nrk-root .vl-bedb.lead { background: var(--sp-text); color: var(--sp-bg); border-color: transparent; }
+.nrk-root .vl-bedb.lead small { color: color-mix(in srgb, var(--sp-bg) 75%, transparent) !important; }
+.nrk-root .vl-bedb.lead .vl-bedb-i { background: color-mix(in srgb, var(--sp-bg) 16%, transparent); color: var(--sp-bg); }
+.nrk-root .vl-now-h { margin-top: 4px; }
+.nrk-root .vl-now { gap: 8px !important; }
+.nrk-root .vl-now li { line-height: 1.45; }
+.nrk-root .vl-now li > span { display: block; }
+.nrk-root .vl-now li .vl-bedb { margin-top: 6px; min-height: 48px; width: 100%; }
+.nrk-root .vl-call { margin: 0 0 12px !important; padding: 10px 12px; border-radius: 12px; font-weight: 650; line-height: 1.4;
+  background: color-mix(in srgb, var(--nk-bad) 14%, transparent); color: var(--sp-text); }
+.nrk-root .vl-limit { margin-top: 14px; padding: 12px; border-radius: 12px; border: 1px dashed var(--vl-cline); display: grid; gap: 8px; }
+.nrk-root .vl-limit p { margin: 0; }
+.nrk-root .vl-fio2l { margin: 10px 0 0 !important; }
+
+/* SpO2 low: why, and what next (engine oxygenHelp) */
+.nrk-root .vl-o2w:empty { display: none; }
+.nrk-root .vl-o2h { margin-top: 10px; padding: 10px 12px; border-radius: 12px; background: var(--vl-knob); font-size: 13.5px; line-height: 1.45; }
+.nrk-root .vl-o2h p { margin: 0 0 6px; }
+.nrk-root .vl-o2h ol { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+.nrk-root .vl-o2h .vl-call { margin: 8px 0 0 !important; }
+
+/* Tutorial coach: at most 55 % of the screen; its text scrolls inside, Next stays in view above the time row (U3) */
+.nrk-root .vl-coach { display: flex; flex-direction: column; max-height: 55dvh; overflow: hidden; padding-bottom: 8px; }
+.nrk-root .vl-co-h, .nrk-root .vl-co-bar, .nrk-root .vl-co-need, .nrk-root .vl-co-f { flex: 0 0 auto; }
+.nrk-root .vl-co-body { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding-bottom: 2px; }
+.nrk-root .vl-co-ht { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.nrk-root .vl-co-show { display: block; }
+.nrk-root .vl-co-say.swap { animation: vl-swap 160ms ease-out; }
+@keyframes vl-swap { from { opacity: 0; filter: blur(2px); } to { opacity: 1; filter: none; } }
+.nrk-root .vl-co-task b, .nrk-root .vl-co-need { color: var(--vl-acc); }
+@media (min-width: 1000px) { .nrk-root .vl-coach { max-height: calc(100% - var(--vl-cob, 96px) - 150px); } }
+/* the tutorial highlight inside a clipped plate is drawn inside, never cut off (premium 10) */
+.nrk-root .vl-waves .vl-hl, .nrk-root .vl-mon .vl-hl { outline-offset: -2px; box-shadow: inset 0 0 0 4px var(--vl-acc-soft); border-radius: 10px; }
+
+/* Level 1 clock: stopped while reading (U8) */
+.nrk-root .vl-tstop { max-width: 760px; margin: 0 auto 6px; font-size: 13px; line-height: 1.35; color: var(--sp-mut); text-align: center; }
+.nrk-root .vl-tbtn { min-height: 44px; }
+/* next step: two lines at most, the rest is in its label (chrome diet) */
+.nrk-root .vl-next > span:not(.vl-chev) { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* Dials: tidal volume per kg PBW, live, with the 6 to 8 band (U7) */
+.nrk-root .vl-perkg { margin: 2px 6px 6px 0; display: grid; gap: 4px; }
+.nrk-root .vl-perkg-t { display: flex; justify-content: space-between; align-items: baseline; gap: 6px; font-variant-numeric: tabular-nums; }
+.nrk-root .vl-perkg-t b { font-size: 13px; font-weight: 700; color: var(--nk-warn); }
+.nrk-root .vl-perkg.ok .vl-perkg-t b { color: var(--nk-ok); }
+.nrk-root .vl-perkg-t small { font-size: 12px; color: var(--sp-mut); }
+.nrk-root .vl-perkg-s { position: relative; height: 6px; border-radius: 3px; background: color-mix(in srgb, var(--sp-mut) 22%, transparent); }
+.nrk-root .vl-perkg-b { position: absolute; left: 33.3%; width: 33.4%; top: 0; bottom: 0; border-radius: 3px; background: color-mix(in srgb, var(--nk-ok) 70%, transparent); }
+.nrk-root .vl-perkg-m { position: absolute; top: -3px; width: 4px; height: 12px; margin-left: -2px; border-radius: 2px; background: var(--sp-text); transition: left 160ms var(--vl-ease); }
+
+/* Confirm: the dial's new value takes a short beat where the hand is; the chain fades in (premium 4) */
+@media (prefers-reduced-motion: no-preference) {
+  .nrk-root .vl-commit { animation: vl-commit 420ms var(--vl-ease); }
+  .nrk-root .vl-chainw.vl-in #vlChain { animation: vl-fade 140ms ease-out; }
+}
+@keyframes vl-commit { 0% { transform: scale(1.12); color: var(--vl-acc); } 100% { transform: none; } }
+@keyframes vl-fade { from { opacity: 0; } to { opacity: 1; } }
+.nrk-root .vl-was { transition: opacity 160ms ease-out; }
+.nrk-root .vl-chainw { scroll-margin-top: 112px; }
+
+/* Flags by goal: amber for "above target" and "low for the FiO2" (U10) */
+.nrk-root .vl-v.amb { color: var(--nk-warn); }
+.nrk-root .vl-abn-t.amb { background: var(--nk-warn); color: #1d1300; }
+.nrk-root .vl-abgt tr.amb td b { color: var(--nk-warn); }
+.nrk-root .vl-flag.amb { color: var(--nk-warn); }
+.nrk-root .vl-warns li.info { background: color-mix(in srgb, var(--vl-acc) 12%, var(--sp-bg)); }
+.nrk-root .vl-warns li.info .smd-ico { color: var(--vl-acc); }
+
+/* Sheet: a grabber, and the title bar drags it down (premium 8) */
+.nrk-root .vl-grab { display: none; }
+@media (max-width: 759px) {
+  .nrk-root .vl-grab { display: block; width: 36px; height: 5px; margin: 8px auto 0; border-radius: 3px; background: color-mix(in srgb, var(--sp-mut) 45%, transparent); }
+  .nrk-root .vl-grab, .nrk-root .vl-sheet-h { touch-action: none; cursor: grab; }
+  .nrk-root .vl-sheet-h { padding-top: 4px; }
+}
+
+/* Debrief: bars coloured by how much was earned, grown in once; the score counts up (premium 9) */
+.nrk-root .vl-pbar.hi i { background: var(--nk-ok); } .nrk-root .vl-pbar.mid i { background: var(--sp-text); } .nrk-root .vl-pbar.lo i { background: var(--nk-bad); }
+.nrk-root .vl-pbar i { transform-origin: left; }
+@media (prefers-reduced-motion: no-preference) {
+  .nrk-root .vl-parts.grow .vl-pbar i { animation: vl-grow 300ms ease-out both; animation-delay: calc(var(--i, 0) * 40ms); }
+}
+@keyframes vl-grow { from { transform: scaleX(0); } to { transform: none; } }
+.nrk-root .vl-score b { font-variant-numeric: tabular-nums; }
+.nrk-root .vl-curve { margin-top: 10px; }
+
+/* Small text raised to 11.5 to 12 px (premium 12) */
+.nrk-root .vl-live-t small, .nrk-root .vl-ovs .vl-u, .nrk-root .vl-p3 th small { font-size: 11.5px; }
+.nrk-root .vl-scale, .nrk-root .vl-u, .nrk-root .vl-ro-i .vl-u, .nrk-root .vl-ro-x, .nrk-root .vl-abgt thead small, .nrk-root .vl-dial-v small, .nrk-root .vl-flag,
+.nrk-root .vl-abn-t, .nrk-root .vl-doing abbr, .nrk-root .vl-parts b small { font-size: 12px; }
