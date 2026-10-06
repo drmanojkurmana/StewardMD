@@ -192,7 +192,13 @@ own (inside `smd_prep`): the home row shows on the NEET-PG tab; data comes from 
   unsorted items then prep-classify's module prompt; `--screen` = prep-screen-keys blind solve, image and unclear-key
   items skipped; `--explain` = our own reasons per option + pearl, grounded on the nearest bank explanation, code gates
   (every reason, numbers grounded, no 12-word copy, no dash, no URL or publisher) then `buildReviewPrompt` gates) all
-  `--dry-run` first; results in `prep/pyq/work/results.json`, applied by re-running the build.
+  `--dry-run` first; results in `prep/pyq/work/results.json`, applied by re-running the build. `--explain-redo` (one
+  retry, resumable, Batch stages `explain-redo` + `review-redo`): every item whose first explanation failed a code gate
+  or the review is regenerated once with the reason fed back (g9b names the ungrounded numbers; a review failure names
+  the failed gates in words plus the reviewer's note) and a stricter stay-in-the-notes instruction, then the same gates
+  and review. Rejections are rebuilt from the saved first-pass requests and replies, so nothing is re-sent. Disputed and
+  key-unclear items are never explained. Still failing: `pending` -> flag `exp-pending`, which (alone of all flags) does
+  not hide the question; the app shows "Explanation coming soon".
 - **Output** `prep/pyq/out/index.json` (papers with item ids, `file`, `tags`, `mods`; no question text; short cache) and
   `items-<sha8>.json` (immutable) and `img/*.webp`. Upload: `node tools/prep-upload-bank.mjs --dir prep/pyq/out --as
   v2/pyq` (dry run; `--yes` uploads, index last). Route whitelist: `v<n>/pyq/(index.json|items-<8 hex>.json|img/<name>.webp)`.
@@ -209,7 +215,11 @@ own (inside `smd_prep`): the home row shows on the NEET-PG tab; data comes from 
   2024 shift 1 80/92, 2024 shift 2 12/27 (the shift papers' failures are the source: questions recalled with 2 or 3
   options, or answers with no letter). 327 items after 2 repeats merged; 102 images attached; 11 held back for a
   missing image, 1 for an unclear key; 3 bank matches (0 key conflicts); 90 items without a subject until `--map`.
-  Dry run of map + screen + explain + review: about $0.11 (Rs 11). Not run (owner's yes needed), not uploaded to R2.
+  Paid run (owner's yes): subject + map + screen + explain + review about $0.12; explanations 315 sent, 209 accepted
+  (rejected: g9b 24, review 82), 32 disputed keys. Retry (`--explain-redo`, $0.025): 91 sent (the 15 disputed rejects
+  skipped), 28 accepted, 63 `exp-pending` (g9b 4, review 59). Now 237 items carry our explanation; 283 of 327 usable,
+  220 of those explained. Uploaded to R2 `prep-bank/v2/pyq/` (verified by hash) and to the private bucket. The live
+  `/api/prep/bank/v2/pyq/` route answers only after this branch's bank route deploys (main's whitelist lacks it).
 - **Gotcha:** `emoji-icons.js` removes page locators ("pg 45") from rendered text, which also ate "PG 2025" out of
   "NEET-PG 2025"; `scrubBooks` now protects "NEET-PG" (test in `test/emoji-icons.test.mjs`).
 - **Tests:** `test/prep-pyq.test.mjs` (three parsers on synthetic fixtures incl. watermark shreds, option matching,
@@ -254,15 +264,57 @@ No flag of its own (inside `smd_prep`).
 - **Gotcha:** every other headless PrepNucleus test sets `window.SMD_PREP_ONBOARD=false` in its init script, or the first
   open stops at onboarding. A new UI test needs the same line.
 
+## Cards (2026-10-06, branch `feat/prep-cards`)
+Module flashcards (Plan 2 phase 2). No flag of its own (inside `smd_prep`): a module screen shows **Cards · n** when
+`prep/cards/v1/index.json` lists the module; home shows **Cards due** once any card was studied. Decision:
+[[decisions/Decisions]] 2026-10-06 "PrepNucleus Cards".
+- **Format** `prep/cards/v1/<module>.json`: `{ v: 1, module, subject, cards: [{ id, kind: "basic"|"cloze"|"occl", fr, bk,
+  src: { item? | kb? }, gen: "AI"|"hand" }] }`. `fr` at most 25 words (basic: a question ending "?"; cloze: exactly one
+  `{{term}}`), `bk` at most 40. Occlusion adds `img` (cleared `prep/lessons/media/*` only) and `boxes: [{ x, y, w, h,
+  label }]` in fractions of the image. Validators `PREP_FLASH._pure.checkCard / checkDeck` (shared by the generator).
+- **Client** `prep-flash.js` (`window.PREP_FLASH`, loaded after `prep-pyq.js`; `prep.js` forwards `data-act` `k-*`, mounts
+  `#pnCardSlot`, adds the home row, calls `leave()` on close) and `prep-flash.css`. Tap turns a basic card (260 ms 3D turn;
+  cross-fade under reduced motion; no motion for keys); cloze fills in place (the hidden term is `aria-hidden` with a
+  screen-reader "blank"); occlusion masks are buttons, each opens alone, grades appear once all are open ("Reveal all"
+  opens every one). Grades Again/Hard/Good/Easy show the FSRS interval each gives (`intervalFor` = what `review` writes);
+  swipe right Good, left Again (touch only, not from the left 28 px edge); keys Space/Enter reveal, 1 to 4 grade;
+  `SMD_HAPTICS.selection()` on every grade. Session: due first (least remembered first), then new cards in deck order up
+  to today's allowance; an Again comes back once at the end. End screen: count, tally, when the next cards are due,
+  "Learn 10 more" when new cards remain, new cards a day 10/20/30/50 (`fc.cap`, default 20).
+- **Memory:** deck key `p:<module>:c` in the shared store; `progressByModule` skips card keys (MCQ counts unchanged),
+  `recall(store, "p:<module>")` counts both. Store `fc: { cap, day, n, more }`. Decks are kept in IndexedDB `prep-bank`
+  under `cards/v1/<module>.json`; `scripts/build-www.sh` ships `prep/cards/v1`.
+- **Generator** `tools/prep-cards.mjs` (owner-run, costs money; `--dry-run`, `--check`, `--index` are $0; `--bank <dir>`
+  for a worktree without the gitignored bank). Sources: unflagged items with a 12+ word explanation (negative stems last),
+  at most 120 (two per card), 12 per request asking 7 cards; plus one request per KB-only fill pack (8 cards). Stages
+  `01-gen`, `02-check` (blind self-check), resumable through `prep-lessons.mjs` `stage()` (exported, `ctx.jobPrefix`).
+  Gates per card against its own source: shape, numbers and drugs (`prep-teacher.js` check), 12-word verbatim, book /
+  page / edition / site names (`emoji-icons.js` `hasBooks` plus a short list), dashes, duplicate fronts (Jaccard 0.7).
+  Keeps at most `min(60, ceil(usable / 2))`. A deck with a hand card is never overwritten. `--pilot` = sur-breast-cancer
+  plus the largest other module of each MBBS subject (20).
+- **Dry runs (2026-10-06, not run):** pilot 20 modules, 199 requests, $0.26 (Rs 25); all 864 MBBS modules, 6,915
+  requests, about 40k cards kept at most, $8.61 (Rs 826). SS modules have no v1 bank yet.
+- **Sample:** `sur-breast-cancer` by hand (10 cards: 7 basic, 2 cloze, 1 occlusion on `breast-t-size.svg`), cited to
+  `kb-reference-breast-cancer`; passes every gate (`--check`). Needs a clinician read before it ships.
+- **Open:** "answered today" on the home plan counts card reviews too (`store.days` is shared); the plan/readiness work
+  should decide whether the daily question goal counts cards. `?v=prep5` was not bumped (merge with the parallel branch
+  first). Not tested on a phone.
+- **Tests:** `test/prep-flash.test.mjs` (validators, gates, dedupe, scheduling hook, interval previews, dry run with no
+  call, the 2-stage pipeline on a fake Vertex, sample deck) and headless `test/run-prep-flash-ui.mjs` (flip, grades, key,
+  swipe, cloze, occlusion, end screen, FSRS rows, home Cards due; `SHOTS=<dir>`, `PN_LIGHT=1`).
+
 ## Store
-localStorage `smd_prep_v1`: `{v, cards, conf, days, mod:{t,ok,last}, bm, rep, exam, last, dl, hid, mt, goal, mh, ls, lsp, pl, pt, ra}` (`ls`/`lsp`: Lessons;
-`pl`/`pt`/`ra`: Plan). FSRS deck key
-`p:<module>` (Layer C decks `p:deck-<id>`). `hid` is the auto-hidden list, refreshed at most every 6 hours.
+localStorage `smd_prep_v1`: `{v, cards, conf, days, mod:{t,ok,last}, bm, rep, exam, last, dl, hid, mt, goal, mh, ls, lsp, pl, pt, ra, fc}` (`ls`/`lsp`: Lessons;
+`pl`/`pt`/`ra`: Plan; `fc`: Cards). FSRS deck key
+`p:<module>` (module cards `p:<module>:c`, Layer C decks `p:deck-<id>`). `hid` is the auto-hidden list, refreshed at most every 6 hours.
+Today's plan counts questions only: its "due reviews" and "new questions" skip card keys `p:<module>:c:<cardId>`
+(`isQ` in `prep-plan.js`); cards due show on the home "Cards due" row, not as a plan item (yet). Readiness retention
+still reads cards and questions together (`recall()` over `p:<module>`).
 
 ## Tests
 `test/prep-app.test.mjs`, `test/prep-build-bank.test.mjs`, `test/prep-server.test.mjs`, `test/prep-core.test.mjs`,
 `test/prep-generate.test.mjs`, `test/prep-layerc-e2e.test.mjs`, `test/prep-create.test.mjs`, `test/prep-teacher.test.mjs`,
-`test/prep-tools.test.mjs`, `test/prep-lessons.test.mjs`, `test/prep-plan.test.mjs`, headless `test/run-prep-plan-ui.mjs`, `test/edge-start-mcq.test.mjs`, headless `test/run-prep-lessons-ui.mjs`, headless `test/run-prep-create-ui.mjs`, `test/run-prep-arena-ui.mjs` and `test/run-prep-ui.mjs` (real app + fixture bank in `test/fixtures/prep/`;
+`test/prep-tools.test.mjs`, `test/prep-lessons.test.mjs`, `test/prep-plan.test.mjs`, headless `test/run-prep-plan-ui.mjs`, `test/prep-flash.test.mjs`, headless `test/run-prep-flash-ui.mjs`, `test/edge-start-mcq.test.mjs`, headless `test/run-prep-lessons-ui.mjs`, headless `test/run-prep-create-ui.mjs`, `test/run-prep-arena-ui.mjs` and `test/run-prep-ui.mjs` (real app + fixture bank in `test/fixtures/prep/`;
 Chromium at `/opt/pw-browsers/chromium` by default, `CHROME=` to override).
 
 ## Bank v1 mapping (2026-10-06)

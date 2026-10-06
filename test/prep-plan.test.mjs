@@ -172,6 +172,15 @@ test("itemProgress: reviews by due drop, new by cards made today, lesson and moc
   assert.equal(L.itemProgress(mk, s, TODAY, dayOf).done, true);
 });
 
+test("newToday and dueNow skip module flashcards (p:<module>:c:<cardId>)", () => {
+  const s = P.emptyStore();
+  C.review(s, "p:a1", "q1", 3, TODAY);
+  C.review(s, "p:a1:c", "c01", 3, TODAY); C.review(s, "p:a1:c", "c02", 1, TODAY);
+  assert.equal(L.newToday(s, TODAY), 1);
+  s.cards["p:a1:c:c01"][3] = TODAY; s.cards["p:a1:q1"][3] = TODAY + 3;
+  assert.equal(L.dueNow(s, TODAY), 0);
+});
+
 test("subjectAction: most due, then the weakest, then the first untouched module", () => {
   const mods = [{ id: "a1", title: "A1", n: 10 }, { id: "a2", title: "A2", n: 10 }, { id: "a3", title: "A3", n: 0 }, { id: "a4", title: "A4", n: 8 }];
   const s = P.emptyStore();

@@ -11404,6 +11404,16 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   content words (Jaccard 0.3); on the first run 0.2 tagged different questions that shared a key and options.
 - **Timed papers** use the NEET-PG pattern from `MOCKS` (210 min per 200 questions, +4/-1) scaled to the paper's size.
 - **Rejected:** keeping 2- and 3-option recalls (they are incomplete memories, not the real exam's 4 options) and
+  guessing keys for answer-only recalls; both are reported as parse failures.
+- **Explanations, one retry then honest pending (owner, 2026-10-06):** every PYQ should carry our explanation. A
+  rejected one gets exactly one retry with the rejection reason fed back and a stricter grounding instruction, through
+  the same gates and review; what still fails is flagged `exp-pending` and shown as "Explanation coming soon" while the
+  question stays usable (unless its key is disputed). No explanation is written for disputed or key-unclear items: we do
+  not explain a key we doubt. **Status:** paid run 2026-10-06 (subject, map, screen, explain, review about $0.12; retry
+  $0.025): 237 items carry our explanation (209 first pass + 28 on the retry, of 91 retried), 63 `exp-pending`, 32
+  disputed, 11 image missing, 1 key unclear; 283 of 327 usable, 220 of them explained. Uploaded to R2
+  `prep-bank/v2/pyq/` (owner's yes) and the private bucket; served once the branch's bank route is deployed.
+
   guessing keys for answer-only recalls; both are reported as parse failures. **Status:** branch `feat/prepnucleus`;
   no paid stage run (dry run about $0.11), not uploaded to R2 (owner's yes).
 
@@ -11429,3 +11439,33 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   bulletin (v2.2, nbe.edu.in/IB): 300 MCQs in 2 parts of 150, 150 min each, +1, no negative marking, pass 150 of 300;
   readiness weights by its blueprint (section 12.2). A full mock here is one part. Arena: "coming soon" on the client,
   no server scheme (the arena-server marking test skips FMGE).
+
+## 2026-10-06 - PrepNucleus Cards: one FSRS store for cards and questions, gated cards from screened explanations
+- **Decision** ([[PrepNucleus]], "Cards"; [[plans/PrepNucleus-Plan2]] section 2 "one memory model"): module flashcards
+  write to the same FSRS store as the questions under deck key `p:<module>:c` (card key `p:<module>:c:<cardId>`), so
+  `recall()` over `p:<module>` (readiness, weak areas) sees both. `progressByModule` in `prep.js` skips card keys, so
+  "answered" and "due" MCQ counts stay MCQ counts; a card review still counts toward `store.days` (streak, daily total).
+- **Sources:** cards come only from unflagged bank items with an explanation (MedMCQA, MIT) and the module's KB-only fill
+  pack; never StatPearls. Each card cites its source (`src.item` or `src.kb`) and is gated against that source alone:
+  numbers and drug names present, no 12-word copy, no book, page, edition or site, no dash, front a question (basic) or
+  exactly one `{{blank}}` (cloze), no near-duplicate front (Jaccard 0.7), then a blind self-check. About one card per 2
+  usable items, at most 60 a module.
+- **UI:** tap turns a basic card; cloze fills its blank in place; occlusion opens masks one at a time (hand-made only for
+  now, cleared `prep/lessons/media` images). Grades Again/Hard/Good/Easy with the FSRS interval each would give; swipe
+  right Good, left Again (Hard and Easy by button or key, vertical swipes stay with scrolling; the left 28 px edge stays
+  with the system back gesture). An Again is re-shown once at the session end. New cards a day: 10/20/30/50, default 20;
+  due cards always come.
+- **Files:** `prep-flash.js` / `prep-flash.css` (prep-cards.js already held the Layer C deck reviewer), data
+  `prep/cards/v1/` (pilot only in git; a full run goes to `prep/cards/gen/`, gitignored, then R2).
+- **Not run:** no paid call made. Dry runs (gemini-3.1-flash-lite, Batch): 20-module pilot $0.26 (Rs 25), all 864 MBBS
+  modules $8.61 (Rs 826). SS modules have no v1 bank yet and are skipped.
+
+## 2026-10-06 - PrepNucleus plan and Cards merged: Today's plan counts questions only
+- **Decision** ([[PrepNucleus]], "Store"): Today's plan "due reviews" and "new questions" count MCQ keys only
+  (`p:<module>:<qid>`); flashcard keys `p:<module>:c:<cardId>` are skipped (`isQ` in `prep-plan.js`, same rule as
+  `progressByModule` in `prep.js`). Otherwise a card review would tick a question item the student never did, and due
+  cards would inflate the minutes budgeted for question reviews (30 s each).
+- **Not done:** no "Cards due" plan item. It needs a new item kind (minutes per card, progress, start action into
+  `PREP_FLASH`); the home "Cards due" row (prep-flash.js) already shows them. Add it once cards are generated for real.
+- Readiness retention keeps reading cards and questions together (`recall()` over `p:<module>`), as the Cards decision
+  intended. Cache token `prep7`.

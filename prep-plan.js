@@ -141,9 +141,12 @@
     return { items: items, total: items.reduce(function (a, it) { return a + it.min; }, 0), minutes: o.minutes };
   }
 
+  /* Question keys only: "p:<module>:<qid>". Module flashcards (prep-flash.js) live under "p:<module>:c:<cardId>" and
+     never count as plan questions; the Flashcards home row shows their due count. */
+  function isQ(k) { if (k.indexOf("p:") !== 0) return false; var p = k.split(":"); return !(p.length === 4 && p[2] === "c"); }
   // New questions first answered today (FSRS cards made today with one review).
-  function newToday(store, today) { var n = 0; Object.keys(store.cards || {}).forEach(function (k) { var c = store.cards[k]; if (k.indexOf("p:") === 0 && c[2] === today && c[4] === 1) n++; }); return n; }
-  function dueNow(store, today) { var n = 0; Object.keys(store.cards || {}).forEach(function (k) { if (k.indexOf("p:") === 0 && store.cards[k][3] <= today) n++; }); return n; }
+  function newToday(store, today) { var n = 0; Object.keys(store.cards || {}).forEach(function (k) { var c = store.cards[k]; if (isQ(k) && c[2] === today && c[4] === 1) n++; }); return n; }
+  function dueNow(store, today) { var n = 0; Object.keys(store.cards || {}).forEach(function (k) { if (isQ(k) && store.cards[k][3] <= today) n++; }); return n; }
   /* Progress of one plan item: { x, of, done }. Items carry what they were planned against: rev.due0 (due when
      planned), new.base (new answered today when planned). dayOf(ms) -> local day number. */
   function itemProgress(it, store, today, dayOf) {
@@ -286,7 +289,7 @@
   // Due reviews, least retrievable first, from the modules with the most due (at most 8 module files).
   function startReviews(n) {
     var s = store(), td = H.today(), by = {};
-    Object.keys(s.cards).forEach(function (k) { var m = k.indexOf("p:") === 0 && k.split(":")[1]; if (m && s.cards[k][3] <= td) by[m] = (by[m] || 0) + 1; });
+    Object.keys(s.cards).forEach(function (k) { var m = isQ(k) && k.split(":")[1]; if (m && s.cards[k][3] <= td) by[m] = (by[m] || 0) + 1; });
     var pairs = Object.keys(by).sort(function (a, b) { return by[b] - by[a]; }).map(function (m) { return { s: H.subjectOfModule(m), m: m }; }).filter(function (x) { return x.s; }).slice(0, 8);
     loadingScreen("Reviews");
     loadPairs(pairs).then(function (lists) {

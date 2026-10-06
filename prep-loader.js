@@ -6,13 +6,13 @@
    "0" or ?prep=0 turns it off (same rule as the home tile in home.js). prep-arena.js (Arena and My stats) always loads; its
    own flag smd_prep_arena (default OFF, ?arena=1) decides whether the Compete section shows. prep-lessons.js (Lessons) has
    no flag of its own: a module shows its Lesson row only when prep/lessons/v1/index.json lists it. prep-plan.js
-   (onboarding, readiness, today's plan) has no flag of its own either. */
+   (onboarding, readiness, today's plan) and prep-flash.js (module flashcards) have no flag of their own either. */
 (function (G) {
   "use strict";
-  var V = "prep6";
+  var V = "prep7";
   // Layer C (prep-source, prep-decks, prep-cards, prep-create) after prep.js; prep-create.js reads the two before it.
-  var CSS = ["prep.css", "prep-create.css", "prep-plan.css"];
-  var JS = ["specialty-core.js", "specialty-bank.js", "prep.js", "prep-arena.js", "prep-lessons.js", "prep-pyq.js", "prep-plan.js", "prep-teacher.js", "prep-source.js", "prep-decks.js", "prep-cards.js", "prep-create.js"];
+  var CSS = ["prep.css", "prep-create.css", "prep-plan.css", "prep-flash.css"];
+  var JS = ["specialty-core.js", "specialty-bank.js", "prep.js", "prep-arena.js", "prep-lessons.js", "prep-pyq.js", "prep-plan.js", "prep-flash.js", "prep-teacher.js", "prep-source.js", "prep-decks.js", "prep-cards.js", "prep-create.js"];
   var loading = null;
 
   function enabled() {

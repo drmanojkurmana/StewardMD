@@ -246,6 +246,11 @@ if [ -f prep/taxonomy.json ]; then
     mkdir -p "$WWW/prep/lessons/v1" && cp prep/lessons/v1/*.json "$WWW/prep/lessons/v1/"
     [ -d prep/lessons/media ] && mkdir -p "$WWW/prep/lessons/media" && cp prep/lessons/media/* "$WWW/prep/lessons/media/"
   fi
+  # Cards (prep-flash.js): the committed pilot decks and their index (occlusion images come from prep/lessons/media).
+  # A full generated set (prep/cards/gen) goes to R2, not here; tools/prep-cards.mjs work files never ship.
+  if [ -f prep/cards/v1/index.json ]; then
+    mkdir -p "$WWW/prep/cards/v1" && cp prep/cards/v1/*.json "$WWW/prep/cards/v1/"
+  fi
 fi
 
 # NMC Logbook curriculum packs + assessment templates. Same rule and the same failure mode as clinix

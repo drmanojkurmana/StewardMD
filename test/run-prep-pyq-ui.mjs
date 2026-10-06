@@ -131,7 +131,7 @@ try {
   await click("#smdPrep [data-act=next]");
   ok(await until(`return /Synthetic PYQ three/.test((document.querySelector("#smdPrep .pn-q")||{}).textContent||"");`, 3000) && await ev(`return !/Synthetic PYQ four/.test(document.body.textContent);`) === true, "the key-unclear question is never shown");
   await click(`#smdPrep [data-act=answer][data-k="1"]`);
-  ok(/No explanation|recall question/i.test(await text("#smdPrep .pn-fb")), "a question without an explanation says so honestly");
+  ok(/Explanation coming soon/.test(await text("#smdPrep .pn-fb")) && !/Explanation coming soon\. Explanation/.test(await text("#smdPrep .pn-fb")), "an exp-pending question is still shown and says Explanation coming soon");
   await click("#smdPrep [data-act=next]");
   ok(await until(`return !!document.querySelector("#smdPrep [data-act=donerun]");`, 3000), "the set finishes after 3 questions");
   ok(await ev(`var s=JSON.parse(localStorage.getItem("smd_prep_v1")); return !!s.cards["p:ana-brachial-plexus:pyq-fx-2025-r1-1"] && !s.mt["pyq-fx-2025-r1-2"];`) === true, "answers write FSRS cards under the mapped module; recall items stay out of My mistakes");

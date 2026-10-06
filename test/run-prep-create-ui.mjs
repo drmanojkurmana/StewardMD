@@ -157,7 +157,7 @@ try {
   ok(await until(`return PREP.isOpen && PREP.isOpen() && !!document.querySelector("#smdPrep .pn-tile");`, 20000), "PrepNucleus opens (fixture bank)");
 
   // prep-loader.js loads the Layer C files on first open, after prep.js, in this order.
-  ok(await ev(`return PREP_LOADER.JS.slice(-4).join(",") + "|" + PREP_LOADER.CSS.join(",");`) === LAYER_C_JS.join(",") + "|prep.css," + LAYER_C_CSS.join(",") + ",prep-plan.css", "prep-loader.js lists the Layer C files in load order");
+  ok(await ev(`return PREP_LOADER.JS.slice(-4).join(",") + "|" + PREP_LOADER.CSS.slice(0, 2).join(",");`) === LAYER_C_JS.join(",") + "|prep.css," + LAYER_C_CSS.join(","), "prep-loader.js lists the Layer C files in load order");
   ok(await until(`return !!(window.PREP_SRC && window.PREP_DECKS && window.PREP_CARDS && window.PREP_C && document.querySelector('link[data-prep="prep-create.css"]'));`, 10000), "the loader loaded PREP_SRC, PREP_DECKS, PREP_CARDS, PREP_C and prep-create.css");
   await ev(`PREP_C.cfg.gap = 0; PREP.close(); PREP.open(); window.SMD_AUTH = { currentUser: { uid: "u-test", getIdToken: function () { return Promise.resolve("test-token"); } } }; return 1;`);
   ok(await until(`return !!document.querySelector('#smdPrep [data-act="c-home"]');`, 10000), "home shows the Your decks card");
