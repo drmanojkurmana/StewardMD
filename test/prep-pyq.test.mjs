@@ -15,6 +15,7 @@ import {
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const FX = path.join(HERE, "fixtures", "prep-pyq");
+const TAX = path.join(HERE, "..", "prep", "taxonomy");
 const read = (f) => fs.readFileSync(path.join(FX, f), "utf8");
 const require = createRequire(import.meta.url);
 const PY = require("../prep-pyq.js");
@@ -211,5 +212,79 @@ test("app pure: recall labels, paper titles, the NEET-PG pattern, paper order, m
   assert.deepEqual(PY.paperItems(its, "q").map((x) => x.id), ["c", "b"]);
   assert.equal(PY.moduleCount({ mods: { m1: 2 }, tags: { x: ["m1", []], y: ["m2", []] } }, "m1"), 3);
   assert.equal(PY.usable({ id: "a", flags: ["key-unclear"] }), false);
+  assert.equal(PY.usable({ id: "a", flags: ["exp-pending"] }), true, "a pending explanation does not hide the question");
+  assert.equal(PY.usable({ id: "a", flags: ["exp-pending", "disputed"] }), false);
   assert.equal(PY.usable({ id: "a" }, { a: 1 }), false);
+});
+
+test("explain retry: rejected items get one more try with the reason fed back; still failing -> exp-pending; resumable", async () => {
+  const { stageLines: SL, build } = await import("../tools/prep-pyq.mjs");
+  const tax = (await import("../tools/prep-build-bank.mjs")).loadTaxonomy();
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "pyq-redo-"));
+  const out = path.join(root, "prep", "pyq", "out"), work = path.join(root, "prep", "pyq", "work");
+  fs.mkdirSync(out, { recursive: true }); fs.mkdirSync(work, { recursive: true });
+  const mk = (id, extra = {}) => ({ id, q: `Fixture question ${id}: which made-up agent fits?`, o: ["Agent one", "Agent two", "Agent three", "Agent four"], a: 1, subject: "pharmacology", ...extra });
+  const its = [mk("p1"), mk("p2"), mk("p3"), mk("p4", { flags: ["disputed"] }), mk("p5", { flags: ["key-unclear"] })];
+  const near = Object.fromEntries(its.map((x) => [x.id, { id: "b-" + x.id, j: 0.6, exp: "Agent two is the fixture choice for this made-up case." }]));
+  fs.writeFileSync(path.join(out, "index.json"), JSON.stringify({ file: "items-00000000.json" }));
+  fs.writeFileSync(path.join(out, "items-00000000.json"), JSON.stringify({ items: its }));
+  fs.writeFileSync(path.join(work, "near.json"), JSON.stringify(near));
+  const good = (i, extra = "") => ({ i, ra: "Agent one does not fit this case.", rb: "Agent two is the fixture choice here." + extra, rc: "Agent three is for another made-up case.", rd: "Agent four is unrelated.", kp: "Agent two fits." });
+  // first pass (as saved by --explain): p1 used an ungrounded number, p2 p3 p4 passed the code gates
+  const el = SL("explain", its.slice(0, 4), { tax, near });
+  fs.writeFileSync(path.join(work, "explain.jsonl"), el.map((l) => JSON.stringify(l)).join("\n") + "\n");
+  fs.writeFileSync(path.join(work, "explain.out.json"), JSON.stringify({ [el[0].key]: JSON.stringify({ ex: [good(0, " Give 40 mg."), good(1), good(2), good(3)] }) }));
+  const T = { g4: true, g6: true, g7: true, g8: true, g9: true, g10: true, g11: true, old: false, why: "" };
+  const rv = [{ key: "r0", ids: ["p2", "p3", "p4"] }];
+  fs.writeFileSync(path.join(work, "review.jsonl"), rv.map((l) => JSON.stringify(l)).join("\n") + "\n");
+  fs.writeFileSync(path.join(work, "review.out.json"), JSON.stringify({ r0: JSON.stringify({ g: [{ i: 0, ...T, g8: false, why: "reason B describes option C" }, { i: 1, ...T }, { i: 2, ...T, g10: false }] }) }));
+  fs.writeFileSync(path.join(work, "results.json"), JSON.stringify({ p3: { r: ["a", "b", "c", "d"], kp: "k", rv: { pass: true } }, p4: { v: "disputed" } }));
+  fs.writeFileSync(path.join(work, "state.json"), JSON.stringify({ v: 1, run: "t", stages: { explain: { status: "done" }, review: { status: "done" } } }));
+
+  const sent = [], log = [];
+  const vertex = {
+    cfg: { model: "gemini-3.1-flash-lite" }, log,
+    batch: {
+      submit: async ({ name, lines }) => { sent.push({ name, lines }); return { jobId: "job-" + name }; },
+      wait: async (jobId) => ({ state: "JOB_STATE_SUCCEEDED", jobId }),
+      results: async (info, lines) => {
+        const m = new Map();
+        for (const l of lines) {
+          if (/explain-redo/.test(info.jobId)) m.set(l.key, { text: JSON.stringify({ ex: l.ids.map((id, i) => good(i)) }) });
+          else m.set(l.key, { text: JSON.stringify({ g: l.ids.map((id, i) => (id === "p2" ? { i, ...T, g8: false, why: "still mismatched" } : { i, ...T })) }) });
+          log.push({ promptTokenCount: 100, candidatesTokenCount: 50 });
+        }
+        return m;
+      },
+    },
+  };
+  const dry = await stages({ flags: new Set(["explain-redo", "dry-run"]), tax: TAX }, { root, log: () => {} });
+  assert.deepEqual(dry.rows.map((r) => [r.stage, r.items]), [["explain-redo", 2], ["review-redo", 2]], "p1 (g9b) and p2 (review) retry; accepted p3, disputed p4, key-unclear p5 do not");
+  const rep = await stages({ flags: new Set(["explain-redo"]), "poll-sec": "0", tax: TAX }, { root, log: () => {}, vertex });
+  assert.deepEqual(sent.map((s) => s.name), ["pyq/explain-redo", "pyq/review-redo"]);
+  const req = JSON.stringify(sent[0].lines);
+  assert.match(req, /Rejected before because: it used numbers that are not in the notes or the question: 40/);
+  assert.match(req, /Rejected before because: a reviewer rejected it: a reason did not match the option it describes \(reason B describes option C\)/);
+  assert.match(req, /Write no number, dose, percentage/);
+  assert.ok(!/p4|p5/.test(JSON.stringify(sent.map((s) => s.lines.map((l) => l.ids)))), "disputed and key-unclear items are never sent");
+  assert.deepEqual(rep.explainRedo, { sent: 2, accepted: 1, pending: 1, rejected: { review: 1 } });
+  const res = JSON.parse(fs.readFileSync(path.join(work, "results.json"), "utf8"));
+  assert.equal(res.p1.rv.redo, true);
+  assert.equal(res.p1.r[1], "Agent two is the fixture choice here.");
+  assert.equal(res.p2.pending, true);
+  assert.ok(!res.p2.r);
+  await stages({ flags: new Set(["explain-redo"]), "poll-sec": "0", tax: TAX }, { root, log: () => {}, vertex });
+  assert.equal(sent.length, 2, "a re-run reads the saved replies and never resubmits");
+
+  // the build turns pending into the exp-pending flag (not hiding) and applies the accepted retry
+  const cfgRoot = fs.mkdtempSync(path.join(os.tmpdir(), "pyq-build-"));
+  fs.mkdirSync(path.join(cfgRoot, "prep", "pyq", "work"), { recursive: true });
+  fs.writeFileSync(path.join(cfgRoot, "prep", "pyq", "work", "results.json"), JSON.stringify({ "pyq-fx-2099-r1-1": { pending: true }, "pyq-fx-2099-r1-2": { r: ["w", "x", "y", "z"], kp: "pearl", rv: { pass: true, redo: true } } }));
+  const conf = { papers: [{ id: "fx-2099-r1", format: "blog", exam: "neet-pg", year: 2099, session: null, kind: "recall", txt: path.join(FX, "blog.txt") }] };
+  const b = await build({ flags: new Set(["no-images"]) }, { root: cfgRoot, conf, bank: { items: [], post: new Map() }, log: () => {} });
+  const by = Object.fromEntries(b.items.map((x) => [x.id, x]));
+  assert.ok(by["pyq-fx-2099-r1-1"].flags.includes("exp-pending"));
+  assert.equal(by["pyq-fx-2099-r1-2"].exp, "x");
+  assert.equal(by["pyq-fx-2099-r1-2"].rv.redo, true);
+  fs.rmSync(root, { recursive: true, force: true }); fs.rmSync(cfgRoot, { recursive: true, force: true });
 });

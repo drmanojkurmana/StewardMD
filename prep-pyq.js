@@ -34,7 +34,8 @@
   function paperScheme(mock, n) {
     return { limit: Math.round(n * mock.min * 60 / mock.n), plus: mock.plus, minus: mock.minus, label: mock.label };
   }
-  function usable(it, hidden) { return !!it && !(it.flags && it.flags.length) && !(hidden && hidden[it.id]); }
+  // exp-pending (our explanation is not written yet) never hides a question; every other flag does.
+  function usable(it, hidden) { return !!it && !(it.flags && it.flags.some(function (f) { return f !== "exp-pending"; })) && !(hidden && hidden[it.id]); }
   // A paper's questions in paper order (an item asked in two papers carries both numbers in pyq).
   function paperItems(items, pid) {
     var out = [];

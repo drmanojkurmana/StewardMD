@@ -189,7 +189,13 @@ own (inside `smd_prep`): the home row shows on the NEET-PG tab; data comes from 
   unsorted items then prep-classify's module prompt; `--screen` = prep-screen-keys blind solve, image and unclear-key
   items skipped; `--explain` = our own reasons per option + pearl, grounded on the nearest bank explanation, code gates
   (every reason, numbers grounded, no 12-word copy, no dash, no URL or publisher) then `buildReviewPrompt` gates) all
-  `--dry-run` first; results in `prep/pyq/work/results.json`, applied by re-running the build.
+  `--dry-run` first; results in `prep/pyq/work/results.json`, applied by re-running the build. `--explain-redo` (one
+  retry, resumable, Batch stages `explain-redo` + `review-redo`): every item whose first explanation failed a code gate
+  or the review is regenerated once with the reason fed back (g9b names the ungrounded numbers; a review failure names
+  the failed gates in words plus the reviewer's note) and a stricter stay-in-the-notes instruction, then the same gates
+  and review. Rejections are rebuilt from the saved first-pass requests and replies, so nothing is re-sent. Disputed and
+  key-unclear items are never explained. Still failing: `pending` -> flag `exp-pending`, which (alone of all flags) does
+  not hide the question; the app shows "Explanation coming soon".
 - **Output** `prep/pyq/out/index.json` (papers with item ids, `file`, `tags`, `mods`; no question text; short cache) and
   `items-<sha8>.json` (immutable) and `img/*.webp`. Upload: `node tools/prep-upload-bank.mjs --dir prep/pyq/out --as
   v2/pyq` (dry run; `--yes` uploads, index last). Route whitelist: `v<n>/pyq/(index.json|items-<8 hex>.json|img/<name>.webp)`.
@@ -206,7 +212,11 @@ own (inside `smd_prep`): the home row shows on the NEET-PG tab; data comes from 
   2024 shift 1 80/92, 2024 shift 2 12/27 (the shift papers' failures are the source: questions recalled with 2 or 3
   options, or answers with no letter). 327 items after 2 repeats merged; 102 images attached; 11 held back for a
   missing image, 1 for an unclear key; 3 bank matches (0 key conflicts); 90 items without a subject until `--map`.
-  Dry run of map + screen + explain + review: about $0.11 (Rs 11). Not run (owner's yes needed), not uploaded to R2.
+  Paid run (owner's yes): subject + map + screen + explain + review about $0.12; explanations 315 sent, 209 accepted
+  (rejected: g9b 24, review 82), 32 disputed keys. Retry (`--explain-redo`, $0.025): 91 sent (the 15 disputed rejects
+  skipped), 28 accepted, 63 `exp-pending` (g9b 4, review 59). Now 237 items carry our explanation; 283 of 327 usable,
+  220 of those explained. Uploaded to R2 `prep-bank/v2/pyq/` (verified by hash) and to the private bucket. The live
+  `/api/prep/bank/v2/pyq/` route answers only after this branch's bank route deploys (main's whitelist lacks it).
 - **Gotcha:** `emoji-icons.js` removes page locators ("pg 45") from rendered text, which also ate "PG 2025" out of
   "NEET-PG 2025"; `scrubBooks` now protects "NEET-PG" (test in `test/emoji-icons.test.mjs`).
 - **Tests:** `test/prep-pyq.test.mjs` (three parsers on synthetic fixtures incl. watermark shreds, option matching,

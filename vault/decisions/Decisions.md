@@ -11404,5 +11404,12 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   content words (Jaccard 0.3); on the first run 0.2 tagged different questions that shared a key and options.
 - **Timed papers** use the NEET-PG pattern from `MOCKS` (210 min per 200 questions, +4/-1) scaled to the paper's size.
 - **Rejected:** keeping 2- and 3-option recalls (they are incomplete memories, not the real exam's 4 options) and
-  guessing keys for answer-only recalls; both are reported as parse failures. **Status:** branch `feat/prepnucleus`;
-  no paid stage run (dry run about $0.11), not uploaded to R2 (owner's yes).
+  guessing keys for answer-only recalls; both are reported as parse failures.
+- **Explanations, one retry then honest pending (owner, 2026-10-06):** every PYQ should carry our explanation. A
+  rejected one gets exactly one retry with the rejection reason fed back and a stricter grounding instruction, through
+  the same gates and review; what still fails is flagged `exp-pending` and shown as "Explanation coming soon" while the
+  question stays usable (unless its key is disputed). No explanation is written for disputed or key-unclear items: we do
+  not explain a key we doubt. **Status:** paid run 2026-10-06 (subject, map, screen, explain, review about $0.12; retry
+  $0.025): 237 items carry our explanation (209 first pass + 28 on the retry, of 91 retried), 63 `exp-pending`, 32
+  disputed, 11 image missing, 1 key unclear; 283 of 327 usable, 220 of them explained. Uploaded to R2
+  `prep-bank/v2/pyq/` (owner's yes) and the private bucket; served once the branch's bank route is deployed.
