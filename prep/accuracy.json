@@ -3,7 +3,7 @@
  "generated": "2026-10-06",
  "sources": {
   "keys": "prep/bank/v1/screen-2026-10-06.json",
-  "questions": "prep/fill/*.json",
+  "questions": "prep/fill/reports.json",
   "lessons": "prep/lessons/v1/*.json",
   "cards": "prep/cards/v1/*.json"
  },
@@ -158,12 +158,12 @@
  },
  "ai": {
   "questions": {
-   "modules": 9,
-   "generated": 131,
-   "accepted": 103,
-   "regenerated": 21,
-   "rejected": 28,
-   "passRate": 0.7863,
+   "modules": 119,
+   "generated": 4403,
+   "accepted": 3339,
+   "regenerated": 779,
+   "rejected": 1064,
+   "passRate": 0.7583,
    "gates": [
     {
      "id": "g1",
@@ -173,7 +173,7 @@
     {
      "id": "g2",
      "label": "Key not repeated as a distractor",
-     "rejected": 0
+     "rejected": 7
     },
     {
      "id": "g3",
@@ -183,37 +183,42 @@
     {
      "id": "g5",
      "label": "Key not much longer or shorter than the distractors",
-     "rejected": 15
+     "rejected": 387
     },
     {
      "id": "g9b",
      "label": "Every number in the key is in the source",
-     "rejected": 8
+     "rejected": 154
     },
     {
      "id": "g12",
      "label": "Not too similar to another question",
-     "rejected": 0
+     "rejected": 7
     },
     {
      "id": "verbatim",
      "label": "Does not copy source wording",
-     "rejected": 0
+     "rejected": 60
     },
     {
      "id": "book",
      "label": "Names no book, edition or page",
-     "rejected": 0
+     "rejected": 11
     },
     {
      "id": "solve",
      "label": "An independent solver picks the same answer",
-     "rejected": 5
+     "rejected": 303
     },
     {
      "id": "review",
      "label": "Passes a second review",
-     "rejected": 0
+     "rejected": 135
+    },
+    {
+     "id": "bad-output",
+     "label": "Valid model reply",
+     "rejected": 7
     }
    ]
   },

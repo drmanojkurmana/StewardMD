@@ -88,11 +88,13 @@ export function fromRepo(root, date) {
   const taxFile = path.join(root, "prep/taxonomy.json");
   if (fs.existsSync(taxFile)) (readJson(taxFile).branches || []).forEach((b) => (b.subjects || []).forEach((s) => { names[s.id] = (s.name && s.name.en) || s.id; }));
   const fillDir = path.join(root, "prep/fill"), lessonDir = path.join(root, "prep/lessons/v1"), cardDir = path.join(root, "prep/cards/v1");
-  const fills = jsonIn(fillDir, ["shortfall.json"]).map((f) => readJson(path.join(fillDir, f)));
+  // ponytail: per-module fill outputs stay out of git (Pages 20,000-file cap); prep/fill/reports.json keeps module + stats.
+  const repFile = path.join(fillDir, "reports.json");
+  const fills = fs.existsSync(repFile) ? readJson(repFile) : jsonIn(fillDir, ["shortfall.json", "reports.json"]).map((f) => readJson(path.join(fillDir, f)));
   const lessons = jsonIn(lessonDir, ["index.json"]).map((f) => readJson(path.join(lessonDir, f)));
   const cards = jsonIn(cardDir, ["index.json"]).map((f) => readJson(path.join(cardDir, f)));
   return compute({ screen: screenFile ? readJson(path.join(bank, screenFile)) : null, names, fills, lessons, cards, fixHours: [], date,
-    sources: { keys: screenFile ? "prep/bank/v1/" + screenFile : null, questions: "prep/fill/*.json", lessons: "prep/lessons/v1/*.json", cards: "prep/cards/v1/*.json" } });
+    sources: { keys: screenFile ? "prep/bank/v1/" + screenFile : null, questions: "prep/fill/reports.json", lessons: "prep/lessons/v1/*.json", cards: "prep/cards/v1/*.json" } });
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
@@ -100,6 +102,12 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const root = path.resolve(arg("--root", path.join(path.dirname(fileURLToPath(import.meta.url)), "..")));
   const out = path.resolve(root, arg("--out", "prep/accuracy.json"));
   const date = arg("--date", new Date().toISOString().slice(0, 10));
+  if (process.argv.includes("--pack-fill")) {  // fold the per-module fill outputs into reports.json (gate stats only)
+    const dir = path.join(root, "prep/fill");
+    const reps = jsonIn(dir, ["shortfall.json", "reports.json"]).map((f) => readJson(path.join(dir, f))).filter((r) => r && r.module && r.stats).map((r) => ({ module: r.module, stats: r.stats }));
+    fs.writeFileSync(path.join(dir, "reports.json"), JSON.stringify(reps) + "\n");
+    console.log("wrote prep/fill/reports.json: " + reps.length + " modules");
+  }
   const j = fromRepo(root, date);
   fs.writeFileSync(out, JSON.stringify(j, null, 1) + "\n");
   console.log(`wrote ${path.relative(root, out)}: ${j.keys ? j.keys.disputed + " of " + j.keys.screened + " keys disputed" : "no screen"}; ` +
