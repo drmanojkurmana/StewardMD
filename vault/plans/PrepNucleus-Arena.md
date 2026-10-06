@@ -56,7 +56,7 @@ StewardMD teal identity). Everything stays behind `smd_prep` (OFF) plus a second
   bar, round result, final result with rating change); Leaderboards (event / weekly rating / all-time); My stats
   (accuracy by subject, attempts per day for 30 days as a simple bar row, mock and event history, battle record).
 - Arena calls go to `/api/prep/arena/*` and the Worker's WS URL from `SMD_PREP_ARENA_WS` (window config, default
-  `wss://prep-arena.stewardmd.workers.dev`). Offline: Compete cards show "Needs a connection".
+  `wss://prep-arena.drmanojkurmana.workers.dev`). Offline: Compete cards show "Needs a connection".
 
 ## Tests (must pass before review)
 - Unit: scoring per scheme, event schedule and deterministic draw, consent and leave, one-entry rule, timing windows,

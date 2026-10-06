@@ -60,7 +60,7 @@ Plan: [[plans/PrepNucleus-Arena]] (deviations listed there). Flags `smd_prep` + 
   with `forfeit: you|opp|both`.
 - **Bindings:** D1 `PREP_ARENA_DB` (database `prep-arena-db`) on Pages (root `wrangler.toml`, default and production)
   and on the Worker; R2 `PREP_BANK_R2` (`stewardmd-offline`) on both; DOs `MATCHMAKER`, `BATTLE_ROOM` on the Worker.
-  All three `database_id`s say `REPLACE_AFTER_CREATE` until the owner creates the database.
+  D1 `prep-arena-db` (45bc1834-baa0-4f75-890e-cc0d81fdff08, APAC) created and schema applied 2026-10-06; Worker deployed at `https://prep-arena.drmanojkurmana.workers.dev` (version 5cbaec0c). Pages gets the binding on the next deploy of this branch.
 - **Deploy (owner, in order):** `npx wrangler d1 create prep-arena-db`, paste the id into `wrangler.toml` (both
   `PREP_ARENA_DB` blocks) and `prep-arena-worker/wrangler.toml`; `npx wrangler d1 execute prep-arena-db --remote
   --file prep-arena-worker/schema.sql`; `cd prep-arena-worker && npx wrangler deploy`; then merge for Pages. Do not
@@ -87,7 +87,7 @@ Plan: [[plans/PrepNucleus-Arena]] (client half; the server half and its deviatio
   marks nor records: items have no key; no FSRS cards, no mistakes) -> submit `{ ans, ms }` -> result with the server's
   score, rank of N, time (server ms), leaderboard and the missed list (keys known only now). Network failure keeps the
   answers with "Send again".
-- **Battle:** WebSocket `SMD_PREP_ARENA_WS` (default `wss://prep-arena.stewardmd.workers.dev`) `+ /battle?exam=`, protocols
+- **Battle:** WebSocket `SMD_PREP_ARENA_WS` (default `wss://prep-arena.drmanojkurmana.workers.dev`) `+ /battle?exam=`, protocols
   `["smd-arena", <ID token>]`. Pure state machine `battleStep` (queue, match, q, r, end; nobody, busy, slow; resume after
   a drop; forfeit you/opp/both). A drop mid-battle reconnects once after 1 s without queueing (the server resumes it in
   its 10 s grace); a second drop shows "Connection lost". Timer bar is a CSS scaleX animation offset by the time already

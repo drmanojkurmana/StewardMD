@@ -140,7 +140,7 @@
 
   /* ================= browser ================= */
   var API = G.SMD_PREP_ARENA_API || "/api/prep/arena/";
-  var WS = G.SMD_PREP_ARENA_WS || "wss://prep-arena.stewardmd.workers.dev";
+  var WS = G.SMD_PREP_ARENA_WS || "wss://prep-arena.drmanojkurmana.workers.dev";
   var A = { consent: null, events: null, evAt: 0, cd: 0, sheet: null, battle: null, ws: null, bTimer: 0, board: "event", ev: null };
   var H = null;
 
