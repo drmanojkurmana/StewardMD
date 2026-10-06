@@ -31,7 +31,13 @@ export function putArgs(f) {
   const cache = f.last ? "public, max-age=300" : "public, max-age=31536000, immutable";
   return ["wrangler", "r2", "object", "put", `${BUCKET}/${f.key}`, "--file", f.src, "--content-type", /\.webp$/.test(f.key) ? "image/webp" : "application/json", "--cache-control", cache, "--remote"];
 }
-function run(args) {
+// R2 answers the odd transient 500 / auth-refresh error; retry each file a few times before giving up.
+async function run(args, tries = 4) {
+  for (let t = 1; ; t++) {
+    try { return await run1(args); } catch (e) { if (t >= tries) throw e; await new Promise((r) => setTimeout(r, 2000 * t)); }
+  }
+}
+function run1(args) {
   return new Promise((res, rej) => {
     const p = spawn("npx", args, { stdio: ["ignore", "ignore", "pipe"] });
     let err = "";
@@ -53,7 +59,8 @@ async function main(argv = process.argv.slice(2)) {
   console.log(`${files.length} files, ${mb.toFixed(1)} MB -> r2://${BUCKET}/${PREFIX}/`);
   if (!argv.includes("--yes")) { for (const f of files.slice(0, 8).concat(files.filter((f) => f.last))) console.log("  " + f.key); console.log("dry run: add --yes to upload"); return; }
   const body = files.filter((f) => !f.last), tail = files.filter((f) => f.last);
-  let done = 0, i = 0;
+  const skip = Number(arg("--skip", 0)) || 0;  // resume an interrupted upload: skip the first n non-manifest files
+  let done = skip, i = skip;
   const worker = async () => { while (i < body.length) { const f = body[i++]; await run(putArgs(f)); if (++done % 50 === 0) console.log(`  ${done}/${files.length}`); } };
   await Promise.all(Array.from({ length: jobs }, worker));
   for (const f of tail) { await run(putArgs(f)); done++; }
