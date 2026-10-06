@@ -274,7 +274,7 @@
   function renderLobby(kind) {
     var now = Date.now(), ev = A.ev && A.ev.kind === kind ? A.ev : pickEvent(A.events, kind, now), title = kind === "weekly" ? "Weekly grand test" : "Daily sprint";
     if (!ev) {
-      H.paint(H.bar(title, H.exam().label, "back") + '<div class="pn-body"><p class="pn-empty">No ' + (kind === "weekly" ? "weekly test" : "sprint") + " is scheduled for this exam yet.</p></div>");
+      H.paint(H.bar(title, H.exam().label, "back") + '<div class="pn-body"><p class="pn-empty pn-art-sc">No ' + (kind === "weekly" ? "weekly test" : "sprint") + " is scheduled for this exam yet.</p></div>");
       return;
     }
     A.ev = ev;

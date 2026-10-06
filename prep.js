@@ -449,12 +449,12 @@
       return '<button type="button" role="tab" class="pn-tab' + (e.id === ex.id ? " on" : "") + '" aria-selected="' + (e.id === ex.id) + '" data-act="exam" data-v="' + e.id + '">' + esc(e.label) + "</button>";
     }).join("") + "</div>";
     var nb = Object.keys(s.bm).length;
-    paint(bar("PrepNucleus", ex.label, "close", '<button type="button" class="pn-ib" data-act="downloads" aria-label="Offline downloads">' + ico("dl") + "</button>") +
+    paint('<div class="pn-sky" aria-hidden="true"></div>' + bar("PrepNucleus", ex.label, "close", '<button type="button" class="pn-ib" data-act="downloads" aria-label="Offline downloads">' + ico("dl") + "</button>") +
       tabs + '<div class="pn-body pn-home" id="pnHome">' +
       // Readiness and Today's plan (prep-plan.js); the older Today card without it.
       (G.PREP_PLAN ? G.PREP_PLAN.homeHtml(HOST) : '<h2 class="pn-h">Today</h2>' + planCard(s)) +
-      (arena ? '<h2 class="pn-h">Compete</h2><div id="pnCompete">' + G.PREP_ARENA.homeHtml(HOST) + "</div>" : "") +
-      '<h2 class="pn-h">Practise</h2>' +
+      (arena ? '<p class="pn-eb" aria-hidden="true">Live, with other students</p><h2 class="pn-h">Compete</h2><div id="pnCompete">' + G.PREP_ARENA.homeHtml(HOST) + "</div>" : "") +
+      '<p class="pn-eb" aria-hidden="true">On your own time</p><h2 class="pn-h">Practise</h2>' +
       '<button type="button" class="pn-next" data-act="solvenext" id="pnNext" hidden><span class="pn-ri" aria-hidden="true">' + ico("target") + '</span><span class="pn-rb"><small>Solve next</small><b id="pnNextT"></b></span>' + ico("chev") + "</button>" +
       '<div class="pn-group">' +
       row("bookmarks", ico("bm"), "Bookmarks", fmt(nb) + " saved") +
@@ -469,7 +469,7 @@
       (G.PREP_C ? row("c-home", ico("deck"), "Your decks", "Questions and cards from your PDF or notes") : "") +
       (G.PREP_ARENA ? row("a-stats", ico("stats"), "My stats", "Accuracy by subject, the last 30 days") : "") +
       (G.PrepSocial ? row("soc-open", ico("user"), "Friends and groups", "Challenge a friend, college boards") + row("soc-acc", ico("check"), "Accuracy", "Your public accuracy page") : "") + "</div>" +
-      '<h2 class="pn-h">Subjects</h2><div class="pn-subs" id="pnGrid">' + subs.map(function (sb) { return tile(sb, null); }).join("") + "</div>" +
+      '<p class="pn-eb" aria-hidden="true">' + subs.length + (subs.length === 1 ? " subject" : " subjects") + '</p><h2 class="pn-h">Subjects</h2><div class="pn-subs" id="pnGrid">' + subs.map(function (sb) { return tile(sb, null); }).join("") + "</div>" +
       (G.PrepPro ? G.PrepPro.homeHtml(HOST) : "") +
       '<p class="pn-note">Practice and progress stay on this device.</p></div>');
     if (arena) G.PREP_ARENA.homeMounted(HOST);
@@ -761,7 +761,7 @@
       '<div class="pn-wrap">' + chips + '</div><button type="button" class="pn-btn pri" data-act="mpractice"' + (ids.length ? "" : " disabled") + ">" + ico("play") + " Practise these " + Math.min(ids.length, 50) + "</button>" +
       '<ul class="pn-mods">' + ids.slice(0, 100).map(function (id) { var b = s.mt[id], t = topicOf(b[0], b[1]); return '<li><div class="pn-mod static"><span class="pn-mb"><b>' + esc(b[4]) + "</b><small>" + (t ? tx(t.title) : esc(b[1])) + (b[2] ? " · " + esc(tagLabel(b[2])) : "") + "</small></span></div></li>"; }).join("") + "</ul>" +
       '<p class="pn-mut pn-small">A question leaves this list when you answer it right.</p>'
-      : '<p class="pn-empty">No mistakes to fix. Questions you get wrong collect here.</p>') + "</div>");
+      : '<p class="pn-empty pn-art-nb">No mistakes to fix. Questions you get wrong collect here.</p>') + "</div>");
     var subs = {}; Object.keys(s.mt).forEach(function (id) { subs[s.mt[id][0]] = 1; }); Object.keys(subs).forEach(function (sid) { loadIndex(sid); });
   }
   function tagLabel(t) { for (var i = 0; i < MISTAKE_TAGS.length; i++) if (MISTAKE_TAGS[i][0] === t) return MISTAKE_TAGS[i][1]; return ""; }
@@ -837,7 +837,7 @@
       el.innerHTML = hits.length ? '<p class="pn-mut pn-small">' + hits.length + (hits.length === 40 ? "+" : "") + " found</p><ul class=\"pn-mods\">" + hits.map(function (h) {
         var t = topicOf(sid, h.t);
         return '<li><button type="button" class="pn-mod" data-act="hit" data-m="' + esc(h.t) + '" data-i="' + esc(h.id) + '"><span class="pn-mb"><b>' + esc(h.p) + "</b><small>" + (t ? tx(t.title) : "") + "</small></span></button></li>";
-      }).join("") + "</ul>" : '<p class="pn-empty">No question matches. Try fewer or other words.</p>';
+      }).join("") + "</ul>" : '<p class="pn-empty pn-art-sc">No question matches. Try fewer or other words.</p>';
     }, function () {
       var el = root && root.querySelector("#pnHits");
       if (el) el.innerHTML = '<p class="pn-err" role="alert">Search needs a connection the first time for each subject.</p>';
@@ -865,7 +865,7 @@
     paint(bar("Bookmarks", fmt(ids.length) + " saved", "back") + '<div class="pn-body">' + (ids.length ?
       '<button type="button" class="pn-btn pri" data-act="practicebm">' + ico("play") + " Practise all bookmarks</button>" +
       '<ul class="pn-mods">' + Object.keys(by).map(function (k) { var p = k.split("|"), t = topicOf(p[0], p[1]), sb = subjectById(p[0]); return '<li><div class="pn-mod static"><span class="pn-mb"><b>' + (t ? tx(t.title) : esc(p[1])) + "</b><small>" + (sb ? tx(sb.name) : "") + " · " + by[k].length + " saved</small></span></div></li>"; }).join("") + "</ul>"
-      : '<p class="pn-empty">Bookmark a question with the ribbon at the top while practising, and it collects here.</p>') + "</div>");
+      : '<p class="pn-empty pn-art-bm">Bookmark a question with the ribbon at the top while practising, and it collects here.</p>') + "</div>");
     Object.keys(by).forEach(function (k) { var p = k.split("|"); loadIndex(p[0]); });
   }
   function practiceBookmarks() {

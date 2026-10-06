@@ -161,7 +161,23 @@
   // The answer log prep.js keeps: [module, 1|0], newest last, at most RA_MAX.
   function noteAnswer(store, mid, ok) { var ra = store.ra || (store.ra = []); ra.push([mid, ok ? 1 : 0]); if (ra.length > RA_MAX) ra.splice(0, ra.length - RA_MAX); }
 
-  var PURE = { EXAM_CHOICES: EXAM_CHOICES, MINUTES: MINUTES, BLUEPRINT: BLUEPRINT, choiceOf: choiceOf, emptyCfg: emptyCfg, needsOnboard: needsOnboard,
+  /* Level: XP = 1 per answer, 1 more when it is right, plus lesson XP (all from the store, nothing invented). Level n
+     starts at 50 * n * (n - 1) XP (0, 100, 300, 600, 1000...); the rank names a band of levels. */
+  var RANKS = [[1, "Fresher"], [3, "Intern"], [5, "Resident"], [8, "Registrar"], [12, "Consultant"]];
+  function xpOf(store) {
+    var x = 0, k;
+    for (k in (store && store.mod) || {}) x += (store.mod[k].t || 0) + (store.mod[k].ok || 0);
+    for (k in (store && store.ls) || {}) x += store.ls[k].xp || 0;
+    return x;
+  }
+  function levelOf(xp) {
+    var n = 1; while (50 * (n + 1) * n <= xp) n++;
+    var lo = 50 * n * (n - 1), hi = 50 * (n + 1) * n, rank = RANKS[0][1];
+    RANKS.forEach(function (r) { if (n >= r[0]) rank = r[1]; });
+    return { n: n, rank: rank, xp: xp, lo: lo, hi: hi, p: (xp - lo) / (hi - lo) };
+  }
+
+  var PURE = { xpOf: xpOf, levelOf: levelOf, EXAM_CHOICES: EXAM_CHOICES, MINUTES: MINUTES, BLUEPRINT: BLUEPRINT, choiceOf: choiceOf, emptyCfg: emptyCfg, needsOnboard: needsOnboard,
     dayOfDate: dayOfDate, daysLeft: daysLeft, geo: geo, readiness: readiness, subjectAction: subjectAction, pickLesson: pickLesson, planDay: planDay,
     newToday: newToday, dueNow: dueNow, itemProgress: itemProgress, noteAnswer: noteAnswer, isQ: isQ };
   if (NODE) { module.exports = PURE; return; }
@@ -232,25 +248,29 @@
   function planValid(s) { return s.pt && s.pt.d === H.today() && s.pt.ex === H.exam().id && s.pt.min === cfg().min; }
 
   /* ---------- home ---------- */
-  // The hero: the readiness ring, the exam countdown, then today's real counts (streak, answers, lesson XP). One button:
-  // the whole card opens "How this is computed".
+  // The hero: the readiness ring, the exam countdown, the level (xpOf/levelOf above), then today's real counts (streak,
+  // answers today). One button: the whole card opens "How this is computed".
   function heroHtml(rd) {
     var dl = examDays(), name = examLabel(), s = store(), td = H.today();
     var when = dl == null ? "" : dl === 0 ? "Exam day" : plural(dl, "day", "days") + " to the exam";
     var line = rd.empty ? "Your first answers start it moving" : "How this is computed";
-    var streak = CORE && CORE.streak ? CORE.streak(s, td) : 0, todayN = (s.days && s.days[td]) || 0, xp = 0;
-    for (var k in (s.ls || {})) xp += s.ls[k].xp || 0;
-    var chips = [["flame", plural(streak, "day", "days") + " streak"], ["bolt", todayN + " answered today"]];
-    if (G.PREP_LESSONS) chips.push(["spark", H.fmt(xp) + " lesson XP"]);
-    var label = "Readiness " + rd.score + " of 100 for " + name + (when ? ", " + when : "") + ". " + chips.map(function (c) { return c[1]; }).join(", ") + ". How this is computed";
+    var streak = CORE && CORE.streak ? CORE.streak(s, td) : 0, todayN = (s.days && s.days[td]) || 0, lv = levelOf(xpOf(s));
+    var chips = [["flame" + (streak > 0 ? " lit" : ""), plural(streak, "day", "days") + " streak"], ["bolt", todayN + " answered today"]];
+    var lvTxt = "Level " + lv.n + ", " + lv.rank + ", " + H.fmt(lv.xp - lv.lo) + " of " + H.fmt(lv.hi - lv.lo) + " XP to level " + (lv.n + 1);
+    var label = "Readiness " + rd.score + " of 100 for " + name + (when ? ", " + when : "") + ". " + lvTxt + ". " + chips.map(function (c) { return c[1]; }).join(", ") + ". How this is computed";
     return '<button type="button" class="pl-hero" data-act="p-why" aria-label="' + esc(label) + '">' +
       '<span class="pl-ring" aria-hidden="true"><svg viewBox="0 0 120 120"><circle class="rt" cx="60" cy="60" r="52" pathLength="100"/>' +
       (rd.score > 0 ? '<circle class="rv" cx="60" cy="60" r="52" pathLength="100" stroke-dasharray="' + rd.score + ' 100"/>' : "") + '</svg><span class="pl-num">' + rd.score + "<small>/100</small></span></span>" +
       '<span class="pl-hb" aria-hidden="true"><b>' + esc(name).replace(/-/g, "\u2011") + " readiness</b>" +
       (when ? '<span class="pl-cd">' + (dl > 0 ? "<strong>" + dl + "</strong> " + (dl === 1 ? "day" : "days") + " to the exam" : "<strong>Exam day</strong>") + "</span>" : "") +
       "<small>" + esc(line) + "</small></span>" + H.ico("chev") +
-      '<span class="pl-chips" aria-hidden="true">' + chips.map(function (c) { return '<span class="pl-chip ' + c[0] + '">' + ic(c[0]) + esc(c[1]) + "</span>"; }).join("") + "</span></button>";
+      '<span class="pl-lv" aria-hidden="true"><span class="pl-lvh"><b>Level ' + lv.n + "</b><span>" + esc(lv.rank) + "</span><em>" + H.fmt(lv.xp - lv.lo) + " / " + H.fmt(lv.hi - lv.lo) + " XP</em></span>" +
+      '<span class="pl-lvbar"><i style="transform:scaleX(' + Math.max(0, Math.min(1, lv.p)).toFixed(3) + ')"></i></span></span>' +
+      '<span class="pl-chips" aria-hidden="true">' + chips.map(function (c) { return '<span class="pl-chip ' + c[0] + '">' + ic(c[0].split(" ")[0]) + esc(c[1]) + "</span>"; }).join("") + "</span></button>";
   }
+  // Section heads: a small line above each, from real data (today's date for the plan).
+  function eyebrow() { try { return new Date().toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long" }); } catch (e) { return ""; } }
+  function planHead() { return '<p class="pn-eb" aria-hidden="true">' + esc(eyebrow()) + '</p><h2 class="pn-h">Today\'s plan</h2>'; }
   // The item's one-line name: the plan row, the widget's "next" and the Live Activity.
   function itemTitle(it) {
     return it.k === "rev" ? "Review " + plural(it.n, "due question", "due questions") : it.k === "lsn" ? "Lesson: " + it.title :
@@ -278,7 +298,7 @@
   function homeHtml(h) {
     H = h;
     var s = store();
-    return '<div id="pnPlanTop" class="pl-top">' + heroHtml(computeReadiness()) + '<h2 class="pn-h">Today\'s plan</h2>' + planHtml(planValid(s) ? s.pt : null) + "</div>";
+    return '<div id="pnPlanTop" class="pl-top">' + heroHtml(computeReadiness()) + planHead() + planHtml(planValid(s) ? s.pt : null) + "</div>";
   }
   function homeMounted(h) {
     H = h;
@@ -286,7 +306,7 @@
       var box = root() && root().querySelector("#pnPlanTop");
       if (!box) return;
       var s = store(), pt = planValid(s) ? s.pt : makePlan(lessons);
-      box.innerHTML = heroHtml(computeReadiness()) + '<h2 class="pn-h">Today\'s plan</h2>' + planHtml(pt);
+      box.innerHTML = heroHtml(computeReadiness()) + planHead() + planHtml(pt);
       if (G.PREP_NATIVE) G.PREP_NATIVE.changed();
     });
   }
@@ -391,6 +411,7 @@
       factor("Coverage", rd.cov, rd.attempted + " of " + H.fmt(rd.modules) + " modules attempted" + (bp ? ", weighted by the " + esc(name) + " blueprint" : ", each subject weighted by its module count")) +
       factor("Retention", rd.ret, rd.cards ? "Chance you recall the " + H.fmt(rd.cards) + " questions you have seen, today (spaced-review model)" : "No questions seen yet") +
       factor("Accuracy", rd.acc, rd.answers ? "Right in your last " + H.fmt(Math.min(rd.answers, RECENT)) + " answers" : "No answers yet") + "</ul>" +
+      '<h3 class="pl-sh">Level</h3><p class="pn-mut pn-small">' + (function () { var lv = levelOf(xpOf(store())); return "Level " + lv.n + ", " + esc(lv.rank) + ": " + H.fmt(lv.xp) + " XP. You earn 1 XP for each answer, 1 more when it is right, plus lesson XP. Level " + (lv.n + 1) + " starts at " + H.fmt(lv.hi) + " XP."; })() + "</p>" +
       '<h3 class="pl-sh">Weakest subjects</h3><ul class="pl-ws">' + weak + "</ul>" +
       '<button type="button" class="pn-btn" data-act="p-close">Close</button>';
     openSheet("why", html, "pnWhyT");
@@ -458,9 +479,9 @@
     H = h;
     if (!P.ob) P.ob = { i: 0, c: { exam: null, date: null, min: 30, rem: null } };
     var o = P.ob, st = STEPS[o.i], last = o.i === STEPS.length - 1, can = st[0] !== "exam" || !!o.c.exam;
-    H.paint(H.bar("PrepNucleus", "Step " + (o.i + 1) + " of 4", "close", '<button type="button" class="pn-link pl-skip" data-act="p-skip">Skip</button>') +
+    H.paint('<div class="pn-sky" aria-hidden="true"></div>' + H.bar("PrepNucleus", "Step " + (o.i + 1) + " of 4", "close", '<button type="button" class="pn-link pl-skip" data-act="p-skip">Skip</button>') +
       '<div class="pn-lsn-prog" aria-hidden="true">' + STEPS.map(function (x, i) { return "<i" + (i <= o.i ? ' class="on"' : "") + "></i>"; }).join("") + "</div>" +
-      '<div class="pn-body pl-ob"><h2 class="pl-q" id="plQ" tabindex="-1">' + st[1] + '</h2><p class="pn-mut">' + st[2] + "</p>" + fieldsHtml(o.c, st[0]) +
+      '<div class="pn-body pl-ob"><img class="pl-art" src="/prep/art/ob-' + st[0] + '.webp" alt="" width="640" height="640" decoding="async"><h2 class="pl-q" id="plQ" tabindex="-1">' + st[1] + '</h2><p class="pn-mut">' + st[2] + "</p>" + fieldsHtml(o.c, st[0]) +
       '<div class="pn-navrow pl-obnav">' + (o.i ? '<button type="button" class="pn-btn" data-act="p-ob-back">Back</button>' : "") +
       '<button type="button" class="pn-btn pri" data-act="p-ob-next"' + (can ? "" : " disabled") + ">" + (last ? "Start preparing" : "Continue") + "</button></div></div>", "#plQ");
     wireInputs(o.c, function () { onboard(H); });

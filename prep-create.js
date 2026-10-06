@@ -537,7 +537,7 @@
       if (!box) return;
       var s = host.store(), td = host.today();
       box.innerHTML = list.length ? list.map(function (m) { return deckRow(host, m, deckProgress(s, m.id, td)); }).join("") :
-        '<p class="pn-empty">No decks yet. Make one from a PDF or your notes, and practise it like any module.</p>';
+        '<p class="pn-empty pn-art-nb">No decks yet. Make one from a PDF or your notes, and practise it like any module.</p>';
     }, function () {
       var box = host.root() && host.root().querySelector("#pcDecks");
       if (box) box.innerHTML = '<p class="pn-err" role="alert">Your decks could not be read on this phone.</p>';

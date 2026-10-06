@@ -212,3 +212,11 @@ test("FMGE: exam tab over the whole MBBS bank, the bulletin's pattern and bluepr
   assert.deepEqual(Object.keys(bp).sort(), mbbs, "every MBBS subject has a blueprint weight");
   assert.equal(Object.values(bp).reduce((a, b) => a + b, 0), 295, "300 marks less radiotherapy (no bank subject)");
 });
+
+test("level: XP is answers, right answers and lesson XP; level n starts at 50n(n-1) XP; ranks band the levels", () => {
+  assert.equal(L.xpOf({ mod: { a: { t: 10, ok: 7 }, b: { t: 3, ok: 0 } }, ls: { c: { xp: 80 } } }), 100);
+  assert.equal(L.xpOf({}), 0);
+  assert.deepEqual([0, 99, 100, 300, 1000, 6600].map((x) => L.levelOf(x).n), [1, 1, 2, 3, 5, 12]);
+  assert.deepEqual([1, 3, 5, 8, 12].map((n) => L.levelOf(50 * n * (n - 1)).rank), ["Fresher", "Intern", "Resident", "Registrar", "Consultant"]);
+  const lv = L.levelOf(150); assert.equal(lv.lo, 100); assert.equal(lv.hi, 300); assert.equal(lv.p, 0.25);
+});

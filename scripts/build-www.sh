@@ -250,6 +250,8 @@ if [ -f prep/taxonomy.json ]; then
   # Public accuracy numbers (tools/prep-accuracy.mjs; PrepSocial.openAccuracy() reads it), a few KB.
   [ -f prep/accuracy.json ] && cp prep/accuracy.json "$WWW/prep/"
   [ -d prep/profiles ] && mkdir -p "$WWW/prep/profiles" && cp prep/profiles/*.json "$WWW/prep/profiles/"
+  # Illustrations (home sky, onboarding, finish screens, Arena lobby, empty states): 14 WebP files, about 300 KB.
+  [ -d prep/art ] && mkdir -p "$WWW/prep/art" && cp prep/art/*.webp "$WWW/prep/art/"
   BV=$(sed -n 's/.*VER = G.SMD_PREP_BANK_VER || "\(v[0-9]*\)".*/\1/p' prep.js); for ix in prep/bank/${BV:-v1}/*/index.json; do [ -f "$ix" ] && mkdir -p "$WWW/$(dirname "$ix")" && cp "$ix" "$WWW/$ix"; done
   # Lessons (prep-lessons.js): the committed pilot lessons, their index and their original diagrams, a few KB each.
   # tools/prep-lessons.mjs work files (prep/lessons/work) never ship.

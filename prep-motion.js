@@ -4,7 +4,10 @@
    - home: the readiness ring draws and its number counts up (first time per open and exam), the sections settle in;
    - an answer: the feedback card springs up, the right option lifts, a wrong one shakes, with a success or error haptic;
    - finish screens (set, test, battle, lesson, cards): the hero card springs in, its ring draws, a success haptic;
-   - sheets rise on a spring, battle round results pop; subject tiles tilt under a mouse or trackpad (never on touch).
+   - sheets rise on a spring, battle round results pop; tiles tilt and carry a spotlight under a mouse or trackpad
+     (never on touch);
+   - the painted sky (.pn-sky) drifts up at under half the scroll speed and fades (1:1 under reduced motion, so it still
+     leaves with the content), the level bar fills, lesson XP counts up, wins and strong results throw confetti.
    Springs come from Motion (motion.dev, MIT, vendored at /vendor/motion/motion.js). The app may already hold an older
    Motion One build on window.Motion (OncoTree), so a modern build is evaluated privately and window.Motion is left alone.
    Everything animates transform and opacity only (the ring stroke is the one SVG paint). Without Motion, or under
@@ -13,7 +16,8 @@
   "use strict";
   if (!G || !G.document) return;
   var D = G.document, SRC = "/vendor/motion/motion.js";
-  var M = null, loading = false, root = null, mo = null, io = null, seen = {}, tiltEl = null;
+  var M = null, loading = false, root = null, mo = null, io = null, seen = {}, tiltEl = null, skyRaf = 0;
+  var TILT = ".pn-tile, .pn-home > .pn-next + .pn-group > .pn-row, #pnCompete > .pn-group > .pn-row";
 
   function reduced() { try { return G.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } }
   function finePointer() { try { return G.matchMedia("(hover: hover) and (pointer: fine)").matches; } catch (e) { return false; } }
@@ -57,10 +61,10 @@
     })();
   }
 
-  // Decorative layer for hero surfaces: three meteors. Paused off screen (IntersectionObserver) and under reduced motion.
+  // Decorative layer for finish screens and the lobby: five sparkles. Paused off screen (IntersectionObserver).
   function fx(el) {
     if (el.querySelector(":scope > .pn-fx")) return;
-    var s = D.createElement("span"); s.className = "pn-fx"; s.setAttribute("aria-hidden", "true"); s.innerHTML = "<i></i><i></i><i></i>";
+    var s = D.createElement("span"); s.className = "pn-fx"; s.setAttribute("aria-hidden", "true"); s.innerHTML = "<i></i><i></i><i></i><i></i><i></i>";
     el.insertBefore(s, el.firstChild);
     if (io) io.observe(el);
   }
@@ -71,7 +75,14 @@
     list.forEach(function (n) {
       if (n.__pnMo) return;
       var c = n.classList;
-      if (c.contains("pl-hero")) { n.__pnMo = 1; fx(n); drawRing(n.querySelector(".pl-ring"), n.querySelector(".pl-num"), "hero:" + (n.getAttribute("aria-label") || "")); return; }
+      if (c.contains("pl-hero")) {
+        n.__pnMo = 1; if (io) io.observe(n);
+        var key = "hero:" + (n.getAttribute("aria-label") || ""), first = !seen[key], bar = n.querySelector(".pl-lvbar i");
+        drawRing(n.querySelector(".pl-ring"), n.querySelector(".pl-num"), key);
+        var m = bar && /scaleX\(([\d.]+)\)/.exec(bar.getAttribute("style") || "");
+        if (first && m && +m[1] > 0) anim(bar, { transform: ["scaleX(0)", "scaleX(" + m[1] + ")"] }, { duration: 0.9, ease: EASE, delay: 0.15 });
+        return;
+      }
       if (c.contains("pn-home")) {
         n.__pnMo = 1;
         if (seen.home) return;
@@ -92,8 +103,11 @@
       if (c.contains("pn-score") || c.contains("pn-lsn-fin") || c.contains("pk-end") || c.contains("pn-lobby")) {
         n.__pnMo = 1; fx(n);
         anim(n, { opacity: [0, 1], transform: ["scale(0.95)", "scale(1)"] }, POP);
-        var ring = n.querySelector(".pn-ring");
+        var ring = n.querySelector(".pn-ring"), xp = n.querySelector(".pn-lsn-xp b"), rv = ring && ring.querySelector(".rv");
         if (ring) drawRing(ring, null, "ring:" + Math.random());
+        if (xp) countUp(xp);
+        var pct = rv ? parseFloat(rv.getAttribute("stroke-dasharray")) || 0 : 0;
+        if (c.contains("win") || (xp && /^\+/.test(xp.textContent)) || pct >= 70) confetti(n);
         if (!c.contains("pn-lobby") && (ring || c.contains("pn-lsn-fin") || c.contains("pk-end") || c.contains("win"))) haptic("success");
         return;
       }
@@ -102,21 +116,62 @@
     });
   }
 
-  // Subject tiles lean toward a mouse or trackpad pointer (up to 6 degrees); touch never tilts.
+  // "+80" counts up from 0 with the same curve as the ring.
+  function countUp(el) {
+    var mm = /^(\+?)(\d+)$/.exec(el.textContent || ""); if (!mm) return;
+    var to = +mm[2], t0 = 0;
+    (function tick(ts) {
+      if (!t0) t0 = ts || 1;
+      var p = Math.min(1, ((ts || t0) - t0) / 800), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = mm[1] + Math.round(to * e);
+      if (p < 1 && el.isConnected) G.requestAnimationFrame(tick); else el.textContent = mm[1] + to;
+    })();
+  }
+  // Confetti: 28 pieces burst up from the figure and fall away in about 1.6 s, then the layer is removed.
+  var HUES = ["#63f0db", "#ffc35c", "#ff8fa3", "#9fb8ff", "#ffffff", "#b6f58c"];
+  function confetti(host) {
+    var box = D.createElement("span"); box.className = "pn-confetti"; box.setAttribute("aria-hidden", "true");
+    var pieces = [];
+    for (var i = 0; i < 28; i++) { var p = D.createElement("i"); p.style.background = HUES[i % HUES.length]; box.appendChild(p); pieces.push(p); }
+    host.appendChild(box);
+    pieces.forEach(function (p, i) {
+      var a = (i / pieces.length) * Math.PI * 2 + Math.random() * 0.4, v = 90 + Math.random() * 90;
+      var dx = Math.cos(a) * v, up = -Math.abs(Math.sin(a)) * v - 60, r = (Math.random() * 2 - 1) * 540;
+      anim(p, { opacity: [1, 1, 0], transform: ["translate(0px, 0px) rotate(0deg) scale(1)", "translate(" + (dx * 0.8).toFixed(1) + "px, " + up.toFixed(1) + "px) rotate(" + (r / 2).toFixed(0) + "deg) scale(1)", "translate(" + dx.toFixed(1) + "px, " + (up + 260).toFixed(1) + "px) rotate(" + r.toFixed(0) + "deg) scale(0.7)"] },
+        { duration: 1.4 + Math.random() * 0.5, ease: [0.2, 0.7, 0.4, 1], delay: 0.12 + Math.random() * 0.08 });
+    });
+    G.setTimeout(function () { if (box.parentNode) box.parentNode.removeChild(box); }, 2400);
+  }
+
+  // Tiles lean toward a mouse or trackpad pointer (up to 6 degrees) and a spotlight follows it; touch never tilts.
   function onMove(e) {
     if (e.pointerType !== "mouse" || reduced()) return;
-    var t = e.target && e.target.closest ? e.target.closest(".pn-tile") : null;
+    var t = e.target && e.target.closest ? e.target.closest(TILT) : null;
     if (tiltEl && tiltEl !== t) untilt();
     if (!t) return;
     var r = t.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
     tiltEl = t; t.classList.add("pn-tilt");
+    t.style.setProperty("--mx", ((x + 0.5) * 100).toFixed(1) + "%"); t.style.setProperty("--my", ((y + 0.5) * 100).toFixed(1) + "%");
     t.style.transform = "perspective(700px) rotateX(" + (-y * 6).toFixed(2) + "deg) rotateY(" + (x * 6).toFixed(2) + "deg)";
+  }
+  // The sky: transform and opacity only, one write per frame.
+  function onScroll(e) {
+    var b = e.target;
+    if (!root || !b || !b.classList || !b.classList.contains("pn-body") || skyRaf) return;
+    skyRaf = G.requestAnimationFrame(function () {
+      skyRaf = 0;
+      var sky = root && root.querySelector(":scope > .pn-sky"); if (!sky) return;
+      var y = Math.max(0, b.scrollTop), k = reduced() ? 1 : 0.42;
+      sky.style.transform = "translate3d(0, " + (-y * k).toFixed(1) + "px, 0)";
+      sky.style.opacity = String(Math.max(0, 1 - y / 520).toFixed(3));
+    });
   }
   function untilt() { if (tiltEl) { tiltEl.style.transform = ""; tiltEl.classList.remove("pn-tilt"); tiltEl = null; } }
 
   function attach(r) {
     detach();
     root = r; seen = {};
+    if (root) root.addEventListener("scroll", onScroll, true);
     if (!root || reduced()) return;
     ensure();
     if (M) ready();
@@ -133,7 +188,7 @@
   function detach() {
     if (mo) mo.disconnect();
     if (io) io.disconnect();
-    if (root) { root.removeEventListener("pointermove", onMove); root.removeEventListener("pointerleave", untilt); }
+    if (root) { root.removeEventListener("pointermove", onMove); root.removeEventListener("pointerleave", untilt); root.removeEventListener("scroll", onScroll, true); }
     mo = io = null; root = null; tiltEl = null;
   }
   G.PREP_MOTION = { attach: attach, detach: detach, ensure: ensure, ready: function () { return !!M; } };

@@ -417,6 +417,25 @@ Owner decisions: [[decisions/Decisions]] "PrepNucleus pricing, free tier and soc
   section 26. Data fields (`gen`, `prov`, deck `label`) stay in the JSON; only the PYQ paper type line still shows.
 - Headless suites finish finite animations before each screenshot (`shotCall`), so shots show final frames.
 
+## Premium UI round 2 (2026-10-07, same branch, `?v=prep15`)
+- Art: 14 WebP illustrations in `prep/art/` (about 300 KB; `scripts/build-www.sh` copies them): `hero-dark`/`hero-light`
+  (home and onboarding sky), `ob-exam|date|min|rem`, `fin-mock` (set, test and event results), `fin-lesson` (lesson and
+  cards finish), `fin-win`/`fin-loss` (battle end; draw uses loss), `arena` (lobby banner, battle card), `empty-bm|nb|sc`.
+  Made with Vertex `gemini-3.1-flash-image` at 1K ($0.067 an image; Imagen 4 ids were discontinued 2026-06-30 and 404),
+  15 billed calls, $1.01. No text, people or logos in them.
+- Home scene: `.pn-sky` is the first child of the root on home and onboarding (CSS picks the theme's image); bar, tabs and
+  body sit above it (z-index 1). prep-motion.js moves it with the body scroll (0.42x, 1x under reduced motion) and fades
+  it; without prep-motion.js it stays put. Readiness card is frosted glass over it.
+- Level: `xpOf(store)` = answers + right answers + lesson XP; `levelOf(xp)`: level n starts at 50n(n-1) XP, ranks Fresher
+  (1), Intern (3), Resident (5), Registrar (8), Consultant (12). Shown in the hero and explained in the readiness sheet.
+  The lesson XP chip is gone (it is inside the XP now).
+- Section heads have a `.pn-eb` line above (outside `.pn-h`, so tests reading `.pn-h` text are unchanged). Compete with
+  more than one row is a snap carousel; the battle card shows the arena art.
+- Finish art is a `::after` on `.pn-score`, `.pn-lsn-fin`, `.pk-end`, `.pn-lobby`; empty states use `.pn-empty.pn-art-*`.
+- Motion: sparkles replaced round 1's meteors (a meteor crossing the ring read as a stray line); confetti on a battle win,
+  a lesson's first XP and a set at 70% or better; lesson XP counts up; the level bar fills; spotlight and tilt on tiles
+  for mouse or trackpad only. Children of hero surfaces are `position: relative`, so the confetti layer is excluded.
+
 ## Store
 localStorage `smd_prep_v1`: `{v, cards, conf, days, mod:{t,ok,last}, bm, rep, exam, last, dl, hid, mt, goal, mh, ls, lsp, pl, pt, ra, fc}` (`ls`/`lsp`: Lessons;
 `pl`/`pt`/`ra`: Plan; `fc`: Cards). FSRS deck key
