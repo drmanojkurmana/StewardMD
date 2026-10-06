@@ -11413,3 +11413,26 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   $0.025): 237 items carry our explanation (209 first pass + 28 on the retry, of 91 retried), 63 `exp-pending`, 32
   disputed, 11 image missing, 1 key unclear; 283 of 327 usable, 220 of them explained. Uploaded to R2
   `prep-bank/v2/pyq/` (owner's yes) and the private bucket; served once the branch's bank route is deployed.
+
+  guessing keys for answer-only recalls; both are reported as parse failures. **Status:** branch `feat/prepnucleus`;
+  no paid stage run (dry run about $0.11), not uploaded to R2 (owner's yes).
+
+## 2026-10-06 - PrepNucleus Cards: one FSRS store for cards and questions, gated cards from screened explanations
+- **Decision** ([[PrepNucleus]], "Cards"; [[plans/PrepNucleus-Plan2]] section 2 "one memory model"): module flashcards
+  write to the same FSRS store as the questions under deck key `p:<module>:c` (card key `p:<module>:c:<cardId>`), so
+  `recall()` over `p:<module>` (readiness, weak areas) sees both. `progressByModule` in `prep.js` skips card keys, so
+  "answered" and "due" MCQ counts stay MCQ counts; a card review still counts toward `store.days` (streak, daily total).
+- **Sources:** cards come only from unflagged bank items with an explanation (MedMCQA, MIT) and the module's KB-only fill
+  pack; never StatPearls. Each card cites its source (`src.item` or `src.kb`) and is gated against that source alone:
+  numbers and drug names present, no 12-word copy, no book, page, edition or site, no dash, front a question (basic) or
+  exactly one `{{blank}}` (cloze), no near-duplicate front (Jaccard 0.7), then a blind self-check. About one card per 2
+  usable items, at most 60 a module.
+- **UI:** tap turns a basic card; cloze fills its blank in place; occlusion opens masks one at a time (hand-made only for
+  now, cleared `prep/lessons/media` images). Grades Again/Hard/Good/Easy with the FSRS interval each would give; swipe
+  right Good, left Again (Hard and Easy by button or key, vertical swipes stay with scrolling; the left 28 px edge stays
+  with the system back gesture). An Again is re-shown once at the session end. New cards a day: 10/20/30/50, default 20;
+  due cards always come.
+- **Files:** `prep-flash.js` / `prep-flash.css` (prep-cards.js already held the Layer C deck reviewer), data
+  `prep/cards/v1/` (pilot only in git; a full run goes to `prep/cards/gen/`, gitignored, then R2).
+- **Not run:** no paid call made. Dry runs (gemini-3.1-flash-lite, Batch): 20-module pilot $0.26 (Rs 25), all 864 MBBS
+  modules $8.61 (Rs 826). SS modules have no v1 bank yet and are skipped.

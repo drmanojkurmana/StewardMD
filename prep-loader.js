@@ -10,8 +10,8 @@
   "use strict";
   var V = "prep5";
   // Layer C (prep-source, prep-decks, prep-cards, prep-create) after prep.js; prep-create.js reads the two before it.
-  var CSS = ["prep.css", "prep-create.css"];
-  var JS = ["specialty-core.js", "specialty-bank.js", "prep.js", "prep-arena.js", "prep-lessons.js", "prep-pyq.js", "prep-teacher.js", "prep-source.js", "prep-decks.js", "prep-cards.js", "prep-create.js"];
+  var CSS = ["prep.css", "prep-create.css", "prep-flash.css"];
+  var JS = ["specialty-core.js", "specialty-bank.js", "prep.js", "prep-arena.js", "prep-lessons.js", "prep-pyq.js", "prep-flash.js", "prep-teacher.js", "prep-source.js", "prep-decks.js", "prep-cards.js", "prep-create.js"];
   var loading = null;
 
   function enabled() {
