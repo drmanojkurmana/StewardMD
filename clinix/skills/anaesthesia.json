@@ -1,0 +1,770 @@
+{
+  "_comment": "CliniX Anaesthesia skill pack (Narke OSCE). Preoperative assessment and ASA grade, airway assessment, consent for general and spinal anaesthesia, bag-mask ventilation with an oropharyngeal airway, LMA insertion, spinal anaesthesia steps, and adult BLS (matches kb/clinical-protocols/adult-cardiac-arrest.json). Shared across the anaesthesia-osce module. Content is ai_drafted, English only (CliniX has no Hindi layer), and every skill cites the guideline it was written from. Guidelines that are not openly licensed are cited for facts only; the wording is original.",
+  "version": 1,
+  "system": "anaesthesia",
+  "skills": {
+    "skill.hx.ana.preop_history": {
+      "id": "skill.hx.ana.preop_history",
+      "kind": "history",
+      "system": "anaesthesia",
+      "title": "Preoperative history (1): the operation, past anaesthetics and the systems",
+      "oneLine": "What surgery, how did past anaesthetics go, and how fit are the heart and lungs",
+      "why": "The anaesthetic plan is built from the history. A past problem with an anaesthetic, a family history of one, poor exercise tolerance or untreated sleep apnoea changes the plan more often than any test does.",
+      "asks": [
+        { "text": "Confirm the planned operation, its side and its urgency, and why it is being done." },
+        { "text": "Ask about previous anaesthetics: what type, and any problems such as a difficult airway, severe nausea, a slow wake-up or admission to ICU." },
+        { "text": "Ask whether any blood relative had a serious problem with an anaesthetic, such as a very high temperature (malignant hyperthermia) or not breathing for a long time after a muscle relaxant." },
+        { "text": "Ask about the heart and lungs: chest pain, breathlessness, palpitations, fainting, and how far they can walk or how many flights of stairs they can climb without stopping." },
+        { "text": "Ask about snoring, witnessed pauses in breathing and daytime sleepiness (obstructive sleep apnoea), and about diabetes, kidney or liver disease, reflux, bleeding problems, smoking, alcohol, and the possibility of pregnancy." }
+      ],
+      "practice": "Take a five-minute preoperative history from a partner and present it in four sentences: operation, past anaesthetics, systems, and functional capacity.",
+      "pitfalls": [
+        "Asking about past operations but not about how the anaesthetic went.",
+        "Forgetting the family history of anaesthetic problems.",
+        "Recording 'fit and well' without asking how far the patient can walk or climb.",
+        "Not asking about snoring and sleep apnoea, which predict a difficult airway and breathing problems after surgery."
+      ],
+      "probes": [
+        { "level": 1, "q": "Which family history must you ask about before an anaesthetic, and why?", "a": "A relative with a serious anaesthetic problem, such as malignant hyperthermia or prolonged apnoea after suxamethonium, because both are inherited.", "accept": ["malignant hyperthermia", "suxamethonium", "apnoea", "inherited", "family"], "minMatch": 2 },
+        { "level": 2, "q": "How do you judge functional capacity at the bedside?", "a": "Ask what activity the patient can do without stopping, for example climbing two flights of stairs or walking up a hill. Poor exercise tolerance raises perioperative cardiac risk.", "accept": ["stairs", "flights", "walk", "exercise", "climb"], "minMatch": 2 },
+        { "level": 3, "q": "Why do you ask about snoring before surgery?", "a": "Loud snoring with witnessed pauses suggests obstructive sleep apnoea, which predicts difficult mask ventilation and breathing problems with opioids after surgery. STOP-Bang can screen for it.", "accept": ["sleep apnoea", "apnoea", "difficult", "mask", "opioids", "stop bang"], "minMatch": 2 }
+      ],
+      "rubric": [
+        { "id": "op", "text": "Confirms the operation, its side and its urgency" },
+        { "id": "past", "text": "Asks about previous anaesthetics and any problems with them", "critical": true },
+        { "id": "family", "text": "Asks about family history of anaesthetic problems (malignant hyperthermia, prolonged apnoea)" },
+        { "id": "cardioresp", "text": "Asks cardiac and respiratory symptoms and functional capacity (stairs or walking distance)" },
+        { "id": "other", "text": "Asks about sleep apnoea, diabetes, reflux, bleeding problems, smoking, alcohol and possible pregnancy" }
+      ],
+      "sources": [
+        { "source": "Association of Anaesthetists (AAGBI): Pre-operative assessment and patient preparation, the role of the anaesthetist (2010)", "locator": "Content of the pre-operative assessment: history, previous anaesthetics, family history, functional status", "url": "https://doi.org/10.21466/g.paapp-t.2010" },
+        { "source": "2022 ESC Guidelines on cardiovascular assessment and management of patients undergoing non-cardiac surgery (endorsed by ESAIC). Eur Heart J 2022;43:3826-3924", "locator": "Section 4: clinical risk evaluation and functional capacity (climbing two flights of stairs)", "url": "https://doi.org/10.1093/eurheartj/ehac270" },
+        { "source": "Chung F et al. STOP questionnaire. Anesthesiology 2008;108:812-821", "locator": "Screening for obstructive sleep apnoea in surgical patients", "url": "https://doi.org/10.1097/aln.0b013e31816d83e4" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "skill.hx.ana.preop_drugs_fasting": {
+      "id": "skill.hx.ana.preop_drugs_fasting",
+      "kind": "history",
+      "system": "anaesthesia",
+      "title": "Preoperative history (2): drugs, allergies, teeth and fasting",
+      "oneLine": "Every medicine, every allergy, loose teeth, and the time of the last food and drink",
+      "why": "Some medicines must be stopped, some must be continued, and some change whether a spinal is safe. An allergy missed here can cause anaphylaxis on the table, and an unclear fasting time is the commonest reason a list is delayed or an aspiration happens.",
+      "asks": [
+        { "text": "List every medicine with dose: especially anticoagulants and antiplatelets, insulin and oral diabetic drugs, blood pressure drugs, steroids, and any herbal or over-the-counter products." },
+        { "text": "Ask about allergies and what exactly happened: drugs (especially antibiotics and muscle relaxants), latex, chlorhexidine, and foods." },
+        { "text": "Ask about loose, capped or false teeth, and problems opening the mouth or moving the neck." },
+        { "text": "Ask when they last ate and when they last drank, and what it was. Explain the fasting times: a light meal up to 6 hours before, and clear fluids up to 2 hours before an elective anaesthetic." }
+      ],
+      "practice": "Take a drug and allergy history from a partner holding a list of five medicines, and say for each one whether you would continue it, stop it, or ask a senior.",
+      "pitfalls": [
+        "Writing 'no known allergies' without asking about latex and chlorhexidine.",
+        "Missing an anticoagulant or antiplatelet, which may make a spinal unsafe.",
+        "Asking 'nil by mouth since midnight' instead of the actual time and type of the last food and drink.",
+        "Forgetting loose teeth, which can be dislodged at laryngoscopy."
+      ],
+      "probes": [
+        { "level": 1, "q": "What are the ASA fasting times for an elective adult anaesthetic?", "a": "A light meal up to 6 hours before and clear fluids up to 2 hours before. A fried or fatty meal needs 8 hours or more.", "accept": ["6", "2", "8", "clear", "light meal"], "minMatch": 3 },
+        { "level": 2, "q": "Which drug groups matter most before a spinal anaesthetic, and why?", "a": "Anticoagulants and antiplatelets, because they raise the risk of a spinal haematoma. The time of the last dose is checked against a neuraxial safety table such as ASRA.", "accept": ["anticoagulants", "antiplatelets", "haematoma", "asra", "last dose"], "minMatch": 2 },
+        { "level": 3, "q": "Why ask specifically about chlorhexidine and latex allergy?", "a": "Both are common hidden causes of anaphylaxis during anaesthesia, and both are in routine use in the theatre, so they must be avoided if the patient is allergic.", "accept": ["anaphylaxis", "theatre", "avoid", "hidden"], "minMatch": 2 }
+      ],
+      "rubric": [
+        { "id": "drugs", "text": "Takes a full drug history, naming anticoagulants, antiplatelets, insulin and other diabetic drugs", "critical": true },
+        { "id": "allergy", "text": "Asks about allergies and the reaction, including latex and chlorhexidine", "critical": true },
+        { "id": "teeth", "text": "Asks about loose, capped or false teeth" },
+        { "id": "fasting", "text": "Records the time and type of the last food and drink and explains the fasting rule (6 hours light meal, 2 hours clear fluids)" }
+      ],
+      "sources": [
+        { "source": "ASA Practice Guidelines for Preoperative Fasting. Anesthesiology 2017;126:376-393", "locator": "Fasting recommendations: clear liquids 2 hours, light meal 6 hours, fried or fatty foods 8 hours or more", "url": "https://doi.org/10.1097/aln.0000000000001452" },
+        { "source": "2023 ASA Practice Guidelines for Preoperative Fasting (modular update). Anesthesiology 2023;138:132-151", "locator": "Carbohydrate-containing clear liquids up to 2 hours before elective procedures", "url": "https://doi.org/10.1097/aln.0000000000004381" },
+        { "source": "Horlocker TT et al. Regional anesthesia in the patient receiving antithrombotic or thrombolytic therapy (ASRA, 4th edition). Reg Anesth Pain Med 2018;43:263-309", "locator": "Timing of neuraxial block in relation to anticoagulant and antiplatelet doses", "url": "https://doi.org/10.1097/AAP.0000000000000763" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "skill.reasoning.ana.asa_readiness": {
+      "id": "skill.reasoning.ana.asa_readiness",
+      "kind": "reasoning",
+      "system": "anaesthesia",
+      "title": "ASA physical status and readiness for surgery",
+      "oneLine": "Grade the patient, decide if they are ready, and present it in one breath",
+      "why": "The ASA physical status grade is a shared language for how ill a patient is before surgery. It does not measure the risk of the operation itself, so the decision about readiness combines the grade with the surgery, its urgency and any condition that can still be improved.",
+      "steps": [
+        { "text": "Assign the ASA grade: I a normal healthy patient; II mild systemic disease; III severe systemic disease; IV severe systemic disease that is a constant threat to life; V a moribund patient not expected to survive without the operation; VI a brain-dead organ donor. Add E for an emergency." },
+        { "text": "Name the conditions that can still be optimised before an elective operation, such as uncontrolled blood pressure or blood sugar, an active chest infection, or anaemia." },
+        { "text": "Decide: fit to proceed, proceed with precautions, or postpone for optimisation, and say who you would discuss this with." },
+        { "text": "Present a summary: age, operation, key findings, ASA grade, airway, fasting status and the plan." }
+      ],
+      "practice": "Grade ten patients from a ward list by ASA class with a partner, then compare and argue the ones you disagree on.",
+      "pitfalls": [
+        "Treating the ASA grade as the risk of the operation.",
+        "Grading a patient by age alone; age is not a systemic disease.",
+        "Forgetting the E suffix for an emergency.",
+        "Postponing without naming what must improve and who will improve it."
+      ],
+      "probes": [
+        { "level": 1, "q": "Define ASA grades I to VI.", "a": "I normal healthy; II mild systemic disease; III severe systemic disease; IV severe systemic disease that is a constant threat to life; V moribund, not expected to survive without the operation; VI brain-dead organ donor.", "accept": ["healthy", "mild", "severe", "threat", "moribund", "brain dead", "donor"], "minMatch": 5 },
+        { "level": 2, "q": "What does the suffix E mean?", "a": "Emergency: a delay in treatment would lead to a significant increase in threat to life or body part.", "accept": ["emergency", "delay", "threat"], "minMatch": 1 },
+        { "level": 3, "q": "Does the ASA grade predict the risk of the operation? Explain.", "a": "No. It describes the patient's preoperative health only. The overall risk also depends on the type and urgency of surgery and the anaesthetic.", "accept": ["no", "patient", "surgery", "urgency", "health"], "minMatch": 2 },
+        { "level": 4, "q": "Give two reasons to postpone an elective operation after preoperative assessment.", "a": "Uncontrolled hypertension or diabetes, an active chest infection, untreated anaemia, or an unfasted patient, where the condition can be improved before surgery.", "accept": ["hypertension", "diabetes", "infection", "anaemia", "fasted", "unfasted"], "minMatch": 2 }
+      ],
+      "rubric": [
+        { "id": "grade", "text": "Assigns a correct ASA physical status grade and adds E if it is an emergency", "critical": true },
+        { "id": "optimise", "text": "Names any condition that can be optimised before an elective operation" },
+        { "id": "decide", "text": "States a clear decision: proceed, proceed with precautions, or postpone, and whom to discuss with" },
+        { "id": "present", "text": "Presents a concise summary with operation, findings, ASA grade, airway, fasting and plan" }
+      ],
+      "sources": [
+        { "source": "American Society of Anesthesiologists: Statement on ASA Physical Status Classification System (amended 2020)", "locator": "Definitions of ASA I to VI and the E modifier, with examples", "url": "https://www.asahq.org/standards-and-practice-parameters/statement-on-asa-physical-status-classification-system" },
+        { "source": "Association of Anaesthetists (AAGBI): Pre-operative assessment and patient preparation (2010)", "locator": "Optimisation and the decision to proceed", "url": "https://doi.org/10.21466/g.paapp-t.2010" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "skill.exam.ana.airway_mouth": {
+      "id": "skill.exam.ana.airway_mouth",
+      "kind": "exam",
+      "system": "anaesthesia",
+      "title": "Airway assessment (1): face, mouth opening, teeth and Mallampati",
+      "oneLine": "Look at the face, measure the mouth opening, check the teeth, then the Mallampati class",
+      "why": "A difficult airway found before induction is a plan; a difficult airway found after induction is an emergency. No single test predicts difficulty well, so the bedside assessment combines several.",
+      "steps": [
+        { "text": "Look at the face and neck: beard, obesity, a small or receding jaw, prominent upper teeth, facial trauma, a neck mass, scars or previous radiotherapy." },
+        { "text": "Ask the patient to open the mouth as wide as possible and measure the gap between the upper and lower incisors, in fingerbreadths or centimetres. A gap of less than 3 cm suggests difficulty." },
+        { "text": "Check the teeth: loose, capped, chipped or false teeth, and prominent upper incisors." },
+        { "text": "Mallampati class: patient sitting upright, head neutral, mouth open fully, tongue out as far as possible, without saying 'aah'. Look from eye level with a torch." },
+        { "text": "Grade it: class I soft palate, fauces, uvula and pillars seen; class II soft palate, fauces and uvula; class III soft palate and base of the uvula; class IV soft palate not seen." }
+      ],
+      "normal": "Mouth opening of three fingerbreadths or more, sound teeth, and Mallampati class I or II.",
+      "abnormal": "Mouth opening under 3 cm, loose or prominent teeth, or Mallampati class III or IV.",
+      "significance": "Each finding raises the chance of difficult laryngoscopy; together they raise it more. A predicted difficult airway is discussed with a senior and planned for in advance.",
+      "practice": "Grade the Mallampati class on five partners, both with and without phonation, and see how saying 'aah' changes the class.",
+      "pitfalls": [
+        "Asking the patient to say 'aah', which lifts the palate and improves the class falsely.",
+        "Testing with the patient lying down or the head extended.",
+        "Relying on the Mallampati class alone.",
+        "Not recording loose teeth before induction."
+      ],
+      "probes": [
+        { "level": 1, "q": "Describe the four Mallampati classes.", "a": "Class I soft palate, fauces, uvula and pillars visible; class II soft palate, fauces and uvula; class III soft palate and base of uvula; class IV soft palate not visible.", "accept": ["soft palate", "fauces", "uvula", "pillars", "base", "not visible"], "minMatch": 4 },
+        { "level": 2, "q": "How is the Mallampati test done correctly?", "a": "Sitting upright, head neutral, mouth fully open, tongue fully out, without phonation, viewed at eye level.", "accept": ["sitting", "neutral", "tongue", "without phonation", "phonation", "eye level"], "minMatch": 3 },
+        { "level": 3, "q": "What mouth opening suggests a difficult airway?", "a": "An interincisor gap of less than 3 cm, roughly less than two fingerbreadths.", "accept": ["3", "cm", "fingerbreadths", "interincisor"], "minMatch": 2 }
+      ],
+      "rubric": [
+        { "id": "inspect", "text": "Inspects face and neck for beard, obesity, small jaw, prominent teeth, masses or radiotherapy" },
+        { "id": "opening", "text": "Measures mouth opening (interincisor gap)" },
+        { "id": "teeth", "text": "Checks teeth for loose, capped or false teeth" },
+        { "id": "mallampati", "text": "Performs Mallampati correctly (sitting, head neutral, tongue out, no phonation) and grades the class", "critical": true }
+      ],
+      "sources": [
+        { "source": "Samsoon GL, Young JR. Difficult tracheal intubation: a retrospective study. Anaesthesia 1987;42:487-490", "locator": "Modified Mallampati classes I to IV", "url": "https://doi.org/10.1111/j.1365-2044.1987.tb04039.x" },
+        { "source": "ASA Practice Guidelines for Management of the Difficult Airway (2013). Anesthesiology 2013;118:251-270", "locator": "Table 1: components of the preoperative airway physical examination", "url": "https://doi.org/10.1097/ALN.0b013e31827773b2" },
+        { "source": "2022 ASA Practice Guidelines for Management of the Difficult Airway. Anesthesiology 2022;136:31-81", "locator": "Evaluation of the airway before airway management", "url": "https://doi.org/10.1097/ALN.0000000000004002" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "skill.exam.ana.airway_jaw_neck": {
+      "id": "skill.exam.ana.airway_jaw_neck",
+      "kind": "exam",
+      "system": "anaesthesia",
+      "title": "Airway assessment (2): thyromental distance, upper lip bite and neck movement",
+      "oneLine": "How much room under the jaw, how far the jaw moves forward, and how far the neck moves",
+      "why": "At laryngoscopy the tongue must be pushed into the space under the jaw, the jaw must move forward, and the head must extend. These three tests check each of those directly.",
+      "steps": [
+        { "text": "Thyromental distance: with the head fully extended, measure from the thyroid notch to the tip of the chin. Less than three fingerbreadths (about 6 cm) suggests difficulty." },
+        { "text": "Upper lip bite test: ask the patient to bite the upper lip with the lower incisors as high as possible. Class I covers the lip above the vermilion line; class II bites below it; class III cannot bite the upper lip. Class III predicts difficult laryngoscopy." },
+        { "text": "Neck movement: ask the patient to touch the chest with the chin, then look up at the ceiling as far as possible. Note limited flexion or extension and any pain or tingling." },
+        { "text": "Ask about and look for predictors of difficult mask ventilation: beard, obesity, no teeth, older age and snoring." },
+        { "text": "Summarise: say whether you predict difficult mask ventilation, difficult laryngoscopy, or both, and what you would plan." }
+      ],
+      "normal": "Thyromental distance of three fingerbreadths or more, upper lip bite class I, and full painless neck flexion and extension.",
+      "abnormal": "Short thyromental distance, upper lip bite class III, or limited or painful neck movement.",
+      "significance": "Limited neck movement in rheumatoid arthritis, ankylosing spondylitis or a cervical injury changes the technique, and an unstable neck must not be extended. A predicted difficult airway is planned with a senior before induction.",
+      "practice": "Measure the thyromental distance and upper lip bite class on five partners, and present each airway in one sentence.",
+      "pitfalls": [
+        "Measuring the thyromental distance without full head extension.",
+        "Extending the neck of a patient with a possible cervical spine injury.",
+        "Assessing intubation but forgetting to predict difficult mask ventilation.",
+        "Not stating a conclusion and a plan after the tests."
+      ],
+      "probes": [
+        { "level": 1, "q": "What is a short thyromental distance?", "a": "Less than three fingerbreadths, about 6 cm, from the thyroid notch to the chin with the head fully extended.", "accept": ["three", "6", "fingerbreadths", "extended", "thyroid notch"], "minMatch": 2 },
+        { "level": 2, "q": "Describe the upper lip bite test classes.", "a": "Class I the lower incisors bite the upper lip above the vermilion line; class II below the vermilion line; class III cannot bite the upper lip, which predicts difficult laryngoscopy.", "accept": ["vermilion", "above", "below", "cannot", "upper lip"], "minMatch": 3 },
+        { "level": 3, "q": "Name predictors of difficult mask ventilation.", "a": "Beard, obesity, no teeth, older age and snoring or sleep apnoea.", "accept": ["beard", "obesity", "teeth", "age", "snoring"], "minMatch": 3 },
+        { "level": 4, "q": "A patient with rheumatoid arthritis needs a general anaesthetic. What airway concern do you have?", "a": "Atlantoaxial instability and limited neck movement, so neck extension may be dangerous and laryngoscopy difficult. Assess symptoms, consider imaging, and plan with a senior.", "accept": ["atlantoaxial", "instability", "neck", "extension", "senior"], "minMatch": 2 }
+      ],
+      "rubric": [
+        { "id": "tmd", "text": "Measures thyromental distance with the head fully extended" },
+        { "id": "ulbt", "text": "Performs the upper lip bite test and grades it" },
+        { "id": "neck", "text": "Tests neck flexion and extension and asks about pain or tingling" },
+        { "id": "bmv", "text": "Checks predictors of difficult mask ventilation (beard, obesity, no teeth, age, snoring)" },
+        { "id": "conclude", "text": "States a conclusion (predicted easy or difficult airway) and a plan, including senior help if difficult", "critical": true }
+      ],
+      "sources": [
+        { "source": "Khan ZH et al. A comparison of the upper lip bite test with modified Mallampati classification. Anesth Analg 2003;96:595-599", "locator": "Upper lip bite test classes I to III", "url": "https://doi.org/10.1097/00000539-200302000-00053" },
+        { "source": "ASA Practice Guidelines for Management of the Difficult Airway (2013). Anesthesiology 2013;118:251-270", "locator": "Table 1: thyromental distance, neck range of motion", "url": "https://doi.org/10.1097/ALN.0b013e31827773b2" },
+        { "source": "All India Difficult Airway Association 2016 guidelines for unanticipated difficult tracheal intubation in adults. Indian J Anaesth 2016;60:885-898", "locator": "Airway assessment and planning", "url": "https://doi.org/10.4103/0019-5049.195481" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "skill.approach.ana.consent_setup": {
+      "id": "skill.approach.ana.consent_setup",
+      "kind": "approach",
+      "system": "anaesthesia",
+      "title": "Consent for anaesthesia (1): setting up the conversation",
+      "oneLine": "Right patient, right time, right language, and find out what they already know",
+      "why": "Consent is valid only if the patient has capacity, is given enough information, and decides freely. The setting decides whether any of that is possible.",
+      "steps": [
+        { "text": "Choose a private place and a time before premedication or sedation, not on the operating table." },
+        { "text": "Check capacity: can the patient understand, retain and weigh the information, and tell you a decision? Use an interpreter if needed, not a relative." },
+        { "text": "Ask what they already know about the operation and the anaesthetic, and what worries them most." },
+        { "text": "Make clear that the decision is theirs and that they may ask questions or change their mind." }
+      ],
+      "practice": "Open a consent conversation with a partner in three ways and ask them which felt least rushed.",
+      "pitfalls": [
+        "Taking consent after premedication or in the anaesthetic room.",
+        "Using a family member as the interpreter.",
+        "Starting to list risks before finding out what the patient knows or fears."
+      ],
+      "probes": [
+        { "level": 1, "q": "What are the three requirements for valid consent?", "a": "The patient has capacity, is adequately informed, and decides voluntarily without coercion.", "accept": ["capacity", "informed", "voluntary", "voluntarily", "coercion"], "minMatch": 2 },
+        { "level": 2, "q": "How do you test capacity?", "a": "Check that the patient can understand the information, retain it, weigh it up, and communicate a decision.", "accept": ["understand", "retain", "weigh", "communicate"], "minMatch": 3 }
+      ],
+      "rubric": [
+        { "id": "setting", "text": "Chooses a private setting before any sedation" },
+        { "id": "capacity", "text": "Checks capacity and offers an interpreter if needed", "critical": true },
+        { "id": "explore", "text": "Asks what the patient knows and what worries them" },
+        { "id": "voluntary", "text": "Makes clear that the decision is the patient's and they may change their mind" }
+      ],
+      "sources": [
+        { "source": "Association of Anaesthetists (AAGBI): Consent for anaesthesia 2017. Anaesthesia 2017;72:93-105", "locator": "Capacity, information, voluntariness; timing of the consent discussion", "url": "https://doi.org/10.1111/anae.13762" },
+        { "source": "Supreme Court of India, Samira Kohli v Dr Prabha Manchanda (16 January 2008)", "locator": "Elements of real and valid consent", "url": "https://indiankanoon.org/doc/438423/" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "skill.approach.ana.consent_ga_info": {
+      "id": "skill.approach.ana.consent_ga_info",
+      "kind": "approach",
+      "system": "anaesthesia",
+      "title": "Consent for general anaesthesia (2): what happens, risks and alternatives",
+      "oneLine": "The journey from fasting to recovery, the common and the serious risks, and the other choices",
+      "why": "Patients fear the unknown more than the risk. Explaining what will happen, step by step, makes the risks easier to understand, and naming the alternatives makes the choice real.",
+      "steps": [
+        { "text": "Explain what will happen: fasting, a cannula, monitoring with a blood pressure cuff, ECG stickers and a finger probe, breathing oxygen through a mask, and drugs into the vein to go to sleep." },
+        { "text": "Explain that a breathing tube or a laryngeal mask may be placed after they are asleep, and that they will wake up in the recovery room." },
+        { "text": "Explain the common side effects: sore throat, nausea and vomiting, shivering, and drowsiness or confusion, especially in older people." },
+        { "text": "Explain the rare but serious risks in plain words: damage to teeth, awareness, a serious allergic reaction, inhaling stomach contents, and very rarely brain damage or death. Add any risk specific to this patient, such as a difficult airway." },
+        { "text": "Explain the alternatives, such as a spinal or nerve block, and the plan for pain relief after surgery." }
+      ],
+      "practice": "Explain a general anaesthetic to a partner with no medical words, then ask them to tell it back to you.",
+      "pitfalls": [
+        "Listing risks without explaining what will happen.",
+        "Using jargon such as 'aspiration' or 'intubation' without explaining it.",
+        "Leaving out risks specific to this patient.",
+        "Not mentioning that a regional technique may be an alternative."
+      ],
+      "probes": [
+        { "level": 1, "q": "Name three common side effects of a general anaesthetic.", "a": "Sore throat, nausea and vomiting, shivering, and drowsiness or confusion.", "accept": ["sore throat", "nausea", "vomiting", "shivering", "drowsiness", "confusion"], "minMatch": 3 },
+        { "level": 2, "q": "Name the rare serious risks you would mention.", "a": "Damage to teeth, awareness, anaphylaxis, aspiration of stomach contents, and very rarely brain damage or death.", "accept": ["teeth", "awareness", "anaphylaxis", "allergic", "aspiration", "death"], "minMatch": 3 },
+        { "level": 3, "q": "How does the Samira Kohli judgment shape what you disclose?", "a": "The doctor must explain the nature and purpose of the procedure, its benefits, the alternatives, the substantial risks, and the consequences of refusing.", "accept": ["nature", "purpose", "benefits", "alternatives", "risks", "refusing"], "minMatch": 4 }
+      ],
+      "rubric": [
+        { "id": "journey", "text": "Explains what will happen from fasting to recovery in plain words" },
+        { "id": "airway", "text": "Explains that a breathing tube or laryngeal mask may be used after they are asleep" },
+        { "id": "common", "text": "Explains the common side effects (sore throat, nausea, shivering, confusion)" },
+        { "id": "serious", "text": "Explains the rare serious risks (teeth, awareness, allergy, aspiration, brain damage or death) and any patient-specific risk", "critical": true },
+        { "id": "alternatives", "text": "Explains the alternatives and the pain relief plan" }
+      ],
+      "sources": [
+        { "source": "Association of Anaesthetists (AAGBI): Consent for anaesthesia 2017. Anaesthesia 2017;72:93-105", "locator": "Information that patients should be given about anaesthesia and its risks", "url": "https://doi.org/10.1111/anae.13762" },
+        { "source": "Supreme Court of India, Samira Kohli v Dr Prabha Manchanda (16 January 2008)", "locator": "Information to be disclosed: nature, purpose, benefits, alternatives, substantial risks, consequences of refusing", "url": "https://indiankanoon.org/doc/438423/" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "skill.approach.ana.consent_spinal_info": {
+      "id": "skill.approach.ana.consent_spinal_info",
+      "kind": "approach",
+      "system": "anaesthesia",
+      "title": "Consent for spinal anaesthesia (2): what happens, risks and alternatives",
+      "oneLine": "The injection in the back, the numb heavy legs, the common and the serious risks, and the backup plan",
+      "why": "A patient who knows the legs will be numb and heavy, that they may feel pulling but not pain, and that a general anaesthetic is the backup, stays calm and still. Stillness makes the block safer.",
+      "steps": [
+        { "text": "Explain what will happen: a cannula and monitors, sitting or lying curled up, cleaning the back, a small injection of local anaesthetic in the skin, then a fine needle between the bones of the lower back." },
+        { "text": "Explain what they will feel: warmth, then numbness and heaviness of the legs for some hours; they may feel touch or pulling during surgery but should not feel pain. Sedation can be offered." },
+        { "text": "Explain the common effects: low blood pressure with nausea, itching if an opioid is added, shivering, and difficulty passing urine." },
+        { "text": "Explain the less common and rare risks: a severe headache after the spinal that may need treatment, a block that does not work well enough, temporary nerve damage, and very rarely permanent nerve damage, infection or a blood clot near the spinal cord." },
+        { "text": "Explain that a general anaesthetic is the backup if the spinal does not work, and that a general anaesthetic is also the alternative." }
+      ],
+      "practice": "Explain a spinal to a partner who is frightened of needles in the back, and answer their three questions.",
+      "pitfalls": [
+        "Promising they will feel nothing at all; they may feel touch and pulling.",
+        "Leaving out the post-dural puncture headache.",
+        "Not explaining the backup plan if the block fails.",
+        "Not asking about anticoagulants before offering a spinal."
+      ],
+      "probes": [
+        { "level": 1, "q": "Name three common effects of a spinal anaesthetic you would tell the patient.", "a": "Low blood pressure with nausea, itching if an opioid is used, shivering, and difficulty passing urine.", "accept": ["blood pressure", "nausea", "itching", "shivering", "urine"], "minMatch": 3 },
+        { "level": 2, "q": "Describe the post-dural puncture headache.", "a": "A headache, usually at the front or back of the head, that is worse on sitting or standing and better lying flat, starting within a few days of the spinal. It can be treated, including with an epidural blood patch.", "accept": ["sitting", "standing", "lying", "flat", "blood patch", "worse"], "minMatch": 3 },
+        { "level": 3, "q": "What is the backup plan if the spinal does not work?", "a": "Repeat the block if appropriate, or convert to a general anaesthetic, which the patient should have been told about at consent.", "accept": ["general anaesthetic", "general", "repeat", "convert"], "minMatch": 1 }
+      ],
+      "rubric": [
+        { "id": "journey", "text": "Explains the procedure: position, cleaning, skin local anaesthetic, fine needle in the lower back" },
+        { "id": "feel", "text": "Explains numb, heavy legs and that touch or pulling may be felt but not pain" },
+        { "id": "common", "text": "Explains common effects: low blood pressure, nausea, itching, shivering, urinary retention" },
+        { "id": "serious", "text": "Explains headache after the spinal, failed block, nerve damage, and rare infection or haematoma", "critical": true },
+        { "id": "backup", "text": "Explains general anaesthesia as the backup and as the alternative" }
+      ],
+      "sources": [
+        { "source": "Association of Anaesthetists (AAGBI): Consent for anaesthesia 2017. Anaesthesia 2017;72:93-105", "locator": "Information about regional anaesthesia and its risks", "url": "https://doi.org/10.1111/anae.13762" },
+        { "source": "Horlocker TT et al. ASRA guideline on regional anesthesia and antithrombotic therapy. Reg Anesth Pain Med 2018;43:263-309", "locator": "Spinal haematoma risk and its relation to anticoagulants", "url": "https://doi.org/10.1097/AAP.0000000000000763" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "skill.approach.ana.consent_close": {
+      "id": "skill.approach.ana.consent_close",
+      "kind": "approach",
+      "system": "anaesthesia",
+      "title": "Consent for anaesthesia (3): checking understanding, documenting and closing",
+      "oneLine": "Ask them to tell it back, answer questions, record it, and give the fasting instructions",
+      "why": "Information given is not information understood. Asking the patient to explain the plan back, and writing down what was said, is what turns a conversation into consent that will stand.",
+      "steps": [
+        { "text": "Ask the patient to explain the plan back to you in their own words, and fill any gaps." },
+        { "text": "Invite questions and answer them honestly; offer time to think or written information if wanted." },
+        { "text": "Record the discussion: the technique agreed, the risks discussed, the alternatives, and the questions asked. Obtain a signature where local policy requires written consent." },
+        { "text": "Give clear fasting and medicine instructions for the day of surgery, and say who they will meet next." }
+      ],
+      "practice": "Close a consent conversation with a partner using a teach-back question, then write a three-line consent note.",
+      "pitfalls": [
+        "Asking 'Do you understand?' instead of asking them to explain it back.",
+        "Treating the signature as the consent rather than the discussion.",
+        "Not writing down which risks were discussed."
+      ],
+      "probes": [
+        { "level": 1, "q": "What do you write in the notes after an anaesthetic consent discussion?", "a": "The technique agreed, the risks discussed, the alternatives offered, the patient's questions, and that they agreed.", "accept": ["technique", "risks", "alternatives", "questions", "agreed"], "minMatch": 3 },
+        { "level": 2, "q": "What is the teach-back method?", "a": "Asking the patient to explain the plan back in their own words to check understanding, then correcting any gaps.", "accept": ["explain", "back", "own words", "understanding"], "minMatch": 2 }
+      ],
+      "rubric": [
+        { "id": "teachback", "text": "Checks understanding by asking the patient to explain the plan back", "critical": true },
+        { "id": "questions", "text": "Invites and answers questions and offers time or written information" },
+        { "id": "document", "text": "Documents technique, risks, alternatives and questions, with signature where required" },
+        { "id": "instructions", "text": "Gives fasting and medicine instructions for the day of surgery" }
+      ],
+      "sources": [
+        { "source": "Association of Anaesthetists (AAGBI): Consent for anaesthesia 2017. Anaesthesia 2017;72:93-105", "locator": "Documentation of consent for anaesthesia", "url": "https://doi.org/10.1111/anae.13762" },
+        { "source": "ASA Practice Guidelines for Preoperative Fasting. Anesthesiology 2017;126:376-393", "locator": "Fasting recommendations given to patients", "url": "https://doi.org/10.1097/aln.0000000000001452" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "skill.exam.ana.opa": {
+      "id": "skill.exam.ana.opa",
+      "kind": "exam",
+      "system": "anaesthesia",
+      "title": "Opening the airway and inserting an oropharyngeal airway",
+      "oneLine": "Head tilt, chin lift or jaw thrust, then size the airway from the incisors to the angle of the jaw",
+      "why": "In an unconscious patient the tongue and soft tissues fall back and block the pharynx. Opening the airway and holding the tongue forward with an oropharyngeal airway often turns an impossible mask seal into easy ventilation.",
+      "steps": [
+        { "text": "Open the airway with head tilt and chin lift, or with jaw thrust alone if a neck injury is possible." },
+        { "text": "Choose the size: hold the airway against the face and pick the one that reaches from the incisors to the angle of the jaw." },
+        { "text": "In an adult, insert it upside down along the hard palate, then rotate it 180 degrees as it passes the soft palate so it sits over the tongue. Alternatively, depress the tongue and insert it the right way up." },
+        { "text": "Check that the flange sits at the lips and that the airway is now clear. Remove it if the patient gags or coughs, and use a nasopharyngeal airway instead, unless a skull base fracture is suspected." }
+      ],
+      "normal": "The flange sits at the lips, the patient tolerates it, and air moves freely with chest rise on ventilation.",
+      "abnormal": "Gagging, coughing or laryngospasm, or an airway that is too short or too long and still obstructs.",
+      "significance": "An airway that is too long can push the epiglottis down and block the larynx; one that is too short can push the tongue back. Gagging means the patient is too awake for it.",
+      "practice": "Size and insert oropharyngeal airways on a manikin three times, saying aloud how you chose the size.",
+      "pitfalls": [
+        "Choosing the size by guesswork instead of measuring incisors to angle of jaw.",
+        "Pushing the tongue back by inserting the right way up without a tongue depressor.",
+        "Forcing it in a patient who is gagging.",
+        "Using head tilt when a neck injury is possible; use jaw thrust."
+      ],
+      "probes": [
+        { "level": 1, "q": "How do you size an oropharyngeal airway?", "a": "Hold it against the face; the right size reaches from the incisors to the angle of the jaw.", "accept": ["incisors", "angle", "jaw", "mandible"], "minMatch": 2 },
+        { "level": 2, "q": "Which airway manoeuvre do you use if a cervical spine injury is possible?", "a": "Jaw thrust without head tilt.", "accept": ["jaw thrust"], "minMatch": 1 },
+        { "level": 3, "q": "When is a nasopharyngeal airway preferred, and when is it avoided?", "a": "Preferred when the patient has a gag reflex or the mouth cannot open; avoided when a skull base fracture is suspected.", "accept": ["gag", "mouth", "skull base", "fracture"], "minMatch": 2 }
+      ],
+      "rubric": [
+        { "id": "open", "text": "Opens the airway with head tilt and chin lift, or jaw thrust if neck injury is possible" },
+        { "id": "size", "text": "Sizes the airway from the incisors to the angle of the jaw", "critical": true },
+        { "id": "insert", "text": "Inserts it correctly (inverted then rotated 180 degrees, or with a tongue depressor)" },
+        { "id": "check", "text": "Confirms position, and removes it if the patient gags" }
+      ],
+      "sources": [
+        { "source": "Resuscitation Council UK: 2025 Adult basic life support guidelines", "locator": "Airway opening: head tilt and chin lift, jaw thrust", "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-basic-life-support-guidelines" },
+        { "source": "Resuscitation Council UK: 2025 Adult advanced life support guidelines", "locator": "Basic airway adjuncts during resuscitation", "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-advanced-life-support-guidelines" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "skill.exam.ana.bmv": {
+      "id": "skill.exam.ana.bmv",
+      "kind": "exam",
+      "system": "anaesthesia",
+      "title": "Bag-mask ventilation",
+      "oneLine": "Oxygen on, good seal, open airway, gentle breaths that just make the chest rise",
+      "why": "Bag-mask ventilation keeps a patient alive while everything else is prepared. It is the first airway skill in every resuscitation and every failed intubation plan, and it is harder than it looks.",
+      "steps": [
+        { "text": "Connect the bag to oxygen at a high flow with the reservoir bag attached, and choose a mask that covers the nose and mouth without covering the eyes." },
+        { "text": "Position the head (sniffing position unless a neck injury is possible) and insert an oropharyngeal airway if the patient is unconscious." },
+        { "text": "Hold the mask with one hand in a C and E grip: thumb and index finger on the mask, the other three fingers lifting the jaw into the mask. If the seal is poor, use two hands with a jaw thrust while an assistant squeezes the bag." },
+        { "text": "Give each breath over about 1 second, with just enough volume to make the chest rise. Avoid fast or large breaths, which inflate the stomach." },
+        { "text": "Check that it is working: chest rise, misting of the mask, and a capnography trace if available, with SpO2 monitoring. In cardiac arrest without an advanced airway give 2 breaths after every 30 compressions." }
+      ],
+      "normal": "Visible chest rise with each breath, a good seal with little leak, and a capnography waveform.",
+      "abnormal": "No chest rise, a large leak, or a rising abdomen.",
+      "significance": "No chest rise means an open-airway or seal problem: reposition, add an airway adjunct, change to a two-person technique, and call for help. Difficult mask ventilation is a step towards a supraglottic airway in the difficult airway plan.",
+      "practice": "Ventilate a manikin for two minutes with one hand, then two hands, and count the breaths with visible chest rise.",
+      "pitfalls": [
+        "Pushing the mask down onto the face instead of lifting the jaw into the mask.",
+        "Ventilating too fast or with too much volume, which inflates the stomach.",
+        "Forgetting to connect oxygen or the reservoir bag.",
+        "Persisting with a poor seal instead of changing to a two-person technique."
+      ],
+      "probes": [
+        { "level": 1, "q": "Describe the C and E grip.", "a": "The thumb and index finger form a C over the mask, and the other three fingers form an E lifting the jaw into the mask.", "accept": ["thumb", "index", "three fingers", "jaw", "lift"], "minMatch": 3 },
+        { "level": 2, "q": "How do you know bag-mask ventilation is working?", "a": "Visible chest rise, misting of the mask, a capnography trace, and stable or rising SpO2.", "accept": ["chest rise", "misting", "capnography", "spo2"], "minMatch": 2 },
+        { "level": 3, "q": "Why should each breath be gentle and over about 1 second?", "a": "Large or fast breaths raise airway pressure and inflate the stomach, causing regurgitation and aspiration, and reduce venous return.", "accept": ["stomach", "regurgitation", "aspiration", "pressure", "venous return"], "minMatch": 2 },
+        { "level": 4, "q": "One-person mask ventilation fails. What do you do next?", "a": "Call for help, reposition and use a two-person technique with jaw thrust, add an oropharyngeal or nasopharyngeal airway, and if still failing insert a supraglottic airway.", "accept": ["help", "two person", "jaw thrust", "oropharyngeal", "supraglottic"], "minMatch": 3 }
+      ],
+      "rubric": [
+        { "id": "oxygen", "text": "Connects high-flow oxygen with the reservoir and selects the right mask size", "critical": true },
+        { "id": "position", "text": "Positions the head and inserts an oropharyngeal airway" },
+        { "id": "grip", "text": "Uses a C and E grip, lifting the jaw into the mask, or two hands if the seal is poor" },
+        { "id": "breath", "text": "Gives each breath over about 1 second, just enough to make the chest rise" },
+        { "id": "confirm", "text": "Confirms ventilation by chest rise, mask misting, capnography and SpO2", "critical": true },
+        { "id": "escalate", "text": "States what to do if ventilation fails: help, two-person technique, adjunct, supraglottic airway" }
+      ],
+      "sources": [
+        { "source": "Resuscitation Council UK: 2025 Adult advanced life support guidelines", "locator": "Airway and ventilation: bag-mask with oxygen, 30:2 without an advanced airway", "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-advanced-life-support-guidelines" },
+        { "source": "Frerk C et al. Difficult Airway Society 2015 guidelines for unanticipated difficult intubation in adults. Br J Anaesth 2015;115:827-848", "locator": "Facemask ventilation technique and the plan when it fails", "url": "https://doi.org/10.1093/bja/aev371" },
+        { "source": "StewardMD clinical protocol: Adult cardiac arrest (kb/clinical-protocols/adult-cardiac-arrest.json)", "locator": "No advanced airway: 30:2 with bag-mask and 100% oxygen; avoid hyperventilation", "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001376" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "skill.exam.ana.lma_prepare": {
+      "id": "skill.exam.ana.lma_prepare",
+      "kind": "exam",
+      "system": "anaesthesia",
+      "title": "Laryngeal mask airway (1): choosing and preparing",
+      "oneLine": "Right patient, right size by weight, cuff checked and lubricated on the back",
+      "why": "A laryngeal mask is quick and gentle, but it does not protect fully against aspiration. Choosing the right patient and preparing the device properly prevent most failures.",
+      "steps": [
+        { "text": "Confirm the indication and check for reasons to avoid it: a full stomach or high aspiration risk, or a need for high ventilation pressures." },
+        { "text": "Choose the size from the patient's weight using the chart on the device: for adults usually size 3, 4 or 5." },
+        { "text": "Check the device: inflate the cuff to test for leaks, then deflate it fully so it forms a smooth wedge with no folds. Prefer a second-generation device with a drain tube." },
+        { "text": "Lubricate the back (posterior) surface only, with a water-based lubricant." },
+        { "text": "Prepare suction, oxygen, a self-inflating bag and monitoring, and preoxygenate the patient." }
+      ],
+      "normal": "The right size is chosen, the cuff holds air and deflates to a smooth wedge, and suction and oxygen are ready.",
+      "abnormal": "A leaking cuff, folds in the deflated cuff, or lubricant on the front of the mask.",
+      "significance": "Folds in the cuff catch the epiglottis and cause obstruction. A patient at high risk of aspiration needs a tracheal tube instead.",
+      "practice": "Prepare three laryngeal masks of different sizes on a tray and name the weight range of each from its label.",
+      "pitfalls": [
+        "Using a laryngeal mask in a patient with a full stomach.",
+        "Choosing the size by guesswork instead of weight.",
+        "Lubricating the front of the cuff, which can reach the larynx and cause coughing.",
+        "Not checking the cuff before use."
+      ],
+      "probes": [
+        { "level": 1, "q": "How do you choose the size of a laryngeal mask?", "a": "By the patient's weight, using the chart printed on the device; most adults need size 3, 4 or 5.", "accept": ["weight", "chart", "3", "4", "5"], "minMatch": 2 },
+        { "level": 2, "q": "Name two contraindications to a laryngeal mask.", "a": "A full stomach or high risk of aspiration, and the need for high airway pressures such as stiff lungs.", "accept": ["full stomach", "aspiration", "high", "pressures"], "minMatch": 2 },
+        { "level": 3, "q": "What is the advantage of a second-generation supraglottic device?", "a": "It has a drain tube for gastric contents and seals at higher pressures, giving some protection against aspiration.", "accept": ["drain", "gastric", "seal", "aspiration"], "minMatch": 2 }
+      ],
+      "rubric": [
+        { "id": "indication", "text": "Confirms the indication and excludes a full stomach or high aspiration risk", "critical": true },
+        { "id": "size", "text": "Chooses the size by weight from the device chart" },
+        { "id": "check", "text": "Checks the cuff for leaks and deflates it to a smooth wedge" },
+        { "id": "lube", "text": "Lubricates the posterior surface only" },
+        { "id": "prepare", "text": "Prepares suction, oxygen, bag and monitoring and preoxygenates" }
+      ],
+      "sources": [
+        { "source": "Frerk C et al. Difficult Airway Society 2015 guidelines. Br J Anaesth 2015;115:827-848", "locator": "Plan B: second-generation supraglottic airway devices", "url": "https://doi.org/10.1093/bja/aev371" },
+        { "source": "All India Difficult Airway Association 2016 guidelines. Indian J Anaesth 2016;60:885-898", "locator": "Supraglottic airway devices in the difficult airway algorithm", "url": "https://doi.org/10.4103/0019-5049.195481" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "skill.exam.ana.lma_insert": {
+      "id": "skill.exam.ana.lma_insert",
+      "kind": "exam",
+      "system": "anaesthesia",
+      "title": "Laryngeal mask airway (2): inserting and confirming",
+      "oneLine": "Deep enough, along the palate, inflate, then prove it with capnography",
+      "why": "Inserting the mask too light causes coughing and laryngospasm. Pressing it along the palate avoids folding the epiglottis. Capnography is the proof that the airway works.",
+      "steps": [
+        { "text": "Check that the patient is deeply enough anaesthetised: no response to a jaw thrust and a relaxed jaw." },
+        { "text": "Place the head in the sniffing position, open the mouth, and press the mask tip against the hard palate." },
+        { "text": "Using the index finger at the junction of the cuff and tube, slide the mask along the palate and back of the pharynx in one smooth movement until resistance is felt." },
+        { "text": "Inflate the cuff with the recommended volume or to the device's maximum pressure, without holding the tube; it usually rises slightly as it seats." },
+        { "text": "Confirm placement: a square capnography trace, chest rise, no large leak with gentle ventilation, and easy breathing. Insert a bite block and secure the tube." },
+        { "text": "If placement fails, remove, reoxygenate with bag and mask, and try again with a change in size or technique; call for help after repeated failure." }
+      ],
+      "normal": "A square capnography trace, good chest rise, a small or no leak at normal pressures, and easy ventilation.",
+      "abnormal": "No capnography trace, a large leak, stridor or laryngospasm, or a gurgling sound.",
+      "significance": "No capnography trace means no ventilation until proven otherwise. Repeated failed attempts are limited, as in the difficult airway plan, and oxygenation always comes first.",
+      "practice": "Insert a laryngeal mask on a manikin three times and confirm each time with a capnography trace on a simulator.",
+      "pitfalls": [
+        "Inserting it before the patient is deep enough, causing coughing or laryngospasm.",
+        "Holding the tube while inflating, which stops the mask from seating.",
+        "Over-inflating the cuff, which worsens the leak and causes sore throat.",
+        "Accepting chest movement without a capnography trace."
+      ],
+      "probes": [
+        { "level": 1, "q": "How do you confirm a laryngeal mask is correctly placed?", "a": "A square capnography trace, chest rise, no large leak, and easy ventilation.", "accept": ["capnography", "chest rise", "leak", "ventilation"], "minMatch": 2 },
+        { "level": 2, "q": "Why must the patient be deep enough before insertion?", "a": "A light plane of anaesthesia causes coughing, gagging, and laryngospasm on insertion.", "accept": ["coughing", "gagging", "laryngospasm", "light"], "minMatch": 2 },
+        { "level": 3, "q": "What is the highest cuff pressure for most laryngeal masks?", "a": "Usually no more than 60 cm H2O, measured with a cuff manometer.", "accept": ["60", "manometer"], "minMatch": 1 }
+      ],
+      "rubric": [
+        { "id": "depth", "text": "Checks adequate depth of anaesthesia before insertion" },
+        { "id": "technique", "text": "Presses the tip along the hard palate and advances in one smooth movement until resistance" },
+        { "id": "inflate", "text": "Inflates the cuff without holding the tube, to the recommended volume or pressure" },
+        { "id": "confirm", "text": "Confirms with a capnography trace, chest rise and minimal leak", "critical": true },
+        { "id": "secure", "text": "Inserts a bite block and secures the device" },
+        { "id": "fail", "text": "States the plan if insertion fails: reoxygenate by mask, limit attempts, call for help" }
+      ],
+      "sources": [
+        { "source": "Frerk C et al. Difficult Airway Society 2015 guidelines. Br J Anaesth 2015;115:827-848", "locator": "Plan B: supraglottic airway insertion, limited attempts, confirmation by capnography", "url": "https://doi.org/10.1093/bja/aev371" },
+        { "source": "2022 ASA Practice Guidelines for Management of the Difficult Airway. Anesthesiology 2022;136:31-81", "locator": "Confirmation of ventilation by capnography", "url": "https://doi.org/10.1097/ALN.0000000000004002" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "skill.approach.ana.spinal_prepare": {
+      "id": "skill.approach.ana.spinal_prepare",
+      "kind": "approach",
+      "system": "anaesthesia",
+      "title": "Spinal anaesthesia (1): checks before the needle",
+      "oneLine": "Consent, contraindications, IV access, monitors, and resuscitation ready",
+      "why": "A spinal can drop the blood pressure within minutes and, rarely, rise high enough to stop breathing. Everything needed to treat that must be in place before the needle goes in.",
+      "steps": [
+        { "text": "Confirm the patient, the operation, consent, fasting status and allergies, using the theatre sign-in checklist." },
+        { "text": "Check for contraindications: patient refusal, infection at the site, a bleeding disorder or anticoagulant within the safe interval, raised intracranial pressure, and severe uncorrected hypovolaemia." },
+        { "text": "Secure a working IV cannula and start fluids if indicated." },
+        { "text": "Attach monitors (ECG, blood pressure, SpO2) and take baseline readings." },
+        { "text": "Have resuscitation ready: oxygen, suction, airway equipment, a vasopressor, atropine, and the drugs and equipment for a general anaesthetic." }
+      ],
+      "practice": "Run a sign-in checklist aloud with a partner before a mock spinal, naming each contraindication you checked.",
+      "pitfalls": [
+        "Starting without a working IV cannula.",
+        "Not checking the time of the last anticoagulant dose.",
+        "No vasopressor drawn up before the block.",
+        "Not checking for infection at the injection site."
+      ],
+      "probes": [
+        { "level": 1, "q": "Name the absolute contraindications to spinal anaesthesia.", "a": "Patient refusal, infection at the injection site, a significant bleeding disorder or anticoagulation, raised intracranial pressure, and severe uncorrected hypovolaemia.", "accept": ["refusal", "infection", "bleeding", "anticoagulation", "intracranial", "hypovolaemia"], "minMatch": 4 },
+        { "level": 2, "q": "What must be ready before you start a spinal?", "a": "IV access, monitoring, oxygen, suction, airway equipment, a vasopressor and atropine, and the ability to give a general anaesthetic.", "accept": ["iv", "monitoring", "oxygen", "suction", "airway", "vasopressor", "atropine"], "minMatch": 4 }
+      ],
+      "rubric": [
+        { "id": "signin", "text": "Confirms identity, operation, consent, fasting and allergies (sign-in)" },
+        { "id": "contra", "text": "Checks contraindications including anticoagulants and site infection", "critical": true },
+        { "id": "iv", "text": "Secures a working IV cannula", "critical": true },
+        { "id": "monitor", "text": "Attaches ECG, blood pressure and SpO2 monitoring and records baselines" },
+        { "id": "resus", "text": "Has oxygen, suction, airway equipment, vasopressor and atropine ready" }
+      ],
+      "sources": [
+        { "source": "Horlocker TT et al. ASRA guideline on regional anesthesia and antithrombotic therapy. Reg Anesth Pain Med 2018;43:263-309", "locator": "Neuraxial block and anticoagulants", "url": "https://doi.org/10.1097/AAP.0000000000000763" },
+        { "source": "Association of Anaesthetists: Safety guideline, skin antisepsis for central neuraxial blockade. Anaesthesia 2014;69:1279-1286", "locator": "Preparation for neuraxial block", "url": "https://doi.org/10.1111/anae.12844" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "skill.exam.ana.spinal_position_asepsis": {
+      "id": "skill.exam.ana.spinal_position_asepsis",
+      "kind": "exam",
+      "system": "anaesthesia",
+      "title": "Spinal anaesthesia (2): position, landmarks and asepsis",
+      "oneLine": "Curl the back, find the space below the cord, and keep everything sterile",
+      "why": "A good position opens the spaces between the vertebrae, the right level keeps the needle below the spinal cord, and full asepsis prevents meningitis and abscess, which are rare but devastating.",
+      "steps": [
+        { "text": "Position the patient sitting or lying on the side, with the back curved outwards (chin to chest, knees up), shoulders and hips level, and an assistant supporting them." },
+        { "text": "Find the line joining the tops of the iliac crests (Tuffier's line). It usually crosses the L4 spinous process or the L4-L5 space. Choose the L3-L4 or L4-L5 space, below the end of the spinal cord." },
+        { "text": "Wash hands and wear a cap, mask, sterile gown and sterile gloves." },
+        { "text": "Clean the skin with 0.5% chlorhexidine in alcohol and let it dry fully. Keep the antiseptic away from the needles and drugs." },
+        { "text": "Drape the back and lay out the sterile tray, keeping the antiseptic pot away from the injection drugs." }
+      ],
+      "normal": "A well-curved, still patient, a palpable midline space at L3-L4 or L4-L5, and a dry, sterile field.",
+      "abnormal": "A patient who cannot curl or stay still, unclear landmarks, or a breach in asepsis.",
+      "significance": "Landmarks are often a space higher than estimated, so err lower. A breach in asepsis means starting again with new sterile equipment.",
+      "practice": "Position a partner for a spinal in both sitting and lateral positions and mark Tuffier's line on the skin.",
+      "pitfalls": [
+        "Choosing a space above L3 without confirming the level.",
+        "Injecting before the chlorhexidine has dried.",
+        "Letting antiseptic touch the needle or drugs, which can cause nerve injury.",
+        "Doing a spinal without a gown and mask."
+      ],
+      "probes": [
+        { "level": 1, "q": "At what level does the adult spinal cord usually end, and which spaces do you use?", "a": "Usually at L1 to L2, so the L3-L4 or L4-L5 space is used.", "accept": ["l1", "l2", "l3", "l4", "l5"], "minMatch": 3 },
+        { "level": 2, "q": "What is Tuffier's line?", "a": "The line joining the tops of the iliac crests, usually crossing the L4 spinous process or the L4-L5 space.", "accept": ["iliac crests", "iliac", "l4", "l5"], "minMatch": 2 },
+        { "level": 3, "q": "Which skin antiseptic is recommended for a spinal, and how is it used?", "a": "0.5% chlorhexidine in alcohol, allowed to dry fully before the needle, and kept away from the needles and drugs.", "accept": ["chlorhexidine", "0 5", "alcohol", "dry"], "minMatch": 2 }
+      ],
+      "rubric": [
+        { "id": "position", "text": "Positions the patient sitting or lateral with the back curved and supported" },
+        { "id": "level", "text": "Identifies Tuffier's line and chooses L3-L4 or L4-L5", "critical": true },
+        { "id": "scrub", "text": "Washes hands and wears cap, mask, sterile gown and gloves", "critical": true },
+        { "id": "antiseptic", "text": "Uses 0.5% chlorhexidine in alcohol and waits until it is dry" },
+        { "id": "drape", "text": "Drapes and keeps antiseptic away from needles and drugs" }
+      ],
+      "sources": [
+        { "source": "Association of Anaesthetists: Safety guideline, skin antisepsis for central neuraxial blockade. Anaesthesia 2014;69:1279-1286", "locator": "Chlorhexidine 0.5% in alcohol, allowed to dry; full aseptic precautions; separation of antiseptic from drugs", "url": "https://doi.org/10.1111/anae.12844" },
+        { "source": "Morgan and Mikhail's Clinical Anesthesiology, 7th edition (McGraw Hill)", "locator": "Chapter 45, Spinal, epidural and caudal blocks: anatomy, level of the conus, Tuffier's line", "url": "https://accessanesthesiology.mhmedical.com/" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "skill.exam.ana.spinal_inject_aftercare": {
+      "id": "skill.exam.ana.spinal_inject_aftercare",
+      "kind": "exam",
+      "system": "anaesthesia",
+      "title": "Spinal anaesthesia (3): needle, injection and the first minutes after",
+      "oneLine": "Fine pencil-point needle, clear CSF, inject slowly, then watch the blood pressure and the level",
+      "why": "Clear, free-flowing CSF is the only proof the needle is in the right place. The first minutes after injection are when blood pressure falls and a high block shows itself.",
+      "steps": [
+        { "text": "Infiltrate the skin with local anaesthetic. Insert the introducer and a fine pencil-point spinal needle in the midline, angled slightly towards the head." },
+        { "text": "Advance slowly, feeling the ligamentum flavum and then the give of the dura. Remove the stylet and wait for clear, free-flowing CSF. If the patient feels a sharp pain or electric shock down a leg, stop and withdraw." },
+        { "text": "Attach the syringe of preservative-free drug labelled for spinal use (for example hyperbaric bupivacaine 0.5%), aspirate CSF to confirm, inject slowly, and aspirate again." },
+        { "text": "Remove the needle, apply a dressing, and lay the patient as planned." },
+        { "text": "Check blood pressure frequently in the first minutes and treat a fall with a vasopressor and fluid. Test the height of the block with cold or pinprick, and watch for a high block: arm weakness, difficulty breathing, slow heart rate or falling consciousness." }
+      ],
+      "normal": "Clear, free-flowing CSF, injection without pain, and a block that rises to the planned level with stable blood pressure.",
+      "abnormal": "Blood-stained CSF that does not clear, pain or paraesthesia on injection, or a block that rises too high.",
+      "significance": "Pain on injection means stop. A high block needs airway support, ventilation and vasopressors. A pencil-point needle lowers the risk of post-dural puncture headache.",
+      "practice": "Talk through a spinal on a lumbar puncture trainer, naming each tissue layer the needle passes through.",
+      "pitfalls": [
+        "Injecting without free-flowing clear CSF.",
+        "Continuing despite pain or paraesthesia.",
+        "Using a drug that is not preservative-free or not labelled for spinal use.",
+        "Leaving the patient without frequent blood pressure checks after injection."
+      ],
+      "probes": [
+        { "level": 1, "q": "Name the layers the spinal needle passes through in the midline.", "a": "Skin, subcutaneous tissue, supraspinous ligament, interspinous ligament, ligamentum flavum, epidural space, dura and arachnoid, into the subarachnoid space.", "accept": ["skin", "supraspinous", "interspinous", "ligamentum flavum", "epidural", "dura", "arachnoid"], "minMatch": 4 },
+        { "level": 2, "q": "Why is a pencil-point needle preferred?", "a": "It separates rather than cuts the dural fibres, lowering the risk of post-dural puncture headache.", "accept": ["headache", "dural", "cuts", "separates"], "minMatch": 1 },
+        { "level": 3, "q": "Blood pressure falls after a spinal. What do you do?", "a": "Give a vasopressor such as phenylephrine or ephedrine, give IV fluid, check the block height and heart rate, and give oxygen.", "accept": ["vasopressor", "phenylephrine", "ephedrine", "fluid", "oxygen"], "minMatch": 2 },
+        { "level": 4, "q": "What are the signs of a high spinal block?", "a": "Weakness of the arms and hands, difficulty breathing or speaking, bradycardia, severe hypotension, and loss of consciousness.", "accept": ["arms", "hands", "breathing", "bradycardia", "hypotension", "consciousness"], "minMatch": 3 }
+      ],
+      "rubric": [
+        { "id": "needle", "text": "Infiltrates skin and inserts a fine pencil-point needle in the midline with an introducer" },
+        { "id": "csf", "text": "Confirms clear, free-flowing CSF before injecting, and stops if there is pain or paraesthesia", "critical": true },
+        { "id": "drug", "text": "Uses a preservative-free drug labelled for spinal use, aspirates and injects slowly" },
+        { "id": "bp", "text": "Checks blood pressure frequently and treats hypotension with a vasopressor", "critical": true },
+        { "id": "level", "text": "Tests block height and watches for a high block" }
+      ],
+      "sources": [
+        { "source": "Morgan and Mikhail's Clinical Anesthesiology, 7th edition (McGraw Hill)", "locator": "Chapter 45, Spinal, epidural and caudal blocks: technique, needle types, complications", "url": "https://accessanesthesiology.mhmedical.com/" },
+        { "source": "Association of Anaesthetists: Safety guideline, skin antisepsis for central neuraxial blockade. Anaesthesia 2014;69:1279-1286", "locator": "Preventing contamination of neuraxial drugs", "url": "https://doi.org/10.1111/anae.12844" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "skill.tx.ana.bls_recognise": {
+      "id": "skill.tx.ana.bls_recognise",
+      "kind": "treatment",
+      "system": "anaesthesia",
+      "title": "Adult BLS (1): safety, response, breathing and calling for help",
+      "oneLine": "Safe, shake and shout, open the airway, look for normal breathing for no more than 10 seconds, call",
+      "why": "Every minute without CPR lowers the chance of survival. Recognition must be fast and simple: unresponsive and not breathing normally means cardiac arrest, and gasping is not normal breathing.",
+      "steps": [
+        { "text": "Check that it is safe to approach." },
+        { "text": "Check for a response: gently shake the shoulders and ask loudly, 'Are you all right?'" },
+        { "text": "Open the airway with head tilt and chin lift." },
+        { "text": "Look, listen and feel for normal breathing for no more than 10 seconds. A trained rescuer may feel for a central pulse at the same time. Occasional gasps (agonal breathing) are not normal breathing; if in doubt, start CPR." },
+        { "text": "Call for help: shout, call the resuscitation team (code blue) or emergency number, and send someone for a defibrillator. Note the time." }
+      ],
+      "practice": "Run the first 30 seconds of BLS on a manikin, saying each step aloud, and time it.",
+      "pitfalls": [
+        "Mistaking agonal gasps for normal breathing.",
+        "Spending more than 10 seconds checking breathing or pulse.",
+        "Starting CPR before checking that the scene is safe.",
+        "Forgetting to ask for a defibrillator."
+      ],
+      "dosingNote": "CliniX does not prescribe. BLS uses no drugs; drug doses for advanced life support are in the app's adult cardiac arrest protocol, and the treating team's own protocol decides what is given.",
+      "probes": [
+        { "level": 1, "q": "How do you recognise cardiac arrest in BLS?", "a": "The person is unresponsive and not breathing normally. Agonal gasps are not normal breathing.", "accept": ["unresponsive", "not breathing", "breathing normally", "agonal", "gasps"], "minMatch": 2 },
+        { "level": 2, "q": "How long may you spend checking for breathing or a pulse?", "a": "No more than 10 seconds. If in doubt, start CPR.", "accept": ["10", "seconds", "doubt", "cpr"], "minMatch": 2 }
+      ],
+      "rubric": [
+        { "id": "safe", "text": "Checks that it is safe to approach" },
+        { "id": "response", "text": "Checks for a response by shaking the shoulders and shouting" },
+        { "id": "airway", "text": "Opens the airway with head tilt and chin lift" },
+        { "id": "breathing", "text": "Checks for normal breathing for no more than 10 seconds and treats agonal gasps as arrest", "critical": true },
+        { "id": "call", "text": "Calls for help and asks for a defibrillator", "critical": true }
+      ],
+      "sources": [
+        { "source": "StewardMD clinical protocol: Adult cardiac arrest (kb/clinical-protocols/adult-cardiac-arrest.json), from AHA 2025 Adult ALS", "locator": "Recognise and call for help: unresponsive with absent or abnormal breathing; no more than 10 seconds; code blue and defibrillator", "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001376" },
+        { "source": "Resuscitation Council UK: 2025 Adult basic life support guidelines", "locator": "BLS sequence: safety, response, airway, breathing, call for help and AED", "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-basic-life-support-guidelines" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "skill.tx.ana.bls_cpr": {
+      "id": "skill.tx.ana.bls_cpr",
+      "kind": "treatment",
+      "system": "anaesthesia",
+      "title": "Adult BLS (2): high-quality chest compressions and breaths",
+      "oneLine": "Centre of the chest, 5 to 6 cm, 100 to 120 a minute, full recoil, 30:2",
+      "why": "Chest compressions are the only blood flow the brain gets during cardiac arrest. Depth, rate, full recoil and few pauses decide how much flow there is.",
+      "steps": [
+        { "text": "Kneel beside the patient (or use a firm surface in bed), place the heel of one hand on the centre of the chest with the other hand on top, arms straight." },
+        { "text": "Compress at least 5 cm but not more than 6 cm, at 100 to 120 per minute, and allow the chest to recoil fully after each compression." },
+        { "text": "Give 30 compressions then 2 breaths. In hospital, use a bag-mask with 100% oxygen; give each breath over about 1 second with visible chest rise." },
+        { "text": "Keep interruptions to a minimum and change the person doing compressions every 2 minutes, or sooner if tired." },
+        { "text": "Once an advanced airway is in place, give continuous compressions with 10 breaths per minute, and avoid over-ventilation." }
+      ],
+      "practice": "Do two minutes of compressions on a feedback manikin and read back your depth, rate and recoil scores.",
+      "pitfalls": [
+        "Compressing too shallow or too fast.",
+        "Leaning on the chest so it does not recoil fully.",
+        "Long pauses for breaths, pulse checks or airway attempts.",
+        "Not swapping the compressor every 2 minutes."
+      ],
+      "dosingNote": "CliniX does not prescribe. BLS uses no drugs; drug doses for advanced life support are in the app's adult cardiac arrest protocol, and the treating team's own protocol decides what is given.",
+      "probes": [
+        { "level": 1, "q": "What are the depth and rate of adult chest compressions?", "a": "At least 5 cm but not more than 6 cm, at 100 to 120 per minute, with full recoil.", "accept": ["5", "6", "cm", "100", "120", "recoil"], "minMatch": 4 },
+        { "level": 2, "q": "What is the compression to ventilation ratio without an advanced airway, and with one?", "a": "30:2 without an advanced airway. With a tracheal tube or supraglottic airway, continuous compressions and 10 breaths per minute.", "accept": ["30", "2", "continuous", "10"], "minMatch": 3 },
+        { "level": 3, "q": "Why is full chest recoil important?", "a": "Recoil lets the heart refill with blood between compressions; leaning on the chest reduces venous return and cardiac output.", "accept": ["refill", "venous return", "cardiac output", "leaning"], "minMatch": 2 }
+      ],
+      "rubric": [
+        { "id": "hands", "text": "Places hands on the centre of the chest with straight arms" },
+        { "id": "depth", "text": "Compresses 5 to 6 cm at 100 to 120 per minute", "critical": true },
+        { "id": "recoil", "text": "Allows full recoil after each compression" },
+        { "id": "ratio", "text": "Gives 30:2 with bag-mask and oxygen, each breath over about 1 second" },
+        { "id": "pauses", "text": "Minimises interruptions and swaps the compressor every 2 minutes" }
+      ],
+      "sources": [
+        { "source": "StewardMD clinical protocol: Adult cardiac arrest (kb/clinical-protocols/adult-cardiac-arrest.json), from AHA 2025 Adult ALS", "locator": "High-quality CPR: 100 to 120/min, 5 to 6 cm, full recoil, change every 2 minutes; 30:2 with bag-mask; 10 breaths/min with an advanced airway", "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001376" },
+        { "source": "Resuscitation Council UK: 2025 Adult basic life support guidelines", "locator": "Chest compressions and rescue breaths", "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-basic-life-support-guidelines" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "skill.tx.ana.bls_aed": {
+      "id": "skill.tx.ana.bls_aed",
+      "kind": "treatment",
+      "system": "anaesthesia",
+      "title": "Adult BLS (3): using the AED",
+      "oneLine": "Switch on, pads on without stopping CPR, stand clear, shock, straight back to compressions",
+      "why": "In VF the chance of survival falls with every minute until a shock. The AED makes defibrillation safe for anyone, but pauses around the shock must be very short.",
+      "steps": [
+        { "text": "Switch the AED on as soon as it arrives and follow its prompts, while CPR continues." },
+        { "text": "Attach the pads to the bare chest: one below the right collarbone, the other on the left side below the armpit in the mid-axillary line." },
+        { "text": "When the AED analyses, stop touching the patient. If a shock is advised, make sure no one is touching the patient, say 'Stand clear', and press the shock button." },
+        { "text": "Restart compressions immediately after the shock, without a pulse check, and keep the pause before the shock under 5 seconds." },
+        { "text": "Continue CPR and follow the AED prompts; it reanalyses every 2 minutes. Hand over to the resuscitation team when it arrives." }
+      ],
+      "practice": "Run a two-person AED scenario on a manikin and time the pause from stopping compressions to restarting after the shock.",
+      "pitfalls": [
+        "Stopping CPR while the pads are being placed.",
+        "Touching the patient during analysis or the shock.",
+        "Checking for a pulse straight after the shock instead of restarting compressions.",
+        "Placing the lateral pad too far forward on the chest."
+      ],
+      "dosingNote": "CliniX does not prescribe. BLS uses no drugs; drug doses for advanced life support are in the app's adult cardiac arrest protocol, and the treating team's own protocol decides what is given.",
+      "probes": [
+        { "level": 1, "q": "Where do you place AED pads in an adult?", "a": "One below the right collarbone and one on the left side below the armpit in the mid-axillary line (antero-lateral).", "accept": ["right", "collarbone", "clavicle", "left", "armpit", "axillary"], "minMatch": 3 },
+        { "level": 2, "q": "What do you do immediately after a shock?", "a": "Restart chest compressions at once, without a pulse check, for 2 minutes until the next analysis.", "accept": ["compressions", "immediately", "without", "pulse", "2 minutes"], "minMatch": 2 },
+        { "level": 3, "q": "Why must the pre-shock pause be short?", "a": "Every second without compressions lowers coronary and brain perfusion and the chance that the shock succeeds; keep it under 5 seconds.", "accept": ["perfusion", "5", "seconds", "success", "succeeds"], "minMatch": 2 }
+      ],
+      "rubric": [
+        { "id": "on", "text": "Switches on the AED and follows the prompts while CPR continues" },
+        { "id": "pads", "text": "Places pads in the antero-lateral position on a bare chest" },
+        { "id": "clear", "text": "Ensures no one touches the patient during analysis and shock", "critical": true },
+        { "id": "resume", "text": "Restarts compressions immediately after the shock without a pulse check", "critical": true },
+        { "id": "continue", "text": "Continues CPR with reanalysis every 2 minutes and hands over to the team" }
+      ],
+      "sources": [
+        { "source": "StewardMD clinical protocol: Adult cardiac arrest (kb/clinical-protocols/adult-cardiac-arrest.json), from AHA 2025 Adult ALS", "locator": "Antero-lateral pads; pre-shock pause under 5 seconds; resume compressions without a pulse check; rhythm check every 2 minutes", "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001376" },
+        { "source": "Resuscitation Council UK: 2025 Adult basic life support guidelines", "locator": "Use of an AED", "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-basic-life-support-guidelines" }
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

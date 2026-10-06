@@ -724,7 +724,7 @@ try {
   // Door 1: the system card.
   await lockPage(false, null);
   const cards = await ev("[...document.querySelectorAll('#clinixRoot .cx-sys')].map(b => ({ t: b.querySelector('.cx-sys-t').textContent, pro: !!b.querySelector('.cx-sys-pro') }))");
-  ok(cards && cards.length === 6, "all six systems are still listed without Pro (locked ones are shown, not hidden)");
+  ok(cards && cards.length === 7, "all seven systems are still listed without Pro (locked ones are shown, not hidden)");
   ok(cards && cards.filter(c => !c.pro).map(c => c.t).join() === "Respiratory", "only Respiratory is unbadged for a non-Pro reader");
   ok(cards && cards.some(c => c.t === "Obstetrics and gynaecology" && c.pro), "the O&G OSCE system is listed, badged Pro");
   await ev("[...document.querySelectorAll('#clinixRoot .cx-sys')].find(b => b.textContent.includes('Cardiovascular')).click()");

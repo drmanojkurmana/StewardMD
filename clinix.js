@@ -152,7 +152,7 @@
   /* Deep links other modules can open. "tokos-osce" is the Tokos OSCE and viva stations (the obgyn-osce
    * pathway). The Pro lock is enforced inside the screens' openDisease(), exactly as for a tap on the
    * card. Returns false for an unknown id or when the flag is off (a complete no-op, like open()). */
-  var DEEP_LINKS = { "tokos-osce": "obgyn-osce" };
+  var DEEP_LINKS = { "tokos-osce": "obgyn-osce", "narke-osce": "anaesthesia-osce" };
   function openDeep(id) {
     if (!on() || !Object.prototype.hasOwnProperty.call(DEEP_LINKS, id)) return false;
     open();

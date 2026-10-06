@@ -7,6 +7,7 @@
 (function (G) {
   "use strict";
   var SP = G.SPECIALTY;
+  var D_OSCE_OFF = { en: "CliniX is not available on this device.", hi: "इस डिवाइस पर CliniX उपलब्ध नहीं है।" };
   if (!SP || !SP.createHost) return;
   var host = SP.createHost({
     id: "narke", global: "NARKE", base: G.SMD_NARKE_BASE || "/narke/", rootId: "smdNarke", rootClass: "nrk-root",
@@ -27,4 +28,11 @@
   SP.features.tools(host);
   SP.features.drills(host);
   SP.features.notes(host);
+  // OSCE and viva: the anaesthesia stations live in CliniX (clinix/systems/anaesthesia.json); this entry deep-links
+  // there. CliniX's overlay sits above Narkē, so closing it returns here. CliniX applies its own Pro rule inside.
+  var OSCE_LINE = { en: "Opens CliniX: preoperative, airway, consent, spinal and BLS stations", hi: "CliniX खुलता है: प्री-ऑपरेटिव, एयरवे, सहमति, स्पाइनल और BLS स्टेशन" };
+  host.registerSim({ id: "osce", icon: "stethoscope", level: "mbbs",
+    title: { en: "OSCE and viva stations", hi: "OSCE और वाइवा स्टेशन" }, sub: { en: "In CliniX", hi: "CliniX में" },
+    line: function () { return host._internal.tx(OSCE_LINE); },
+    open: function () { var X = G.CLINIX; if (!X || !X.openDeep || !X.openDeep("narke-osce")) host._internal.toast(D_OSCE_OFF[host._internal.lang()] || D_OSCE_OFF.en); } });
 })(typeof window !== "undefined" ? window : this);
