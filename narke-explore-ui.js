@@ -95,6 +95,7 @@
     pinsp: T("Inspiratory pressure above PEEP", "PEEP के ऊपर inspiratory pressure"), rate: T("Rate", "Rate"), ie: T("I:E", "I:E"),
     paw: T("Pressure", "Pressure"), flow: T("Flow", "Flow"), volume: T("Volume", "Volume"),
     peak: T("Peak", "Peak"), plat: T("Plateau", "Plateau"), drive: T("Driving", "Driving"), totPeep: T("Total PEEP", "Total PEEP"), vtOut: T("Tidal volume", "Tidal volume"), mv: T("Minute volume", "Minute volume"),
+    ventLab: T("Open the Ventilator Lab: simulated patients, alarms and blood gases", "वेंटिलेटर लैब खोलें: सिम्युलेटेड मरीज़, अलार्म और ब्लड गैस"),
     ventSay: T("Peak {a}, plateau {b}, driving pressure {c} cmH2O. Tidal volume {v} mL.", "Peak {a}, plateau {b}, driving pressure {c} cmH2O। Tidal volume {v} mL।"),
     waveAlt: T("Pressure, flow and volume against time for two breaths", "दो साँसों के लिए समय के साथ pressure, flow और volume"),
     settings: T("Settings", "Settings"),
@@ -410,7 +411,7 @@
         '<div class="nkx-segrow"><span class="nkx-lbl" id="nkxVlL">' + s("lung") + '</span><div class="nkx-chips" role="group" aria-labelledby="nkxVlL">' + Object.keys(m.presets).map(function (k) {
           return '<button type="button" class="nkx-chip" data-act="nkxvpre" data-v="' + k + '" aria-pressed="' + (pre === k) + '">' + tx(m.presets[k].name) + "</button>";
         }).join("") + "</div></div>" +
-        '<div id="nkxLive">' + this.live(m) + "</div></section>" +
+        '<div id="nkxLive">' + this.live(m) + "</div>" + (host._sims.some(function (y) { return y.id === "ventlab"; }) ? '<button type="button" class="sp-btn pri sp-wide nkx-lab" data-act="sim" data-s="ventlab">' + s("ventLab") + "</button>" : "") + "</section>" +
         '<section class="nkx-sec" aria-labelledby="nkxVnS"><h2 class="sp-h2" id="nkxVnS">' + s("settings") + "</h2>" +
         vRange("compliance") + vRange("resistance") + vRange("peep") + vRange(VS.mode === "vc" ? "vt" : "pinsp") + vRange("rate") +
         seg("nkxvie", s("ie"), [[1, "1:1"], [2, "1:2"], [3, "1:3"], [4, "1:4"]], VS.ie, "nkxVieL") +
