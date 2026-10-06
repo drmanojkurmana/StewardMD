@@ -102,6 +102,7 @@
   var TIER_IAP = { student: "trainee", coresident: "coresident", pro: "pro", physician: "physician", physicianpro: "physicianpro" };
   function iosNativeIap() { return plat() === "ios" && window.SMD_IAP && typeof SMD_IAP.purchase === "function"; }
   function productIdFor(body) {
+    if (body.productId) return body.productId;   // PrepNucleus Pro: the server quote names the product
     if (body.tier) return "in.stewardmd." + (TIER_IAP[body.tier] || body.tier) + "." + (body.cycle === "annual" ? "annual" : "monthly");
     if (body.addon === "onco") return "in.stewardmd.onco.monthly";
     if (body.pack) return "in.stewardmd.tokens." + body.pack;
@@ -535,7 +536,7 @@
   // Force a token refresh so isPro() picks up a just-granted `pro` claim, then re-check status.
   function refresh() { return token(true).then(function () { return api("/api/billing/status").then(function (x) { _status = x.d || {}; if (_root) paint(); return _status; }); }); }
 
-  function attach() { if (!window.SMD_PRO) return setTimeout(attach, 300); window.SMD_PRO.openPaywall = openPaywall; window.SMD_PRO.openAiLimit = openAiLimit; window.SMD_PRO.openTopUp = openTopUp; window.SMD_PRO.refresh = refresh; }
+  function attach() { if (!window.SMD_PRO) return setTimeout(attach, 300); window.SMD_PRO.openPaywall = openPaywall; window.SMD_PRO.openAiLimit = openAiLimit; window.SMD_PRO.openTopUp = openTopUp; window.SMD_PRO.refresh = refresh; window.SMD_PRO.buy = doBuy; }
   attach();
 
   // One central interceptor for the "AI limit hit" sheet: watch AI responses and, on a 429

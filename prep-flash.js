@@ -328,6 +328,7 @@
     if (!c || !r.shown || r.busy) return;
     var s = store(), today = host.today(), key = c._m + ":" + c.id;
     grade(s, c._m, c.id, g, today, C());
+    if (G.PrepPro) G.PrepPro.use("cards", { module: c._m });   // PrepNucleus Pro: counts only; the gate is at the batch start
     host.save(); haptic();
     if (!r.relearn[key]) r.n[g]++;
     // An Again comes back once at the end of this session (FSRS same-day step), and tomorrow.
