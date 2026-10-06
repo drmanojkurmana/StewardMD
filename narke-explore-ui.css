@@ -39,6 +39,9 @@ body:not(.dark):not(.v3-dark) .nrk-root { --nkx-skin: #ebe4d4; --nkx-block: rgba
 .nrk-root .nkx-seg { justify-self: start; flex-wrap: wrap; }
 .nrk-root .nkx-seg.nkx-fill { display: grid; grid-template-columns: repeat(5, 1fr); width: 100%; }
 .nrk-root .nkx-seg.nkx-wrap { margin-top: 2px; }
+/* long drug-family names: one option per row at full width, so neither wraps mid-name at phone width */
+.nrk-root .nkx-seg.nkx-stack { display: grid; grid-template-columns: minmax(0, 1fr); width: 100%; }
+.nrk-root .nkx-seg.nkx-stack button { justify-content: flex-start; text-align: left; padding: 10px 14px; line-height: 1.3; }
 .nrk-root .nkx-seg button { font-variant-numeric: tabular-nums; }
 .nrk-root .nkx-chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .nrk-root .nkx-chip { min-height: 44px; padding: 0 14px; border-radius: 12px; border: 1px solid var(--sp-line); background: transparent; color: var(--sp-text);

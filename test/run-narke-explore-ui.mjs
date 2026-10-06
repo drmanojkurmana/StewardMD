@@ -88,6 +88,7 @@ try {
   ok(/^90\.6/.test(await text(".nkx-readout .nkx-big")), "PaO2 60: saturation 90.6%");
   await slide("[data-xin=po2]", 40);
   ok(/^74\.9/.test(await text(".nkx-readout .nkx-big")) && await ev(`var r=document.querySelector("[data-xin=po2]"); return r.getAttribute("aria-valuetext")==="40 mmHg" && document.activeElement!==null;`) === true, "PaO2 slider 40: 74.9%, spoken value, slider stays mounted");
+  ok(await ev(`var say=document.getElementById("nkxSay"), live=document.getElementById("nkxLive"); return !!say && say.getAttribute("role")==="status" && !live.contains(say) && /At PaO2 40 mmHg, saturation is 74\.9%/.test(say.textContent) && !live.querySelector("[role=status],[aria-live]");`) === true, "one persistent live region outside #nkxLive speaks the reading; none inside");
   await slide("[data-xin=ph]", 7.2);
   ok(/Right shift/.test(await text(".nkx-shift")) && /P50 is 32\.2/.test(await text(".nkx-readout")), "pH 7.2: right shift, P50 32.2");
   await click('[data-act=nkxodhbf]');
@@ -116,11 +117,17 @@ try {
   ok(await openX("tof"), "TOF opens");
   ok(/Minimal block/.test(await text(".nkx-readout .nkx-stage")) && /Residual block/.test(await text(".nkx")), "count 4, ratio 0.6: minimal, residual warning");
   ok(/neostigmine/i.test(await text("#nkxLive")) && /Sugammadex 2 mg\/kg: 120 mg/.test(await text("#nkxLive")), "minimal: sugammadex 2 mg/kg (120 mg at 60 kg) or neostigmine");
+  await click('[data-act=nkxtfc][data-v="1"]');
+  ok(await until(`return /Moderate block/.test(document.querySelector(".nkx-readout .nkx-stage").textContent) && /Sugammadex 4 mg\\/kg: 240 mg/.test(document.getElementById("nkxLive").textContent);`), "count 1: moderate, sugammadex 4 mg/kg (the count reaches the model)");
+  await click('[data-act=nkxtfc][data-v="3"]');
+  ok(await until(`return /Sugammadex 2 mg\\/kg: 120 mg/.test(document.getElementById("nkxLive").textContent) && !/Sugammadex 4 mg\\/kg/.test(document.getElementById("nkxLive").textContent);`), "count 3: sugammadex 2 mg/kg once T2 is back");
   await click('[data-act=nkxtfc][data-v="0"]');
   ok(await until(`return /Deep block/.test(document.querySelector(".nkx-readout .nkx-stage").textContent) && document.activeElement && document.activeElement.getAttribute("data-v")==="0";`), "count 0, PTC 5: deep block, focus kept on the pressed button");
   ok(/Sugammadex 4 mg\/kg: 240 mg/.test(await text("#nkxLive")), "deep: sugammadex 4 mg/kg");
   for (let i = 0; i < 5; i++) { await ev(`document.querySelector('[data-act=nkxtfp][data-v="-1"]').focus(); return 1;`); await key("Enter", "Enter", 13, "\r"); }
   ok(await until(`return /Intense block/.test(document.querySelector(".nkx-readout .nkx-stage").textContent);`), "PTC 0 by keyboard: intense block");
+  ok(await ev(`var a=document.activeElement; return !!a && a.getAttribute("data-act")==="nkxtfp" && a.getAttribute("data-v")==="1" && !a.disabled;`) === true, "PTC at 0: Fewer is disabled, focus moves to More");
+  ok(await ev(`var b=document.querySelectorAll('[data-act=nkxtff]'); return b.length===2 && b[0].getBoundingClientRect().bottom <= b[1].getBoundingClientRect().top + 1 && b[0].getBoundingClientRect().height < 60;`) === true, "Blocker given: the two options stack, one line each, at 390 px");
   await click('[data-act=nkxtff][data-v="benzyl"]');
   ok(await until(`return /Wait/.test(document.getElementById("nkxLive").textContent);`), "atracurium family at intense block: wait");
   await click('[data-act=nkxtfc][data-v="4"]'); await slide("[data-xin=ratio]", 0.95);

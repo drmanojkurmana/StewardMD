@@ -85,9 +85,9 @@
     return chan("ecg", w.ecg, w.sweepFast, wave("ecg", m.ecg.y, -0.8, 1.4, 80), big(w.hr, dash(n.hr))) +
       chan("spo2", w.pleth, w.sweepFast, wave("spo2", m.pleth.y, -0.1, 1.25, 56), big(w.spo2, dash(n.spo2))) +
       chan("co2", w.co2, w.sweepSlow, co2 ? wave("co2", co2.y, -3, hi, 64, co2Grid(hi)) : '<span class="nkc-off">' + esc(w.notConn) + "</span>",
-        big(w.etco2, dash(n.etco2)) + big(w.rr, dash(n.rr))) +
-      '<div class="nkc-ch nkc-art nkc-nibp"><div class="nkc-wave">' + trendSvg(m.trend) + '</div><div class="nkc-num">' +
-      big(w.nibp, n.sys == null ? "?" : n.sys + "/" + n.dia, n.map == null ? "" : "(" + n.map + ")") + "</div></div>";
+        big(w.etco2, dash(n.etco2)) + big(w.rr, dash(n.rr))) + trendSvg(m.trend) +
+      '<div class="nkc-ch nkc-art nkc-nibp"><span class="nkc-k">' + esc(w.nibp) + '</span><span class="nkc-bp"><b class="nkc-v">' +
+      esc(n.sys == null ? "?" : n.sys + "/" + n.dia) + "</b>" + (n.map == null ? "" : '<span class="nkc-sub">(' + esc(n.map) + ")</span>") + "</span></div>";
   }
 
   /* ---------- one case: question, then the reveal below it ---------- */
@@ -111,7 +111,7 @@
     var s = st.session;
     var html = I.top(w.backHub, I.tx(sp.title), esc(fmt(w.caseOf, { i: s.i + 1, n: s.list.length })), I.langBtn()) +
       '<div class="sp-scroll sp-pad nkc-view"><div class="sp-col">' +
-      '<p class="nkc-scene">' + I.tx(p.scene) + "</p>" +
+      '<p class="nkc-scene" tabindex="-1">' + I.tx(p.scene) + "</p>" +
       '<figure class="nkc-mon' + (nk.fresh ? " nkc-new" : "") + '" role="img" aria-label="' + esc(isMon ? w.monAria : w.capAria) + '" aria-describedby="nkcDesc">' +
         (isMon ? monitorScreen(sig) : capnoScreen(sig)) + "</figure>" +
       '<p id="nkcDesc" class="sp-sr">' + esc(srText) + "</p>" +
@@ -157,7 +157,7 @@
     nk.done = done; nk.fresh = true;
     st.session.result = null;
     st.view = "nkc"; st.again = function (f) { render(typeof f === "string" ? f : null); };
-    render(st.session.i > 0 ? ".nkc-mon" : null);
+    render(st.session.i > 0 ? ".nkc-scene" : null); // keep focus inside the clinic so keys 1 to 4 still answer
   }
   function items(id) {
     return function (d) {

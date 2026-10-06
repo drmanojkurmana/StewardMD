@@ -86,7 +86,7 @@
     if (!data || data.kind !== "drill") return ["kind must be drill"];
     if (!/^[a-z]+$/.test(data.id || "")) errs.push("id");
     if (data.level !== "mbbs" && data.level !== "resident") errs.push("level");
-    if (data.review !== "ai_drafted") errs.push("review must be ai_drafted");
+    if (data.review !== "ai_drafted" && data.review !== "reviewed") errs.push("review must be ai_drafted or reviewed");
     textErr(data.title, "title", errs); textErr(data.scenario, "scenario", errs);
     if (!data.sources || !data.sources.length) errs.push("sources");
     // A source is a web document ({label, url}) or one of the app's own protocol files ({label, path}).

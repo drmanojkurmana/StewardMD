@@ -32,12 +32,16 @@ body:not(.dark):not(.v3-dark) .nrk-root { --nkc-plate: var(--sp-card); --nkc-gri
 .nrk-root .nkc-v { font-size: 26px; font-weight: 700; line-height: 1.05; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
 .nrk-root .nkc-v + .nkc-k { margin-top: 4px; }
 .nrk-root .nkc-sub { font-size: 13px; font-variant-numeric: tabular-nums; }
-.nrk-root .nkc-nibp .nkc-v { font-size: 22px; }
+.nrk-root .nkc-ch.nkc-nibp { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 12px 10px 10px; color: var(--nk-art); }
+.nrk-root .nkc-nibp .nkc-bp { display: flex; align-items: baseline; gap: 6px; }
+.nrk-root .nkc-nibp .nkc-v { font-size: 24px; }
+.nrk-root .nkc-trend + .nkc-ch { border-top: 1px solid var(--nkc-grid); }
+.nrk-root .nkc-scene:focus { outline: none; }
+.nrk-root .nkc-scene:focus-visible { outline: 2px solid var(--nk-co2); outline-offset: 4px; border-radius: 4px; }
 .nrk-root .nkc-off { display: flex; align-items: center; height: 60px; font-size: 14px; color: var(--sp-mut); }
 .nrk-root .nkc-trend { position: relative; padding-top: 14px; }
 .nrk-root .nkc-trend .nkc-tag { left: 0; top: 0; }
 .nrk-root .nkc-trend .nkc-svg { height: 36px; }
-.nrk-root .nkc-nibp .nkc-wave { padding-top: 8px; }
 .nrk-root .nkc-tends { display: flex; justify-content: space-between; font-size: 12px; color: var(--sp-mut); font-variant-numeric: tabular-nums; margin-top: 2px; }
 .nrk-root .nkc-mon > .nkc-trend { border-top: 1px solid var(--nkc-grid); padding: 18px 28px 8px 10px; }
 .nrk-root .nkc-mon > .nkc-trend .nkc-tag { left: 10px; top: 6px; }

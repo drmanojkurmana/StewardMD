@@ -143,8 +143,8 @@
     if (o) o.textContent = txt;
   }
   // A segmented control of aria-pressed buttons.
-  function seg(act, label, items, cur, labelId) {
-    return '<div class="nkx-segrow"><span class="nkx-lbl" id="' + labelId + '">' + label + '</span><div class="sp-seg nkx-seg" role="group" aria-labelledby="' + labelId + '">' +
+  function seg(act, label, items, cur, labelId, cls) {
+    return '<div class="nkx-segrow"><span class="nkx-lbl" id="' + labelId + '">' + label + '</span><div class="sp-seg nkx-seg' + (cls ? " " + cls : "") + '" role="group" aria-labelledby="' + labelId + '">' +
       items.map(function (it) { return '<button type="button" data-act="' + act + '" data-v="' + esc(it[0]) + '" aria-pressed="' + (String(cur) === String(it[0])) + '">' + it[1] + "</button>"; }).join("") + "</div></div>";
   }
   function alertsHtml(list) {
@@ -155,9 +155,19 @@
   function paint(id, focusSel) {
     var x = X[id], m = M(id);
     if (!x || !m) return;
-    EXUI.frame(id, '<div class="nkx" data-nkx="' + id + '">' + metaHtml(m.level) + x.body(m) + learnHtml(id) + srcHtml(m) + "</div>", focusSel);
+    EXUI.frame(id, '<div class="nkx" data-nkx="' + id + '">' + metaHtml(m.level) + x.body(m) + learnHtml(id) + srcHtml(m) +
+      '<p class="sp-sr" role="status" aria-live="polite" id="nkxSay"></p></div>', focusSel);
   }
-  function repaintLive(id) { var x = X[id], el = $("nkxLive"); if (x && x.live && el) el.innerHTML = x.live(M(id)); }
+  // One persistent polite region (#nkxSay) speaks the reading; the live areas repaint every tick and carry no live role,
+  // so a screen reader is not handed a fresh region (and a dropped announcement) on each slider step.
+  function say(id) {
+    var x = X[id], el = $("nkxSay"), r;
+    if (!x || !el) return;
+    if (x.say) { el.textContent = x.say(M(id)); return; }
+    r = I.root().querySelectorAll(".nkx-readout, .nkx-result");
+    el.textContent = [].map.call(r, function (n) { return n.textContent.replace(/\s+/g, " ").trim(); }).join(". ");
+  }
+  function repaintLive(id) { var x = X[id], el = $("nkxLive"); if (x && x.live && el) el.innerHTML = x.live(M(id)); say(id); }
   function again(focusSel) { var id = curId(); if (id) paint(id, focusSel); }
 
   /* ================= odc ================= */
@@ -195,10 +205,11 @@
         '<circle class="nkx-dot" cx="' + cx.toFixed(1) + '" cy="' + cy.toFixed(1) + '" r="6"/></svg>';
       var axis = '<div class="nkx-axx" aria-hidden="true"><span>0</span><span>40</span><span>80</span><span>120 mmHg</span></div>';
       return '<div class="nkx-plate">' + '<div class="nkx-yl" aria-hidden="true"><span>100</span><span>50</span><span>0</span></div>' + svg + axis + "</div>" +
-        '<div class="nkx-readout" role="status" aria-live="polite"><p class="nkx-big"><output>' + f1(r.so2) + '</output><span>%</span></p>' +
+        '<div class="nkx-readout"><p class="nkx-big"><output>' + f1(r.so2) + '</output><span>%</span></p>' +
         '<p class="sp-small">' + s("odcSay", { p: OD.po2, s: f1(r.so2), q: f1(r.p50) }) + "</p></div>" +
         '<p class="nkx-p nkx-shift is-' + r.shift + '">' + tx(r.shiftText) + "</p>";
     },
+    say: function (m) { var r = m.at(OD.po2, odCond()); return raw("odcSay", { p: OD.po2, s: f1(r.so2), q: f1(r.p50) }); },
     input: function (el) {
       var k = el.getAttribute("data-xin"), v = +el.value;
       OD[k] = v;
@@ -240,7 +251,7 @@
     live2: function (m) {
       var mix = {}; mix[MC.agent] = MC.et; mix.n2o = MC.n2o;
       var r = m.combine(MC.age, mix), pct = Math.min(100, r.totalExact / 2 * 100);
-      return '<div class="nkx-readout" role="status" aria-live="polite"><p class="nkx-big"><output>' + r.total.toFixed(2) + '</output><span>MAC</span></p>' +
+      return '<div class="nkx-readout"><p class="nkx-big"><output>' + r.total.toFixed(2) + '</output><span>MAC</span></p>' +
         '<div class="nkx-gauge" aria-hidden="true"><span class="nkx-gauge-f" style="width:' + pct.toFixed(1) + '%"></span><i style="left:50%"></i><i style="left:65%"></i></div>' +
         '<div class="nkx-gauge-t" aria-hidden="true"><span>0</span><span style="left:50%">1.0</span><span style="left:65%">1.3</span><span>2.0</span></div>' +
         '<p class="sp-small">' + r.parts.map(function (p) { return esc(raw("fracOf", { a: t(m.agents[p.agent].name), f: p.fraction.toFixed(2) })); }).join(" + ") + "</p></div>" +
@@ -252,7 +263,7 @@
       setOut(el, k === "age" ? raw("years", { n: v }) : (k === "et" ? f1(v) : v) + "%");
       if (k === "age") repaintLive("mac");
       var l2 = $("nkxLive2"); if (l2) l2.innerHTML = X.mac.live2(M("mac"));
-      touched("mac");
+      say("mac"); touched("mac");
     }
   };
   A.nkxmcag = function (b) {
@@ -278,12 +289,12 @@
           '<button type="button" class="nkx-icon" data-act="nkxtfp" data-v="-1" aria-label="' + s("fewer") + '"' + (TF.ptc > 0 ? "" : " disabled") + ">−</button>" +
           '<output class="nkx-num" aria-live="polite">' + TF.ptc + "</output>" +
           '<button type="button" class="nkx-icon" data-act="nkxtfp" data-v="1" aria-label="' + s("more") + '"' + (TF.ptc < 15 ? "" : " disabled") + ">+</button></div>" : "") +
-        seg("nkxtff", s("family"), [["aminosteroid", s("amino")], ["benzyl", s("benzyl")]], TF.family, "nkxTfF") +
+        seg("nkxtff", s("family"), [["aminosteroid", s("amino")], ["benzyl", s("benzyl")]], TF.family, "nkxTfF", "nkx-stack") +
         range("kg", s("weight"), 30, 150, 5, TF.kg, raw("kg", { n: TF.kg }), raw("kg", { n: TF.kg })) +
         '<p class="sp-small nkx-hint">' + tx(m.notes.weight) + "</p></section>";
     },
     live: function (m) {
-      var d = m.depth(tofReading()), tw = m.twitches(tofReading()), rv = m.reverse(d.depth, TF.family, TF.kg);
+      var d = m.depth(tofReading()), tw = m.twitches(tofReading()), rv = m.reverse(d.depth, TF.family, TF.kg, TF.count);
       var bars = tw.map(function (h, i) {
         var bh = Math.max(0, h) * 96, x = 28 + i * 52;
         return h > 0 ? '<rect class="nkx-tw" x="' + x + '" y="' + (112 - bh).toFixed(1) + '" width="22" height="' + bh.toFixed(1) + '" rx="3"/>' : '<line class="nkx-tw0" x1="' + x + '" y1="111" x2="' + (x + 22) + '" y2="111"/>';
@@ -301,7 +312,7 @@
       }
       plan = '<h3 class="nkx-h3">' + s("plan") + '</h3><p class="nkx-p">' + tx(rv.text) + "</p>" + dose(rv.plan) + dose(rv.alt);
       return '<div class="nkx-plate nkx-plate-s">' + svg + "</div>" + scale +
-        '<div class="nkx-readout" role="status" aria-live="polite"><p class="nkx-stage">' + tx(d.name) + '</p><p class="nkx-p">' + tx(d.reads) + "</p></div>" +
+        '<div class="nkx-readout"><p class="nkx-stage">' + tx(d.name) + '</p><p class="nkx-p">' + tx(d.reads) + "</p></div>" +
         (d.residual ? '<p class="nkx-alert">' + s("residual") + (d.qualitativeBlind ? " " + tx(m.notes.feel) : "") + "</p>" : "") + plan;
     },
     input: function (el) {
@@ -312,7 +323,12 @@
     }
   };
   A.nkxtfc = function (b) { TF.count = +b.getAttribute("data-v"); touched("tof"); again('[data-act="nkxtfc"][data-v="' + TF.count + '"]'); };
-  A.nkxtfp = function (b) { TF.ptc = clamp(TF.ptc + +b.getAttribute("data-v"), 0, 15); touched("tof"); again('[data-act="nkxtfp"][data-v="' + b.getAttribute("data-v") + '"]:not([disabled])'); };
+  A.nkxtfp = function (b) {
+    var d = +b.getAttribute("data-v");
+    TF.ptc = clamp(TF.ptc + d, 0, 15); touched("tof");
+    var end = d < 0 ? TF.ptc === 0 : TF.ptc === 15; // the pressed button is now disabled: focus the other one
+    again('[data-act="nkxtfp"][data-v="' + (end ? -d : d) + '"]');
+  };
   A.nkxtff = function (b) { TF.family = b.getAttribute("data-v"); touched("tof"); again(); };
 
   /* ================= dermatomes ================= */
@@ -355,7 +371,7 @@
         return '<li class="' + (on ? "is-on" : "") + '"><b>' + x.level + "</b><span>" + tx(x.name) + '</span><span class="sp-small">' + s(on ? "covered" : "notCovered") + "</span></li>";
       }).join("") + "</ul>";
       return '<div class="nkx-bodyrow"><figure class="nkx-fig" role="img" aria-label="' + esc(raw("bodyAlt", { l: DM.level })) + '">' + svg + "</figure>" +
-        '<div class="nkx-bodyside"><div class="nkx-readout" role="status" aria-live="polite"><p class="nkx-big"><output>' + DM.level + "</output></p>" +
+        '<div class="nkx-bodyside"><div class="nkx-readout"><p class="nkx-big"><output>' + DM.level + "</output></p>" +
         '<p class="sp-small">' + s("symp", { l: b.sympathetic }) + "<br>" + s("motor", { l: b.motor }) + "</p></div>" +
         '<h3 class="nkx-h3">' + s("landmarks") + "</h3>" + lm + "</div></div>" + alertsHtml(b.warnings);
     },
@@ -364,17 +380,17 @@
       var b = m.block(DM.level, DM.op), op = null;
       m.operations.forEach(function (o) { if (o.id === DM.op) op = o; });
       var o = b.operation;
-      return '<div class="nkx-result is-' + (o.enough ? "ok" : "bad") + '" role="status"><p class="nkx-rt">' +
+      return '<div class="nkx-result is-' + (o.enough ? "ok" : "bad") + '"><p class="nkx-rt">' +
         (o.enough ? s("enough", { op: t(op.name), l: o.needs }) : s("notEnough", { op: t(op.name), l: o.needs, g: o.gap })) + "</p></div>";
     },
     input: function (el) {
       var m = M("dermatomes"), k = el.getAttribute("data-xin");
-      if (k === "op") { DM.op = el.value; var l2 = $("nkxLive2"); if (l2) l2.innerHTML = X.dermatomes.live2(m); touched("dermatomes"); return; }
+      if (k === "op") { DM.op = el.value; var l2 = $("nkxLive2"); if (l2) l2.innerHTML = X.dermatomes.live2(m); say("dermatomes"); touched("dermatomes"); return; }
       DM.level = m.levels[+el.value];
       setOut(el, DM.level);
       repaintLive("dermatomes");
       var l3 = $("nkxLive2"); if (l3) l3.innerHTML = X.dermatomes.live2(m);
-      touched("dermatomes");
+      say("dermatomes"); touched("dermatomes");
     }
   };
 
@@ -421,8 +437,9 @@
         '<p class="nkx-mon-u" aria-hidden="true">cmH2O · mL · L/min</p></div>';
       var pre = presetOf(m), lesson = pre && pre !== "normal" ? '<p class="nkx-p nkx-lesson">' + tx(m.lessons[VS.mode][pre]) + "</p>" : "";
       return '<figure class="nkx-figw" role="img" aria-label="' + esc(raw("waveAlt")) + '">' + monitor + "</figure>" +
-        '<p class="sp-sr" role="status" aria-live="polite">' + s("ventSay", { a: f1(pp), b: f1(pl), c: f1(r.driving), v: r.vt }) + "</p>" + lesson + alertsHtml(r.alerts);
+        lesson + alertsHtml(r.alerts);
     },
+    say: function (m) { var r = m.breath(VS, 90); return raw("ventSay", { a: f1(r.peak), b: f1(r.plateau), c: f1(r.driving), v: r.vt }); },
     input: function (el) {
       var k = el.getAttribute("data-xin"), v = +el.value, wasPre = presetOf(M("ventilator"));
       VS[k] = v; setOut(el, v + VSL[k][3]);
@@ -480,9 +497,12 @@
         '<div class="nkx-plate nkx-mon"><div class="nkx-ch nkx-c-co2"><div class="nkx-ch-h"><span>' + s("capno") + '</span><span class="nkx-ch-u">0 to ' + top + " mmHg</span></div>" + capSvg + "</div>" +
         '<dl class="nkx-num6 nkx-num3"><div><dt>' + s("insp") + "</dt><dd>" + (st.runaway ? "&gt;100" : f1(st.inspiredCO2)) + "</dd></div><div><dt>" + s("et") + "</dt><dd>" + (st.runaway ? "&gt;100" : f1(st.endTidalCO2)) +
         "</dd></div><div><dt>" + s("reb") + "</dt><dd>" + Math.round(st.rebreathedFraction * 100) + "%</dd></div></dl></div>" +
-        '<p class="sp-sr" role="status" aria-live="polite">' + s("circSay", { i: iv, e: ev }) + "</p>" +
         '<p class="nkx-p"><b>' + tx(st.flowClass.name) + "</b> · " + s("lmin", { n: FGF_STEPS[CI.fgfI] }) + "</p>" +
         (st.washout && CI.absorber !== "fresh" ? '<p class="nkx-p">' + s("washout") + "</p>" : "") + alertsHtml(st.alerts);
+    },
+    say: function (m) {
+      var st = m.state({ fgf: FGF_STEPS[CI.fgfI], ve: CI.ve, absorber: CI.absorber });
+      return raw("circSay", { i: st.runaway ? raw("rising") : raw("mmhg", { n: f1(st.inspiredCO2) }), e: st.runaway ? raw("rising") : raw("mmhg", { n: f1(st.endTidalCO2) }) });
     },
     input: function (el) {
       var k = el.getAttribute("data-xin"), v = +el.value;

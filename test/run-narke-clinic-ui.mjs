@@ -6,7 +6,7 @@
  * USAGE: PORT=<free port> CHROME_PORT=<free port> node test/run-narke-clinic-ui.mjs   (SHOTS=<dir> saves screenshots)
  */
 import { spawn } from "node:child_process";
-import { writeFileSync } from "node:fs";
+import { writeFileSync, mkdirSync } from "node:fs";
 import { setTimeout as sleep } from "node:timers/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -31,6 +31,7 @@ const call = (m, p) => { const i = msgId++; return new Promise(r => { pending.se
 const ev = async (e) => { const r = await call("Runtime.evaluate", { expression: `(function(){try{${e}}catch(x){return "ERR:"+String(x&&x.message||x)}})()`, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : undefined; };
 const until = async (e, ms = 10000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (await ev(e) === true) return true; await sleep(150); } return false; };
 const key = async (k, code, vk, text) => { await call("Input.dispatchKeyEvent", { type: "keyDown", key: k, code, windowsVirtualKeyCode: vk, nativeVirtualKeyCode: vk, text }); await call("Input.dispatchKeyEvent", { type: "keyUp", key: k, code, windowsVirtualKeyCode: vk, nativeVirtualKeyCode: vk }); };
+if (process.env.SHOTS) mkdirSync(process.env.SHOTS, { recursive: true });
 const shot = async (name) => { if (!process.env.SHOTS) return; const r = await call("Page.captureScreenshot", { format: "png", captureBeyondViewport: false }); writeFileSync(join(process.env.SHOTS, name + ".png"), Buffer.from(r.result.data, "base64")); };
 let fails = 0; const ok = (c, m) => { console.log((c ? "✅ " : "❌ ") + m); if (!c) fails++; };
 const R = `var R=document.getElementById("smdNarke");`;
@@ -79,6 +80,11 @@ try {
   await shot("capno-dark-reveal");
   await ev(`document.querySelector('[data-act=nkc-next]').click(); return 1;`);
   ok(await until(`return /Case 2 of/.test(document.querySelector('#smdNarke .sp-title').textContent) && !document.querySelector('#smdNarke .nkc-verdict');`), "Next case moves on");
+  ok(await ev(`var a=document.activeElement; return !!a && a !== document.body && !!a.closest('#smdNarke') && a.classList.contains('nkc-scene');`) === true, "after Next, focus is on the new case's scene inside the clinic");
+  await key("2", "Digit2", 50, "2");
+  ok(await until(`return !!document.querySelector('#smdNarke .nkc-verdict') && document.querySelectorAll('#smdNarke .sp-ans')[1].getAttribute('data-state') !== null;`), "key 2 answers the second case without clicking first");
+  await ev(`document.querySelector('[data-act=nkc-next]').click(); return 1;`);
+  ok(await until(`return /Case 3 of/.test(document.querySelector('#smdNarke .sp-title').textContent) && !document.querySelector('#smdNarke .nkc-verdict');`), "Next again moves to case 3");
 
   // the correct option gives Correct
   await ev(`var c=NARKE._st.session.list[NARKE._st.session.i].c; document.querySelector('#smdNarke [data-act=nkc-ans][data-o="'+c.pattern+'"]').click(); return 1;`);
@@ -102,6 +108,7 @@ try {
   await until(`return !!document.querySelector('[data-act=clinic][data-t=monitor]');`);
   await ev(`document.querySelector('[data-act=clinic][data-t=monitor]').click(); return 1;`);
   ok(await until(`${R} return !!(R.querySelector('.nkc-line.ecg') && R.querySelector('.nkc-line.spo2') && R.querySelector('.nkc-nibp'));`), "monitor case draws ECG and pleth with NIBP");
+  ok(await ev(`${R} var t=R.querySelector('.nkc-mon > .nkc-trend'), m=R.querySelector('.nkc-mon'); if(!t) return "no trend row"; var a=t.getBoundingClientRect(), b=m.getBoundingClientRect(); return a.width >= b.width - 2 && !t.closest('.nkc-nibp');`) === true, "monitor: the EtCO2 trend is its own full-width row, apart from NIBP");
   ok(await ev(`${R} return /HR/.test(R.querySelector('.nkc-ecg .nkc-num').textContent) && /most likely problem/.test(R.textContent);`) === true, "monitor numerics and question");
   ok(await ev(`${R} var s=R.querySelector('.sp-scroll'); return s.scrollWidth <= s.clientWidth + 1;`) === true, "monitor: no horizontal scroll at 390 px");
   await shot("monitor-light-question");
