@@ -115,3 +115,21 @@ test("textbooks as sources become generic references; page numbers go; clinical 
     assert.equal(E.scrubBooks(keep), keep, keep);
   store.set("smd_nobooks", "0"); assert.equal(E.display("Harrison 22e, p. 12"), "Harrison 22e, p. 12"); store.clear();
 });
+
+/* Owner, 2026-10-06 (HIV page): "(cross-ref ch.49)", "(the reference ch.208; ... cross-ref ch.62, ch.222)",
+ * "(cross-ref ch.205)" - "I shouldn't see this". Book chapter/table locators go; clinical brackets stay. */
+test("book chapter, table and cross-ref locators are removed; clinical brackets stay", () => {
+  const T = [
+    ["in advanced HIV (cross-ref ch.49).", "in advanced HIV."],
+    ["AIDS-defining illnesses (Harrison ch.208; opportunistic-infection associations cross-ref ch.62, ch.222, ch.227, ch.235).", "AIDS-defining illnesses."],
+    ["have a better prognosis (cross-ref ch.205).", "have a better prognosis."],
+    ["(AML, Ch.109)", "(AML)"],
+    ["by physiologic state (Tables 470-1/470-2): opioids", "by physiologic state: opioids"],
+    ["and Evans syndrome (801, Table 105-7). Prognosis", "and Evans syndrome. Prognosis"],
+    ["component per Harrison Table 231-2 (Manifestations of Severe Falciparum Malaria).", "component."],
+    ["For risk stratification, Table 23-1 lists high-risk features.", "For risk stratification, the reference lists high-risk features."],
+  ];
+  for (const [a, b] of T) assert.equal(E.scrubBooks(a), b, a);
+  for (const keep of ["(notably <200 cells/uL) define", "CH50 is low (classical pathway)", "types (1, 2, 3) and", "dose 5 mg/kg (max 300 mg) daily", "use Table salt sparingly", "the reference standard is biopsy"])
+    assert.equal(E.scrubBooks(keep), keep, keep);
+});
