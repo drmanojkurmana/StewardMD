@@ -11,6 +11,7 @@
  * USAGE: node test/run-prep-plan-ui.mjs   (SHOTS=<dir> saves screenshots, PN_LIGHT=1 light theme; CHROME=, PORT=, CHROME_PORT=)
  */
 import { spawn } from "node:child_process";
+import { freePort } from "./free-port.mjs";
 import { setTimeout as sleep } from "node:timers/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";

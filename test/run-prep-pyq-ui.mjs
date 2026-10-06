@@ -13,6 +13,7 @@
  * USAGE: node test/run-prep-pyq-ui.mjs   (CHROME=<path>; SHOTS=<dir> saves screenshots, PN_LIGHT=1 in light)
  */
 import { spawn } from "node:child_process";
+import { freePort } from "./free-port.mjs";
 import { setTimeout as sleep } from "node:timers/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";

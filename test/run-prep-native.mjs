@@ -10,6 +10,7 @@
  * USAGE: node test/run-prep-native.mjs   (SHOTS=<dir> saves the settings sheet light and dark; CHROME=, PORT=, CHROME_PORT=)
  */
 import { spawn } from "node:child_process";
+import { freePort } from "./free-port.mjs";
 import { setTimeout as sleep } from "node:timers/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";

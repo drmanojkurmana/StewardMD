@@ -12,6 +12,7 @@
  * USAGE: node test/run-prep-create-ui.mjs   (BASE=http://localhost:8998/ for a running server; CHROME, CHROME_PORT, SHOTS=<dir>)
  */
 import { spawn } from "node:child_process";
+import { freePort } from "./free-port.mjs";
 import { writeFileSync, mkdirSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { setTimeout as sleep } from "node:timers/promises";
