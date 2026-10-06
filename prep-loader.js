@@ -10,7 +10,7 @@
    prep-sync.js (opt-in encrypted sync) and prep-native.js (reminder, widget, Live Activity) load with them. */
 (function (G) {
   "use strict";
-  var V = "prep8";
+  var V = "prep9";
   // Layer C (prep-source, prep-decks, prep-cards, prep-create) after prep.js; prep-create.js reads the two before it.
   var CSS = ["prep.css", "prep-create.css", "prep-plan.css", "prep-flash.css"];
   var JS = ["specialty-core.js", "specialty-bank.js", "prep.js", "prep-sync.js", "prep-arena.js", "prep-lessons.js", "prep-pyq.js", "prep-plan.js", "prep-native.js", "prep-flash.js", "prep-teacher.js", "prep-source.js", "prep-decks.js", "prep-cards.js", "prep-create.js"];
