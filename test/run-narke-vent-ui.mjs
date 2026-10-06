@@ -46,6 +46,7 @@ const small = () => ev(`${R} var out=[]; [].forEach.call(R.querySelectorAll('but
 // A real click: scroll the target into the clear area, dispatch a mouse press at its centre, and fail if something
 // else (a coach, a toast, a sticky bar) is on top of it.
 const tap = async (sel) => {
+  if (/\.vl-sheet/.test(sel)) await sleep(450); // a sheet slides in: tap only once it has settled (screenshots used to hide this)
   const pos = await ev(`var b=document.querySelector('#smdNarke ${sel.replace(/'/g, "\\'")}'); if(!b) return "missing"; var sc=b.closest('.sp-scroll'); if (sc) { var r0=b.getBoundingClientRect(), s0=sc.getBoundingClientRect(); if (r0.top < s0.top + 70 || r0.bottom > s0.bottom - 8) sc.scrollTop += r0.top - s0.top - s0.height/3; } var r=b.getBoundingClientRect(), x=r.left+r.width/2, y=r.top+r.height/2, h=document.elementFromPoint(x,y); return (h && (h===b || b.contains(h))) ? [x,y] : "covered by " + (h ? (h.className||h.tagName) : "nothing") + " at " + Math.round(x) + "," + Math.round(y);`);
   if (!Array.isArray(pos)) return pos;
   for (const type of ["mousePressed", "mouseReleased"]) await call("Input.dispatchMouseEvent", { type, x: pos[0], y: pos[1], button: "left", clickCount: 1 });
@@ -520,7 +521,6 @@ try {
     await tap(`[data-act=vlgo][data-s=pneumonia]`);
     ok(await until(`return !!document.querySelector('#smdNarke .vl-run');`) && await clock() === tr0, "opening the patient resumes the run at " + tr0 + " s");
     await ev(`NARKE.back(); return 1;`); await until(`return !!document.querySelector('#smdNarke [data-act=vlleave]');`);
-    await sleep(450); // the sheet slides in; tap only after it has settled
     await tap(`.vl-sheet [data-act=vlleave]`);
     ok(await until(`return !!document.querySelector('#smdNarke .vl-home') && !document.querySelector('#smdNarke [data-act=vlgo][data-s=pneumonia] .vl-resume');`), "Leave without saving drops the run");
 
