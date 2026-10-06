@@ -163,7 +163,7 @@ test("B2: low SpO2 below 88% bags before FiO2, as its own text and the engine pl
   assert.ok(by.bag.rank < by.dope.rank, "bag before DOPE");
   // the engine leads a low SpO2 below 88 with bagging (vent-engine.js planOf)
   const eng = readFileSync("narke-models/vent-engine.js", "utf8");
-  assert.ok(/spo2 < 88 && avail\("bag100"\)\) prim = pa\("bag100"\)/.test(eng), "engine: spo2Low below 88 leads with bag100");
+  assert.ok(/(spo2 < 88|band === "emergency") && avail\("bag100"\)\) prim = pa\("bag100"\)/.test(eng) && /SPO2_EMERG = 88/.test(eng), "engine: spo2Low below 88 leads with bag100");
   // SBAR does not assume the optional step happened, and is consistent with bagging
   assert.ok(/bagging with 100% oxygen/.test(lo.sbar.a.en) && !/FiO2 now 100/.test(lo.sbar.a.en));
   // Never alone allows FiO2 100% in an emergency, so it is never a trap
@@ -207,9 +207,9 @@ test("B4: handover to the next doctor covers mode, set, measured, last gas, alar
 test("never alone card: may, may not, call now triggers, SBAR template", () => {
   const N = J.never;
   assert.ok(N.may.length >= 4 && N.mayNot.length >= 3 && N.callNow.length >= 5);
-  // The call-now thresholds match the engine's callNow triggers (vent-engine.js callOf): SpO2 85, MAP 65, HR 50, pH 7.20, auto-PEEP 10.
+  // The call-now thresholds match the engine's callNow triggers (vent-engine.js callOf): SpO2 88 (engine SPO2_EMERG), MAP 65, HR 50, pH 7.20, auto-PEEP 10.
   const cn = N.callNow.map((x) => x.en).join(" ");
-  for (const k of ["85%", "below 65", "below 50", "7.20", "auto-PEEP of 10"]) assert.ok(cn.includes(k), "call now: " + k);
+  for (const k of ["88%", "below 65", "below 50", "7.20", "auto-PEEP of 10"]) assert.ok(cn.includes(k), "call now: " + k);
   assert.ok(/100%/.test(N.may.map((x) => x.en).join(" ")) && /policy/.test(N.may.map((x) => x.en).join(" ")), "FiO2 100% only per local policy");
   assert.ok(/PEEP/.test(N.mayNot.map((x) => x.en).join(" ")));
   assert.deepEqual(N.sbar.map((x) => x.k), ["S", "B", "A", "R"]);
