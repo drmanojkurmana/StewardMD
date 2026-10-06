@@ -191,3 +191,6 @@ data/dose-rules-report.json
 # to R2 like the bank (prep/lessons/gen/ is the place for a full run's output).
 /prep/lessons/work/
 /prep/lessons/gen/
+# PrepNucleus PYQ (tools/prep-pyq.mjs): recall question text, options and images never enter the public repo; they
+# go to R2 (prep-bank/v2/pyq/) and the private GCS bucket. Only the synthetic test fixture is committed.
+/prep/pyq/

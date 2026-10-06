@@ -368,3 +368,23 @@ body.dark .pn-root .pn-vimg img, body.dark .pn-root .pn-zoom-b img { filter: bri
   .pn-root .pn-lsn-xp b, .pn-root .pn-zoom { animation: none; }
   .pn-root .pn-lsn-play, .pn-root .pn-lsn-spd, .pn-root .pn-vimg { transition: none; }
 }
+
+/* ---- Previous year papers (prep-pyq.js): papers list, paper panel, module PYQ chips, recall tags, question images ----
+   Recall honesty is a calm note and a neutral "Recall" label, never an alarm colour. Question images reuse the lesson
+   figure (.pn-vimg) and zoom (.pn-zoom). */
+.pn-root .pn-yq-note { display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px; border-radius: 14px; background: var(--pn-s1); color: var(--pn-mut); font-size: 13px; line-height: 1.45; text-wrap: pretty; }
+.pn-root .pn-yq-note b { color: var(--pn-text); font-weight: 650; }
+.pn-root .pn-yq-ni { flex: 0 0 auto; display: inline-flex; margin-top: 1px; color: var(--pn-pri); }
+.pn-root .pn-yq-kind { flex: 0 0 auto; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--pn-line); font-size: 12px; font-weight: 650; color: var(--pn-mut); white-space: nowrap; }
+.pn-root .pn-yq-subs { display: flex; flex-direction: column; border: 1px solid var(--pn-line); border-radius: 16px; background: var(--pn-card); overflow: hidden; }
+.pn-root .pn-yq-subs li { display: flex; align-items: center; gap: 12px; min-height: 48px; padding: 8px 14px; font-size: 15px; }
+.pn-root .pn-yq-subs li + li { border-top: 1px solid var(--pn-line); }
+.pn-root .pn-yq-sn { flex: 1 1 auto; min-width: 0; }
+.pn-root .pn-yq-chips { padding-bottom: 2px; }
+.pn-root .pn-yq-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.pn-root .pn-yq-tag { display: inline-flex; align-items: center; gap: 6px; max-width: 100%; min-height: 28px; padding: 3px 10px 3px 8px; border-radius: 999px; background: var(--pn-pri-soft); color: var(--pn-pri-ink); font-size: 12px; font-weight: 650; line-height: 1.3; }
+.pn-root .pn-yq-tag > span { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pn-root .pn-yq-fig .pn-vimg { max-height: 60vh; display: flex; align-items: center; justify-content: center; }
+.pn-root .pn-yq-fig .pn-vimg img { width: auto; max-width: 100%; max-height: 60vh; object-fit: contain; }
+.pn-root .pn-zoom-b, .pn-root .pn-vimg { -webkit-touch-callout: none; }
+.pn-root .pn-panel[hidden] { display: none; }

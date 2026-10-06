@@ -111,7 +111,8 @@ test("textbooks as sources become generic references; page numbers go; clinical 
   ];
   for (const [a, b] of T) assert.equal(E.scrubBooks(a), b, a);
   for (const keep of ["Harrison's groove in rickets", "Fitzpatrick skin type IV", "Braunwald classification of unstable angina", "Kaplan-Meier survival",
-    "Brenner tumour of ovary", "Nelson syndrome after adrenalectomy", "Rockwood classification type III", "Page 2 of 5", "p53 mutation and p = 0.05"])
+    "Brenner tumour of ovary", "Nelson syndrome after adrenalectomy", "Rockwood classification type III", "Page 2 of 5", "p53 mutation and p = 0.05",
+    "Asked in NEET-PG 2025, 2024 (recall)", "NEET PG 2023 recall"])
     assert.equal(E.scrubBooks(keep), keep, keep);
   store.set("smd_nobooks", "0"); assert.equal(E.display("Harrison 22e, p. 12"), "Harrison 22e, p. 12"); store.clear();
 });

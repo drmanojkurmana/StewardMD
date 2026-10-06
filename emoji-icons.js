@@ -255,6 +255,7 @@
     var o = t, REF = (opts && opts.ref) || GENERIC_REF, kept = [];
     t = t.replace(LINES_RE, function (m) { if (m === REF) return "\u0003"; kept.push(m); return "\u0004" + (kept.length - 1) + "\u0004"; });
     t = t.replace(/\bTinsley\s+R(?:andolph|\.)?\s+Harrison\b/g, function (m) { kept.push(m); return "\u0004" + (kept.length - 1) + "\u0004"; });   // the physician, not the book
+    t = t.replace(/\bNEET[-\s]?PG\b/gi, function (m) { kept.push(m); return "\u0004" + (kept.length - 1) + "\u0004"; });   // the exam, not a page: "NEET-PG 2025" kept whole
     t = t.replace(/\bHarrison(?:'s|\u2019s)?\s+line\s+\d+/g, "\u0001");
     var unwrap = function (m) { var a = /^\s*\(/.test(m), z = /\)\s*$/.test(m); return a && z ? "" : a ? "(" : z ? ")" : ""; };
     t = t.replace(PAGE_RE, unwrap).replace(CHAP_RE, unwrap);

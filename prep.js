@@ -349,6 +349,8 @@
     if (G.PREP_ARENA && G.PREP_ARENA.back && G.PREP_ARENA.back()) return true;
     // Lessons: a zoomed image closes first; leaving the reader stops the narration.
     if (G.PREP_LESSONS && G.PREP_LESSONS.back()) return true;
+    // PYQ: an enlarged question image closes first.
+    if (G.PREP_PYQ && G.PREP_PYQ.back()) return true;
     if (st.run && st.run.mode === "exam" && !st.run.done) { if (!G.confirm || G.confirm("Leave the test? Your answers in this test will be lost.")) { stopTimer(); st.run = null; } else return true; }
     stopTimer();
     if (st.stack.length > 1) { st.stack.pop(); rerender(); return true; }
@@ -399,6 +401,7 @@
     stopTimer();
     try { if (G.PREP_ARENA && G.PREP_ARENA.leave) G.PREP_ARENA.leave(); } catch (e) {}
     try { if (G.PREP_LESSONS) G.PREP_LESSONS.leave(); } catch (e) {}
+    try { if (G.PREP_PYQ) G.PREP_PYQ.leave(); } catch (e) {}
     st.open = false; st.run = null; st.stack = [];
     if (root && root.parentNode) root.parentNode.removeChild(root);
     root = null;
@@ -429,6 +432,8 @@
       row("custom", ico("plus"), "Custom module", "Your own mix and count") +
       row("mistakes", ico("x"), "My mistakes", fmt(Object.keys(s.mt).length) + " to fix") +
       row("mocks", ico("clock"), "Mock exam", "Full pattern, marked") +
+      // Previous year papers (prep-pyq.js): NEET-PG recall papers only, so the row shows on that tab.
+      (G.PREP_PYQ && s.exam === "neet-pg" ? G.PREP_PYQ.homeRow(HOST) : "") +
       (G.PREP_C ? row("c-home", ico("deck"), "Your decks", "Questions and cards from your PDF or notes") : "") +
       (G.PREP_ARENA ? row("a-stats", ico("stats"), "My stats", "Accuracy by subject, the last 30 days") : "") + "</div>" +
       '<h2 class="pn-h">Subjects</h2><div class="pn-subs" id="pnGrid">' + subs.map(function (sb) { return tile(sb, null); }).join("") + "</div>" +
@@ -494,7 +499,8 @@
     if (!t) return;
     var n = countFor(t, s.exam), p = progressByModule(s, today())[mid] || { answered: 0, due: 0 }, sr = stars(s.mod[mid]);
     // Lessons (prep-lessons.js): the slot fills when the lesson index lists this module.
-    paint(bar(tx(t.title), tx(subjectById(sid).name), "back") + '<div class="pn-body"><div id="pnLsnSlot"></div><section class="pn-panel">' +
+    // PYQ (prep-pyq.js): the slot draws "All questions / PYQ n" chips when the module has previous-year questions.
+    paint(bar(tx(t.title), tx(subjectById(sid).name), "back") + '<div class="pn-body"><div id="pnLsnSlot"></div><div id="pnPyqSlot"></div><section class="pn-panel" id="pnModPanel">' +
       '<p class="pn-big">' + fmt(n) + ' MCQs</p><p class="pn-mut">' + fmt(Math.min(p.answered, n)) + " answered" + (sr != null ? " · mastery " + sr + "/5" : "") + (p.due ? " · " + fmt(p.due) + " due for review" : "") + "</p>" +
       (p.due ? '<button type="button" class="pn-btn pri" data-act="start" data-k="due">' + ico("play") + " Review " + fmt(p.due) + " due</button>" : "") +
       '<button type="button" class="pn-btn' + (p.due ? "" : " pri") + '" data-act="start" data-k="study">' + ico("play") + " Practice " + Math.min(SESSION, n) + " questions</button>" +
@@ -502,6 +508,7 @@
       '<p class="pn-mut pn-small">Practice marks each answer at once with its explanation. A timed test marks everything at the end. Every answer schedules the question for spaced review.</p></section></div>');
     st.cur = { s: sid, m: mid };
     if (G.PREP_LESSONS) G.PREP_LESSONS.mount(root.querySelector("#pnLsnSlot"), sid, mid, HOST);
+    if (G.PREP_PYQ) G.PREP_PYQ.mount(root.querySelector("#pnPyqSlot"), sid, mid, HOST);
   }
   function startModule(sid, mid, kind, n) {
     var s = load(), size = n || SESSION;
@@ -547,11 +554,13 @@
     }, 1000);
   }
   function stopTimer() { if (st.timer) { G.clearInterval(st.timer); st.timer = 0; } }
-  function provLine(it) { return it.gen || it.prov === "SMD" ? "AI-generated, auto-checked" : it.prov === "USR" ? "Your deck" : "Source: MedMCQA (MIT licence)"; }
+  function provLine(it) { if (it._py && G.PREP_PYQ) return G.PREP_PYQ.prov(it); return it.gen || it.prov === "SMD" ? "AI-generated, auto-checked" : it.prov === "USR" ? "Your deck" : "Source: MedMCQA (MIT licence)"; }
   function renderRun() {
     var r = st.run; if (!r) return;
     if (r.done) return r.custom ? r.custom.render(r) : renderResult();
     var it = r.items[r.i], chosen = r.ans[r.i], shown = r.mode === "study" && chosen >= 0, s = load(), bm = !!s.bm[it.id], own = it._s === "deck";
+    // PYQ items (prep-pyq.js) are not in a bank module file, so a bookmark could not reload them: no ribbon.
+    var pyq = G.PREP_PYQ ? { tags: G.PREP_PYQ.chips(it, HOST), fig: G.PREP_PYQ.figure(it, HOST) } : { tags: "", fig: "" };
     var L = ["A", "B", "C", "D"];
     var opts = it.o.map(function (o, k) {
       var cls = "pn-opt";
@@ -561,13 +570,13 @@
         (shown && k === it.a ? '<span class="pn-mark">' + ico("check") + "</span>" : shown && k === chosen ? '<span class="pn-mark">' + ico("x") + "</span>" : "") + "</button></li>";
     }).join("");
     // Your own deck's questions stay on this phone: no bookmark (bookmarks reload from the bank) and no report.
-    var right = r.mode === "exam" ? '<span class="pn-clock" id="pnClock" role="timer" aria-live="off">' + fmtTime(r.limit - (Date.now() - r.t0) / 1000) + "</span>" : own ? "" :
+    var right = r.mode === "exam" ? '<span class="pn-clock" id="pnClock" role="timer" aria-live="off">' + fmtTime(r.limit - (Date.now() - r.t0) / 1000) + "</span>" : own || it._py ? "" :
       '<button type="button" class="pn-ib' + (bm ? " on" : "") + '" data-act="bookmark" aria-pressed="' + bm + '" aria-label="' + (bm ? "Remove bookmark" : "Bookmark this question") + '">' + ico("bm", bm) + "</button>";
     var fb = "";
     if (shown) {
       var ok = chosen === it.a;
       fb = '<section class="pn-fb ' + (ok ? "ok" : "no") + '" role="status" tabindex="-1"><p class="pn-verdict">' + ico(ok ? "check" : "x") + "<span>" + (ok ? "Correct" : "Incorrect") + " · Answer " + L[it.a] + ". " + esc(it.o[it.a]) + "</span></p>" +
-        (it.exp ? '<h3>Explanation</h3><p class="pn-exp">' + esc(it.exp) + "</p>" : '<p class="pn-mut">The source gives no explanation for this question.</p>') +
+        (it.exp ? '<h3>Explanation</h3><p class="pn-exp">' + esc(it.exp) + "</p>" : '<p class="pn-mut">' + (it._py ? "No explanation written for this recall question yet." : "The source gives no explanation for this question.") + "</p>") +
         (it.kp ? '<p class="pn-kp"><b>Exam pearl:</b> ' + esc(it.kp) + "</p>" : "") +
         (it.rv && it.rv.old ? '<p class="pn-old">This may be outdated: check current guidance.</p>' : "") +
         // Offline teacher (prep-teacher.js, Phase 6): only when MaiK runs on this phone; never a server call.
@@ -586,7 +595,7 @@
       : shown ? '<div class="pn-navrow">' + (own ? "" : '<button type="button" class="pn-btn" data-act="report">' + ico("flag") + " Report</button>") +
         '<button type="button" class="pn-btn pri" data-act="next">' + (r.i < r.items.length - 1 ? "Next question" : "Finish") + " " + ico("next") + "</button></div>" : "";
     paint(bar(esc(r.title), "Question " + (r.i + 1) + " of " + r.items.length, "back", right) +
-      '<div class="pn-body pn-run"><p class="pn-q">' + esc(it.q) + '</p><ol class="pn-opts" type="A">' + opts + "</ol>" + fb + nav + "</div>", shown ? ".pn-fb" : ".pn-opt");
+      '<div class="pn-body pn-run">' + pyq.tags + '<p class="pn-q">' + esc(it.q) + "</p>" + pyq.fig + '<ol class="pn-opts" type="A">' + opts + "</ol>" + fb + nav + "</div>", shown ? ".pn-fb" : ".pn-opt");
   }
   function record(it, chosen) {
     var s = load(), ok = chosen === it.a, td = today(), dk = deckKey(it._m || it.t);
@@ -596,7 +605,8 @@
     ms.t++; if (ok) ms.ok++; ms.last = td;
     s.last = { s: it._s, m: it._m || it.t };
     // Mistakes (bank questions only; a deck's questions live in Layer C storage): kept until answered right.
-    if (it._s !== "deck") { if (ok) delete s.mt[it.id]; else s.mt[it.id] = [it._s, it._m || it.t, (s.mt[it.id] || [])[2] || null, Date.now(), String(it.q || "").slice(0, 140)]; }
+    // PYQ items live in their paper, not a module file, so My mistakes (which reloads modules) leaves them out.
+    if (it._s !== "deck" && !it._py) { if (ok) delete s.mt[it.id]; else s.mt[it.id] = [it._s, it._m || it.t, (s.mt[it.id] || [])[2] || null, Date.now(), String(it.q || "").slice(0, 140)]; }
     save();
   }
   function answer(k) {
@@ -633,7 +643,7 @@
     var r = st.run, it = r.items[i];
     st.stack.push(function () {
       var L = ["A", "B", "C", "D"];
-      paint(bar("Review", esc(r.title), "back") + '<div class="pn-body pn-run"><p class="pn-q">' + esc(it.q) + '</p><ol class="pn-opts">' + it.o.map(function (o, k) {
+      paint(bar("Review", esc(r.title), "back") + '<div class="pn-body pn-run">' + (G.PREP_PYQ ? G.PREP_PYQ.chips(it, HOST) : "") + '<p class="pn-q">' + esc(it.q) + "</p>" + (G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST) : "") + '<ol class="pn-opts">' + it.o.map(function (o, k) {
         return '<li><div class="pn-opt' + (k === it.a ? " right" : k === r.ans[i] ? " wrong" : "") + '"><span class="pn-l">' + L[k] + "</span><span>" + esc(o) + "</span></div></li>";
       }).join("") + '</ol><section class="pn-fb"><h3>Explanation</h3><p class="pn-exp">' + esc(it.exp || "The source gives no explanation for this question.") + '</p><p class="pn-prov">' + provLine(it) + "</p></section></div>");
     });
@@ -745,11 +755,13 @@
     });
   }
   function mockAnalysis(r) {
-    var sc = scoreMock(r.items, r.ans, r.scheme), rows = Object.keys(sc.bySubject).map(function (sid) { var b = sc.bySubject[sid], sb = subjectById(sid); return { sid: sid, name: sb ? tx(sb.name) : esc(sid), n: b.n, right: b.right, wrong: b.wrong, pct: b.n ? Math.round(b.right * 100 / b.n) : 0 }; });
+    var sc = scoreMock(r.items, r.ans, r.scheme), rows = Object.keys(sc.bySubject).map(function (sid) { var b = sc.bySubject[sid], sb = subjectById(sid); return { sid: sid, sb: sb, name: sb ? tx(sb.name) : "Not sorted into a subject yet", n: b.n, right: b.right, wrong: b.wrong, pct: b.n ? Math.round(b.right * 100 / b.n) : 0 }; });
     rows.sort(function (a, b) { return a.pct - b.pct; });
     return '<section class="pn-panel pn-score"><p class="pn-big">' + fmtMark(sc.marks) + " / " + sc.max + '</p><p class="pn-mut">' + sc.right + " right · " + sc.wrong + " wrong · " + sc.blank + " unanswered · " + fmtTime(r.secs) + " taken</p></section>" +
       '<h2 class="pn-sec">By subject, weakest first</h2><ul class="pn-mods">' + rows.map(function (x) {
-        return '<li><button type="button" class="pn-mod" data-act="subject" data-s="' + esc(x.sid) + '"><span class="pn-mb"><b>' + x.name + "</b><small>" + x.right + " of " + x.n + " right · " + x.wrong + ' wrong</small></span><span class="pn-st' + (x.pct >= 70 ? " done" : "") + '">' + x.pct + "%</span></button></li>";
+        // A previous-year question not yet sorted into a subject (_s "pyq") has no subject screen to open.
+        var inner = '<span class="pn-mb"><b>' + x.name + "</b><small>" + x.right + " of " + x.n + " right · " + x.wrong + ' wrong</small></span><span class="pn-st' + (x.pct >= 70 ? " done" : "") + '">' + x.pct + "%</span>";
+        return x.sb ? '<li><button type="button" class="pn-mod" data-act="subject" data-s="' + esc(x.sid) + '">' + inner + "</button></li>" : '<li><div class="pn-mod static">' + inner + "</div></li>";
       }).join("") + "</ul>";
   }
 
@@ -947,6 +959,8 @@
     if (a.indexOf("a-") === 0 && G.PREP_ARENA && G.PREP_ARENA.act) return G.PREP_ARENA.act(a, b, HOST);
     // Lessons (prep-lessons.js) own every data-act starting "l-".
     if (a.indexOf("l-") === 0 && G.PREP_LESSONS) return G.PREP_LESSONS.act(a, b, HOST);
+    // Previous year papers (prep-pyq.js) own every data-act starting "y-".
+    if (a.indexOf("y-") === 0 && G.PREP_PYQ) return G.PREP_PYQ.act(a, b, HOST);
   }
   function openGrid() {
     var r = st.run;
@@ -969,7 +983,7 @@
     subjIco: subjIco, row: row, fmtTime: fmtTime, mockOf: mockOf, subjectOfModule: subjectOfModule, subjectById: subjectById, tx: tx,
     stackTop: function () { return st.stack[st.stack.length - 1]; }, home: renderHome, run_: function () { return st.run; },
     // Lessons (prep-lessons.js)
-    stack: function () { return st.stack; }, loadModule: loadModule, pool: function (items) { var h = hidden(); return (items || []).filter(function (it) { return usable(it, h); }); }, cacheGet: cacheGet, cachePut: cachePut };
+    stack: function () { return st.stack; }, loadModule: loadModule, bankApi: API, pool: function (items) { var h = hidden(); return (items || []).filter(function (it) { return usable(it, h); }); }, cacheGet: cacheGet, cachePut: cachePut };
 
   var API_OBJ = { open: open, close: close, back: back, isOpen: function () { return st.open; }, _pure: PURE, _st: st, _host: HOST };
   G.PREP = API_OBJ;

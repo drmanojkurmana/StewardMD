@@ -11389,3 +11389,20 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
 - **No flag of its own:** a module shows its Lesson row only when the index lists it, so shipping lessons is shipping
   data. Progress `ls`, prefs `lsp` in `smd_prep_v1`; XP 10 a step, once per lesson. **Status:** branch
   `feat/prepnucleus`; one hand-written lesson (`sur-breast-cancer`); no paid run yet.
+
+## 2026-10-06 - PrepNucleus PYQ: recall papers kept out of git, honest labels, tags instead of copies
+- **Decision** ([[PrepNucleus]], "Previous year papers / PYQ"): the owner's PYQ PDFs are public free downloads of
+  memory-based recall papers, so every PYQ is `kind: "recall"` and the app says "recall" wherever a PYQ appears; never
+  "official" unless the source is official. NBEMS does not publish NEET-PG papers.
+- **Storage:** the repo is public, so question text, options and images live only in gitignored `prep/pyq/`, R2
+  (`prep-bank/v2/pyq/`, served by the bank route's whitelist) and the private GCS bucket. Publisher names, URLs,
+  watermarks and explanations are dropped; the watermark text and publisher names needed to strip them sit in the
+  private config, not in code. Explanations are ours (Layer B reason style, gated).
+- **Dedupe:** a PYQ that is already a bank question becomes a tag on the bank item (side index, module files untouched),
+  not a second copy; repeats across papers merge into one item that carries every source. Recall papers reword stems,
+  so besides exact and 5-gram matches a repeat also counts when the key and 3 options match and the stems share
+  content words (Jaccard 0.3); on the first run 0.2 tagged different questions that shared a key and options.
+- **Timed papers** use the NEET-PG pattern from `MOCKS` (210 min per 200 questions, +4/-1) scaled to the paper's size.
+- **Rejected:** keeping 2- and 3-option recalls (they are incomplete memories, not the real exam's 4 options) and
+  guessing keys for answer-only recalls; both are reported as parse failures. **Status:** branch `feat/prepnucleus`;
+  no paid stage run (dry run about $0.11), not uploaded to R2 (owner's yes).

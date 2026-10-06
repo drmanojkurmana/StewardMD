@@ -10,17 +10,21 @@
  * that does not exist yet.
  *
  * Public by design: the bank is MedMCQA (MIT) plus StewardMD-generated items, the same content the app shows
- * before sign-in, and nothing here is per user. Only whitelisted paths are served; files are versioned (v1, v2, ...)
+ * before sign-in, and nothing here is per user. PYQ files (v2/pyq/) are recall questions the owner supplied; they live
+ * only in R2 (never in the public repo). Only whitelisted paths are served; files are versioned (v1, v2, ...)
  * and never change once uploaded, so they are cached as immutable.
  */
 const PATH_RE = /^v\d{1,3}\/(?:manifest\.json|[a-z0-9-]{2,60}\/(?:index|search)\.json|[a-z0-9-]{2,60}\/mcq\/[a-z0-9-]{2,80}\.json)$/;
+// PYQ (tools/prep-pyq.mjs): v<n>/pyq/index.json (names the current items file, so short cache), items-<8 hex>.json and
+// img/<name>.webp (both immutable: the items name carries a content hash, image names never change meaning).
+const PYQ_RE = /^v\d{1,3}\/pyq\/(?:index\.json|items-[0-9a-f]{8}\.json|img\/[a-z0-9-]{2,80}\.webp)$/;
 const PREFIX = "prep-bank/";
 
 function notFound() { return new Response(JSON.stringify({ error: "not-found" }), { status: 404, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } }); }
 
 export function bankPath(params) {
   const p = [].concat((params && params.path) || []).map(String).join("/");
-  return PATH_RE.test(p) ? p : null;
+  return PATH_RE.test(p) || PYQ_RE.test(p) ? p : null;
 }
 
 export async function onRequestGet({ env, params }) {
@@ -32,9 +36,9 @@ export async function onRequestGet({ env, params }) {
   try { obj = await bucket.get(PREFIX + p); } catch (e) { obj = null; }
   if (!obj) return notFound();
   const headers = new Headers({
-    "Content-Type": "application/json; charset=utf-8",
-    // manifest.json names the current files, so it may change; everything else is immutable within a version
-    "Cache-Control": /manifest\.json$/.test(p) ? "public, max-age=300" : "public, max-age=31536000, immutable",
+    "Content-Type": /\.webp$/.test(p) ? "image/webp" : "application/json; charset=utf-8",
+    // manifest.json and pyq/index.json name the current files, so they may change; everything else is immutable
+    "Cache-Control": /(?:manifest|pyq\/index)\.json$/.test(p) ? "public, max-age=300" : "public, max-age=31536000, immutable",
     "X-Content-Type-Options": "nosniff",
   });
   if (obj.httpEtag) headers.set("ETag", obj.httpEtag);

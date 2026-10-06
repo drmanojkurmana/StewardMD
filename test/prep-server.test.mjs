@@ -55,6 +55,27 @@ test("bank: anything off the whitelist is 404 and never reaches the bucket", asy
   assert.equal((await get("v1/anatomy/mcq/missing-module.json", { PREP_BANK_R2: r2({}) })).status, 404);
 });
 
+test("bank: PYQ index (short cache), hashed items file and webp images (immutable, image/webp); nothing else under pyq/", async () => {
+  const env = { PREP_BANK_R2: r2({ "prep-bank/v2/pyq/index.json": '{"v":1}', "prep-bank/v2/pyq/items-0a1b2c3d.json": '{"v":1,"items":[]}', "prep-bank/v2/pyq/img/neet-pg-2025-r1-1-1.webp": "RIFF" }) };
+  const ix = await get("v2/pyq/index.json", env);
+  assert.equal(ix.status, 200);
+  assert.doesNotMatch(ix.headers.get("Cache-Control"), /immutable/);
+  const it = await get("v2/pyq/items-0a1b2c3d.json", env);
+  assert.equal(it.status, 200);
+  assert.match(it.headers.get("Cache-Control"), /immutable/);
+  assert.match(it.headers.get("Content-Type"), /json/);
+  const im = await get("v2/pyq/img/neet-pg-2025-r1-1-1.webp", env);
+  assert.equal(im.status, 200);
+  assert.equal(im.headers.get("Content-Type"), "image/webp");
+  assert.match(im.headers.get("Cache-Control"), /immutable/);
+  let asked = 0;
+  const spy = { PREP_BANK_R2: { get: async () => { asked++; return { body: "x" }; } } };
+  for (const p of ["v2/pyq/items.json", "v2/pyq/items-0A1B2C3D.json", "v2/pyq/img/x.png", "v2/pyq/img/../index.json", "v2/pyq/source.pdf", "v2/pyq/img/a/b.webp", "v2/anatomy/x.webp", "v2/pyq/img/neet.webp.json"]) {
+    assert.equal((await get(p, spy)).status, 404, p);
+  }
+  assert.equal(asked, 0);
+});
+
 test("bank: no binding is a clear 503", async () => {
   assert.equal((await get("v1/anatomy/index.json", {})).status, 503);
 });

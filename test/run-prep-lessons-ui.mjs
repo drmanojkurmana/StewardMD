@@ -213,7 +213,7 @@ try {
 
   // ---- offline copy, network, errors
   ok(await evA(`PREP._host.cacheGet("lessons/v1/${MID}.json").then(function(f){ return !!(f && f.steps && f.steps.length===8); })`) === true, "the lesson is kept in IndexedDB for offline");
-  ok(reqs.some((u) => /\/prep-lessons\.js\?v=prep4/.test(u)) && reqs.some((u) => /\/prep\/lessons\/v1\/index\.json/.test(u)), "prep-lessons.js and the lesson index load");
+  ok(reqs.some((u) => /\/prep-lessons\.js\?v=prep5/.test(u)) && reqs.some((u) => /\/prep\/lessons\/v1\/index\.json/.test(u)), "prep-lessons.js and the lesson index load");
   ok(!reqs.some((u) => /\/api\/(ai|prep\/bank)/.test(u)), "no request to /api/ai or the live bank");
   await ev(`PREP.close(); return 1;`);
   ok(errors.length === 0, "no uncaught PrepNucleus error" + (errors.length ? ": " + errors.join(" | ").slice(0, 400) : ""));
