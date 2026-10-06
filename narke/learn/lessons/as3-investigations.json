@@ -1,0 +1,219 @@
+{
+  "id": "as3-investigations",
+  "unit": "as3",
+  "level": "mbbs",
+  "minutes": 5,
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "Order-set contents follow the kit (preop-fit-adult, preop-major, preop-cardiac)",
+      "No routine chest X-ray (NICE NG45)"
+    ]
+  },
+  "competencies": [
+    "AS3.4"
+  ],
+  "title": {
+    "en": "Choosing preoperative tests",
+    "hi": "ऑपरेशन से पहले जाँचें चुनना"
+  },
+  "idea": {
+    "en": "Order a test only when the result could change the plan. Choose by age, illness and the size of the surgery, not by a fixed routine panel.",
+    "hi": "जाँच तभी लिखिए जब उसका नतीजा योजना बदल सके। उम्र, बीमारी और सर्जरी के आकार से चुनिए, किसी तय नियमित पैनल से नहीं।"
+  },
+  "see": {
+    "diagram": "diagrams/as3-investigations.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "A decision diamond leads to three boxes. Green holds one blood tube and amber a tube and an ECG trace. Red adds a heart outline. Below, a grey bar ends in a red circle with a white cross.",
+      "hi": "एक निर्णय वाला हीरा तीन खानों तक जाता है: हरा जिसमें एक ख़ून की ट्यूब, पीला जिसमें ट्यूब और ECG रेखा, लाल जिसमें ट्यूब, ECG रेखा और दिल की आकृति। नीचे एक भूरी पट्टी जो सफ़ेद क्रॉस वाले लाल घेरे पर ख़त्म होती है।"
+    },
+    "caption": {
+      "en": "Tests grow with patient risk and surgical size; routine tests without a reason are crossed out.",
+      "hi": "जाँचें मरीज़ के जोखिम और सर्जरी के आकार के साथ बढ़ती हैं; बिना कारण की नियमित जाँचें काटी गई हैं।"
+    },
+    "credit": "Original diagram, Narkē (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.5,
+        "y": 0.233,
+        "label": {
+          "en": "Will it change the plan?",
+          "hi": "क्या यह योजना बदलेगा?"
+        },
+        "note": {
+          "en": "Ask this before every test. Unneeded tests delay surgery, cost money and throw up false alarms.",
+          "hi": "हर जाँच से पहले यह पूछिए। बेवजह की जाँचें सर्जरी टालती हैं, पैसा लगाती हैं और झूठे अलार्म देती हैं।"
+        }
+      },
+      {
+        "x": 0.208,
+        "y": 0.583,
+        "label": {
+          "en": "Fit adult, minor surgery",
+          "hi": "स्वस्थ वयस्क, छोटी सर्जरी"
+        },
+        "note": {
+          "en": "Usually little or nothing. CBC, blood sugar or a urine pregnancy test only if indicated.",
+          "hi": "आमतौर पर बहुत कम या कुछ नहीं। CBC, ब्लड शुगर या पेशाब से प्रेगनेंसी टेस्ट सिर्फ़ ज़रूरत हो तो।"
+        }
+      },
+      {
+        "x": 0.5,
+        "y": 0.583,
+        "label": {
+          "en": "Major surgery or ASA III",
+          "hi": "बड़ी सर्जरी या ASA III"
+        },
+        "note": {
+          "en": "CBC, creatinine, electrolytes, sugar and HbA1c, coagulation if indicated, blood group, and an ECG.",
+          "hi": "CBC, क्रिएटिनिन, इलेक्ट्रोलाइट्स, शुगर और HbA1c, ज़रूरत हो तो कोएगुलेशन, ब्लड ग्रुप, और ECG।"
+        }
+      },
+      {
+        "x": 0.792,
+        "y": 0.583,
+        "label": {
+          "en": "Heart disease or age 65 plus",
+          "hi": "हृदय रोग या 65 से ऊपर"
+        },
+        "note": {
+          "en": "ECG, and troponin, NT-proBNP or echocardiography when cardiac risk or symptoms call for them.",
+          "hi": "ECG, और हृदय जोखिम या लक्षण हों तो ट्रोपोनिन, NT-proBNP या इकोकार्डियोग्राफ़ी।"
+        }
+      },
+      {
+        "x": 0.792,
+        "y": 0.833,
+        "label": {
+          "en": "Routine chest X-ray",
+          "hi": "नियमित छाती का एक्स-रे"
+        },
+        "note": {
+          "en": "Not needed routinely. Order it only for a clinical reason such as new chest signs.",
+          "hi": "नियमित रूप से ज़रूरी नहीं। सिर्फ़ किसी क्लिनिकल कारण से लिखिए, जैसे छाती में नए लक्षण।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Grade the surgery as minor, intermediate or major, and the patient by ASA and disease.",
+        "hi": "सर्जरी को छोटी, मध्यम या बड़ी और मरीज़ को ASA और बीमारी से ग्रेड कीजिए।"
+      },
+      {
+        "en": "Add tests for specific illness: creatinine and potassium in kidney disease or on diuretics, HbA1c in diabetes.",
+        "hi": "ख़ास बीमारी के लिए जाँच जोड़िए: किडनी रोग या डाइयूरेटिक पर क्रिएटिनिन और पोटैशियम, डायबिटीज़ में HbA1c।"
+      },
+      {
+        "en": "Offer a pregnancy test to women who could be pregnant, with consent.",
+        "hi": "जो महिलाएँ गर्भवती हो सकती हैं, उन्हें सहमति से प्रेगनेंसी टेस्ट दीजिए।"
+      },
+      {
+        "en": "Many Indian hospitals still order fixed panels. Follow local policy, but know what each test adds.",
+        "hi": "भारत के कई अस्पताल अब भी तय पैनल लिखते हैं। स्थानीय नीति मानिए, पर जानिए हर जाँच क्या जोड़ती है।"
+      },
+      {
+        "en": "Interpret every result and act on it. An abnormal result left unread is worse than no test.",
+        "hi": "हर नतीजा पढ़िए और उस पर कार्रवाई कीजिए। बिना पढ़ा असामान्य नतीजा जाँच न करने से भी बुरा है।"
+      }
+    ],
+    "analogy": {
+      "en": "Tests are like a map: buy one for a new road, not for your own street.",
+      "hi": "जाँचें नक़्शे जैसी हैं: नए रास्ते के लिए ख़रीदिए, अपनी गली के लिए नहीं।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Hb and sugar are worth checking in a diabetic before major surgery.",
+      "hi": "बड़ी सर्जरी से पहले डायबिटिक में Hb और शुगर देखना उपयोगी है।"
+    },
+    {
+      "en": "An ECG in a fit 25-year-old for minor surgery rarely helps.",
+      "hi": "छोटी सर्जरी के लिए स्वस्थ 25 साल के व्यक्ति में ECG शायद ही मदद करता है।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "For three patients on the list, write which tests you would order and why, then compare with what was ordered.",
+      "hi": "सूची के तीन मरीज़ों के लिए लिखिए कि आप कौन सी जाँचें और क्यों लिखते, फिर लिखी गई जाँचों से मिलाइए।"
+    }
+  ],
+  "remember": {
+    "en": "Test for a reason: by age, illness and surgery size. No routine chest X-ray; ECG for heart disease or age 65 plus.",
+    "hi": "कारण से जाँच: उम्र, बीमारी और सर्जरी के आकार से। नियमित छाती का एक्स-रे नहीं; हृदय रोग या 65 से ऊपर में ECG।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "A fit 24-year-old needs excision of a small lipoma. What testing is most appropriate?",
+        "hi": "स्वस्थ 24 साल के व्यक्ति की छोटी लाइपोमा निकालनी है। कौन सी जाँच सबसे उचित है?"
+      },
+      "o": [
+        {
+          "en": "CBC, LFT, RFT, ECG and chest X-ray",
+          "hi": "CBC, LFT, RFT, ECG और छाती का एक्स-रे"
+        },
+        {
+          "en": "ECG and echocardiography",
+          "hi": "ECG और इकोकार्डियोग्राफ़ी"
+        },
+        {
+          "en": "No routine tests unless indicated",
+          "hi": "ज़रूरत न हो तो कोई नियमित जाँच नहीं"
+        },
+        {
+          "en": "Coagulation profile and chest X-ray",
+          "hi": "कोएगुलेशन प्रोफ़ाइल और छाती का एक्स-रे"
+        }
+      ],
+      "a": 2,
+      "why": {
+        "en": "For a fit young adult having minor surgery, routine tests add little. Test only for a clinical reason.",
+        "hi": "छोटी सर्जरी वाले स्वस्थ युवा में नियमित जाँचें कम जोड़ती हैं। सिर्फ़ क्लिनिकल कारण से जाँचिए।"
+      }
+    },
+    {
+      "q": {
+        "en": "A 60-year-old on a diuretic for hypertension is listed for major surgery. Which test is clearly indicated?",
+        "hi": "हाइपरटेंशन के लिए डाइयूरेटिक लेने वाले 60 साल के व्यक्ति की बड़ी सर्जरी है। कौन सी जाँच साफ़ ज़रूरी है?"
+      },
+      "o": [
+        {
+          "en": "Thyroid function tests",
+          "hi": "थायरॉइड फ़ंक्शन टेस्ट"
+        },
+        {
+          "en": "Serum electrolytes and creatinine",
+          "hi": "सीरम इलेक्ट्रोलाइट्स और क्रिएटिनिन"
+        },
+        {
+          "en": "Serum amylase and lipase",
+          "hi": "सीरम एमाइलेज़ और लाइपेज़"
+        },
+        {
+          "en": "Pulmonary function tests",
+          "hi": "पल्मोनरी फ़ंक्शन टेस्ट"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "Diuretics can lower potassium and affect kidney function, which matter for major surgery.",
+        "hi": "डाइयूरेटिक पोटैशियम घटा सकते हैं और किडनी पर असर डालते हैं, जो बड़ी सर्जरी में मायने रखता है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "preop",
+    "tool": "rcri"
+  },
+  "glossary": [],
+  "sources": [
+    "NICE guideline NG45. Routine preoperative tests for elective surgery (2016).",
+    "StewardMD Anaesthesia kit kb/specialty-kits/src/anaesthesia.json: pre-anaesthetic check-up fields, airway assessment and preoperative order sets.",
+    "2022 ESC/ESAIC Guidelines on cardiovascular assessment and management of patients undergoing non-cardiac surgery.",
+    "Butterworth JF, Mackey DC, Wasnick JD. Morgan and Mikhail's Clinical Anesthesiology, 7th edition (2022), Chapter 18: Preoperative assessment, premedication and perioperative documentation."
+  ]
+}

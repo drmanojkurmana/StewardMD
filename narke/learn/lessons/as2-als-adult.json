@@ -1,0 +1,275 @@
+{
+  "id": "as2-als-adult",
+  "unit": "as2",
+  "level": "mbbs",
+  "minutes": 7,
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "Adrenaline timing in shockable rhythm (after 3rd shock ERC, 2nd shock AHA)",
+      "Amiodarone 300 mg then 150 mg",
+      "Post-ROSC targets"
+    ]
+  },
+  "competencies": [
+    "AS2.2"
+  ],
+  "title": {
+    "en": "Adult advanced life support",
+    "hi": "वयस्क एडवांस्ड लाइफ़ सपोर्ट"
+  },
+  "idea": {
+    "en": "ALS adds rhythm checks, shocks, drugs and an airway to good CPR. Split the rhythm into [[shockable-rhythm|shockable]] or not, and search for the [[hs-and-ts]].",
+    "hi": "ALS अच्छे CPR में लय की जाँच, शॉक, दवाएँ और एयरवे जोड़ता है। लय को [[shockable-rhythm|शॉक योग्य]] या नहीं में बाँटिए, और [[hs-and-ts]] खोजिए।"
+  },
+  "see": {
+    "diagram": "diagrams/as2-als-adult.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "A diamond at the top splits into two paths. Left: a red circle with a lightning bolt, then a CPR box, looping back to the top. Right: a blue circle with a flat line, then a CPR box, looping back. Between the paths are two green syringes and one purple syringe. At the bottom is a green heart.",
+      "hi": "ऊपर एक हीरे के आकार से दो रास्ते निकलते हैं। बाएँ: बिजली के निशान वाला लाल घेरा, फिर CPR का खाना, जो वापस ऊपर जाता है। दाएँ: सपाट रेखा वाला नीला घेरा, फिर CPR का खाना, वापस ऊपर। रास्तों के बीच दो हरी सिरिंज और एक बैंगनी सिरिंज। नीचे एक हरा दिल।"
+    },
+    "caption": {
+      "en": "Two loops of 2 minutes each: shock or no shock, with adrenaline and amiodarone at set points, until ROSC.",
+      "hi": "2-2 मिनट के दो चक्र: शॉक या बिना शॉक, तय समय पर adrenaline और amiodarone के साथ, ROSC तक।"
+    },
+    "credit": "Original diagram, Narkē (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.5,
+        "y": 0.167,
+        "label": {
+          "en": "Rhythm check",
+          "hi": "लय की जाँच"
+        },
+        "note": {
+          "en": "Every 2 minutes, pause briefly to look at the rhythm. Check a pulse only if an organised rhythm or signs of ROSC appear.",
+          "hi": "हर 2 मिनट पर लय देखने के लिए थोड़ा रुकिए। नाड़ी तभी देखिए जब व्यवस्थित लय या ROSC के संकेत दिखें।"
+        }
+      },
+      {
+        "x": 0.25,
+        "y": 0.433,
+        "label": {
+          "en": "VF or pulseless VT",
+          "hi": "VF या बिना नाड़ी VT"
+        },
+        "note": {
+          "en": "Shock at once: biphasic as per the manufacturer (usually 120 to 200 J), or 360 J monophasic. Resume CPR for 2 minutes straight after.",
+          "hi": "तुरंत शॉक: बाइफ़ेज़िक निर्माता के अनुसार (आमतौर पर 120 से 200 J), या मोनोफ़ेज़िक 360 J। तुरंत बाद 2 मिनट CPR फिर शुरू।"
+        }
+      },
+      {
+        "x": 0.75,
+        "y": 0.433,
+        "label": {
+          "en": "Asystole or PEA",
+          "hi": "Asystole या PEA"
+        },
+        "note": {
+          "en": "No shock. Give adrenaline 1 mg IV or IO as soon as access is obtained, then CPR for 2 minutes.",
+          "hi": "शॉक नहीं। एक्सेस मिलते ही adrenaline 1 mg IV या IO, फिर 2 मिनट CPR।"
+        }
+      },
+      {
+        "x": 0.421,
+        "y": 0.513,
+        "label": {
+          "en": "Adrenaline",
+          "hi": "Adrenaline"
+        },
+        "note": {
+          "en": "1 mg IV or IO every 3 to 5 minutes. In shockable rhythms, start after the 3rd shock (ERC) or 2nd shock (AHA).",
+          "hi": "हर 3 से 5 मिनट 1 mg IV या IO। शॉक योग्य लय में तीसरे शॉक (ERC) या दूसरे शॉक (AHA) के बाद शुरू।"
+        }
+      },
+      {
+        "x": 0.421,
+        "y": 0.607,
+        "label": {
+          "en": "Amiodarone",
+          "hi": "Amiodarone"
+        },
+        "note": {
+          "en": "300 mg IV after 3 shocks, a further 150 mg after 5 shocks. Lidocaine is the alternative.",
+          "hi": "3 शॉक के बाद 300 mg IV, 5 शॉक के बाद और 150 mg। Lidocaine विकल्प है।"
+        }
+      },
+      {
+        "x": 0.5,
+        "y": 0.887,
+        "label": {
+          "en": "After ROSC",
+          "hi": "ROSC के बाद"
+        },
+        "note": {
+          "en": "ABCDE and a 12-lead ECG. SpO2 90 to 98% (ERC 94 to 98%), PaCO2 35 to 45 mmHg, MAP 65 or more. Prevent fever.",
+          "hi": "ABCDE, 12-लीड ECG, SpO2 90 से 98% (ERC 94 से 98%), PaCO2 35 से 45 mmHg, MAP 65 या ज़्यादा, और बुख़ार रोकिए।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Start high-quality CPR, attach the defibrillator and call the team. Note the time.",
+        "hi": "अच्छी गुणवत्ता का CPR शुरू कीजिए, डिफ़िब्रिलेटर लगाइए और टीम बुलाइए। समय लिखिए।"
+      },
+      {
+        "en": "Shockable rhythm: shock, then 2 minutes of CPR before the next check. Never delay the first shock for drugs or the airway.",
+        "hi": "शॉक योग्य लय: शॉक, फिर अगली जाँच से पहले 2 मिनट CPR। दवा या एयरवे के लिए पहला शॉक कभी न टालिए।"
+      },
+      {
+        "en": "IV access first, IO if IV fails twice. The tracheal route is no longer used for drugs.",
+        "hi": "पहले IV एक्सेस, IV दो बार न लगे तो IO। दवाओं के लिए ट्रेकियल रास्ता अब इस्तेमाल नहीं होता।"
+      },
+      {
+        "en": "Start with bag-mask. Place a supraglottic airway or tube only if skilled; then give 10 breaths a minute with continuous compressions.",
+        "hi": "बैग-मास्क से शुरू कीजिए। कुशल हों तभी सुप्राग्लॉटिक एयरवे या ट्यूब; फिर लगातार दबाने के साथ प्रति मिनट 10 साँस।"
+      },
+      {
+        "en": "Confirm the tube with waveform [[etco2]]. A flat trace means the tube is in the oesophagus until proved otherwise.",
+        "hi": "ट्यूब की पुष्टि वेवफ़ॉर्म [[etco2]] से कीजिए। सपाट रेखा का मतलब है ट्यूब भोजन-नली में है जब तक उल्टा साबित न हो।"
+      },
+      {
+        "en": "Look for the 4 Hs and 4 Ts. In India also think of poisoning, snakebite and hyperkalaemia in kidney disease.",
+        "hi": "4 H और 4 T खोजिए। भारत में ज़हर, साँप का काटना और किडनी रोग में hyperkalaemia के बारे में भी सोचिए।"
+      }
+    ],
+    "analogy": {
+      "en": "ALS is a 2-minute clock. Each lap you look, decide, shock or not, give the due drug, and keep the chest moving.",
+      "hi": "ALS एक 2 मिनट की घड़ी है। हर चक्कर में देखिए, तय कीजिए, शॉक दें या नहीं, बकाया दवा दीजिए, और छाती दबाते रहिए।"
+    }
+  },
+  "spot": [
+    {
+      "en": "A sudden, sustained rise in EtCO2 during CPR suggests ROSC.",
+      "hi": "CPR के दौरान EtCO2 का अचानक, टिकाऊ बढ़ना ROSC का संकेत है।"
+    },
+    {
+      "en": "PEA needs an active search for hypovolaemia, tamponade, tension pneumothorax, PE and hyperkalaemia.",
+      "hi": "PEA में hypovolaemia, tamponade, tension pneumothorax, PE और hyperkalaemia की सक्रिय खोज ज़रूरी है।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Run a mock code on a manikin and say each drug and shock time aloud.",
+      "hi": "मैनिकिन पर एक नकली कोड चलाइए और हर दवा और शॉक का समय बोलकर बताइए।"
+    },
+    {
+      "en": "Check the crash cart: adrenaline 1 mg, amiodarone, defibrillator pads and a capnograph.",
+      "hi": "क्रैश कार्ट जाँचिए: adrenaline 1 mg, amiodarone, डिफ़िब्रिलेटर पैड और कैपनोग्राफ़।"
+    }
+  ],
+  "remember": {
+    "en": "Shockable: shock, CPR 2 min, adrenaline after the 3rd shock (ERC) and amiodarone 300 mg. Non-shockable: adrenaline 1 mg at once. Treat the 4 Hs and 4 Ts.",
+    "hi": "शॉक योग्य: शॉक, 2 मिनट CPR, तीसरे शॉक (ERC) के बाद adrenaline और amiodarone 300 mg। शॉक अयोग्य: तुरंत adrenaline 1 mg। 4 H और 4 T का इलाज।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "A monitored patient has asystole. When is the first adrenaline given?",
+        "hi": "मॉनिटर पर मरीज़ में asystole है। पहली adrenaline कब दी जाती है?"
+      },
+      "o": [
+        {
+          "en": "After the third shock",
+          "hi": "तीसरे शॉक के बाद"
+        },
+        {
+          "en": "After 10 minutes of CPR",
+          "hi": "10 मिनट CPR के बाद"
+        },
+        {
+          "en": "As soon as IV or IO access is obtained",
+          "hi": "IV या IO एक्सेस मिलते ही"
+        },
+        {
+          "en": "Only after a tube is placed",
+          "hi": "ट्यूब लगने के बाद ही"
+        }
+      ],
+      "a": 2,
+      "why": {
+        "en": "In non-shockable rhythms, adrenaline 1 mg is given as soon as access is obtained, then every 3 to 5 minutes.",
+        "hi": "शॉक अयोग्य लय में एक्सेस मिलते ही adrenaline 1 mg दी जाती है, फिर हर 3 से 5 मिनट।"
+      }
+    },
+    {
+      "q": {
+        "en": "VF persists after 3 shocks. Which drug and dose is due now?",
+        "hi": "3 शॉक के बाद भी VF बना है। अब कौन सी दवा और खुराक देनी है?"
+      },
+      "o": [
+        {
+          "en": "Amiodarone 150 mg IV",
+          "hi": "Amiodarone 150 mg IV (नस में)"
+        },
+        {
+          "en": "Amiodarone 300 mg IV",
+          "hi": "Amiodarone 300 mg IV (नस में)"
+        },
+        {
+          "en": "Atropine 3 mg IV",
+          "hi": "Atropine 3 mg IV (नस में)"
+        },
+        {
+          "en": "Calcium chloride 10 mL IV",
+          "hi": "Calcium chloride 10 mL IV (नस में)"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "Amiodarone 300 mg IV after 3 shocks, then 150 mg after 5 shocks, along with adrenaline 1 mg.",
+        "hi": "3 शॉक के बाद amiodarone 300 mg IV, फिर 5 शॉक के बाद 150 mg, adrenaline 1 mg के साथ।"
+      }
+    },
+    {
+      "q": {
+        "en": "After intubation during CPR the capnograph trace is flat. What is most likely?",
+        "hi": "CPR के दौरान इंट्यूबेशन के बाद कैपनोग्राफ़ की रेखा सपाट है। सबसे संभावित क्या है?"
+      },
+      "o": [
+        {
+          "en": "The tube is in the oesophagus",
+          "hi": "ट्यूब भोजन-नली में है"
+        },
+        {
+          "en": "Return of spontaneous circulation",
+          "hi": "स्वतः रक्त-संचार की वापसी"
+        },
+        {
+          "en": "Compressions are too deep",
+          "hi": "दबाना बहुत गहरा है"
+        },
+        {
+          "en": "The patient is hyperventilated",
+          "hi": "मरीज़ को ज़्यादा वेंटिलेशन मिला है"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Even in arrest, good CPR gives a capnography trace. A flat line means oesophageal intubation until proved otherwise.",
+        "hi": "अरेस्ट में भी अच्छे CPR से कैपनोग्राफ़ी रेखा बनती है। सपाट रेखा का मतलब भोजन-नली में इंट्यूबेशन जब तक उल्टा साबित न हो।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "cpr",
+    "sim": "als"
+  },
+  "glossary": [
+    "shockable-rhythm",
+    "pea",
+    "hs-and-ts",
+    "etco2",
+    "rosc"
+  ],
+  "sources": [
+    "StewardMD clinical protocol kb/clinical-protocols/adult-cardiac-arrest.json (from AHA 2025 Adult ALS, ERC 2025 ALS and Resuscitation Council UK 2025).",
+    "StewardMD clinical protocol kb/clinical-protocols/post-cardiac-arrest-care.json (from AHA 2025 and ERC-ESICM 2025 post-resuscitation care).",
+    "Indian Resuscitation Council (ISA). Indian guidelines on basic and advanced cardiopulmonary life support, cited for facts only.",
+    "Resuscitation Council UK. 2025 Adult advanced life support guidelines."
+  ]
+}
