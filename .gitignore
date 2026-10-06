@@ -179,5 +179,8 @@ data/dose-rules-report.json
 # (tools/prep-upload-bank.mjs); only prep/taxonomy.json and each subject's index.json are committed and shipped.
 /prep/bank/v*/*/mcq/
 /prep/bank/v*/*/search.json
-/prep/build/
+/prep/build/*
+# Owner 2026-10-06: classifier outputs are kept in git so a lost worktree costs nothing; vectors stay local.
+!/prep/build/embed-*.json
+!/prep/build/llm-*.json
 /prep/fill/
