@@ -1,0 +1,260 @@
+{
+  "id": "as6-circulation-discharge",
+  "unit": "as6",
+  "level": "mbbs",
+  "minutes": 6,
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "Modified Aldrete item definitions (circulation bands 20% and 20 to 49%; SpO2 above 92% on air) and discharge at 9 or more."
+    ]
+  },
+  "competencies": [
+    "AS6.3",
+    "AS6.1"
+  ],
+  "title": {
+    "en": "Blood pressure, slow waking and discharge",
+    "hi": "ब्लड प्रेशर, देर से जागना और रिकवरी से छुट्टी"
+  },
+  "idea": {
+    "en": "Low or high blood pressure and slow waking need a cause, not a guess. Send the patient out only when the [[aldrete]] is 9 or more.",
+    "hi": "कम या ज़्यादा ब्लड प्रेशर और देर से जागने का कारण खोजिए, अंदाज़ा मत लगाइए। मरीज़ को तभी भेजिए जब [[aldrete]] 9 या ज़्यादा हो।"
+  },
+  "see": {
+    "diagram": "diagrams/as6-circulation-discharge.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "A score card with five rows. Row icons: a stick figure, lungs, a heart, an open eye and a finger with a red clip. Each row has three boxes holding no dot, one dot and two dots, with one box shaded green. To the right is a bar of ten blocks, nine green and one grey. An amber line sits before the ninth block, with a small bed below.",
+      "hi": "पाँच पंक्तियों वाला एक स्कोर कार्ड। हर पंक्ति एक चित्र से शुरू होती है: एक मानव आकृति, फेफड़े, दिल, खुली आँख और लाल क्लिप वाली उंगली। हर पंक्ति में तीन खाने हैं जिनमें शून्य, एक और दो बिंदु हैं, और एक खाना हरा रंगा है। दाईं ओर दस खानों की पट्टी है, नौ हरे और एक धूसर, नौवें खाने से पहले एक पीली रेखा और नीचे एक छोटा बेड।"
+    },
+    "caption": {
+      "en": "The modified Aldrete score: five items, 0 to 2 each. A total of 9 or more allows discharge.",
+      "hi": "modified Aldrete स्कोर: पाँच मद, हर एक 0 से 2। कुल 9 या ज़्यादा पर छुट्टी।"
+    },
+    "credit": "Original diagram, Narkē (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.117,
+        "y": 0.133,
+        "label": {
+          "en": "Activity",
+          "hi": "गतिविधि"
+        },
+        "note": {
+          "en": "2: moves all four limbs. 1: moves two limbs. 0: moves none.",
+          "hi": "2: चारों अंग हिलाता है। 1: दो अंग हिलाता है। 0: कोई नहीं।"
+        }
+      },
+      {
+        "x": 0.117,
+        "y": 0.317,
+        "label": {
+          "en": "Breathing",
+          "hi": "साँस"
+        },
+        "note": {
+          "en": "2: breathes deeply and coughs. 1: short of breath or shallow. 0: apnoeic.",
+          "hi": "2: गहरी साँस लेता और खाँसता है। 1: साँस फूलती या उथली। 0: साँस नहीं।"
+        }
+      },
+      {
+        "x": 0.117,
+        "y": 0.5,
+        "label": {
+          "en": "Circulation",
+          "hi": "Circulation"
+        },
+        "note": {
+          "en": "2: BP within 20% of the pre-anaesthetic value. 1: within 20 to 49%. 0: 50% or more away.",
+          "hi": "2: BP एनेस्थीसिया से पहले के मान से 20% के भीतर। 1: 20 से 49% के भीतर। 0: 50% या ज़्यादा अंतर।"
+        }
+      },
+      {
+        "x": 0.117,
+        "y": 0.683,
+        "label": {
+          "en": "Consciousness",
+          "hi": "होश"
+        },
+        "note": {
+          "en": "2: fully awake. 1: wakes when called. 0: does not respond.",
+          "hi": "2: पूरी तरह जागा। 1: पुकारने पर जागता है। 0: कोई प्रतिक्रिया नहीं।"
+        }
+      },
+      {
+        "x": 0.117,
+        "y": 0.867,
+        "label": {
+          "en": "Oxygen saturation",
+          "hi": "ऑक्सीजन saturation"
+        },
+        "note": {
+          "en": "2: SpO2 above 92% on room air. 1: needs oxygen to stay above 90%. 0: below 90% even with oxygen.",
+          "hi": "2: कमरे की हवा पर SpO2 92% से ऊपर। 1: 90% से ऊपर रहने के लिए ऑक्सीजन चाहिए। 0: ऑक्सीजन के साथ भी 90% से कम।"
+        }
+      },
+      {
+        "x": 0.771,
+        "y": 0.467,
+        "label": {
+          "en": "Total and threshold",
+          "hi": "कुल और सीमा"
+        },
+        "note": {
+          "en": "Add the five items. 9 or more, with pain and nausea controlled, allows discharge to the ward.",
+          "hi": "पाँचों मद जोड़िए। 9 या ज़्यादा, और दर्द व मतली नियंत्रित हों, तो वार्ड भेज सकते हैं।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Low BP: think of bleeding, a high spinal or epidural block, drugs and sepsis. Check the wound and drains.",
+        "hi": "कम BP: रक्तस्राव, ऊँचा spinal या epidural block, दवाएँ और sepsis सोचिए। घाव और drains देखिए।"
+      },
+      {
+        "en": "High BP: often pain, a full bladder, cold, or missed regular medicines. Treat the cause first.",
+        "hi": "ज़्यादा BP: अक्सर दर्द, भरा मूत्राशय, ठंड या छूटी नियमित दवाएँ। पहले कारण का इलाज कीजिए।"
+      },
+      {
+        "en": "Slow waking: check glucose, temperature, oxygen, carbon dioxide and drugs. Then think of a stroke.",
+        "hi": "देर से जागना: glucose, तापमान, ऑक्सीजन, carbon dioxide और दवाएँ जाँचिए। फिर stroke के बारे में सोचिए।"
+      },
+      {
+        "en": "Discharge when the Aldrete score is 9 or more and pain and nausea are controlled.",
+        "hi": "Aldrete स्कोर 9 या ज़्यादा हो और दर्द व मतली नियंत्रित हों तो छुट्टी दीजिए।"
+      }
+    ],
+    "analogy": {
+      "en": "The Aldrete score is a pre-flight checklist. Every item must pass before the patient leaves recovery.",
+      "hi": "Aldrete स्कोर उड़ान से पहले की checklist है। मरीज़ के रिकवरी छोड़ने से पहले हर मद पास होना चाहिए।"
+    }
+  },
+  "spot": [
+    {
+      "en": "A rising pulse with a falling BP after surgery is bleeding until proved otherwise.",
+      "hi": "सर्जरी के बाद बढ़ती नाड़ी और गिरता BP तब तक रक्तस्राव है जब तक कुछ और साबित न हो।"
+    },
+    {
+      "en": "New confusion in an older patient may be hypoxia, not simply age.",
+      "hi": "बुज़ुर्ग मरीज़ में नई उलझन hypoxia हो सकती है, सिर्फ़ उम्र नहीं।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Check capillary glucose in every patient who is slow to wake.",
+      "hi": "देर से जागने वाले हर मरीज़ में capillary glucose जाँचिए।"
+    },
+    {
+      "en": "Score the five Aldrete items aloud before you sign the discharge.",
+      "hi": "छुट्टी पर दस्तख़त से पहले पाँचों Aldrete मद बोलकर गिनिए।"
+    }
+  ],
+  "remember": {
+    "en": "Find the cause of abnormal BP or slow waking. Discharge at Aldrete 9 or more, with pain and nausea controlled.",
+    "hi": "असामान्य BP या देर से जागने का कारण खोजिए। Aldrete 9 या ज़्यादा पर, दर्द और मतली नियंत्रित होने पर छुट्टी।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "Which five items make up the modified Aldrete score?",
+        "hi": "modified Aldrete स्कोर किन पाँच मदों से बनता है?"
+      },
+      "o": [
+        {
+          "en": "Pulse, pain, nausea, urine and temperature",
+          "hi": "नाड़ी, दर्द, मतली, पेशाब और तापमान"
+        },
+        {
+          "en": "GCS, pupils, BP, glucose and lactate",
+          "hi": "GCS, पुतलियाँ, BP, glucose और lactate"
+        },
+        {
+          "en": "Activity, breathing, circulation, consciousness and SpO2",
+          "hi": "गतिविधि, साँस, circulation, होश और SpO2"
+        },
+        {
+          "en": "Airway, ECG, drains, wound and mobility",
+          "hi": "Airway, ECG, drains, घाव और चलना-फिरना"
+        }
+      ],
+      "a": 2,
+      "why": {
+        "en": "The modified score replaced skin colour with SpO2 and kept the other four items.",
+        "hi": "modified स्कोर में त्वचा के रंग की जगह SpO2 आया और बाकी चार मद वही रहे।"
+      }
+    },
+    {
+      "q": {
+        "en": "A patient is slow to wake after general anaesthesia. What is the first bedside test?",
+        "hi": "general anaesthesia के बाद मरीज़ देर से जाग रहा है। बेड के पास पहला टेस्ट क्या है?"
+      },
+      "o": [
+        {
+          "en": "CT scan of the head",
+          "hi": "सिर का CT scan"
+        },
+        {
+          "en": "Capillary blood glucose",
+          "hi": "Capillary blood glucose"
+        },
+        {
+          "en": "Serum magnesium level",
+          "hi": "Serum magnesium स्तर"
+        },
+        {
+          "en": "Chest X-ray film",
+          "hi": "छाती का X-ray"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "Hypoglycaemia is quick to find and quick to treat, so check it first.",
+        "hi": "Hypoglycaemia जल्दी पकड़ में आता है और जल्दी ठीक होता है, इसलिए पहले यही जाँचिए।"
+      }
+    },
+    {
+      "q": {
+        "en": "Pulse 124, BP 84/50 and the drain is filling with blood. What is the likely cause?",
+        "hi": "नाड़ी 124, BP 84/50 और drain में खून भर रहा है। संभावित कारण क्या है?"
+      },
+      "o": [
+        {
+          "en": "Bleeding from the operation site",
+          "hi": "ऑपरेशन की जगह से रक्तस्राव"
+        },
+        {
+          "en": "Pain from the wound edge",
+          "hi": "घाव के किनारे का दर्द"
+        },
+        {
+          "en": "A full urinary bladder",
+          "hi": "भरा हुआ मूत्राशय"
+        },
+        {
+          "en": "Shivering after anaesthesia",
+          "hi": "एनेस्थीसिया के बाद कँपकँपी"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Tachycardia, hypotension and a filling drain mean haemorrhage. Call the surgeon and resuscitate.",
+        "hi": "तेज़ नाड़ी, कम BP और भरता drain रक्तस्राव बताते हैं। सर्जन को बुलाइए और resuscitation कीजिए।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "monitoring-equipment"
+  },
+  "glossary": [
+    "aldrete"
+  ],
+  "sources": [
+    "Aldrete JA. The post-anesthesia recovery score revisited. J Clin Anesth 1995;7:89-91.",
+    "Gropper MA, ed. Miller's Anesthesia, 9th edition (2020): the postanesthesia care unit, haemodynamic problems and delayed emergence.",
+    "Association of Anaesthetists. Immediate post-anaesthesia recovery 2013: discharge criteria from recovery."
+  ]
+}

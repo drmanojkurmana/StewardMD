@@ -27,7 +27,11 @@
   function ms(n) { return '<span class="material-symbols-outlined kit-ic" aria-hidden="true">' + n + "</span>"; }
   function toast(m) { try { (G.toast || G.SMD_toast) && (G.toast || G.SMD_toast)(m); } catch (e) {} }
   var DECISIONS = [["approve", "Approve as it is"], ["approve-minor", "Approve after the minor edits I describe"], ["changes", "Needs changes before use"]];
-  var KINDS = [["protocol", "Protocols"], ["kit", "Specialty kits"], ["consent", "Consent templates"], ["tokos", "Tokós"]];
+  var KINDS = [["protocol", "Protocols"], ["kit", "Specialty kits"], ["consent", "Consent templates"], ["tokos", "Tokós"], ["narke", "Narkē"]];
+  // Specialty-engine hosts with a Review Desk tab: display name, data base, models global, loader global.
+  var SPEC = { tokos: { name: "Tokós", base: "SMD_TOKOS_BASE", dir: "/tokos/", models: "TOKOS_MODELS", loader: "TOKOS_LOADER" },
+    narke: { name: "Narkē", base: "SMD_NARKE_BASE", dir: "/narke/", models: "NARKE_MODELS", loader: "NARKE_LOADER" } };
+  function specBase(h) { return G[SPEC[h].base] || SPEC[h].dir; }
 
   function loadDecisions() { try { var o = JSON.parse((G.localStorage && G.localStorage.getItem(LS_KEY)) || "{}"); return o && typeof o === "object" ? o : {}; } catch (e) { return {}; } }
   function saveDecisions(o) { try { G.localStorage.setItem(LS_KEY, JSON.stringify(o)); } catch (e) {} }
@@ -37,7 +41,7 @@
     return { schema: 1, app: "StewardMD review desk", exportedAt: now || new Date().toISOString(), reviewer: { name: reviewer.name || "", regNo: reviewer.regNo || "", speciality: reviewer.speciality || "", verified: !!reviewer.verified }, decisions: list };
   }
 
-  var S = { deskOn: false, kind: "protocol", sel: "", showText: false, items: { protocol: null, kit: null, consent: null, tokos: null }, tokosBank: {}, reviewer: { name: "", regNo: "", speciality: "", verified: false }, q: "" };
+  var S = { deskOn: false, kind: "protocol", sel: "", showText: false, items: { protocol: null, kit: null, consent: null, tokos: null, narke: null }, specBank: { tokos: {}, narke: {} }, specLearn: {}, reviewer: { name: "", regNo: "", speciality: "", verified: false }, q: "" };
 
   /* ---------- Tokós (CTG trainer) ---------- */
   var TOK_TEXT = [["rationale", "review", "Tokós teaching points", "The Why notes on the answer screen, English and Hindi"],
@@ -55,10 +59,12 @@
     return rest.filter(function (x) { return x.verify; }).concat(ctg, rest.filter(function (x) { return !x.verify; }));
   }
   var LEVEL = { mbbs: "MBBS", resident: "Resident" };
-  /** Pure: the Tokós 2.0 items. learn = learn/index.json, bank = decks/mcq/index.json, models = window.TOKOS_MODELS,
+  /** Pure: a specialty host's items (host "tokos" by default, or "narke"). learn = learn/index.json,
+   * bank = decks/mcq/index.json, models = the host's models global,
    * ledger = reviews.json items. Order: units (syllabus order), bank topics, drills, labour room, calculators, explorers, clinics. */
-  function tokosMore(x) {
-    var L = x.learn || { units: [], lessons: {} }, M = x.models || {}, led = x.ledger || {}, out = [];
+  function tokosMore(x, host) {
+    host = host || "tokos";
+    var L = x.learn || { units: [], lessons: {} }, M = x.models || {}, led = x.ledger || {}, out = [], N = SPEC[host].name;
     function add(id, title, sub, extra) {
       var it = { id: id, title: title, sub: sub, status: (led[id] && led[id].status) || "ai_drafted" };
       for (var k in extra || {}) it[k] = extra[k];
@@ -67,16 +73,21 @@
     (L.units || []).forEach(function (u) {
       var v = 0;
       u.lessons.forEach(function (l) { v += ((L.lessons[l] || {}).verify || []).length; });
-      add("unit-" + u.id, "Tokós lessons: " + u.title.en, u.lessons.length + " lessons, " + (LEVEL[u.level] || u.level) + (v ? "; " + v + " claim" + (v === 1 ? "" : "s") + " to verify first" : ""), v ? { verify: v } : null);
+      add("unit-" + u.id, N + " lessons: " + u.title.en, u.lessons.length + " lessons, " + (LEVEL[u.level] || u.level) + (v ? "; " + v + " claim" + (v === 1 ? "" : "s") + " to verify first" : ""), v ? { verify: v } : null);
     });
-    ((x.bank && x.bank.topics) || []).forEach(function (t) { add("bank-" + t.id, "Tokós questions: " + t.title.en, t.count + " questions (MedMCQA); confirm the flagged answer keys"); });
+    ((x.bank && x.bank.topics) || []).forEach(function (t) { add("bank-" + t.id, N + " questions: " + t.title.en, t.count + " questions (MedMCQA); confirm the flagged answer keys"); });
     function kind(k) { return Object.keys(M).map(function (id) { return M[id]; }).filter(function (m) { return m && m.kind === k; }).sort(function (a, b) { return a.id < b.id ? -1 : 1; }); }
     kind("drill").forEach(function (m) {
-      if (m.stages) add("drill-" + m.id, "Tokós drill: " + m.title.en, "Emergency drill, " + m.stages.length + " steps, " + (LEVEL[m.level] || m.level));
-      else if (m.init) add("sim-labour", "Tokós labour room: " + m.title.en, "Simulator settings: progress curves, oxytocin steps, scenarios");
+      if (m.stages) add("drill-" + m.id, N + " drill: " + m.title.en, "Emergency drill, " + m.stages.length + " steps, " + (LEVEL[m.level] || m.level));
+      else if (m.init) add("sim-labour", N + " labour room: " + m.title.en, "Simulator settings: progress curves, oxytocin steps, scenarios");
     });
-    kind("tool").forEach(function (m) { add("tool-" + m.id, "Tokós calculator: " + m.title.en, (m.sources || []).length + " source" + ((m.sources || []).length === 1 ? "" : "s") + ", " + (m.examples || []).length + " worked examples"); });
-    kind("explorer").forEach(function (m) { add("explorer-" + m.id, "Tokós explorer: " + m.title.en, (m.sources || []).length + " sources, rules and teaching text"); });
+    kind("tool").forEach(function (m) { add("tool-" + m.id, N + " calculator: " + m.title.en, (m.sources || []).length + " source" + ((m.sources || []).length === 1 ? "" : "s") + ", " + (m.examples || []).length + " worked examples"); });
+    kind("explorer").forEach(function (m) { add("explorer-" + m.id, N + " explorer: " + m.title.en, (m.sources || []).length + " sources, rules and teaching text"); });
+    if (host === "narke") {
+      if (M.signals) { add("clinic-capno", "Narkē clinic: capnography", "Teaching points per pattern, synthetic signals"); add("clinic-monitor", "Narkē clinic: monitor reading", "Teaching points per crisis scenario, synthetic signals"); }
+      return out;
+    }
+    if (host !== "tokos") return out;
     add("clinic-fetal-planes", "Tokós clinic: fetal ultrasound planes", "Teaching points per plane (ISUOG), English and Hindi");
     add("clinic-hc-biometry", "Tokós clinic: fetal head circumference", "Teaching points, HC scoring bands and GA from HC");
     return out;
@@ -109,16 +120,25 @@
     if (id === "rationale") Object.keys(R).filter(function (k) { return k !== "v" && !/^review/.test(k); }).forEach(function (k) { rows.push([words(k), R[k].en, R[k].hi]); });
     else if (id === "checklist") { var L = G.TOKOS_CTG && G.TOKOS_CTG.L10N; if (L) Object.keys(L.en.opts).forEach(function (q) { Object.keys(L.en.opts[q]).forEach(function (v) { rows.push([words(q) + ": " + words(v), L.en.opts[q][v], (L.hi.opts[q] || {})[v]]); }); }); }
     else if (id === "calipers") { var W = G.TOKOS_CALIPERS && G.TOKOS_CALIPERS.WORDS; if (W) ["reduced", "normal", "increased", "short", "decel", "prolonged", "over5"].forEach(function (k) { rows.push([words(k), W.en[k], W.hi[k]]); }); }
-    else rows = tokosMoreRows(id);
+    else rows = tokosMoreRows(id, S.kind);
     if (rows === null) return '<p class="kit-muted">Loading…</p>';
-    if (!rows.length) return '<p class="kit-muted">This text could not be loaded here. Open Tokós once, then try again.</p>';
+    if (!rows.length) return '<p class="kit-muted">This text could not be loaded here. Open ' + esc((SPEC[S.kind] || SPEC.tokos).name) + " once, then try again.</p>";
     return '<ol class="rv-text">' + rows.map(function (r) { return '<li><span class="rv-s">' + esc(r[0]) + "</span><p>" + esc(r[1]) + '</p><p lang="hi">' + esc(r[2] || "") + "</p></li>"; }).join("") + "</ol>";
   }
   // Rows [label, English, Hindi] for a Tokós 2.0 item; null while a bank topic file loads (it repaints when done).
-  function tokosMoreRows(id) {
-    var M = G.TOKOS_MODELS || {}, m, rows = [], L = S.tokosLearn;
+  function tokosMoreRows(id, host) {
+    host = host || "tokos";
+    var M = G[SPEC[host].models] || {}, m, rows = [], L = S.specLearn[host], bank = S.specBank[host];
     function tt(o) { return o && typeof o === "object" ? o : { en: o == null ? "" : String(o), hi: "" }; }
     function srcs(list) { (list || []).forEach(function (x) { rows.push(["Source", x.label || x.url || String(x), ""]); }); }
+    function bilingual(o, path, depth, out) { // every {en, hi} under o as [path, en, hi]; functions skipped, depth capped
+      if (!o || typeof o !== "object" || depth > 6) return;
+      if (typeof o.en === "string" && typeof o.hi === "string") { out.push([path, o.en, o.hi]); return; }
+      Object.keys(o).forEach(function (k) {
+        if (typeof o[k] === "function" || (!depth && (k === "sources" || k === "subtitle"))) return;
+        bilingual(o[k], path ? path + "." + k : k, depth + 1, out);
+      });
+    }
     if (/^unit-/.test(id) && L) {
       var u = (L.units || []).filter(function (x) { return "unit-" + x.id === id; })[0];
       if (u) u.lessons.forEach(function (lid) {
@@ -127,15 +147,15 @@
       });
       if (u) u.lessons.forEach(function (lid) { var l = L.lessons[lid] || {}; rows.push([lid, tt(l.title).en + ". " + tt(l.idea).en, tt(l.title).hi + (tt(l.idea).hi ? "। " + tt(l.idea).hi : "")]); });
     } else if (/^bank-/.test(id)) {
-      var tid = id.slice(5), f = S.tokosBank[tid];
+      var tid = id.slice(5), f = bank[tid];
       if (f === undefined) {
-        S.tokosBank[tid] = null;
-        G.fetch((G.SMD_TOKOS_BASE || "/tokos/") + "decks/mcq/" + tid + ".json").then(function (r) { return r.ok ? r.json() : { items: [] }; }).then(function (d) { S.tokosBank[tid] = d.items || []; render(); }, function () { S.tokosBank[tid] = []; render(); });
+        bank[tid] = null;
+        G.fetch(specBase(host) + "decks/mcq/" + tid + ".json").then(function (r) { return r.ok ? r.json() : { items: [] }; }).then(function (d) { bank[tid] = d.items || []; render(); }, function () { bank[tid] = []; render(); });
         return null;
       }
       if (f === null) return null;
       f.filter(function (q) { return q.flags && q.flags.length; }).forEach(function (q) { rows.push(["Flags: " + q.flags.join(", "), q.q + " Key: " + (q.o || [])[q.a], q.exp ? "Explanation: " + String(q.exp).slice(0, 300) : ""]); });
-      if (!rows.length && f.length) rows.push(["No flagged keys", f.length + " questions; none carries a key flag. Sample a few in Tokós.", ""]);
+      if (!rows.length && f.length) rows.push(["No flagged keys", f.length + " questions; none carries a key flag. Sample a few in " + SPEC[host].name + ".", ""]);
     } else if (/^drill-/.test(id) && (m = M[id.slice(6)]) && m.stages) {
       m.stages.forEach(function (st) {
         var ok = (st.options || []).filter(function (o) { return o.correct; })[0];
@@ -150,8 +170,18 @@
     } else if (/^(tool|explorer)-/.test(id) && (m = M[id.replace(/^(tool|explorer)-/, "")])) {
       (m.examples || []).forEach(function (e) { rows.push(["Worked example", JSON.stringify(e.values) + " gives " + JSON.stringify(e.expect), ""]); });
       if (m.subtitle) rows.push(["What it shows", tt(m.subtitle).en, tt(m.subtitle).hi]);
+      if (host === "narke" && /^explorer-/.test(id)) bilingual(m, "", 0, rows); // Narkē explorers carry no examples: list every {en, hi} they show
       srcs(m.sources);
-    } else if (/^clinic-/.test(id) && G.TOKOS_US) {
+    } else if (host === "narke" && /^clinic-(capno|monitor)$/.test(id) && (m = M.signals)) {
+      var T = id === "clinic-capno" ? m.CAPNO : m.MONITOR;
+      Object.keys(T || {}).forEach(function (k) {
+        var c = T[k], h = tt(c.title).en;
+        if (c.scene) rows.push([h + ": scene", tt(c.scene).en, tt(c.scene).hi]);
+        if (c.describe) rows.push([h + ": trace", tt(c.describe).en, tt(c.describe).hi]);
+        (c.points || []).forEach(function (pt) { rows.push([h, pt.en, pt.hi]); });
+      });
+      Object.keys(m.SOURCES || {}).forEach(function (k) { rows.push(["Source", m.SOURCES[k].label, ""]); });
+    } else if (host === "tokos" && /^clinic-/.test(id) && G.TOKOS_US) {
       var U = G.TOKOS_US;
       if (id === "clinic-fetal-planes") Object.keys(U.PLANES).forEach(function (k) { U.PLANES[k].points.forEach(function (pt) { rows.push([words(k), pt.en, pt.hi]); }); });
       else { U.HC_POINTS.points.forEach(function (pt) { rows.push(["Head circumference", pt.en, pt.hi]); }); U.HC_BANDS.forEach(function (b) { rows.push(["Scoring band " + b.id, "Error up to " + b.maxPct + "% of the sonographer's HC (Tokós choice, not a guideline)", ""]); }); }
@@ -167,14 +197,25 @@
     var code = L && L.load && (!L.enabled || L.enabled()) ? L.load().then(null, function () {}) : Promise.resolve();
     function soft(p) { return j(p).then(null, function () { return null; }); } // Tokós 2.0 files: a missing one lists nothing
     return Promise.all([j("decks/ctg.json"), j("rationale.json"), code, soft("learn/index.json"), soft("decks/mcq/index.json"), soft("reviews.json")]).then(function (res) {
-      S.tokosRat = res[1]; S.tokosLearn = res[3];
+      S.tokosRat = res[1]; S.specLearn.tokos = res[3];
       return tokosItems(res[0], res[1], { learn: res[3], bank: res[4], models: G.TOKOS_MODELS, ledger: res[5] && res[5].items });
+    });
+  }
+  // Narkē: learn, bank and reviews from its data files; its code (models) loads only when it is switched on.
+  function loadNarke() {
+    var base = specBase("narke"), L = G.NARKE_LOADER;
+    function soft(p) { return G.fetch(base + p).then(function (r) { return r.ok ? r.json() : null; }).then(null, function () { return null; }); }
+    var code = L && L.load && (!L.enabled || L.enabled()) ? L.load().then(null, function () {}) : Promise.resolve();
+    return Promise.all([code, soft("learn/index.json"), soft("decks/mcq/index.json"), soft("reviews.json")]).then(function (res) {
+      S.specLearn.narke = res[1];
+      return tokosMore({ learn: res[1], bank: res[2], models: G.NARKE_MODELS, ledger: res[3] && res[3].items }, "narke");
     });
   }
   function loadItems(kind) {
     if (S.items[kind]) return Promise.resolve(S.items[kind]);
     var p = kind === "protocol" ? (G.SMD_KBPROTO && G.SMD_KBPROTO.loadIndex ? G.SMD_KBPROTO.loadIndex().then(function (idx) { return (idx.protocols || []).map(function (x) { return { id: x.id, title: x.title, sub: (G.SMD_KBPROTO.subjectLabel ? G.SMD_KBPROTO.subjectLabel(x.subject) : x.subject), status: x.status }; }); }) : Promise.resolve([]))
       : kind === "tokos" ? (G.fetch ? loadTokos() : Promise.resolve([]))
+      : kind === "narke" ? (G.fetch ? loadNarke() : Promise.resolve([]))
       : kind === "kit" ? (G.SMD_KITS && G.SMD_KITS.loadKits ? G.SMD_KITS.loadKits().then(function (b) { return (b.kits || []).map(function (k) { return { id: k.id, title: k.label, sub: (k.sections || []).length + " sections, " + (k.tools || []).length + " tools", status: (k.review || {}).status }; }); }) : Promise.resolve([]))
       : (G.SMD_DOCS && G.SMD_DOCS.load ? G.SMD_DOCS.load().then(function (b) { return (b.consent || []).map(function (c) { return { id: c.id, title: c.title.en, sub: "English, Telugu, Hindi", status: (c.review || {}).status }; }); }) : Promise.resolve([]));
     return p.then(function (list) { S.items[kind] = list; return list; }, function () { return []; });
@@ -202,7 +243,7 @@
     if (!list) { loadItems(S.kind).then(render); html = tabs + '<p class="kit-muted">Loading…</p>'; }
     else if (S.sel) {
       var it = list.filter(function (x) { return x.id === S.sel; })[0] || { id: S.sel, title: S.sel }, d = dec[S.kind + ":" + S.sel] || {}, r = reviewer();
-      var tokText = S.kind === "tokos" && !it.c;
+      var tokText = (S.kind === "tokos" || S.kind === "narke") && !it.c;
       html = '<button type="button" class="kit-link" data-rv-act="back">' + ms("arrow_back") + "Back to the list</button><h2 class=\"dl-h\">" + esc(it.title) + "</h2>" + statusPill(it.status) +
         (it.c ? tokosCaseHtml(it.c) : "") +
         '<div class="kit-row"><button type="button" class="kit-pill" data-rv-act="read"' + (tokText ? ' aria-expanded="' + S.showText + '"' : "") + ">" + ms("menu_book") + (tokText && S.showText ? "Hide the text" : "Read it") + "</button></div>" +
@@ -302,6 +343,7 @@
         if (/^case-/.test(S.sel)) { if (G.TOKOS && G.TOKOS.openCase) { if (G.TOKOS.openCase(S.sel.slice(5)) === false) toast("Tokós is switched off on this phone."); } else toast("Tokós is loading. Try again in a moment."); }
         else { S.showText = !S.showText; render(); }
       }
+      else if (S.kind === "narke") { S.showText = !S.showText; render(); }
       return;
     }
     if (cmd === "save") {
@@ -330,7 +372,7 @@
 
   // Weekly review push (/?rvtab=bulletins) lands here: open the desk on the Clinical updates tab.
   function openBulletins() { S.wantBulletin = true; open(); }
-  var API = { open: open, openBulletins: openBulletins, close: close, _render: render, _buildExport: buildExport, _tokosItems: tokosItems, _tokosMore: tokosMore, DECISIONS: DECISIONS };
+  var API = { open: open, openBulletins: openBulletins, close: close, _render: render, _buildExport: buildExport, _tokosItems: tokosItems, _tokosMore: tokosMore, _tokosMoreRows: tokosMoreRows, DECISIONS: DECISIONS };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   G.SMD_REVIEW = API;
 })(typeof window !== "undefined" ? window : globalThis);

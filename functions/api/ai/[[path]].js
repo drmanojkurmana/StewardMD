@@ -1691,13 +1691,14 @@ export async function onRequest(context) {
     // Owner check runs alongside the others so the exemption costs no extra wall time. checkQuota
     // (_usage.js) already exempts owners from ITS per-user throttles; this makes the second cap
     // system agree, instead of capping an owner one layer down.
-    const _ownerP = _capped ? Promise.resolve(ownerOK(request, env)).catch(function () { return false; }) : null;
+    // Also used by the per-device cap below: an owner account is unlimited (owner, 2026-10-06).
+    const _ownerP = (_capped || _dcP) ? Promise.resolve(ownerOK(request, env)).catch(function () { return false; }) : null;
     if (_dcP) {
       try {
         const _dc = await _dcP;
         _hm.dev = Date.now() - _reqT0;
         if (!_dc.ok && seg === "prep-generate") return json({ error: "quota", reason: "daily-calls" }, 429);
-        if (!_dc.ok) return json({ error: "quota", reason: "device-cap", message: "Daily AI limit for this device reached. Try again after midnight." }, 429);
+        if (!_dc.ok && !(await _ownerP)) return json({ error: "quota", reason: "device-cap", message: "Daily AI limit for this device reached. Try again after midnight." }, 429);
       } catch (e) { /* fail-open */ }
     }
     if (_capped) {

@@ -1,0 +1,272 @@
+{
+  "id": "as11-oxygen-therapy",
+  "unit": "as11",
+  "level": "mbbs",
+  "minutes": 6,
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "SpO2 target 94 to 98%, and 88 to 92% if at risk of hypercapnia (BTS 2017; kb protocol)",
+      "Recheck blood gas 30 to 60 minutes after starting or changing oxygen in a CO2 retainer (BTS 2017)",
+      "WHO 2016: give oxygen to children with SpO2 below 90%",
+      "India medical oxygen cylinder: black body, white shoulder; pin index 2 and 5; US green; ISO 32 white shoulder",
+      "Pulse oximeters may over-read on darker skin"
+    ]
+  },
+  "competencies": [
+    "AS11.2"
+  ],
+  "title": {
+    "en": "Principles of oxygen therapy",
+    "hi": "ऑक्सीजन थेरेपी के सिद्धांत"
+  },
+  "idea": {
+    "en": "Oxygen is a drug. Prescribe a target [[spo2]]: 94 to 98% for most, 88 to 92% if at risk of [[hypercapnia]]. Then adjust flow to stay in range.",
+    "hi": "ऑक्सीजन एक दवा है। लक्ष्य [[spo2]] लिखें: ज़्यादातर के लिए 94 से 98%, [[hypercapnia]] के जोखिम में 88 से 92%। फिर सीमा में रहने के लिए प्रवाह बदलें।"
+  },
+  "see": {
+    "diagram": "diagrams/as11-oxygen-therapy.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "A horizontal saturation scale with a pink zone on the left. A green band sits above the right part and an amber band below the middle. Below are a finger pulse oximeter, a black cylinder with a white top, and a crossed-out flame.",
+      "hi": "एक आड़ा संतृप्ति पैमाना जिसके बाएँ में गुलाबी हिस्सा है। दाएँ हिस्से के ऊपर हरी पट्टी और बीच के नीचे पीली पट्टी है। नीचे उँगली का पल्स ऑक्सीमीटर, सफ़ेद ऊपरी हिस्से वाला काला सिलेंडर, और लाल घेरे में कटी हुई लौ है।"
+    },
+    "caption": {
+      "en": "SpO2 from 80 to 100%: the two target bands, the oximeter, the Indian oxygen cylinder and the fire risk.",
+      "hi": "80 से 100% तक SpO2: दो लक्ष्य पट्टियाँ, ऑक्सीमीटर, भारतीय ऑक्सीजन सिलेंडर और आग का ख़तरा।"
+    },
+    "credit": "Original diagram, Narkē (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.75,
+        "y": 0.153,
+        "label": {
+          "en": "Target 94 to 98%",
+          "hi": "लक्ष्य 94 से 98%"
+        },
+        "note": {
+          "en": "For most acutely ill adults. Above 98% adds no benefit and may harm.",
+          "hi": "ज़्यादातर गंभीर बीमार वयस्कों के लिए। 98% से ऊपर कोई फ़ायदा नहीं, नुकसान हो सकता है।"
+        }
+      },
+      {
+        "x": 0.5,
+        "y": 0.313,
+        "label": {
+          "en": "Target 88 to 92%",
+          "hi": "लक्ष्य 88 से 92%"
+        },
+        "note": {
+          "en": "For COPD, obesity hypoventilation, neuromuscular or chest wall disease. Check a blood gas after starting.",
+          "hi": "COPD, obesity hypoventilation, neuromuscular या chest wall रोग में। शुरू करने के बाद blood gas जाँचें।"
+        }
+      },
+      {
+        "x": 0.25,
+        "y": 0.233,
+        "label": {
+          "en": "Below 88%",
+          "hi": "88% से कम"
+        },
+        "note": {
+          "en": "Hypoxaemia. Increase oxygen and look for the cause. In children, WHO advises oxygen below 90%.",
+          "hi": "Hypoxaemia। ऑक्सीजन बढ़ाएँ और कारण खोजें। बच्चों में WHO 90% से कम पर ऑक्सीजन की सलाह देता है।"
+        }
+      },
+      {
+        "x": 0.22,
+        "y": 0.65,
+        "label": {
+          "en": "Pulse oximeter",
+          "hi": "पल्स ऑक्सीमीटर"
+        },
+        "note": {
+          "en": "Wait for a steady wave. It misleads with cold fingers, movement, nail polish and carbon monoxide. It may read high on dark skin.",
+          "hi": "स्थिर तरंग का इंतज़ार करें। ठंडी उँगलियों, हिलने, नेल पॉलिश और कार्बन मोनोऑक्साइड में यह भ्रम देता है। गहरी त्वचा पर ज़्यादा पढ़ सकता है।"
+        }
+      },
+      {
+        "x": 0.5,
+        "y": 0.7,
+        "label": {
+          "en": "Oxygen cylinder (India)",
+          "hi": "ऑक्सीजन सिलेंडर (भारत)"
+        },
+        "note": {
+          "en": "Medical oxygen in India: black body, white shoulder. Pin index 2 and 5. ISO also uses a white shoulder; the US uses green.",
+          "hi": "भारत में मेडिकल ऑक्सीजन: काला शरीर, सफ़ेद कंधा। Pin index 2 और 5। ISO में भी सफ़ेद कंधा; अमेरिका में हरा।"
+        }
+      },
+      {
+        "x": 0.767,
+        "y": 0.773,
+        "label": {
+          "en": "Fire safety",
+          "hi": "आग से सुरक्षा"
+        },
+        "note": {
+          "en": "Oxygen feeds fire. No smoking or flames near it. No oil or grease on valves. Open the cylinder slowly.",
+          "hi": "ऑक्सीजन आग को बढ़ाती है। पास में धूम्रपान या लौ नहीं। वाल्व पर तेल या ग्रीस नहीं। सिलेंडर धीरे खोलें।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Give oxygen for hypoxaemia, not for breathlessness alone. It does not help a patient with normal SpO2.",
+        "hi": "ऑक्सीजन hypoxaemia के लिए दें, सिर्फ़ साँस फूलने के लिए नहीं। सामान्य SpO2 वाले मरीज़ को यह मदद नहीं करती।"
+      },
+      {
+        "en": "In cardiac arrest, shock, sepsis, major trauma or anaphylaxis, start a non-rebreather at 15 L/min. Titrate down once stable.",
+        "hi": "Cardiac arrest, shock, sepsis, बड़ी चोट या anaphylaxis में non-rebreather 15 L/min से शुरू करें। स्थिर होने पर घटाएँ।"
+      },
+      {
+        "en": "In CO2 retainers, high oxygen worsens V/Q matching and raises PaCO2. Use Venturi 24 to 28% and recheck a blood gas in 30 to 60 minutes.",
+        "hi": "CO2 retainers में ज़्यादा ऑक्सीजन V/Q मिलान बिगाड़ती है और PaCO2 बढ़ाती है। Venturi 24 से 28% दें और 30 से 60 मिनट में blood gas दोबारा जाँचें।"
+      },
+      {
+        "en": "Monitor SpO2, breathing rate, work of breathing and consciousness. Rising oxygen need is a warning sign.",
+        "hi": "SpO2, साँस की दर, साँस लेने की मेहनत और होश पर नज़र रखें। बढ़ती ऑक्सीजन ज़रूरत चेतावनी का संकेत है।"
+      },
+      {
+        "en": "Too much oxygen harms: absorption atelectasis, lung toxicity with long high FiO2, and retinopathy in preterm babies.",
+        "hi": "ज़्यादा ऑक्सीजन नुकसान करती है: absorption atelectasis, लंबे समय तक ऊँचे FiO2 से फेफड़ों को नुकसान, और समय से पहले जन्मे शिशुओं में retinopathy।"
+      }
+    ],
+    "analogy": {
+      "en": "Oxygen is like a fuel gauge target. You aim for the right band, not a full tank at any cost.",
+      "hi": "ऑक्सीजन fuel gauge के लक्ष्य जैसी है। आप सही पट्टी पर निशाना रखते हैं, हर क़ीमत पर भरी टंकी पर नहीं।"
+    }
+  },
+  "spot": [
+    {
+      "en": "A drowsy COPD patient on high-flow oxygen with SpO2 99% may be retaining CO2.",
+      "hi": "ज़्यादा ऑक्सीजन पर SpO2 99% वाला उनींदा COPD मरीज़ CO2 रोक रहा हो सकता है।"
+    },
+    {
+      "en": "An oximeter showing a flat or jumping wave gives a number you cannot trust.",
+      "hi": "सपाट या उछलती तरंग वाला ऑक्सीमीटर ऐसा नंबर देता है जिस पर भरोसा नहीं।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Write the target range, device and flow on the chart, like any drug order.",
+      "hi": "किसी भी दवा के आदेश की तरह चार्ट पर लक्ष्य सीमा, उपकरण और प्रवाह लिखें।"
+    },
+    {
+      "en": "Check cylinder contents and the spare before transport. Keep cylinders upright and chained.",
+      "hi": "ले जाने से पहले सिलेंडर की मात्रा और अतिरिक्त सिलेंडर जाँचें। सिलेंडर सीधे और ज़ंजीर से बँधे रखें।"
+    }
+  ],
+  "remember": {
+    "en": "Prescribe a target: 94 to 98%, or 88 to 92% if at risk of hypercapnia. Oxygen feeds fire. Indian oxygen cylinders are black with a white shoulder.",
+    "hi": "लक्ष्य लिखें: 94 से 98%, या hypercapnia के जोखिम में 88 से 92%। ऑक्सीजन आग बढ़ाती है। भारतीय ऑक्सीजन सिलेंडर काले, सफ़ेद कंधे वाले होते हैं।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "What SpO2 target suits a patient with COPD and a past raised PaCO2?",
+        "hi": "COPD और पहले बढ़े PaCO2 वाले मरीज़ के लिए कौन-सा SpO2 लक्ष्य सही है?"
+      },
+      "o": [
+        {
+          "en": "100%",
+          "hi": "100%"
+        },
+        {
+          "en": "94 to 98%",
+          "hi": "94 से 98%"
+        },
+        {
+          "en": "80 to 84%",
+          "hi": "80 से 84%"
+        },
+        {
+          "en": "88 to 92%",
+          "hi": "88 से 92%"
+        }
+      ],
+      "a": 3,
+      "why": {
+        "en": "Patients at risk of hypercapnic respiratory failure aim for 88 to 92%.",
+        "hi": "Hypercapnic respiratory failure के जोखिम वाले मरीज़ों का लक्ष्य 88 से 92% है।"
+      }
+    },
+    {
+      "q": {
+        "en": "A medical oxygen cylinder in an Indian hospital has which colour code?",
+        "hi": "भारतीय अस्पताल में मेडिकल ऑक्सीजन सिलेंडर का रंग कोड क्या है?"
+      },
+      "o": [
+        {
+          "en": "Blue body",
+          "hi": "नीला शरीर"
+        },
+        {
+          "en": "Black body with a white shoulder",
+          "hi": "काला शरीर, सफ़ेद कंधा"
+        },
+        {
+          "en": "Grey body",
+          "hi": "धूसर शरीर"
+        },
+        {
+          "en": "Green body",
+          "hi": "हरा शरीर"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "In India medical oxygen is black with a white shoulder. Nitrous oxide is blue.",
+        "hi": "भारत में मेडिकल ऑक्सीजन काली, सफ़ेद कंधे वाली होती है। Nitrous oxide नीली होती है।"
+      }
+    },
+    {
+      "q": {
+        "en": "Which is a known harm of too much oxygen?",
+        "hi": "ज़्यादा ऑक्सीजन का कौन-सा नुकसान ज्ञात है?"
+      },
+      "o": [
+        {
+          "en": "Absorption atelectasis",
+          "hi": "Absorption atelectasis"
+        },
+        {
+          "en": "Hypokalaemia",
+          "hi": "Hypokalaemia"
+        },
+        {
+          "en": "Bradycardia in all adults",
+          "hi": "सभी वयस्कों में bradycardia"
+        },
+        {
+          "en": "Anaemia",
+          "hi": "एनीमिया"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "High FiO2 washes out nitrogen. Oxygen is absorbed and alveoli collapse.",
+        "hi": "ऊँचा FiO2 nitrogen को बाहर कर देता है। ऑक्सीजन सोख ली जाती है और alveoli सिकुड़ जाते हैं।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "icu-ventilation",
+    "explorer": "odc"
+  },
+  "glossary": [
+    "spo2",
+    "hypercapnia",
+    "fio2"
+  ],
+  "sources": [
+    "O'Driscoll BR, Howard LS, Earis J, Mak V. BTS guideline for oxygen use in adults in healthcare and emergency settings. Thorax 2017;72(Suppl 1):ii1-ii90.",
+    "StewardMD reviewed protocol kb/clinical-protocols/acute-respiratory-failure-niv-hfnc.json: oxygen targets, HFNC settings and Venturi use.",
+    "World Health Organization. Oxygen therapy for children: a manual for health workers (2016).",
+    "Yadav A. Short Textbook of Anaesthesia (Jaypee, India): medical gas cylinders, colour codes and pin index, and airway equipment.",
+    "National Medical Commission. CBME Curriculum 2024, Anaesthesiology, competencies AS11.1 to AS11.6."
+  ]
+}

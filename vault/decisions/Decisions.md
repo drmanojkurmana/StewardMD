@@ -11496,3 +11496,19 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
 
 - **Price ladder update (owner, 2026-10-06, supersedes Rs 1,499/year list and the 3-month plan):** list Rs 5,999/year, actually charged on renewal from year 2 (stated on the pricing screen and at checkout). New users: introductory Rs 1,499 first year ("75% off Rs 5,999, then Rs 5,999/year"). Win-back: one time per account, Rs 999 first year (83% off), only on a later visit after an abandoned checkout, valid 48 h from first shown, real expiry time shown, never resets or returns, dismissible. Optional launch price (flag OFF, config only): Rs 999 first year until a configured end date. Strikethrough allowed only for Rs 5,999 because it is the real renewal price; every percentage is computed from config prices, never typed. Discounts never stack: the server picks the single lowest first-year price among intro, student (20% off list), win-back and launch; the referral month is a time credit to the referrer, independent of price. Eligibility, expiry and amounts are server-side only. 3-month plan dropped.
 - **Launch price and cancel anytime (owner, 2026-10-06):** the Rs 1,499 first-year price is the launch price, labelled "Launch price until <date>" from config `launchPriceEndsAt` (default 2027-03-31 23:59 IST); after that date the first-year price falls back to config `introPaiseAfterLaunch` (default Rs 5,999, no intro) and the label disappears. The separate Rs 999 launch option is dropped; the Rs 999 win-back stays. "Cancel anytime" is shown on the pricing screen, the offer card and at checkout, and links to the real cancel path (App Store / Play manage-subscription links; for Razorpay, an in-app cancel at period end if it auto-renews, otherwise a truthful "no auto-renewal" line).
+
+## 2026-10-06 - Narkē (Anaesthesia) is the second specialty-engine host; shared Tokós tooling takes a host
+- **Context**: the Anaesthesia module needs every engine feature Tokós uses. Copying Tokós's Review Desk tab,
+  apply-reviews targets and build tools would double about 300 lines.
+- **Decision**: Narkē copies only the host-named files (host config, loader, palette). Shared code takes a host instead:
+  the Review Desk specialty tab (`SPEC` map: name, base, models global, loader global), `apply-reviews.mjs` kind
+  `narke` with per-host targets and ledger, `tools/tokos-learn-index.mjs` (unit order `as`/`asr`, per-host coverage),
+  `tools/tokos-build-drills.mjs --host narke` (copies the shared drill core). Tokós output is byte-identical.
+- **Budget**: Pages caps a deploy at 20,000 files (about 16,850 now); Narkē is capped at 450 files by test.
+  [[Narkē]] [[Specialty Engine]]
+- **Owner, 2026-10-06 ("MaiK usage limit reached ... make it unlimited for owner accounts"):** owner
+  accounts (verified owner email, `functions/_adminauth.js ownerOK`, or the admin token) now pass the
+  PROJECT-WIDE daily cost breaker (`functions/_usage.js checkQuota`) and the per-device daily cap
+  (`functions/api/ai/[[path]].js`). This reverses the earlier "the breaker exempts nobody, owners included"
+  rule. Owner calls are still metered, so they show in the dashboards and still count toward the breaker
+  for everyone else. The admin "pause" kill switch still applies to owners. Tests: `test/maik-owner-exempt.test.mjs`.

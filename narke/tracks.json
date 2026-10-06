@@ -1,0 +1,48 @@
+{
+  "v": 1,
+  "tracks": [
+    {
+      "id": "capno",
+      "deck": "decks/capno.json",
+      "labelEn": "Capnography",
+      "labelHi": "कैपनोग्राफ़ी"
+    },
+    {
+      "id": "monitor",
+      "deck": "decks/monitor.json",
+      "labelEn": "Monitor reading",
+      "labelHi": "मॉनिटर पढ़ना"
+    }
+  ],
+  "access": {
+    "freeLevels": [
+      "mbbs"
+    ]
+  },
+  "sources": {
+    "medmcqa": {
+      "name": {
+        "en": "Question bank: MedMCQA, subject Anaesthesia",
+        "hi": "प्रश्न बैंक: MedMCQA, विषय निश्चेतना विज्ञान"
+      },
+      "license": "MIT (repository), Apache-2.0 (Hugging Face dataset card)",
+      "cite": "Pal A, Umapathi LK, Sankarasubbu M. MedMCQA: A Large-scale Multi-Subject Multi-Choice Dataset for Medical domain Question Answering. PMLR 174:248-260, 2022. Hugging Face openlifescienceai/medmcqa at commit 91c6572c454088bf71b679ad90aa8dffcd0d5868, train and validation splits. Cleaned, de-duplicated, mapped to Narkē topics and tagged by difficulty. Answer keys and explanations are the source's and are not clinically reviewed.",
+      "url": "https://github.com/medmcqa/medmcqa"
+    },
+    "narke-signals": {
+      "name": {
+        "en": "Capnography and monitor clinics: synthetic teaching signals",
+        "hi": "कैपनोग्राफ़ी और मॉनिटर क्लिनिक: कृत्रिम शिक्षण सिग्नल"
+      },
+      "license": "Original, MAIKNOWLEDGE LLP",
+      "cite": {
+        "en": "Waveforms and numbers come from a seeded model (narke-models/signals.js). They are teaching signals, not patient data. Shapes follow Gravenstein JS et al., Capnography 2e (2011), and Morgan and Mikhail's Clinical Anesthesiology 7e (2022).",
+        "hi": "तरंगें और संख्याएँ seed वाले मॉडल (narke-models/signals.js) से बनी हैं। ये शिक्षण सिग्नल हैं, मरीज़ का डेटा नहीं। आकार Gravenstein JS et al., Capnography 2e (2011) और Morgan and Mikhail's Clinical Anesthesiology 7e (2022) पर आधारित हैं।"
+      }
+    }
+  },
+  "reviewNote": {
+    "en": "Every lesson, drill, clinic signal and calculator here is drafted from the cited sources and is pending review by an anaesthesiologist. For learning, not for patient care.",
+    "hi": "यहाँ का हर पाठ, ड्रिल, क्लिनिक सिग्नल और कैलकुलेटर उद्धृत स्रोतों से तैयार ड्राफ़्ट है और एनेस्थीसियोलॉजिस्ट की समीक्षा बाकी है। सीखने के लिए, मरीज़ के इलाज के लिए नहीं।"
+  }
+}

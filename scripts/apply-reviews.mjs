@@ -49,6 +49,7 @@ export const KINDS = {
   kit: { dir: "kb/specialty-kits/src", build: "scripts/build-specialty-kits.mjs", label: "Specialty kit" },
   consent: { dir: "kb/documents/consent", build: "scripts/build-documents.mjs", label: "Consent template" },
   tokos: { dir: "tokos", build: null, label: "Tokós" },
+  narke: { dir: "narke", build: null, label: "Narkē" },
 };
 // Tokós text blocks: review-desk id -> the top-level key of tokos/rationale.json that holds its review.
 export const TOKOS_TEXT = { rationale: "review", checklist: "reviewChecklist", calipers: "reviewCalipers" };
@@ -56,19 +57,21 @@ const TOKOS_CTG = createRequire(import.meta.url)("../tokos-ctg.js");
 export const TOKOS_LEDGER = "tokos/reviews.json";
 
 /** Tokós 2.0 desk id -> the files an approve rewrites and how, or null for an id this repo does not have. */
-export function tokosTarget(id, root, read, exists) {
+export function tokosTarget(id, root, read, exists, host = "tokos") {
   let m;
+  const H = host, HM = host + "-models";
   const J = (f) => JSON.parse(read(join(root, f)));
   if ((m = /^unit-([a-z]+\d+)$/.exec(id))) {
-    const f = "tokos/learn/units/" + m[1] + ".json";
-    return exists(join(root, f)) ? { files: J(f).lessons.map((l) => ({ file: join(root, "tokos/learn/lessons", l + ".json"), how: "lesson" })) } : null;
+    const f = H + "/learn/units/" + m[1] + ".json";
+    return exists(join(root, f)) ? { files: J(f).lessons.map((l) => ({ file: join(root, H + "/learn/lessons", l + ".json"), how: "lesson" })) } : null;
   }
-  if ((m = /^drill-([a-z-]+)$/.exec(id))) return { files: [{ file: join(root, "tokos/drill", m[1] + ".json"), how: "string" }], build: "tools/tokos-build-drills.mjs" };
-  if (id === "sim-labour") return { files: [{ file: join(root, "tokos-models/drill-labour.js"), how: "js" }] };
-  if (/^(tool|explorer)-[a-z0-9-]+$/.test(id)) return { files: [{ file: join(root, "tokos-models", id + ".js"), how: "js" }] };
-  if ((m = /^clinic-(fetal-planes|hc-biometry)$/.exec(id))) return { files: [{ file: join(root, "tokos/decks", m[1] + ".json"), how: "string" }] };
+  if ((m = /^drill-([a-z-]+)$/.exec(id))) return { files: [{ file: join(root, H + "/drill", m[1] + ".json"), how: "string" }], build: "tools/tokos-build-drills.mjs" + (H === "tokos" ? "" : " --host " + H) };
+  if (H === "tokos" && id === "sim-labour") return { files: [{ file: join(root, "tokos-models/drill-labour.js"), how: "js" }] };
+  if (/^(tool|explorer)-[a-z0-9-]+$/.test(id)) return { files: [{ file: join(root, HM, id + ".js"), how: "js" }] };
+  if (H === "narke" && /^clinic-(capno|monitor)$/.test(id)) return exists(join(root, "narke-models/signals.js")) ? { files: [] } : null; // ledger only
+  if (H === "tokos" && (m = /^clinic-(fetal-planes|hc-biometry)$/.exec(id))) return { files: [{ file: join(root, "tokos/decks", m[1] + ".json"), how: "string" }] };
   if ((m = /^bank-([a-z-]+)$/.exec(id))) {
-    const f = "tokos/decks/mcq/index.json";
+    const f = H + "/decks/mcq/index.json";
     return exists(join(root, f)) && J(f).topics.some((t) => t.id === m[1]) ? { files: [] } : null;
   }
   return null;
@@ -110,7 +113,7 @@ export function validateExport(x) {
   if (!Array.isArray(x.decisions) || !x.decisions.length) e.push("export: no decisions");
   else x.decisions.forEach((d, i) => {
     const w = `decisions[${i}]`;
-    if (!d || !KINDS[d.kind]) e.push(`${w}: kind must be protocol, kit, consent or tokos`);
+    if (!d || !KINDS[d.kind]) e.push(`${w}: kind must be protocol, kit, consent, tokos or narke`);
     if (!d || !ID_RE.test(d.id || "")) e.push(`${w}: id must be kebab-case`);
     if (!d || DECISIONS.indexOf(d.decision) < 0) e.push(`${w}: decision must be ${DECISIONS.join(", ")}`);
     if (d && d.decision !== "approve" && !(typeof d.comment === "string" && d.comment.trim())) e.push(`${w}: ${d.decision} needs a comment`);
@@ -189,7 +192,7 @@ export function plan(x, { root = ROOT, includeMinor = false, read = (f) => readF
   const get = (f) => (texts[f] != null ? texts[f] : (texts[f] = read(f)));   // several decisions can touch one file
   x.decisions.forEach((d) => {
     const tc = d.kind === "tokos" && /^case-(\d+)$/.exec(d.id), tk = d.kind === "tokos" && TOKOS_TEXT[d.id];
-    if (d.kind === "tokos" && !tc && !tk) return planTokos(d);
+    if (d.kind === "narke" || (d.kind === "tokos" && !tc && !tk)) return planTokos(d);
     const file = d.kind !== "tokos" ? join(root, KINDS[d.kind].dir, d.id + ".json")
       : tc ? join(root, "tokos/decks/ctg.json") : tk ? join(root, "tokos/rationale.json") : null;
     if (!file || !exists(file)) { skipped.push({ ...d, why: "no such " + d.kind + " item in this repo" }); return; }
@@ -212,9 +215,9 @@ export function plan(x, { root = ROOT, includeMinor = false, read = (f) => readF
   return { updates, feedback, skipped };
 
   function planTokos(d) {
-    const t = tokosTarget(d.id, root, read, exists);
-    if (!t || t.files.some((f) => !exists(f.file))) { skipped.push({ ...d, why: "no such Tokós item in this repo" }); return; }
-    const lf = join(root, TOKOS_LEDGER), ledger = texts[lf] != null || exists(lf) ? JSON.parse(get(lf)) : { v: 1, items: {} };
+    const t = tokosTarget(d.id, root, read, exists, d.kind);
+    if (!t || t.files.some((f) => !exists(f.file))) { skipped.push({ ...d, why: "no such " + KINDS[d.kind].label + " item in this repo" }); return; }
+    const lf = join(root, d.kind === "tokos" ? TOKOS_LEDGER : d.kind + "/reviews.json"), ledger = texts[lf] != null || exists(lf) ? JSON.parse(get(lf)) : { v: 1, items: {} };
     const wantsStatus = d.decision === "approve" || (d.decision === "approve-minor" && includeMinor);
     if (d.decision !== "approve") feedback.push(d);
     if (!wantsStatus) return;
@@ -248,6 +251,14 @@ export function feedbackMarkdown(x, p, today) {
 
 /** The cache-token bump a Tokós approval needs (models and data load at the loader's ?v= token), or "". */
 export function tokosBump(kinds, root = ROOT) {
+  const isNarke = (k) => k === "narke" || / --host narke$/.test(k);
+  if (kinds.some(isNarke)) {
+    const n = (/var V = "(nrk)(\d+)";/.exec(readFileSync(join(root, "narke-loader.js"), "utf8")) || []);
+    const c = n[1] ? n[1] + n[2] : "nrkN", x = n[1] ? n[1] + (+n[2] + 1) : "nrkN+1";
+    const msg = `Narkē content changed: bump the cache token ${c} -> ${x} in narke-loader.js (var V = "${x}") and in index.html (<script src="/narke-loader.js?v=${x}">), and in test/narke-wiring.test.mjs.`;
+    if (!kinds.some((k) => k === "tokos" || /tokos/.test(k))) return msg;
+    return msg + " " + tokosBump(kinds.filter((k) => !isNarke(k)), root);
+  }
   if (!kinds.some((k) => k === "tokos" || /tokos/.test(k))) return "";
   const v = (/var V = "(tok)(\d+)";/.exec(readFileSync(join(root, "tokos-loader.js"), "utf8")) || []);
   const cur = v[1] ? v[1] + v[2] : "tokN", next = v[1] ? v[1] + (+v[2] + 1) : "tokN+1";
@@ -271,7 +282,7 @@ function main() {
   const kinds = new Set();
   for (const x of exports) applyOne(x, { dry, includeMinor }, kinds);
   if (dry) return;
-  [...new Set([...kinds].map((k) => (KINDS[k] ? KINDS[k].build : k)))].filter(Boolean).forEach((b) => { console.log("Rebuilding: " + b); execFileSync(process.execPath, [join(ROOT, b)], { stdio: "inherit" }); });
+  [...new Set([...kinds].map((k) => (KINDS[k] ? KINDS[k].build : k)))].filter(Boolean).forEach((b) => { console.log("Rebuilding: " + b); const [f, ...a] = b.split(" "); execFileSync(process.execPath, [join(ROOT, f), ...a], { stdio: "inherit" }); });
   if (kinds.size) console.log("Done. Run the unit tests, then commit the changed files.");
   const tb = tokosBump([...kinds]);
   if (tb) console.log(tb);

@@ -1115,6 +1115,12 @@
       if (!t || !homeToolEligible(t)) return;
       if (window.PREP && PREP.open) PREP.open(); else toast("PrepNucleus loading…");
     },
+    // Narkē (Anaesthesia), the same kill-switch rule as Tokós.
+    narke: function () {
+      var t = HOME_TOOLS.filter(function (x) { return x.act === "narke"; })[0];
+      if (!t || !homeToolEligible(t)) return;
+      if (window.NARKE && NARKE.open) NARKE.open(); else toast("Narkē loading…");
+    },
     oncohome: function () { if (window.SMD_ONCOHOME && SMD_ONCOHOME.open) SMD_ONCOHOME.open(); else toast("ONCQIS loading…"); },
     oncotree: function () { if (window.SMD_ONCOTREE && SMD_ONCOTREE.open) SMD_ONCOTREE.open(); else toast("OncoTree loading…"); },
     staging: function () { if (window.SMD_ONCOSTAGING && SMD_ONCOSTAGING.openList) SMD_ONCOSTAGING.openList(); else toast("Cancer Staging loading…"); },
@@ -2156,6 +2162,10 @@
     // bank (vault/plans/PrepNucleus.md). ON for all (owner 2026-10-06); smd_prep="0" or ?prep=0 hides it.
     { act: "prep", ic: "quiz", tt: "PrepNucleus", sub: "Exam question bank",
       eligible: function () { try { var q = (location.search.match(/[?&]prep=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_prep") !== "0"; } catch (e) { return true; } } },
+    // Narkē (narke.js on the specialty engine, loaded on first open by narke-loader.js): Anaesthesia learning. ON for all
+    // (owner 2026-10-06); kill switch smd_narke="0" or ?narke=0. Content stays "draft" until an anaesthesiologist approves it.
+    { act: "narke", ic: "masks", tt: "Narkē", sub: "Anaesthesia",
+      eligible: function () { try { var q = (location.search.match(/[?&]narke=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_narke") !== "0"; } catch (e) { return true; } } },
     { act: "electrolytes", ic: "science", tt: "Electrolytes", sub: "ICU correction", defOn: false },
     // Everything else the app can open — available in "Add Tool" (off by default; the doctor pins what they want).
     { act: "hospital", ic: "local_hospital", tt: "Hospital", sub: "OPD · ICU · Ward", defOn: false },

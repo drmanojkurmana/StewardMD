@@ -144,6 +144,7 @@
     try { if (window.OPHTHALMOS && window.OPHTHALMOS.isOpen && window.OPHTHALMOS.isOpen()) return true; } catch (e) {}
     try { if (window.TOKOS && window.TOKOS.isOpen && window.TOKOS.isOpen()) return true; } catch (e) {}
     try { if (window.PREP && window.PREP.isOpen && window.PREP.isOpen()) return true; } catch (e) {}
+    try { if (window.NARKE && window.NARKE.isOpen && window.NARKE.isOpen()) return true; } catch (e) {}
     try { if (window.FUNDX && window.FUNDX.isOpen && window.FUNDX.isOpen()) return true; } catch (e) {}
     if (topBackControl()) return true;
     return !!(engineActive() && typeof window._SMD_goBack === "function");
@@ -163,6 +164,7 @@
     // Tokós opens the CliniX OSCE above itself (CLINIX.openDeep): while CliniX is open, back belongs to CliniX (step 1).
     if (window.TOKOS && window.TOKOS.isOpen && window.TOKOS.isOpen() && !(window.CLINIX && window.CLINIX.isOpen && window.CLINIX.isOpen())) { _last = now; return window.TOKOS.back() !== false; }
     if (window.PREP && window.PREP.isOpen && window.PREP.isOpen()) { _last = now; return window.PREP.back() !== false; }
+    if (window.NARKE && window.NARKE.isOpen && window.NARKE.isOpen() && !(window.CLINIX && window.CLINIX.isOpen && window.CLINIX.isOpen())) { _last = now; return window.NARKE.back() !== false; }
     if (window.FUNDX && window.FUNDX.isOpen && window.FUNDX.isOpen()) { _last = now; return window.FUNDX.back() !== false; } } catch (e) {}
     // 0b) home's bottom-sheet system (#hvSheet + #hvScrim): the More sheet, the settings sheets,
     // Customize tools, Account. Its rows are `.hv-mi` buttons and it ships NO back/close control, so

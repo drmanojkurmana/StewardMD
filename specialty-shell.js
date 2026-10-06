@@ -626,10 +626,11 @@
       host._tools.forEach(function (x) { if (x.id === id) x.open(true); });
     };
 
-    // Escape unwinds one layer like swipe-back; MaiK above the overlay owns Escape while it is open.
+    // Escape unwinds one layer like swipe-back; MaiK or CliniX (an OSCE opened from here) above the overlay owns Escape while open.
     if (G.document && G.document.addEventListener)
       G.document.addEventListener("keydown", function (e) {
         if (e.key !== "Escape" || !isOpen() || maikOpen()) return;
+        if (G.CLINIX && G.CLINIX.isOpen && G.CLINIX.isOpen()) return;
         e.preventDefault();
         back();
       });

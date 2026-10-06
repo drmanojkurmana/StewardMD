@@ -1,0 +1,106 @@
+{
+  "id": "aspiration", "kind": "drill", "level": "resident", "review": "ai_drafted", "timeLimitSec": 480,
+  "title": { "en": "Pulmonary aspiration under anaesthesia drill", "hi": "एनेस्थीसिया में फेफड़ों में एस्पिरेशन ड्रिल" },
+  "scenario": {
+    "en": "A 52-year-old woman with long-standing type 2 diabetes is having a day-case knee arthroscopy. She is breathing spontaneously through a first-generation laryngeal mask with sevoflurane. Twenty minutes in, the surgeon manipulates the knee and she coughs. Teaching scenario, not a real patient.",
+    "hi": "52 वर्षीय महिला, जिसे लंबे समय से टाइप 2 डायबिटीज़ है, डे-केयर में घुटने की आर्थ्रोस्कोपी करवा रही है। वह फ़र्स्ट-जनरेशन लैरिंजियल मास्क से सेवोफ्लुरेन पर खुद साँस ले रही है। 20 मिनट बाद सर्जन घुटना घुमाता है और वह खाँसती है। यह शिक्षण परिदृश्य है, असली मरीज़ नहीं।"
+  },
+  "sources": [
+    { "label": "Cook TM, Woodall N, Frerk C. Major complications of airway management in the UK: NAP4 of the Royal College of Anaesthetists and the Difficult Airway Society. Part 1: Anaesthesia. Br J Anaesth 2011;106:617-31", "url": "https://academic.oup.com/bja/article/106/5/617/279879" },
+    { "label": "Robinson M, Davidson A. Aspiration under anaesthesia: risk assessment and decision-making. Contin Educ Anaesth Crit Care Pain 2014;14:171-5", "url": "https://academic.oup.com/bjaed/article/14/4/171/293792" },
+    { "label": "2023 American Society of Anesthesiologists Practice Guidelines for Preoperative Fasting. Anesthesiology 2023;138:132-51", "url": "https://journals.lww.com/anesthesiology/fulltext/10.1097/aln.0000000000004381~2023-american-society-of-anesthesiologists-practice" }
+  ],
+  "stages": [
+    { "id": "recognise", "src": 1, "timeSec": 45,
+      "vitals": { "hr": 108, "bp": "142/86", "rr": 28, "spo2": 90 },
+      "prompt": { "en": "Green fluid appears in the laryngeal mask tube. She is wheezing and SpO2 falls to 90%. What do you do first?", "hi": "लैरिंजियल मास्क की ट्यूब में हरा द्रव दिखता है। उसे घरघराहट है और SpO2 90% पर गिर गया है। सबसे पहले क्या करेंगे?" },
+      "options": [
+        { "id": "a", "correct": true, "critical": true, "next": "deepen",
+          "text": { "en": "Call for help, give 100% oxygen, tilt the table head down, and suction the mask tube and the pharynx.", "hi": "मदद बुलाएँ, 100% ऑक्सीजन दें, टेबल का सिर नीचे झुकाएँ, और मास्क की ट्यूब और गले को सक्शन करें।" },
+          "feedback": { "en": "Head down lets fluid drain out of the mouth, not into the lungs. Suction clears it before more is inhaled.", "hi": "सिर नीचे करने से द्रव फेफड़ों के बजाय मुँह से बाहर बहता है। सक्शन इसे और साँस में जाने से पहले हटाता है।" } },
+        { "id": "b", "correct": false, "next": "spasm",
+          "text": { "en": "Pull out the laryngeal mask and let her wake up.", "hi": "लैरिंजियल मास्क निकालें और उसे जगने दें।" },
+          "feedback": { "en": "Waking a lightly anaesthetised patient with soiled airways invites laryngospasm and more aspiration. Control the airway first.", "hi": "गंदे वायुमार्ग के साथ हल्की बेहोशी में मरीज़ को जगाने से लैरिंगोस्पाज़्म और ज़्यादा एस्पिरेशन होता है। पहले वायुमार्ग सँभालें।" } },
+        { "id": "c", "correct": false, "next": "deepen",
+          "text": { "en": "Squeeze the bag hard to push oxygen in.", "hi": "ऑक्सीजन अंदर धकेलने के लिए बैग ज़ोर से दबाएँ।" },
+          "feedback": { "en": "Positive pressure before suction drives the aspirate further down the airway. Suction first.", "hi": "सक्शन से पहले पॉज़िटिव प्रेशर एस्पिरेट को वायुमार्ग में और नीचे धकेलता है। पहले सक्शन करें।" } }
+      ] },
+    { "id": "spasm", "src": 1, "timeSec": 30,
+      "vitals": { "hr": 120, "spo2": 82 },
+      "prompt": { "en": "With the mask out she has stridor and then no air movement. SpO2 82%. What now?", "hi": "मास्क निकालने के बाद उसे स्ट्राइडर है और फिर हवा का आना-जाना बंद। SpO2 82%। अब क्या?" },
+      "options": [
+        { "id": "a", "correct": true, "next": "secure",
+          "text": { "en": "Treat laryngospasm: jaw thrust, 100% oxygen with CPAP, deepen with propofol, and suxamethonium if it does not break.", "hi": "लैरिंगोस्पाज़्म का इलाज: जॉ थ्रस्ट, CPAP के साथ 100% ऑक्सीजन, प्रोपोफोल से गहरा करें, और न टूटे तो सक्सामेथोनियम।" },
+          "feedback": { "en": "Laryngospasm is a common result of airway soiling in light anaesthesia. Then secure the airway with a tube.", "hi": "हल्की बेहोशी में वायुमार्ग गंदा होने से लैरिंगोस्पाज़्म आम है। फिर ट्यूब से वायुमार्ग सुरक्षित करें।" } },
+        { "id": "b", "correct": false, "next": "secure",
+          "text": { "en": "Wait for her to wake fully and breathe on her own.", "hi": "उसके पूरी तरह जगने और खुद साँस लेने का इंतज़ार करें।" },
+          "feedback": { "en": "She will desaturate further while you wait. Break the spasm actively.", "hi": "इंतज़ार में उसका ऑक्सीजन और गिरेगा। स्पाज़्म को सक्रिय रूप से तोड़ें।" } }
+      ] },
+    { "id": "deepen", "src": 1, "timeSec": 45,
+      "prompt": { "en": "She is still coughing and straining on the mask. What next?", "hi": "वह अब भी मास्क पर खाँस और ज़ोर लगा रही है। आगे क्या?" },
+      "options": [
+        { "id": "a", "correct": true,
+          "text": { "en": "Deepen anaesthesia with IV propofol and ask the surgeon to stop.", "hi": "IV प्रोपोफोल से एनेस्थीसिया गहरा करें और सर्जन से रुकने को कहें।" },
+          "feedback": { "en": "Straining raises intra-abdominal pressure and drives more regurgitation. Light anaesthesia with surgical stimulus is a classic cause.", "hi": "ज़ोर लगाने से पेट का दबाव बढ़ता है और और ज़्यादा उल्टी ऊपर आती है। सर्जिकल उत्तेजना के साथ हल्की बेहोशी एक आम कारण है।" } },
+        { "id": "b", "correct": false,
+          "text": { "en": "Turn off the sevoflurane so she wakes and protects her own airway.", "hi": "सेवोफ्लुरेन बंद करें ताकि वह जगकर खुद अपना वायुमार्ग बचाए।" },
+          "feedback": { "en": "She will pass through a light plane where laryngospasm and further aspiration are most likely.", "hi": "वह हल्की बेहोशी के उस दौर से गुज़रेगी जहाँ लैरिंगोस्पाज़्म और और एस्पिरेशन सबसे ज़्यादा होते हैं।" } }
+      ] },
+    { "id": "secure", "src": 0, "timeSec": 60,
+      "vitals": { "hr": 112, "spo2": 91 },
+      "prompt": { "en": "She is now deep. How do you manage the airway?", "hi": "अब वह गहरी बेहोशी में है। वायुमार्ग कैसे सँभालेंगे?" },
+      "options": [
+        { "id": "a", "correct": true, "critical": true,
+          "text": { "en": "Rapid sequence intubation with cricoid pressure, then suction down the tracheal tube before positive pressure ventilation.", "hi": "क्रिकॉइड प्रेशर के साथ रैपिड सीक्वेंस इंट्यूबेशन, फिर पॉज़िटिव प्रेशर वेंटिलेशन से पहले ट्रेकियल ट्यूब से सक्शन।" },
+          "feedback": { "en": "NAP4: once placed, a tracheal tube gives the best protection against aspiration. Suctioning first stops you blowing aspirate distally.", "hi": "NAP4: लगने के बाद ट्रेकियल ट्यूब एस्पिरेशन से सबसे अच्छी सुरक्षा देती है। पहले सक्शन करने से एस्पिरेट नीचे नहीं धकेला जाता।" } },
+        { "id": "b", "correct": false,
+          "text": { "en": "Keep the first-generation mask and switch to controlled ventilation.", "hi": "फ़र्स्ट-जनरेशन मास्क ही रखें और कंट्रोल्ड वेंटिलेशन पर जाएँ।" },
+          "feedback": { "en": "NAP4 found standard laryngeal masks gave poor protection in patients at risk of aspiration.", "hi": "NAP4 में पाया गया कि एस्पिरेशन के खतरे वाले मरीज़ों में साधारण लैरिंजियल मास्क से सुरक्षा कम रही।" } },
+        { "id": "c", "correct": false,
+          "text": { "en": "Intubate, ventilate at once, and suction at the end of surgery.", "hi": "इंट्यूबेट करें, तुरंत वेंटिलेट करें, और सर्जरी के अंत में सक्शन करें।" },
+          "feedback": { "en": "Suction the trachea before ventilating, so you do not push the aspirate deeper.", "hi": "वेंटिलेट करने से पहले ट्रेकिया का सक्शन करें, ताकि एस्पिरेट और गहरा न जाए।" } }
+      ] },
+    { "id": "ventilate", "src": 1, "timeSec": 60,
+      "vitals": { "hr": 104, "bp": "128/78", "spo2": 92 },
+      "prompt": { "en": "The tube is in and suctioned. SpO2 is 92% on 100% oxygen. You see food particles in the suction. What next?", "hi": "ट्यूब लग गई और सक्शन हो गया। 100% ऑक्सीजन पर SpO2 92% है। सक्शन में खाने के कण दिखते हैं। आगे क्या?" },
+      "options": [
+        { "id": "a", "correct": true, "critical": true,
+          "text": { "en": "Ventilate with PEEP, and arrange bronchoscopy to remove the solid particles.", "hi": "PEEP के साथ वेंटिलेट करें, और ठोस कण निकालने के लिए ब्रोंकोस्कोपी करवाएँ।" },
+          "feedback": { "en": "PEEP helps reopen flooded alveoli. Solid matter can block airways and needs bronchoscopic removal.", "hi": "PEEP भरे हुए एल्वियोलाई को खोलने में मदद करता है। ठोस कण वायुमार्ग रोक सकते हैं और ब्रोंकोस्कोपी से निकाले जाते हैं।" } },
+        { "id": "b", "correct": false,
+          "text": { "en": "Wash out the lungs with large volumes of saline down the tube.", "hi": "ट्यूब से भारी मात्रा में सलाइन डालकर फेफड़े धोएँ।" },
+          "feedback": { "en": "Large-volume lavage is not recommended. It can spread the aspirate and worsen hypoxia.", "hi": "भारी मात्रा में लैवेज की सलाह नहीं दी जाती। इससे एस्पिरेट फैल सकता है और हाइपोक्सिया बढ़ सकता है।" } }
+      ] },
+    { "id": "drugs", "src": 1, "timeSec": 45,
+      "prompt": { "en": "The surgeon asks for steroids and antibiotics to prevent pneumonia. Your answer?", "hi": "सर्जन निमोनिया रोकने के लिए स्टेरॉयड और एंटीबायोटिक माँगता है। आपका जवाब?" },
+      "options": [
+        { "id": "a", "correct": true,
+          "text": { "en": "No routine steroids or prophylactic antibiotics. Start antibiotics only if infection develops or the aspirate was likely infected.", "hi": "रूटीन स्टेरॉयड या प्रोफ़िलैक्टिक एंटीबायोटिक नहीं। संक्रमण हो या एस्पिरेट के संक्रमित होने की संभावना हो, तभी एंटीबायोटिक।" },
+          "feedback": { "en": "Early injury is chemical pneumonitis, not infection. Steroids have not shown benefit, and routine antibiotics select resistant organisms.", "hi": "शुरुआती चोट रासायनिक न्यूमोनाइटिस है, संक्रमण नहीं। स्टेरॉयड से लाभ नहीं दिखा, और रूटीन एंटीबायोटिक प्रतिरोधी कीटाणु बढ़ाते हैं।" } },
+        { "id": "b", "correct": false,
+          "text": { "en": "High-dose IV steroids now to reduce the inflammation.", "hi": "सूजन कम करने के लिए अभी हाई-डोज़ IV स्टेरॉयड।" },
+          "feedback": { "en": "Steroids have not been shown to help aspiration pneumonitis.", "hi": "एस्पिरेशन न्यूमोनाइटिस में स्टेरॉयड से फ़ायदा साबित नहीं हुआ है।" } }
+      ] },
+    { "id": "after", "src": 1, "timeSec": 60,
+      "vitals": { "spo2": 95, "rr": 22 },
+      "prompt": { "en": "Surgery is done. She is extubated awake and needs 4 L/min of oxygen. She was booked as a day case. Plan?", "hi": "सर्जरी पूरी हो गई। जगने पर उसे एक्सट्यूबेट किया गया और उसे 4 L/min ऑक्सीजन चाहिए। वह डे-केयर में बुक थी। योजना?" },
+      "options": [
+        { "id": "a", "correct": true, "critical": true,
+          "text": { "en": "Admit her with close monitoring, get a chest X-ray, and escalate to HDU or ICU if oxygen needs rise.", "hi": "करीबी निगरानी के साथ भर्ती करें, छाती का X-ray करवाएँ, और ऑक्सीजन की ज़रूरत बढ़े तो HDU या ICU भेजें।" },
+          "feedback": { "en": "A new oxygen need after aspiration rules out day-case discharge. Pneumonitis can worsen over the next hours.", "hi": "एस्पिरेशन के बाद नई ऑक्सीजन ज़रूरत का मतलब डे-केयर छुट्टी नहीं। अगले कुछ घंटों में न्यूमोनाइटिस बिगड़ सकता है।" } },
+        { "id": "b", "correct": false,
+          "text": { "en": "Discharge home this evening as planned, with advice to return if breathless.", "hi": "योजना के अनुसार आज शाम घर भेजें, साँस फूलने पर लौटने की सलाह के साथ।" },
+          "feedback": { "en": "She is hypoxic. Discharging her would miss a deteriorating pneumonitis.", "hi": "उसे हाइपोक्सिया है। घर भेजने से बिगड़ता न्यूमोनाइटिस छूट जाएगा।" } }
+      ] },
+    { "id": "debrief", "src": 2, "timeSec": 60,
+      "prompt": { "en": "Later she says she had tea with milk and biscuits that morning. What should the pre-op check have caught?", "hi": "बाद में वह बताती है कि सुबह उसने दूध वाली चाय और बिस्कुट लिए थे। प्री-ऑप जाँच में क्या पकड़ा जाना चाहिए था?" },
+      "options": [
+        { "id": "a", "correct": true, "critical": true, "next": "end",
+          "text": { "en": "Milk and biscuits are not clear liquids. Check fasting and aspiration risk in every patient, and change the plan if in doubt.", "hi": "दूध और बिस्कुट क्लियर लिक्विड नहीं हैं। हर मरीज़ में फ़ास्टिंग और एस्पिरेशन का खतरा जाँचें, और शक हो तो योजना बदलें।" },
+          "feedback": { "en": "Clear liquids are allowed until 2 hours before. NAP4 found aspiration often followed a missed risk assessment. Diabetes can also slow gastric emptying.", "hi": "क्लियर लिक्विड 2 घंटे पहले तक ठीक हैं। NAP4 में एस्पिरेशन अक्सर छूटी जोखिम-जाँच के बाद हुआ। डायबिटीज़ में पेट देर से खाली हो सकता है।" } },
+        { "id": "b", "correct": false, "next": "end",
+          "text": { "en": "Nothing. Tea counts as a clear liquid, so she was fasted.", "hi": "कुछ नहीं। चाय क्लियर लिक्विड है, तो वह फ़ास्टिंग में थी।" },
+          "feedback": { "en": "Tea with milk is not a clear liquid, and biscuits are solid food.", "hi": "दूध वाली चाय क्लियर लिक्विड नहीं है, और बिस्कुट ठोस भोजन है।" } }
+      ] }
+  ]
+}

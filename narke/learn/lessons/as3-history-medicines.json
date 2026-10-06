@@ -1,0 +1,234 @@
+{
+  "id": "as3-history-medicines",
+  "unit": "as3",
+  "level": "mbbs",
+  "minutes": 6,
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "Two flights of stairs is about 4 METs",
+      "SGLT2 inhibitor stop interval (FDA: 3 days, ertugliflozin 4 days)"
+    ]
+  },
+  "competencies": [
+    "AS3.2"
+  ],
+  "title": {
+    "en": "The pre-anaesthetic history and medicines",
+    "hi": "प्री-एनेस्थेटिक इतिहास और दवाएँ"
+  },
+  "idea": {
+    "en": "Ask about past anaesthetics, family reactions, allergies, illnesses, exercise tolerance in [[mets]], habits and every medicine. Each answer can change the plan.",
+    "hi": "पिछले एनेस्थीसिया, परिवार में प्रतिक्रिया, एलर्जी, बीमारियाँ, [[mets]] में व्यायाम क्षमता, आदतें और हर दवा के बारे में पूछिए। हर जवाब योजना बदल सकता है।"
+  },
+  "see": {
+    "diagram": "diagrams/as3-history-medicines.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "A clipboard with four coloured rows: blue, purple, red and green. On the right, a figure stands at the top of a staircase of four steps. Above the stairs are a pill bottle, a capsule and a round tablet.",
+      "hi": "चार रंगीन पंक्तियों वाला क्लिपबोर्ड: नीली, बैंगनी, लाल और हरी। दाईं ओर चार सीढ़ियों के ऊपर एक आकृति खड़ी है। सीढ़ियों के ऊपर एक दवा की शीशी, एक कैप्सूल और एक गोल गोली।"
+    },
+    "caption": {
+      "en": "History rows, a stair-climb test for reserve, and a full medicine list.",
+      "hi": "इतिहास की पंक्तियाँ, रिज़र्व के लिए सीढ़ी चढ़ने की जाँच, और दवाओं की पूरी सूची।"
+    },
+    "credit": "Original diagram, Narkē (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.138,
+        "y": 0.233,
+        "label": {
+          "en": "Past anaesthetics",
+          "hi": "पिछले एनेस्थीसिया"
+        },
+        "note": {
+          "en": "Ask about difficult airway, nausea and vomiting, delayed waking or prolonged paralysis.",
+          "hi": "मुश्किल वायुमार्ग, मतली-उल्टी, देर से होश या लंबे लकवे के बारे में पूछिए।"
+        }
+      },
+      {
+        "x": 0.138,
+        "y": 0.4,
+        "label": {
+          "en": "Family history",
+          "hi": "पारिवारिक इतिहास"
+        },
+        "note": {
+          "en": "Malignant hyperthermia or prolonged paralysis after suxamethonium in relatives changes the drugs you can use.",
+          "hi": "रिश्तेदारों में malignant hyperthermia या suxamethonium के बाद लंबा लकवा हो तो दवाएँ बदलनी पड़ती हैं।"
+        }
+      },
+      {
+        "x": 0.138,
+        "y": 0.567,
+        "label": {
+          "en": "Allergies",
+          "hi": "एलर्जी"
+        },
+        "note": {
+          "en": "Drug, latex and food allergies, and what the reaction was.",
+          "hi": "दवा, लेटेक्स और भोजन की एलर्जी, और प्रतिक्रिया क्या थी।"
+        }
+      },
+      {
+        "x": 0.138,
+        "y": 0.733,
+        "label": {
+          "en": "Illnesses and habits",
+          "hi": "बीमारियाँ और आदतें"
+        },
+        "note": {
+          "en": "Heart, lung, kidney, liver, diabetes, snoring and sleep apnoea, smoking, tobacco and alcohol.",
+          "hi": "दिल, फेफड़े, किडनी, लिवर, डायबिटीज़, खर्राटे और स्लीप एपनिया, धूम्रपान, तंबाकू और शराब।"
+        }
+      },
+      {
+        "x": 0.792,
+        "y": 0.583,
+        "label": {
+          "en": "Exercise tolerance",
+          "hi": "व्यायाम क्षमता"
+        },
+        "note": {
+          "en": "Can the patient climb two flights of stairs without stopping? That is about 4 METs, a sign of good cardiac reserve.",
+          "hi": "क्या मरीज़ बिना रुके दो मंज़िल सीढ़ियाँ चढ़ सकता है? यह लगभग 4 METs है, अच्छे हृदय रिज़र्व का संकेत।"
+        }
+      },
+      {
+        "x": 0.688,
+        "y": 0.183,
+        "label": {
+          "en": "Medicines",
+          "hi": "दवाएँ"
+        },
+        "note": {
+          "en": "List every drug, dose and time, including ayurvedic and over-the-counter ones. Mark what to continue, stop or change.",
+          "hi": "हर दवा, खुराक और समय लिखिए, आयुर्वेदिक और बिना पर्चे वाली भी। लिखिए क्या जारी, बंद या बदलना है।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Start with the operation and the patient's main complaint, then the past anaesthetic history.",
+        "hi": "ऑपरेशन और मरीज़ की मुख्य शिकायत से शुरू कीजिए, फिर पिछले एनेस्थीसिया का इतिहास।"
+      },
+      {
+        "en": "Go system by system. Snoring, daytime sleepiness and a thick neck suggest sleep apnoea; screen with STOP-BANG.",
+        "hi": "हर तंत्र को बारी से देखिए। खर्राटे, दिन में नींद और मोटी गर्दन स्लीप एपनिया का संकेत हैं; STOP-BANG से जाँचिए।"
+      },
+      {
+        "en": "Most medicines continue, including on the morning of surgery. Anticoagulants, antiplatelets and diabetes drugs follow the protocol and the prescriber.",
+        "hi": "ज़्यादातर दवाएँ जारी रहती हैं, सर्जरी की सुबह भी। एंटीकोएगुलेंट, एंटीप्लेटलेट और डायबिटीज़ की दवाएँ प्रोटोकॉल और दवा लिखने वाले के अनुसार।"
+      },
+      {
+        "en": "SGLT2 inhibitors are usually stopped days before surgery because of the risk of ketoacidosis.",
+        "hi": "SGLT2 inhibitor आमतौर पर सर्जरी से कुछ दिन पहले बंद किए जाते हैं क्योंकि कीटोएसिडोसिस का जोखिम है।"
+      },
+      {
+        "en": "Document clearly and present it as: patient, surgery, problems found, ASA, airway, plan.",
+        "hi": "साफ़ लिखिए और ऐसे प्रस्तुत कीजिए: मरीज़, सर्जरी, मिली समस्याएँ, ASA, वायुमार्ग, योजना।"
+      }
+    ],
+    "analogy": {
+      "en": "Taking a history is reading the patient's previous flight log. Past turbulence warns you where the next flight may shake.",
+      "hi": "इतिहास लेना मरीज़ की पिछली उड़ानों का लॉग पढ़ना है। पिछली हलचल बताती है कि अगली उड़ान कहाँ हिल सकती है।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Unable to climb two flights of stairs means poor reserve: think about cardiac risk.",
+      "hi": "दो मंज़िल सीढ़ियाँ न चढ़ पाना कम रिज़र्व है: हृदय जोखिम के बारे में सोचिए।"
+    },
+    {
+      "en": "Herbal and over-the-counter drugs are often missed unless you ask.",
+      "hi": "जड़ी-बूटी और बिना पर्चे की दवाएँ पूछे बिना अक्सर छूट जाती हैं।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Take a full pre-anaesthetic history from one patient and present it in under 3 minutes.",
+      "hi": "एक मरीज़ का पूरा प्री-एनेस्थेटिक इतिहास लीजिए और 3 मिनट से कम में प्रस्तुत कीजिए।"
+    }
+  ],
+  "remember": {
+    "en": "Past anaesthetics, family reactions, allergies, systems, METs, habits and every medicine, with a clear continue or stop plan.",
+    "hi": "पिछले एनेस्थीसिया, पारिवारिक प्रतिक्रिया, एलर्जी, तंत्र, METs, आदतें और हर दवा, जारी या बंद की साफ़ योजना के साथ।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "Which family history most changes the choice of anaesthetic drugs?",
+        "hi": "कौन सा पारिवारिक इतिहास एनेस्थेटिक दवाओं का चुनाव सबसे ज़्यादा बदलता है?"
+      },
+      "o": [
+        {
+          "en": "A relative who had malignant hyperthermia",
+          "hi": "एक रिश्तेदार जिसे malignant hyperthermia हुआ"
+        },
+        {
+          "en": "A relative with seasonal allergic rhinitis",
+          "hi": "मौसमी एलर्जिक राइनाइटिस वाला रिश्तेदार"
+        },
+        {
+          "en": "A relative with hypothyroidism on tablets",
+          "hi": "गोलियों पर हाइपोथायरॉइड वाला रिश्तेदार"
+        },
+        {
+          "en": "A relative with long-standing migraine",
+          "hi": "पुराने माइग्रेन वाला रिश्तेदार"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "A family history of malignant hyperthermia means avoiding volatile agents and suxamethonium.",
+        "hi": "malignant hyperthermia का पारिवारिक इतिहास होने पर वोलेटाइल एजेंट और suxamethonium से बचना होता है।"
+      }
+    },
+    {
+      "q": {
+        "en": "A patient climbs two flights of stairs without stopping. What does this suggest?",
+        "hi": "मरीज़ बिना रुके दो मंज़िल सीढ़ियाँ चढ़ता है। इसका क्या मतलब है?"
+      },
+      "o": [
+        {
+          "en": "He needs an echocardiogram first",
+          "hi": "पहले उसकी इकोकार्डियोग्राफ़ी चाहिए"
+        },
+        {
+          "en": "Functional capacity of about 4 METs",
+          "hi": "लगभग 4 METs की कार्य क्षमता"
+        },
+        {
+          "en": "He has severe lung disease",
+          "hi": "उसे गंभीर फेफड़े का रोग है"
+        },
+        {
+          "en": "He must be ASA III or above",
+          "hi": "वह ASA III या ऊपर ही होगा"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "Two flights of stairs is about 4 METs, which suggests good functional reserve.",
+        "hi": "दो मंज़िल सीढ़ियाँ लगभग 4 METs हैं, जो अच्छे कार्य रिज़र्व का संकेत है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "preop",
+    "tool": "stopbang"
+  },
+  "glossary": [
+    "mets"
+  ],
+  "sources": [
+    "Butterworth JF, Mackey DC, Wasnick JD. Morgan and Mikhail's Clinical Anesthesiology, 7th edition (2022), Chapter 18: Preoperative assessment, premedication and perioperative documentation.",
+    "Gropper MA (ed). Miller's Anesthesia, 9th edition (2020), Chapter 31: Preoperative evaluation.",
+    "2022 ESC/ESAIC Guidelines on cardiovascular assessment and management of patients undergoing non-cardiac surgery.",
+    "StewardMD Anaesthesia kit kb/specialty-kits/src/anaesthesia.json: pre-anaesthetic check-up fields, airway assessment and preoperative order sets.",
+    "US FDA Drug Safety Communication (2020): stop canagliflozin, dapagliflozin and empagliflozin at least 3 days, and ertugliflozin at least 4 days, before scheduled surgery."
+  ]
+}

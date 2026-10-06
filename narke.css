@@ -1,0 +1,33 @@
+/* Narkē: the Anaesthesia module on the specialty engine (specialty.css draws every shared screen).
+   This file sets Narkē's palette on its root (.nrk-root).
+   Two themes from the use scene. Monitor (dark): the anaesthesia workstation, black with the capnograph's yellow
+   as the one accent and the usual channel colours (ECG green, SpO2 cyan, EtCO2 yellow, arterial red).
+   Chart (light): the paper anaesthesia record, dark ink on warm paper with an ochre accent.
+   The host resolves the system preference and the in-app choice into body.dark (body.v3-dark on v3 screens). */
+.nrk-root {
+  --nk-bg: #000; --nk-s1: #111214; --nk-s2: #1b1c1f; --nk-s3: #2a2b2f; --nk-line: #34353a;
+  --nk-text: #f2f2f4; --nk-mut: #a9a9b1; --nk-ok: #34c759; --nk-bad: #ff6961; --nk-warn: #ffc05a;
+  /* accent = the EtCO2 channel; text on the fill is 12:1 */
+  --nk-acc: #facc15; --nk-on-acc: #1a1400; --nk-acc-soft: rgba(250, 204, 21, .14);
+  /* monitor channels */
+  --nk-ecg: #3ee07a; --nk-spo2: #38bdf8; --nk-co2: #facc15; --nk-art: #fb7185; --nk-grid: #16202c;
+  --nk-ease: cubic-bezier(0.23, 1, 0.32, 1);
+  /* the engine's tokens */
+  --sp-bg: var(--nk-bg); --sp-s1: var(--nk-s1); --sp-s2: var(--nk-s2); --sp-s3: var(--nk-s3); --sp-line: var(--nk-line);
+  --sp-text: var(--nk-text); --sp-mut: var(--nk-mut); --sp-acc: var(--nk-acc); --sp-ok: var(--nk-ok); --sp-bad: var(--nk-bad); --sp-warn: var(--nk-warn);
+  --sp-link: #fde047; --sp-link-line: rgba(253, 224, 71, .45);
+  --sp-pri: var(--nk-acc); --sp-on-pri: var(--nk-on-acc); --sp-pri-hover: #fde047; --sp-acc-soft: var(--nk-acc-soft);
+  --sp-tile-bg: #05070a; --sp-tile-fg: var(--nk-co2); --sp-plate: #000; --sp-card: var(--nk-s3); --sp-on-ok: #04210d;
+  color-scheme: dark;
+}
+body:not(.dark):not(.v3-dark) .nrk-root {
+  --nk-bg: #faf8f3; --nk-s1: #f1ede3; --nk-s2: #e7e1d3; --nk-s3: #d5cdb9; --nk-line: #d8d0be;
+  --nk-text: #1c1b18; --nk-mut: #5a574f; --nk-ok: #15803d; --nk-bad: #b42318; --nk-warn: #9a5b00;
+  --nk-acc: #7a4f00; --nk-on-acc: #fff; --nk-acc-soft: rgba(122, 79, 0, .1);
+  --nk-ecg: #15803d; --nk-spo2: #0e6f86; --nk-co2: #7a4f00; --nk-art: #b42318; --nk-grid: #ece4d2;
+  --sp-link: #7a4f00; --sp-link-line: rgba(122, 79, 0, .45); --sp-pri-hover: #5f3d00; --sp-card: #fffdf8; --sp-on-ok: #fff;
+  --sp-tile-bg: #fffdf8; --sp-tile-fg: #7a4f00;
+  color-scheme: light;
+}
+.nrk-root .sp-tile { box-shadow: inset 0 0 0 1px var(--nk-line); }
+.nrk-root output { font-variant-numeric: tabular-nums; }
