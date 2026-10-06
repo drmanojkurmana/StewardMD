@@ -288,7 +288,8 @@ export function groundingFor(ctx, id) {
 const readJson = (p, d) => { try { return JSON.parse(fs.readFileSync(p, "utf8")); } catch (e) { return d; } };
 const writeJson = (p, o) => { fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, JSON.stringify(o, null, 1)); };
 export class Pending extends Error { constructor(m) { super(m); this.pending = true; } }
-async function stage(ctx, name, lines, op) {
+// Exported for tools/prep-cards.mjs (ctx.jobPrefix names the Batch job folder; default "lessons").
+export async function stage(ctx, name, lines, op) {
   const st = ctx.state.stages[name] || (ctx.state.stages[name] = {});
   const outFile = path.join(ctx.work, name + ".out.json"), inFile = path.join(ctx.work, name + ".jsonl");
   if (st.status === "done") return new Map(Object.entries(readJson(outFile, {})));
@@ -296,7 +297,7 @@ async function stage(ctx, name, lines, op) {
     fs.mkdirSync(ctx.work, { recursive: true });
     fs.writeFileSync(inFile, lines.map((l) => JSON.stringify(l)).join("\n") + (lines.length ? "\n" : ""));
     if (!lines.length) { Object.assign(st, { status: "done", n: 0 }); writeJson(outFile, {}); ctx.save(); return new Map(); }
-    const job = await ctx.vx.batch.submit({ name: "lessons/" + name, run: ctx.state.run, lines });
+    const job = await ctx.vx.batch.submit({ name: (ctx.jobPrefix || "lessons") + "/" + name, run: ctx.state.run, lines });
     Object.assign(st, { status: "submitted", n: lines.length, ...job }); ctx.save();
     ctx.log(`  ${name}: submitted ${lines.length} requests as ${job.jobId}`);
   }
@@ -315,7 +316,7 @@ async function stage(ctx, name, lines, op) {
   return new Map(Object.entries(saved));
 }
 const textOf = (m, k) => (m.get(k) || {}).text || "";
-function readChecks(text, n) {
+export function readChecks(text, n) {
   const j = parseModelJson(text), out = Array.from({ length: n }, () => ({ unsup: true, why: "no self-check answer" }));
   for (const r of (j && Array.isArray(j.res) ? j.res : [])) if (Number.isInteger(r.idx) && r.idx >= 0 && r.idx < n) out[r.idx] = { unsup: r.unsup !== false, why: str(r.why) };
   return out;

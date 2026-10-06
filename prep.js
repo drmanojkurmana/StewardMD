@@ -42,6 +42,7 @@
     for (k in store.cards) {
       if (k.indexOf("p:") !== 0) continue;
       parts = k.split(":"); m = parts[1]; c = store.cards[k];
+      if (parts.length === 4 && parts[2] === "c") continue;   // a module flashcard (prep-flash.js), not a question
       var r = out[m] || (out[m] = { answered: 0, due: 0 });
       r.answered++;
       if (c[3] <= today) r.due++;
@@ -347,6 +348,7 @@
     if (!st.open) return false;
     // Arena: a sheet closes first; a live battle asks before it is left.
     if (G.PREP_ARENA && G.PREP_ARENA.back && G.PREP_ARENA.back()) return true;
+    if (G.PREP_FLASH && G.PREP_FLASH.back()) return true;
     // Lessons: a zoomed image closes first; leaving the reader stops the narration.
     if (G.PREP_LESSONS && G.PREP_LESSONS.back()) return true;
     // PYQ: an enlarged question image closes first.
@@ -402,6 +404,7 @@
     try { if (G.PREP_ARENA && G.PREP_ARENA.leave) G.PREP_ARENA.leave(); } catch (e) {}
     try { if (G.PREP_LESSONS) G.PREP_LESSONS.leave(); } catch (e) {}
     try { if (G.PREP_PYQ) G.PREP_PYQ.leave(); } catch (e) {}
+    try { if (G.PREP_FLASH) G.PREP_FLASH.leave(); } catch (e) {}
     st.open = false; st.run = null; st.stack = [];
     if (root && root.parentNode) root.parentNode.removeChild(root);
     root = null;
@@ -434,6 +437,8 @@
       row("mocks", ico("clock"), "Mock exam", "Full pattern, marked") +
       // Previous year papers (prep-pyq.js): NEET-PG recall papers only, so the row shows on that tab.
       (G.PREP_PYQ && s.exam === "neet-pg" ? G.PREP_PYQ.homeRow(HOST) : "") +
+      // Cards due (prep-flash.js): shows once the student has studied any module card.
+      (G.PREP_FLASH ? G.PREP_FLASH.homeRow(HOST) : "") +
       (G.PREP_C ? row("c-home", ico("deck"), "Your decks", "Questions and cards from your PDF or notes") : "") +
       (G.PREP_ARENA ? row("a-stats", ico("stats"), "My stats", "Accuracy by subject, the last 30 days") : "") + "</div>" +
       '<h2 class="pn-h">Subjects</h2><div class="pn-subs" id="pnGrid">' + subs.map(function (sb) { return tile(sb, null); }).join("") + "</div>" +
@@ -500,7 +505,7 @@
     var n = countFor(t, s.exam), p = progressByModule(s, today())[mid] || { answered: 0, due: 0 }, sr = stars(s.mod[mid]);
     // Lessons (prep-lessons.js): the slot fills when the lesson index lists this module.
     // PYQ (prep-pyq.js): the slot draws "All questions / PYQ n" chips when the module has previous-year questions.
-    paint(bar(tx(t.title), tx(subjectById(sid).name), "back") + '<div class="pn-body"><div id="pnLsnSlot"></div><div id="pnPyqSlot"></div><section class="pn-panel" id="pnModPanel">' +
+    paint(bar(tx(t.title), tx(subjectById(sid).name), "back") + '<div class="pn-body"><div id="pnLsnSlot"></div><div id="pnCardSlot"></div><div id="pnPyqSlot"></div><section class="pn-panel" id="pnModPanel">' +
       '<p class="pn-big">' + fmt(n) + ' MCQs</p><p class="pn-mut">' + fmt(Math.min(p.answered, n)) + " answered" + (sr != null ? " · mastery " + sr + "/5" : "") + (p.due ? " · " + fmt(p.due) + " due for review" : "") + "</p>" +
       (p.due ? '<button type="button" class="pn-btn pri" data-act="start" data-k="due">' + ico("play") + " Review " + fmt(p.due) + " due</button>" : "") +
       '<button type="button" class="pn-btn' + (p.due ? "" : " pri") + '" data-act="start" data-k="study">' + ico("play") + " Practice " + Math.min(SESSION, n) + " questions</button>" +
@@ -509,6 +514,7 @@
     st.cur = { s: sid, m: mid };
     if (G.PREP_LESSONS) G.PREP_LESSONS.mount(root.querySelector("#pnLsnSlot"), sid, mid, HOST);
     if (G.PREP_PYQ) G.PREP_PYQ.mount(root.querySelector("#pnPyqSlot"), sid, mid, HOST);
+    if (G.PREP_FLASH) G.PREP_FLASH.mount(root.querySelector("#pnCardSlot"), sid, mid, HOST);
   }
   function startModule(sid, mid, kind, n) {
     var s = load(), size = n || SESSION;
@@ -961,6 +967,8 @@
     if (a.indexOf("l-") === 0 && G.PREP_LESSONS) return G.PREP_LESSONS.act(a, b, HOST);
     // Previous year papers (prep-pyq.js) own every data-act starting "y-".
     if (a.indexOf("y-") === 0 && G.PREP_PYQ) return G.PREP_PYQ.act(a, b, HOST);
+    // Module flashcards (prep-flash.js) own every data-act starting "k-".
+    if (a.indexOf("k-") === 0 && G.PREP_FLASH) return G.PREP_FLASH.act(a, b, HOST);
   }
   function openGrid() {
     var r = st.run;
