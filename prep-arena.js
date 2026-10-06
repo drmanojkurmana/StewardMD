@@ -20,10 +20,12 @@
   // One event as the client uses it, from either snake_case (D1 rows) or camelCase fields.
   function normEvent(e) {
     if (!e || !e.id) return null;
+    // entry: the caller's state from the server, null | "started" | "submitted".
     return { id: String(e.id), kind: e.kind === "weekly" ? "weekly" : "daily", exam: e.exam || "", start: ms(e.starts_at != null ? e.starts_at : e.startsAt),
-      end: ms(e.ends_at != null ? e.ends_at : e.endsAt), n: Number(e.n) || 0, secs: Number(e.secs) || 0, done: !!(e.submitted || e.entered) };
+      end: ms(e.ends_at != null ? e.ends_at : e.endsAt), n: Number(e.n) || 0, secs: Number(e.secs) || 0, done: e.entry === "submitted", started: e.entry === "started" };
   }
-  // GET events answers either { events: [...] } or { daily, weekly } (each an event or a list).
+  // GET events answers { events: [{ role, id, kind, startsAt, endsAt, n, secs, status, entry }] } (current and next per
+  // kind); { daily, weekly } is read too.
   function eventsFrom(j) {
     var raw = [];
     if (j && j.events) raw = [].concat(j.events);
@@ -53,6 +55,7 @@
     var p = phase(ev, now);
     if (p === "none") return "No event scheduled";
     if (ev.done) return "Submitted. See the leaderboard";
+    if (ev.started && p === "live") return "In progress, ends in " + countdown(ev.end - now);
     if (p === "soon") return "Starts in " + countdown(ev.start - now);
     if (p === "live") return "Live now, ends in " + countdown(ev.end - now);
     return "Closed";
@@ -76,17 +79,21 @@
   /* Battle state from the server's messages (protocol in the plan). Unknown or malformed messages leave it unchanged.
      phase: queue (connecting or waiting) -> match -> q (a question) -> r (its result) -> ... -> end; or nobody, or lost
      (the socket closed before the end). */
-  function battleNew() { return { phase: "queue", waiting: false, opp: null, n: 7, secs: 20, i: -1, q: "", o: [], deadline: 0, got: 0, pick: -1, a: -1, you: null, them: null, score: [0, 0], result: null, rating: null }; }
+  function battleNew() { return { phase: "queue", waiting: false, opp: null, n: 7, secs: 20, i: -1, q: "", o: [], deadline: 0, got: 0, pick: -1, a: -1, you: null, them: null, score: [0, 0], result: null, rating: null, forfeit: null }; }
   function isInt(x) { return typeof x === "number" && isFinite(x) && Math.floor(x) === x; }
   function battleStep(b, m, now) {
     if (!m || typeof m !== "object" || typeof m.t !== "string") return b;
     var x = {}, k; for (k in b) x[k] = b[k];
     if (b.phase === "end" || b.phase === "nobody") return b;
-    if (m.t === "waiting") { x.waiting = true; return x; }
-    if (m.t === "nobody" && (b.phase === "queue")) { x.phase = "nobody"; return x; }
-    if (m.t === "match" && m.opp) {
+    if (m.t === "waiting" && b.phase === "queue") { x.waiting = true; return x; }
+    // nobody (30 s, no opponent), busy (already in a battle elsewhere), slow (over 10 queue joins a minute): only while queueing
+    if ((m.t === "nobody" || m.t === "busy" || m.t === "slow") && b.phase === "queue") { x.phase = m.t; return x; }
+    // match; with resume:true (a reconnect, also after "lost") it carries the score so far and the open question follows.
+    if (m.t === "match" && m.opp && (b.phase === "queue" || b.phase === "lost" || m.resume)) {
       x.phase = "match"; x.opp = { name: String(m.opp.name || "Doctor").slice(0, 40), rating: Number(m.opp.rating) || 0 };
-      x.n = isInt(m.n) && m.n > 0 ? m.n : 7; x.secs = Number(m.secs) > 0 ? Number(m.secs) : 20; x.id = String(m.id || ""); return x;
+      x.n = isInt(m.n) && m.n > 0 ? m.n : 7; x.secs = Number(m.secs) > 0 ? Number(m.secs) : 20; x.id = String(m.id || ""); x.resumed = !!m.resume;
+      if (m.resume && Array.isArray(m.score) && m.score.length === 2) x.score = [Number(m.score[0]) || 0, Number(m.score[1]) || 0];
+      return x;
     }
     if (m.t === "q" && isInt(m.i) && m.i >= 0 && Array.isArray(m.o) && m.o.length >= 2 && m.o.length <= 6 && (b.phase === "match" || b.phase === "r" || b.phase === "q")) {
       x.phase = "q"; x.i = m.i; x.q = String(m.q || ""); x.o = m.o.map(String); x.pick = -1; x.a = -1; x.you = null; x.them = null;
@@ -102,20 +109,33 @@
       return x;
     }
     if (m.t === "end" && (m.result === "win" || m.result === "loss" || m.result === "draw")) {
-      x.phase = "end"; x.result = m.result;
+      x.phase = "end"; x.result = m.result; x.forfeit = m.forfeit === "you" || m.forfeit === "opp" || m.forfeit === "both" ? m.forfeit : null;
       if (Array.isArray(m.score) && m.score.length === 2) x.score = [Number(m.score[0]) || 0, Number(m.score[1]) || 0];
       x.rating = m.rating && isFinite(m.rating.before) && isFinite(m.rating.after) ? { before: Number(m.rating.before), after: Number(m.rating.after) } : null;
       return x;
     }
     return b;
   }
-  // The socket closed: before the end or a "nobody" that is a lost connection.
-  function battleClosed(b) { if (b.phase === "end" || b.phase === "nobody") return b; var x = {}, k; for (k in b) x[k] = b[k]; x.phase = "lost"; return x; }
+  // The socket closed: before an end (or nobody, busy, slow) that is a lost connection. live: a battle was under way, so
+  // the client reconnects once (the server resumes it within its 10 s grace).
+  function liveBattle(b) { return b.phase === "match" || b.phase === "q" || b.phase === "r"; }
+  function battleClosed(b) { if (b.phase === "end" || b.phase === "nobody" || b.phase === "busy" || b.phase === "slow") return b; var x = {}, k; for (k in b) x[k] = b[k]; x.phase = "lost"; return x; }
   // A pick is sent once, only while the question is open.
   function canPick(b, k, now) { return b.phase === "q" && b.pick < 0 && isInt(k) && k >= 0 && k < b.o.length && now < b.deadline; }
 
+  // Plain words for the server's refusals (status and error code from the Arena API).
+  function errWord(status, code) {
+    if (status === 401) return "Sign in to compete. Practice works without an account.";
+    if (status === 403) return "Join the Arena first.";
+    if (status === 425) return "This event has not opened yet.";
+    if (status === 409 && code === "not-started") return "Start the event before submitting.";
+    if (status === 409) return "You have already taken this event. Only the first entry counts.";
+    if (status === 410) return code === "too-late" ? "Too late: the event closed before your answers arrived." : "This event has closed.";
+    if (status === 503) return "Coming soon: questions for this exam are still being prepared.";
+    return "The Arena did not answer. Try again in a moment.";
+  }
   var PURE = { enabled: enabled, ms: ms, normEvent: normEvent, eventsFrom: eventsFrom, phase: phase, pickEvent: pickEvent, countdown: countdown, eventLine: eventLine,
-    lastDays: lastDays, accuracyBySubject: accuracyBySubject, signed: signed, answersOf: answersOf, battleNew: battleNew, battleStep: battleStep, battleClosed: battleClosed, canPick: canPick };
+    lastDays: lastDays, accuracyBySubject: accuracyBySubject, signed: signed, answersOf: answersOf, battleNew: battleNew, battleStep: battleStep, battleClosed: battleClosed, canPick: canPick, liveBattle: liveBattle, errWord: errWord };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
@@ -142,16 +162,18 @@
   }
   function errText(e) {
     if (!online()) return "Needs a connection. Practice works offline.";
-    if (e && e.status === 401) return "Sign in to compete. Practice works without an account.";
-    if (e && e.status === 403) return "Join the Arena first.";
-    return "The Arena did not answer. Try again in a moment.";
+    if (e && e.status === 403) A.consent = null;   // consent gone (left on another phone): ask again next time
+    return errWord(e && e.status, e && e.body && e.body.error);
   }
+  // Exams whose Arena is not open yet (the server answers 503 bank-empty): NEET-SS until its bank is filled.
+  var SOON = { "neet-ss": 1 };
 
   /* ---------- home: Compete ---------- */
   function homeHtml(host) {
     H = host;
     if (!online()) return '<div class="pn-group">' + H.row("a-retryhome", H.ico("off"), "Needs a connection", "Arena events and battles run online. Practice works offline.") + "</div>";
     if (!user()) return '<div class="pn-group"><div class="pn-row static"><span class="pn-ri" aria-hidden="true">' + H.ico("user") + '</span><span class="pn-rb"><b>Sign in to compete</b><small>Daily sprints, the weekly grand test and 1v1 battles need a StewardMD account. Practice works without one.</small></span></div></div>';
+    if (SOON[exam()]) return '<div class="pn-group"><div class="pn-row static"><span class="pn-ri" aria-hidden="true">' + H.ico("trophy") + '</span><span class="pn-rb"><b>' + esc(H.exam().label) + " Arena: coming soon</b><small>Sprints, grand tests and battles open once this exam's question bank is ready. NEET-PG and USMLE are open.</small></span></div></div>";
     var now = Date.now(), ev = A.events || [], d = pickEvent(ev, "daily", now), w = pickEvent(ev, "weekly", now);
     var line = function (e) { return A.events ? eventLine(e || null, now) : "Loading"; };
     var cdAttr = function (e) { return e ? ' data-cd="' + esc(e.id) + '"' : ""; };
@@ -163,7 +185,7 @@
   }
   function homeMounted(host) {
     H = host;
-    if (!online() || !user()) return;
+    if (!online() || !user() || SOON[exam()]) return;
     if (!A.events || Date.now() - A.evAt > 60e3) loadEvents().then(function () { var box = root() && root().querySelector("#pnCompete"); if (box) box.innerHTML = homeHtml(H); tick(); }, function () {
       var box = root() && root().querySelector("#pnCompete");
       if (box) box.innerHTML = '<div class="pn-group">' + H.row("a-retryhome", H.ico("off"), "Arena did not load", "Tap to try again") + "</div>";
@@ -260,8 +282,8 @@
       '<p class="pn-big pn-cdbig" data-cd="' + esc(ev.id) + '" role="timer" aria-live="off">' + esc(eventLine(ev, now)) + "</p>" +
       '<p class="pn-mut">' + esc(rulesLine(ev)) + "</p>" +
       (ev.done ? '<button type="button" class="pn-btn pri" data-act="a-board" data-v="' + esc(ev.id) + '">' + H.ico("trophy") + " See the leaderboard</button>"
-        : '<button type="button" class="pn-btn pri" data-act="a-start"' + (p === "live" ? "" : " disabled") + ">" + H.ico("play") + (p === "soon" ? " Opens at " + esc(t(when)) : p === "live" ? " Start" : " Closed") + "</button>") +
-      "</section>" +
+        : '<button type="button" class="pn-btn pri" data-act="a-start"' + (p === "live" ? "" : " disabled") + ">" + H.ico("play") + (p === "soon" ? " Opens at " + esc(t(when)) : p === "live" ? (ev.started ? " Resume" : " Start") : " Closed") + "</button>") +
+      '<p class="pn-err" id="pnLobbyErr" role="alert" hidden></p></section>' +
       '<ul class="pn-rules"><li>One attempt. Answers are marked when you submit or when the time runs out.</li><li>Questions come from the screened bank, spread across subjects. Answer keys stay hidden until you submit.</li>' +
       "<li>Your name and score appear on the leaderboard.</li></ul>" +
       '<button type="button" class="pn-link" data-act="a-board" data-v="' + esc(ev.id) + '">' + H.ico("trophy") + " Leaderboard</button></div>");
@@ -279,8 +301,12 @@
       var limit = Math.max(1, Math.min(secs, Math.floor((endsAt - Date.now()) / 1000)));
       H.run(items, "exam", ev.kind === "weekly" ? "Weekly grand test" : "Daily sprint", { limit: limit, custom: { submit: submitEvent, render: renderEventResult } });
     }).then(null, function (e) {
-      btn.disabled = false; btn.textContent = "Start";
-      H.toast(e && e.status === 409 ? "You have already taken this event." : errText(e));
+      var el = root() && root().querySelector("#pnLobbyErr");
+      btn.textContent = "Start";
+      // closed, already taken or not ready: Start stays off; a network hiccup or "not open yet" can be tried again.
+      btn.disabled = !!(e && (e.status === 409 || e.status === 410 || e.status === 503));
+      if (e && e.status === 409) { ev.done = true; }
+      if (el) { el.textContent = errText(e); el.hidden = false; } else H.toast(errText(e));
     });
   }
   function submitEvent(r) {
@@ -292,19 +318,20 @@
       ev.done = true;
       r.arena = { state: "done", res: j }; H.rerender();
       api("GET", "events/" + encodeURIComponent(ev.id) + "/board?around=me").then(function (b) { r.arena.board = b; if (H.run_() === r) H.rerender(); }, function () {});
-    }, function (e) { r.arena = { state: e && e.status === 409 ? "dup" : "fail", msg: errText(e) }; H.rerender(); });
+    // 409 (already in) and 410 (too late) are final; anything else keeps the answers for "Send again".
+    }, function (e) { r.arena = { state: e && (e.status === 409 || e.status === 410) ? "dup" : "fail", msg: errText(e) }; H.rerender(); });
   }
   function renderEventResult(r) {
     var a = r.arena || { state: "sending" }, head = H.bar(esc(r.title), "Result", "back");
     if (a.state === "sending") return H.paint(head + '<div class="pn-body"><p class="pn-load" role="status">Submitting your answers</p></div>');
     if (a.state === "fail") return H.paint(head + '<div class="pn-body"><p class="pn-err" role="alert">' + esc(a.msg) + ' Your answers are kept on this screen.</p><button type="button" class="pn-btn pri" data-act="a-resubmit">Send again</button></div>');
-    if (a.state === "dup") return H.paint(head + '<div class="pn-body"><p class="pn-empty">This event already has your entry. Only the first one counts.</p><button type="button" class="pn-btn pri" data-act="donerun">Done</button></div>');
+    if (a.state === "dup") return H.paint(head + '<div class="pn-body"><p class="pn-empty">' + esc(a.msg) + '</p><button type="button" class="pn-btn pri" data-act="donerun">Done</button></div>');
     var x = a.res, missed = [];
     r.items.forEach(function (it, i) { if (it.a != null && r.ans[i] !== it.a) missed.push(i); });
     H.paint(head + '<div class="pn-body"><section class="pn-panel pn-score"><p class="pn-big">' + esc(String(x.score)) + "</p>" +
       (x.rank ? '<p class="pn-rank">Rank ' + H.fmt(x.rank) + (x.of ? " of " + H.fmt(x.of) : "") + "</p>" : "") +
-      '<p class="pn-mut">' + (x.right || 0) + " right · " + (x.wrong || 0) + " wrong · " + (x.blank || 0) + " unanswered · " + H.fmtTime(r.secs) + "</p></section>" +
-      boardHtml(a.board, "score", 10) +
+      '<p class="pn-mut">' + (x.right || 0) + " right · " + (x.wrong || 0) + " wrong · " + (x.blank || 0) + " unanswered · " + H.fmtTime(x.ms != null ? x.ms / 1000 : r.secs) + "</p></section>" +
+      '<h2 class="pn-h">Leaderboard</h2>' + boardHtml(a.board, "score", 10) +
       (missed.length ? '<h2 class="pn-h">Review the missed</h2><ol class="pn-missed">' + missed.map(function (i) {
         var it = r.items[i];
         return '<li><button type="button" class="pn-mod" data-act="reviewq" data-i="' + i + '"><span class="pn-mb"><b>' + esc(it.q.length > 120 ? it.q.slice(0, 117) + "..." : it.q) + "</b><small>Answer: " + esc(it.o[it.a]) + (r.ans[i] >= 0 ? " · you chose " + esc(it.o[r.ans[i]]) : " · not answered") + "</small></span></button></li>";
@@ -322,7 +349,7 @@
       var v = x[field] != null ? x[field] : x.score != null ? x.score : x.rating;
       return '<li class="pn-lb' + (mine ? " me" : "") + '"><span class="pn-lb-r">' + H.fmt(x.rank) + '</span><span class="pn-lb-n">' + esc(String(x.name || "Doctor").slice(0, 40)) + (mine ? " <small>You</small>" : "") + '</span><span class="pn-lb-v">' + esc(v == null ? "" : String(v)) + "</span></li>";
     };
-    var html = rows.map(function (x) { var m = !!(me && x.rank === me.rank && x.name === me.name); if (m) meIn = true; return li(x, m); }).join("");
+    var html = rows.map(function (x) { var m = !!(x.me || (me && x.rank === me.rank && x.name === me.name)); if (m) meIn = true; return li(x, m); }).join("");
     if (me && !meIn) html += '<li class="pn-lb-gap" aria-hidden="true"></li>' + li(me, true);
     return '<ol class="pn-board" aria-label="Leaderboard">' + html + "</ol>";
   }
@@ -352,26 +379,41 @@
   function openBattle() { joined(function () { H.push(renderBattle); startBattle(); }); }
   function startBattle() {
     stopBattle();
-    A.battle = battleNew();
+    A.battle = battleNew(); A.retry = 0;
+    connect(false);
+    paintBattle();
+  }
+  // resume: reconnecting to a battle under way; the server sends match (resume) and the open question on its own, so
+  // nothing is queued.
+  function connect(resume) {
     token().then(function (tok) {
-      if (!tok || !A.battle) return;
+      if (!tok || !A.battle) { if (A.battle) { A.battle = battleClosed(A.battle); paintBattle(); } return; }
       var ws;
       try { ws = new G.WebSocket(WS.replace(/\/$/, "") + "/battle?exam=" + encodeURIComponent(exam()), ["smd-arena", tok]); } catch (e) { A.battle = battleClosed(A.battle); return paintBattle(); }
       A.ws = ws;
-      ws.onopen = function () { try { ws.send(JSON.stringify({ t: "queue" })); } catch (e) {} };
+      ws.onopen = function () { if (!resume) try { ws.send(JSON.stringify({ t: "queue" })); } catch (e) {} };
       ws.onmessage = function (e) {
         if (A.ws !== ws) return;
         var m = null; try { m = JSON.parse(e.data); } catch (x) { return; }
         var before = A.battle;
         A.battle = battleStep(A.battle, m, Date.now());
-        if (A.battle !== before) paintBattle();
-        if (A.battle.phase === "end" || A.battle.phase === "nobody") { A.ws = null; try { ws.close(); } catch (x) {} }
+        if (A.battle !== before) { A.retry = 0; paintBattle(); }
+        var ph = A.battle.phase;
+        if (ph === "end" || ph === "nobody" || ph === "busy" || ph === "slow") { A.ws = null; try { ws.close(); } catch (x) {} }
       };
-      ws.onclose = ws.onerror = function () { if (A.ws !== ws) return; A.ws = null; A.battle = battleClosed(A.battle); paintBattle(); };
+      ws.onclose = ws.onerror = function () {
+        if (A.ws !== ws) return;
+        A.ws = null;
+        var live = liveBattle(A.battle);
+        A.battle = battleClosed(A.battle);
+        // one quiet reconnect per drop, inside the server's 10 s grace
+        if (live && A.retry < 1) { A.retry++; A.battle.reconnecting = true; A.rTimer = G.setTimeout(function () { A.rTimer = 0; if (A.battle && A.battle.phase === "lost") connect(true); }, 1000); }
+        else if (A.battle) A.battle.reconnecting = false;
+        paintBattle();
+      };
     });
-    paintBattle();
   }
-  function stopBattle() { var ws = A.ws; A.ws = null; if (A.bTimer) { G.clearInterval(A.bTimer); A.bTimer = 0; } if (ws) try { ws.close(); } catch (e) {} }
+  function stopBattle() { var ws = A.ws; A.ws = null; if (A.rTimer) { G.clearTimeout(A.rTimer); A.rTimer = 0; } if (A.bTimer) { G.clearInterval(A.bTimer); A.bTimer = 0; } if (ws) try { ws.close(); } catch (e) {} }
   function pick(k) {
     var b = A.battle, now = Date.now();
     if (!b || !canPick(b, k, now) || !A.ws) return;
@@ -397,9 +439,13 @@
       esc(H.exam().label) + ", nearest rating first. This takes up to 30 seconds.</p></section><button type=\"button\" class=\"pn-btn\" data-act=\"back\">Cancel</button>";
     else if (b.phase === "nobody") body = '<section class="pn-panel pn-score"><p class="pn-mid">Nobody is free right now</p><p class="pn-mut">No opponent joined in 30 seconds. Battles are only against real players. Try again in a few minutes, or practise meanwhile.</p></section>' +
       '<div class="pn-navrow"><button type="button" class="pn-btn" data-act="back">Back</button><button type="button" class="pn-btn pri" data-act="a-again">Try again</button></div>';
-    else if (b.phase === "lost") body = (b.opp ? versus(b) : "") + '<section class="pn-panel pn-score" role="alert"><p class="pn-mid">Connection lost</p><p class="pn-mut">' + (b.opp ? "A battle left for more than 10 seconds goes to the other player." : "The battle server could not be reached.") + " Check the connection and try again.</p></section>" +
+    else if (b.phase === "busy" || b.phase === "slow") body = '<section class="pn-panel pn-score"><p class="pn-mid">' + (b.phase === "busy" ? "You are already in a battle" : "Too many tries") + '</p><p class="pn-mut">' +
+      (b.phase === "busy" ? "A battle of yours is still running, perhaps on another phone. It ends on its own within a few minutes." : "Battles allow 10 joins a minute. Wait a minute, then try again.") + "</p></section>" +
       '<div class="pn-navrow"><button type="button" class="pn-btn" data-act="back">Back</button><button type="button" class="pn-btn pri" data-act="a-again">Try again</button></div>';
-    else if (b.phase === "match") body = versus(b) + '<section class="pn-panel pn-score" role="status"><p class="pn-mid">Matched</p><p class="pn-mut">' + b.n + " questions, " + b.secs + " seconds each. Faster right answers score more.</p></section>";
+    else if (b.phase === "lost" && b.reconnecting) body = (b.opp ? versus(b) : "") + '<section class="pn-panel pn-mm" role="status"><span class="pn-mm-bar" aria-hidden="true"><i></i></span><p class="pn-mid">Reconnecting</p><p class="pn-mut">The connection dropped. Your battle is held for 10 seconds.</p></section>';
+    else if (b.phase === "lost") body = (b.opp ? versus(b) : "") + '<section class="pn-panel pn-score" role="alert"><p class="pn-mid">Connection lost</p><p class="pn-mut">' + (b.opp ? "A player away for more than 10 seconds loses the battle." : "The battle server could not be reached.") + " Check the connection and try again.</p></section>" +
+      '<div class="pn-navrow"><button type="button" class="pn-btn" data-act="back">Back</button><button type="button" class="pn-btn pri" data-act="a-again">Try again</button></div>';
+    else if (b.phase === "match") body = versus(b) + '<section class="pn-panel pn-score" role="status"><p class="pn-mid">' + (b.resumed ? "Back in the battle" : "Matched") + '</p><p class="pn-mut">' + b.n + " questions, " + b.secs + " seconds each. Faster right answers score more.</p></section>";
     else if (b.phase === "q" || b.phase === "r") {
       var shown = b.phase === "r", now = Date.now(), total = Math.max(1, b.deadline - b.got), left = Math.max(0, b.deadline - now);
       body = versus(b) +
@@ -416,7 +462,8 @@
       if (!shown) A.bTimer = G.setInterval(function () { var el = root() && root().querySelector(".pn-tbar"); if (!el || !A.battle || A.battle.phase !== "q") { G.clearInterval(A.bTimer); A.bTimer = 0; return; } var l = Math.max(0, A.battle.deadline - Date.now()); el.setAttribute("aria-label", Math.ceil(l / 1000) + " seconds left"); el.classList.toggle("low", l < 5000); }, 500);
     } else if (b.phase === "end") {
       var head = b.result === "win" ? "You won" : b.result === "loss" ? "You lost" : "A draw", rt = b.rating;
-      body = versus(b) + '<section class="pn-panel pn-score pn-final ' + b.result + '"><p class="pn-big">' + head + '</p><p class="pn-final-s">' + b.score[0] + " to " + b.score[1] + "</p>" +
+      var why = b.forfeit === "opp" ? esc(b.opp.name) + " left the battle." : b.forfeit === "you" ? "You were away for more than 10 seconds." : b.forfeit === "both" ? "Both players left, so it is a draw." : "";
+      body = versus(b) + '<section class="pn-panel pn-score pn-final ' + b.result + '"><p class="pn-big">' + head + '</p><p class="pn-final-s">' + b.score[0] + " to " + b.score[1] + "</p>" + (why ? '<p class="pn-mut">' + why + "</p>" : "") +
         (rt ? '<p class="pn-mut">Rating ' + rt.before + " to <b>" + rt.after + "</b> (" + signed(rt.after - rt.before) + ")</p>" : "") + "</section>" +
         '<div class="pn-navrow"><button type="button" class="pn-btn" data-act="back">Done</button><button type="button" class="pn-btn pri" data-act="a-again">Play again</button></div>';
     }
@@ -451,13 +498,19 @@
       return api("GET", "me/stats").then(function (j) { put(arenaStatsHtml(j)); });
     }).then(null, function (e) { put('<p class="pn-err" role="alert">' + esc(errText(e)) + "</p>"); });
   }
+  // me/stats: { player: { rating, battles, wins }, events: [{ kind, score, right, wrong, blank, at }], battles: [{ opp,
+  // score, result, rating, endedAt }] (latest 60), trend }. Losses and draws come from the listed battles.
   function arenaStatsHtml(j) {
-    var bt = j.battles || j.record || {}, w = Number(bt.wins != null ? bt.wins : bt.w) || 0, l = Number(bt.losses != null ? bt.losses : bt.l) || 0, d = Number(bt.draws != null ? bt.draws : bt.d) || 0;
-    var evs = (j.events || []).slice(0, 20);
-    return '<section class="pn-panel pn-rec"><div><b>' + esc(String(j.rating != null ? j.rating : 1200)) + "</b><small>Battle rating</small></div><div><b>" + w + "</b><small>Won</small></div><div><b>" + l + "</b><small>Lost</small></div><div><b>" + d + "</b><small>Drawn</small></div></section>" +
-      (evs.length ? '<ul class="pn-mods">' + evs.map(function (e) {
-        var dt = new Date(ms(e.at || e.submitted_at || e.starts_at)), ds = ""; try { ds = dt.toLocaleDateString("en-IN", { day: "numeric", month: "short" }); } catch (x) {}
-        return '<li><div class="pn-mod static"><span class="pn-mb"><b>' + (e.kind === "weekly" ? "Weekly grand test" : "Daily sprint") + "</b><small>" + esc(ds) + (e.rank ? " · rank " + H.fmt(e.rank) + (e.of ? " of " + H.fmt(e.of) : "") : "") + '</small></span><span class="pn-st">' + esc(String(e.score != null ? e.score : "")) + "</span></div></li>";
+    var pl = j.player || {}, bl = j.battles || [], w = Number(pl.wins) || 0, d = bl.filter(function (x) { return x.result === "draw"; }).length;
+    var l = Math.max(0, (Number(pl.battles) || bl.length) - w - d), evs = (j.events || []).slice(0, 10);
+    var day = function (t) { try { return new Date(ms(t)).toLocaleDateString("en-IN", { day: "numeric", month: "short" }); } catch (x) { return ""; } };
+    return '<section class="pn-panel pn-rec"><div><b>' + esc(String(pl.rating != null ? pl.rating : 1200)) + "</b><small>Battle rating</small></div><div><b>" + w + "</b><small>Won</small></div><div><b>" + l + "</b><small>Lost</small></div><div><b>" + d + "</b><small>Drawn</small></div></section>" +
+      (bl.length ? '<h2 class="pn-sec">Recent battles</h2><ul class="pn-mods">' + bl.slice(0, 5).map(function (x) {
+        var sc = x.score || [0, 0];
+        return '<li><div class="pn-mod static"><span class="pn-mb"><b>vs ' + esc(String(x.opp || "Former player").slice(0, 40)) + "</b><small>" + esc(day(x.endedAt)) + " · " + sc[0] + " to " + sc[1] + (x.rating != null ? " · rating " + x.rating : "") + '</small></span><span class="pn-st' + (x.result === "win" ? " done" : "") + '">' + (x.result === "win" ? "Won" : x.result === "loss" ? "Lost" : "Draw") + "</span></div></li>";
+      }).join("") + "</ul>" : "") +
+      '<h2 class="pn-sec">Sprints and grand tests</h2>' + (evs.length ? '<ul class="pn-mods">' + evs.map(function (e) {
+        return '<li><div class="pn-mod static"><span class="pn-mb"><b>' + (e.kind === "weekly" ? "Weekly grand test" : "Daily sprint") + "</b><small>" + esc(day(e.at)) + (e.right != null ? " · " + e.right + " right, " + (e.wrong || 0) + " wrong" : "") + '</small></span><span class="pn-st">' + esc(String(e.score != null ? e.score : "")) + "</span></div></li>";
       }).join("") + "</ul>" : '<p class="pn-empty">Your sprints and grand tests are listed here.</p>') +
       '<button type="button" class="pn-link pn-danger" data-act="a-leave">' + H.ico("leave") + " Leave the Arena</button>";
   }
