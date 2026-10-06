@@ -267,8 +267,8 @@
     if (temp <= 36) { why.push("a low temperature (" + fx(temp, 1) + " C)"); whyH.push("कम तापमान (" + fx(temp, 1) + " C)"); }
     if (pco2 >= 50) { why.push("high CO2"); whyH.push("ज़्यादा CO2"); }
     if (pco2 <= 30) { why.push("low CO2"); whyH.push("कम CO2"); }
-    var right = p50 > 26.8;
-    return T((why.length ? why.join(" and ") : "pH and temperature") + " shift the oxygen curve " + (right ? "right" : "left") + " (P50 " + fx(p50) + " instead of 27). At PaO2 " + fx(pao2) + " the saturation is " + fx(sao2 * 100) + "%, where a normal curve gives " + fx(std) + "%." + (right ? " Blood gives oxygen to the tissues more easily." : " Blood holds on to oxygen more tightly."),
+    var right = p50 > 26.8, lead = why.length ? why.join(" and ") : "pH and temperature";
+    return T(lead.charAt(0).toUpperCase() + lead.slice(1) + " shift the oxygen curve " + (right ? "right" : "left") + " (P50 " + fx(p50) + " instead of 27). At PaO2 " + fx(pao2) + " the saturation is " + fx(sao2 * 100) + "%, where a normal curve gives " + fx(std) + "%." + (right ? " Blood gives oxygen to the tissues more easily." : " Blood holds on to oxygen more tightly."),
       (whyH.length ? whyH.join(" और ") : "pH और तापमान") + " oxygen curve को " + (right ? "दाईं" : "बाईं") + " ओर खिसकाते हैं (P50 27 की जगह " + fx(p50) + ")। PaO2 " + fx(pao2) + " पर saturation " + fx(sao2 * 100) + "% है, जहाँ सामान्य curve " + fx(std) + "% देती है।" + (right ? " ख़ून tissues को oxygen आसानी से देता है।" : " ख़ून oxygen को कसकर पकड़े रहता है।"));
   }
   function content(po2, hb, ph, temp, pco2) { return 1.34 * hb * sat(po2, ph, temp, pco2) + 0.003 * po2; }
@@ -1140,7 +1140,7 @@
     bag: T("If the patient is unstable or you are unsure: take the patient off the ventilator and hand bag with 100% oxygen.", "मरीज़ unstable हो या आप पक्के न हों: ventilator हटाकर 100% oxygen से हाथ से bag करें।"),
     senior: T("Call your senior and say: patient, alarm, numbers, what you have done (SBAR).", "Senior को बुलाएँ और बताएँ: मरीज़, alarm, संख्याएँ, आपने क्या किया (SBAR)।"),
     noLimit: T("Do not raise the alarm limit to stop the sound: that hides the problem, it does not treat the patient.", "आवाज़ बंद करने के लिए alarm limit न बढ़ाएँ: इससे समस्या छिपती है, मरीज़ का इलाज नहीं होता।"),
-    peakPlat: T("Check the plateau with an inspiratory hold. High peak with a normal plateau: the airway (secretions, bitten or kinked tube, bronchospasm). Both high: the lung or chest (pneumothorax, stiff lung).", "Inspiratory hold से plateau देखें। Peak ज़्यादा और plateau सामान्य: airway (secretions, दबी या मुड़ी tube, bronchospasm)। दोनों ज़्यादा: फेफड़ा या छाती (pneumothorax, सख़्त फेफड़ा)।"),
+    peakPlat: T("Do an inspiratory hold: a normal plateau points to the airway, a high one to the lung or chest.", "Inspiratory hold करें: plateau सामान्य हो तो airway, ज़्यादा हो तो फेफड़ा या छाती।"),
     lowerVt: T("Lower VT toward 6 mL/kg predicted body weight; raise the rate to hold pH.", "VT को 6 mL/kg predicted body weight की ओर घटाएँ; pH बनाए रखने को rate बढ़ाएँ।"),
     breathing: T("Is the patient breathing? Check sedation and the drive to breathe. Missing breaths need a mode with a set rate.", "क्या मरीज़ साँस ले रहा है? Sedation और साँस की drive देखें। साँसें छूट रही हों तो तय rate वाला mode चाहिए।"),
     agitation: T("Look for pain, agitation, hypoxia, fever or a full bladder. Treat the cause before you sedate.", "दर्द, बेचैनी, hypoxia, बुख़ार या भरा bladder देखें। Sedation से पहले कारण का इलाज करें।"),
@@ -1252,6 +1252,8 @@
   /* ---------- explanations ---------- */
   function fx(x, d) { return String(d ? Math.round(x * Math.pow(10, d)) / Math.pow(10, d) : Math.round(x)); }
   function metOf(s) { return s.p.hco3 - (s.lac - s.p.lac0); } // metabolic bicarbonate, before acute CO2 buffering
+  /* A line "from X to Y" where the rounded X and Y are equal says nothing: drop it. */
+  function noChange(t) { var m, re = /from (-?[\d.]+)%? to (-?[\d.]+)/g; while ((m = re.exec(t.en))) if (m[1] === m[2]) return true; return false; }
   function explainDelta(abgB, abgA, sB, sA, stB, stA) {
     var B = model(stB, sB || stB.settings), A = model(stA, sA || stA.settings), out = [];
     var CH = ["setting", "ventilator", "mechanics", "gasExchange", "abg"];
@@ -1266,6 +1268,7 @@
         if (Math.abs(A.vdvt - B.vdvt) >= 0.03) why.push(T("Dead space fraction went from " + fx(B.vdvt, 2) + " to " + fx(A.vdvt, 2) + ".", "Dead space fraction " + fx(B.vdvt, 2) + " से " + fx(A.vdvt, 2) + " हुआ।"));
       }
       if ((dir === "up" && A.vco2 > B.vco2 * 1.03) || (dir === "down" && A.vco2 < B.vco2 * 0.97)) why.push(T("CO2 production changed from " + fx(B.vco2) + " to " + fx(A.vco2) + " mL/min.", "CO2 production " + fx(B.vco2) + " से " + fx(A.vco2) + " mL/min हुआ।"));
+      why = why.filter(function (w) { return !noChange(w); });
       if (!why.length) why.push(dir === "up" ? T("PaCO2 is still rising toward its new steady state. Body CO2 stores fill over minutes.", "PaCO2 अभी नए steady state की ओर बढ़ रहा है। शरीर के CO2 stores मिनटों में भरते हैं।")
         : T("PaCO2 is still falling toward its new steady state. Body CO2 stores empty over minutes.", "PaCO2 अभी नए steady state की ओर गिर रहा है। शरीर के CO2 stores मिनटों में खाली होते हैं।"));
       for (var i = 0; i < why.length; i++) out.push({ param: "PaCO2", direction: dir, because: why[i], chain: CH.slice() });
@@ -1276,7 +1279,7 @@
       var dirO = dO > 0 ? "up" : "down";
       var base = { hb: stB.p.hb, ph: B.ph, temp: B.temp, paco2: B.paco2, pao2A: B.PAtarget, shunt: B.shunt, lowvq: stB.p.lowvq, vqr: stB.p.vqr, va: B.va, co: B.co, vo2: B.vo2 };
       var p0 = oxy(base).pao2, terms = [], k;
-      var tryT = function (id, ch, txt) { var o = clone(base), x; for (x in ch) if (own(ch, x)) o[x] = ch[x]; terms.push({ id: id, eff: oxy(o).pao2 - p0, txt: txt }); };
+      var tryT = function (id, ch, txt) { var o = clone(base), x; for (x in ch) if (own(ch, x)) o[x] = ch[x]; if (!noChange(txt)) terms.push({ id: id, eff: oxy(o).pao2 - p0, txt: txt }); };
       tryT("fio2", { pao2A: Math.max(0, A.fio2 * (PATM - PH2O) - B.paco2 / RQ) }, T("FiO2 went from " + fx(B.fio2 * 100) + " to " + fx(A.fio2 * 100) + "%, so alveolar PO2 changed from " + fx(B.PAtarget) + " to " + fx(A.PAtarget) + " mmHg.",
         "FiO2 " + fx(B.fio2 * 100) + " से " + fx(A.fio2 * 100) + "% हुआ, इसलिए alveolar PO2 " + fx(B.PAtarget) + " से " + fx(A.PAtarget) + " mmHg हुआ।"));
       tryT("shunt", { shunt: A.shunt }, T("Shunt went from " + fx(B.shunt * 100) + "% to " + fx(A.shunt * 100) + "% as lung " + (A.shunt < B.shunt ? "recruited" : "collapsed") + ".",
@@ -1293,7 +1296,7 @@
         : T("PaO2 is still falling. The oxygen held in the lungs runs down over a few minutes.", "PaO2 अभी गिर रहा है। फेफड़ों में रखी oxygen कुछ मिनटों में घटती है।"), chain: CH.slice() });
       // SaO2 can move against PaO2 when pH or temperature shift the curve (Bohr effect); say so instead of contradicting
       var dS = abgA.SaO2 - abgB.SaO2;
-      if (Math.abs(dS) >= 1 && (dS > 0) !== (dO > 0)) out.push({ param: "SaO2", direction: dS > 0 ? "up" : "down", because: T("SaO2 moved the other way to PaO2: pH went from " + fx(B.ph, 2) + " to " + fx(A.ph, 2) + " and shifted the oxygen curve.", "SaO2 PaO2 से उल्टी दिशा में गया: pH " + fx(B.ph, 2) + " से " + fx(A.ph, 2) + " हुआ और oxygen curve खिसकी।"), chain: ["gasExchange", "abg"] });
+      if (Math.abs(dS) >= 1 && (dS > 0) !== (dO > 0) && fx(B.ph, 2) !== fx(A.ph, 2)) out.push({ param: "SaO2", direction: dS > 0 ? "up" : "down", because: T("SaO2 moved the other way to PaO2: pH went from " + fx(B.ph, 2) + " to " + fx(A.ph, 2) + " and shifted the oxygen curve.", "SaO2 PaO2 से उल्टी दिशा में गया: pH " + fx(B.ph, 2) + " से " + fx(A.ph, 2) + " हुआ और oxygen curve खिसकी।"), chain: ["gasExchange", "abg"] });
     }
     // pH: from the actual signed changes of PaCO2 and of the metabolic bicarbonate (A6)
     var dH = abgA.pH - abgB.pH;
@@ -1301,6 +1304,7 @@
       var dirH = dH > 0 ? "up" : "down", hb = [], mB = metOf(stB), mA = metOf(stA), dM = mA - mB;
       if (Math.abs(dC) >= 1 && (dC > 0) !== (dH > 0)) hb.push(T("PaCO2 " + (dC > 0 ? "rose" : "fell") + " from " + abgB.PaCO2 + " to " + abgA.PaCO2 + ", so pH " + (dH > 0 ? "rose" : "fell") + " (Henderson-Hasselbalch).", "PaCO2 " + abgB.PaCO2 + " से " + abgA.PaCO2 + " हुआ, इसलिए pH " + (dH > 0 ? "बढ़ा" : "घटा") + " (Henderson-Hasselbalch)।"));
       if (Math.abs(dM) >= 1 && (dM > 0) === (dH > 0)) hb.push(T("Metabolic bicarbonate went from " + fx(mB, 1) + " to " + fx(mA, 1) + (dM < 0 && stA.lac > stB.lac + 0.5 ? " as lactate rose." : "."), "Metabolic bicarbonate " + fx(mB, 1) + " से " + fx(mA, 1) + " हुआ" + (dM < 0 && stA.lac > stB.lac + 0.5 ? ", क्योंकि lactate बढ़ा।" : "।")));
+      hb = hb.filter(function (w) { return !noChange(w); });
       if (!hb.length) hb.push(T("pH follows the PaCO2 to HCO3 ratio.", "pH, PaCO2 और HCO3 के अनुपात से चलता है।"));
       for (k = 0; k < hb.length; k++) out.push({ param: "pH", direction: dirH, because: hb[k], chain: CH.slice() });
     }

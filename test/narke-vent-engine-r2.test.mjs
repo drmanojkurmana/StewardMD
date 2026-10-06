@@ -120,7 +120,7 @@ test("E4: pneumonia's SaO2 90 at PaO2 78 is the Bohr and fever shift, and the ga
   assert.equal(a.PaO2, 78); assert.equal(a.SaO2, 90); assert.equal(r.vitals.spo2, a.SaO2, "SpO2 and SaO2 agree");
   assert.ok(a.P50 > 31 && a.P50 < 36, "right shifted P50 " + a.P50);
   assert.ok(bi(a.curveNote), "curve note in en and hi");
-  assert.match(a.curveNote.en, /acid blood \(pH 7\.23\) and fever \(39 C\) shift the oxygen curve right/);
+  assert.match(a.curveNote.en, /Acid blood \(pH 7\.23\) and fever \(39 C\) shift the oxygen curve right/);
   assert.match(a.curveNote.en, /a normal curve gives 95%/);
   assert.equal(r.gas.p50, a.P50);
   const n = E.init(quiet("postop-normal"));
@@ -265,4 +265,60 @@ test("E8: a tutorial run is scored as practice and does not count toward the bes
   assert.equal(x.practice, true); assert.equal(x.countsForBest, false);
   assert.ok(/Practice run/.test(x.notes[0].en) && bi(x.notes[0]));
   assert.equal(y.practice, false); assert.equal(y.countsForBest, true);
+});
+
+// Round 3 engine copy fixes.
+test("R3: curveNote reads as a sentence in both languages", () => {
+  const m = E.abg(E.init(quiet("pneumonia"))).curveNote;
+  assert.ok(m, "acid blood and fever shift the curve");
+  assert.ok(/^[A-Z]/.test(m.en), m.en); assert.ok(/[.]$/.test(m.en)); assert.ok(bi(m));
+});
+
+test("R3: explainDelta never says a quantity went from X to the same X", () => {
+  const re = /from (-?[\d.]+)%? to (-?[\d.]+)/g;
+  for (const id of ["ards", "copd", "postop-normal", "neuromuscular-gbs"]) {
+    let a = E.init(quiet(id)); const st = Object.assign({}, a.settings);
+    a = E.step(a, st, 600);
+    for (const ch of [{ key: "fio2", to: 100 }, { key: "peep", to: 14 }, { key: "rr", to: 26 }, { key: "vt", to: 300 }]) {
+      const w = E.whatIf(a, st, ch);
+      for (const x of w.because) { let m; re.lastIndex = 0; while ((m = re.exec(x.because.en))) assert.notEqual(m[1], m[2], id + " " + x.because.en); }
+    }
+  }
+  const a = E.init(quiet("ards")), st = Object.assign({}, a.settings), b = E.step(a, st, 600);
+  assert.equal(E.explainDelta(E.abg(b), E.abg(b), st, st, b, b).length, 0);
+});
+
+test("R3: every bilingual text the engine and scenarios emit has en and hi", () => {
+  const bad = [];
+  const walk = (x, p) => {
+    if (Array.isArray(x)) x.forEach((v) => walk(v, p));
+    else if (x && typeof x === "object") {
+      if ("en" in x || "hi" in x) {
+        const nameOnly = !/ /.test(x.en || "") && x.en === x.hi; // a bare name such as "pH" is the same in both
+        if (!(typeof x.en === "string" && x.en.trim() && typeof x.hi === "string" && x.hi.trim()) || (!nameOnly && !/[ऀ-ॿ]/.test(x.hi))) bad.push(p + " " + JSON.stringify(x).slice(0, 120));
+      }
+      for (const k in x) walk(x[k], p + "." + k);
+    }
+  };
+  const ids = ["pPeakHigh", "pPlatHigh", "vtLow", "veLow", "veHigh", "apnoea", "rrHigh", "fio2Low", "fio2High", "peepLow", "peepHigh", "disconnect", "autoPeep", "dyssync", "peepSetHigh", "spo2Low", "mapLow", "hrHigh", "hrLow", "etco2High"];
+  for (const sc0 of S.scenarios) {
+    walk(sc0, sc0.id + ".scenario");
+    let s = E.init(JSON.parse(JSON.stringify(sc0))), prev = s; const st = Object.assign({}, s.settings);
+    for (let i = 0; i < 40; i++) {
+      s = E.step(s, st, 120);
+      walk(E.readout(s, st), sc0.id + ".readout"); walk(E.abg(s), sc0.id + ".abg"); walk(E.alarms(s, st), sc0.id + ".alarms");
+      walk(E.whyDrift(prev, s), sc0.id + ".drift"); walk(E.suggestActions(s, E.alarms(s, st)), sc0.id + ".sug"); prev = s;
+    }
+    for (const id of ids) walk(E.alarmPlan(s, id, st), sc0.id + ".plan." + id);
+    for (const [key, to] of [["fio2", 100], ["peep", 14], ["vt", 300], ["rr", 28]]) walk(E.whatIf(s, st, { key, to }), sc0.id + ".whatif." + key);
+  }
+  assert.deepEqual(bad, []);
+});
+
+test("R3: the pPeakHigh hold step is one short line", () => {
+  const s = E.init(quiet("postop-normal")), p = E.alarmPlan(s, "pPeakHigh", s.settings);
+  const hold = p.checklist[2];
+  assert.equal(hold.id, "peakPlat");
+  assert.ok(hold.text.en.length <= 100, hold.text.en.length + " " + hold.text.en);
+  assert.ok(!/[–—]/.test(hold.text.en + hold.text.hi) && bi(hold.text));
 });
