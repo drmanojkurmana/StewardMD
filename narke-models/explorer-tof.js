@@ -72,7 +72,7 @@
       if (id === "intense") return { ok: true, action: "wait-or-immediate", plan: sug(SUG.immediate),
         text: T("Wait for PTC to return. Sugammadex 16 mg/kg is only for immediate reversal soon after rocuronium 1.2 mg/kg.", "PTC लौटने तक रुकें। Sugammadex 16 mg/kg केवल rocuronium 1.2 mg/kg के तुरंत बाद immediate reversal के लिए है।") };
       if (id === "deep") return { ok: true, action: "sugammadex", plan: sug(SUG.deep), text: T("Sugammadex 4 mg/kg. Neostigmine does not work at this depth.", "Sugammadex 4 mg/kg। इस depth पर neostigmine काम नहीं करता।") };
-      if (id === "moderate") return { ok: true, action: "sugammadex", plan: sug(count >= 2 ? SUG.shallow : SUG.deep), text: T("TOF count 1: sugammadex 4 mg/kg (2 mg/kg only once T2 has reappeared).", "TOF count 1: sugammadex 4 mg/kg (2 mg/kg केवल T2 लौटने पर)।") };
+      if (id === "moderate") return { ok: true, action: "sugammadex", plan: sug(count >= 2 ? SUG.shallow : SUG.deep), text: count >= 2 ? T("TOF count 2 or 3: sugammadex 2 mg/kg.", "TOF count 2 या 3: sugammadex 2 mg/kg।") : T("TOF count 1: sugammadex 4 mg/kg (2 mg/kg only once T2 has reappeared).", "TOF count 1: sugammadex 4 mg/kg (2 mg/kg केवल T2 लौटने पर)।") };
       if (id === "shallow") return { ok: true, action: "sugammadex", plan: sug(SUG.shallow), text: T("Sugammadex 2 mg/kg once T2 has reappeared. Prefer it to neostigmine at this depth.", "T2 लौटने पर sugammadex 2 mg/kg। इस depth पर इसे neostigmine से बेहतर मानें।") };
       return { ok: true, action: "either", plan: sug(SUG.shallow), alt: neo(), text: T("Sugammadex 2 mg/kg, or neostigmine as a reasonable alternative at this minimal depth.", "Sugammadex 2 mg/kg, या इस minimal depth पर neostigmine एक उचित विकल्प।") };
     }
