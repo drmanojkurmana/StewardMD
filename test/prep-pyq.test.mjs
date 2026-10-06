@@ -288,3 +288,25 @@ test("explain retry: rejected items get one more try with the reason fed back; s
   assert.equal(by["pyq-fx-2099-r1-2"].rv.redo, true);
   fs.rmSync(root, { recursive: true, force: true }); fs.rmSync(cfgRoot, { recursive: true, force: true });
 });
+
+test("compilation layouts: num (explanation lists are not questions, ordinal numbers), aipg17 answer variants, qno blocks", () => {
+  const n = parsePaper(read("num.txt"), "num");
+  assert.deepEqual(n.items.map((x) => [x.n, x.a, x.o[0]]), [[1, 0, "Alpha bone"], [2, 2, "Level one"]], "printed numbers restart; ids follow the answer count");
+  assert.deepEqual(n.fails, [{ n: 3, why: "only 3 options in the source" }], "an explanation list is dropped, not reported");
+  assert.ok(!n.items.some((x) => /explanation|dropped/.test(x.q + x.o.join(" "))), "no publisher explanation in an item");
+  const a = parsePaper(read("aipg17.txt"), "aipg17");
+  assert.deepEqual(a.items.map((x) => [x.n, x.a]), [[1, 1], [2, 2], [3, 0]], "'Answer - B. text', 'Ans. C.text', 'Answer: Option A - text'");
+  const q = parsePaper(read("qno.txt"), { ...FORMATS.qno, mark: "SampleMark" });
+  assert.deepEqual(q.items.map((x) => [x.n, x.subject, x.topic || null, x.a]), [[1, "anatomy", "Fixture Topic", 2], [2, "pharmacology", null, 3]]);
+  assert.deepEqual(q.items[0].o, ["Upper gyrus", "Lower gyrus", "Middle gyrus", "Back gyrus"], "O4 with its text after blank lines; shreds gone");
+  assert.equal(q.items[0].q, "Which made-up gyrus holds the fixture area?");
+});
+
+test("images in an ordinal layout wait for an option line and go to the next answer's question", () => {
+  const ev = [
+    { kind: "text", text: "1. Which made-up bone?" }, { kind: "image", src: "q1.png" }, { kind: "text", text: "a) Alpha" }, { kind: "text", text: "Correct Answer - A" },
+    { kind: "text", text: "1. First listed thing" }, { kind: "image", src: "explain.png" },
+    { kind: "text", text: "1. Which invented level?" }, { kind: "text", text: "a) Level one" }, { kind: "image", src: "q2.png" }, { kind: "text", text: "Correct Answer - C" },
+  ];
+  assert.deepEqual([...attachImages(ev, "num").entries()], [[1, ["q1.png"]], [2, ["q2.png"]]]);
+});

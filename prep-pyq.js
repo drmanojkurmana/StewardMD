@@ -10,7 +10,9 @@
    enlarge (tap again for 2.2x; back or Escape closes). */
 (function (G) {
   "use strict";
-  var EXAM_LABEL = { "neet-pg": "NEET-PG", "ini-cet": "INI-CET", "neet-ss": "NEET-SS", usmle: "USMLE" };
+  var EXAM_LABEL = { "neet-pg": "NEET-PG", aipgmee: "AIPGMEE", "ini-cet": "INI-CET", "neet-ss": "NEET-SS", usmle: "USMLE" };
+  // AIPGMEE was the all-India PG entrance before NEET-PG (2017 session onwards): its papers sit on the NEET-PG tab.
+  var PG = { "neet-pg": 1, aipgmee: 1 };
 
   /* ================= pure ================= */
   // [exam, year, kind] or { exam, year, kind } -> one line per exam and kind: "Asked in NEET-PG 2025, 2024 (recall)".
@@ -101,14 +103,14 @@
     return host.row("y-home", icon(), "Previous year papers", "NEET-PG recall papers by year, timed or practice");
   }
 
-  var NOTE = '<section class="pn-yq-note" aria-label="About these papers"><span class="pn-yq-ni">' + svg("info", 18) + "</span><p><b>Recall papers, not official ones.</b> NBEMS does not publish NEET-PG papers. These were put together from memory after each exam, so wording and options can differ from the real paper. Questions whose answer key is unclear or whose image is missing are held back.</p></section>";
+  var NOTE = '<section class="pn-yq-note" aria-label="About these papers"><span class="pn-yq-ni">' + svg("info", 18) + "</span><p><b>Recall papers, not official ones.</b> NBEMS does not publish NEET-PG papers, and AIPGMEE papers were not published either. These were put together from memory after each exam, so wording and options can differ from the real paper. Questions whose answer key is unclear or whose image is missing are held back.</p></section>";
   function renderPapers(host) {
     var esc = host.esc;
-    host.paint(host.bar("Previous year papers", "NEET-PG · recall", "back") + '<div class="pn-body" id="pnYq">' + NOTE + '<p class="pn-load" role="status">Loading papers</p></div>');
+    host.paint(host.bar("Previous year papers", "NEET-PG and AIPGMEE · recall", "back") + '<div class="pn-body" id="pnYq">' + NOTE + '<p class="pn-load" role="status">Loading papers</p></div>');
     Promise.all([loadIndex(host), loadItems(host)]).then(function (r) {
       var box = host.root() && host.root().querySelector("#pnYq"); if (!box) return;
       var ix = r[0], items = r[1], hid = hiddenOf(host), years = {}, html = "";
-      ix.papers.filter(function (p) { return p.exam === "neet-pg"; }).forEach(function (p) { (years[p.year] = years[p.year] || []).push(p); });
+      ix.papers.filter(function (p) { return PG[p.exam]; }).forEach(function (p) { (years[p.year] = years[p.year] || []).push(p); });
       var ys = Object.keys(years).sort(function (a, b) { return b - a; });
       if (!ys.length) { box.innerHTML = NOTE + '<p class="pn-empty">No previous year papers for this exam yet.</p>'; return; }
       ys.forEach(function (y) {
@@ -131,14 +133,15 @@
     (P.ix ? P.ix.papers : []).forEach(function (x) { if (x.id === pid) p = x; });
     if (!p || !P.items) return;
     var list = paperItems(P.items, pid), hid = hiddenOf(host), ok = list.filter(function (it) { return usable(it, hid); });
-    var held = list.length - ok.length, mock = mockFor(host, "neet-pg"), sc = paperScheme(mock, ok.length), subj = bySubject(ok);
+    // a compilation bigger than the real paper is timed as one real-size paper drawn at random from it
+    var held = list.length - ok.length, mock = mockFor(host, "neet-pg"), tn = Math.min(ok.length, mock.n), sc = paperScheme(mock, tn), subj = bySubject(ok);
     var subs = Object.keys(subj).sort(function (a, b) { return subj[b] - subj[a]; }).map(function (sid) {
       var sb = host.subjectById(sid);
       return '<li><span class="pn-yq-sn">' + (sb ? host.tx(sb.name) : "Not sorted yet") + '</span><span class="pn-st">' + subj[sid] + "</span></li>";
     }).join("");
     host.paint(host.bar(esc(paperTitle(p)), "Recall paper", "back") + '<div class="pn-body"><section class="pn-panel">' +
       '<p class="pn-big">' + host.fmt(ok.length) + ' questions</p><p class="pn-mut">' + (held ? held + " held back (unclear key or missing image) · " : "") + "memory-based recall</p>" +
-      '<button type="button" class="pn-btn pri" data-act="y-start" data-v="' + esc(pid) + '" data-k="exam"' + (ok.length ? "" : " disabled") + ">" + host.ico("clock") + " Timed test: " + fmtMin(Math.round(sc.limit / 60)) + ", +" + mock.plus + " / −" + fmtMark(mock.minus) + "</button>" +
+      '<button type="button" class="pn-btn pri" data-act="y-start" data-v="' + esc(pid) + '" data-k="exam"' + (ok.length ? "" : " disabled") + ">" + host.ico("clock") + " Timed test: " + (tn < ok.length ? tn + " random questions, " : "") + fmtMin(Math.round(sc.limit / 60)) + ", +" + mock.plus + " / −" + fmtMark(mock.minus) + "</button>" +
       '<button type="button" class="pn-btn" data-act="y-start" data-v="' + esc(pid) + '" data-k="study"' + (ok.length ? "" : " disabled") + ">" + host.ico("play") + " Practice in paper order</button>" +
       '<p class="pn-mut pn-small">The timed test uses the ' + esc(mock.label) + " (" + mock.n + " questions in " + fmtMin(mock.min) + "), scaled to this paper. Practice shows each answer with its explanation.</p></section>" +
       (subs ? '<h2 class="pn-sec">By subject</h2><ul class="pn-yq-subs">' + subs + "</ul>" : "") + "</div>");
@@ -148,7 +151,10 @@
     var hid = hiddenOf(host), ok = paperItems(P.items, pid).filter(function (it) { return usable(it, hid); });
     if (!p || !ok.length) return host.toast("This paper has no questions to show yet.");
     var title = paperTitle(p) + " (recall)";
-    if (kind === "exam") { var sc = paperScheme(mockFor(host, "neet-pg"), ok.length); return host.run(ok.slice(), "exam", title, { limit: sc.limit, scheme: { plus: sc.plus, minus: sc.minus, label: sc.label } }); }
+    if (kind === "exam") {
+      var mock = mockFor(host, "neet-pg"), pick = ok.length > mock.n ? host.shuffle(ok.slice()).slice(0, mock.n) : ok.slice(), sc = paperScheme(mock, pick.length);
+      return host.run(pick, "exam", title, { limit: sc.limit, scheme: { plus: sc.plus, minus: sc.minus, label: sc.label } });
+    }
     host.run(ok.slice(), "study", title);
   }
 

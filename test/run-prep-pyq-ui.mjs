@@ -84,9 +84,10 @@ try {
 
   // ---- papers list
   await click("#smdPrep [data-act=y-home]");
-  ok(await until(`return document.querySelectorAll("#smdPrep .pn-yq-row").length === 2;`, 8000), "the papers screen lists both fixture papers");
-  ok(/not official/i.test(await text("#smdPrep .pn-yq-note")) && /NBEMS does not publish/.test(await text("#smdPrep .pn-yq-note")), "the screen says these are recalls, not official papers");
-  ok(await ev(`return Array.from(document.querySelectorAll("#smdPrep #pnYq .pn-sec")).map(function(h){return h.textContent;}).join(",")==="2025,2024";`) === true, "years newest first");
+  ok(await until(`return document.querySelectorAll("#smdPrep .pn-yq-row").length === 3;`, 8000), "the papers screen lists the three fixture papers (an AIPGMEE one on the NEET-PG tab)");
+  ok(/not official/i.test(await text("#smdPrep .pn-yq-note")) && /NBEMS does not publish/.test(await text("#smdPrep .pn-yq-note")) && /AIPGMEE/.test(await text("#smdPrep .pn-yq-note")), "the screen says these are recalls, not official papers");
+  ok(await ev(`return Array.from(document.querySelectorAll("#smdPrep #pnYq .pn-sec")).map(function(h){return h.textContent;}).join(",")==="2025,2024,2013";`) === true, "years newest first");
+  ok(/AIPGMEE 2013/.test(await text(`#smdPrep [data-act=y-paper][data-v=fx-2013-r1]`)), "a pre-2017 paper is named AIPGMEE");
   const r25 = await text(`#smdPrep [data-act=y-paper][data-v=fx-2025-r1]`);
   ok(/NEET-PG 2025/.test(r25) && /3 questions/.test(r25) && /1 with images/.test(r25) && /Recall/.test(r25), "2025 row: title, 3 usable questions (the flagged one left out), 1 with an image, Recall label: " + r25);
   ok(/Shift 1/.test(await text(`#smdPrep [data-act=y-paper][data-v=fx-2024-s1]`)), "the 2024 row names its shift");
@@ -179,8 +180,8 @@ try {
   ok(await ev(`var q=document.querySelector("#smdPrep .pn-q").textContent; var t=document.querySelector("#smdPrep .pn-yq-tags"); return /question 1 of/.test(q) ? !!t : !t;`) === true, "only the tagged item carries a chip in ordinary practice");
 
   // ---- offline copy, network, errors
-  ok(await evA(`PREP._host.cacheGet("pyq/index.json").then(function(f){ return !!(f && f.papers && f.papers.length===2); })`) === true, "the PYQ index is kept in IndexedDB");
-  ok(await evA(`PREP._host.cacheGet("pyq/items-0f0f0f01.json").then(function(f){ return !!(f && f.items && f.items.length===5); })`) === true, "the PYQ items are kept in IndexedDB");
+  ok(await evA(`PREP._host.cacheGet("pyq/index.json").then(function(f){ return !!(f && f.papers && f.papers.length===3); })`) === true, "the PYQ index is kept in IndexedDB");
+  ok(await evA(`PREP._host.cacheGet("pyq/items-0f0f0f01.json").then(function(f){ return !!(f && f.items && f.items.length===6); })`) === true, "the PYQ items are kept in IndexedDB");
   ok(reqs.some((u) => /\/prep-pyq\.js\?v=prep5/.test(u)), "prep-pyq.js loads at the current token");
   ok(!reqs.some((u) => /\/api\/(ai|prep\/bank)/.test(u)), "no request to /api/ai or the live bank");
   await ev(`PREP.close(); return 1;`);

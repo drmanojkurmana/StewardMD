@@ -123,6 +123,29 @@ export const FORMATS = {
 };
 // Option identity: normText drops arrows, so "↑P, ↓E" and "↓P, ↑E" would look the same.
 export const optKey = (s) => normText(String(s).replace(/&/g, " and ").replace(/↑/g, " up ").replace(/↓/g, " down ").replace(/→/g, " to ").replace(/\+(?=\s*\d)/g, " plus ").replace(/[-\u2013\u2212](?=\s*\d)/g, " minus "));
+// Compilations with explanations (2012-2016, 2020): "N. stem", "a) .. d)", "Correct Answer - X", then the publisher's
+// explanation (dropped), whose numbered lists look like question lines. ordinal: the question number is the count of
+// answer lines (the printed numbers restart per subject); optionless: a "numbered" block with no options and no answer
+// is an explanation list, not a failed question.
+FORMATS.num = {
+  q: /^\s*(\d{1,4})\.\s+(\S.*)$/, opt: /^\s*([a-dA-D])\)\s*(.*)$/, ans: /^\s*Correct Answer\s*-\s*([A-Da-d])\b/, ansText: false,
+  header: () => null, noise: [/https?:\/\/|www\./i], stop: null, mark: null, ordinal: true, optionless: true,
+  xq: /^\s*\d{1,4}\.\s+\S/, xa: /^\s*Correct Answer\s*-/, xo: /^\s*[aA]\)/,
+};
+// 2017 compilation: "Question N", options "A> .. D>" or "A. .. D.", answers "Answer - B", "Answer: Option A - text", "Ans. A.text";
+// the explanation is dropped. ordinal: the printed numbers repeat.
+FORMATS.aipg17 = {
+  q: /^\s*Question\s+(\d{1,4})\s*$/, opt: /^\s*([A-D])\s*[>.)]\s*(.*)$/, ans: /^\s*(?:Answer|Ans)\s*[-:.]?\s*(?:Option\s*[-:]?\s*)?([A-D])\b/, ansText: false,
+  header: () => null, noise: [/https?:\/\/|www\./i], stop: null, mark: null, optionless: true, ordinal: true,
+  xq: /^\s*Question\s+(\d{1,4})\s*$/, xa: /^\s*(?:Answer|Ans)\s*[-:.]?\s*(?:Option\s*[-:]?\s*)?[A-D]\b/, xo: /^\s*A\s*[>.)]/,
+};
+// Question-bank export (2018-2023): "Ques No: N", "Subject:", "Topic:", "Sub-Topic:" inside the block, "O1:" with the
+// option text on the next line(s), "Ans: 1"; a shredded diagonal watermark (its text comes from the config).
+FORMATS.qno = {
+  q: /^\s*Ques No\s*:\s*(\d{1,4})\s*(.*)$/, opt: /^\s*O([1-4])\s*:\s*(.*)$/, ans: /^\s*Ans\s*:\s*([1-4])\b/, ansText: false,
+  header: () => null, meta: /^\s*(Subject|Topic|Sub-Topic)\s*:\s*(.*)$/i, noise: [/https?:\/\/|www\./i], stop: null, mark: null,
+  xq: /^\s*Ques No\s*:\s*(\d{1,4})/, xa: /^\s*Ans\s*:/,
+};
 const LET = { A: 0, B: 1, C: 2, D: 3, 1: 0, 2: 1, 3: 2, 4: 3 };
 const words = (s) => String(s).trim().split(/\s+/).filter(Boolean).length;
 const join = (ls) => ls.map((l) => l.trim()).filter(Boolean).join(" ").replace(/\s+/g, " ").trim();
@@ -156,9 +179,11 @@ export function matchOption(ans, o) {
 export function parsePaper(text, format) {
   const F = typeof format === "string" ? FORMATS[format] : format;
   const out = [], fails = [], dropped = { captions: 0 };
-  let subject = null, topic = null, cur = null;
+  let subject = null, topic = null, cur = null, ord = 0;
   const finish = () => {
     if (!cur) return;
+    if (F.optionless && !cur.answered && !cur.lines.some((l) => F.opt.test(l))) { cur = null; return; }   // an explanation list
+    if (F.ordinal) cur.n = cur.answered ? ++ord : -1;
     const r = buildItem(cur, F, dropped);
     if (r.why) fails.push({ n: cur.n, why: r.why }); else out.push(r.item);
     cur = null;
@@ -169,13 +194,16 @@ export function parsePaper(text, format) {
     if (F.noise.some((re) => re.test(l))) continue;
     if (F.stop && F.stop.test(l)) { finish(); break; }
     const qm = F.q.exec(l);
-    if (qm) { finish(); cur = { n: Number(qm[1]), subject, topic, lines: [qm[2]] }; continue; }
+    if (qm) { finish(); cur = { n: Number(qm[1]), subject, topic, lines: [qm[2] || ""] }; continue; }
     if (l.trim() && (!cur || cur.answered)) {
       const h = F.header(l.trim());
       if (h) { subject = h; topic = null; if (cur) finish(); continue; }
       const tm = F.topic && F.topic.exec(l);
       if (tm) { topic = tm[1].trim(); if (cur) finish(); continue; }
     }
+    const mm = cur && !cur.answered && F.meta && F.meta.exec(l);
+    if (mm) { const k = mm[1].toLowerCase(), v = mm[2].trim(); if (k === "subject") cur.subject = subjectOf(v) || cur.subject; else if (k === "topic" && v) cur.topic = v; continue; }
+    // in ordinal formats a numbered line after an answer is the explanation's list until the next real stem
     if (cur) { cur.lines.push(l); if (F.ans.test(l)) cur.answered = true; }
   }
   finish();
@@ -206,7 +234,8 @@ function buildItem(cur, F, dropped) {
   const q = join(kept.flat()).replace(/^Q\.\s*/, "");
   const o = at.map((s, k) => {
     const end = k < 3 ? at[k + 1] : body.length, ls = [F.opt.exec(body[s])[2]];
-    for (let i = s + 1; i < end; i++) { if (!body[i].trim()) { if (k === 3) break; continue; } ls.push(body[i]); }
+    // D ends at the first blank line after its text ("O4:" may stand alone with its text a few lines down)
+    for (let i = s + 1; i < end; i++) { if (!body[i].trim()) { if (k === 3 && ls.some((x) => x.trim())) break; continue; } ls.push(body[i]); }
     return tidyOpt(ls.join(" "));
   });
   if (!q || q.length < 8) return { why: "empty stem" };
@@ -257,6 +286,21 @@ export function xmlEvents(xml) {
 export function attachImages(events, format, drop) {
   const F = typeof format === "string" ? FORMATS[format] : format;
   const out = new Map();
+  if (F.ordinal) {
+    // numbered lines also start explanation lists: images wait until an "a)" option confirms a real stem, and the
+    // question is the ordinal of the next answer line
+    let ord = 0, open = false, seenOpt = false, pend = [];
+    for (const e of events) {
+      if (e.kind === "text") {
+        if (F.xa.test(e.text)) { ord++; if (seenOpt && pend.length) out.set(ord, pend); open = false; seenOpt = false; pend = []; continue; }
+        if (F.xq.test(e.text)) { open = true; seenOpt = false; pend = []; continue; }
+        if (open && F.xo && F.xo.test(e.text)) seenOpt = true;
+        continue;
+      }
+      if (open && !(drop && drop(e.src))) pend.push(e.src);
+    }
+    return out;
+  }
   let open = null;
   for (const e of events) {
     if (e.kind === "text") {
@@ -271,7 +315,25 @@ export function attachImages(events, format, drop) {
   }
   return out;
 }
-function run(cmd, args) { const r = spawnSync(cmd, args, { encoding: "utf8" }); if (r.status !== 0) throw new Error(`${cmd} ${args.join(" ")}: ${(r.stderr || "").slice(0, 300)}`); return r.stdout; }
+function run(cmd, args) { const r = spawnSync(cmd, args, { encoding: "utf8", maxBuffer: 1 << 28 }); if (r.status !== 0) throw new Error(`${cmd} ${args.join(" ")}: ${(r.stderr || "").slice(0, 300)}`); return r.stdout; }
+/* ocrBlankPages(pdf, text, bin, dir) -> text with every near-empty page (under 40 visible characters, an image-only
+ * scan) replaced by macOS Vision OCR of that page at 200 dpi. Pages are rendered one at a time and deleted at once. */
+export function ocrBlankPages(pdf, text, bin, dir, log = () => {}) {
+  const pages = String(text).split("\f");
+  let n = 0;
+  fs.mkdirSync(dir, { recursive: true });
+  pages.forEach((pg, i) => {
+    if (pg.replace(/\s+/g, "").length >= 40 || i >= pages.length - 1 && !pg.trim()) return;
+    const base = path.join(dir, "ocr-page");
+    try {
+      run("pdftoppm", ["-r", "200", "-f", String(i + 1), "-l", String(i + 1), "-singlefile", "-png", pdf, base]);
+      const t = run(bin, [base + ".png"]).replace(/\f/g, "").trim();
+      if (t) { pages[i] = t; n++; }
+    } catch (e) { log(`OCR page ${i + 1}: ${e.message.slice(0, 80)}`); }
+    fs.rmSync(base + ".png", { force: true });
+  });
+  return { text: pages.join("\f"), ocrPages: n };
+}
 function pixelSize(file) {
   const o = run("sips", ["-g", "pixelWidth", "-g", "pixelHeight", file]);
   return { w: Number((/pixelWidth: (\d+)/.exec(o) || [])[1] || 0), h: Number((/pixelHeight: (\d+)/.exec(o) || [])[1] || 0) };
@@ -340,11 +402,17 @@ const keyText = (it) => normText(it.o[it.a]);
 /* mergePyq(items) -> merged list: a repeat (same question in two papers) is folded into the first with both sources in
  * pyq; keys that disagree flag dup-key; an image or subject the first lacks is taken from the repeat. */
 export function mergePyq(items) {
-  const kept = [], gs = [];
+  const kept = [], gs = [], post = new Map();
   let merged = 0;
   for (const it of items) {
     const g = grams(fullText(it));
-    const i = kept.findIndex((k, j) => sameQuestion(k, it, gs[j], g) >= NEAR);
+    // candidates share a rare stem or option word (a full scan is O(n^2) on 12k items)
+    const cnt = new Map();
+    for (const w of toks(it.q + " " + it.o.join(" "))) for (const j of post.get(w) || []) cnt.set(j, (cnt.get(j) || 0) + 1);
+    const cand = [...cnt.entries()].sort((a, b) => b[1] - a[1]).slice(0, 60).map(([j]) => j);
+    const hit = cand.find((j) => sameQuestion(kept[j], it, gs[j], g) >= NEAR);
+    const i = hit == null ? -1 : hit;
+    if (i < 0) { for (const w of toks(it.q + " " + it.o.join(" "))) { let l = post.get(w); if (!l) post.set(w, (l = [])); if (l.length < 3000) l.push(kept.length); } }
     if (i < 0) { kept.push(it); gs.push(g); continue; }
     const k = kept[i];
     merged++;
@@ -441,7 +509,9 @@ export async function build(args, deps = {}) {
     checkPaper(p);
     // the watermark text comes from the config (a publisher name stays out of this public file)
     const F = p.mark ? { ...FORMATS[p.format], mark: p.mark } : FORMATS[p.format];
-    const text = p.txt && fs.existsSync(p.txt) ? fs.readFileSync(p.txt, "utf8") : run("pdftotext", ["-layout", p.pdf, "-"]);
+    let text = p.txt && fs.existsSync(p.txt) ? fs.readFileSync(p.txt, "utf8") : spawnSync("pdftotext", ["-layout", p.pdf, "-"], { encoding: "utf8", maxBuffer: 1 << 30 }).stdout;
+    let ocrPages = 0;
+    if (conf.ocr && p.pdf && fs.existsSync(p.pdf) && !args.flags.has("no-ocr")) ({ text, ocrPages } = ocrBlankPages(p.pdf, text, conf.ocr, path.join(work, p.id + "-ocr"), log));
     const parsed = parsePaper(text, F);
     let imgs = null;
     if (!args.flags.has("no-images") && p.pdf && fs.existsSync(p.pdf)) {
@@ -452,12 +522,12 @@ export async function build(args, deps = {}) {
     const items = toItems(p, parsed, imgs, brandRe(conf.brand));
     const nums = parsed.items.map((x) => x.n).concat(parsed.fails.map((x) => x.n));
     const maxN = Math.max(0, ...nums), gaps = [];
-    for (let n = 1; n <= maxN; n++) if (!nums.includes(n)) gaps.push(n);
+    if (!F.ordinal) for (let n = 1; n <= maxN; n++) if (!nums.includes(n)) gaps.push(n);
     const fails = parsed.fails.concat(gaps.map((n) => ({ n, why: "number missing from the text" })));
     const total = items.length + fails.length;
     report.papers.push({ id: p.id, parsed: items.length, failed: fails, total, pct: total ? Math.round(items.length * 1000 / total) / 10 : 0,
       withImage: items.filter((x) => x.img).length, imgMissing: items.filter((x) => x.flags.includes("img-missing")).length,
-      keyUnclear: items.filter((x) => x.flags.includes("key-unclear")).map((x) => x.n), brand: items.filter((x) => x.flags.includes("brand")).map((x) => x.n), captionsDropped: parsed.dropped.captions });
+      keyUnclear: items.filter((x) => x.flags.includes("key-unclear")).map((x) => x.n), brand: items.filter((x) => x.flags.includes("brand")).map((x) => x.n), captionsDropped: parsed.dropped.captions, ocrPages });
     all = all.concat(items);
   }
   const m = mergePyq(all);
