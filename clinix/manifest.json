@@ -1,8 +1,8 @@
 {
   "_comment": "CliniX catalog. Small on purpose: the app fetches this first, then only the packs the student actually opens. Modelled on atlas/modules.json, deliberately NOT on kardiox-content-pack.js (a 1.9 MB array parsed on every page load).",
   "schemaVersion": 1,
-  "contentVersion": "0.9.3-obgyn",
-  "updated": "2026-09-29",
+  "contentVersion": "0.9.4-anaesthesia",
+  "updated": "2026-10-06",
   "skillPacks": [
     {
       "id": "core",
@@ -39,6 +39,11 @@
       "id": "obgyn",
       "file": "skills/obgyn.json",
       "title": "Obstetrics and gynaecology history, examination, counselling and emergencies"
+    },
+    {
+      "id": "anaesthesia",
+      "file": "skills/anaesthesia.json",
+      "title": "Anaesthesia preoperative assessment, airway, consent, procedures and BLS"
     }
   ],
   "presentations": [
@@ -370,6 +375,25 @@
         "subtitle": "10 stations: history, examination, counselling, consent and obstetric emergencies",
         "file": "systems/obgyn.json",
         "estMinutes": 150,
+        "chapters": 4,
+        "review": "ai_drafted"
+      }
+    },
+    {
+      "id": "anaesthesia",
+      "title": "Anaesthesiology",
+      "icon": "vital_signs",
+      "skillPacks": [
+        "core",
+        "anaesthesia"
+      ],
+      "diseases": [],
+      "module": {
+        "id": "anaesthesia-osce",
+        "title": "OSCE and viva stations",
+        "subtitle": "8 stations: preoperative assessment, airway, consent, airway devices, spinal and BLS",
+        "file": "systems/anaesthesia.json",
+        "estMinutes": 120,
         "chapters": 4,
         "review": "ai_drafted"
       }
