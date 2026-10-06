@@ -227,8 +227,9 @@ test("E7: the low SpO2 alarm carries bag, suction, DOPE, probe and circuit, and 
   assert.ok(a.actions.includes("bag100") && a.actions.includes("suction"), "bedside actions " + a.actions);
   assert.equal(a.checklist.find((c) => c.id === "suction").action, "suction");
   assert.equal(a.checklist.find((c) => c.id === "bag").action, "bag100");
-  assert.match(a.fio2Line.en, /FiO2 is 70%\. Raise it to 100%/);
-  assert.deepEqual([a.primary.kind, a.primary.key, a.primary.to], ["setting", "fio2", 100]);
+  // round 4 (E6): SpO2 90 is a mild fall: one FiO2 step after the probe check (it was 100% at once before)
+  assert.match(a.fio2Line.en, /SpO2 90% is a mild fall\. After the probe check, raise FiO2 one step, from 70% to 80%/);
+  assert.deepEqual([a.primary.kind, a.primary.key, a.primary.to], ["setting", "fio2", 80]);
   st.fio2 = 100;
   s = E.inject(s, "secretions"); s = E.inject(s, "plug");
   a = E.alarms(s, st).find((x) => x.id === "spo2Low");
