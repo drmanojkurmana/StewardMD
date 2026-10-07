@@ -158,7 +158,10 @@ test("3 am drill: five alarms, patient first, a call with SBAR, one trap each, a
 
 test("B2: low SpO2 below 88% bags before FiO2, as its own text and the engine plan say; FiO2 100% is optional", () => {
   const lo = J.drills.items.find((x) => x.id === "lowspo2"), by = Object.fromEntries(lo.steps.map((s) => [s.id, s]));
-  assert.ok(/84%/.test(lo.scene.en) && /below 88%/.test(by.bag.text.en));
+  assert.ok(/84%/.test(lo.scene.en) && /below 88%/i.test(by.bag.why.en));
+  // R5 B8: the option text is neutral (it does not give away the threshold) and the feedback says look first, then bag
+  assert.ok(!/88|good trace/.test(by.bag.text.en + by.bag.text.hi), "bag option text is neutral: " + by.bag.text.en);
+  assert.ok(/^You looked first/.test(by.bag.why.en) && by.look.rank < by.bag.rank, "feedback: look first, then bag");
   assert.equal(by.fio2.opt, true, "FiO2 100% is an accepted optional step");
   assert.ok(by.bag.rank < by.dope.rank, "bag before DOPE");
   // the engine leads a low SpO2 below 88 with bagging (vent-engine.js planOf)
@@ -270,6 +273,164 @@ test("wiring: the loader lists the bridge after the lab, the lab home has one ho
   assert.ok(L.indexOf('"narke-vent.css"') < L.indexOf('"narke-vent-bridge.css"'));
   const H = readFileSync("home.js", "utf8");
   for (const ic of ["steth", "device", "list", "siren", "rounds", "note", "shield"]) assert.ok(new RegExp("\\b" + ic + ": ?'").test(H), "icon " + ic);
-  assert.equal((V.match(/NARKE_VENT_BRIDGE/g) || []).length, 3, "one guarded call in narke-vent.js");
+  // every use in narke-vent.js is guarded (the bridge may be absent): homeBlock, and the round-5 path card's progress()
+  const uses = V.match(/[^\n]*NARKE_VENT_BRIDGE[^\n]*/g) || [];
+  assert.ok((V.match(/NARKE_VENT_BRIDGE/g) || []).length >= 3, "the lab calls the bridge");
+  uses.forEach((l) => assert.ok(/G\.NARKE_VENT_BRIDGE &&|NARKE_VENT_BRIDGE\s*&&|typeof|\|\||if \(|\? /.test(l), "guarded: " + l.trim().slice(0, 120)));
   assert.ok(!/narke/.test(JSON.stringify(Object.keys(UI.STR))));
+});
+
+/* ================= round 5 (B1 to B9) ================= */
+test("R5 B1: progress() has the exact shape the lab's path card uses, from saved prefs only", () => {
+  const ids = ["never", "bed", "screen", "modes", "alarms", "drills", "read", "skills", "care", "hand", "card", "check"];
+  assert.deepEqual(UI.ITEMS.map((x) => x.id), ids);
+  const empty = UI.progressOf({});
+  assert.deepEqual(Object.keys(empty).sort(), ["doneCount", "firstNightPassed", "items", "total"]);
+  assert.equal(empty.total, 12); assert.equal(empty.doneCount, 0); assert.equal(empty.firstNightPassed, false);
+  empty.items.forEach((x, i) => {
+    assert.deepEqual(Object.keys(x).sort(), ["done", "id", "label", "open"]);
+    assert.equal(x.id, ids[i]); assert.equal(x.done, false); assert.equal(x.open, x.id, "open falls back to the page id outside the browser");
+    assert.ok(bi(x.label) && DEVANAGARI.test(x.label.hi), x.id + " label en + hi");
+  });
+  const fns = {}; ids.forEach((id) => { fns[id] = () => id; });
+  const p = UI.progressOf({ done: { bed: 1, drills: 1, check: 1 }, checkPass: "7 Oct 2026" }, fns);
+  assert.equal(p.doneCount, 3); assert.equal(p.firstNightPassed, true);
+  assert.equal(typeof p.items[0].open, "function"); assert.equal(p.items[1].open(), "bed");
+  assert.equal(UI.progressOf({ done: { check: 1 } }).firstNightPassed, false, "passed needs the saved pass too");
+  assert.equal(UI.progressOf(null).total, 12, "never throws on bad prefs");
+  // documented at the top of the file, for the UI fixer
+  const src = readFileSync("narke-vent-bridge.js", "utf8").slice(0, 3500);
+  assert.ok(/NARKE_VENT_BRIDGE\.progress\(\)/.test(src) && /firstNightPassed/.test(src) && /never, bed, screen, modes, alarms, drills, read, skills, care, hand, card, check/.test(src));
+});
+
+test("R5 B2: first-night check: 12 mixed questions, teach-back on each, pass 10 (80%), covers the brief's topics", () => {
+  const C = J.check;
+  assert.ok(C.items.length >= 10 && C.items.length <= 12);
+  assert.equal(C.pass, Math.ceil(C.items.length * 0.8));
+  assert.ok(bi(C.badge) && /under supervision/.test(C.badge.en) && /never change settings alone/.test(C.badgeNote.en));
+  const ids = C.items.map((x) => x.id);
+  for (const id of ["meas", "peep", "hp", "spo2", "disc", "apnoea", "dope", "call", "never", "mode", "psv"]) assert.ok(ids.includes(id), id);
+  C.items.forEach((q) => {
+    assert.ok(bi(q.q) && bi(q.why) && bi(q.key), q.id + " question, why and a say-it-back line");
+    assert.ok(q.options.length === 4 && q.answer >= 0 && q.answer < 4, q.id);
+  });
+  // consistent with the engine and the never-alone card
+  const by = Object.fromEntries(C.items.map((q) => [q.id, q])), en = (q) => (typeof q.options[q.answer] === "string" ? q.options[q.answer] : q.options[q.answer].en);
+  assert.ok(/bag with 100% oxygen/i.test(en(by.spo2)) && /88%/.test(by.spo2.why.en), "SpO2 84: bag, emergency below 88");
+  assert.ok(/7\.15/.test(en(by.call)) && /7\.20/.test(by.call.why.en), "call now: pH below 7.20");
+  assert.ok(/Look at the patient/.test(en(by.hp)), "high pressure: the patient first");
+  assert.ok(/bag/.test(en(by.never)), "may: bag");
+  // the answer is not always in the same place once shuffled, and the shuffle is stable per seed
+  assert.deepEqual(UI.perm(4, "ck0:1"), UI.perm(4, "ck0:1"));
+  assert.ok(new Set(C.items.map((q, i) => UI.perm(4, "ck" + i + ":1").indexOf(q.answer))).size >= 3, "right answers spread over positions");
+});
+
+test("R5 B3: pocket card: alarm orders come from the drills, who-to-call is local only, print styles exist", () => {
+  const P = J.card, orders = UI.cardOrders(J.drills.items);
+  assert.deepEqual(orders.map((o) => o.id), ["highp", "lowspo2", "disc", "apnoea"]);
+  orders.forEach((o) => {
+    assert.equal(o.steps[0].n, 1, o.id + " starts with step 1");
+    assert.ok(/patient|Patient/.test(o.steps[0].short.en), o.id + ": the patient first");
+    assert.ok(!o.steps.some((x) => /Raise|Silence|PEEP to 15/.test(x.short.en)), o.id + ": no trap on the card");
+  });
+  assert.ok(/Bag/.test(orders[1].steps[1].short.en), "low SpO2: bag second, as in the drill and the engine emergency plan");
+  assert.ok(bi(P.privacy) && /this phone only/i.test(P.privacy.en) && /Never sent/i.test(P.privacy.en));
+  assert.deepEqual(P.who.map((x) => x.id), ["n1", "p1", "n2", "p2"]);
+  for (const k of ["setMeas", "silence", "dope", "may"]) assert.ok(bi(P[k]), k);
+  assert.ok(/walk away/.test(P.silence.en));
+  const js = readFileSync("narke-vent-bridge.js", "utf8"), css = readFileSync("narke-vent-bridge.css", "utf8");
+  assert.ok(/smd_narke_vcard/.test(js) && /G\.print\(\)/.test(js), "stored under its own local key; window.print");
+  assert.ok(!/fetch\([^)]*vcard|sendBeacon|XMLHttpRequest/.test(js), "the card is never sent anywhere");
+  assert.ok(/@media print/.test(css) && /vb-printing/.test(css) && /#vbPrintHost/.test(css));
+});
+
+test("R5 B4: alarm messages by brand style follow the engine's alarm plans, with priority and text-only labels", () => {
+  const A = J.alarms, S = JSON.parse(readFileSync("narke/vent/scenarios.json", "utf8")).scenarios;
+  const ids = A.items.map((x) => x.id);
+  assert.deepEqual(ids, ["hp", "lowvol", "apnoea", "disc", "fio2", "o2sup", "power", "humid"]);
+  const st = E.init(S[0]);
+  A.items.forEach((x) => {
+    assert.ok(["high", "medium", "low"].includes(x.prio) && bi(A.prio[x.prio].name), x.id);
+    assert.ok(bi(x.name) && bi(x.means), x.id);
+    for (const s of ["drager", "hamilton", "mindray"]) assert.ok(typeof x.labels[s] === "string" && x.labels[s], x.id + " " + s);
+    assert.equal(x.steps[0].k, "patient", x.id + ": the patient first");
+    x.steps.forEach((s) => assert.ok(bi(s.text), x.id + "." + s.k));
+    if (x.engine) {
+      const plan = E.alarmPlan(st, x.engine).checklist.map((c) => c.id);
+      let j = 0; x.steps.forEach((s) => { const k = plan.indexOf(s.k, j); assert.ok(k >= 0, x.id + ": step " + s.k + " in the engine order " + plan.join(",")); j = k + 1; });
+    }
+  });
+  assert.ok(/model and software/.test(A.intro.en), "wording varies by machine");
+  assert.ok(!A.items.some((x) => x.steps.some((s) => /raise the (alarm )?limit/i.test(s.text.en) && !/not/i.test(s.text.en))), "never advises raising a limit");
+});
+
+test("R5 B5: every mode lists what is SET and what is NOT; pressure support has no set rate; a mode quiz", () => {
+  const M = J.modes;
+  M.items.forEach((x) => { assert.ok(x.set.length >= 3 && x.notSet.length >= 1 && bi(x.watch), x.id); });
+  const txt = (a) => a.map((v) => (typeof v === "string" ? v : v.en)).join(" | ");
+  const ps = M.items.find((x) => x.id === "ps");
+  assert.ok(/Rate/.test(txt(ps.notSet)) && !/Rate/.test(txt(ps.set)), "PSV: no set rate");
+  assert.ok(/VT/.test(txt(M.items.find((x) => x.id === "pc").notSet)), "PC: VT is the result");
+  assert.ok(/Pressure/.test(txt(M.items.find((x) => x.id === "prvc").notSet)), "PRVC: the machine sets the pressure");
+  assert.ok(M.quiz.length >= 5);
+  M.quiz.forEach((q, i) => { assert.ok(bi(q.q) && bi(q.why), "mq" + i); assert.ok(q.answer >= 0 && q.answer < q.options.length); });
+});
+
+test("R5 B6: read this screen: three styles, an alarm on each panel, first step follows the engine plan, tap targets are real tiles", () => {
+  const R = J.read, tiles = new Set(J.screen.tiles.map((t) => t.id));
+  assert.deepEqual(R.items.map((x) => x.style).sort(), ["drager", "hamilton", "mindray"]);
+  R.items.forEach((x) => {
+    assert.ok(x.ov.abar && bi(x.scene), x.id + " has a live alarm and a scene");
+    Object.keys(x.ov).forEach((k) => assert.ok(tiles.has(k), x.id + " override " + k));
+    assert.ok(bi(x.q1.q) && bi(x.q1.why) && x.q1.options.length === 4 && x.q1.answer >= 0);
+    assert.ok(x.q2.targets.length >= 1 && x.q2.targets.every((k) => tiles.has(k)) && bi(x.q2.why));
+    assert.ok(!x.q1.options.some((o, j) => j !== x.q1.answer && /^Look at the patient/.test(o.en)), "the patient is already looked at");
+  });
+  const r1 = R.items[0];
+  assert.ok(+r1.ov.ppeak > J.screen.tiles.find((t) => t.id === "lim_ppeak").value && +r1.ov.pplat <= 30, "r1: Ppeak above its limit, Pplat normal: an airway problem");
+  const r2 = R.items[1]; assert.ok(+r2.ov.vti - +r2.ov.vte > 200 && Math.abs(+r2.ov.mve - (+r2.ov.vte * 18) / 1000) < 0.15, "r2: a leak, MVe consistent");
+});
+
+test("R5 B7: hands-on skills: bagging, reconnect with the engine's post-reconnect checks, suction, hold, cuff, circuit", () => {
+  const K = J.skills, by = Object.fromEntries(K.items.map((x) => [x.id, x]));
+  assert.deepEqual(K.items.map((x) => x.id), ["bag", "recon", "suction", "hold", "cuff", "circuit"]);
+  K.items.forEach((x) => { assert.ok(bi(x.title) && bi(x.when) && x.steps.length >= 4 && x.steps.every(bi), x.id); });
+  const t = (id) => by[id].steps.map((s) => s.en).join(" ");
+  assert.ok(/PEEP valve/.test(t("bag")) && /15 L\/min/.test(t("bag")) && /6 seconds/.test(t("bag")), "bag: PEEP valve, O2 flow, rate");
+  assert.ok(/chest rise on both sides, VTe back near the set VT, an EtCO2 trace/.test(t("recon")) && /FiO2 was turned up/.test(t("recon")), "reconnect checks in the engine's order (ACTIONS.reconnect.checks)");
+  const eng = E.ACTIONS.reconnect && E.ACTIONS.reconnect.checks;
+  if (eng) assert.ok(/Chest rises/.test(eng[0].en) && /VTe/.test(eng[1].en) && /EtCO2/.test(eng[2].en));
+  assert.ok(/15 seconds/.test(t("suction")) && /150 mmHg/.test(t("suction")), "suction: time and pressure");
+  assert.ok(/20 to 30 cmH2O/.test(t("cuff")) && /Never/.test(by.cuff.warn.en));
+  assert.ok(/never both/.test(t("circuit")) && /away from the patient/.test(t("circuit")));
+});
+
+test("R5 B8: fixes: the demo alarm matches its numbers, find Q5 is unambiguous, drill counts in the learner's terms, alarm note template", () => {
+  const by = Object.fromEntries(J.screen.tiles.map((t) => [t.id, t]));
+  assert.ok(+by.ppeak.value < +by.lim_ppeak.value, "Ppeak below its limit now");
+  assert.ok(bi(by.abar.state) && /Cleared/.test(by.abar.state.en) && /cleared by itself/.test(by.abar.what.en), "so the alarm bar shows a cleared alarm and says why");
+  assert.ok(/LOW limit for the litres breathed out each minute/.test(J.screen.find.items[4].q.en));
+  const steps = J.drills.items[0].steps;
+  const c = UI.drillCount(UI.verdict(steps, ["suction", "look", "trap"]));
+  assert.deepEqual(c, { picked: 3, right: 1, fix: 2, missed: 3 });
+  assert.ok(/\{p\}/.test(UI.STR.someWrong.en) && /\{m\}/.test(UI.STR.someWrong.hi) && /missed/.test(UI.STR.someWrong.en));
+  assert.equal(UI.STR.wrong.en, "Not right"); assert.equal(UI.STR.wrong.hi, "गलत");
+  const N = J.handover.note;
+  assert.ok(N.fields.length >= 6 && N.fields.every(bi) && /Nothing is typed or saved/.test(N.intro.en));
+  assert.equal(UI.noteText(N.fields, "en").split("\n")[0], "Time: ");
+  assert.ok(bi(UI.STR.timeLeft) && bi(UI.STR.timedNote), "60 s timer strings");
+});
+
+test("R5 B9: glossary with brand synonyms, en + hi", () => {
+  const Gl = J.gloss;
+  assert.ok(Gl.items.length >= 20);
+  const all = Gl.items.map((x) => x.term + " " + x.aka).join(" | ");
+  for (const k of ["PIP", "ExpMinVol", "fTotal", "Oxygen", "ASB", "Esens", "Tapn", "HME", "Audio paused"]) assert.ok(all.includes(k), k);
+  Gl.items.forEach((x) => assert.ok(x.term && x.aka && bi(x.plain) && DEVANAGARI.test(x.plain.hi), x.term));
+});
+
+test("R5: draft marking once per page group: the review note is on the bridge home block, not repeated on every page", () => {
+  const js = readFileSync("narke-vent-bridge.js", "utf8");
+  assert.equal((js.match(/reviewNote/g) || []).length, 1, "one place");
+  assert.ok(/draft/i.test(UI.STR.cardFoot.en), "the printed card, which leaves the app, carries it too");
 });
