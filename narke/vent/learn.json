@@ -1752,8 +1752,8 @@
     },
     {
      "say": {
-      "en": "Put it back to 14. The monitor shows SpO2, heart rate and BP. The blood gas confirms the story.",
-      "hi": "इसे वापस 14 करें। Monitor पर SpO2, heart rate और BP हैं। Blood gas पूरी कहानी पक्की करती है।"
+      "en": "Set the rate back to 14 and watch CO2 rise again. The monitor shows SpO2, heart rate and BP; the blood gas confirms the story.",
+      "hi": "Rate वापस 14 करें और CO2 को फिर बढ़ते देखें। Monitor पर SpO2, heart rate और BP हैं; blood gas पूरी कहानी पक्की करती है।"
      },
      "do": {
       "key": "rr",
@@ -1769,12 +1769,13 @@
     },
     {
      "say": {
-      "en": "He is back on his start settings. Nothing about him has changed.",
-      "hi": "वे फिर शुरू की settings पर हैं। उनमें कुछ नहीं बदला।"
+      "en": "He is back on his start settings. Over the next half hour his CO2 settles back to where it began.",
+      "hi": "वे फिर शुरू की settings पर हैं। अगले आधे घंटे में उनका CO2 वापस वहीं आ जाता है जहाँ से शुरू हुआ था।"
      }
     }
    ],
-   "level": 1
+   "level": 1,
+   "core": true
   },
   {
    "id": "fio2-peep",
@@ -1900,11 +1901,13 @@
      ]
     }
    ],
-   "level": 1
+   "level": 1,
+   "core": true
   },
   {
    "id": "first-alarm",
    "level": 1,
+   "core": true,
    "title": {
     "en": "Your first alarm",
     "hi": "आपकी पहली alarm"
@@ -2297,6 +2300,10 @@
      "say": {
       "en": "Mr Singh is now on rate 12. Less air is trapped each breath.",
       "hi": "श्री सिंह अब rate 12 पर हैं। हर साँस में कम हवा फँसती है।"
+     },
+     "left": {
+      "en": "In COPD a high CO2 with a safe pH is accepted so that less air is trapped. Ask your senior which pH to aim for.",
+      "hi": "COPD में सुरक्षित pH के साथ ऊँचा CO2 स्वीकार किया जाता है, ताकि कम हवा फँसे। Senior से पूछें कि किस pH का लक्ष्य रखें।"
      }
     }
    ],
@@ -2389,6 +2396,10 @@
      "say": {
       "en": "Anjali stays on rate 30 and FiO2 30%. Her pH is climbing back.",
       "hi": "अंजलि rate 30 और FiO2 30% पर रहती हैं। उनका pH वापस बढ़ रहा है।"
+     },
+     "left": {
+      "en": "That is the DKA, not the ventilator: the fast rate only buys time. Insulin and fluids, ordered by your senior team, clear the acid over hours.",
+      "hi": "यह DKA की वजह से है, ventilator की नहीं: तेज़ rate सिर्फ़ समय देता है। Senior team के दिए insulin और fluid घंटों में acid साफ़ करते हैं।"
      }
     }
    ],
@@ -2613,6 +2624,7 @@
   {
    "id": "low-spo2",
    "level": 1,
+   "core": true,
    "title": {
     "en": "Low SpO2: mild, then an emergency",
     "hi": "SpO2 कम: पहले हल्का, फिर emergency"
@@ -2739,6 +2751,17 @@
     },
     {
      "say": {
+      "en": "Bagging is over: put him back on the ventilator. Check that his chest rises, VTe comes back and the EtCO2 trace returns with every breath.",
+      "hi": "Bagging पूरी: उन्हें वापस ventilator पर लगाएँ। जाँचें कि छाती उठ रही है, VTe लौट आया है और हर साँस के साथ EtCO2 trace लौट रहा है।"
+     },
+     "reconnect": true,
+     "highlight": [
+      "vte",
+      "ve"
+     ]
+    },
+    {
+     "say": {
       "en": "SpO2 is back. Mild: look, check the probe, raise FiO2 one step. Below 88: bag with 100% oxygen, think DOPE, and call your senior. Once he is stable, bring FiO2 back down.",
       "hi": "SpO2 लौट आया। हल्की कमी: देखें, probe जाँचें, FiO2 एक कदम बढ़ाएँ। 88 से नीचे: 100% oxygen से bag करें, DOPE सोचें, और senior को बुलाएँ। मरीज़ स्थिर हो तो FiO2 फिर घटाएँ।"
      },
@@ -2751,6 +2774,7 @@
   {
    "id": "disconnect",
    "level": 1,
+   "core": true,
    "title": {
     "en": "The circuit comes apart",
     "hi": "Circuit अलग हो जाता है"
