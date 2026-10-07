@@ -42,14 +42,56 @@
     "linezolid":             ["mao_inhibitor", "serotonergic", "antibiotic"],
     "tacrolimus":            ["calcineurin_inhibitor", "cyp3a4_sensitive_substrate", "nephrotoxic", "qt_prolonging"],
     "ciclosporin":           ["calcineurin_inhibitor", "cyp3a4_sensitive_substrate", "nephrotoxic"],
-    "digoxin":               ["cardiac_glycoside"]
+    "digoxin":               ["cardiac_glycoside"],
+
+    "nefopam":               ["cns_depressant"],
+    "flupirtine (as maleate)": ["cns_depressant"],
+    "noscapine":             ["cns_depressant"],
+    "levocloperastine (levocloperastine fendizoate/hydrochloride)": ["cns_depressant"],
+    "buspirone":             ["serotonergic"],
+
+    "amiodarone":            ["cyp2c9_inhibitor"],
+    "metronidazole":         ["cyp2c9_inhibitor"],
+    "co-trimoxazole":        ["cyp2c9_inhibitor"],
+    "cotrimoxazole":         ["cyp2c9_inhibitor", "qt_prolonging"],
+    "paracetamol":           ["analgesic"],
+    "fluvoxamine":           ["cyp1a2_inhibitor"],
+    "cimetidine":            ["cyp1a2_inhibitor"],
+    "insulin":               ["insulin", "hypoglycemic"],
+    "prednisolone":          ["systemic_corticosteroid"],
+    "prednisone":            ["systemic_corticosteroid"],
+    "methylprednisolone":    ["systemic_corticosteroid"],
+    "dexamethasone":         ["systemic_corticosteroid"],
+    "hydrocortisone":        ["systemic_corticosteroid"],
+    "betamethasone":         ["systemic_corticosteroid"],
+    "triamcinolone":         ["systemic_corticosteroid"],
+    "deflazacort":           ["systemic_corticosteroid"],
+    "cortisone":             ["systemic_corticosteroid"]
   },
 
   "deny_classes": {
-    "verapamil":  ["cyp3a4_inhibitor"],
+    "verapamil":  ["cyp3a4_inhibitor", "dihydropyridine_ccb"],
     "diltiazem":  ["cyp3a4_inhibitor"],
-    "azithromycin": ["cyp3a4_inhibitor"]
+    "azithromycin": ["cyp3a4_inhibitor"],
+    "naloxone":   ["opioid", "cns_depressant"],
+
+    "cotrimoxazole": ["azole_antifungal", "cyp3a4_inhibitor"],
+    "lisinopril": ["diuretic", "thiazide_diuretic"],
+    "clozapine":  ["benzodiazepine"],
+    "protamine sulfate": ["anticoagulant"],
+    "sodium citrate": ["anticoagulant"],
+    "edetic acid": ["anticoagulant"],
+    "fondaparinux": ["doac"],
+    "bivalirudin": ["doac"],
+    "abciximab":  ["pgp_inhibitor"],
+    "zonisamide": ["pgp_inhibitor"],
+    "sarecycline": ["pgp_inhibitor"],
+    "sarecycline hydrochloride": ["pgp_inhibitor"]
   },
+
+  "_notes_august_2026_ddi_fixes": "Ported 2026-10-02 from the August R1-reviewed fixes that were hand-edited into interaction-rules.js only (qa-report/clinical_safety.md; commits 34fc51533 CR1-CR3, 4f3180121, b2a23bcaa + 3f9550bf0 HIGH, b2889f7f9 + 0905c1a58 MEDIUM). Pins: cyp2c9_inhibitor (CR1, warfarin), cotrimoxazole = co-trimoxazole (CR1 hyphen bug), paracetamol analgesic (CR3), cyp1a2_inhibitor (M follow-up, theophylline), bare insulin (M5, insulin + sulfonylurea), systemic_corticosteroid (M follow-up: steroid + NSAID fires for systemic steroids only). Denies: verapamil is not a DHP (M3; mech-cyp3a4strong-nondhp-ccb covers clarithromycin), lisinopril is not a thiazide (H4), clozapine is not a benzodiazepine (M3), protamine/citrate/edetate are not anticoagulants and fondaparinux/bivalirudin not DOACs (H follow-up), abciximab/zonisamide/sarecycline are not P-gp inhibitors (H follow-up). Rules: mechanism_rules.json (20); superseded legacy rules retired in legacy_rules.json.",
+
+  "_notes_2026_10_02": "Owner-approved. build_gold.py no longer reads 'Non-opioid' as opioid (nor non-benzodiazepine, non-NSAID, Non-dihydropyridine, insulin secretagogue/sensitizer). Pins: nefopam, flupirtine, noscapine, levocloperastine keep cns_depressant (central and sedating, but NOT opioids). verapamil's dihydropyridine_ccb pin was removed the same day: mech-cyp3a4strong-nondhp-ccb now ships in both artifacts (see _notes_august_2026_ddi_fixes). buspirone: not a benzodiazepine or CNS depressant, but serotonergic (serotonin syndrome with tramadol, SSRIs/SNRIs; labelled against MAOIs and linezolid), pinned so removing its wrong tags does not leave it with no alert (R1, owner 2026-10-02). Deny: naloxone is an antagonist, not an opioid or CNS depressant. naltrexone is deliberately left tagged opioid + cns_depressant until an opioid antagonist + agonist rule is signed off (its wrong tag is today the only alert for naltrexone + morphine).",
 
   "alias_generics": {
     "nitroglycerin (gtn)": "nitroglycerin",

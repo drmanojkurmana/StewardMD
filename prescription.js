@@ -2688,7 +2688,7 @@
     ensureEls();
     try {
       if (typeof smdLazy === "function") {
-        smdLazy('/interaction-rules.js?v=gold363').then(function () {
+        smdLazy('/interaction-rules.js?v=ddisync20261002').then(function () {
           try { refreshSafety(); } catch (e) {}
         });
       }

@@ -80,7 +80,7 @@
    * amiodarone, labetalol, prednisolone, isoniazid, rifampicin, hydralazine, clavulanate: a line
    * naming one of those was checked on its numbers only, and a bare "- Warfarin" bullet was waved
    * through as a heading. The caller passes the app's drug lexicon (drug-lexicon.js,
-   * window.SMD_DRUG_LEXICON: { generics[], brands{brand: generic} }) as opts.lexicon; names are
+   * window.SMD_DRUG_LEXICON: { generics[], brands{brand: generic}, combos{brand: [generics]} }) as opts.lexicon; names are
    * matched as whole words (up to LEX_MAX_WORDS) in claim, passage and question alike, and a brand
    * is read as its generic. No lexicon = the suffix rule alone, exactly as before.
    * LEX_SKIP: lexicon entries that are also lab analytes or everyday words in clinical prose
@@ -100,6 +100,9 @@
     // so the answer's "amlodipine" and the book's "amlodipine besylate" are one drug.
     for (var k in map) { var w0 = k.split(" ")[0]; if (w0 !== k && map[w0]) map[k] = w0; }
     if (src.brands) for (var b in src.brands) { var bb = clean(b), gg = clean(src.brands[b]); if (bb.length >= 4 && !LEX_SKIP[bb] && gg) map[bb] = map[gg] || gg; }
+    // A combination brand reads as the combination ("ibuprofen + paracetamol"), never as one ingredient:
+    // a Combiflam dose is not grounded by an ibuprofen-only passage.
+    if (src.combos) for (var c in src.combos) { var cc = clean(c); if (cc.length >= 4) map[cc] = src.combos[c].join(" + "); }
     _lexSrc = src; _lex = map;
     return map;
   }
@@ -202,8 +205,9 @@
     var taken = {};
     for (var q = 0; q < drugs.length; q++) taken[drugs[q].pos] = 1;
     for (var i = 0; i < tk.length; i++) {
-      if (tk[i].w.length < 4) continue;
+      // A word under 4 letters is never a drug on its own, but can open one: "Pan-D", "co-trimoxazole".
       for (var k = Math.min(LEX_MAX_WORDS, tk.length - i); k >= 1; k--) {
+        if (k === 1 && tk[i].w.length < 4) continue;
         var key = tk[i].w, ok = true;
         for (var j = 1; j < k; j++) {
           if (!/^[\s-]+$/.test(t.slice(tk[i + j - 1].end, tk[i + j].pos))) { ok = false; break; }

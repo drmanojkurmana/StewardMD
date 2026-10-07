@@ -53,9 +53,26 @@ CLS_KEYWORDS = [
     (r"calcineurin inhibitor", ["calcineurin_inhibitor", "cyp3a4_sensitive_substrate", "nephrotoxic"]),
     (r"cardiac glycoside", ["cardiac_glycoside"]),
     (r"methylxanthine|xanthine bronchodilator", ["methylxanthine"]),
+    # The negated / qualified phrasings, said correctly (see _matches below).
+    (r"non-?dihydropyridine", ["non_dihydropyridine_ccb", "calcium_channel_blocker"]),
+    (r"insulin (?:secretagogue|sensiti[sz])", ["hypoglycemic"]),
+    (r"non-?benzodiazepine (?:sedative-)?hypnotic|z-drug", ["cns_depressant"]),
 ]
 
 _KW = [(re.compile(p, re.I), tags) for p, tags in CLS_KEYWORDS]
+# A keyword negated or qualified in the class text is NOT that class. "Non-opioid analgesic" matched
+# r"opioid" and tagged paracetamol opioid + cns_depressant (paracetamol + midazolam fired the major
+# opioid + benzodiazepine rule); likewise "non-benzodiazepine" (Z-drugs, buspirone), "non-NSAID"
+# (nefopam), "Non-dihydropyridine" (verapamil), "insulin secretagogue/sensitizer" (glinides, glitazones).
+_NEGATED = re.compile(r"\bnon[\s-]?$", re.I)
+_QUALIFIED = re.compile(r"^\s*(?:secretagogue|sensiti[sz])", re.I)
+
+
+def _matches(rx, cls):
+    for m in rx.finditer(cls):
+        if not _NEGATED.search(cls[:m.start()]) and not _QUALIFIED.match(cls[m.end():]):
+            return True
+    return False
 
 
 def run():
@@ -72,7 +89,7 @@ def run():
         cls = str(d.get("cls") or "")
         tags = []
         for rx, tg in _KW:
-            if rx.search(cls):
+            if _matches(rx, cls):
                 for t in tg:
                     if t not in tags:
                         tags.append(t)

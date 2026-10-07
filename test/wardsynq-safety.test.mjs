@@ -14,7 +14,7 @@ import {
   SEVERITY, DISPOSITION, SafetyEngine, SafetyEngineError,
   compileRulePack, emptyRulePack, defaultDisposition,
   checkAllergies, checkInteractions, checkDose, checkRenal,
-  resolveGeneric, renalBand, isSevereReaction,
+  resolveGeneric, resolveComponents, renalBand, isSevereReaction,
 } from "../wardsynq/wardsynq-safety.js";
 import { loadStewardMDRulePack } from "../wardsynq/adapters/wardsynq-rules-stewardmd.js";
 import { Patient, MedicationOrder, AllergyIntolerance } from "../wardsynq/wardsynq-model.js";
@@ -495,6 +495,61 @@ test("integration: a drug prescribed by BRAND is checked, not silently skipped",
     "paracetamol by brand must not be flagged for a penicillin allergy or a warfarin interaction");
 });
 
+/* 2026-10-02. data/interaction-rules.json maps each combination brand to ONE ingredient, so
+ * "Combiflam" was checked as ibuprofen alone: Combiflam on top of Crocin raised no duplicate
+ * paracetamol, and Zituvimet dropped its sitagliptin. The owner-confirmed combination list
+ * (drug-lexicon.js `combos`, the same one drug-link.js uses) now feeds the pack's combinations. */
+test("integration: a combination BRAND is checked for every ingredient the pack knows, not just one", async () => {
+  const pack = await loadStewardMDRulePack();
+  // Pinned per brand: an ingredient that stops resolving must FAIL this, not shrink the expectation.
+  // Entresto and Deriphyllin stay single: sacubitril and etofylline are not in the pack.
+  const EXPECTED = { combiflam: ["ibuprofen", "paracetamol"], dynapar: ["diclofenac", "paracetamol"], ultracet: ["paracetamol", "tramadol"],
+    zituvimet: ["metformin", "sitagliptin"], "pan-d": ["domperidone", "pantoprazole"], entresto: ["valsartan"], deriphyllin: ["theophylline"] };
+  const { default: LEX } = await import("../drug-lexicon.js");
+  assert.deepEqual(Object.keys(EXPECTED).sort(), Object.keys(LEX.combos).sort(), "every lexicon combination is pinned here");
+  for (const [brand, parts] of Object.entries(EXPECTED)) {
+    assert.deepEqual(resolveComponents(brand + " 1 tab", pack).slice().sort(), parts, brand);
+    // Two or more checkable parts: never an alias to one of them (the Bactrim rule).
+    if (parts.length > 1) assert.equal(resolveGeneric(brand, pack), null, brand + " must not resolve to a single ingredient");
+  }
+  for (const written of ["Pan-D 40", "Pan D 40mg", "PAN-D"]) {
+    assert.deepEqual(resolveComponents(written, pack).slice().sort(), ["domperidone", "pantoprazole"], written);
+  }
+
+  const engine = new SafetyEngine({ rulePack: pack, checks: ["allergy", "interaction", "dose", "renal", "same-drug"] });
+  const ev = (drug, active, dose) => engine.evaluate({ order: MedicationOrder({ patientId: "p1", drug, dose, prescriberId: "dr-1" }), activeMeds: active ? [{ drug: active }] : [] });
+  const codes = (v, re) => v.findings.filter((f) => re.test(f.code)).map((f) => f.code);
+  // Duplicate molecule, either direction.
+  const dup = (drug, active) => ev(drug, active).findings.filter((f) => f.code === "SAME_DRUG_ACTIVE").map((f) => f.generic);
+  for (const brand of ["Combiflam", "Ultracet", "Dynapar"]) assert.deepEqual(dup(brand, "Crocin 650"), ["paracetamol"], brand + " on top of paracetamol");
+  assert.deepEqual(dup("Zituvimet 50/500", "Glycomet 500"), ["metformin"]);
+  assert.deepEqual(dup("Brufen 400", "Combiflam"), ["ibuprofen"], "the combination is still ibuprofen as well");
+  // R1 C1: a combination that is already ACTIVE interacts through each molecule too.
+  for (const [order, active] of [["Warfarin 5mg", "Combiflam"], ["Warfarin 5mg", "Dynapar"], ["Sertraline 50mg", "Ultracet"]]) {
+    const v = ev(order, active);
+    assert.ok(codes(v, /^INTERACTION_MAJOR$/).length > 0, `${order} with ${active} active`);
+    assert.deepEqual(v.unresolvedActiveMeds, [], `${active} is checked, not reported as unchecked`);
+  }
+  assert.ok(codes(ev("Clopidogrel 75mg", "Pan-D 40"), /^INTERACTION/).length > 0, "clopidogrel + the PPI in Pan-D");
+  // R1 I1: one product is not an interaction with itself (Ultracet alone, no other drug).
+  assert.deepEqual(codes(ev("Ultracet"), /^INTERACTION/), []);
+  // R1 C2: no single ceiling applies to a combination, and it says so instead of passing silently.
+  // Gated where a single-molecule order would be (no dose, or above an ingredient's ceiling); otherwise informational.
+  // Owner 2026-10-02: above the SUM of the ingredient ceilings (800 + 1000 mg) is a hard stop.
+  for (const [dose, code, disposition] of [[{ value: 3000, unit: "mg" }, "DOSE_COMBINATION_CEILING", "block"],
+    [{ value: 1450, unit: "mg" }, "DOSE_COMBINATION_UNCHECKED", "overridable"], [undefined, "DOSE_COMBINATION_UNCHECKED", "overridable"],
+    [{ value: 1, unit: "tab" }, "DOSE_COMBINATION_UNCHECKED", "warn"]]) {
+    const f = ev("Combiflam", null, dose).findings.find((x) => x.code.startsWith("DOSE_COMBINATION"));
+    assert.ok(f && f.code === code && f.disposition === disposition && /ibuprofen 800 mg/.test(f.message) && /paracetamol 1000 mg/.test(f.message), JSON.stringify(dose));
+  }
+  assert.equal(ev("Combiflam", null, { value: 3000, unit: "mg" }).allowed, false);
+  // Tramadol has no ceiling in the pack, so Ultracet's ingredients cannot be summed: never a block.
+  assert.equal(ev("Ultracet", null, { value: 5000, unit: "mg" }).findings.find((x) => x.code.startsWith("DOSE_COMBINATION")).disposition, "overridable");
+  assert.equal(ev("Combiflam", null, { value: 1, unit: "tab" }).allowed, true, "a routine Combiflam needs no override");
+  // Plain "Pan" (under the 4-character brand floor) is reported as unchecked, never resolved to a guess.
+  assert.equal(ev("Pan 40").unresolvedDrug, true);
+});
+
 /* 2026-09-07 cephalosporin audit. Two different causes produced the same silence for a
  * penicillin-allergic patient: cefdinir and cefoxitin were simply absent from the class, while
  * "Cefpodoxime Proxetil" and "Cefixime anhydrous" are SEPARATE pack generics from the bare molecule
@@ -531,13 +586,45 @@ test("integration: a CLASS name must never resolve to one member of that class",
   // Both brand maps carry class abbreviations as search keys ("nsaid" -> diclofenac). As a safety
   // alias that is a fabrication: "on an NSAID" is not "on diclofenac", and it would check the wrong
   // drug's rules while missing the right one's. The pack's own class vocabulary is the filter.
-  for (const cls of ["nsaid", "ppi", "statin", "arb", "insulin", "lmwh", "doac"]) {
+  for (const cls of ["nsaid", "ppi", "statin", "arb", "lmwh", "doac"]) {
     assert.equal(resolveGeneric(cls, pack), null, `"${cls}" names a class and must stay unresolved`);
   }
+  // Insulin is the exception, by owner decision 2026-10-02 (the August M5 fix the app already has): bare
+  // "insulin" is its own class-level entry carrying ONLY the insulin + hypoglycemic tags, so an order
+  // written "Insulin" is checked for hypoglycaemia stacking. It still never becomes one specific insulin.
+  assert.equal(resolveGeneric("insulin", pack), "insulin");
+  assert.deepEqual([...pack.drugClasses.get("insulin")].sort(), ["hypoglycemic", "insulin"]);
+  const ins = new SafetyEngine({ rulePack: pack }).evaluate({ order: MedicationOrder({ patientId: "p1", drug: "Insulin", prescriberId: "dr-1" }), activeMeds: [{ drug: "Glimepiride 2mg" }] });
+  assert.ok(ins.findings.some((f) => f.ruleId === "dup-hypoglycemic"), "insulin + sulfonylurea");
+  // R1: the class-level entry is the LAST resort. "Insulin Actrapid" is regular insulin, so a second
+  // active order of it is the same drug (a reason is required), not just two hypoglycaemics.
+  assert.equal(resolveGeneric("Insulin Actrapid 10 IU", pack), "insulin (regular)");
+  assert.equal(resolveGeneric("Inj. Insulin 10 units", pack), "insulin");
+  const same = new SafetyEngine({ rulePack: pack, checks: ["allergy", "interaction", "dose", "renal", "same-drug"] })
+    .evaluate({ order: MedicationOrder({ patientId: "p1", drug: "Insulin Actrapid 10 IU", prescriberId: "dr-1" }), activeMeds: [{ drug: "Actrapid" }] });
+  assert.deepEqual(same.findings.filter((f) => f.code === "SAME_DRUG_ACTIVE").map((f) => [f.generic, f.disposition]), [["insulin (regular)", "overridable"]]);
   // A combination whose components are BOTH checkable is left unresolved rather than collapsed to
   // one of them - the engine resolves an order to a single generic, so aliasing would silently drop
   // the other half. Reported as unchecked, never as clean.
   assert.equal(resolveGeneric("Bactrim DS", pack), null, "trimethoprim + sulfamethoxazole are both checkable");
+});
+
+/* 2026-10-02 (owner, after R1 on the interaction-data resync): WardSynq order-entry policy on the shared
+ * rules (adapter WARDSYNQ_RULE_POLICY). The rule text and severity are the app's; only the gate differs. */
+test("integration: standard ACS therapy is not hard-stopped; colchicine + P-gp inhibitor needs a reason, not a block", async () => {
+  const pack = await loadStewardMDRulePack();
+  const engine = new SafetyEngine({ rulePack: pack });
+  const ev = (drug, active) => engine.evaluate({ order: MedicationOrder({ patientId: "p1", drug, prescriberId: "dr-1" }), activeMeds: active.map((d) => ({ drug: d })) });
+  const gates = (v) => v.findings.filter((f) => /^INTERACTION/.test(f.code)).map((f) => `${f.ruleId}:${f.disposition}`).sort();
+  // Heparin/enoxaparin + aspirin + clopidogrel: aspirin is not the NSAID of the bleeding triad.
+  assert.deepEqual(gates(ev("Enoxaparin 40mg", ["Aspirin 75mg", "Clopidogrel 75mg"])), ["pair-anticoagulant-antiplatelet:overridable"]);
+  // A real NSAID still completes the triad, and that is still a hard stop.
+  assert.ok(gates(ev("Enoxaparin 40mg", ["Aspirin 75mg", "Ibuprofen 400mg"])).includes("combo-bleeding-triad:block"));
+  // Colchicine: still CONTRAINDICATED in severity, overridable in WardSynq.
+  for (const other of ["Ticagrelor 90mg", "Clarithromycin 500mg"]) {
+    const f = ev("Colchicine 0.5mg", [other]).findings.find((x) => /^pair-colchicine-/.test(x.ruleId));
+    assert.ok(f && f.severity === "contraindicated" && f.disposition === "overridable", other);
+  }
 });
 
 test("integration: the seeded allergy shield works against real drug names", async () => {

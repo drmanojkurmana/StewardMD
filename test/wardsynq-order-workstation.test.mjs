@@ -263,6 +263,13 @@ test("retest 2026-09-16: POST /api/queue/ward/medication-order flags the same dr
   const q4h = await as(DOCTOR, "/ward/medication-order", "POST", workstationOrder(adm, { drug: "Paracetamol IV", frequency: "q4h" }, { overrideReason: "x" }));
   assert.equal(q4h.__status, 409, JSON.stringify(q4h));
   assert.equal(await count(), 1);
+  // 2026-10-02: a combination dose above the SUM of its ingredients' ceilings (Combiflam: 800 + 1000 mg) is the
+  // same refusal; it used to arrive as ibuprofen's DOSE_ABSOLUTE_CEILING when Combiflam resolved to ibuprofen.
+  const combo = await as(DOCTOR, "/ward/medication-order", "POST", workstationOrder(adm, { drug: "Combiflam", dose: { value: 3000, unit: "mg" }, frequency: "OD" }, { checkOnly: true }));
+  assert.deepEqual(combo.safety.hardStops.map((f) => f.code), ["DOSE_COMBINATION_CEILING"], JSON.stringify(combo.safety));
+  const comboPlaced = await as(DOCTOR, "/ward/medication-order", "POST", workstationOrder(adm, { drug: "Combiflam", dose: { value: 3000, unit: "mg" }, frequency: "OD" }, { overrideReason: "x" }));
+  assert.equal(comboPlaced.__status, 409, JSON.stringify(comboPlaced));
+  assert.equal(await count(), 1);
 
   // The replacement flow: the same order written again replaces the active one, so it is not a duplicate of itself.
   const repl = await as(DOCTOR, "/ward/medication-order", "POST", workstationOrder(adm, { dose: { value: 650, unit: "mg" }, frequency: "TDS" }, { checkOnly: true }));
