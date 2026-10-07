@@ -965,6 +965,8 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-bedb-i { color: var(--nk-text); }
 /* U7: the safe rate pair is the filled action; "Confirm anyway" is outlined in the warning colour */
 .nrk-root .vl-pair.is-pri { background: var(--sp-text); color: var(--sp-bg); border-color: transparent; }
 .nrk-root .vl-pair.is-pri .smd-ico { color: var(--sp-bg); }
+/* U13: a reason about the future is labelled as a prediction */
+.nrk-root .vl-pred { font-size: 12px; font-weight: 650; color: var(--sp-mut); white-space: nowrap; }
 /* U8: after Question 1, a cue that Question 2 waits below */
 .nrk-root .vl-cue { display: flex; align-items: center; gap: 6px; margin: 12px 0 0; font-size: 13.5px; font-weight: 650; color: var(--vl-acc); }
 .nrk-root .vl-cue-i { display: grid; transform: rotate(90deg); }

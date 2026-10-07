@@ -385,7 +385,7 @@ try {
     await goRun(1, "postop-normal");
     ok(await ev(`var d=document.querySelector("#smdNarke .vl-bedd"); return !!d && !d.open && d.querySelectorAll("[data-act=vlbed]").length >= 3;`) === true, "Level 1: bedside actions are one folded line on the Monitor tab while no alarm suggests one (U4)");
     await goRun(2, "pneumonia");
-    ok(await ev(`${R} var b=R.querySelectorAll('.vl-bed [data-act=vlbed]'), A=NARKE_MODELS["vent-engine"].ACTIONS; return b.length===Object.keys(A).length && [].every.call(b, function(x){ return x.textContent.indexOf(A[x.getAttribute('data-k')].label.en)>=0; });`) === true, "Level 2: a Bedside actions group shows every engine action with its label");
+    ok(await ev(`${R} var b=R.querySelectorAll('.vl-bed [data-act=vlbed]'), A=NARKE_MODELS["vent-engine"].ACTIONS; return b.length===Object.keys(A).filter(function(k){ return k!=='reconnect' || A[k].available(NARKE_VENT_UI.run().s); }).length && [].every.call(b, function(x){ return x.textContent.indexOf(A[x.getAttribute('data-k')].label.en)>=0; });`) === true, "Level 2: a Bedside actions group shows every engine action with its label (Reconnect only while off the ventilator)");
     ok(await ev(`${R} return !!R.querySelector('.vl-ro-i[data-vl-id=trapV]') && !!R.querySelector('.vl-ro-i[data-vl-id=autoPeep]') && !R.querySelector('.vl-ro-i[data-vl-id=ineffective]');`) === true, "Level 2: trapped air sits next to auto-PEEP; missed breaths wait for Level 3");
     await skip(1800);
     const pk0 = await num(`.vl-ro-i[data-vl-id=ppeak] b`);
@@ -802,6 +802,7 @@ try {
     // U10: the new tutorials run to Done by hand (the learner's own taps), and the mixed acidosis case is listed
     const handTut = async (id) => {
       await toHome(); await click(`[data-act=vllevel][data-v="1"]`);
+      await ev(`var b=document.querySelector('#smdNarke [data-act=vltut][data-k="${id}"]'), d=b && b.closest('details'); if (d) d.open=true; return 1;`); // r5: Later tutorials sit in a fold at Level 1
       await tap(`[data-act=vltut][data-k="${id}"]`);
       if (!(await until(`return !!document.querySelector('#smdNarke .vl-coach .vl-co-say');`))) return id + ": no coach";
       for (let i = 0; i < 20; i++) {
@@ -923,7 +924,7 @@ try {
     // U11: the low SpO2 tutorial reconnects after bagging and ends connected; abg-adjust says why it ends off target
     { const r = await fastTut("low-spo2"); ok(r === true, "r5 U11: low-spo2 reaches its finish card" + (r === true ? "" : ": " + r)); }
     ok(await ev(`var R0=NARKE_VENT_UI.run(); return !(R0.s.m.bagUntil > R0.s.t) && !(R0.s.m.discUntil > R0.s.t);`) === true, "r5 U11: the low SpO2 tutorial ends back on the ventilator (not bagging, not disconnected)");
-    ok(LEARN5.tutorials.find((x) => x.id === "low-spo2").steps.some((x) => x.reconnect && /back on the ventilator/.test(x.say.en)), "r5 U11: low-spo2 has a reconnect step with the post-reconnect checks");
+    ok(LEARN5.tutorials.find((x) => x.id === "low-spo2").steps.some((x) => x.do && x.do.action === "reconnect" && /reconnect him to the ventilator/.test(x.say.en)), "r5 U11: low-spo2 has a reconnect step with the post-reconnect checks");
     await tap(`.vl-sheet [data-act=vlfinlab]`); await toHome();
     await click(`[data-act=vllevel][data-v="3"]`); await click(`[data-act=vltut][data-k="abg-adjust"]`); await until(`return !!document.querySelector('#smdNarke .vl-coach .vl-co-say');`);
     for (let i = 0; i < 24 && await ev(`var R0=NARKE_VENT_UI.run(); return !!R0.tut && R0.tut.i < R0.tut.tu.steps.length - 1;`); i++) {
@@ -967,11 +968,13 @@ try {
     await tap(`[data-act=vltab][data-t=dials]`);
     await click(`[data-act=vltype][data-k=fio2]`);
     await ev(`var i=document.querySelector('#smdNarke .vl-type'); i.value='21'; i.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true})); return 1;`);
-    ok(await ev(`var w=document.querySelector('#smdNarke .vl-warns'); return !!w && /FiO2 21% (on a patient who needs oxygen|while SpO2 is below target)/.test(w.textContent);`) === true, "r5 U7: FiO2 21 on a patient who needs oxygen warns before Confirm: " + (await ev(`var w=document.querySelector('#smdNarke .vl-warns'); return w ? w.textContent : "none";`)));
+    ok(await ev(`var w=document.querySelector('#smdNarke .vl-warns'); return !!w && /FiO2 21% (is room air|on a patient who needs oxygen|while SpO2 is below target)/.test(w.textContent);`) === true, "r5 U7: FiO2 21 on a patient who needs oxygen warns before Confirm: " + (await ev(`var w=document.querySelector('#smdNarke .vl-warns'); return w ? w.textContent : "none";`)));
     await shot("r5-fio2-warn");
     await click(`[data-act=vlconfirm]`); await sleep(250);
     await skip(900);
     const al5 = await ev(`return [].map.call(document.querySelectorAll('#smdNarke .vl-alarms .vl-al'), function(b){return b.getAttribute('data-k');}).join(',');`);
+    // U13 (engine driftReport): right after the learner's own change the drift line never says "You changed nothing"
+    ok(await ev(`var d=document.getElementById('vlDrift'); return !d || !/You changed nothing/.test(d.textContent);`) === true, "r5 U13: after the learner's FiO2 change the drift line does not say 'You changed nothing'");
     if (/spo2Low/.test(al5)) {
       ok(await ev(`var n=document.querySelector('#smdNarke .vl-next'); return !!n && n.classList.contains('al') && /Handle the alarm first/.test(n.textContent) && !/\\+\\d+ min/.test(n.textContent);`) === true, "r5 U4: with an alarm on, Next says 'Handle the alarm first' and offers no time skip");
       await tap(`.vl-next`);

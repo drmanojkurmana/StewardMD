@@ -23,7 +23,7 @@ const ALARMS_R2 = ["etco2High"];
 const DYSSYNC = ["doubleTrigger", "ineffectiveTrigger", "autoTrigger", "flowStarvation", "prematureCycle", "delayedCycle", "reverseTrigger"];
 const CHAIN = ["setting", "ventilator", "mechanics", "waveforms", "gasExchange", "monitor", "abg", "patient"];
 const TUTORIALS = ["how-it-works", "fio2-peep", "first-alarm", "vt-rr", "pc-vs-vc", "waveforms", "abg-adjust", "ards", "copd-autopeep", "low-spo2", "disconnect", "apnoea-ps"];
-const ACTION_IDS = ["decompress", "suction", "bag100", "disconnect", "bronchodilator", "sedate", "paralyse", "fluid", "blood"];
+const ACTION_IDS = ["decompress", "suction", "bag100", "disconnect", "reconnect", "bronchodilator", "sedate", "paralyse", "fluid", "blood"];
 const SCENARIOS = ["postop-normal", "copd", "asthma", "ards", "cardiogenic-oedema", "pneumonia", "postop-atelectasis",
   "neuromuscular-gbs", "metabolic-dka", "trauma-contusion"];
 const MAIN_WHATIF = ["fio2", "peep", "vt", "rr", "ti", "pinsp", "ps", "trigFlow", "cycle", "rise", "ipap", "epap", "phigh", "tlow"];

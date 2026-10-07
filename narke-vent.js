@@ -404,7 +404,9 @@
     snrCalled: T("Good call. Tell your senior: the patient, the alarm, the numbers and what you have done.", "सही फ़ैसला। Senior को बताएँ: मरीज़, alarm, संख्याएँ और आपने क्या किया।"),
     caseCue: T("Read why, then answer Question 2 below.", "क्यों पढ़ें, फिर नीचे प्रश्न 2 का उत्तर दें।"),
     vdWrong: T("Does not fix it:", "इससे ठीक नहीं होता:"), vdOff: T("in 30 min {x} still off target.", "30 मिनट बाद भी {x} लक्ष्य से बाहर।"),
-    predL: T("prediction", "अनुमान")
+    predL: T("prediction", "अनुमान"), predIn: T("In {m} min (prediction):", "{m} मिनट में (अनुमान):"),
+    driftMine: T("Your change is still working", "आपका बदलाव अभी असर कर रहा है"),
+    noImprove: T("This patient started on target: nothing to improve here, so this run does not count as a best score. Practise the dials, or open a patient with something to fix.", "यह मरीज़ शुरू से लक्ष्य पर था: यहाँ सुधारने को कुछ नहीं, इसलिए यह रन सबसे अच्छे score में नहीं गिना जाता। Dials का अभ्यास करें, या ऐसा मरीज़ खोलें जिसमें कुछ ठीक करना हो।")
   };
   // Plain line for an engine reason: the engine's own `plain` when it gives one, else the table above, else its text.
   function plainWhy(x) {
@@ -415,7 +417,7 @@
   // The bedside actions in a fixed order (never reordered by suggestion, so a hand learns where each one lives).
   // Clinical short names for the coach's live numbers (never an upper-cased key such as "PACO2")
   var NUM_LAB = { spo2: "SpO2", map: "MAP", sbp: "SBP", hr: "HR", paco2: "PaCO2", pao2: "PaO2", ph: "pH", hco3: "HCO3", sao2: "SaO2", etco2: "EtCO2", shunt: "Shunt", rr: "RR" };
-  var BED_ORDER = ["suction", "bag100", "bronchodilator", "sedate", "paralyse", "fluid", "blood", "disconnect", "decompress"];
+  var BED_ORDER = ["reconnect", "suction", "bag100", "bronchodilator", "sedate", "paralyse", "fluid", "blood", "disconnect", "decompress"];
   // Alarm card defaults when the engine gives no bedside list for an alarm (E7): the bedside fix leads, never a limit.
   var CARD_ACTS = { pPeakHigh: ["suction", "bag100"], vtLow: ["suction", "bag100"], veLow: ["bag100", "suction"], apnoea: ["bag100"], spo2Low: ["bag100", "suction"], disconnect: ["bag100"], pPlatHigh: [], autoPeep: ["disconnect"] };
   var CARD_CK = { pPeakHigh: ["ck_look", "ck_bag", "ck_dope", "ck_senior"], vtLow: ["ck_look", "ck_bag", "ck_dope", "ck_senior"], veLow: ["ck_look", "ck_bag", "ck_dope", "ck_senior"],
@@ -886,7 +888,7 @@
       var right = (beg && tu.core ? '<span class="vl-core">' + s("tagCore") + "</span>" : "") + (td[tu.id] ? '<span class="vl-tdone">' + (ico("check") || "") + '<span class="sp-sr">' + s("done") + "</span></span>" : "");
       return I.row("vltut", ' data-k="' + esc(tu.id) + '"', I.tile("play"), tx(tu.title), s("steps", { n: (tu.steps || []).length }), right);
     }
-    var nowT = beg ? tl.filter(function (tu) { return (tu.level || 1) <= n || td[tu.id]; }) : tl, laterT = beg ? tl.filter(function (tu) { return nowT.indexOf(tu) < 0; }) : [];
+    var nowT = beg ? tl.filter(function (tu) { return (tu.level || 1) <= n; }) : tl, laterT = beg ? tl.filter(function (tu) { return nowT.indexOf(tu) < 0; }) : [];
     var tutBlock = tl.length ? '<h2 class="sp-h2">' + s("guided") + '</h2><ul class="sp-rows vl-tuts">' + nowT.map(tutRow).join("") + "</ul>" +
       (laterT.length ? '<details class="vl-later"><summary><span class="vl-later-t">' + s("laterH", { n: laterT.length }) + '</span><span class="vl-later-s">' + s("laterS") + '</span></summary><ul class="sp-rows vl-tuts">' + laterT.map(tutRow).join("") + "</ul></details>" : "") : "";
     var nd = Object.keys(learn().dyssync || {}).filter(function (k) { return DYS_KINDS.indexOf(k) >= 0; });
@@ -1011,7 +1013,7 @@
     run();
   }
   /* ---- unfinished runs: Resume later keeps the run (this device only); opening the patient again resumes it ---- */
-  var RK = "smd_narke_vent_runs", KEEP = ["s", "set", "startSet", "log", "abgs", "answers", "seen", "lastSet", "lastAct", "lastLog", "sil", "ack", "hints", "evSeen", "side", "acts", "hold", "exam", "bad", "tab", "alLab"];
+  var RK = "smd_narke_vent_runs", KEEP = ["s", "set", "startSet", "log", "abgs", "answers", "seen", "lastSet", "lastAct", "lastLog", "sil", "ack", "hints", "evSeen", "side", "acts", "hold", "exam", "bad", "tab", "alLab", "alSelf"];
   function savedRuns() { var o = null; try { o = JSON.parse(I.ls().getItem(RK)); } catch (e) {} return o && typeof o === "object" ? o : {}; }
   // A tutorial's patient is practice: it never writes the patient's own save slot (U5), even after the coach is done.
   function saveRun() {
@@ -1216,7 +1218,7 @@
       (h.callSenior ? '<p class="vl-call">' + s("o2Call") + "</p>" : "") + "</div>";
   }
   function flagsHtml(r) {
-    return (r.flags || []).map(function (f) { return '<span class="vl-fl ' + esc(f.severity || "info") + '">' + tx(f.label) + "</span>"; }).join("");
+    return (r.flags || []).map(function (f) { return '<span class="vl-fl ' + esc(f.severity || "info") + '">' + tx(lv() <= 1 && f.plain ? f.plain : f.label) + "</span>"; }).join(""); // Level 1: the plain line (engine r5)
   }
   function monSay(r) { var v = r.vitals || {}; return s("monSay", { a: fmtN(v.hr), b: fmtN(v.spo2), c: fmtN(v.sbp), d: fmtN(v.dbp), e: fmtN(v.map), f: fmtN(v.rr), g: fmtN(v.etco2), h: v.temp }); }
   function pulse(el) { if (!el || reduced()) return; el.classList.remove("vl-chg"); void el.offsetWidth; el.classList.add("vl-chg"); }
@@ -1250,7 +1252,7 @@
   }
   function driftHtml() {
     var d = R && driftTx(R.drift);
-    return d ? '<p class="vl-drift-p"><b>' + s("driftH") + "</b> <span>" + d + "</span></p>" : "";
+    return d ? '<p class="vl-drift-p"><b>' + s(R.drift && R.drift.mine ? "driftMine" : "driftH") + "</b> <span>" + d + "</span></p>" : "";
   }
   function paintDrift() { var el = $("vlDrift"); if (el) { var h = driftHtml(); if (el.innerHTML !== h) el.innerHTML = h; } }
   function setDrift(d) { if (!R) return; R.drift = d; paintDrift(); }
@@ -1260,8 +1262,11 @@
     if (!b || !b.r) { R.driftBase = { t: R.s.t, r: r }; return; }
     if (R.s.t - b.t < 300) return;
     var e = E(), why = e.whyDrift ? safe(function () { return e.whyDrift(R.s, R.set, b.r); }, null) : null, d = null;
-    if (why && whyTx(why)) d = { why: why };
-    if (!d) {
+    // engine r5: driftReport says whether the learner changed something in the window; then the heading is "Your change
+    // is still working", and "You changed nothing" is never said
+    var rep = e.driftReport ? safe(function () { return e.driftReport(R.s, R.set, b.r); }, null) : null, mine = !!(rep && rep.learnerChanged);
+    if (why && whyTx(why)) d = { why: why, mine: mine };
+    if (!d && !mine) {
       var v0 = b.r.vitals || {}, v1 = r.vitals || {}, g0 = b.r.gas || {}, g1 = r.gas || {}, xs = [];
       if (Math.abs((v1.spo2 || 0) - (v0.spo2 || 0)) >= 3) xs.push(["spo2", v0.spo2, v1.spo2]);
       if (Math.abs((v1.map || 0) - (v0.map || 0)) >= 8) xs.push(["map", v0.map, v1.map]);
@@ -1589,10 +1594,10 @@
     function W(x) { w.push({ t: x }); }
     if (R.pend.peep != null && o.peep > (n <= 2 ? 12 : 18)) W(raw("wHigh", { x: "PEEP", v: o.peep }));
     if (R.pend.peep != null && o.peep < 3 && n <= 2) W(raw("wLow", { x: "PEEP", v: o.peep }));
-    if (R.pend.fio2 != null && o.fio2 < R.set.fio2 && sp != null && sp < spo2Lo()) W(raw("wO2", { v: o.fio2 }));
+    if (!E().settingWarnings && R.pend.fio2 != null && o.fio2 < R.set.fio2 && sp != null && sp < spo2Lo()) W(raw("wO2", { v: o.fio2 }));
     // round 5 (U7, E8): the engine's own Confirm warnings when it gives them; else a big FiO2 drop (20 points or more, or
     // down to room air) on a patient who needs the oxygen: the 30 min prediction says how far SpO2 falls
-    var ew = E().confirmWarnings ? safe(function () { return E().confirmWarnings(R.s, R.set, o); }, null) : null;
+    var ew = E().settingWarnings ? safe(function () { return E().settingWarnings(R.s, R.set, o); }, null) : null;
     if (ew && ew.length) ew.forEach(function (x) { if (x && (x.text || x.en)) w.push({ t: t(x.text || x), info: x.level === "info" }); });
     else if (R.pend.fio2 != null && o.fio2 < R.set.fio2 && !(sp != null && sp < spo2Lo()) && (o.fio2 <= 21 || R.set.fio2 - o.fio2 >= 20)) {
       var pr = safe(function () { return E().readout(E().step(clone(R.s), o, 1800), o); }, null), ps = pr && pr.vitals ? pr.vitals.spo2 : null;
@@ -1978,7 +1983,7 @@
     if (!list.length) return '<p class="vl-al-none">' + (ico("check") ? '<span aria-hidden="true">' + ico("check") + "</span>" : "") + s("alarmsNone") + "</p>";
     // the "+N more" chip on a phone takes the colour of the worst alarm it hides, so a hidden red never looks grey
     var hid = list.slice(1), worst = hid.reduce(function (m, a) { return Math.max(m, R.sil[a.id] > R.s.t || R.ack[a.id] ? 0 : tier(a)); }, 0);
-    var more = list.length > 1 ? '<button type="button" class="vl-al-more' + (worst === 3 ? " danger" : worst === 2 ? " warn" : "") + '" data-act="vlalall" aria-label="' + s("allAlarms", { n: list.length }) + '"><b>' + (list.length === 2 ? s("moreAl1") : s("moreAl", { n: list.length - 1 })) + "</b><small>" + s("reddest") + "</small></button>" : "";
+    var more = list.length > 1 ? '<button type="button" class="vl-al-more' + (worst === 3 ? " danger" : worst === 2 ? " warn" : "") + '" data-act="vlalall" aria-haspopup="dialog"><b>' + (list.length === 2 ? s("moreAl1") : s("moreAl", { n: list.length - 1 })) + "</b><small>" + s("reddest") + "</small></button>" : "";
     return '<h2 class="sp-sr">' + s("alarmsH") + '</h2><ul class="vl-al-list">' + list.map(function (a) {
       var sil = R.sil[a.id] > R.s.t, ak = !!R.ack[a.id];
       return '<li><button type="button" class="vl-al ' + esc(sevOf(a)) + (sil || ak ? " sil" : "") + '" data-act="vlalarm" data-k="' + esc(a.id) + '" aria-label="' + s("alarmOpen", { x: t(a.label) }) + (sil ? ", " + s("silenced") : ak ? ", " + s("acked") : "") + '">' +
@@ -1989,16 +1994,18 @@
   function trackAlarms() {
     var now = allAlarms(), ids = {};
     if (!R.alLab) R.alLab = {};
-    now.forEach(function (a) { ids[a.id] = 1; if (R.seen[a.id] == null) R.seen[a.id] = R.s.t; R.alLab[a.id] = a.label; });
+    if (!R.alSelf) R.alSelf = {};
+    // engine r5 (E6): an alarm the learner's own change caused is "selfMade" (not a response to score), with its times
+    now.forEach(function (a) { ids[a.id] = 1; if (R.seen[a.id] == null) { R.seen[a.id] = R.s.t; R.alSelf[a.id] = !!safe(function () { return causedBy(a); }, null); } R.alLab[a.id] = a.label; });
     Object.keys(R.seen).forEach(function (id) {
       if (ids[id]) return;
-      if (R.lastSet >= R.seen[id] || R.lastAct >= R.seen[id]) R.answers.push({ kind: "alarm", id: id, correct: true });
-      delete R.seen[id];
+      if (R.lastSet >= R.seen[id] || R.lastAct >= R.seen[id]) R.answers.push({ kind: "alarm", id: id, correct: true, t: R.seen[id], clearedT: R.s.t, selfMade: !!R.alSelf[id] });
+      delete R.seen[id]; delete R.alSelf[id];
     });
   }
   function finalAnswers() {
     var out = R.answers.slice();
-    Object.keys(R.seen).forEach(function (id) { if (R.s.t - R.seen[id] >= 300) out.push({ kind: "alarm", id: id, correct: false, t: R.seen[id] }); });
+    Object.keys(R.seen).forEach(function (id) { if (R.s.t - R.seen[id] >= 300) out.push({ kind: "alarm", id: id, correct: false, t: R.seen[id], selfMade: !!(R.alSelf && R.alSelf[id]) }); });
     return out;
   }
   function updAlarms() {
@@ -2086,11 +2093,19 @@
     // with 100%); a CO2 cause (a smaller breath) moves under "Also fix the CO2", and in an emergency a lowered FiO2 is
     // never set "back" to a value below what the emergency needs: bagging leads, the set back waits under "Then".
     var o2 = id === "spo2Low", band = (P && P.spo2Band) || (o2 ? (sev === "danger" ? "emergency" : "mild") : null), also = "";
-    if (o2 && cb && top && (!OX_KEYS[cb.key] || (band === "emergency" && cb.key === "fio2" && +cb.from < 100))) {
+    // Engine r5 (E1): primary.second is the learner-caused fix, under the primary with its own heading. Older engines:
+    // the UI's own rule for low SpO2.
+    var sec2 = pr && pr.second;
+    if (sec2) {
+      also = '<div class="vl-also"><h3 class="vl-h3">' + (sec2.heading ? tx(sec2.heading) : s("alsoThen")) + "</h3>" +
+        (top ? top.replace(/sp-btn pri/g, "sp-btn sec") : sec2.kind === "action" && A0[sec2.id] ? bedBtn({ id: sec2.id, a: A0[sec2.id], on: true, sug: true }, true) : setDef(sec2.key) && ALARM_KEYS.indexOf(sec2.key) < 0 ? planBtn(sec2, "sec") + (sec2.why ? '<p class="vl-note vl-prim-why">' + txg(sec2.why) + "</p>" : "") : "") + "</div>";
+      top = "";
+    } else if (o2 && cb && top && (!OX_KEYS[cb.key] || (band === "emergency" && cb.key === "fio2" && +cb.from < 100))) {
       also = '<div class="vl-also"><h3 class="vl-h3">' + s(OX_KEYS[cb.key] ? "alsoThen" : "alsoCo2") + "</h3>" + top.replace(/sp-btn pri/g, "sp-btn sec") + "</div>";
       top = "";
     }
-    if (o2 && !oxPrim(pr)) pr = o2Prim(band, A0);
+    // an r5 engine (it sends silenceOk) already leads with the alarm's own fix (reconnect, bag, DOPE while bagging)
+    if (o2 && !oxPrim(pr) && !(P && P.silenceOk != null)) pr = o2Prim(band, A0);
     var lead = !top;
     if (top && pr && pr.kind !== "action") pr = null; // the cause block above already carries the setting step
     function actBtn(k, isLead) { if (!A0[k]) return ""; var on = safe(function () { return A0[k].available(R.s); }, false), h = bedBtn({ id: k, a: A0[k], on: on, sug: true }, true); return isLead && on ? h.replace('class="vl-bedb', 'class="vl-bedb lead') : h; }
@@ -2119,7 +2134,7 @@
     var open = sev === "danger" || !!lim || !top;
     sheet((a ? tx(a.label) : esc(id)),
       '<div class="vl-acard ' + esc(sev) + '">' + top + now + also + (more ? '<details class="vl-more"' + (open ? " open" : "") + "><summary>" + s("otherCauses") + "</summary>" + more + "</details>" : "") + "</div>",
-      (silenceOk(a, P, id, band) ? '<button type="button" class="sp-btn sec" data-act="vlsil" data-k="' + esc(id) + '">' + s("silence") + "</button>" : '<p class="vl-nosil" role="note">' + s("noSil") + "</p>") +
+      (silenceOk(a, P, id, band) ? '<button type="button" class="sp-btn sec" data-act="vlsil" data-k="' + esc(id) + '">' + s("silence") + "</button>" : '<p class="vl-nosil" role="note">' + (P && P.silenceWhy ? txg(P.silenceWhy) : a && a.silenceWhy ? txg(a.silenceWhy) : s("noSil")) + "</p>") +
       '<button type="button" class="sp-btn sec" data-act="vlack" data-k="' + esc(id) + '">' + s("ack") + "</button>", b);
   };
   // Silence is not offered for an emergency or a high-priority patient alarm (S10): the engine's silenceOk when it gives
@@ -2169,7 +2184,7 @@
   function focusAlarmBar() { var n = q(".vl-alarms button") || q(".vl-mode"); if (n) n.focus({ preventScroll: true }); }
 
   /* ---- bedside actions (engine E.ACTIONS / E.act) ---- */
-  var BED_ICO = { decompress: "syringe", suction: "droplet", bag100: "lungs", disconnect: "unlink", bronchodilator: "spray", sedate: "moon", fluid: "droplet", blood: "droplet" };
+  var BED_ICO = { decompress: "syringe", suction: "droplet", bag100: "lungs", disconnect: "unlink", reconnect: "plus", bronchodilator: "spray", sedate: "moon", fluid: "droplet", blood: "droplet" };
   // Fallback when the engine has no E.suggestActions: the actions the alarm card's own fix names (then its steps).
   var BED_RX = { decompress: /decompress|needle|drain/i, suction: /suction/i, bag100: /\bbag/i, disconnect: /disconnect/i, bronchodilator: /bronchodilat|salbutamol|nebul/i, sedate: /sedat|paralys/i, fluid: /fluid|bolus/i, blood: /blood|transfus/i };
   function alarmActs(id) {
@@ -2196,7 +2211,7 @@
     // every action, in one fixed order (U4: Level 1 has them too, folded); suggestion marks, never reorders
     return ks.map(function (k) {
       return { id: k, a: acts[k], on: safe(function () { return acts[k].available(R.s); }, false), sug: !!sug[k] };
-    });
+    }).filter(function (x) { return x.id !== "reconnect" || x.on; }); // Reconnect shows only while off the ventilator
   }
   function bedBtn(x, inSheet) {
     var left = actLeft(x.id), used = lastUse(x.id);
@@ -2266,7 +2281,9 @@
     if (v0.map !== v1.map) eff.push(raw("sawVal", { x: "MAP", a: fmtN(v0.map), b: fmtN(v1.map) }));
     I.haptic("tap");
     var trd = r1.oxygenTrend && r1.oxygenTrend.direction === "down" && r1.oxygenTrend.reason ? " " + tx(r1.oxygenTrend.reason) : "";
-    toast("event", s("bedDone", { x: t(a.label) }) + (eff.length ? ". " + esc(eff.join(", ")) + "." : "") + trd);
+    // reconnect (engine r5): the checks to do once back on the ventilator (chest rise, VTe, EtCO2) travel with it
+    var cks = a.checks && a.checks.length ? " " + a.checks.slice(0, 3).map(function (x) { return tx(x); }).join(" ") : "";
+    toast("event", s("bedDone", { x: t(a.label) }) + (eff.length ? ". " + esc(eff.join(", ")) + "." : "") + trd + cks);
     say(raw("bedDone", { x: t(a.label) }) + (id === "bag100" ? ". " + raw("bagOff") : ""));
     if (R.tut) { R.tut.did = id; tutCheck(); }
     var n = q('#vlBedW [data-k="' + id + '"]') || q("#vlBedW button") || q(".vl-mode"); if (n) n.focus({ preventScroll: true });
@@ -2473,15 +2490,10 @@
       // repaint at once (the clock may be stopped at Level 1, so no tick would show the alarm the event raises)
       refresh(true);
     }
-    // a reconnect step (round 5, U11): bagging ends and the patient goes back on the ventilator, so the tutorial ends
-    // connected (the engine's own reconnect action when it has one; else the bag's last seconds run out)
-    if (sp.reconnect && bagLeft() > 0) {
-      var AC = E().ACTIONS || {};
-      if (AC.reconnect && safe(function () { return AC.reconnect.available(R.s); }, false)) R.s = E().act(R.s, "reconnect");
-      else R.s = E().step(R.s, R.set, bagLeft());
-      R.log.push({ t: R.s.t, settings: clone(R.set), readout: cur(), action: "wait" }); R.lastLog = R.s.t;
-      refresh(true);
-    }
+    // a reconnect step (round 5, U11) whose bag has already run out while time moved on: the patient is back on the
+    // ventilator, so the step is done (the tutorial still ends connected)
+    var AC = E().ACTIONS || {};
+    if (sp.do && sp.do.action === "reconnect" && AC.reconnect && !safe(function () { return AC.reconnect.available(R.s); }, true)) R.tut.ok = true;
     if (sp.expect && R.tut.ok) tutObserve(sp);
     var ro = $("vlRo"); if (ro) ro.innerHTML = roHtml(cur());
     // the control the step asks for exists and is open: a dial above the level, the alarm limits, the bedside group
@@ -2799,6 +2811,8 @@
     }
     var ws = sco.worstSpell, wsEn = ws && ws.what ? "Longest time off a goal" : null;
     var us = unsafeList(sco), notes = (sco.notes || []).filter(function (n) { return !(wsEn && n && n.en && n.en.indexOf(wsEn) === 0); }).map(anyTx).filter(Boolean), good = sco.goodRun || sco.good || sco.goodRunDescription;
+    // the engine's "nothing to improve" note (its first note then) leads the debrief instead of hiding in the takeaways
+    var noimp = sco.nothingToImprove ? (notes.length ? notes.shift() : s("noImprove")) : null;
     var worst = ws && ws.what ? '<div class="vl-worst" role="note"><p class="vl-o2h-h"><b>' + s("worstH") + "</b></p><p>" + s("worstLine", { x: t(ws.what), a: ws.fromMin, b: ws.toMin, m: ws.minutes }) + "</p></div>" : "";
     var key = (sc.debrief || []).map(function (n) { return txg(n); });
     var tone = R.arrest ? "bad" : sco.total >= 80 ? "ok" : sco.total >= 60 ? "mid" : "bad";
@@ -2806,6 +2820,8 @@
       '<div class="sp-scroll sp-pad"><div class="sp-col vl-done">' +
       (R.arrest ? '<div class="vl-arrest vl-arrest-d" role="note"><h2 class="vl-h">' + s("arrestH") + "</h2>" + arrestHtml() + "</div>" : "") +
       '<div class="vl-score ' + tone + '" tabindex="-1"><b>' + I.fmt(sco.total || 0) + "</b><span>" + s("outOf") + "</span></div>" +
+      // engine r5: a patient on target at the start says so, and the run does not count as a best (E6)
+      (noimp ? '<p class="vl-worst vl-noimp" role="note">' + noimp + "</p>" : "") +
       '<ul class="vl-parts">' + parts + "</ul>" + worst +
       '<h2 class="sp-h2">' + s("unsafeH") + "</h2>" + (us.length ? '<ul class="dr-lines vl-notes vl-unsafe">' + us.map(function (x) { return "<li>" + x + "</li>"; }).join("") + "</ul>" : '<p class="vl-empty">' + s("unsafeNone") + "</p>") +
       (tg.length ? '<h2 class="sp-h2">' + s("atEndT", { t: clockText(R.s.t) }) + '</h2><table class="vl-goals"><tbody>' + tg.join("") + "</tbody></table>" + (sco.goals && sco.goals.missedText ? '<p class="vl-plain">' + anyTx(sco.goals.missedText) + "</p>" : "") : "") +
@@ -3006,7 +3022,8 @@
   }
   // "Why" lines under a gas: Level 1 one plain line per gas and direction, the engine's formulas under More detail.
   function whyList(rs, beg) {
-    var li = function (x, txt) { return "<li>" + arrow(x.direction === "down" ? -1 : 1) + "<span><b>" + esc(x.param || "") + "</b> " + txt + "</span></li>"; };
+    // a reason about the future (engine r5 prediction + horizonMin) says so: "In 30 min (prediction)"
+    var li = function (x, txt) { return "<li>" + arrow(x.direction === "down" ? -1 : 1) + "<span><b>" + esc(x.param || "") + "</b> " + (x.prediction ? '<small class="vl-pred">' + s("predIn", { m: x.horizonMin || 30 }) + "</small> " : "") + txt + "</span></li>"; };
     if (!beg) return '<ul class="vl-why">' + rs.map(function (x) { return li(x, tx(x.because)); }).join("") + "</ul>";
     var seen = {}, pl = rs.filter(function (x) { var k = x.param + x.direction; if (seen[k]) return false; seen[k] = 1; return true; });
     return '<ul class="vl-why">' + pl.map(function (x) { return li(x, esc(plainWhy(x))); }).join("") + "</ul>" +
@@ -3047,7 +3064,7 @@
         var wi = safe(function () { return e.whatIf(st0, set0, ch); }, null) || {};
         var pB = safe(function () { return e.step(clone(st0), set0, 1800); }, st0), pA = safe(function () { return e.step(clone(st0), set1, 1800); }, st0);
         res.before = e.readout(st0, set0); res.after = (!ch.also && (wi["with"] || wi.after)) || e.readout(pA, set1);
-        res.reasons = agree(safe(function () { return e.explainDelta(e.abg(st0), e.abg(pA), set0, set1, st0, pA); }, []), e.abg(st0), e.abg(pA));
+        res.reasons = agree(safe(function () { return e.explainDelta(e.abg(st0), e.abg(pA), set0, set1, st0, pA, { prediction: true, horizonMin: 30 }); }, []), e.abg(st0), e.abg(pA));
       }
       CS.res = res;
     }

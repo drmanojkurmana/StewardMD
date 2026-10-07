@@ -2751,10 +2751,12 @@
     },
     {
      "say": {
-      "en": "Bagging is over: put him back on the ventilator. Check that his chest rises, VTe comes back and the EtCO2 trace returns with every breath.",
-      "hi": "Bagging पूरी: उन्हें वापस ventilator पर लगाएँ। जाँचें कि छाती उठ रही है, VTe लौट आया है और हर साँस के साथ EtCO2 trace लौट रहा है।"
+      "en": "Bagging is over: reconnect him to the ventilator. Then check that his chest rises, VTe comes back and the EtCO2 trace returns with every breath.",
+      "hi": "Bagging पूरी: उन्हें फिर ventilator से जोड़ें। फिर जाँचें कि छाती उठ रही है, VTe लौट आया है और हर साँस के साथ EtCO2 trace लौट रहा है।"
      },
-     "reconnect": true,
+     "do": {
+      "action": "reconnect"
+     },
      "highlight": [
       "vte",
       "ve"
