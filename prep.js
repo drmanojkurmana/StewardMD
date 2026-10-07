@@ -351,8 +351,12 @@
     return '<span class="pn-mring" aria-hidden="true"><svg viewBox="0 0 44 44"><circle class="rt" cx="22" cy="22" r="18" pathLength="100"/>' + (pct > 0 ? '<circle class="rv" cx="22" cy="22" r="18" pathLength="100" stroke-dasharray="' + pct + ' 100"/>' : "") + "</svg><b>" + label + "</b></span>";
   }
   function bar(title, sub, left, right) {
-    return '<header class="pn-bar"><button type="button" class="pn-ib" data-act="' + (left || "back") + '" aria-label="' + (left === "close" ? "Close PrepNucleus" : "Back") + '">' + ico(left === "close" ? "close" : "back") + "</button>" +
-      '<div class="pn-t"><h1>' + title + "</h1>" + (sub ? "<p>" + sub + "</p>" : "") + "</div>" + (right || '<span class="pn-ib-sp"></span>') + "</header>";
+    var isPN = title === "PrepNucleus";
+    var tHtml = isPN
+      ? '<h1 class="pn-t-brand"><img class="pn-bar-logo" src="/prep/art/logo-icon.png" alt="" width="22" height="22" decoding="async"><span>' + title + "</span></h1>"
+      : "<h1>" + title + "</h1>";
+    return '<header class="pn-bar' + (isPN ? " pn-bar-brand" : "") + '"><button type="button" class="pn-ib" data-act="' + (left || "back") + '" aria-label="' + (left === "close" ? "Close PrepNucleus" : "Back") + '">' + ico(left === "close" ? "close" : "back") + "</button>" +
+      '<div class="pn-t">' + tHtml + (sub ? "<p>" + sub + "</p>" : "") + "</div>" + (right || '<span class="pn-ib-sp"></span>') + "</header>";
   }
   // Round 4: a navigation (push, back, a tab) marks the next paint so prep-motion.js can play the shared-axis slide or
   // the cross-fade on it. The mark lapses after 1.5 s, so an unrelated repaint later never slides.
@@ -462,6 +466,7 @@
     var nb = Object.keys(s.bm).length;
     paint('<div class="pn-sky" aria-hidden="true"></div>' + bar("PrepNucleus", ex.label, "close", '<button type="button" class="pn-ib" data-act="downloads" aria-label="Offline downloads">' + ico("dl") + "</button>") +
       tabs + '<div class="pn-body pn-home" id="pnHome">' +
+      '<div class="pn-banner pn-brand-banner" role="img" aria-label="PrepNucleus: AI-Powered Medical Prep"></div>' +
       // Readiness and Today's plan (prep-plan.js); the older Today card without it.
       (G.PREP_PLAN ? G.PREP_PLAN.homeHtml(HOST) : '<h2 class="pn-h">Today</h2>' + planCard(s)) +
       (arena ? '<p class="pn-eb" aria-hidden="true">Live, with other students</p><h2 class="pn-h">Compete</h2><div id="pnCompete">' + G.PREP_ARENA.homeHtml(HOST) + "</div>" : "") +

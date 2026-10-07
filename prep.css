@@ -56,6 +56,9 @@ body.dark .pn-root {
 .pn-root .pn-ib-sp { width: 44px; flex: 0 0 auto; }
 .pn-root .pn-t { flex: 1 1 auto; min-width: 0; padding: 0 4px; }
 .pn-root .pn-t h1 { font-size: 17px; font-weight: 700; letter-spacing: -.012em; line-height: 1.25; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pn-root .pn-t-brand { display: inline-flex; align-items: center; gap: 7px; }
+.pn-root .pn-bar-logo { display: inline-block; width: 22px; height: 22px; vertical-align: middle; flex-shrink: 0; object-fit: contain; }
+body.dark .pn-root .pn-bar-logo { filter: drop-shadow(0 0 6px rgba(99, 240, 219, .45)); }
 .pn-root .pn-t p { font-size: 13px; color: var(--pn-mut); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .pn-root .pn-clock { flex: 0 0 auto; min-width: 64px; padding: 0 4px; text-align: right; font-family: var(--pn-num); font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums; }
 
@@ -922,8 +925,10 @@ body.dark .pn-root .pn-load { --sk: rgba(190, 235, 240, .06); --sk-hi: rgba(190,
 .pn-root .pn-banner, .pn-root #pnYq::before { content: ""; display: block; width: 100%; max-width: 720px; margin: 0 auto -4px; aspect-ratio: 16 / 7; border-radius: 22px; background: center / cover no-repeat; flex: 0 0 auto;
   box-shadow: 0 18px 36px -24px rgba(4, 30, 30, .9), inset 0 0 0 1px rgba(255, 255, 255, .06); }
 .pn-root .pn-banner.pn-art-mock { background-image: url(/prep/art/mock.webp); }
+.pn-root .pn-banner.pn-brand-banner { background-image: url(/prep/art/banner-light.webp); margin: 6px auto 14px; box-shadow: 0 16px 36px -18px rgba(4, 30, 30, .35), inset 0 0 0 1px rgba(14, 90, 62, .14); }
 .pn-root #pnYq::before { background-image: url(/prep/art/papers.webp); background-position: 50% 40%; }
 body.dark .pn-root .pn-banner, body.dark .pn-root #pnYq::before { -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent 100%); mask-image: linear-gradient(180deg, #000 60%, transparent 100%); box-shadow: none; border-radius: 22px 22px 0 0; }
+body.dark .pn-root .pn-banner.pn-brand-banner { background-image: url(/prep/art/banner-dark.webp); -webkit-mask-image: none; mask-image: none; border-radius: 22px; box-shadow: 0 18px 42px -20px rgba(0, 0, 0, .85), inset 0 0 0 1px rgba(99, 240, 219, .22), inset 0 1px 0 rgba(255, 255, 255, .15); }
 
 /* Mock analysis: a meter under each subject. */
 .pn-root .pn-mb .pn-meter { margin-top: 6px; }

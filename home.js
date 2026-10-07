@@ -2163,7 +2163,7 @@
       eligible: function () { try { var q = (location.search.match(/[?&]tokos=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_tokos") !== "0"; } catch (e) { return true; } } },
     // PrepNucleus (prep.js, loaded on first open by prep-loader.js): the NEET-PG, INI-CET, NEET-SS and USMLE question
     // bank (vault/plans/PrepNucleus.md). ON for all (owner 2026-10-06); smd_prep="0" or ?prep=0 hides it.
-    { act: "prep", ic: "quiz", tt: "PrepNucleus", sub: "Exam question bank",
+    { act: "prep", ic: "quiz", anim: "prep", tt: "PrepNucleus", sub: "Exam question bank",
       eligible: function () { try { var q = (location.search.match(/[?&]prep=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_prep") !== "0"; } catch (e) { return true; } } },
     // Narkē (narke.js on the specialty engine, loaded on first open by narke-loader.js): Anaesthesia learning. ON for all
     // (owner 2026-10-06); kill switch smd_narke="0" or ?narke=0. Content stays "draft" until an anaesthesiologist approves it.
@@ -2370,7 +2370,9 @@
     // which works because the PNG is alpha-masked rather than a white-background image.
     // Not a loop of motion but a blade glint (owner, 2026-09-27: "SurgX should shine like a sharp
     // knife"): redesign-system.css sweeps a streak of light across the mark, clipped to its shape.
-    surgx: '<img class="ai-brandmark ai-surgx-img" src="/surgx-logo.png" alt="">'
+    surgx: '<img class="ai-brandmark ai-surgx-img" src="/surgx-logo.png" alt="">',
+    // PrepNucleus: the 4K nucleus mark (prepnucleus-logo.png), alpha-masked; brightness(0) invert(1) forces it white on this badge.
+    prep: '<img class="ai-brandmark ai-prep-img" src="/prepnucleus-logo.png" alt="PrepNucleus">'
   };
   /* Role box (owner, 2026-09-26): tools outside the user's role stay on Home but locked, after the
    * open ones, and explain themselves on tap. role-features.js owns the map; this is presentation

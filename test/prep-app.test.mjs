@@ -281,3 +281,35 @@ test("battle state machine: queue, match, rounds, end; busy, slow, nobody, resum
   assert.equal(back.phase, "match"); assert.equal(back.resumed, true); assert.deepEqual(back.score, [18, 12]);
   for (const t of ["busy", "slow", "nobody"]) { const x = AR.battleStep(AR.battleNew(), { t }, t0); assert.equal(x.phase, t); assert.equal(AR.battleClosed(x), x); }
 });
+
+test("PrepNucleus 4K logo icon and banner assets ship and are wired", () => {
+  const rootLogo = path.join(ROOT, "prepnucleus-logo.png");
+  assert.ok(fs.existsSync(rootLogo), "prepnucleus-logo.png must exist at repo root");
+  const logoBuf = fs.readFileSync(rootLogo);
+  assert.equal(logoBuf.slice(1, 4).toString("ascii"), "PNG", "must be a PNG");
+  assert.equal(logoBuf[25], 6, "prepnucleus-logo.png must have RGBA alpha channel");
+  assert.ok(logoBuf.length < 400 * 1024, "prepnucleus-logo.png must be under 400KB");
+
+  const icon4k = path.join(ROOT, "prep/art/logo-icon-4k.png");
+  assert.ok(fs.existsSync(icon4k), "4K logo icon must exist");
+
+  const bannerDark = path.join(ROOT, "prep/art/banner-dark.webp");
+  const bannerLight = path.join(ROOT, "prep/art/banner-light.webp");
+  const banner4k = path.join(ROOT, "prep/art/banner-4k.png");
+  assert.ok(fs.existsSync(bannerDark), "banner-dark.webp must exist");
+  assert.ok(fs.existsSync(bannerLight), "banner-light.webp must exist");
+  assert.ok(fs.existsSync(banner4k), "banner-4k.png must exist");
+
+  const prepJs = read("prep.js");
+  assert.match(prepJs, /pn-bar-logo/, "prep.js must render the logo icon in the header");
+  assert.match(prepJs, /pn-brand-banner/, "prep.js must render the brand banner in renderHome");
+
+  const prepCss = read("prep.css");
+  assert.match(prepCss, /\.pn-brand-banner/, "prep.css must style pn-brand-banner");
+  assert.match(prepCss, /\.pn-bar-logo/, "prep.css must style pn-bar-logo");
+
+  const homeJs = read("home.js");
+  assert.match(homeJs, /prepnucleus-logo\.png/, "home.js must reference prepnucleus-logo.png");
+  assert.match(homeJs, /act: "prep"[\s\S]*anim: "prep"/, "HOME_TOOLS must declare anim: prep");
+});
+
