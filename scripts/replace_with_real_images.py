@@ -413,6 +413,94 @@ SPECIFIC_DISEASE_IMAGES = {
             {"label": "Cholelithiasis", "description": "Echogenic intraluminal calculi casting strong posterior acoustic shadowing."},
             {"label": "Sonographic Murphy Sign", "description": "Focal tenderness elicited when the transducer compresses the gallbladder fundus."}
         ]
+    },
+    "ventricular_tachycardia": {
+        "src": "/assets/kb-real-images/ventricular-tachycardia-ecg.jpg?v=kbri3",
+        "type": "ecg",
+        "title_suffix": "12-Lead Diagnostic ECG (Ventricular Tachycardia)",
+        "caption": "Real 12-lead electrocardiogram showing monomorphic wide-complex ventricular tachycardia with AV dissociation and extreme axis deviation.",
+        "annotations": [
+            {"label": "Wide QRS", "description": "QRS duration >140 ms with concordant precordial pattern."},
+            {"label": "AV Dissociation", "description": "Independent P waves dissociated from rapid regular ventricular rhythm."},
+            {"label": "Capture & Fusion", "description": "Intermittent capture and fusion beats confirming ventricular origin."}
+        ]
+    },
+    "pulmonary_embolism": {
+        "src": "/assets/kb-real-images/pulmonary-embolism-ct.jpg?v=kbri3",
+        "type": "ct",
+        "title_suffix": "CT Pulmonary Angiogram (Saddle Pulmonary Embolus)",
+        "caption": "Real contrast-enhanced CT pulmonary angiography demonstrating a large saddle embolus occluding the pulmonary trunk bifurcation.",
+        "annotations": [
+            {"label": "Saddle Thrombus", "description": "Hypodense filling defect straddling the pulmonary artery bifurcation."},
+            {"label": "Lobar Occlusion", "description": "Abrupt vascular cutoff and persistent perfusion defect in lobar branches."},
+            {"label": "RV Strain", "description": "Right ventricular dilatation with RV/LV diameter ratio >1.0."}
+        ]
+    },
+    "subdural_hematoma": {
+        "src": "/assets/kb-real-images/subdural-hematoma-ct.jpg?v=kbri3",
+        "type": "ct",
+        "title_suffix": "Non-Contrast Head CT (Subdural Hematoma)",
+        "caption": "Real axial non-contrast head CT demonstrating a crescentic extra-axial hematoma crossing suture lines with mass effect.",
+        "annotations": [
+            {"label": "Crescentic Hematoma", "description": "Concave inner margin conforming to hemispheric convexity crossing suture lines."},
+            {"label": "Mass Effect", "description": "Ipsilateral lateral ventricle compression and midline shift."},
+            {"label": "Parenchymal Herniation", "description": "Subfalcine or uncal herniation vector requiring surgical evacuation."}
+        ]
+    },
+    "gout": {
+        "src": "/assets/kb-real-images/gout-tophi.jpg?v=kbri3",
+        "type": "diagram",
+        "title_suffix": "Clinical Examination Photography (Tophaceous Gout)",
+        "caption": "Real clinical photograph displaying chalky white subcutaneous monosodium urate tophaceous deposits in chronic gout.",
+        "annotations": [
+            {"label": "Subcutaneous Tophi", "description": "Firm nodular deposits of monosodium urate crystals at articular margins."},
+            {"label": "Joint Erythema", "description": "Overlying cutaneous erythema and cutaneous thinning from inflammatory micro-erosions."},
+            {"label": "1st MTP Involvement", "description": "Classic podagra localization at the first metatarsophalangeal joint."}
+        ]
+    },
+    "psoriasis": {
+        "src": "/assets/kb-real-images/psoriasis-plaque.jpg?v=kbri3",
+        "type": "diagram",
+        "title_suffix": "Clinical Dermatology Photograph (Plaque Psoriasis)",
+        "caption": "Real clinical photograph showing sharply demarcated erythematous plaques covered by silvery micaceous scales.",
+        "annotations": [
+            {"label": "Erythematous Plaques", "description": "Sharply marginated, raised, salmon-pink erythematous cutaneous plaques."},
+            {"label": "Micaceous Scaling", "description": "Thick, layered, silvery-white scales characteristic of accelerated epidermal turnover."},
+            {"label": "Auspitz Phenomenon", "description": "Punctate bleeding upon gentle detachment of adherent scales."}
+        ]
+    },
+    "sickle_cell_disease": {
+        "src": "/assets/kb-real-images/sickle-cell-smear.jpg?v=kbri3",
+        "type": "diagram",
+        "title_suffix": "Peripheral Blood Smear (Sickle Cell Anemia)",
+        "caption": "Real MGG-stained peripheral blood smear displaying crescent-shaped irreversible sickle cells (drepanocytes) and target cells.",
+        "annotations": [
+            {"label": "Drepanocytes", "description": "Elongated, curved erythrocytes with pointed ends from hemoglobin S polymerization."},
+            {"label": "Target Cells & Howell-Jolly", "description": "Functional asplenia signs including codocytes and nuclear remnants."},
+            {"label": "Polychromasia", "description": "Elevated reticulocyte release responding to ongoing intravascular hemolysis."}
+        ]
+    },
+    "tumour-lysis-syndrome": {
+        "src": "/assets/kb-real-images/acute-leukemia-smear.jpg?v=kbri3",
+        "type": "diagram",
+        "title_suffix": "Bone Marrow / Blood Smear (Acute Leukemia Blasts)",
+        "caption": "Real high-power microscopic smear showing high blast burden in acute leukemia driving spontaneous or treatment-induced tumor lysis.",
+        "annotations": [
+            {"label": "Blasts Burden", "description": "Immature leukemic blast cells with high nuclear-to-cytoplasmic ratio."},
+            {"label": "Nucleic Acid Turnover", "description": "Intense cellular turnover driving hyperuricemia and hyperphosphatemia."},
+            {"label": "Auer Rods & Granules", "description": "Pathognomonic cytoplasmic Auer rods in acute promyelocytic/myeloid lineage."}
+        ]
+    },
+    "iron_deficiency_anemia": {
+        "src": "/assets/kb-real-images/iron-deficiency-smear.jpg?v=kbri3",
+        "type": "diagram",
+        "title_suffix": "Peripheral Blood Film (Microcytic Hypochromic Anemia)",
+        "caption": "Real Giemsa-stained peripheral blood film showing marked microcytosis, exaggerated central pallor, and pencil cells.",
+        "annotations": [
+            {"label": "Microcytosis & Hypochromia", "description": "Diminutive red cells with thin rims of hemoglobin and enlarged central pallor (>1/3)."},
+            {"label": "Poikilocytosis & Pencil Cells", "description": "Elongated elliptical 'pencil' erythrocytes characteristic of severe iron deficiency."},
+            {"label": "Anisocytosis", "description": "Elevated red cell distribution width (RDW) reflecting disparate cell sizing."}
+        ]
     }
 }
 
