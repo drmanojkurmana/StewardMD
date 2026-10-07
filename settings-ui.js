@@ -76,7 +76,7 @@
       if (!button.querySelector('.sbr-chev')) { var arrow = document.createElement('span'); arrow.className = 'sbr-chev'; arrow.setAttribute('aria-hidden', 'true'); arrow.textContent = '›'; button.appendChild(arrow); }
     });
     var controls = document.createElement('div'); controls.className = 'settings-tools';
-    controls.innerHTML = '<label class="settings-search"><span>Find a setting</span><input type="search" placeholder="Search settings" autocomplete="off"></label><nav class="settings-nav" aria-label="Settings categories"></nav><p class="settings-results" role="status" aria-live="polite" hidden></p>';
+    controls.innerHTML = '<label class="settings-search"><span>Find a setting</span><input type="search" placeholder="Search settings…" autocomplete="off" spellcheck="false"></label><nav class="settings-nav" aria-label="Settings categories"></nav><p class="settings-results" role="status" aria-live="polite" hidden></p>';
     intro.insertAdjacentElement('afterend', controls);
     var nav = controls.querySelector('nav'), input = controls.querySelector('input'), status = controls.querySelector('[role=status]'), active = lastView.category; input.value = lastView.query;
     if (active !== 'All' && !groups.some(function (g) { return g.getAttribute('data-title') === active; })) active = 'All';
