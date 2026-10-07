@@ -868,3 +868,105 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-bedb-i { color: var(--nk-text); }
 .nrk-root .vl-worst { margin: 12px 0; }
 .nrk-root .vl-interp { margin: 10px 0 0; font-size: 14.5px; line-height: 1.45; }
 .nrk-root .vl-interp p { margin: 0 0 6px; }
+
+/* ================= round 5 ================= */
+/* U1: "Your path" at the top of the lab home. A numbered rail: done steps tick and quieten, the next step is the one
+   tinted row, and the finish line sits at the bottom. */
+.nrk-root .vl-path { margin: 16px 0 6px; padding: 14px 14px 12px; border-radius: 16px; background: var(--vl-card); border: 1px solid var(--vl-cline); }
+.nrk-root .vl-path-h { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.nrk-root .vl-path-h .sp-h2 { margin: 0; }
+.nrk-root .vl-path-n { font-size: 13px; font-weight: 650; color: var(--sp-mut); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.nrk-root .vl-path-bar { height: 4px; margin: 10px 0 6px; border-radius: 2px; background: color-mix(in srgb, var(--sp-mut) 20%, transparent); overflow: hidden; }
+.nrk-root .vl-path-bar i { display: block; height: 100%; background: var(--nk-ok); transform-origin: left; }
+.nrk-root .vl-path-l { list-style: none; margin: 0; padding: 0; position: relative; }
+.nrk-root .vl-path-l > li { position: relative; }
+.nrk-root .vl-path-l > li + li::before { content: ""; position: absolute; left: 25px; top: -4px; height: 10px; width: 2px; background: var(--vl-cline); }
+.nrk-root .vl-path-l > li.done + li::before { background: color-mix(in srgb, var(--nk-ok) 60%, var(--vl-cline)); }
+.nrk-root .vl-pstep { width: 100%; min-height: 52px; display: flex; align-items: center; gap: 12px; padding: 6px 6px 6px 4px; margin: 3px 0; border: 1px solid transparent; border-radius: 12px;
+  background: none; color: var(--sp-text); font: inherit; text-align: left; touch-action: manipulation; -webkit-user-select: none; user-select: none; transition: transform 140ms var(--vl-ease, ease-out), background-color 160ms ease; }
+.nrk-root .vl-pstep:active { transform: scale(.985); }
+.nrk-root .vl-pnum { flex: 0 0 32px; width: 32px; height: 32px; display: grid; place-items: center; margin-left: 6px; border-radius: 50%; border: 1.5px solid var(--vl-cline); font-size: 14px; font-weight: 750; font-variant-numeric: tabular-nums; color: var(--sp-mut); background: var(--vl-card); }
+.nrk-root .vl-pnum .smd-ico { width: 16px; height: 16px; }
+.nrk-root .vl-pb { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.nrk-root .vl-pb b { font-size: 15px; font-weight: 650; line-height: 1.3; text-wrap: pretty; }
+.nrk-root .vl-pb small { font-size: 12.5px; color: var(--sp-mut); line-height: 1.35; }
+.nrk-root .vl-pnx { flex: 0 0 auto; font-size: 11.5px; font-weight: 750; letter-spacing: .04em; text-transform: uppercase; color: var(--vl-acc); }
+.nrk-root .vl-pstep .vl-chev { flex: 0 0 auto; color: var(--sp-mut); display: grid; }
+.nrk-root .vl-pstep .vl-chev .smd-ico { width: 16px; height: 16px; }
+.nrk-root .vl-path-l > li.done .vl-pnum { border-color: transparent; background: color-mix(in srgb, var(--nk-ok) 18%, transparent); color: var(--nk-ok); }
+.nrk-root .vl-path-l > li.done .vl-pb b { color: var(--sp-mut); font-weight: 600; }
+.nrk-root .vl-path-l > li.next .vl-pstep { background: var(--vl-acc-soft); border-color: color-mix(in srgb, var(--vl-acc) 55%, transparent); }
+.nrk-root .vl-path-l > li.next .vl-pnum { border-color: var(--vl-acc); color: var(--vl-acc); }
+.nrk-root .vl-path-fin { display: flex; gap: 10px; align-items: flex-start; margin: 10px 0 0; padding: 10px 12px; border-radius: 12px; border: 1px dashed var(--vl-cline); font-size: 14px; line-height: 1.45; color: var(--sp-mut); }
+.nrk-root .vl-path-fin .smd-ico { width: 18px; height: 18px; flex: 0 0 auto; margin-top: 1px; }
+.nrk-root .vl-path.ready .vl-path-fin { border-style: solid; border-color: color-mix(in srgb, var(--nk-ok) 55%, transparent); background: color-mix(in srgb, var(--nk-ok) 12%, transparent); color: var(--sp-text); }
+.nrk-root .vl-path.ready .vl-path-fin b { display: block; color: var(--nk-ok); font-size: 15px; }
+@media (hover: hover) and (pointer: fine) { .nrk-root .vl-pstep:hover { background: var(--nk-s2); } .nrk-root .vl-path-l > li.next .vl-pstep:hover { background: var(--vl-acc-soft); } }
+.nrk-root .vl-pstep:focus-visible { outline: 2px solid var(--vl-acc); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .nrk-root .vl-pstep { transition: none; } .nrk-root .vl-pstep:active { transform: none; } }
+/* U3: Core tag and the Later fold */
+.nrk-root .vl-core { display: inline-block; margin-top: 4px; font-size: 11.5px; font-weight: 700; color: var(--vl-acc); border: 1px solid color-mix(in srgb, var(--vl-acc) 50%, transparent); border-radius: 6px; padding: 1px 7px; }
+.nrk-root .vl-core + .vl-tdone { margin-left: 8px; vertical-align: -3px; }
+.nrk-root .vl-later { margin: 6px 0 4px; border: 1px solid var(--vl-cline); border-radius: 14px; padding: 0 12px; }
+.nrk-root .vl-later > summary { min-height: 52px; display: flex; flex-direction: column; justify-content: center; gap: 2px; padding: 8px 24px 8px 0; cursor: pointer; list-style: none; position: relative; }
+.nrk-root .vl-later > summary::-webkit-details-marker { display: none; }
+.nrk-root .vl-later > summary::after { content: ""; position: absolute; right: 4px; top: 50%; width: 8px; height: 8px; margin-top: -6px; border-right: 2px solid var(--sp-mut); border-bottom: 2px solid var(--sp-mut); transform: rotate(45deg); transition: transform 200ms var(--vl-ease, ease-out); }
+.nrk-root .vl-later[open] > summary::after { transform: rotate(225deg); margin-top: -2px; }
+.nrk-root .vl-later-t { font-size: 15px; font-weight: 650; color: var(--sp-text); }
+.nrk-root .vl-later-s { font-size: 13px; color: var(--sp-mut); line-height: 1.35; }
+.nrk-root .vl-later .sp-rows { margin-bottom: 8px; }
+.nrk-root .vl-ontgt { border-style: dashed; }
+/* U2: tutorial finish card */
+.nrk-root .vl-fin-d { display: flex; gap: 10px; align-items: flex-start; margin: 0 0 10px; font-size: 16px; font-weight: 650; line-height: 1.4; }
+.nrk-root .vl-fin-i { flex: 0 0 28px; width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: color-mix(in srgb, var(--nk-ok) 18%, transparent); color: var(--nk-ok); }
+.nrk-root .vl-fin-i .smd-ico { width: 16px; height: 16px; }
+.nrk-root .vl-fin-n { margin: 0; font-size: 15px; line-height: 1.45; }
+.nrk-root .vl-fin-f { display: grid; gap: 8px; width: 100%; }
+.nrk-root .vl-fin-f .sp-btn { width: 100%; }
+.nrk-root .vl-fin-stay { justify-self: center; text-align: center; }
+.nrk-root .vl-senior { margin: 0 0 10px; padding: 10px 12px; border-radius: 12px; font-size: 14px; font-weight: 600; line-height: 1.45;
+  background: color-mix(in srgb, var(--nk-warn) 13%, transparent); border-left: 3px solid var(--nk-warn); }
+.nrk-root .vl-coach .vl-senior { margin: 8px 0 0; }
+/* U4: the Next strip during an alarm takes the alarm colour */
+.nrk-root .vl-next.al { border-color: color-mix(in srgb, var(--nk-bad) 60%, transparent); background: color-mix(in srgb, var(--nk-bad) 10%, var(--vl-card)); }
+.nrk-root .vl-next.al b { color: var(--nk-bad); }
+/* U5: the "+N more" chip says what it is; the CO2 fix sits under the oxygen fix; no Silence on an emergency */
+.nrk-root .vl-al-more { display: inline-flex; flex-direction: column; align-items: flex-start; justify-content: center; white-space: normal; text-align: left; line-height: 1.2; max-width: 52%; padding: 4px 10px; }
+.nrk-root .vl-al-more b { font-size: 13.5px; font-weight: 700; }
+.nrk-root .vl-al-more small { font-size: 11.5px; font-weight: 600; color: var(--sp-mut); }
+.nrk-root .vl-al-note { margin: 0 0 10px; }
+.nrk-root .vl-also { margin: 14px 0 0; padding: 12px; border-radius: 12px; border: 1px solid var(--vl-cline); }
+.nrk-root .vl-also > .vl-h3 { margin-top: 0; }
+.nrk-root .vl-nosil { margin: 0; flex: 1 1 100%; font-size: 13.5px; font-weight: 650; line-height: 1.4; color: var(--nk-bad); }
+/* U6: on a phone the Monitor tab opens with the story and goals, then the monitor; the bag banner is one line; a coach
+   folded while bagging keeps Next in its header */
+@media (max-width: 759px) {
+  .nrk-root .vl-pt { order: 0; } .nrk-root .vl-monw { order: 1; } .nrk-root .vl-bedw { order: 2; }
+  .nrk-root .vl-bag { padding: 6px 12px 8px; }
+  .nrk-root .vl-bag-t small { display: none; }
+  .nrk-root .vl-bag-n { font-size: 17px; }
+}
+.nrk-root .vl-co-hn { flex: 0 0 auto; min-height: 44px; min-width: 88px; padding: 0 16px; }
+/* U12: "above target" on a low FiO2 is information, not a warning */
+.nrk-root .vl-abn-t.neu { background: var(--nk-s2); color: var(--sp-text); box-shadow: inset 0 0 0 1px var(--vl-cline); }
+/* U12 (S15): the IEC flash veil sits under the label, and the label turns white in the dark half of the flash, so the
+   text keeps AA contrast at the trough in both themes (dark ink on the bright phase, white on the dark phase) */
+.nrk-root .vl-al:not(.sil)::after { z-index: -1; }
+.nrk-root .vl-al.danger:not(.sil) { animation: vl-flash-ink 500ms steps(1, end) infinite; }
+.nrk-root .vl-al.warn:not(.sil) { animation: vl-flash-ink 1600ms steps(1, end) infinite; }
+.nrk-root .vl-al.warn:not(.sil)::after { animation-name: vl-flash-w; }
+@keyframes vl-flash-ink { 50% { color: #fff; } }
+@keyframes vl-flash-w { 50% { opacity: .55; } }
+.nrk-root .vl-snr-c { margin: 0; font-size: 14px; line-height: 1.45; }
+/* U12 (S16): dial and limit titles break evenly and never clip; the limit block's text balances */
+.nrk-root .vl-knob-lw { min-width: 0; }
+.nrk-root .vl-knob-l { text-wrap: balance; overflow-wrap: anywhere; }
+.nrk-root .vl-limit p, .nrk-root .vl-sheet-h h2 { text-wrap: balance; overflow-wrap: anywhere; }
+/* U7: the safe rate pair is the filled action; "Confirm anyway" is outlined in the warning colour */
+.nrk-root .vl-pair.is-pri { background: var(--sp-text); color: var(--sp-bg); border-color: transparent; }
+.nrk-root .vl-pair.is-pri .smd-ico { color: var(--sp-bg); }
+/* U8: after Question 1, a cue that Question 2 waits below */
+.nrk-root .vl-cue { display: flex; align-items: center; gap: 6px; margin: 12px 0 0; font-size: 13.5px; font-weight: 650; color: var(--vl-acc); }
+.nrk-root .vl-cue-i { display: grid; transform: rotate(90deg); }
+.nrk-root .vl-cue-i .smd-ico { width: 16px; height: 16px; }
+.nrk-root .vl-confirm .sp-btn.vl-anyway { background: transparent; color: var(--sp-text); border: 1.5px solid var(--nk-warn); }

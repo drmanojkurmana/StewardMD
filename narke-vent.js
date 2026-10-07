@@ -117,9 +117,9 @@
     cWave: T("Peak pressure {a} to {b} cmH2O.", "पीक प्रेशर {a} से {b} cmH2O।"),
     cWaveAuto: T("Flow no longer reaches zero: auto-PEEP {a} cmH2O.", "फ़्लो अब शून्य तक नहीं पहुँचता: ऑटो-PEEP {a} cmH2O।"),
     cWaveFree: T("Flow reaches zero again: trapped air is gone.", "फ़्लो फिर शून्य तक पहुँचता है: फँसी हवा निकल गई।"),
-    cMon: T("In 30 min without your change vs with it: SpO2 {a} vs {b}, EtCO2 {c} vs {d}.", "30 मिनट में, बिना बदलाव बनाम बदलाव के साथ: SpO2 {a} बनाम {b}, EtCO2 {c} बनाम {d}।"),
-    cAbg: T("In 30 min without your change vs with it: PaO2 {a} vs {b}, PaCO2 {c} vs {d}, pH {e} vs {f}.", "30 मिनट में, बिना बदलाव बनाम बदलाव के साथ: PaO2 {a} बनाम {b}, PaCO2 {c} बनाम {d}, pH {e} बनाम {f}।"),
-    cPt: T("In 30 min without your change vs with it: MAP {a} vs {b}, HR {c} vs {d}.", "30 मिनट में, बिना बदलाव बनाम बदलाव के साथ: MAP {a} बनाम {b}, HR {c} बनाम {d}।"),
+    cMon: T("In 30 min without your change vs with it (prediction): SpO2 {a} vs {b}, EtCO2 {c} vs {d}.", "30 मिनट में, बिना बदलाव बनाम बदलाव के साथ (अनुमान): SpO2 {a} बनाम {b}, EtCO2 {c} बनाम {d}।"),
+    cAbg: T("In 30 min without your change vs with it (prediction): PaO2 {a} vs {b}, PaCO2 {c} vs {d}, pH {e} vs {f}.", "30 मिनट में, बिना बदलाव बनाम बदलाव के साथ (अनुमान): PaO2 {a} बनाम {b}, PaCO2 {c} बनाम {d}, pH {e} बनाम {f}।"),
+    cPt: T("In 30 min without your change vs with it (prediction): MAP {a} vs {b}, HR {c} vs {d}.", "30 मिनट में, बिना बदलाव बनाम बदलाव के साथ (अनुमान): MAP {a} बनाम {b}, HR {c} बनाम {d}।"),
     cSame: T("No change", "कोई बदलाव नहीं"),
     cPlat: T("Plateau {a} to {b} cmH2O", "प्लेटो {a} से {b} cmH2O"), cDrive: T("driving pressure {a} to {b}", "ड्राइविंग प्रेशर {a} से {b}"),
     cDriveSame: T("driving pressure stays {a}", "ड्राइविंग प्रेशर {a} पर स्थिर"), cPeepT: T("total PEEP {a} to {b}", "कुल PEEP {a} से {b}"),
@@ -172,7 +172,7 @@
     wiPick: T("Pick a question", "एक प्रश्न चुनें"), wiBuild: T("Or build your own", "या अपना बनाएँ"), wiSetting: T("Setting", "सेटिंग"), wiDir: T("Direction", "दिशा"),
     wiUp: T("Increase", "बढ़ाएँ"), wiDown: T("Decrease", "घटाएँ"), wiGo: T("Show before and after", "पहले और बाद दिखाएँ"), wiNow: T("Now", "अभी"), wiAfter: T("After 30 min", "30 मिनट बाद"),
     wiPatient: T("Patient", "मरीज़"), wiEmpty: T("Choose a question above to see what changes, and why.", "क्या बदलता है और क्यों, देखने के लिए ऊपर एक प्रश्न चुनें।"),
-    caseOf: T("Case {i} of {n}", "{n} में से केस {i}"), right: T("Correct", "सही"), wrong: T("Not this one", "यह नहीं"), result: T("Simulated result, 30 min after the change", "बदलाव के 30 मिनट बाद सिम्युलेटेड परिणाम"), applied: T("Change applied", "लागू बदलाव"),
+    caseOf: T("Case {i} of {n}", "{n} में से केस {i}"), right: T("Correct", "सही"), wrong: T("Not right", "गलत"), result: T("Simulated result, 30 min after the change", "बदलाव के 30 मिनट बाद सिम्युलेटेड परिणाम"), applied: T("Change applied", "लागू बदलाव"),
     nextCase: T("Next case", "अगला केस"), q1: T("Question 1", "प्रश्न 1"), q2: T("Question 2", "प्रश्न 2"), normal: T("Normal {a} to {b}", "सामान्य {a} से {b}"),
     pattern: T("Pattern {n}", "पैटर्न {n}"), nameIt: T("Which pattern is this?", "यह कौन सा पैटर्न है?"), named: T("Named", "पहचाना"), notNamed: T("Not named yet", "अभी पहचाना नहीं"), dysNext: T("Next pattern", "अगला पैटर्न"),
     dName: T("Name", "नाम"), dClue: T("Clue", "संकेत"), dCause: T("Cause", "कारण"), dFix: T("Fix", "समाधान"),
@@ -259,7 +259,7 @@
     ex_air: T("Air entry", "हवा का प्रवेश"), ex_trach: T("Trachea", "श्वासनली"), ex_sounds: T("Added sounds", "अतिरिक्त आवाज़ें"), ex_move: T("Chest movement", "छाती की हरकत"),
     exEqual: T("Equal on both sides", "दोनों तरफ़ बराबर"), exOneSide: T("Reduced on one side", "एक तरफ़ कम"), exMid: T("Central", "बीच में"), exShift: T("Pushed to one side", "एक तरफ़ खिसकी"),
     exWheeze: T("Wheeze on breathing out", "साँस छोड़ते समय सीटी (wheeze)"), exCrackles: T("Crackles", "कर्कश आवाज़ (crackles)"), exClear: T("None", "कोई नहीं"), exEven: T("Even, both sides rise", "बराबर, दोनों तरफ़ उठती है"),
-    p3now: T("Now", "अभी"), p3without: T("In 30 min without your change", "30 मिनट में, बिना आपके बदलाव"), p3with: T("In 30 min with it", "30 मिनट में, बदलाव के साथ"),
+    p3now: T("Now", "अभी"), p3without: T("In 30 min without your change (prediction)", "30 मिनट में, बिना आपके बदलाव (अनुमान)"), p3with: T("In 30 min with it (prediction)", "30 मिनट में, बदलाव के साथ (अनुमान)"),
     p3withoutS: T("30 min, no change", "30 मिनट, बिना बदलाव"), p3withS: T("30 min, with change", "30 मिनट, बदलाव के साथ"),
     p3without2: T("In 30 min without the change", "30 मिनट में, बिना बदलाव"),
     littleGain: T("Little to gain here: this change barely moves this patient.", "यहाँ ज़्यादा फ़ायदा नहीं: यह बदलाव इस मरीज़ को लगभग नहीं बदलता।"),
@@ -271,8 +271,8 @@
     pl_mechUp: T("Each breath stretches the lung more.", "हर साँस फेफड़े को ज़्यादा खींचती है।"), pl_mechDn: T("Each breath stretches the lung less.", "हर साँस फेफड़े को कम खींचती है।"),
     pl_waveUp: T("The pressure trace peaks higher.", "प्रेशर ट्रेस ऊँचा जाता है।"), pl_waveDn: T("The pressure trace peaks lower.", "प्रेशर ट्रेस नीचा रहता है।"),
     pl_trap: T("Air is trapped: the flow trace no longer reaches zero.", "हवा फँस रही है: फ़्लो ट्रेस अब शून्य तक नहीं पहुँचता।"), pl_free: T("Trapped air is gone: flow reaches zero again.", "फँसी हवा निकल गई: फ़्लो फिर शून्य तक पहुँचता है।"),
-    pl_monUp: T("In 30 min SpO2 rises to {b}.", "30 मिनट में SpO2 बढ़कर {b}।"), pl_monDn: T("In 30 min SpO2 falls to {b}.", "30 मिनट में SpO2 घटकर {b}।"), pl_monSame: T("SpO2 stays about {b}.", "SpO2 लगभग {b} रहता है।"),
-    pl_co2Up: T("In 30 min CO2 in the blood rises to {b}.", "30 मिनट में खून में CO2 बढ़कर {b}।"), pl_co2Dn: T("In 30 min CO2 in the blood falls to {b}.", "30 मिनट में खून में CO2 घटकर {b}।"), pl_co2Same: T("CO2 in the blood stays about {b}.", "खून में CO2 लगभग {b} रहता है।"),
+    pl_monUp: T("In 30 min (prediction): SpO2 rises to {b}.", "30 मिनट में (अनुमान): SpO2 बढ़कर {b}।"), pl_monDn: T("In 30 min (prediction): SpO2 falls to {b}.", "30 मिनट में (अनुमान): SpO2 घटकर {b}।"), pl_monSame: T("In 30 min (prediction): SpO2 stays about {b}.", "30 मिनट में (अनुमान): SpO2 लगभग {b} रहता है।"),
+    pl_co2Up: T("In 30 min (prediction): CO2 in the blood rises to {b}.", "30 मिनट में (अनुमान): खून में CO2 बढ़कर {b}।"), pl_co2Dn: T("In 30 min (prediction): CO2 in the blood falls to {b}.", "30 मिनट में (अनुमान): खून में CO2 घटकर {b}।"), pl_co2Same: T("In 30 min (prediction): CO2 in the blood stays about {b}.", "30 मिनट में (अनुमान): खून में CO2 लगभग {b} रहता है।"),
     pl_bpUp: T("Blood pressure rises: MAP {b}.", "BP बढ़ता है: MAP {b}।"), pl_bpDn: T("Blood pressure falls: MAP {b}.", "BP गिरता है: MAP {b}।"), pl_bpSame: T("Blood pressure stays about the same.", "BP लगभग वैसा ही रहता है।"),
     pl_gasSame: T("Oxygen in and CO2 out barely change.", "ऑक्सीजन अंदर और CO2 बाहर लगभग नहीं बदलते।"),
     driftH: T("Why is the patient changing?", "मरीज़ क्यों बदल रहा है?"),
@@ -370,7 +370,41 @@
     wp_PaO2_down: T("Less oxygen gets from the lungs into the blood.", "फेफड़ों से खून में कम ऑक्सीजन पहुँचती है।"),
     wp_SaO2_up: T("More of the blood's oxygen carriers are full.", "खून के ज़्यादा ऑक्सीजन वाहक भरे हैं।"), wp_SaO2_down: T("Fewer of the blood's oxygen carriers are full.", "खून के कम ऑक्सीजन वाहक भरे हैं।"),
     wp_pH_up: T("Less CO2 makes the blood less acid.", "कम CO2 से खून कम अम्लीय होता है।"), wp_pH_down: T("More CO2 makes the blood more acid.", "ज़्यादा CO2 से खून ज़्यादा अम्लीय होता है।"),
-    wp_HCO3_up: T("The body's buffer rises slowly to balance the acid.", "अम्ल को संतुलित करने के लिए शरीर का बफ़र धीरे बढ़ता है।"), wp_HCO3_down: T("The body's buffer falls slowly to balance the change.", "बदलाव को संतुलित करने के लिए शरीर का बफ़र धीरे घटता है।")
+    wp_HCO3_up: T("The body's buffer rises slowly to balance the acid.", "अम्ल को संतुलित करने के लिए शरीर का बफ़र धीरे बढ़ता है।"), wp_HCO3_down: T("The body's buffer falls slowly to balance the change.", "बदलाव को संतुलित करने के लिए शरीर का बफ़र धीरे घटता है।"),
+    // round 5: the path card, the tutorial finish card, core and later tutorials, alarm and confirm safety
+    pathH: T("Your path", "आपका रास्ता"), pathOf: T("{d} of {n} done", "{n} में से {d} पूरे"), pathNext: T("Next", "अगला"),
+    pathTut: T("Tutorial", "ट्यूटोरियल"), pathGuide: T("Real ventilator guide", "असली ventilator गाइड"),
+    p_bed: T("Walk up to the bed", "बेड तक जाना"), p_bedS: T("The first five minutes checklist", "पहले पाँच मिनट की checklist"),
+    p_run: T("Run one patient to the debrief", "एक मरीज़ को समीक्षा तक चलाएँ"), p_runS: T("Start with {x}", "{x} से शुरू करें"), p_runD: T("Best score {b}", "सबसे अच्छा score {b}"),
+    p_drills: T("Night drills", "रात की drills"), p_drillsS: T("What to do when the alarm sounds at 3 am", "रात 3 बजे alarm बजे तो क्या करें"),
+    p_check: T("First-night check", "पहली रात की जाँच"), p_checkS: T("A short final quiz", "एक छोटा अंतिम quiz"),
+    pathFin: T("Finish line: ready to start under supervision", "मंज़िल: निगरानी में शुरू करने को तैयार"),
+    pathReady: T("Ready to start under supervision", "निगरानी में शुरू करने को तैयार"),
+    pathReadyS: T("Never alone on day one: your senior still decides every change.", "पहले दिन कभी अकेले नहीं: हर बदलाव का फ़ैसला अब भी senior करता है।"),
+    tagCore: T("Core", "ज़रूरी"), laterH: T("Later: {n} more tutorials", "बाद में: {n} और ट्यूटोरियल"),
+    laterS: T("Open these after the core tutorials and one patient run.", "इन्हें ज़रूरी ट्यूटोरियल और एक मरीज़ रन के बाद खोलें।"),
+    onTgt: T("Starts on target: little to fix", "शुरू से लक्ष्य पर: ठीक करने को कम"),
+    finH: T("Tutorial done", "ट्यूटोरियल पूरा"), finDone: T("Done! You finished {x}.", "पूरा! आपने {x} पूरा किया।"),
+    finNext: T("Next: {x}", "अगला: {x}"), finAll: T("Every step on your path is done.", "आपके रास्ते का हर कदम पूरा है।"),
+    finNextT: T("Next tutorial", "अगला ट्यूटोरियल"), finGo: T("Go to the next step", "अगले कदम पर जाएँ"),
+    finStay: T("Stay with this patient (practice, not scored)", "इसी मरीज़ के साथ रहें (अभ्यास, अंक नहीं)"),
+    seniorTut: T("On a real patient, ask your senior before changing settings.", "असली मरीज़ पर settings बदलने से पहले अपने senior से पूछें।"),
+    nxAl: T("Handle the alarm first: tap it to see what to do.", "पहले alarm सँभालें: क्या करना है, देखने के लिए उस पर दबाएँ।"),
+    nx3b: T("Tap +30 min, then Draw ABG. Blood gases change slowly.", "+30 मिनट दबाएँ, फिर ABG लें। ब्लड गैस धीरे बदलती है।"),
+    moreAl: T("{n} more alarms", "{n} और alarm"), moreAl1: T("1 more alarm", "1 और alarm"), reddest: T("look at the reddest first", "सबसे लाल वाला पहले देखें"),
+    alAllNote: T("Reddest first. Tap one to see what to do.", "सबसे लाल पहले। क्या करना है, देखने के लिए किसी पर दबाएँ।"),
+    alsoCo2: T("Also fix the CO2", "CO2 भी ठीक करें"), alsoThen: T("Then, once SpO2 is safe", "फिर, SpO2 सुरक्षित होने पर"),
+    raiseFio2: T("Raise FiO2 to {v}%", "FiO2 {v}% करें"),
+    noSil: T("Emergency: do not silence this alarm. Stay with the patient and call for help.", "Emergency: इस alarm को चुप न करें। मरीज़ के पास रहें और मदद बुलाएँ।"),
+    wFio2Low: T("FiO2 {v}% on a patient who needs oxygen: SpO2 falls to about {s}% in 30 min.", "ऑक्सीजन चाहने वाले मरीज़ पर FiO2 {v}%: 30 मिनट में SpO2 लगभग {s}% तक गिरेगा।"),
+    wFio2Drop: T("FiO2 {a}% to {b}% is a big drop. Lower it 5 to 10 at a time and watch SpO2.", "FiO2 {a}% से {b}% बड़ी गिरावट है। एक बार में 5 से 10 घटाएँ और SpO2 देखें।"),
+    snrH: T("Only your senior orders this", "यह सिर्फ़ आपका senior तय करता है"),
+    snrB: T("{x}: a junior doctor does not give this alone. In the lab it is logged as an unsafe step if it was not needed.", "{x}: junior doctor यह अकेले नहीं देता। Lab में ज़रूरत न हो तो यह असुरक्षित कदम के रूप में दर्ज होता है।"),
+    snrCall: T("Call my senior instead", "इसके बजाय senior को बुलाएँ"), snrGo: T("Give it anyway", "फिर भी दें"),
+    snrCalled: T("Good call. Tell your senior: the patient, the alarm, the numbers and what you have done.", "सही फ़ैसला। Senior को बताएँ: मरीज़, alarm, संख्याएँ और आपने क्या किया।"),
+    caseCue: T("Read why, then answer Question 2 below.", "क्यों पढ़ें, फिर नीचे प्रश्न 2 का उत्तर दें।"),
+    vdWrong: T("Does not fix it:", "इससे ठीक नहीं होता:"), vdOff: T("in 30 min {x} still off target.", "30 मिनट बाद भी {x} लक्ष्य से बाहर।"),
+    predL: T("prediction", "अनुमान")
   };
   // Plain line for an engine reason: the engine's own `plain` when it gives one, else the table above, else its text.
   function plainWhy(x) {
@@ -426,7 +460,9 @@
       if (GL.seen[x.k]) return;
       var m = x.re.exec(str);
       if (!m) return;
-      var end = m.index + m[0].length;
+      var end = m.index + m[0].length, pre = str.slice(0, m.index);
+      // never a gloss inside brackets that are already open: no nested brackets (round 5, U10)
+      if ((pre.match(/\(/g) || []).length > (pre.match(/\)/g) || []).length) return;
       GL.seen[x.k] = 1;
       if (str.slice(end, end + 2) !== " (") str = str.slice(0, end) + " (" + x.gl + ")" + str.slice(end);
     });
@@ -800,6 +836,8 @@
     if (!el) return;
     // a hint never replaces an event the learner caused in the last 4 s (their bedside action's result stays readable)
     if (kind === "hint" && TO.kind === "event" && el.classList.contains("on") && Date.now() - TO.at < 4000) return;
+    // phone, inside a tutorial: the coach already shows what the learner did and saw; no card over the monitor (U6)
+    if (R && R.tut && isPhone() && $("vlCoach")) return;
     TO.kind = kind; TO.at = Date.now(); TO.hold = false;
     toastBind(el); toastPlace(el);
     el.innerHTML = '<span class="vl-toast-k">' + (ico(kind === "hint" ? "spark" : "info")) + "<b>" + s(kind === "hint" ? "hint" : "event") + '</b></span><span class="vl-toast-m">' + html + "</span>" +
@@ -835,37 +873,100 @@
     glossReset();
     var n = lv(), all = VL.scen.slice().sort(function (a, b) { return (a.level || 1) - (b.level || 1); });
     var open = all.filter(function (x) { return (x.level || 1) <= n; }), more = all.length - open.length;
+    // Levels 1 and 2: a patient with something to fix comes before one who starts on target (round 5, U3)
+    if (n <= 2) open.sort(function (a, b) { return (a.level || 1) - (b.level || 1) || (fixCache(b) ? 1 : 0) - (fixCache(a) ? 1 : 0); });
     var seg = [1, 2, 3, 4].map(function (k) {
       return '<button type="button" data-act="vllevel" data-v="' + k + '" aria-pressed="' + (k === n) + '"><b>' + k + "</b><span>" + esc(lvName(k)) + "</span></button>";
     }).join("");
     var intro = lvIntro(n);
     var cards = open.map(function (sc) { return scCard(sc, e); }).join("");
-    var tl = learn().tutorials || [], td = prefs().tuts, nextT = tl.filter(function (tu) { return !td[tu.id]; })[0];
-    var tuts = tl.map(function (tu) {
-      var right = td[tu.id] ? '<span class="vl-tdone">' + (ico("check") || "") + '<span class="sp-sr">' + s("done") + "</span></span>" : tu === nextT && n <= 2 ? '<span class="vl-start">' + s("startHere") + "</span>" : "";
+    var tl = learn().tutorials || [], td = prefs().tuts, beg = n <= 2;
+    // Levels 1 and 2: the core tutorials carry a "Core" tag; tutorials above the level fold under "Later" (round 5, U3).
+    function tutRow(tu) {
+      var right = (beg && tu.core ? '<span class="vl-core">' + s("tagCore") + "</span>" : "") + (td[tu.id] ? '<span class="vl-tdone">' + (ico("check") || "") + '<span class="sp-sr">' + s("done") + "</span></span>" : "");
       return I.row("vltut", ' data-k="' + esc(tu.id) + '"', I.tile("play"), tx(tu.title), s("steps", { n: (tu.steps || []).length }), right);
-    }).join("");
-    // Beginners meet the tutorials before the patients; residents (Level 3 and 4) see patients first.
-    var tutBlock = tuts ? '<h2 class="sp-h2">' + s("guided") + "</h2>" + (n <= 1 && !td[(tl[1] || {}).id] ? '<p class="vl-lvintro vl-tfirst">' + s("tutFirst") + "</p>" : "") + '<ul class="sp-rows vl-tuts">' + tuts + "</ul>" : "";
+    }
+    var nowT = beg ? tl.filter(function (tu) { return (tu.level || 1) <= n || td[tu.id]; }) : tl, laterT = beg ? tl.filter(function (tu) { return nowT.indexOf(tu) < 0; }) : [];
+    var tutBlock = tl.length ? '<h2 class="sp-h2">' + s("guided") + '</h2><ul class="sp-rows vl-tuts">' + nowT.map(tutRow).join("") + "</ul>" +
+      (laterT.length ? '<details class="vl-later"><summary><span class="vl-later-t">' + s("laterH", { n: laterT.length }) + '</span><span class="vl-later-s">' + s("laterS") + '</span></summary><ul class="sp-rows vl-tuts">' + laterT.map(tutRow).join("") + "</ul></details>" : "") : "";
     var nd = Object.keys(learn().dyssync || {}).filter(function (k) { return DYS_KINDS.indexOf(k) >= 0; });
     var solved = nd.filter(function (k) { return prefs().dys[k]; }).length;
     var prac = I.row("vlwhat", "", I.tile("sliders"), s("whatIf"), s("whatIfSub"), "") +
       ((learn().cases || []).length ? I.row("vlcases", "", I.tile("abg"), s("cases"), s("casesSub"), s("nCases", { n: caseList().length })) : "") +
       (nd.length ? I.row("vldys", "", I.tile("pulse"), s("dys"), s("dysSub"), s("nPatterns", { n: nd.length, s: solved })) : "");
+    // real-ventilator bridge (narke-vent-bridge.js): directly under the path at Levels 1 and 2 (round 5, U1)
+    var bridge = vb("homeBlock") ? vb("homeBlock").homeBlock(n) : "";
     I.paint(I.top(t(STR.backTest), s("title"), s("sub"), I.langBtn()) +
       '<div class="sp-scroll sp-pad"><div class="vl-wrap vl-home">' +
       '<p class="vl-lede">' + s("lede") + "</p>" +
       '<p class="vl-disc" role="note">' + (ico("info") ? '<span aria-hidden="true">' + ico("info") + "</span>" : "") + "<span>" + disc() + ' <span class="vl-draft">' + s("draft") + ".</span></span></p>" +
       '<h2 class="sp-h2" id="vlLvH">' + s("level") + '</h2><div class="vl-levels" role="group" aria-labelledby="vlLvH">' + seg + "</div>" +
       (intro ? '<p class="vl-lvintro">' + tx(intro) + "</p>" : "") +
-      (n <= 2 ? tutBlock : "") +
-      (G.NARKE_VENT_BRIDGE && G.NARKE_VENT_BRIDGE.homeBlock ? G.NARKE_VENT_BRIDGE.homeBlock(n) : "") + // real-ventilator bridge (narke-vent-bridge.js)
+      (beg ? pathHtml() + bridge + tutBlock : "") +
       '<h2 class="sp-h2">' + s("patients") + '</h2><ul class="vl-cards">' + cards + "</ul>" +
       (more > 0 ? '<p class="sp-small vl-more">' + s("morePts", { n: more }) + "</p>" : "") +
-      (n > 2 ? tutBlock : "") +
+      (beg ? "" : tutBlock + bridge) +
       '<h2 class="sp-h2">' + s("practise") + '</h2><ul class="sp-rows">' + prac + "</ul>" +
       "</div></div>", typeof focusSel === "string" ? focusSel : null);
   }
+  /* ---- "Your path" (round 5, U1): the core steps of a first night, ticked in order, with a finish line ---- */
+  // The real-ventilator bridge (narke-vent-bridge.js), guarded: its rows (homeBlock(level)) and its own pages' progress
+  // (progress(): {items: [{id, done}]}). Without progress the bridge steps still open, but cannot tick (the finish line waits).
+  function vb(k) { return G.NARKE_VENT_BRIDGE && typeof G.NARKE_VENT_BRIDGE[k] === "function" ? G.NARKE_VENT_BRIDGE : null; }
+  var PATH_BR = { bed: ["bed"], drills: ["drills", "drill"], check: ["check", "firstNight", "first-night", "quiz", "final", "fnc"] };
+  function bridgeProg() {
+    var B = vb("progress"), p = B ? safe(function () { return B.progress(); }, null) : null;
+    return p && p.items && p.items.length ? p : null;
+  }
+  // A patient who starts outside a target has something to fix; one already on target is listed after (U3).
+  function needsFix(sc) {
+    var e = E(), r = safe(function () { var s0 = e.init(clone(sc), null); return e.readout(s0, s0.settings || baseSettings(sc)); }, null);
+    if (!r) return true;
+    var g = sc.goals || {}, v = r.vitals || {}, gs = r.gas || {}, w = r.vent || {}, kg = ptPbw(sc), set = baseSettings(sc);
+    return !!((g.spo2 && v.spo2 != null && (v.spo2 < g.spo2[0] || (v.spo2 > g.spo2[1] && set.fio2 > 50))) ||
+      (g.paco2 && gs.paco2 != null && (gs.paco2 < g.paco2[0] - 3 || gs.paco2 > g.paco2[1] + 3)) || (g.ph && gs.ph != null && (gs.ph < g.ph[0] || gs.ph > g.ph[1])) ||
+      (w.pplat != null && w.pplat > (g.pplatMax || 30)) || (VOL_MODES[set.mode] && g.vtPerKg && set.vt / kg > g.vtPerKg[1] + 0.5) || (v.map != null && v.map < 65));
+  }
+  function fixCache(sc) { VL.fix = VL.fix || {}; if (VL.fix[sc.id] == null) VL.fix[sc.id] = needsFix(sc); return VL.fix[sc.id]; }
+  function firstPatient() { var o = (VL.scen || []).filter(function (x) { return (x.level || 1) <= lv(); }); return o.filter(fixCache)[0] || o[0] || null; }
+  function pathSteps() {
+    var td = prefs().tuts, prog = bridgeProg(), out = [], best = prefs().best || {}, bk = Object.keys(best);
+    (learn().tutorials || []).filter(function (tu) { return tu.core; }).forEach(function (tu) { out.push({ k: "t:" + tu.id, title: tx(tu.title), sub: s("pathTut"), done: !!td[tu.id] }); });
+    function br(k) {
+      var it = prog ? prog.items.filter(function (x) { return PATH_BR[k].indexOf(x.id) >= 0; })[0] : null;
+      if (prog && !it && k === "check") return; // the bridge has no final check yet: the path does not wait for it
+      out.push({ k: "b:" + (it ? it.id : k), title: s("p_" + k), sub: s("p_" + k + "S"), done: !!(it && it.done), br: true, open: !!it });
+    }
+    br("bed");
+    var fp = firstPatient(), bs = bk.reduce(function (m, id) { return Math.max(m, best[id] || 0); }, 0);
+    out.push({ k: "run", title: s("p_run"), sub: bk.length ? s("p_runD", { b: bs }) : fp ? s("p_runS", { x: t(fp.title) }) : "", done: bk.length > 0 });
+    br("drills"); br("check");
+    return { steps: out, prog: !!prog };
+  }
+  function pathNext(P) { return P.steps.filter(function (x) { return !x.done; })[0] || null; }
+  function pathHtml() {
+    var P = pathSteps(), st0 = P.steps, d = st0.filter(function (x) { return x.done; }).length, nx = pathNext(P), ready = !nx && P.prog;
+    var rows = st0.map(function (x, i) {
+      var isN = x === nx;
+      return '<li class="' + (x.done ? "done" : isN ? "next" : "") + '"><button type="button" class="vl-pstep" data-act="vlpath" data-k="' + esc(x.k) + '"' + (isN ? ' aria-current="step"' : "") + ">" +
+        '<span class="vl-pnum" aria-hidden="true">' + (x.done ? ico("check") || "" : i + 1) + "</span>" +
+        '<span class="vl-pb"><b>' + x.title + "</b>" + (x.sub ? "<small>" + x.sub + "</small>" : "") + "</span>" +
+        (x.done ? '<span class="sp-sr">' + s("done") + "</span>" : isN ? '<span class="vl-pnx">' + s("pathNext") + "</span>" : "") +
+        '<span class="vl-chev" aria-hidden="true">' + ico("chev") + "</span></button></li>";
+    }).join("");
+    return '<section class="vl-path' + (ready ? " ready" : "") + '" aria-labelledby="vlPathH"><div class="vl-path-h"><h2 class="sp-h2" id="vlPathH">' + s("pathH") + '</h2><span class="vl-path-n">' + s("pathOf", { d: d, n: st0.length }) + "</span></div>" +
+      '<div class="vl-path-bar" aria-hidden="true"><i style="transform:scaleX(' + (d / (st0.length || 1)).toFixed(3) + ')"></i></div>' +
+      '<ol class="vl-path-l">' + rows + "</ol>" +
+      '<p class="vl-path-fin" role="note">' + (ico("flag") ? '<span aria-hidden="true">' + ico(ready ? "check" : "flag") + "</span>" : "") + "<span>" + (ready ? "<b>" + s("pathReady") + "</b> " + s("pathReadyS") : s("pathFin")) + "</span></p></section>";
+  }
+  function goPath(k) {
+    if (!k) return home();
+    if (k.indexOf("t:") === 0) return A.vltut({ getAttribute: function () { return k.slice(2); } });
+    if (k === "run") { var fp = firstPatient(); if (fp) return A.vlgo({ getAttribute: function () { return fp.id; } }); return home(); }
+    if (k.indexOf("b:") === 0 && A.vbopen) { closeSheet(true); return A.vbopen({ getAttribute: function () { return k.slice(2); } }); }
+    home();
+  }
+  A.vlpath = function (b) { goPath(b.getAttribute("data-k")); };
   function miniTrace(sc, e) {
     var b = safe(function () { var st0 = e.init(sc); return e.breath(st0, baseSettings(sc), 60); }, null);
     if (!b || !b.t || b.t.length < 2) return "";
@@ -882,7 +983,7 @@
   }
   function scCard(sc, e) {
     var p = sc.patient || {}, sv = savedRuns()[sc.id];
-    var tags = lungTags(sc).map(function (k) { return '<span class="vl-tag2">' + s(k) + "</span>"; }).join("");
+    var tags = lungTags(sc).map(function (k) { return '<span class="vl-tag2">' + s(k) + "</span>"; }).join("") + (lv() <= 2 && !fixCache(sc) ? '<span class="vl-tag2 vl-ontgt">' + s("onTgt") + "</span>" : "");
     return '<li><button type="button" class="vl-card vl-sc" data-act="vlgo" data-s="' + esc(sc.id) + '">' +
       '<span class="vl-sc-plate">' + miniTrace(sc, e) + "</span>" +
       '<span class="vl-sc-b"><span class="vl-sc-top"><b>' + tx(sc.title) + '</b><span class="vl-lvb">' + s("lvN", { n: sc.level || 1 }) + "</span></span>" +
@@ -1071,18 +1172,19 @@
     var v = r.vitals || {}, o = {};
     if (v.spo2 != null && v.spo2 < spo2Lo()) o.vlSpo2 = -1;
     // above the target on added oxygen: amber "above target" (the oxygen can come down), never red (U10)
-    else if (v.spo2 != null && goals().spo2 && v.spo2 > goals().spo2[1] && R.set.fio2 > 21) o.vlSpo2 = 2;
+    // round 5 (U12): on a low FiO2 (50% or less, the debrief's own "above range is fine" line) the tag is neutral, not amber
+    else if (v.spo2 != null && goals().spo2 && v.spo2 > goals().spo2[1] && R.set.fio2 > 21) o.vlSpo2 = R.set.fio2 > 50 ? 2 : 3;
     if (v.map != null && v.map < 65) o.vlBp = -1;
     if (v.hr != null && (v.hr > 120 || v.hr < 50)) o.vlHr = v.hr > 120 ? 1 : -1;
     return o;
   }
-  function abnTag(d) { return d === 2 ? '<span class="vl-abn-t amb">' + s("aboveTgt") + "</span>" : d ? '<span class="vl-abn-t">' + s(d < 0 ? "abnLow" : "abnHigh") + "</span>" : ""; }
+  function abnTag(d) { return d === 2 || d === 3 ? '<span class="vl-abn-t ' + (d === 2 ? "amb" : "neu") + '">' + s("aboveTgt") + "</span>" : d ? '<span class="vl-abn-t">' + s(d < 0 ? "abnLow" : "abnHigh") + "</span>" : ""; }
   function monHtml(r) {
     var m = monNums(r), ab = monAbn(r);
     function ch(cls, tag, w, num, id) {
       return '<div class="vl-ch ' + cls + '" data-vl-id="' + id + '"><div class="vl-ch-w"><span class="vl-tag">' + tag + '</span><canvas class="vl-cv" data-w="' + w + '" aria-hidden="true"></canvas></div><div class="vl-num">' + num + "</div></div>";
     }
-    function big(k, id, v, sub) { return '<span class="vl-k">' + s(k) + '</span><b class="vl-v' + (ab[id] === 2 ? " amb" : ab[id] ? " abn" : "") + '" id="' + id + '">' + esc(v) + '</b><span class="vl-abn" id="' + id + 'T">' + abnTag(ab[id]) + "</span>" + (sub || ""); }
+    function big(k, id, v, sub) { return '<span class="vl-k">' + s(k) + '</span><b class="vl-v' + (ab[id] === 2 ? " amb" : ab[id] === 3 ? "" : ab[id] ? " abn" : "") + '" id="' + id + '">' + esc(v) + '</b><span class="vl-abn" id="' + id + 'T">' + abnTag(ab[id]) + "</span>" + (sub || ""); }
     return '<section class="vl-card vl-monw" data-vl-id="monitor" data-g="mon" aria-labelledby="vlMonH"><h2 class="vl-h" id="vlMonH">' + s("monitor") + "</h2>" +
       '<div class="vl-plate vl-mon">' +
       ch("c-ecg", s("ecg"), "ecg", big("hr", "vlHr", m.hr), "hr") +
@@ -1122,7 +1224,7 @@
   function updMonitor(r, flash) {
     var m = monNums(r), ab = monAbn(r);
     [["vlHr", m.hr], ["vlSpo2", m.spo2], ["vlEt", m.et], ["vlRr", m.rr], ["vlBp", m.bp], ["vlMap", m.map], ["vlTemp", m.temp]].forEach(function (x) { var el = $(x[0]); if (el && el.textContent !== x[1]) { el.textContent = x[1]; if (flash) pulse(el); } });
-    ["vlHr", "vlSpo2", "vlBp"].forEach(function (id) { var el = $(id), tg = $(id + "T"), h = abnTag(ab[id]); if (el) { el.classList.toggle("abn", !!ab[id] && ab[id] !== 2); el.classList.toggle("amb", ab[id] === 2); } if (tg && tg.innerHTML !== h) tg.innerHTML = h; });
+    ["vlHr", "vlSpo2", "vlBp"].forEach(function (id) { var el = $(id), tg = $(id + "T"), h = abnTag(ab[id]); if (el) { el.classList.toggle("abn", !!ab[id] && ab[id] < 2); el.classList.toggle("amb", ab[id] === 2); } if (tg && tg.innerHTML !== h) tg.innerHTML = h; });
     var sr = $("vlMonSay"); if (sr) sr.innerHTML = monSay(r);
     var fl = $("vlFlags"), fh = flagsHtml(r); if (fl && fl.innerHTML !== fh) fl.innerHTML = fh;
     var mm = $("vlMini"), mh = miniMon(r); if (mm && mm.innerHTML !== mh) mm.innerHTML = mh;
@@ -1360,7 +1462,9 @@
   // Round 4 (U3, U6): Level 2 turns VT in 20s and keeps PEEP in 1s; Levels 3 and 4 use the dial's own step. Alarm limits
   // move in useful jumps at every level (Ppeak limit 5 per tap: 40 to 25 is three taps, not fifteen). A tutorial step
   // that asks for an exact value keeps the coarse step only when that value sits on its grid.
-  var COARSE = { 1: { fio2: 5, peep: 2, rr: 2, vt: 50, pinsp: 2, ps: 2 }, 2: { fio2: 5, rr: 2, vt: 20, pinsp: 2, ps: 2 } };
+  // Round 5 (U9): PEEP turns in 1s at every level (5, 6, 7, 8: never 5, 6, 8); a coarse step never jumps past the value a
+  // tutorial step asks for (rate 14 to 16 lands on 16, and from 15 it lands on 16, not 17).
+  var COARSE = { 1: { fio2: 5, rr: 2, vt: 50, pinsp: 2, ps: 2 }, 2: { fio2: 5, rr: 2, vt: 20, pinsp: 2, ps: 2 } };
   var ALARM_STEP = { pPeakHigh: 5, rrHigh: 5, veHigh: 1, apnoea: 5 };
   function coarse(k) {
     var c = ALARM_STEP[k] || (COARSE[lv()] || {})[k] || 0, sp = tutStep();
@@ -1416,8 +1520,9 @@
   function bump(k, dir, mult) {
     var d = setDef(k);
     if (!d || d.options) return;
-    var v = R.pend[k] != null ? R.pend[k] : R.set[k];
-    stage(k, stepVal(d, v, dir, mult, coarse(k)));
+    var v = R.pend[k] != null ? R.pend[k] : R.set[k], nv = stepVal(d, v, dir, mult, coarse(k)), sp = tutStep(), to = sp && sp.do && sp.do.key === k ? +sp.do.to : null;
+    if (to != null && !isNaN(to) && ((+v < to && nv > to) || (+v > to && nv < to))) nv = to;
+    stage(k, nv);
   }
   A.vlstep = function (b) {
     if (!R) return;
@@ -1485,6 +1590,15 @@
     if (R.pend.peep != null && o.peep > (n <= 2 ? 12 : 18)) W(raw("wHigh", { x: "PEEP", v: o.peep }));
     if (R.pend.peep != null && o.peep < 3 && n <= 2) W(raw("wLow", { x: "PEEP", v: o.peep }));
     if (R.pend.fio2 != null && o.fio2 < R.set.fio2 && sp != null && sp < spo2Lo()) W(raw("wO2", { v: o.fio2 }));
+    // round 5 (U7, E8): the engine's own Confirm warnings when it gives them; else a big FiO2 drop (20 points or more, or
+    // down to room air) on a patient who needs the oxygen: the 30 min prediction says how far SpO2 falls
+    var ew = E().confirmWarnings ? safe(function () { return E().confirmWarnings(R.s, R.set, o); }, null) : null;
+    if (ew && ew.length) ew.forEach(function (x) { if (x && (x.text || x.en)) w.push({ t: t(x.text || x), info: x.level === "info" }); });
+    else if (R.pend.fio2 != null && o.fio2 < R.set.fio2 && !(sp != null && sp < spo2Lo()) && (o.fio2 <= 21 || R.set.fio2 - o.fio2 >= 20)) {
+      var pr = safe(function () { return E().readout(E().step(clone(R.s), o, 1800), o); }, null), ps = pr && pr.vitals ? pr.vitals.spo2 : null;
+      if (ps != null && ps < spo2Lo()) W(raw("wFio2Low", { v: o.fio2, s: fmtN(Math.round(ps)) }));
+      else if (R.set.fio2 - o.fio2 >= 20) w.push({ t: raw("wFio2Drop", { a: R.set.fio2, b: o.fio2 }), info: true });
+    }
     if (R.pend.rr != null && o.rr < 8) W(raw("wLow", { x: setLabel("rr"), v: o.rr }));
     if (R.pend.rr != null && o.rr >= 30) W(raw("wRrHigh", { v: o.rr }));
     if (R.pend.vt != null && VOL_MODES[o.mode]) {
@@ -1509,22 +1623,32 @@
   function nextStep() {
     if (lv() > 2 || R.tut) return null;
     if (nPend()) return { k: "nx2", to: "confirm" };
+    // an active alarm comes first, and the strip never offers a time skip over it (round 5, U4)
+    var al = activeAlarms().filter(function (a) { return !(R.sil[a.id] > R.s.t) && !(R.ack[a.id] && !MON_AL[a.id]); })[0];
+    if (al) return { k: "nxAl", to: "alarm", id: al.id };
     var ch = R.lastSet > 0, n = R.abgs.length, last = R.abgs[n - 1], after = ch && last && last.t >= R.lastSet;
     if (!ch) return n ? { k: "nx1", to: "settings" } : { k: "nx0", to: "abg" };
-    // "again" only when a gas was drawn before (U6, round 4)
-    if (!after) return R.s.t - R.lastSet < 1500 ? { k: "nx3", to: "chain" } : { k: n ? "nx4" : "nx4b", to: "abg" };
+    // "again" only when a gas was drawn before (U6, round 4); no chain to read (a tutorial's last change), no "Read the chain"
+    if (!after) return R.s.t - R.lastSet < 1500 ? (R.chain && !R.fromTut ? { k: "nx3", to: "chain" } : { k: "nx3b", to: "time" }) : { k: n ? "nx4" : "nx4b", to: "abg" };
     // a gas drawn too soon after the change has not settled yet; Before and Now need two gases
     if (last.t - R.lastSet < 900) return { k: "nx6", to: "abg" };
     return R.abgs.some(function (a) { return a.t < R.lastSet; }) ? { k: "nx5", to: "abg" } : { k: "nx7", to: "abg" };
   }
   function nextHtml() {
     var x = nextStep();
-    return x ? '<button type="button" class="vl-next" data-act="vlnext" data-to="' + x.to + '"><b>' + s("nextH") + "</b><span>" + s(x.k) + '</span><span class="vl-chev" aria-hidden="true">' + ico("chev") + "</span></button>" : "";
+    return x ? '<button type="button" class="vl-next' + (x.to === "alarm" ? " al" : "") + '" data-act="vlnext" data-to="' + x.to + '"' + (x.id ? ' data-k="' + esc(x.id) + '"' : "") + '><b>' + s("nextH") + "</b><span>" + s(x.k) + '</span><span class="vl-chev" aria-hidden="true">' + ico("chev") + "</span></button>" : "";
   }
-  function paintFoot() { var f = $("vlFoot"); if (f) f.innerHTML = footHtml(); }
+  function paintFoot() {
+    var f = $("vlFoot"); if (!f) return;
+    var a = G.document.activeElement, sel = a && f.contains(a) && a.getAttribute("data-act") ? '[data-act="' + a.getAttribute("data-act") + '"]' + (a.getAttribute("data-k") ? '[data-k="' + a.getAttribute("data-k") + '"]' : "") : null;
+    f.innerHTML = footHtml();
+    if (sel) { var n = f.querySelector(sel); if (n) n.focus({ preventScroll: true }); }
+  }
   A.vlnext = function (b) {
     var to = b.getAttribute("data-to"), el, f;
     if (to === "confirm") { f = q("[data-act=vlconfirm]"); if (f) f.focus({ preventScroll: true }); return; }
+    if (to === "alarm") { f = q('.vl-al[data-k="' + b.getAttribute("data-k") + '"]'); return A.vlalarm(f || b); }
+    if (to === "time") { f = q('[data-act=vlskip][data-k="1800"]'); if (f) { pulse(f); f.focus({ preventScroll: true }); } return; }
     el = to === "abg" ? $("vlAbg") : to === "chain" ? $("vlChH") : $("vlSet");
     f = to === "abg" ? q("[data-act=vldraw]") : to === "chain" ? $("vlChH") : q("#vlSet .vl-dial");
     reveal(el);
@@ -1534,11 +1658,12 @@
   function footHtml() {
     var n = nPend();
     if (n) {
-      var w = warnings(), hard = w.filter(function (x) { return !x.info; }).length;
+      var w = warnings(), hard = w.filter(function (x) { return !x.info; }).length, pairOn = w.some(function (x) { return x.pair; });
       return nextHtml() + (w.length ? '<ul class="vl-warns"' + (hard ? ' role="alert"' : "") + ">" + w.map(function (x) { return '<li class="' + (x.info ? "info" : "") + '">' + (ico(x.info ? "info" : "warn") ? '<span aria-hidden="true">' + ico(x.info ? "info" : "warn") + "</span>" : "") + "<span>" + esc(x.t) +
-        (x.pair ? '<button type="button" class="vl-pair" data-act="vlrrpair" data-v="' + x.pair + '">' + (ico("plus") || "") + "<span>" + s("rrPair", { n: x.pair }) + "</span></button>" : "") + "</span></li>"; }).join("") + "</ul>" : "") +
+        (x.pair ? '<button type="button" class="vl-pair is-pri" data-act="vlrrpair" data-v="' + x.pair + '">' + (ico("plus") || "") + "<span>" + s("rrPair", { n: x.pair }) + "</span></button>" : "") + "</span></li>"; }).join("") + "</ul>" : "") +
         '<div class="vl-confirm"><button type="button" class="sp-btn sec" data-act="vlcancel">' + s("cancel") + "</button>" +
-        '<button type="button" class="sp-btn pri' + (hard ? " vl-warnbtn" : "") + '" data-act="vlconfirm">' + (ico("check") || "") + " " + (hard ? s("confirmAny") : n === 1 ? s("confirm1") : s("confirmN", { n: n })) + "</button></div>";
+        // with the safe rate pair on offer, the pair is the filled button and "Confirm anyway" is outlined (U7)
+        '<button type="button" class="sp-btn ' + (pairOn ? "sec vl-anyway" : "pri") + (hard && !pairOn ? " vl-warnbtn" : "") + '" data-act="vlconfirm">' + (ico("check") || "") + " " + (hard ? s("confirmAny") : n === 1 ? s("confirm1") : s("confirmN", { n: n })) + "</button></div>";
     }
     var waits = [["300", "t5"], ["900", "t15"], ["1800", "t30"], ["3600", "t60"]];
     var stopped = lv() <= 1 && !R.live && !R.arrest ? '<p class="vl-tstop">' + s("timeStopped") + "</p>" : "";
@@ -1682,11 +1807,14 @@
       if (!out[k]) out[k] = { on: false, lines: [], plain: "" };
       if (!out[k].on) { out[k].lines = [raw("cSame")]; out[k].plain = out[k].plain || (k === "gasExchange" ? raw("pl_gasSame") : raw("cSame")); }
       if (!out[k].plain) out[k].plain = out[k].lines[0];
+      // Level 1: one plain sentence per box (round 5, U10); the setting box keeps one sentence per changed dial
+      if (n <= 1 && k !== "setting") out[k].plain = oneSentence(out[k].plain);
       if (out[k].on) said.push(raw("ch_" + k) + ": " + (n <= 1 ? out[k].plain : out[k].lines.join(" ")));
     });
     var now = o.now || o.roB;
     return { steps: steps, data: out, notes: notes, p3: { now: now, wo: a0, wi: a1 }, say: raw("chainSay", { x: said.join(" ") }), src: o, lang: L(), lv: n };
   }
+  function oneSentence(str) { var m = /^[\s\S]*?[.।](?=\s|$)/.exec(str || ""); return m ? m[0] : str || ""; }
   // A chain is written in the language and level of the moment it was made; after a switch it is written again.
   function fresh(c) { return c && c.src && (c.lang !== L() || c.lv !== lv()) ? compose(c.src) : c; }
   function chainHtml() {
@@ -1781,8 +1909,9 @@
   // The engine's reading of a gas (abg().interp or E.interpretAbg): its label, and the steps (folded at Level 1).
   function interpHtml(ip, fold) {
     if (!ip || !ip.label) return "";
-    var d = ip.detail ? txg(ip.detail) : "";
-    return '<div class="vl-interp"><p><b>' + s("interpH") + ":</b> " + tx(ip.label) + "</p>" +
+    // Level 1 reads the engine's short plain form when it gives one (E4: no Winter's, no acidaemia); the full reading folds
+    var d = ip.detail ? txg(ip.detail) : "", lab = fold && (ip.short || ip.plain) ? ip.short || ip.plain : ip.label;
+    return '<div class="vl-interp"><p><b>' + s("interpH") + ":</b> " + tx(lab) + "</p>" +
       (d ? fold ? '<details class="vl-more"><summary>' + s("stepByStep") + "</summary><p>" + d + "</p></details>" : '<p class="vl-plain">' + d + "</p>" : "") + "</div>";
   }
   // A reason whose direction disagrees with the numbers it sits next to is dropped, never shown.
@@ -1849,7 +1978,7 @@
     if (!list.length) return '<p class="vl-al-none">' + (ico("check") ? '<span aria-hidden="true">' + ico("check") + "</span>" : "") + s("alarmsNone") + "</p>";
     // the "+N more" chip on a phone takes the colour of the worst alarm it hides, so a hidden red never looks grey
     var hid = list.slice(1), worst = hid.reduce(function (m, a) { return Math.max(m, R.sil[a.id] > R.s.t || R.ack[a.id] ? 0 : tier(a)); }, 0);
-    var more = list.length > 1 ? '<button type="button" class="vl-al-more' + (worst === 3 ? " danger" : worst === 2 ? " warn" : "") + '" data-act="vlalall" aria-label="' + s("allAlarms", { n: list.length }) + '">' + s("plusN", { n: list.length - 1 }) + "</button>" : "";
+    var more = list.length > 1 ? '<button type="button" class="vl-al-more' + (worst === 3 ? " danger" : worst === 2 ? " warn" : "") + '" data-act="vlalall" aria-label="' + s("allAlarms", { n: list.length }) + '"><b>' + (list.length === 2 ? s("moreAl1") : s("moreAl", { n: list.length - 1 })) + "</b><small>" + s("reddest") + "</small></button>" : "";
     return '<h2 class="sp-sr">' + s("alarmsH") + '</h2><ul class="vl-al-list">' + list.map(function (a) {
       var sil = R.sil[a.id] > R.s.t, ak = !!R.ack[a.id];
       return '<li><button type="button" class="vl-al ' + esc(sevOf(a)) + (sil || ak ? " sil" : "") + '" data-act="vlalarm" data-k="' + esc(a.id) + '" aria-label="' + s("alarmOpen", { x: t(a.label) }) + (sil ? ", " + s("silenced") : ak ? ", " + s("acked") : "") + '">' +
@@ -1885,6 +2014,7 @@
     if (fresh.length) I.haptic(fresh.some(function (x) { return sevOf(x) === "danger"; }) ? "error" : "warning");
     el.innerHTML = alarmsHtml();
     el.classList.toggle("is-none", !R.alN);
+    var nx = q(".vl-next"), want = nextStep(); if ((nx ? nx.getAttribute("data-to") : null) !== (want ? want.to : null) || (want && want.id && nx.getAttribute("data-k") !== want.id)) paintFoot(); // the Next strip follows the alarm bar (U4)
     var ok = $("vlOk"); if (ok) ok.hidden = !!R.alN;
     if (keep) { var n = el.querySelector('[data-k="' + keep + '"]'); if (n) n.focus({ preventScroll: true }); }
   }
@@ -1951,7 +2081,17 @@
             : can ? '<button type="button" class="sp-btn pri" data-act="vlsetback" data-k="' + esc(cb.key) + '" data-v="' + esc(cb.from) + '">' + s("setBack", { x: setLabel(cb.key), a: setText(cb.key, cb.from) + u }) + "</button>" : "") + "</div>";
       }
     }
-    var P = planOf(a, id), checks = P ? P.checklist : fallbackChecks(id), acts = P ? (P.actions || []) : fallbackActs(a, id), pr = P && P.primary, lead = !top;
+    var P = planOf(a, id), checks = P ? P.checklist : fallbackChecks(id), acts = P ? (P.actions || []) : fallbackActs(a, id), pr = P && P.primary;
+    // Round 5 (U5, E1): an alarm leads with its own fix. Low SpO2 leads with oxygen (mild: FiO2 one step; emergency: bag
+    // with 100%); a CO2 cause (a smaller breath) moves under "Also fix the CO2", and in an emergency a lowered FiO2 is
+    // never set "back" to a value below what the emergency needs: bagging leads, the set back waits under "Then".
+    var o2 = id === "spo2Low", band = (P && P.spo2Band) || (o2 ? (sev === "danger" ? "emergency" : "mild") : null), also = "";
+    if (o2 && cb && top && (!OX_KEYS[cb.key] || (band === "emergency" && cb.key === "fio2" && +cb.from < 100))) {
+      also = '<div class="vl-also"><h3 class="vl-h3">' + s(OX_KEYS[cb.key] ? "alsoThen" : "alsoCo2") + "</h3>" + top.replace(/sp-btn pri/g, "sp-btn sec") + "</div>";
+      top = "";
+    }
+    if (o2 && !oxPrim(pr)) pr = o2Prim(band, A0);
+    var lead = !top;
     if (top && pr && pr.kind !== "action") pr = null; // the cause block above already carries the setting step
     function actBtn(k, isLead) { if (!A0[k]) return ""; var on = safe(function () { return A0[k].available(R.s); }, false), h = bedBtn({ id: k, a: A0[k], on: on, sug: true }, true); return isLead && on ? h.replace('class="vl-bedb', 'class="vl-bedb lead') : h; }
     // the primary step: a bedside action, a setting (never a limit), or a check the learner does with their eyes
@@ -1978,9 +2118,25 @@
     // open for a high-priority alarm or a changed limit (the real guidance must not hide); folded under a setting cause
     var open = sev === "danger" || !!lim || !top;
     sheet((a ? tx(a.label) : esc(id)),
-      '<div class="vl-acard ' + esc(sev) + '">' + top + now + (more ? '<details class="vl-more"' + (open ? " open" : "") + "><summary>" + s("otherCauses") + "</summary>" + more + "</details>" : "") + "</div>",
-      '<button type="button" class="sp-btn sec" data-act="vlsil" data-k="' + esc(id) + '">' + s("silence") + '</button><button type="button" class="sp-btn sec" data-act="vlack" data-k="' + esc(id) + '">' + s("ack") + "</button>", b);
+      '<div class="vl-acard ' + esc(sev) + '">' + top + now + also + (more ? '<details class="vl-more"' + (open ? " open" : "") + "><summary>" + s("otherCauses") + "</summary>" + more + "</details>" : "") + "</div>",
+      (silenceOk(a, P, id, band) ? '<button type="button" class="sp-btn sec" data-act="vlsil" data-k="' + esc(id) + '">' + s("silence") + "</button>" : '<p class="vl-nosil" role="note">' + s("noSil") + "</p>") +
+      '<button type="button" class="sp-btn sec" data-act="vlack" data-k="' + esc(id) + '">' + s("ack") + "</button>", b);
   };
+  // Silence is not offered for an emergency or a high-priority patient alarm (S10): the engine's silenceOk when it gives
+  // one, else the UI's own rule.
+  function silenceOk(a, P, id, band) {
+    var x = (P && P.silenceOk != null) ? P.silenceOk : a && a.silenceOk != null ? a.silenceOk : null;
+    if (x != null) return !!x;
+    return !(band === "emergency" || (MON_AL[id] && sevOf(a) === "danger"));
+  }
+  function oxPrim(pr) { return !!pr && ((pr.kind === "action" && pr.id === "bag100") || (pr.kind === "setting" && OX_KEYS[pr.key] && (pr.key !== "fio2" || +pr.to > +R.set.fio2))); }
+  function o2Prim(band, A0) {
+    var on = function (k) { return !!A0[k] && safe(function () { return A0[k].available(R.s); }, false); }, f = +R.set.fio2;
+    if (band === "emergency" && on("bag100")) return { kind: "action", id: "bag100", label: A0.bag100.label };
+    // one FiO2 step: the engine's own fio2Step when exported; until then the same rule as its fio2Line (+20 below 60, else +10)
+    if (f < 100) { var up = band === "emergency" ? 100 : E().fio2Step ? safe(function () { return E().fio2Step(f); }, 100) : Math.min(100, f + (f < 60 ? 20 : 10)); return { kind: "setting", key: "fio2", to: up, label: { en: STR.raiseFio2.en.replace("{v}", up), hi: STR.raiseFio2.hi.replace("{v}", up) } }; }
+    return { kind: "check", id: "fio2max", label: STR.fio2Max };
+  }
   // A plan's setting step as a button; `also` (e.g. a shorter Ti with a faster rate) travels with it.
   function planBtn(x, cls) {
     var al = x.also && typeof x.also === "object" ? JSON.stringify(x.also) : "";
@@ -2004,7 +2160,7 @@
   };
   A.vlalall = function (b) {
     var list = activeAlarms();
-    sheet(s("alarmsH"), '<ul class="vl-al-list vl-al-sheet">' + list.map(function (a) {
+    sheet(s("alarmsH"), '<p class="vl-note vl-al-note">' + s("alAllNote") + '</p><ul class="vl-al-list vl-al-sheet">' + list.map(function (a) {
       return '<li><button type="button" class="vl-al ' + esc(sevOf(a)) + '" data-act="vlalarm" data-k="' + esc(a.id) + '"><span class="vl-al-i" aria-hidden="true">' + (ico(sevOf(a) === "danger" ? "siren" : "warn") || "!") + "</span>" + tx(a.label) + "</button></li>";
     }).join("") + "</ul>", null, b);
   };
@@ -2078,6 +2234,7 @@
       else if (!had) b.innerHTML = bagHtml();
       else { var c = $("vlBagN"); if (c) c.textContent = raw("bagLeft", { n: n }); var p = b.querySelector(".vl-bag-p"); if (p) p.style.setProperty("--p", (n / 60).toFixed(3)); }
     }
+    coachAuto();
     if (!w) return;
     var list = bedList(), sig = bedSigOf(list);
     if (sig === R.bedSig) return;
@@ -2088,7 +2245,9 @@
   A.vlbed = function (b) {
     var id = b.getAttribute("data-k"), e = E(), a = e.ACTIONS && e.ACTIONS[id];
     if (!a || !safe(function () { return a.available(R.s); }, false)) return;
-    var inSheet = !!b.closest(".vl-sheet"), r0 = cur();
+    // a senior-only order (a muscle relaxant, a transfusion) asks first (round 5, U7 + E7)
+    if (seniorOnly(id, a) && b.getAttribute("data-ok") !== "1") return seniorSheet(id, a, b);
+    var inSheet = !!(b.closest && b.closest(".vl-sheet")), r0 = cur();
     // a tutorial remembers every bedside action with the readout just before it: a later step that asks for the same
     // action accepts it (the first-alarm deadlock: suction from the alarm card, then a step that asks for suction)
     // (a step whose change was already seen keeps its evidence: it is not re-judged against this action)
@@ -2113,6 +2272,27 @@
     var n = q('#vlBedW [data-k="' + id + '"]') || q("#vlBedW button") || q(".vl-mode"); if (n) n.focus({ preventScroll: true });
     if (R.tut) tutCheck();
   };
+
+  // The engine marks high-risk orders seniorOnly (E7); until it does, the UI treats the relaxant and blood the same way.
+  var SENIOR_ONLY = { paralyse: 1, blood: 1 };
+  function seniorOnly(id, a) { return a && a.seniorOnly != null ? !!a.seniorOnly : !!SENIOR_ONLY[id]; }
+  function seniorSheet(id, a, trig) {
+    var why = a.consequence ? '<p class="vl-snr-c">' + txg(a.consequence) + "</p>" : "";
+    sheet(s("snrH"), '<p class="vl-senior" role="note">' + s("snrB", { x: t(a.label) }) + "</p>" + why,
+      '<div class="vl-fin-f"><button type="button" class="sp-btn pri" data-act="vlsnrcall">' + s("snrCall") + '</button><button type="button" class="sp-btn sec" data-act="vlsnrgo" data-k="' + esc(id) + '">' + s("snrGo") + "</button></div>",
+      trig && trig.getAttribute ? trig : null);
+  }
+  A.vlsnrcall = function () { closeSheet(); toast("event", s("snrCalled")); say(raw("snrCalled")); };
+  A.vlsnrgo = function (b) { var id = b.getAttribute("data-k"); closeSheet(true); A.vlbed({ getAttribute: function (k) { return k === "data-k" ? id : k === "data-ok" ? "1" : null; }, closest: function () { return null; } }); };
+  // Phone, tutorial, bagging: once the bag step is done the coach folds to its one-line header (Next stays in it), so
+  // the bag banner and the monitor are not buried under five layers (round 5, U6). The learner can open it again.
+  function coachAuto() {
+    if (!R || !R.tut || !$("vlCoach")) return;
+    var want = isPhone() && bagLeft() > 0 && R.tut.ok;
+    if (want && !R.coMin && !R.coKeep) { R.coMin = true; R.coAuto = true; paintCoach(); }
+    else if (!want && R.coAuto) { R.coAuto = false; R.coKeep = false; if (R.coMin) { R.coMin = false; paintCoach(); } }
+    if (!want) R.coKeep = false;
+  }
 
   /* ---- time ---- */
   var LIVE = { tm: 0 };
@@ -2293,6 +2473,15 @@
       // repaint at once (the clock may be stopped at Level 1, so no tick would show the alarm the event raises)
       refresh(true);
     }
+    // a reconnect step (round 5, U11): bagging ends and the patient goes back on the ventilator, so the tutorial ends
+    // connected (the engine's own reconnect action when it has one; else the bag's last seconds run out)
+    if (sp.reconnect && bagLeft() > 0) {
+      var AC = E().ACTIONS || {};
+      if (AC.reconnect && safe(function () { return AC.reconnect.available(R.s); }, false)) R.s = E().act(R.s, "reconnect");
+      else R.s = E().step(R.s, R.set, bagLeft());
+      R.log.push({ t: R.s.t, settings: clone(R.set), readout: cur(), action: "wait" }); R.lastLog = R.s.t;
+      refresh(true);
+    }
     if (sp.expect && R.tut.ok) tutObserve(sp);
     var ro = $("vlRo"); if (ro) ro.innerHTML = roHtml(cur());
     // the control the step asks for exists and is open: a dial above the level, the alarm limits, the bedside group
@@ -2339,17 +2528,22 @@
     return out.length ? '<p class="vl-co-nums"><b>' + s("coNow") + "</b> " + out.slice(0, 4).join("") + "</p>" : "";
   }
   // On the last step: if the tutorial left the patient outside a target, say so and offer the starting settings back.
-  function tutLeftHtml() {
+  function tutLeftHtml(sp) {
     var r = cur(), g = goals(), v = r.vitals || {}, gs = r.gas || {}, bad = [];
     if (g.spo2 && v.spo2 != null && v.spo2 < g.spo2[0]) bad.push("SpO2 " + fmtN(v.spo2));
     if (g.paco2 && gs.paco2 != null && (gs.paco2 < g.paco2[0] - 3 || gs.paco2 > g.paco2[1] + 3)) bad.push("PaCO2 " + fmtN(gs.paco2));
     else if (g.ph && gs.ph != null && (gs.ph < g.ph[0] || gs.ph > g.ph[1])) bad.push("pH " + fmtN(gs.ph));
     if (v.map != null && v.map < 65) bad.push("MAP " + fmtN(v.map));
-    return bad.length ? '<p class="vl-co-wait">' + s("tutLeft", { x: bad.join(", ") }) + '</p><button type="button" class="vl-co-link" data-act="vltutrst">' + s("restore") + "</button>" : "";
+    if (!bad.length) return "";
+    // the tutorial's own reason why this patient is not fully fixed yet (U11); else the offer to restore
+    if (sp && sp.left) return '<p class="vl-co-wait vl-co-left">' + s("tutLeft", { x: bad.join(", ") }) + " " + txg(sp.left) + "</p>";
+    return '<p class="vl-co-wait">' + s("tutLeft", { x: bad.join(", ") }) + '</p><button type="button" class="vl-co-link" data-act="vltutrst">' + s("restore") + "</button>";
   }
   function coachHtml() {
     var tu = R.tut.tu, sp = tutStep(), n = tu.steps.length, last = R.tut.i >= n - 1, task = taskText(sp), exp = "";
-    var keep = GL.seen; GL.seen = {};
+    // a term is glossed once per tutorial, on the step where it first appears (repaints of that step keep it) (U10)
+    if (R.tut.glI !== R.tut.i) { R.tut.glBase = clone(R.tut.gl || {}); R.tut.glI = R.tut.i; }
+    var keep = GL.seen; GL.seen = clone(R.tut.glBase || {});
     if (sp.expect) {
       var bv = R.tut.base ? roVal(R.tut.base.r, expKey(sp)) : null, nv = roVal(cur(), expKey(sp));
       // the evidence is frozen when the change is first seen: a later fix (suction) must not rewrite what was seen
@@ -2374,14 +2568,16 @@
     var say = txg(cleared ? sp.cleared : sp.say);
     var show = !R.tut.ok && sp.do && (sp.do.key != null || sp.do.action || sp.do.mode) ? '<button type="button" class="vl-co-link vl-co-show" data-act="vltutshow">' +
       s(sp.do.key != null && ALARM_KEYS.indexOf(sp.do.key) >= 0 ? "openLim" : sp.do.action ? "openBed" : "showCtl") + "</button>" : "";
-    GL.seen = keep;
+    R.tut.gl = GL.seen; GL.seen = keep;
+    // the instruction comes first while it waits (U12): "Your turn" above the explanation, then the explanation
+    var taskL = task ? '<p class="vl-co-task"' + (waitTask ? ' id="vlCoNeed"' : "") + "><b>" + s("yourTurn") + "</b> " + task + (R.tut.ok ? ' <span class="vl-co-done">' + (ico("check") || "") + s("doneStep") + "</span>" : "") + "</p>" + show : "";
+    var sayL = '<p class="vl-co-say" id="vlCoSay" tabindex="-1">' + say + "</p>";
     return '<div class="vl-co-h"><button type="button" class="vl-co-min" data-act="vlcomin" aria-expanded="' + !R.coMin + '" aria-controls="vlCoBody"><span class="vl-co-ht"><span class="vl-co-tt">' + tx(tu.title) + '</span><span class="vl-co-st"> · ' + s("stepOf", { i: R.tut.i + 1, n: n }) + "</span>" +
-      '</span><span class="vl-co-chev" aria-hidden="true">' + ico("chev") + '</span><span class="sp-sr">' + s(R.coMin ? "coMax" : "coMin") + '</span></button><button type="button" class="vl-co-x" data-act="vltutx">' + s("exitTut") + "</button></div>" +
+      '</span><span class="vl-co-chev" aria-hidden="true">' + ico("chev") + '</span><span class="sp-sr">' + s(R.coMin ? "coMax" : "coMin") + '</span></button>' + (R.coMin && canNext ? '<button type="button" class="sp-btn pri vl-co-hn" data-act="vltutn">' + s(last ? "done" : "next") + "</button>" : '<button type="button" class="vl-co-x" data-act="vltutx">' + s("exitTut") + "</button>") + "</div>" +
       '<div class="vl-co-bar" aria-hidden="true"><i style="transform:scaleX(' + ((R.tut.i + 1) / n).toFixed(3) + ')"></i></div>' +
       '<div class="vl-co-body" id="vlCoBody">' +
-      '<p class="vl-co-say" id="vlCoSay" tabindex="-1">' + say + "</p>" +
-      (task ? '<p class="vl-co-task"' + (waitTask ? ' id="vlCoNeed"' : "") + "><b>" + s("yourTurn") + "</b> " + task + (R.tut.ok ? ' <span class="vl-co-done">' + (ico("check") || "") + s("doneStep") + "</span>" : "") + "</p>" + show : "") + exp + coachNums(sp) +
-      (last ? tutLeftHtml() : "") + "</div>" +
+      (waitTask ? taskL + sayL : sayL + taskL) + exp + coachNums(sp) +
+      (last ? tutLeftHtml(sp) + (tutChanges(tu) ? '<p class="vl-senior" role="note">' + s("seniorTut") + "</p>" : "") : "") + "</div>" +
       need + '<div class="vl-co-f">' + (task && !R.tut.ok ? '<button type="button" class="sp-btn sec" data-act="vltutdo">' + s("doIt") + "</button>" : "") +
       '<button type="button" class="sp-btn pri' + (canNext ? "" : " is-wait") + '" data-act="vltutn"' + (canNext ? "" : ' data-wait="1" aria-describedby="vlCoNeed"') + ">" + s(last ? "done" : "next") + "</button></div>";
   }
@@ -2424,7 +2620,7 @@
       pulse(tg); var f = tg.querySelector ? tg.querySelector(".vl-dial") || tg : tg; try { f.focus({ preventScroll: true }); } catch (e) {}
     });
   };
-  A.vlcomin = function () { R.coMin = !R.coMin; paintCoach(); var b = q("[data-act=vlcomin]"); if (b) b.focus({ preventScroll: true }); if (!R.coMin) tutHighlight(); };
+  A.vlcomin = function () { R.coMin = !R.coMin; if (!R.coMin && R.coAuto) { R.coAuto = false; R.coKeep = true; } paintCoach(); var b = q("[data-act=vlcomin]"); if (b) b.focus({ preventScroll: true }); if (!R.coMin) tutHighlight(); };
   // The highlighted target comes into the clear area: its tab opens on a phone, then it scrolls to the middle of the
   // visible page (the coach is outside the scroller, so the middle is always clear).
   function tutHighlight(still) {
@@ -2473,7 +2669,7 @@
       pulse($("vlCoNeed")); say(($("vlCoNeed") || {}).textContent || "");
       return;
     }
-    if (R.tut.i >= R.tut.tu.steps.length - 1) { prefs().tuts[R.tut.tu.id] = 1; savePrefs(); return tutEnd(); }
+    if (R.tut.i >= R.tut.tu.steps.length - 1) { prefs().tuts[R.tut.tu.id] = 1; savePrefs(); return tutFinish(); }
     R.tut.i++; R.tut.t0 = R.s.t; tutEnter(); paintCoach(true);
   };
   A.vltutrst = function () {
@@ -2484,8 +2680,32 @@
     toast("event", s("restored"));
     paintCoach();
   };
-  function tutEnd() { R.tut = null; var c = $("vlCoach"); if (c) c.parentNode.removeChild(c); var sc = q(".vl-scroll"); if (sc) sc.classList.remove("has-coach"); tutHighlight(); paintFoot(); R.bedSig = ""; updBed(); var tb = q(".vl-tabbar"); if (tb && !q(".vl-tutrun")) tb.insertAdjacentHTML("afterend", '<p class="vl-tutrun" role="note">' + s("tutRunNote") + "</p>"); toast("event", s("tutPractice")); var m = q(".vl-mode"); if (m) m.focus({ preventScroll: true }); }
+  function tutClose() { R.tut = null; var c = $("vlCoach"); if (c) c.parentNode.removeChild(c); var sc = q(".vl-scroll"); if (sc) sc.classList.remove("has-coach"); tutHighlight(); paintFoot(); R.bedSig = ""; updBed(); var tb = q(".vl-tabbar"); if (tb && !q(".vl-tutrun")) tb.insertAdjacentHTML("afterend", '<p class="vl-tutrun" role="note">' + s("tutRunNote") + "</p>"); }
+  function tutEnd() { tutClose(); toast("event", s("tutPractice")); var m = q(".vl-mode"); if (m) m.focus({ preventScroll: true }); }
   A.vltutx = function () { tutEnd(); };
+  // A tutorial that changes a setting or the mode closes with the real-ward rule (round 5, U11).
+  function tutChanges(tu) { return (tu.steps || []).some(function (x) { return x.do && ((x.do.key != null && ALARM_KEYS.indexOf(x.do.key) < 0) || x.do.mode); }); }
+  // Finish card (round 5, U2): "Done! Next: <the next step on the path>", with Next and Back to the lab. Staying on the
+  // practice patient is a choice (the quiet third button, or closing the card), never where the learner is left.
+  function tutNext(doneId) {
+    if (lv() <= 2) { var nx = pathNext(pathSteps()); return nx ? { k: nx.k, title: nx.title, tut: nx.k.indexOf("t:") === 0 } : null; }
+    var td = prefs().tuts, tu = (learn().tutorials || []).filter(function (x) { return x.id !== doneId && !td[x.id] && (x.level || 1) <= lv(); })[0];
+    return tu ? { k: "t:" + tu.id, title: tx(tu.title), tut: true } : null;
+  }
+  function tutFinish() {
+    var tu = R.tut.tu, nx = tutNext(tu.id);
+    tutClose();
+    I.haptic("success");
+    R.finNext = nx ? nx.k : null;
+    sheet(s("finH"), '<div class="vl-fin"><p class="vl-fin-d">' + (ico("check") ? '<span class="vl-fin-i" aria-hidden="true">' + ico("check") + "</span>" : "") + "<span>" + s("finDone", { x: t(tu.title) }) + "</span></p>" +
+      (tutChanges(tu) ? '<p class="vl-senior" role="note">' + s("seniorTut") + "</p>" : "") +
+      '<p class="vl-fin-n">' + (nx ? s("finNext", { x: "" }).replace(/\s*$/, " ") + "<b>" + nx.title + "</b>" : s("finAll")) + "</p></div>",
+      '<div class="vl-fin-f">' + (nx ? '<button type="button" class="sp-btn pri" data-act="vlfingo">' + s(nx.tut ? "finNextT" : "finGo") + "</button>" : "") +
+      '<button type="button" class="sp-btn sec" data-act="vlfinlab">' + s("backLab") + '</button><button type="button" class="vl-co-link vl-fin-stay" data-act="vlfinstay">' + s("finStay") + "</button></div>", q(".vl-mode"));
+  }
+  A.vlfingo = function () { var k = R && R.finNext; closeSheet(true); stopLive(); goPath(k); };
+  A.vlfinlab = function () { closeSheet(true); stopLive(); home(lv() <= 2 ? ".vl-path .next .vl-pstep" : null); };
+  A.vlfinstay = function () { closeSheet(true); toast("event", s("tutPractice")); var m = q(".vl-mode"); if (m) m.focus({ preventScroll: true }); };
 
   /* ================= debrief ================= */
   A.vlfinish = function () {
@@ -2593,7 +2813,7 @@
       (good ? '<h2 class="sp-h2">' + s("goodH") + '</h2><div class="vl-good">' + (Array.isArray(good) ? "<ul>" + good.map(function (x) { return "<li>" + anyTx(x) + "</li>"; }).join("") + "</ul>" : "<p>" + anyTx(good) + "</p>") + "</div>"
         : key.length ? '<h2 class="sp-h2">' + s("goodH") + '</h2><ul class="dr-lines vl-notes">' + key.map(function (n) { return "<li>" + n + "</li>"; }).join("") + "</ul>" : "") +
       I.maikBtn(STR.maikQ.en + ": " + (sc.title && sc.title.en) + ". Score " + sco.total + ". " + (sco.notes || []).map(function (n) { return typeof n === "string" ? n : n.en; }).join(" ") + " Explain what the best ventilator settings would have been and why.") +
-      '<p class="vl-disc vl-disc-end" role="note"><span>' + disc() + ' <span class="vl-draft">' + s("draft") + ".</span></span></p></div></div>" +
+      '<p class="vl-disc vl-disc-end" role="note"><span>' + disc() + "</span></p></div></div>" +
       '<div class="sp-foot"><div class="mcq-foot2"><button type="button" class="sp-btn sec" data-act="vlhome">' + s("labHome") + '</button><button type="button" class="sp-btn pri" data-act="vlrerun">' + s("again") + "</button></div></div>",
       typeof focusSel === "string" ? focusSel : null);
   }
@@ -2720,7 +2940,7 @@
     return "<b>" + esc(modeShort(set.mode)) + "</b> · " + keys.map(function (k) { return esc(setLabel(k)) + " " + esc(setText(k, set[k])) + (setUnit(k) ? " " + esc(setUnit(k)) : ""); }).join(" · ");
   }
   function caseView(focusSel) {
-    var list = caseList(), c = list[CS.i], beg = lv() <= 1;
+    var list = caseList(), c = list[CS.i], beg = lv() <= 1, sc0 = q(".sp-scroll"), keepTop = st.view === "vl-case" && sc0 ? sc0.scrollTop : 0;
     I.leave(); closeSheet(true); wvStop();
     st.view = "vl-case"; st.again = caseView;
     st.onBack = function () { home("[data-act=vlcases]"); return true; };
@@ -2750,20 +2970,47 @@
     if (CS.a1 != null) {
       var ipc = E().interpretAbg ? safe(function () { return E().interpretAbg(c.abg); }, null) : null;
       h += verdict("vl-v1", CS.a1 === q1.answer, q1) + (q1.why ? '<p class="vl-whyp">' + txg(q1.why) + "</p>" : "") + interpHtml(ipc, beg) +
+        (CS.a2 == null ? '<p class="vl-cue" aria-hidden="true">' + s("caseCue") + (ico("chev") ? '<span class="vl-cue-i">' + ico("chev") + "</span>" : "") + "</p>" : "") +
         '<h2 class="sp-h3 vl-q" id="vlQ2">' + s("q2") + ": " + txg(q2.ask) + "</h2>" + opts(q2, "vlq2", CS.a2);
     }
     if (CS.a2 != null) {
       var rr = CS.res;
-      h += verdict("vl-v2", CS.a2 === q2.answer, q2) + (rr && rr.after ? verdictHtml(caseBefore(rr, c), rr.after, sc && sc.goals, true) : "") +
+      h += verdict("vl-v2", CS.a2 === q2.answer, q2) + (rr && rr.after ? caseVerdict(caseBefore(rr, c), rr.after, sc && sc.goals, CS.a2 === q2.answer) : "") +
         (q2.why ? '<h3 class="vl-h3">' + s("whyH") + '</h3><p class="vl-whyp">' + txg(q2.why) + "</p>" : "") +
         (rr && rr.applied && rr.applied.length ? '<p class="vl-applied"><b>' + s("applied") + ":</b> " + rr.applied.map(function (x) { return esc(setLabel(x.k)) + " " + esc(setText(x.k, x.a)) + " &rarr; " + esc(setText(x.k, x.b)) + (setUnit(x.k) ? " " + esc(setUnit(x.k)) : ""); }).join(" · ") + "</p>" : "") +
         (rr && rr.after ? '<h3 class="vl-h3">' + s("result") + '</h3><div class="vl-card">' + caseResult(rr, c) + "</div>" : '<p class="vl-empty">' + s("caseNoSim") + "</p>") +
-        (rr && rr.reasons.length ? '<ul class="vl-why">' + rr.reasons.map(function (x) { return "<li>" + arrow(x.direction === "down" ? -1 : 1) + "<span><b>" + esc(x.param || "") + "</b> " + tx(x.because) + "</span></li>"; }).join("") + "</ul>" : "");
+        (rr && rr.reasons.length ? whyList(rr.reasons, beg) : "");
     }
     I.paint(I.top(t(STR.backLab), s("cases"), s("caseOf", { i: CS.i + 1, n: list.length }), I.langBtn()) +
       '<div class="sp-scroll sp-pad"><div class="sp-col vl-case">' + h + '<p class="vl-disc vl-disc-end" role="note"><span>' + disc() + "</span></p></div></div>" +
       (CS.a2 != null ? '<div class="sp-foot"><button type="button" class="sp-btn pri sp-wide" data-act="vlcnext">' + s(CS.i < list.length - 1 ? "nextCase" : "labHome") + "</button></div>" : ""),
       typeof focusSel === "string" ? focusSel : null);
+    // the answer's verdict comes into view where the learner is reading, never back at the top (round 5, U8, S4)
+    var scN = q(".sp-scroll"); if (scN && keepTop) scN.scrollTop = keepTop;
+    var vf = typeof focusSel === "string" ? q(focusSel) : null;
+    if (vf && scN) G.requestAnimationFrame(function () { scrollTo(vf, false); try { vf.focus({ preventScroll: true }); } catch (e) {} });
+  }
+  // A wrong answer's verdict leads with what is still wrong 30 min later, never "Little change" (round 5, U8)
+  function caseVerdict(b, a, g, ok) {
+    var h = verdictHtml(b, a, g, true);
+    if (ok) return h;
+    g = g || {};
+    var sp = g.spo2 || [92, 98], co = g.paco2 || (g.ph ? null : [35, 45]), ph = g.ph || [7.35, 7.45], off = [];
+    var v = gv(a, "vitals", "spo2"), pc = gv(a, "gas", "paco2"), p = gv(a, "gas", "ph"), m = gv(a, "vitals", "map");
+    if (v != null && v < sp[0]) off.push("SpO2 " + fmtN(v));
+    if (pc != null && co && (pc < co[0] || pc > co[1])) off.push("PaCO2 " + fmtN(pc));
+    if (p != null && (p < ph[0] || p > ph[1])) off.push("pH " + fmtN(p));
+    if (m != null && m < 65) off.push("MAP " + fmtN(m));
+    if (off.length) return '<p class="vl-verdict vd-bad"><b>' + s("vdWrong") + "</b> " + s("vdOff", { x: off.join(", ") }) + "</p>";
+    return h.replace("vd-none", "vd-bad").replace("<b>" + s("vd_none") + ":</b>", "<b>" + s("vdWrong") + "</b>");
+  }
+  // "Why" lines under a gas: Level 1 one plain line per gas and direction, the engine's formulas under More detail.
+  function whyList(rs, beg) {
+    var li = function (x, txt) { return "<li>" + arrow(x.direction === "down" ? -1 : 1) + "<span><b>" + esc(x.param || "") + "</b> " + txt + "</span></li>"; };
+    if (!beg) return '<ul class="vl-why">' + rs.map(function (x) { return li(x, tx(x.because)); }).join("") + "</ul>";
+    var seen = {}, pl = rs.filter(function (x) { var k = x.param + x.direction; if (seen[k]) return false; seen[k] = 1; return true; });
+    return '<ul class="vl-why">' + pl.map(function (x) { return li(x, esc(plainWhy(x))); }).join("") + "</ul>" +
+      '<details class="vl-more"><summary>' + s("moreDetail") + '</summary><ul class="vl-why">' + rs.map(function (x) { return li(x, tx(x.because)); }).join("") + "</ul></details>";
   }
   // The verdict reads the same Before as the table: the case's own gas where it has a number, else the engine's.
   function caseBefore(rr, c) {
