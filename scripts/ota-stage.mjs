@@ -71,7 +71,20 @@ function r2PutJSON(key, obj) {
 }
 function r2PutFile(key, path, contentType) {
   if (DRY) { console.log(`  [dry-run] would upload ${key}`); return; }
-  wrangler(["r2", "object", "put", `${BUCKET}/${key}`, "--file", path, "--content-type", contentType, "--remote"], { quiet: true });
+  let lastErr = null;
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      wrangler(["r2", "object", "put", `${BUCKET}/${key}`, "--file", path, "--content-type", contentType, "--remote"], { quiet: true });
+      return;
+    } catch (e) {
+      lastErr = e;
+      if (attempt < 3) {
+        console.warn(`  ⚠️ Retry ${attempt}/3 for ${key}: ${e.message}`);
+        execFileSync("sleep", ["2"]);
+      }
+    }
+  }
+  throw lastErr;
 }
 
 // Bounded concurrency — thousands of individual `wrangler` process spawns run serially by default,
