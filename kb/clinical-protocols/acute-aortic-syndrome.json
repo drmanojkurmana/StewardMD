@@ -5,7 +5,22 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, ICU, cardiothoracic or vascular centre",
- "aliases": ["AAS", "aortic dissection", "AD", "type A dissection", "type B dissection", "Stanford A", "Stanford B", "intramural haematoma", "IMH", "penetrating aortic ulcer", "PAU", "ADD-RS", "impulse control", "TEVAR"],
+ "aliases": [
+  "AAS",
+  "aortic dissection",
+  "AD",
+  "type A dissection",
+  "type B dissection",
+  "Stanford A",
+  "Stanford B",
+  "intramural haematoma",
+  "IMH",
+  "penetrating aortic ulcer",
+  "PAU",
+  "ADD-RS",
+  "impulse control",
+  "TEVAR"
+ ],
  "summary": "Suspect aortic dissection in any severe abrupt chest, back or abdominal pain; use the ADD-RS with D-dimer and urgent CT angiography, give IV opioid and IV beta-blocker to heart rate below 60/min and SBP 100 to 120 mmHg, send type A for emergency surgery and treat uncomplicated type B medically with TEVAR for complications.",
  "sections": [
   {
@@ -72,28 +87,86 @@
   }
  ],
  "drugs": [
-  { "name": "Esmolol", "dose": "0.5 to 1 mg/kg IV bolus over 1 minute, then 50 to 300 mcg/kg/min infusion", "notes": "First choice for rapid, titratable heart rate control." },
-  { "name": "Labetalol", "dose": "20 mg IV over 2 minutes, then 40 to 80 mg every 10 minutes (maximum cumulative 300 mg), or IV infusion starting at 2 mg/min, titrated", "notes": "Combined alpha and beta blockade." },
-  { "name": "Metoprolol", "dose": "2.5 to 5 mg IV over 2 minutes, repeat every 5 minutes to a maximum of 15 mg", "notes": "Alternative beta-blocker." },
-  { "name": "Sodium nitroprusside", "dose": "0.3 to 10 mcg/kg/min IV infusion, titrated to SBP 100 to 120 mmHg", "notes": "Only after beta-blockade. Cyanide toxicity with prolonged or high-dose use." },
-  { "name": "Nicardipine", "dose": "5 mg/h IV, increase by 2.5 mg/h every 15 minutes to a maximum of 15 mg/h", "notes": "Only after beta-blockade." },
-  { "name": "Diltiazem", "dose": "0.25 mg/kg IV over 5 minutes, then 5 to 15 mg/h infusion", "notes": "Rate control when beta-blockers are contraindicated." },
-  { "name": "Morphine", "dose": "2 to 5 mg IV, titrated every 5 to 10 minutes to pain relief", "notes": "Watch for respiratory depression and hypotension." }
+  {
+   "name": "Esmolol",
+   "dose": "0.5 to 1 mg/kg IV bolus over 1 minute, then 50 to 300 mcg/kg/min infusion",
+   "notes": "First choice for rapid, titratable heart rate control."
+  },
+  {
+   "name": "Labetalol",
+   "dose": "20 mg IV over 2 minutes, then 40 to 80 mg every 10 minutes (maximum cumulative 300 mg), or IV infusion starting at 2 mg/min, titrated",
+   "notes": "Combined alpha and beta blockade."
+  },
+  {
+   "name": "Metoprolol",
+   "dose": "2.5 to 5 mg IV over 2 minutes, repeat every 5 minutes to a maximum of 15 mg",
+   "notes": "Alternative beta-blocker."
+  },
+  {
+   "name": "Sodium nitroprusside",
+   "dose": "0.3 to 10 mcg/kg/min IV infusion, titrated to SBP 100 to 120 mmHg",
+   "notes": "Only after beta-blockade. Cyanide toxicity with prolonged or high-dose use."
+  },
+  {
+   "name": "Nicardipine",
+   "dose": "5 mg/h IV, increase by 2.5 mg/h every 15 minutes to a maximum of 15 mg/h",
+   "notes": "Only after beta-blockade."
+  },
+  {
+   "name": "Diltiazem",
+   "dose": "0.25 mg/kg IV over 5 minutes, then 5 to 15 mg/h infusion",
+   "notes": "Rate control when beta-blockers are contraindicated."
+  },
+  {
+   "name": "Morphine",
+   "dose": "2 to 5 mg IV, titrated every 5 to 10 minutes to pain relief",
+   "notes": "Watch for respiratory depression and hypotension."
+  }
  ],
-  "sources": [
-  { "org": "ESC", "title": "2024 ESC Guidelines for the management of peripheral arterial and aortic diseases", "year": 2024, "url": "https://academic.oup.com/eurheartj/article-lookup/doi/10.1093/eurheartj/ehae179" },
-  { "org": "ACC / AHA", "title": "2022 ACC/AHA Guideline for the Diagnosis and Management of Aortic Disease", "year": 2022, "url": "https://www.jacc.org/doi/10.1016/j.jacc.2022.08.004" }
+ "sources": [
+  {
+   "org": "ESC",
+   "title": "2024 ESC Guidelines for the management of peripheral arterial and aortic diseases",
+   "year": 2024,
+   "url": "https://academic.oup.com/eurheartj/article-lookup/doi/10.1093/eurheartj/ehae179"
+  },
+  {
+   "org": "ACC / AHA",
+   "title": "2022 ACC/AHA Guideline for the Diagnosis and Management of Aortic Disease",
+   "year": 2022,
+   "url": "https://www.jacc.org/doi/10.1016/j.jacc.2022.08.004"
+  }
  ],
  "algorithms": [
   {
    "id": "aas-triage-algo",
    "title": "AAS Diagnostic and Resuscitation Pathway",
    "steps": [
-    { "step": "Initial Presentation", "action": "Severe abrupt ripping or tearing chest or back pain. Assess airway, breathing, circulation, and bilateral arm blood pressures.", "critical": true },
-    { "step": "Hemodynamic Stability", "branch": "Unstable (Shock, Tamponade)", "action": "Immediate bedside transthoracic echocardiogram. Avoid delaying transfer for CT. Call cardiothoracic surgery emergently.", "critical": true },
-    { "step": "ADD-RS Risk Stratification", "branch": "Stable Patient", "action": "Calculate ADD-RS score (0, 1, or 2 to 3 points across high-risk conditions, pain features, and exam features)." },
-    { "step": "Diagnostic Imaging Branch", "branch": "ADD-RS 0 to 1", "action": "If D-dimer < 500 ng/mL, AAS is highly unlikely. If D-dimer positive or ADD-RS 2 to 3, perform urgent whole-aorta CTA." },
-    { "step": "Impulse Control and Definitive Plan", "action": "Target HR < 60 bpm then SBP 100 to 120 mmHg. Stanford Type A goes to emergency surgery; Type B receives medical therapy or TEVAR if complicated." }
+    {
+     "step": "Initial Presentation",
+     "action": "Severe abrupt ripping or tearing chest or back pain. Assess airway, breathing, circulation, and bilateral arm blood pressures.",
+     "critical": true
+    },
+    {
+     "step": "Hemodynamic Stability",
+     "branch": "Unstable (Shock, Tamponade)",
+     "action": "Immediate bedside transthoracic echocardiogram. Avoid delaying transfer for CT. Call cardiothoracic surgery emergently.",
+     "critical": true
+    },
+    {
+     "step": "ADD-RS Risk Stratification",
+     "branch": "Stable Patient",
+     "action": "Calculate ADD-RS score (0, 1, or 2 to 3 points across high-risk conditions, pain features, and exam features)."
+    },
+    {
+     "step": "Diagnostic Imaging Branch",
+     "branch": "ADD-RS 0 to 1",
+     "action": "If D-dimer < 500 ng/mL, AAS is highly unlikely. If D-dimer positive or ADD-RS 2 to 3, perform urgent whole-aorta CTA."
+    },
+    {
+     "step": "Impulse Control and Definitive Plan",
+     "action": "Target HR < 60 bpm then SBP 100 to 120 mmHg. Stanford Type A goes to emergency surgery; Type B receives medical therapy or TEVAR if complicated."
+    }
    ],
    "caption": "Diagnostic pathway aligned with ESC 2024 and ACC/AHA 2022 aortic guidelines."
   }
@@ -102,13 +175,37 @@
   {
    "id": "stanford-classification",
    "title": "Stanford Classification: Type A vs Type B Comparison",
-   "headers": ["Feature", "Stanford Type A", "Stanford Type B"],
+   "headers": [
+    "Feature",
+    "Stanford Type A",
+    "Stanford Type B"
+   ],
    "rows": [
-    ["Involvement", "Ascending aorta (with or without arch or descending)", "Descending aorta only (distal to left subclavian)"],
-    ["Emergency Mortality", "Approximately 1% to 2% per hour if untreated", "Significantly lower acute mortality if uncomplicated"],
-    ["Primary Treatment", "Immediate emergency cardiothoracic surgical repair", "Medical impulse control in ICU or HDU setting"],
-    ["Intervention Triggers", "Mandatory surgery for all operable patients", "TEVAR for malperfusion, rupture, refractory pain, or rapid expansion"],
-    ["Target Hemodynamics", "HR < 60 bpm and SBP 100 to 120 mmHg pre-op", "HR < 60 bpm and SBP 100 to 120 mmHg maintenance"]
+    [
+     "Involvement",
+     "Ascending aorta (with or without arch or descending)",
+     "Descending aorta only (distal to left subclavian)"
+    ],
+    [
+     "Emergency Mortality",
+     "Approximately 1% to 2% per hour if untreated",
+     "Significantly lower acute mortality if uncomplicated"
+    ],
+    [
+     "Primary Treatment",
+     "Immediate emergency cardiothoracic surgical repair",
+     "Medical impulse control in ICU or HDU setting"
+    ],
+    [
+     "Intervention Triggers",
+     "Mandatory surgery for all operable patients",
+     "TEVAR for malperfusion, rupture, refractory pain, or rapid expansion"
+    ],
+    [
+     "Target Hemodynamics",
+     "HR < 60 bpm and SBP 100 to 120 mmHg pre-op",
+     "HR < 60 bpm and SBP 100 to 120 mmHg maintenance"
+    ]
    ],
    "caption": "Classification directly dictates surgical vs medical triage pathway."
   }
@@ -121,20 +218,30 @@
    "description": "Quantifies high-risk conditions, pain features, and examination findings to guide D-dimer vs immediate CTA imaging."
   }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" },
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
  "diagrams": [
   {
-   "id": "aortic-dissection-stanford",
-   "title": "Stanford type A versus type B aortic dissection",
+   "id": "acute-aortic-syndrome-real-image",
+   "title": "Acute aortic syndrome and aortic dissection: Contrast-Enhanced Chest CT Angiogram (Aortic Syndrome)",
    "type": "ct",
-   "src": "/assets/kb-diagrams/aortic-dissection-stanford.svg?v=kbdx1",
-   "caption": "Schematic comparing Stanford type A dissection (ascending aorta involved, a surgical emergency) with type B (confined to the descending aorta), showing the intimal flap and the true and false lumens.",
+   "src": "/assets/kb-real-images/aortic-dissection-ct.jpg?v=kbri1",
+   "caption": "Real axial contrast-enhanced thoracic computed tomography scan demonstrating an intimal dissection flap separating the true and false lumina of the aorta.",
    "annotations": [
-    { "label": "Intimal flap", "description": "Tear flap separating the true lumen from the false lumen." },
-    { "label": "True lumen", "description": "The original aortic channel, usually smaller and in continuity with branch vessels." },
-    { "label": "False lumen", "description": "Blood-filled channel within the media; may thrombose, expand or rupture." },
-    { "label": "Type A", "description": "Any involvement of the ascending aorta: emergency surgery." },
-    { "label": "Type B", "description": "Entry beyond the left subclavian with a spared ascending aorta: usually medical management first." }
+    {
+     "label": "Intimal Flap",
+     "description": "Linear hypodense intimal flap separating true lumen from false lumen."
+    },
+    {
+     "label": "True vs False Lumen",
+     "description": "Smaller true lumen with rapid contrast transit vs dilated false lumen with delayed clearance."
+    },
+    {
+     "label": "Branch Vessel Patency",
+     "description": "Perfusion assessment of celiac, mesenteric, and coronary ostia."
+    }
    ]
   }
  ]

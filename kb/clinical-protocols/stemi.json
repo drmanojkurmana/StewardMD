@@ -248,15 +248,24 @@
  ],
  "diagrams": [
   {
-   "id": "stemi-ecg",
-   "title": "Diagnostic ECG: anterior ST elevation with reciprocal depression",
+   "id": "stemi-real-image",
+   "title": "ST-elevation myocardial infarction (STEMI): reperfusion: 12-Lead Diagnostic Electrocardiogram (ST Elevation)",
    "type": "ecg",
-   "src": "/assets/kb-diagrams/stemi-ecg.svg?v=kbdx1",
-   "caption": "Schematic rhythm strips showing convex ST elevation in the anterior leads with reciprocal ST depression in opposite leads, the ECG pattern that triggers reperfusion.",
+   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri1",
+   "caption": "Real diagnostic 12-lead electrocardiogram demonstrating marked acute ST-segment elevation in precordial leads with reciprocal ST depression.",
    "annotations": [
-    { "label": "Convex ST elevation", "description": "Coved upward ST segment merging into a tall T wave in contiguous anterior leads." },
-    { "label": "J point", "description": "Measure ST deviation at the J point relative to the TP baseline." },
-    { "label": "Reciprocal depression", "description": "ST depression in opposite leads strengthens the diagnosis and localises the occlusion." }
+    {
+     "label": "ST Elevation",
+     "description": "J-point elevation >= 1 mm in limb leads or >= 2 mm in anterior leads."
+    },
+    {
+     "label": "Reciprocal Changes",
+     "description": "ST-segment depression in reciprocal leads confirming acute epicardial injury vector."
+    },
+    {
+     "label": "QRS Evolution",
+     "description": "R-wave progression and emergent pathological Q-wave formation."
+    }
    ]
   }
  ]
