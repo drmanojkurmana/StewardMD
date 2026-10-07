@@ -260,7 +260,8 @@ test("E7: the high pressure alarm leads with suction, never with the alarm limit
 
 /* E8: a tutorial run must not count as the hub's best score */
 test("E8: a tutorial run is scored as practice and does not count toward the best score", () => {
-  const sc = quiet("postop-normal"), r = runner(sc);
+  // round 5: a patient already on target never counts (nothing to improve), so use one with something to fix
+  const sc = quiet("postop-atelectasis"), r = runner(sc);
   r.adv(600);
   const x = r.score({ tutorial: true }), y = E.score({ scenario: sc, log: r.log, answers: [] });
   assert.equal(x.practice, true); assert.equal(x.countsForBest, false);

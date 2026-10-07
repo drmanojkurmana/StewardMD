@@ -612,7 +612,7 @@ test("m9: scripted harmful events are not counted as unsafe in their response wi
 });
 
 test("m9: learner actions: E.ACTIONS and E.act decompress, suction and bag", () => {
-  assert.deepEqual(Object.keys(E.ACTIONS).sort(), ["bag100", "blood", "bronchodilator", "decompress", "disconnect", "fluid", "paralyse", "sedate", "suction"]);
+  assert.deepEqual(Object.keys(E.ACTIONS).sort(), ["bag100", "blood", "bronchodilator", "decompress", "disconnect", "fluid", "paralyse", "reconnect", "sedate", "suction"]);
   for (const [id, a] of Object.entries(E.ACTIONS)) { assert.equal(a.id, id); assert.ok(a.label.en && a.label.hi && typeof a.available === "function"); }
   // trauma: the pneumothorax stays until the learner decompresses it
   const sc = byId("trauma-contusion"); assert.ok(!sc.timeline.some((e) => e.event === "improve"), "no scripted drain");
