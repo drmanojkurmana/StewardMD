@@ -139,7 +139,7 @@
       var sb = host.subjectById(sid);
       return '<li><span class="pn-yq-sn">' + (sb ? host.tx(sb.name) : "Not sorted yet") + '</span><span class="pn-st">' + subj[sid] + "</span></li>";
     }).join("");
-    host.paint(host.bar(esc(paperTitle(p)), "Recall paper", "back") + '<div class="pn-body"><section class="pn-panel">' +
+    host.paint(host.bar(esc(paperTitle(p)), "Recall paper", "back") + '<div class="pn-body"><section class="pn-panel pn-modp" style="--h:262">' +
       '<p class="pn-big">' + host.fmt(ok.length) + ' questions</p><p class="pn-mut">' + (held ? held + " held back (unclear key or missing image) · " : "") + "memory-based recall</p>" +
       '<button type="button" class="pn-btn pri" data-act="y-start" data-v="' + esc(pid) + '" data-k="exam"' + (ok.length ? "" : " disabled") + ">" + host.ico("clock") + " Timed test: " + (tn < ok.length ? tn + " random questions, " : "") + fmtMin(Math.round(sc.limit / 60)) + ", +" + mock.plus + " / −" + fmtMark(mock.minus) + "</button>" +
       '<button type="button" class="pn-btn" data-act="y-start" data-v="' + esc(pid) + '" data-k="study"' + (ok.length ? "" : " disabled") + ">" + host.ico("play") + " Practice in paper order</button>" +
@@ -174,7 +174,7 @@
     slot.innerHTML = '<div class="pn-wrap pn-yq-chips" role="group" aria-label="Show questions">' +
       '<button type="button" class="pn-chip' + (on ? "" : " on") + '" aria-pressed="' + !on + '" data-act="y-mf" data-v="all" data-s="' + host.esc(sid) + '" data-m="' + host.esc(mid) + '">All questions</button>' +
       '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="y-mf" data-v="pyq" data-s="' + host.esc(sid) + '" data-m="' + host.esc(mid) + '">PYQ · ' + n + "</button></div>" +
-      (on ? '<section class="pn-panel"><p class="pn-big">' + n + ' PYQs</p><p class="pn-mut">Asked in NEET-PG, from recall papers</p>' +
+      (on ? '<section class="pn-panel pn-modp" style="--h:262"><p class="pn-big">' + n + ' PYQs</p><p class="pn-mut">Asked in NEET-PG, from recall papers</p>' +
         '<button type="button" class="pn-btn pri" data-act="y-mstart" data-k="study" data-s="' + host.esc(sid) + '" data-m="' + host.esc(mid) + '">' + host.ico("play") + " Practice PYQs</button>" +
         '<button type="button" class="pn-btn" data-act="y-mstart" data-k="exam" data-s="' + host.esc(sid) + '" data-m="' + host.esc(mid) + '">' + host.ico("clock") + " Timed test of PYQs</button></section>" : "");
   }

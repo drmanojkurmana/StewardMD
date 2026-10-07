@@ -16,7 +16,7 @@
   "use strict";
   if (!G || !G.document) return;
   var D = G.document, SRC = "/vendor/motion/motion.js";
-  var M = null, loading = false, root = null, mo = null, io = null, seen = {}, tiltEl = null, skyRaf = 0, lastSk = 0;
+  var M = null, loading = false, root = null, attachedAt = 0, mo = null, io = null, seen = {}, tiltEl = null, skyRaf = 0, lastSk = 0;
   var TILT = ".pn-tile, .pn-home > .pn-next + .pn-group > .pn-row, #pnCompete > .pn-group > .pn-row";
 
   function reduced() { try { return G.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } }
@@ -214,11 +214,29 @@
       sky.style.opacity = String(Math.max(0, 1 - y / 520).toFixed(3));
     });
   }
+  // Screen to screen (round 4). prep.js marks a push (1), a pop (-1) or a tab (0) and calls this right after the paint.
+  // Push and pop: the shared axis, the new body arriving 28 px from the side the student is heading to while it fades
+  // in (240 ms, strong ease-out); the title and tabs travel 12 px. A tab or filter: the body cross-fades (180 ms).
+  // Reduced motion: every case is a 160 ms cross-fade, no travel. WAAPI only (compositor), so it needs no Motion build.
+  // The first paint after the overlay opens is not animated: the overlay itself just arrived.
+  function wa(el, kf, o) { try { return el.animate(kf, o); } catch (e) { return null; } }
+  function nav(r, d) {
+    if (!r || r !== root || Date.now() - attachedAt < 450) return;
+    var pick = function (s) { return Array.prototype.slice.call(r.querySelectorAll(s)); };
+    var body = pick(":scope > .pn-body, :scope > .pn-qprog, :scope > .pn-load"), head = pick(":scope > .pn-bar > .pn-t, :scope > .pn-tabs, :scope > .pn-filters, :scope > .pn-lsn-prog");
+    if (d === 0 || reduced()) {
+      (d === 0 ? body : body.concat(head)).forEach(function (el) { wa(el, [{ opacity: 0 }, { opacity: 1 }], { duration: reduced() ? 160 : 180, easing: "cubic-bezier(.23, 1, .32, 1)" }); });
+      return;
+    }
+    var x = d > 0 ? 1 : -1;
+    body.forEach(function (el) { wa(el, [{ opacity: 0, transform: "translateX(" + 28 * x + "px)" }, { opacity: 1, transform: "translateX(0px)" }], { duration: 240, easing: "cubic-bezier(.23, 1, .32, 1)" }); });
+    head.forEach(function (el) { wa(el, [{ opacity: 0, transform: "translateX(" + 12 * x + "px)" }, { opacity: 1, transform: "translateX(0px)" }], { duration: 200, easing: "cubic-bezier(.23, 1, .32, 1)" }); });
+  }
   function untilt() { if (tiltEl) { tiltEl.style.transform = ""; tiltEl.classList.remove("pn-tilt"); tiltEl = null; } }
 
   function attach(r) {
     detach();
-    root = r; seen = {}; lastSk = 0;
+    root = r; seen = {}; lastSk = 0; attachedAt = Date.now();
     if (root) root.addEventListener("scroll", onScroll, true);
     if (!root || reduced()) return;
     ensure();
@@ -239,5 +257,5 @@
     if (root) { root.removeEventListener("pointermove", onMove); root.removeEventListener("pointerleave", untilt); root.removeEventListener("scroll", onScroll, true); }
     mo = io = null; root = null; tiltEl = null;
   }
-  G.PREP_MOTION = { attach: attach, detach: detach, ensure: ensure, ready: function () { return !!M; }, settle: settle, haptic: haptic, confetti: function (el) { if (M && root && !reduced()) confetti(el); } };
+  G.PREP_MOTION = { attach: attach, detach: detach, nav: nav, ensure: ensure, ready: function () { return !!M; }, settle: settle, haptic: haptic, confetti: function (el) { if (M && root && !reduced()) confetti(el); } };
 })(typeof window !== "undefined" ? window : this);

@@ -35,3 +35,9 @@
 .pn-root .pp-cmp td:last-child { white-space: nowrap; }
 .pn-root .pp-cmp td { font-variant-numeric: tabular-nums; }
 .pn-root .pp-nw { white-space: nowrap; }
+/* Round 4: the plan card opens on the lantern summit (prep/art/pro.webp), faded into the card; the price sits below it. */
+.pn-root .pp-plan { overflow: hidden; padding-top: 0; }
+.pn-root .pp-plan::before { content: ""; display: block; margin: 0 -18px 4px; aspect-ratio: 16 / 7; background: url(/prep/art/pro.webp) 50% 45% / cover no-repeat;
+  -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 100%); mask-image: linear-gradient(180deg, #000 55%, transparent 100%); }
+.pn-root .pp-plan .pp-price b { font-size: 44px; }
+.pn-root .pp-cmp td:last-child { font-weight: 750; }

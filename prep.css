@@ -554,10 +554,12 @@ body.dark .pn-root:has(> .pn-sky) .pn-tab.on { background: rgba(255, 255, 255, .
 .pn-root:has(> .pn-sky) .pn-bar .pn-t p { color: var(--pn-text); opacity: .72; }
 
 /* Readiness: frosted deep teal over the sky; the score is the largest figure on the page. */
-.pn-root .pl-hero { margin-top: 56px; background: linear-gradient(162deg, rgba(16, 92, 86, .74) 0%, rgba(9, 50, 52, .82) 55%, rgba(6, 30, 34, .9) 100%);
-  -webkit-backdrop-filter: blur(22px) saturate(150%); backdrop-filter: blur(22px) saturate(150%); box-shadow: 0 30px 60px -34px rgba(2, 24, 26, .95), inset 0 0 0 1px rgba(255, 255, 255, .12), inset 0 1px 0 rgba(255, 255, 255, .16); }
+/* Round 4 perf: no backdrop blur here. The card scrolls over the moving sky, and a 22 px blur repainted every frame on a
+   low-end Android; the tint is dense enough that the sky still reads through it. */
+.pn-root .pl-hero { margin-top: 56px; background: linear-gradient(162deg, rgba(16, 92, 86, .84) 0%, rgba(9, 50, 52, .9) 55%, rgba(6, 30, 34, .95) 100%);
+  contain: paint; box-shadow: 0 30px 60px -34px rgba(2, 24, 26, .95), inset 0 0 0 1px rgba(255, 255, 255, .12), inset 0 1px 0 rgba(255, 255, 255, .16); }
 .pn-root .pl-ring { width: 136px; height: 136px; }
-.pn-root .pl-num { font-size: 52px; letter-spacing: -.045em; background: linear-gradient(180deg, #ffffff 35%, #8ff3e3 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.pn-root .pl-num { font-size: 52px; letter-spacing: -.04em; color: #fff; text-shadow: 0 0 24px rgba(99, 240, 219, .35); }
 .pn-root .pl-num small { -webkit-text-fill-color: currentColor; }
 .pn-root .pl-cd strong { font-size: 44px; letter-spacing: -.04em; }
 .pn-root .pl-lv { grid-column: 1 / -1; display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; border-radius: 16px; background: rgba(255, 255, 255, .07); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08); }
@@ -687,8 +689,8 @@ body:not(.dark) .pn-root .pn-empty[class*=pn-art-]::before { -webkit-mask-image:
 
 /* Stem and options */
 .pn-root .pn-run { touch-action: pan-y; overflow-x: hidden; }
-.pn-root .pn-qw { display: flex; flex-direction: column; gap: 14px; will-change: transform; }
-.pn-root .pn-qw.drag { transition: none; -webkit-user-select: none; user-select: none; }
+.pn-root .pn-qw { display: flex; flex-direction: column; gap: 14px; }
+.pn-root .pn-qw.drag { will-change: transform; transition: none; -webkit-user-select: none; user-select: none; }
 .pn-root .pn-qw.in-r { animation: pn-in-r 220ms var(--pn-ease); }
 .pn-root .pn-qw.in-l { animation: pn-in-l 220ms var(--pn-ease); }
 @keyframes pn-in-r { from { opacity: 0; transform: translateX(36px); } }
@@ -857,3 +859,124 @@ body:not(.dark) .pn-root .pn-empty[class*=pn-art-]::before { -webkit-mask-image:
 .pn-root .pn-heat-l i:first-child { margin-left: 4px; }
 .pn-root .pn-heat-l i:last-child { margin-right: 4px; }
 .pn-root .pn-mast .pn-meter i { width: 100%; transform-origin: 0 50%; background: linear-gradient(90deg, hsl(var(--h, 172) 66% 46%), var(--pn-pri)); }
+
+/* ---- Round 4 (2026-10-07): the rest of the world ----
+   Loading is a skeleton of the screen that is coming (shimmer moves by transform, paused under reduced motion), not a
+   line of grey text; the status text stays for screen readers and tests as a small label above it. The subject page
+   opens on the subject's own hero (its hue, icon, modules done, a ring), the module panel carries the answered ring,
+   mistakes filter on one scrolling line, search starts from a prompt, downloads and bookmarks use the subject tiles,
+   mocks, papers and pricing get their art. Screen changes slide on a shared axis (prep-motion.js, WAAPI). */
+.pn-root .pn-load { --sk: color-mix(in srgb, var(--pn-text) 7%, transparent); --sk-hi: rgba(255, 255, 255, .55);
+  position: relative; overflow: hidden; contain: paint; min-height: 330px; padding: 2px 2px 0; text-align: left; font-size: 13px; font-weight: 650; color: var(--pn-mut); }
+body.dark .pn-root .pn-load { --sk: rgba(190, 235, 240, .06); --sk-hi: rgba(190, 240, 235, .07); }
+.pn-root .pn-load::before { content: ""; position: absolute; left: 0; right: 0; top: 30px; height: 72px; border-radius: 18px; background: var(--sk);
+  box-shadow: 0 82px 0 var(--sk), 0 164px 0 var(--sk), 0 246px 0 var(--sk); }
+.pn-root .pn-load::after { content: ""; position: absolute; left: 0; right: 0; top: 30px; bottom: 0; pointer-events: none;
+  background: linear-gradient(100deg, transparent 25%, var(--sk-hi) 50%, transparent 75%); transform: translateX(-100%); animation: pn-shim 1400ms cubic-bezier(.45, 0, .55, 1) infinite; }
+.pn-root > .pn-load { margin: calc(72px + env(safe-area-inset-top, 0px)) 16px 0; }
+.pn-root #pcCreateView .pn-load, .pn-root .pn-sheet .pn-load { min-height: 0; padding: 24px 16px; text-align: center; contain: none; }
+.pn-root #pcCreateView .pn-load::before, .pn-root #pcCreateView .pn-load::after, .pn-root .pn-sheet .pn-load::before, .pn-root .pn-sheet .pn-load::after { content: none; }
+@keyframes pn-shim { to { transform: translateX(100%); } }
+
+/* Subject hero: deep surface tinted by the subject's hue. */
+.pn-root .pn-subhead { --pn-text: #f1fbf9; --pn-mut: rgba(225, 245, 242, .78); position: relative; overflow: hidden; gap: 16px; padding: 20px 18px; border: 0; color: var(--pn-text);
+  background: radial-gradient(120% 90% at 0% 0%, hsl(var(--h) 72% 46% / .55) 0%, hsl(var(--h) 72% 46% / 0) 60%), linear-gradient(160deg, hsl(var(--h) 46% 22%) 0%, hsl(var(--h) 40% 13%) 60%, #071a1f 100%);
+  box-shadow: 0 22px 44px -28px hsl(var(--h) 60% 12% / .95), inset 0 1px 0 rgba(255, 255, 255, .1); }
+.pn-root .pn-subhead .pn-ic { width: 60px; height: 60px; border-radius: 19px; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35), 0 10px 22px -10px rgba(0, 0, 0, .6); }
+.pn-root .pn-subhead .pn-ic svg { width: 32px; height: 32px; }
+.pn-root .pn-subhead .pn-tb b { font-size: 19px; font-weight: 800; letter-spacing: -.02em; }
+.pn-root .pn-subhead .pn-tb small { font-size: 13.5px; }
+.pn-root .pn-subhead .pn-mring { --ring: #fff; --track: rgba(255, 255, 255, .16); }
+
+/* A ring with its figure inside. */
+.pn-root .pn-mring { --ring: var(--pn-pri); --track: var(--pn-s2); position: relative; flex: 0 0 auto; width: 64px; height: 64px; display: inline-flex; align-items: center; justify-content: center; }
+.pn-root .pn-mring svg { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); overflow: visible; }
+.pn-root .pn-mring circle { fill: none; stroke-width: 4.5; }
+.pn-root .pn-mring .rt { stroke: var(--track); }
+.pn-root .pn-mring .rv { stroke: var(--ring); stroke-linecap: round; animation: pn-draw 800ms var(--pn-ease) both; }
+.pn-root .pn-mring b { position: relative; font-family: var(--pn-num); font-size: 15px; font-weight: 800; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+
+/* Module panel: the figure, the answered ring, a hue glow from the subject. */
+.pn-root .pn-modp { overflow: hidden; gap: 12px; padding-top: 22px; }
+.pn-root .pn-modp::before { content: ""; position: absolute; inset: 0 0 auto; height: 120px; pointer-events: none; background: radial-gradient(90% 100% at 0% 0%, hsl(var(--h, 172) 70% 50% / .2), hsl(var(--h, 172) 70% 50% / 0) 70%); }
+.pn-root .pn-modp > * { position: relative; }
+.pn-root .pn-modh { display: flex; align-items: center; gap: 14px; margin-bottom: 4px; }
+.pn-root .pn-modt { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.pn-root .pn-modp .pn-big { font-size: 44px; letter-spacing: -.04em; }
+.pn-root .pn-modp .pn-mring { width: 76px; height: 76px; }
+.pn-root .pn-modp .pn-mring b { font-size: 17px; }
+
+/* Mistakes: one scrolling line of filters; each row carries the red mark. */
+.pn-root .pn-wrap.pn-scroll { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin: 0 -16px; padding: 2px 16px 6px; width: auto; overscroll-behavior-x: contain; }
+.pn-root .pn-wrap.pn-scroll::-webkit-scrollbar { display: none; }
+.pn-root .pn-mx { align-items: flex-start; }
+.pn-root .pn-mx .pn-ri { --h: 352; width: 32px; height: 32px; border-radius: 10px; }
+.pn-root .pn-mx .pn-ri svg { width: 16px; height: 16px; }
+.pn-root .pn-mx[data-tag=know] .pn-ri { --h: 262; }
+.pn-root .pn-mx[data-tag=misread] .pn-ri { --h: 38; }
+.pn-root .pn-mx[data-tag=mixed] .pn-ri { --h: 200; }
+.pn-root .pn-mx[data-tag=careless] .pn-ri { --h: 18; }
+.pn-root .pn-mod > svg:last-child { width: 18px; height: 18px; color: var(--pn-mut); flex: 0 0 auto; }
+
+/* Banners: art across the top of a list screen. */
+.pn-root .pn-banner, .pn-root #pnYq::before { content: ""; display: block; width: 100%; max-width: 720px; margin: 0 auto -4px; aspect-ratio: 16 / 7; border-radius: 22px; background: center / cover no-repeat; flex: 0 0 auto;
+  box-shadow: 0 18px 36px -24px rgba(4, 30, 30, .9), inset 0 0 0 1px rgba(255, 255, 255, .06); }
+.pn-root .pn-banner.pn-art-mock { background-image: url(/prep/art/mock.webp); }
+.pn-root #pnYq::before { background-image: url(/prep/art/papers.webp); background-position: 50% 40%; }
+body.dark .pn-root .pn-banner, body.dark .pn-root #pnYq::before { -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent 100%); mask-image: linear-gradient(180deg, #000 60%, transparent 100%); box-shadow: none; border-radius: 22px 22px 0 0; }
+
+/* Mock analysis: a meter under each subject. */
+.pn-root .pn-mb .pn-meter { margin-top: 6px; }
+.pn-root .pn-meter i { width: 100%; transform-origin: 0 50%; }
+.pn-root .pn-meter.ok i { background: var(--pn-ok); }
+.pn-root .pn-meter.low i { background: var(--pn-bad); }
+.pn-root .pn-missed .pn-mod { border-left: 0; }
+
+/* Search: the field carries its glyph; the prompt state is a smaller illustration. */
+.pn-root .pn-srch { position: relative; display: block; }
+.pn-root .pn-srch > svg { position: absolute; left: 15px; top: 50%; width: 20px; height: 20px; margin-top: -10px; color: var(--pn-mut); pointer-events: none; }
+.pn-root .pn-srch .pn-in { padding-left: 44px; min-height: 54px; border-radius: 18px; }
+.pn-root .pn-empty.pn-hint { padding-top: 24px; font-size: 14.5px; }
+.pn-root .pn-empty.pn-hint::before { width: 112px; height: 112px; border-radius: 30px; }
+
+/* Custom module: two panels, segmented rows, and a line that says what Start makes. */
+.pn-root .pn-cm .pn-panel { gap: 10px; padding: 16px; }
+.pn-root .pn-cm .pn-panel .pn-sec { padding-top: 2px; }
+.pn-root .pn-cm .pn-panel .pn-wrap + .pn-sec { padding-top: 12px; }
+.pn-root .pn-seg4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+.pn-root .pn-seg4 .pn-chip { min-width: 0; padding: 0 6px; }
+.pn-root .pn-seg4:has(> :nth-child(2):last-child) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.pn-root .pn-cm .pn-chip:not(.on) { background: var(--pn-s1); box-shadow: none; border-color: transparent; }
+.pn-root .pn-cm-sum { text-align: center; font-size: 14px; font-weight: 650; color: var(--pn-mut); padding-top: 4px; font-variant-numeric: tabular-nums; }
+
+/* Downloads: the art, subject tiles, downloaded rows lit. */
+.pn-root .pn-dlhead { display: flex; align-items: center; gap: 14px; }
+.pn-root .pn-dlart { flex: 0 0 auto; width: 88px; height: 88px; border-radius: 26px; background: url(/prep/art/empty-dl.webp) center / cover no-repeat;
+  -webkit-mask-image: radial-gradient(closest-side, #000 66%, transparent 100%); mask-image: radial-gradient(closest-side, #000 66%, transparent 100%); }
+body:not(.dark) .pn-root .pn-dlart { -webkit-mask-image: none; mask-image: none; box-shadow: 0 14px 28px -18px rgba(6, 40, 44, .7); }
+.pn-root #pnDl .pn-mod.on { box-shadow: var(--pn-elev), inset 0 0 0 1.5px color-mix(in srgb, var(--pn-ok) 55%, transparent); }
+.pn-root #pnDl .pn-mod.on small { color: var(--pn-ok); font-weight: 650; }
+
+/* Question grid: bigger cells, a key drawn with the same marks. */
+.pn-root .pn-qgrid { grid-template-columns: repeat(auto-fill, minmax(52px, 1fr)); gap: 8px; }
+.pn-root .pn-qn { height: 52px; border-radius: 14px; font-family: var(--pn-num); font-size: 17px; font-weight: 800; }
+.pn-root .pn-qkey { display: flex; flex-wrap: wrap; gap: 6px 16px; }
+.pn-root .pn-qkey span { display: inline-flex; align-items: center; gap: 6px; }
+.pn-root .pn-qkey i { width: 14px; height: 14px; border-radius: 4px; background: var(--pn-card); box-shadow: inset 0 0 0 1.5px var(--pn-s2); }
+.pn-root .pn-qkey i.ans { background: var(--pn-pri); box-shadow: none; }
+.pn-root .pn-qkey i.mark { box-shadow: inset 0 0 0 2px var(--pn-warn); }
+
+@media (prefers-reduced-motion: reduce) {
+  .pn-root .pn-load::after { animation: none; opacity: 0; }
+  .pn-root .pn-mring .rv { animation: none; }
+}
+/* Subject hero layout: icon and ring on top, the line across the full width under them. */
+.pn-root .pn-subhead { display: grid; grid-template-columns: auto 1fr auto; align-items: center; row-gap: 14px; }
+.pn-root .pn-subhead .pn-tb { grid-column: 1 / -1; grid-row: 2; }
+.pn-root .pn-subhead .pn-mring { grid-column: 3; grid-row: 1; width: 60px; height: 60px; }
+.pn-root .pn-subhead .pn-tb b { font-size: 21px; text-wrap: pretty; }
+.pn-root .pn-mod .pn-mb b { text-wrap: pretty; }
+/* Round 4 accessibility: every control is at least 44 px tall; the custom-module rows reflow at large text sizes. */
+.pn-root .pn-btn.sm, .pn-root .pn-chip, .pn-root .pn-tab { min-height: 44px; }
+.pn-root .pn-seg4 { grid-template-columns: repeat(auto-fit, minmax(68px, 1fr)); }
+.pn-root .pn-seg4 .pn-chip { white-space: normal; line-height: 1.15; }

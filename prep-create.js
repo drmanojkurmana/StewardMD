@@ -705,7 +705,7 @@
     if (!job) return host.back();
     var esc = host.esc, b = progressBits(host), res = jobResult, id = esc(job.deckId), body;
     if (!res) body = '<section class="pn-panel pc-progp" aria-live="polite"><p class="pn-big" id="pcCount">' + b.count + "</p><p class=\"pn-mut\">questions ready</p>" +
-      '<span class="pn-prog pc-bar" aria-hidden="true"><i id="pcBarI" style="width:' + b.pct + '%"></i></span>' +
+      '<span class="pn-prog pc-bar" aria-hidden="true"><i id="pcBarI" style="transform:scaleX(' + (b.pct / 100) + ')"></i></span>' +
       '<p id="pcPhase">' + esc(b.phase) + '</p><p class="pn-mut pn-small" id="pcCost">' + esc(b.cost) + '</p><p class="pn-mut pn-small" id="pcCaps">' + esc(b.caps) + "</p></section>" +
       '<button type="button" class="pn-btn" data-act="c-stop"' + (job.stopReq ? " disabled" : "") + ">" + (job.stopReq ? "Stopping after this step" : "Stop after this step") + "</button>" +
       (note ? '<p class="pn-mut pn-small" id="pcNote">' + esc(note) + "</p>" : "") +
@@ -735,7 +735,7 @@
     if (!r || !r.querySelector("#pcProgView") || jobResult) return;
     var b = progressBits(host), set = function (sel, t) { var el = r.querySelector(sel); if (el) el.textContent = t; };
     set("#pcCount", b.count); set("#pcPhase", b.phase); set("#pcCost", b.cost); set("#pcCaps", b.caps);
-    var bar = r.querySelector("#pcBarI"); if (bar) bar.style.width = b.pct + "%";
+    var bar = r.querySelector("#pcBarI"); if (bar) bar.style.transform = "scaleX(" + (b.pct / 100) + ")";
   }
   function resume(host) {
     if (!job || !jobResult || jobResult.ok) return;

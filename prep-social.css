@@ -84,3 +84,9 @@
 .pn-root .ps-gates tr.z td:last-child { color: var(--pn-mut); font-weight: 500; }
 .pn-root .ps-how { display: flex; flex-direction: column; gap: 10px; padding-left: 18px; list-style: disc; line-height: 1.5; }
 .pn-root .ps-how li::marker { color: var(--pn-mut); }
+/* Round 4: the accuracy page leads with its one figure on the hero surface. */
+.pn-root .ps-hero { position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 4px; padding: 22px 20px 20px; border-radius: 22px; background: var(--pn-hero); color: var(--pn-hero-ink);
+  box-shadow: 0 18px 40px -24px rgba(4, 30, 30, .9), inset 0 1px 0 rgba(255, 255, 255, .08); }
+.pn-root .ps-hero b { font-family: var(--pn-num); font-size: 56px; font-weight: 800; letter-spacing: -.045em; line-height: 1; color: #fff; font-variant-numeric: tabular-nums; }
+.pn-root .ps-hero span { font-size: 17px; font-weight: 650; letter-spacing: -.01em; }
+.pn-root .ps-hero small { font-size: 13px; color: var(--pn-hero-mut); font-variant-numeric: tabular-nums; }

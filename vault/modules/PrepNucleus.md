@@ -468,6 +468,29 @@ Owner decisions: [[decisions/Decisions]] "PrepNucleus pricing, free tier and soc
 - Headless suites wait 150 ms before each screenshot (Motion starts its animations on the next frame). `STRIP=<dir>`
   on run-prep-ui, run-prep-flash-ui and run-prep-arena-ui writes motion frames (paused animations stepped in ms).
 
+## Premium UI round 4 (2026-10-07, same branch, `?v=prep17`)
+- Navigation motion: prep.js `nav(dir)` marks the next `paint()` (push 1, back -1, tab or filter 0; the mark lapses after
+  1.5 s; Escape never marks). prep-motion.js `nav(root, d)` runs WAAPI on `:scope > .pn-body` (28 px shared-axis slide plus
+  fade, 240 ms) and the title and tabs (12 px, 200 ms); a tab cross-fades the body (180 ms); reduced motion is a 160 ms fade.
+  The first 450 ms after the overlay opens are not animated. Marked: push, back, runner start, done, exam tab, subject
+  filter, mistakes filter, onboarding steps (prep-plan.js), social tabs (prep-social.js), Arena board tabs (prep-arena.js).
+  `HOST.nav` exposes it to the other files.
+- Loading: every `.pn-load` is a CSS skeleton (four card shapes from one pseudo-element's box-shadows, a shimmer that moves
+  by transform, `contain: paint`); the status text stays as a small label. Exempt: `.pn-sheet .pn-load` and
+  `#pcCreateView .pn-load`. No JS change, so every module's loading state got it.
+- Screens: subject hero (`.pn-subhead`, hue-tinted deep surface, icon, ring via `mring()`, reviews due), module panel
+  `.pn-modp` (answered ring, hue glow; also the PYQ panels), mistakes filters on one scrolling line (`.pn-wrap.pn-scroll`)
+  with a tag-hued mark per row, search field glyph and a prompt state (`.pn-hint`), bookmarks and downloads with subject
+  tiles, downloads art (`empty-dl.webp`), custom module in two panels with a summary line, mock banner (`mock.webp`),
+  per-subject meters in the mock analysis, question grid key, PYQ papers banner (`#pnYq::before`, `papers.webp`),
+  pricing plan art (`pro.webp`), accuracy hero figure (`.ps-hero`, share of keys that matched the independent check).
+- Perf: the readiness card lost its 22 px backdrop blur (it scrolls over the moving sky) and gained `contain: paint`;
+  `.pn-qw` has `will-change` only while dragging; the Layer C progress bar fills by `scaleX`; `.pl-num` is solid white (no
+  gradient text). Art: 4 calls, $0.27 (job imagen/log.tsv).
+- A11y: chips, tabs and small buttons are 44 px tall; the custom-module rows reflow at 130% zoom.
+- Headless: run-prep-ui.mjs checks the push and back slides, the tab cross-fade, Escape without animation, the reduced
+  motion fade, the skeleton and the search prompt.
+
 ## Store
 localStorage `smd_prep_v1`: `{v, cards, conf, days, mod:{t,ok,last}, bm, rep, exam, last, dl, hid, mt, goal, mh, ls, lsp, pl, pt, ra, fc}` (`ls`/`lsp`: Lessons;
 `pl`/`pt`/`ra`: Plan; `fc`: Cards). FSRS deck key

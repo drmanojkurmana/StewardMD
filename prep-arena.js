@@ -646,7 +646,7 @@
     if (a === "a-resubmit") { var r = H.run_(); if (r) submitEvent(r); return; }
     if (a === "a-board") return openBoards("event", v);
     if (a === "a-boards") return openBoards("event");
-    if (a === "a-tab") { A.board = v; if (v !== "event") A.boardEv = null; return H.rerender(); }
+    if (a === "a-tab") { A.board = v; if (v !== "event") A.boardEv = null; if (H.nav) H.nav(0); return H.rerender(); }
     if (a === "a-leave") return leaveArena();
     if (a === "a-join") return join(b);
     if (a === "a-nojoin") { closeSheet(); return; }

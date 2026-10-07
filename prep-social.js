@@ -43,6 +43,8 @@
     var NA = '<span class="ps-na">Not yet published</span>', k = j.keys;
     var max = 0, h = "";
     h += '<p class="ps-lede">Every number on this page is computed by a script from our own build records, not typed by hand. Where we have no record yet, we say so.</p>';
+    // Round 4: the one figure first (keys that matched the independent check), then the detail.
+    if (k && k.screened) h += '<section class="ps-hero" aria-label="Answer keys that matched"><b>' + pct(1 - k.rate, 1) + "</b><span>of answer keys matched an independent check</span><small>" + fmt(k.screened) + " questions checked</small></section>";
     h += '<h2 class="pn-h">Answer keys</h2>';
     if (k) {
       (k.subjects || []).forEach(function (s) { if (s.rate > max) max = s.rate; });
@@ -293,7 +295,7 @@
   function battle(room, exam) { G.PREP_ARENA.startBattle({ room: room, exam: exam || "neet-pg" }, H); }
   function act(a, b) {
     var v = b.getAttribute("data-v");
-    if (a === "s-tab") { S.tab = v; renderMain(); return load(); }
+    if (a === "s-tab") { S.tab = v; if (H && H.nav) H.nav(0); renderMain(); return load(); }
     if (a === "s-reload") { S.err[S.tab] = null; renderMain(); return load(); }
     if (a === "s-leave") return G.PREP_ARENA.leaveArena(H);
     if (a === "s-fryes") return post("friends/accept", { smdId: v }, b, null, function () { H.toast("Friend added."); load(); });

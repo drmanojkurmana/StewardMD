@@ -522,8 +522,8 @@
     }
     if (a === "p-save") { apply(SET); closeSheet(true); return H.rerender(); }
     if (a === "p-skip") return finishOnboard(true);
-    if (a === "p-ob-back") { if (P.ob && P.ob.i) { P.ob.i--; onboard(H); } return; }
-    if (a === "p-ob-next") { if (!P.ob) return; if (P.ob.i < STEPS.length - 1) { P.ob.i++; return onboard(H); } return finishOnboard(false); }
+    if (a === "p-ob-back") { if (P.ob && P.ob.i) { P.ob.i--; if (H.nav) H.nav(-1); onboard(H); } return; }
+    if (a === "p-ob-next") { if (!P.ob) return; if (P.ob.i < STEPS.length - 1) { P.ob.i++; if (H.nav) H.nav(1); return onboard(H); } return finishOnboard(false); }
   }
   // PREP.back() asks first: a sheet closes; inside onboarding a step goes back.
   function back() {

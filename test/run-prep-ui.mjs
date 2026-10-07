@@ -102,8 +102,12 @@ try {
   ok(await until(`var n=document.getElementById("pnNext"); return !!n && !n.hidden && /Gametogenesis/.test(n.textContent);`, 5000), "Solve next points at the first module with questions");
   await shot("home");
 
-  // ---- subject
-  await click("#smdPrep .pn-tile[data-s=anatomy]");
+  // ---- subject (round 4: a push slides the new body in from the right on a shared axis; the first 450 ms after the
+  // overlay opens are not animated, as the overlay itself just arrived, so wait past them)
+  await sleep(500);
+  const navIn = JSON.parse(await ev(`document.querySelector("#smdPrep .pn-tile[data-s=anatomy]").click(); var an=document.getAnimations().filter(function(a){var t=a.effect&&a.effect.target; return t&&t.matches&&t.matches("#smdPrep > .pn-body");}); var k=an.length?an[0].effect.getKeyframes():[]; return JSON.stringify({n:an.length, from:(k[0]&&k[0].transform)||"", op:k[0]?k[0].opacity:null});`));
+  ok(navIn.n === 1 && /translateX\(28px\)/.test(navIn.from) && String(navIn.op) === "0", "a push slides the new screen in from the right: " + JSON.stringify(navIn));
+  ok(await ev(`var p=document.createElement("p"); p.className="pn-load"; p.textContent="Loading"; document.querySelector("#smdPrep .pn-body").appendChild(p); var b=getComputedStyle(p,"::before"), a=getComputedStyle(p,"::after"), r=b.content!=="none" && parseFloat(getComputedStyle(p).minHeight)>=300 && /pn-shim/.test(a.animationName) && b.boxShadow!=="none"; p.remove(); return r;`) === true, "loading states draw a skeleton with a moving shimmer");
   ok(await until(`return document.querySelectorAll("#smdPrep .pn-mod[data-act=module]").length === 3;`, 10000), "subject lists its 3 modules");
   ok(await ev(`return Array.from(document.querySelectorAll("#smdPrep .pn-sec")).map(function(h){return h.textContent;}).join("|");`) === "Embryology|Upper limb", "sections in taxonomy order");
   ok(await ev(`var b=document.querySelector('#smdPrep .pn-mod[data-m=ana-placenta]'); return b.getAttribute("aria-disabled")==="true" && /Questions coming soon/.test(b.textContent);`) === true, "an empty module says Questions coming soon and is disabled");
@@ -188,11 +192,13 @@ try {
   ok(await until(`return /Test marked/.test(document.querySelector("#smdPrep .pn-t h1").textContent);`, 5000), "submit marks the test");
   await click("#smdPrep [data-act=donerun]");
 
-  // ---- search within the subject
-  await ev(`PREP.back(); return 1;`);
+  // ---- search within the subject (round 4: a pop slides the previous screen in from the left)
+  const navOut = JSON.parse(await ev(`PREP.back(); var an=document.getAnimations().filter(function(a){var t=a.effect&&a.effect.target; return t&&t.matches&&t.matches("#smdPrep > .pn-body");}); var k=an.length?an[0].effect.getKeyframes():[]; return JSON.stringify({n:an.length, from:(k[0]&&k[0].transform)||"", op:k[0]?k[0].opacity:null});`));
+  ok(navOut.n === 1 && /translateX\(-28px\)/.test(navOut.from), "back slides the previous screen in from the left: " + JSON.stringify(navOut));
   ok(await until(`return !!document.querySelector("#smdPrep [data-act=search]");`, 3000), "the subject screen has a search button");
   await click("#smdPrep [data-act=search]");
   ok(await until(`return document.activeElement && document.activeElement.id === "pnSearch";`, 3000), "search opens with the field focused");
+  ok(await ev(`return !!document.querySelector("#pnHits .pn-empty.pn-art-sc") && !!document.querySelector("#smdPrep .pn-srch > svg");`) === true, "search starts from a prompt with art, the field carries its glyph");
   await ev(`var i=document.getElementById("pnSearch"); i.value="brachial fixture"; i.dispatchEvent(new Event("input",{bubbles:true})); return 1;`);
   ok(await until(`return document.querySelectorAll("#smdPrep [data-act=hit]").length === 3;`, 5000), "search finds the 3 matching questions: " + await ev(`return (document.getElementById("pnHits")||{}).textContent;`));
   await shot("search");
@@ -203,6 +209,17 @@ try {
   // ---- back to home: bookmark count, exam tab
   await ev(`PREP.back(); return 1;`);
   ok(await until(`return !!document.querySelector("#smdPrep .pn-tabs");`, 5000), "back() unwinds to home");
+  // Round 4: a tab cross-fades (opacity, no travel); Escape goes back with no animation; reduced motion is a fade.
+  const navTab = JSON.parse(await ev(`document.querySelector("#smdPrep .pn-tab.on").click(); var an=document.getAnimations().filter(function(a){var t=a.effect&&a.effect.target; return t&&t.matches&&t.matches("#smdPrep > .pn-body");}); var k=an.length?an[0].effect.getKeyframes():[]; return JSON.stringify({n:an.length, from:(k[0]&&k[0].transform)||"", op:k[0]?k[0].opacity:null});`));
+  ok(navTab.n === 1 && !navTab.from && String(navTab.op) === "0", "an exam tab cross-fades the body: " + JSON.stringify(navTab));
+  await sleep(300); await click("#smdPrep [data-act=bookmarks]"); await until(`return /Bookmarks/.test(document.querySelector("#smdPrep .pn-t h1").textContent);`, 3000); await sleep(300);
+  const navKey = JSON.parse(await ev(`document.getElementById("smdPrep").dispatchEvent(new KeyboardEvent("keydown",{key:"Escape",bubbles:true})); var an=document.getAnimations().filter(function(a){var t=a.effect&&a.effect.target; return t&&t.matches&&t.matches("#smdPrep > .pn-body");}); var k=an.length?an[0].effect.getKeyframes():[]; return JSON.stringify({n:an.length, from:(k[0]&&k[0].transform)||"", op:k[0]?k[0].opacity:null});`));
+  ok(navKey.n === 0 && await ev(`return !!document.querySelector("#smdPrep .pn-tabs");`) === true, "Escape goes back with no animation: " + JSON.stringify(navKey));
+  await call("Emulation.setEmulatedMedia", { features: [{ name: "prefers-reduced-motion", value: "reduce" }] });
+  const navRm = JSON.parse(await ev(`document.querySelector("#smdPrep [data-act=bookmarks]").click(); var an=document.getAnimations().filter(function(a){var t=a.effect&&a.effect.target; return t&&t.matches&&t.matches("#smdPrep > .pn-body");}); var k=an.length?an[0].effect.getKeyframes():[]; return JSON.stringify({n:an.length, from:(k[0]&&k[0].transform)||"", op:k[0]?k[0].opacity:null});`));
+  ok(navRm.n === 1 && !navRm.from && String(navRm.op) === "0", "reduced motion: a push is a cross-fade with no travel: " + JSON.stringify(navRm));
+  await call("Emulation.setEmulatedMedia", { features: [] });
+  await ev(`PREP.back(); return 1;`); await until(`return !!document.querySelector("#smdPrep .pn-tabs");`, 3000);
   ok(await ev(`return /1 saved/.test(document.querySelector("#smdPrep [data-act=bookmarks]").textContent);`) === true, "home counts the bookmark");
   const nmt = await ev(`return Object.keys(JSON.parse(localStorage.getItem("smd_prep_v1")).mt).length;`);
   ok(nmt > 0 && await ev(`return /${nmt} to fix/.test(document.querySelector("#smdPrep [data-act=mistakes]").textContent);`) === true, "home counts the mistakes: " + nmt);
