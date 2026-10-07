@@ -15,7 +15,7 @@ import os
 # Map organ categories and specific diseases to authentic real clinical images
 CATEGORY_REAL_IMAGES = {
     "cardio": {
-        "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri1",
+        "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri2",
         "type": "ecg",
         "title_suffix": "12-Lead Diagnostic Electrocardiogram",
         "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
@@ -26,7 +26,7 @@ CATEGORY_REAL_IMAGES = {
         ]
     },
     "pulmo": {
-        "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri1",
+        "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri2",
         "type": "xray",
         "title_suffix": "Diagnostic Chest Radiograph",
         "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
@@ -37,7 +37,7 @@ CATEGORY_REAL_IMAGES = {
         ]
     },
     "neuro": {
-        "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri1",
+        "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri2",
         "type": "ct",
         "title_suffix": "Diagnostic Head Computed Tomography",
         "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
@@ -48,7 +48,7 @@ CATEGORY_REAL_IMAGES = {
         ]
     },
     "gi": {
-        "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri1",
+        "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri2",
         "type": "ct",
         "title_suffix": "Diagnostic Abdominal Computed Tomography",
         "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
@@ -59,7 +59,7 @@ CATEGORY_REAL_IMAGES = {
         ]
     },
     "renal": {
-        "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri1",
+        "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri2",
         "type": "ultrasound",
         "title_suffix": "Diagnostic Renal Ultrasonography",
         "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
@@ -70,7 +70,7 @@ CATEGORY_REAL_IMAGES = {
         ]
     },
     "derm": {
-        "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri1",
+        "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri2",
         "type": "diagram",
         "title_suffix": "Clinical Cutaneous Dermatology Photograph",
         "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
@@ -81,7 +81,7 @@ CATEGORY_REAL_IMAGES = {
         ]
     },
     "heme": {
-        "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri1",
+        "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri2",
         "type": "diagram",
         "title_suffix": "Diagnostic Peripheral Blood Smear Examination",
         "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
@@ -92,7 +92,7 @@ CATEGORY_REAL_IMAGES = {
         ]
     },
     "ortho": {
-        "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri1",
+        "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri2",
         "type": "xray",
         "title_suffix": "Diagnostic Musculoskeletal Radiograph",
         "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
@@ -103,7 +103,7 @@ CATEGORY_REAL_IMAGES = {
         ]
     },
     "infect": {
-        "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri1",
+        "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri2",
         "type": "diagram",
         "title_suffix": "Diagnostic Microbiological / Smear Examination",
         "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
@@ -114,7 +114,7 @@ CATEGORY_REAL_IMAGES = {
         ]
     },
     "endo": {
-        "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri1",
+        "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri2",
         "type": "ct",
         "title_suffix": "Diagnostic Endocrine Cross-Sectional Imaging",
         "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
@@ -125,7 +125,7 @@ CATEGORY_REAL_IMAGES = {
         ]
     },
     "general": {
-        "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri1",
+        "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri2",
         "type": "xray",
         "title_suffix": "Diagnostic Imaging Evaluation",
         "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
@@ -141,7 +141,7 @@ CATEGORY_REAL_IMAGES = {
 SPECIFIC_DISEASE_IMAGES = {
     # STEMI / ACS / Arrhythmias
     "stemi": {
-        "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri1",
+        "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri2",
         "type": "ecg",
         "title_suffix": "12-Lead Diagnostic Electrocardiogram (ST Elevation)",
         "caption": "Real diagnostic 12-lead electrocardiogram demonstrating marked acute ST-segment elevation in precordial leads with reciprocal ST depression.",
@@ -152,7 +152,7 @@ SPECIFIC_DISEASE_IMAGES = {
         ]
     },
     "chronic-coronary-syndrome": {
-        "src": "/assets/kb-real-images/normal-ecg.jpg?v=kbri1",
+        "src": "/assets/kb-real-images/normal-ecg.jpg?v=kbri2",
         "type": "ecg",
         "title_suffix": "Baseline 12-Lead Electrocardiogram",
         "caption": "Real 12-lead electrocardiogram illustrating baseline resting sinus rhythm, QRS axis, and absence of acute ischemia.",
@@ -163,7 +163,7 @@ SPECIFIC_DISEASE_IMAGES = {
         ]
     },
     "atrial_fibrillation": {
-        "src": "/assets/kb-real-images/atrial-fibrillation-ecg.jpg?v=kbri1",
+        "src": "/assets/kb-real-images/atrial-fibrillation-ecg.jpg?v=kbri2",
         "type": "ecg",
         "title_suffix": "12-Lead Diagnostic ECG (Atrial Fibrillation)",
         "caption": "Real electrocardiogram demonstrating irregularly irregular ventricular rhythm, absent distinct P waves, and fine fibrillatory baseline waves.",
@@ -174,7 +174,7 @@ SPECIFIC_DISEASE_IMAGES = {
         ]
     },
     "pericarditis": {
-        "src": "/assets/kb-real-images/pericarditis-ecg.png?v=kbri1",
+        "src": "/assets/kb-real-images/pericarditis-ecg.png?v=kbri2",
         "type": "ecg",
         "title_suffix": "12-Lead Diagnostic ECG (Acute Pericarditis)",
         "caption": "Real 12-lead electrocardiogram demonstrating diffuse upward-concave ST-segment elevation across multiple vascular territories with PR-segment depression.",
@@ -185,7 +185,7 @@ SPECIFIC_DISEASE_IMAGES = {
         ]
     },
     "hyperkalemia": {
-        "src": "/assets/kb-real-images/hyperkalemia-ecg.jpg?v=kbri1",
+        "src": "/assets/kb-real-images/hyperkalemia-ecg.jpg?v=kbri2",
         "type": "ecg",
         "title_suffix": "Diagnostic ECG (Hyperkalemia Peaked T Waves)",
         "caption": "Real electrocardiogram demonstrating tall, narrow, symmetrical peaked T waves with QT shortening reflecting severe hyperkalemia.",
@@ -198,7 +198,7 @@ SPECIFIC_DISEASE_IMAGES = {
 
     # Aortic Dissection
     "aortic_dissection": {
-        "src": "/assets/kb-real-images/aortic-dissection-ct.jpg?v=kbri1",
+        "src": "/assets/kb-real-images/aortic-dissection-ct.jpg?v=kbri2",
         "type": "ct",
         "title_suffix": "Contrast-Enhanced Chest CT Angiogram (Intimal Flap)",
         "caption": "Real axial contrast-enhanced thoracic computed tomography scan demonstrating an intimal dissection flap separating the true and false lumina of the aorta.",
@@ -209,7 +209,7 @@ SPECIFIC_DISEASE_IMAGES = {
         ]
     },
     "acute-aortic-syndrome": {
-        "src": "/assets/kb-real-images/aortic-dissection-ct.jpg?v=kbri1",
+        "src": "/assets/kb-real-images/aortic-dissection-ct.jpg?v=kbri2",
         "type": "ct",
         "title_suffix": "Contrast-Enhanced Chest CT Angiogram (Aortic Syndrome)",
         "caption": "Real axial contrast-enhanced thoracic computed tomography scan demonstrating an intimal dissection flap separating the true and false lumina of the aorta.",
@@ -222,7 +222,7 @@ SPECIFIC_DISEASE_IMAGES = {
 
     # Pulmonary
     "CAP": {
-        "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri1",
+        "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri2",
         "type": "xray",
         "title_suffix": "Chest Radiograph (Dense Lobar Consolidation)",
         "caption": "Real posteroanterior chest radiograph demonstrating dense lobar alveolar consolidation with air bronchograms and silhouetting.",
@@ -233,7 +233,7 @@ SPECIFIC_DISEASE_IMAGES = {
         ]
     },
     "pneumothorax": {
-        "src": "/assets/kb-real-images/pneumothorax-xray.jpg?v=kbri1",
+        "src": "/assets/kb-real-images/pneumothorax-xray.jpg?v=kbri2",
         "type": "xray",
         "title_suffix": "Chest Radiograph (Visceral Pleural Line)",
         "caption": "Real chest radiograph demonstrating the visceral pleural line, absence of distal pulmonary vascular markings, and lung collapse.",
@@ -244,7 +244,7 @@ SPECIFIC_DISEASE_IMAGES = {
         ]
     },
     "pleural_effusion": {
-        "src": "/assets/kb-real-images/pleural-effusion-xray.jpg?v=kbri1",
+        "src": "/assets/kb-real-images/pleural-effusion-xray.jpg?v=kbri2",
         "type": "xray",
         "title_suffix": "Chest Radiograph (Pleural Effusion Meniscus Sign)",
         "caption": "Real upright posteroanterior radiograph showing blunting of the costophrenic angle and a classic homogenous fluid meniscus sign.",
@@ -255,7 +255,7 @@ SPECIFIC_DISEASE_IMAGES = {
         ]
     },
     "tuberculosis": {
-        "src": "/assets/kb-real-images/tuberculosis-xray.jpg?v=kbri1",
+        "src": "/assets/kb-real-images/tuberculosis-xray.jpg?v=kbri2",
         "type": "xray",
         "title_suffix": "Chest Radiograph (Apical Cavitary Lesion)",
         "caption": "Real chest radiograph demonstrating apical fibro-cavitary infiltrates and nodular opacities characteristic of post-primary pulmonary tuberculosis.",
@@ -266,7 +266,7 @@ SPECIFIC_DISEASE_IMAGES = {
         ]
     },
     "copd": {
-        "src": "/assets/kb-real-images/copd-emphysema-xray.jpg?v=kbri1",
+        "src": "/assets/kb-real-images/copd-emphysema-xray.jpg?v=kbri2",
         "type": "xray",
         "title_suffix": "Chest Radiograph (Hyperinflation & Emphysema)",
         "caption": "Real posteroanterior chest radiograph demonstrating diffuse pulmonary hyperinflation, flattened diaphragmatic domes, and increased retrosternal space.",
@@ -279,7 +279,7 @@ SPECIFIC_DISEASE_IMAGES = {
 
     # Neuro
     "gbs": {
-        "src": "/assets/kb-real-images/gbs-nerve-mri.jpg?v=kbri1",
+        "src": "/assets/kb-real-images/gbs-nerve-mri.jpg?v=kbri2",
         "type": "ct",
         "title_suffix": "Diagnostic Neuroimaging (Spinal / Cranial MRI)",
         "caption": "Real clinical neuroimaging scan displaying spinal nerve root and cauda equina architecture, demonstrating post-contrast inflammatory changes in Guillain-Barré syndrome.",
@@ -290,7 +290,7 @@ SPECIFIC_DISEASE_IMAGES = {
         ]
     },
     "guillain-barre-syndrome": {
-        "src": "/assets/kb-real-images/gbs-nerve-mri.jpg?v=kbri1",
+        "src": "/assets/kb-real-images/gbs-nerve-mri.jpg?v=kbri2",
         "type": "ct",
         "title_suffix": "Diagnostic Neuroimaging (Spinal / Cranial MRI)",
         "caption": "Real clinical neuroimaging scan displaying spinal nerve root and cauda equina architecture, demonstrating post-contrast inflammatory changes in Guillain-Barré syndrome.",
@@ -301,7 +301,7 @@ SPECIFIC_DISEASE_IMAGES = {
         ]
     },
     "ischemic_stroke": {
-        "src": "/assets/kb-real-images/ischemic-stroke-ct.jpg?v=kbri1",
+        "src": "/assets/kb-real-images/ischemic-stroke-ct.jpg?v=kbri2",
         "type": "ct",
         "title_suffix": "Non-Contrast Head CT (Acute Ischemic Infarct)",
         "caption": "Real non-contrast head computed tomography scan demonstrating acute parenchymal hypodensity, loss of gray-white matter differentiation, and sulcal effacement.",
@@ -312,7 +312,7 @@ SPECIFIC_DISEASE_IMAGES = {
         ]
     },
     "sah": {
-        "src": "/assets/kb-real-images/subarachnoid-hemorrhage-ct.jpg?v=kbri1",
+        "src": "/assets/kb-real-images/subarachnoid-hemorrhage-ct.jpg?v=kbri2",
         "type": "ct",
         "title_suffix": "Non-Contrast Head CT (Subarachnoid Hemorrhage)",
         "caption": "Real axial non-contrast computed tomography scan demonstrating high-attenuation acute blood filling the basal cisterns, sylvian fissures, and sulci.",
@@ -323,7 +323,7 @@ SPECIFIC_DISEASE_IMAGES = {
         ]
     },
     "ich": {
-        "src": "/assets/kb-real-images/epidural-hematoma-ct.jpg?v=kbri1",
+        "src": "/assets/kb-real-images/epidural-hematoma-ct.jpg?v=kbri2",
         "type": "ct",
         "title_suffix": "Non-Contrast Head CT (Acute Intracranial Hemorrhage)",
         "caption": "Real non-contrast head computed tomography scan displaying hyperdense acute extravasated blood collection with mass effect.",
@@ -336,7 +336,7 @@ SPECIFIC_DISEASE_IMAGES = {
 
     # Infectious / Rash
     "DENGUE": {
-        "src": "/assets/kb-real-images/dengue-rash.jpg?v=kbri1",
+        "src": "/assets/kb-real-images/dengue-rash.jpg?v=kbri2",
         "type": "diagram",
         "title_suffix": "Clinical Dermatology Photograph (Dengue Confluent Rash)",
         "caption": "Real clinical photograph displaying confluent erythematous flushing with sparing 'islands of white' and petechial eruptions typical of dengue.",
@@ -347,7 +347,7 @@ SPECIFIC_DISEASE_IMAGES = {
         ]
     },
     "dengue": {
-        "src": "/assets/kb-real-images/dengue-rash.jpg?v=kbri1",
+        "src": "/assets/kb-real-images/dengue-rash.jpg?v=kbri2",
         "type": "diagram",
         "title_suffix": "Clinical Dermatology Photograph (Dengue Confluent Rash)",
         "caption": "Real clinical photograph displaying confluent erythematous flushing with sparing 'islands of white' and petechial eruptions typical of dengue.",
@@ -358,7 +358,7 @@ SPECIFIC_DISEASE_IMAGES = {
         ]
     },
     "TOXIC_SHOCK_SYNDROME": {
-        "src": "/assets/kb-real-images/toxic-shock-rash.jpg?v=kbri1",
+        "src": "/assets/kb-real-images/toxic-shock-rash.jpg?v=kbri2",
         "type": "diagram",
         "title_suffix": "Clinical Dermatology Photograph (Diffuse Erythroderma)",
         "caption": "Real clinical photograph demonstrating diffuse macular sunburn-like erythroderma with subsequent desquamation characteristic of toxic shock syndrome.",
@@ -369,7 +369,7 @@ SPECIFIC_DISEASE_IMAGES = {
         ]
     },
     "toxic-shock-syndrome": {
-        "src": "/assets/kb-real-images/toxic-shock-rash.jpg?v=kbri1",
+        "src": "/assets/kb-real-images/toxic-shock-rash.jpg?v=kbri2",
         "type": "diagram",
         "title_suffix": "Clinical Dermatology Photograph (Diffuse Erythroderma)",
         "caption": "Real clinical photograph demonstrating diffuse macular sunburn-like erythroderma with subsequent desquamation characteristic of toxic shock syndrome.",
@@ -380,7 +380,7 @@ SPECIFIC_DISEASE_IMAGES = {
         ]
     },
     "malaria": {
-        "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri1",
+        "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri2",
         "type": "diagram",
         "title_suffix": "Thin Blood Smear (Plasmodium falciparum Ring Trophozoites)",
         "caption": "Real Giemsa-stained peripheral blood smear showing delicate intraerythrocytic ring-form trophozoites and high parasitic load.",
@@ -393,7 +393,7 @@ SPECIFIC_DISEASE_IMAGES = {
 
     # GI / Abdominal
     "acute_appendicitis": {
-        "src": "/assets/kb-real-images/appendicitis-ct.jpg?v=kbri1",
+        "src": "/assets/kb-real-images/appendicitis-ct.jpg?v=kbri2",
         "type": "ct",
         "title_suffix": "Abdominal CT (Acute Appendicitis)",
         "caption": "Real axial contrast-enhanced abdominal computed tomography scan demonstrating appendiceal wall thickening, luminal distension, and surrounding fat stranding.",
@@ -404,7 +404,7 @@ SPECIFIC_DISEASE_IMAGES = {
         ]
     },
     "cholecystitis": {
-        "src": "/assets/kb-real-images/cholecystitis-ultrasound.jpg?v=kbri1",
+        "src": "/assets/kb-real-images/cholecystitis-ultrasound.jpg?v=kbri2",
         "type": "ultrasound",
         "title_suffix": "Right Upper Quadrant Ultrasound (Acute Cholecystitis)",
         "caption": "Real abdominal ultrasound demonstrating gallbladder hydrops, mural thickening >3 mm, impacted gallstones, and pericholecystic fluid.",
