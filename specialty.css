@@ -94,6 +94,15 @@ body.sp-lock { overflow: hidden; }
 /* ---- hub ---- */
 .sp-root .sp-levelrow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin: 4px 0 16px; }
 .sp-root .sp-today { background: var(--sp-s1); border-radius: 16px; padding: 16px; }
+.sp-root .sp-feat { width: 100%; min-height: 76px; display: flex; align-items: center; gap: 14px; margin: 0 0 12px; padding: 14px 12px 14px 14px; text-align: left; color: inherit; font: inherit;
+  border: 1.5px solid color-mix(in srgb, var(--sp-acc) 45%, var(--sp-s2)); border-radius: 16px; background: var(--sp-acc-soft); cursor: pointer; touch-action: manipulation;
+  transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1), border-color 160ms ease; }
+.sp-root .sp-feat:active { transform: scale(0.985); }
+.sp-root .sp-feat-b { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.sp-root .sp-feat-b > b { font-size: 17px; font-weight: 700; line-height: 1.3; }
+.sp-root .sp-feat-b > span { font-size: 14px; line-height: 1.4; color: var(--sp-text); text-wrap: pretty; }
+.sp-root .sp-feat-b > small { font-size: 12.5px; color: var(--sp-mut); }
+@media (hover: hover) and (pointer: fine) { .sp-root .sp-feat:hover { border-color: var(--sp-acc); } }
 .sp-root .sp-today-line { margin: 0 0 14px; font-size: 16px; line-height: 1.5; }
 .sp-root .sp-today-line b { font-weight: 700; }
 .sp-root .sp-today .sp-btn { margin-top: 2px; }
