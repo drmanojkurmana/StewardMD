@@ -62,7 +62,7 @@ function load({ genMs = 5, hang = false } = {}) {
     const t = setTimeout(fn, ms);
     return {
       _t: t,
-      unref() {},
+      unref() { if (t && t.unref) t.unref(); },
       ref() { if (t && t.ref) t.ref(); }
     };
   };
